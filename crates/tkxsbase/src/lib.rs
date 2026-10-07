@@ -22,4 +22,5 @@ mod ostream_text;
 pub mod transfer;
 pub mod transfer_brep;
 pub mod xs_algo;
+pub mod xs_control;
 pub mod xs_message;

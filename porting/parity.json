@@ -104929,6 +104929,318 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Vec or Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The 96 command functions are private, as natively (functions/*.rs)."
     },
     {
+      "upstream_id": "XSControl_Utils::XSControl_Utils",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::new",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::TraceLine",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::trace_line",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::TraceLines",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::trace_lines",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::IsKind",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::is_kind",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. A null type is None."
+    },
+    {
+      "upstream_id": "XSControl_Utils::TypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::type_name",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::TraValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::tra_value",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::NewSeqTra",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::new_seq_tra",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::AppendTra",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::append_tra",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. Standard_NullObject for a null list."
+    },
+    {
+      "upstream_id": "XSControl_Utils::DateString",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::date_string",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::DateValues",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::date_values",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. The six fields are returned (they start at 0 for Interface_MSG::NDate)."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToCString(const occ::handle<TCollection_HAsciiString>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_c_string",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToCString(const TCollection_AsciiString&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_c_string_ascii",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToHString(const char* const) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_h_string",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToAString",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_a_string",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToEString(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_e_string",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToEString(const TCollection_ExtendedString&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_e_string_ext",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToHString(const char16_t* const) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_h_string_ext",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ToXString",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::to_x_string",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::AsciiToExtended",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::ascii_to_extended",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::IsAscii",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::is_ascii",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ExtendedToAscii",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::extended_to_ascii",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::CStrValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::c_str_value",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. Standard_OutOfRange for a number below 1 of a list."
+    },
+    {
+      "upstream_id": "XSControl_Utils::EStrValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::e_str_value",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. Native defect kept: a list of AsciiString gives no units."
+    },
+    {
+      "upstream_id": "XSControl_Utils::NewSeqCStr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::new_seq_c_str",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::AppendCStr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::append_c_str",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::NewSeqEStr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::new_seq_e_str",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::AppendEStr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::append_e_str",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::CompoundFromSeq",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::compound_from_seq",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. The ShapeExtend_Explorer implementation (the same code natively)."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ShapeType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::shape_type",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. The ShapeExtend_Explorer implementation (the same code natively)."
+    },
+    {
+      "upstream_id": "XSControl_Utils::SortedCompound",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::sorted_compound",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ShapeValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::shape_value",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::NewSeqShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::new_seq_shape",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::AppendShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::append_shape",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ShapeBinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::shape_binder",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::BinderShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::binder_shape",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::SeqLength",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::seq_length",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. Native defect kept: a list of ExtendedString is not counted (the extended handle list is tested twice)."
+    },
+    {
+      "upstream_id": "XSControl_Utils::SeqToArr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::seq_to_arr",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors. Native quirk kept: for first > 1 the first items fall below the bounds (Standard_OutOfRange)."
+    },
+    {
+      "upstream_id": "XSControl_Utils::ArrToSeq",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::arr_to_seq",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Utils::SeqIntValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Utils.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlUtils::seq_int_value",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, const char16_t* as Vec<u16>, empty for null); native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
