@@ -447830,7 +447830,7 @@
       "upstream_id": "Aspect_XRAnalogActionData::Aspect_XRAnalogActionData",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRAnalogActionData.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::default",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRAnalogActionData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
     },
@@ -447894,7 +447894,7 @@
       "upstream_id": "Aspect_XRDigitalActionData::Aspect_XRDigitalActionData",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRDigitalActionData.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::default",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRDigitalActionData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
     },
@@ -447950,7 +447950,7 @@
       "upstream_id": "Aspect_XRHapticActionData::Aspect_XRHapticActionData",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRHapticActionData.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::default",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRHapticActionData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
     },
@@ -448006,7 +448006,7 @@
       "upstream_id": "Aspect_XRPoseActionData::Aspect_XRPoseActionData",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRPoseActionData.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData::default",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRPoseActionData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
     },
@@ -448222,7 +448222,7 @@
       "upstream_id": "Aspect_XRSession::Aspect_XRSession",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionBase::default",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionBase::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
     },
@@ -448702,7 +448702,7 @@
       "upstream_id": "Aspect_OpenVRSession::Aspect_OpenVRSession",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::default",
+      "rust_item": "rustycad_tkservice::aspect::AspectOpenVRSession::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Aspect_OpenVRSession mapping: the HAVE_OPENVR-off build of the oracle (no OpenVR SDK): no headset, Open reports \"Open CASCADE has been built without OpenVR support\", every query is empty and the wrong-action checks return Standard_ProgramError; covered by tests/aspect_xr_test.rs."
     },
@@ -450676,7 +450676,7 @@
       "upstream_id": "Font_TextFormatter::Font_TextFormatter",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
-      "rust_item": "rustycad_tkservice::font::FontTextFormatter::default",
+      "rust_item": "rustycad_tkservice::font::FontTextFormatter::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Font_TextFormatter mapping: the layout state is behind the handle's shared lock; the text is kept as decoded code points; corners, line widths, glyph cells, alignments, wrapping and the filtered iteration are compared bit for bit by the sv_textfmt native probe."
     },
@@ -456116,15 +456116,19 @@
       "upstream_id": "Graphic3d_ValueInterface::As()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.lxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValueInterface::as_value_mut",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValueAccess::as_value_mut",
       "status": "implemented",
-      "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe. The native dynamic_cast dereferences a null pointer for a wrong type; here the result is None."
+      "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe. The native dynamic_cast dereferences a null pointer for a wrong type; here the result is None.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "usr": "c:@S@Graphic3d_ValueInterface@FT@>1#TAs#&t0.0#"
+      }
     },
     {
       "upstream_id": "Graphic3d_ValueInterface::As() const",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.lxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValueInterface::as_value",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValueAccess::as_value",
       "status": "implemented",
       "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe. The native dynamic_cast dereferences a null pointer for a wrong type; here the result is None."
     },
@@ -463075,7 +463079,7 @@
       "upstream_id": "Graphic3d_ClipPlane::Graphic3d_ClipPlane()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. The plane is gp_Pln(0, 0, 1, 0) (origin z = -0) and the reversed equation the literal (0, 0, -1, 0), as natively."
     },
@@ -463523,7 +463527,7 @@
       "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Iterator()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
     },
@@ -463563,7 +463567,7 @@
       "upstream_id": "Graphic3d_SequenceOfHClipPlane::Graphic3d_SequenceOfHClipPlane",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
     },
@@ -463675,7 +463679,7 @@
       "upstream_id": "Graphic3d_ViewAffinity::Graphic3d_ViewAffinity",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ViewAffinity.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dViewAffinity::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
     },
@@ -464323,7 +464327,7 @@
       "upstream_id": "Graphic3d_LightSet::Graphic3d_LightSet",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
     },
@@ -464355,7 +464359,7 @@
       "upstream_id": "Graphic3d_LightSet::Iterator::Iterator()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
     },
@@ -465809,7 +465813,7 @@
       "upstream_id": "Graphic3d_ZLayerSettings::Graphic3d_ZLayerSettings",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ZLayerSettings.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dZLayerSettings::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_ZLayerSettings mapping: a value struct with private fields behind the native accessors; the origin translation is a TopLoc_Datum3D handle; the settings and their dump are compared by the sv_params native probe."
     },
@@ -466193,7 +466197,7 @@
       "upstream_id": "Graphic3d_PresentationAttributes::Graphic3d_PresentationAttributes",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_PresentationAttributes.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributes::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dPresentationAttributes::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_PresentationAttributes mapping: the virtual setters (overridden by Prs3d_Drawer) are the Graphic3dPresentationAttributesSource trait over an embedded base whose protected fields are public on Graphic3dPresentationAttributesFields; the getters are Graphic3dPresentationAttributesMembers; the state and dump are compared by the sv_params native probe."
     },
@@ -466385,7 +466389,7 @@
       "upstream_id": "Graphic3d_CullingTool::CullingContext::CullingContext",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingContext::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingContext::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
     },
@@ -466401,7 +466405,7 @@
       "upstream_id": "Graphic3d_CullingTool::Plane::Plane()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingPlane::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
     },
@@ -466433,7 +466437,7 @@
       "upstream_id": "Graphic3d_CullingTool::Graphic3d_CullingTool",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CullingTool.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCullingTool::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_CullingTool mapping: a value class whose \"inside\" output pointers are Option<&mut bool>; the frustum plane projections that the native class leaves uninitialised until CacheClipPtsProjections start at zero; the culling context, model-space eye and direction and every box test with its inside flags are compared bit for bit by the sv_culling native probe (the native quirk of the Z inside test comparing Y coordinates is kept)."
     },
@@ -467025,7 +467029,7 @@
       "upstream_id": "Graphic3d_FrameStats::Graphic3d_FrameStats",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStats.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsBase::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsBase::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
     },
@@ -467281,7 +467285,7 @@
       "upstream_id": "Graphic3d_FrameStatsData::Graphic3d_FrameStatsData()",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
     },
@@ -467289,7 +467293,7 @@
       "upstream_id": "Graphic3d_FrameStatsData::Graphic3d_FrameStatsData(const Graphic3d_FrameStatsData &)",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::clone",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsData::<core::clone::Clone>::clone",
       "status": "implemented",
       "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
     },
@@ -467449,7 +467453,7 @@
       "upstream_id": "Graphic3d_FrameStatsDataTmp::Graphic3d_FrameStatsDataTmp",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_FrameStats mapping (visualization-design.md section 1): the abstract class is the Graphic3dFrameStats trait over Graphic3dFrameStatsBase (protected fields public on Graphic3dFrameStatsFields), non-virtual members in Graphic3dFrameStatsMembers; FormatStats is bit-exact on the sv_stats oracle (text widths, k/M/G and KiB/MiB/GiB scaling, hh:mm:ss/ms times with the x86-64 unsigned conversion, %.1g dictionary values); covered by tests/graphic3d_frame_stats_test.rs."
     },
@@ -468649,7 +468653,7 @@
       "upstream_id": "Graphic3d_BvhCStructureSet::Graphic3d_BvhCStructureSet",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_BvhCStructureSet.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBvhCStructureSet::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dBvhCStructureSet::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d driver support classes mapping (visualization-design.md section 1): Graphic3d_DataStructureManager is the Graphic3dDataStructureManager trait (implemented by every view); the driver factory registry is a process-wide list behind free functions; the BVH structure sets are plain structs owned by the layer (held by value natively) over the tkmath BVH (weak structure handles where the native keeps raw pointers); checked by the sv_scene oracle (culling) and tests/graphic3d_driver_model_test.rs."
     },
@@ -471772,7 +471776,7 @@
       "upstream_id": "Graphic3d_GraduatedTrihedron::Graphic3d_GraduatedTrihedron",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_GraduatedTrihedron.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedron::default",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedron::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs. The default arguments; the other arguments are the public fields."
     },
@@ -472030,7 +472034,8 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_GraduatedTrihedron.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedron::names_size",
       "status": "implemented",
-      "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs."
+      "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs.",
+      "rust_kind": "function"
     },
     {
       "upstream_id": "Graphic3d_GraduatedTrihedron::SetNamesSize",
@@ -472038,7 +472043,8 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_GraduatedTrihedron.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedron::names_size",
       "status": "implemented",
-      "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs. The public field (names_size())."
+      "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs. The public field (names_size()).",
+      "rust_kind": "struct_field"
     },
     {
       "upstream_id": "Graphic3d_GraduatedTrihedron::myCubicAxesCallback",
@@ -472070,7 +472076,8 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_GraduatedTrihedron.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dGraduatedTrihedron::names_size",
       "status": "implemented",
-      "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs."
+      "notes": "Graphic3d_GraduatedTrihedron mapping: plain value structs with public fields (the getters and setters are the field accesses); the axis index checks raise Standard_OutOfRange; the cubic axes callback is an optional fn of the view; covered by tests/graphic3d_driver_model_test.rs.",
+      "rust_kind": "struct_field"
     },
     {
       "upstream_id": "Graphic3d_GraduatedTrihedron::myValuesFont",
@@ -472718,7 +472725,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_GlslExtension_GL_OES_standard_derivatives",
@@ -472726,7 +472733,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_GlslExtension_GL_EXT_shader_texture_lod",
@@ -472734,7 +472741,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_GlslExtension_GL_EXT_frag_depth",
@@ -472742,7 +472749,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_GlslExtension_GL_EXT_gpu_shader4",
@@ -472750,7 +472757,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "(unnamed enum at src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx:39:1)",
@@ -472758,7 +472765,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_GlslExtension_NB",
@@ -472766,7 +472773,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager",
@@ -472774,7 +472781,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::Graphic3d_ShaderManager",
@@ -472782,7 +472789,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::IsGapiGreaterEqual",
@@ -472790,7 +472797,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::GapiVersionMajor",
@@ -472798,7 +472805,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::GapiVersionMinor",
@@ -472806,7 +472813,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::SetGapiVersion",
@@ -472814,7 +472821,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::UseRedAlpha",
@@ -472822,7 +472829,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::SetUseRedAlpha",
@@ -472830,7 +472837,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::HasFlatShading",
@@ -472838,7 +472845,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::ToReverseDFdxSign",
@@ -472846,7 +472853,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::SetFlatShading",
@@ -472854,7 +472861,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::ToEmulateDepthClamp",
@@ -472862,7 +472869,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::SetEmulateDepthClamp",
@@ -472870,7 +472877,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::HasGlslExtension",
@@ -472878,7 +472885,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::EnableGlslExtension",
@@ -472886,7 +472893,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::genLightKey",
@@ -472894,7 +472901,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramFont",
@@ -472902,7 +472909,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramUnlit",
@@ -472910,7 +472917,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramGouraud",
@@ -472918,7 +472925,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramPhong",
@@ -472926,7 +472933,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramBoundBox",
@@ -472934,7 +472941,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getBgCubeMapProgram",
@@ -472942,7 +472949,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getBgSkydomeProgram",
@@ -472950,7 +472957,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getColoredQuadProgram",
@@ -472958,7 +472965,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getGridProgram",
@@ -472966,7 +472973,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getPBREnvBakingProgram",
@@ -472974,7 +472981,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramFboBlit",
@@ -472982,7 +472989,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramStereo",
@@ -472990,7 +472997,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramOitCompositing",
@@ -472998,7 +473005,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramOitDepthPeelingBlend",
@@ -473006,7 +473013,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::getStdProgramOitDepthPeelingFlush",
@@ -473014,7 +473021,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::hasGlslBitwiseOps",
@@ -473022,7 +473029,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::defaultGlslVersion",
@@ -473030,7 +473037,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::defaultOitGlslVersion",
@@ -473038,7 +473045,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::pointSpriteAlphaSrc",
@@ -473046,7 +473053,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::pointSpriteShadingSrc",
@@ -473054,7 +473061,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::stdComputeLighting",
@@ -473062,7 +473069,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myGapi",
@@ -473070,7 +473077,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myGapiVersion",
@@ -473078,7 +473085,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myGlslExtensions",
@@ -473086,7 +473093,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myHasFlatShading",
@@ -473094,7 +473101,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myToReverseDFdxSign",
@@ -473102,7 +473109,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::mySetPointSize",
@@ -473110,7 +473117,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myUseRedAlpha",
@@ -473118,7 +473125,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::myToEmulateDepthClamp",
@@ -473126,7 +473133,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Graphic3d_ShaderManager::mySRgbState",
@@ -473134,7 +473141,7 @@
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderManager.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
+      "notes": "Graphic3d_ShaderManager generates the GLSL programs of the OpenGL driver (only OpenGl_ShaderManager of TKOpenGl uses it) from the Shaders GLSL tables; replaced by the Vulkan 1.3 driver, which writes its own shaders (user decision 2026-10-07)."
     },
     {
       "upstream_id": "AVBufferPool",
@@ -473180,7 +473187,7 @@
       "upstream_id": "Media_BufferPool::Media_BufferPool",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_BufferPool.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaBufferPool::default",
+      "rust_item": "rustycad_tkservice::media::MediaBufferPool::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -473268,7 +473275,7 @@
       "upstream_id": "Media_Scaler::Media_Scaler",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_Scaler.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaScaler::default",
+      "rust_item": "rustycad_tkservice::media::MediaScaler::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -473444,7 +473451,7 @@
       "upstream_id": "Media_Timer::Media_Timer",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_Timer.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaTimer::default",
+      "rust_item": "rustycad_tkservice::media::MediaTimer::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -473548,7 +473555,7 @@
       "upstream_id": "Media_CodecContext::Media_CodecContext",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_CodecContext.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaCodecContext::default",
+      "rust_item": "rustycad_tkservice::media::MediaCodecContext::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -473708,7 +473715,7 @@
       "upstream_id": "Media_FormatContext::Media_FormatContext",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_FormatContext.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaFormatContext::default",
+      "rust_item": "rustycad_tkservice::media::MediaFormatContext::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -473900,7 +473907,7 @@
       "upstream_id": "Media_Frame::Media_Frame",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_Frame.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaFrame::default",
+      "rust_item": "rustycad_tkservice::media::MediaFrame::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -474124,7 +474131,7 @@
       "upstream_id": "Media_Packet::Media_Packet",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Media/Media_Packet.hxx",
-      "rust_item": "rustycad_tkservice::media::MediaPacket::default",
+      "rust_item": "rustycad_tkservice::media::MediaPacket::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Media mapping: the package as the oracle build compiles it, without FFmpeg (HAVE_FFMPEG off): the FFmpeg structures are uninhabited types (every pointer to one is None), inputs do not open (OpenInput reports \"Error: FFmpeg library is unavailable\"), frames are empty, nothing converts or decodes; the time texts, timer, buffer pool and the FFmpeg-free answers are bit-exact on the sv_media oracle; the player worker thread is covered by tests/media_test.rs."
     },
@@ -474798,7 +474805,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_LocalPool.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_LocalPool",
@@ -474806,7 +474813,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_LocalPool.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_LocalPool::Cocoa_LocalPool",
@@ -474814,7 +474821,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_LocalPool.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "NSView",
@@ -474822,7 +474829,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "NSWindow",
@@ -474830,7 +474837,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window",
@@ -474838,7 +474845,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::VirtualKeyFromNative",
@@ -474846,7 +474853,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Cocoa_Window(const char *const,const int,const int,const int,const int)",
@@ -474854,7 +474861,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Cocoa_Window(NSView *)",
@@ -474862,7 +474869,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Map",
@@ -474870,7 +474877,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Unmap",
@@ -474878,7 +474885,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::DoResize",
@@ -474886,7 +474893,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::DoMapping",
@@ -474894,7 +474901,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::IsMapped",
@@ -474902,7 +474909,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Ratio",
@@ -474910,7 +474917,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Position",
@@ -474918,7 +474925,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::Size",
@@ -474926,7 +474933,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::HView",
@@ -474934,7 +474941,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::SetHView",
@@ -474942,7 +474949,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::NativeHandle",
@@ -474950,7 +474957,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::NativeParentHandle",
@@ -474958,7 +474965,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::NativeFBConfig",
@@ -474966,7 +474973,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::SetTitle",
@@ -474974,7 +474981,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::InvalidateContent",
@@ -474982,7 +474989,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::myHWindow",
@@ -474990,7 +474997,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::myHView",
@@ -474998,7 +475005,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::myXLeft",
@@ -475006,7 +475013,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::myYTop",
@@ -475014,7 +475021,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::myXRight",
@@ -475022,7 +475029,7 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Cocoa_Window::myYBottom",
@@ -475030,23 +475037,207 @@
       "source": "src/Visualization/TKService/Cocoa/Cocoa_Window.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
+      "notes": "Cocoa (macOS) is not built into the Linux library: Cocoa_Window.mm and Cocoa_LocalPool.mm are Objective-C++ sources compiled only on Apple targets, so there is no Linux behavior to port (visualization-design.md section 4)."
     },
     {
       "upstream_id": "Shaders_DeclarationsImpl_glsl",
-      "toolkit": "TKService",
+      "toolkit": "TKOpenGl",
       "source": "src/Visualization/TKService/Shaders/Shaders_DeclarationsImpl_glsl.pxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Shaders: the GLSL source tables of the OpenGL driver; replaced by the Vulkan 1.3 driver (user decision 2026-10-07)."
+      "notes": "Shaders: the GLSL source tables of the OpenGL driver; replaced by the Vulkan 1.3 driver (user decision 2026-10-07)."
     },
     {
       "upstream_id": "Shaders_Declarations_glsl",
-      "toolkit": "TKService",
+      "toolkit": "TKOpenGl",
       "source": "src/Visualization/TKService/Shaders/Shaders_Declarations_glsl.pxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Xw_Window mapping (visualization-design.md section 2): the Xlib window over the project-owned Xlib wrapper (x11-dl loads libX11 at run time); the X event is the project-owned XwXEvent over the C union bytes; the constructors are create (own window) and wrap (existing window); checked by the sv_window oracle (key translations, constructor checks) and, on a display, tests/window_events_test.rs. Shaders: the GLSL source tables of the OpenGL driver; replaced by the Vulkan 1.3 driver (user decision 2026-10-07)."
+      "notes": "Shaders: the GLSL source tables of the OpenGL driver; replaced by the Vulkan 1.3 driver (user decision 2026-10-07)."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#f"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#I"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Vec2>#f"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Vec3>#f"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Vec4>#f"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Vec2>#I"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Vec3>#I"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Vec4>#I"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Mat3>#f"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_UniformValueTypeID",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderVariable.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@S@Graphic3d_UniformValueTypeID>#$@S@NCollection_Mat4>#f"
+      },
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dUniformValueTypeId::ID",
+      "status": "implemented",
+      "notes": "Graphic3d_UniformValueTypeID<T> specialization: the impl of Graphic3dUniformValueTypeId for the matching Rust type (f32, i32, Vec2..Vec4 of f32/i32, Mat3/Mat4 of f32) carries the same ID constant."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::MatrixType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@N@Graphic3d_TransformUtils@S@MatrixType>#d"
+      },
+      "rust_item": "rustycad_tkernel::ncollection::Mat4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils::MatrixType<double>: the trait selects NCollection_Mat4<double>; Rust spells Mat4<f64>/Mat4<f32> directly."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::MatrixType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@N@Graphic3d_TransformUtils@S@MatrixType>#f"
+      },
+      "rust_item": "rustycad_tkernel::ncollection::Mat4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils::MatrixType<float>: the trait selects NCollection_Mat4<float>; Rust spells Mat4<f64>/Mat4<f32> directly."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@N@Graphic3d_TransformUtils@S@VectorType>#d"
+      },
+      "rust_item": "rustycad_tkernel::ncollection::Vec4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils::VectorType<double>: the trait selects NCollection_Vec4<double>; Rust spells Vec4<f64>/Vec4<f32> directly."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplateSpecialization",
+        "usr": "c:@N@Graphic3d_TransformUtils@S@VectorType>#f"
+      },
+      "rust_item": "rustycad_tkernel::ncollection::Vec4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils::VectorType<float>: the trait selects NCollection_Vec4<float>; Rust spells Vec4<f64>/Vec4<f32> directly."
+    },
+    {
+      "upstream_id": "Aspect_XVisualInfo",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_DisplayConnection.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "A C forward declaration of an opaque X11/GLX structure without members; TKService only passes its pointer through. Rust keeps the pointer as an address: AspectDisplayConnection::get_default_visual_info returns the XVisualInfo* address as usize."
+    },
+    {
+      "upstream_id": "__GLXFBConfigRec",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_FBConfig.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "A C forward declaration of an opaque X11/GLX structure without members; TKService only passes its pointer through. Rust keeps the pointer as an address: the alias rustycad_tkservice::aspect::AspectFbConfig is the GLXFBConfig address."
     }
   ],
   "tests": [

@@ -32,18 +32,25 @@ pub trait Graphic3dValueInterface: Any + Send + Sync {
     /// The value as mutable `Any`, for the typed accessors.
     fn as_any_mut(&mut self) -> &mut dyn Any;
 }
-impl dyn Graphic3dValueInterface {
+/// The typed accessors `As<T>()` of `Graphic3d_ValueInterface`. They are generic, so they
+/// cannot be methods of the object-safe interface. The blanket impl also covers
+/// `dyn Graphic3dValueInterface`; an `impl dyn` block would not show in the API inventory.
+pub trait Graphic3dValueAccess {
     /// `As<T>()`: the stored value when it has type `T`. The native `dynamic_cast` then
     /// dereferences a null pointer for a wrong type; here it is `None`.
     ///
     /// Example: `value.as_value::<f32>() == Some(&1.5)`.
-    pub fn as_value<T: Graphic3dUniformValueTypeId>(&self) -> Option<&T> {
+    fn as_value<T: Graphic3dUniformValueTypeId>(&self) -> Option<&T>;
+    /// `As<T>()` on a mutable value; `*value.as_value_mut::<f32>().unwrap() = 2.0`.
+    fn as_value_mut<T: Graphic3dUniformValueTypeId>(&mut self) -> Option<&mut T>;
+}
+impl<V: Graphic3dValueInterface + ?Sized> Graphic3dValueAccess for V {
+    fn as_value<T: Graphic3dUniformValueTypeId>(&self) -> Option<&T> {
         self.as_any()
             .downcast_ref::<Graphic3dUniformValue<T>>()
             .map(|uniform| &uniform.value)
     }
-    /// `As<T>()` on a mutable value; `*value.as_value_mut::<f32>().unwrap() = 2.0`.
-    pub fn as_value_mut<T: Graphic3dUniformValueTypeId>(&mut self) -> Option<&mut T> {
+    fn as_value_mut<T: Graphic3dUniformValueTypeId>(&mut self) -> Option<&mut T> {
         self.as_any_mut()
             .downcast_mut::<Graphic3dUniformValue<T>>()
             .map(|uniform| &mut uniform.value)

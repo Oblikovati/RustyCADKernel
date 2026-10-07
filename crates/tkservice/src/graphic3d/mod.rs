@@ -246,7 +246,7 @@ pub use shader_variable::{
     Graphic3dShaderAttribute, Graphic3dShaderVariable, Graphic3dUniformFloat, Graphic3dUniformInt,
     Graphic3dUniformMat3, Graphic3dUniformMat4, Graphic3dUniformValue, Graphic3dUniformValueTypeId,
     Graphic3dUniformVec2, Graphic3dUniformVec2i, Graphic3dUniformVec3, Graphic3dUniformVec3i,
-    Graphic3dUniformVec4, Graphic3dUniformVec4i, Graphic3dValueInterface,
+    Graphic3dUniformVec4, Graphic3dUniformVec4i, Graphic3dValueAccess, Graphic3dValueInterface,
 };
 pub use small_values::{Graphic3dBufferRange, Graphic3dPolygonOffset, Graphic3dVertex};
 pub use stats_enums::*;
