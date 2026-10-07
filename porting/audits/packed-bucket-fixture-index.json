@@ -1,0 +1,61 @@
+{
+  "schema": "rustycad.test-fixture-index.v1",
+  "base_revision": "4be8ba8c0fab63a2f1ec72693cd96a669f55b221",
+  "status": "candidate validated; coordinating integration pending",
+  "scope": "Only cfg(test) native bucket policy fixture lookup; all 240 scenario calls and exact expected payloads are retained.",
+  "implementation": "Borrow each original key/payload from the unchanged static fixture, reject duplicate/malformed rows, initialize one immutable OnceLock BTreeMap before allocation observation.",
+  "production_code_changed": false,
+  "native_fixture_changed": false,
+  "original_scenario_tests_preserved": 6,
+  "new_fixture_integrity_tests": 3,
+  "normal_passed": 9,
+  "strict_provenance_miri_passed": 9,
+  "strict_clippy_exit": 0,
+  "format_exit": 0,
+  "native_matrix_rows_checked": 240,
+  "static_work_analysis": {
+    "previous_prefix_format_calls": 28920,
+    "current_prefix_format_calls": 0,
+    "basis": "Each of the 240 unique scenario keys is requested once. The previous find_map formatted a prefix on every scanned line; this is source/fixture analysis, not a measured allocator trace."
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/packed_map/engine_contracts/bucket_policy.rs": "b38c9505128a947cdced3f66e1891c6a606f513089cf67f2327343c2c84596cd",
+    "crates/tkernel/src/ncollection/packed_map/engine_contracts/bucket_policy/fixture_index.rs": "c8b3e6f33047935f0a4a685f9a67872daf525448771cfbd602bf3b19e0dcd70e",
+    "crates/tkernel/src/ncollection/packed_map.rs": "06f583cb6faa854d8f826e1d577fbc5f7af23fa7d434a98924a74b9d3c4ca84c",
+    "tools/oracle/tkernel_packed_map_bucket_policy.expected": "1b87ed58167854e64aabde52215d6d8e14ce8e7aa0f3786b67e6d20bc18c3ffe"
+  },
+  "artifacts": {
+    "fmt": {
+      "path": "porting/runtime-evidence/packed-bucket-fixture-index-fmt.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    "rust": {
+      "path": "porting/runtime-evidence/packed-bucket-fixture-index-rust.gz",
+      "sha256": "c2e42f31ac04ba01d8822ce493b2aaa099e6f3257a453b09c947f7b0b960af3d"
+    },
+    "clippy": {
+      "path": "porting/runtime-evidence/packed-bucket-fixture-index-clippy.gz",
+      "sha256": "3cc06466904b272cc91158401495305076580f030329be86caf20a9f4cce248f"
+    },
+    "miri": {
+      "path": "porting/runtime-evidence/packed-bucket-fixture-index-miri.gz",
+      "sha256": "ee67dd80bd8162f7def31990b4e42044a5c0a2e71b33ef088e11b5f97fe5542c"
+    },
+    "baseline_source": {
+      "path": "porting/runtime-evidence/packed-bucket-fixture-index-baseline.rs.gz",
+      "sha256": "d5eba09f3b2863c085c87d45ed3785cb1be86fb8789d9b9f25ac0d2a3bfde126",
+      "baseline_behavior_run": false
+    },
+    "source": {
+      "path": "porting/runtime-evidence/packed-bucket-fixture-index-source.tar.gz",
+      "sha256": "d7d163e2a48e92bce0b44d9f8a3b814253144352d1dec835cc6051448ecba0b0"
+    }
+  },
+  "api_credit": 0,
+  "legacy_mapping_credit": 0,
+  "limitations": [
+    "No production behavior, native API implementation or new legacy declaration is introduced.",
+    "No timing speedup is claimed; candidate and historical runs have different surrounding test scopes and host workloads.",
+    "Source snapshot was recorded after formatting and validation; the next root integration supplies a complete unchanged-input validation freeze."
+  ]
+}
