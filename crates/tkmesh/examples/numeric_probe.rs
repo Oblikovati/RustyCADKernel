@@ -143,6 +143,8 @@ fn dispatch(operation: &str, values: &[i32]) -> bool {
         "mesh_delaun_use_edge" => mesh_probe::delaun_core::use_edge_case(values[0]),
         "mesh_incremental_shape" => mesh_probe::incremental::incremental_shape_case(values),
         "mesh_triangulator" => mesh_probe::incremental::triangulator_case(values[0]),
+        "mesh_delabella_points" => mesh_probe::delabella::points_case(values),
+        "mesh_delabella_shape" => mesh_probe::incremental::delabella_shape_case(values),
         "mesh_delaun_sort" => mesh_probe::delaun_core::sort_vertices_case(values),
         "mesh_delaun_polygon" => mesh_probe::delaun_core::polygon_case(values),
         "mesh_delaun_polygon_mesh" => mesh_probe::delaun_core::polygon_mesh_case(values),

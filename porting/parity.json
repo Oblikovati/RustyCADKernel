@@ -297185,29 +297185,33 @@
       "upstream_id": "BRepMesh_DelabellaBaseMeshAlgo::BRepMesh_DelabellaBaseMeshAlgo()",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DelabellaBaseMeshAlgo.hxx",
-      "status": "excluded",
-      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam. Needs the third-party MIT delabella triangulation library (BRepMesh/delabella.cpp), which is not ported: porting it requires its MIT notice, which the project rules forbid adding to a file (license decision pending with the user). BRepMesh_Context refuses IMeshTools_MeshAlgoType_Delabella with a Standard_ProgramError."
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDelabellaBaseMeshAlgo::new",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py: 90 mesh_delabella_points requests (raw DelaBella on grid, random, near-circle, lattice, colinear and float clouds of 1..1000 points) and 64 mesh_delabella_shape requests (the mesh_incremental_shape corpus through BRepMesh_Context(IMeshTools_MeshAlgoType_Delabella)) equal the native build; tests/brep_mesh_delabella.rs. The handle holds the plain algorithm (DelabellaBaseMeshAlgoCore) or, through from_core, a node-insertion template instance over BRepMesh_CustomDelaunayBaseMeshAlgo<BRepMesh_DelabellaBaseMeshAlgo>, whose dynamic type is this class as natively."
     },
     {
       "upstream_id": "BRepMesh_DelabellaBaseMeshAlgo::buildBaseTriangulation()",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DelabellaBaseMeshAlgo.hxx",
-      "status": "excluded",
-      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam. Needs the third-party MIT delabella triangulation library (BRepMesh/delabella.cpp), which is not ported: porting it requires its MIT notice, which the project rules forbid adding to a file (license decision pending with the user). BRepMesh_Context refuses IMeshTools_MeshAlgoType_Delabella with a Standard_ProgramError."
+      "rust_item": "rustycad_tkmesh::brep_mesh::mesh_algo::DelabellaTriangulation::<rustycad_tkmesh::brep_mesh::mesh_algo::CustomBaseTriangulation>::build_base_triangulation",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py: 90 mesh_delabella_points requests (raw DelaBella on grid, random, near-circle, lattice, colinear and float clouds of 1..1000 points) and 64 mesh_delabella_shape requests (the mesh_incremental_shape corpus through BRepMesh_Context(IMeshTools_MeshAlgoType_Delabella)) equal the native build; tests/brep_mesh_delabella.rs. Bounding box enlarged by 0.1 of its diagonal, 4 corner nodes added, points normalized to [-0.5,0.5]^2 in the native operation order, DelaBella (brep_mesh::delabella, long double arithmetic in the x87 LongDouble) and each triangle added as v[0],v[2],v[1]; logDelabella2Occ maps [ERR] to Message_Fail and [WRN]/[NFO] to Message_Trace. Divergence: a face whose nodes all coincide (0/0 normalization, NaN input that is undefined natively) fails with Standard_DomainError, which Perform swallows like any Standard_Failure."
     },
     {
       "upstream_id": "BRepMesh_DelabellaMeshAlgoFactory::BRepMesh_DelabellaMeshAlgoFactory()",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DelabellaMeshAlgoFactory.hxx",
-      "status": "excluded",
-      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam. Needs the third-party MIT delabella triangulation library (BRepMesh/delabella.cpp), which is not ported: porting it requires its MIT notice, which the project rules forbid adding to a file (license decision pending with the user). BRepMesh_Context refuses IMeshTools_MeshAlgoType_Delabella with a Standard_ProgramError."
+      "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshDelabellaMeshAlgoFactory::new",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py: 90 mesh_delabella_points requests (raw DelaBella on grid, random, near-circle, lattice, colinear and float clouds of 1..1000 points) and 64 mesh_delabella_shape requests (the mesh_incremental_shape corpus through BRepMesh_Context(IMeshTools_MeshAlgoType_Delabella)) equal the native build; tests/brep_mesh_delabella.rs. Stateless factory."
     },
     {
       "upstream_id": "BRepMesh_DelabellaMeshAlgoFactory::GetAlgo(GeomAbs_SurfaceType,const IMeshTools_Parameters&) const",
       "toolkit": "TKMesh",
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_DelabellaMeshAlgoFactory.hxx",
-      "status": "excluded",
-      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam. Needs the third-party MIT delabella triangulation library (BRepMesh/delabella.cpp), which is not ported: porting it requires its MIT notice, which the project rules forbid adding to a file (license decision pending with the user). BRepMesh_Context refuses IMeshTools_MeshAlgoType_Delabella with a Standard_ProgramError."
+      "rust_item": "rustycad_tkmesh::brep_mesh::mesh_algo::BRepMeshDelabellaMeshAlgoFactory::<rustycad_tkmesh::imesh_tools::MeshAlgoFactory>::get_algo",
+      "status": "implemented",
+      "notes": "Native differential tools/verify_tkmesh_numeric.py: 90 mesh_delabella_points requests (raw DelaBella on grid, random, near-circle, lattice, colinear and float clouds of 1..1000 points) and 64 mesh_delabella_shape requests (the mesh_incremental_shape corpus through BRepMesh_Context(IMeshTools_MeshAlgoType_Delabella)) equal the native build; tests/brep_mesh_delabella.rs. Plane: Delabella node insertion (InternalVerticesMode) or plain Delabella; sphere/cone/torus: Delabella node insertion with pre-processed surface nodes; cylinder: the Watson algorithms; revolution: deflection control over BoundaryParams; every other type: deflection control over the NURBS splitter. EnableControlSurfaceDeflectionAllSurfaces is ignored, as natively."
     },
     {
       "upstream_id": "BRepMesh_Context::BRepMesh_Context(IMeshTools_MeshAlgoType)",
@@ -297215,7 +297219,7 @@
       "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_Context.hxx",
       "rust_item": "rustycad_tkmesh::brep_mesh::BRepMeshContext::new",
       "status": "implemented",
-      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam. CSF_MeshAlgo is read through an injectable lookup (with_environment); Delabella is refused (see the Delabella rows)."
+      "notes": "Native ShapeTool differential corpus exercises curve/pcurve queries, one-way flag changes, native polygon storage, placements, tolerance and bounding-box queries; focused shape_tool Rust tests. Range tuples preserve nullable curve plus range, matching existing ShapeAnalysisEdge seam. CSF_MeshAlgo is read through an injectable lookup (with_environment); IMeshTools_MeshAlgoType_Delabella builds BRepMesh_DelabellaMeshAlgoFactory."
     },
     {
       "upstream_id": "BRepMesh_Context",

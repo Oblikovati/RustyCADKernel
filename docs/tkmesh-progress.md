@@ -237,6 +237,23 @@ UV-parameter, NURBS, boundary-parameter, extrusion, undefined), `BRepMesh_Classi
 selection maps are packed maps, as `IMeshData::MapOfInteger` is natively. The OCC31461
 sphere declaration is mapped (5106 nodes, 10108 triangles), and the numeric oracle adds
 64 `mesh_incremental_shape` requests (all factory surface types, four parameter modes)
-and six `mesh_triangulator` requests, all equal to the pinned native build. Delabella
-is not ported (third-party MIT library). TKMesh maps 28/29 declarations; torus Boolean
-fusion waits for `BRepAlgoAPI_Fuse`.
+and six `mesh_triangulator` requests, all equal to the pinned native build. TKMesh maps
+28/29 declarations; torus Boolean fusion waits for `BRepAlgoAPI_Fuse`.
+
+### Delabella (2026-10)
+
+The bundled DELABELLA library (`delabella.cpp`/`delabella.pxx`, MIT) is ported to
+`brep_mesh::delabella`; those files keep the original MIT notice (user decision
+2026-10-07, full text in `licenses/DELABELLA_MIT.txt`). Its `long double` z values,
+cross and dot products are computed in the x87 80-bit `LongDouble` of TKMath, so every
+sign decision matches the GCC x86-64 build. `BRepMesh_DelabellaBaseMeshAlgo` and
+`BRepMesh_DelabellaMeshAlgoFactory` complete the factory set, and `BRepMesh_Context`
+builds the Delabella factory for `IMeshTools_MeshAlgoType_Delabella` (or
+`CSF_MeshAlgo=delabella`). The numeric oracle adds 90 `mesh_delabella_points` requests
+(grid, random, near-circle, lattice, colinear and float clouds of 1..1000 points) and 64
+`mesh_delabella_shape` requests (the `mesh_incremental_shape` corpus through the
+Delabella context), all equal to the native build. Native quirks kept: an input whose
+points are all cocircular overruns the face pool (a segfault natively, a
+`Standard_ProgramError` here); a coplanar point that sees neither contour edge is not
+linked but still becomes the contour's `last` (the compiled-out `assert(0)`). Non-finite or empty input, undefined
+natively, is refused with `Standard_DomainError`.

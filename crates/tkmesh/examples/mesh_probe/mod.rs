@@ -254,6 +254,7 @@ pub mod delaun_selector;
 
 pub mod circle_tool;
 
+pub mod delabella;
 pub mod delaun_core;
 pub mod delaun_legacy;
 pub mod incremental;
