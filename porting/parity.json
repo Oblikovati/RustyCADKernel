@@ -399168,6 +399168,822 @@
       "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::document_version",
       "status": "implemented",
       "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "PCDM_ReaderStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The enumerators keep the native order, which the framework compares with >."
+    },
+    {
+      "upstream_id": "PCDM_RS_OK",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::Ok",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_NoDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::NoDriver",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_UnknownFileDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::UnknownFileDriver",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_OpenError",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::OpenError",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_NoVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::NoVersion",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_NoSchema",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::NoSchema",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_NoDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::NoDocument",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_ExtensionFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::ExtensionFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_WrongStreamMode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::WrongStreamMode",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_FormatFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::FormatFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_TypeFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::TypeFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_TypeNotFoundInSchema",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::TypeNotFoundInSchema",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_UnrecognizedFileFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::UnrecognizedFileFormat",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_MakeFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::MakeFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_PermissionDenied",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::PermissionDenied",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_DriverFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::DriverFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_AlreadyRetrievedAndModified",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::AlreadyRetrievedAndModified",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_AlreadyRetrieved",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::AlreadyRetrieved",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_UnknownDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::UnknownDocument",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_WrongResource",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::WrongResource",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_ReaderException",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::ReaderException",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_NoModel",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::NoModel",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RS_UserBreak",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderStatus::UserBreak",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StoreStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_OK",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::Ok",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_DriverFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::DriverFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_WriteFailure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::WriteFailure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_Failure",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::Failure",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_Doc_IsNull",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::DocIsNull",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_No_Obj",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::NoObj",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_Info_Section_Error",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::InfoSectionError",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_UserBreak",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::UserBreak",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_SS_UnrecognizedFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StoreStatus.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStoreStatus::UnrecognizedFormat",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_TypeOfFileDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_TypeOfFileDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmTypeOfFileDriver",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_TOFD_File",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_TypeOfFileDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmTypeOfFileDriver::File",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_TOFD_CmpFile",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_TypeOfFileDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmTypeOfFileDriver::CmpFile",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_TOFD_XmlFile",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_TypeOfFileDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmTypeOfFileDriver::XmlFile",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_TOFD_Unknown",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_TypeOfFileDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmTypeOfFileDriver::Unknown",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): the package class only probes the native FSD containers (FileDriverType)."
+    },
+    {
+      "upstream_id": "PCDM::FileDriverType(const TCollection_AsciiString&,occ::handle<Storage_BaseDriver>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it recognises the native FSD_CmpFile/FSD_File/FSD_BinaryFile containers; the port's file-format queries answer as for a file in no native format (rustycad_tkcdf::pcdm::PcdmReadWriterBase::file_format)."
+    },
+    {
+      "upstream_id": "PCDM::FileDriverType(Standard_IStream&,occ::handle<Storage_BaseDriver>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it reads the magic number of the native FSD containers and skips an XML declaration; see rustycad_tkcdf::pcdm::PcdmReadWriterBase::file_format_stream."
+    },
+    {
+      "upstream_id": "PCDM_Document",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Document.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): the Standard_Persistent root of the Std storage schema."
+    },
+    {
+      "upstream_id": "PCDM_DOMHeaderParser",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DOMHeaderParser.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): the LDOM parser that reads the header of the native Xml format."
+    },
+    {
+      "upstream_id": "PCDM_DOMHeaderParser::SetStartElementName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DOMHeaderParser.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): LDOM header parser of the native Xml format."
+    },
+    {
+      "upstream_id": "PCDM_DOMHeaderParser::SetEndElementName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DOMHeaderParser.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): LDOM header parser of the native Xml format."
+    },
+    {
+      "upstream_id": "PCDM_DOMHeaderParser::startElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DOMHeaderParser.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): LDOM header parser of the native Xml format."
+    },
+    {
+      "upstream_id": "PCDM_DOMHeaderParser::endElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DOMHeaderParser.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): LDOM header parser of the native Xml format."
+    },
+    {
+      "upstream_id": "PCDM_DOMHeaderParser::GetElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_DOMHeaderParser.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): LDOM header parser of the native Xml format."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): the Storage_HeaderData layout of the native Std containers."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::PCDM_ReadWriter_1",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::Version",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::WriteReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::WriteReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::WriteExtensions",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::WriteVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::ReadReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09); a file in no native format answers 0 through rustycad_tkcdf::pcdm::PcdmRetrievalDriverBase::reference_counter."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::ReadReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09); a file in no native format has no reference (rustycad_tkcdf::pcdm::PcdmReferenceIterator::init)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::ReadExtensions",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09)."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter_1::ReadDocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter_1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09); a file in no native format answers -1 through rustycad_tkcdf::pcdm::PcdmRetrievalDriverBase::document_version."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::Version",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::version",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::WriteReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::write_reference_counter",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::WriteReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::write_references",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::WriteExtensions",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::write_extensions",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::WriteVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::write_version",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::ReadReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::read_reference_counter",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::ReadReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::read_references",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::ReadExtensions",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::read_extensions",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::ReadDocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriter::read_document_version",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::Open",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it opens a native Storage_BaseDriver container."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::Reader",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it returns the native PCDM_ReadWriter_1."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::Writer",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it returns the native PCDM_ReadWriter_1."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::WriteFileFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriterBase::write_file_format",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::ParseReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriterBase::parse_reference",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::FileFormat(const TCollection_ExtendedString&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriterBase::file_format",
+      "status": "partial",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The native header and Xml probes (native file formats, not ported by user decision 2026-09) are replaced by their answer for a file in no native format: an empty format."
+    },
+    {
+      "upstream_id": "PCDM_ReadWriter::FileFormat(Standard_IStream&,occ::handle<Storage_Data>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReadWriter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReadWriterBase::file_format_stream",
+      "status": "partial",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The native container probe (native file formats, not ported by user decision 2026-09) is replaced by its answer for a stream in no native format: an empty format, nothing read."
+    },
+    {
+      "upstream_id": "PCDM_Reader::myReaderStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reader.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderBase::status",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The protected field is read by status() and written by set_status(); native code leaves it uninitialised, Rust starts at PCDM_RS_OK."
+    },
+    {
+      "upstream_id": "PCDM_Reader::GetStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reader.lxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReader::get_status",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Reference::PCDM_Reference()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReference::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Reference::PCDM_Reference(const int,const TCollection_ExtendedString&,const int)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReference::new",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Reference::ReferenceIdentifier",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReference::reference_identifier",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Reference::FileName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReference::file_name",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Reference::DocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReference::document_version",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReferenceIterator::PCDM_ReferenceIterator",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReferenceIterator::new",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_ReferenceIterator::LoadReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReferenceIterator::load_references",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The private MetaData splits folder and name as on the pinned non-Windows platform."
+    },
+    {
+      "upstream_id": "PCDM_ReferenceIterator::Init",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReferenceIterator::init",
+      "status": "partial",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The references are read through PCDM_ReadWriter_1 from a native header (native file formats, not ported by user decision 2026-09); the port gives the native answer for a file in no native format: no reference."
+    },
+    {
+      "upstream_id": "PCDM_RetrievalDriver::DocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_RetrievalDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmRetrievalDriverBase::document_version",
+      "status": "partial",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The version is read from a native header (native file formats, not ported by user decision 2026-09); the port gives the native answer for a file in no native format: -1."
+    },
+    {
+      "upstream_id": "PCDM_RetrievalDriver::ReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_RetrievalDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmRetrievalDriverBase::reference_counter",
+      "status": "partial",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The counter is read from a native header (native file formats, not ported by user decision 2026-09); the port gives the native answer for a file in no native format: 0."
+    },
+    {
+      "upstream_id": "PCDM_RetrievalDriver::SetFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_RetrievalDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmRetrievalDriver::set_format",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_RetrievalDriver::GetFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_RetrievalDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmRetrievalDriver::get_format",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::Make(const occ::handle<CDM_Document>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it builds the PCDM_Document persistent of the Std schema."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::Make(const occ::handle<CDM_Document>&,NCollection_Sequence<occ::handle<PCDM_Document>>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): it collects PCDM_Document persistents of the Std schema."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::Write(const occ::handle<CDM_Document>&,const TCollection_ExtendedString&,const Message_ProgressRange&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. native file format not ported (user decision 2026-09): the default writes an FSD_CmpFile Std container; a Rust storage driver implements rustycad_tkcdf::pcdm::PcdmWriter::write_file."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::Write(const occ::handle<CDM_Document>&,Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::storage_write_stream",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors. The native default writes nothing; a driver's write_stream delegates to it."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::SetFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::set_format",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::GetFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::get_format",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::IsError",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::is_error",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::SetIsError",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::set_is_error",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::GetStoreStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::get_store_status",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_StorageDriver::SetStoreStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_StorageDriver.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmStorageDriver::set_store_status",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Writer::Write(const occ::handle<CDM_Document>&,const TCollection_ExtendedString&,const Message_ProgressRange&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Writer.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmWriter::write_file",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "PCDM_Writer::Write(const occ::handle<CDM_Document>&,Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_Writer.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmWriter::write_stream",
+      "status": "implemented",
+      "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
     }
   ],
   "tests": [
@@ -504205,6 +505021,48 @@
       "blocked_by": [
         "BRepAlgoAPI_Splitter"
       ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PCDM_ReadWriterTest.ParseReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/PCDM_ReadWriter_Test.cxx",
+      "source_sha256": "0bcb4c7cfba65c2c98058b065d2d800e0d14063774c212d439efcf2f4de83cb1",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "pcdm_read_writer",
+      "rust_test": "PCDM_ReadWriterTest__ParseReference",
+      "rust_source": "crates/tkcdf/tests/pcdm_read_writer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PCDM_ReadWriterTest.ParseReferenceFileNameWithSpaces",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/PCDM_ReadWriter_Test.cxx",
+      "source_sha256": "0bcb4c7cfba65c2c98058b065d2d800e0d14063774c212d439efcf2f4de83cb1",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "pcdm_read_writer",
+      "rust_test": "PCDM_ReadWriterTest__ParseReferenceFileNameWithSpaces",
+      "rust_source": "crates/tkcdf/tests/pcdm_read_writer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PCDM_ReadWriterTest.RejectMalformedReferenceWithoutChangingOutputs",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/PCDM_ReadWriter_Test.cxx",
+      "source_sha256": "0bcb4c7cfba65c2c98058b065d2d800e0d14063774c212d439efcf2f4de83cb1",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "pcdm_read_writer",
+      "rust_test": "PCDM_ReadWriterTest__RejectMalformedReferenceWithoutChangingOutputs",
+      "rust_source": "crates/tkcdf/tests/pcdm_read_writer.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]
