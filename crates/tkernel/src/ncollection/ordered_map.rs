@@ -308,3 +308,5 @@ mod construction;
 super::ordered_table::ordered_default_construction!(OrderedMap<K,H>, H);
 
 super::ordered_table::ordered_protected_lookup!(OrderedMap<K,H>,H,super::OrderedMapNode<K>);
+
+super::ordered_table::ordered_borrowed_clear!(OrderedMap<K,H>);

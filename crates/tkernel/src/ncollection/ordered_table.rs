@@ -67,13 +67,6 @@ impl<K, V, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
         self.remove_slot(slot, hash);
         true
     }
-    pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
-        let release = resource.as_ref() != Some(self.resource());
-        self.clear(release);
-        if release {
-            self.base = BaseMapStorage::new(self.bucket_count, resource);
-        }
-    }
 }
 impl<K: Clone, V: Clone, H: HashPolicy<K>, N: StorageNode<K, V>> OrderedTable<K, V, H, N> {
     pub fn assign(&mut self, source: &Self, replace_values: bool) {
@@ -135,3 +128,6 @@ pub(super) use copy_construction::ordered_default_construction;
 
 mod protected_lookup;
 pub(super) use protected_lookup::ordered_protected_lookup;
+
+mod allocator_selection;
+pub(super) use allocator_selection::ordered_borrowed_clear;
