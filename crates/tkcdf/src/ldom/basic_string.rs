@@ -161,7 +161,7 @@ impl LdomBasicString {
         }
     }
     /// `SetDirect(aType, aValue)`: the type and the allocation, without copy.
-    pub(crate) fn set_direct(&mut self, kind: LdomStringType, text: Arc<LdomChars>) {
+    pub fn set_direct(&mut self, kind: LdomStringType, text: Arc<LdomChars>) {
         self.value = StringValue::Text(kind, text);
     }
     /// Retypes a document string (`SetValueClear` turns `LDOM_AsciiDoc` into

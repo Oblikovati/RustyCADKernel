@@ -400810,6 +400810,1598 @@
       "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
     },
     {
+      "upstream_id": "LDOMBasicString::GetInteger",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::get_integer",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::GetString",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::get_string",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOMBasicString()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOMBasicString(const char *)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::from_c_str",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOMBasicString(const char *,const int,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::with_length",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOMBasicString(const char *,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::with_document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOMBasicString(const int)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::from_integer",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOM_AsciiDoc",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType::LdomAsciiDoc",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOM_AsciiDocClear",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType::LdomAsciiDocClear",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOM_AsciiFree",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType::LdomAsciiFree",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOM_AsciiHashed",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType::LdomAsciiHashed",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOM_Integer",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType::LdomInteger",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::LDOM_NULL",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType::LdomNull",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::SetDirect",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::set_direct",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::StringType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomStringType",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::Type",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::string_type",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::equals",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::equals",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::myType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::string_type",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected type field is the variant of the value, read by Type."
+    },
+    {
+      "upstream_id": "LDOMBasicString::myVal",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::get_string",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected union is the value enum, read by GetString and GetInteger."
+    },
+    {
+      "upstream_id": "LDOMBasicString::operator TCollection_AsciiString",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::to_ascii_string",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::operator TCollection_ExtendedString",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::to_extended_string",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMBasicString::operator!=(const LDOMBasicString &) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of PartialEq::eq."
+    },
+    {
+      "upstream_id": "LDOMBasicString::operator!=(const LDOM_NullPtr *) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of is_null."
+    },
+    {
+      "upstream_id": "LDOMBasicString::operator==(const LDOMBasicString &) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The same type and the same integer or string allocation."
+    },
+    {
+      "upstream_id": "LDOMBasicString::operator==(const LDOM_NullPtr *) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicString::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_NullPtr",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The tag type of the null-pointer operators (operator=(LDOM_NullPtr*), operator==(LDOM_NullPtr*)); the port has set_null and is_null members instead."
+    },
+    {
+      "upstream_id": "db_pretty_print(const LDOMBasicString *,int,char *)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMBasicString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. A debugging helper compiled only with OCCT_DEBUG."
+    },
+    {
+      "upstream_id": "LDOMParser::GetBOM",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::get_bom",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::GetError",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::get_error",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::LDOMParser",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::endElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::end_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::getCurrentElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::get_current_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::getDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::get_document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::parse(const char *const)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::parse_file",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::parse(std::istream &,const bool,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::parse",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMParser::startElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMParser.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomParser::start_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMString::LDOMString()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomString::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMString::LDOMString(const char *)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomString::from_c_str",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMString::LDOMString(const int)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomString::from_integer",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOMString::getOwnerDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOMString.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomString::get_owner_document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Attr::LDOM_Attr()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Attr.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomAttr::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Attr::LDOM_Attr(const LDOM_BasicAttribute &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Attr.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomAttr::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_Attr::getName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Attr.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomAttr::get_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Attr::getValue",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Attr.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomAttr::get_value",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Attr::setValue",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Attr.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomAttr::set_value",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicAttribute::GetName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicAttribute.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicAttribute::get_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicAttribute::GetValue",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicAttribute.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicAttribute::get_value",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicAttribute::LDOM_BasicAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicAttribute.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicAttribute::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicAttribute::SetValue",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicAttribute.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicAttribute::set_value",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::AddAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::add_attribute",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::AppendChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::append_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::Create",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::create",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::GetAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::get_attribute",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::GetFirstChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::get_first_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::GetLastChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::get_last_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::GetTagName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::get_tag_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::LDOM_BasicElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::RemoveAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::remove_attribute",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicElement::RemoveChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicElement.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicElement::remove_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::GetSibling",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::get_sibling",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::LDOM_BasicNode()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. A new UNKNOWN node of the document."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::LDOM_BasicNode(LDOM_Node::NodeType)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::SetSibling",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::set_sibling",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::getNodeType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::get_node_type",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::isNull",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::myNodeType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::get_node_type",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected field of the node record, read by getNodeType."
+    },
+    {
+      "upstream_id": "LDOM_BasicNode::mySibling",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicNode.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicNode::get_sibling",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected link of the node record, read by GetSibling and written by SetSibling."
+    },
+    {
+      "upstream_id": "LDOM_BasicText::GetData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicText.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicText::get_data",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicText::LDOM_BasicText",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicText.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicText::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_BasicText::SetData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_BasicText.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBasicText::set_data",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CDATASection::LDOM_CDATASection()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CDATASection.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCdataSection::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CDATASection::LDOM_CDATASection(const LDOM_BasicText &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CDATASection.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCdataSection::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_CharReference::Decode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharReference.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharReference::decode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CharReference::Encode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharReference.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharReference::encode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CharacterData::LDOM_CharacterData()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharacterData.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharacterData::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CharacterData::LDOM_CharacterData(const LDOM_BasicText &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharacterData.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharacterData::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_CharacterData::getData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharacterData.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharacterData::get_data",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CharacterData::getLength",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharacterData.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharacterData::get_length",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_CharacterData::setData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_CharacterData.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomCharacterData::set_data",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Comment::LDOM_Comment()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Comment.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomComment::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Comment::LDOM_Comment(const LDOM_BasicText &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Comment.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomComment::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_Document::LDOM_Document()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::LDOM_Document(const LDOM_MemManager &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::from_mem_manager",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::createCDATASection",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::create_cdata_section",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::createComment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::create_comment",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::createDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::create_document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::createElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::create_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::createTextNode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::create_text_node",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::getDocumentElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::get_document_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::getElementsByTagName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::get_elements_by_tag_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::isNull",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Document::operator!=(const LDOM_Document &) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of PartialEq::eq."
+    },
+    {
+      "upstream_id": "LDOM_Document::operator!=(const LDOM_NullPtr *) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::eq_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of eq_null."
+    },
+    {
+      "upstream_id": "LDOM_Document::operator==(const LDOM_Document &) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The same storage."
+    },
+    {
+      "upstream_id": "LDOM_Document::operator==(const LDOM_NullPtr *) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomDocument::eq_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::GetAttributesList",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_attributes_list",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::GetChildByTagName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_child_by_tag_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::GetSiblingByTagName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_sibling_by_tag_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::LDOM_Element()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::LDOM_Element(const LDOM_BasicElement &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_Element::ReplaceElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::replace_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::getAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_attribute",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::getAttributeNode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_attribute_node",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::getElementsByTagName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_elements_by_tag_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::getTagName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::get_tag_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::removeAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::remove_attribute",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::setAttribute",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::set_attribute",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Element::setAttributeNode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Element.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomElement::set_attribute_node",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::Allocate",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. Untyped raw memory of the native blocks; the document arena owns typed node records and reference-counted strings, so no raw allocation exists."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::CompareStrings",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::compare_strings",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::Hash",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::hash",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::HashedAllocate(const char *,const int,LDOMBasicString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::hashed_allocate_into",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::HashedAllocate(const char *,const int,int &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::hashed_allocate",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::LDOM_MemManager",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::RootElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::root_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_MemManager::Self",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_MemManager.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomMemManager::self_ref",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::ATTRIBUTE_NODE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType::AttributeNode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::CDATA_SECTION_NODE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType::CdataSectionNode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::COMMENT_NODE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType::CommentNode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::ELEMENT_NODE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType::ElementNode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::LDOM_Node()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::LDOM_Node(const LDOM_BasicNode &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_Node::NodeType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::Origin",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::origin",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::SetValueClear",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::set_value_clear",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::TEXT_NODE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType::TextNode",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::UNKNOWN",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeType::Unknown",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::appendChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::append_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getFirstChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_first_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getLastChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_last_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getNextSibling",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_next_sibling",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getNodeName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_node_name",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getNodeType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_node_type",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getNodeValue",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_node_value",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::getOwnerDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_owner_document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::hasChildNodes",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::has_child_nodes",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::isNull",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::myDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected document handle."
+    },
+    {
+      "upstream_id": "LDOM_Node::myLastChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::get_last_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected cache, a Cell filled by getLastChild and appendChild."
+    },
+    {
+      "upstream_id": "LDOM_Node::myOrigin",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::origin",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected basic node, read by Origin."
+    },
+    {
+      "upstream_id": "LDOM_Node::operator!=(const LDOM_Node &) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of PartialEq::eq."
+    },
+    {
+      "upstream_id": "LDOM_Node::operator!=(const LDOM_NullPtr *) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of is_null."
+    },
+    {
+      "upstream_id": "LDOM_Node::operator==(const LDOM_Node &) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. Two null nodes, or the same basic node."
+    },
+    {
+      "upstream_id": "LDOM_Node::operator==(const LDOM_NullPtr *) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Node::removeChild",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNode::remove_child",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "db_pretty_print(const LDOM_Node *,int,char *)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Node.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. A debugging helper compiled only with OCCT_DEBUG."
+    },
+    {
+      "upstream_id": "LDOM_BasicNodeSequence",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_NodeList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The private DECLARE_SEQUENCE linked list behind LDOM_NodeList; the port keeps a Vec of node ids."
+    },
+    {
+      "upstream_id": "LDOM_NodeList::LDOM_NodeList()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_NodeList.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeList::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_NodeList::getLength",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_NodeList.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeList::get_length",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_NodeList::item",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_NodeList.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeList::item",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_NodeList::operator!=",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_NodeList.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeList::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. operator!= is the negation of is_null."
+    },
+    {
+      "upstream_id": "LDOM_NodeList::operator==",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_NodeList.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomNodeList::is_null",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOMType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_BOCU1",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomBocu1",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_GB18030",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomGb18030",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_SCSU",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomScsu",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UNDEFINED",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUndefined",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF1",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf1",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF16BE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf16be",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF16LE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf16le",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF32BE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf32be",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF32LE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf32le",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF7",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf7",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTF8",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtf8",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::BOM_UTFEBCDIC",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomBomType::BomUtfebcdic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::Clear",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomOSStream::clear",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::LDOM_OSStream",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomOSStream::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::Length",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomOSStream::length",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_OSStream::str",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomOSStream::str",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::Clear",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::clear",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::LDOM_SBuffer",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::Length",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::length",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::overflow",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::overflow",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::str",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::str",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::underflow",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::underflow",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_SBuffer::xsputn",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_OSStream.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomSBuffer::xsputn",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Text::LDOM_Text()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Text.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomText::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_Text::LDOM_Text(const LDOM_BasicText &,const occ::handle<LDOM_MemManager> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_Text.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomText::from_basic",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results. The protected constructor over a basic node of the document."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::CreateElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader::create_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::GetBOM",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader::get_bom",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::GetElement",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader::get_element",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::LDOM_XmlReader",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::ReadRecord",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader::read_record",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::RecordType",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_CDATA",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlCdata",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_COMMENT",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlComment",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_DOCTYPE",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlDoctype",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_END_ELEMENT",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlEndElement",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_EOF",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlEof",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_FULL_ELEMENT",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlFullElement",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_HEADER",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlHeader",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_START_ELEMENT",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlStartElement",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_TEXT",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlText",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::XML_UNKNOWN",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlRecordType::XmlUnknown",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlReader::getInteger",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlReader.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlReader::get_integer",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlWriter::LDOM_XmlWriter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlWriter.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlWriter::new",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlWriter::SetIndentation",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlWriter.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlWriter::set_indentation",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlWriter::Write(Standard_OStream &,const LDOM_Document &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlWriter.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlWriter::write_document",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
+      "upstream_id": "LDOM_XmlWriter::Write(Standard_OStream &,const LDOM_Node &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/LDOM/LDOM_XmlWriter.hxx",
+      "rust_item": "rustycad_tkcdf::ldom::LdomXmlWriter::write_node",
+      "status": "implemented",
+      "notes": "LDOM mapping (docs/ocaf-design.md section 9): the nodes of a document live in the arena of its LdomMemManager; basic nodes are views (document handle, node id); the DOM values embed LdomNode and dereference to it; streams are std::io Read/Write behind LdomIStream; the parser virtuals are the LdomParserHooks trait; native null dereferences are errors or null results."
+    },
+    {
       "upstream_id": "TDF::LowestID",
       "toolkit": "TKLCAF",
       "source": "src/ApplicationFramework/TKLCAF/TDF/TDF.hxx",
