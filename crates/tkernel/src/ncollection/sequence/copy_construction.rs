@@ -44,4 +44,4 @@ impl<T> Sequence<T> {
 }
 
 #[cfg(test)]
-mod tests;
+pub(super) mod tests;
