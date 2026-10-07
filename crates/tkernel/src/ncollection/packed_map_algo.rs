@@ -117,16 +117,46 @@ pub fn difference<T: PackedInteger>(
 }
 /// Check a common key, visiting the smaller operand; `has_intersection(&left, &right)`.
 pub fn has_intersection<T: PackedInteger>(left: &PackedMap<T>, right: &PackedMap<T>) -> bool {
-    let (smaller, larger) = if left.len() > right.len() {
+    if left.is_empty() || right.is_empty() {
+        return false;
+    }
+    if std::ptr::eq(left, right) {
+        return true;
+    }
+    let (smaller, larger) = if left.extent() > right.extent() {
         (right, left)
     } else {
         (left, right)
     };
-    smaller.into_iter().any(|value| larger.contains(value))
+    has_common_key(smaller, larger)
+}
+fn has_common_key<T: PackedInteger>(smaller: &PackedMap<T>, larger: &PackedMap<T>) -> bool {
+    let mut cursor = smaller.iter();
+    while let Some(value) = cursor.key().copied() {
+        if larger.contains(value) {
+            return true;
+        }
+        cursor.advance();
+    }
+    false
 }
 /// Check every key in the second operand; `contains(&superset, &subset)`.
 pub fn contains<T: PackedInteger>(map: &PackedMap<T>, other: &PackedMap<T>) -> bool {
-    map.len() >= other.len() && other.into_iter().all(|value| map.contains(value))
+    if std::ptr::eq(map, other) || other.is_empty() {
+        return true;
+    }
+    // Pinned OCCT 3d097a0 compares narrowed signed Extent(), including its wrap behavior.
+    if map.extent() < other.extent() {
+        return false;
+    }
+    let mut cursor = other.iter();
+    while let Some(value) = cursor.key().copied() {
+        if !map.contains(value) {
+            return false;
+        }
+        cursor.advance();
+    }
+    true
 }
 /// Check inclusion in the other operand; `is_subset(&subset, &superset)`.
 pub fn is_subset<T: PackedInteger>(map: &PackedMap<T>, other: &PackedMap<T>) -> bool {
@@ -134,5 +164,5 @@ pub fn is_subset<T: PackedInteger>(map: &PackedMap<T>, other: &PackedMap<T>) -> 
 }
 /// Compare contents independent of bucket order; `is_equal(&first, &second)`.
 pub fn is_equal<T: PackedInteger>(map: &PackedMap<T>, other: &PackedMap<T>) -> bool {
-    map.len() == other.len() && contains(map, other)
+    std::ptr::eq(map, other) || (map.extent() == other.extent() && contains(map, other))
 }

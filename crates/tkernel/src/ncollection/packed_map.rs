@@ -171,3 +171,6 @@ pub use operands::PackedMapOperand;
 
 #[cfg(test)]
 mod engine_contracts;
+
+#[cfg(test)]
+mod predicate_contracts;
