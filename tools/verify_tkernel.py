@@ -23,6 +23,7 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, runtime_case_results, verified_native_skips
 from tkernel_native_baseline import compile_sources
 from legacy_pending_dependency import implemented_classes, pending_dependency_rows, runnable_rows
+from legacy_not_applicable import not_applicable_rows
 from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 import tkernel_ncollection_corpus
 import tkernel_quantity_corpus
@@ -132,15 +133,18 @@ def main():
         raise RuntimeError("No TKernel mappings; refusing an empty success")
     # A pending-dependency row runs natively only; it lapses once its blocking class is ported.
     pending = pending_dependency_rows(mappings, implemented_classes(ledger["api"]))
+    # A C++-only property (move/copy traits) runs natively only, with its stated reason.
+    inapplicable = not_applicable_rows(mappings)
     runnable = runnable_rows(mappings)
     all_candidates = {c["name"] for t in inventory["toolkits"] if t["name"] == "TKernel" for c in t["gtest_declaration_candidates"]}
-    missing = all_candidates - {m["upstream_id"] for m in runnable}
+    # A not-applicable row is fully accounted; a pending one still counts as missing.
+    missing = all_candidates - {m["upstream_id"] for m in runnable} - set(inapplicable)
     if args.require_complete and (missing or not ledger["runtime_test_inventory_complete"] or not ledger["api_inventory_complete"]):
         raise RuntimeError(f"TKernel NOT COMPLETE: {len(missing)} unmapped GoogleTest declarations; full runtime/DRAW and API inventories also required")
     print(f"TKernel progress: {len(runnable)}/{len(all_candidates)} discovered declarations mapped, {len(pending)} pending dependency; toolkit acceptance pending", flush=True)
     sources = sorted({m["source"] for m in mappings})
     expected, rust_expected = mapped_runtime_sets(runnable)
-    expected |= set(pending)
+    expected |= set(pending) | set(inapplicable)
     if len({m["upstream_id"] for m in mappings}) != len(mappings):
         raise RuntimeError("Duplicate upstream test mappings")
     for path in sources:
@@ -254,6 +258,7 @@ def main():
               "legacy_tests_passed":native_passed,"upstream_skips":native_skips,
               "declarations_mapped":len(runnable),
               "rust_pending_dependency":{name:list(case.blocked_by) for name,case in sorted(pending.items())},
+              "rust_not_applicable":{name:case.reason for name,case in sorted(inapplicable.items())},
               "rust_translations_passed":sum(m["status"]=="translated" for m in runnable),
               "current_behavior_regressions_passed":len(native_skips),"rust_runtime_cases_passed":len(rust_expected),
               "runtime_evidence_schema":1,"runtime_evidence_toolkit":"TKernel",
