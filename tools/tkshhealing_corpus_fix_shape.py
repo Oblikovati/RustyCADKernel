@@ -98,10 +98,15 @@ def raw_face_inputs() -> list[list[float]]:
     notch = [o, (2, 0, 0), (2, 1, 0), (0, 1, 0), (1, 1, 0)]
     first_notch = [(0, 1, 0), (1, 1, 0), o, (2, 0, 0), (2, 1, 0)]
     bow = [o, (2, 0, 0), (0, 1, 0), (2, 1, 0)]
+    # Nonadjacent edges overlapping on [1, 3] exactly and at 1e-5, and touching at (1, 1).
+    overlap = [o, (4, 0, 0), (4, 1, 0), (3, 1, 0), (3, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)]
+    near_overlap = [o, (4, 0, 0), (4, 1, 0), (3, 1, 0), (3, 1e-5, 0), (1, 1e-5, 0), (1, 1, 0), (0, 1, 0)]
+    touching = [o, (1, 1, 0), (2, 0, 0), (2, 3, 0), (1, 1, 0), (0, 2, 0)]
     arcs = [4, 4, *arc(o, 1.0, 0.0, PI / 2), *segment((0, 1, 0), (-1, 0, 0)), *arc(o, 1.0, PI, 1.5 * PI),
             *segment((0, -1, 0), (1.001, 0, 0))]
     return [raw_face(tail), raw_face(notch), raw_face(first_notch), raw_face(bow), raw_face(square(0, 0, 2.0)),
-            raw_face(square(0, 0, 2.0), 1e-4), raw_face(square(0, 0, 2.0), 0.02), raw_face(tail, 1e-5), arcs, [4, 0]]
+            raw_face(square(0, 0, 2.0), 1e-4), raw_face(square(0, 0, 2.0), 0.02), raw_face(tail, 1e-5), arcs, [4, 0],
+            raw_face(overlap), raw_face(near_overlap), raw_face(touching)]
 
 
 def sphere_face(arcs: list[tuple]) -> list[float]:
