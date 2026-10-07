@@ -7,6 +7,7 @@ mod configuration_node_base;
 mod provider;
 mod provider_streams;
 mod shape_fix_parameters;
+mod validation_utils;
 
 pub use configuration_context::{DeConfigurationContext, DeResourceMap};
 pub use configuration_node::DeConfigurationNode;
@@ -19,3 +20,4 @@ pub use provider_streams::{
     DeProviderWriteStreamNode,
 };
 pub use shape_fix_parameters::{DeShapeFixParameters, DeShapeFixParametersFixMode};
+pub use validation_utils::DeValidationUtils;
