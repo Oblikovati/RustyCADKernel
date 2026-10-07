@@ -1,0 +1,96 @@
+   Compiling libc v0.2.189
+    Checking allocator-api2 v0.4.0
+    Checking bytemuck v1.25.2
+    Checking rustycad-cmath v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/cmath)
+    Checking smallvec v1.16.2
+ Documenting rustycad-tkernel v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkernel)
+warning: unresolved link to `0,s`
+  --> crates/tkernel/src/ncollection/linear_vector/insert_policy.rs:16:40
+   |
+16 |     /// If shifting source `s` fails, [0,s] stays live (possibly modified), slot s+1 is dead,
+   |                                        ^^^ no item named `0,s` in scope
+   |
+   = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+   = note: `#[warn(rustdoc::broken_intra_doc_links)]` on by default
+
+warning: unresolved link to `index`
+ --> crates/tkernel/src/ncollection/dynamic_array/internal_append.rs:8:45
+  |
+8 |     /// This represents native Append(array[index]); no Clone or Default bound is required.
+  |                                             ^^^^^ no item named `index` in scope
+  |
+  = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+
+warning: unresolved link to `index`
+  --> crates/tkernel/src/ncollection/dynamic_array/internal_append.rs:24:55
+   |
+24 |     /// This represents native Append(std::move(array[index])). A constructor panic retains
+   |                                                       ^^^^^ no item named `index` in scope
+   |
+   = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+
+warning: unresolved link to `right`
+ --> crates/tkernel/src/osd/protection/tables.rs:2:44
+  |
+2 | //! `TabProtSub` tables (indexed [current][right] by `OSD_SingleProtection`), Windows
+  |                                            ^^^^^ no item named `right` in scope
+  |
+  = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+
+warning: unclosed HTML tag `Cell`
+ --> crates/tkernel/src/ncollection/cell_filter/cell_map.rs:1:18
+  |
+1 | //! Canonical Map<Cell> and Object-first list nodes, without duplicate order/owner registries.
+  |                  ^^^^^^
+  |
+  = note: `#[warn(rustdoc::invalid_html_tags)]` on by default
+help: try marking as source code
+  |
+1 | //! Canonical `Map<Cell>` and Object-first list nodes, without duplicate order/owner registries.
+  |               +         +
+
+warning: unclosed HTML tag `Cell`
+ --> crates/tkernel/src/ncollection/cell_filter/cell_map/cell_node.rs:1:8
+  |
+1 | //! Map<Cell> destruction receives its allocator from the canonical node owner.
+  |        ^^^^^^
+  |
+help: try marking as source code
+  |
+1 | //! `Map<Cell>` destruction receives its allocator from the canonical node owner.
+  |     +         +
+
+warning: unclosed HTML tag `K`
+ --> crates/tkernel/src/ncollection/map_node/iterator_node.rs:1:56
+  |
+1 | //! KEY_ONLY BasicIterator reads the real ListValueNode<K> value rather than a unit placeholder.
+  |                                                        ^^^
+  |
+help: try marking as source code
+  |
+1 | //! KEY_ONLY BasicIterator reads the real `ListValueNode<K>` value rather than a unit placeholder.
+  |                                           +                +
+
+warning: unclosed HTML tag `text`
+  --> crates/tkernel/src/osd/parallel/job.rs:49:30
+   |
+49 | /// text panic reads "panic: <text>" (the `std::exception` clause prints the type name),
+   |                              ^^^^^^
+
+warning: `crate::standard::strtod` is both a function and a module
+ --> crates/tkernel/src/standard/c_string.rs:7:67
+  |
+7 | //! end the string exactly as `strlen`/`strcmp` do. `Strtod` is [`crate::standard::strtod`].
+  |                                                                   ^^^^^^^^^^^^^^^^^^^^^^^ ambiguous link
+  |
+help: to link to the function, add parentheses
+  |
+7 | //! end the string exactly as `strlen`/`strcmp` do. `Strtod` is [`crate::standard::strtod()`].
+  |                                                                                          ++
+help: to link to the module, prefix with `mod@`
+  |
+7 | //! end the string exactly as `strlen`/`strcmp` do. `Strtod` is [`mod@crate::standard::strtod`].
+  |                                                                   ++++
+
+warning: `rustycad-tkernel` (lib doc) generated 9 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.82s

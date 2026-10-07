@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import gzip
 import json
 from pathlib import Path
@@ -147,5 +148,13 @@ def replay(root: Path, receipt_path: Path) -> JSONObject:
     }
 
 
+def main() -> None:
+    """Choose current or historical receipt explicitly; e.g. `--receipt current.json`."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--receipt", type=Path, default=ROOT / RECEIPT)
+    arguments = parser.parse_args()
+    print(json.dumps(replay(ROOT, arguments.receipt), sort_keys=True))
+
+
 if __name__ == "__main__":
-    print(json.dumps(replay(ROOT, ROOT / RECEIPT), sort_keys=True))
+    main()
