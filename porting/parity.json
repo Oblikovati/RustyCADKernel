@@ -274142,6 +274142,69 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeCustom::ApplyModifier(const TopoDS_Shape&,const occ::handle<BRepTools_Modification>&,NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher>&,BRepTools_Modifier&,const Message_ProgressRange&,const occ::handle<ShapeBuild_ReShape>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::apply_modifier",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). Compounds child by child with the location-free context map, the optional reshape history (UpdateShapeBuild) and the progress cancellation.",
+      "cpp_declaration_id": "1a49160413652360a32454cd43c1ad24334242a9d40c8d0c1d96b9dd79e6740a"
+    },
+    {
+      "upstream_id": "ShapeCustom::DirectFaces(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::direct_faces",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "0d0dd8f55bd0c758489992a77ced8a07f2dcd2ffa37bc5bed331dbb4e24dfeb1"
+    },
+    {
+      "upstream_id": "ShapeCustom::ScaleShape(const TopoDS_Shape&,const double)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::scale_shape",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "ed6d6e48132e0d27062f600c5da9758598e874ca1c0e7c8d75f890bd0ca7d43b"
+    },
+    {
+      "upstream_id": "ShapeCustom::BSplineRestriction(const TopoDS_Shape&,const double,const double,const int,const int,const GeomAbs_Shape,const GeomAbs_Shape,const bool,const bool,const occ::handle<ShapeCustom_RestrictionParameters>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::bspline_restriction",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). The nine arguments after the shape are the ShapeCustomRestrictionRequest fields.",
+      "cpp_declaration_id": "e04aedafdb795b26727d2ed7839e66aa9a79ef5e8cadf0698b90dd7be18db196"
+    },
+    {
+      "upstream_id": "ShapeCustom::ConvertToRevolution(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::convert_to_revolution",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "1efce70cfada20b11d368d59ee891f0c40f81b633c31a2d45b12391fe8b342a2"
+    },
+    {
+      "upstream_id": "ShapeCustom::SweptToElementary(const TopoDS_Shape&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::swept_to_elementary",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "caf5f1a1965e2c42b9e87c6de618cadbc24def854ed2c00ed9cdc38027a7045b"
+    },
+    {
+      "upstream_id": "ShapeCustom::ConvertToBSpline(const TopoDS_Shape&,const bool,const bool,const bool,const bool)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustom::convert_to_bspline",
+      "status": "implemented",
+      "notes": "Line-by-line port (shape_custom/package.rs); compared with OCCT by the sc_modif op 12 and 13 requests (tools/tkshhealing_corpus_shapecustom.py). ",
+      "cpp_declaration_id": "7b98a96135c8b24971b1ac6cb868cefb9fe9c2cfaa73686dd6e4b30b8896f4c1"
+    },
+    {
       "upstream_id": "ShapeCustom_RestrictionParameters",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom.hxx",

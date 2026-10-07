@@ -20,7 +20,12 @@
 //  the table; 8: the dynamic type and IsKind of ShapeCustom_Modification and
 //  BRepTools_TrsfModification; 9 s k g: SendMsg(shape, message "m<k>", gravity g);
 //  10: MsgRegistrator().IsNull(); 11: for a B-spline restriction MaxErrors (the three
-//  errors), NbOfSpan and the three error accessors.
+//  errors), NbOfSpan and the three error accessors; 12 k s: the ShapeCustom package
+//  function k on s (0 DirectFaces, 1 ScaleShape 2.5, 2 BSplineRestriction(1e-3, 1e-6, 3,
+//  2, C1, C1, true, false) with ConvertPlane, 3 ConvertToRevolution, 4 SweptToElementary,
+//  5 ConvertToBSpline all modes, 6 ConvertToBSpline no mode) and the result digest;
+//  13 s: ShapeCustom::ApplyModifier(s, M) with a new ShapeBuild_ReShape, then the result,
+//  the context size and the reshape image of s.
 #include <BRepTools_Modifier.hxx>
 #include <ShapeCustom_BSplineRestriction.hxx>
 #include <ShapeCustom_ConvertToBSpline.hxx>
@@ -28,6 +33,7 @@
 #include <ShapeCustom_DirectModification.hxx>
 #include <ShapeCustom_SweptToElementary.hxx>
 #include <ShapeCustom_TrsfModification.hxx>
+#include <ShapeCustom.hxx>
 #include <ShapeExtend.hxx>
 occ::handle<BRepTools_Modification> sc_modification(GaReader& r){
  int kind=r.integer();
@@ -59,6 +65,14 @@ void sc_member(GaReader& r,const TpShapes& t,const occ::handle<BRepTools_Modific
   double p=0.5,tol=-1.;GA_TRY(ga_flag(m->NewParameter(v,e,p,tol)))ga_real(p);ga_real(tol);}
  else{TopoDS_Edge e=sh_edge(t,r.integer());TopoDS_Face f1=sh_face(t,r.integer()),f2=sh_face(t,r.integer());
   GA_TRY(ga_int(m->Continuity(e,f1,f2,e,f1,f2)))}}
+TopoDS_Shape sc_package(int k,const TopoDS_Shape& s){
+ if(k==0)return ShapeCustom::DirectFaces(s);
+ if(k==1)return ShapeCustom::ScaleShape(s,2.5);
+ if(k==2){occ::handle<ShapeCustom_RestrictionParameters> p=new ShapeCustom_RestrictionParameters();p->ConvertPlane()=true;
+  return ShapeCustom::BSplineRestriction(s,1e-3,1e-6,3,2,GeomAbs_C1,GeomAbs_C1,true,false,p);}
+ if(k==3)return ShapeCustom::ConvertToRevolution(s);
+ if(k==4)return ShapeCustom::SweptToElementary(s);
+ return ShapeCustom::ConvertToBSpline(s,k==5,k==5,k==5,k==5);}
 void sc_registrator(const TpShapes& t,const occ::handle<ShapeCustom_Modification>& cm){
  occ::handle<ShapeExtend_MsgRegistrator> reg=cm.IsNull()?nullptr:occ::down_cast<ShapeExtend_MsgRegistrator>(cm->MsgRegistrator());
  ga_flag(!reg.IsNull());if(reg.IsNull())return;
@@ -77,6 +91,12 @@ void sc_other(GaReader& r,const TpShapes& t,const occ::handle<BRepTools_Modifica
  else if(op==11){occ::handle<ShapeCustom_BSplineRestriction> b=occ::down_cast<ShapeCustom_BSplineRestriction>(m);
   double e3=-1.,e2=-1.;ga_real(b->MaxErrors(e3,e2));ga_real(e3);ga_real(e2);ga_int(b->NbOfSpan());
   ga_real(b->SurfaceError());ga_real(b->Curve3dError());ga_real(b->Curve2dError());}
+ else if(op==12){int k=r.integer();TopoDS_Shape s=sh_shape(t,r.integer());GA_TRY(tp_shape(sc_package(k,s)))}
+ else if(op==13){TopoDS_Shape s=sh_shape(t,r.integer());
+  NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher> context;BRepTools_Modifier MD;
+  occ::handle<ShapeBuild_ReShape> rs=new ShapeBuild_ReShape();
+  GA_TRY(tp_shape(ShapeCustom::ApplyModifier(s,m,context,MD,Message_ProgressRange(),rs));ga_int(context.Extent());
+   tp_shape(rs->Apply(s)))}
  else ga_flag(!cm.IsNull()&&cm->MsgRegistrator().IsNull());}
 void sc_modif_case(std::istream& input){
  ShapeExtend::Init();

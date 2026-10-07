@@ -241,7 +241,7 @@ def modif_requests(s: ModificationScene) -> list[str]:
 
 def ops_count(ops: list[int]) -> list[int]:
     """The ops of an op list (each op code with its operand count), to count them."""
-    widths = {0: 1, 1: 1, 2: 1, 3: 4, 4: 2, 5: 3, 6: 1, 7: 0, 8: 0, 9: 3, 10: 0, 11: 0}
+    widths = {0: 1, 1: 1, 2: 1, 3: 4, 4: 2, 5: 3, 6: 1, 7: 0, 8: 0, 9: 3, 10: 0, 11: 0, 12: 2, 13: 1}
     codes, k = [], 0
     while k < len(ops):
         codes.append(ops[k])
@@ -346,6 +346,32 @@ def bspline_restriction_requests(s: ModificationScene) -> list[str]:
     return out
 
 
+def package_requests() -> list[str]:
+    """The ShapeCustom package functions and ApplyModifier with a reshape on single faces,
+    on the scene compound and on an assembly sharing one face three times (twice located,
+    once in a nested compound)."""
+    scene = spline_scene()
+    p = scene.program
+    turned = scene.prelude.location(rotation(O, (0., 0., 1.), 0.5))
+    shared = scene.faces['ext_circle']
+    nested = p.container(COMPOUND)
+    p.add(nested, shared)
+    assembly = p.container(COMPOUND)
+    for child in (shared, p.located(shared, turned), nested, scene.faces['plane']):
+        p.add(assembly, child)
+    targets = [scene.faces[name] for name in ('plane', 'ext_circle', 'rev_cyl', 'cyl', 'rev_bezier')]
+    targets += [scene.compound, assembly]
+    out = []
+    for target in targets:
+        ops: list[int] = []
+        for k in range(7):
+            ops += [12, k, target]
+        out.append(request('sc_modif', scene.tokens(), 1, 0, len(ops_count(ops)), *ops))
+        for modification in ([1], [3, 1, 1, 1, 1], [4]):
+            out.append(request('sc_modif', scene.tokens(), *modification, 0, 1, 13, target))
+    return out
+
+
 def append_shapecustom_requests(requests: list[str]) -> None:
     """Append every ShapeCustom request family in a fixed order."""
     requests += is_linear_requests()
@@ -359,3 +385,4 @@ def append_shapecustom_requests(requests: list[str]) -> None:
     requests += convert_to_bspline_requests(swept)
     requests += swept_to_elementary_requests(swept)
     requests += bspline_restriction_requests(swept)
+    requests += package_requests()

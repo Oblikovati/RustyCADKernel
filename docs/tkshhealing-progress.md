@@ -187,14 +187,18 @@ the trait `ShapeCustomModification: BRepToolsModification`; the three modificati
 `ShapeCustomDirectModification` and `ShapeCustomConvertToRevolution`, applied with
 TKBRep's `Modifier`. `crates/tkshhealing/tests/shape_custom_*.rs` hold the behavior tests.
 
-Not ported yet, because they use classes of the parallel ShapeAnalysis/ShapeConstruct work
-that are not in this branch: ShapeCustom_BSplineRestriction (ShapeAnalysis,
-ShapeAnalysis_Curve, ShapeConstruct), ShapeCustom_ConvertToBSpline (ShapeConstruct),
-ShapeCustom_Surface (ShapeAnalysis_Geom, ShapeAnalysis_Surface),
-ShapeCustom_SweptToElementary (ShapeAnalysis_Surface) and the package functions of
-ShapeCustom.hxx (they use the four classes). The api audit of ShapeCustom is 0 stale with
-48 rows (6 of them the excluded RTTI macros); the 64 missing members belong to those
-classes.
+Ported in October 2026 (wave 3): ShapeCustom_ConvertToBSpline, ShapeCustom_SweptToElementary,
+ShapeCustom_Surface, ShapeCustom_BSplineRestriction and the package functions of
+ShapeCustom.hxx (`ShapeCustom`, with `ApplyModifier`). They are compared with OCCT by the
+`sc_modif` kinds 3 to 5 and ops 11 to 13 and by `sc_surface`
+(tools/tkshhealing_corpus_shapecustom.py, tools/tkshhealing_corpus_construct_package.py).
+Native quirks kept and documented in the code: SweptToElementary never converts a wrapped
+swept surface and dereferences a null swept surface in NewCurve2d (a SIGSEGV natively, a
+Standard_NullObject failure in Rust, left out of the corpus); BSplineRestriction approximates
+3D conics with the 2D continuity; ShapeCustom_Surface keeps the swapped bounds of the V-iso
+torus pass and substitutes a rejected (null) candidate. The ShapeConstruct package functions
+(ConvertCurveToBSpline, ConvertSurfaceToBSpline, JoinPCurves) are compared by the
+`sh_construct_pkg` requests.
 
 ## ShapeUpgrade
 

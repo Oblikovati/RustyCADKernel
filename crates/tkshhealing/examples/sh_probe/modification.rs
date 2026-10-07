@@ -6,15 +6,21 @@ use super::registrator::{gravity, list, message};
 use super::sh_common::{curve, curve2d, location, shapes, surface, trsf};
 use super::shapes::TpShapes;
 use super::wire_data::{sh_edge, sh_face, sh_shape};
+use rustycad_tkbrep::brep_tools::ReShape;
 use rustycad_tkbrep::brep_tools::{BRepToolsModification, Modifier, NewCurve, NewSurface};
 use rustycad_tkbrep::topods;
+use rustycad_tkbrep::topods::Shape;
+use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::geom_abs::Shape as Continuity;
 use rustycad_tkmath::gp::Point3;
+use rustycad_tkshhealing::shape_build::ShapeBuildReShape;
 use rustycad_tkshhealing::shape_custom::{
-    ShapeCustomBSplineRestriction, ShapeCustomBSplineRestrictionSettings,
-    ShapeCustomConvertToBSpline, ShapeCustomConvertToRevolution, ShapeCustomDirectModification,
-    ShapeCustomModification, ShapeCustomSweptToElementary, ShapeCustomTrsfModification,
+    ShapeCustom, ShapeCustomBSplineRestriction, ShapeCustomBSplineRestrictionSettings,
+    ShapeCustomContext, ShapeCustomConvertToBSpline, ShapeCustomConvertToRevolution,
+    ShapeCustomDirectModification, ShapeCustomModification, ShapeCustomRestrictionParameters,
+    ShapeCustomRestrictionRequest, ShapeCustomSweptToElementary, ShapeCustomTrsfModification,
 };
 use rustycad_tkshhealing::shape_extend::{
     BasicMsgRegistrator, ShapeExtend, ShapeExtendMsgRegistrator,
@@ -197,6 +203,15 @@ fn other(r: &mut Reader<'_>, t: &TpShapes, m: &Modification, op: i32) {
             }
         }
         11 => restriction_errors(m),
+        12 => {
+            let k = r.integer();
+            let s = sh_shape(t, r.integer());
+            attempt(|| shape(&package_function(k, &s)?));
+        }
+        13 => {
+            let s = sh_shape(t, r.integer());
+            attempt(|| apply_with_reshape(&s, m));
+        }
         _ => flag(cm.get().is_some_and(|cm| cm.msg_registrator().is_null())),
     }
 }
@@ -235,6 +250,51 @@ fn continuity_of(value: i32) -> Continuity {
         Continuity::C3,
         Continuity::CN,
     ][value as usize]
+}
+
+/// Op 12: the ShapeCustom package function `k` on `s`.
+fn package_function(k: i32, s: &Shape) -> Result<Shape, Failure> {
+    match k {
+        0 => ShapeCustom::direct_faces(s),
+        1 => ShapeCustom::scale_shape(s, 2.5),
+        2 => {
+            let parameters = Handle::new(ShapeCustomRestrictionParameters::new());
+            parameters.set_convert_plane(true);
+            let request = ShapeCustomRestrictionRequest {
+                tol_3d: 1e-3,
+                tol_2d: 1e-6,
+                max_degree: 3,
+                max_nb_segment: 2,
+                continuity_3d: Continuity::C1,
+                continuity_2d: Continuity::C1,
+                degree: true,
+                rational: false,
+                parameters,
+            };
+            ShapeCustom::bspline_restriction(s, &request)
+        }
+        3 => ShapeCustom::convert_to_revolution(s),
+        4 => ShapeCustom::swept_to_elementary(s),
+        _ => ShapeCustom::convert_to_bspline(s, k == 5, k == 5, k == 5, k == 5),
+    }
+}
+
+/// Op 13: ApplyModifier with a new reshape, the context size and the reshape image.
+fn apply_with_reshape(s: &Shape, m: &Modification) -> Result<(), Failure> {
+    let mut context = ShapeCustomContext::default();
+    let mut modifier = Modifier::new(false);
+    let reshape = Handle::new(ShapeBuildReShape::new());
+    let range = ProgressRange::default();
+    shape(&ShapeCustom::apply_modifier(
+        s,
+        m,
+        &mut context,
+        &mut modifier,
+        &range,
+        &reshape,
+    )?)?;
+    int(context.extent() as i32);
+    shape(&ReShape::apply(&*reshape, s, ShapeEnum::Shape)?)
 }
 
 /// Op 11: MaxErrors, NbOfSpan and the error accessors of a B-spline restriction.
