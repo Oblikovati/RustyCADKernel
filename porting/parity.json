@@ -149312,6 +149312,22 @@
       "notes": "C++ protected data member of Intf_Interference: Rust keeps it as the private field `tangent_zones` of Interference (tkgeomalgo/src/intf/interference.rs), the state of Interference; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "Intf_Interference::SelfInterference(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::self_interference",
+      "status": "implemented",
+      "notes": "C++ protected member setter: public in Rust."
+    },
+    {
+      "upstream_id": "Intf_Interference(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_Interference.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::Interference::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor of the interference base: public in Rust."
+    },
+    {
       "upstream_id": "Intf_InterferencePolygon2d::Intf_InterferencePolygon2d()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_InterferencePolygon2d.hxx",
@@ -151460,6 +151476,30 @@
       "notes": "C++ protected data member of IntRes2d_Intersection: Rust keeps it as the private field `reverse` of Intersection (tkgeomalgo/src/int_res2d/intersection.rs), the state of Intersection; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "IntRes2d_Intersection::Insert(const IntRes2d_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::insert",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::SetValues(const IntRes2d_Intersection&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::set_values",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::Append(const IntRes2d_Intersection&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::append_composite",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
       "upstream_id": "IntRes2d_IntersectionPoint()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
@@ -152442,6 +152482,14 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::is_null",
       "status": "implemented",
       "notes": "Public data member of Interval: the public field `is_null` of the Rust struct."
+    },
+    {
+      "upstream_id": "PIpPI",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PI_P_PI",
+      "status": "implemented",
+      "notes": "File-scope static of IntCurve_IntConicConic_Tool.hxx (M_PI + M_PI, never modified): the Rust constant."
     },
     {
       "upstream_id": "IntCurve_IntConicConic::IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Lin2d&,const IntRes2d_Domain&,double,double)",
@@ -153810,6 +153858,22 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::get_min_nb_samples",
       "status": "implemented",
       "notes": "Geom2dInt mapping (docs/tkgeomalgo-progress.md): the instantiations of the IntCurve curve-curve templates on Adaptor2d_Curve2d are aliases of the Rust generics (docs/geomalgo-design.md section 5); native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2int_polygon, g2int_exact, g2int_polypoly, g2int_ginter)."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntPCurvePCurveOfGInter::Perform(const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::perform_self_iter",
+      "status": "implemented",
+      "notes": "C++ protected member; the instance is a type alias of the IntCurve generic, whose method is public."
+    },
+    {
+      "upstream_id": "Geom2dInt_TheIntPCurvePCurveOfGInter::Perform(const Adaptor2d_Curve2d&,const IntRes2d_Domain&,const Adaptor2d_Curve2d&,const IntRes2d_Domain&,double,double,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dInt/Geom2dInt_TheIntPCurvePCurveOfGInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::perform_iter",
+      "status": "implemented",
+      "notes": "C++ protected member; the instance is a type alias of the IntCurve generic, whose method is public."
     },
     {
       "upstream_id": "Geom2dInt_ThePolygon2dOfTheIntPCurvePCurveOfGInter(const Adaptor2d_Curve2d&,int,const IntRes2d_Domain&,double)",
@@ -157642,6 +157706,27 @@
       "notes": "C++ protected data member of FairCurve_Batten: Rust keeps it as the private field `old.height` of BattenConstraints (tkgeomalgo/src/fair_curve/batten/mod.rs), the state of FairCurveBatten; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "FairCurve_Batten::Compute(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private function FairCurveBatten::length_of_angle (crates/tkgeomalgo/src/fair_curve/batten/sliding.rs)."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Compute(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private function FairCurveBatten::length_of_pair (crates/tkgeomalgo/src/fair_curve/batten/sliding.rs)."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SlidingOfReference(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method FairCurveBatten::sliding_of_reference_for (crates/tkgeomalgo/src/fair_curve/batten/sliding.rs)."
+    },
+    {
       "upstream_id": "FairCurve_BattenLaw::FairCurve_BattenLaw(double,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
@@ -157753,6 +157838,14 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
       "status": "excluded",
       "notes": "C++ protected data member of FairCurve_DistributionOfEnergy: Rust keeps it as the private field `derivative_order` of FairCurveDistributionOfEnergy (tkgeomalgo/src/fair_curve/distribution.rs), the state of FairCurveDistributionOfEnergy; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfEnergy::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor of the abstract distribution: the shared state that each distribution embeds."
     },
     {
       "upstream_id": "FairCurve_DistributionOfJerk::FairCurve_DistributionOfJerk(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,const FairCurve_BattenLaw&,int)",
@@ -157902,6 +157995,65 @@
       "notes": "C++ protected data member of FairCurve_Energy: Rust keeps it as the private field `nb_var` of FairCurveEnergy (tkgeomalgo/src/fair_curve/energy.rs), the state of FairCurveEnergyModel; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "FairCurve_Energy(const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,bool,double,double,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergy::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor of the abstract energy: the shared state FairCurveEnergy that each energy embeds."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Hessian1(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method FairCurveEnergy::hessian1 (energy_terms.rs) in crates/tkgeomalgo/src/fair_curve, called by the provided methods of FairCurveEnergyModel."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::ComputePolesG2(int,double,double,const gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method FairCurveEnergy::poles_g2 (energy.rs) in crates/tkgeomalgo/src/fair_curve, called by the provided methods of FairCurveEnergyModel."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::ComputePoles(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergy::compute_poles",
+      "status": "implemented",
+      "notes": "C++ protected member: the base pole update of FairCurveEnergy."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Indice(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method FairCurveEnergy::indice (energy.rs) in crates/tkgeomalgo/src/fair_curve, called by the provided methods of FairCurveEnergyModel."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::ComputePolesG1(int,double,const gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method FairCurveEnergy::poles_g1 (energy.rs) in crates/tkgeomalgo/src/fair_curve, called by the provided methods of FairCurveEnergyModel."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Gradient1(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method FairCurveEnergy::gradient1 (energy_terms.rs) in crates/tkgeomalgo/src/fair_curve, called by the provided methods of FairCurveEnergyModel."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Compute(int,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::compute",
+      "status": "implemented",
+      "notes": "C++ protected member pure virtual member: the required method of the FairCurveEnergyModel trait."
+    },
+    {
       "upstream_id": "FairCurve_EnergyOfBatten::FairCurve_EnergyOfBatten(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,const FairCurve_BattenLaw&,double,bool,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
@@ -157934,6 +158086,22 @@
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
     },
     {
+      "upstream_id": "FairCurve_EnergyOfBatten::Compute(int,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfBatten::<rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel>::compute",
+      "status": "implemented",
+      "notes": "C++ protected member override: the FairCurveEnergyModel implementation."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfBatten::ComputePoles(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfBatten::<rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel>::compute_poles",
+      "status": "implemented",
+      "notes": "C++ protected member override: the FairCurveEnergyModel implementation."
+    },
+    {
       "upstream_id": "FairCurve_EnergyOfMVC::FairCurve_EnergyOfMVC(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,const FairCurve_BattenLaw&,double,double,bool,double,double,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
@@ -157964,6 +158132,22 @@
       "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::<rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel>::variable",
       "status": "implemented",
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfMVC::ComputePoles(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::<rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel>::compute_poles",
+      "status": "implemented",
+      "notes": "C++ protected member override: the FairCurveEnergyModel implementation."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfMVC::Compute(int,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::<rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel>::compute",
+      "status": "implemented",
+      "notes": "C++ protected member override: the FairCurveEnergyModel implementation."
     },
     {
       "upstream_id": "FairCurve_MinimalVariation::FairCurve_MinimalVariation(const gp_Pnt2d&,const gp_Pnt2d&,double,double,double)",
@@ -158645,6 +158829,14 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
       "status": "excluded",
       "notes": "C++ protected data member of HatchGen_IntersectionPoint: Rust keeps it as the private field `my_param` of IntersectionPoint (tkgeomalgo/src/hatch_gen/intersection_point.rs), the state of IntersectionPoint; derived types reach it through the methods, so it is not public API."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "C++ protected member constructor: Default gives the native initial values."
     },
     {
       "upstream_id": "HatchGen_PointOnElement::HatchGen_PointOnElement()",
@@ -159781,6 +159973,22 @@
       "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::dump",
       "status": "implemented",
       "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Element(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::element_mut",
+      "status": "implemented",
+      "notes": "C++ protected member non-const accessor: the mutable accessor."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Hatching(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::hatching_mut",
+      "status": "implemented",
+      "notes": "C++ protected member non-const accessor: the mutable accessor."
     },
     {
       "upstream_id": "Geom2dGcc::Unqualified(const Geom2dAdaptor_Curve&)",
@@ -163439,6 +163647,22 @@
       "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 11): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polygon)."
     },
     {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::Init(const occ::handle<Adaptor3d_Curve>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::polygon_utils::init_with_params",
+      "status": "implemented",
+      "notes": "C++ protected member: the public sampling function that the polygon constructors call."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolygonOfHInter::Init(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonOfHInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::polygon_utils::init_uniform",
+      "status": "implemented",
+      "notes": "C++ protected member: the public sampling function that the polygon constructors call."
+    },
+    {
       "upstream_id": "IntCurveSurface_ThePolygonToolOfHInter::Bounding(const IntCurveSurface_ThePolygonOfHInter&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolygonToolOfHInter.hxx",
@@ -163749,6 +163973,20 @@
       "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::dump",
       "status": "implemented",
       "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 11): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_polyhedron)."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Init(const occ::handle<Adaptor3d_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method `init` of the polyhedron (crates/tkgeomalgo/src/int_curve_surface/polyhedron.rs), called by its constructor."
+    },
+    {
+      "upstream_id": "IntCurveSurface_ThePolyhedronOfHInter::Init(const occ::handle<Adaptor3d_Surface>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method `init_with_params` of the polyhedron (crates/tkgeomalgo/src/int_curve_surface/polyhedron.rs), called by its constructor."
     },
     {
       "upstream_id": "IntCurveSurface_ThePolyhedronToolOfHInter::Bounding(const IntCurveSurface_ThePolyhedronOfHInter&)",
@@ -164968,6 +165206,14 @@
       "notes": "impl_transient_interface!(dyn GeomFillBoundary, \"GeomFill_Boundary\", StandardTransient) gives the abstract class its runtime type. GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_Boundary(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Boundary.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillBoundaryTolerances::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor (Tol3d, Tolang): the tolerances that each boundary embeds."
+    },
+    {
       "upstream_id": "GeomFill_SimpleBound::GeomFill_SimpleBound(const occ::handle<Adaptor3d_Curve>&,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_SimpleBound.hxx",
@@ -165667,6 +165913,14 @@
       "notes": "Member typedef of the storage type (NCollection_DynamicArray<Type>) of IntPolyh_Array: Rust spells the storage directly as the private Vec<T> field `vector` of IntPolyhArray; no public behavior."
     },
     {
+      "upstream_id": "IntPolyh_Array",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Array.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhArray",
+      "status": "implemented",
+      "notes": "Class template: the generic Rust struct."
+    },
+    {
       "upstream_id": "IntPolyh_Couple()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
@@ -165769,6 +166023,13 @@
       "rust_item": "rustycad_tkgeomalgo::int_polyh::IntPolyhCouple::<core::hash::Hash>::hash",
       "status": "implemented",
       "notes": "IntPolyh mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 12): concrete structs; overloads take distinct names, output references become returned values, members that can raise return Result, Dump members write the native printf text to a fmt::Write; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ph_*)."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPolyh/IntPolyh_Couple.hxx",
+      "status": "excluded",
+      "notes": "std::hash specialization for IntPolyh_Couple: replaced by the Rust Hash implementation of IntPolyhCouple (core::hash::Hash::hash), which the operator() row claims."
     },
     {
       "upstream_id": "IntPolyh_Edge()",
@@ -170248,6 +170509,30 @@
       "notes": "C++ protected data member of IntPatch_Line: Rust keeps it as the private field `typ` of LineFields (tkgeomalgo/src/int_patch/line.rs), the state of IntPatchLine; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "IntPatch_Line(bool,IntSurf_TypeTrans,IntSurf_TypeTrans)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Line.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineBase::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor: IntPatchLineBase::new with IntPatchLineTransitions::Types."
+    },
+    {
+      "upstream_id": "IntPatch_Line(bool,IntSurf_Situation,IntSurf_Situation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Line.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineBase::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor: IntPatchLineBase::new with IntPatchLineTransitions::Situations."
+    },
+    {
+      "upstream_id": "IntPatch_Line(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Line.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchLineBase::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor: IntPatchLineBase::new with IntPatchLineTransitions::Undecided."
+    },
+    {
       "upstream_id": "IntPatch_Point::IntPatch_Point()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Point.hxx",
@@ -170638,6 +170923,27 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPointLine::static_type",
       "status": "implemented",
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_PointLine(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PointLine.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member constructor of the abstract IntPatch_PointLine that only forwards to the IntPatch_Line constructor: the Rust trait IntPatchPointLine has no data, and the concrete lines build their IntPatchLineBase with IntPatchLineBase::new."
+    },
+    {
+      "upstream_id": "IntPatch_PointLine(bool,IntSurf_Situation,IntSurf_Situation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PointLine.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member constructor of the abstract IntPatch_PointLine that only forwards to the IntPatch_Line constructor: the Rust trait IntPatchPointLine has no data, and the concrete lines build their IntPatchLineBase with IntPatchLineBase::new."
+    },
+    {
+      "upstream_id": "IntPatch_PointLine(bool,IntSurf_TypeTrans,IntSurf_TypeTrans)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_PointLine.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member constructor of the abstract IntPatch_PointLine that only forwards to the IntPatch_Line constructor: the Rust trait IntPatchPointLine has no data, and the concrete lines build their IntPatchLineBase with IntPatchLineBase::new."
     },
     {
       "upstream_id": "IntPatch_RLine::IntPatch_RLine(bool,IntSurf_TypeTrans,IntSurf_TypeTrans)",
@@ -171308,6 +171614,126 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchTheIWalking::single_pnt",
       "status": "implemented",
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::Cadrage(math_Vector&,math_Vector&,math_Vector&,double&,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `cadrage` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::TestArretCadre(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const occ::handle<IntPatch_TheIWLineOfTheIWalking>&,IntPatch_TheSurfFunction&,math_Vector&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_cadre` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::Clear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkIWalking::clear",
+      "status": "implemented",
+      "notes": "C++ protected member; IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose `clear` is public."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::ComputeCloseLine(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const NCollection_Sequence<IntSurf_PathPoint>&,const NCollection_Sequence<IntSurf_InteriorPoint>&,IntPatch_TheSurfFunction&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `compute_close_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::MakeWalkingPoint(int,double,double,IntPatch_TheSurfFunction&,IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `make_walking_point` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::IsPointOnLine(const gp_Pnt2d&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `is_point_on_line_2d` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::OpenLine(int,const IntSurf_PntOn2S&,const NCollection_Sequence<IntSurf_PathPoint>&,IntPatch_TheSurfFunction&,const occ::handle<IntPatch_TheIWLineOfTheIWalking>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `open_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::AddPointInCurrentLine(int,const IntSurf_PathPoint&,const occ::handle<IntPatch_TheIWLineOfTheIWalking>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `add_point_in_current_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::TestArretAjout(IntPatch_TheSurfFunction&,math_Vector&,int&,IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_ajout` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::ComputeOpenLine(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const NCollection_Sequence<IntSurf_PathPoint>&,IntPatch_TheSurfFunction&,bool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `compute_open_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::TestArretPassage(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,const math_Vector&,int,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_passage_closed` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::RemoveTwoEndPoints(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `remove_two_end_points` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::IsPointOnLine(const IntSurf_PntOn2S&,const math_Vector&,const math_Vector&,math_FunctionSetRoot&,IntPatch_TheSurfFunction&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `is_point_on_line` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::IsValidEndPoint(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `is_valid_end_point` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::FillPntsInHoles(IntPatch_TheSurfFunction&,NCollection_Sequence<int>&,NCollection_Sequence<IntSurf_InteriorPoint>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `fill_pnts_in_holes` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::TestArretPassage(const NCollection_Sequence<double>&,const NCollection_Sequence<double>&,IntPatch_TheSurfFunction&,math_Vector&,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_arret_passage_open` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
+    },
+    {
+      "upstream_id": "IntPatch_TheIWalking::TestDeflection(IntPatch_TheSurfFunction&,bool,const math_Vector&,IntWalk_StatusDeflection,int&,double&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_TheIWalking.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member of the IntWalk_IWalking instance: IntPatch_TheIWalking is a type alias of IntWalkIWalking, whose private method `test_deflection` (crates/tkgeomalgo/src/int_walk/iwalking/) carries it."
     },
     {
       "upstream_id": "IntPatch_ThePathPointOfTheSOnBounds::IntPatch_ThePathPointOfTheSOnBounds()",
@@ -177298,6 +177724,14 @@
       "notes": "C++ protected data member of IntPatch_Polygo: Rust keeps it as the private field `error` of IntPatchPolygoBase (tkgeomalgo/src/int_patch/polygo.rs), the state of IntPatchPolygo; derived types reach it through the methods, so it is not public API."
     },
     {
+      "upstream_id": "IntPatch_Polygo(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polygo.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchPolygoBase::new",
+      "status": "implemented",
+      "notes": "C++ protected member constructor: the shared state IntPatchPolygoBase of the polygons."
+    },
+    {
       "upstream_id": "IntPatch_Polyhedron::IntPatch_Polyhedron(const occ::handle<Adaptor3d_Surface>&,int,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Polyhedron.hxx",
@@ -179672,6 +180106,14 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLineTool::extend_two_wlines",
       "status": "implemented",
       "notes": "IntPatch parametric intersection and front end (docs/geomalgo-design.md section 18): static classes are unit structs with associated functions; the domains are &dyn TheTopolTool (the virtual Adaptor3d_TopolTool); line sequences are Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_extend requests)."
+    },
+    {
+      "upstream_id": "IntPatch_WLineTool::myMaxConcatAngle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLineTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLineTool::MY_MAX_CONCAT_ANGLE",
+      "status": "implemented",
+      "notes": "Public static constant: the associated constant (PI / 6)."
     },
     {
       "upstream_id": "IntPatch_PrmPrmIntersection::Perform(const occ::handle<Adaptor3d_Surface>&,const IntPatch_Polyhedron&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const IntPatch_Polyhedron&,const occ::handle<Adaptor3d_TopolTool>&,double,double,double,double)",
@@ -184994,6 +185436,14 @@
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
     },
     {
+      "upstream_id": "GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox::Perform(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::BSpFunction::perform",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public method."
+    },
+    {
       "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,int,int,AppParCurves_Constraint,AppParCurves_Constraint,const math_Vector&,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
@@ -185160,6 +185610,79 @@
       "rust_item": "rustycad_tkgeombase::app_par_curves::LeastSquare::k_index",
       "status": "implemented",
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::MakeTAA(math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_blocks` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::NbBColumns(const GeomInt_TheMultiLineOfWLApprox&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::nb_b_columns",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::MakeTAA(math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_full` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::SearchIndex(math_IntegerVector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::search_index` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::TheLastPoint(AppParCurves_Constraint,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_last_point",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::TheFirstPoint(AppParCurves_Constraint,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_first_point",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::Affect(const GeomInt_TheMultiLineOfWLApprox&,int,AppParCurves_Constraint&,math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::affect` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::MakeTAA(math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_profile` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::ComputeFunction(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::compute_function` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox::Init(const GeomInt_TheMultiLineOfWLApprox&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::init` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
     },
     {
       "upstream_id": "GeomInt_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfWLApprox(math_MultipleVarFunctionWithGradient&,const math_Vector&,double,double,double,int)",
@@ -185418,6 +185941,20 @@
       "notes": "GeomInt (docs/geomalgo-design.md section 20): surfaces are Handle<GeomAdaptorSurface> compared by address, domains Rc<dyn TheTopolTool>, line sequences Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange, in-out references become &mut parameters or returned tuples, the native sorts run the libstdc++ algorithm; exceptions (and the null dereferences of the native code) become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gi_intss, gi_lconst, gi_lines, gi_ltool, gi_pcurves, gi_trim, gi_mkbsp, gi_rline, gi_adjust, gi_porient requests)."
     },
     {
+      "upstream_id": "GeomInt_IntSS::MakeCurve(int,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_TopolTool>&,double,bool,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_IntSS.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method GeomIntIntSS::make_curve (crates/tkgeomalgo/src/geom_int/int_ss/internal_perform.rs)."
+    },
+    {
+      "upstream_id": "GeomInt_IntSS::InternalPerform(double,bool,bool,bool,bool,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_IntSS.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method GeomIntIntSS::internal_perform (crates/tkgeomalgo/src/geom_int/int_ss/internal_perform.rs) behind the public perform members."
+    },
+    {
       "upstream_id": "GeomInt_LineConstructor::GeomInt_LineConstructor()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_LineConstructor.hxx",
@@ -185464,6 +186001,14 @@
       "rust_item": "rustycad_tkgeomalgo::geom_int::GeomIntLineConstructor::part",
       "status": "implemented",
       "notes": "GeomInt (docs/geomalgo-design.md section 20): surfaces are Handle<GeomAdaptorSurface> compared by address, domains Rc<dyn TheTopolTool>, line sequences Vec<Handle<dyn IntPatchLine>> read 1-based with the native Standard_OutOfRange, in-out references become &mut parameters or returned tuples, the native sorts run the libstdc++ algorithm; exceptions (and the null dereferences of the native code) become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gi_intss, gi_lconst, gi_lines, gi_ltool, gi_pcurves, gi_trim, gi_mkbsp, gi_rline, gi_adjust, gi_porient requests)."
+    },
+    {
+      "upstream_id": "GeomInt_LineConstructor::TreatCircle(const occ::handle<IntPatch_Line>&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_LineConstructor.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_int::GeomIntLineConstructor::treat_circle",
+      "status": "implemented",
+      "notes": "C++ protected member: public in Rust."
     },
     {
       "upstream_id": "GeomInt_LineTool::NbVertex(const occ::handle<IntPatch_Line>&)",
@@ -185568,6 +186113,13 @@
       "rust_item": "rustycad_tkgeombase::app_par_curves::BSpGradient::average_error",
       "status": "implemented",
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
+    },
+    {
+      "upstream_id": "GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox::Perform(const GeomInt_TheMultiLineOfWLApprox&,int,int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&,math_Vector&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,double,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `BSpGradient::perform` (crates/tkgeombase/src/app_par_curves/bsp_gradient.rs) that the constructors call."
     },
     {
       "upstream_id": "GeomInt_MyGradientOfTheComputeLineBezierOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,int,int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&,math_Vector&,int,double,double,int)",
@@ -185778,6 +186330,14 @@
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
     },
     {
+      "upstream_id": "GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox::Perform(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::Function::perform",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public method."
+    },
+    {
       "upstream_id": "GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,int,int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&,const math_Vector&,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
@@ -185872,6 +186432,14 @@
       "rust_item": "rustycad_tkgeombase::app_par_curves::Function::last_constraint",
       "status": "implemented",
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
+    },
+    {
+      "upstream_id": "GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox::Perform(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::Function::perform",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public method."
     },
     {
       "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,int,int,AppParCurves_Constraint,AppParCurves_Constraint,const math_Vector&,int)",
@@ -186042,6 +186610,79 @@
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
     },
     {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::SearchIndex(math_IntegerVector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::search_index` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::TheFirstPoint(AppParCurves_Constraint,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_first_point",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::TheLastPoint(AppParCurves_Constraint,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_last_point",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::MakeTAA(math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_blocks` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::NbBColumns(const GeomInt_TheMultiLineOfWLApprox&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::nb_b_columns",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::ComputeFunction(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::compute_function` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::Affect(const GeomInt_TheMultiLineOfWLApprox&,int,AppParCurves_Constraint&,math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::affect` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::MakeTAA(math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_full` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::Init(const GeomInt_TheMultiLineOfWLApprox&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::init` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox::MakeTAA(math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_profile` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
       "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,int,int,AppParCurves_Constraint,AppParCurves_Constraint,const math_Vector&,int)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
@@ -186210,6 +186851,79 @@
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
     },
     {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::MakeTAA(math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_blocks` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::TheFirstPoint(AppParCurves_Constraint,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_first_point",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::TheLastPoint(AppParCurves_Constraint,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::the_last_point",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::MakeTAA(math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_profile` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::ComputeFunction(const math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::compute_function` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::SearchIndex(math_IntegerVector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::search_index` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::NbBColumns(const GeomInt_TheMultiLineOfWLApprox&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::nb_b_columns",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public function of that module."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::Init(const GeomInt_TheMultiLineOfWLApprox&,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::init` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::Affect(const GeomInt_TheMultiLineOfWLApprox&,int,AppParCurves_Constraint&,math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::affect` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
+      "upstream_id": "GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox::MakeTAA(math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "status": "excluded",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the private method `LeastSquare::make_taa_full` (crates/tkgeombase/src/app_par_curves/least_square/), called by the public Perform members."
+    },
+    {
       "upstream_id": "GeomInt_ParameterAndOrientation::GeomInt_ParameterAndOrientation()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ParameterAndOrientation.hxx",
@@ -186321,6 +187035,22 @@
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
     },
     {
+      "upstream_id": "GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox::NbConstraints(const GeomInt_TheMultiLineOfWLApprox&,int,int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_constraints",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public associated function."
+    },
+    {
+      "upstream_id": "GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox::NbColumns(const GeomInt_TheMultiLineOfWLApprox&,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_columns",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public associated function."
+    },
+    {
       "upstream_id": "GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,AppParCurves_MultiCurve&,int,int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&,const math_Matrix&,const math_Matrix&,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
@@ -186374,6 +187104,22 @@
       "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::inverse_matrix",
       "status": "implemented",
       "notes": "GeomInt template instance (docs/geomalgo-design.md section 20): the native _0.cxx instantiates the AppParCurves/Approx .gxx over GeomInt_TheMultiLineOfWLApprox and GeomInt_TheMultiLineToolOfWLApprox; the tkgeombase generics take any LineTool, so the class is an alias of the generic (as the AppDef instances are); overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT through GeomInt_WLApprox by tools/verify_tkgeomalgo_numeric.py (gi_wlapprox, gi_intss requests)."
+    },
+    {
+      "upstream_id": "GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox::NbConstraints(const GeomInt_TheMultiLineOfWLApprox&,int,int,const occ::handle<NCollection_HArray1<AppParCurves_ConstraintCouple>>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_constraints",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public associated function."
+    },
+    {
+      "upstream_id": "GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox::NbColumns(const GeomInt_TheMultiLineOfWLApprox&,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomInt/GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ResolConstraint::nb_columns",
+      "status": "implemented",
+      "notes": "C++ protected member; the GeomInt instance is a type alias of the tkgeombase AppParCurves generic, so it is the public associated function."
     },
     {
       "upstream_id": "GeomInt_TheComputeLineBezierOfWLApprox(const GeomInt_TheMultiLineOfWLApprox&,int,int,double,double,int,bool,Approx_ParametrizationType,bool)",
@@ -187717,6 +188463,178 @@
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Allocator.hxx",
       "status": "excluded",
       "notes": "Typedef of occ::handle<NCollection_BaseAllocator> used only as the optional allocator argument of the IntSurf_LineOn2S constructor: Rust collections use the global allocator, so IntSurfLineOn2S::new takes no allocator; no behavior to port."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(const BRepAdaptor_Surface&) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_surface",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(double) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_tolerance",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::SetImplicitSurface(const IntSurf_Quadric&) (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_implicit_surface",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Root() const (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::root",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Tolerance() const (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::tolerance",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Point() const (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::point",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction3d() (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction3d",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction2d() (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction2d",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::PSurface() const (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::p_surface",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::ISurface() const (definition)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::i_surface",
+      "status": "implemented",
+      "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+    },
+    {
+      "upstream_id": "RatioTol",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope constant of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private const RATIO_TOL (1.5) of crates/tkgeomalgo/src/approx_int/approx/ (mod.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "ComputeTrsf3d(const occ::handle<BRepApprox_ApproxLine>&,double&,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope static function of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private fn compute_trsf3d of crates/tkgeomalgo/src/approx_int/approx/ (build.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "ComputeTrsf2d(const occ::handle<BRepApprox_ApproxLine>&,bool,double&,double&)",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope static function of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private fn compute_trsf2d of crates/tkgeomalgo/src/approx_int/approx/ (build.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "aMinNbPointsForApprox",
+      "toolkit": "TKTopAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/ApproxInt/ApproxInt_Approx.gxx",
+      "status": "excluded",
+      "notes": "File-scope constant of ApproxInt_Approx.gxx, expanded in the TKTopAlgo instance BRepApprox_Approx: the private const MIN_NB_POINTS_FOR_APPROX (5) of crates/tkgeomalgo/src/approx_int/approx/ (perform.rs), shared by every ApproxInt_Approx instance."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const FairCurve_Batten&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.lxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::dump",
+      "status": "implemented",
+      "notes": "Inline stream operator that calls Dump(o): the Rust dump writes the same text."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream&,const FairCurve_MinimalVariation&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.lxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::dump",
+      "status": "implemented",
+      "notes": "Inline stream operator that calls Dump(o): the Rust dump writes the same text."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::ResetFields()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::reset_fields",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::ReversedParameters() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::reversed_parameters",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::new",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::Append(const IntRes2d_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::append_point",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::Append(const IntRes2d_IntersectionSegment&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::append_segment",
+      "status": "implemented",
+      "notes": "C++ protected member of the result base: public in Rust, since the intersector structs embed Intersection."
+    },
+    {
+      "upstream_id": "operator<<(std::ostream&,IntRes2d_Transition&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.lxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::<core::fmt::Display>::fmt",
+      "status": "implemented",
+      "notes": "Stream operator: the Display implementation writes the native text."
     },
     {
       "upstream_id": "BRepCheck::Add(NCollection_List<BRepCheck_Status>&,BRepCheck_Status)",
