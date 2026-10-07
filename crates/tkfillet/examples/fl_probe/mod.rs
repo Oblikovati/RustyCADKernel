@@ -5,6 +5,7 @@ pub mod brep_blend;
 pub mod chamfer;
 pub mod chfi_ds;
 pub mod fillet;
+pub mod line_builders;
 pub mod rst_rst;
 pub mod surf_rst;
 pub mod walking;

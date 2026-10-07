@@ -19,9 +19,15 @@ use rustycad_tkmath::math::Vector;
 
 /// `fl_curve2d_kind`: 5 numbers.
 fn curve2d_kind(r: &mut Reader<'_>) -> Handle<dyn Adaptor2dCurve2d> {
+    let curve = geom_curve2d_kind(r);
+    Handle::new(Geom2dAdaptorCurve::with_curve(&curve).expect("adaptor")).cast()
+}
+
+/// The curve of `fl_curve2d_kind`.
+pub(super) fn geom_curve2d_kind(r: &mut Reader<'_>) -> Handle<dyn Geom2dCurve> {
     let kind = r.integer();
     let (a, b, c, d) = (r.real(), r.real(), r.real(), r.real());
-    let curve: Handle<dyn Geom2dCurve> = if kind == 1 {
+    if kind == 1 {
         let axis = Axis2d::new(
             Point2::new(a, b),
             Direction2::new(1., 0.).expect("direction"),
@@ -33,8 +39,7 @@ fn curve2d_kind(r: &mut Reader<'_>) -> Handle<dyn Adaptor2dCurve2d> {
     } else {
         let direction = Direction2::new(c, d).expect("direction");
         Handle::new(Geom2dLine::from_point(Point2::new(a, b), direction)).cast()
-    };
-    Handle::new(Geom2dAdaptorCurve::with_curve(&curve).expect("adaptor")).cast()
+    }
 }
 
 fn vector_of(values: &[f64]) -> Vector<'static> {

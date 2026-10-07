@@ -6,6 +6,7 @@
 use super::{BRepBlendWalking, Sol, math_vector, root_of, solver_for};
 use crate::blend::BlendFuncInv;
 use crate::blend_func::linalg::{vget, vset};
+use crate::brep_blend::marching::ArcSearch;
 use crate::brep_blend::{BRepBlendBlendTool, BRepBlendHCurve2dTool};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
@@ -64,67 +65,29 @@ impl BRepBlendWalking {
         prev_index: i32,
         ponarc: &mut f64,
     ) -> Result<ArcHit, Failure> {
-        let (byinter, lastpt2d, pt2d) = self.search_points(on_first, the_sol)?;
-        let iter = self.rec_domain(on_first);
-        let (mut index_sol, mut nbarc, mut distmin) = (0, 0, f64::MAX);
-        iter.init();
-        while iter.more() {
-            nbarc += 1;
-            let arc = iter.value()?;
-            let (prm, dist, okinter) =
-                self.arc_distance(on_first, &arc, (pt2d, lastpt2d), byinter)?;
-            if nbarc != prev_index && (dist < distmin || okinter) {
-                (distmin, *ponarc, index_sol) = (dist, prm, nbarc);
-                if okinter && prev_index == 0 {
-                    break;
-                }
-            }
-            iter.next();
-        }
-        Ok(ArcHit {
-            index: index_sol,
-            lastpt2d,
-            pt2d,
-        })
-    }
-
-    /// Whether the search goes by intersection (the line has points), the previous point
-    /// (the origin otherwise) and the solution point on the surface.
-    fn search_points(
-        &self,
-        on_first: bool,
-        the_sol: &Sol,
-    ) -> Result<(bool, Point2, Point2), Failure> {
         let byinter = crate::chfi_ds::lock(self.line_handle()?).nb_points() != 0;
-        let (uprev, vprev) = if byinter {
-            self.previous_uv(on_first)?
+        let previous = if byinter {
+            Some(self.previous_uv(on_first)?)
         } else {
-            (0.0, 0.0)
+            None
         };
         let pt2d = if on_first {
             Point2::new(the_sol[0], the_sol[1])
         } else {
             Point2::new(the_sol[2], the_sol[3])
         };
-        Ok((byinter, Point2::new(uprev, vprev), pt2d))
-    }
-
-    /// The parameter on the arc and the distance of the intersection of the step with
-    /// it (when `byinter` and found: the last flag), else of the projection on it.
-    fn arc_distance(
-        &self,
-        on_first: bool,
-        arc: &Arc,
-        (pt2d, lastpt2d): (Point2, Point2),
-        byinter: bool,
-    ) -> Result<(f64, f64, bool), Failure> {
-        let surf = self.surface(on_first);
-        if byinter && let Some((prm, dist)) = BRepBlendBlendTool::inters(pt2d, lastpt2d, surf, arc)?
-        {
-            return Ok((prm, dist, true));
-        }
-        let (prm, dist) = BRepBlendBlendTool::project(pt2d, surf, arc)?;
-        Ok((prm, dist, false))
+        let search = ArcSearch {
+            domain: self.rec_domain(on_first),
+            surf: self.surface(on_first),
+            pt2d,
+            previous,
+        };
+        let index = search.run(prev_index, ponarc)?;
+        Ok(ArcHit {
+            index,
+            lastpt2d: search.lastpt2d(),
+            pt2d,
+        })
     }
 
     /// The parameters of the previous point on the first or the second surface.
@@ -136,16 +99,9 @@ impl BRepBlendWalking {
         }
     }
 
-    /// The arc of index `index` of a domain (`Init` then `Next` up to it).
+    /// The arc of index `index` of a domain to stop on.
     pub(super) fn nth_arc(&self, on_first: bool, index: i32) -> Result<Arc, Failure> {
-        let iter = self.rec_domain(on_first);
-        iter.init();
-        let mut nbarc = 1;
-        while nbarc < index {
-            nbarc += 1;
-            iter.next();
-        }
-        iter.value()
+        crate::brep_blend::marching::nth_arc(self.rec_domain(on_first), index)
     }
 
     /// `Recadre(FInv, OnFirst, Sol, Solrst, Indexsol, IsVtx, Vtx, Extrap)`: the section

@@ -439555,6 +439555,86 @@
       "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
     },
     {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::ArcToRecadre(const math_Vector&,int,gp_Pnt2d&,gp_Pnt2d&,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::arc_to_recadre",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::BRepBlend_SurfRstLineBuilder(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_TopolTool>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_TopolTool>&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::new",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::Complete(Blend_SurfRstFunction&,Blend_FuncInv&,Blend_SurfPointFuncInv&,Blend_SurfCurvFuncInv&,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::complete",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py. The three inverse functions (Finv, FinvP, FinvC) are passed together as brep_blend::SurfRstInverses; the settings as SurfRstWalkSettings."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::DecrochEnd() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::decroch_end",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::DecrochStart() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::decroch_start",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::IsDone() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::is_done",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::Line() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::line",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::Perform(Blend_SurfRstFunction&,Blend_FuncInv&,Blend_SurfPointFuncInv&,Blend_SurfCurvFuncInv&,double,double,double,double,double,double,const math_Vector&,double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::perform",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py. The three inverse functions (Finv, FinvP, FinvC) are passed together as brep_blend::SurfRstInverses; the settings as SurfRstWalkSettings."
+    },
+    {
+      "upstream_id": "BRepBlend_SurfRstLineBuilder::PerformFirstSection(Blend_SurfRstFunction&,Blend_FuncInv&,Blend_SurfPointFuncInv&,Blend_SurfCurvFuncInv&,double,double,const math_Vector&,double,double,double,bool,bool,bool,double&,math_Vector&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/BRepBlend/BRepBlend_SurfRstLineBuilder.hxx",
+      "rust_item": "rustycad_tkfillet::brep_blend::BRepBlendSurfRstLineBuilder::perform_first_section",
+      "status": "implemented",
+      "notes": "BRepBlend mapping (docs/tkfillet-progress.md): the static tools are unit structs with associated functions; the functions implement the Blend traits and math::FunctionSetWithDerivatives, and classes that share their text share one implementation; output references become returned values, overloads take distinct names, native exceptions become Failure values and solver-callback exceptions are kept for take_failure. Compared with OCCT by the fl_* probes of tools/verify_tkfillet_numeric.py. The three inverse functions (Finv, FinvP, FinvC) are passed together as brep_blend::SurfRstInverses; the settings as SurfRstWalkSettings."
+    },
+    {
       "upstream_id": "BRepFilletAPI_LocalOperation::operator delete(void*) noexcept",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/BRepFilletAPI/BRepFilletAPI_LocalOperation.hxx",

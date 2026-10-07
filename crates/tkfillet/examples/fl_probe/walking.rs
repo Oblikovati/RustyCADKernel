@@ -30,7 +30,7 @@ fn transition(t: &IntSurfTransition) {
 }
 
 /// `fl_extremity`.
-fn extremity(e: &BRepBlendExtremity) {
+pub(super) fn extremity(e: &BRepBlendExtremity) {
     pnt(e.value());
     let (u, v) = e.parameters();
     [u, v, e.parameter(), e.parameter_on_guide(), e.tolerance()]
@@ -49,7 +49,7 @@ fn extremity(e: &BRepBlendExtremity) {
 }
 
 /// `fl_blend_point`.
-fn blend_point(p: &BlendPoint) {
+pub(super) fn blend_point(p: &BlendPoint) {
     real(p.parameter());
     pnt(p.point_on_s1());
     pnt(p.point_on_s2());
@@ -93,14 +93,14 @@ fn walk(w: &BRepBlendWalking) {
 }
 
 /// `fl_trimmed_surface`.
-fn trimmed_surface(r: &mut Reader<'_>) -> Handle<dyn Adaptor3dSurface> {
+pub(super) fn trimmed_surface(r: &mut Reader<'_>) -> Handle<dyn Adaptor3dSurface> {
     let geom = geom_surface(r);
     let bounds = (r.real(), r.real(), r.real(), r.real());
     Handle::new(GeomAdaptorSurface::with_bounds(&geom, bounds).expect("trimmed surface")).cast()
 }
 
 /// `fl_el_spine`.
-fn el_spine(r: &mut Reader<'_>) -> Handle<ElSpine> {
+pub(super) fn el_spine(r: &mut Reader<'_>) -> Handle<ElSpine> {
     let curve = geom_guide(r);
     let spine = ElSpine::new();
     spine.set_curve(&curve).expect("spine curve");

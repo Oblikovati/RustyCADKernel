@@ -65,6 +65,12 @@ FilletSurf.
   `Continu(OnS1)` removes the old last point with the new ones; a stop on the guide
   deflection does not set the line ends; `CorrectExtremityOnOneRst` reads the current arc
   of the domain iterator.
+- `BRepBlend_SurfRstLineBuilder`: the first extremity on the restriction gets the
+  parameters of the point on the surface; the reframing vertices, the arc and the
+  unhooking flag persist between the steps (a stale vertex can end a line on the bound);
+  the section on both restrictions takes the third value of the surface reframing in
+  `InternalPerform` (the second in `PerformFirstSection`), and its end on the arc takes
+  the guide parameter.
 
 ## Verification
 
@@ -76,4 +82,4 @@ FilletSurf.
 | --- | --- |
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
-| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking` |
+| BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk` |

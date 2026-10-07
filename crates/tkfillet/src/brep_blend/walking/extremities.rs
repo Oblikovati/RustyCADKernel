@@ -6,6 +6,7 @@
 //! correction of an end near a vertex of the guide.
 use super::recadre::{Arc, Vertex};
 use super::{BRepBlendWalking, live, live_guide};
+use crate::brep_blend::marching;
 use crate::brep_blend::{BRepBlendBlendTool, BRepBlendExtremity, BRepBlendHCurve2dTool};
 use crate::chfi_ds::lock;
 use rustycad_tkernel::ncollection::Array2;
@@ -81,34 +82,10 @@ impl BRepBlendWalking {
         Ok((tline, tarc))
     }
 
-    /// The tangent of the line at the previous point: its own one, or the chord from the
-    /// point before when it is a tangency point; `None` on a line too short for a chord.
+    /// The tangent of the line at the previous point on one surface.
     fn line_tangent(&self, on_first: bool) -> Result<Option<Vector3>, Failure> {
-        let previous = &self.previous_p;
-        if !previous.is_tangency_point() {
-            let tangent = if on_first {
-                previous.tangent_on_s1()?
-            } else {
-                previous.tangent_on_s2()?
-            };
-            return Ok(Some(tangent));
-        }
         let line = lock(self.line_handle()?);
-        if line.nb_points() < 2 {
-            return Ok(None);
-        }
-        let index = if self.sens < 0.0 {
-            2
-        } else {
-            line.nb_points() - 1
-        };
-        let prevprev = *line.point(index)?;
-        let chord = if on_first {
-            Vector3::between(prevprev.point_on_s1(), previous.point_on_s1())
-        } else {
-            Vector3::between(prevprev.point_on_s2(), previous.point_on_s2())
-        };
-        Ok(Some(chord))
+        marching::line_tangent(&line, &self.previous_p, self.sens, on_first)
     }
 
     /// `MakeExtremity(Extrem, OnFirst, Index, Param, IsVtx, Vtx)`: the end at the

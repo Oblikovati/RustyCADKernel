@@ -14,22 +14,15 @@ mod status;
 #[cfg(test)]
 mod tests;
 
-use super::app_func::DynFunctionSet;
+use super::marching::{self, WalkingDomain, math_vector, root_of, solver_for};
 use super::{BRepBlendLine, BRepBlendLineHandle};
 use crate::blend::BlendPoint;
-use crate::blend_func::linalg::vector;
 use crate::chfi_ds::{ElSpine, shared};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
-use rustycad_tkgeomalgo::int_start::TheTopolTool;
-use rustycad_tkmath::math::{FunctionSetRoot, FunctionSetWithDerivatives, Vector};
-use std::rc::Rc;
+use rustycad_tkmath::math::Vector;
 
 pub use first_section::WalkingTolerances;
-
-/// The domain of a surface (`occ::handle<Adaptor3d_TopolTool>`): its restrictions and
-/// vertices, shared with the caller, which keeps the iterators inside.
-pub type WalkingDomain = Rc<dyn TheTopolTool>;
 
 /// The variables of a section `(U1, V1, U2, V2)` (the `math_Vector(1, 4)` of the native
 /// class).
@@ -234,20 +227,12 @@ impl BRepBlendWalking {
 
 /// The StdFail_NotDone of a member called before a successful walking.
 fn not_done(member: &str) -> Failure {
-    Failure::with_message(
-        "StdFail_NotDone",
-        &format!("BRepBlend_Walking::{member}: the walking is not done; expected Perform first"),
-    )
+    marching::not_done("BRepBlend_Walking", member)
 }
 
 /// The surface behind a handle; a null handle is dereferenced natively.
 fn live(surface: &Handle<dyn Adaptor3dSurface>) -> Result<&dyn Adaptor3dSurface, Failure> {
-    surface.get().ok_or_else(|| {
-        Failure::with_message(
-            "Standard_NullObject",
-            "BRepBlend_Walking: null surface; expected an Adaptor3d_Surface",
-        )
-    })
+    marching::live_surface(surface, "BRepBlend_Walking")
 }
 
 /// The guide behind its handle.
@@ -260,41 +245,7 @@ fn live_guide(guide: &Handle<ElSpine>) -> Result<&ElSpine, Failure> {
     })
 }
 
-/// A `math_Vector(1, n)` holding `values`; `math_vector(&[1.0, 2.0])?`.
-fn math_vector(values: &[f64]) -> Result<Vector<'static>, Failure> {
-    let mut v = vector(values.len() as i32)?;
-    for (i, value) in (1..).zip(values) {
-        crate::blend_func::linalg::vset(&mut v, i, *value)?;
-    }
-    Ok(v)
-}
-
 /// The four values of a `math_Vector(1, 4)`.
 fn sol_of(v: &Vector<'_>) -> Result<Sol, Failure> {
-    let get = |i| crate::blend_func::linalg::vget(v, i);
-    Ok([get(1)?, get(2)?, get(3)?, get(4)?])
-}
-
-/// `math_FunctionSetRoot(F, Tolerance, NbIterations)`.
-fn solver_for<T: FunctionSetWithDerivatives + ?Sized>(
-    func: &mut T,
-    tolerance: &Vector<'_>,
-    nb_iterations: i32,
-) -> Result<FunctionSetRoot, Failure> {
-    FunctionSetRoot::new(&DynFunctionSet(func), tolerance, nb_iterations)
-}
-
-/// `rsnld.Perform(F, Start, Inf, Sup)`: the root when the solver is done.
-fn root_of<T: FunctionSetWithDerivatives + ?Sized>(
-    solver: &mut FunctionSetRoot,
-    func: &mut T,
-    start: &Sol,
-    (inf, sup): (&Vector<'_>, &Vector<'_>),
-) -> Result<Option<Sol>, Failure> {
-    let start = math_vector(start)?;
-    solver.perform_bounded(&mut DynFunctionSet(func), &start, inf, sup, false)?;
-    if !solver.is_done() {
-        return Ok(None);
-    }
-    Ok(Some(sol_of(solver.root()?)?))
+    marching::values_of(v)
 }

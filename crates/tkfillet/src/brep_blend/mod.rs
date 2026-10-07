@@ -13,6 +13,7 @@ mod extremity;
 mod h_curve2d_tool;
 mod h_curve_tool;
 mod line;
+mod marching;
 mod point_on_rst;
 mod rad_inv_macro;
 mod rad_inv_terms;
@@ -20,6 +21,7 @@ mod rst_rst;
 mod surf_curv_inv;
 mod surf_point_inv;
 pub(crate) mod surf_rst;
+mod surf_rst_builder;
 mod walking;
 
 pub use app_func::{
@@ -34,12 +36,14 @@ pub use extremity::BRepBlendExtremity;
 pub use h_curve_tool::BRepBlendHCurveTool;
 pub use h_curve2d_tool::BRepBlendHCurve2dTool;
 pub use line::{BRepBlendLine, BRepBlendLineHandle};
+pub use marching::WalkingDomain;
 pub use point_on_rst::BRepBlendPointOnRst;
 pub use rst_rst::{BRepBlendRstRstConstRad, BRepBlendRstRstEvolRad, RstRstInputs};
 pub use surf_curv_inv::{BRepBlendSurfCurvConstRadInv, BRepBlendSurfCurvEvolRadInv};
 pub use surf_point_inv::{BRepBlendSurfPointConstRadInv, BRepBlendSurfPointEvolRadInv};
 pub use surf_rst::{BRepBlendSurfRstConstRad, BRepBlendSurfRstEvolRad, SurfRstInputs};
-pub use walking::{BRepBlendWalking, WalkingDomain, WalkingTolerances};
+pub use surf_rst_builder::{BRepBlendSurfRstLineBuilder, SurfRstInverses, SurfRstWalkSettings};
+pub use walking::{BRepBlendWalking, WalkingTolerances};
 
 /// `BRepBlend_ChAsym`: the typedef of `BlendFunc_ChAsym`.
 pub type BRepBlendChAsym = crate::blend_func::ChAsym;

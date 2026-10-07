@@ -7,6 +7,7 @@ use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dTopolTool};
 use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface;
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
+use std::rc::Rc;
 
 /// The plane of normal `n` and X direction (1, 0, 0) through the origin, trimmed.
 fn plane(n: Direction3, bounds: (f64, f64, f64, f64)) -> Handle<dyn Adaptor3dSurface> {

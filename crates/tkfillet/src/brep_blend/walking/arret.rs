@@ -5,24 +5,14 @@
 //! deflection, and the transitions of the line on both surfaces.
 use super::{BRepBlendWalking, live, math_vector, sol_of};
 use crate::blend::{BlendFunction, BlendPoint, SectionTangents, Status};
+use crate::brep_blend::marching::{Deflection, EndData, end_data, step_outcome, without_backward};
 use crate::chfi_ds::lock;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans;
-use rustycad_tkmath::gp::{Point3, Vector2, Vector3};
 
-/// `CosRef3D` of CheckDeflection: rule set by tests in U4, 11.478 degrees.
-const COS_REF_3D: f64 = 0.98;
 /// `CosRef2D` of CheckDeflection: 25 degrees.
 const COS_REF_2D: f64 = 0.88;
-
-/// The 3d and 2d data of one end of a section, for the deflection test.
-struct EndData {
-    point: Point3,
-    tangent: Vector3,
-    uv: (f64, f64),
-    tangent2d: Vector2,
-}
 
 impl BRepBlendWalking {
     /// `TestArret(F, State, TestDeflection, TestSolution, TestLengthStep)`: whether the
@@ -60,7 +50,7 @@ impl BRepBlendWalking {
         test_defl: bool,
         test_length_step: bool,
     ) -> Result<(Status, Status), Failure> {
-        let (mut state1, mut state2) = if test_defl && self.check {
+        let raw = if test_defl && self.check {
             // Verification du critere de fleche sur chaque surface et sur la ligne guide
             (
                 self.check_deflection(true, curpoint)?,
@@ -71,12 +61,8 @@ impl BRepBlendWalking {
         } else {
             (Status::Ok, Status::Ok)
         };
-        for s in [&mut state1, &mut state2] {
-            if *s == Status::Backward {
-                *s = Status::StepTooLarge;
-                self.rebrou = true;
-            }
-        }
+        let ((state1, state2), backward) = without_backward(raw);
+        self.rebrou |= backward;
         Ok((state1, state2))
     }
 
@@ -95,23 +81,11 @@ impl BRepBlendWalking {
         if !self.comptra && !curpoint.is_tangency_point() {
             self.compute_transitions(function, &curpoint, (loctwist1, loctwist2))?;
         }
-        if state1 == Status::Ok || state2 == Status::Ok {
+        let (status, keep) = step_outcome((state1, state2), state);
+        if keep {
             self.previous_p = curpoint;
-            return Ok(state);
         }
-        if state1 == Status::StepTooSmall && state2 == Status::StepTooSmall {
-            self.previous_p = curpoint;
-            return Ok(if state == Status::Ok {
-                Status::StepTooSmall
-            } else {
-                state
-            });
-        }
-        Ok(if state == Status::Ok {
-            Status::SamePoints
-        } else {
-            state
-        })
+        Ok(status)
     }
 
     /// The point of the solution, with its tangents unless it is a tangency point, and
@@ -224,14 +198,16 @@ impl BRepBlendWalking {
         let surface = live(self.surface(on_first))?;
         let tolu = surface.u_resolution(self.tolpoint3d)?;
         let tolv = surface.v_resolution(self.tolpoint3d)?;
-        let corde = Vector3::between(prev.point, cur.point);
-        let norme = corde.square_magnitude();
-        let toler3d = 0.01 * self.tolpoint3d;
-        if norme <= toler3d * toler3d {
-            // il faudra peut etre forcer meme point
-            return Ok(Status::SamePoints);
-        }
-        if let Some(status) = self.check_angles_3d(corde, norme, (&cur, &prev), tangents) {
+        let deflection = Deflection {
+            tolpoint3d: self.tolpoint3d,
+            sens: self.sens,
+            fleche: self.fleche,
+        };
+        let (corde, norme) = match deflection.chord(&cur, &prev) {
+            Ok(chord) => chord,
+            Err(status) => return Ok(status), // il faudra peut etre forcer meme point
+        };
+        if let Some(status) = deflection.check_angles((corde, norme), (&cur, &prev), tangents) {
             return Ok(status);
         }
         let check_2d = || self.check_deflection_2d(&cur, &prev, tangents, (tolu, tolv));
@@ -243,56 +219,7 @@ impl BRepBlendWalking {
         if !tangents.0 || !tangents.1 {
             return Ok(Status::Ok);
         }
-        self.check_fleche(&cur, &prev, norme)
-    }
-
-    /// The 3d angles of the chord with the previous and the current tangents: `None`
-    /// when the step passes them.
-    fn check_angles_3d(
-        &self,
-        corde: Vector3,
-        norme: f64,
-        (cur, prev): (&EndData, &EndData),
-        (cur_tangent, prev_tangent): (bool, bool),
-    ) -> Option<Status> {
-        let toler3d = 0.01 * self.tolpoint3d;
-        if prev_tangent {
-            let prev_norme = prev.tangent.square_magnitude();
-            if prev_norme <= toler3d * toler3d {
-                return Some(Status::SamePoints);
-            }
-            let cosi = self.sens * corde.dot(prev.tangent);
-            if cosi < 0.0 {
-                // angle 3d > pi/2 --> retour arriere
-                return Some(Status::Backward);
-            }
-            if cosi * cosi / prev_norme / norme < COS_REF_3D {
-                return Some(Status::StepTooLarge);
-            }
-        }
-        if cur_tangent {
-            let cosi = self.sens * corde.dot(cur.tangent);
-            let cosi2 = cosi * cosi / cur.tangent.square_magnitude() / norme;
-            if cosi2 < COS_REF_3D || cosi < 0.0 {
-                return Some(Status::StepTooLarge);
-            }
-        }
-        None
-    }
-
-    /// Estimation de la fleche courante: the deflection of the step against the
-    /// requested one.
-    fn check_fleche(&self, cur: &EndData, prev: &EndData, norme: f64) -> Result<Status, Failure> {
-        let gap = *prev.tangent.normalized()?.xyz() - *cur.tangent.normalized()?.xyz();
-        let fleche_courante = gap.square_modulus() * norme / 64.0;
-        if fleche_courante <= 0.25 * self.fleche * self.fleche {
-            return Ok(Status::StepTooSmall);
-        }
-        if fleche_courante > self.fleche * self.fleche {
-            // pas trop grand : commentaire interessant
-            return Ok(Status::StepTooLarge);
-        }
-        Ok(Status::Ok)
+        deflection.check_fleche(&cur, &prev, norme)
     }
 
     /// The 2d part of CheckDeflection: `None` when the step passes it.
@@ -327,47 +254,4 @@ impl BRepBlendWalking {
         }
         None
     }
-}
-
-/// The point, the tangents (when `tangent`) and the parameters (when `with_2d`) of one
-/// end of a line point.
-fn end_data(
-    point: &BlendPoint,
-    on_first: bool,
-    tangent: bool,
-    with_2d: bool,
-) -> Result<EndData, Failure> {
-    let mut data = EndData {
-        point: if on_first {
-            point.point_on_s1()
-        } else {
-            point.point_on_s2()
-        },
-        tangent: Vector3::default(),
-        uv: (0.0, 0.0),
-        tangent2d: Vector2::default(),
-    };
-    if tangent {
-        data.tangent = if on_first {
-            point.tangent_on_s1()?
-        } else {
-            point.tangent_on_s2()?
-        };
-    }
-    if !with_2d {
-        return Ok(data);
-    }
-    data.uv = if on_first {
-        point.parameters_on_s1()?
-    } else {
-        point.parameters_on_s2()?
-    };
-    if tangent {
-        data.tangent2d = if on_first {
-            point.tangent2d_on_s1()?
-        } else {
-            point.tangent2d_on_s2()?
-        };
-    }
-    Ok(data)
 }

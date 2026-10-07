@@ -19,3 +19,5 @@ def append_tkfillet_requests(requests: list[str]) -> None:
     __import__('tkfillet_corpus_brepblend').append_brepblend_requests(requests)
     # BRepBlend_Walking (tkfillet_corpus_walking.py)
     __import__('tkfillet_corpus_walking').append_walking_requests(requests)
+    # BRepBlend line builders (tkfillet_corpus_linebuilders.py)
+    __import__('tkfillet_corpus_linebuilders').append_linebuilder_requests(requests)

@@ -3,7 +3,8 @@
 use std::io::{self, BufRead};
 mod fl_probe;
 use fl_probe::{
-    app_func, blend_func, brep_blend, chamfer, chfi_ds, fillet, rst_rst, surf_rst, walking,
+    app_func, blend_func, brep_blend, chamfer, chfi_ds, fillet, line_builders, rst_rst, surf_rst,
+    walking,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -29,6 +30,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_rst_rst", rst_rst::rst_rst_case),
     ("fl_app_func", app_func::app_func_case),
     ("fl_walking", walking::walking_case),
+    ("fl_surf_rst_walk", line_builders::surf_rst_walk_case),
 ];
 
 fn main() {
