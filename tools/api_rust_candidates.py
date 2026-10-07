@@ -47,6 +47,8 @@ def rust_candidates(
         return "no_rust_target_declared", []
     if bool_primitive_ufcs_target(rust_item):
         return bool_primitive_candidates(rust_item, crates)
+    if pointer_self_ufcs_target(rust_item):
+        return pointer_self_candidates(rust_item, crates)
     prefix, separator = rust_target_prefix(rust_item)
     if not separator or prefix not in crates:
         return "unknown_rust_crate", []
@@ -73,6 +75,27 @@ def bool_primitive_candidates(
     ]
     status = candidate_status(matches)
     if status == "unique" and not bool_source_is_pinned(matches[0]):
+        return "unverifiable_source", matches
+    return status, matches
+
+
+def pointer_self_ufcs_target(target: str) -> bool:
+    """`<*const T as Trait<..>>::m`: a raw-pointer Self has no crate prefix of its own."""
+    return target.startswith(("<*const ", "<*mut ")) and ">::" in target
+
+
+def pointer_self_candidates(
+    target: str, crates: dict[str, dict[str, list[dict[str, JSONValue]]]]
+) -> tuple[str, list[dict[str, JSONValue]]]:
+    """Exact UFCS match across crates; only the anchor's defining crate emits the path."""
+    matches = [
+        item
+        for paths in crates.values()
+        for item in paths.get(target, [])
+        if isinstance(item.get("pointer_self_type"), str)
+    ]
+    status = candidate_status(matches)
+    if status == "unique" and not rust_source_is_pinned(matches[0]):
         return "unverifiable_source", matches
     return status, matches
 
