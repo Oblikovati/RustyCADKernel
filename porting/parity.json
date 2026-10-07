@@ -106873,6 +106873,22 @@
       "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Standard_NullObject for a null pilot (a native null dereference)."
     },
     {
+      "upstream_id": "XSControl_Functions",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlFunctions",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. The command functions return a Result: the native null dereferences (no XSControl session, no norm for twmode, no binder for trecord) are Failure errors."
+    },
+    {
+      "upstream_id": "XSControl_Functions::Init",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/XSControl/XSControl_Functions.hxx",
+      "rust_item": "rustycad_tkxsbase::xs_control::XSControlFunctions::init",
+      "status": "implemented",
+      "notes": "XSControl mapping (docs/xsbase-design.md section 4): output arguments are returned; the native static text buffers are owned values (const char* as AsciiString or String, empty for null); HSequence arguments are slices and HSequence results Vec copies; native exceptions and null dereferences are Failure errors; virtual members of classes with subclasses are trait methods over an embedded base. Registered once per process, in the native order; the errors of IFSelect_Act registration are returned."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
