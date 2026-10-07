@@ -40808,7 +40808,7 @@
       "upstream_id": "Poly_ArrayOfNodes()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "<rustycad_tkmath::poly::ArrayOfNodes as Default>::default",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40816,7 +40816,7 @@
       "upstream_id": "Poly_ArrayOfNodes(int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::new",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::new",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40824,7 +40824,7 @@
       "upstream_id": "Poly_ArrayOfNodes(const Poly_ArrayOfNodes&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "<rustycad_tkmath::poly::ArrayOfNodes as Clone>::clone",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::<core::clone::Clone>::clone",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40832,7 +40832,7 @@
       "upstream_id": "Poly_ArrayOfNodes(const gp_Pnt&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::from_double_slice",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::from_double_slice",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40840,7 +40840,7 @@
       "upstream_id": "Poly_ArrayOfNodes(const NCollection_Vec3<float>&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::from_float_slice",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::from_float_slice",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40856,7 +40856,7 @@
       "upstream_id": "Poly_ArrayOfNodes::IsDoublePrecision() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::is_double_precision",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::is_double_precision",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40864,7 +40864,7 @@
       "upstream_id": "Poly_ArrayOfNodes::SetDoublePrecision(bool)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::set_double_precision",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::set_double_precision",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40872,7 +40872,7 @@
       "upstream_id": "Poly_ArrayOfNodes::Assign(const Poly_ArrayOfNodes&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::assign",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::assign",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40888,7 +40888,7 @@
       "upstream_id": "Poly_ArrayOfNodes::operator=(const Poly_ArrayOfNodes&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::assign",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::assign",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40912,47 +40912,227 @@
       "upstream_id": "Poly_ArrayOfNodes::Value(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::value",
+          "declaration_sha256": "f9bda6d7912266851631b85b035b431fac474ff799ed585d800ecb639ef519da",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "3",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfNodes::Value(size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::value",
+          "declaration_sha256": "f9bda6d7912266851631b85b035b431fac474ff799ed585d800ecb639ef519da",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "3",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfNodes::SetValue(int,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::set_value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::set_value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::set_value",
+          "declaration_sha256": "64a66f88c24f1e8936443af11422454638a7d4b40643a54f554d6d1e8f5c7f4b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "3",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfNodes::SetValue(size_t,const gp_Pnt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::set_value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::set_value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::set_value",
+          "declaration_sha256": "64a66f88c24f1e8936443af11422454638a7d4b40643a54f554d6d1e8f5c7f4b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "3",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfNodes::operator[](int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfNodes::value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::value",
+          "declaration_sha256": "f9bda6d7912266851631b85b035b431fac474ff799ed585d800ecb639ef519da",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "3",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfUVNodes()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "<rustycad_tkmath::poly::ArrayOfUvNodes as Default>::default",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::<core::default::Default>::default",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40960,7 +41140,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes(int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::new",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::new",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40968,7 +41148,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes(const Poly_ArrayOfUVNodes&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "<rustycad_tkmath::poly::ArrayOfUvNodes as Clone>::clone",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::<core::clone::Clone>::clone",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40976,7 +41156,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes(const gp_Pnt2d&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::from_double_slice",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::from_double_slice",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -40984,7 +41164,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes(const NCollection_Vec2<float>&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::from_float_slice",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::from_float_slice",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -41000,7 +41180,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes::IsDoublePrecision() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::is_double_precision",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::is_double_precision",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -41008,7 +41188,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes::SetDoublePrecision(bool)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::set_double_precision",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::set_double_precision",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -41016,7 +41196,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes::Assign(const Poly_ArrayOfUVNodes&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::assign",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::assign",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -41032,7 +41212,7 @@
       "upstream_id": "Poly_ArrayOfUVNodes::operator=(const Poly_ArrayOfUVNodes&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::assign",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::assign",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -41056,41 +41236,221 @@
       "upstream_id": "Poly_ArrayOfUVNodes::Value(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::value",
+          "declaration_sha256": "8c3391c04ee46e0b69ebab113ac8ac7a3e41c541f1b2c750549d77dbe0a8934a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "2",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfUVNodes::Value(size_t) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::value",
+          "declaration_sha256": "8c3391c04ee46e0b69ebab113ac8ac7a3e41c541f1b2c750549d77dbe0a8934a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "2",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfUVNodes::SetValue(int,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::set_value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::set_value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::set_value",
+          "declaration_sha256": "18f75b067da3ce1704ccd33a2bde6496a5b26add87ca478cce2a803f09dbf9ba",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "2",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfUVNodes::SetValue(size_t,const gp_Pnt2d&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::set_value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::set_value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::set_value",
+          "declaration_sha256": "18f75b067da3ce1704ccd33a2bde6496a5b26add87ca478cce2a803f09dbf9ba",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "2",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_ArrayOfUVNodes::operator[](int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_ArrayOfUVNodes.hxx",
-      "rust_item": "rustycad_tkmath::poly::ArrayOfUvNodes::value",
+      "rust_item": "rustycad_tkmath::poly::NodeArray::value",
       "status": "implemented",
-      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
+      "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkmath::poly::NodeArray::value",
+          "declaration_sha256": "8c3391c04ee46e0b69ebab113ac8ac7a3e41c541f1b2c750549d77dbe0a8934a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "const": {
+                          "expr": "2",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::NodeArray",
+                "resolved_item_path": "rustycad_tkmath::poly::nodes::NodeArray"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Poly_CoherentLink::Poly_CoherentLink()",
@@ -41642,7 +42002,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_CoherentTriangulation::RemoveDegenerated(double,NCollection_List<TwoIntegers>*)",
+      "upstream_id": "Poly_CoherentTriangulation::RemoveDegenerated(const double,NCollection_List<Poly_CoherentTriangulation::TwoIntegers>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::remove_degenerated",
@@ -41786,7 +42146,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_CoherentTriangulation::FindTriangle(const Poly_CoherentLink&,const Poly_CoherentTriangle* pTri [2]) const",
+      "upstream_id": "Poly_CoherentTriangulation::FindTriangle(const Poly_CoherentLink&,const Poly_CoherentTriangle**) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
       "rust_item": "rustycad_tkmath::poly::CoherentTriangulation::find_triangle",
@@ -41986,7 +42346,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::Link::operator==(const Link&) const",
+      "upstream_id": "Poly_MakeLoops::Link::operator==(const Poly_MakeLoops::Link&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::Link::<core::cmp::PartialEq>::eq",
@@ -41997,7 +42357,7 @@
       "upstream_id": "Poly_MakeLoops::Hasher::operator()(const Poly_MakeLoops::Link&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
-      "rust_item": "<rustycad_tkmath::poly::make_loops::LinkHasher as rustycad_tkernel::ncollection::HashPolicy<Link>>::hash",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkmath::poly::make_loops::Link>>::hash",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -42005,7 +42365,7 @@
       "upstream_id": "Poly_MakeLoops::Hasher::operator()(const Poly_MakeLoops::Link&,const Poly_MakeLoops::Link&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
-      "rust_item": "<rustycad_tkmath::poly::make_loops::LinkHasher as rustycad_tkernel::ncollection::HashPolicy<Link>>::equal",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkmath::poly::make_loops::Link>>::equal",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -42018,7 +42378,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::Helper::OnAddLink(int,const Link&) const",
+      "upstream_id": "Poly_MakeLoops::Helper::OnAddLink(int,const Poly_MakeLoops::Link&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoopsHelper::on_add_link",
@@ -42082,7 +42442,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops(const Helper*,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "Poly_MakeLoops(const Poly_MakeLoops::Helper*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::new",
@@ -42090,7 +42450,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::Reset(const Helper*,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "Poly_MakeLoops::Reset(const Poly_MakeLoops::Helper*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::reset",
@@ -42098,7 +42458,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::AddLink(const Link&)",
+      "upstream_id": "Poly_MakeLoops::AddLink(const Poly_MakeLoops::Link&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::add_link",
@@ -42106,7 +42466,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::ReplaceLink(const Link&,const Link&)",
+      "upstream_id": "Poly_MakeLoops::ReplaceLink(const Poly_MakeLoops::Link&,const Poly_MakeLoops::Link&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::replace_link",
@@ -42114,7 +42474,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::SetLinkOrientation(const Link&,LinkFlag)",
+      "upstream_id": "Poly_MakeLoops::SetLinkOrientation(const Poly_MakeLoops::Link&,const Poly_MakeLoops::LinkFlag)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::set_link_orientation",
@@ -42122,7 +42482,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops::FindLink(const Link&) const",
+      "upstream_id": "Poly_MakeLoops::FindLink(const Poly_MakeLoops::Link&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops::find_link",
@@ -42178,7 +42538,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops3D::Helper::GetFirstTangent(const Link&,gp_Dir&) const",
+      "upstream_id": "Poly_MakeLoops3D::Helper::GetFirstTangent(const Poly_MakeLoops::Link&,gp_Dir&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops3DHelper::get_first_tangent",
@@ -42186,7 +42546,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops3D::Helper::GetLastTangent(const Link&,gp_Dir&) const",
+      "upstream_id": "Poly_MakeLoops3D::Helper::GetLastTangent(const Poly_MakeLoops::Link&,gp_Dir&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops3DHelper::get_last_tangent",
@@ -42202,7 +42562,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops3D(const Helper*,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "Poly_MakeLoops3D(const Poly_MakeLoops3D::Helper*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::LeftWay3D::new",
@@ -42210,7 +42570,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops2D::Helper::GetFirstTangent(const Link&,gp_Dir2d&) const",
+      "upstream_id": "Poly_MakeLoops2D::Helper::GetFirstTangent(const Poly_MakeLoops::Link&,gp_Dir2d&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops2DHelper::get_first_tangent",
@@ -42218,7 +42578,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops2D::Helper::GetLastTangent(const Link&,gp_Dir2d&) const",
+      "upstream_id": "Poly_MakeLoops2D::Helper::GetLastTangent(const Poly_MakeLoops::Link&,gp_Dir2d&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops2DHelper::get_last_tangent",
@@ -42226,7 +42586,7 @@
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
     {
-      "upstream_id": "Poly_MakeLoops2D(bool,const Helper*,const occ::handle<NCollection_BaseAllocator>&)",
+      "upstream_id": "Poly_MakeLoops2D(const bool,const Poly_MakeLoops2D::Helper*,const occ::handle<NCollection_BaseAllocator>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
       "rust_item": "rustycad_tkmath::poly::make_loops::LeftWay2D::new",
@@ -42237,7 +42597,7 @@
       "upstream_id": "std::hash<Poly_MakeLoops::Link>::operator()(const Poly_MakeLoops::Link&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
-      "rust_item": "<rustycad_tkmath::poly::make_loops::LinkHasher as rustycad_tkernel::ncollection::HashPolicy<Link>>::hash",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkmath::poly::make_loops::Link>>::hash",
       "status": "implemented",
       "notes": "Explicit Poly mapping. Transient classes keep their fields behind one lock, so members take &self and changes are seen through every Handle; references to internal arrays become copies or closures run under the lock; pointers to coherent triangles and links become indices; C++ out parameters become returned values except Poly::Intersect, whose partially written outputs are native; exceptions become Failure errors carrying the offending value."
     },
@@ -239600,6 +239960,350 @@
       "rust_item": "rustycad_tkmath::poly::make_loops::LeftWay3D::<rustycad_tkmath::poly::make_loops::LoopWay>::choose_left_way",
       "status": "implemented",
       "notes": "Reusable protected operation and strategy hook. Signed indices preserve link orientation and raise Standard_OutOfRange for missing keys; turn strategies propagate failures and raise Standard_NoSuchObject for empty fallback candidates. Native probe plus differential Poly tests: tools/oracle/poly_make_loops_get_link.md. Compiler ID 11d0429c11c3102dae015ad38867aad3a59db7f5749a99477ac9b0c12310034d. Native abs(INT_MIN) is undefined and not a parity input. This hook mapping does not claim null-helper constructor behavior or debug-only OnAddLink. No legacy declaration count increase."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Link::flags",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::Link::flags",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Link::node1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::Link::node1",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Link::node2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::Link::node2",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::LF_None",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkFlag::None",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::LF_Fwd",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkFlag::Fwd",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::LF_Rev",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkFlag::Rev",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::LF_Both",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkFlag::Both",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::LF_Reversed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::LinkFlag::Reversed",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the same value/order."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::RC_LoopsDone",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::result_code::LOOPS_DONE",
+      "status": "implemented",
+      "notes": "ResultCode bit combined in Perform()'s int result; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::RC_HangingLinks",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::result_code::HANGING_LINKS",
+      "status": "implemented",
+      "notes": "ResultCode bit combined in Perform()'s int result; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::RC_Failure",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::result_code::FAILURE",
+      "status": "implemented",
+      "notes": "ResultCode bit combined in Perform()'s int result; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_NONE",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::NONE",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_Calculation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::CALCULATION",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_Presentation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::PRESENTATION",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_Active",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::ACTIVE",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_Loaded",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::LOADED",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_AnyFallback",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::ANY_FALLBACK",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose_USER",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::mesh_purpose::USER",
+      "status": "implemented",
+      "notes": "Unnamed-enum bit flag of Poly_MeshPurpose; Rust constant with the same value."
+    },
+    {
+      "upstream_id": "Poly_MeshPurpose",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MeshPurpose.hxx",
+      "rust_item": "rustycad_tkmath::poly::MeshPurpose",
+      "status": "implemented",
+      "notes": "typedef unsigned int Poly_MeshPurpose is the Rust alias poly::MeshPurpose."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::ListOfLink",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::ListOfLink",
+      "status": "implemented",
+      "notes": "Same list alias."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::Loop",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::Loop",
+      "status": "implemented",
+      "notes": "Same list alias (Loop = ListOfLink)."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops2D::Helper",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": "rustycad_tkmath::poly::make_loops::MakeLoops2DHelper",
+      "status": "implemented",
+      "notes": "Abstract helper class is the Rust trait make_loops::MakeLoops2DHelper."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops::getHelper() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected accessor for derived classes. Rust MakeLoops owns its helper and the LoopWay::helper trait method returns it to the algorithm."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops2D::getHelper() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected accessor for derived classes. Rust LeftWay2D owns its helper and the LoopWay::helper trait method returns it to the algorithm."
+    },
+    {
+      "upstream_id": "Poly_MakeLoops3D::getHelper() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected accessor for derived classes. Rust LeftWay3D owns its helper and the LoopWay::helper trait method returns it to the algorithm."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriangulation::TwoIntegers::myValue",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": "rustycad_tkmath::poly::TwoIntegers::value",
+      "status": "implemented",
+      "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriangulation::myAlloc",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::CoherentTriangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriangulation::myDeflection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::CoherentTriangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriangulation::myLinks",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::CoherentTriangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriangulation::myNodes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::CoherentTriangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_CoherentTriangulation::myTriangles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::CoherentTriangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangle::myNodes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangle.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangle keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myCachedMinMax",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myCachedMinMaxMutex",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myDeflection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myNodes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myNormals",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myParams",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myPurpose",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myTriangles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "Poly_Triangulation::myUVNodes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: protected C++ data member. Rust poly::Triangulation keeps it as private state behind its public accessors."
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: forward declaration of the TKernel class; ported there as rustycad_tkernel::ncollection allocators."
+    },
+    {
+      "upstream_id": "NCollection_List",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_CoherentTriangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: forward declaration of the TKernel template; ported there as rustycad_tkernel::ncollection::List."
     },
     {
       "upstream_id": "Geom2d_BSplineCurve::updateKnots()",
