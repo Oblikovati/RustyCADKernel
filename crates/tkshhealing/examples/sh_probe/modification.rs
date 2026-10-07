@@ -12,7 +12,7 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkshhealing::shape_custom::{
     ShapeCustomConvertToBSpline, ShapeCustomConvertToRevolution, ShapeCustomDirectModification,
-    ShapeCustomModification, ShapeCustomTrsfModification,
+    ShapeCustomModification, ShapeCustomSweptToElementary, ShapeCustomTrsfModification,
 };
 use rustycad_tkshhealing::shape_extend::{
     BasicMsgRegistrator, ShapeExtend, ShapeExtendMsgRegistrator,
@@ -37,6 +37,7 @@ fn modification(r: &mut Reader<'_>) -> Result<Modification, Failure> {
             m.set_plane_mode(r.flag());
             Handle::new(m).cast()
         }
+        4 => Handle::new(ShapeCustomSweptToElementary::new()).cast(),
         _ => Handle::new(ShapeCustomConvertToRevolution::new()).cast(),
     })
 }

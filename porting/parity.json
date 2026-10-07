@@ -274361,6 +274361,69 @@
       "cpp_declaration_id": "fbcc027b191e7d3ca8dc93ac90ec1827e4a303b7b19924666bd8a9f738d75414"
     },
     {
+      "upstream_id": "ShapeCustom_SweptToElementary::Continuity(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::<rustycad_tkbrep::brep_tools::BRepToolsModification>::continuity",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "29c93bffc6878bd497af62c79bba5cbd383ea0cae8d684598867a5aa1bffbc8c"
+    },
+    {
+      "upstream_id": "ShapeCustom_SweptToElementary::NewSurface(const TopoDS_Face&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,bool&,bool&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_surface",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "35c61326621e342c1fa3f10c984320169475580da1336ddd642a06d4d6972a3f"
+    },
+    {
+      "upstream_id": "ShapeCustom_SweptToElementary::NewPoint(const TopoDS_Vertex&,gp_Pnt&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_point",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "45d8c3b7901d2362373ded15280c8bcfbf9e1f0fa2e857078f69b763e3b1c5d3"
+    },
+    {
+      "upstream_id": "ShapeCustom_SweptToElementary::ShapeCustom_SweptToElementary()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::new",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "7ad1aad126e2273c6e20494671afcf01a214bb46688660720f61347167360f50"
+    },
+    {
+      "upstream_id": "ShapeCustom_SweptToElementary::NewCurve2d(const TopoDS_Edge&,const TopoDS_Face&,const TopoDS_Edge&,const TopoDS_Face&,occ::handle<Geom2d_Curve>&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve2d",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "8d622439f14e5560177bb4502020be2a596857fb7a1c9ff079cc8dcf2bcc6fe0"
+    },
+    {
+      "upstream_id": "ShapeCustom_SweptToElementary::NewParameter(const TopoDS_Vertex&,const TopoDS_Edge&,double&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_parameter",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "b8568c1904f1efefb98cfeaff470f8dc5161368c0e82ef560ff755d40afd948c"
+    },
+    {
+      "upstream_id": "ShapeCustom_SweptToElementary::NewCurve(const TopoDS_Edge&,occ::handle<Geom_Curve>&,TopLoc_Location&,double&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeCustom/ShapeCustom_SweptToElementary.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_custom::ShapeCustomSweptToElementary::<rustycad_tkbrep::brep_tools::BRepToolsModification>::new_curve",
+      "status": "implemented",
+      "notes": "ShapeCustom mapping (docs/shhealing-design.md section 7): C++ output references become &mut outputs, native exceptions and null dereferences are Failure errors; compared with OCCT by the sc_modif requests (tools/tkshhealing_corpus_shapecustom.py, modification kind 4).",
+      "cpp_declaration_id": "f7066c47f54ba8119d6eeac6cf95b3130c55829fb7db7752f45a5bcc5cadd40d"
+    },
+    {
       "upstream_id": "ShapeUpgrade::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom_BoundedCurve>>>&)",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade.hxx",

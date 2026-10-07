@@ -16,6 +16,7 @@ mod direct_modification;
 mod edge_copy;
 mod modification;
 mod restriction_parameters;
+mod swept_to_elementary;
 mod trsf_modification;
 
 pub use convert_to_bspline::ShapeCustomConvertToBSpline;
@@ -24,4 +25,5 @@ pub use curve2d::{Line2dConversion, ShapeCustomCurve2d};
 pub use direct_modification::ShapeCustomDirectModification;
 pub use modification::{ShapeCustomModification, ShapeCustomModificationFields};
 pub use restriction_parameters::ShapeCustomRestrictionParameters;
+pub use swept_to_elementary::ShapeCustomSweptToElementary;
 pub use trsf_modification::ShapeCustomTrsfModification;

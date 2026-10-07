@@ -276,6 +276,12 @@ def spline_scene() -> ModificationScene:
     s_['trim_rev'] = pre.trimmed(s_['rev_bezier'], 0., 3., 0., 1.)
     s_['trim_ext'] = pre.trimmed(s_['ext_spline'], 0., 1., -1., 2.)
     s_['cyl'] = pre.elementary(CYLINDER, (0.5, -1., 0.), Z, X, False, 1.5)
+    s_['rev_torus'] = pre.revolution(geom_gp(1, p=(3., 0., 0.), n=(0., 1., 0.), radius=1.), O, Z)
+    s_['rev_sphere'] = pre.revolution(geom_gp(1, p=(0., 0., 0.), n=(0., 1., 0.), radius=2.), O, Z)
+    s_['rev_cyl'] = pre.revolution(geom_gp(0, p=(1.5, 0., 0.), d=(0., 0., 1.)), O, Z)
+    s_['ext_line'] = pre.extrusion(geom_gp(0, p=(0., 1., 0.), d=(1., 0., 0.)), Z)
+    s_['tor'] = pre.elementary(TORUS, O, Z, X, False, 3., 1.)
+    s_['sph'] = pre.elementary(SPHERE, O, Z, X, False, 2.)
     scene = ModificationScene(pre, pre.program())
     for name, surface in s_.items():
         bounded_face(scene, name, surface)
@@ -300,6 +306,24 @@ def convert_to_bspline_requests(s: ModificationScene) -> list[str]:
     return out
 
 
+def swept_to_elementary_requests(s: ModificationScene) -> list[str]:
+    """ShapeCustom_SweptToElementary on every face, with the p-curves of the swept faces
+    also moved onto the torus and sphere faces (the native shifts). The elementary torus and
+    sphere faces themselves are left out: NewCurve2d of a copied edge on a non-swept face
+    whose new face is a torus or a sphere dereferences a null swept surface natively
+    (SIGSEGV; the Rust port raises Standard_NullObject, covered by a unit test)."""
+    out = []
+    for name in (n for n in s.faces if n not in ('tor', 'sph')):
+        ops = face_ops(s, name)
+        if name.startswith(('rev_', 'ext_')):
+            e = s.edges[name][0]
+            ops += [3, e, s.faces[name], s.other_edge, s.faces['tor'],
+                    3, e, s.faces[name], s.other_edge, s.faces['sph']]
+        out.append(request('sc_modif', s.tokens(), 4, 1, len(ops_count(ops)), *ops))
+    out.append(request('sc_modif', s.tokens(), 4, 1, 4, 6, s.compound, 7, 8, 10))
+    return out
+
+
 def append_shapecustom_requests(requests: list[str]) -> None:
     """Append every ShapeCustom request family in a fixed order."""
     requests += is_linear_requests()
@@ -309,4 +333,6 @@ def append_shapecustom_requests(requests: list[str]) -> None:
     scene = modification_scene()
     requests += modif_requests(scene)
     requests += message_requests(scene)
-    requests += convert_to_bspline_requests(spline_scene())
+    swept = spline_scene()
+    requests += convert_to_bspline_requests(swept)
+    requests += swept_to_elementary_requests(swept)
