@@ -2,7 +2,7 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -20,7 +20,8 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
-from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
+from native_build import (CLOSURE_TARGETS, LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS,
+                          OCAF_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -48,6 +49,19 @@ NUMERIC_VERIFIERS = {
     'TKPrim': ('tools/verify_tkprim_numeric.py', 'target/oracle-tkprim/numeric'),
     'TKHLR': ('tools/verify_tkhlr_numeric.py', 'target/oracle-tkhlr/numeric'),
 }
+
+
+# The profiles without numeric probes (the OCAF toolkits hold no numeric algorithm), and the
+# native closure each of them links: its own toolkit and the ones below it.
+PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
+    'TKCDF': ('TKCDF', 'TKernel'),
+    'TKLCAF': OCAF_LINKED_TOOLKITS,
+}
+
+
+def linked_toolkits(toolkit: str) -> tuple[str, ...]:
+    """The native libraries a profile links, dependants first; linked_toolkits('TKMath') == LINKED_TOOLKITS."""
+    return PROFILES_WITHOUT_NUMERIC.get(toolkit, LINKED_TOOLKITS)
 
 
 def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
@@ -89,15 +103,19 @@ def verify_sources(source: Path, rows: list[dict]) -> list[str]:
     return paths
 
 
-def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, environment: dict, reuse: Path | None = None) -> Path:
-    """Build the verified native geometry closure; prepare_build(source, out, inventory, 4, env).
+def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, environment: dict, reuse: Path | None = None, toolkit: str = 'TKMath') -> Path:
+    """Build the verified native closure of a profile; prepare_build(source, out, inventory, 4, env).
 
     A reused build is never reconfigured or rebuilt, so parallel worktrees can share
     one native closure without racing on it; it must already contain the libraries.
+    The OCAF profiles build their own closure tree, so the geometry closure keeps its flags.
     """
     if reuse is not None:
         if not (reuse/'CMakeCache.txt').is_file(): raise ValueError(f'No configured native build at {reuse}; expected a CMake build directory')
         return reuse
+    if toolkit in PROFILES_WITHOUT_NUMERIC:
+        flags = closure_flags(inventory['modules'], OCAF_TOOLKITS)
+        return locked_cmake(source,ROOT/'target/occt-ocaf-full',flags,OCAF_CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
     build = ROOT/'target/occt-tkernel-full'
     return locked_cmake(source,build,closure_flags(inventory['modules']),CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
 
@@ -134,13 +152,13 @@ def run_native_suites(command: list, log: Path, environment: dict, has_approved_
         if not has_approved_failures: raise
 
 
-def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str], disabled: dict[str, SourceDisabledCase] | None = None) -> list[Path]:
+def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict, approved: dict[str, str], disabled: dict[str, SourceDisabledCase] | None = None, linked: tuple[str, ...] = LINKED_TOOLKITS) -> list[Path]:
     """Run complete native suites; only the approved native failures may fail; native_tests(...)."""
     compiler = re.search(r'^CMAKE_CXX_COMPILER:FILEPATH=(.*)$',(build/'CMakeCache.txt').read_text(),re.M)[1]
     common = [compiler,'-std=c++17','-O2','-pthread','-I'+str(build/'include/opencascade'),
               '-I'+str(build/'_deps/googletest-src/googletest/include')]
     objects = compile_sources(source,paths,common,output,jobs)
-    libraries = [unique(build,f'lib{name}.so') for name in [*LINKED_TOOLKITS,'gtest_main','gtest']]
+    libraries = [unique(build,f'lib{name}.so') for name in [*linked,'gtest_main','gtest']]
     executable = output/'legacy-tests'
     run([*common,*objects,*libraries,'-Wl,-rpath,'+str(libraries[0].parent),'-o',executable],output/'link.log',env=environment)
     listing = run([executable,'--gtest_list_tests'],output/'native-list.txt',env=environment)
@@ -190,7 +208,7 @@ def require_exact_rust_cases(package: str, target: str, passed: set[str], mapped
 def main() -> None:
     """Verify the selected profile and persist evidence only after success."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('toolkit', choices=sorted(NUMERIC_VERIFIERS))
+    parser.add_argument('toolkit', choices=sorted([*NUMERIC_VERIFIERS, *PROFILES_WITHOUT_NUMERIC]))
     parser.add_argument('--source',type=Path,default=ROOT/'../OCCT')
     parser.add_argument('--jobs',type=int,default=2)
     parser.add_argument('--native-build',type=Path,help='Reuse this prebuilt native closure without rebuilding it')
@@ -207,8 +225,8 @@ def main() -> None:
         if not rows: raise ValueError(f'--only {args.only} selects no mapped sources; expected a substring of a mapped source path')
     environment = dict(os.environ,LC_ALL='C',LANG='C')
     environment['PATH'] = str(Path.home()/'.cargo/bin')+os.pathsep+environment['PATH']
-    build = prepare_build(source,output,inventory,args.jobs,environment,args.native_build)
-    native,rust,approved,libraries = mapped_suites(source,output,build,rows,args.jobs,environment)
+    build = prepare_build(source,output,inventory,args.jobs,environment,args.native_build,args.toolkit)
+    native,rust,approved,libraries = mapped_suites(source,output,build,rows,args.jobs,environment,linked_toolkits(args.toolkit))
     numeric = None
     if args.only:
         disabled = source_disabled_rows(runnable_rows(rows))
@@ -216,26 +234,27 @@ def main() -> None:
               f'{len(native)-len(approved)-len(disabled)} native passed, '
               f'{len(disabled)} source-disabled expected failures, {len(rust)} Rust passed; not a toolkit gate')
         return
-    script, evidence = NUMERIC_VERIFIERS[args.toolkit]
-    run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment,timeout=NUMERIC_TIMEOUT_SECONDS)
-    numeric = json.loads((ROOT/evidence/'report.json').read_text())
+    if args.toolkit in NUMERIC_VERIFIERS:
+        script, evidence = NUMERIC_VERIFIERS[args.toolkit]
+        run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment,timeout=NUMERIC_TIMEOUT_SECONDS)
+        numeric = json.loads((ROOT/evidence/'report.json').read_text())
     record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric,approved)
 
 
-def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], jobs: int, environment: dict) -> tuple[set, set, dict[str, str], list[Path]]:
+def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], jobs: int, environment: dict, linked: tuple[str, ...] = LINKED_TOOLKITS) -> tuple[set, set, dict[str, str], list[Path]]:
     """Run the mapped suites natively and in Rust; return the native and Rust runtime
     cases, the approved native failures and the linked libraries. Without mapped rows
     nothing runs and the libraries are only hashed for the report;
     mapped_suites(source, out, build, rows, 4, env)."""
     if not rows:
-        return set(), set(), {}, [unique(build,f'lib{name}.so') for name in LINKED_TOOLKITS]
+        return set(), set(), {}, [unique(build,f'lib{name}.so') for name in linked]
     paths = verify_sources(source,rows); runnable = runnable_rows(rows)
     native,rust = mapped_runtime_sets(runnable)
     native |= set(pending_native_cases(source, rows))
     native |= set(not_applicable_rows(rows))
     approved = approved_native_failures(runnable)
     disabled = source_disabled_rows(runnable)
-    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled)
+    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved,disabled,linked)
     rust_tests(output,runnable,rust,environment)
     return native,rust,approved,libraries
 
@@ -254,7 +273,8 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     inputs = [p for p in (ROOT/'crates').rglob('*') if p.is_file()]
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
     inputs += sorted((ROOT/'tools').rglob('*.py'))
-    inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
+    inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0]] if toolkit in NUMERIC_VERIFIERS else []
+    inputs += [ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
     disabled = source_disabled_rows(runnable_rows(rows))
     pending = pending_dependency_rows(rows, set())
     inapplicable = not_applicable_rows(rows)
