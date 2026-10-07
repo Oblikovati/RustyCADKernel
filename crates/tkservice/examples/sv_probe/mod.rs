@@ -5,6 +5,7 @@ pub mod camera;
 pub mod clip_plane;
 pub mod grid;
 pub mod hid;
+pub mod light;
 pub mod marker;
 pub mod material;
 pub mod pbr;

@@ -40,6 +40,9 @@ mod exceptions;
 mod flipper;
 mod hatch_style;
 mod index_buffer;
+mod light;
+mod light_set;
+mod light_setters;
 mod marker_image;
 mod marker_standard;
 mod marker_tables;
@@ -121,6 +124,10 @@ pub use hatch_style::Graphic3dHatchStyle;
 pub use index_buffer::{
     Graphic3dIndexBuffer, Graphic3dIndexBufferMembers, Graphic3dIndexBufferSource,
     Graphic3dMutableIndexBuffer,
+};
+pub use light::Graphic3dCLight;
+pub use light_set::{
+    Graphic3dLightSet, Graphic3dLightSetIterationFilter, Graphic3dLightSetIterator,
 };
 pub use marker_image::Graphic3dMarkerImage;
 pub use material_aspect::Graphic3dMaterialAspect;

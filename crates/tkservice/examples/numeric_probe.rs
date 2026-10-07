@@ -3,7 +3,8 @@
 use std::io::{self, BufRead};
 mod sv_probe;
 use sv_probe::{
-    array, aspects, camera, clip_plane, grid, hid, marker, material, pbr, pixel, shader, texture,
+    array, aspects, camera, clip_plane, grid, hid, light, marker, material, pbr, pixel, shader,
+    texture,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -48,6 +49,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // Graphic3d_ClipPlane (sv_probe/clip_plane.rs)
     ("sv_clip", clip_plane::clip_case),
     ("sv_clip_capping", clip_plane::capping_case),
+    // Graphic3d_CLight and Graphic3d_LightSet (sv_probe/light.rs)
+    ("sv_light", light::light_case),
+    ("sv_light_set", light::light_set_case),
 ];
 
 fn main() {

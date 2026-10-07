@@ -35,3 +35,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_camera').append_camera_requests(requests)
     # Graphic3d_ClipPlane (tkservice_corpus_clip.py)
     __import__('tkservice_corpus_clip').append_clip_requests(requests)
+    # Graphic3d_CLight and Graphic3d_LightSet (tkservice_corpus_light.py)
+    __import__('tkservice_corpus_light').append_light_requests(requests)

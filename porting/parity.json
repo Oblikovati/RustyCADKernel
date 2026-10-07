@@ -460696,6 +460696,854 @@
       "rust_item": "rustycad_tkservice::graphic3d::structure_definition_error",
       "status": "implemented",
       "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter_None",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter::None",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter_ExcludeAmbient",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter::ExcludeAmbient",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter_ExcludeDisabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter::ExcludeDisabled",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter_ExcludeNoShadow",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter::ExcludeNoShadow",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter_ExcludeDisabledAndAmbient",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter::ExcludeDisabledAndAmbient",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IterationFilter_ActiveShadowCasters",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterationFilter::ActiveShadowCasters",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Name",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::name",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_name",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Color",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::color",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_color",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::IsEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::is_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::ToCastShadows",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::to_cast_shadows",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetCastShadows",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_cast_shadows",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::IsHeadlight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::is_headlight",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Headlight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::headlight",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetHeadlight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_headlight",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::ConstAttenuation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::const_attenuation",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::LinearAttenuation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::linear_attenuation",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Attenuation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::attenuation",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetAttenuation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_attenuation",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::DisplayPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::display_position",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetDisplayPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_display_position",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Angle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::angle",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_angle",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Concentration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::concentration",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetConcentration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_concentration",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Intensity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::intensity",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetIntensity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_intensity",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Smoothness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::smoothness",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetSmoothRadius",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_smooth_radius",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetSmoothAngle",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_smooth_angle",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::HasRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::has_range",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Range",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::range",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_range",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::GetId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::get_id",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::PackedParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_params",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::PackedColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_color",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::PackedDirectionRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_direction_range",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::PackedDirection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_direction",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Revision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::revision",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Lower",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::lower",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Upper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::upper",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::is_empty",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Extent",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::extent",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Contains",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::contains",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::NbLightsOfType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_lights_of_type",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::UpdateRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::update_revision",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Revision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::revision",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::NbEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::NbEnabledLightsOfType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_enabled_lights_of_type",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::NbCastShadows",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_cast_shadows",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::AmbientColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::ambient_color",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::KeyEnabledLong",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::key_enabled_long",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::KeyEnabledShort",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::key_enabled_short",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::More",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::more",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::value",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::Next",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::next",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Graphic3d_CLight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::new",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::light_type",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Position() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::position",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetPosition(const gp_Pnt &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_position",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Position(double &,double &,double &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::position_coords",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetPosition(double,double,double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_position_coords",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Direction() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::direction",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. A zero direction (a light type without one) raises the Standard_ConstructionError of gp_Dir, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetDirection(const gp_Dir &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_direction",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::Direction(double &,double &,double &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::direction_coords",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::SetDirection(double,double,double)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::set_direction_coords",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. The gp_Dir of a null vector raises Standard_ConstructionError before the type check, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::CopyFrom",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::copy_from",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. A null source raises Standard_ProgramError (natively a null dereference)."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::dump_json",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. The pointer field prints a Rust address; a spot or directional light without a direction raises from gp_Dir as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Graphic3d_LightSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::default",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::value",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. An index outside 1..Extent raises Standard_OutOfRange, as the IndexedDataMap::FindKey Raise_if does."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Add",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::add",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Remove",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::remove",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. The last light takes the removed index, as NCollection_IndexedDataMap::RemoveFromIndex does."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::Iterator()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::default",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::Iterator(const Graphic3d_LightSet &,Graphic3d_LightSet::IterationFilter)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::new",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. The iterator walks a snapshot of the handles and filters each light when it reaches it."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::Iterator(const occ::handle<Graphic3d_LightSet> &,Graphic3d_LightSet::IterationFilter)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator::from_handle",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::skipFiltered",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Private skip_filtered of the iterator."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::myIter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Private snapshot and position of the iterator."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::Iterator::myFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSetIterator",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Private filter of the iterator."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myLights",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::lights",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. The protected map is private shared state (lights with their cached revisions)."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myAmbient",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::ambient_color",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myKeyEnabledLong",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::key_enabled_long",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myKeyEnabledShort",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::key_enabled_short",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myLightTypes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_lights_of_type",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myLightTypesEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_enabled_lights_of_type",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myNbEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myNbCastShadows",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::nb_cast_shadows",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::revision",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_LightSet::myCacheRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_LightSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dLightSet::update_revision",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state read by update_revision."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::light_type",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::get_id",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::name",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myPosition",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::position",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myColor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_color",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myDirection",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_direction_range",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::packed_params",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::mySmoothness",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::smoothness",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myIntensity",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::intensity",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::revision",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myIsHeadlight",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::is_headlight",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myIsEnabled",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::is_enabled",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_CLight::myToCastShadows",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CLight.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::to_cast_shadows",
+      "status": "implemented",
+      "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
     }
   ],
   "tests": [
