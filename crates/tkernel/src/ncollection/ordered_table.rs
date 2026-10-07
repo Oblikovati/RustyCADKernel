@@ -131,6 +131,3 @@ pub(super) use protected_lookup::ordered_protected_lookup;
 
 mod allocator_selection;
 pub(super) use allocator_selection::ordered_borrowed_clear;
-
-mod resize_interruption;
-pub(in crate::ncollection) use resize_interruption::ResizeInterruption;

@@ -239,7 +239,3 @@ mod ordered_node_links;
 mod ordered_node_owner;
 pub use ordered_data_map_node::{OrderedDataMapNode, OrderedDataMapNodeOwner};
 pub use ordered_map_node::{OrderedMapNode, OrderedMapNodeOwner};
-
-mod ordered_resize_interruption;
-pub use ordered_data_map::OrderedDataMapResizeInterruption;
-pub use ordered_map::OrderedMapResizeInterruption;
