@@ -1,4 +1,6 @@
 //! Face-connection geometry shared by fillet construction and offset analysis.
+mod builder0;
+pub use builder0::*;
 mod concave_side;
 mod connection;
 mod hatching;

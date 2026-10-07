@@ -30,6 +30,7 @@
 #include "tkfillet_probe_linebuilders.cxx"
 #include "tkfillet_probe_chfi2d.cxx"
 #include "tkfillet_probe_chfi3d.cxx"
+#include "tkfillet_probe_builder0.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // ChFiDS (tkfillet_probe_chfids.cxx)
  {"fl_spine", fl_spine_case},
@@ -59,6 +60,18 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_hatching_domains", fl_hatching_domains_case},
  {"fl_concave_side", fl_concave_side_case},
  {"fl_search_sing", fl_search_sing_case},
+ // ChFi3d_Builder_0 (tkfillet_probe_builder0.cxx)
+ {"fl_b0_scalars", fl_b0_scalars_case},
+ {"fl_bound_srf", fl_bound_srf_case},
+ {"fl_bound_fac", fl_bound_fac_case},
+ {"fl_enlarge_box", fl_enlarge_box_case},
+ {"fl_b0_faces", fl_b0_faces_case},
+ {"fl_b0_spines", fl_b0_spines_case},
+ {"fl_inter_plane_edge", fl_inter_plane_edge_case},
+ {"fl_b0_pcurves", fl_b0_pcurves_case},
+ {"fl_reparam_pcurv", fl_reparam_pcurv_case},
+ {"fl_project_pcurv", fl_project_pcurv_case},
+ {"fl_b0_bounds", fl_b0_bounds_case},
 };
 int main() {
  std::string line;

@@ -98,7 +98,7 @@ fn built(mut maker: impl BRepBuilderAPIMakeShape) -> Result<Shape, Failure> {
 }
 
 /// `fl_solid`: see tools/oracle/tkfillet_probe_chfi3d.cxx.
-pub(super) fn solid(r: &mut Reader<'_>) -> Result<Shape, Failure> {
+pub(crate) fn solid(r: &mut Reader<'_>) -> Result<Shape, Failure> {
     let kind = r.integer();
     let (a, b, c, d) = (r.real(), r.real(), r.real(), r.real());
     match kind {
@@ -125,7 +125,7 @@ pub(super) fn solid(r: &mut Reader<'_>) -> Result<Shape, Failure> {
 }
 
 /// `fl_edge_faces`.
-pub(super) fn edge_faces(s: &Shape) -> Result<IndexedDataMapOfShapeListOfShape, Failure> {
+pub(crate) fn edge_faces(s: &Shape) -> Result<IndexedDataMapOfShapeListOfShape, Failure> {
     let mut m = IndexedDataMapOfShapeListOfShape::default();
     topexp::map_shapes_and_ancestors(s, ShapeEnum::Edge, ShapeEnum::Face, &mut m)?;
     Ok(m)

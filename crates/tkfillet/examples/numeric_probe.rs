@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod fl_probe;
 use fl_probe::{
-    app_func, blend_func, brep_blend, chamfer, chfi_ds, chfi2d, chfi3d, fillet, line_builders,
-    rst_rst, surf_rst, walking,
+    app_func, blend_func, brep_blend, builder0, chamfer, chfi_ds, chfi2d, chfi3d, fillet,
+    line_builders, rst_rst, surf_rst, walking,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -40,6 +40,18 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fl_hatching_domains", chfi3d::hatching_domains_case),
     ("fl_concave_side", chfi3d::concave_side_case),
     ("fl_search_sing", chfi3d::search_sing_case),
+    // ChFi3d_Builder_0 (fl_probe/builder0.rs)
+    ("fl_b0_scalars", builder0::scalars_case),
+    ("fl_bound_srf", builder0::bound_srf_case),
+    ("fl_bound_fac", builder0::bound_fac_case),
+    ("fl_enlarge_box", builder0::enlarge_box_case),
+    ("fl_b0_faces", builder0::faces_case),
+    ("fl_b0_spines", builder0::spines_case),
+    ("fl_inter_plane_edge", builder0::inter_plane_edge_case),
+    ("fl_b0_pcurves", builder0::pcurves_case),
+    ("fl_reparam_pcurv", builder0::reparam_pcurv_case),
+    ("fl_project_pcurv", builder0::project_pcurv_case),
+    ("fl_b0_bounds", builder0::bounds_case),
 ];
 
 fn main() {

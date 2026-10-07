@@ -311552,6 +311552,262 @@
       "notes": "ChFi3d mapping (docs/tkfillet-progress.md): the free functions of ChFi3d and ChFi3d_Builder_0 are functions of the chfi3d module, output references become returned values and native exceptions become Failure values; ChFi3d_SearchSing implements math::FunctionWithDerivative and keeps a curve failure for take_failure. Compared with OCCT by the fl_concave_side and fl_search_sing probes of tools/verify_tkfillet_numeric.py."
     },
     {
+      "upstream_id": "ChFi3d_Boite(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&,double&,double&,double&,double&,double&,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::boite4",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_Boite(const gp_Pnt2d&,const gp_Pnt2d&,double&,double&,double&,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::boite",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_BoundFac",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::bound_fac",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_BoundSrf",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::bound_srf",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_BuildPCurve(const gp_Pnt2d&,gp_Dir2d&,const gp_Pnt2d&,gp_Dir2d&,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::build_pcurve",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_BuildPCurve(const occ::handle<Adaptor3d_Surface>&,const gp_Pnt2d&,const gp_Vec&,const gp_Pnt2d&,const gp_Vec&,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::build_pcurve_3d",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_BuildPCurve(const occ::handle<Adaptor3d_Surface>&,const gp_Pnt2d&,const gp_Vec2d&,const gp_Pnt2d&,const gp_Vec2d&,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::build_pcurve_on",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_CheckSameParameter",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::check_same_parameter",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_CircularSpine",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::circular_spine",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_ComputePCurv(const gp_Pnt2d&,const gp_Pnt2d&,occ::handle<Geom2d_Curve>&,double,double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::compute_pcurv",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_ComputePCurv(const occ::handle<Adaptor3d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&,occ::handle<Geom2d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,double&,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::compute_pcurv_on",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_ComputePCurv(const occ::handle<Geom_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&,occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double,double,double&,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::compute_pcurv_geom",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_EdgeState",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::edge_state",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_EnlargeBox(const TopoDS_Edge&,const NCollection_List<TopoDS_Shape>&,double,Bnd_Box&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::enlarge_box_edge",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_EnlargeBox(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Geom2d_Curve>&,double,double,Bnd_Box&,Bnd_Box&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::enlarge_box_pcurve",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_EnlargeBox(const occ::handle<Geom_Curve>&,double,double,Bnd_Box&,Bnd_Box&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::enlarge_box_curve",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_InPeriod",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::in_period",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_InterPlaneEdge",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::inter_plane_edge",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_KParticular",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::kparticular",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_ProjectPCurv",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::project_pcurv",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_ReparamPcurv",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::reparam_pcurv",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SameParameter(const occ::handle<Adaptor3d_Curve>&,occ::handle<Geom2d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::same_parameter",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_SameParameter(const occ::handle<Geom_Curve>&,occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double,double,double&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::same_parameter_geom",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_Spine",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::spine",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_conexfaces",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::conexfaces",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_evalconti",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::evalconti",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_mkbound(const occ::handle<Adaptor3d_Surface>&,const gp_Pnt2d&,const gp_Pnt2d&,double,double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::mkbound_points",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_mkbound(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Geom2d_Curve>&,double,double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::mkbound",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_mkbound(const occ::handle<Adaptor3d_Surface>&,occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,const gp_Pnt2d&,double,double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::mkbound_segment",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_mkbound(const occ::handle<Adaptor3d_Surface>&,occ::handle<Geom2d_Curve>&,int,const gp_Pnt2d&,const gp_Vec2d&,int,const gp_Pnt2d&,const gp_Vec2d&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::mkbound_tangents_2d",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_mkbound(const occ::handle<Adaptor3d_Surface>&,occ::handle<Geom2d_Curve>&,int,const gp_Pnt2d&,gp_Vec&,int,const gp_Pnt2d&,gp_Vec&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::mkbound_tangents_3d",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi3d_mkbound(const occ::handle<Geom_Surface>&,const gp_Pnt2d&,const gp_Pnt2d&,double,double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d_Builder_0.hxx",
+      "rust_item": "rustycad_tkfillet::chfi3d::mkbound_geom",
+      "status": "implemented",
+      "notes": "ChFi3d_Builder_0 mapping (docs/tkfillet-progress.md): the free functions are functions of the chfi3d module; output references become returned values (in/out arguments stay &mut), overloads take distinct names and native exceptions become Failure values. Compared with OCCT by the fl_b0_*, fl_bound_*, fl_enlarge_box, fl_inter_plane_edge, fl_reparam_pcurv and fl_project_pcurv probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "BRepOffset_Analyse",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Analyse.hxx",
