@@ -10,7 +10,7 @@ from dataclasses import dataclass
 
 from api_inventory.inputs import JSONObject
 from api_macro_classes import RustClass
-from api_macro_cpp import ALLOCATION_HEADERS, spelling_header, upstream_identity
+from api_macro_cpp import allocation_macro, upstream_identity
 from api_macro_rust import CLONE, RustInventoryIndex, trait_item
 from api_macro_rust_source import RustSourceTree, clone_is_derived
 from api_macro_source import DEFAULTED, DELETED, EMPTY_BODY, USER_BODY
@@ -74,7 +74,7 @@ def allocation_variant(declaration: JSONObject) -> str:
     name = str(declaration.get("qualified_name", "")).rsplit("::", 1)[-1]
     operator = name.removeprefix("operator ")
     parameters = declaration.get("parameter_types") or []
-    macro = ALLOCATION_HEADERS[spelling_header(declaration)]
+    macro = allocation_macro(declaration)
     if macro == "DEFINE_INC_ALLOC":
         return "inc delete"
     if macro == "DEFINE_NCOLLECTION_ALLOC":
@@ -87,7 +87,7 @@ def allocation_variant(declaration: JSONObject) -> str:
 def allocation_row(member: SpecialMember) -> BuildResult:
     """Exclude a macro allocation operator; Rust has no class-specific allocator hook."""
     variant = allocation_variant(member.declaration)
-    macro = ALLOCATION_HEADERS[spelling_header(member.declaration)]
+    macro = allocation_macro(member.declaration)
     notes = (
         f"Excluded: {macro} generates this class-specific operator, which "
         f"{ALLOCATION_NOTES[variant]}. Rust has no per-type allocation or placement "

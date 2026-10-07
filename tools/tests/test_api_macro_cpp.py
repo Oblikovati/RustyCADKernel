@@ -23,7 +23,7 @@ class SpecialMemberKindTests(unittest.TestCase):
 
     def test_exception_members(self) -> None:
         kind = declaration("1", "E::ExceptionType", "CXXMethod", "const char *() const noexcept", spelled=EXCEPTION, macro=True)
-        ctor = declaration("2", "E::E", "CXXConstructor", "void (const char *)", ["const char *"], macro=True)
+        ctor = declaration("2", "E::E", "CXXConstructor", "void (const char *)", ["const char *"], spelled=("src/P/TK/E/E.hxx", 3, 1), macro=True)
         self.assertEqual(special_member_kind(kind), "exception_type")
         self.assertEqual(special_member_kind(ctor), "exception_constructor")
 

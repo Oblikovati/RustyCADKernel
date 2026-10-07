@@ -2,14 +2,21 @@
 
 The OCCT compiler inventory records only user-declared members: implicit copy, move and
 destructor members never appear, so nothing here has to match compiler-implicit records.
-Macro members are recognized by `macro_generated` plus the header that spells them, never
-by name alone, so a hand-written `DynamicType` override stays a toolkit member.
+Categories come from the shared `api_gap_categories` classifier (macro members by
+`macro_generated` plus spelling header, never by name alone).
 """
 
 from __future__ import annotations
 
 import re
 
+from api_gap_categories import (
+    ALLOC_MACRO,
+    EXCEPTION_MACRO,
+    RTTI_MACRO,
+    SPECIAL_MEMBER,
+    declaration_category,
+)
 from api_identity import norm_cpp, parse_upstream_id, leaf_name
 from api_inventory.inputs import JSONObject
 
@@ -23,7 +30,6 @@ RTTI_KINDS = {
     "get_type_descriptor": "rtti_descriptor",
     "DynamicType": "rtti_dynamic",
 }
-EXCEPTION_HEADER = "Standard_DefineException.hxx"
 RTTI_HEADER = "Standard_Type.hxx"
 
 
@@ -40,36 +46,37 @@ def spelling_header(declaration: JSONObject) -> str:
     return path.rsplit("/", 1)[-1] if isinstance(path, str) else ""
 
 
-def special_member_kind(declaration: JSONObject) -> str | None:
-    """Classify one declaration; the single category rule of this generator.
+def allocation_macro(declaration: JSONObject) -> str:
+    """The allocation macro that spells an operator, e.g. `DEFINE_STANDARD_ALLOC`."""
+    return ALLOCATION_HEADERS.get(spelling_header(declaration), "an OCCT allocation macro")
 
+
+def special_member_kind(declaration: JSONObject) -> str | None:
+    """Refine the shared gap category into this generator's row kind.
+
+    `api_gap_categories.declaration_category` decides the category (one classifier for
+    reports and generators); this only names the member inside it, or None when the
+    generator has no rule for it (e.g. a converting `operator=`).
     Example: `special_member_kind(geom2d_line_get_type_name) == 'rtti_name'`.
     """
-    if declaration.get("macro_generated") is True:
-        return macro_member_kind(declaration)
-    if declaration.get("kind") == "CXXDestructor":
-        return "destructor"
-    return copy_move_kind(declaration)
-
-
-def macro_member_kind(declaration: JSONObject) -> str | None:
-    header = spelling_header(declaration)
+    category = declaration_category(declaration)
     leaf = leaf_name(str(declaration.get("qualified_name", "")))
-    if header in ALLOCATION_HEADERS and leaf.startswith("operator "):
+    if category == ALLOC_MACRO:
         return "allocation"
-    if header == RTTI_HEADER and declaration.get("kind") == "CXXMethod":
-        return RTTI_KINDS.get(leaf)
-    if header == EXCEPTION_HEADER and leaf == "ExceptionType":
-        return "exception_type"
-    if declaration.get("kind") == "CXXConstructor" and exception_constructor(declaration):
-        return "exception_constructor"
-    return None
+    if category == RTTI_MACRO:
+        return RTTI_KINDS.get(leaf, "rtti_base" if leaf == "base_type" else None)
+    if category == EXCEPTION_MACRO:
+        return "exception_type" if leaf == "ExceptionType" else exception_constructor_kind(declaration)
+    if category != SPECIAL_MEMBER:
+        return None
+    return "destructor" if declaration.get("kind") == "CXXDestructor" else copy_move_kind(declaration)
 
 
-def exception_constructor(declaration: JSONObject) -> bool:
+def exception_constructor_kind(declaration: JSONObject) -> str | None:
     """`DEFINE_STANDARD_EXCEPTION` constructors take one or two `const char *`."""
     parameters = declaration.get("parameter_types")
-    return parameters in (["const char *"], ["const char *", "const char *"])
+    exception = parameters in (["const char *"], ["const char *", "const char *"])
+    return "exception_constructor" if exception else None
 
 
 def copy_move_kind(declaration: JSONObject) -> str | None:
@@ -101,7 +108,7 @@ def self_reference(declaration: JSONObject) -> str | None:
 def upstream_identity(declaration: JSONObject) -> str:
     """Spell the ledger id of a member, e.g. `Geom2d_Line::DynamicType() const`."""
     name = str(declaration.get("qualified_name", ""))
-    if declaration.get("kind") == "CXXRecord":
+    if declaration.get("kind") in {"CXXRecord", "Typedef", "TypeAlias"}:
         return name
     parameters = declaration.get("written_parameter_types")
     if not isinstance(parameters, list):

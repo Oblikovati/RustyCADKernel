@@ -81,6 +81,7 @@ class MacroRowGeneratorTests(unittest.TestCase):
         self.assertEqual(rows["copy"]["status"], "excluded")
         self.assertIn("= delete", rows["copy"]["notes"])
         self.assertEqual(rows["dtor"]["status"], "excluded")
+        self.assertEqual((rows["base"]["upstream_id"], rows["base"]["status"]), ("Geom2d_Line::base_type", "excluded"))
         self.assertEqual((rows["rec"]["upstream_id"], rows["rec"]["status"]), ("Geom2d_Line", "implemented"))
 
     def test_macro_row_is_retired_with_its_notes_kept(self) -> None:

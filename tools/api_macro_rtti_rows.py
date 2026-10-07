@@ -84,6 +84,23 @@ def rtti_row(member: SpecialMember, evidence: MacroEvidence) -> BuildResult:
     return ledger_row(member, "partial", target, notes), None
 
 
+def rtti_base_row(member: SpecialMember, evidence: MacroEvidence) -> BuildResult:
+    """Exclude the macro's `base_type` typedef once the Rust parent is proven equal."""
+    if member.rust_class is None:
+        return None, "rtti_without_rust_class"
+    cxx = declaration_owner(member.declaration)
+    base, parent = evidence.cpp_bases.get(cxx), rust_parent_name(cxx, evidence)
+    if base is None or parent != base:
+        return None, "rtti_base_parent_unproven"
+    notes = (
+        f"Excluded: DEFINE_STANDARD_RTTI declares `typedef {base} base_type` for its own "
+        f"descriptor wiring. Rust has no alias for it; the registration of "
+        f"{member.rust_class.path} names parent descriptor \"{parent}\", which "
+        "RuntimeType::parent() returns."
+    )
+    return ledger_row(member, "excluded", member.rust_class.path, notes), None
+
+
 def rtti_notes(
     member: SpecialMember, registration: TransientRegistration | None, base: str | None
 ) -> str:

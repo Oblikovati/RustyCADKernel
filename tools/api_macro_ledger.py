@@ -18,7 +18,7 @@ from api_macro_cpp import RTTI_KINDS, declaration_owner, special_member_kind, up
 from api_macro_evidence import macro_evidence
 from api_macro_merge import keep_superseded_notes, merged_rows, retire_stale_rows, rtti_ids_by_class
 from api_macro_rows import GENERATOR, BuildResult, SpecialMember, special_row
-from api_macro_rtti_rows import MacroEvidence, exception_row, record_row, rtti_row
+from api_macro_rtti_rows import MacroEvidence, exception_row, record_row, rtti_base_row, rtti_row
 from api_macro_rust import RustInventoryIndex
 from api_macro_rust_source import RustSourceTree, TransientRegistration
 from api_macro_source import SourceTextReader, UNKNOWN, definition_form
@@ -121,6 +121,8 @@ def build_row(
     """Route one member to its builder; `build_row(member, evidence, sources)`."""
     if member.kind in RTTI_KINDS.values():
         return rtti_row(member, evidence)
+    if member.kind == "rtti_base":
+        return rtti_base_row(member, evidence)
     if member.kind.startswith("exception"):
         return exception_row(member, evidence)
     if member.kind == "record":
@@ -183,7 +185,7 @@ class MacroRowGenerator:
     def generate(self, declaration: JSONObject, kind: str, toolkit: str) -> None:
         form = definition_form(self.inputs.occt, declaration) if kind in FORM_KINDS else UNKNOWN
         cxx_class = declaration_owner(declaration) or str(declaration.get("qualified_name"))
-        rtti = kind in RTTI_KINDS.values()
+        rtti = kind in RTTI_KINDS.values() or kind == "rtti_base"
         resolve = self.resolver.descriptor_class if rtti else self.resolver.resolve
         rust_class = resolve(cxx_class, toolkit)
         member = SpecialMember(declaration, kind, form, toolkit, rust_class)
