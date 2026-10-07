@@ -142,7 +142,7 @@ fn location_law_queries(law: &dyn BRepFillLocationLaw, section: &Shape) {
 }
 
 /// The shape of the program at a table index.
-fn at(t: &TpShapes, index: i32) -> Result<Shape, Failure> {
+pub fn at(t: &TpShapes, index: i32) -> Result<Shape, Failure> {
     t.shapes
         .get(index as usize)
         .cloned()
@@ -150,7 +150,7 @@ fn at(t: &TpShapes, index: i32) -> Result<Shape, Failure> {
 }
 
 /// The law of a request; `None` (printed) for an EdgeOnSurfLaw without result.
-fn law_of(
+pub fn law_of(
     r: &mut Reader<'_>,
     t: &TpShapes,
     path: &Shape,

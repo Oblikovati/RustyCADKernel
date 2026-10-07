@@ -40,8 +40,9 @@ pub struct BRepFillLocationLawBase {
 
 impl BRepFillLocationLawBase {
     /// `Init(Path)`: one null law, one null edge and one unknown length per
-    /// non-degenerated edge of the path, the tolerance 1e-4 and the tangent mode.
-    pub(crate) fn new(path: &Wire) -> Result<Self, Failure> {
+    /// non-degenerated edge of the path, the tolerance 1e-4 and the tangent mode;
+    /// `let base = BRepFillLocationLawBase::new(&path)?;`.
+    pub fn new(path: &Wire) -> Result<Self, Failure> {
         let mut nb_edge: usize = 0;
         let mut explorer = WireExplorer::with_wire(path)?;
         while explorer.more() {

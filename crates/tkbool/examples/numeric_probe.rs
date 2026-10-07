@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 mod bl_probe;
 use bl_probe::{
     brep_fill_compatible, brep_fill_generator, brep_fill_location_law, brep_fill_package,
-    brep_fill_section, brep_fill_section_law,
+    brep_fill_section, brep_fill_section_law, brep_fill_sweep,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -15,7 +15,8 @@ type ProbeCase = fn(&[f64]);
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // BRepFill (bl_probe/brep_fill_generator.rs, bl_probe/brep_fill_package.rs,
     // bl_probe/brep_fill_compatible.rs, bl_probe/brep_fill_section_law.rs,
-    // bl_probe/brep_fill_location_law.rs, bl_probe/brep_fill_section.rs)
+    // bl_probe/brep_fill_location_law.rs, bl_probe/brep_fill_section.rs,
+    // bl_probe/brep_fill_sweep.rs)
     ("bf_generator", brep_fill_generator::generator_case),
     ("bf_face", brep_fill_package::face_case),
     ("bf_shell", brep_fill_package::shell_case),
@@ -32,6 +33,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "bf_section_placement",
         brep_fill_section::section_placement_case,
     ),
+    ("bf_sweep", brep_fill_sweep::sweep_case),
 ];
 
 fn main() {

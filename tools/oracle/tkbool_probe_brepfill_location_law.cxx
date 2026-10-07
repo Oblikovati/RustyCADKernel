@@ -42,27 +42,33 @@ void bl_location_law_queries(const occ::handle<BRepFill_LocationLaw>& law,const 
  GA_TRY(law->TransformInG0Law();TopoDS_Shape s=section;law->D0(0.25*total,s);pr_shape(s))
  GA_TRY(law->TransformInCompatibleLaw(0.1);TopoDS_Shape s=section;law->D0(0.25*total,s);pr_shape(s))
  GA_TRY(law->DeleteTransform();TopoDS_Shape s=section;law->D0(0.25*total,s);pr_shape(s))}
-// `program path section kind ...`: kind 0 `trihedron` (Edge3DLaw on a
+// The location law of a request: kind 0 `trihedron` (Edge3DLaw on a
 // GeomFill_CurveAndTrihedron: 0 corrected Frenet, 1 Frenet, 2 constant binormal +Z),
 // 1 `D angle` (DraftLaw on a GeomFill_LocationDraft, then CleanLaw(0.1)), 2 `support`
-// (EdgeOnSurfLaw on a shape, printing HasResult), 3 `guide` (ACRLaw on a GeomFill_LocationGuide
-// of a GeomFill_GuideTrihedronAC along the BRepAdaptor_CompCurve of a guide wire).
+// (EdgeOnSurfLaw on a shape, printing HasResult; null without result), 3 `guide` (ACRLaw
+// on a GeomFill_LocationGuide of a GeomFill_GuideTrihedronAC along the
+// BRepAdaptor_CompCurve of a guide wire).
+occ::handle<BRepFill_LocationLaw> bl_location_law_of(GaReader& r,const TpShapes& t,const TopoDS_Wire& path){
+ int kind=r.integer();
+ if(kind==0){int k=r.integer();occ::handle<GeomFill_TrihedronLaw> tri;
+  if(k==0)tri=new GeomFill_CorrectedFrenet();else if(k==1)tri=new GeomFill_Frenet();else tri=new GeomFill_ConstantBiNormal(gp_Dir(0,0,1));
+  return new BRepFill_Edge3DLaw(path,new GeomFill_CurveAndTrihedron(tri));}
+ if(kind==1){gp_Dir d=r.dir();double a=r.real();
+  occ::handle<BRepFill_DraftLaw> dl=new BRepFill_DraftLaw(path,new GeomFill_LocationDraft(d,a));dl->CleanLaw(0.1);return dl;}
+ if(kind==3){occ::handle<Adaptor3d_Curve> guide=new BRepAdaptor_CompCurve(TopoDS::Wire(t.shapes.at(r.integer())));
+  occ::handle<GeomFill_LocationGuide> lg=new GeomFill_LocationGuide(new GeomFill_GuideTrihedronAC(guide));
+  return new BRepFill_ACRLaw(path,lg);}
+ occ::handle<BRepFill_EdgeOnSurfLaw> sl=new BRepFill_EdgeOnSurfLaw(path,t.shapes.at(r.integer()));
+ ga_flag(sl->HasResult());
+ if(!sl->HasResult())return occ::handle<BRepFill_LocationLaw>();
+ return sl;}
+// `program path section law...`: the queries of the location law (bl_location_law_of).
 void bl_bf_location_law_case(std::istream& input){
  GaReader r{input};TpShapes t;
  try{t=tp_shapes(r);}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';ga_end();return;}
  TopoDS_Wire path=TopoDS::Wire(t.shapes.at(r.integer()));TopoDS_Shape section=t.shapes.at(r.integer());
- int kind=r.integer();occ::handle<BRepFill_LocationLaw> law;
- try{
-  if(kind==0){int k=r.integer();occ::handle<GeomFill_TrihedronLaw> tri;
-   if(k==0)tri=new GeomFill_CorrectedFrenet();else if(k==1)tri=new GeomFill_Frenet();else tri=new GeomFill_ConstantBiNormal(gp_Dir(0,0,1));
-   law=new BRepFill_Edge3DLaw(path,new GeomFill_CurveAndTrihedron(tri));}
-  else if(kind==1){gp_Dir d=r.dir();double a=r.real();
-   occ::handle<BRepFill_DraftLaw> dl=new BRepFill_DraftLaw(path,new GeomFill_LocationDraft(d,a));dl->CleanLaw(0.1);law=dl;}
-  else if(kind==3){occ::handle<Adaptor3d_Curve> guide=new BRepAdaptor_CompCurve(TopoDS::Wire(t.shapes.at(r.integer())));
-   occ::handle<GeomFill_LocationGuide> lg=new GeomFill_LocationGuide(new GeomFill_GuideTrihedronAC(guide));
-   law=new BRepFill_ACRLaw(path,lg);}
-  else{occ::handle<BRepFill_EdgeOnSurfLaw> sl=new BRepFill_EdgeOnSurfLaw(path,t.shapes.at(r.integer()));
-   ga_flag(sl->HasResult());law=sl;if(!sl->HasResult()){ga_end();return;}}}
+ occ::handle<BRepFill_LocationLaw> law;
+ try{law=bl_location_law_of(r,t,path);}
  catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';ga_end();return;}
- bl_location_law_queries(law,section);
+ if(!law.IsNull())bl_location_law_queries(law,section);
  ga_end();}

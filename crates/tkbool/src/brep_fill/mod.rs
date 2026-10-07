@@ -6,8 +6,11 @@ mod package;
 mod section;
 mod section_law;
 mod section_placement;
+mod shape_table;
+mod sweep;
 mod thru_section_error_status;
 mod transition_style;
+mod trim_shell_corner;
 
 pub use compatible_wires::BRepFillCompatibleWires;
 pub use generator::{BRepFillGenerator, GeneratedFaces};
@@ -21,5 +24,7 @@ pub use section_law::{
     BRepFillNSections, BRepFillSectionLaw, BRepFillSectionLawBase, BRepFillShapeLaw,
 };
 pub use section_placement::BRepFillSectionPlacement;
+pub use sweep::{BRepFillSweep, SweepBuildOptions, SweepHistory, SweepTablesMap};
 pub use thru_section_error_status::ThruSectionErrorStatus;
 pub use transition_style::{TransitionStyle, TypeOfContact};
+pub use trim_shell_corner::BRepFillTrimShellCorner;

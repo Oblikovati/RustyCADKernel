@@ -5,6 +5,7 @@ pub mod brep_fill_location_law;
 pub mod brep_fill_package;
 pub mod brep_fill_section;
 pub mod brep_fill_section_law;
+pub mod brep_fill_sweep;
 
 // The reader and bit printers of the TKGeomAlgo probe, the shape digest of the TKTopAlgo
 // probe and the face frames of the TKPrim probe, shared so that every toolkit prints the

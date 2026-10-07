@@ -430540,6 +430540,254 @@
       "notes": "Translated from BRepFill_Section.cxx/.lxx and BRepFill_SectionPlacement.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_section, bf_section_placement requests)."
     },
     {
+      "upstream_id": "BRepFill_TrimShellCorner::BRepFill_TrimShellCorner(const occ::handle<NCollection_HArray2<TopoDS_Shape>>&,BRepFill_TransitionStyle,const gp_Ax2&,const gp_Vec&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::AddBounds(const occ::handle<NCollection_HArray2<TopoDS_Shape>>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::add_bounds",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::AddUEdges(const occ::handle<NCollection_HArray2<TopoDS_Shape>>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::add_u_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::AddVEdges(const occ::handle<NCollection_HArray2<TopoDS_Shape>>&,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::add_v_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::Perform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::HasSection() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::has_section",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner::Modified(const TopoDS_Shape&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner::modified",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_TrimShellCorner.cxx with the native operation order (the pave filler of the two shells, the split u-edges, the section chains found from the u-edges then along the bound edge by pairs and continuously); exercised and compared with OCCT through the right and round corners of the sweep by tools/verify_tkbool_numeric.py (bf_sweep requests). Native quirks kept: HasSection is never raised; the common vertices of the u-edges are the last edge/edge interference examined even when its direction test fails; the face history keys the face as given, the result of ReShape::Apply is dropped; Modified copies the history list. Handle tables are copied on input; output lists are returned."
+    },
+    {
+      "upstream_id": "BRepFill_TrimShellCorner",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TrimShellCorner.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillTrimShellCorner",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillTrimShellCorner; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::BRepFill_Sweep(const occ::handle<BRepFill_SectionLaw>&,const occ::handle<BRepFill_LocationLaw>&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::SetBounds(const TopoDS_Wire&,const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::set_bounds",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::SetTolerance(double,double,double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::set_tolerance",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::SetAngularControl(double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::set_angular_control",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::SetForceApproxC1(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::set_force_approx_c1",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::Build(NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,occ::handle<NCollection_HArray2<TopoDS_Shape>>,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,occ::handle<NCollection_HArray2<TopoDS_Shape>>,TopTools_ShapeMapHasher>&,BRepFill_TransitionStyle,GeomAbs_Shape,GeomFill_ApproxStyle,int,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::build",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::ErrorOnSurface() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::error_on_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::SubShape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::sub_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::InterFaces() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::inter_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::Sections() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::sections",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::Tape(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::tape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::CorrectApproxParameters()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::correct_approx_parameters",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::BuildWire(BRepFill_TransitionStyle)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::build_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::BuildShell(BRepFill_TransitionStyle,int,int,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,occ::handle<NCollection_HArray2<TopoDS_Shape>>,TopTools_ShapeMapHasher>&,NCollection_DataMap<TopoDS_Shape,occ::handle<NCollection_HArray2<TopoDS_Shape>>,TopTools_ShapeMapHasher>&,double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::build_shell",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::PerformCorner(int,BRepFill_TransitionStyle,const occ::handle<NCollection_HArray2<TopoDS_Shape>>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::perform_corner",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::EvalExtrapol(int,BRepFill_TransitionStyle) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::eval_extrapol",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::MergeVertex(const TopoDS_Shape&,TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::merge_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::UpdateVertex(int,int,double,double,TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::update_vertex",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep::RebuildTopOrBottomEdge(const TopoDS_Edge&,TopoDS_Edge&,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep::rebuild_top_or_bottom_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Sweep.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_sweep requests). The face, u-edge and v-edge tables are owned by the sweep and handed out as new handles; the reversed edges, tapes and rails of Build are passed as a SweepHistory and the trailing Build arguments as SweepBuildOptions (native defaults). Native quirks kept: BuildWire puts the first bound at column NbPath when there is a last bound; PerformCorner reads the second tangent placement at the last parameter, and passes the unmodified transition to the trimming; the modified v-edges are substituted in the hash order of their TShape addresses."
+    },
+    {
+      "upstream_id": "BRepFill_Sweep",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Sweep.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillSweep",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillSweep; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
