@@ -117,6 +117,20 @@ class. `IFSelect_WorkSession` and `XSControl_WorkSession` keep their native item
 `IFSelect_Act`, the `*_Functions` packages) reads commands as text and writes plain text
 to a `std::io::Write`, as the native `std::cout` output.
 
+The work session details:
+
+- The items are a vector of (item, attribute) pairs in ident order (the native indexed
+  map); the names are the TKernel `DataMap`, so `ItemNames` keeps the native order.
+- `ClearData` is the only virtual member: `IFSelectWorkSessionOps::clear_data`. A
+  derived session (`XSControl_WorkSession`) embeds `IFSelectWorkSession` and calls
+  `bind_self` with its handle, so that `SetModel` and `ClearData(1)` call the override.
+- The native static `errhand` is a process-wide flag. A guarded call (native `try`
+  around the call with `errhand` cleared) reports the error and gives an empty result
+  when the errors are handled, else returns the error. The native defect of the
+  sending calls is kept: after a successful guarded sending, `errhand` stays cleared.
+- The editors and the edit forms are built as handles (the editor receives its form as
+  `this`): `IFSelectEditorBase::bind_self` records the handle of an editor.
+
 XSAlgo (the shape processing) needs two items from outside TKXSBase:
 
 - `DE_ShapeFixParameters` is a TKDE header that TKXSBase includes without linking TKDE

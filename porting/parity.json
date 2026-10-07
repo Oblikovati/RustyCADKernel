@@ -103177,6 +103177,1342 @@
       "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null); const char* results are AsciiString copies; native exceptions and null dereferences are Failure errors."
     },
     {
+      "upstream_id": "IFSelect_WorkSession::IFSelect_WorkSession",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::new",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_error_handle",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ErrorHandle",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::error_handle",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ShareOut",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::share_out",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetShareOut",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_share_out",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetModeStat",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_mode_stat",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GetModeStat",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::get_mode_stat",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetLibrary",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_library",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::WorkLibrary",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::work_library",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetProtocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_protocol",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Protocol",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::protocol",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetSignType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_sign_type",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SignType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sign_type",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::HasModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::has_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Standard_NullObject for a null model."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetLoadedFile",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_loaded_file",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::LoadedFile",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::loaded_file",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ReadFile",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::read_file",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The errors of the library are reported as a failure."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ReadStream",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::read_stream",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NbStartingEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::nb_starting_entities",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::StartingEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::starting_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::StartingNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::starting_number",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NumberFromLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::number_from_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EntityLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::entity_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EntityName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::entity_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::CategoryNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::category_number",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::CategoryName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::category_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ValidityName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::validity_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ClearData",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSessionOps::clear_data",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The virtual member is on IFSelectWorkSessionOps; clear_data_base is the native body. Native defect kept: mode 4 also clears all the items."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ComputeGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::compute_graph",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::HGraph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::h_graph",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Graph",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::graph",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The graph is read through the returned HGraph; Standard_DomainError when not available."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Shareds",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::shareds",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Sharings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sharings",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::IsLoaded",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::is_loaded",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ComputeCheck",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::compute_check",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ModelCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::model_check_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::CheckOne",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::check_one",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::LastRunCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::last_run_check_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::MaxIdent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::max_ident",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Item",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ItemIdent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item_ident",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NamedItem(const char* const) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::named_item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NamedItem(const occ::handle<TCollection_HAsciiString>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::named_item_h",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NameIdent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::name_ident",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::HasName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::has_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::AddItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::add_item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::AddNamedItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::add_named_item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetActive",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_active",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::RemoveNamedItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::remove_named_item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::RemoveName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::remove_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native quirk kept: the item keeps its name as attribute."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::RemoveItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::remove_item",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ClearItems",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::clear_items",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ItemLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ItemIdents",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item_idents",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The type is a RuntimeType; the result is a Vec."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ItemNames",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item_names",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ItemNamesForLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item_names_for_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native quirk kept: the labels are listed, not the names."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NextIdentForLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::next_ident_for_label",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NewParamFromStatic",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::new_param_from_static",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::IntParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::int_param",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::IntValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::int_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NewIntParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::new_int_param",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetIntValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_int_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::TextParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::text_param",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::TextValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::text_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NewTextParam",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::new_text_param",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetTextValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_text_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Signature",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::signature",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SignValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sign_value",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Selection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EvalSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::eval_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. A guarded call (errhand): an error is reported and gives an empty result."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Sources",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sources",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SelectionResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::selection_result",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. A guarded call (errhand)."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SelectionResultFromList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::selection_result_from_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetItemSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_item_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ResetItemSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::reset_item_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ItemSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::item_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SignCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sign_counter",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ComputeCounter",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::compute_counter",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ComputeCounterFromList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::compute_counter_from_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::AppliedDispatches",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::applied_dispatches",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ClearShareOut",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::clear_share_out",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Dispatch",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::dispatch",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::DispatchRank",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::dispatch_rank",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ModelCopier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::model_copier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetModelCopier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_model_copier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NbFinalModifiers",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::nb_final_modifiers",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::FinalModifierIdents",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::final_modifier_idents",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GeneralModifier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::general_modifier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ModelModifier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::model_modifier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ModifierRank",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::modifier_rank",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ChangeModifierRank",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::change_modifier_rank",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ClearFinalModifiers",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::clear_final_modifiers",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetAppliedModifier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_applied_modifier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ResetAppliedModifier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::reset_applied_modifier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::UsesAppliedModifier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::uses_applied_modifier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Transformer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::transformer",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::RunTransformer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::run_transformer",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::RunModifier",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::run_modifier",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::RunModifierSelected",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::run_modifier_selected",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NewTransformStandard",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::new_transform_standard",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetModelContent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_model_content",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::FilePrefix",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::file_prefix",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::DefaultFileRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::default_file_root",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::FileExtension",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::file_extension",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::FileRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::file_root",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetFilePrefix",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_file_prefix",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetDefaultFileRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_default_file_root",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetFileExtension",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_file_extension",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetFileRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_file_root",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveFileRoot",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_file_root",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveFileComplete",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_file_complete",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ClearFile",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::clear_file",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EvaluateFile",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::evaluate_file",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native quirk kept: when the errors are handled, the last run checks are then replaced by empty checks."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NbFiles",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::nb_files",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::FileModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::file_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::FileName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::file_name",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::BeginSentFiles",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::begin_sent_files",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SentFiles",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sent_files",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SendSplit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::send_split",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native defect kept: a successful guarded sending leaves the errors unhandled for the next calls."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EvalSplit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::eval_split",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SentList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::sent_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::MaxSendingCount",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::max_sending_count",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetRemaining",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_remaining",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SendAll(const char* const,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::send_all",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native quirks kept: a main fail stops without recording the checks; a successful guarded sending leaves the errors unhandled."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SendAll(Standard_OStream&,const char* const,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::send_all_stream",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SendSelected",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::send_selected",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native defect kept: a successful guarded sending leaves the errors unhandled for the next calls."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::WriteFile(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::write_file",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::WriteFile(const char* const,const occ::handle<IFSelect_Selection>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::write_file_selected",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::WriteStream",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::write_stream",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NbSources",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::nb_sources",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::Source",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::source",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::IsReversedSelectExtract",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::is_reversed_select_extract",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ToggleSelectExtract",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::toggle_select_extract",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetInputSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_input_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetControl",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_control",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::CombineAdd",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::combine_add",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::CombineRemove",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::combine_remove",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::NewSelectPointed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::new_select_pointed",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetSelectPointed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_select_pointed",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveList(const occ::handle<Standard_Transient>&) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. A native list object has no counterpart (lists are values)."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveList(const char* const,const char* const) const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_list_texts",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveListFromList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_list_from_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::GiveListCombined",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::give_list_combined",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native defect kept: the result list is never allocated, so two lists raise Standard_NullObject."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::QueryCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::query_check_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native defects kept: nothing is propagated (the sharing list is empty), and a global check raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::QueryCheckStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::query_check_status",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::QueryParent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::query_parent",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::SetParams",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::set_params",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. Native quirks kept: the forms take the 0-based ranks as value numbers, and the loading form stays empty."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::TraceStatics",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::trace_statics",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::DumpShare",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::dump_share",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ListItems",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::list_items",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ListFinalModifiers",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::list_final_modifiers",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::DumpSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::dump_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::DumpModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::dump_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors. The unreachable native branch of the levels 3 and 4 is not ported."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::TraceDumpModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::trace_dump_model",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::DumpEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::dump_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::PrintEntityStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::print_entity_status",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::TraceDumpEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::trace_dump_entity",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::PrintCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::print_check_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::PrintSignatureList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::print_signature_list",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EvaluateSelection",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::evaluate_selection",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EvaluateDispatch",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::evaluate_dispatch",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::EvaluateComplete",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::evaluate_complete",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "IFSelect_WorkSession::ListEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.hxx",
+      "rust_item": "rustycad_tkxsbase::if_select::IFSelectWorkSession::list_entities",
+      "status": "implemented",
+      "notes": "IFSelect mapping (docs/xsbase-design.md section 4): output arguments are returned; HSequence arguments are slices (None for null) and results Option<Vec>; const char* results are AsciiString or String copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",

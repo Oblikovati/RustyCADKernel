@@ -55,6 +55,7 @@ mod transform_standard;
 #[cfg(test)]
 mod transform_tests;
 mod work_library;
+mod work_session;
 
 pub use context_modif::IFSelectContextModif;
 pub use context_write::IFSelectContextWrite;
@@ -128,3 +129,4 @@ pub use signatures::{
 };
 pub use transform_standard::IFSelectTransformStandard;
 pub use work_library::{IFSelectWorkLibrary, IFSelectWorkLibraryBase};
+pub use work_session::{IFSelectTransientList, IFSelectWorkSession, IFSelectWorkSessionOps};
