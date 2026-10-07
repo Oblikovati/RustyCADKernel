@@ -183,6 +183,8 @@ pub use base_storage::{BaseSequence, BaseSequenceRawIterator, DelSeqNode};
 #[allow(unsafe_code)]
 mod assignment;
 mod borrowed;
+mod copy_assignment;
+mod copy_construction;
 mod cursor_contracts;
 #[allow(unsafe_code)]
 mod editing;

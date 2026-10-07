@@ -10,11 +10,12 @@
       "late-default",
       "late-fill"
     ],
-    "observed_gap": "Unpublished tail, copy/fill constructor ownership, and growth relocation-constructor failure now have bounded receipts. Remaining old-range destructor exceptions in growth and shrink/Clear can create native dead registered slots; these remain actionable separately. Historical receipts describe their archived implementations.",
+    "observed_gap": "Unpublished tails, constructor ownership and growth relocation failures have bounded receipts. Original-slot growth destructor failures and explicit reconstruction now have an opt-in ownership-token adapter with no safe dead-slot access; ordinary safe reserve intentionally retains Rust cleanup. Shrink/Clear and remaining alias/placement/allocator domains remain subsequent slices.",
     "implementation_receipt": "porting/audits/linear-vector-native-tail-methods.json",
     "copy_constructor_receipt": "porting/audits/linear-vector-copy-constructor-methods.json",
     "fill_constructor_receipt": "porting/audits/linear-vector-fill-constructor-methods.json",
-    "growth_ownership_receipt": "porting/audits/linear-vector-growth-ownership-methods.json"
+    "growth_ownership_receipt": "porting/audits/linear-vector-growth-ownership-methods.json",
+    "growth_destruction_token_receipt": "porting/audits/linear-vector-growth-destruction-methods.json"
   },
   "next_slice": {
     "name": "Preserve initialized spare slots on native tail-constructor failure",
@@ -51,12 +52,12 @@
   ],
   "subsequent_slices": [
     {
-      "name": "Growth old-range destruction exception ownership",
+      "name": "Growth remaining placement/alias/allocation domains",
       "native_methods": [
         "NCollection_LinearVector::grow"
       ],
-      "gap": "Replacement relocation-constructor failure now retains native allocation and completed values. After successful relocation, an old-range destructor exception can leave dead registered source slots and a completed untransferred replacement. Rust Vec assignment cleanup differs from that native state.",
-      "design": "Extend the separately reviewed raw lifetime/destructor policy to grow destruction and storage transfer, tracking dead old slots plus completed replacement ownership without creating safe references to invalid values. Native callback-throw prefixes must precede any explicit test-only repair. Do not mark the whole grow method complete from relocation-constructor coverage."
+      "gap": "An opt-in consuming token preserves defined native destructor-failure prefixes and explicit repair while preventing safe access/drop of holes. Current safe reserve remains a distinct Rust cleanup policy. Full method parity still requires address-dependent constructors, callback-time receiver aliases, allocation hooks/OOM and ABI domains.",
+      "design": "Keep exact native Reserve/grow bindings partial. Audit each remaining callable domain independently; the token must not gain safe references to interrupted elements or implicit replacement cleanup. Reuse its raw ownership primitive for shrink/Clear only after their distinct publication order is proven."
     },
     {
       "name": "Destructive shrink exceptions",
@@ -87,6 +88,11 @@
       "name": "Growth relocation-constructor allocation ownership",
       "receipt": "porting/audits/linear-vector-growth-ownership-methods.json",
       "capacity": "Native nextCapacity of the existing receiver; old registered storage publishes no replacement until relocation returns. Failed copies/moves retain raw allocation and completed replacement prefix; move source mutations persist. Old-range destructor exceptions remain pending."
+    },
+    {
+      "name": "Growth original-slot destructor ownership token",
+      "receipt": "porting/audits/linear-vector-growth-destruction-methods.json",
+      "capacity": "Preserve source Size/Capacity/Data on destructor failure; full replacement remains abandoned. Interrupted original storage is MaybeUninit with precise hole and repair boundaries. Checked extraction is blocked until all original slots are reconstructed."
     }
   ]
 }

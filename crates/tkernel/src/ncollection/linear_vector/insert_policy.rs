@@ -13,7 +13,7 @@ impl<T> LinearVector<T> {
     /// must leave its source valid even on unwind; captured donors cannot alias receiver slots.
     /// Unless destructive callbacks are proven non-panicking, enclose the receiver in
     /// ManuallyDrop before this call, including during propagation to a catch boundary.
-    /// If shifting source `s` fails, [0,s] stays live (possibly modified), slot s+1 is dead,
+    /// If shifting source `s` fails, `[0,s]` stays live (possibly modified), slot s+1 is dead,
     /// and [s+2,old Size] is live. If the final constructor fails, [0,index) and
     /// [index+1,old Size] are live and index is dead. Empty ranges contain no live values.
     /// Thus a failure before any successful shift has no live unpublished tail; inserting at

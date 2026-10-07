@@ -254,3 +254,26 @@ def expected_public_paths() -> tuple[str, ...]:
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class InventoryOutputEncodingTest(unittest.TestCase):
+    """The output suffix decides the encoding that readers expect."""
+
+    def test_gz_suffix_writes_deterministic_gzip(self) -> None:
+        import gzip
+        from normalize_rustdoc_inventory import write_inventory_text
+
+        with tempfile.TemporaryDirectory() as folder:
+            first, second = Path(folder, "a.json.gz"), Path(folder, "b.json.gz")
+            write_inventory_text(first, "{}\n")
+            write_inventory_text(second, "{}\n")
+            self.assertEqual(gzip.decompress(first.read_bytes()), b"{}\n")
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+
+    def test_plain_suffix_writes_text(self) -> None:
+        from normalize_rustdoc_inventory import write_inventory_text
+
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder, "inventory.json")
+            write_inventory_text(target, "{}\n")
+            self.assertEqual(target.read_text(encoding="utf-8"), "{}\n")

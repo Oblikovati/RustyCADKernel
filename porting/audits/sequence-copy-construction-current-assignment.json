@@ -1,0 +1,26 @@
+{
+  "schema": "rustycad.sequence-copy-construction-current-assignment.v1",
+  "status": "partial_current_body_proof",
+  "scope": "Superseding current source/body proof for both constructors after assignment refactor. Historical constructor receipt remains byte-identical; no constructor behavior promotion.",
+  "historical_receipt": "porting/audits/hsequence-copy-construction.json",
+  "historical_receipt_sha256": "47587df639dfcfcc46fa2f939002e31a0376f3277b3e9fc89742e78303fe2270",
+  "current_primary_receipt": "porting/audits/sequence-assignment-policy.json",
+  "current_primary_receipt_sha256": "fc75cbfcaeb7abe8979dbcb6404d5780c4f6d8000dd4c4dd8c4da1baca2d6458",
+  "bindings_path": "porting/runtime-evidence/sequence-assignment-policy-constructor-bindings.json.gz",
+  "bindings_sha256": "afec9f69e5708e3620628023b9811e889206ce146368412a28c45fe82f14a153",
+  "preserved_bodies_path": "porting/runtime-evidence/sequence-assignment-policy-constructor-preserved.json.gz",
+  "preserved_bodies_sha256": "3a1d766122aa62ac08ff8a602e6b07a7836698f45f45c1b614ff32a0fb0fd44a",
+  "native_ids": [
+    "0fdc7d1765ad406be5253a7c95806ce13355414716eff14512da45af26a5c095",
+    "b68e5aaca70428ecd6149f219ee7934f927b5084a9fce2e0b3dbb26e51e77393"
+  ],
+  "public_body_bindings": 4,
+  "partial_status_unchanged": true,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sequence/operations.rs": "3965ae744023283bf022c0d8ca062971130b1ef72dd75195e369b5fe3d7c3aeb",
+    "crates/tkernel/src/ncollection/sequence/copy_construction.rs": "6c1497d29c679a895561ad17660eae3f7d4bb18dfe9eb70fcdd2b8d2d8bbebe2",
+    "crates/tkernel/src/ncollection/h_sequence/copy_construction.rs": "d521de9946841d9a8e307cadd737c9ecd0da29934c3b3ce162fe141cfda1f3ab"
+  },
+  "replay_command": "gzip -dc porting/runtime-evidence/sequence-assignment-policy-replay.py.gz > /tmp/replay-sequence-assignment-policy.py && python3 /tmp/replay-sequence-assignment-policy.py \"$PWD\"",
+  "current_proof_checks": "Combined replay verifies both exact native constructor IDs, signatures, selectors, current bodies and ledger rows. An explicit negative test corrupts ordinary Clone source hash and must fail; all prior20 native rows and7 constructor tests remain green."
+}
