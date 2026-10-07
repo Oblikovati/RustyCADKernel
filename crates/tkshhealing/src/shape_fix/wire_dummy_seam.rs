@@ -69,7 +69,7 @@ impl ShapeFixWire {
         following: i32,
         count: i32,
     ) -> Result<(), Failure> {
-        let previous = if index == 1 { count } else { index - 1 };
+        let previous = if index > 1 { index - 1 } else { count };
         let next = if following == count { 1 } else { following + 1 };
         let previous_edge = wire_data.edge(previous)?;
         let next_edge = wire_data.edge(next)?;
