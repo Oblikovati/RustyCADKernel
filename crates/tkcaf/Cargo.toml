@@ -1,0 +1,25 @@
+[package]
+name = "rustycad-tkcaf"
+description = "OCCT TKCAF toolkit: topological naming (TNaming), the extended attributes (TDataXtd) and the standard application (AppStd)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
+# TNaming::OuterWire classifies wires with IntTools_FClass2d (TKBO).
+rustycad-tkbo = { path = "../tkbo" }
+rustycad-tkcdf = { path = "../tkcdf" }
+rustycad-tklcaf = { path = "../tklcaf" }
+
+[dev-dependencies]
+rustycad-tkprim = { path = "../tkprim" }

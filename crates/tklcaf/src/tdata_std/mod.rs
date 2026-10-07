@@ -22,7 +22,7 @@ mod named_data_category;
 mod package;
 mod real;
 mod reference_array;
-pub(crate) mod support;
+pub mod support;
 mod tree_node;
 mod tree_node_attribute;
 mod u_attribute;

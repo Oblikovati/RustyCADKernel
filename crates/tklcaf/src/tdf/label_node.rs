@@ -188,6 +188,10 @@ impl TdfLabelNode {
             child = node.state.write().brother.take();
             node.destroy();
         }
-        *self.state.write() = NodeState::default();
+        // The old state (and its attribute list) drops after the lock is released: an
+        // attribute destructor may read this node (`~TNaming_NamedShape` calls `Clear`,
+        // which walks to the root), and it must then see the reset node.
+        let released = std::mem::take(&mut *self.state.write());
+        drop(released);
     }
 }

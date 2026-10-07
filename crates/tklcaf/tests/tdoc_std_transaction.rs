@@ -1,8 +1,9 @@
 //! 1:1 translation of src/ApplicationFramework/TKLCAF/GTests/TDocStd_Transaction_Test.cxx.
 //!
 //! The cases on TDataXtd attributes, TNaming named shapes and BRepPrimAPI boxes
-//! (CafBug_2932_3, _5, _8, _12, _13, _14, _18 and _24) need TKCAF and TKPrim; the ledger
-//! marks them `pending_dependency`.
+//! (CafBug_2932_3, _5, _8, _12, _13, _14, _18 and _24) need TKCAF and TKPrim: their
+//! translations are in crates/tkcaf/tests/lcaf_tdoc_std_transaction.rs (the ledger marks
+//! the ones that still wait for a TDataXtd class `pending_dependency`).
 #![allow(non_snake_case)]
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::tcollection::{AsciiString, ExtendedString};

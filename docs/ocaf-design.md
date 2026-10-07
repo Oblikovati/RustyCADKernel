@@ -1,9 +1,10 @@
-# OCAF design notes (TKCDF, TKLCAF)
+# OCAF design notes (TKCDF, TKLCAF, TKCAF)
 
-This note fixes how the OCAF base toolkits map to Rust: TKCDF (`crates/tkcdf`,
+This note fixes how the OCAF toolkits map to Rust: TKCDF (`crates/tkcdf`,
 `rustycad-tkcdf`: packages CDM, PCDM, CDF, LDOM) and TKLCAF (`crates/tklcaf`,
-`rustycad-tklcaf`: packages TDF, TDataStd, TFunction, TDocStd). Both depend only on
-TKernel. The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
+`rustycad-tklcaf`: packages TDF, TDataStd, TFunction, TDocStd), which depend only on
+TKernel, and TKCAF (`crates/tkcaf`, `rustycad-tkcaf`: packages TNaming, TDataXtd, AppStd),
+which adds the modeling toolkits (sections 10 and 11). The rules of [geom-design.md](geom-design.md) sections 1 to 4 (abstract class as
 trait, `Handle<dyn Trait>`, `SharedState`, exceptions as `Failure`) apply; this note covers
 what they do not. Code comments and ledger notes cite it as "ocaf-design.md section N".
 
@@ -219,3 +220,93 @@ other code (the QABugs DRAW commands) parses XML with it.
   record `>` after a CDATA section and the attribute search of `getAttributeNode` that
   starts after the first attribute; `tests/ldom_native_oracle.rs` compares the port with
   the output of a native program.
+
+## 10. TNaming: the evolution graph
+
+TNaming records how shapes evolve. A `TNaming_NamedShape` holds a list of `TNaming_Node`s,
+one per (old shape, new shape) pair; the root attribute `TNaming_UsedShapes` maps each
+shape (`TopTools_ShapeMapHasher`, so orientation is ignored) to a `TNaming_RefShape`, the
+head of the chain of nodes that use that shape. Natively all of this is raw pointers with
+explicit `new`/`delete`.
+
+- **Nodes and ref shapes** are `Arc<TNamingNode>` and `Arc<TNamingRefShape>` with their
+  fields in one `SharedState`; a native pointer is `Option<Arc<_>>` (`TNamingNodePtr`,
+  `TNamingRefShapePtr`) and pointer equality is `Arc::ptr_eq` (two null pointers are
+  equal, as natively). The chain links (`nextSameAttribute`, `nextSameOld`,
+  `nextSameNew`, `myOld`, `myNew`, `FirstUse`) are strong, so a walk never meets a freed
+  node. The native `delete` of a ref shape is `release`, which drops its first use (a ref
+  shape's first use points back to it); the `delete` of a node drops its links to the other
+  nodes of the shape chains, which breaks the remaining cycles, and keeps its shapes,
+  attribute and attribute link readable. Natively an iterator that stands on a deleted node
+  reads freed memory (`TNaming::Transform` iterates a label while its builder clears the
+  named shape, which is safe only when the builder backs it up, in a later transaction);
+  the port reads what `RemoveNode` left in the node instead. `myAtt` is a
+  `WeakHandle<TNamingNamedShape>`: `BackupCopy` and `Restore` move the nodes from one
+  attribute to the other and re-point it, as natively.
+- **Clear on destruction.** `~TNaming_NamedShape` calls `Clear`, which unlinks the nodes
+  from the shape chains through the root's map. The Rust `Drop` does the same. An attribute
+  with a null label (a removed attribute, a backup after `RemoveBackup`, a label freed by
+  `TDF_Data::Destroy`) is left alone, as natively. `TDF_LabelNode::Destroy` therefore drops
+  the old node state after releasing the node's lock, so that the destructor sees the reset
+  node instead of deadlocking on it.
+- **The map** is a `DataMap<Shape, Arc<TNamingRefShape>, ShapeMapHasher>` in the
+  attribute's `SharedState`; `Map()` returns its write guard, which a caller drops before it
+  calls back into the framework. Native quirks kept: `Delete` binds a new null-shape ref
+  shape each time (the previous one stays reachable from its nodes only), and `RemoveNode`
+  unbinds the key of the shape, whichever ref shape is bound to it.
+- **Iterators.** `TNaming_Iterator`, `TNaming_NewShapeIterator`, `TNaming_OldShapeIterator`
+  and `TNaming_SameShapeIterator` keep the current node. The constructors from a label whose
+  root has no `TNaming_UsedShapes` leave the native iterator uninitialized; the port starts
+  at the end. The copy constructors of the new- and old-shape iterators descend (or ascend)
+  to the evolutions of the current shape; they are `from_new_shape_iterator` and
+  `from_old_shape_iterator`, and the structs do not implement `Clone`. `Next` and the
+  accessors at the end are `Standard_NoMoreObject`/`Standard_NoSuchObject` errors (some are
+  crashes natively), and a node whose attribute is gone is `Standard_NullObject`.
+- **Overloads.** `TNaming_Builder::Generated(new)` is `generated`, `Generated(old, new)` is
+  `generated_from`; the iterator constructors are `new` (a named shape), `from_label`,
+  `from_label_in_transaction`, `from_used_shapes`, `from_used_shapes_in_transaction` and
+  `from_iterator`. `TNaming_NamedShape::Get` is an inherent method that a `Handle` hides
+  (`Handle::get`); call it as `TNamingNamedShape::get(&named)`.
+- **DumpJson** of a node or a ref shape with a negative depth recurses without end natively
+  (a ref shape's first use points back to it) and overflows the stack; the port returns an
+  error for a graph link dumped at a negative depth.
+- **TNaming_Name** is a value (`Clone`); `TNaming_Naming::GetName` returns a copy and
+  `ChangeName` the write guard of the name. The native constructor leaves the shape type and
+  the orientation uninitialized; the OCCT allocator clears memory, so they read
+  `TopAbs_COMPOUND` and `TopAbs_FORWARD`, which the port uses.
+
+## 11. TDataXtd: the extended attributes
+
+- **Construction attributes.** `TDataXtd_Point`, `Axis`, `Plane`, `Placement` and `Shape`
+  derive from `TDataStd_GenericEmpty` and are declared with the
+  `rustycad_tklcaf::tdata_std_empty_attribute!` macro. Their geometry is the
+  `TNaming_NamedShape` of their label; `TDataXtd_Geometry` reads it back. The `Set`
+  overloads are `set` (find or add), `set_point`, `set_line` and `set_plane`.
+- **Derived-attribute registration.** Natively `IMPLEMENT_DERIVED_ATTRIBUTE` registers the
+  five construction attributes when the library loads. Rust has no load-time initializer,
+  so the constructor of each of them calls `TDataXtd::register_derived_attributes`, which
+  registers all five once, in the native link order. The guard is an `AtomicBool`, not a
+  `Once`: the registry builds its prototypes with these constructors, which call back into
+  the registration.
+- **TDataXtd_Pattern** is the trait `TDataXtdPattern` (`PatternID`, `NbTrsfs`,
+  `ComputeTrsfs`); its static `GetID` is the provided `TDataXtdPattern::get_id` (on
+  concrete types only), which is also the `ID` of `TDataXtd_PatternStd`. `ComputeTrsfs` fills a slice from its start; a slice
+  shorter than `NbTrsfs` is `Standard_OutOfRange`. `NbTrsfs` multiplies by
+  `NbInstances2` whenever it is set, also for a linear pattern, as natively.
+- **OCC2932 checks.** The setters of `Constraint`, `PatternStd` and `Position` do not back
+  up an unchanged value. Natively they dereference the new handle; the port reads a null
+  new handle as a change. The four-geometry `TDataXtd_Constraint::Set` compares the third
+  stored geometry with the fourth given one, as natively.
+- **TDataXtd_Presentation** holds a `Quantity_NameOfColor` as `NamedColor`. The old-enum
+  conversions are in `presentation_colors`. An old value that gives a negative color is
+  `Standard_OutOfRange` (natively an invalid enumerator).
+- **TDataXtd_Triangulation** covers the `Poly_Triangulation` methods so that each change
+  is backed up. `Restore` and `Paste` install a copy of the mesh. The methods on an
+  attribute without a mesh are `Standard_NullObject` errors (natively a null dereference).
+
+## 12. AppStd
+
+`AppStd_Application` is `AppStdApplication`, a `TDocStd_Application` built like
+`TDocStdStandardApplication` (`new` returns its bound handle). Its `ResourcesName` is
+`Standard`. Its `DumpJson` is an inherent method: the native one hides the non-virtual
+`TDocStd_Application::DumpJson`, and it dumps that one as its base class.
