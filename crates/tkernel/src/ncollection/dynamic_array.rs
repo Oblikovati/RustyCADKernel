@@ -24,9 +24,12 @@ impl<T> Default for DynamicArray<T> {
 }
 mod block_table;
 mod borrowed;
+#[allow(unsafe_code)]
+mod clear_state;
 mod copy_construction_failure;
 mod copy_date;
 mod copy_policy;
+pub use clear_state::DynamicArrayClearState;
 mod increment;
 pub use copy_construction_failure::DynamicArrayCopyConstructionFailure;
 mod initialized_tail;
