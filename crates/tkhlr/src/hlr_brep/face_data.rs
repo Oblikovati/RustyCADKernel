@@ -80,6 +80,19 @@ impl FaceData {
         data
     }
 
+    /// The native copy assignment (`*fd = *f1` in HLRBRep_Data::Write): the flags,
+    /// size and tolerance, the wire blocks shared (the native handle copy) and the
+    /// surface on a new adaptor of the same face; `let copy = face.try_clone()?;`.
+    pub fn try_clone(&self) -> Result<Self, Failure> {
+        Ok(Self {
+            flags: self.flags,
+            wires: self.wires.clone(),
+            geometry: self.geometry.try_clone()?,
+            size: self.size,
+            tolerance: self.tolerance,
+        })
+    }
+
     /// Set(FG, Or, Cl, NW): loads the face, its tolerance and orientation, and `NW`
     /// empty wire slots; `face.set(&f, Orientation::Forward, false, 1)?`.
     pub fn set(&mut self, fg: &Face, or: Orientation, cl: bool, nw: i32) -> Result<(), Failure> {

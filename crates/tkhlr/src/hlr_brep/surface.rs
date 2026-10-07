@@ -53,6 +53,25 @@ impl Surface {
         self.projector = projector;
     }
 
+    // The shared projector, compared by identity (see `Curve::projector_handle`).
+    pub(super) fn projector_handle(&self) -> Option<&Arc<Projector>> {
+        self.projector.as_ref()
+    }
+
+    // The native copy: a new adaptor on the same face (restricted, as `Surface(F)`).
+    pub(super) fn try_clone(&self) -> Result<Self, Failure> {
+        let surf = BRepAdaptorSurface::default();
+        let face = self.surf.face();
+        if !face.is_null() {
+            surf.initialize(&face, true)?;
+        }
+        Ok(Self {
+            surf,
+            surf_type: self.surf_type,
+            projector: self.projector.clone(),
+        })
+    }
+
     fn projector(&self) -> Result<&Projector, Failure> {
         self.projector
             .as_deref()

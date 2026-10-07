@@ -53,7 +53,7 @@ pub fn edge_summary(e: &Edge) -> Result<(), Failure> {
 
 // The vertex indices, tolerance and status of a default EdgeData are uninitialized
 // natively, so `full` is false before Set.
-fn edge_flags(d: &EdgeData, full: bool) {
+pub fn edge_flags(d: &EdgeData, full: bool) {
     for v in [
         d.selected(),
         d.rg1_line(),

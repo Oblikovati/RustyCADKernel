@@ -321702,6 +321702,14 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_ShapeToHLR::Load(const occ::handle<HLRTopoBRep_OutLiner>&,const HLRAlgo_Projector&,NCollection_DataMap<TopoDS_Shape, BRepTopAdaptor_Tool, TopTools_ShapeMapHasher>&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ShapeToHLR.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::ShapeToHLR::load",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_ShapeToHLR.hxx/.cxx with the private ExploreFace and ExploreShape. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_Surface::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
@@ -325724,6 +325732,294 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::FaceIterator::internal",
       "status": "implemented",
       "notes": "Ported from HLRBRep_FaceIterator.hxx/.lxx/.cxx; compared by the walk of hb_facedata. The native file is compiled with No_Exception (out-of-range reads are undefined); the port returns Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::HidingTheFace() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::hiding_the_face",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::EDataArray()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::e_data_array",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::NextInterference()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::next_interference",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::EdgeOfTheHidingFace(int,const HLRBRep_EdgeData&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::edge_of_the_hiding_face",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::EdgeState(double,double,TopAbs_State&,TopAbs_State&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::edge_state",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::InitEdge(int,NCollection_DataMap<TopoDS_Shape, BRepTopAdaptor_Tool, TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::init_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::InitInterference()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::init_interference",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Tolerance(float)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::set_tolerance",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Tolerance() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::tolerance",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::SimplClassify(int,const HLRBRep_EdgeData&,int,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::simpl_classify",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit. The native ED argument is the record E of EDataArray() at every caller (HLRBRep_Hider); the port reads the record E and drops the argument."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::LocalLEGeometry2D(double,gp_Dir2d&,gp_Dir2d&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::local_le_geometry_2d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::NbFaces() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::nb_faces",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::NbEdges() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::nb_edges",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Interference()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::interference",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit. Interference() returns a copy of the value."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Update(const HLRAlgo_Projector&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::update",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::LocalFEGeometry2D(int,double,gp_Dir2d&,gp_Dir2d&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::local_fe_geometry_2d",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Classify(int,const HLRBRep_EdgeData&,bool,int&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::classify",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit. The native ED argument is the record E of EDataArray() at every caller (HLRBRep_Hider); the port reads the record E and drops the argument. Level is returned with the state."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::MoreInterference() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::more_interference",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Destroy()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::destroy",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::NbVertices() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::nb_vertices",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Projector()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::projector",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit. Projector() returns a copy; the in-place edit of the native reference is change_projector, which shares the edited projector with every curve and surface that shared the previous one."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::RejectedInterference()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::rejected_interference",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::AboveInterference()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::above_interference",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::IsBadFace() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::is_bad_face",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Edge() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::MoreEdge()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::more_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Write(const occ::handle<HLRBRep_Data>&,int,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::write",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::SimpleHidingFace() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::simple_hiding_face",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::FDataArray()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::f_data_array",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::InitBoundSort(const HLRAlgo_EdgesBlock::MinMaxIndices&,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::init_bound_sort",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::Compare(int,const HLRBRep_EdgeData&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::compare",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit. The native ED argument is the record E of EDataArray() at every caller (HLRBRep_Hider); the port reads the record E and drops the argument."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::FaceMap()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::face_map",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data(int,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::NextEdge(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::next_edge",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::HidingStartLevel(int,const HLRBRep_EdgeData&,const NCollection_List<HLRAlgo_Interference>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::hiding_start_level",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit. The native ED argument is the record E of EDataArray() at every caller (HLRBRep_Hider); the port reads the record E and drops the argument."
+    },
+    {
+      "upstream_id": "HLRBRep_Data::EdgeMap()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Data.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Data::edge_map",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Data.hxx/.lxx/.cxx with the private RejectionCache, AdjustParameter, OrientOutLine, OrientOthEdge, RejectedPoint and SameVertex. A transient whose records, maps and walk state sit behind locks (docs/hlr-design.md section 6); the native pointers into the records are indices and the CLProps and SLProps members are made per call on the same curve or surface. hb_data (320 numeric requests: ShapeToHLR::Load on boxes, cylinders, cones, spheres, tori, faces of every surface kind and compounds, parallel and perspective, with 0 and 2 isolines; then every edge and face record after Load and after Update (flags, boxes, wire boxes and edge orientations), InitBoundSort on the box of the shape, and the hiding walk of every hiding face: InitEdge, the edges, every interference with its rejection, fields and local 2D geometry, Compare, Classify, SimplClassify, HidingStartLevel and EdgeOfTheHidingFace) compares bit for bit."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",

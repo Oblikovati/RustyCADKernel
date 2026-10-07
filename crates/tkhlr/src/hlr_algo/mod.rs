@@ -18,7 +18,7 @@ mod bi_point;
 mod edge_iterator;
 mod edge_status;
 mod edges_block;
-mod failures;
+pub(crate) mod failures;
 mod interference;
 mod min_max;
 mod poly_algo;

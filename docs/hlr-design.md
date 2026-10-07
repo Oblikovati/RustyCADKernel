@@ -219,3 +219,19 @@ and 17.
   surface again, so the borrow lasts one call. The polyhedron of a non-elementary
   surface is built on the first sight line after `load` and kept until the next one,
   as the native `myPolyhedron`.
+- **The data structure.** `HLRBRep_Data` is shared by handles (the algorithm, the
+  Hider and the edge interference tool hold it) and edited through all of them. The
+  port makes it a transient with four locks: the edge records, the face records, the
+  two shape maps and the walk state (the native scalar members, the face iterators,
+  the intersector, the classifier and the intersection cache). `EDataArray()`,
+  `FDataArray()`, `EdgeMap()` and `FaceMap()` return write guards; every other member
+  locks what it needs for the call, so a caller drops its guards before it calls
+  another member. The native pointers into the records (`iFaceData`, `iFaceGeom`,
+  `myLEData`, `myLEGeom`, `myLEMinMax`, `myFEData`, `myFEGeom`) are record indices,
+  kept apart where the native members set them apart (`myFEGeom` lags `myFE` in
+  `Update`, `InitBoundSort` moves `myLEMinMax` alone). The `CLProps` and `SLProps`
+  members are made per call on the curve or surface the native member was given.
+  `Compare`, `Classify`, `SimplClassify` and `HidingStartLevel` read the record `E`
+  where the native code takes it as the `ED` argument (it is that record at every
+  caller). The recursion of `NextEdge` over skipped edges is a loop that keeps the
+  native order of the hide counts.

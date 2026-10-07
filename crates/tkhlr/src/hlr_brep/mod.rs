@@ -14,6 +14,8 @@ mod curve;
 mod curve_2d;
 pub use curve::{Curve, MinMaxBox};
 mod curve_tool;
+mod data;
+pub use data::{Data, EdgeDataArray, FaceDataArray, LocalGeometry2D};
 mod edge_data;
 pub use edge_data::EdgeData;
 mod edge_face_tool;
@@ -35,6 +37,8 @@ mod line_tool;
 mod make_edge;
 pub use line_tool::LineTool;
 pub use make_edge::{make_edge, make_edge_3d, poly_hlr_angle_and_deflection};
+mod shape_to_hlr;
+pub use shape_to_hlr::ShapeToHLR;
 mod sl_props;
 pub use sl_props::{SLProps, SLPropsATool};
 mod surface;
@@ -53,6 +57,5 @@ pub use c_inter::{
     TheProjPCurOfCInter,
 };
 
-// Consumed by the remaining HLRBRep_Data port; not a public OCCT declaration.
-#[cfg_attr(not(test), expect(dead_code))]
+// The private HLRBRep_Data::RejectionCache.
 mod rejection_cache;

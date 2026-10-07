@@ -49,6 +49,7 @@
 #include "tkhlr_probe_hlrbrep_surface.cxx"
 #include "tkhlr_probe_hlrbrep_records.cxx"
 #include "tkhlr_probe_hlrbrep_intersector.cxx"
+#include "tkhlr_probe_hlrbrep_data.cxx"
 #include "tkhlr_probe_hlrtopobrep.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ct_walking",ct_walking_case},
@@ -98,6 +99,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"hb_facedata", hb_facedata_case},
  {"hb_edgeface", hb_edgeface_case},
  {"hb_intersector", hb_intersector_case},
+ {"hb_data", hb_data_case},
  {"ht_outliner", ht_outliner_case},
 };
 int main() {

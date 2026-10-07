@@ -276,6 +276,18 @@ def intersector_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def data_requests(rng: random.Random) -> list[str]:
+    """hb_data: ShapeToHLR::Load, Data::Update and the hiding walk of every hiding face
+    on primitives, faces and compounds, parallel and perspective."""
+    requests = []
+    for index in range(320):
+        proj = projector(rng, rng.choice((0, 0, 1)))
+        if proj[0] == 1:
+            proj[-1] = rng.choice((30.0, 60.0))
+        requests.append('hb_data ' + numbers(proj + shape(rng, index % 8) + [rng.choice((0, 0, 2))]))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
@@ -287,3 +299,4 @@ def append_hlrbrep_requests(requests: list[str]) -> None:
     requests.extend(edgeface_requests(rng))
     requests.extend(outliner_requests(rng))
     requests.extend(intersector_requests(rng))
+    requests.extend(data_requests(rng))

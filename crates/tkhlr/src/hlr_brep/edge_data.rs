@@ -85,6 +85,16 @@ impl EdgeData {
         data
     }
 
+    /// The native copy assignment (`*ed = *e1` in HLRBRep_Data::Write): every field,
+    /// the curve on a new adaptor of the same edge; `let copy = edge.try_clone()?;`.
+    pub fn try_clone(&self) -> Result<Self, Failure> {
+        Ok(Self {
+            status: self.status.clone(),
+            geometry: self.geometry.try_clone()?,
+            ..*self
+        })
+    }
+
     /// Set(Reg1, RegN, EG, V1, V2, Out1, Out2, Cut1, Cut2, Start, TolStart, End,
     /// TolEnd): loads the edge and its flags; the status tolerances are the 3D curve
     /// resolutions of the given tolerances, rounded to `float`;

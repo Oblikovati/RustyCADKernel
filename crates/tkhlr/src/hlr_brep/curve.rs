@@ -76,6 +76,28 @@ impl Curve {
         self.projector = projector;
     }
 
+    // The shared projector, compared by identity where the native code compares the
+    // projector pointer (HLRBRep_Data shares a scaled projector with its curves).
+    pub(super) fn projector_handle(&self) -> Option<&Arc<Projector>> {
+        self.projector.as_ref()
+    }
+
+    // The native copy: a new adaptor on the same edge (the adaptor keeps its state
+    // behind locks, so it is not cloned) with the same type, line data and projector.
+    pub(super) fn try_clone(&self) -> Result<Self, Failure> {
+        let curve = BRepAdaptorCurve::default();
+        let edge = self.curve.edge();
+        if !edge.is_null() {
+            curve.initialize(&edge)?;
+        }
+        Ok(Self {
+            curve,
+            curve_type: self.curve_type,
+            projector: self.projector.clone(),
+            ..*self
+        })
+    }
+
     pub(super) fn projector(&self) -> Result<&Projector, Failure> {
         self.projector
             .as_deref()
