@@ -9987,7 +9987,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSetAccess::cached_box",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "CXXMethod"
+      }
     },
     {
       "upstream_id": "BVH_PrimitiveSet::BVH()",
@@ -11329,7 +11332,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhGeometry::cached_box",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "CXXMethod"
+      }
     },
     {
       "upstream_id": "BVH_Geometry::BVH()",
@@ -32325,7 +32331,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::VectorType",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "ClassTemplate"
+      }
     },
     {
       "upstream_id": "BVH::ToBndBox(const T&,const T&)",
@@ -78673,7 +78682,7 @@
       "upstream_id": "NCollection_Array2::operator()(int,int) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Array2 as Index<(i32, i32)>>::index",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::<core::ops::index::Index<(i32, i32)>>::index",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; out-of-range (row, col) pairs panic with the ArrayError text, as the native operator raises."
     },
@@ -78689,7 +78698,7 @@
       "upstream_id": "NCollection_Array2::operator()(int,int)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
-      "rust_item": "<rustycad_tkernel::ncollection::Array2 as IndexMut<(i32, i32)>>::index_mut",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::<core::ops::index::IndexMut<(i32, i32)>>::index_mut",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; out-of-range (row, col) pairs panic with the ArrayError text, as the native operator raises."
     },
@@ -81119,7 +81128,21 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vector.hxx",
       "rust_item": "rustycad_tkernel::ncollection::DynamicArray",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the deprecated alias NCollection_Vector<T> = NCollection_DynamicArray<T> has no Rust alias: use DynamicArray<T>."
+      "notes": "Manual NCollection member mapping; the deprecated alias NCollection_Vector<T> = NCollection_DynamicArray<T> has no Rust alias: use DynamicArray<T>.",
+      "cpp_selector": {
+        "kind": "TypeAliasTemplate"
+      }
+    },
+    {
+      "upstream_id": "NCollection_Vector",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the deprecated alias NCollection_Vector<T> = NCollection_DynamicArray<T> has no Rust alias: use DynamicArray<T>. Clang records the alias template and its templated alias declaration separately; both name NCollection_DynamicArray<T>, which Rust spells DynamicArray.",
+      "cpp_selector": {
+        "kind": "TypeAlias"
+      }
     },
     {
       "upstream_id": "NCollection_List::Iterator()",
@@ -92689,7 +92712,23 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::hash_combine",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The C++ defaults (sizeof(T1), optimalSeed) are explicit arguments."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The C++ defaults (sizeof(T1), optimalSeed) are explicit arguments.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<sizeof(type-parameter-0-1) == 8, unsigned long>::type (const type-parameter-0-0 &, int, type-parameter-0-1) noexcept"
+      }
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::hash_combine(const T1&,int,T)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::hash_combine",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The C++ defaults (sizeof(T1), optimalSeed) are explicit arguments. Second enable_if overload (word width other than 8 bytes): the generic Rust hash_combine dispatches on the HashWord width.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<sizeof(type-parameter-0-1) != 8, type-parameter-0-1>::type (const type-parameter-0-0 &, int, type-parameter-0-1) noexcept"
+      }
     },
     {
       "upstream_id": "opencascade::MurmurHash::optimalSeed()",
@@ -92721,7 +92760,23 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
       "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::hash_combine",
       "status": "implemented",
-      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The loop reads plain char, so bytes >= 0x80 are sign-extended where char is signed (the oracle profile); the port widens through std::ffi::c_char to keep that quirk."
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The loop reads plain char, so bytes >= 0x80 are sign-extended where char is signed (the oracle profile); the port widens through std::ffi::c_char to keep that quirk.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<sizeof(type-parameter-0-1) == 8, unsigned long>::type (const type-parameter-0-0 &, int, type-parameter-0-1) noexcept"
+      }
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::hash_combine(const T1&,int,T)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::hash_combine",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The loop reads plain char, so bytes >= 0x80 are sign-extended where char is signed (the oracle profile); the port widens through std::ffi::c_char to keep that quirk. Second enable_if overload (word width other than 8 bytes): the generic Rust hash_combine dispatches on the HashWord width.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "std::enable_if<sizeof(type-parameter-0-1) != 8, type-parameter-0-1>::type (const type-parameter-0-0 &, int, type-parameter-0-1) noexcept"
+      }
     },
     {
       "upstream_id": "opencascade::FNVHash::optimalSeed()",
@@ -93029,7 +93084,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
+      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) && !defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4) && !defined(__EMSCRIPTEN__)",
+        "line": 86
+      }
     },
     {
       "upstream_id": "Standard_Atomic::_InterlockedDecrement(volatile long*)",
@@ -93037,7 +93096,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
+      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) && !defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4) && !defined(__EMSCRIPTEN__)",
+        "line": 87
+      }
     },
     {
       "upstream_id": "Standard_Atomic::_InterlockedCompareExchange(long volatile*,long,long)",
@@ -93045,7 +93108,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
+      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) && !defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4) && !defined(__EMSCRIPTEN__)",
+        "line": 88
+      }
     },
     {
       "upstream_id": "OCCT_DevelopmentVersion()",
@@ -94191,7 +94258,7 @@
       "upstream_id": "opencascade::handle::operator==(const T2*) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<*const T>>::eq",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::cmp::PartialEq<*const T>>::eq",
       "status": "implemented",
       "notes": "Compares the projected address with a raw pointer; the reverse friend operator is <*const T as PartialEq<Handle<T>>>::eq. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
@@ -94199,7 +94266,7 @@
       "upstream_id": "opencascade::handle::operator!=(const T2*) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<*const T>>::ne",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::cmp::PartialEq<*const T>>::eq",
       "status": "implemented",
       "notes": "Negation of ==. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
     },
@@ -94225,7 +94292,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::cast",
       "status": "implemented",
-      "notes": "C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+      "notes": "C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe.",
+      "cpp_configuration": {
+        "condition": "defined(OCCT_HANDLE_NOCAST) on a compiler with default template arguments of function templates",
+        "line": 243
+      }
     },
     {
       "upstream_id": "opencascade::handle(handle<T2>&&)",
@@ -94233,7 +94304,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::into_cast",
       "status": "implemented",
-      "notes": "rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
+      "notes": "rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference.",
+      "cpp_configuration": {
+        "condition": "defined(OCCT_HANDLE_NOCAST) on a compiler with default template arguments of function templates",
+        "line": 251
+      }
     },
     {
       "upstream_id": "opencascade::handle::operator=(const handle<T2>&)",
@@ -94241,7 +94316,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::cast",
       "status": "implemented",
-      "notes": "Converting assignment (both compiler branches declare it): assign the result of cast. C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base."
+      "notes": "Converting assignment (both compiler branches declare it): assign the result of cast. C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base.",
+      "cpp_configuration": {
+        "condition": "defined(OCCT_HANDLE_NOCAST) on a compiler with default template arguments of function templates",
+        "line": 259
+      }
     },
     {
       "upstream_id": "opencascade::handle::operator=(handle<T2>&&)",
@@ -94249,7 +94328,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::into_cast",
       "status": "implemented",
-      "notes": "Converting move assignment (both compiler branches declare it). rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
+      "notes": "Converting move assignment (both compiler branches declare it). rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference.",
+      "cpp_configuration": {
+        "condition": "defined(OCCT_HANDLE_NOCAST) on a compiler with default template arguments of function templates",
+        "line": 267
+      }
     },
     {
       "upstream_id": "opencascade::handle(const handle<T2>&,std::enable_if<is_base_but_not_same<T,T2>::value>::type*)",
@@ -94257,7 +94340,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::cast",
       "status": "implemented",
-      "notes": "Fallback spelling for old compilers. C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base."
+      "notes": "Fallback spelling for old compilers. C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base.",
+      "cpp_configuration": {
+        "condition": "defined(OCCT_HANDLE_NOCAST) on a compiler without default template arguments of function templates (VC10, VC11, GCC below 4.3)",
+        "line": 301
+      }
     },
     {
       "upstream_id": "opencascade::handle(handle<T2>&&,std::enable_if<is_base_but_not_same<T,T2>::value>::type*)",
@@ -94265,7 +94352,11 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::into_cast",
       "status": "implemented",
-      "notes": "Fallback spelling for old compilers. rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
+      "notes": "Fallback spelling for old compilers. rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference.",
+      "cpp_configuration": {
+        "condition": "defined(OCCT_HANDLE_NOCAST) on a compiler without default template arguments of function templates (VC10, VC11, GCC below 4.3)",
+        "line": 310
+      }
     },
     {
       "upstream_id": "occ::down_cast(const TBase*)",
@@ -95036,12 +95127,16 @@
       "notes": "The subclass override is the closure given to ErrorHandlerCallback::new; the handler runs it when it unlinks with the callback registered. Compared by the runtime_handler_script probe."
     },
     {
-      "upstream_id": "Standard_Assert::Standard_ASSERT_REPORT_(const char*,int,const char*,const char*)",
+      "upstream_id": "Standard_ASSERT_REPORT_(const char*,int,const char*,const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
       "rust_item": "rustycad_tkernel::standard::assert::standard_assert_report",
       "status": "implemented",
-      "notes": "Debug-build report (the MSVC and POSIX branches share the signature): the POSIX text is written to the given stream (C++ writes std::cerr) and true is returned. The prebuilt kernel is a release build, where the macros only run their action; standard_assert_raise builds the Standard_ASSERT_RAISE exception."
+      "notes": "Debug-build report (the MSVC and POSIX branches share the signature): the POSIX text is written to the given stream (C++ writes std::cerr) and true is returned. The prebuilt kernel is a release build, where the macros only run their action; standard_assert_raise builds the Standard_ASSERT_RAISE exception.",
+      "cpp_configuration": {
+        "condition": "defined(_DEBUG) && !defined(_MSC_VER)",
+        "line": 114
+      }
     },
     {
       "upstream_id": "Standard_Static_Assert<true>::assert_ok()",
@@ -96082,7 +96177,11 @@
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
       "rust_item": "rustycad_tkernel::tcollection::ExtendedString::to_wide_string",
       "status": "implemented",
-      "notes": "Windows only (#[cfg(windows)]), where wchar_t is UTF-16."
+      "notes": "Windows only (#[cfg(windows)]), where wchar_t is UTF-16.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32)",
+        "line": 810
+      }
     },
     {
       "upstream_id": "TCollection_ExtendedString::Value(int) const",
@@ -106230,7 +106329,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 31
+      }
     },
     {
       "upstream_id": "OSD_WNT::AllocSD()",
@@ -106238,7 +106341,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 74
+      }
     },
     {
       "upstream_id": "OSD_WNT::FreeSD(PSECURITY_DESCRIPTOR)",
@@ -106246,7 +106353,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 75
+      }
     },
     {
       "upstream_id": "OSD_WNT::GetTokenInformationEx(HANDLE,TOKEN_INFORMATION_CLASS)",
@@ -106254,7 +106365,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 77
+      }
     },
     {
       "upstream_id": "OSD_WNT::FreeTokenInformation(LPVOID)",
@@ -106262,7 +106377,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 78
+      }
     },
     {
       "upstream_id": "OSD_WNT::GetFileSecurityEx(LPCWSTR,SECURITY_INFORMATION)",
@@ -106270,7 +106389,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 80
+      }
     },
     {
       "upstream_id": "OSD_WNT::FreeFileSecurity(PSECURITY_DESCRIPTOR)",
@@ -106278,7 +106401,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 81
+      }
     },
     {
       "upstream_id": "OSD_WNT::CreateAcl(DWORD)",
@@ -106286,7 +106413,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 83
+      }
     },
     {
       "upstream_id": "OSD_WNT::FreeAcl(PACL)",
@@ -106294,7 +106425,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 84
+      }
     },
     {
       "upstream_id": "OSD_WNT::PredefinedSid(PSID)",
@@ -106302,7 +106437,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 86
+      }
     },
     {
       "upstream_id": "OSD_WNT::NtPredefinedSid(PSID)",
@@ -106310,7 +106449,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 87
+      }
     },
     {
       "upstream_id": "OSD_WNT::AdminSid()",
@@ -106318,7 +106461,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 88
+      }
     },
     {
       "upstream_id": "OSD_WNT::WorldSid()",
@@ -106326,7 +106473,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 89
+      }
     },
     {
       "upstream_id": "OSD_WNT::InteractiveSid()",
@@ -106334,7 +106485,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 90
+      }
     },
     {
       "upstream_id": "OSD_WNT::NetworkSid()",
@@ -106342,7 +106497,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 91
+      }
     },
     {
       "upstream_id": "OSD_WNT::LocalSid()",
@@ -106350,7 +106509,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 92
+      }
     },
     {
       "upstream_id": "OSD_WNT::DialupSid()",
@@ -106358,7 +106521,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 93
+      }
     },
     {
       "upstream_id": "OSD_WNT::BatchSid()",
@@ -106366,7 +106533,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 94
+      }
     },
     {
       "upstream_id": "OSD_WNT::CreatorOwnerSid()",
@@ -106374,7 +106545,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 95
+      }
     },
     {
       "upstream_id": "OSD_WNT::NullSid()",
@@ -106382,7 +106557,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 96
+      }
     },
     {
       "upstream_id": "OSD_WNT::NtSid()",
@@ -106390,7 +106569,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 97
+      }
     },
     {
       "upstream_id": "OSD_WNT::AllocAccessAllowedAce(DWORD,BYTE,PSID)",
@@ -106398,7 +106581,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 99
+      }
     },
     {
       "upstream_id": "OSD_WNT::FreeAce(PVOID)",
@@ -106406,7 +106593,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 100
+      }
     },
     {
       "upstream_id": "OSD_WNT::MoveDirectory(LPCWSTR,LPCWSTR)",
@@ -106414,7 +106605,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 102
+      }
     },
     {
       "upstream_id": "OSD_WNT::CopyDirectory(LPCWSTR,LPCWSTR)",
@@ -106422,7 +106617,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 103
+      }
     },
     {
       "upstream_id": "OSD_WNT::SetMoveDirectoryProc(MOVE_DIR_PROC)",
@@ -106430,7 +106629,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 105
+      }
     },
     {
       "upstream_id": "OSD_WNT::SetCopyDirectoryProc(COPY_DIR_PROC)",
@@ -106438,7 +106641,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 106
+      }
     },
     {
       "upstream_id": "OSD_WNT::SetResponseDirectoryProc(RESPONSE_DIR_PROC)",
@@ -106446,7 +106653,11 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
       "rust_item": null,
       "status": "excluded",
-      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either.",
+      "cpp_configuration": {
+        "condition": "defined(_WIN32) (OSD_WNT.hxx includes <windows.h>; the Linux capture cannot parse it)",
+        "line": 107
+      }
     },
     {
       "upstream_id": "OSD_FileNode::Path(OSD_Path&) const",
@@ -164779,7 +164990,23 @@
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::TypedId::is_valid_in",
       "status": "implemented",
-      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes."
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Nb() , bool()) (const type-parameter-1-0 &) const"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Typed::IsValidIn(const CountProviderT&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::is_valid_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes. Second SFINAE overload (provider with Size(), cast to uint32_t): the one Rust CountProvider::count covers Nb() and Size() providers.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Size() , bool()) (const type-parameter-1-0 &) const"
+      }
     },
     {
       "upstream_id": "BRepGraph_NodeId::Typed::operator BRepGraph_NodeId() const",
@@ -164995,7 +165222,23 @@
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::NodeId::is_valid_in",
       "status": "implemented",
-      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes."
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Nb() , bool()) (const type-parameter-0-0 &) const"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::IsValidIn(const CountProviderT&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId::is_valid_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes. Second SFINAE overload (provider with Size(), cast to uint32_t): the one Rust CountProvider::count covers Nb() and Size() providers.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Size() , bool()) (const type-parameter-0-0 &) const"
+      }
     },
     {
       "upstream_id": "BRepGraph_NodeId::operator==(const BRepGraph_NodeId&) const",
@@ -165502,7 +165745,23 @@
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::TypedId::is_valid_in",
       "status": "implemented",
-      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes."
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Nb() , bool()) (const type-parameter-1-0 &) const"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Typed::IsValidIn(const CountProviderT&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::is_valid_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes. Second SFINAE overload (provider with Size(), cast to uint32_t): the one Rust CountProvider::count covers Nb() and Size() providers.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Size() , bool()) (const type-parameter-1-0 &) const"
+      }
     },
     {
       "upstream_id": "BRepGraph_RefId::Typed::operator BRepGraph_RefId() const",
@@ -165710,7 +165969,23 @@
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::RefId::is_valid_in",
       "status": "implemented",
-      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes."
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Nb() , bool()) (const type-parameter-0-0 &) const"
+      }
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::IsValidIn(const CountProviderT&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId::is_valid_in",
+      "status": "implemented",
+      "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes. Second SFINAE overload (provider with Size(), cast to uint32_t): the one Rust CountProvider::count covers Nb() and Size() providers.",
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "decltype(theProvider.Size() , bool()) (const type-parameter-0-0 &) const"
+      }
     },
     {
       "upstream_id": "BRepGraph_RefId::operator==(const BRepGraph_RefId&) const",
@@ -361682,7 +361957,7 @@
       "upstream_id": "opencascade::operator==(const T2*,const handle<T>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<*const T as PartialEq<rustycad_tkernel::standard::Handle<T>>>::eq",
+      "rust_item": "<*const T as core::cmp::PartialEq<rustycad_tkernel::standard::handle::Handle<T>>>::eq",
       "status": "implemented",
       "notes": "Friend form with the raw pointer on the left; compares the pointer with the projected address, as the member form does. Rust takes the pointer of the handle's own projection type T; a pointer to another type is projected first with Handle::cast."
     },
@@ -361690,7 +361965,7 @@
       "upstream_id": "opencascade::operator!=(const T2*,const handle<T>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
-      "rust_item": "<*const T as PartialEq<rustycad_tkernel::standard::Handle<T>>>::ne",
+      "rust_item": "<*const T as core::cmp::PartialEq<rustycad_tkernel::standard::handle::Handle<T>>>::eq",
       "status": "implemented",
       "notes": "Friend form with the raw pointer on the left; compares the pointer with the projected address, as the member form does. Rust takes the pointer of the handle's own projection type T; a pointer to another type is projected first with Handle::cast."
     },
@@ -378815,7 +379090,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "CXXMethod"
+      }
     },
     {
       "upstream_id": "BVH_Triangulation::Center(int,int) const",
@@ -378839,7 +379117,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "CXXMethod"
+      }
     },
     {
       "upstream_id": "BVH_BoxSet::Center(int,int) const",
@@ -378871,7 +379152,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "CXXMethod"
+      }
     },
     {
       "upstream_id": "BVH_IndexedBoxSet::Swap(int,int)",
@@ -378895,7 +379179,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::<rustycad_tkmath::bvh::BvhSet<V>>::element_box",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending.",
+      "cpp_selector": {
+        "kind": "CXXMethod"
+      }
     },
     {
       "upstream_id": "BVH_ObjectSet::Center(int,int) const",
@@ -379621,7 +379908,11 @@
             "trait": null
           }
         }
-      ]
+      ],
+      "cpp_selector": {
+        "kind": "FunctionTemplate",
+        "signature": "int &(int)"
+      }
     },
     {
       "upstream_id": "BVH_Tree<type-parameter-0-0, value-parameter-0-1>::ChangeChild(const int)",
