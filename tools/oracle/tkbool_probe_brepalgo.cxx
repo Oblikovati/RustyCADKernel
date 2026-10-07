@@ -4,6 +4,7 @@
 // The shapes are shapes of a shape program (tktopalgo_probe_shapes.cxx); shapes print
 // through pr_shape (tkprim_probe_shape.cxx).
 #include <BRepAlgo.hxx>
+#include <BRepAlgo_FaceRestrictor.hxx>
 // `program wire option angtol`: ConcatenateWire (option as a GeomAbs_Shape value).
 void bl_ba_concat_case(std::istream& input){
  GaReader r{input};TpShapes t;
@@ -36,4 +37,18 @@ void bl_ba_valid_case(std::istream& input){
  GA_TRY(ga_flag(BRepAlgo::IsValid(res)))
  GA_TRY(ga_flag(BRepAlgo::IsTopologicallyValid(res)))
  GA_TRY(ga_flag(BRepAlgo::IsValid(args,res,closed,geom)))
+ ga_end();}
+// `program face proj control n wire...`: a FaceRestrictor on the face with the wires:
+// Perform, IsDone, each face, then the face count.
+void bl_ba_face_restrictor_case(std::istream& input){
+ GaReader r{input};TpShapes t;
+ try{t=tp_shapes(r);}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';ga_end();return;}
+ const TopoDS_Face f=TopoDS::Face(t.shapes.at(r.integer()));bool proj=r.flag(),control=r.flag();int n=r.integer();
+ BRepAlgo_FaceRestrictor fr;fr.Init(f,proj,control);
+ for(int i=0;i<n;i++){TopoDS_Wire w=TopoDS::Wire(t.shapes.at(r.integer()));fr.Add(w);}
+ GA_TRY(fr.Perform())
+ ga_flag(fr.IsDone());
+ int count=0;
+ GA_TRY(for(;fr.More();fr.Next()){pr_shape(fr.Current());count++;})
+ ga_int(count);
  ga_end();}

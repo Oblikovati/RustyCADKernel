@@ -126,3 +126,5 @@ def append_brepalgo_requests(requests: list[str]) -> None:
         for tol in (0.1, 0.01):
             requests.append(f'ba_convert {p.tokens()} {f} {tol}')
     requests.extend(valid_requests())
+    # BRepAlgo_FaceRestrictor on the scenes of the TopOpeBRepBuild requests.
+    __import__('tkbool_corpus_topopebrepbuild').append_face_restrictor_requests(requests)

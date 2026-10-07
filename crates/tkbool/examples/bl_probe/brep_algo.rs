@@ -2,13 +2,14 @@
 //! (the records are documented there).
 use super::brep_fill_generator::failed;
 use super::brep_fill_location_law::at;
-use super::common::{Reader, attempt, end, flag};
+use super::common::{Reader, attempt, end, flag, int};
 use super::shape::shape;
 use super::shapes::{TpShapes, tp_shapes};
 use rustycad_tkbool::brep_algo;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Shape};
 use rustycad_tkernel::ncollection::List;
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::geom_abs::Shape as Continuity;
 
@@ -89,5 +90,37 @@ pub fn valid_case(values: &[f64]) {
     attempt(|| brep_algo::is_valid(&result).map(flag));
     attempt(|| brep_algo::is_topologically_valid(&result).map(flag));
     attempt(|| brep_algo::is_valid_result(&args, &result, closed, geom).map(flag));
+    end();
+}
+
+/// `ba_face_restrictor program face proj control n wire...`.
+pub fn face_restrictor_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let Some(t) = program(&mut r) else { return };
+    let (fi, proj, control, n) = (r.integer(), r.flag(), r.flag(), r.integer());
+    let wires: Vec<i32> = (0..n).map(|_| r.integer()).collect();
+    let mut fr = rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::new();
+    let mut setup = || -> Result<(), Failure> {
+        fr.init(&topods::face(&at(&t, fi)?)?, proj, control);
+        for w in &wires {
+            fr.add(&topods::wire(&at(&t, *w)?)?);
+        }
+        Ok(())
+    };
+    if let Err(error) = setup() {
+        return failed(error);
+    }
+    attempt(|| fr.perform());
+    flag(fr.is_done());
+    let mut count = 0;
+    attempt(|| {
+        while fr.more() {
+            shape(fr.current()?.as_ref())?;
+            count += 1;
+            fr.next()?;
+        }
+        Ok(())
+    });
+    int(count);
     end();
 }

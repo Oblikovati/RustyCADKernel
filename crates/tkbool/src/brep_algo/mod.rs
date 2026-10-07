@@ -1,10 +1,12 @@
 //! `BRepAlgo`: the shape images and ascendants/descendants of the Boolean operations,
 //! and the package functions on wires, faces and validity.
 mod as_des;
+mod face_restrictor;
 mod image;
 mod normal_projection;
 mod package;
 pub use as_des::BRepAlgoAsDes;
+pub use face_restrictor::BRepAlgoFaceRestrictor;
 pub use image::BRepAlgoImage;
 pub use normal_projection::BRepAlgoNormalProjection;
 pub use package::{

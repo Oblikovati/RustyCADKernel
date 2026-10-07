@@ -16,9 +16,10 @@ POINTS = [(0, 0, 0), (10, 0, 0), (10, 10, 0), (0, 10, 0),
           (3, 3, 0), (5, 3, 0), (5, 5, 0), (3, 5, 0),
           (6, 6, 0), (8, 6, 0), (8, 8, 0), (6, 8, 0),
           (12, 0, 0), (14, 0, 0), (14, 2, 0), (12, 2, 0),
-          (3, 1, 0), (1, 3, 0)]
+          (3, 1, 0), (1, 3, 0),
+          (3.5, 3.5, 0), (4.5, 3.5, 0), (4.5, 4.5, 0), (3.5, 4.5, 0)]
 LOOPS = {'outer': [0, 1, 2, 3], 'hole': [4, 7, 6, 5], 'hole_ccw': [4, 5, 6, 7], 'hole2': [8, 11, 10, 9],
-         'away': [12, 13, 14, 15], 'corner': [0, 16, 17], 'chain': [4, 5, 6]}
+         'away': [12, 13, 14, 15], 'island': [18, 19, 20, 21], 'corner': [0, 16, 17], 'chain': [4, 5, 6]}
 
 
 class PlaneScene:
@@ -136,3 +137,32 @@ def append_topopebrepbuild_requests(requests: list[str]) -> None:
     append_wec_requests(requests)
     append_face_builder_requests(requests)
     append_wire_to_face_requests(requests)
+
+
+def face_restrictor_request(names: list[str], proj: bool, control: bool, pcurves: bool) -> str:
+    s = PlaneScene(pcurves)
+    wires = [s.outer if n == 'outer' else s.wire(n) for n in names]
+    return (f"ba_face_restrictor {s.tokens()} {s.face} {int(proj)} {int(control)} {len(wires)} "
+            f"{' '.join(map(str, wires))}")
+
+
+def cylinder_face_restrictor_request(control: bool) -> str:
+    p = ShapeProgram()
+    cyl = cylinder_face(p, 1.0, 2.0)
+    return f"ba_face_restrictor {p.tokens()} {cyl['face']} 0 {int(control)} 1 {cyl['wire']}"
+
+
+def append_face_restrictor_requests(requests: list[str]) -> None:
+    """BRepAlgo_FaceRestrictor on the plane scene: plain (with and without p-curves,
+    projected or not) and with orientation control (wrong orientations, three nesting
+    levels, disjoint wires), and on the cylinder face."""
+    for names in (['outer', 'hole'], ['outer', 'hole', 'hole2'], ['away'], ['outer', 'hole', 'island']):
+        for pcurves in (True, False):
+            requests.append(face_restrictor_request(names, False, False, pcurves))
+        requests.append(face_restrictor_request(names, True, False, False))
+    for names in (['outer', 'hole_ccw'], ['hole', 'outer'], ['outer', 'hole_ccw', 'island'], ['away', 'hole_ccw'],
+                  ['outer', 'hole', 'hole2', 'island'], ['outer']):
+        for pcurves in (True, False):
+            requests.append(face_restrictor_request(names, False, True, pcurves))
+    requests.append(cylinder_face_restrictor_request(False))
+    requests.append(cylinder_face_restrictor_request(True))

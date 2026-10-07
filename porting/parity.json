@@ -318710,6 +318710,78 @@
       "notes": "Translated from BRepAlgo_NormalProjection.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (ba_normal_projection requests: segments, an arc and a B-spline on a square face and a cube shell, limited or not, within a distance or not, with or without 3d curves). Native quirks kept: the parametric tolerances are the resolutions of the 3d tolerance divided by 20; the Degenerated flag is declared once per face, so pieces without an approximated 3d curve keep the previous value; the projections kept through the section are not recorded in Generated; approximations missing by more than 1000 times the 3d tolerance are skipped; the chronometer debug code is not ported."
     },
     {
+      "upstream_id": "BRepAlgo_FaceRestrictor::BRepAlgo_FaceRestrictor()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::new",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::Add(TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::add",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::Clear()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::clear",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::Current() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::current",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::Init(const TopoDS_Face&,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::init",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::More() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::more",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::Next()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::next",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
+      "upstream_id": "BRepAlgo_FaceRestrictor::Perform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_FaceRestrictor.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoFaceRestrictor::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
+    },
+    {
       "upstream_id": "BRepOffset_Inter3d",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",
