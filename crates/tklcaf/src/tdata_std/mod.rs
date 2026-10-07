@@ -8,11 +8,15 @@ mod ascii_string;
 mod boolean_array;
 mod generic_empty;
 mod generic_ext_string;
+mod h_data_maps;
+mod int_packed_map;
 mod integer;
 mod list_attribute;
 mod list_core;
 mod lists;
 mod name;
+mod named_data;
+mod named_data_category;
 mod package;
 mod real;
 mod reference_array;
@@ -33,12 +37,19 @@ pub use generic_empty::{
 pub use generic_ext_string::{
     TDataStdGenericExtString, TDataStdGenericExtStringBase, TDataStdGenericExtStringMembers,
 };
+pub use h_data_maps::{
+    TDataStdHDataMapOfStringByte, TDataStdHDataMapOfStringHArray1OfInteger,
+    TDataStdHDataMapOfStringHArray1OfReal, TDataStdHDataMapOfStringInteger,
+    TDataStdHDataMapOfStringReal, TDataStdHDataMapOfStringString, TDataStdNamedMap,
+};
+pub use int_packed_map::{TDataStdDeltaOnModificationOfIntPackedMap, TDataStdIntPackedMap};
 pub use integer::TDataStdInteger;
 pub use lists::{
     TDataStdBooleanList, TDataStdExtStringList, TDataStdIntegerList, TDataStdRealList,
     TDataStdReferenceList,
 };
 pub use name::{TDataStdComment, TDataStdName};
+pub use named_data::TDataStdNamedData;
 pub use package::TDataStd;
 pub use real::{TDataStdReal, TDataStdRealEnum};
 pub use reference_array::TDataStdReferenceArray;
