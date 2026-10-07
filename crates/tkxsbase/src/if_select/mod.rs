@@ -10,6 +10,11 @@ mod dispatch;
 mod dispatch_tests;
 mod enums;
 mod int_param;
+mod model_copier;
+mod model_copier_send;
+#[cfg(test)]
+mod model_copier_tests;
+mod model_copier_whole;
 #[cfg(test)]
 mod modifier_tests;
 mod modifiers;
@@ -37,6 +42,12 @@ mod signature_list;
 #[cfg(test)]
 mod signature_tests;
 mod signatures;
+#[cfg(test)]
+mod test_work_library;
+mod transform_standard;
+#[cfg(test)]
+mod transform_tests;
+mod work_library;
 
 pub use context_modif::IFSelectContextModif;
 pub use context_write::IFSelectContextWrite;
@@ -49,6 +60,8 @@ pub use enums::{
     IFSelectReturnStatus,
 };
 pub use int_param::IFSelectIntParam;
+pub use model_copier::IFSelectModelCopier;
+pub use model_copier_send::IFSelectCopiedModelArgs;
 pub use modifiers::{
     IFSelectAppliedItem, IFSelectAppliedModifiers, IFSelectGeneralModifier,
     IFSelectGeneralModifierBase, IFSelectModifReorder, IFSelectModifier,
@@ -102,3 +115,5 @@ pub use signatures::{
     IFSelectSignAncestor, IFSelectSignCategory, IFSelectSignMultiple, IFSelectSignType,
     IFSelectSignValidity,
 };
+pub use transform_standard::IFSelectTransformStandard;
+pub use work_library::{IFSelectWorkLibrary, IFSelectWorkLibraryBase};

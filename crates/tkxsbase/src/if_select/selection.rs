@@ -20,7 +20,7 @@ use rustycad_tkernel::{
 ///
 /// ```
 /// use rustycad_tkxsbase::if_select::{IFSelectSelection, IFSelectSelectModelEntities};
-/// assert_eq!(IFSelectSelectModelEntities::new().label().as_bytes(), b"All Entities");
+/// assert_eq!(IFSelectSelectModelEntities::new().label().as_bytes(), b"All Entities from Model");
 /// ```
 pub trait IFSelectSelection: Transient {
     /// `RootResult(G)`: the entities selected, without the ones they share.
