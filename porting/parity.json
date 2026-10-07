@@ -87961,6 +87961,1014 @@
       "notes": "Class record of the TKernel exception Standard_DomainError: the inventory records the class at its first observed declaration, the forward declaration in Transfer_ActorOfProcessForFinder.hxx. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
     },
     {
+      "upstream_id": "MoniTool_ValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueMisc",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueMisc",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueInteger",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueInteger",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueReal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueReal",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueIdent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueIdent",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueVoid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueVoid",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueText",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueText",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueEnum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueEnum",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueLogical",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueLogical",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueSub",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueSub",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueHexa",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueHexa",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueBinary",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueType.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueType::ValueBinary",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_ValueInterpret",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueInterpret.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueInterpret",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The function pointer type; the typed value is passed as &MoniToolTypedValue (natively `this` as a handle)."
+    },
+    {
+      "upstream_id": "MoniTool_ValueSatisfies",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_ValueSatisfies.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolValueSatisfies",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The function pointer type."
+    },
+    {
+      "upstream_id": "MoniTool_IntVal::MoniTool_IntVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_IntVal.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolIntVal::new",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_IntVal::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_IntVal.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolIntVal::value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_IntVal::CValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_IntVal.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolIntVal::c_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. int& is the write guard of the shared value."
+    },
+    {
+      "upstream_id": "MoniTool_RealVal::MoniTool_RealVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_RealVal.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolRealVal::new",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_RealVal::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_RealVal.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolRealVal::value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_RealVal::CValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_RealVal.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolRealVal::c_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. double& is the write guard of the shared value."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::MoniTool_AttrList()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::new",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::SetAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::set_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::RemoveAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::remove_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::GetAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::get_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. occ::handle<Standard_Type> is &RuntimeType."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::Attribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::AttributeType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::attribute_type",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::SetIntegerAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::set_integer_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::GetIntegerAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::get_integer_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::IntegerAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::integer_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::SetRealAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::set_real_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::GetRealAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::get_real_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::RealAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::real_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::SetStringAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::set_string_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::GetStringAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::get_string_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::StringAttribute",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::string_attribute",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::AttrList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::attr_list",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::SameAttributes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::same_attributes",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. Native quirk kept: the map is copied, not shared (xsbase-design.md section 5)."
+    },
+    {
+      "upstream_id": "MoniTool_AttrList::GetAttributes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_AttrList.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolAttrList::get_attributes",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::MoniTool_Element",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElementBase",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The protected constructor is the Default of the embedded base (hash code 0, no attribute)."
+    },
+    {
+      "upstream_id": "MoniTool_Element::GetHashCode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::get_hash_code",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::Equates",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::equates",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::ValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::value_type",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::ValueTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::value_type_name",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::ListAttr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::list_attr",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::ChangeAttr",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::change_attr",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Element::SetHashCode",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Element.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolElement::set_hash_code",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_SignText::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_SignText.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolSignText::name",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_SignText::TextAlone",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_SignText.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolSignText::text_alone",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_SignText::Text",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_SignText.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolSignText::text",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::MoniTool_Timer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::new",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Timer() const",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::timer",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. Returns a copy of the OSD_Timer."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Timer()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::change_timer",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The OSD_Timer& is lent to a closure under the lock."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Timer(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::timer_named",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Start()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::start",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Stop()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::stop",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Start(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::start_named",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Stop(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::stop_named",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Reset",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::reset",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Count",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::count",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::IsRunning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::is_running",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::CPU",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::cpu",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Amend",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::amend",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Dump",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::dump",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::Dictionary",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::dictionary",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The map keys are names (natively the callers' C strings hashed by content); the result is the write guard of the process-wide map."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::ClearTimers",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::clear_timers",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::DumpTimers",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::dump_timers",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::ComputeAmendments",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::compute_amendments",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_Timer::GetAmendments",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_Timer.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimer::get_amendments",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The four output references are the fields of MoniToolTimerAmendments."
+    },
+    {
+      "upstream_id": "MoniTool_TimerSentry::MoniTool_TimerSentry(const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TimerSentry.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimerSentry::from_name",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TimerSentry::MoniTool_TimerSentry(const occ::handle<MoniTool_Timer>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TimerSentry.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimerSentry::new",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TimerSentry::Timer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TimerSentry.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimerSentry::timer",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TimerSentry::Stop",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TimerSentry.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTimerSentry::stop",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::MoniTool_TypedValue(const char* const,const MoniTool_ValueType,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::new",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::MoniTool_TypedValue(const occ::handle<MoniTool_TypedValue>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::copied",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. Native quirk kept: the copy reads the limits through IntegerLimit/RealLimit, so the unset ones become the natural limits, and enforces the computed definition."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Internals",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::internals",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The four output references are the returned tuple."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Name",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::name",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::ValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::value_type",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Definition",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::definition",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetDefinition",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_definition",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Print",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::print",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. No OCCT class overrides the virtual members of MoniTool_TypedValue, so they are inherent methods."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::PrintValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::print_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::AddDef",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::add_def",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_label",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Label",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::label",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetMaxLength",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_max_length",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::MaxLength",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::max_length",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetIntegerLimit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_integer_limit",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::IntegerLimit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::integer_limit",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The int& output and the result are the returned pair."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetRealLimit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_real_limit",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::RealLimit",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::real_limit",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The double& output and the result are the returned pair."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetUnitDef",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_unit_def",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::UnitDef",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::unit_def",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::StartEnum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::start_enum",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::AddEnum",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::add_enum",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The ten optional texts are a slice; more than ten are added ten at a time, as successive native calls."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::AddEnumValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::add_enum_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::EnumDef",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::enum_def",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The outputs and the result are Option<(start, end, match)>."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::EnumVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::enum_val",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::EnumCase",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::enum_case",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetObjectType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_object_type",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::ObjectType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::object_type",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetInterpret",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_interpret",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::HasInterpret",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::has_interpret",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetSatisfies",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_satisfies",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SatisfiesName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::satisfies_name",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::IsSetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::is_set_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. A null value string (after ClearValue), which the native code dereferences, reads as empty."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::CStringValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::c_string_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::HStringValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::h_string_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Interpret",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::interpret",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Satisfies",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::satisfies",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::ClearValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::clear_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetCStringValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_c_string_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The shared string is edited in place; after ClearValue the native IsSameString raises Standard_NullObject, the Err value."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetHStringValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_h_string_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::IntegerValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::integer_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetIntegerValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_integer_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::RealValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::real_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetRealValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_real_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::ObjectValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::object_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::GetObjectValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::get_object_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::SetObjectValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::set_object_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::ObjectTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::object_type_name",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::AddLib",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::add_lib",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Lib",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::lib",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::FromLib",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::from_lib",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::LibList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::lib_list",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The HSequence of names is a Vec in the native map order."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::StaticValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::static_value",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks."
+    },
+    {
+      "upstream_id": "MoniTool_TypedValue::Stats",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/MoniTool/MoniTool_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::moni_tool::MoniToolTypedValue::stats",
+      "status": "implemented",
+      "notes": "MoniTool mapping (docs/xsbase-design.md sections 1, 2 and 5): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are AsciiString copies; Standard_OStream is std::io::Write; native exceptions are Failure errors; the process-wide dictionaries are RwLocks behind OnceLocks. The protected static map is the write guard of the process-wide map."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",

@@ -74,6 +74,7 @@ jobs:
       - run: python3 tools/verify_toolkit.py TKHLR --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKCDF --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKLCAF --source target/occt-source --jobs 2
+      - run: python3 tools/verify_toolkit.py TKXSBase --source target/occt-source --jobs 2
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

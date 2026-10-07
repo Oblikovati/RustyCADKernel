@@ -2,7 +2,7 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKXSBase)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -20,7 +20,8 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
-from native_build import (CLOSURE_TARGETS, LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS,
+from native_build import (CLOSURE_TARGETS, EXCHANGE_CLOSURE_TARGETS, EXCHANGE_LINKED_TOOLKITS,
+                          EXCHANGE_TOOLKITS, LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS,
                           OCAF_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
@@ -51,11 +52,18 @@ NUMERIC_VERIFIERS = {
 }
 
 
-# The profiles without numeric probes (the OCAF toolkits hold no numeric algorithm), and the
-# native closure each of them links: its own toolkit and the ones below it.
+# The profiles without numeric probes (the OCAF toolkits and TKXSBase hold no numeric
+# algorithm), and the native closure each of them links: its own toolkit and the ones below it.
 PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
     'TKCDF': ('TKCDF', 'TKernel'),
     'TKLCAF': OCAF_LINKED_TOOLKITS,
+    'TKXSBase': EXCHANGE_LINKED_TOOLKITS,
+}
+# The separate closure tree each profile without numeric probes builds: toolkits, tree, targets.
+PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], str, list[str]]] = {
+    'TKCDF': (OCAF_TOOLKITS, 'target/occt-ocaf-full', OCAF_CLOSURE_TARGETS),
+    'TKLCAF': (OCAF_TOOLKITS, 'target/occt-ocaf-full', OCAF_CLOSURE_TARGETS),
+    'TKXSBase': (EXCHANGE_TOOLKITS, 'target/occt-exchange-full', EXCHANGE_CLOSURE_TARGETS),
 }
 
 
@@ -108,14 +116,16 @@ def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, enviro
 
     A reused build is never reconfigured or rebuilt, so parallel worktrees can share
     one native closure without racing on it; it must already contain the libraries.
-    The OCAF profiles build their own closure tree, so the geometry closure keeps its flags.
+    The OCAF and exchange profiles build their own closure trees, so the geometry closure keeps
+    its flags.
     """
     if reuse is not None:
         if not (reuse/'CMakeCache.txt').is_file(): raise ValueError(f'No configured native build at {reuse}; expected a CMake build directory')
         return reuse
-    if toolkit in PROFILES_WITHOUT_NUMERIC:
-        flags = closure_flags(inventory['modules'], OCAF_TOOLKITS)
-        return locked_cmake(source,ROOT/'target/occt-ocaf-full',flags,OCAF_CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
+    if toolkit in PROFILE_CLOSURES:
+        toolkits, tree, targets = PROFILE_CLOSURES[toolkit]
+        flags = closure_flags(inventory['modules'], toolkits)
+        return locked_cmake(source,ROOT/tree,flags,targets,jobs,output/'configure.log',output/'build.log',run,environment)
     build = ROOT/'target/occt-tkernel-full'
     return locked_cmake(source,build,closure_flags(inventory['modules']),CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
 
