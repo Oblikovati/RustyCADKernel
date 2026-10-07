@@ -431052,6 +431052,126 @@
       "notes": "Typedef base_type = Standard_Transient that DEFINE_STANDARD_RTTIEXT(BRepFill_PipeShell, Standard_Transient) expands: Rust has no class inheritance to name; the parent type is recorded by the registered runtime type (RuntimeTyped::static_type of the Rust type), so there is no public item to port."
     },
     {
+      "upstream_id": "BRepFill_Pipe::BRepFill_Pipe()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::BRepFill_Pipe(const TopoDS_Wire&,const TopoDS_Shape&,GeomFill_Trihedron,bool,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::with_profile",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Perform(const TopoDS_Wire&,const TopoDS_Shape&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Spine() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::spine",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Profile() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::profile",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::ErrorOnSurface() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::error_on_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::FirstShape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::first_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::LastShape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::last_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Generated(const TopoDS_Shape&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Face(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::face",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Edge(const TopoDS_Edge&,const TopoDS_Vertex&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::edge",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::Section(const TopoDS_Vertex&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::section",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe::PipeLine(const gp_Pnt&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe::pipe_line",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Pipe.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_pipe requests). The tables are owned by the pipe (none before a wire is swept: the table queries of a vertex profile are a Standard_NullObject where they crash natively); output lists are returned. Native quirks kept: the faces of the wires of a face profile come from the face table, the vertex search of a wire reads the section vertices at the running global index, and the error on surface is 0 before a sweep (uninitialized natively)."
+    },
+    {
+      "upstream_id": "BRepFill_Pipe",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Pipe.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillPipe",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillPipe; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",
