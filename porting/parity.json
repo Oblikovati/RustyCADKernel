@@ -31669,6 +31669,30 @@
       "notes": "Excluded: C++ member typedef of a template specialization (BVH_TreeBase<type-parameter-0-0, value-parameter-0-1>::BVH_VecNt). Rust spells the type directly through the BvhVector/BvhMatrix associated types."
     },
     {
+      "upstream_id": "BVH_Tree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "implemented",
+      "notes": "Class template BVH_Tree<T, N, Arity> is the generic Rust struct bvh::BvhTree<V, A>."
+    },
+    {
+      "upstream_id": "BVH_Tree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "implemented",
+      "notes": "Partial specialization BVH_Tree<T, N, BVH_BinaryTree> is bvh::BvhTree<V, BvhBinaryTree>."
+    },
+    {
+      "upstream_id": "BVH_Tree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QuadTree.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTree",
+      "status": "implemented",
+      "notes": "Partial specialization BVH_Tree<T, N, BVH_QuadTree> is bvh::BvhTree<V, BvhQuadTree>."
+    },
+    {
       "upstream_id": "BSplCLib::DN(double,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,gp_Pnt&,gp_Vec&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
@@ -36882,6 +36906,46 @@
       "notes": "C++ namespace MathInteg is the Rust module math_integ."
     },
     {
+      "upstream_id": "MathInteg::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathInteg/MathInteg_DoubleExp.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathInteg. Rust module math_integ imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathInteg::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathInteg/MathInteg_Gauss.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathInteg. Rust module math_integ imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathInteg::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathInteg/MathInteg_Kronrod.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathInteg. Rust module math_integ imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathInteg::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathInteg/MathInteg_Multiple.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathInteg. Rust module math_integ imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathInteg::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathInteg/MathInteg_Set.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathInteg. Rust module math_integ imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
       "upstream_id": "MathLin::CroutResult",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
@@ -37712,6 +37776,62 @@
       "rust_item": "rustycad_tkmath::math_lin::TridiagonalResult::dimension",
       "status": "implemented",
       "notes": "MathLin::EigenResult is math_lin::TridiagonalResult (kept apart from math_utils::EigenResult); Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Crout.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_EigenSearch.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Gauss.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Householder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_Jacobi.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_LeastSquares.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathLin::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathLin/MathLin_SVD.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathLin. Rust module math_lin imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
     },
     {
       "upstream_id": "MathOpt::BFGS(Function &,const math_Vector &,const MathUtils::Config &)",
@@ -38874,6 +38994,70 @@
       "notes": "C++ helper namespace MathOpt::Utils is the Rust module math_opt::utils."
     },
     {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_BFGS.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Brent.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_FRPR.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_GlobOpt.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Newton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_PSO.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Powell.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathOpt::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathOpt/MathOpt_Uzawa.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathOpt. Rust module math_opt imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
       "upstream_id": "MathRoot::NullInterval",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
@@ -39674,6 +39858,62 @@
       "notes": "Excluded: bound reference held by the C++ helper functor. Rust math_root::utils::MultipleSampleValueFn keeps it as private state set once by MultipleSampleValueFn::new; its behavior is the functor's trait method."
     },
     {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_All.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Bisection.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Brent.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_MultipleUtils.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Newton.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Secant.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
+      "upstream_id": "MathRoot::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathRoot/MathRoot_Trig.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathRoot. Rust module math_root imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
+    },
+    {
       "upstream_id": "MathSys::LMConfig",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/MathSys/MathSys_LevenbergMarquardt.hxx",
@@ -40464,6 +40704,14 @@
       "rust_item": "rustycad_tkmath::math_sys::utils::LinearStep::status",
       "status": "implemented",
       "notes": "Public C++ data member mapped to the Rust public struct field of the same meaning."
+    },
+    {
+      "upstream_id": "MathSys::<using-directive>",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathSys/MathSys_NewtonTypes.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: `using namespace` directive inside namespace MathSys. Rust module math_sys imports the shared math_utils items with explicit `use` declarations; a directive has no callable counterpart."
     },
     {
       "upstream_id": "Geom2dEval_AHTBezierCurve::Geom2dEval_AHTBezierCurve(const NCollection_Array1<gp_Pnt2d>&,int,double,double)",
@@ -45825,6 +46073,14 @@
       "rust_item": "rustycad_tkmath::toploc::Location::shallow_dump",
       "status": "implemented",
       "notes": "Free inline ShallowDump(me, S) forwards to me.ShallowDump(S); Rust exposes the member."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/TopLoc/TopLoc_Location.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: std::hash<TopLoc_Location> specialization record. The Rust behavior is the HashKey impl for toploc::Location (occt_hash), claimed by the operator() row."
     },
     {
       "upstream_id": "math::GaussPointsMax()",
@@ -240824,6 +241080,22 @@
       "notes": "NCollection_Lerp<gp_Trsf> specialization is the Rust struct gp::TransformNLerp."
     },
     {
+      "upstream_id": "std::hash",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: std::hash<gp_Pnt> specialization record. The Rust behavior is the rustycad_tkernel::ncollection::HashKey impl for gp::Point3 (occt_hash), claimed by the operator() row."
+    },
+    {
+      "upstream_id": "std::equal_to",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Pnt.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: std::equal_to<gp_Pnt> specialization record. The Rust behavior is gp::PointHashPolicy::equal (HashPolicy<Point3>), claimed by the operator() row."
+    },
+    {
       "upstream_id": "PLib_JacobiPolynomial::D0123(int,double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
@@ -241701,6 +241973,22 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: forward declaration of the TKernel template; ported there as rustycad_tkernel::ncollection::List."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: std::hash<Poly_MakeLoops::Link> specialization record. The Rust behavior is poly::make_loops::LinkHasher::hash, claimed by the operator() row."
+    },
+    {
+      "upstream_id": "std::equal_to",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Poly/Poly_MakeLoops.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: std::equal_to<Poly_MakeLoops::Link> specialization record. The Rust behavior is poly::make_loops::LinkHasher::equal (Link::eq)."
     },
     {
       "upstream_id": "Geom2d_BSplineCurve::updateKnots()",
