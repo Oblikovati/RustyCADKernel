@@ -1,0 +1,96 @@
+{
+  "schema": "rustycad.native-behavior-audit.v1",
+  "scope": "Bounded protected Standard_MMgrOpt::Initialize state reset on the actual optimized allocator; constructor shares the same path",
+  "integration_status": "branch candidate; root integration/check/deletion required",
+  "source_base_revision": "2fd2b67b",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_inputs_count": 393,
+  "source_manifest": "porting/runtime-evidence/standard-mmgr-opt-initialize-source-manifest.json.gz",
+  "source_capture_scope": "393 selected Standard/allocator/container sources, dependent test inputs, Cargo configuration and oracles; not a complete workspace compiler-input capture",
+  "source_inputs_after_run_identical": true,
+  "artifact_sha256": {
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-source-manifest.json.gz": "caf84e9dad70aeac4abc77dec7018699c9da42a7e02d7f4f2ae5e9430f37a564",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-source.tar.gz": "0b02a66d41e20291ff9503ba87f8f59701d3e800341c7680098e971ed98c6471",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-unit.log.gz": "6d8296d01222d37e6cc5930a8d57b9a07563634136fc66c7b29beeaf8a8e92e0",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-rust.log.gz": "6d391808485caf088c9007d7be67e18f3911a6d5e717317fb8d2a8d2db7deecc",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-doc.log.gz": "d1216f8a1acb242435805889c1c7c0155a2a2341da24c586e1fd32c3f4ba141b",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-clippy.log.gz": "72af7e70bfbda593f7fdfca266015ba9f41bc1a84bef9111ca10e912c00cfcd0",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-fmt.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-unit-miri.log.gz": "78a8a866c57c1e7579050979316c0b17584b67f324f57d1b6147640b0d851c40",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-miri.log.gz": "106858fdd5b6d7f68d1ddfee4ac82bfe23bef37dc3a7351bb88d6ffa6c007225",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-services-miri.log.gz": "920082a83988d3a2ff95bd0811800a25016b9e323427a8db4221f553e5b3eb95",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-legacy-miri.log.gz": "a16369f012ead30d695124d7126cadc7697b577974c70c249307d0d486687307",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-native-original.log.gz": "d69305a080bc53a70c2f57c762a5de28367864a98e422c78ebef8bff0b47da18",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-baseline.log.gz": "98cb970d4fb800f062cc9e8efbad559d93c9edcb17729cf2deefa899ce9b7bf2",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-native-compile.log.gz": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-commands.sh.gz": "a5ccf51c10a1a13a94622bf24c4c3a662b273d96e4065488582dc27a31ef0956",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-native.log.gz": "3b0d4378a2629af4b8af973ea92d34fac5160052407d5b484b930f83b3e6cc47",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-compiler-binding.json.gz": "8612fd5429f3f22b39550ee0d0bb6f1149d451fc3ade99697cb58984926ad741",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-row-coverage.json.gz": "f9ba6aa2387b8db70f166d2a81dd3624532cb5e9de1c957d7da09453fb9cc0ab",
+    "porting/runtime-evidence/standard-mmgr-opt-initialize-original-test-joins.json.gz": "498854987dd34840c51a6e5ab23cb07675de7e444299a0f40b01c62aee6b7f5d"
+  },
+  "occt_source_sha256": {
+    "Standard_MMgrOpt.hxx": "9ca7d6b876c018ff937746df766eac2568ab1dbafd8a27b2ba745adfea032a22",
+    "Standard_MMgrOpt.cxx": "5bc434cc85e3143f605d0ff852058eab8f168cea1bca8657bfdfc42819359424"
+  },
+  "compiler_evidence": {
+    "exact_method_id": "d3af4a958200e39e65136deafddc037d5bdbd84edfa67227f518cd98aec6bcb0",
+    "qualified_name": "Standard_MMgrOpt::Initialize",
+    "signature": "void ()",
+    "access": "protected",
+    "rust_binding": "MMgrOpt::initialize_native_free_lists",
+    "body_binding_performed": false,
+    "declaration_records": 1
+  },
+  "automatic_api_parity_credit": 0,
+  "original_declaration_mapping_credit": 0,
+  "full_native_Initialize_parity": false,
+  "behavior": [
+    "MMgrOpt::new constructs zero initial storage, sets the requested parameters, and invokes the same actual initialize_native_free_lists method. No duplicate normalization implementation or detached graph was introduced.",
+    "Initialization preserves native operation order: correct page count, read system page size, disable mapping when page size is unavailable, compute free-list maximum, discard current free-list heads, round cell size. The clear flag, live handles, allocation headers, payload bytes, pool head, active cursor and pool end remain unchanged.",
+    "Recycled small blocks are forgotten by the actual free-list table without rewinding the active pool cursor. Allocation continues 24 bytes after the prior 16-byte block; subsequent Free and Allocate reestablish normal reuse.",
+    "Recycled medium blocks remain owned but unreachable from the reset free lists. Purge no longer releases them; new medium allocations do not reuse their still-live addresses. Live medium payloads remain intact, and newly freed replacements are purged normally.",
+    "Native Initialize takes no mutex and does not call or replace the process-wide allocation callback. Rust requires exclusive borrowing and leaves existing callback synchronization and Allocate/Free clearing paths unchanged. Native and Rust compare no Initialize event followed by one Allocate event.",
+    "Focused pool tests use the same legal protected page-size override in the native subclass and private Rust engine before allocating a real 6400-byte pool. Reinitialization restores the system page-size field while preserving that existing pool topology. Public adapter tests use normal constructor geometry and small medium allocations.",
+    "The native harness observes the discarded free-list array before freeing it, and cleans abandoned native medium storage only after comparison. A separate native-only fixture records calloc-table replacement and both old/new Linux descriptors remaining open, then explicitly closes them in the harness."
+  ],
+  "checks": {
+    "rust_passed": 198,
+    "rust_private_units": 5,
+    "rust_integration": 193,
+    "miri_passed": 29,
+    "miri_scope_counts": {
+      "unit-miri": 5,
+      "miri": 14,
+      "services-miri": 9,
+      "legacy-miri": 1
+    },
+    "tkernel_doctests": 273,
+    "new_tests": 8,
+    "native_fixture_rows": 11,
+    "native_rows_exactly_compared": 9,
+    "native_only_gap_rows": 2,
+    "native_originals_passed": 106,
+    "native_original_names_exactly_joined": true,
+    "baseline_missing_method_errors": 2,
+    "strict_tkernel_all_targets_clippy_exit": 0,
+    "workspace_fmt_exit": 0,
+    "miri_toolchain": "nightly-2026-09-25",
+    "miri_flags": "-Zmiri-strict-provenance",
+    "miri_leak_checks_disabled": false
+  },
+  "native_build_sha256": {
+    "probe": "0ac48d3a1a3bd000cd23cd8b95ff876be0666ce0f2965ae8d5a904b4598ed3b4",
+    "TKernel_library": "6dc26dc2e8ae4fbd4beddd4f1205947a6f1860f8ff202b65b2658970c08e0aee",
+    "original_test_binary": "1abf9129562e16490ab9098162a9cf2c1aa40d72000328fb5bb9e6cf71cf3693"
+  },
+  "remaining_gaps_and_adaptations": [
+    "Rust uses a sparse BTreeMap, not the native calloc pointer array. Native array allocation identity, byte consumption, old-array leak and unchecked calloc-failure state are not reproduced. The native-only table row remains uncredited.",
+    "The Rust mapping policy is a bool with anonymous OS mappings. Linux Initialize opens /dev/zero or /dev/null and retains old descriptors; descriptor identity, open failures and replacement/leak effects are not reproduced. The native-only descriptor row remains uncredited.",
+    "Rust retains ownership of abandoned medium backing until allocator drop; native forgets that storage and does not reclaim it on destruction. Heap resource-lifetime equivalence is not claimed. Safe invalid-handle refusal remains a Rust adaptation.",
+    "Native protected writable fields, arbitrary subclass operations and concurrent raw calls are not equivalent to the safe adapter. Exclusive Rust borrowing preserves safety; native Initialize itself provides no mutex protection.",
+    "Miri covers all eight new tests, ordinary Standard storage regressions, nine selected service memory tests and the original initialization-normalization test. The existing huge-pool stress was not rerun under Miri; every Standard service test, including all 19 pool/manager cases, passed normally.",
+    "As in the preceding shared-Standard-storage receipt, the service-memory Miri selection excludes the 1<<62 allocation case because it exhausts Miri compiler resources; complete normal tests include it. Unrelated locale FFI is outside this focused Miri selection.",
+    "The preexisting 167-record allocator reconciliation remains historical evidence from the prior candidate. This scoped binding adds evidence for one method without changing global inventory counts or claiming full allocator-family parity."
+  ]
+}
