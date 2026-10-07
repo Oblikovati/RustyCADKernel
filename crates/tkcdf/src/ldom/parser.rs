@@ -288,15 +288,8 @@ impl LdomParser {
             LdomXmlRecordType::XmlFullElement | LdomXmlRecordType::XmlStartElement => {
                 let child = self.reader.as_ref().and_then(|reader| reader.element);
                 self.append_child(parent, child, last_child);
-                if self.start_element() {
-                    return self.fail("User abort at startElement()");
-                }
-                if record == LdomXmlRecordType::XmlStartElement {
-                    return self.parse_element(stream, doc_start).then_some(true);
-                }
-                self.end_element()
-                    .then(|| self.fail("User abort at endElement()"))
-                    .flatten()
+                let full = record == LdomXmlRecordType::XmlFullElement;
+                self.child_element(full, stream, doc_start)
             }
             LdomXmlRecordType::XmlEndElement => Some(self.end_tag(parent)),
             LdomXmlRecordType::XmlText
@@ -305,6 +298,24 @@ impl LdomParser {
             LdomXmlRecordType::XmlEof => self.fail("Inexpected end of file"),
             _ => None,
         }
+    }
+    /// A child element was appended: `startElement`, then `endElement` for an empty
+    /// element or its own children for a start tag.
+    fn child_element(
+        &mut self,
+        full: bool,
+        stream: &mut LdomIStream,
+        doc_start: &mut bool,
+    ) -> Option<bool> {
+        if self.start_element() {
+            return self.fail("User abort at startElement()");
+        }
+        if !full {
+            return self.parse_element(stream, doc_start).then_some(true);
+        }
+        self.end_element()
+            .then(|| self.fail("User abort at endElement()"))
+            .flatten()
     }
     /// The end tag must name the parent; then `endElement`. True on error.
     fn end_tag(&mut self, parent: Option<LdomNodeId>) -> bool {
@@ -332,24 +343,7 @@ impl LdomParser {
         parent: Option<LdomNodeId>,
         last_child: &mut Option<LdomNodeId>,
     ) -> Option<bool> {
-        let mut text = self.current_data.str();
-        let (node_type, value) = match record {
-            LdomXmlRecordType::XmlText => {
-                (LdomNodeType::TextNode, self.decoded_text(&mut text, true))
-            }
-            LdomXmlRecordType::XmlComment => (
-                LdomNodeType::CommentNode,
-                self.decoded_text(&mut text, false),
-            ),
-            _ => (
-                LdomNodeType::CdataSectionNode,
-                Some(LdomBasicString::with_length(
-                    Some(&text),
-                    self.current_data.length(),
-                    &self.document,
-                )),
-            ),
-        };
+        let (node_type, value) = self.record_value(record);
         let Some(value) = value else {
             // Natively the null result of Decode is dereferenced.
             return self.fail("Invalid character reference in character data");
@@ -359,6 +353,25 @@ impl LdomParser {
         });
         self.append_child(parent, node, last_child);
         None
+    }
+    /// The node type and the value of a text, comment or CDATA record (none for an invalid
+    /// character reference).
+    fn record_value(&self, record: LdomXmlRecordType) -> (LdomNodeType, Option<LdomBasicString>) {
+        let mut text = self.current_data.str();
+        match record {
+            LdomXmlRecordType::XmlText => {
+                (LdomNodeType::TextNode, self.decoded_text(&mut text, true))
+            }
+            LdomXmlRecordType::XmlComment => (
+                LdomNodeType::CommentNode,
+                self.decoded_text(&mut text, false),
+            ),
+            _ => {
+                let length = self.current_data.length();
+                let value = LdomBasicString::with_length(Some(&text), length, &self.document);
+                (LdomNodeType::CdataSectionNode, Some(value))
+            }
+        }
     }
     /// `Decode` of a text, then an integer (for a text, when it is one) or a document
     /// string of the decoded length; none for an invalid character reference.

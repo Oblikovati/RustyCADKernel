@@ -113,6 +113,19 @@ impl LdomXmlWriter {
         if first.get_node_type() == LdomNodeType::ElementNode && self.indent > 0 {
             stream.write_all(b"\n")?;
         }
+        let is_child_element = self.write_child_nodes(stream, first)?;
+        if is_child_element {
+            stream.write_all(indent)?;
+            stream.write_all(b"/")?;
+        } else {
+            stream.write_all(b"</")?;
+        }
+        stream.write_all(c_str(name))?;
+        stream.write_all(b">")
+    }
+    /// Writes `first` and its next siblings, an element child one indentation deeper;
+    /// tells whether the last child is an element.
+    fn write_child_nodes(&mut self, stream: &mut dyn Write, first: LdomNode) -> io::Result<bool> {
         let mut child = first;
         let mut is_child_element = false;
         while !child.is_null() {
@@ -123,14 +136,7 @@ impl LdomXmlWriter {
             self.current_indent -= step;
             child = child.get_next_sibling();
         }
-        if is_child_element {
-            stream.write_all(indent)?;
-            stream.write_all(b"/")?;
-        } else {
-            stream.write_all(b"</")?;
-        }
-        stream.write_all(c_str(name))?;
-        stream.write_all(b">")
+        Ok(is_child_element)
     }
     /// `WriteAttribute(theOStream, theAtt)`: ` name="value"`; an integer as `%d`, a clear
     /// document string as is, any other string with its references encoded.

@@ -185,12 +185,8 @@ impl LdomXmlReader {
             if !self.refill(stream, data, &mut scan) {
                 break;
             }
-            if *doc_start && !self.eof {
-                *doc_start = false;
-                self.read_bom();
-                if self.bom != LdomBomType::BomUndefined {
-                    continue;
-                }
+            if self.skip_document_start(doc_start) {
+                continue;
             }
             if let Step::Return(record) = self.step(&mut scan, data) {
                 return record;
@@ -201,6 +197,16 @@ impl LdomXmlReader {
             return LdomXmlRecordType::XmlUnknown;
         }
         LdomXmlRecordType::XmlEof
+    }
+    /// At the document start (with input left), reads the byte order mark; true when a mark
+    /// is known, which restarts the loop as natively.
+    fn skip_document_start(&mut self, doc_start: &mut bool) -> bool {
+        if !*doc_start || self.eof {
+            return false;
+        }
+        *doc_start = false;
+        self.read_bom();
+        self.bom != LdomBomType::BomUndefined
     }
     /// Reads more input when fewer than `XML_MIN_BUFFER` bytes are left: the pending
     /// record data goes to `data`, the rest moves to the buffer start. False at the end.

@@ -351,14 +351,7 @@ impl LdomXmlReader {
     ) -> Step {
         self.buffer[close] = 0;
         scan.delimiter = 0;
-        let (mut text, end) = if data.length() > 0 {
-            self.put(data, start, close);
-            let text = data.str();
-            let end = c_str(&text).len();
-            (text, end)
-        } else {
-            (self.buffer[start..=close].to_vec(), close - start)
-        };
+        let (mut text, end) = self.attribute_text(data, start, close);
         let Some(value) = self.decoded_value(&mut text, end) else {
             // Natively the null result of Decode is dereferenced.
             return self.fail("Invalid character reference in attribute value");
@@ -371,6 +364,22 @@ impl LdomXmlReader {
         scan.start = None;
         scan.state = ScanState::AttributeName;
         Step::Continue
+    }
+    /// The C string of a value and the offset of its end: the value in place, or the data
+    /// collected over buffer refills followed by the rest of the value.
+    fn attribute_text(
+        &self,
+        data: &mut LdomOSStream,
+        start: usize,
+        close: usize,
+    ) -> (Vec<u8>, usize) {
+        if data.length() == 0 {
+            return (self.buffer[start..=close].to_vec(), close - start);
+        }
+        self.put(data, start, close);
+        let text = data.str();
+        let end = c_str(&text).len();
+        (text, end)
     }
     /// `Decode` of a value, then an integer (`getInteger` against the undecoded end) or a
     /// document string of the decoded length.
