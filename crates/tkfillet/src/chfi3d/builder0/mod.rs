@@ -9,9 +9,11 @@ mod boundaries;
 mod bounds;
 mod faces;
 mod pcurves;
+mod smooth;
 mod solve;
 mod spines;
 mod stripes;
+mod topology;
 
 pub use arete::{Arete, compute_arete, fil_common_point, trsf_trans};
 pub use boundaries::{
@@ -27,9 +29,15 @@ pub use pcurves::{
     check_same_parameter, compute_pcurv, compute_pcurv_geom, compute_pcurv_on, project_pcurv,
     reparam_pcurv, same_parameter, same_parameter_geom,
 };
+pub use smooth::{approx_by_c2, is_smooth};
 pub use solve::{computes_int_pc, int_cs, parameters, search_pivot, trim_curve};
 pub use spines::{circular_spine, inter_plane_edge, spine};
 pub use stripes::{
     conv_tol2d_to_tol3d, edge_from_v1, eval_tol_reached, has_common_endpoint,
     has_transversal_intersection, index_of_surf_data,
+};
+pub use topology::{
+    angle_edge, cherche_bords_libres, cherche_edge, cherche_element, cherche_face1, cherche_vertex,
+    couture, couture_on_vertex, edge_common_faces, is_pseudo_seam, nb_not_degenerated_edges,
+    nbface, number_of_edges, number_of_sharp_edges,
 };

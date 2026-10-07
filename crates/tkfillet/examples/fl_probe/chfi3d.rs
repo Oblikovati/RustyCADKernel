@@ -116,6 +116,9 @@ pub(crate) fn solid(r: &mut Reader<'_>) -> Result<Shape, Failure> {
         3 => built(BRepPrimAPIMakeCone::new(a, b, c)?),
         4 => built(BRepPrimAPIMakeSphere::new(a)?),
         5 => built(BRepPrimAPIMakeTorus::new(a, b)?),
+        7 => Ok(
+            polygon_face(&[(0.0, 0.0), (a, 0.0), (a, d), (d, d), (d, b), (0.0, b)])?.into_shape(),
+        ),
         _ => {
             let f = polygon_face(&[(a, 0.0), (a + b, 0.0), (a + b, c), (a, c)])?;
             let axis = Axis1::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 1.0, 0.0)?);

@@ -79,6 +79,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"fl_int_cs", fl_int_cs_case},
  {"fl_computes_int_pc", fl_computes_int_pc_case},
  {"fl_b0_inter2d", fl_b0_inter2d_case},
+ {"fl_b0_topology", fl_b0_topology_case},
+ {"fl_b0_smooth", fl_b0_smooth_case},
 };
 int main() {
  std::string line;

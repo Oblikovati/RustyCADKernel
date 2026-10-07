@@ -157,6 +157,17 @@ def meetings(requests: list[str]) -> None:
             requests.append('fl_b0_inter2d ' + numbers([*c1, f1, l1, *c2, f2, l2, 1e-7]))
 
 
+def topology(requests: list[str]) -> None:
+    for solid in [*SOLIDS, (7, 10, 8, 0, 2)]:
+        requests.append('fl_b0_topology ' + numbers(list(solid)))
+    bezier = [4, 0, 0, 0, 1, 2, 0, 3, -1, 1, 4, 1, 0]
+    kinked = [3, 0, 0, 0, 1, 0, 0, 1, 0.01, 0]
+    for kind, g, poles, f, l in ((0, LINE_X, [0], 0, 0), (0, LINE_X, [0], -2, 3), (0, CIRCLE2, [0], 0, 0), (0, CIRCLE2, [0], 0.5, 4.0),
+                                 (1, LINE_X, bezier, 0, 0), (1, LINE_X, bezier, 0.2, 0.9), (1, LINE_X, kinked, 0, 0),
+                                 (0, guide(1, (0, 0, 0), (0, 0, 1), (1, 0, 0), 1e-3), [0], 0.1, 6.0)):
+        requests.append('fl_b0_smooth ' + numbers([kind, *g, *poles, f, l]))
+
+
 def append_builder0_requests(requests: list[str]) -> None:
     """Append the ChFi3d_Builder_0 request families."""
     scalars(requests)
@@ -170,3 +181,4 @@ def append_builder0_requests(requests: list[str]) -> None:
     common_points(requests)
     tolerances(requests)
     meetings(requests)
+    topology(requests)

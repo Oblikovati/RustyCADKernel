@@ -21,6 +21,7 @@
 #include <GeomAdaptor_Curve.hxx>
 #include <GeomAdaptor_Surface.hxx>
 #include <GeomFill_Boundary.hxx>
+#include <Geom_BSplineCurve.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <Geom_Circle.hxx>
 #include <Geom_RectangularTrimmedSurface.hxx>
@@ -274,4 +275,51 @@ void fl_b0_inter2d_case(std::istream& in){
  GA_TRY(Geom2dAdaptor_Curve a1(c1,f1,l1),a2(c2,f2,l2);Geom2dInt_GInter inter(a1,a2,tol,tol);ga_flag(inter.IsDone());
   ga_int(inter.NbPoints());ga_int(inter.NbSegments());ga_flag(ChFi3d_HasTransversalIntersection(inter));
   bool s1=false,s2=true;ga_flag(ChFi3d_HasCommonEndpoint(inter,a1,a2,tol,s1,s2));ga_flag(s1);ga_flag(s2));
+ ga_end();}
+
+// The index of a shape in the map of its kind in the solid (0 for a null shape).
+int fl_index(const TopoDS_Shape& s,const TopoDS_Shape& x,TopAbs_ShapeEnum kind){
+ if(x.IsNull())return 0;NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher> m;TopExp::MapShapes(s,kind,m);return m.FindIndex(x);}
+
+// `fl_b0_topology SOLID`: for each face, ChFi3d_Couture, ChFi3d_CoutureOnVertex (its
+// vertices), ChFi3d_IsPseudoSeam and ChFi3d_cherche_element (its edges at their first
+// vertex); for each edge, ChFi3d_edge_common_faces and ChFi3d_cherche_face1; for each
+// vertex, ChFi3d_nbface, ChFi3d_NbNotDegeneratedEdges, ChFi3d_NumberOfEdges,
+// ChFi3d_NumberOfSharpEdges, ChFi3d_ChercheBordsLibres, and for its first two edges
+// ChFi3d_AngleEdge, ChFi3d_cherche_vertex and ChFi3d_cherche_edge on their first face.
+void fl_b0_topology_case(std::istream& in){
+ GaReader r{in};TopoDS_Shape s=fl_solid(r);ChFiDS_Map ef,ve,vf;ef.Fill(s,TopAbs_EDGE,TopAbs_FACE);ve.Fill(s,TopAbs_VERTEX,TopAbs_EDGE);vf.Fill(s,TopAbs_VERTEX,TopAbs_FACE);
+ for(TopExp_Explorer ex(s,TopAbs_FACE);ex.More();ex.Next()){TopoDS_Face f=TopoDS::Face(ex.Current());
+  GA_TRY(bool c=false;TopoDS_Edge e;ChFi3d_Couture(f,c,e);ga_flag(c);ga_int(fl_index(s,e,TopAbs_EDGE)));
+  for(TopExp_Explorer ev(f,TopAbs_VERTEX);ev.More();ev.Next())
+   GA_TRY(bool c=false;TopoDS_Edge e;ChFi3d_CoutureOnVertex(f,TopoDS::Vertex(ev.Current()),c,e);ga_flag(c);ga_int(fl_index(s,e,TopAbs_EDGE)));
+  for(TopExp_Explorer ee(f,TopAbs_EDGE);ee.More();ee.Next()){TopoDS_Edge e=TopoDS::Edge(ee.Current());
+   GA_TRY(ga_flag(ChFi3d_IsPseudoSeam(e,f)));
+   GA_TRY(TopoDS_Edge x;TopoDS_Vertex v;ChFi3d_cherche_element(TopExp::FirstVertex(e),e,f,x,v);ga_int(fl_index(s,x,TopAbs_EDGE));ga_int(fl_index(s,v,TopAbs_VERTEX)));}}
+ FlEdgeFaces edges=fl_edge_faces(s);
+ for(int i=1;i<=edges.Extent();++i){
+  GA_TRY(TopoDS_Face f1,f2;ChFi3d_edge_common_faces(edges(i),f1,f2);ga_int(fl_index(s,f1,TopAbs_FACE));ga_int(fl_index(s,f2,TopAbs_FACE));
+   TopoDS_Face f;ChFi3d_cherche_face1(edges(i),f1,f);ga_int(fl_index(s,f,TopAbs_FACE)));}
+ FlEdgeFaces verts;TopExp::MapShapesAndAncestors(s,TopAbs_VERTEX,TopAbs_EDGE,verts);
+ for(int i=1;i<=verts.Extent();++i){TopoDS_Vertex v=TopoDS::Vertex(verts.FindKey(i));
+  GA_TRY(ga_int(ChFi3d_nbface(vf(v))));GA_TRY(ga_int(ChFi3d_NbNotDegeneratedEdges(v,ve)));
+  GA_TRY(ga_int(ChFi3d_NumberOfEdges(v,ve)));GA_TRY(ga_int(ChFi3d_NumberOfSharpEdges(v,ve,ef)));
+  GA_TRY(bool b=false;TopoDS_Edge e1,e2;ChFi3d_ChercheBordsLibres(ve,v,b,e1,e2);ga_flag(b);ga_int(fl_index(s,e1,TopAbs_EDGE));ga_int(fl_index(s,e2,TopAbs_EDGE)));
+  const NCollection_List<TopoDS_Shape>& es=verts(i);if(es.Extent()<2)continue;
+  TopoDS_Edge a=TopoDS::Edge(es.First()),b=TopoDS::Edge(*std::next(es.begin()));
+  GA_TRY(ga_real(ChFi3d_AngleEdge(v,a,b)));
+  GA_TRY(TopoDS_Vertex x;bool found=false;ChFi3d_cherche_vertex(a,b,x,found);ga_flag(found);ga_int(fl_index(s,x,TopAbs_VERTEX)));
+  GA_TRY(TopoDS_Face f=TopoDS::Face(ef(a).First());NCollection_Array1<TopoDS_Shape> ex(1,2);ex(1)=a;ex(2)=b;TopoDS_Edge x;TopoDS_Vertex vx;
+   ChFi3d_cherche_edge(v,ex,f,x,vx);ga_int(fl_index(s,x,TopAbs_EDGE));ga_int(fl_index(s,vx,TopAbs_VERTEX)));}
+ ga_end();}
+
+// `fl_b0_smooth kind GUIDE n P1..Pn f l`: ChFi3d_IsSmooth and ChFi3d_ApproxByC2 of the guide
+// (kind 0) or the Bezier curve of the poles (kind 1), trimmed to [f, l] when f < l.
+void fl_b0_smooth_case(std::istream& in){
+ GaReader r{in};int kind=r.integer();occ::handle<Geom_Curve> c=fl_geom_guide(r);int n=r.integer();
+ NCollection_Array1<gp_Pnt> poles(1,std::max(n,1));for(int i=1;i<=n;++i)poles(i)=r.pnt();double f=r.real(),l=r.real();
+ GA_TRY(if(kind==1)c=new Geom_BezierCurve(poles);if(f<l)c=new Geom_TrimmedCurve(c,f,l);
+  GA_TRY(ga_flag(ChFi3d_IsSmooth(c)));
+  GA_TRY(occ::handle<Geom_BSplineCurve> bs=ChFi3d_ApproxByC2(c);ga_flag(bs.IsNull());if(!bs.IsNull()){ga_int(bs->Degree());ga_int(bs->NbPoles());
+   ga_real(bs->FirstParameter());ga_real(bs->LastParameter());ga_pnt(bs->Value(0.5*(bs->FirstParameter()+bs->LastParameter())));}));
  ga_end();}

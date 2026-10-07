@@ -53,7 +53,8 @@ TopoDS_Face fl_polygon_face(const std::vector<gp_Pnt2d>& pts){
 
 // `fl_solid kind a b c d`: 0 box (a, b, c), 1 L-shaped prism (legs a and b, thickness d,
 // height c; its inner edge is concave), 2 cylinder (a, b), 3 cone (a, b, c), 4 sphere (a),
-// 5 torus (a, b), 6 the rectangle [a, a + b] x [0, c] revolved by d around the Y axis.
+// 5 torus (a, b), 6 the rectangle [a, a + b] x [0, c] revolved by d around the Y axis, 7 the
+// face of the L-shaped prism alone (free borders).
 TopoDS_Shape fl_solid(GaReader& r){
  int kind=r.integer();double a=r.real(),b=r.real(),c=r.real(),d=r.real();
  if(kind==0)return BRepPrimAPI_MakeBox(a,b,c).Shape();
@@ -63,6 +64,7 @@ TopoDS_Shape fl_solid(GaReader& r){
  if(kind==3)return BRepPrimAPI_MakeCone(a,b,c).Shape();
  if(kind==4)return BRepPrimAPI_MakeSphere(a).Shape();
  if(kind==5)return BRepPrimAPI_MakeTorus(a,b).Shape();
+ if(kind==7)return fl_polygon_face({gp_Pnt2d(0,0),gp_Pnt2d(a,0),gp_Pnt2d(a,d),gp_Pnt2d(d,d),gp_Pnt2d(d,b),gp_Pnt2d(0,b)});
  TopoDS_Face f=fl_polygon_face({gp_Pnt2d(a,0),gp_Pnt2d(a+b,0),gp_Pnt2d(a+b,c),gp_Pnt2d(a,c)});
  return BRepPrimAPI_MakeRevol(f,gp_Ax1(gp_Pnt(0,0,0),gp_Dir(0,1,0)),d).Shape();}
 
