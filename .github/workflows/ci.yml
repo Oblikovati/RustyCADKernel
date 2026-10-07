@@ -60,7 +60,7 @@ jobs:
           ref: 3d097a0328e71b826377d4814ab05ec3c3d23871
           path: target/occt-source
       - run: rustup show
-      - run: PYTHONPATH=tools python3 -m unittest discover -s tools/tests
+      - run: python3 tools/run_tool_tests.py --jobs 2
       - run: python3 tools/verify_tkernel.py --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKMath --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKG2d --source target/occt-source --jobs 2

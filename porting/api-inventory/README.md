@@ -55,7 +55,7 @@ python3 tools/normalize_rustdoc_inventory.py
 python3 tools/api_coverage_report.py
 python3 tools/publish_api_snapshot.py
 python3 tools/api_metrics_report.py
-PYTHONPATH=tools python3 -m unittest discover -s tools/tests
+python3 tools/run_tool_tests.py --jobs 2
 ```
 
 To examine the checked-in crosswalk without generating compiler artifacts:
