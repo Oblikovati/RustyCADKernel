@@ -33,6 +33,22 @@ impl DrawXSegment {
             ],
         }
     }
+
+    /// `operator[](i) const`: point 0 (start) or 1 (end); `None` for another index
+    /// (the C++ reads outside the array).
+    ///
+    /// ```
+    /// use rustycad_tkdraw::draw::DrawXSegment;
+    /// assert_eq!(DrawXSegment::new(1, 2, 3, 4).point(1), Some([3, 4]));
+    /// ```
+    pub fn point(&self, index: usize) -> Option<[i16; 2]> {
+        self.points.get(index).copied()
+    }
+
+    /// `operator[](i)`: the point for modification.
+    pub fn point_mut(&mut self, index: usize) -> Option<&mut [i16; 2]> {
+        self.points.get_mut(index)
+    }
 }
 
 /// What a `Draw_Display` draws on: the geometry of the current `Draw_View` and its
