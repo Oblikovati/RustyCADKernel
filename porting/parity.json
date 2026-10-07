@@ -97609,6 +97609,590 @@
       "notes": "IFGraph mapping (docs/xsbase-design.md section 1): the graph contents embed an Interface_GraphContent (dereference target) and implement InterfaceGraphContentEvaluate for the virtual Evaluate; the sub-parts iterators embed IFGraphSubPartsIterator and implement IFGraphSubPartsEvaluate; the graph copies of the constructors are Interface_Graph copies; native exceptions and null dereferences are Failure errors. Native quirk kept: a present entity makes it non-empty, so a non-empty list never is."
     },
     {
+      "upstream_id": "TransferBRep_BinderOfShape::TransferBRep_BinderOfShape()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::new",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_BinderOfShape::TransferBRep_BinderOfShape(const TopoDS_Shape&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::with_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_BinderOfShape::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::<rustycad_tkxsbase::transfer::TransferBinder>::result_type",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_BinderOfShape::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::<rustycad_tkxsbase::transfer::TransferBinder>::result_type_name",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_BinderOfShape::SetResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::set_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. Transfer_TransferFailure when the result is already used."
+    },
+    {
+      "upstream_id": "TransferBRep_BinderOfShape::Result",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_BinderOfShape::CResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_BinderOfShape.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepBinderOfShape::c_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. The write guard (natively a modifiable reference); Transfer_TransferFailure when used."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::TransferBRep_ShapeBinder()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::new",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::TransferBRep_ShapeBinder(const TopoDS_Shape&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::with_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::ShapeType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::shape_type",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Vertex",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::vertex",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Edge",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::edge",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Wire",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::wire",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Face",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::face",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Shell",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::shell",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Solid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::solid",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::CompSolid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::comp_solid",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeBinder::Compound",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeBinder::compound",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::TransferBRep_ShapeListBinder()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::new",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::TransferBRep_ShapeListBinder(const occ::handle<NCollection_HSequence<TopoDS_Shape>>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::with_list",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. A null sequence is None; its later use is a Standard_NullObject failure."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::IsMultiple",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::<rustycad_tkxsbase::transfer::TransferBinder>::is_multiple",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::ResultType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::ResultTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::<rustycad_tkxsbase::transfer::TransferBinder>::result_type_name",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::AddResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::add_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. Native behaviour kept: the result status stays void."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Result",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::SetResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::set_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::NbShapes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::nb_shapes",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Shape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::shape",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::ShapeType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::shape_type",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Vertex",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::vertex",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Edge",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::edge",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Wire",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::wire",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Face",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::face",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Shell",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::shell",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Solid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::solid",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::CompSolid",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::comp_solid",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeListBinder::Compound",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeListBinder.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeListBinder::compound",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeMapper::TransferBRep_ShapeMapper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeMapper::new",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeMapper::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeMapper::value",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeMapper::Equates",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeMapper::<rustycad_tkxsbase::transfer::TransferFinder>::equates",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeMapper::ValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeMapper::<rustycad_tkxsbase::transfer::TransferFinder>::value_type",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeMapper::ValueTypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeMapper.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeMapper::<rustycad_tkxsbase::transfer::TransferFinder>::value_type_name",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeInfo::Type",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeInfo::type_of",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_ShapeInfo::TypeName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_ShapeInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepShapeInfo::type_name",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::TransferBRep_TransferResultInfo",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::new",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::clear",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::Result",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. The write guard (natively a modifiable reference)."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::ResultWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::result_warning",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::ResultFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::result_fail",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::ResultWarningFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::result_warning_fail",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::NoResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::no_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::NoResultWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::no_result_warning",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::NoResultFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::no_result_fail",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep_TransferResultInfo::NoResultWarningFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep_TransferResultInfo.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRepTransferResultInfo::no_result_warning_fail",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::ShapeResult(const occ::handle<Transfer_Binder>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::shape_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::ShapeResult(const occ::handle<Transfer_TransientProcess>&,const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::shape_result_of",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. Standard_NullObject for a null process."
+    },
+    {
+      "upstream_id": "TransferBRep::SetShapeResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::set_shape_result",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::Shapes(const occ::handle<Transfer_TransientProcess>&,const bool)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::shapes",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. None for a null process (the native null sequence)."
+    },
+    {
+      "upstream_id": "TransferBRep::Shapes(const occ::handle<Transfer_TransientProcess>&,const occ::handle<NCollection_HSequence<occ::handle<Standard_Transient>>>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::shapes_of",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. Native quirk kept: only both null give a null result; one null is a Standard_NullObject failure."
+    },
+    {
+      "upstream_id": "TransferBRep::ShapeState",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::shape_state",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::ResultFromShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::result_from_shape",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::TransientFromShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::transient_from_shape",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::SetTransientFromShape",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::set_transient_from_shape",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::ShapeMapper",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::shape_mapper",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. Standard_NullObject for a null process."
+    },
+    {
+      "upstream_id": "TransferBRep::TransferResultInfo(const occ::handle<Transfer_TransientProcess>&,const occ::handle<NCollection_HSequence<occ::handle<Standard_Transient>>>&,occ::handle<NCollection_HSequence<occ::handle<TransferBRep_TransferResultInfo>>>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::transfer_result_info",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. The output sequence is the returned Vec."
+    },
+    {
+      "upstream_id": "TransferBRep::TransferResultInfo(const occ::handle<Transfer_FinderProcess>&,const occ::handle<NCollection_HSequence<int>>&,occ::handle<NCollection_HSequence<occ::handle<TransferBRep_TransferResultInfo>>>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::transfer_result_info_shapes",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. The output sequence is the returned Vec; a mapped finder that is not a shape mapper is a Standard_NullObject failure (a native null dereference)."
+    },
+    {
+      "upstream_id": "TransferBRep::PrintResultInfo",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::print_result_info",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. The messages Result.Print.MSG30 to MSG48 are in no native catalog: their texts are the unknown-key texts of Message_Msg, as natively."
+    },
+    {
+      "upstream_id": "TransferBRep::BRepCheck",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors. Declared but not defined upstream (the definition is commented out with TransferBRep_Analyzer, which does not exist)."
+    },
+    {
+      "upstream_id": "TransferBRep::ResultCheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::result_check_list",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::Checked",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::checked",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::CheckedShapes",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::checked_shapes",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
+      "upstream_id": "TransferBRep::CheckObject",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/TransferBRep/TransferBRep.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer_brep::TransferBRep::check_object",
+      "status": "implemented",
+      "notes": "TransferBRep mapping (docs/xsbase-design.md section 3): binders and finders implement the Transfer traits; TopoDS_Shape is rustycad_tkbrep::topods::Shape and the typed casts return Standard_TypeMismatch failures; HSequence arguments are slices (None for null) and results are Vec copies; native exceptions and null dereferences are Failure errors."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
