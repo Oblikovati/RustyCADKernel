@@ -21,3 +21,5 @@ def append_tkfillet_requests(requests: list[str]) -> None:
     __import__('tkfillet_corpus_walking').append_walking_requests(requests)
     # BRepBlend line builders (tkfillet_corpus_linebuilders.py)
     __import__('tkfillet_corpus_linebuilders').append_linebuilder_requests(requests)
+    # ChFi2d (tkfillet_corpus_chfi2d.py)
+    __import__('tkfillet_corpus_chfi2d').append_chfi2d_requests(requests)

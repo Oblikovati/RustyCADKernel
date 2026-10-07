@@ -464463,6 +464463,758 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ChFi2d",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d::CommonVertex(const TopoDS_Edge&,const TopoDS_Edge&,TopoDS_Vertex&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::common_vertex",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d::FindConnectedEdges(const TopoDS_Face&,const TopoDS_Vertex&,TopoDS_Edge&,TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::find_connected_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::ChFi2d_AnaFilletAlgo()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::new",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::ChFi2d_AnaFilletAlgo(const TopoDS_Edge&,const TopoDS_Edge&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::with_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::ChFi2d_AnaFilletAlgo(const TopoDS_Wire&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::with_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::Init(const TopoDS_Edge&,const TopoDS_Edge&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::init_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::Init(const TopoDS_Wire&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::init_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::Perform(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::perform",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_AnaFilletAlgo::Result(TopoDS_Edge&,TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_AnaFilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dAnaFilletAlgo::result",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_BothEdgesDegenerated",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::BothEdgesDegenerated",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::AddChamfer(const TopoDS_Edge&,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::add_chamfer",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::AddChamfer(const TopoDS_Edge&,const TopoDS_Vertex&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::add_chamfer_angle",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::AddFillet(const TopoDS_Vertex&,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::add_fillet",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::BasisEdge(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::basis_edge",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::ChFi2d_Builder()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::new",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::ChFi2d_Builder(const TopoDS_Face&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::with_face",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::ChamferEdges() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::chamfer_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::DescendantEdge(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::descendant_edge",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::FilletEdges() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::fillet_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::HasDescendant(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::has_descendant",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::Init(const TopoDS_Face&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::init",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::Init(const TopoDS_Face&,const TopoDS_Face&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::init_modified",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::IsModified(const TopoDS_Edge&) const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::is_modified",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::ModifyChamfer(const TopoDS_Edge&,const TopoDS_Edge&,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::modify_chamfer",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::ModifyChamfer(const TopoDS_Edge&,const TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::modify_chamfer_angle",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::ModifyFillet(const TopoDS_Edge&,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::modify_fillet",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::NbChamfer() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::nb_chamfer",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::NbFillet() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::nb_fillet",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::RemoveChamfer(const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::remove_chamfer",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::RemoveFillet(const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::remove_fillet",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::Result() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::result",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Builder::Status() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_Builder.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dBuilder::status",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::ChFi2d_ChamferAPI()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::new",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::ChFi2d_ChamferAPI(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::with_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::ChFi2d_ChamferAPI(const TopoDS_Wire&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::with_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::Init(const TopoDS_Edge&,const TopoDS_Edge&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::init_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::Init(const TopoDS_Wire&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::init_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::Perform()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::perform",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ChamferAPI::Result(TopoDS_Edge&,TopoDS_Edge&,double,double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ChamferAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dChamferAPI::result",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ComputationError",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::ComputationError",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ConnexionError",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::ConnexionError",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ConstructionError",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::ChFi2d_FilletAPI()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::new",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::ChFi2d_FilletAPI(const TopoDS_Edge&,const TopoDS_Edge&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::with_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::ChFi2d_FilletAPI(const TopoDS_Wire&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::with_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::Init(const TopoDS_Edge&,const TopoDS_Edge&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::init_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::Init(const TopoDS_Wire&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::init_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::NbResults(const gp_Pnt&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::nb_results",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::Perform(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::perform",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAPI::Result(const gp_Pnt&,TopoDS_Edge&,TopoDS_Edge&,int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAPI.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAPI::result",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::ChFi2d_FilletAlgo()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::new",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::ChFi2d_FilletAlgo(const TopoDS_Edge&,const TopoDS_Edge&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::with_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::ChFi2d_FilletAlgo(const TopoDS_Wire&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::with_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::Init(const TopoDS_Edge&,const TopoDS_Edge&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::init_edges",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::Init(const TopoDS_Wire&,const gp_Pln&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::init_wire",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::NbResults(const gp_Pnt&)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::nb_results",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::Perform(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::perform",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FilletAlgo::Result(const gp_Pnt&,TopoDS_Edge&,TopoDS_Edge&,int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ChFi2dFilletAlgo::result",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_FirstEdgeDegenerated",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::FirstEdgeDegenerated",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_InitialisationError",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::InitialisationError",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_IsDone",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::IsDone",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_LastEdgeDegenerated",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::LastEdgeDegenerated",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_NoFace",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::NoFace",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_NotAuthorized",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::NotAuthorized",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_NotPlanar",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::NotPlanar",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_ParametersError",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::ParametersError",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_Ready",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::Ready",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "ChFi2d_TangencyError",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_ConstructionError.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::ConstructionError::TangencyError",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::Copy()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::copy",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::FilletPoint(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::new",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::FilterPoints(FilletPoint*)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::filter_points",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::LowerValue()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::lower_value",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::appendValue(double,bool)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::append_value",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::calculateDiff(FilletPoint*)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::calculate_diff",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getCenter()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_center",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getDiff(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_diff",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getNBValues()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_nb_values",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getNear(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_near",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getParam() const",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_param",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getParam2()",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_param2",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::getValue(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::get_value",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::hasSolution(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::has_solution",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::isValid(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::is_valid",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::remove(int)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::remove",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::setCenter(gp_Pnt2d)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::set_center",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::setParam(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::set_param",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
+      "upstream_id": "FilletPoint::setParam2(double)",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/ChFi2d/ChFi2d_FilletAlgo.hxx",
+      "rust_item": "rustycad_tkfillet::chfi2d::FilletPoint::set_param2",
+      "status": "implemented",
+      "notes": "ChFi2d mapping (docs/tkfillet-progress.md): the algorithms are plain structs; output edge references stay &mut Edge arguments, CommonVertex returns Option<Vertex>, the overloads take distinct names (with_wire/with_edges, init_wire/init_edges, add_chamfer_angle, modify_chamfer_angle), FilletPoint pointers become references and native exceptions become Failure values. Compared with OCCT by the fl_chfi2d_fillet, fl_chfi2d_chamfer and fl_chfi2d_builder probes of tools/verify_tkfillet_numeric.py."
+    },
+    {
       "upstream_id": "ChFiKPart_ComputeData::operator delete(void*) noexcept",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/ChFiKPart/ChFiKPart_ComputeData.hxx",

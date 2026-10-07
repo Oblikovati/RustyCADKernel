@@ -76,6 +76,13 @@ FilletSurf.
   restriction takes the tangent on the first one; the end point reframings read the
   restriction parameter of the last vertex examined even when none matched (as do those
   of the surface-restriction builder).
+- `ChFi2d_AnaFilletAlgo`: both neighbours of the fillet take the orientation of the
+  first edge; the cut of two crossing edges is found by `GeomAPI_ExtremaCurveCurve`.
+- `ChFi2d_FilletAlgo`: the shifted point is filled up to `delta * 999` (not shifted);
+  the projections compare `LowerDistanceParameter` with the confusion as a distance.
+- `ChFi2d_Builder`: when the chamfer line does not cut the second edge, `ComputePoint`
+  returns the surface point at the origin and an uninitialized parameter (the port uses
+  0.0); `ModifyChamfer(Chamfer, E1, E2, D1, D2)` does not use `E1`.
 
 ## Verification
 
@@ -88,3 +95,4 @@ FilletSurf.
 | ChFiDS | `fl_spine`, `fl_arc_spine`, `fl_fil_law` |
 | BlendFunc | `fl_const_rad`, `fl_const_rad_inv`, `fl_evol_rad`, `fl_evol_rad_inv`, `fl_chamfer`, `fl_chamfer_inv` |
 | BRepBlend | `fl_rad_inv`, `fl_blend_tool`, `fl_surf_rst`, `fl_rst_rst`, `fl_app_func`, `fl_walking`, `fl_surf_rst_walk`, `fl_rst_rst_walk` |
+| ChFi2d | `fl_chfi2d_fillet`, `fl_chfi2d_chamfer`, `fl_chfi2d_builder` |
