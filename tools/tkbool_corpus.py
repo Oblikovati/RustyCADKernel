@@ -29,3 +29,5 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_brepfill_pipe_shell').append_pipe_shell_requests(requests)
     # BRepFill_Pipe (tkbool_corpus_brepfill_pipe.py)
     __import__('tkbool_corpus_brepfill_pipe').append_pipe_requests(requests)
+    # BRepFill_Draft (tkbool_corpus_brepfill_draft.py)
+    __import__('tkbool_corpus_brepfill_draft').append_draft_requests(requests)

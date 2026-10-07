@@ -431172,6 +431172,94 @@
       "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillPipe; each member is mapped by its own row."
     },
     {
+      "upstream_id": "BRepFill_Draft::BRepFill_Draft(const TopoDS_Shape&,const gp_Dir&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::SetOptions(BRepFill_TransitionStyle,double,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::set_options",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::SetDraft(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::set_draft",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::Perform(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::perform_length",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::Perform(const occ::handle<Geom_Surface>&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::perform_surface",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::Perform(const TopoDS_Shape&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::perform_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::IsDone() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::is_done",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::Shell() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::shell",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::Generated(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft::shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Draft.cxx with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_draft requests). The Perform overloads are perform_length, perform_surface and perform_shape. The stop Boolean operation reuses the pave filler of the section (taken back from it) and runs BuildBOP by the operation of the same states; the history of the cut is merged through the builder relations. Native quirks kept: Generated casts its argument to an edge (a vertex is Standard_TypeMismatch) and looks for vertices only for a null shape; the length is divided by the cosine of the angle for the stops."
+    },
+    {
+      "upstream_id": "BRepFill_Draft",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Draft.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillDraft",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::brep_fill::BRepFillDraft; each member is mapped by its own row."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",

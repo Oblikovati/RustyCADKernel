@@ -1,5 +1,6 @@
 //! `BRepFill`: sweeps, pipes, thru-sections and fillings of the topological shapes.
 mod compatible_wires;
+mod draft;
 mod generator;
 mod location_law;
 mod package;
@@ -15,6 +16,7 @@ mod transition_style;
 mod trim_shell_corner;
 
 pub use compatible_wires::BRepFillCompatibleWires;
+pub use draft::BRepFillDraft;
 pub use generator::{BRepFillGenerator, GeneratedFaces};
 pub use location_law::{
     BRepFillACRLaw, BRepFillDraftLaw, BRepFillEdge3DLaw, BRepFillEdgeOnSurfLaw,
