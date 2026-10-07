@@ -85458,6 +85458,14 @@
       "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
     },
     {
+      "upstream_id": "NCollection_BaseAllocator::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (Standard_Transient) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of BaseAllocator (AllocatorObject) carry the parent type descriptor."
+    },
+    {
       "upstream_id": "NCollection_IncAllocator::NCollection_IncAllocator(size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
@@ -85538,6 +85546,134 @@
       "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
     },
     {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel::Min",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel::Min",
+      "status": "implemented",
+      "notes": "Block growth level Min; same declaration order (discriminants 0..4) as the native unsigned short enum."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel::Small",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel::Small",
+      "status": "implemented",
+      "notes": "Block growth level Small; same declaration order (discriminants 0..4) as the native unsigned short enum."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel::Medium",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel::Medium",
+      "status": "implemented",
+      "notes": "Block growth level Medium; same declaration order (discriminants 0..4) as the native unsigned short enum."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel::Large",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel::Large",
+      "status": "implemented",
+      "notes": "Block growth level Large; same declaration order (discriminants 0..4) as the native unsigned short enum."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel::Max",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel::Max",
+      "status": "implemented",
+      "notes": "Block growth level Max; same declaration order (discriminants 0..4) as the native unsigned short enum."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::THE_DEFAULT_BLOCK_SIZE",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::INC_DEFAULT_BLOCK_SIZE",
+      "status": "implemented",
+      "notes": "Static constexpr 1024 * 12 is the crate constant INC_DEFAULT_BLOCK_SIZE."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::THE_MINIMUM_BLOCK_SIZE",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::INC_MINIMUM_BLOCK_SIZE",
+      "status": "implemented",
+      "notes": "Static constexpr 1024 * 2 is the crate constant INC_MINIMUM_BLOCK_SIZE."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlock::AvailableSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlock::available_size",
+      "status": "implemented",
+      "notes": "Bytes left in the block. Native uses std::atomic for CAS under a shared lock; the Rust engine mutates blocks only under its allocator lock, so a plain usize field carries the same value."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlock::CurPointer",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlock::cursor",
+      "status": "partial",
+      "notes": "Bump pointer of the block. Rust stores the offset from the payload start (cursor) instead of an absolute char* (address = payload + cursor); atomicity is replaced by the allocator lock."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlock::NextBlock",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockObservation::next",
+      "status": "partial",
+      "notes": "Intrusive sorted-list link. The Rust engine owns its blocks and keeps the sorted chain internally; IncAllocatorExtension::observation reports each link as a numeric block identity in IncBlockObservation::next. No writable link escapes."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlock::NextOrderedBlock",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockObservation::ordered_next",
+      "status": "partial",
+      "notes": "Intrusive allocation-order link. Kept internally by the Rust engine and reported by IncAllocatorExtension::observation as IncBlockObservation::ordered_next."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::allocateSlow(const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncAllocatorExtension::allocate_slow",
+      "status": "partial",
+      "notes": "Protected slow allocation path (new block, list repair); safe lock-scoped facade on IncAllocatorExtension (BaseAllocator::incremental_extension); it rejects calls while typed owners hold arena blocks."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::increaseBlockSize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncAllocatorExtension::increase_block_size",
+      "status": "partial",
+      "notes": "Protected growth of the next block capacity by IBlockSizeLevel; safe lock-scoped facade on IncAllocatorExtension (BaseAllocator::incremental_extension); it rejects calls while typed owners hold arena blocks."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::resetBlock(NCollection_IncAllocator::IBlock*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncAllocatorExtension::reset_block",
+      "status": "partial",
+      "notes": "Protected rewind of one block; takes the block identity reported by observation() and rejects addresses outside the chain; safe lock-scoped facade on IncAllocatorExtension (BaseAllocator::incremental_extension); it rejects calls while typed owners hold arena blocks."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::clean()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncAllocatorExtension::clean",
+      "status": "partial",
+      "notes": "Protected release of all blocks and reset to the default capacity; safe lock-scoped facade on IncAllocatorExtension (BaseAllocator::incremental_extension); it rejects calls while typed owners hold arena blocks."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (NCollection_BaseAllocator) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of IncrementalAllocatorObject carry the parent type descriptor."
+    },
+    {
       "upstream_id": "NCollection_HeapAllocator::Allocate(size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
@@ -85586,6 +85722,14 @@
       "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
     },
     {
+      "upstream_id": "NCollection_HeapAllocator::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (NCollection_BaseAllocator) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of HeapAllocatorObject carry the parent type descriptor."
+    },
+    {
       "upstream_id": "NCollection_AlignedAllocator::NCollection_AlignedAllocator(size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
@@ -85632,6 +85776,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Protected alignment value; private state of the aligned BaseAllocator variant (AlignedAllocatorObject)."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (NCollection_BaseAllocator) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of AlignedAllocatorObject carry the parent type descriptor."
     },
     {
       "upstream_id": "NCollection_AccAllocator::NCollection_AccAllocator(size_t)",
@@ -86408,6 +86560,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Protected allocator handle; private state of Buffer, read through allocator()."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (Standard_Transient) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of Buffer carry the parent type descriptor."
     },
     {
       "upstream_id": "NCollection_Handle()",
@@ -240224,6 +240384,70 @@
       "notes": "Native int maps to i32 and remains directly mutable; behavior outside signed overflow remains unspecified as in C++. Native derived probe: tools/oracle/ncollection_acc_block.md; header SHA-256 5fe1b00032b8b1493a18d1a8c778410f929cb25a010757c15028d02fa490c585."
     },
     {
+      "upstream_id": "NCollection_AccAllocator::Align",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ACC_ALIGN",
+      "status": "implemented",
+      "notes": "Static constexpr alignment 4 is the crate constant ACC_ALIGN."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::DefaultBlockSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ACC_DEFAULT_BLOCK_SIZE",
+      "status": "implemented",
+      "notes": "Static constexpr 24600 is the crate constant ACC_DEFAULT_BLOCK_SIZE."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::MaxLookupBlocks",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ACC_MAX_LOOKUP_BLOCKS",
+      "status": "implemented",
+      "notes": "Static constexpr int 16 is the crate constant ACC_MAX_LOOKUP_BLOCKS (i32)."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::getKey(void*const) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AccAllocatorExtension::key_for_address",
+      "status": "implemented",
+      "notes": "Protected key of an address: address / block size, the same integer division."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::myBlockSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected block size state; private field of the Rust accumulating engine (AccumulatingAllocatorObject), used by key_for_address."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::mypLastBlock",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected last-block pointer; private state of the Rust accumulating engine, reachable as AccBlockState through AccAllocatorExtension."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::myBlocks",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected key-to-block map; private state of the Rust accumulating engine, searched by AccAllocatorExtension::find_block."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (NCollection_BaseAllocator) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of AccumulatingAllocatorObject carry the parent type descriptor."
+    },
+    {
       "upstream_id": "Standard_ArrayStreamBuffer::underflow()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
@@ -250636,6 +250860,14 @@
       "notes": "Typedef of NCollection_Array1<T>; Rust HArray1<T> exposes its Array1<T> through array1/change_array1 and names the type directly."
     },
     {
+      "upstream_id": "NCollection_HArray1::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (Standard_Transient) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of HArray1 carry the parent type descriptor."
+    },
+    {
       "notes": "Exact partial const-Array2 constructor domain. Explicit from_array_trivial selects the native trivially-copyable policy through existing Array2::assign_trivial and bypasses Clone hooks, preserving rectangle metadata independently of inherited flat bounds/length, empty-source metadata and ownership-independent copied values. The unchanged ordinary from_array path remains a Clone policy and is not automatically equivalent to arbitrary C++ trivial/nontrivial copy construction. Tests prove ordinary Clone still dispatches and explicit trivial copy bypasses it. Allocation/default-copy failure, custom C++ lifetime/address effects, zero-sized Rust types, locking and Send+Sync+static restrictions remain outside full parity. See porting/audits/harray2-trivial-copy.json.",
       "rust_declaration_selectors": [
         {
@@ -250826,6 +251058,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Typedef of NCollection_Array2<T>; Rust HArray2<T> exposes its Array2<T> through array2/change_array2."
+    },
+    {
+      "upstream_id": "NCollection_HArray2::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (Standard_Transient) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of HArray2 carry the parent type descriptor."
     },
     {
       "upstream_id": "NCollection_Sequence::NCollection_Sequence<TheItemType>(const NCollection_Sequence<TheItemType> &)",
@@ -251066,6 +251306,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Typedef of NCollection_Sequence<T>; Rust HSequence<T> exposes its Sequence<T> through sequence/change_sequence."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::base_type",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "base_type typedef (Standard_Transient) emitted by the DEFINE_STANDARD_RTTI macro; Rust has no class inheritance: the RuntimeTyped/Transient impls of HSequence carry the parent type descriptor."
     },
     {
       "upstream_id": "NCollection_Sequence::Assign(const NCollection_Sequence<TheItemType> &)",
