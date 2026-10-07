@@ -50,8 +50,14 @@ mod reader_tests;
 mod report_entity;
 mod share_tool;
 mod sign_type;
+mod static_registry;
+mod static_standards;
+#[cfg(test)]
+mod static_tests;
+mod static_value;
 #[cfg(test)]
 mod test_norm;
+mod typed_value;
 
 pub use bit_map::InterfaceBitMap;
 pub use check::InterfaceCheck;
@@ -99,3 +105,5 @@ pub use reader_module::{
 pub use report_entity::InterfaceReportEntity;
 pub use share_tool::InterfaceShareTool;
 pub use sign_type::{InterfaceSignType, InterfaceSignTypeBase, interface_sign_type_text};
+pub use static_value::{InterfaceStatic, InterfaceStaticSatisfies};
+pub use typed_value::InterfaceTypedValue;

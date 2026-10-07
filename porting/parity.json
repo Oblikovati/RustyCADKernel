@@ -92556,7 +92556,7 @@
       "upstream_id": "Interface_CopyMap::Clear",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Interface/Interface_CopyMap.hxx",
-      "rust_item": "rustycad_tkxsbase::interface::InterfaceCopyMap::clear",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCopyMap::<rustycad_tkxsbase::interface::InterfaceCopyControl>::clear",
       "status": "implemented",
       "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases (Interface_InterfaceModel over InterfaceModelBase, with its non-virtual members in the extension traits InterfaceModelEntities and InterfaceModelReports); `this` is the handle bound by InterfaceModelBase::bind_self; entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies."
     },
@@ -92572,7 +92572,7 @@
       "upstream_id": "Interface_CopyMap::Bind",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Interface/Interface_CopyMap.hxx",
-      "rust_item": "rustycad_tkxsbase::interface::InterfaceCopyMap::bind",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCopyMap::<rustycad_tkxsbase::interface::InterfaceCopyControl>::bind",
       "status": "implemented",
       "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases (Interface_InterfaceModel over InterfaceModelBase, with its non-virtual members in the extension traits InterfaceModelEntities and InterfaceModelReports); `this` is the handle bound by InterfaceModelBase::bind_self; entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies."
     },
@@ -92580,7 +92580,7 @@
       "upstream_id": "Interface_CopyMap::Search",
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Interface/Interface_CopyMap.hxx",
-      "rust_item": "rustycad_tkxsbase::interface::InterfaceCopyMap::search",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCopyMap::<rustycad_tkxsbase::interface::InterfaceCopyControl>::search",
       "status": "implemented",
       "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases (Interface_InterfaceModel over InterfaceModelBase, with its non-virtual members in the extension traits InterfaceModelEntities and InterfaceModelReports); `this` is the handle bound by InterfaceModelBase::bind_self; entities are Handle<StandardTransient>; occ::handle<Standard_Type> is &RuntimeType; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; HSequence results are Vec copies."
     },
@@ -93575,6 +93575,254 @@
       "rust_item": "rustycad_tkxsbase::interface::InterfaceFileReaderToolOps::clear",
       "status": "implemented",
       "notes": "Interface mapping (docs/xsbase-design.md sections 1 and 2): abstract classes are traits over embedded bases with their non-virtual members as extension traits; const references to a parameter are copies and modifiable references are lent to a closure; output references are return values; native exceptions, the Standard_OutOfRange of the checked NCollection accessors and native null dereferences are Failure errors; occ::handle<Message_Messenger> is Option<Arc<Messenger>>."
+    },
+    {
+      "upstream_id": "Interface_TypedValue::Interface_TypedValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceTypedValue::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_TypedValue::Type",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceTypedValue::param_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_TypedValue::ParamTypeToValueType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceTypedValue::param_type_to_value_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_TypedValue::ValueTypeToParamType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_TypedValue.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceTypedValue::value_type_to_param_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_StaticSatisfies",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_StaticSatisfies.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStaticSatisfies",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. The function pointer type."
+    },
+    {
+      "upstream_id": "Interface_Static::Interface_Static(const char* const,const char* const,const Interface_ParamType,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Interface_Static(const char* const,const char* const,const occ::handle<Interface_Static>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::from_other",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. Native quirk kept: the interpret and satisfies functions and the label are not copied."
+    },
+    {
+      "upstream_id": "Interface_Static::PrintStatic",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::print_static",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. Native quirks kept: no value after \"Value : \", and the never-set own satisfies function prints nothing."
+    },
+    {
+      "upstream_id": "Interface_Static::Family",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::family",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::SetWild",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::set_wild",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Wild",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::wild",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::SetUptodate",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::set_uptodate",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::UpdatedStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::updated_status",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Init(const char* const,const char* const,const Interface_ParamType,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::init",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Init(const char* const,const char* const,const char,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::init_char",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. The type letter is a byte."
+    },
+    {
+      "upstream_id": "Interface_Static::Static",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::static_named",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::IsPresent",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::is_present",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::CDef",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::c_def",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. The native static buffer of the result is an owned String."
+    },
+    {
+      "upstream_id": "Interface_Static::IDef",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::i_def",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::IsSet",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::is_set",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. A null wild-card (dereferenced natively) reads as not set."
+    },
+    {
+      "upstream_id": "Interface_Static::CVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::c_val",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::IVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::i_val",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::RVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::r_val",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::SetCVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::set_c_val",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::SetIVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::set_i_val",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::SetRVal",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::set_r_val",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Update",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::update",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::IsUpdated",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::is_updated",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Items",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::items",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "Interface_Static::Standards",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::standards",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors. Runs once per process (an AtomicBool for THE_Interface_Static_deja); loads the embedded XSTEP.us when CSF_XSMessage gives no file."
+    },
+    {
+      "upstream_id": "Interface_Static::FillMap",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Static.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceStatic::fill_map",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): Interface_TypedValue embeds MoniTool_TypedValue and Interface_Static embeds Interface_TypedValue (each registered as the RTTI parent, Deref to the base); the private fields both classes redeclare without using have no counterpart; the static values live in the process-wide map MoniToolTypedValue::stats; const char* results are owned texts; native exceptions are Failure errors."
     },
     {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",

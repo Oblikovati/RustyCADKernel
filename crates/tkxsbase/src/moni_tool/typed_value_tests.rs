@@ -146,5 +146,8 @@ fn copies_and_library() {
         b"my def"
     );
     assert!(MoniToolTypedValue::static_value("c").is_null());
-    assert!(MoniToolTypedValue::stats().is_empty());
+    assert!(
+        !MoniToolTypedValue::stats()
+            .is_bound(&rustycad_tkernel::tcollection::AsciiString::new("c"))
+    );
 }
