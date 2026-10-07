@@ -66,15 +66,6 @@ impl<'a> ClearTrace<'a> {
         let stats = stats.map(|value| value.to_string()).join(" ");
         assert_eq!(format!("{label} {stats} {events}"), native_line(label));
     }
-    pub fn verify_termination_prefix(&self, label: &str) {
-        let line = native_line(label);
-        let expected = line.split_whitespace().last().unwrap();
-        assert_eq!(self.failure_events.borrow().as_deref(), Some(expected));
-        assert_eq!(
-            native_line(&format!("{label}_exit")),
-            format!("{label}_exit 73")
-        );
-    }
 }
 pub fn active_allocations(arena: &BaseAllocator) -> i32 {
     arena

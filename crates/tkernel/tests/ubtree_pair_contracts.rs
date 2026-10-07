@@ -61,13 +61,10 @@ fn verify_pair_ownership(
     assert_eq!(allocations(allocator), 0);
 }
 #[test]
-fn native_borrowed_child_construction_and_assignment_matrix() {
+fn native_borrowed_child_construction_and_assignment_order() {
+    // Rejection rows (a throwing child copy) are D1 class B2 and are no longer reproduced.
     for branch in [false, true] {
-        for rejection in [
-            "XX0", "NB1", "NB2", "NO1", "NO2", "AB1", "AB2", "AB3", "AO1", "AO2", "AO3", "NO3",
-        ] {
-            construct_case(branch, rejection);
-        }
+        construct_case(branch, "XX0");
     }
 }
 fn destroy_case(index: i32) {

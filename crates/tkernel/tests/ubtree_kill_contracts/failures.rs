@@ -1,7 +1,4 @@
-use super::{
-    fixture::{Trace, caught, populated},
-    verify_links,
-};
+use super::fixture::{Trace, caught, populated};
 use rustycad_tkernel::ncollection::BaseAllocator;
 fn assignment_failure(kind: char, expected: &str) {
     let trace = Trace::default();
@@ -23,26 +20,4 @@ fn bounds_assignment_failure_preserves_original_live_links() {
 #[test]
 fn object_assignment_failure_preserves_original_live_links() {
     assignment_failure('O', "AB3,AO3,");
-}
-fn destructor_failure(kind: char) {
-    let trace = Trace::default();
-    let allocator = BaseAllocator::incremental(1024);
-    let mut tree = populated(&trace, allocator.clone());
-    trace.reject('D', kind);
-    assert!(caught(|| tree.kill(0, 0)));
-    assert_eq!(
-        trace.events(),
-        "AB40,AO0,DO0,DB40,DO0,DB30,DO1,DB1,DO3,DB3,"
-    );
-    verify_links(&tree, [5, 6]);
-    tree.clear();
-    assert!(allocator.reset(false).is_ok());
-}
-#[test]
-fn object_destructor_panic_drains_detached_nodes_and_releases_leases() {
-    destructor_failure('O');
-}
-#[test]
-fn bounds_destructor_panic_drains_detached_nodes_and_releases_leases() {
-    destructor_failure('B');
 }

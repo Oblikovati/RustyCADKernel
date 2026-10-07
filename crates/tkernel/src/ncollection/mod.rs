@@ -110,7 +110,7 @@ pub use base_map::{
     IndexedCursorSourceMut, MapLinkNode,
 };
 mod data_map_node;
-mod destructor_unwind;
+mod native_noexcept;
 pub use data_map_node::{DataMapNode, DataMapNodeOwner};
 mod double_map_node;
 pub use double_map_node::{DoubleMapNode, DoubleMapNodeOwner};
@@ -172,9 +172,7 @@ mod ubtree;
 pub use ebtree::EBTree;
 pub use ubtree::{BoundingNode, BoundingVolume, FallibleTreeSelector, TreeSelector, UBTree};
 mod ubtree_filler;
-pub use ubtree_filler::{
-    BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller, UBTreeFillerWithSelfAssignment,
-};
+pub use ubtree_filler::{BoundingTreeInsertion, NativeBoundingTree, ObjBnd, UBTreeFiller};
 
 mod packed_map;
 pub use packed_map::{

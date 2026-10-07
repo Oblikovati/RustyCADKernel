@@ -1,5 +1,4 @@
 use super::{BoundingVolume, UBTree};
-use crate::ncollection::destructor_unwind::DeferredDestructorPanic;
 impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     /// Kill child `index` of branch `id` (the whole sub-branch), as native `TreeNode::Kill`:
     /// the branch takes over the other child's bounds, object and children. Ancestor bounds
@@ -17,13 +16,11 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         let old_pairs = self.nodes.child_pairs(children);
         self.assign_survivor(id, kept);
         self.reparent_children(id);
-        let mut unwind = DeferredDestructorPanic::default();
-        unwind.capture(|| self.release_node(kept));
-        self.release_subtree(killed, &mut unwind);
+        self.release_node(kept);
+        self.release_subtree(killed);
         for pair in old_pairs {
             self.nodes.release_pair(pair);
         }
-        unwind.finish(Ok(()));
     }
     fn assign_survivor(&mut self, parent: usize, kept: usize) {
         let [target, source] = self.nodes.get_disjoint_mut([parent, kept]).unwrap();
