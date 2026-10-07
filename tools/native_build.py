@@ -54,6 +54,14 @@ OCAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKBin', 'TKBinL', 'TKCAF', 'TKBO', 'TK
                                          'TKLCAF', 'TKCDF', 'TKMath', 'TKernel')
 OCAF_CLOSURE_TARGETS: list[str] = [*OCAF_TOOLKITS, 'gtest_main']
 
+# The TKCAF closure: the unchanged TNaming_Tool_Test drives DNaming functions (TKDCAF, a DRAW
+# toolkit over Tcl/Tk), whose drivers call Boolean operations (TKBool) and fillets (TKFillet).
+# It lives in its own tree too, so the OCAF closure keeps its flags.
+CAF_TOOLKITS: tuple[str, ...] = (*OCAF_TOOLKITS, 'TKDCAF', 'TKFillet', 'TKBool')
+# The TKCAF closure's shared libraries in link order, dependants first (TKDCAF sits on TKCAF).
+CAF_LINKED_TOOLKITS: tuple[str, ...] = ('TKDCAF', 'TKFillet', 'TKBool', *OCAF_LINKED_TOOLKITS)
+CAF_CLOSURE_TARGETS: list[str] = [*CAF_TOOLKITS, 'gtest_main']
+
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:
     """CMake flags of a shared oracle closure (the geometry one by default); one spelling for

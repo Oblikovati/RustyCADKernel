@@ -2,7 +2,7 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKCAF)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -20,8 +20,9 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
-from native_build import (CLOSURE_TARGETS, LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS,
-                          OCAF_TOOLKITS, closure_flags, locked_cmake)
+from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS, CLOSURE_TARGETS,
+                          LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
+                          closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -56,6 +57,15 @@ NUMERIC_VERIFIERS = {
 PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
     'TKCDF': ('TKCDF', 'TKernel'),
     'TKLCAF': OCAF_LINKED_TOOLKITS,
+    'TKCAF': CAF_LINKED_TOOLKITS,
+}
+
+# The native closure tree each profile without numeric probes builds when no prebuilt one is
+# given: toolkits, build targets and tree. TKCAF adds the DRAW toolkit TKDCAF to the OCAF set.
+PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
+    'TKCDF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
+    'TKLCAF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
+    'TKCAF': (CAF_TOOLKITS, CAF_CLOSURE_TARGETS, 'target/occt-caf-full'),
 }
 
 
@@ -113,9 +123,10 @@ def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, enviro
     if reuse is not None:
         if not (reuse/'CMakeCache.txt').is_file(): raise ValueError(f'No configured native build at {reuse}; expected a CMake build directory')
         return reuse
-    if toolkit in PROFILES_WITHOUT_NUMERIC:
-        flags = closure_flags(inventory['modules'], OCAF_TOOLKITS)
-        return locked_cmake(source,ROOT/'target/occt-ocaf-full',flags,OCAF_CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
+    if toolkit in PROFILE_CLOSURES:
+        toolkits, targets, tree = PROFILE_CLOSURES[toolkit]
+        flags = closure_flags(inventory['modules'], toolkits)
+        return locked_cmake(source,ROOT/tree,flags,targets,jobs,output/'configure.log',output/'build.log',run,environment)
     build = ROOT/'target/occt-tkernel-full'
     return locked_cmake(source,build,closure_flags(inventory['modules']),CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
 
