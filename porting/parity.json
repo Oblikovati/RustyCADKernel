@@ -429348,6 +429348,214 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepFill_Generator::BRepFill_Generator()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::new",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::AddWire(const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::add_wire",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::Perform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::Shell() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::shell",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::Generated() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::generated",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::GeneratedShapes(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::generated_shapes",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::ResultShape(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::result_shape",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::SetMutableInput(const bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::set_mutable_input",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::IsMutableInput() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::is_mutable_input",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_Generator::GetStatus() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_Generator.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::BRepFillGenerator::get_status",
+      "status": "implemented",
+      "notes": "Translated from BRepFill_Generator.cxx (DetectKPart, CreateKPart, Perform) with the native operation order; compared with OCCT by tools/verify_tkbool_numeric.py (bf_generator requests: cylinders, cones, apexes, planes, ruled B-splines, reversed and located edges, Null3DCurve, immutable input). Native quirk kept: the generated map is keyed by the wire explorer's edge after its advance (the aliased anOrEdge1 reference), a null edge for the last face of a wire."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus",
+      "status": "implemented",
+      "notes": "Rust enum with the native i32 discriminants."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_Done",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::Done",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_NotDone",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::NotDone",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_NotSameTopology",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::NotSameTopology",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_ProfilesInconsistent",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::ProfilesInconsistent",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_WrongUsage",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::WrongUsage",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_Null3DCurve",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::Null3DCurve",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ThruSectionErrorStatus_Failed",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_ThruSectionErrorStatus.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::ThruSectionErrorStatus::Failed",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_TransitionStyle",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TransitionStyle.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TransitionStyle",
+      "status": "implemented",
+      "notes": "Rust enum with the native i32 discriminants."
+    },
+    {
+      "upstream_id": "BRepFill_Modified",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TransitionStyle.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TransitionStyle::Modified",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_Right",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TransitionStyle.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TransitionStyle::Right",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_Round",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TransitionStyle.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TransitionStyle::Round",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_TypeOfContact",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TypeOfContact.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TypeOfContact",
+      "status": "implemented",
+      "notes": "Rust enum with the native i32 discriminants."
+    },
+    {
+      "upstream_id": "BRepFill_NoContact",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TypeOfContact.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TypeOfContact::NoContact",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_Contact",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TypeOfContact.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TypeOfContact::Contact",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BRepFill_ContactOnBorder",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepFill/BRepFill_TypeOfContact.hxx",
+      "rust_item": "rustycad_tkbool::brep_fill::TypeOfContact::ContactOnBorder",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
       "upstream_id": "BRepProj_Projection::operator delete(void*) noexcept",
       "toolkit": "TKBool",
       "source": "src/ModelingAlgorithms/TKBool/BRepProj/BRepProj_Projection.hxx",

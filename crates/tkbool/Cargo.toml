@@ -13,5 +13,12 @@ rustycad-tkernel = { path = "../tkernel" }
 rustycad-tkmath = { path = "../tkmath" }
 rustycad-tkg3d = { path = "../tkg3d" }
 rustycad-tkbrep = { path = "../tkbrep" }
-[dev-dependencies]
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo" }
 rustycad-tktopalgo = { path = "../tktopalgo" }
+[dev-dependencies]
+
+[[example]]
+name = "rustycad-tkbool-numeric-probe"
+path = "examples/numeric_probe.rs"

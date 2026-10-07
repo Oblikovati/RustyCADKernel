@@ -72,6 +72,7 @@ jobs:
       - run: python3 tools/verify_toolkit.py TKShHealing --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKPrim --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKHLR --source target/occt-source --jobs 2
+      - run: python3 tools/verify_toolkit.py TKBool --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKCDF --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKLCAF --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKCAF --source target/occt-source --jobs 2
