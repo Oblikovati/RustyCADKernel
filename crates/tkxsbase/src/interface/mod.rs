@@ -2,6 +2,10 @@
 //! libraries, checks, graphs, copies, file reading tools and static parameters);
 //! docs/xsbase-design.md section 1.
 mod bit_map;
+mod check;
+mod check_edit;
+#[cfg(test)]
+mod check_tests;
 mod enums;
 mod float_writer;
 mod int_array;
@@ -12,6 +16,7 @@ mod msg;
 mod msg_text;
 
 pub use bit_map::InterfaceBitMap;
+pub use check::InterfaceCheck;
 pub use enums::{InterfaceCheckStatus, InterfaceDataState, InterfaceParamType};
 pub use float_writer::{InterfaceFloatWriter, InterfaceFloatWriterOptions};
 pub use int_array::InterfaceIntArray;

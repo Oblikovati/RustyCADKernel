@@ -89985,6 +89985,358 @@
       "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors; occ::handle<NCollection_HArray1<int>> is the shared InterfaceIntArray."
     },
     {
+      "upstream_id": "Interface_Check::Interface_Check()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Interface_Check(const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::with_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::SendFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::send_fail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddFail(const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_fail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddFail(const occ::handle<TCollection_HAsciiString>&,const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_fail_with_original",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddFail(const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_fail_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddFail(const Message_Msg&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_fail_msg",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::HasFailed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::has_failed",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::NbFails",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::nb_fails",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Fail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::fail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::CFail",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::c_fail",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Fails",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::fails",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::SendWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::send_warning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddWarning(const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_warning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddWarning(const occ::handle<TCollection_HAsciiString>&,const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_warning_with_original",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddWarning(const char* const,const char* const)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_warning_text",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::AddWarning(const Message_Msg&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::add_warning_msg",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::HasWarnings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::has_warnings",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::NbWarnings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::nb_warnings",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Warning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::warning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::CWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::c_warning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Warnings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::warnings",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::SendMsg",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::send_msg",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy. Native quirk kept: the original list gets the final text."
+    },
+    {
+      "upstream_id": "Interface_Check::NbInfoMsgs",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::nb_info_msgs",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::InfoMsg",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::info_msg",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::CInfoMsg",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::c_info_msg",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::InfoMsgs",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::info_msgs",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Status",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::status",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Complies(const Interface_CheckStatus)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::complies",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Complies(const occ::handle<TCollection_HAsciiString>&,const int,const Interface_CheckStatus)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::complies_message",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy. Native quirk kept: the fail criterion scans the warnings."
+    },
+    {
+      "upstream_id": "Interface_Check::HasEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::has_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Entity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::ClearFails",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::clear_fails",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::ClearWarnings",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::clear_warnings",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::ClearInfoMsgs",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::clear_info_msgs",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Remove",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::remove",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy. Native quirk kept: the fail criterion removes the fails at the ranks of the matching warnings."
+    },
+    {
+      "upstream_id": "Interface_Check::Mend",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::mend",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy. The nullable C string is Option<&str>."
+    },
+    {
+      "upstream_id": "Interface_Check::SetEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::set_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::GetEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::get_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::GetMessages",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::get_messages",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::GetAsWarning",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::get_as_warning",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Print",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::print",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
+      "upstream_id": "Interface_Check::Trace",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_Check.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceCheck::trace",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
