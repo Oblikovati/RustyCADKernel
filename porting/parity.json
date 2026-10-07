@@ -70882,6 +70882,110 @@
       "notes": "C++ STL-protocol member typedef difference_type (long) of NCollection_Array1. Rust Array1 spells isize where a signed distance is needed; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_Array1::allocate(const size_t,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected raw-storage plumbing of Array1 (Standard::AllocateOptimal of size * item size); Rust Array1 owns its elements (Vec or a borrowed slice) and performs this step privately inside with_size/resize/resize_bounds/assign and Drop, so no separate entry point exists."
+    },
+    {
+      "upstream_id": "NCollection_Array1::deallocate(void*) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected raw-storage plumbing of Array1 (Standard::Free of the buffer); Rust Array1 owns its elements (Vec or a borrowed slice) and performs this step privately inside with_size/resize/resize_bounds/assign and Drop, so no separate entry point exists."
+    },
+    {
+      "upstream_id": "NCollection_Array1::setStorage(void*,const size_t,const int,const bool) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected raw-storage plumbing of Array1 (replacing pointer, size, lower bound and ownership flag); Rust Array1 owns its elements (Vec or a borrowed slice) and performs this step privately inside with_size/resize/resize_bounds/assign and Drop, so no separate entry point exists."
+    },
+    {
+      "upstream_id": "NCollection_Array1::releaseStorage() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected raw-storage plumbing of Array1 (freeing owned storage and resetting to the empty state); Rust Array1 owns its elements (Vec or a borrowed slice) and performs this step privately inside with_size/resize/resize_bounds/assign and Drop, so no separate entry point exists."
+    },
+    {
+      "upstream_id": "NCollection_Array1::resizeImpl(const size_t,const int,const bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected raw-storage plumbing of Array1 (core of every Resize overload; reached through resize/resize_bounds); Rust Array1 owns its elements (Vec or a borrowed slice) and performs this step privately inside with_size/resize/resize_bounds/assign and Drop, so no separate entry point exists."
+    },
+    {
+      "upstream_id": "NCollection_Array1::offsetOf(const int,const char*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected bound check returning index - lower (Standard_OutOfRange otherwise); Rust value/change_value perform the same check privately and return ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_Array1::at(const size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::at",
+      "status": "implemented",
+      "notes": "Protected zero-based access; at(offset) returns ArrayError::Index where native raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_Array1::at(const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::as_mut_slice",
+      "status": "partial",
+      "notes": "Protected mutable zero-based access; Rust indexes as_mut_slice()[offset] (a bounds panic instead of Standard_OutOfRange)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::assign(const NCollection_Array1::const_pointer,const size_t,const int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::assign_trivial_from_raw_parts",
+      "status": "partial",
+      "notes": "Protected copy from a raw range with a new lower bound; the unsafe raw-parts entry covers trivially copyable items, other items go through assign/copy_values_with_assignment."
+    },
+    {
+      "upstream_id": "NCollection_Array1::copyConstruct(NCollection_Array1::const_pointer,const size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::copy_construct_nontrivial_raw",
+      "status": "partial",
+      "notes": "Protected copy construction into the own storage; Rust exposes the raw copy-construction step as the unsafe associated function with an explicit target pointer."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Iterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef NCollection_Iterator<Array1<T>, false>; Rust names CollectionCursorMut over the array directly (and slice iterators via iter_mut())."
+    },
+    {
+      "upstream_id": "NCollection_Array1::ConstIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef NCollection_Iterator<Array1<T>, true>; Rust names CollectionCursor over the array directly (and slice iterators via iter())."
+    },
+    {
+      "upstream_id": "NCollection_Array1",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1",
+      "status": "implemented",
+      "notes": "Class template NCollection_Array1 is the generic Rust type Array1; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_Array2::ArraySize(size_t,size_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
@@ -71490,6 +71594,62 @@
       "notes": "C++ STL-protocol member typedef pointer (type-parameter-0-0 *) of NCollection_Array2. Rust Array2 spells &mut T / *mut T in its accessors; there is no named alias to map."
     },
     {
+      "upstream_id": "NCollection_Array2::myLowerRow",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::lower_row",
+      "status": "implemented",
+      "notes": "Protected row origin; read through lower_row()."
+    },
+    {
+      "upstream_id": "NCollection_Array2::myLowerCol",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::lower_col",
+      "status": "implemented",
+      "notes": "Protected column origin; read through lower_col()."
+    },
+    {
+      "upstream_id": "NCollection_Array2::mySizeRow",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::row_size",
+      "status": "implemented",
+      "notes": "Protected row count (size_t); read through row_size()."
+    },
+    {
+      "upstream_id": "NCollection_Array2::mySizeCol",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::col_size",
+      "status": "implemented",
+      "notes": "Protected column count (size_t); read through col_size()."
+    },
+    {
+      "upstream_id": "NCollection_Array2::resizeNoData(int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected reallocation without copying; Rust Array2::resize/resize_bounds call it privately when copy is false."
+    },
+    {
+      "upstream_id": "NCollection_Array2::resizeImpl(int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected copying resize template (trim or keep layout); reached through resize/resize_with_trim/resize_bounds/resize_trim_bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2",
+      "status": "implemented",
+      "notes": "Class template NCollection_Array2 is the generic Rust type Array2; its members are mapped row by row."
+    },
+    {
       "upstream_id": "NCollection_HArray1()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
@@ -71652,20 +71812,20 @@
       "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
     },
     {
-      "upstream_id": "NCollection_LocalArray::operator pointer()",
+      "upstream_id": "NCollection_LocalArray::operator type-parameter-0-0 *() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::LocalArray::as_mut_slice",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::data_mut_ptr",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the pointer conversion becomes a mutable slice."
+      "notes": "Implicit conversion to the element pointer; data_mut_ptr() (as_mut_slice() for safe access)."
     },
     {
-      "upstream_id": "NCollection_LocalArray::operator const_pointer() const",
+      "upstream_id": "NCollection_LocalArray::operator const type-parameter-0-0 *() const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::LocalArray::as_slice",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::data_ptr",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the const pointer conversion becomes a slice."
+      "notes": "Implicit conversion to the const element pointer; data_ptr() (as_slice() for safe access)."
     },
     {
       "upstream_id": "NCollection_LocalArray(NCollection_LocalArray<theItem,NCollection_LocalArray::MAX_ARRAY_SIZE>&&)",
@@ -71771,6 +71931,142 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef value_type (type-parameter-0-0) of NCollection_LocalArray. Rust LocalArray spells the element type parameter directly (T, or the mapped item type); there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::deallocate()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::deallocate",
+      "status": "implemented",
+      "notes": "Protected release of heap storage, returning to the inline buffer."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::isInline() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::is_inline",
+      "status": "implemented",
+      "notes": "Protected test whether the inline buffer is in use."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::inlinePtr() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected address of the private inline buffer; equals data_ptr() while is_inline()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::inlinePtr() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected mutable address of the private inline buffer; equals data_mut_ptr() while is_inline()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::myPtr",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::data_ptr",
+      "status": "implemented",
+      "notes": "Protected element pointer; read through data_ptr()/data_mut_ptr()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::mySize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::len",
+      "status": "implemented",
+      "notes": "Protected element count; read through len()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::myStorage",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected inline buffer; private storage of LocalArray."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorage",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected typedef choosing the trivial or non-trivial inline buffer; Rust LocalArray uses one private inline array."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageTrivial",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected inline buffer record (trivial items); private storage of LocalArray."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageTrivial::myData",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Raw inline buffer bytes; private storage of LocalArray."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageTrivial::ptr() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Address of the private inline buffer; data_ptr() equals it while is_inline()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageTrivial::ptr() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Mutable address of the private inline buffer; data_mut_ptr() equals it while is_inline()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageNonTrivial",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected inline buffer record (nontrivial items); private storage of LocalArray."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageNonTrivial::myData",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Raw inline buffer bytes; private storage of LocalArray."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageNonTrivial::ptr() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Address of the private inline buffer; data_ptr() equals it while is_inline()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::InlineStorageNonTrivial::ptr() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Mutable address of the private inline buffer; data_mut_ptr() equals it while is_inline()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray",
+      "status": "implemented",
+      "notes": "Class template NCollection_LocalArray is the generic Rust type LocalArray; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_LinearVector()",
@@ -73348,6 +73644,62 @@
       "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_last",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::myData",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::data_ptr",
+      "status": "implemented",
+      "notes": "Protected byte buffer; read through data_ptr()/data_mut_ptr()."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::mySize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::size_bytes",
+      "status": "implemented",
+      "notes": "Protected buffer size in bytes; read through size_bytes()."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::myStride",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::stride",
+      "status": "implemented",
+      "notes": "Protected element stride; read through stride()."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::myDeletable",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::is_deletable",
+      "status": "implemented",
+      "notes": "Protected ownership flag; read through is_deletable()."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::checkedSize(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::checked_size",
+      "status": "implemented",
+      "notes": "Protected validated element count; out-of-range values are a Failure result."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::checkedStride(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::checked_stride",
+      "status": "implemented",
+      "notes": "Protected validated stride; out-of-range values are a Failure result."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray",
+      "status": "implemented",
+      "notes": "Class template NCollection_AliasedArray is the generic Rust type AliasedArray; its members are mapped row by row."
     },
     {
       "upstream_id": "NCollection_SparseArray(size_t)",
