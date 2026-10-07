@@ -1,6 +1,6 @@
 {
   "schema": "rustycad.native-growth-destruction-token-plan.v1",
-  "status": "contract_implemented_pending_native_and_miri_validation",
+  "status": "bounded_token_verified_pending_integration",
   "fresh_main_base": "d2cfaa1eba16c8f97947b25fd8a1bfd14d6503c4",
   "explicit_dependency": "cf1e0b67372a84a602350bf153e7f0e4914fde5c",
   "dependency_merge": "6d8ca8910dbad3d68ed60959495a4522447ec423",
@@ -41,5 +41,14 @@
     "Automatic recovery of arbitrary native invalid state, OOM/allocator exceptions, generalized placement/alias/ABI parity."
   ],
   "api_parity_complete": false,
-  "global_api_claims_added": 0
+  "global_api_claims_added": 0,
+  "validation": {
+    "native_cases": 17,
+    "native_rows": 59,
+    "public_observation_rows": 35,
+    "original_tests": 49,
+    "strict_miri_passes": 287,
+    "compiler_negative_barriers": 5,
+    "all_targets_clippy": true
+  }
 }
