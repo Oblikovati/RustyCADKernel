@@ -11,3 +11,13 @@ fn not_copy_constructible() {
     let builder = BRepAlgoAPIBuilderAlgo::new();
     assert!(builder.arguments().is_empty());
 }
+
+/// C++ copy assignment maps to `Clone::clone_from`, which the `Clone` assertion above rules
+/// out; only an owned value can replace a builder.
+#[test]
+fn not_copy_assignable() {
+    let mut builder = BRepAlgoAPIBuilderAlgo::new();
+    assert!(builder.arguments().is_empty());
+    builder = BRepAlgoAPIBuilderAlgo::new();
+    assert!(builder.arguments().is_empty());
+}
