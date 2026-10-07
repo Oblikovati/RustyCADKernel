@@ -453932,6 +453932,1674 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dShaderProgram::shaders_folder",
       "status": "implemented",
       "notes": "Graphic3d shader data model mapping (visualization-design.md section 3): the shader program, stage and uniform classes are ported as transients; their GLSL text is assembled exactly as natively but only the OpenGL driver compiles it, the Vulkan driver reads the same description and writes its own shaders; protected fields are read through their accessors; the declaration generator is compared text for text by the sv_shader_decl native probe. Native quirk: the folder is marked defined before it is checked, so only the first call raises the Standard_Failure for a missing Declarations.glsl."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::Graphic3d_TextureParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::TextureUnit",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::texture_unit",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetTextureUnit",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_texture_unit",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::IsModulate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::is_modulate",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetModulate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_modulate",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::IsRepeat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::is_repeat",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetRepeat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_repeat",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::Filter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::filter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_filter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::AnisoFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::aniso_filter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetAnisoFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_aniso_filter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::Rotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::rotation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetRotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_rotation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::Scale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::scale",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_scale",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::Translation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::translation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetTranslation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_translation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::GenMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::gen_mode",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::GenPlaneS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::gen_plane_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::GenPlaneT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::gen_plane_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetGenMode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_gen_mode",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::BaseLevel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::base_level",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::MaxLevel",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::max_level",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SetLevelsRange",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::set_levels_range",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureParams::SamplerRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureParams.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureParams::sampler_revision",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRoot",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::TexturesFolder",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::graphic3d_textures_folder",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Native quirk: the folder is marked defined before it is checked, so only the first call raises."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::IsDone",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRoot::is_done",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::Path",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::path",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::Type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::texture_type",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::GetId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::get_id",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::Revision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::revision",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::UpdateRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::update_revision",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::GetParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::get_params",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::IsColorMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::is_color_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::SetColorMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::set_color_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::HasMipmaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::has_mipmaps",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::SetMipmapsGeneration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::set_mipmaps_generation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::IsTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::is_top_down",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::GetCompressedImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRoot::get_compressed_image",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::GetImage(const occ::handle<Image_SupportedFormats> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRoot::get_image",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTextureRoot::get_image",
+        "rustycad_tkservice::graphic3d::graphic3d_texture_root_get_image"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The base body is also a function for the overrides that call it."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::GetImage() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRoot::legacy_image",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::Graphic3d_TextureRoot(const TCollection_AsciiString &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootBase::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::Graphic3d_TextureRoot(const occ::handle<Image_PixMap> &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootBase::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::generateId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootBase::generate_id",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::convertToCompatible",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::graphic3d_convert_to_compatible",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myParams",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootBase::params",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myTexId",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::tex_id",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myPixMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myPath",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::path",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myRevision",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::revision",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::kind",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myIsColorMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::is_color_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myIsTopDown",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::is_top_down",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureRoot::myHasMipmaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootFields::has_mipmaps",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Image_CompressedPixMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageCompressedPixMap",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Forward declaration in Graphic3d_TextureRoot.hxx."
+    },
+    {
+      "upstream_id": "Image_SupportedFormats",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "rust_item": "rustycad_tkservice::image::ImageSupportedFormats",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Forward declaration in Graphic3d_TextureRoot.hxx."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMap",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::EnableSmooth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::enable_smooth",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::IsSmoothed",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::is_smoothed",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::DisableSmooth",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::disable_smooth",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::EnableModulate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::enable_modulate",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::DisableModulate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::disable_modulate",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::IsModulate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::is_modulate",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::EnableRepeat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::enable_repeat",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::DisableRepeat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::disable_repeat",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::IsRepeat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::is_repeat",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::AnisoFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::aniso_filter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::SetAnisoFilter",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureMapMembers::set_aniso_filter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::Graphic3d_TextureMap(const TCollection_AsciiString &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootBase::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The texture map adds no state to the root base."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureMap::Graphic3d_TextureMap(const occ::handle<Image_PixMap> &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootBase::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The texture map adds no state to the root base."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1D",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D::Name",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1DMembers::name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D::NumberOfTextures",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1DBase::number_of_textures",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D::TextureName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1DBase::texture_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D::Graphic3d_Texture1D(const TCollection_AsciiString &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1DBase::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D::Graphic3d_Texture1D(const Graphic3d_NameOfTexture1D,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1DBase::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1D::Graphic3d_Texture1D(const occ::handle<Image_PixMap> &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1DBase::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dmanual",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dmanual.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dmanual",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dmanual::Graphic3d_Texture1Dmanual(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dmanual.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dmanual::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dmanual::Graphic3d_Texture1Dmanual(const Graphic3d_NameOfTexture1D)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dmanual.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dmanual::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dmanual::Graphic3d_Texture1Dmanual(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dmanual.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dmanual::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dsegment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dsegment.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dsegment",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dsegment::Graphic3d_Texture1Dsegment(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dsegment.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dsegment::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dsegment::Graphic3d_Texture1Dsegment(const Graphic3d_NameOfTexture1D)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dsegment.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dsegment::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dsegment::Graphic3d_Texture1Dsegment(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dsegment.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dsegment::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dsegment::SetSegment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dsegment.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dsegment::set_segment",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. A null segment divides by zero in float, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture1Dsegment::Segment",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture1Dsegment.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture1Dsegment::segment",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The six out-parameters are returned as an array."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::NumberOfTextures",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DBase::number_of_textures",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::TextureName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DBase::texture_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Graphic3d_Texture2D(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2D::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Graphic3d_Texture2D(const Graphic3d_NameOfTexture2D)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2D::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Graphic3d_Texture2D(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2D::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Name",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DMembers::name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::SetImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DMembers::set_image",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Graphic3d_Texture2D(const TCollection_AsciiString &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DBase::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The protected constructors build the base that the classes derived from Graphic3d_Texture2D embed."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Graphic3d_Texture2D(const Graphic3d_NameOfTexture2D,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DBase::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::Graphic3d_Texture2D(const occ::handle<Image_PixMap> &,const Graphic3d_TypeOfTexture)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DBase::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2D::myName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2DBase::name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Native quirk: the plane name is left uninitialised by the constructors; here it starts as UNKNOWN."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::Graphic3d_Texture2Dplane(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::Graphic3d_Texture2Dplane(const Graphic3d_NameOfTexture2D)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::Graphic3d_Texture2Dplane(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetPlaneS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_plane_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetPlaneT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_plane_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_plane",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetScaleS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_scale_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetScaleT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_scale_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetTranslateS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_translate_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetTranslateT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_translate_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::SetRotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::set_rotation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::Plane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::plane",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::PlaneS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::plane_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::PlaneT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::plane_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::TranslateS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::translate_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::TranslateT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::translate_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::ScaleS",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::scale_s",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::ScaleT",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::scale_t",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture2Dplane::Rotation",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2Dplane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture2Dplane::rotation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The out-parameters are returned."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv::Graphic3d_TextureEnv(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv::Graphic3d_TextureEnv(const Graphic3d_NameOfTextureEnv)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv::from_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv::Graphic3d_TextureEnv(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv::Name",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv::name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv::NumberOfTextures",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv::number_of_textures",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureEnv::TextureName",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureEnv.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureEnv::texture_name",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Iterator",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::iter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The iterator is a Rust iterator over the handles, empty for a null set."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Iterator::Iterator()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::iter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. An empty iterator is the iterator of a null set."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Iterator::Iterator(const occ::handle<Graphic3d_TextureSet> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::iter",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Graphic3d_TextureSet()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Graphic3d_TextureSet(int)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::with_size",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. A negative count makes the native array allocate a wrapped size_t count (Standard_OutOfMemory); here that error with the count."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Graphic3d_TextureSet(const occ::handle<Graphic3d_TextureMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::with_texture",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::is_empty",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Size",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::size",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Lower",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::lower",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Upper",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::upper",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::SetFirst",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::set_first",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::First",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::first",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. An empty set raises Standard_OutOfRange (undefined natively)."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Standard_OutOfRange with the index outside the bounds."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::SetValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::set_value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Standard_OutOfRange with the index outside the bounds."
+    },
+    {
+      "upstream_id": "Graphic3d_TextureSet::myTextures",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureSet.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureSet::textures",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The protected array is read as a copy of the handles (shared lock)."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMap",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::Graphic3d_CubeMap(const TCollection_AsciiString &,bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapBase::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::Graphic3d_CubeMap(const occ::handle<Image_PixMap> &,bool)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapBase::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::More",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapMembers::more",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::Next",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapMembers::next",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::SetZInversion",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapMembers::set_z_inversion",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::ZIsInverted",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapMembers::z_is_inverted",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::CurrentSide",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapMembers::current_side",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. None once Next went past NEG_Z (an out-of-range enum value natively)."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::HasMipmaps",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::has_mipmaps",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The cube map redeclares the root member with the same body."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::SetMipmapsGeneration",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTextureRootMembers::set_mipmaps_generation",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The cube map redeclares the root member with the same body."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::CompressedValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMap::compressed_value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMap::value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::Reset",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapMembers::reset",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Returns nothing instead of the texture reference."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::myCurrentSide",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapIteration::current_side",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::myEndIsReached",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapIteration::end_is_reached",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMap::myZIsInverted",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMap.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapIteration::z_is_inverted",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ValidatedCubeMapOrder",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValidatedCubeMapOrder",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Graphic3d_CubeMapOrder()",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Graphic3d_CubeMapOrder(unsigned char,unsigned char,unsigned char,unsigned char,unsigned char,unsigned char)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::new",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Graphic3d_CubeMapOrder(const Graphic3d_ValidatedCubeMapOrder &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::from_validated",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Set(const Graphic3d_CubeMapOrder &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::assign",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Validated",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::validated",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Set(Graphic3d_CubeMapSide,unsigned char)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::set",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::SetDefault",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::set_default",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Permute",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::permute",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Permuted",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::permuted",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Swap",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::swap",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Swapped",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::swapped",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Get",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::get",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::operator[]",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::get",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Clear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::clear",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::IsEmpty",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::is_empty",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::HasRepetitions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::has_repetitions",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::HasOverflows",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::has_overflows",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::IsValid",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::is_valid",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapOrder::Default",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapOrder::default_order",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ValidatedCubeMapOrder::operator->",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValidatedCubeMapOrder::order",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ValidatedCubeMapOrder::Graphic3d_ValidatedCubeMapOrder",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValidatedCubeMapOrder::<core::clone::Clone>::clone",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_ValidatedCubeMapOrder::Order",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapOrder.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dValidatedCubeMapOrder::order",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The const public field is read through an accessor so that only Validated builds the type."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked::Graphic3d_CubeMapPacked(const TCollection_AsciiString &,const Graphic3d_ValidatedCubeMapOrder &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked::Graphic3d_CubeMapPacked(const occ::handle<Image_PixMap> &,const Graphic3d_ValidatedCubeMapOrder &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. A null image is dropped (a null dereference natively); a zero width or height does not divide by zero."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked::CompressedValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked::<rustycad_tkservice::graphic3d::Graphic3dCubeMap>::compressed_value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked::<rustycad_tkservice::graphic3d::Graphic3dCubeMap>::value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The native tile wrapper aliases the packed image; here it holds a copy of the tile rows with the same row stride and row order."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked::myOrder",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked::order",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapPacked::myTileNumberX",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapPacked.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapPacked::tile_number_x",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::Graphic3d_CubeMapSeparate(const NCollection_Array1<TCollection_AsciiString> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::from_paths",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::Graphic3d_CubeMapSeparate(const NCollection_Array1<occ::handle<Image_PixMap>> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::from_images",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::CompressedValue",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::<rustycad_tkservice::graphic3d::Graphic3dCubeMap>::compressed_value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::Value",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::<rustycad_tkservice::graphic3d::Graphic3dCubeMap>::value",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::GetImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::<rustycad_tkservice::graphic3d::Graphic3dTextureRoot>::get_image",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::IsDone",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::<rustycad_tkservice::graphic3d::Graphic3dTextureRoot>::is_done",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::myPaths",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::paths",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::myImages",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::images",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::mySize",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::first_side_layout",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Native quirk: uninitialised until the first side is read; here 0."
+    },
+    {
+      "upstream_id": "Graphic3d_CubeMapSeparate::myFormat",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CubeMapSeparate.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCubeMapSeparate::first_side_layout",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. Native quirk: uninitialised until the first side is read; here Gray."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D::Graphic3d_Texture3D(const TCollection_AsciiString &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::from_file",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D::Graphic3d_Texture3D(const occ::handle<Image_PixMap> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::from_pix_map",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D::Graphic3d_Texture3D(const NCollection_Array1<TCollection_AsciiString> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::from_slices",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes. The slice files keep their order; the array bounds are not kept."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D::SetImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::set_image",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D::GetImage",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::<rustycad_tkservice::graphic3d::Graphic3dTextureRoot>::get_image",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
+    },
+    {
+      "upstream_id": "Graphic3d_Texture3D::myPaths",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture3D.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTexture3D::slice_paths",
+      "status": "implemented",
+      "notes": "Graphic3d texture mapping (visualization-design.md section 1): Graphic3d_TextureRoot and its abstract classes are traits over embedded bases (Graphic3dTextureRootBase holds the parameters and the shared mutable fields), concrete classes are transients; the predefined-name constructors return the TexturesFolder Standard_Failure and refuse the UNKNOWN name (an out-of-bounds table read natively) with Standard_OutOfRange; without an image library file images fail to load as natively; the packed cube map tiles and segment planes are compared bit for bit by the sv_cubemap and sv_segment native probes."
     }
   ],
   "tests": [
