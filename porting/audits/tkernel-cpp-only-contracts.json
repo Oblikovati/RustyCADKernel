@@ -1,0 +1,1385 @@
+{
+  "schema": "rustycad.tkernel-cpp-only-contracts.v1",
+  "revision": "b84620d9",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "decision": "docs/tkernel-rust-refactoring-plan.md D1-D4 (D1, D2 approved by the user 2026-10-07)",
+  "classes": {
+    "A": "observable through the mapped API under conditions Rust can produce: obligation",
+    "B1": "throwing element destructor (native: std::terminate)",
+    "B2": "throwing copy/move/assignment and the partial state it leaves",
+    "B3": "operator new / allocator failure mid-operation",
+    "B4": "C++ type traits",
+    "B5": "raw node addresses",
+    "S": "Rust soundness duty created by the unsafe representation (user Hash/Eq/Clone/Drop panic); not OCCT behaviour",
+    "RX": "Rust-only extension; never OCCT parity credit",
+    "D3": "panic on caller input or internal error that must become a named failure"
+  },
+  "findings": {
+    "mapped_upstream_gtests_using_catch_unwind": 0,
+    "tkernel_test_files_using_catch_unwind": 158,
+    "tkernel_api_rows_whose_notes_cite_these_states": {
+      "total": 166,
+      "by_status": {
+        "implemented": 90,
+        "partial": 76
+      }
+    },
+    "consequence": "Removing B1-B3/S machinery cannot change any mapped upstream GTest; it changes Rust-side behaviour tests and the notes (and some partial statuses) of the cited API rows."
+  },
+  "catch_unwind_sites": [
+    {
+      "path": "crates/tkernel/src/ncollection/destructor_unwind.rs",
+      "kind": "production",
+      "lines": 42,
+      "unsafe": 0,
+      "catch_unwind": 3,
+      "class": "B1",
+      "native_contract": "Runs remaining element destructors, then resumes the first Drop panic. Native: a throwing destructor calls std::terminate (C++11 implicit noexcept), so no native state exists to reproduce.",
+      "recommendation": "Remove; let Drop panics follow Rust defaults. Callers: ebtree/removal, indexed_storage/assignment, sparse_array/storage/lifecycle, ubtree/storage/pair."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/sparse_array/storage/lifecycle.rs",
+      "kind": "production",
+      "lines": 19,
+      "unsafe": 2,
+      "catch_unwind": 2,
+      "class": "B1",
+      "native_contract": "Defers Rust destructor panics until counts and blocks are restored.",
+      "recommendation": "Remove with destructor_unwind.rs; destroy with ordinary Drop."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/ubtree_filler/owned_policy.rs",
+      "kind": "production",
+      "lines": 88,
+      "unsafe": 0,
+      "catch_unwind": 2,
+      "class": "B1",
+      "native_contract": "Opt-in 'native destructor policy' for UBTreeFiller self-assignment during Drop; its own doc says OCCT's destructor domain is noexcept.",
+      "recommendation": "Remove the opt-in policy type; keep the ordinary filler (class A Fill order)."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/ubtree/storage/pair.rs",
+      "kind": "production",
+      "lines": 141,
+      "unsafe": 6,
+      "catch_unwind": 3,
+      "class": "B1+B5",
+      "native_contract": "One raw allocation holding two nodes whose payload lifetime is independent of the block, with deferred destructor panics.",
+      "recommendation": "Replace with two owned nodes (Box or arena slots); keep the native tree shape and fill order (class A)."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/ubtree/storage/pair/failed_contracts.rs",
+      "kind": "test-module",
+      "lines": 84,
+      "unsafe": 2,
+      "catch_unwind": 3,
+      "class": "B2",
+      "native_contract": "Tests that a panicking pair assignment leaves the allocation abandoned without drops.",
+      "recommendation": "Remove with pair.rs."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/ebtree/removal.rs",
+      "kind": "production",
+      "lines": 37,
+      "unsafe": 0,
+      "catch_unwind": 2,
+      "class": "S+B1",
+      "native_contract": "Repairs the leaf index when a user hash panics during rebind; defers destructor panics while killing the node.",
+      "recommendation": "Keep the native Remove phase order (class A); drop the unwind repair once storage is safe."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/indexed_storage/assignment.rs",
+      "kind": "production",
+      "lines": 72,
+      "unsafe": 0,
+      "catch_unwind": 1,
+      "class": "S+B2",
+      "native_contract": "Substitute: unlink/assign/relink with relink after a panicking assignment (user Clone/Drop).",
+      "recommendation": "Keep the Standard_DomainError check and order (class A); drop the unwind path with safe storage."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/indexed_storage/queries.rs",
+      "kind": "production",
+      "lines": 56,
+      "unsafe": 6,
+      "catch_unwind": 1,
+      "class": "S",
+      "native_contract": "S: Rust soundness of raw intrusive storage when a user Hash/Eq/Clone/Drop panics; not an OCCT behaviour (native hashers of integral keys do not throw). Disappears with safe index-based storage.",
+      "recommendation": "Drop the guard with safe storage."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/indexed_storage/resize.rs",
+      "kind": "production",
+      "lines": 74,
+      "unsafe": 4,
+      "catch_unwind": 2,
+      "class": "S",
+      "native_contract": "Rehash relinks; a panicking user hash restores original links.",
+      "recommendation": "Keep native rehash order (class A); drop the guard with safe storage."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/ordered_table/resize.rs",
+      "kind": "production",
+      "lines": 61,
+      "unsafe": 4,
+      "catch_unwind": 2,
+      "class": "S+D3",
+      "native_contract": "Rehash with link restore on panic; also panics on a begin_resize error (unwrap_or_else(panic!)).",
+      "recommendation": "Keep native rehash order; return a named failure (D3); drop the guard with safe storage."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/ordered_table/resize_interruption.rs",
+      "kind": "production",
+      "lines": 148,
+      "unsafe": 3,
+      "catch_unwind": 2,
+      "class": "B3+RX",
+      "native_contract": "Public Rust-only resize_with_progress returns a ResizeInterruption that keeps a partial native rehash after a panic (also macro ordered_resize_interruption.rs).",
+      "recommendation": "Remove the API and its rows' notes; a rehash cannot be interrupted except by a caller bug."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/double_map/removal.rs",
+      "kind": "production",
+      "lines": 57,
+      "unsafe": 1,
+      "catch_unwind": 2,
+      "class": "S+D3",
+      "native_contract": "Restores the first unlink if hashing the opposite key panics; panics if the partner bucket is missing (internal invariant).",
+      "recommendation": "Drop the guard with safe storage; keep the invariant assert with a comment (D3 allows documented invariants)."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/cell_filter/cell_map/retention.rs",
+      "kind": "production",
+      "lines": 87,
+      "unsafe": 15,
+      "catch_unwind": 3,
+      "class": "S+RX",
+      "native_contract": "Rust-only fallible try_retain; removes a dead cell when the user keep callback panics.",
+      "recommendation": "Keep try_retain as a Rust-only extension (Result path); drop the panic path with safe storage."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/list/owner.rs",
+      "kind": "production",
+      "lines": 58,
+      "unsafe": 7,
+      "catch_unwind": 1,
+      "class": "S+B1",
+      "native_contract": "Lets the raw base finish when dropping an owner panics.",
+      "recommendation": "Drop with safe storage."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/linear_vector/constructor_ownership.rs",
+      "kind": "production",
+      "lines": 36,
+      "unsafe": 0,
+      "catch_unwind": 2,
+      "class": "B2+B3",
+      "native_contract": "Constructors transfer raw storage ownership only when element initialisation completes; a test hook observes allocation provenance after a panic.",
+      "recommendation": "Remove; build with Vec (memory safety is Vec's)."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/local_array.rs",
+      "kind": "test-module",
+      "lines": 218,
+      "unsafe": 1,
+      "catch_unwind": 1,
+      "class": "B2",
+      "native_contract": "Inline test: reallocation keeps old values when Default panics.",
+      "recommendation": "Remove the test; SmallVec provides memory safety."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/allocator/owned_contracts.rs",
+      "kind": "test-module",
+      "lines": 106,
+      "unsafe": 4,
+      "catch_unwind": 1,
+      "class": "B2+B3",
+      "native_contract": "Tests that a panicking value constructor releases a typed lease.",
+      "recommendation": "Keep only if allocate_value_with is public API that a mapped row claims; otherwise remove."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/packed_map/engine_contracts/bucket_policy.rs",
+      "kind": "test-module",
+      "lines": 104,
+      "unsafe": 0,
+      "catch_unwind": 1,
+      "class": "B3",
+      "native_contract": "Exact allocation-boundary traces with injected allocation failure.",
+      "recommendation": "Remove the failure injection; keep the success-path bucket traces if a native probe compares them (class A)."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/packed_map/engine_contracts/rehash_guards.rs",
+      "kind": "test-module",
+      "lines": 27,
+      "unsafe": 0,
+      "catch_unwind": 1,
+      "class": "B3",
+      "native_contract": "Rehash panic leaves the map unchanged.",
+      "recommendation": "Remove."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/packed_map/engine_contracts/unwind.rs",
+      "kind": "test-module",
+      "lines": 107,
+      "unsafe": 0,
+      "catch_unwind": 2,
+      "class": "RX+S",
+      "native_contract": "Rust-only open-trait unwind safety; its doc says OCCT's integral template arguments cannot panic.",
+      "recommendation": "Seal PackedInteger to the native integer types; then remove."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/packed_map/mutation_contracts.rs",
+      "kind": "test-module",
+      "lines": 167,
+      "unsafe": 0,
+      "catch_unwind": 1,
+      "class": "B3",
+      "native_contract": "Mutation results under injected failure; the success rows are class A.",
+      "recommendation": "Keep the success rows; remove the failure injection."
+    },
+    {
+      "path": "crates/tkernel/src/ncollection/packed_map/mutation_contracts/callbacks.rs",
+      "kind": "test-module",
+      "lines": 172,
+      "unsafe": 0,
+      "catch_unwind": 1,
+      "class": "RX",
+      "native_contract": "Its doc: key callbacks are Rust extensions, native source order is the contract.",
+      "recommendation": "Keep as Rust-only extension tests only if the callbacks stay public; otherwise remove."
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel/job.rs",
+      "kind": "production",
+      "lines": 69,
+      "unsafe": 3,
+      "catch_unwind": 3,
+      "class": "A",
+      "native_contract": "OSD_ThreadPool performJob: a failing job becomes the Standard_ProgramError the launcher raises.",
+      "recommendation": "Keep.",
+      "mapped_upstream_tests": [
+        "OSD_ParallelTest.OCC24826_SaxpyParallelMatchesSequential",
+        "OSD_ParallelTest.OCC29935_MatrixMultiplyParallelMatchesSequential"
+      ]
+    },
+    {
+      "path": "crates/tkernel/src/osd/parallel/worker.rs",
+      "kind": "production",
+      "lines": 131,
+      "unsafe": 0,
+      "catch_unwind": 1,
+      "class": "A",
+      "native_contract": "OSD_ThreadPool EnumeratedThread failure capture on a pool thread.",
+      "recommendation": "Keep.",
+      "mapped_upstream_tests": [
+        "OSD_ParallelTest.OCC24826_SaxpyParallelMatchesSequential",
+        "OSD_ParallelTest.OCC29935_MatrixMultiplyParallelMatchesSequential"
+      ]
+    }
+  ],
+  "unsafe_clusters": [
+    {
+      "module": "crates/tkernel/src/ncollection/sequence",
+      "unsafe": 244,
+      "lines": 2881,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/sparse_array_base",
+      "unsafe": 185,
+      "lines": 1084,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/base_list",
+      "unsafe": 99,
+      "lines": 756,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/ordered_table",
+      "unsafe": 71,
+      "lines": 1382,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/dynamic_array",
+      "unsafe": 70,
+      "lines": 3591,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/allocator",
+      "unsafe": 59,
+      "lines": 2058,
+      "class": "A: allocator implementation; raw memory is its purpose and its public results (identity, alignment, reset, statistics) are class A.",
+      "recommendation": "Keep. Review only the parts that exist for B3 failure injection or S panic guards."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/base_map",
+      "unsafe": 59,
+      "lines": 1661,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/cell_filter",
+      "unsafe": 51,
+      "lines": 1099,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/array1",
+      "unsafe": 49,
+      "lines": 1291,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/list",
+      "unsafe": 48,
+      "lines": 1251,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/indexed_storage",
+      "unsafe": 40,
+      "lines": 541,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/occ_allocator",
+      "unsafe": 31,
+      "lines": 425,
+      "class": "A: allocator implementation; raw memory is its purpose and its public results (identity, alignment, reset, statistics) are class A.",
+      "recommendation": "Keep. Review only the parts that exist for B3 failure injection or S panic guards."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/double_map",
+      "unsafe": 29,
+      "lines": 1172,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/sparse_array",
+      "unsafe": 27,
+      "lines": 926,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    },
+    {
+      "module": "crates/tkernel/src/ncollection/owned_bucket_chains",
+      "unsafe": 25,
+      "lines": 342,
+      "class": "Hypothesis, to verify per module in Phase 2: A+B5: raw intrusive nodes model native node layout. Class A: node identity seen by detached cursors, bucket/chain and insertion order, allocator statistics a public API reports. Not an obligation: raw addresses (B5) and panic-safety states (S).",
+      "recommendation": "Phase 2 candidate: index-based safe storage (Vec slots + free list; cursors hold index and generation) that keeps every class-A order; prototype on one family first (base_map/data_map), gated by verify_tkernel."
+    }
+  ],
+  "api_rows_to_revisit": [
+    {
+      "upstream_id": "NCollection_Array1::operator()(int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::<core::ops::index::Index<i32>>::index"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator[](int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::<core::ops::index::Index<i32>>::index"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator()(int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::<core::ops::index::IndexMut<i32>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator[](int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::<core::ops::index::IndexMut<i32>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::Allocate(size_t)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::allocate"
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::Reallocate(size_t,bool)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::reallocate"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector(size_t,const TheItemType&)",
+      "status": "partial",
+      "rust_item": null
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator=(const NCollection_LinearVector<TheItemType>&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Reserve(size_t)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::reserve"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Resize(size_t)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::resize"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator()(size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator()(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator[](size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator[](size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Appended()",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::appended"
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::EmplaceAppend(Args&&...)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::emplace_append"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::~NCollection_DynamicArray<TheItemType>()",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::ops::drop::Drop>::drop"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray<TheItemType> &,const bool)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_returning"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Assign(NCollection_DynamicArray<TheItemType> &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray<TheItemType> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign_operator_returning"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator=(NCollection_DynamicArray<TheItemType> &&) noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from_returning"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator()(size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator[](size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator()(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator[](size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_SparseArray(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::new"
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::operator()(size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::operator()(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Size() const noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::size"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Capacity() const noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::capacity"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::HasValue(const size_t) const",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::has_value"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Restart()",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::restart"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::More() const noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::more"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Next()",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::next"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Index() const noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBaseIterator::index"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::<core::clone::Clone>::clone"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::operator=(const NCollection_FlatDataMap<TheKeyType, TheItemType, Hasher> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::assign_returning"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bind(const TheKeyType &,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bind(const TheKeyType &,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref_key"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bind(TheKeyType &&,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind_ref_value"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bind(TheKeyType &&,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bind"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBind(const TheKeyType &,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBind(const TheKeyType &,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref_key"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBind(TheKeyType &&,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind_ref_value"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBind(TheKeyType &&,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bind"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bound(const TheKeyType &,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bound(const TheKeyType &,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref_key"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bound(TheKeyType &&,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound_ref_value"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Bound(TheKeyType &&,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::bound"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBound(const TheKeyType &,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBound(const TheKeyType &,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref_key"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBound(TheKeyType &&,const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound_ref_value"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryBound(TheKeyType &&,TheItemType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_bound"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Emplace(K &&,Args &&...)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::emplace"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::Emplaced(K &&,Args &&...)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::emplaced"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryEmplace(K &&,Args &&...)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_emplace"
+    },
+    {
+      "upstream_id": "NCollection_FlatDataMap::TryEmplaced(K &&,Args &&...)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatDataMap::try_emplaced"
+    },
+    {
+      "upstream_id": "NCollection_FlatMap(const NCollection_FlatMap<TheKeyType, Hasher> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::<core::clone::Clone>::clone"
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::operator=(const NCollection_FlatMap<TheKeyType, Hasher> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::assign_returning"
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::Add(const TheKeyType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::add_ref"
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::Add(TheKeyType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::add"
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::Added(const TheKeyType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::added_ref"
+    },
+    {
+      "upstream_id": "NCollection_FlatMap::Added(TheKeyType &&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::FlatMap::added"
+    },
+    {
+      "upstream_id": "NCollection_DataMap::Bind(const TheKeyType&,const TheItemType&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::bind_ref"
+    },
+    {
+      "upstream_id": "NCollection_DataMap::operator()(const TheKeyType&) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::<core::ops::index::Index<&K>>::index"
+    },
+    {
+      "upstream_id": "NCollection_DataMap::operator()(const TheKeyType&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::DataMap::<core::ops::index::IndexMut<&K>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::operator()(size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::operator()(int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::operator()(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_IndexedDataMap::operator()(int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedDataMap::<core::ops::index::IndexMut<usize>>::index_mut"
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::Add(const TheKeyType&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap::add_ref"
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::operator()(size_t) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_IndexedMap::operator()(int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IndexedMap::<core::ops::index::Index<usize>>::index"
+    },
+    {
+      "upstream_id": "NCollection_Map::Add(const TheKeyType&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::Map::add_ref"
+    },
+    {
+      "upstream_id": "NCollection_Map::Added(const TheKeyType&)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::Map::added_ref"
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Reset(double,const occ::handle<NCollection_IncAllocator>&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::reset"
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Build(const ThePointType*,const double*,size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::build_radii"
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Build(const NCollection_Array1<ThePointType>&,const NCollection_Array1<double>&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::build_radii_array"
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::Allocate(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw"
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::AllocateOptimal(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw"
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::Free(void*)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw_nullable"
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::CommonBaseAllocator()",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::common"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::NCollection_IncAllocator(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::incremental"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::Allocate(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::AllocateOptimal(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::Free(void*)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw_nullable"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::Reset(bool)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::reset"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlock(void*,size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlock::new"
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel"
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::Allocate(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw"
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::AllocateOptimal(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw"
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::Free(void*)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw_nullable"
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::GlobalHeapAllocator()",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::global_heap"
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::NCollection_AlignedAllocator(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::aligned"
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::Allocate(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw"
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::AllocateOptimal(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw"
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::Free(void*)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw_nullable"
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::NCollection_AccAllocator(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::accumulating"
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Allocate(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw"
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::AllocateOptimal(size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw"
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Free(void*)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw_nullable"
+    },
+    {
+      "upstream_id": "Modulus(int,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::integer::modulus"
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::hash_combine(const T1&,int,T)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::hash_combine"
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::hash_combine(const T1&,int,T)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::hash_combine"
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::hash_combine(const T1&,int,T)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::hash_combine"
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::hash_combine(const T1&,int,T)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::hash_combine"
+    },
+    {
+      "upstream_id": "opencascade::hash(const T1&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::hashing::hash"
+    },
+    {
+      "upstream_id": "opencascade::hash_combine(const T1&,int,T)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::hashing::hash_combine"
+    },
+    {
+      "upstream_id": "Standard_Mutex::Sentry(Standard_Mutex&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::mutex::Sentry::new"
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::readStream(std::istream&,size_t,size_t&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_stream_istream"
+    },
+    {
+      "upstream_id": "opencascade::handle::operator*() const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::deref::Deref>::deref"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::TCollection_ExtendedString(const char16_t* const,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t* const,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Copy(const char16_t* const,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Insert(int,const char16_t* const,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,const char16_t* const,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Prepend(const char16_t* const,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsEqual(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsDifferent(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsLess(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsGreater(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::StartsWith(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::EndsWith(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Search(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_span"
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const char16_t* const,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end_span"
+    },
+    {
+      "upstream_id": "Quantity_Color::ColorFromName(const char* const,Quantity_NameOfColor&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::quantity::NamedColor::from_name"
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_HLS_To_LinearRGB(const NCollection_Vec3<float>&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::quantity::Color::hls_to_linear_rgb"
+    },
+    {
+      "upstream_id": "Quantity_Color::HlsRgb(double,double,double,double&,double&,double&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::quantity::Color::hls_rgb"
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::SetValues(float,float,float,float)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::set_values"
+    },
+    {
+      "upstream_id": "OSD::SetSignal(OSD_SignalMode,bool)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_signal"
+    },
+    {
+      "upstream_id": "OSD::SetSignal(bool)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_signal_default"
+    },
+    {
+      "upstream_id": "OSD_Process::SystemDate()",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::osd::Process::system_date"
+    },
+    {
+      "upstream_id": "OSD_Parallel::ForEach(InputIterator,InputIterator,const Functor&,bool,int)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::osd::Parallel::for_each"
+    },
+    {
+      "upstream_id": "OSD_Thread::Wait(void*&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::wait_result"
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::Perform(int,int,const Functor&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::osd::Launcher::perform"
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,Inspector&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect"
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,const Point&,Inspector&)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect_range"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::destroyAt(NCollection_DynamicArray::pointer) noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::destroy_at"
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::replaceAt(NCollection_DynamicArray::pointer,Args &&...)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayStorageExtension::replace_at_assign"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::endResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize_legacy"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::destroy",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::destroy"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BeginResize(const size_t,size_t &,NCollection_ListNode **&,NCollection_ListNode **&) const",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_legacy_into"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::beginResize(const size_t,size_t &,NCollection_ListNode **&) const",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_into"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::EndResize(const size_t,const size_t,NCollection_ListNode **,NCollection_ListNode **) noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize_legacy"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::Destroy",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::destroy"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::beginResize(const size_t,size_t &,NCollection_ListNode **&,NCollection_ListNode **&) const",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::begin_resize_legacy_into"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::endResize(const size_t,const size_t,NCollection_ListNode **) noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapStorage::end_resize"
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::exchange(NCollection_SparseArrayBase &) noexcept",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::exchange"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator==",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_equal"
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::IndexedIterator::operator!=",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapIndexedIterator::is_not_equal"
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const opencascade::handle<T> &,typename std::enable_if<std::is_base_of<NCollection_HSequence<TheItemType>, T>::value>::type *)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_handle"
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const TheItemType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_ref"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::NCollection_Sequence<TheItemType>(const NCollection_Sequence<TheItemType> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::<core::clone::Clone>::clone"
+    },
+    {
+      "upstream_id": "NCollection_HSequence::NCollection_HSequence<TheItemType>(const NCollection_HSequence::SequenceType &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::from_sequence"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(const size_t,NCollection_Sequence<TheItemType> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after"
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(const int,NCollection_Sequence<TheItemType> &)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after_signed"
+    },
+    {
+      "upstream_id": "opencascade::handle::operator->",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::deref::Deref>::deref"
+    },
+    {
+      "upstream_id": "NCollection_Array1::at(const size_t)",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::as_mut_slice"
+    },
+    {
+      "upstream_id": "NCollection_Array2::operator()(int,int) const",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::value"
+    },
+    {
+      "upstream_id": "NCollection_BaseIndexedMap::resizeIndexTable(const size_t)",
+      "status": "implemented",
+      "rust_item": "rustycad_tkernel::ncollection::BaseIndexedMapStorage::resize_index_table"
+    },
+    {
+      "upstream_id": "NCollection_BaseDoubleMap::beginResize(const size_t,size_t&,NCollection_ListNode**&,NCollection_ListNode**&) const",
+      "status": "partial",
+      "rust_item": "rustycad_tkernel::ncollection::BaseDoubleMapStorage::begin_resize"
+    }
+  ],
+  "test_files_using_catch_unwind": [
+    "crates/tkernel/tests/acc_allocator_alignment_safety.rs",
+    "crates/tkernel/tests/array2_index_limits/support.rs",
+    "crates/tkernel/tests/array2_resize_assignment.rs",
+    "crates/tkernel/tests/array2_resize_validation.rs",
+    "crates/tkernel/tests/array_const_assignment/support.rs",
+    "crates/tkernel/tests/array_copy_values_assignment/support.rs",
+    "crates/tkernel/tests/array_default_construction.rs",
+    "crates/tkernel/tests/array_emplace_assignment/support.rs",
+    "crates/tkernel/tests/array_internal_emplace/support.rs",
+    "crates/tkernel/tests/array_internal_init/support.rs",
+    "crates/tkernel/tests/array_internal_set_value/support.rs",
+    "crates/tkernel/tests/array_nontrivial_raw_copy.rs",
+    "crates/tkernel/tests/array_raw_construction.rs",
+    "crates/tkernel/tests/array_raw_copy_validation.rs",
+    "crates/tkernel/tests/array_raw_destruction/support.rs",
+    "crates/tkernel/tests/array_set_value_assignment/support.rs",
+    "crates/tkernel/tests/base_sequence_method_contracts.rs",
+    "crates/tkernel/tests/cell_class_fixture/safety.rs",
+    "crates/tkernel/tests/cell_filter_method_contracts.rs",
+    "crates/tkernel/tests/cell_protected_fixture/failures.rs",
+    "crates/tkernel/tests/cell_protected_fixture/mod.rs",
+    "crates/tkernel/tests/data_map_method_contracts.rs",
+    "crates/tkernel/tests/data_map_storage_contracts/fixture.rs",
+    "crates/tkernel/tests/double_map_canonical_contracts/observation_fixture.rs",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods.rs",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_insertion.rs",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/alias_setvalue.rs",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/internal.rs",
+    "crates/tkernel/tests/dynamic_array_borrowed_methods/oracle.rs",
+    "crates/tkernel/tests/dynamic_array_clear_state/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_clear_state/trace.rs",
+    "crates/tkernel/tests/dynamic_array_copy_date/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_default_constructor_order.rs",
+    "crates/tkernel/tests/dynamic_array_emplace_value_order.rs",
+    "crates/tkernel/tests/dynamic_array_erase_last_phase.rs",
+    "crates/tkernel/tests/dynamic_array_increment_overflow.rs",
+    "crates/tkernel/tests/dynamic_array_internal_reconstruction.rs",
+    "crates/tkernel/tests/dynamic_array_method_tail.rs",
+    "crates/tkernel/tests/dynamic_array_method_tail/oracle.rs",
+    "crates/tkernel/tests/dynamic_array_move_constructor.rs",
+    "crates/tkernel/tests/dynamic_array_native_insertion.rs",
+    "crates/tkernel/tests/dynamic_array_native_insertion/convenience.rs",
+    "crates/tkernel/tests/dynamic_array_native_insertion/oracle.rs",
+    "crates/tkernel/tests/dynamic_array_public_copy/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime.rs",
+    "crates/tkernel/tests/dynamic_array_raw_lifetime/oracle.rs",
+    "crates/tkernel/tests/dynamic_array_replacement_policy.rs",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/emplace.rs",
+    "crates/tkernel/tests/dynamic_array_replacement_policy/oracle.rs",
+    "crates/tkernel/tests/dynamic_array_retained_zero_stride.rs",
+    "crates/tkernel/tests/dynamic_array_retained_zero_stride/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_retained_zero_stride/native_rows.rs",
+    "crates/tkernel/tests/dynamic_array_zero_first_replacement/contracts.rs",
+    "crates/tkernel/tests/dynamic_array_zero_first_replacement/phases.rs",
+    "crates/tkernel/tests/ebtree_implicit_contracts.rs",
+    "crates/tkernel/tests/ebtree_move_assignment_contracts/failures.rs",
+    "crates/tkernel/tests/ebtree_native_add_contracts/fixture.rs",
+    "crates/tkernel/tests/ebtree_remove_contracts/fixture.rs",
+    "crates/tkernel/tests/ebtree_remove_contracts/recovery.rs",
+    "crates/tkernel/tests/fixtures/native_map_node_trace.rs",
+    "crates/tkernel/tests/flat_data_map_method_contracts.rs",
+    "crates/tkernel/tests/forward_native_access_contracts.rs",
+    "crates/tkernel/tests/harray1_borrowed_initialization.rs",
+    "crates/tkernel/tests/harray1_trivial_copy.rs",
+    "crates/tkernel/tests/harray2_borrowed_initialization.rs",
+    "crates/tkernel/tests/harray2_borrowed_initialization/default_failure.rs",
+    "crates/tkernel/tests/harray2_borrowed_initialization/native_rows.rs",
+    "crates/tkernel/tests/harray2_trivial_copy.rs",
+    "crates/tkernel/tests/hsequence_borrowed_append/native_rows.rs",
+    "crates/tkernel/tests/hsequence_projected_append/native_rows.rs",
+    "crates/tkernel/tests/indexed_data_map_canonical/lifetime.rs",
+    "crates/tkernel/tests/indexed_data_map_method_contracts.rs",
+    "crates/tkernel/tests/indexed_map_borrowed_add.rs",
+    "crates/tkernel/tests/indexed_map_canonical/lifetime.rs",
+    "crates/tkernel/tests/indexed_map_canonical/unwind.rs",
+    "crates/tkernel/tests/linear_vector_append_policy/fixture.rs",
+    "crates/tkernel/tests/linear_vector_assignment_tail.rs",
+    "crates/tkernel/tests/linear_vector_assignment_tail/transitions.rs",
+    "crates/tkernel/tests/linear_vector_erase_last_methods.rs",
+    "crates/tkernel/tests/linear_vector_erase_methods.rs",
+    "crates/tkernel/tests/linear_vector_growth_destruction.rs",
+    "crates/tkernel/tests/linear_vector_insert_methods/fixture.rs",
+    "crates/tkernel/tests/linear_vector_move_methods.rs",
+    "crates/tkernel/tests/linear_vector_native_tail.rs",
+    "crates/tkernel/tests/linear_vector_native_tail/transitions.rs",
+    "crates/tkernel/tests/linear_vector_resize_policy/fixture.rs",
+    "crates/tkernel/tests/linear_vector_resize_policy/recovery.rs",
+    "crates/tkernel/tests/linear_vector_set_value_policy/fixture.rs",
+    "crates/tkernel/tests/linear_vector_set_value_policy/recovery.rs",
+    "crates/tkernel/tests/list_allocation_contracts.rs",
+    "crates/tkernel/tests/list_method_contracts.rs",
+    "crates/tkernel/tests/list_node_contracts.rs",
+    "crates/tkernel/tests/list_observer_contracts.rs",
+    "crates/tkernel/tests/list_topology_contracts/destruction.rs",
+    "crates/tkernel/tests/local_array_nontrivial_methods.rs",
+    "crates/tkernel/tests/map_canonical_storage_contracts/fixture.rs",
+    "crates/tkernel/tests/map_method_contracts.rs",
+    "crates/tkernel/tests/map_node_bridge_contracts/fixture.rs",
+    "crates/tkernel/tests/map_topology_sync_contracts/changed_routes.rs",
+    "crates/tkernel/tests/mmgr_opt_callback_unwind/mod.rs",
+    "crates/tkernel/tests/ncollection_data_map_assignment.rs",
+    "crates/tkernel/tests/ncollection_data_map_bind_ref_allocation.rs",
+    "crates/tkernel/tests/ncollection_dynamic_array_assignment_behavior.rs",
+    "crates/tkernel/tests/ncollection_flat_key_construction.rs",
+    "crates/tkernel/tests/ncollection_linear_vector/append_order.rs",
+    "crates/tkernel/tests/ncollection_linear_vector/assign_tail.rs",
+    "crates/tkernel/tests/ncollection_linear_vector/exceptions.rs",
+    "crates/tkernel/tests/ncollection_linear_vector/resize_value_ref.rs",
+    "crates/tkernel/tests/ncollection_map_borrowed_add.rs",
+    "crates/tkernel/tests/occ_allocator_method_contracts.rs",
+    "crates/tkernel/tests/ordered_borrowed_clear/contracts.rs",
+    "crates/tkernel/tests/ordered_borrowed_emplace/contracts.rs",
+    "crates/tkernel/tests/ordered_copy_lifetimes/copy.rs",
+    "crates/tkernel/tests/ordered_copy_lifetimes/defaults.rs",
+    "crates/tkernel/tests/ordered_data_map_method_contracts.rs",
+    "crates/tkernel/tests/ordered_emplace_construction/fixture.rs",
+    "crates/tkernel/tests/ordered_map_destruction.rs",
+    "crates/tkernel/tests/ordered_map_method_contracts.rs",
+    "crates/tkernel/tests/ordered_mixed_ownership.rs",
+    "crates/tkernel/tests/ordered_policy_construction.rs",
+    "crates/tkernel/tests/ordered_policy_exchange/cursors.rs",
+    "crates/tkernel/tests/ordered_policy_exchange/scenarios.rs",
+    "crates/tkernel/tests/ordered_protected_lookup/contracts.rs",
+    "crates/tkernel/tests/ordered_protected_lookup/fixture.rs",
+    "crates/tkernel/tests/ordered_resize_progress/contracts.rs",
+    "crates/tkernel/tests/osd_universal_iterator.rs",
+    "crates/tkernel/tests/packed_map_iterator_errors/stack_setting.rs",
+    "crates/tkernel/tests/packed_map_native_rehash/key_callbacks.rs",
+    "crates/tkernel/tests/packed_map_node_contracts/ownership.rs",
+    "crates/tkernel/tests/packed_map_object_storage/lifecycle.rs",
+    "crates/tkernel/tests/sequence_borrowed_assignment_contracts.rs",
+    "crates/tkernel/tests/sequence_node_method_contracts.rs",
+    "crates/tkernel/tests/sequence_observer_contracts/destruction.rs",
+    "crates/tkernel/tests/sequence_topology_contracts.rs",
+    "crates/tkernel/tests/sequence_topology_contracts/destruction.rs",
+    "crates/tkernel/tests/shared_collection_method_contracts.rs",
+    "crates/tkernel/tests/shared_state_supplemental.rs",
+    "crates/tkernel/tests/sparse_array_base_contracts.rs",
+    "crates/tkernel/tests/sparse_array_base_contracts/fixture.rs",
+    "crates/tkernel/tests/sparse_array_base_contracts/raw_cursor.rs",
+    "crates/tkernel/tests/sparse_array_base_contracts/resources.rs",
+    "crates/tkernel/tests/sparse_array_method_contracts.rs",
+    "crates/tkernel/tests/sparse_block_native_surface.rs",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/fixture.rs",
+    "crates/tkernel/tests/sparse_typed_storage_contracts/rust_safety.rs",
+    "crates/tkernel/tests/standard_c_locale_sentry.rs",
+    "crates/tkernel/tests/standard_services_api_behavior/sync.rs",
+    "crates/tkernel/tests/support/bounding_tree_trace.rs",
+    "crates/tkernel/tests/ubtree_add_contracts/fixture.rs",
+    "crates/tkernel/tests/ubtree_filler_dispatch_contracts/fixture.rs",
+    "crates/tkernel/tests/ubtree_filler_owned_policy_contracts.rs",
+    "crates/tkernel/tests/ubtree_filler_payload_contracts.rs",
+    "crates/tkernel/tests/ubtree_gemmate_parent_contracts.rs",
+    "crates/tkernel/tests/ubtree_pair_contracts/fixture.rs",
+    "crates/tkernel/tests/ubtree_pair_contracts/safety.rs",
+    "crates/tkernel/tests/ubtree_payload_contracts/fixture.rs"
+  ],
+  "phase2_order": [
+    "Remove B1 (destructor_unwind and its four users) and the Rust-only resize_with_progress API (B3+RX).",
+    "Remove B2/B3 test modules and the LinearVector constructor ownership tokens; seal PackedInteger.",
+    "Prototype safe index storage on base_map/data_map; if verify_tkernel and the differential count hold and unsafe falls, extend family by family (indexed_storage, ordered_table, double_map, list/base_list, sequence, sparse_array_base).",
+    "D3: Array1/Array2/IndexedMap index operators and ordered_table resize errors return named failures."
+  ],
+  "clusters_note": "Cluster classes are hypotheses from module structure and docs, not a line-by-line audit; Phase 2 verifies each module before changing it."
+}
