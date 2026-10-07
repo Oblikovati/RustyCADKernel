@@ -289,8 +289,8 @@ explicit `new`/`delete`.
   `Once`: the registry builds its prototypes with these constructors, which call back into
   the registration.
 - **TDataXtd_Pattern** is the trait `TDataXtdPattern` (`PatternID`, `NbTrsfs`,
-  `ComputeTrsfs`); its static `GetID` is `<dyn TDataXtdPattern>::get_id()`, which is also
-  the `ID` of `TDataXtd_PatternStd`. `ComputeTrsfs` fills a slice from its start; a slice
+  `ComputeTrsfs`); its static `GetID` is the provided `TDataXtdPattern::get_id` (on
+  concrete types only), which is also the `ID` of `TDataXtd_PatternStd`. `ComputeTrsfs` fills a slice from its start; a slice
   shorter than `NbTrsfs` is `Standard_OutOfRange`. `NbTrsfs` multiplies by
   `NbInstances2` whenever it is set, also for a linear pattern, as natively.
 - **OCC2932 checks.** The setters of `Constraint`, `PatternStd` and `Position` do not back

@@ -31,15 +31,16 @@ pub trait TDataXtdPattern: TdfAttribute {
     fn nb_trsfs(&self) -> i32;
     /// `ComputeTrsfs(Trsfs)`: fills `NbTrsfs` transformations from the start of `trsfs`.
     fn compute_trsfs(&self, trsfs: &mut [Transform3]) -> Result<(), Failure>;
-}
-impl_transient_interface!(dyn TDataXtdPattern, "TDataXtd_Pattern", dyn TdfAttribute);
-
-impl dyn TDataXtdPattern {
-    /// `TDataXtd_Pattern::GetID`.
-    pub fn get_id() -> Guid {
+    /// `TDataXtd_Pattern::GetID`: the ID of every pattern attribute (a static member, so
+    /// only on a concrete pattern type).
+    fn get_id() -> Guid
+    where
+        Self: Sized,
+    {
         PATTERN_ID
     }
 }
+impl_transient_interface!(dyn TDataXtdPattern, "TDataXtd_Pattern", dyn TdfAttribute);
 
 /// The fields of `TDataXtd_PatternStd`.
 #[derive(Clone, Default)]
@@ -104,9 +105,9 @@ impl TDataXtdPatternStd {
     pub fn get_pattern_id() -> Guid {
         PATTERN_STD_ID
     }
-    /// `GetID` (inherited from `TDataXtd_Pattern`).
+    /// `GetID` (inherited from `TDataXtd_Pattern`, see [`TDataXtdPattern::get_id`]).
     pub fn get_id() -> Guid {
-        PATTERN_ID
+        <Self as TDataXtdPattern>::get_id()
     }
     /// `Set(label)`: finds the label's pattern or adds a standard one.
     pub fn set(label: &TdfLabel) -> Result<Handle<TDataXtdPatternStd>, Failure> {

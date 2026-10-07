@@ -331,5 +331,5 @@ fn the_derived_attributes_are_registered_on_first_use() {
     assert!(TdfDerivedAttribute::attribute("TDataXtd_Shape").is_some());
     let mut ids = Vec::new();
     TDataXtd::id_list(&mut ids);
-    assert!(ids.contains(&<dyn TDataXtdPattern>::get_id()));
+    assert!(ids.contains(&<TDataXtdPatternStd as TDataXtdPattern>::get_id()));
 }
