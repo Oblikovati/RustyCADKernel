@@ -50,40 +50,4 @@ fn shrink_panic_safely_drops_remaining_tail_and_keeps_the_prefix() {
     assert_eq!(trace.resources.get(), 0);
 }
 
-#[test]
-fn relocation_failure_cleans_replacement_without_constructing_the_tail() {
-    let trace = Rc::new(ResizeTrace::default());
-    let mut vector = fixture::filled(2, 2, &trace);
-    let before = vector.data_ptr();
-    let called = Cell::new(false);
-    trace.active.set(true);
-    let failed = fail_growth(&mut vector, &trace, &called);
-    trace.active.set(false);
-    assert!(failed && !called.get());
-    assert_eq!(
-        (vector.len(), vector.capacity(), trace.resources.get()),
-        (2, 2, 2)
-    );
-    assert_eq!(vector.data_ptr(), before);
-    assert!(vector.iter().map(|item| item.value).eq([10, 11]));
-    assert_eq!(*trace.events.borrow(), "G10,D10@X,");
-}
-
-fn fail_growth(
-    vector: &mut LinearVector<ResizeItem>,
-    trace: &Rc<ResizeTrace>,
-    called: &Cell<bool>,
-) -> bool {
-    std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-        vector.resize_with_relocation(5, reject_eleven, || {
-            called.set(true);
-            ResizeItem::new(99, trace)
-        });
-    }))
-    .is_err()
-}
-
-fn reject_eleven(source: &mut ResizeItem) -> ResizeItem {
-    assert_ne!(source.value, 11, "relocation value 11: expected success");
-    source.copied()
-}
+// Native growth failure ownership is checked by the shared growth trace and repair suite.

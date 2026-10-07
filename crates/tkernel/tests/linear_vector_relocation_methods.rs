@@ -121,28 +121,7 @@ fn relocation_does_not_require_clone_or_default_bounds() {
     reserve_case("move-only", 4, 3, 5, false);
 }
 
-fn reject_eleven(item: &mut Relocated) -> Relocated {
-    assert_ne!(
-        item.value, 11,
-        "relocation value 11: expected non-panicking move"
-    );
-    item.move_observed()
-}
-
-#[test]
-fn callback_panic_preserves_registered_storage_and_drops_partial_replacement() {
-    let trace = Rc::new(RefCell::new(String::new()));
-    let mut vector = filled(4, 3, &trace);
-    let before = vector.data_ptr();
-    let failed = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-        vector.reserve_with_relocation(5, reject_eleven);
-    }));
-    assert!(failed.is_err());
-    assert_eq!((vector.len(), vector.capacity()), (3, 4));
-    assert_eq!(vector.data_ptr(), before);
-    assert_eq!(*trace.borrow(), "M10,D10,");
-    assert!(vector.iter().map(|item| item.value).eq([-1, 11, 12]));
-}
+// Growth failure assertions now use native traces and cfg(test) typed replacement repair.
 
 #[test]
 fn local_inline_predicate_preserves_retained_heap_state() {
