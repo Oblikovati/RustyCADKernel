@@ -10,6 +10,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::sync::RwLock;
 mod address_space;
 mod free_pools;
+mod initialize;
 mod mapped_region;
 mod os_page;
 mod pools;
@@ -71,23 +72,12 @@ impl MMgrOpt {
     /// Builds a manager and runs `Initialize`; `MMgrOpt::new(true, false, 200, 1000, 40000)`.
     /// Fewer than 100 pages means 1000; the cell size is rounded up to 16 bytes.
     pub fn new(clear: bool, mmap: bool, cell_size: usize, nb_pages: i32, threshold: usize) -> Self {
-        let page_size = os_page::os_page_size();
-        Self {
-            clear,
-            // Initialize turns mapping off when the page size is unknown (getpagesize() == 0).
-            mmap: mmap && page_size != 0,
-            cell_size: roundup16(cell_size),
-            nb_pages: if nb_pages < 100 { 1000 } else { nb_pages },
-            page_size,
-            threshold,
-            free_list_max: index_cell(roundup_cell(threshold.wrapping_sub(BLOCK_SHIFT))),
-            free_lists: BTreeMap::new(),
-            alloc_list: 0,
-            next_addr: 0,
-            end_block: 0,
-            space: AddressSpace::default(),
-            live: BTreeSet::new(),
-        }
+        let mut allocator = Self::before_initialize(clear, mmap);
+        allocator.cell_size = cell_size;
+        allocator.nb_pages = nb_pages;
+        allocator.threshold = threshold;
+        allocator.initialize_native_free_lists();
+        allocator
     }
 
     /// Installs or removes the process-wide observer; `MMgrOpt::set_call_back_function(None)`.
