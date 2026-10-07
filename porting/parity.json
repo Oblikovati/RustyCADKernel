@@ -291661,7 +291661,7 @@
       "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
       "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::build",
       "status": "implemented",
-      "notes": "Reviewed line by line against the C++ (2026-10-07). Revolution and extrusion sweeps (the extrusion end trim with the U ends read before the basis split, std::max/std::min order), trimmed and offset recursion, one-patch reuse, knot snapping and the patch grid with Segment fallback match. The 16 swept multipart Build(false) requests crash natively (sweeps of null pieces) and return a named Rust failure (D3). sh_split_surface: 642 requests match, including the extrusion-end requests; tools/verify_split_surface.py replays the crash candidates."
+      "notes": "Reviewed line by line against the C++ (2026-10-07). Revolution and extrusion sweeps (the extrusion end trim with the U ends read before the basis split, std::max/std::min order), trimmed and offset recursion, one-patch reuse, knot snapping and the patch grid with Segment fallback match. The 16 swept multipart Build(false) requests crash natively (sweeps of null pieces) and return a named Rust failure (D3). 658 candidates: 642 exact sh_split_surface requests match, including the extrusion-end requests; tools/verify_split_surface.py replays the crash candidates."
     },
     {
       "upstream_id": "ShapeUpgrade_SplitSurface::Compute(bool)",
