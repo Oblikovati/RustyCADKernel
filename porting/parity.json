@@ -317062,6 +317062,42 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPDS_IteratorSI()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_IteratorSI.hxx",
+      "source_sha256": "0caa2a67204418e54cb1edbe9b9bd0267291e069e30f73f2bce04a32e653e610",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIteratorSI::new",
+      "status": "implemented",
+      "notes": "An iterator without candidate pairs. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPDS_IteratorSI(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_IteratorSI.hxx",
+      "source_sha256": "0caa2a67204418e54cb1edbe9b9bd0267291e069e30f73f2bce04a32e653e610",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIteratorSI::new",
+      "status": "implemented",
+      "notes": "The allocator is not ported (Rust collections own their storage). Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPDS_IteratorSI::UpdateByLevelOfCheck(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_IteratorSI.hxx",
+      "source_sha256": "0caa2a67204418e54cb1edbe9b9bd0267291e069e30f73f2bce04a32e653e610",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIteratorSI::update_by_level_of_check",
+      "status": "implemented",
+      "notes": "Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPDS_IteratorSI::Intersect(const occ::handle<IntTools_Context>&,bool,double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_IteratorSI.hxx",
+      "source_sha256": "0caa2a67204418e54cb1edbe9b9bd0267291e069e30f73f2bce04a32e653e610",
+      "rust_item": "rustycad_tkbo::bop_ds::BOPDSIteratorSI::prepare_with_context",
+      "status": "implemented",
+      "notes": "Protected virtual override of the broad phase, reached through `Prepare`: the Rust iterator has no virtual Intersect, so BOPDSIteratorSI::prepare_with_context runs the self-interference selection. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
       "upstream_id": "BOPDS_SubIterator",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_SubIterator.hxx",
@@ -324498,6 +324534,114 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "af470e6f968ed290aa49c21d7a274c4f9e42cac1508db7b18efb98c4d90eacfc",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::new",
+      "status": "implemented",
+      "notes": "Non-destructive, without p-curve construction, level of check 9. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. A failure is the AlertIntersectionFailed error the native catch adds. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::SetLevelOfCheck(int)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::set_level_of_check",
+      "status": "implemented",
+      "notes": "A level outside 0..9 is ignored as natively. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::myLevelOfCheck",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::level_of_check",
+      "status": "implemented",
+      "notes": "Protected data member kept as private state of BOPAlgoCheckerSI, written by set_level_of_check and read by level_of_check."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::Init(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected virtual override ported as the private `initialize_checker`, passed to the pave filler as its `Init` (BOPAlgoPaveFiller::perform_with_initializer). Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::PostTreat()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `post_treat` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::CheckFaceSelfIntersection(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `check_face_self_intersection` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::PerformVZ(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `perform_vz` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::PerformEZ(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `perform_ez` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::PerformFZ(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `perform_fz` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::PerformZZ(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `perform_zz` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckerSI::PerformSZ(TopAbs_ShapeEnum,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
+      "source_sha256": "6b92ac96dabc89ca57c07d76c60293a2d5c8332c61569e004a664a4e97f400ff",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCheckerSI::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private stage `perform_sz` run by `BOPAlgoCheckerSI::perform`; Rust has no subclass extension point for it. Verified bit for bit (errors, record counts, interference table order) by the native replay tools/oracle/tkbo_checker_si.cxx (crates/tkbo/tests/bop_algo_checker_si.rs)."
     },
     {
       "upstream_id": "BOPAlgo_MakeConnected::operator delete(void*) noexcept",
@@ -510334,10 +510478,11 @@
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
       "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BOPAlgo_CheckerSI"
-      ],
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_CheckerSITest__ModalgBug_24029_CheckLevelControlsInterferences",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]
@@ -510364,6 +510509,132 @@
       "blocked_by": [
         "BOPAlgo_ArgumentAnalyzer"
       ],
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A1_TwoOpenBoxes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A1_TwoOpenBoxes",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A2_OpenBoxesWithPartialIntersection",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A2_OpenBoxesWithPartialIntersection",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A3_OpenBoxesWithDifferentOrientation",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A3_OpenBoxesWithDifferentOrientation",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A4_MultiObjectOpenSolidOperations",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A4_MultiObjectOpenSolidOperations",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A5_InvertedToolOpenSolidOperations",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A5_InvertedToolOpenSolidOperations",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A6_NestedOpenSolidOperations",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A6_NestedOpenSolidOperations",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A7_ThreeOpenSolidOperations",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A7_ThreeOpenSolidOperations",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A8_OverlappingOpenSolidOperations",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A8_OverlappingOpenSolidOperations",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_OpenSolidTest.A9_OpenSolidWithInternalShell",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_OpenSolid_Test.cxx",
+      "source_sha256": "b8098a67da067e205a904f9c7d3df62ad05481a5900f029db377bb6781f08274",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_open_solid_legacy",
+      "rust_test": "cases::BOPAlgo_OpenSolidTest__A9_OpenSolidWithInternalShell",
+      "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]

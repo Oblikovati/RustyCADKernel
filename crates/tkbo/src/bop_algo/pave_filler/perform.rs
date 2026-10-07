@@ -15,7 +15,17 @@ impl BOPAlgoPaveFiller {
     /// Runs the whole intersection; any failure becomes an `AlertIntersectionFailed` error, as
     /// the native catch of Standard_Failure does (`Perform`); `filler.perform();`.
     pub fn perform(&mut self) {
-        if self.perform_internal().is_err() {
+        self.perform_with_initializer(Self::initialize);
+    }
+
+    /// `Perform` of a derived filler whose virtual `Init` is `initialize`
+    /// (`BOPAlgo_CheckerSI::Init` prepares a self-interference iterator);
+    /// `filler.perform_with_initializer(BOPAlgoPaveFiller::initialize)`.
+    pub(crate) fn perform_with_initializer(
+        &mut self,
+        initialize: impl FnOnce(&mut Self) -> Result<(), Failure>,
+    ) {
+        if self.perform_internal_with(initialize).is_err() {
             let alert: AlertHandle = Arc::new(AlertIntersectionFailed);
             self.options.add_error(&alert);
         }
@@ -24,7 +34,14 @@ impl BOPAlgoPaveFiller {
     /// Initialization and all interference stages in native order (`PerformInternal`).
     /// `filler.perform_internal()?`.
     pub fn perform_internal(&mut self) -> Result<(), Failure> {
-        self.initialize()?;
+        self.perform_internal_with(Self::initialize)
+    }
+
+    fn perform_internal_with(
+        &mut self,
+        initialize: impl FnOnce(&mut Self) -> Result<(), Failure>,
+    ) -> Result<(), Failure> {
+        initialize(self)?;
         if self.options.has_errors() {
             return Ok(());
         }

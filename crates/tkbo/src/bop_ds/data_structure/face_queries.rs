@@ -130,7 +130,8 @@ impl DataStructure {
             .collect())
     }
 
-    /// Tests a stored pair between `shape` and any (or every) sub-shape of `parent`.
+    /// Tests a stored pair between `shape` and any (or every) sub-shape of `parent`; a parent
+    /// without sub-shapes gives false in both modes, as the native loop leaves its flag unset.
     /// `ds.has_interference_shape_subshapes_mode(v, e, false)?`.
     pub fn has_interference_shape_subshapes_mode(
         &self,
@@ -139,6 +140,9 @@ impl DataStructure {
         any_interference: bool,
     ) -> Result<bool, Failure> {
         let sub_shapes = self.shape_info(parent)?.sub_shapes();
+        if sub_shapes.is_empty() {
+            return Ok(false);
+        }
         let mut interfering = sub_shapes
             .iter()
             .map(|sub_shape| self.has_interference_between(shape, *sub_shape));
@@ -216,6 +220,12 @@ impl DataStructure {
     /// Mutably borrows solid/solid records; `ds.interf_zz().len()`.
     pub fn interf_zz(&mut self) -> &mut DynamicArray<InterfZZ> {
         &mut self.interf_zz
+    }
+
+    /// The pair table itself, which the self-interference check clears and refills with its
+    /// own pairs (native `BOPAlgo_CheckerSI` casts away the constness of `Interferences()`).
+    pub(crate) fn interference_table_mut(&mut self) -> &mut Map<super::Pair> {
+        &mut self.interference_table
     }
 
     /// Native number of interference kinds (VV..ZZ); `DataStructure::nb_interf_types() == 10`.

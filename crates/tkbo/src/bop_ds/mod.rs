@@ -26,7 +26,7 @@ pub use interference::{
     InterfEE, InterfEF, InterfEZ, InterfFF, InterfFZ, InterfVE, InterfVF, InterfVV, InterfVZ,
     InterfZZ, Interference,
 };
-pub use iterator::BOPDSIterator;
+pub use iterator::{BOPDSIterator, BOPDSIteratorSI};
 pub use pair::Pair;
 pub use pave::Pave;
 pub use pave_block::{PaveBlock, PaveBlockHandle};

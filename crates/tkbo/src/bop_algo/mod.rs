@@ -13,6 +13,8 @@ pub use section_attribute::SectionAttribute;
 pub(crate) mod alerts;
 pub use alerts::*;
 mod bop;
+mod checker_si;
+pub use checker_si::BOPAlgoCheckerSI;
 mod builder;
 pub use bop::BOPAlgoBOP;
 mod general_fuse;

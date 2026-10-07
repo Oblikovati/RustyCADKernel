@@ -5,7 +5,7 @@ use crate::bop_algo::alerts::alert;
 use crate::bop_algo::tools::fill_internals;
 use crate::bop_algo::{
     AlertBOPNotSet, AlertBuilderFailed, AlertTooFewArguments, AlertUnknownShape,
-    AlertUnsupportedType, BuilderSolid, Operation,
+    AlertUnsupportedType, BOPAlgoPaveFiller, BuilderSolid, Operation,
 };
 use crate::bop_ds::DataStructure;
 use crate::bop_tools::{
@@ -72,6 +72,25 @@ impl BOPAlgoBuilder {
     ) -> Result<(), Failure> {
         let (object_state, tools_state) = operation_states(operation);
         self.build_bop(objects, object_state, tools, tools_state, report)
+    }
+
+    /// `BuildBOP(theObjects, theTools, theOperation, ...)` after `perform_with_filler(filler)`:
+    /// the native builder keeps a pointer to that filler's data structure, the Rust one is
+    /// given the filler again; `builder.build_bop_operation_with_filler(&filler, &objects,
+    /// &tools, Operation::Cut, None)?`.
+    pub fn build_bop_operation_with_filler(
+        &mut self,
+        filler: &BOPAlgoPaveFiller,
+        objects: &List<Shape>,
+        tools: &List<Shape>,
+        operation: Operation,
+        report: Option<&Arc<Report>>,
+    ) -> Result<(), Failure> {
+        let structure = filler
+            .data_structure()
+            .ok_or_else(super::perform::no_structure)?;
+        let (object_state, tools_state) = operation_states(operation);
+        self.build_bop_with(structure, objects, object_state, tools, tools_state, report)
     }
 
     /// `BuildBOP` on the data structure of the General Fuse run.

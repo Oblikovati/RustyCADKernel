@@ -259,7 +259,11 @@ impl BOPAlgoPaveFiller {
         true
     }
 
-    fn initialize_data_structure(&mut self) -> Result<(), rustycad_tkernel::standard::Failure> {
+    /// A new data structure over the arguments, initialized with the fuzzy value (step 1 of
+    /// `Init`, shared by `BOPAlgo_CheckerSI::Init`).
+    pub(super) fn initialize_data_structure(
+        &mut self,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
         let arguments: Vec<Shape> = self.arguments.iter().cloned().collect();
         self.data_structure = Some(DataStructure::default());
         let structure = self
@@ -290,6 +294,17 @@ impl BOPAlgoPaveFiller {
             self.options.fuzzy_value(),
         )?;
         Ok(())
+    }
+
+    /// Installs the context and the prepared broad-phase iterator (steps 2 and 3 of `Init`)
+    /// of a derived filler; `filler.install_context_and_iterator(context, iterator)`.
+    pub(super) fn install_context_and_iterator(
+        &mut self,
+        context: Handle<Context>,
+        iterator: BOPDSIterator,
+    ) {
+        self.context = context;
+        self.iterator = Some(iterator);
     }
 
     fn set_non_destructive_from_arguments(

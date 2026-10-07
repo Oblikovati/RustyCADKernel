@@ -1,9 +1,11 @@
 //! AABB candidate-pair preparation for Boolean interference algorithms.
-use super::{DataStructure, IndexRange, Pair};
+use super::{DataStructure, IndexRange, Pair, ShapeInfo};
 mod extended;
+mod self_interference;
 use crate::int_tools::Context;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
+pub use self_interference::BOPDSIteratorSI;
 
 #[derive(Clone, Copy)]
 struct PreparationOptions<'a> {
@@ -49,7 +51,7 @@ impl BOPDSIterator {
             check_obb,
             fuzzy,
         };
-        let candidates = self.candidate_pairs(structure)?;
+        let candidates = self.candidate_pairs(structure, ShapeInfo::has_brep)?;
         let mut candidate_index = 0;
         for range_index in 0..structure.nb_ranges() {
             let range = structure.range(range_index)?;
@@ -129,12 +131,18 @@ impl BOPDSIterator {
         self.length = 0;
     }
 
-    fn candidate_pairs(&self, structure: &DataStructure) -> Result<Vec<Pair>, Failure> {
+    /// The sorted box-overlapping pairs of the source shapes that `selected` keeps: the shapes
+    /// with a B-rep for `Intersect`, the interfering ones for `BOPDS_IteratorSI::Intersect`.
+    fn candidate_pairs(
+        &self,
+        structure: &DataStructure,
+        selected: fn(&ShapeInfo) -> bool,
+    ) -> Result<Vec<Pair>, Failure> {
         let mut boxes = crate::bop_tools::BoxSet::default();
         boxes.set_size(structure.nb_source_shapes() as usize);
         for index in 0..structure.nb_source_shapes() {
             let info = structure.shape_info(index)?;
-            if info.has_brep() {
+            if selected(info) {
                 boxes.add(index, rustycad_tkmath::bnd::box3_to_bvh(info.box_bounds())?);
             }
         }
