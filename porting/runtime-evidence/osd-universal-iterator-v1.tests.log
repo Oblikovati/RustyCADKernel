@@ -1,0 +1,41 @@
+   Compiling rustycad-tkernel v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkernel)
+   Compiling rustycad-tkmath v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkmath)
+   Compiling rustycad-tkg2d v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkg2d)
+   Compiling rustycad-tkg3d v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.1.0 (/tmp/rustycad-osd-universal-iterator/crates/tktopalgo)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.70s
+     Running tests/osd_iterator_interface.rs (target/debug/deps/osd_iterator_interface-9286b6f11f78eafd)
+
+running 3 tests
+test optional_and_foreign_comparison_states_are_not_equal ... ok
+test parallel_for_each_still_accepts_borrowed_non_clone_payloads ... ok
+test virtual_clone_outlives_source_wrapper_and_preserves_borrowed_payload ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/osd_parallel.rs (target/debug/deps/osd_parallel-75f691e23d846235)
+
+running 2 tests
+test OSD_ParallelTest__OCC29935_MatrixMultiplyParallelMatchesSequential ... ok
+test OSD_ParallelTest__OCC24826_SaxpyParallelMatchesSequential ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/osd_universal_iterator.rs (target/debug/deps/osd_universal_iterator-cef639fbf0a18376)
+
+running 9 tests
+test assignment_and_self_assignment_clone_before_old_drop ... ok
+test default_and_pointer_constructors_preserve_empty_state ... ok
+test independently_owned_clone_retains_non_clone_borrowed_payload ... ok
+test legal_null_clone_preserves_native_copy_and_assignment_states ... ok
+test clone_panic_preserves_assignment_target_and_post_increment_source ... ok
+test legal_null_clone_preserves_self_assignment_and_post_increment_states ... ok
+test empty_operations_are_rejected_without_undefined_behavior ... ok
+test mutable_dereference_dispatches_without_extra_clone ... ok
+test native_equality_pre_and_post_increment_dispatch_order ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

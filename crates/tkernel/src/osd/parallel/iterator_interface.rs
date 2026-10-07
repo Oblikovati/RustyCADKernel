@@ -12,11 +12,11 @@ use std::any::Any;
 /// impl<'a> ParallelIteratorInterface<'a> for Borrowed<'a> {
 ///     fn is_equal(&self, _: &dyn ParallelIteratorInterface<'a>) -> bool { false }
 ///     fn increment(&mut self) {}
-///     fn clone_box(&self) -> Box<dyn ParallelIteratorInterface<'a> + 'a> {
-///         Box::new(Borrowed(self.0))
+///     fn clone_box(&self) -> Option<Box<dyn ParallelIteratorInterface<'a> + 'a>> {
+///         Some(Box::new(Borrowed(self.0)))
 ///     }
 /// }
-/// fn escapes() -> Box<dyn ParallelIteratorInterface<'static>> {
+/// fn escapes() -> Option<Box<dyn ParallelIteratorInterface<'static>>> {
 ///     let text = String::from("local");
 ///     let source = Borrowed(&text);
 ///     source.clone_box()
@@ -29,8 +29,8 @@ pub trait ParallelIteratorInterface<'data>: 'data {
     /// Advances the wrapped iterator; `cursor.increment()`.
     fn increment(&mut self);
 
-    /// Owns an independent wrapper over the same borrowed data; `let copy = cursor.clone_box()`.
-    fn clone_box(&self) -> Box<dyn ParallelIteratorInterface<'data> + 'data>;
+    /// Owns an independent wrapper or native null over the same borrowed data; `let copy = cursor.clone_box()`.
+    fn clone_box(&self) -> Option<Box<dyn ParallelIteratorInterface<'data> + 'data>>;
 
     /// Exposes optional comparison state (Rust extension); `other.comparison_value()?.downcast_ref::<usize>()`.
     /// A borrowed iterator may expose an owned position field without requiring its payload to be Any.
