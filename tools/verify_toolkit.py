@@ -2,7 +2,8 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase,
+       TKService)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -24,7 +25,8 @@ from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS
                           DE_CLOSURE_TARGETS, DE_LINKED_TOOLKITS, DE_TOOLKITS, EXCHANGE_CLOSURE_TARGETS,
                           EXCHANGE_LINKED_TOOLKITS, EXCHANGE_TOOLKITS, LINKED_TOOLKITS,
                           OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
-                          closure_flags, locked_cmake)
+                          VISUALIZATION_CLOSURE_TARGETS, VISUALIZATION_LINKED_TOOLKITS,
+                          VISUALIZATION_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -51,6 +53,7 @@ NUMERIC_VERIFIERS = {
     'TKShHealing': ('tools/verify_tkshhealing_numeric.py', 'target/oracle-tkshhealing/numeric'),
     'TKPrim': ('tools/verify_tkprim_numeric.py', 'target/oracle-tkprim/numeric'),
     'TKHLR': ('tools/verify_tkhlr_numeric.py', 'target/oracle-tkhlr/numeric'),
+    'TKService': ('tools/verify_tkservice_numeric.py', 'target/oracle-tkservice/numeric'),
 }
 
 
@@ -65,7 +68,7 @@ PROFILES_WITHOUT_NUMERIC: dict[str, tuple[str, ...]] = {
     'TKXSBase': EXCHANGE_LINKED_TOOLKITS,
 }
 
-# The native closure tree each profile without numeric probes builds when no prebuilt one is
+# The native closure tree each profile with its own closure builds when no prebuilt one is
 # given: toolkits, build targets and tree. TKCAF adds the DRAW toolkit TKDCAF to the OCAF set.
 PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKCDF': (OCAF_TOOLKITS, OCAF_CLOSURE_TARGETS, 'target/occt-ocaf-full'),
@@ -73,12 +76,20 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKCAF': (CAF_TOOLKITS, CAF_CLOSURE_TARGETS, 'target/occt-caf-full'),
     'TKDE': (DE_TOOLKITS, DE_CLOSURE_TARGETS, 'target/occt-de-full'),
     'TKXSBase': (EXCHANGE_TOOLKITS, EXCHANGE_CLOSURE_TARGETS, 'target/occt-exchange-full'),
+    # TKService needs FreeType, fontconfig and Xlib, which the other closures must not require.
+    'TKService': (VISUALIZATION_TOOLKITS, VISUALIZATION_CLOSURE_TARGETS, 'target/occt-visualization-full'),
+}
+
+
+# The numeric profiles that link their own closure instead of the geometry one.
+OWN_CLOSURE_PROFILES: dict[str, tuple[str, ...]] = {
+    'TKService': VISUALIZATION_LINKED_TOOLKITS,
 }
 
 
 def linked_toolkits(toolkit: str) -> tuple[str, ...]:
     """The native libraries a profile links, dependants first; linked_toolkits('TKMath') == LINKED_TOOLKITS."""
-    return PROFILES_WITHOUT_NUMERIC.get(toolkit, LINKED_TOOLKITS)
+    return PROFILES_WITHOUT_NUMERIC.get(toolkit, OWN_CLOSURE_PROFILES.get(toolkit, LINKED_TOOLKITS))
 
 
 def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
