@@ -19,7 +19,12 @@ mod process_results;
 #[cfg(test)]
 mod process_tests;
 mod process_transfer;
+mod result_from_model;
+mod result_from_transient;
+#[cfg(test)]
+mod result_tests;
 mod transfer_iterator;
+mod transfer_output;
 mod transient_mapper;
 mod transient_process;
 
@@ -46,6 +51,9 @@ pub use process_iterator::TransferIteratorOfProcess;
 pub use process_ops::{
     TransferProcessForFinder, TransferProcessForTransient, TransferProcessOps, bind_new,
 };
+pub use result_from_model::TransferResultFromModel;
+pub use result_from_transient::TransferResultFromTransient;
 pub use transfer_iterator::TransferTransferIterator;
+pub use transfer_output::TransferOutput;
 pub use transient_mapper::{TransferDataInfo, TransferTransientMapper};
 pub use transient_process::{GraphGuard, TransferTransientProcess};

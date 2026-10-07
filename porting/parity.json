@@ -96729,6 +96729,390 @@
       "notes": "Transfer mapping (docs/xsbase-design.md section 3): the two template instances (ForTransient, ForFinder) share one generic body (TransferProcess<K>, TransferActorOps<K>, TransferIteratorOfProcess<K>) over a kind (TransferTransientKind, TransferFinderKind); virtual members are trait methods; native exceptions and null dereferences are Failure errors; HSequence arguments are slices, results are Vec copies or shared lists."
     },
     {
+      "upstream_id": "Transfer_ResultFromTransient::Transfer_ResultFromTransient",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::SetStart",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::set_start",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::SetBinder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::set_binder",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::Start",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::start",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::Binder",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::binder",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::HasResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::has_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::Check",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::check",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Without binder: the process-wide empty check (the native static voidcheck)."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::CheckStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::check_status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::ClearSubs",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::clear_subs",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::AddSubResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::add_sub_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::NbSubResults",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::nb_sub_results",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::SubResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::sub_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::ResultFromKey",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::result_from_key",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. An associated function: the receiving handle is `this`, which the native member returns."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::FillMap",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::fill_map",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::Fill",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::fill",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Natively empty."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::Strip",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::strip",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Natively empty."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromTransient::FillBack",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromTransient.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromTransient::fill_back",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Natively empty."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::Transfer_ResultFromModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::new",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::SetModel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::set_model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::SetFileName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::set_file_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::FileName",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::file_name",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::Fill",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::fill",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::Strip",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::strip",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::FillBack",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::fill_back",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Standard_NullObject without main result or process (native null dereferences)."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::HasResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::has_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::MainResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::main_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::SetMainResult",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::set_main_result",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::MainLabel",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::main_label",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::MainNumber",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::main_number",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::ResultFromKey",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::result_from_key",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Standard_NullObject without main result."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::Results",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::results",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Native quirk kept: level 1 lists the main result twice. Standard_NullObject without main result from level 1."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::TransferredList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::transferred_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::CheckedList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::checked_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::CheckList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::check_list",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::CheckStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::check_status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_ResultFromModel::ComputeCheckStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_ResultFromModel.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferResultFromModel::compute_check_status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Native quirk kept: with enforce, CheckStatus returns the recorded status."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::Transfer_TransferOutput(const occ::handle<Transfer_ActorOfTransientProcess>&,const occ::handle<Interface_InterfaceModel>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::with_actor",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies. Standard_NullObject for a null model (a native null dereference)."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::Transfer_TransferOutput(const occ::handle<Transfer_TransientProcess>&,const occ::handle<Interface_InterfaceModel>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::with_process",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::Model",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::model",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::TransientProcess",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::transient_process",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::Transfer",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::transfer",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::TransferRoots(const occ::handle<Interface_Protocol>&,const Message_ProgressRange&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::transfer_roots_protocol",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::TransferRoots(const Interface_Graph&,const Message_ProgressRange&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::transfer_roots_graph",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::TransferRoots(const Message_ProgressRange&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::transfer_roots",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::ListForStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::list_for_status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
+      "upstream_id": "Transfer_TransferOutput::ModelForStatus",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferOutput.hxx",
+      "rust_item": "rustycad_tkxsbase::transfer::TransferOutput::model_for_status",
+      "status": "implemented",
+      "notes": "Transfer mapping (docs/xsbase-design.md section 3): native exceptions and null dereferences are Failure errors; HSequence results are Vec copies; const char* results are AsciiString copies."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
