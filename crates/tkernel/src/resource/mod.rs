@@ -2,7 +2,8 @@
 //! and the Resource_Unicode text conversions with their exact code tables.
 use crate::{
     ncollection::DataMap,
-    standard::Failure,
+    impl_transient,
+    standard::{Failure, StandardTransient},
     tcollection::{AsciiString, ExtendedString},
 };
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -46,6 +47,8 @@ static DEBUG: AtomicBool = AtomicBool::new(false);
 /// ShapeProcess_Context uses): the name, the three maps, the flags and the host.
 #[derive(Clone)]
 pub struct ResourceManager {
+    // Standard_Transient base: the native manager is shared by handle.
+    parent: StandardTransient,
     name: AsciiString,
     reference: DataMap<AsciiString, AsciiString>,
     user: DataMap<AsciiString, AsciiString>,
@@ -54,6 +57,7 @@ pub struct ResourceManager {
     initialized: bool,
     host: ResourceHost,
 }
+impl_transient!(ResourceManager, "Resource_Manager", StandardTransient, parent);
 impl ResourceManager {
     /// Loads `$CSF_<name>Defaults/<name>` then `$CSF_<name>UserDefaults/<name>` (native
     /// `Resource_Manager(aName, Verbose)`); `ResourceManager::new("App", false, host)?`.
@@ -105,6 +109,7 @@ impl ResourceManager {
     }
     fn with_state(name: &str, verbose: bool, host: ResourceHost) -> Self {
         Self {
+            parent: StandardTransient::default(),
             name: c_string(name),
             reference: DataMap::default(),
             user: DataMap::default(),

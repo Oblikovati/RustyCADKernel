@@ -1,5 +1,7 @@
 //! Message_ProgressIndicator: the thread-safe global progress scale and user hooks.
 use super::{ProgressRange, ProgressScope};
+use crate::impl_transient;
+use crate::standard::StandardTransient;
 use std::sync::{
     Arc, Mutex,
     atomic::{AtomicU64, Ordering},
@@ -63,9 +65,12 @@ impl IndicatorShared {
 /// outlive it (the native contract, enforced here by lifetimes).
 /// Example: `let range = ProgressIndicator::new(Box::new(hooks)).start();` (keep the indicator bound).
 pub struct ProgressIndicator {
+    // Standard_Transient base: the native indicator is shared by handle.
+    parent: StandardTransient,
     shared: Arc<IndicatorShared>,
     root: ProgressScope<'static>,
 }
+impl_transient!(ProgressIndicator, "Message_ProgressIndicator", StandardTransient, parent);
 impl ProgressIndicator {
     /// Protected native constructor: position 0 and an active unnamed root scope
     /// with max 1; `ProgressIndicator::new(Box::new(hooks))`.
@@ -76,7 +81,11 @@ impl ProgressIndicator {
             hooks,
         });
         let root = ProgressScope::root(Arc::clone(&shared));
-        Self { shared, root }
+        Self {
+            parent: StandardTransient::default(),
+            shared,
+            root,
+        }
     }
     /// Resets position and root value to 0, calls `reset` then `show(root, false)`,
     /// and returns the root's `Next()` range covering the whole scale; `indicator.start()`.
