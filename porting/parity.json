@@ -243613,6 +243613,14 @@
       "notes": "Typedef of the block-pointer container NCollection_LinearVector<T*>; Rust DynamicArray keeps its block table as private state."
     },
     {
+      "upstream_id": "operator+(const NCollection_DynamicArray::BasicIterator::difference_type,const BasicIterator<NCollection_DynamicArray::BasicIterator::IsConstant>&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArrayIterator::shifted",
+      "status": "implemented",
+      "notes": "Free n + iterator is commutative with iterator + n; Rust provides it as iterator.shifted(n) (also Add<isize>)."
+    },
+    {
       "notes": "Exact BaseList declaration reconciliation; valid raw-node/borrow domain only, allocator/ABI/noexcept/configuration closure remains open. See porting/audits/base-list-api-reconciliation.json and its exact-ID matrix.",
       "rust_item": "rustycad_tkernel::ncollection::BaseListBasicIterator::more",
       "rust_items": [
@@ -253361,6 +253369,14 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Typedef of decltype(map.FindKey(i)); Rust BaseMapIndexedIterator::key/key_with return &K directly."
+    },
+    {
+      "upstream_id": "NCollection_BaseMap::BasicIterator::BasicIterator<TheContainer, TheNode, TheKey, TheValue, IsKeyOnly, IsConstant, IsOrdered>(const NCollection_BaseMap::BasicIterator<TheContainer,TheNode,TheKey,TheValue,NCollection_BaseMap::BasicIterator::IsKeyOnly,false,NCollection_BaseMap::BasicIterator::IsOrdered>&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseMapBasicIterator::from_mutable",
+      "status": "implemented",
+      "notes": "Converting constructor from the mutable to the const iterator; from_mutable copies the node position."
     },
     {
       "upstream_id": "NCollection_HArray1::NCollection_HArray1<TheItemType>(const int,const int,const TheItemType &)",
