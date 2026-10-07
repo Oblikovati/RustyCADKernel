@@ -1,5 +1,6 @@
 //! The TKBool probe operations, one module per C++ probe file under tools/oracle.
 pub mod brep_fill_generator;
+pub mod brep_fill_package;
 
 // The reader and bit printers of the TKGeomAlgo probe, the shape digest of the TKTopAlgo
 // probe and the face frames of the TKPrim probe, shared so that every toolkit prints the

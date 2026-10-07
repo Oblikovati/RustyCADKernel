@@ -38,9 +38,16 @@
 #include "tktopalgo_probe_face.cxx"
 #include "tktopalgo_probe_shapes.cxx"
 #include "tkbool_probe_brepfill_generator.cxx"
+#include "tkbool_probe_brepfill_package.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
- // BRepFill (tkbool_probe_brepfill_generator.cxx)
+ // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx)
  {"bf_generator", bl_bf_generator_case},
+ {"bf_face", bl_bf_face_case},
+ {"bf_shell", bl_bf_shell_case},
+ {"bf_axe", bl_bf_axe_case},
+ {"bf_search_origin", bl_bf_search_origin_case},
+ {"bf_compute_acr", bl_bf_compute_acr_case},
+ {"bf_insert_acr", bl_bf_insert_acr_case},
 };
 int main() {
  std::string line;
