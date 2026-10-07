@@ -1,6 +1,6 @@
 //! 1:1 translation of src/ApplicationFramework/TKCAF/GTests/TNaming_Tool_Test.cxx.
 //!
-//! The cases that drive DNaming functions (TKDCAF, a DRAW toolkit), Boolean operations or
+//! The cases that drive DNaming functions (TKDCAF, a DRAW toolkit) or
 //! TNaming_Selector, TNaming_NamingTool and TNaming_Translator wait for those classes; the
 //! ledger marks them `pending_dependency`.
 #![allow(non_snake_case)]

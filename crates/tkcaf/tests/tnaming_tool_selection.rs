@@ -4,6 +4,7 @@
 #![allow(non_snake_case)]
 mod support;
 
+use rustycad_tkbo::brep_algo_api::BRepAlgoAPIFuse;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkbrep::toptools::MapOfShape;
 use rustycad_tkcaf::tnaming::{
@@ -22,7 +23,7 @@ use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape,
     BRepBuilderAPIMakeVertex, BRepBuilderAPIMakeWire, BRepBuilderAPITransform,
 };
-use support::{find_named_shape, make_box, shape_at};
+use support::{find_named_shape, make_box, make_box_at, shape_at};
 
 fn child(label: &TdfLabel, tag: i32) -> TdfLabel {
     label.find_child(tag, true).unwrap()
@@ -310,6 +311,30 @@ fn TNaming_Tool_Test__CafNamedShape_D2_SelectGeometryFaces() {
 #[test]
 fn TNaming_Tool_Test__CafNamedShape_D3_SelectGeometryVertices() {
     assert_eq!(select_geometry(ShapeEnum::Vertex, 3001), 8);
+}
+
+// caf/named_shape/D4: CurrentShape follows a Boolean modification of a generated box.
+#[test]
+fn TNaming_Tool_Test__CafNamedShape_D4_CurrentShapeAfterBoolean() {
+    let solid = make_box(190.0, 890.0, 290.0);
+    let tool = make_box_at([-100.0, 400.0, -130.0], 390.0, 190.0, 490.0);
+    let fused = BRepAlgoAPIFuse::from_shapes(&solid, &tool).unwrap();
+    let cut = fused.shape().clone();
+
+    let (_data, root) = fixture_root();
+    let label = child(&root, 1);
+    add_primitive(&label, &solid);
+    TNamingBuilder::new(&label)
+        .unwrap()
+        .modify(&solid, &cut)
+        .unwrap();
+
+    let named_shape = find_named_shape(&label).expect("the label has a named shape");
+    assert!(
+        TNamingTool::current_shape(&named_shape)
+            .unwrap()
+            .is_same(&cut)
+    );
 }
 
 // caf/bugs/bug23799: copying a selection remains safe after its imported source label has
