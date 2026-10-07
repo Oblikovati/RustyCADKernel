@@ -12,6 +12,10 @@ degree 2 B-splines.
 - `hb_cinter`: HLRBRep_CurveTool (samples, C1 intervals, types), HLRBRep_TheProjPCurOfCInter
   and HLRBRep_CInter (every helper instance: conic-conic, conic-curve, polygon-polygon and
   self intersection) on pairs of projected edges.
+- `hb_surface`: HLRBRep_Surface (type, IsSide, Plane, IsAbove), HLRBRep_SurfaceTool
+  sample counts, HLRBRep_SLProps normals and curvatures, and HLRBRep_InterCSurf of sight
+  lines (Perform(L, S) and the polygon/polyhedron form of HLRBRep_Intersector) on planes,
+  cylinders, cones, spheres, tori, Bezier, B-spline, revolution and extrusion faces.
 """
 from __future__ import annotations
 import math
@@ -109,8 +113,64 @@ def cinter_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def grid(rng: random.Random, nu: int, nv: int, flat: bool) -> list[float]:
+    """`nu nv` poles on a perturbed grid (in the plane z = 0 when `flat`)."""
+    fields: list[float] = [nu, nv]
+    for i in range(nu):
+        for j in range(nv):
+            z = 0.0 if flat else round(rng.uniform(-1, 1), 3)
+            fields += [i * 2.0 - 2.0, j * 2.0 - 2.0, z]
+    return fields
+
+
+def surface(rng: random.Random, kind: int, view: tuple[float, float, float]) -> list[float]:
+    """`sk ...` and its bounds `umin umax vmin vmax`."""
+    two_pi = 2 * math.pi
+    if kind == 5:
+        nu, nv = rng.choice(((2, 2), (3, 3), (4, 3)))
+        return [5, *grid(rng, nu, nv, rng.random() < 0.3), 0.0, 1.0, 0.0, 1.0]
+    if kind == 6:
+        nu, nv = rng.choice(((3, 3), (4, 4), (5, 3)))
+        return [6, *grid(rng, nu, nv, rng.random() < 0.3), 0.0, nu - 2.0, 0.0, nv - 2.0]
+    if kind == 7:
+        return [7, *point(rng, 2.0), *rng.choice(VIEW_DIRS), *point(rng, 1.0), *rng.choice(VIEW_DIRS + [view]),
+                0.0, rng.choice((math.pi, two_pi)), 0.0, 3.0]
+    n = rng.choice(VIEW_DIRS + [view, view])
+    head = [kind, *point(rng, 2.0), *n, *x_direction(n)]
+    if kind == 0:
+        return head + [-3.0, 3.0, -2.0, 2.5]
+    if kind == 1:
+        return head + [rng.choice((1.0, 2.0)), 0.0, rng.choice((math.pi, two_pi)), -2.0, 2.0]
+    if kind == 2:
+        return head + [rng.choice((0.3, 0.6)), 1.0, 0.0, two_pi, 0.0, 3.0]
+    if kind == 3:
+        return head + [2.0, 0.0, rng.choice((math.pi, two_pi)), -math.pi / 2, rng.choice((0.5, math.pi / 2))]
+    if kind == 4:
+        return head + [3.0, 1.0, 0.0, two_pi, 0.0, two_pi]
+    return head + [1.5, *rng.choice(VIEW_DIRS + [view]), 0.0, two_pi, 0.0, 3.0]
+
+
+def surface_requests(rng: random.Random) -> list[str]:
+    """hb_surface over every surface kind, random projectors, curves and sight lines."""
+    requests = []
+    for index in range(900):
+        proj = projector(rng)
+        view = tuple(proj[4:7]) if proj[0] != 2 else (0.0, 0.0, 1.0)
+        fields = surface(rng, index % 9, view)
+        tols = list(rng.choice(((1e-7, 1e-7), (1e-3, 1e-3), (0.1, 1e-4))))
+        params = [round(rng.uniform(0, 1), 3) for _ in range(4)]
+        curve, _, _ = edge(rng, view)
+        sights: list[float] = [3]
+        for _ in range(3):
+            sights += [round(rng.uniform(-4, 4), 3), round(rng.uniform(-4, 4), 3), rng.choice((0, 1)), -100.0, 100.0]
+        requests.append('hb_surface ' + numbers(proj + fields + tols + params + curve
+                                                 + [rng.choice((0, 1)), rng.choice((1e-7, 0.01))] + sights))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
     requests.extend(curve_requests(rng))
     requests.extend(cinter_requests(rng))
+    requests.extend(surface_requests(rng))

@@ -320562,6 +320562,158 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_InterCSurf::Perform(const gp_Lin&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_bounds",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::InternalPerform(const gp_Lin&,const HLRBRep_ThePolygonOfInterCSurf&,HLRBRep_Surface*,const HLRBRep_ThePolyhedronOfInterCSurf&,double,double,double,double,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_polyhedron_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::Perform(const gp_Lin&,const HLRBRep_ThePolygonOfInterCSurf&,HLRBRep_Surface*,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polygon_polyhedron",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::AppendSegment(const gp_Lin&,double,double,HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::append_curve_segment",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::InternalPerform(const gp_Lin&,const HLRBRep_ThePolygonOfInterCSurf&,HLRBRep_Surface*,const HLRBRep_ThePolyhedronOfInterCSurf&,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_polyhedron",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::PerformConicSurf(const gp_Parab&,const gp_Lin&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_parabola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::InternalPerformCurveQuadric(const gp_Lin&,HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_curve_quadric",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::InternalPerform(const gp_Lin&,const HLRBRep_ThePolygonOfInterCSurf&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::internal_perform_polygon",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::PerformConicSurf(const gp_Circ&,const gp_Lin&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_circle",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::PerformConicSurf(const gp_Hypr&,const gp_Lin&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_hyperbola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::AppendPoint(const gp_Lin&,double,HLRBRep_Surface*,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::append_curve_point",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::AppendIntAna(const gp_Lin&,HLRBRep_Surface*,const IntAna_IntConicQuad&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::append_int_ana",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::Perform(const gp_Lin&,const HLRBRep_ThePolygonOfInterCSurf&,HLRBRep_Surface*,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polygon_polyhedron_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::PerformConicSurf(const gp_Elips&,const gp_Lin&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_ellipse",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::Perform(const gp_Lin&,HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::Perform(const gp_Lin&,HLRBRep_Surface*,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polyhedron",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::Perform(const gp_Lin&,const HLRBRep_ThePolygonOfInterCSurf&,HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_polygon",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_InterCSurf::PerformConicSurf(const gp_Lin&,const gp_Lin&,HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::HInter::perform_conic_surf_line",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11); the generic body is the TKGeomAlgo port. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_Intersector::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Intersector.hxx",
@@ -320680,6 +320832,294 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "e82b8dc79b55e4ac5ae89362bd56172fd3b23f6ae963c105d1a1afb71e0fe9a9",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::NbSamples(const gp_Lin&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::nb_samples",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Line(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::GetType(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::get_type",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Resolution(const gp_Lin&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::resolution",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::DN(const gp_Lin&,double,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::dn",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::NbIntervals(const gp_Lin&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::nb_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::IntervalFirst(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::interval_first",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::D3(const gp_Lin&,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::d3",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::BSpline(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::bspline",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::D2(const gp_Lin&,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::SamplePars(const gp_Lin&,double,double,double,int,occ::handle<NCollection_HArray1<double>>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::sample_pars_into",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::SamplePars(const gp_Lin&,double,double,double,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::sample_pars",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Continuity(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::IntervalLast(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::interval_last",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::IntervalContinuity(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::interval_continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Bezier(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::bezier",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::NbKnots(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::nb_knots",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::PolesAndWeights(const gp_Lin&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::poles_and_weights",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::D1(const gp_Lin&,double,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::LastParameter(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::last_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Intervals(const gp_Lin&,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Ellipse(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::ellipse",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::NbPoles(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::nb_poles",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::IsPeriodic(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::is_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::D0(const gp_Lin&,double,gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::d0",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::IsRational(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::is_rational",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::IsClosed(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::is_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Hyperbola(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::hyperbola",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Circle(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::circle",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Period(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Degree(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::degree",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Poles(const gp_Lin&,NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::poles",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::KnotsAndMultiplicities(const gp_Lin&,NCollection_Array1<double>&,NCollection_Array1<int>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::knots_and_multiplicities",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Parabola(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::parabola",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::Value(const gp_Lin&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
+    },
+    {
+      "upstream_id": "HLRBRep_LineTool::FirstParameter(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::LineTool::first_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_LineTool.lxx: the sight line as the unbounded curve of the IntCurveSurface templates (one CN interval, three samples, null spline handles). Implements the IntImp and IntCurveSurface curve tool traits; exercised by every HLRBRep_InterCSurf comparison in hb_surface."
     },
     {
       "upstream_id": "HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter::operator delete(void*) noexcept",
@@ -321074,6 +321514,78 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_Surface::Value(double,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Projector(const HLRAlgo_Projector*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::set_projector",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::VIntervalContinuity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "Declared in HLRBRep_Surface.hxx but defined in no OCCT source at 3d097a03 (HLRBRep_Surface.lxx and .cxx have no VIntervalContinuity); any call fails to link natively. No Rust member is invented."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::UIntervalContinuity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "",
+      "status": "upstream_unimplemented",
+      "notes": "Declared in HLRBRep_Surface.hxx but defined in no OCCT source at 3d097a03 (HLRBRep_Surface.lxx and .cxx have no UIntervalContinuity); any call fails to link natively. No Rust member is invented."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::IsSide(double,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::is_side",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Plane() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::plane",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::IsAbove(bool,const HLRBRep_Curve*,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::is_above",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Surface(const TopoDS_Face&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::set_surface",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::new",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
       "upstream_id": "HLRBRep_SurfaceTool::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
@@ -321134,6 +321646,334 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_SurfaceTool::Value(const HLRBRep_Surface*,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::VIntervals(const HLRBRep_Surface*,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::v_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Cylinder(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::cylinder",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::IsVClosed(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::is_v_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::FirstVParameter(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::first_v_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::D1(const HLRBRep_Surface*,double,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::NbVIntervals(const HLRBRep_Surface*,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::UTrim(const HLRBRep_Surface*,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::u_trim",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::BasisCurve(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::basis_curve",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::NbSamplesU(const HLRBRep_Surface*,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::nb_samples_u_in",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::NbSamplesU(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::nb_samples_u",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::LastVParameter(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::last_v_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::D0(const HLRBRep_Surface*,double,double,gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::d0",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::BSpline(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::bspline",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::AxeOfRevolution(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Bezier(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::bezier",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::NbUIntervals(const HLRBRep_Surface*,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Sphere(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::sphere",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::D2(const HLRBRep_Surface*,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::UPeriod(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::u_period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::NbSamplesV(const HLRBRep_Surface*,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::nb_samples_v_in",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::NbSamplesV(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::nb_samples_v",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::IsUPeriodic(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::is_u_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::IsVPeriodic(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::is_v_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::BasisSurface(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::basis_surface",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::VPeriod(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::v_period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::DN(const HLRBRep_Surface*,double,double,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::dn",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Cone(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::cone",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::VResolution(const HLRBRep_Surface*,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::v_resolution",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Plane(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::plane",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::FirstUParameter(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::first_u_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::VTrim(const HLRBRep_Surface*,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::v_trim",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::GetType(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::get_type",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Torus(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::torus",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::UResolution(const HLRBRep_Surface*,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::u_resolution",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::Direction(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::direction",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::LastUParameter(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::last_u_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::IsUClosed(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::is_u_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::OffsetValue(const HLRBRep_Surface*)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::offset_value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::UIntervals(const HLRBRep_Surface*,NCollection_Array1<double>&,GeomAbs_Shape)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::u_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfaceTool::D3(const HLRBRep_Surface*,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SurfaceTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SurfaceTool::d3",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SurfaceTool.hxx/.lxx/.cxx (the NbSamples rules, including the reversed (First - Last) span of the range forms, with x86 int truncation). The tool also implements the IntImp ThePSurfaceTool and IntCurveSurface InterSurfaceTool traits on &HLRBRep_Surface, which the native templates reach as HLRBRep_Surface*. Compared in hb_surface (sample counts and every InterCSurf intersection it feeds)."
+    },
+    {
       "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
@@ -321192,6 +322032,86 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "6abcdd378dc7f0caf93ef7f7e7bc8da984ba6afecbcf93f4d1c176c57c51c86f",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::Point() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::point",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::derivatives",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::AuxillarSurface() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::auxillar_surface",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::NbEquations() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::nb_equations",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::AuxillarCurve() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::auxillar_curve",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::value",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::Root() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::root",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::NbVariables() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::nb_variables",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::values",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCSFunctionOfInterCSurf(HLRBRep_Surface*const&,const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCSFunctionOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerCSParFunc::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11); the generic body is the TKGeomAlgo port. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
     },
     {
       "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter::operator delete(void*) noexcept",
@@ -321630,6 +322550,126 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf(const NCollection_Array1<gp_Lin>&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::with_lines_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf(const HLRBRep_ThePolygonOfInterCSurf&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::with_polygon",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Perform(const NCollection_Array1<gp_Lin>&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::perform_lines",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Interference(const HLRBRep_ThePolygonOfInterCSurf&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::interference",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Perform(const NCollection_Array1<gp_Lin>&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::perform_lines_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Perform(const HLRBRep_ThePolygonOfInterCSurf&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::perform_polygon_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf(const HLRBRep_ThePolygonOfInterCSurf&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::with_polygon_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Perform(const HLRBRep_ThePolygonOfInterCSurf&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::perform_polygon",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Interference(const HLRBRep_ThePolygonOfInterCSurf&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::interference_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf(const NCollection_Array1<gp_Lin>&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::with_lines",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf(const gp_Lin&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::with_line",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11); the generic body is the TKGeomAlgo port. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Perform(const gp_Lin&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::perform_line_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11); the generic body is the TKGeomAlgo port. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::Perform(const gp_Lin&,const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::perform_line",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11); the generic body is the TKGeomAlgo port. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf(const gp_Lin&,const HLRBRep_ThePolyhedronOfInterCSurf&,Bnd_BoundSortBox&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheInterferenceOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::InterferencePolygonPolyhedron::with_line_grid",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11); the generic body is the TKGeomAlgo port. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
@@ -321970,6 +323010,142 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::SupParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::sup_parameter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::SetDeflectionOverEstimation(double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::set_deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::DeflectionOverEstimation() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::Init(const gp_Lin&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::polygon_utils::init_uniform",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::BeginOfSeg(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::begin_of_seg",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf(const gp_Lin&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf(const gp_Lin&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::with_parameters",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::InfParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::inf_parameter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf(const gp_Lin&,double,double,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::with_range",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::Closed(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::set_closed",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::Init(const gp_Lin&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::polygon_utils::init_with_params",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::ApproxParamOnCurve(int,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::approx_param_on_curve",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::NbSegments() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::nb_segments",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::Bounding() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::Closed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::closed",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::Dump() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::dump",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::EndOfSeg(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonOfHInter::end_of_seg",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
@@ -322028,6 +323204,62 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "4abb32d637aabffadc5e210e724e3c22d2f4e39a3959665ea7e25292ca5a87b0",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::Dump(const HLRBRep_ThePolygonOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::dump",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::DeflectionOverEstimation(const HLRBRep_ThePolygonOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::<rustycad_tkgeomalgo::intf::Polygon3dTool>::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::Closed(const HLRBRep_ThePolygonOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::<rustycad_tkgeomalgo::intf::Polygon3dTool>::closed",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::EndOfSeg(const HLRBRep_ThePolygonOfInterCSurf&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::<rustycad_tkgeomalgo::intf::Polygon3dTool>::end_of_seg",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::Bounding(const HLRBRep_ThePolygonOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::<rustycad_tkgeomalgo::intf::Polygon3dTool>::bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::NbSegments(const HLRBRep_ThePolygonOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::<rustycad_tkgeomalgo::intf::Polygon3dTool>::nb_segments",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygonToolOfInterCSurf::BeginOfSeg(const HLRBRep_ThePolygonOfInterCSurf&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygonToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolygonToolOfHInter::<rustycad_tkgeomalgo::intf::Polygon3dTool>::begin_of_seg",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
     },
     {
       "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::operator delete(void*) noexcept",
@@ -322090,6 +323322,270 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::NbPoints() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::nb_points",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Destroy()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::destroy",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Bounding() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::UMaxSingularity(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::u_max_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::VMaxSingularity(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::v_max_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Triangle(int,int&,int&,int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::triangle",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::HasUMinSingularity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_u_min_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::PlaneEquation(int,gp_XYZ&,double&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::plane_equation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::HasUMaxSingularity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_u_max_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::NbTriangles() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::nb_triangles",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::HasVMinSingularity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_v_min_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::DeflectionOverEstimation() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::ComponentsBounding() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::components_bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Size(int&,int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::size",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Point(const gp_Pnt&,int,int,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::set_point",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Point(int,gp_Pnt&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::point",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Init(HLRBRep_Surface*,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method `init_with_params` of the polyhedron (crates/tkgeomalgo/src/int_curve_surface/polyhedron.rs), called by its constructor."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Dump() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::dump",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::UMinSingularity(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::u_min_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::GetBorderDeflection() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::get_border_deflection",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::TriConnex(int,int,int,int&,int&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::tri_connex",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::DeflectionOverEstimation(double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::set_deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Contain(int,const gp_Pnt&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::contain",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Point(int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::point",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::VMinSingularity(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::v_min_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::FillBounding()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::fill_bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Parameters(int,double&,double&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::parameters",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Init(HLRBRep_Surface*,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "",
+      "status": "excluded",
+      "notes": "C++ protected member: the private method `init` of the polyhedron (crates/tkgeomalgo/src/int_curve_surface/polyhedron.rs), called by its constructor."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::IsOnBound(int,int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::is_on_bound",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::HasVMaxSingularity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::has_v_max_singularity",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf::Point(int,double&,double&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::point_with_parameters",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf(HLRBRep_Surface*,int,int,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::on_adaptor",
+      "status": "implemented",
+      "notes": "HLRBRep_ThePolyhedronOfInterCSurf includes the same IntCurveSurface_PolyhedronUtils.pxx body as IntCurveSurface_ThePolyhedronOfHInter, on the BRepAdaptor_Surface of the HLR surface; the shared Rust type builds it on that adaptor (the SamplePolyhedron impl for hlr_brep::SurfaceTool calls these constructors). Deviation: a parameter array with fewer than two values raises Standard_OutOfRange, where the HLR native constructor (which lacks the HInter check) allocates a negative grid. hb_surface compares the polyhedron deflection and every intersection it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronOfInterCSurf(HLRBRep_Surface*,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronOfHInter::on_adaptor_with_parameters",
+      "status": "partial",
+      "notes": "HLRBRep_ThePolyhedronOfInterCSurf includes the same IntCurveSurface_PolyhedronUtils.pxx body as IntCurveSurface_ThePolyhedronOfHInter, on the BRepAdaptor_Surface of the HLR surface; the shared Rust type builds it on that adaptor (the SamplePolyhedron impl for hlr_brep::SurfaceTool calls these constructors). Deviation: a parameter array with fewer than two values raises Standard_OutOfRange, where the HLR native constructor (which lacks the HInter check) allocates a negative grid. hb_surface compares the polyhedron deflection and every intersection it feeds bit for bit."
+    },
+    {
       "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
@@ -322148,6 +323644,86 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "fdfe6186180b835541e81304f764de87fc10eb0cac1a1035dd5835a5c4393c45",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::Bounding(const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::Triangle(const HLRBRep_ThePolyhedronOfInterCSurf&,int,int&,int&,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::triangle",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::DeflectionOverEstimation(const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::TriConnex(const HLRBRep_ThePolyhedronOfInterCSurf&,int,int,int,int&,int&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::tri_connex",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::Point(const HLRBRep_ThePolyhedronOfInterCSurf&,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::point",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::IsOnBound(const HLRBRep_ThePolyhedronOfInterCSurf&,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::is_on_bound",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::ComponentsBounding(const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::components_bounding",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::GetBorderDeflection(const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::get_border_deflection",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::Dump(const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::dump",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolyhedronToolOfInterCSurf::NbTriangles(const HLRBRep_ThePolyhedronOfInterCSurf&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolyhedronToolOfInterCSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::ThePolyhedronToolOfHInter::nb_triangles",
+      "status": "implemented",
+      "notes": "Instance of the IntCurveSurface/IntImp/Intf template on HLRBRep_LineTool (gp_Lin) and HLRBRep_SurfaceTool (hlr_brep::inter_c_surf, docs/geomalgo-design.md sections 2, 6 and 11): the generic body is the TKGeomAlgo port; the polyhedron shares the IntCurveSurface_ThePolyhedronOfHInter body on the BRepAdaptor_Surface of the HLR surface. hb_surface compares HLRBRep_InterCSurf in both Perform forms HLRBRep_Intersector uses (900 requests, nine surface kinds) bit for bit."
     },
     {
       "upstream_id": "HLRBRep_TheProjPCurOfCInter::operator delete(void*) noexcept",
@@ -322868,6 +324444,342 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::degree",
       "status": "implemented",
       "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_SLProps",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLProps.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLProps",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::UDegree() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::u_degree",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::LastVParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::last_v_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Cylinder() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::cylinder",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::VPeriod() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::v_period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::IsUPeriodic() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::GetType() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::get_type",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Cone() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::cone",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::D3(double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::d3",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::IsVPeriodic() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::D2(double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::DN(double,double,int,int) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::dn",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::UPeriod() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::u_period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::IsVClosed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::is_v_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::D0(double,double,gp_Pnt&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::d0",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::NbVPoles() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::LastUParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::last_u_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::NbUIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::IsUClosed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::is_u_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::FirstVParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::first_v_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Axis() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::axis",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Surface() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::surface",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Surface()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::surface",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::UContinuity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::u_continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::D1(double,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::FirstUParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::first_u_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::VDegree() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::v_degree",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::NbVIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::NbUPoles() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::VContinuity() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::v_continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Torus() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::torus",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::NbVKnots() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::nb_v_knots",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::Sphere() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::sphere",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_Surface::NbUKnots() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Surface.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface::nb_u_knots",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_Surface.hxx/.lxx/.cxx: the HLR type classification (bilinear Bezier as Plane, B-spline and swept surfaces as OtherSurface), IsSide with SideRowsOfPoles, IsAbove, Plane of a Bezier. The projector is a shared Arc (docs/hlr-design.md section 6). hb_surface (900 numeric requests over nine surface kinds, parallel and perspective projectors) matches OCCT bit for bit; tests/hlr_brep_surface.rs adds direct regressions."
+    },
+    {
+      "upstream_id": "HLRBRep_SLPropsATool::Continuity(HLRBRep_SurfacePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLPropsATool::continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_SLPropsATool::D2(HLRBRep_SurfacePtr,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLPropsATool::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_SLPropsATool::Bounds(HLRBRep_SurfacePtr,double&,double&,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLPropsATool::bounds",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_SLPropsATool::DN(HLRBRep_SurfacePtr,double,double,int,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLPropsATool::dn",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_SLPropsATool::D1(HLRBRep_SurfacePtr,double,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLPropsATool::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_SLPropsATool::Value(HLRBRep_SurfacePtr,double,double,gp_Pnt&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_SLPropsATool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::SLPropsATool::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_SLPropsATool.lxx (infinite bounds, continuity 2) and the HLRBRep_SLProps alias of GeomLProp_SLPropsBase through LProp ToolAccess; hb_surface compares normals and curvatures."
+    },
+    {
+      "upstream_id": "HLRBRep_CurvePtr",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeDef.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Curve",
+      "status": "excluded",
+      "notes": "Excluded: HLRBRep_TypeDef.hxx spells the projected curve as an untyped void* so the template instances can take it; Rust passes typed references instead (&hlr_brep::Curve through hlr_brep::CurveTool), see docs/hlr-design.md section 6. No behavior is lost."
+    },
+    {
+      "upstream_id": "HLRBRep_SurfacePtr",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeDef.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::Surface",
+      "status": "excluded",
+      "notes": "Excluded: HLRBRep_TypeDef.hxx spells the HLR surface as an untyped void* so the template instances can take it; Rust passes typed references instead (&hlr_brep::Surface through hlr_brep::SurfaceTool), see docs/hlr-design.md section 6. No behavior is lost."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",

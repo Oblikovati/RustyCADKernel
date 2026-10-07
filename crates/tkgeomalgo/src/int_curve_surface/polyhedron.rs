@@ -9,6 +9,7 @@ use super::tri_connex::tri_connex;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::real::epsilon;
+use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::adaptor3d::h_surface_tool::Adaptor3dSurfaceHandle;
 use rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface;
 use rustycad_tkmath::bnd::BoundingBox3;
@@ -85,8 +86,18 @@ impl ThePolyhedronOfHInter {
         u2: f64,
         v2: f64,
     ) -> Result<Self, Failure> {
+        Self::on_adaptor(&**surface, (nbd_u, nbd_v), [u1, v1, u2, v2])
+    }
+    /// The uniform constructor on any surface adaptor, the body that
+    /// `HLRBRep_ThePolyhedronOfInterCSurf` shares on the adaptor of its HLR surface;
+    /// `ThePolyhedronOfHInter::on_adaptor(&*s, (10, 10), [0.0, 0.0, 1.0, 1.0])?`.
+    pub fn on_adaptor(
+        surface: &dyn Adaptor3dSurface,
+        (nbd_u, nbd_v): (i32, i32),
+        bounds: [f64; 4],
+    ) -> Result<Self, Failure> {
         let mut polyhedron = Self::allocated(nbd_u.max(3), nbd_v.max(3));
-        polyhedron.init(surface, [u1, v1, u2, v2])?;
+        polyhedron.init(surface, bounds)?;
         Ok(polyhedron)
     }
     /// Constructor (Surface, Upars, Vpars): the grid at the given parameters;
@@ -97,6 +108,15 @@ impl ThePolyhedronOfHInter {
         upars: &Array1<'_, f64>,
         vpars: &Array1<'_, f64>,
     ) -> Result<Self, Failure> {
+        Self::on_adaptor_with_parameters(&**surface, upars, vpars)
+    }
+    /// The parameter constructor on any surface adaptor (see [`Self::on_adaptor`]);
+    /// `ThePolyhedronOfHInter::on_adaptor_with_parameters(&*s, &upars, &vpars)?`.
+    pub fn on_adaptor_with_parameters(
+        surface: &dyn Adaptor3dSurface,
+        upars: &Array1<'_, f64>,
+        vpars: &Array1<'_, f64>,
+    ) -> Result<Self, Failure> {
         let nbdu: i32 = nb_delta_from_parameters(upars, "Upars")?;
         let nbdv: i32 = nb_delta_from_parameters(vpars, "Vpars")?;
         let mut polyhedron = Self::allocated(nbdu, nbdv);
@@ -104,8 +124,8 @@ impl ThePolyhedronOfHInter {
         Ok(polyhedron)
     }
     /// `Init(Surface, U1, V1, U2, V2)` (protected).
-    fn init(&mut self, surface: &Adaptor3dSurfaceHandle, bounds: [f64; 4]) -> Result<(), Failure> {
-        let eval = GeomGridEvalSurface::from_adaptor(&**surface)?;
+    fn init(&mut self, surface: &dyn Adaptor3dSurface, bounds: [f64; 4]) -> Result<(), Failure> {
+        let eval = GeomGridEvalSurface::from_adaptor(surface)?;
         let sizes = (self.nbdelta_u, self.nbdelta_v);
         utils::init_uniform(&eval, bounds, sizes, &mut self.grid, &mut self.the_bnd)?;
         self.finish(surface, &eval, bounds)
@@ -113,11 +133,11 @@ impl ThePolyhedronOfHInter {
     /// `Init(Surface, Upars, Vpars)` (protected).
     fn init_with_params(
         &mut self,
-        surface: &Adaptor3dSurfaceHandle,
+        surface: &dyn Adaptor3dSurface,
         upars: &Array1<'_, f64>,
         vpars: &Array1<'_, f64>,
     ) -> Result<(), Failure> {
-        let eval = GeomGridEvalSurface::from_adaptor(&**surface)?;
+        let eval = GeomGridEvalSurface::from_adaptor(surface)?;
         let sizes = (self.nbdelta_u, self.nbdelta_v);
         utils::init_with_params(
             &eval,
@@ -139,12 +159,12 @@ impl ThePolyhedronOfHInter {
     /// border deflection.
     fn finish(
         &mut self,
-        surface: &Adaptor3dSurfaceHandle,
+        surface: &dyn Adaptor3dSurface,
         eval: &GeomGridEvalSurface<'_>,
         bounds: [f64; 4],
     ) -> Result<(), Failure> {
         let tol: f64 = utils::compute_max_deflection(
-            &**surface,
+            surface,
             &self.grid,
             self.nbdelta_v,
             self.nb_triangles(),
