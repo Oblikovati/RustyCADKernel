@@ -148725,6 +148725,38 @@
       "notes": "Manual Intf mapping; C++ exceptions become Failure errors. The enumerators keep their native order, which Merge compares. Compared with OCCT by the intf_spoint probe."
     },
     {
+      "upstream_id": "Intf_EDGE",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_PIType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::PIType::Edge",
+      "status": "implemented",
+      "notes": "Enumerator of Intf_PIType: the variant Edge of the Rust enum that the Intf_PIType row names."
+    },
+    {
+      "upstream_id": "Intf_VERTEX",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_PIType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::PIType::Vertex",
+      "status": "implemented",
+      "notes": "Enumerator of Intf_PIType: the variant Vertex of the Rust enum that the Intf_PIType row names."
+    },
+    {
+      "upstream_id": "Intf_FACE",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_PIType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::PIType::Face",
+      "status": "implemented",
+      "notes": "Enumerator of Intf_PIType: the variant Face of the Rust enum that the Intf_PIType row names."
+    },
+    {
+      "upstream_id": "Intf_EXTERNAL",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_PIType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::intf::PIType::External",
+      "status": "implemented",
+      "notes": "Enumerator of Intf_PIType: the variant External of the Rust enum that the Intf_PIType row names."
+    },
+    {
       "upstream_id": "Intf_SectionPoint::Pnt() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Intf/Intf_SectionPoint.hxx",
@@ -149525,6 +149557,46 @@
       "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
     },
     {
+      "upstream_id": "GccEnt_outside",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::Position::Outside",
+      "status": "implemented",
+      "notes": "Enumerator of GccEnt_Position: the variant Outside of the Rust enum that the GccEnt_Position row names."
+    },
+    {
+      "upstream_id": "GccEnt_enclosing",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::Position::Enclosing",
+      "status": "implemented",
+      "notes": "Enumerator of GccEnt_Position: the variant Enclosing of the Rust enum that the GccEnt_Position row names."
+    },
+    {
+      "upstream_id": "GccEnt_unqualified",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::Position::Unqualified",
+      "status": "implemented",
+      "notes": "Enumerator of GccEnt_Position: the variant Unqualified of the Rust enum that the GccEnt_Position row names."
+    },
+    {
+      "upstream_id": "GccEnt_enclosed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::Position::Enclosed",
+      "status": "implemented",
+      "notes": "Enumerator of GccEnt_Position: the variant Enclosed of the Rust enum that the GccEnt_Position row names."
+    },
+    {
+      "upstream_id": "GccEnt_noqualifier",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::Position::NoQualifier",
+      "status": "implemented",
+      "notes": "Enumerator of GccEnt_Position: the variant NoQualifier of the Rust enum that the GccEnt_Position row names."
+    },
+    {
       "upstream_id": "GccEnt_QualifiedCirc::GccEnt_QualifiedCirc(const gp_Circ2d&,GccEnt_Position)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
@@ -149861,6 +149933,54 @@
       "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
     },
     {
+      "upstream_id": "GccInt_Lin",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType::Lin",
+      "status": "implemented",
+      "notes": "Enumerator of GccInt_IType: the variant Lin of the Rust enum that the GccInt_IType row names."
+    },
+    {
+      "upstream_id": "GccInt_Cir",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType::Cir",
+      "status": "implemented",
+      "notes": "Enumerator of GccInt_IType: the variant Cir of the Rust enum that the GccInt_IType row names."
+    },
+    {
+      "upstream_id": "GccInt_Par",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType::Par",
+      "status": "implemented",
+      "notes": "Enumerator of GccInt_IType: the variant Par of the Rust enum that the GccInt_IType row names."
+    },
+    {
+      "upstream_id": "GccInt_Hpr",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType::Hpr",
+      "status": "implemented",
+      "notes": "Enumerator of GccInt_IType: the variant Hpr of the Rust enum that the GccInt_IType row names."
+    },
+    {
+      "upstream_id": "GccInt_Ell",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType::Ell",
+      "status": "implemented",
+      "notes": "Enumerator of GccInt_IType: the variant Ell of the Rust enum that the GccInt_IType row names."
+    },
+    {
+      "upstream_id": "GccInt_Pnt",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType::Pnt",
+      "status": "implemented",
+      "notes": "Enumerator of GccInt_IType: the variant Pnt of the Rust enum that the GccInt_IType row names."
+    },
+    {
       "upstream_id": "Hatch_Hatcher::Hatch_Hatcher(double,bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
@@ -150067,6 +150187,30 @@
       "rust_item": "rustycad_tkgeomalgo::hatch::LineForm",
       "status": "implemented",
       "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_ANYLINE",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_LineForm.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::LineForm::AnyLine",
+      "status": "implemented",
+      "notes": "Enumerator of Hatch_LineForm: the variant AnyLine of the Rust enum that the Hatch_LineForm row names."
+    },
+    {
+      "upstream_id": "Hatch_YLINE",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_LineForm.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::LineForm::YLine",
+      "status": "implemented",
+      "notes": "Enumerator of Hatch_LineForm: the variant YLine of the Rust enum that the Hatch_LineForm row names."
+    },
+    {
+      "upstream_id": "Hatch_XLINE",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_LineForm.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::LineForm::XLine",
+      "status": "implemented",
+      "notes": "Enumerator of Hatch_LineForm: the variant XLine of the Rust enum that the Hatch_LineForm row names."
     },
     {
       "upstream_id": "Hatch_Parameter()",
@@ -151389,6 +151533,30 @@
       "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
     },
     {
+      "upstream_id": "IntRes2d_Middle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Position::Middle",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_Position: the variant Middle of the Rust enum that the IntRes2d_Position row names."
+    },
+    {
+      "upstream_id": "IntRes2d_Head",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Position::Head",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_Position: the variant Head of the Rust enum that the IntRes2d_Position row names."
+    },
+    {
+      "upstream_id": "IntRes2d_End",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Position::End",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_Position: the variant End of the Rust enum that the IntRes2d_Position row names."
+    },
+    {
       "upstream_id": "IntRes2d_Situation",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Situation.hxx",
@@ -151397,12 +151565,68 @@
       "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
     },
     {
+      "upstream_id": "IntRes2d_Unknown",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Situation::Unknown",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_Situation: the variant Unknown of the Rust enum that the IntRes2d_Situation row names."
+    },
+    {
+      "upstream_id": "IntRes2d_Inside",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Situation::Inside",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_Situation: the variant Inside of the Rust enum that the IntRes2d_Situation row names."
+    },
+    {
+      "upstream_id": "IntRes2d_Outside",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Situation::Outside",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_Situation: the variant Outside of the Rust enum that the IntRes2d_Situation row names."
+    },
+    {
       "upstream_id": "IntRes2d_TypeTrans",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_TypeTrans.hxx",
       "rust_item": "rustycad_tkgeomalgo::int_res2d::TypeTrans",
       "status": "implemented",
       "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Undecided",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::TypeTrans::Undecided",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_TypeTrans: the variant Undecided of the Rust enum that the IntRes2d_TypeTrans row names."
+    },
+    {
+      "upstream_id": "IntRes2d_Touch",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::TypeTrans::Touch",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_TypeTrans: the variant Touch of the Rust enum that the IntRes2d_TypeTrans row names."
+    },
+    {
+      "upstream_id": "IntRes2d_In",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::TypeTrans::In",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_TypeTrans: the variant In of the Rust enum that the IntRes2d_TypeTrans row names."
+    },
+    {
+      "upstream_id": "IntRes2d_Out",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::TypeTrans::Out",
+      "status": "implemented",
+      "notes": "Enumerator of IntRes2d_TypeTrans: the variant Out of the Rust enum that the IntRes2d_TypeTrans row names."
     },
     {
       "upstream_id": "IntRes2d_Transition::IntRes2d_Transition()",
@@ -154461,6 +154685,30 @@
       "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
     },
     {
+      "upstream_id": "IntSurf_Unknown",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfSituation::Unknown",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_Situation: the variant Unknown of the Rust enum that the IntSurf_Situation row names."
+    },
+    {
+      "upstream_id": "IntSurf_Outside",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfSituation::Outside",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_Situation: the variant Outside of the Rust enum that the IntSurf_Situation row names."
+    },
+    {
+      "upstream_id": "IntSurf_Inside",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfSituation::Inside",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_Situation: the variant Inside of the Rust enum that the IntSurf_Situation row names."
+    },
+    {
       "upstream_id": "IntSurf_Transition::IntSurf_Transition()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
@@ -154547,6 +154795,38 @@
       "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans",
       "status": "implemented",
       "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Out",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans::Out",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_TypeTrans: the variant Out of the Rust enum that the IntSurf_TypeTrans row names."
+    },
+    {
+      "upstream_id": "IntSurf_In",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans::In",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_TypeTrans: the variant In of the Rust enum that the IntSurf_TypeTrans row names."
+    },
+    {
+      "upstream_id": "IntSurf_Undecided",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans::Undecided",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_TypeTrans: the variant Undecided of the Rust enum that the IntSurf_TypeTrans row names."
+    },
+    {
+      "upstream_id": "IntSurf_Touch",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans::Touch",
+      "status": "implemented",
+      "notes": "Enumerator of IntSurf_TypeTrans: the variant Touch of the Rust enum that the IntSurf_TypeTrans row names."
     },
     {
       "upstream_id": "Law::MixBnd(const occ::handle<Law_Linear>&)",
@@ -156573,6 +156853,46 @@
       "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
     },
     {
+      "upstream_id": "LocalAnalysis_TangentNotDefined",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_StatusErrorType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisStatusErrorType::TangentNotDefined",
+      "status": "implemented",
+      "notes": "Enumerator of LocalAnalysis_StatusErrorType: the variant TangentNotDefined of the Rust enum that the LocalAnalysis_StatusErrorType row names."
+    },
+    {
+      "upstream_id": "LocalAnalysis_NullSecondDerivative",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_StatusErrorType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisStatusErrorType::NullSecondDerivative",
+      "status": "implemented",
+      "notes": "Enumerator of LocalAnalysis_StatusErrorType: the variant NullSecondDerivative of the Rust enum that the LocalAnalysis_StatusErrorType row names."
+    },
+    {
+      "upstream_id": "LocalAnalysis_NormalNotDefined",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_StatusErrorType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisStatusErrorType::NormalNotDefined",
+      "status": "implemented",
+      "notes": "Enumerator of LocalAnalysis_StatusErrorType: the variant NormalNotDefined of the Rust enum that the LocalAnalysis_StatusErrorType row names."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurvatureNotDefined",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_StatusErrorType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisStatusErrorType::CurvatureNotDefined",
+      "status": "implemented",
+      "notes": "Enumerator of LocalAnalysis_StatusErrorType: the variant CurvatureNotDefined of the Rust enum that the LocalAnalysis_StatusErrorType row names."
+    },
+    {
+      "upstream_id": "LocalAnalysis_NullFirstDerivative",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_StatusErrorType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisStatusErrorType::NullFirstDerivative",
+      "status": "implemented",
+      "notes": "Enumerator of LocalAnalysis_StatusErrorType: the variant NullFirstDerivative of the Rust enum that the LocalAnalysis_StatusErrorType row names."
+    },
+    {
       "upstream_id": "LocalAnalysis_SurfaceContinuity::LocalAnalysis_SurfaceContinuity(const occ::handle<Geom_Surface>&,double,double,const occ::handle<Geom_Surface>&,double,double,GeomAbs_Shape,double,double,double,double,double,double,double)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
@@ -156763,6 +157083,38 @@
       "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveAnalysisCode",
       "status": "implemented",
       "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_InfiniteSliding",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_AnalysisCode.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveAnalysisCode::InfiniteSliding",
+      "status": "implemented",
+      "notes": "Enumerator of FairCurve_AnalysisCode: the variant InfiniteSliding of the Rust enum that the FairCurve_AnalysisCode row names."
+    },
+    {
+      "upstream_id": "FairCurve_OK",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_AnalysisCode.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveAnalysisCode::Ok",
+      "status": "implemented",
+      "notes": "Enumerator of FairCurve_AnalysisCode: the variant Ok of the Rust enum that the FairCurve_AnalysisCode row names."
+    },
+    {
+      "upstream_id": "FairCurve_NotConverged",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_AnalysisCode.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveAnalysisCode::NotConverged",
+      "status": "implemented",
+      "notes": "Enumerator of FairCurve_AnalysisCode: the variant NotConverged of the Rust enum that the FairCurve_AnalysisCode row names."
+    },
+    {
+      "upstream_id": "FairCurve_NullHeight",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_AnalysisCode.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveAnalysisCode::NullHeight",
+      "status": "implemented",
+      "notes": "Enumerator of FairCurve_AnalysisCode: the variant NullHeight of the Rust enum that the FairCurve_AnalysisCode row names."
     },
     {
       "upstream_id": "FairCurve_Batten::FairCurve_Batten(const gp_Pnt2d&,const gp_Pnt2d&,double,double)",
@@ -157325,6 +157677,38 @@
       "notes": "IntImp mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 2): ComputeTangence takes fixed-size arrays; ChoixRef raises Standard_OutOfRange as a Result error. The .gxx templates (ZerParFunc, ZerImpFunc, ZerCSParFunc, Int2S, IntCS) are the generics IntImpZerParFunc, IntImpZerImpFunc, IntImpZerCSParFunc, IntImpInt2S and IntImpIntCS over the ThePSurfaceTool, TheISurfaceTool and TheCurveTool traits."
     },
     {
+      "upstream_id": "IntImp_VIsoparametricOnCaro2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ConstIsoparametric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpConstIsoparametric::VIsoparametricOnCaro2",
+      "status": "implemented",
+      "notes": "Enumerator of IntImp_ConstIsoparametric: the variant VIsoparametricOnCaro2 of the Rust enum that the IntImp_ConstIsoparametric row names."
+    },
+    {
+      "upstream_id": "IntImp_UIsoparametricOnCaro1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ConstIsoparametric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpConstIsoparametric::UIsoparametricOnCaro1",
+      "status": "implemented",
+      "notes": "Enumerator of IntImp_ConstIsoparametric: the variant UIsoparametricOnCaro1 of the Rust enum that the IntImp_ConstIsoparametric row names."
+    },
+    {
+      "upstream_id": "IntImp_UIsoparametricOnCaro2",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ConstIsoparametric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpConstIsoparametric::UIsoparametricOnCaro2",
+      "status": "implemented",
+      "notes": "Enumerator of IntImp_ConstIsoparametric: the variant UIsoparametricOnCaro2 of the Rust enum that the IntImp_ConstIsoparametric row names."
+    },
+    {
+      "upstream_id": "IntImp_VIsoparametricOnCaro1",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ConstIsoparametric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpConstIsoparametric::VIsoparametricOnCaro1",
+      "status": "implemented",
+      "notes": "Enumerator of IntImp_ConstIsoparametric: the variant VIsoparametricOnCaro1 of the Rust enum that the IntImp_ConstIsoparametric row names."
+    },
+    {
       "upstream_id": "AppBlend_Approx::IsDone() const",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
@@ -157613,12 +157997,84 @@
       "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
     },
     {
+      "upstream_id": "HatchGen_TrimFailure",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_ErrorStatus.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::ErrorStatus::TrimFailure",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_ErrorStatus: the variant TrimFailure of the Rust enum that the HatchGen_ErrorStatus row names."
+    },
+    {
+      "upstream_id": "HatchGen_TransitionFailure",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_ErrorStatus.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::ErrorStatus::TransitionFailure",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_ErrorStatus: the variant TransitionFailure of the Rust enum that the HatchGen_ErrorStatus row names."
+    },
+    {
+      "upstream_id": "HatchGen_IncoherentParity",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_ErrorStatus.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::ErrorStatus::IncoherentParity",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_ErrorStatus: the variant IncoherentParity of the Rust enum that the HatchGen_ErrorStatus row names."
+    },
+    {
+      "upstream_id": "HatchGen_NoProblem",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_ErrorStatus.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::ErrorStatus::NoProblem",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_ErrorStatus: the variant NoProblem of the Rust enum that the HatchGen_ErrorStatus row names."
+    },
+    {
+      "upstream_id": "HatchGen_IncompatibleStates",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_ErrorStatus.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::ErrorStatus::IncompatibleStates",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_ErrorStatus: the variant IncompatibleStates of the Rust enum that the HatchGen_ErrorStatus row names."
+    },
+    {
       "upstream_id": "HatchGen_IntersectionType",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionType.hxx",
       "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionType",
       "status": "implemented",
       "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_TRUE",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionType::True",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_IntersectionType: the variant True of the Rust enum that the HatchGen_IntersectionType row names."
+    },
+    {
+      "upstream_id": "HatchGen_TANGENT",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionType::Tangent",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_IntersectionType: the variant Tangent of the Rust enum that the HatchGen_IntersectionType row names."
+    },
+    {
+      "upstream_id": "HatchGen_UNDETERMINED",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionType::Undetermined",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_IntersectionType: the variant Undetermined of the Rust enum that the HatchGen_IntersectionType row names."
+    },
+    {
+      "upstream_id": "HatchGen_TOUCH",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionType::Touch",
+      "status": "implemented",
+      "notes": "Enumerator of HatchGen_IntersectionType: the variant Touch of the Rust enum that the HatchGen_IntersectionType row names."
     },
     {
       "upstream_id": "HatchGen_IntersectionPoint::SetIndex(int)",
@@ -160709,6 +161165,54 @@
       "notes": "Geom2dGcc mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 9): the Iter and Geo classes are concrete structs; each constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue, Geom2dGcc_IsParallel...) named after its argument kinds (curve/circ/lin/pnt) and locus (on_line/on_circle/on_curve); output references become returned tuples; the fixed-size solution arrays and their consultation checks keep the native order, so an index past an array raises Standard_OutOfRange; the function classes borrow their curves and implement the tkmath function traits, keeping an evaluation failure for raised(); Geom2dGcc_QCurve is an alias of QualifiedCurve."
     },
     {
+      "upstream_id": "Geom2dGcc_LiLiCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type1::LiLiCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type1: the variant LiLiCu of the Rust enum that the Geom2dGcc_Type1 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiCiCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type1::CiCiCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type1: the variant CiCiCu of the Rust enum that the Geom2dGcc_Type1 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiCuCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type1::CiCuCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type1: the variant CiCuCu of the Rust enum that the Geom2dGcc_Type1 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuCuCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type1::CuCuCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type1: the variant CuCuCu of the Rust enum that the Geom2dGcc_Type1 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiLiCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type1::CiLiCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type1: the variant CiLiCu of the Rust enum that the Geom2dGcc_Type1 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_LiCuCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type1.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type1::LiCuCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type1: the variant LiCuCu of the Rust enum that the Geom2dGcc_Type1 row names."
+    },
+    {
       "upstream_id": "Geom2dGcc_Type2",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
@@ -160717,12 +161221,124 @@
       "notes": "Geom2dGcc mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 9): the Iter and Geo classes are concrete structs; each constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue, Geom2dGcc_IsParallel...) named after its argument kinds (curve/circ/lin/pnt) and locus (on_line/on_circle/on_curve); output references become returned tuples; the fixed-size solution arrays and their consultation checks keep the native order, so an index past an array raises Standard_OutOfRange; the function classes borrow their curves and implement the tkmath function traits, keeping an evaluation failure for raised(); Geom2dGcc_QCurve is an alias of QualifiedCurve."
     },
     {
+      "upstream_id": "Geom2dGcc_CuPtOnCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CuPtOnCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CuPtOnCu of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuPtOnLi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CuPtOnLi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CuPtOnLi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiCuOnCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CiCuOnCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CiCuOnCu of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuCuOnLi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CuCuOnLi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CuCuOnLi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiCuOnCi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CiCuOnCi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CiCuOnCi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_LiCuOnLi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::LiCuOnLi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant LiCuOnLi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuPtOnCi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CuPtOnCi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CuPtOnCi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuCuOnCi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CuCuOnCi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CuCuOnCi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiCuOnLi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CiCuOnLi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CiCuOnLi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_LiCuOnCi",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::LiCuOnCi",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant LiCuOnCi of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuCuOnCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::CuCuOnCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant CuCuOnCu of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_LiCuOnCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type2.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type2::LiCuOnCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type2: the variant LiCuOnCu of the Rust enum that the Geom2dGcc_Type2 row names."
+    },
+    {
       "upstream_id": "Geom2dGcc_Type3",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type3.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type3",
       "status": "implemented",
       "notes": "Geom2dGcc mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 9): the Iter and Geo classes are concrete structs; each constructor overload is a named Rust constructor returning Result (GccEnt_BadQualifier, Standard_NegativeValue, Geom2dGcc_IsParallel...) named after its argument kinds (curve/circ/lin/pnt) and locus (on_line/on_circle/on_curve); output references become returned tuples; the fixed-size solution arrays and their consultation checks keep the native order, so an index past an array raises Standard_OutOfRange; the function classes borrow their curves and implement the tkmath function traits, keeping an evaluation failure for raised(); Geom2dGcc_QCurve is an alias of QualifiedCurve."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CiCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type3.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type3::CiCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type3: the variant CiCu of the Rust enum that the Geom2dGcc_Type3 row names."
+    },
+    {
+      "upstream_id": "Geom2dGcc_CuCu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Type3.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_gcc::Type3::CuCu",
+      "status": "implemented",
+      "notes": "Enumerator of Geom2dGcc_Type3: the variant CuCu of the Rust enum that the Geom2dGcc_Type3 row names."
     },
     {
       "upstream_id": "IntWalk_PWalking",
@@ -160955,6 +161571,54 @@
       "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection",
       "status": "implemented",
       "notes": "IntWalk mapping (docs/tkgeomalgo-progress.md): the enum, its values without the IntWalk_ prefix."
+    },
+    {
+      "upstream_id": "IntWalk_StepTooSmall",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection::StepTooSmall",
+      "status": "implemented",
+      "notes": "Enumerator of IntWalk_StatusDeflection: the variant StepTooSmall of the Rust enum that the IntWalk_StatusDeflection row names."
+    },
+    {
+      "upstream_id": "IntWalk_PointConfondu",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection::PointConfondu",
+      "status": "implemented",
+      "notes": "Enumerator of IntWalk_StatusDeflection: the variant PointConfondu of the Rust enum that the IntWalk_StatusDeflection row names."
+    },
+    {
+      "upstream_id": "IntWalk_ArretSurPoint",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection::ArretSurPoint",
+      "status": "implemented",
+      "notes": "Enumerator of IntWalk_StatusDeflection: the variant ArretSurPoint of the Rust enum that the IntWalk_StatusDeflection row names."
+    },
+    {
+      "upstream_id": "IntWalk_PasTropGrand",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection::PasTropGrand",
+      "status": "implemented",
+      "notes": "Enumerator of IntWalk_StatusDeflection: the variant PasTropGrand of the Rust enum that the IntWalk_StatusDeflection row names."
+    },
+    {
+      "upstream_id": "IntWalk_OK",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection::OK",
+      "status": "implemented",
+      "notes": "Enumerator of IntWalk_StatusDeflection: the variant OK of the Rust enum that the IntWalk_StatusDeflection row names."
+    },
+    {
+      "upstream_id": "IntWalk_ArretSurPointPrecedent",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntWalk/IntWalk_StatusDeflection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_walk::IntWalkStatusDeflection::ArretSurPointPrecedent",
+      "status": "implemented",
+      "notes": "Enumerator of IntWalk_StatusDeflection: the variant ArretSurPointPrecedent of the Rust enum that the IntWalk_StatusDeflection row names."
     },
     {
       "upstream_id": "IntWalk_VectorOfInteger",
@@ -162709,6 +163373,30 @@
       "notes": "IntCurveSurface mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 11): the .pxx templates are generics over InterCurveTool/InterSurfaceTool and the instance classes are aliases; overloads take distinct names; native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ics_records)."
     },
     {
+      "upstream_id": "IntCurveSurface_In",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TransitionOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TransitionOnCurve::In",
+      "status": "implemented",
+      "notes": "Enumerator of IntCurveSurface_TransitionOnCurve: the variant In of the Rust enum that the IntCurveSurface_TransitionOnCurve row names."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Out",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TransitionOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TransitionOnCurve::Out",
+      "status": "implemented",
+      "notes": "Enumerator of IntCurveSurface_TransitionOnCurve: the variant Out of the Rust enum that the IntCurveSurface_TransitionOnCurve row names."
+    },
+    {
+      "upstream_id": "IntCurveSurface_Tangent",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TransitionOnCurve.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve_surface::TransitionOnCurve::Tangent",
+      "status": "implemented",
+      "notes": "Enumerator of IntCurveSurface_TransitionOnCurve: the variant Tangent of the Rust enum that the IntCurveSurface_TransitionOnCurve row names."
+    },
+    {
       "upstream_id": "GeomFill_AppSurf()",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_AppSurf.hxx",
@@ -163397,12 +164085,52 @@
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
     },
     {
+      "upstream_id": "GeomFill_StretchStyle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_FillingStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFillingStyle::StretchStyle",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_FillingStyle: the variant StretchStyle of the Rust enum that the GeomFill_FillingStyle row names."
+    },
+    {
+      "upstream_id": "GeomFill_CurvedStyle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_FillingStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFillingStyle::CurvedStyle",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_FillingStyle: the variant CurvedStyle of the Rust enum that the GeomFill_FillingStyle row names."
+    },
+    {
+      "upstream_id": "GeomFill_CoonsStyle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_FillingStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillFillingStyle::CoonsStyle",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_FillingStyle: the variant CoonsStyle of the Rust enum that the GeomFill_FillingStyle row names."
+    },
+    {
       "upstream_id": "GeomFill_ApproxStyle",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_ApproxStyle.hxx",
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillApproxStyle",
       "status": "implemented",
       "notes": "GeomFill filling-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 13): each class is one file of geom_fill; transient classes are handle-shared structs, abstract classes traits reached through Handle<dyn ...>; C++ output references become returned values or assigned arrays, overloads take distinct Rust names, native exceptions are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_* requests)."
+    },
+    {
+      "upstream_id": "GeomFill_Location",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_ApproxStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillApproxStyle::Location",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_ApproxStyle: the variant Location of the Rust enum that the GeomFill_ApproxStyle row names."
+    },
+    {
+      "upstream_id": "GeomFill_Section",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_ApproxStyle.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillApproxStyle::Section",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_ApproxStyle: the variant Section of the Rust enum that the GeomFill_ApproxStyle row names."
     },
     {
       "upstream_id": "GeomFill_BezierCurves::GeomFill_BezierCurves()",
@@ -167099,6 +167827,230 @@
       "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
     },
     {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::OrderingFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::OrderingFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant OrderingFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::KnotAlignmentFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::KnotAlignmentFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant KnotAlignmentFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::ContactDiscovery",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::ContactDiscovery",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant ContactDiscovery of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::ReferenceSurfaceFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::ReferenceSurfaceFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant ReferenceSurfaceFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::ConversionFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::ConversionFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant ConversionFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::PeriodicityFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::PeriodicityFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant PeriodicityFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::RationalDegreeOverflow",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::RationalDegreeOverflow",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant RationalDegreeOverflow of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::Approximation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::Approximation",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant Approximation of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::CompatibilityFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::CompatibilityFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant CompatibilityFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::NotStarted",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::NotStarted",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant NotStarted of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::InvalidInput",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::InvalidInput",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant InvalidInput of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::IntersectionFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::IntersectionFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant IntersectionFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::NetworkOrdering",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::NetworkOrdering",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant NetworkOrdering of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ApproximationMode::AllowApproximateFallback",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonApproximationMode::AllowApproximateFallback",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ApproximationMode: the variant AllowApproximateFallback of the Rust enum that the GeomFill_Gordon::ApproximationMode row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::ConstructionFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::ConstructionFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant ConstructionFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::SkinningFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::SkinningFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant SkinningFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::Done",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::Done",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant Done of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::InputConversion",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::InputConversion",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant InputConversion of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::RationalReparametrizationFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::RationalReparametrizationFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant RationalReparametrizationFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::ReparametrizationFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::ReparametrizationFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant ReparametrizationFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::RationalConstructionFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::RationalConstructionFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant RationalConstructionFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::ExactConstruction",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::ExactConstruction",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant ExactConstruction of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::CurveCompatibilityFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::CurveCompatibilityFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant CurveCompatibilityFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ApproximationMode::ExactOnly",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonApproximationMode::ExactOnly",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ApproximationMode: the variant ExactOnly of the Rust enum that the GeomFill_Gordon::ApproximationMode row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::ResultStatus::ApproximationFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonStatus::ApproximationFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::ResultStatus: the variant ApproximationFailed of the Rust enum that the GeomFill_Gordon::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::Reparametrization",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::Reparametrization",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant Reparametrization of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::Validation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::Validation",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant Validation of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
+      "upstream_id": "GeomFill_Gordon::BuildStage::NotStarted",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Gordon.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GordonBuildStage::NotStarted",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Gordon::BuildStage: the variant NotStarted of the Rust enum that the GeomFill_Gordon::BuildStage row names."
+    },
+    {
       "upstream_id": "GeomFill_NetworkSurface::ResultStatus",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
@@ -167153,6 +168105,94 @@
       "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillNetworkSurface::surface",
       "status": "implemented",
       "notes": "GeomFill Gordon mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 15): the nested enums and BuildReport as GordonStatus, GordonApproximationMode, GordonBuildStage and GordonBuildReport, NetworkSurface Init arguments grouped in tuples, native exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfill_gordon, gfill_network)."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::ReferenceSurfaceFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::ReferenceSurfaceFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant ReferenceSurfaceFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::ConstructionFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::ConstructionFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant ConstructionFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::RationalDegreeOverflow",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::RationalDegreeOverflow",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant RationalDegreeOverflow of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::KnotAlignmentFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::KnotAlignmentFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant KnotAlignmentFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::PeriodicityFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::PeriodicityFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant PeriodicityFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::CurveCompatibilityFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::CurveCompatibilityFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant CurveCompatibilityFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::RationalConstructionFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::RationalConstructionFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant RationalConstructionFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::InvalidInput",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::InvalidInput",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant InvalidInput of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::SkinningFailed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::SkinningFailed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant SkinningFailed of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::Done",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::Done",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant Done of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
+    },
+    {
+      "upstream_id": "GeomFill_NetworkSurface::ResultStatus::NotStarted",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_NetworkSurface.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::NetworkSurfaceStatus::NotStarted",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_NetworkSurface::ResultStatus: the variant NotStarted of the Rust enum that the GeomFill_NetworkSurface::ResultStatus row names."
     },
     {
       "upstream_id": "IntPatch_ALine::IntPatch_ALine(const IntAna_Curve&,bool,IntSurf_TypeTrans,IntSurf_TypeTrans)",
@@ -168339,6 +169379,70 @@
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
     },
     {
+      "upstream_id": "IntPatch_Lin",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Lin",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Lin of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Ellipse",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Ellipse",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Ellipse of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Analytic",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Analytic",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Analytic of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Parabola",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Parabola",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Parabola of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Hyperbola",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Hyperbola",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Hyperbola of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Restriction",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Restriction",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Restriction of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Circle",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Circle",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Circle of the Rust enum that the IntPatch_IType row names."
+    },
+    {
+      "upstream_id": "IntPatch_Walking",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchIType::Walking",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_IType: the variant Walking of the Rust enum that the IntPatch_IType row names."
+    },
+    {
       "upstream_id": "IntPatch_Line::SetValue(bool,bool,bool,bool)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_Line.hxx",
@@ -169143,6 +170247,54 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType",
       "status": "implemented",
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_SPntPoleSeamU",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType::SPntPoleSeamU",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_SpecPntType: the variant SPntPoleSeamU of the Rust enum that the IntPatch_SpecPntType row names."
+    },
+    {
+      "upstream_id": "IntPatch_SPntPole",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType::SPntPole",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_SpecPntType: the variant SPntPole of the Rust enum that the IntPatch_SpecPntType row names."
+    },
+    {
+      "upstream_id": "IntPatch_SPntSeamU",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType::SPntSeamU",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_SpecPntType: the variant SPntSeamU of the Rust enum that the IntPatch_SpecPntType row names."
+    },
+    {
+      "upstream_id": "IntPatch_SPntSeamV",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType::SPntSeamV",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_SpecPntType: the variant SPntSeamV of the Rust enum that the IntPatch_SpecPntType row names."
+    },
+    {
+      "upstream_id": "IntPatch_SPntSeamUV",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType::SPntSeamUV",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_SpecPntType: the variant SPntSeamUV of the Rust enum that the IntPatch_SpecPntType row names."
+    },
+    {
+      "upstream_id": "IntPatch_SPntNone",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_SpecPntType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchSpecPntType::SPntNone",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_SpecPntType: the variant SPntNone of the Rust enum that the IntPatch_SpecPntType row names."
     },
     {
       "upstream_id": "IntPatch_TheIWLineOfTheIWalking::IntPatch_TheIWLineOfTheIWalking(const IntSurf_Allocator&)",
@@ -170231,6 +171383,38 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLine::static_type",
       "status": "implemented",
       "notes": "IntPatch mapping (docs/geomalgo-design.md section 16): the lines are transients shared through handles (IntPatch_Line and IntPatch_PointLine are traits over an embedded IntPatchLineBase), vertices and points are returned as copies and ChangeVertex edits through a closure; the template instances are aliases of the IntStart, IntWalk and IntImp generics over IntPatch type bundles; C++ exceptions become Failure errors. Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_*, is_*, iw_* requests)."
+    },
+    {
+      "upstream_id": "IntPatch_WLine::IntPatch_WLUnknown",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLType::Unknown",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_WLine::IntPatch_WLType: the variant Unknown of the Rust enum that the IntPatch_WLine::IntPatch_WLType row names."
+    },
+    {
+      "upstream_id": "IntPatch_WLine::IntPatch_WLImpImp",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLType::ImpImp",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_WLine::IntPatch_WLType: the variant ImpImp of the Rust enum that the IntPatch_WLine::IntPatch_WLType row names."
+    },
+    {
+      "upstream_id": "IntPatch_WLine::IntPatch_WLImpPrm",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLType::ImpPrm",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_WLine::IntPatch_WLType: the variant ImpPrm of the Rust enum that the IntPatch_WLine::IntPatch_WLType row names."
+    },
+    {
+      "upstream_id": "IntPatch_WLine::IntPatch_WLPrmPrm",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_WLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchWLType::PrmPrm",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_WLine::IntPatch_WLType: the variant PrmPrm of the Rust enum that the IntPatch_WLine::IntPatch_WLType row names."
     },
     {
       "upstream_id": "GeomFill::Surface(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&)",
@@ -173336,6 +174520,38 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_PipeOk",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_PipeError.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillPipeError::PipeOk",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_PipeError: the variant PipeOk of the Rust enum that the GeomFill_PipeError row names."
+    },
+    {
+      "upstream_id": "GeomFill_PipeNotOk",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_PipeError.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillPipeError::PipeNotOk",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_PipeError: the variant PipeNotOk of the Rust enum that the GeomFill_PipeError row names."
+    },
+    {
+      "upstream_id": "GeomFill_PlaneNotIntersectGuide",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_PipeError.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillPipeError::PlaneNotIntersectGuide",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_PipeError: the variant PlaneNotIntersectGuide of the Rust enum that the GeomFill_PipeError row names."
+    },
+    {
+      "upstream_id": "GeomFill_ImpossibleContact",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_PipeError.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillPipeError::ImpossibleContact",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_PipeError: the variant ImpossibleContact of the Rust enum that the GeomFill_PipeError row names."
+    },
+    {
       "upstream_id": "GeomFill_PlanFunc::GeomFill_PlanFunc(const gp_Pnt&,const gp_Vec&,const occ::handle<Adaptor3d_Curve>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_PlanFunc.hxx",
@@ -174422,6 +175638,86 @@
       "notes": "GeomFill sweep-part mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 14): each class is one or more files of geom_fill; transient classes are handle-shared structs with their state behind locks, abstract classes are traits reached through Handle<dyn ...>; C++ output references become returned values, frame structs or assigned arrays, overloads take distinct Rust names, native exceptions and null dereferences are Failure errors; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (gfs_* requests)."
     },
     {
+      "upstream_id": "GeomFill_IsGuideAC",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsGuideAC",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsGuideAC of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsGuideACWithContact",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsGuideACWithContact",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsGuideACWithContact of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsDiscreteTrihedron",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsDiscreteTrihedron",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsDiscreteTrihedron of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsGuidePlan",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsGuidePlan",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsGuidePlan of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsCorrectedFrenet",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsCorrectedFrenet",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsCorrectedFrenet of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsDarboux",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsDarboux",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsDarboux of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsFrenet",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsFrenet",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsFrenet of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsGuidePlanWithContact",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsGuidePlanWithContact",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsGuidePlanWithContact of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsConstantNormal",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsConstantNormal",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsConstantNormal of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
+      "upstream_id": "GeomFill_IsFixed",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_Trihedron.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom_fill::GeomFillTrihedron::IsFixed",
+      "status": "implemented",
+      "notes": "Enumerator of GeomFill_Trihedron: the variant IsFixed of the Rust enum that the GeomFill_Trihedron row names."
+    },
+    {
       "upstream_id": "GeomFill_TrihedronLaw::SetCurve(const occ::handle<Adaptor3d_Curve>&)",
       "toolkit": "TKGeomAlgo",
       "source": "src/ModelingAlgorithms/TKGeomAlgo/GeomFill/GeomFill_TrihedronLaw.hxx",
@@ -174915,6 +176211,30 @@
       "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpIntersection::tangent_faces",
       "status": "implemented",
       "notes": "IntPatch analytic intersections (docs/geomalgo-design.md section 17): the surfaces are Adaptor3dSurfaceHandle, the domains `&(dyn TheTopolTool + 'static)`, the result lines Handle<dyn IntPatchLine>; C++ exceptions become Failure errors; the native operation order, NaN behaviour and quirks are kept (docs/tkgeomalgo-progress.md). Compared with OCCT by tools/verify_tkgeomalgo_numeric.py (ip_impimp requests)."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IntStatus_OK",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpStatus::Ok",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_ImpImpIntersection::IntStatus: the variant Ok of the Rust enum that the IntPatch_ImpImpIntersection::IntStatus row names."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IntStatus_Fail",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpStatus::Fail",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_ImpImpIntersection::IntStatus: the variant Fail of the Rust enum that the IntPatch_ImpImpIntersection::IntStatus row names."
+    },
+    {
+      "upstream_id": "IntPatch_ImpImpIntersection::IntStatus_InfiniteSectionCurve",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntPatch/IntPatch_ImpImpIntersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_patch::IntPatchImpImpStatus::InfiniteSectionCurve",
+      "status": "implemented",
+      "notes": "Enumerator of IntPatch_ImpImpIntersection::IntStatus: the variant InfiniteSectionCurve of the Rust enum that the IntPatch_ImpImpIntersection::IntStatus row names."
     },
     {
       "upstream_id": "IntPatch_ImpPrmIntersection::IntPatch_ImpPrmIntersection()",
