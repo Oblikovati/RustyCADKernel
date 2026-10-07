@@ -7,8 +7,10 @@ use std::sync::Arc;
 
 const INITIAL_BUCKETS: usize = 100;
 
+/// Native `std::hash<occ::handle<BOPDS_PaveBlock>>`: pave blocks are keyed by handle identity.
+/// `IndexedMap::with_hasher(PaveBlockHandleIdentity, 1)`.
 #[derive(Clone, Copy, Debug, Default)]
-struct PaveBlockHandleIdentity;
+pub struct PaveBlockHandleIdentity;
 
 impl HashPolicy<PaveBlockHandle> for PaveBlockHandleIdentity {
     fn hash(&self, block: &PaveBlockHandle) -> usize {
@@ -87,6 +89,11 @@ impl VertexIndexSet {
     /// Tests whether the index is present.
     pub fn contains(&self, index: i32) -> bool {
         self.0.contains(&index)
+    }
+
+    /// Removes an index, reporting whether it was present; `vertices.remove(3)`.
+    pub fn remove(&mut self, index: i32) -> bool {
+        self.0.remove(&index)
     }
 
     /// Returns the number of unique vertex indices.

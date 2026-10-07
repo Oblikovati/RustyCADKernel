@@ -13,17 +13,21 @@ mod pave_block;
 mod point;
 mod shape_info;
 mod sub_iterator;
-pub use common_block::{CommonBlock, CommonBlockHandle, common_block_handle, pave_block_handle};
+pub mod tools;
+pub use common_block::{
+    CommonBlock, CommonBlockHandle, CommonBlockHandleIdentity, common_block_handle,
+    pave_block_handle,
+};
 pub use couple_of_pave_blocks::CoupleOfPaveBlocks;
 pub use curve::BopdsCurve;
-pub use data_structure::DataStructure;
-pub use face_info::{FaceInfo, PaveBlockIndexMap, VertexIndexSet};
+pub use data_structure::{DataStructure, SubShapesOnIn};
+pub use face_info::{FaceInfo, PaveBlockHandleIdentity, PaveBlockIndexMap, VertexIndexSet};
 pub use index_range::IndexRange;
 pub use interference::{
     InterfEE, InterfEF, InterfEZ, InterfFF, InterfFZ, InterfVE, InterfVF, InterfVV, InterfVZ,
     InterfZZ, Interference,
 };
-pub use iterator::BOPDSIterator;
+pub use iterator::{BOPDSIterator, BOPDSIteratorSI};
 pub use pair::Pair;
 pub use pave::Pave;
 pub use pave_block::{PaveBlock, PaveBlockHandle};

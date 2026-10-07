@@ -1,5 +1,6 @@
 //! Same-domain chains follow the pinned native DS lookup without path compression.
 use super::DataStructure;
+use rustycad_tkernel::ncollection::DataMap;
 
 impl DataStructure {
     /// Binds distinct indices; self-bindings are ignored. `ds.add_shape_sd(3, 8)`.
@@ -36,5 +37,11 @@ impl DataStructure {
     /// Traverses direct bindings in native bucket order; `ds.shape_sd_items().count()`.
     pub fn shape_sd_items(&self) -> impl Iterator<Item = (&i32, &i32)> {
         self.same_domain_vertices.items()
+    }
+
+    /// The direct same-domain bindings themselves (`ShapesSD`), which the native callers may
+    /// change; `ds.shapes_sd().is_bound(&3)`.
+    pub fn shapes_sd(&mut self) -> &mut DataMap<i32, i32> {
+        &mut self.same_domain_vertices
     }
 }

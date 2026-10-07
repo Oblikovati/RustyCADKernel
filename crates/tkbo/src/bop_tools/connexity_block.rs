@@ -1,6 +1,7 @@
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::ncollection::{BaseAllocator, List};
 /// Shape block, loops and regularity; `ConnexityBlock::default()`.
+#[derive(Clone)]
 pub struct ConnexityBlock {
     _allocator: BaseAllocator,
     regular: bool,

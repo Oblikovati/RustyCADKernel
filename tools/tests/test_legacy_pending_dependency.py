@@ -1,10 +1,13 @@
 """Pending-dependency GTest rows: native-only, never counted as a Rust pass, lapse once ported."""
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 
 from legacy_pending_dependency import (implemented_classes, is_pending_dependency, pending_dependency_case,
-                                       pending_dependency_rows, require_blockers_in_source, runnable_rows)
+                                       pending_dependency_rows, require_blockers_in_source, runnable_rows,
+                                       source_with_fixtures)
 
 DIGEST = "a" * 64
 
@@ -63,6 +66,16 @@ class PendingRowSelectionTests(unittest.TestCase):
         require_blockers_in_source(case, "#include <BRepAlgoAPI_Cut.hxx>")
         with self.assertRaisesRegex(ValueError, "never names"):
             require_blockers_in_source(case, "#include <BRepAlgoAPI_CutX.hxx>")
+
+    def test_a_blocker_may_appear_in_a_local_fixture_header(self) -> None:
+        case = pending_dependency_case(pending(blocked_by=("BRepFilletAPI_MakeFillet",)))
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder)/"S_Test.cxx"
+            source.write_text('#include "S_Utilities.pxx"\n#include <gtest/gtest.h>\n')
+            (Path(folder)/"S_Utilities.pxx").write_text("BRepFilletAPI_MakeFillet aFillet(aShape);\n")
+            require_blockers_in_source(case, source_with_fixtures(source))
+            with self.assertRaisesRegex(ValueError, "never names"):
+                require_blockers_in_source(case, source.read_text())
 
 
 if __name__ == "__main__":

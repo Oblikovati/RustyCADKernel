@@ -13,6 +13,7 @@ from __future__ import annotations
 import re
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from pathlib import Path
 
 PENDING_DEPENDENCY = "pending_dependency"
 # A GTest of a C++-only language property (see legacy_not_applicable); it has no Rust side either.
@@ -90,6 +91,18 @@ def runnable_rows(rows: Sequence[Mapping[str, object]]) -> list[Mapping[str, obj
 def implemented_classes(api_rows: Sequence[Mapping[str, object]]) -> set[str]:
     """C++ classes with an implemented ledger record; implemented_classes(ledger['api'])."""
     return {str(row["upstream_id"]) for row in api_rows if row.get("status") == "implemented" and CPP_CLASS.fullmatch(str(row.get("upstream_id")))}
+
+
+LOCAL_INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"/\\]+)"', re.M)
+
+
+def source_with_fixtures(path: Path) -> str:
+    """A GTest source followed by the local fixture headers it includes (`#include "X.pxx"` next to
+    it), where a test may reach its blocking class (TKBO's BOPTest_Utilities::CreateBlend builds a
+    BRepFilletAPI_MakeFillet); source_with_fixtures(occt/'src/.../BRepAlgoAPI_Fuse_Test.cxx')."""
+    text = path.read_text()
+    headers = [path.parent/name for name in LOCAL_INCLUDE.findall(text)]
+    return "\n".join([text, *(header.read_text() for header in headers if header.is_file())])
 
 
 def require_blockers_in_source(case: PendingDependencyCase, text: str) -> None:

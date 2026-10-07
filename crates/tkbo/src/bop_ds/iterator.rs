@@ -1,9 +1,11 @@
 //! AABB candidate-pair preparation for Boolean interference algorithms.
-use super::{DataStructure, IndexRange, Pair};
+use super::{DataStructure, IndexRange, Pair, ShapeInfo};
 mod extended;
+mod self_interference;
 use crate::int_tools::Context;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
+pub use self_interference::BOPDSIteratorSI;
 
 #[derive(Clone, Copy)]
 struct PreparationOptions<'a> {
@@ -49,7 +51,7 @@ impl BOPDSIterator {
             check_obb,
             fuzzy,
         };
-        let candidates = self.candidate_pairs(structure)?;
+        let candidates = self.candidate_pairs(structure, ShapeInfo::has_brep)?;
         let mut candidate_index = 0;
         for range_index in 0..structure.nb_ranges() {
             let range = structure.range(range_index)?;
@@ -129,12 +131,18 @@ impl BOPDSIterator {
         self.length = 0;
     }
 
-    fn candidate_pairs(&self, structure: &DataStructure) -> Result<Vec<Pair>, Failure> {
+    /// The sorted box-overlapping pairs of the source shapes that `selected` keeps: the shapes
+    /// with a B-rep for `Intersect`, the interfering ones for `BOPDS_IteratorSI::Intersect`.
+    fn candidate_pairs(
+        &self,
+        structure: &DataStructure,
+        selected: fn(&ShapeInfo) -> bool,
+    ) -> Result<Vec<Pair>, Failure> {
         let mut boxes = crate::bop_tools::BoxSet::default();
         boxes.set_size(structure.nb_source_shapes() as usize);
         for index in 0..structure.nb_source_shapes() {
             let info = structure.shape_info(index)?;
-            if info.has_brep() {
+            if selected(info) {
                 boxes.add(index, rustycad_tkmath::bnd::box3_to_bvh(info.box_bounds())?);
             }
         }
@@ -248,39 +256,12 @@ fn stored_shape_type(types: &[ShapeEnum], index: i32) -> Result<ShapeEnum, Failu
     })
 }
 
+/// The interference list of two shape types, None for a pair that never interferes.
 fn interference_index(first: ShapeEnum, second: ShapeEnum) -> Option<usize> {
-    let first = interference_rank(first);
-    let second = interference_rank(second);
-    let code = second * 10 + first;
-    match code {
-        77 => Some(0),
-        76 | 67 => Some(1),
-        66 => Some(2),
-        74 | 47 => Some(3),
-        64 | 46 => Some(4),
-        44 => Some(5),
-        72 | 27 => Some(6),
-        62 | 26 => Some(7),
-        42 | 24 => Some(8),
-        22 => Some(9),
-        _ => None,
-    }
+    usize::try_from(super::tools::type_pair_to_integer(first, second)).ok()
 }
 
-fn interference_rank(shape_type: ShapeEnum) -> i32 {
-    shape_rank(shape_type)
-}
-
+/// The rank of a shape type (`BOPDS_Tools::TypeToInteger`).
 fn shape_rank(shape_type: ShapeEnum) -> i32 {
-    match shape_type {
-        ShapeEnum::Compound => 0,
-        ShapeEnum::CompSolid => 1,
-        ShapeEnum::Solid => 2,
-        ShapeEnum::Shell => 3,
-        ShapeEnum::Face => 4,
-        ShapeEnum::Wire => 5,
-        ShapeEnum::Edge => 6,
-        ShapeEnum::Vertex => 7,
-        ShapeEnum::Shape => 8,
-    }
+    super::tools::type_to_integer(shape_type)
 }

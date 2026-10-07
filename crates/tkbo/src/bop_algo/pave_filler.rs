@@ -1,4 +1,6 @@
 //! Native `BOPAlgo_PaveFiller::Init` state and broad-phase preparation.
+#[path = "pave_filler/degenerated.rs"]
+mod degenerated;
 #[path = "pave_filler/edge_edge.rs"]
 mod edge_edge;
 #[path = "pave_filler/edge_face.rs"]
@@ -15,24 +17,53 @@ mod face_face_task;
 #[cfg(test)]
 #[path = "pave_filler/face_face_task_tests.rs"]
 mod face_face_task_tests;
+#[path = "pave_filler/make_blocks.rs"]
+mod make_blocks;
+#[path = "pave_filler/pcurves.rs"]
+mod pcurves;
+#[path = "pave_filler/perform.rs"]
+mod perform;
+#[path = "pave_filler/sd_updates.rs"]
+mod sd_updates;
 #[cfg(test)]
 #[path = "pave_filler/section_attribute_tests.rs"]
 mod section_attribute_tests;
+#[path = "pave_filler/self_interference.rs"]
+mod self_interference;
 #[path = "pave_filler/shrunk_data.rs"]
 mod shrunk_data;
-#[path = "pave_filler/split_blocks.rs"]
-mod split_blocks;
+#[path = "pave_filler/split_edges.rs"]
+mod split_edges;
 #[path = "pave_filler/vertex_edge.rs"]
 mod vertex_edge;
 #[path = "pave_filler/vertex_face.rs"]
 mod vertex_face;
 #[path = "pave_filler/vertex_vertex.rs"]
 mod vertex_vertex;
+use super::alerts::alert;
 use super::{AlertNullInputShapes, AlertTooFewArguments, Glue, Options, SectionAttribute};
-use crate::{bop_ds::BOPDSIterator, bop_ds::DataStructure, int_tools::Context};
+use crate::{
+    bop_ds::{BOPDSIterator, DataStructure, Pair, PaveBlockHandle},
+    int_tools::Context,
+};
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::{message::AlertHandle, ncollection::List, standard::Handle};
-use std::sync::Arc;
+use rustycad_tkernel::{
+    ncollection::{DataMap, List, Map as IndexMap},
+    standard::Handle,
+};
+use std::collections::HashMap;
+
+/// `BOPAlgo_PaveFiller::EdgeRangeDistance`: the distance of an edge range to a face that it
+/// does not intersect; `EdgeRangeDistance { first: 0., last: 1., distance: 0.5 }`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct EdgeRangeDistance {
+    /// First parameter of the range.
+    pub first: f64,
+    /// Last parameter of the range.
+    pub last: f64,
+    /// Minimal distance between the range and the face.
+    pub distance: f64,
+}
 
 /// `BOPAlgo_PaveFiller` through data-structure and iterator preparation.
 /// Boolean intersection stages are not attached yet; `filler.initialize()?` prepares candidates.
@@ -47,6 +78,9 @@ pub struct BOPAlgoPaveFiller {
     avoid_build_pcurve: bool,
     is_primary: bool,
     vertices_to_avoid_extension: Vec<i32>,
+    increased_ss: IndexMap<i32>,
+    fpb_done: HashMap<i32, Vec<PaveBlockHandle>>,
+    distances: DataMap<Pair, Vec<EdgeRangeDistance>>,
     section_attribute: SectionAttribute,
 }
 
@@ -70,6 +104,9 @@ impl BOPAlgoPaveFiller {
             avoid_build_pcurve: false,
             is_primary: true,
             vertices_to_avoid_extension: Vec::new(),
+            increased_ss: IndexMap::new(1),
+            fpb_done: HashMap::new(),
+            distances: DataMap::default(),
             section_attribute: SectionAttribute::new(),
         }
     }
@@ -113,6 +150,7 @@ impl BOPAlgoPaveFiller {
         self.options.clear();
         self.data_structure = None;
         self.iterator = None;
+        self.increased_ss.clear(false);
     }
 
     /// Borrows the prepared data structure when initialization reached that stage.
@@ -130,6 +168,12 @@ impl BOPAlgoPaveFiller {
     /// `filler.context().is_some()`.
     pub fn context(&self) -> Option<&Context> {
         self.context.get()
+    }
+
+    /// The shared geometric context (`Context`), null before `initialize`;
+    /// `filler.context_handle().is_null()`.
+    pub fn context_handle(&self) -> Handle<Context> {
+        self.context.clone()
     }
 
     /// Borrows prepared AABB/OBB candidates; `filler.iterator().is_some()`.
@@ -188,6 +232,11 @@ impl BOPAlgoPaveFiller {
         &self.vertices_to_avoid_extension
     }
 
+    /// Reads sub-shapes whose tolerance grew during the operation; `filler.increased_ss()`.
+    pub fn increased_ss(&self) -> &IndexMap<i32> {
+        &self.increased_ss
+    }
+
     /// Borrows inherited algorithm options; `filler.options().fuzzy_value()`.
     pub fn options(&self) -> &Options {
         &self.options
@@ -210,7 +259,11 @@ impl BOPAlgoPaveFiller {
         true
     }
 
-    fn initialize_data_structure(&mut self) -> Result<(), rustycad_tkernel::standard::Failure> {
+    /// A new data structure over the arguments, initialized with the fuzzy value (step 1 of
+    /// `Init`, shared by `BOPAlgo_CheckerSI::Init`).
+    pub(super) fn initialize_data_structure(
+        &mut self,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
         let arguments: Vec<Shape> = self.arguments.iter().cloned().collect();
         self.data_structure = Some(DataStructure::default());
         let structure = self
@@ -243,6 +296,17 @@ impl BOPAlgoPaveFiller {
         Ok(())
     }
 
+    /// Installs the context and the prepared broad-phase iterator (steps 2 and 3 of `Init`)
+    /// of a derived filler; `filler.install_context_and_iterator(context, iterator)`.
+    pub(super) fn install_context_and_iterator(
+        &mut self,
+        context: Handle<Context>,
+        iterator: BOPDSIterator,
+    ) {
+        self.context = context;
+        self.iterator = Some(iterator);
+    }
+
     fn set_non_destructive_from_arguments(
         &mut self,
     ) -> Result<(), rustycad_tkernel::standard::Failure> {
@@ -259,6 +323,11 @@ impl BOPAlgoPaveFiller {
     }
 }
 
-fn alert<T: rustycad_tkernel::message::Alert + 'static>(value: T) -> AlertHandle {
-    Arc::new(value)
+/// The failure of a stage run before `initialize` built the data structure.
+fn missing_structure() -> rustycad_tkernel::standard::Failure {
+    rustycad_tkernel::standard::Failure::with_type(
+        "Standard_NullObject",
+        "BOPAlgo_PaveFiller: data structure is None; expected initialize() to have run",
+        "",
+    )
 }

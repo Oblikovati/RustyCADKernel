@@ -5,7 +5,7 @@ use std::fmt::Write;
 use std::sync::{Arc, Mutex};
 
 /// `BOPDS_CommonBlock`; groups coincident edge intervals and incident faces.
-#[derive(Default)]
+#[derive(Debug, Default)]
 pub struct CommonBlock {
     pave_blocks: Vec<PaveBlockHandle>,
     faces: Vec<i32>,
@@ -14,6 +14,21 @@ pub struct CommonBlock {
 
 /// Shared ownership mirrors an OCCT handle to `BOPDS_CommonBlock`.
 pub type CommonBlockHandle = Arc<Mutex<CommonBlock>>;
+
+/// Native `std::hash<occ::handle<BOPDS_CommonBlock>>`: common blocks keyed by handle identity.
+/// `IndexedDataMap::with_hasher(CommonBlockHandleIdentity, 1)`.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct CommonBlockHandleIdentity;
+
+impl rustycad_tkernel::ncollection::HashPolicy<CommonBlockHandle> for CommonBlockHandleIdentity {
+    fn hash(&self, block: &CommonBlockHandle) -> usize {
+        Arc::as_ptr(block) as usize
+    }
+
+    fn equal(&self, first: &CommonBlockHandle, second: &CommonBlockHandle) -> bool {
+        Arc::ptr_eq(first, second)
+    }
+}
 
 impl CommonBlock {
     /// Creates an empty group; `CommonBlock::default().tolerance() == 0.0`.

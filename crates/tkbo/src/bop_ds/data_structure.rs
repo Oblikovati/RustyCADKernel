@@ -1,7 +1,8 @@
 //! Shape storage and the ported topology-preparation slice of `BOPDS_DS::Init`.
 use super::{
-    CommonBlockHandle, FaceInfo, IndexRange, InterfEE, InterfEF, InterfFF, InterfVE, InterfVF,
-    InterfVV, Pair, Pave, PaveBlock, PaveBlockHandle, ShapeInfo, VertexIndexSet, pave_block_handle,
+    CommonBlockHandle, FaceInfo, IndexRange, InterfEE, InterfEF, InterfEZ, InterfFF, InterfFZ,
+    InterfVE, InterfVF, InterfVV, InterfVZ, InterfZZ, Pair, Pave, PaveBlock, PaveBlockHandle,
+    ShapeInfo, VertexIndexSet, pave_block_handle,
 };
 use rustycad_tkbrep::topods::{Edge, Face, Shape, ShapeIterator, Vertex};
 use rustycad_tkbrep::toptools::ShapeMapHasher;
@@ -20,6 +21,9 @@ use std::sync::Arc;
 
 mod face_classification;
 mod face_classification_in;
+mod face_queries;
+pub use face_queries::SubShapesOnIn;
+mod pave_block_updates;
 mod same_domain;
 
 /// The shape and argument storage shared by Boolean operation algorithms.
@@ -40,6 +44,10 @@ pub struct DataStructure {
     interf_ee: DynamicArray<InterfEE>,
     interf_ef: DynamicArray<InterfEF>,
     interf_ff: DynamicArray<InterfFF>,
+    interf_vz: DynamicArray<InterfVZ>,
+    interf_ez: DynamicArray<InterfEZ>,
+    interf_fz: DynamicArray<InterfFZ>,
+    interf_zz: DynamicArray<InterfZZ>,
     interference_table: Map<Pair>,
     interfered_shapes: Map<i32>,
     same_domain_vertices: DataMap<i32, i32>,
@@ -243,6 +251,11 @@ impl DataStructure {
         &mut self.interf_vf
     }
 
+    /// Borrows vertex/face records in insertion order; `ds.interf_vf_records().len()`.
+    pub fn interf_vf_records(&self) -> &DynamicArray<InterfVF> {
+        &self.interf_vf
+    }
+
     /// Mutably borrows edge/edge records; `ds.interf_ee().append(InterfEE::default())`.
     pub fn interf_ee(&mut self) -> &mut DynamicArray<InterfEE> {
         &mut self.interf_ee
@@ -263,6 +276,11 @@ impl DataStructure {
     /// `ds.interf_ef_records().iter()`.
     pub fn interf_ef_records(&self) -> &DynamicArray<InterfEF> {
         &self.interf_ef
+    }
+
+    /// Borrows face/face records in insertion order; `ds.interf_ff_records().len()`.
+    pub fn interf_ff_records(&self) -> &DynamicArray<InterfFF> {
+        &self.interf_ff
     }
 
     /// Mutably borrows face/face records; `ds.interf_ff().append(InterfFF::default())`.
@@ -405,6 +423,12 @@ impl DataStructure {
         self.interf_ef.clear(false);
         self.interf_ff.clear(false);
         self.same_domain_vertices.clear(false);
+        self.interference_table.clear(false);
+        self.interfered_shapes.clear(false);
+        self.interf_vz.clear(false);
+        self.interf_ez.clear(false);
+        self.interf_fz.clear(false);
+        self.interf_zz.clear(false);
         self.source_shape_count = 0;
         if let Some(indices) = &mut self.shape_indices {
             indices.clear(false);
@@ -783,32 +807,22 @@ impl DataStructure {
         block: &mut PaveBlock,
     ) -> Result<(), Failure> {
         for vertex_index in vertex_indices {
-            self.append_endpoint_pave(edge_index, *vertex_index, edge, block, false)?;
-        }
-        if let [vertex_index] = vertex_indices {
-            self.append_endpoint_pave(edge_index, *vertex_index, edge, block, true)?;
-        }
-        Ok(())
-    }
-
-    fn append_endpoint_pave(
-        &self,
-        edge_index: i32,
-        vertex_index: i32,
-        edge: &Edge,
-        block: &mut PaveBlock,
-        reverse_vertex: bool,
-    ) -> Result<(), Failure> {
-        let mut vertex = Vertex::unchecked(self.shape(vertex_index)?.clone());
-        if reverse_vertex {
-            vertex = Vertex::unchecked(vertex.reversed());
-        }
-        let parameter = endpoint_parameter(self, vertex_index, &vertex, edge)?;
-        let pave = Pave::new(vertex_index, parameter);
-        if self.shape_info(edge_index)?.has_flag() || reverse_vertex {
-            block.append_ext_pave1(pave);
-        } else {
-            block.append_ext_pave(pave);
+            let vertex = Vertex::unchecked(self.shape(*vertex_index)?.clone());
+            let parameter = endpoint_parameter(self, *vertex_index, &vertex, edge)?;
+            let pave = Pave::new(self.same_domain_index(*vertex_index), parameter);
+            if self.shape_info(edge_index)?.has_flag() {
+                // A degenerated edge receives its paves unconditionally.
+                block.append_ext_pave1(pave);
+            } else {
+                block.append_ext_pave(pave);
+            }
+            // A closed edge with one shared vertex also needs the pave of its other end; the
+            // native code always reads it with BRep_Tool::Parameter of the reversed vertex.
+            if vertex_indices.len() == 1 {
+                let reversed = Vertex::unchecked(vertex.reversed());
+                let parameter = BRepTool::parameter(&reversed, edge)?;
+                block.append_ext_pave1(Pave::new(pave.index(), parameter));
+            }
         }
         Ok(())
     }
@@ -824,7 +838,8 @@ impl DataStructure {
             let vertex_index = self.index(&vertex_shape);
             let vertex = Vertex::unchecked(vertex_shape);
             let parameter = endpoint_parameter(self, vertex_index, &vertex, edge)?;
-            block.append_ext_pave1(Pave::new(vertex_index, parameter));
+            let index = self.same_domain_index(vertex_index);
+            block.append_ext_pave1(Pave::new(index, parameter));
             vertices.next();
         }
         Ok(())

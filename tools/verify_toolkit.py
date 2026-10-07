@@ -26,7 +26,7 @@ from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
-                                       require_blockers_in_source, runnable_rows)
+                                       require_blockers_in_source, runnable_rows, source_with_fixtures)
 from legacy_not_applicable import not_applicable_rows
 
 # The whole numeric verifier of one toolkit (both probes over its full corpus) may run this
@@ -272,10 +272,11 @@ def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], job
 
 def pending_native_cases(source: Path, rows: list[dict]) -> dict[str, PendingDependencyCase]:
     """Pending-dependency declarations, whose unchanged native test must still run and pass;
-    each blocker must be named by its source; pending_native_cases(occt, rows)."""
+    each blocker must be named by its source or a local fixture header it includes;
+    pending_native_cases(occt, rows)."""
     pending = pending_dependency_rows(rows, set())
     for case in pending.values():
-        require_blockers_in_source(case, (source/case.source).read_text())
+        require_blockers_in_source(case, source_with_fixtures(source/case.source))
     return pending
 
 

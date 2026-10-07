@@ -3,7 +3,6 @@
 //! An edge interval between adjacent paves, plus inserted vertices and shrunk bounds.
 use super::Pave;
 use rustycad_tkmath::bnd::BoundingBox3;
-use std::cmp::Ordering;
 use std::collections::HashSet;
 use std::sync::{Arc, Mutex};
 
@@ -173,7 +172,8 @@ impl PaveBlock {
         if paves.len() < 2 {
             return;
         }
-        paves.sort_by(pave_order);
+        // libstdc++ std::sort: tie order of equal parameters is part of the native output.
+        rustycad_tkernel::stl::sort_by(&mut paves, |first, second| first.is_less(second));
         self.append_intervals(output, &paves);
     }
 
@@ -245,15 +245,4 @@ impl PaveBlock {
         self.pave2.dump(output)?;
         output.write_str(" }")
     }
-}
-
-/// Matches `BOPDS_Pave::IsLess`, where only the parameter participates in ordering.
-fn pave_order(first: &Pave, second: &Pave) -> Ordering {
-    if first.parameter() < second.parameter() {
-        return Ordering::Less;
-    }
-    if second.parameter() < first.parameter() {
-        return Ordering::Greater;
-    }
-    Ordering::Equal
 }

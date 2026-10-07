@@ -98,3 +98,54 @@ define_alert_with_shape!(
     AlertUnableToMakeClosedEdgeOnFace,
     "BOPAlgo_AlertUnableToMakeClosedEdgeOnFace"
 );
+
+/// The `TopoDS_AlertWithShape` part of a BOPAlgo alert carrying a shape
+/// (`occ::down_cast<TopoDS_AlertWithShape>`); `None` for the other alerts.
+pub(crate) fn alert_with_shape(
+    alert: &rustycad_tkernel::message::AlertHandle,
+) -> Option<&rustycad_tkbrep::topods::AlertWithShape> {
+    let any: &dyn std::any::Any = alert.as_ref();
+    macro_rules! with_shape {
+        ($($alert:ident),* $(,)?) => {
+            $(if let Some(found) = any.downcast_ref::<$alert>() {
+                return Some(&**found);
+            })*
+        };
+    }
+    with_shape!(
+        AlertBadPositioning,
+        AlertEmptyShape,
+        AlertNotSplittableEdge,
+        AlertRemovalOfIBForEdgesFailed,
+        AlertRemovalOfIBForFacesFailed,
+        AlertRemovalOfIBForMDimShapes,
+        AlertRemovalOfIBForSolidsFailed,
+        AlertSelfInterferingShape,
+        AlertShellSplitterFailed,
+        AlertTooSmallEdge,
+        AlertIntersectionOfPairOfShapesFailed,
+        AlertBuildingPCurveFailed,
+        AlertAcquiredSelfIntersection,
+        AlertUnsupportedType,
+        AlertUnableToRemoveTheFeature,
+        AlertSolidBuilderUnusedFaces,
+        AlertFaceBuilderUnusedEdges,
+        AlertUnableToOrientTheShape,
+        AlertUnknownShape,
+        AlertUnableToTrim,
+        AlertUnableToMakeIdentical,
+        AlertUnableToRepeat,
+        AlertUnableToMakePeriodic,
+        AlertUnableToGlue,
+        AlertShapeIsNotPeriodic,
+        AlertUnableToMakeClosedEdgeOnFace,
+    );
+    any.downcast_ref::<rustycad_tkbrep::topods::AlertWithShape>()
+}
+
+/// Wraps one alert for a report (`new BOPAlgo_Alert...`); `alert(AlertUserBreak)`.
+pub(crate) fn alert<T: rustycad_tkernel::message::Alert + 'static>(
+    value: T,
+) -> rustycad_tkernel::message::AlertHandle {
+    std::sync::Arc::new(value)
+}

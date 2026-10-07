@@ -1,212 +1,229 @@
-//! Vertex/face solvers run before their results mutate source vertices.
-use super::BOPAlgoPaveFiller;
-use crate::bop_algo::{AlertIntersectionOfPairOfShapesFailed, Glue};
-use crate::bop_ds::{DataStructure, InterfVF};
-use rustycad_tkbrep::{
-    brep::BRepBuilder,
-    topods::{Compound, Face, Vertex},
-};
-use rustycad_tkernel::{message::AlertHandle, ncollection::Map, standard::Failure};
+//! `BOPAlgo_PaveFiller_4.cxx`: vertex/face intersection and the treatment of EE vertices.
+use super::{BOPAlgoPaveFiller, Glue, missing_structure};
+use crate::bop_ds::{BOPDSSubIterator, InterfVF, Pair};
+use rustycad_tkbrep::topods::{Face, Vertex};
+use rustycad_tkernel::ncollection::{DataMap, List, Map};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use std::sync::Arc;
 
-#[path = "vertex_face/ee_vertices.rs"]
-mod ee_vertices;
-
-struct VertexFaceCandidate {
-    representative: i32,
+/// One prepared `BOPAlgo_VertexFace` solver and its computed result.
+struct VertexFaceSolver {
+    vertex: i32,
     face: i32,
-    originals: Map<i32>,
-}
-
-#[derive(Clone, Copy)]
-struct VertexFaceHit {
-    u: f64,
-    v: f64,
-    tolerance: f64,
+    flag: i32,
+    uv: (f64, f64),
+    new_tolerance: f64,
+    failed: bool,
 }
 
 impl BOPAlgoPaveFiller {
-    /// Intersects prepared vertex/face candidates and EE vertices; `filler.perform_vf()?`.
+    /// Intersects vertices with faces, recording VF interferences and the faces' In vertices,
+    /// then treats the vertices created by EE intersections (`PerformVF`); `filler.perform_vf()?`.
     pub fn perform_vf(&mut self) -> Result<(), Failure> {
-        let pairs = self.selected_vertex_face_pairs()?;
+        let pairs = self.iterator_pairs(ShapeEnum::Vertex, ShapeEnum::Face)?;
         if self.glue == Glue::Full {
-            return self.initialize_glued_faces(&pairs);
-        }
-        self.vf_structure()?
-            .interf_vf()
-            .set_increment(if pairs.is_empty() { 10 } else { pairs.len() });
-        let candidates = self.vertex_face_candidates(&pairs)?;
-        let hits = self.compute_vertex_faces(&candidates)?;
-        for (candidate, hit) in candidates.iter().zip(hits) {
-            if let Some(hit) = hit {
-                self.accept_vertex_face(candidate, hit)?;
+            // No vertex/face intersection in this mode: only the face records are initialized.
+            let structure = self.structure_mut()?;
+            for (vertex, face) in pairs {
+                if !structure.is_sub_shape(vertex, face)? {
+                    structure.change_face_info(face)?;
+                }
             }
+            return Ok(());
+        }
+        if pairs.is_empty() {
+            return self.treat_vertices_ee();
+        }
+        let mut grouped: DataMap<Pair, Map<i32>> = DataMap::default();
+        let mut solvers = Vec::new();
+        for (vertex, face) in pairs {
+            if let Some(solver) = self.vf_candidate(vertex, face, &mut grouped)? {
+                solvers.push(solver);
+            }
+        }
+        for solver in &mut solvers {
+            self.compute_vf_solver(solver)?;
+        }
+        for solver in &solvers {
+            self.apply_vf_solver(solver, &grouped)?;
         }
         self.treat_vertices_ee()
     }
 
-    fn compute_vertex_faces(
-        &mut self,
-        candidates: &[VertexFaceCandidate],
-    ) -> Result<Vec<Option<VertexFaceHit>>, Failure> {
-        candidates
-            .iter()
-            .map(|candidate| {
-                self.compute_vertex_face(candidate.representative, candidate.face, true)
-            })
-            .collect()
-    }
-
-    fn vf_structure(&mut self) -> Result<&mut DataStructure, Failure> {
-        self.data_structure.as_mut().ok_or_else(|| Failure::new(
-            "BOPAlgo_PaveFiller::PerformVF received absent DS; expected initialized data structure"))
-    }
-
-    fn selected_vertex_face_pairs(&mut self) -> Result<Vec<(i32, i32)>, Failure> {
-        let iterator = self.iterator.as_mut().ok_or_else(|| Failure::new(
-            "BOPAlgo_PaveFiller::PerformVF received absent iterator; expected initialized iterator"))?;
-        iterator.initialize(ShapeEnum::Vertex, ShapeEnum::Face);
-        let mut pairs = Vec::new();
-        while iterator.more() {
-            pairs.push(iterator.value()?);
-            iterator.next();
-        }
-        Ok(pairs)
-    }
-
-    fn initialize_glued_faces(&mut self, pairs: &[(i32, i32)]) -> Result<(), Failure> {
-        let ds = self.vf_structure()?;
-        for &(vertex, face) in pairs {
-            if !ds.shape_info(face)?.has_sub_shape(vertex) {
-                ds.change_face_info(face)?;
+    /// Classifies every vertex created by an EE intersection against the source faces it is
+    /// not On, adding VF interferences and In vertices (`TreatVerticesEE`).
+    /// `filler.treat_vertices_ee()?`.
+    pub fn treat_vertices_ee(&mut self) -> Result<(), Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let mut fence: Map<i32> = Map::new(100);
+        let mut vertices: List<i32> = List::default();
+        for record in structure.interf_ee_records().iter() {
+            if let Some(vertex) = record.get_index_new()
+                && fence.add(vertex)
+            {
+                vertices.append(vertex);
             }
+        }
+        if vertices.is_empty() {
+            return Ok(());
+        }
+        let mut faces: List<i32> = List::default();
+        for index in 0..structure.nb_source_shapes() {
+            if structure.shape_info(index)?.shape_type() == ShapeEnum::Face {
+                faces.append(index);
+            }
+        }
+        if faces.is_empty() {
+            return Ok(());
+        }
+        let pairs = subset_pairs(structure, &faces, &vertices)?;
+        for (vertex, face) in pairs {
+            self.treat_ee_vertex_on_face(vertex, face)?;
         }
         Ok(())
     }
 
-    fn vertex_face_candidates(
-        &mut self,
-        pairs: &[(i32, i32)],
-    ) -> Result<Vec<VertexFaceCandidate>, Failure> {
-        let ds = self.vf_structure()?;
-        let mut candidates = Vec::new();
-        for &(vertex, face) in pairs {
-            if ds.shape_info(face)?.has_sub_shape(vertex)
-                || ds.has_interference_between(vertex, face)
-            {
-                continue;
-            }
-            ds.change_face_info(face)?;
-            if !ds.has_interference_shape_subshapes(vertex, face)? {
-                group_vertex_face(&mut candidates, ds.same_domain_index(vertex), face, vertex);
-            }
-        }
-        Ok(candidates)
-    }
-
-    fn compute_vertex_face(
+    fn vf_candidate(
         &mut self,
         vertex: i32,
         face: i32,
-        warn: bool,
-    ) -> Result<Option<VertexFaceHit>, Failure> {
-        let ds = self.vf_structure()?;
-        let vertex = Vertex::unchecked(ds.shape(vertex)?.clone());
-        let face = Face::unchecked(ds.shape(face)?.clone());
-        let mut hit = VertexFaceHit {
-            u: 0.,
-            v: 0.,
-            tolerance: 0.,
-        };
-        let status = self
-            .context
-            .get()
-            .expect("initialized VF context")
-            .compute_vf(
-                &vertex,
-                &face,
-                &mut hit.u,
-                &mut hit.v,
-                &mut hit.tolerance,
-                self.options.fuzzy_value(),
-            );
-        match status {
-            Ok(0) => Ok(Some(hit)),
-            Ok(_) => Ok(None),
-            Err(_) if warn => {
-                self.warn_vertex_face(&vertex, &face)?;
-                Ok(None)
-            }
-            Err(failure) => Err(failure),
+        grouped: &mut DataMap<Pair, Map<i32>>,
+    ) -> Result<Option<VertexFaceSolver>, Failure> {
+        let structure = self.structure_mut()?;
+        if structure.is_sub_shape(vertex, face)? || structure.has_interference_between(vertex, face)
+        {
+            return Ok(None);
         }
+        structure.change_face_info(face)?;
+        if structure.has_interference_shape_subshapes(vertex, face)? {
+            return Ok(None);
+        }
+        let mut representative = vertex;
+        structure.has_shape_sd_into(vertex, &mut representative);
+        let key = Pair::new(representative, face);
+        if let Some(group) = grouped.change_seek(&key) {
+            group.add(vertex);
+            return Ok(None);
+        }
+        let mut group: Map<i32> = Map::new(1);
+        group.add(vertex);
+        grouped.bind(key, group);
+        Ok(Some(VertexFaceSolver {
+            vertex: representative,
+            face,
+            flag: -1,
+            uv: (-1., -1.),
+            new_tolerance: -1.,
+            failed: false,
+        }))
     }
 
-    fn warn_vertex_face(&self, vertex: &Vertex, face: &Face) -> Result<(), Failure> {
-        let builder = BRepBuilder::default();
-        let mut compound = Compound::default();
-        builder.make_compound(&mut compound);
-        let mut shape = compound.into_shape();
-        builder.add(&mut shape, &vertex.clone().into_shape())?;
-        builder.add(&mut shape, &face.clone().into_shape())?;
-        let alert: AlertHandle = Arc::new(AlertIntersectionOfPairOfShapesFailed::new(&shape));
-        self.options.add_warning(&alert);
+    fn compute_vf_solver(&self, solver: &mut VertexFaceSolver) -> Result<(), Failure> {
+        let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+        let vertex = Vertex::unchecked(structure.shape(solver.vertex)?.clone());
+        let face = Face::unchecked(structure.shape(solver.face)?.clone());
+        let context = self.context.get().ok_or_else(missing_structure)?;
+        let (u, v) = (&mut solver.uv.0, &mut solver.uv.1);
+        // An exception of ComputeVF becomes the solver's error; its flag stays -1.
+        match context.compute_vf(
+            &vertex,
+            &face,
+            u,
+            v,
+            &mut solver.new_tolerance,
+            self.options.fuzzy_value(),
+        ) {
+            Ok(flag) => solver.flag = flag,
+            Err(_) => solver.failed = true,
+        }
         Ok(())
     }
 
-    fn accept_vertex_face(
+    fn apply_vf_solver(
         &mut self,
-        candidate: &VertexFaceCandidate,
-        hit: VertexFaceHit,
+        solver: &VertexFaceSolver,
+        grouped: &DataMap<Pair, Map<i32>>,
     ) -> Result<(), Failure> {
-        let mut representative = candidate.representative;
-        for original in candidate.originals.iter() {
-            let ds = self.vf_structure()?;
-            append_vf_record(ds, *original, candidate.face, hit);
-            representative = self.update_vertex(*original, hit.tolerance)?;
-            let ds = self.vf_structure()?;
-            if ds.is_new_shape(representative) {
-                let last = ds.interf_vf().len() - 1;
-                ds.interf_vf()
-                    .change_value(last)
-                    .expect("newly appended VF record")
-                    .set_index_new(representative);
+        if solver.flag != 0 {
+            if solver.failed {
+                let structure = self.data_structure.as_ref().ok_or_else(missing_structure)?;
+                let vertex = structure.shape(solver.vertex)?.clone();
+                let face = structure.shape(solver.face)?.clone();
+                self.add_intersection_failed_warning(&vertex, &face)?;
+            }
+            return Ok(());
+        }
+        let originals: Vec<i32> = grouped
+            .find(&Pair::new(solver.vertex, solver.face))?
+            .iter()
+            .copied()
+            .collect();
+        let mut updated = solver.vertex;
+        for original in originals {
+            let structure = self.structure_mut()?;
+            let position = structure.interf_vf_records().len();
+            let record = structure.interf_vf().append(InterfVF::default());
+            record.set_indices(original, solver.face);
+            record.set_uv(solver.uv.0, solver.uv.1);
+            structure.add_interference(original, solver.face);
+            updated = self.update_vertex(original, solver.new_tolerance)?;
+            let structure = self.structure_mut()?;
+            if structure.is_new_shape(updated) {
+                structure.interf_vf()[position].set_index_new(updated);
             }
         }
-        self.vf_structure()?
-            .change_face_info(candidate.face)?
+        self.structure_mut()?
+            .change_face_info(solver.face)?
             .change_vertices_in()
-            .add(representative);
+            .add(updated);
+        Ok(())
+    }
+
+    fn treat_ee_vertex_on_face(&mut self, vertex: i32, face: i32) -> Result<(), Failure> {
+        let fuzzy = self.options.fuzzy_value();
+        let context = self.context.clone();
+        let structure = self.structure_mut()?;
+        if structure
+            .change_face_info(face)?
+            .vertices_on()
+            .contains(vertex)
+        {
+            return Ok(());
+        }
+        let shape = Vertex::unchecked(structure.shape(vertex)?.clone());
+        let face_shape = Face::unchecked(structure.shape(face)?.clone());
+        let (mut u, mut v, mut dummy) = (0., 0., 0.);
+        let context = context.get().ok_or_else(missing_structure)?;
+        if context.compute_vf(&shape, &face_shape, &mut u, &mut v, &mut dummy, fuzzy)? != 0 {
+            return Ok(());
+        }
+        let record = structure.interf_vf().append(InterfVF::default());
+        record.set_indices(vertex, face);
+        record.set_uv(u, v);
+        structure.add_interference(vertex, face);
+        structure
+            .change_face_info(face)?
+            .change_vertices_in()
+            .add(vertex);
         Ok(())
     }
 }
 
-fn group_vertex_face(
-    candidates: &mut Vec<VertexFaceCandidate>,
-    representative: i32,
-    face: i32,
-    original: i32,
-) {
-    if let Some(candidate) = candidates
-        .iter_mut()
-        .find(|candidate| candidate.representative == representative && candidate.face == face)
-    {
-        candidate.originals.add(original);
-        return;
+fn subset_pairs(
+    structure: &crate::bop_ds::DataStructure,
+    faces: &List<i32>,
+    vertices: &List<i32>,
+) -> Result<Vec<(i32, i32)>, Failure> {
+    let mut iterator = BOPDSSubIterator::new();
+    iterator.set_ds(Some(structure));
+    iterator.set_subset1(faces);
+    iterator.set_subset2(vertices);
+    iterator.prepare()?;
+    iterator.initialize();
+    let mut pairs = Vec::new();
+    while iterator.more() {
+        pairs.push(iterator.value()?);
+        iterator.next();
     }
-    let mut originals = Map::default();
-    originals.add(original);
-    candidates.push(VertexFaceCandidate {
-        representative,
-        face,
-        originals,
-    });
-}
-
-fn append_vf_record(ds: &mut DataStructure, vertex: i32, face: i32, hit: VertexFaceHit) {
-    let mut record = InterfVF::default();
-    record.set_indices(vertex, face);
-    record.set_uv(hit.u, hit.v);
-    ds.interf_vf().append(record);
-    ds.add_interference(vertex, face);
+    Ok(pairs)
 }
