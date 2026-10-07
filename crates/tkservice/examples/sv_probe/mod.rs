@@ -12,6 +12,7 @@ pub mod pbr;
 pub mod pixel;
 pub mod shader;
 pub mod texture;
+pub mod tpers;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
 // prints the same token stream (tools/oracle/tkservice_probe.cxx includes
 // tkgeomalgo_probe_common.cxx likewise). Each package uses a subset of them.

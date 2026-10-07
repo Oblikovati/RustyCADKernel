@@ -9,7 +9,7 @@ use rustycad_tkservice::graphic3d::{
     Graphic3dCameraTile,
 };
 
-fn mat4<T: Copy + Into<f64>>(matrix: &Mat4<T>) {
+pub fn mat4<T: Copy + Into<f64>>(matrix: &Mat4<T>) {
     for row in 0..4 {
         for column in 0..4 {
             real(matrix.get_value(row, column).into());

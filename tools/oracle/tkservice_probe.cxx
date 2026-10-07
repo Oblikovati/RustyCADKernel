@@ -36,6 +36,7 @@
 #include "tkservice_probe_camera.cxx"
 #include "tkservice_probe_clip.cxx"
 #include "tkservice_probe_light.cxx"
+#include "tkservice_probe_tpers.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Aspect grids (tkservice_probe_grid.cxx)
  {"sv_rgrid", sv_rgrid_case},
@@ -76,6 +77,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Graphic3d_CLight and Graphic3d_LightSet (tkservice_probe_light.cxx)
  {"sv_light", sv_light_case},
  {"sv_light_set", sv_light_set_case},
+ // Graphic3d_TransformPers and Graphic3d_TransformUtils (tkservice_probe_tpers.cxx)
+ {"sv_tpers", sv_tpers_case},
+ {"sv_tutils", sv_tutils_case},
 };
 int main() {
  std::string line;

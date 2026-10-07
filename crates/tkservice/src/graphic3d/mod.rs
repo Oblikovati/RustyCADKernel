@@ -66,6 +66,10 @@ mod texture_map;
 mod texture_params;
 mod texture_root;
 mod texture_set;
+mod transform_pers;
+mod transform_pers_apply;
+mod transform_pers_scaled;
+pub mod transform_utils;
 mod view_affinity;
 
 pub use array_classes::{
@@ -165,4 +169,14 @@ pub use texture_root::{
     graphic3d_textures_folder,
 };
 pub use texture_set::Graphic3dTextureSet;
+pub use transform_pers::{
+    Graphic3dTransformPers, Graphic3dTransformPersBase, Graphic3dTransformPersMembers,
+    Graphic3dTransformPersSource, Graphic3dTransformPersState, graphic3d_transform_pers_dump_json,
+};
+pub use transform_pers_apply::{
+    Graphic3dTransformPersApply, graphic3d_transform_pers_compute_apply,
+    graphic3d_transform_pers_persistent_scale,
+};
+pub use transform_pers_scaled::Graphic3dTransformPersScaledAbove;
+pub use transform_utils::Graphic3dTransformScalar;
 pub use view_affinity::Graphic3dViewAffinity;

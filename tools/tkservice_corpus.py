@@ -37,3 +37,5 @@ def append_tkservice_requests(requests: list[str]) -> None:
     __import__('tkservice_corpus_clip').append_clip_requests(requests)
     # Graphic3d_CLight and Graphic3d_LightSet (tkservice_corpus_light.py)
     __import__('tkservice_corpus_light').append_light_requests(requests)
+    # Graphic3d_TransformPers and Graphic3d_TransformUtils (tkservice_corpus_tpers.py)
+    __import__('tkservice_corpus_tpers').append_tpers_requests(requests)

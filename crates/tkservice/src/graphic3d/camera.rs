@@ -225,6 +225,16 @@ impl Graphic3dCamera {
         camera.copy(other);
         camera
     }
+    /// The implicit copy constructor (`new Graphic3d_Camera(*camera)`): every member as it is,
+    /// including the cached matrices and the state counters. It differs from
+    /// [`Self::from_camera`], whose `Copy` goes through the setters (a perspective camera's
+    /// scale is then recomputed from its distance). Example: `camera.copy_members()`.
+    pub fn copy_members(&self) -> Self {
+        Self {
+            transient: StandardTransient::default(),
+            state: SharedState::new(self.read(Clone::clone)),
+        }
+    }
     /// Reads the state.
     pub(crate) fn read<R>(&self, read: impl FnOnce(&Graphic3dCameraState) -> R) -> R {
         read(&self.state.read())

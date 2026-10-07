@@ -461544,6 +461544,460 @@
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCLight::to_cast_shadows",
       "status": "implemented",
       "notes": "Graphic3d light mapping: the light and light-set fields sit behind the handle's shared lock, so accessors return values; the type and range checks (Standard_ProgramError_Raise_if, Standard_OutOfRange_Raise_if, active in the oracle build) return the named failures with the offending value; the packed parameters, color, direction, revision, CopyFrom, the set counters, ambient color, keys, filtered iteration and RemoveFromIndex reordering are compared bit for bit by the sv_light and sv_light_set native probes. Protected field, private shared state."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsZoomOrRotate(Graphic3d_TransModeFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::is_zoom_or_rotate_mode",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsTrihedronOr2d(Graphic3d_TransModeFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::is_trihedron_or_2d_mode",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsOrthoPers(Graphic3d_TransModeFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::is_ortho_pers_mode",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsAxial(Graphic3d_TransModeFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::is_axial_mode",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Graphic3d_TransformPers(const Graphic3d_TransModeFlags)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::new",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPers::new",
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPersBase::new"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Graphic3d_TransformPers(const Graphic3d_TransModeFlags,const gp_Pnt &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::with_point",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPers::with_point",
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPersBase::with_point"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Graphic3d_TransformPers(const Graphic3d_TransModeFlags,const Aspect_TypeOfTriedronPosition,const NCollection_Vec2<int> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPers::with_corner",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPers::with_corner",
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPersBase::with_corner"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsZoomOrRotate() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::is_zoom_or_rotate",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsTrihedronOr2d() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::is_trihedron_or_2d",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsOrthoPers() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::is_ortho_pers",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::IsAxial() const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::is_axial",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Mode",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::mode",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Flags",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::flags",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::SetPersistence(const Graphic3d_TransModeFlags,const gp_Pnt &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::set_persistence_point",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::SetPersistence(const Graphic3d_TransModeFlags,const Aspect_TypeOfTriedronPosition,const NCollection_Vec2<int> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::set_persistence_corner",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::AnchorPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::anchor_point",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::SetAnchorPoint",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::set_anchor_point",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Corner2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::corner_2d",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::SetCorner2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::set_corner_2d",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Offset2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::offset_2d",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::SetOffset2d",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersMembers::set_offset_2d",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::persistentScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::persistent_scale",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::persistent_scale",
+        "rustycad_tkservice::graphic3d::graphic3d_transform_pers_persistent_scale"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe. The camera is passed by reference (a null handle cannot reach it)."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::persistentRotationMatrix",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::persistent_rotation_matrix",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Apply(const occ::handle<Graphic3d_Camera> &,const NCollection_Mat4<T> &,const NCollection_Mat4<T> &,const int,const int,Bnd_Box &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersApply::apply_bnd",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe. Only the double instantiation compiles natively (Bnd_Box::Get takes doubles)."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Apply(const occ::handle<Graphic3d_Camera> &,const NCollection_Mat4<T> &,const NCollection_Mat4<T> &,const int,const int,BVH_Box<T, 3> &) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersApply::apply_bvh",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Compute",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersApply::compute",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::Apply(const occ::handle<Graphic3d_Camera> &,const NCollection_Mat4<T> &,NCollection_Mat4<T> &,const int,const int,const gp_Pnt *,const bool) const",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersApply::apply_world_view",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe. A null camera raises Standard_ProgramError (natively a null dereference); a singular projection raises the Standard_ConstructionError of NCollection_Mat4::Inverted()."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::ComputeApply",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::compute_apply",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::compute_apply",
+        "rustycad_tkservice::graphic3d::graphic3d_transform_pers_compute_apply"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe. A camera direction parallel to its up in the trihedron branch raises the Standard_ConstructionError of gp_Dir::Crossed, as natively."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPers::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPers.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::dump_json",
+      "rust_items": [
+        "rustycad_tkservice::graphic3d::Graphic3dTransformPersSource::dump_json",
+        "rustycad_tkservice::graphic3d::graphic3d_transform_pers_dump_json"
+      ],
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe. Bytes of the union that the native code never writes dump as zero here (natively uninitialised)."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPersScaledAbove",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPersScaledAbove.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersScaledAbove",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPersScaledAbove::Graphic3d_TransformPersScaledAbove",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPersScaledAbove.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersScaledAbove::new",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformPersScaledAbove::persistentScale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformPersScaledAbove.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dTransformPersScaledAbove",
+      "status": "implemented",
+      "notes": "Graphic3d transform persistence mapping: Graphic3d_TransformPers is a trait over an embedded base (Graphic3dTransformPersSource with the virtual persistentScale, persistentRotationMatrix, ComputeApply and DumpJson; the non-virtual members in Graphic3dTransformPersMembers and the templated Apply/Compute in Graphic3dTransformPersApply, generic over f32 and f64); the parameter union keeps both views over the same bytes; the camera copies are the member-wise copy constructor (Graphic3dCamera::copy_members); the wrong-mode exceptions return Standard_ProgramError with the mode; ComputeApply, Apply in double and float, Compute, the box members and the persistent scale are compared bit for bit by the sv_tpers native probe. The Graphic3dTransformPersSource::persistent_scale override."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::MatrixType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplate"
+      },
+      "rust_item": "rustycad_tkernel::ncollection::Mat4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::MatrixType<double>::Mat4",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::MatrixType<float>::Mat4",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Mat4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "cpp_selector": {
+        "kind": "ClassTemplate"
+      },
+      "rust_item": "rustycad_tkernel::ncollection::Vec4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType<double>::Vec2",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType<double>::Vec3",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType<double>::Vec4",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType<float>::Vec2",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType<float>::Vec3",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::VectorType<float>::Vec4",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Convert",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::convert",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Ortho",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::ortho",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Ortho2D",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::ortho_2d",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Project",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::project",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::UnProject",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::un_project",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::ConstructRotate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::construct_rotate",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Rotate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::rotate",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Scale",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::scale",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::Translate",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::translate",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
+    },
+    {
+      "upstream_id": "Graphic3d_TransformUtils::ScaleFactor",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_TransformUtils.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::transform_utils::scale_factor",
+      "status": "implemented",
+      "notes": "Graphic3d_TransformUtils mapping: the namespace is the public module graphic3d::transform_utils with free functions generic over f32 and f64 (Graphic3dTransformScalar supplies the C math of each type); MatrixType/VectorType are the plain Mat4/Vec2/Vec3/Vec4 types; the multi-value inputs and outputs are arrays and Option; every helper and Convert is compared bit for bit by the sv_tutils native probe."
     }
   ],
   "tests": [

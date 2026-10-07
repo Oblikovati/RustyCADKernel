@@ -1,6 +1,7 @@
 //! `Graphic3d_Flipper`: the transformation that keeps a reference plane (and its text or
 //! labels) readable by flipping it when the view looks at it from behind or upside down.
 use super::Graphic3dCameraScalar;
+use super::bnd_box::{apply_on_bnd_box, transform_box_corners};
 use crate::json_dump::{class_begin, field_dumped};
 use rustycad_tkernel::ncollection::{Mat4, Vec3, Vec4};
 use rustycad_tkernel::standard::dump::DumpStream;
@@ -130,24 +131,7 @@ impl Graphic3dFlipper {
         if flip.is_identity() || !bounds.is_valid() {
             return;
         }
-        let (min, max) = (*bounds.corner_min(), *bounds.corner_max());
-        let one = T::from_f64(1.0);
-        let corners = [
-            (min.x, min.y, min.z),
-            (min.x, min.y, max.z),
-            (min.x, max.y, min.z),
-            (min.x, max.y, max.z),
-            (max.x, min.y, min.z),
-            (max.x, min.y, max.z),
-            (max.x, max.y, min.z),
-            (max.x, max.y, max.z),
-        ];
-        bounds.clear();
-        for (x, y, z) in corners {
-            let corner = flip * Vec4::new(x, y, z, one);
-            let corner = corner / corner.w;
-            bounds.add(&xyz(corner));
-        }
+        transform_box_corners(&flip, bounds);
     }
     /// `Apply(theWorldView, Bnd_Box&)`: the same on a `Bnd_Box` (void boxes are left).
     /// Example: `flipper.apply_bnd(&world_view, &mut bounds)?`.
@@ -156,16 +140,10 @@ impl Graphic3dFlipper {
         world_view: &Mat4<f64>,
         bounds: &mut BoundingBox3,
     ) -> Result<(), Failure> {
-        if bounds.is_void() {
-            return Ok(());
-        }
-        let [x0, y0, z0, x1, y1, z1] = bounds.get()?;
-        let mut bvh = BvhBox::from_corners(Vec3::new(x0, y0, z0), Vec3::new(x1, y1, z1));
-        self.apply_bvh(world_view, &mut bvh);
-        let (min, max) = (bvh.corner_min(), bvh.corner_max());
-        *bounds = BoundingBox3::default();
-        bounds.update_bounds([min.x, min.y, min.z], [max.x, max.y, max.z]);
-        Ok(())
+        apply_on_bnd_box(bounds, |bvh| {
+            self.apply_bvh(world_view, bvh);
+            Ok(())
+        })
     }
     /// `DumpJson`; `flipper.dump_json(&mut stream, -1)?`.
     pub fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
