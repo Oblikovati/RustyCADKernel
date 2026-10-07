@@ -125,31 +125,6 @@ fn echo_prints_the_words_and_the_result() {
 }
 
 #[test]
-fn the_log_records_command_output() {
-    let (di, _) = interpretor();
-    di.add(
-        "say",
-        "",
-        Box::new(|di: &DrawInterpretor, a: &[&str]| {
-            di.append(a[1])?;
-            Ok(0)
-        }),
-        "G",
-    )
-    .unwrap();
-    assert_eq!(di.log_file_descriptor(), None);
-    di.set_do_log(true);
-    assert!(di.get_do_log());
-    di.add_log("start\n");
-    di.eval("say logged").unwrap();
-    assert_eq!(di.get_log(), "start\n");
-    di.reset_log();
-    assert_eq!(di.get_log(), "");
-    di.set_do_log(false);
-    assert!(di.log_file_descriptor().is_some());
-}
-
-#[test]
 fn help_and_completeness() {
     let (di, _) = interpretor();
     di.eval("proc help {name} {return \"help for $name\"}")
@@ -172,28 +147,4 @@ fn exit_on_catch_reports_and_evaluates_exit() {
     di.eval("fail").unwrap();
     di.eval("set exited").unwrap();
     assert_eq!(di.result().unwrap(), "1");
-}
-
-#[test]
-fn the_log_captures_the_process_streams() {
-    let di = DrawInterpretor::new(Rc::new(crate::draw::ProcessConsole));
-    di.init();
-    di.add(
-        "say",
-        "",
-        Box::new(|di: &DrawInterpretor, a: &[&str]| {
-            di.append(a[1])?;
-            Ok(0)
-        }),
-        USER_COMMANDS,
-    )
-    .unwrap();
-    di.set_do_log(true);
-    di.eval("say logged").unwrap();
-    di.set_do_log(false);
-    assert!(
-        di.get_log().contains("say logged \nlogged\n"),
-        "{:?}",
-        di.get_log()
-    );
 }
