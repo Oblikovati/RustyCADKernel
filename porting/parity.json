@@ -324812,6 +324812,186 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_CellsBuilder()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::new",
+      "status": "implemented",
+      "notes": "Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::new",
+      "status": "implemented",
+      "notes": "The allocator is not ported (Rust collections own their storage). Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::Clear()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::clear",
+      "status": "implemented",
+      "notes": "Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::GetAllParts() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::all_parts",
+      "status": "implemented",
+      "notes": "Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::AddToResult(const NCollection_List<TopoDS_Shape>&,const NCollection_List<TopoDS_Shape>&,int,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::add_to_result",
+      "status": "partial",
+      "notes": "Returns the failure of a refused internal-boundary removal when `update` is set. The history is refilled from the source shapes taken after the General Fuse, so no data structure is needed later. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs). Partial: removing the internal boundaries between the edges or the faces of one material needs ShapeUpgrade_UnifySameDomain with its History(), which the TKShHealing port does not provide yet; such a material is refused with a named Standard_NotImplemented error before the result changes. Solids, single parts and multi-dimensional materials are ported."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::AddAllToResult(int,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::add_all_to_result",
+      "status": "partial",
+      "notes": "Returns the failure of a refused internal-boundary removal when `update` is set. The history is refilled from the source shapes taken after the General Fuse, so no data structure is needed later. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs). Partial: removing the internal boundaries between the edges or the faces of one material needs ShapeUpgrade_UnifySameDomain with its History(), which the TKShHealing port does not provide yet; such a material is refused with a named Standard_NotImplemented error before the result changes. Solids, single parts and multi-dimensional materials are ported."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::RemoveFromResult(const NCollection_List<TopoDS_Shape>&,const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::remove_from_result",
+      "status": "implemented",
+      "notes": "The history is refilled from the source shapes taken after the General Fuse, so no data structure is needed later. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::RemoveAllFromResult()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::remove_all_from_result",
+      "status": "implemented",
+      "notes": "The history is refilled from the source shapes taken after the General Fuse, so no data structure is needed later. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::RemoveInternalBoundaries()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::remove_internal_boundaries",
+      "status": "partial",
+      "notes": "The history is refilled from the source shapes taken after the General Fuse, so no data structure is needed later. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs). Partial: removing the internal boundaries between the edges or the faces of one material needs ShapeUpgrade_UnifySameDomain with its History(), which the TKShHealing port does not provide yet; such a material is refused with a named Standard_NotImplemented error before the result changes. Solids, single parts and multi-dimensional materials are ported."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::MakeContainers()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::make_containers",
+      "status": "implemented",
+      "notes": "Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::LocModified(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::remove_internal_boundaries",
+      "status": "implemented",
+      "notes": "Protected virtual override ported as the private `loc_modified` passed to the history fill; the unified shapes replace the General Fuse splits. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::PerformInternal1(const BOPAlgo_PaveFiller&,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::<rustycad_tkbo::bop_algo::BuilderHooks>::perform_internal1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::IndexParts()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `index_parts` run by `BOPAlgoCellsBuilder::perform`; Rust has no subclass extension point for it. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::FindParts(const NCollection_List<TopoDS_Shape>&,const NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::add_to_result",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `find_parts` run by `BOPAlgoCellsBuilder::add_to_result`; Rust has no subclass extension point for it. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::RemoveInternals(const NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&,const NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder::remove_internal_boundaries",
+      "status": "partial",
+      "notes": "Protected step ported as the private `remove_internal_faces` run by `BOPAlgoCellsBuilder::remove_internal_boundaries`; Rust has no subclass extension point for it. Verified bit for bit (results, warnings and history after each step) by the native replay tools/oracle/tkbo_cells_builder.cxx (crates/tkbo/tests/bop_algo_cells_builder.rs). Partial: removing the internal boundaries between the edges or the faces of one material needs ShapeUpgrade_UnifySameDomain with its History(), which the TKShHealing port does not provide yet; such a material is refused with a named Standard_NotImplemented error before the result changes. Solids, single parts and multi-dimensional materials are ported."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::myAllParts",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoCellsBuilder, which no derived class needs (Rust has no subclassing); perform builds it and all_parts reads it."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::myIndex",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoCellsBuilder, which no derived class needs (Rust has no subclassing); perform indexes the parts and the result methods find parts in it."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::myMaterials",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoCellsBuilder, which no derived class needs (Rust has no subclassing); the result methods assign materials and remove_internal_boundaries reads them."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::myShapeMaterial",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoCellsBuilder, which no derived class needs (Rust has no subclassing); the result methods assign materials and remove_internal_boundaries reads them."
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilder::myMapModified",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CellsBuilder.hxx",
+      "source_sha256": "1cd997cf62523b2f6d294250ab79c3cdbe582a87910d0230471297e1ed1aff5f",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BOPAlgoCellsBuilder, which no derived class needs (Rust has no subclassing); remove_internal_boundaries records the merged solids for the history."
+    },
+    {
       "upstream_id": "BOPAlgo_CheckResult::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
@@ -511564,6 +511744,33 @@
       "rust_test": "cases::BOPAlgo_OpenSolidTest__A9_OpenSolidWithInternalShell",
       "rust_source": "crates/tkbo/tests/bop_algo_open_solid_legacy.rs",
       "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilderTest.A6_BoxCellsHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_CellsBuilder_Test.cxx",
+      "source_sha256": "7d8fdf5abf47d4d2ab45af82fb9376ae106c5732984ac41543a5f21b5c598d35",
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_cells_builder_legacy",
+      "rust_test": "BOPAlgo_CellsBuilderTest__A6_BoxCellsHistory",
+      "rust_source": "crates/tkbo/tests/bop_algo_cells_builder_legacy.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BOPAlgo_CellsBuilderTest.A5_CircleCellsHistory",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_CellsBuilder_Test.cxx",
+      "source_sha256": "7d8fdf5abf47d4d2ab45af82fb9376ae106c5732984ac41543a5f21b5c598d35",
+      "status": "pending_dependency",
+      "blocked_by": [
+        "BOPAlgo_CellsBuilder"
+      ],
       "profiles": [
         "linux-gcc-c-locale"
       ]

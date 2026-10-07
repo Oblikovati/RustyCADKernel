@@ -17,7 +17,7 @@ mod draft_face;
 #[path = "builder/faces.rs"]
 mod faces;
 #[path = "builder/history.rs"]
-mod history;
+pub(super) mod history;
 #[path = "builder/images.rs"]
 mod images;
 #[path = "builder/images_edges.rs"]
