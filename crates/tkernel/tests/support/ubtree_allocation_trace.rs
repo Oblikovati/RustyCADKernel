@@ -127,14 +127,3 @@ pub type Tree = UBTree<Payload<'O'>, Payload<'B'>>;
 pub fn record_key_phase(phase: char, value: i32) {
     record(phase, 'O', value);
 }
-
-/// Gives cleanup after an unpublished pair failure in the shared bound100 fixture.
-/// Example: `failed_union_cleanup_suffix("NB1")`.
-pub fn failed_union_cleanup_suffix(rejection: &str) -> &'static str {
-    match rejection {
-        "NB1" => "DB100:1,",
-        "NO2" => "DO0:2,DB0:2,DB100:1,",
-        "AB1" => "DO0:2,DB10:2,DO0:2,DB0:2,DB100:1,",
-        _ => panic!("rejection {rejection}; expected unpublished pair failure"),
-    }
-}

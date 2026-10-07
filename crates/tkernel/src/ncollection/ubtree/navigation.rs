@@ -59,7 +59,7 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
 impl<T: Clone + Default, B: BoundingVolume + Default> UBTree<T, B> {
     /// Default-constructs paired children and assigns borrowed inputs in native Gemmate order.
     /// Example: `tree.gemmate_ref(root, &union, &object, &bounds)`.
-    /// Before publication, Rust cleans constructed children if a callback panics.
+    /// Failed unpublished children remain in raw allocator ownership, as native Gemmate does.
     pub fn gemmate_ref(
         &mut self,
         id: usize,
@@ -68,9 +68,10 @@ impl<T: Clone + Default, B: BoundingVolume + Default> UBTree<T, B> {
         bounds: &B,
     ) -> Option<usize> {
         let previous = self.node_by_id(id)?;
-        let pair =
-            super::storage::TreeArena::allocate_pair(&self.resource, |_| BoundingNode::default());
-        let pair = pair.edit(|children| {
+        let pair = super::storage::TreeArena::allocate_native_pair(&self.resource, |_| {
+            BoundingNode::default()
+        });
+        let pair = pair.edit_native(|children| {
             children.node_mut(0).clone_from(previous);
             let child = children.node_mut(1);
             child.object.clone_from(object);

@@ -3,7 +3,7 @@ use super::{BoundingNode, BoundingVolume, UBTree};
 impl<T: Clone + Default, B: BoundingVolume + Default> UBTree<T, B> {
     /// Inserts borrowed inputs in native allocation/copy/default order; duplicates are allowed.
     /// Example: `tree.add_ref(&object, &bounds)`.
-    /// Failed unpublished paired construction currently uses Rust cleanup, as `gemmate_ref` does.
+    /// Failed unpublished pairs retain native raw ownership; their payloads are not destroyed.
     pub fn add_ref(&mut self, object: &T, bounds: &B) -> bool {
         self.insert_leaf_ref(object, bounds);
         true

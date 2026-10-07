@@ -1,5 +1,6 @@
 pub use crate::allocation_trace::*;
 use rustycad_tkernel::ncollection::BaseAllocator;
+/// Builds a leaf or an existing branch on an observed allocator; `populated(true)`.
 pub fn populated(branch: bool) -> (Tree, BaseAllocator) {
     let allocator = BaseAllocator::accumulating(65536).unwrap();
     let mut tree = Tree::with_allocator(allocator.clone());
@@ -9,15 +10,18 @@ pub fn populated(branch: bool) -> (Tree, BaseAllocator) {
     }
     (tree, allocator)
 }
+/// Finds an exact native pair row; `native_row("layout ")`.
 pub fn native_row(prefix: &str) -> &'static str {
     include_str!("../../../../tools/oracle/tkernel_ubtree_pair_contracts.expected")
         .lines()
         .find(|line| line.starts_with(prefix))
         .unwrap()
 }
+/// Captures one deliberate callback rejection; `caught(|| operation())`.
 pub fn caught(operation: impl FnOnce()) -> bool {
     std::panic::catch_unwind(std::panic::AssertUnwindSafe(operation)).is_err()
 }
+/// Checks actual typed child spacing; `pair_is_contiguous(&tree)`.
 pub fn pair_is_contiguous(tree: &Tree) -> bool {
     let first = tree.child(tree.root().unwrap(), 0).unwrap();
     let second = tree.child(tree.root().unwrap(), 1).unwrap();

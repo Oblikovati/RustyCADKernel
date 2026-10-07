@@ -1,6 +1,8 @@
 //! Native borrowed Add callback order and graph publication on ordinary/throwing paths.
 #[path = "support/ubtree_allocation_trace.rs"]
 pub mod allocation_trace;
+#[path = "support/ubtree_failed_pair_repair.rs"]
+pub mod failed_pair_repair;
 #[path = "ubtree_add_contracts/fixture.rs"]
 mod fixture;
 use fixture::*;
@@ -37,9 +39,9 @@ fn search_extent_and_second_union_copy_failures_match_native_cleanup() {
     }
 }
 #[test]
-fn unpublished_pair_failure_retains_native_prefix_and_explicit_rust_cleanup() {
+fn unpublished_pair_failure_retains_native_allocation_and_exact_callbacks() {
     for rejection in ["NB1", "NO2", "AB1"] {
-        partial_case(rejection);
+        retained_pair_case(rejection);
     }
 }
 #[test]
