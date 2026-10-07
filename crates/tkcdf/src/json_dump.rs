@@ -1,9 +1,10 @@
 //! The `OCCT_DUMP_*` macros that the OCAF `DumpJson` members expand, over the TKernel
-//! `DumpStream`. Field names are passed already converted by `Standard_Dump::DumpFieldToName`
-//! (`myVersion` -> `Version`).
+//! `DumpStream`. Each helper takes the C++ field expression of the macro argument
+//! (`myVersion`, `aReference.get()`) and converts it with `Standard_Dump::DumpFieldToName`
+//! (`Version`, `Reference`), as the macros do.
 use rustycad_tkernel::standard::{
     Guid,
-    dump::{DumpOutput, DumpStream, add_values_separator, get_pointer_info},
+    dump::{DumpOutput, DumpStream, add_values_separator, dump_field_to_name, get_pointer_info},
 };
 use std::io;
 
@@ -17,14 +18,16 @@ pub fn class_begin(stream: &mut DumpStream, class_name: &str) -> io::Result<()> 
 }
 
 /// `OCCT_DUMP_FIELD_VALUE_STRING`: `"<name>": "<value>"`; `field_string(&mut s, "Name", "x")?`.
-pub fn field_string(stream: &mut DumpStream, name: &str, value: &str) -> io::Result<()> {
+pub fn field_string(stream: &mut DumpStream, field: &str, value: &str) -> io::Result<()> {
+    let name = key(field)?;
     add_values_separator(stream)?;
     stream.write_fragment(format!("\"{name}\": \"{value}\"").as_bytes())
 }
 
 /// `OCCT_DUMP_FIELD_VALUE_NUMERICAL` of an integer or a boolean (printed 0/1);
 /// `field_integer(&mut stream, "Version", 1)?`.
-pub fn field_integer(stream: &mut DumpStream, name: &str, value: i32) -> io::Result<()> {
+pub fn field_integer(stream: &mut DumpStream, field: &str, value: i32) -> io::Result<()> {
+    let name = key(field)?;
     add_values_separator(stream)?;
     stream.write_fragment(format!("\"{name}\": {value}").as_bytes())
 }
@@ -55,16 +58,12 @@ pub fn field_dumped(
     };
     let mut field = DumpStream::default();
     child(&mut field, depth - 1)?;
-    key_to_class(stream, name, field.bytes())
+    key_to_class(stream, &key(name)?, field.bytes())
 }
 
 /// `OCCT_DUMP_BASE_CLASS`: a separator, then the parent-class dump written inline at
 /// `depth - 1`; skipped at depth 0; `base_class(&mut stream, depth, &|s, d| parent(s, d))?`.
-pub fn base_class(
-    stream: &mut DumpStream,
-    depth: i32,
-    base: DumpChild<'_>,
-) -> io::Result<()> {
+pub fn base_class(stream: &mut DumpStream, depth: i32, base: DumpChild<'_>) -> io::Result<()> {
     if depth == 0 {
         return Ok(());
     }
@@ -79,4 +78,10 @@ fn key_to_class(stream: &mut DumpStream, name: &str, text: &[u8]) -> io::Result<
     stream.write_fragment(format!("\"{name}\": {{").as_bytes())?;
     stream.write_fragment(text)?;
     stream.write_fragment(b"}")
+}
+
+/// `Standard_Dump::DumpFieldToName` of a macro argument, as UTF-8 text.
+fn key(field: &str) -> io::Result<String> {
+    let name = dump_field_to_name(field).map_err(io::Error::other)?;
+    Ok(String::from_utf8_lossy(name.as_bytes()).into_owned())
 }

@@ -397920,6 +397920,1254 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "d026c113a694cdcf3efa61233414dc23508136cdae85cfc84b51993704aac2e8",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::PCDM_ReaderFilter()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::new",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::PCDM_ReaderFilter(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::with_skipped_type",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::PCDM_ReaderFilter(const TCollection_AsciiString&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::with_entry",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::PCDM_ReaderFilter(const AppendMode)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::with_append_mode",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AppendMode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilterAppendMode",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AppendMode_Forbid",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilterAppendMode::Forbid",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AppendMode_Protect",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilterAppendMode::Protect",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AppendMode_Overwrite",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilterAppendMode::Overwrite",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AddSkipped(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::add_skipped_type",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AddSkipped(const TCollection_AsciiString&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::add_skipped",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AddRead(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::add_read_type",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AddRead(const TCollection_AsciiString&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::add_read",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::AddPath",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::add_path",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::Clear",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::clear",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsPassed(const occ::handle<Standard_Type>&) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_passed_type",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsPassedAttr",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_passed_attr",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsPassed(const TCollection_AsciiString&) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_passed_entry",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsSubPassed(const TCollection_AsciiString&) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_sub_passed_entry",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsPartTree",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_part_tree",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::Mode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::mode",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. The returned modifiable reference is the pair mode/set_mode."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsAppendMode",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_append_mode",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::StartIteration",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::start_iteration",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::Up",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::up",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Native quirk: Up from the root makes the current map null and a later IsPassed() crashes; the Rust cursor becomes None and is_passed() answers false."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::Down",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::down",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsPassed() const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_passed",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::IsSubPassed() const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::is_sub_passed",
+      "status": "implemented",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::TagTree",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. The typedef NCollection_DataMap<int, void*> names the untyped native tree; Rust keeps the tree as private arena state of rustycad_tkcdf::pcdm::PcdmReaderFilter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::myAppend",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": "rustycad_tkcdf::pcdm::PcdmReaderFilter::mode",
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; private state of rustycad_tkcdf::pcdm::PcdmReaderFilter, read by mode() and written by set_mode(); no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::mySkip",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; private state of rustycad_tkcdf::pcdm::PcdmReaderFilter, filled by add_skipped; no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::myRead",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; private state of rustycad_tkcdf::pcdm::PcdmReaderFilter, filled by add_read; no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::mySubTrees",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; private state of rustycad_tkcdf::pcdm::PcdmReaderFilter, filled by add_path; no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::myTree",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; the private arena of rustycad_tkcdf::pcdm::PcdmReaderFilter built by start_iteration; no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::myCurrent",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; the private cursor index of rustycad_tkcdf::pcdm::PcdmReaderFilter moved by up/down; no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "PCDM_ReaderFilter::myCurrentDepth",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/PCDM/PCDM_ReaderFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "PCDM_ReaderFilter mapping (docs/ocaf-design.md section 1): a transient with its fields in one SharedState; the NCollection_DataMap<int, void*> iteration tree is an arena of nodes indexed by position (father link, children by tag, sub-tree mark); occ::handle<Standard_Type> arguments are &RuntimeType; no OCCT class overrides the virtual members. Protected data member; private state of rustycad_tkcdf::pcdm::PcdmReaderFilter moved by up/down and read by is_sub_passed; no OCCT class derives from the filter."
+    },
+    {
+      "upstream_id": "CDM_CanCloseStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_CanCloseStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmCanCloseStatus",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_CCS_OK",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_CanCloseStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmCanCloseStatus::Ok",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_CCS_NotOpen",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_CanCloseStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmCanCloseStatus::NotOpen",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_CCS_UnstoredReferenced",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_CanCloseStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmCanCloseStatus::UnstoredReferenced",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_CCS_ModifiedReferenced",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_CanCloseStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmCanCloseStatus::ModifiedReferenced",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_CCS_ReferenceRejection",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_CanCloseStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmCanCloseStatus::ReferenceRejection",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::CDM_Application",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplicationBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. The protected constructor is the Default of the embedded base; it creates the default messenger."
+    },
+    {
+      "upstream_id": "CDM_Application::Resources",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::resources",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. occ::handle<Resource_Manager> is SharedResourceManager (Arc<SharedState<ResourceManager>>)."
+    },
+    {
+      "upstream_id": "CDM_Application::MessageDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::message_driver",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. occ::handle<Message_Messenger> is Arc<Messenger> as in the TKernel port."
+    },
+    {
+      "upstream_id": "CDM_Application::BeginOfUpdate",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::begin_of_update",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::EndOfUpdate",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::end_of_update",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::Write",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::write",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::Name",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::name",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::Version",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::MetaDataLookUpTable",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::meta_data_look_up_table",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. The returned reference is the write guard of the table."
+    },
+    {
+      "upstream_id": "CDM_Application::DumpJson",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::dump_json",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::SetDocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::set_document_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Application::SetReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmApplication::set_reference_counter",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CDM_Document",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. The protected constructor is the Default of the embedded base (version 1, no references)."
+    },
+    {
+      "upstream_id": "CDM_Document::myResourcesAreLoaded",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentBase::resources_are_loaded",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. The protected field is read through resources_are_loaded and assigned through set_resources_are_loaded."
+    },
+    {
+      "upstream_id": "CDM_Document::Update(const occ::handle<CDM_Document>&,const int,void* const)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::update_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. void* is the opaque ModifContext address."
+    },
+    {
+      "upstream_id": "CDM_Document::Update(TCollection_ExtendedString&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::update_with_error",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Update()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::update",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::StorageFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::storage_format",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Extensions",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::extensions",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::GetAlternativeDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::get_alternative_document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CanCloseReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::can_close_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CloseReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocument::close_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CreateReference(const occ::handle<CDM_Document>&)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::create_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CreateReference(const occ::handle<CDM_MetaData>&,const int,const occ::handle<CDM_Application>&,const int,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::create_reference_with_identifier",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CreateReference(const occ::handle<CDM_MetaData>&,const occ::handle<CDM_Application>&,const int,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::create_reference_to_meta_data",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::RemoveReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::remove_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::RemoveAllReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::remove_all_references",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Document",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Reference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsInSession",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::is_in_session",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsStored(const int) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::is_stored_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsStored() const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::is_stored",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Name",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::name",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::UpdateFromDocuments",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::update_from_documents",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. Native quirk kept: every call starts an update cycle and appends each referencing document once per reference."
+    },
+    {
+      "upstream_id": "CDM_Document::ToReferencesNumber",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::to_references_number",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::FromReferencesNumber",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::from_references_number",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::ShallowReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::shallow_references",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. Native quirk kept: it compares with the targets of the references to this document (this document itself)."
+    },
+    {
+      "upstream_id": "CDM_Document::DeepReferences",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::deep_references",
+      "status": "partial",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. Native recursion re-enters the same document and overflows the stack when this document is referenced and the argument is another document; the port visits each document once and answers false there. Other answers are native."
+    },
+    {
+      "upstream_id": "CDM_Document::CopyReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::copy_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsReadOnly() const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsReadOnly(const int) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::is_read_only_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetIsReadOnly",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::set_is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::UnsetIsReadOnly",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::unset_is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Modify",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::modify",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Modifications",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::modifications",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::UnModify",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::un_modify",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsUpToDate",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::is_up_to_date",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetIsUpToDate",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::set_is_up_to_date",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetComment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::set_comment",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::AddComment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::add_comment",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetComments",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::set_comments",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Comments",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::comments",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Comment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::comment",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. The native null pointer is None."
+    },
+    {
+      "upstream_id": "CDM_Document::StorageVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::storage_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetMetaData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::set_meta_data",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::UnsetIsStored",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::unset_is_stored",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::MetaData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::meta_data",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Folder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::folder",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetRequestedFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::set_requested_folder",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::RequestedFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::requested_folder",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::HasRequestedFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::has_requested_folder",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetRequestedName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::set_requested_name",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::RequestedName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::requested_name",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetRequestedPreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::set_requested_previous_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::UnsetRequestedPreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::unset_requested_previous_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::HasRequestedPreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::has_requested_previous_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::RequestedPreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::requested_previous_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetRequestedComment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::set_requested_comment",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::RequestedComment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::requested_comment",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::LoadResources",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::load_resources",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::FindFileExtension",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::find_file_extension",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::FileExtension",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::file_extension",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::FindDescription",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::find_description",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Description",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentStorage::description",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsModified",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::is_modified",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Print",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::print",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::operator<<",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::print",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. operator<< calls Print."
+    },
+    {
+      "upstream_id": "CDM_Document::IsOpened() const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::is_opened",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::IsOpened(const int) const",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::is_opened_reference",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Open",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::open",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::CanClose",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::can_close",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Close",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::close",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::Application",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::application",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::ReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::reference_counter",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetModifications",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::set_modifications",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::SetReferenceCounter",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentReferences::set_reference_counter",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Document::DumpJson",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Document.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmDocumentLifecycle::dump_json",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::LookUp(NCollection_DataMap<TCollection_ExtendedString, occ::handle<CDM_MetaData>>&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::look_up",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::LookUp(NCollection_DataMap<TCollection_ExtendedString, occ::handle<CDM_MetaData>>&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const TCollection_ExtendedString&,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::look_up_with_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::IsRetrieved",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::is_retrieved",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::Document",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::Folder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::folder",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::Name",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::name",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::Version",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::HasVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::has_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::FileName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::file_name",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::Print",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::print",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::operator<<",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::print",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. operator<< calls Print."
+    },
+    {
+      "upstream_id": "CDM_MetaData::Path",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::path",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::UnsetDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::unset_document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::IsReadOnly",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::SetIsReadOnly",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::set_is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::UnsetIsReadOnly",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::unset_is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_MetaData::DumpJson",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_MetaData.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmMetaData::dump_json",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Reference::FromDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReference::from_document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Reference::ToDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReference::to_document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Reference::ReferenceIdentifier",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReference::reference_identifier",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Reference::DocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReference::document_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Reference::IsReadOnly",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReference::is_read_only",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_Reference::DumpJson",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_Reference.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReference::dump_json",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_ReferenceIterator::CDM_ReferenceIterator",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::new",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec. The iterator walks a copy of the reference list taken at creation."
+    },
+    {
+      "upstream_id": "CDM_ReferenceIterator::More",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::more",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_ReferenceIterator::Next",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::next",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_ReferenceIterator::Document",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::document",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_ReferenceIterator::ReferenceIdentifier",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::reference_identifier",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
+    },
+    {
+      "upstream_id": "CDM_ReferenceIterator::DocumentVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDM/CDM_ReferenceIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdm::CdmReferenceIterator::document_version",
+      "status": "implemented",
+      "notes": "CDM mapping (docs/ocaf-design.md sections 2 and 6): abstract classes are traits over embedded bases (CdmDocumentBase, CdmApplicationBase) reached through Handle<dyn Trait>; non-virtual CDM_Document members are the extension traits CdmDocumentReferences, CdmDocumentStorage and CdmDocumentLifecycle; raw back pointers are WeakHandles; `this` is the bound self handle; native exceptions and null dereferences are Failure errors; output sequences are Vec."
     }
   ],
   "tests": [
