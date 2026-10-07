@@ -37,3 +37,30 @@ void hb_curve_case(std::istream& input){
  HLRBRep_Curve c;c.Projector(&projector);c.Curve(edge);hb_curve_box(c);
  for(int i=0;i<3;++i)hb_curve_at(c,r.real());
  hb_curve_conics(c);hb_curve_poles(c);ga_end();}
+#include <HLRBRep_CInter.hxx>
+#include <HLRBRep_TheProjPCurOfCInter.hxx>
+// The CurveTool members the intersection templates call, on an updated curve.
+void hb_curve_tool(HLRBRep_Curve& c){
+ HLRBRep_CurvePtr p=&c;
+ GA_TRY(ga_int(HLRBRep_CurveTool::NbSamples(p)));
+ GA_TRY(ga_int(HLRBRep_CurveTool::NbSamples(p,HLRBRep_CurveTool::FirstParameter(p),HLRBRep_CurveTool::LastParameter(p))));
+ GA_TRY(int n=HLRBRep_CurveTool::NbIntervals(p);ga_int(n);NCollection_Array1<double> tab(1,n+1);HLRBRep_CurveTool::Intervals(p,tab);
+  for(double v:tab)ga_real(v);double a,b;HLRBRep_CurveTool::GetInterval(p,1,tab,a,b);ga_real(a);ga_real(b));
+ ga_int(HLRBRep_CurveTool::TheType(p));ga_flag(HLRBRep_CurveTool::Bezier(p).IsNull());ga_flag(HLRBRep_CurveTool::BSpline(p).IsNull());}
+// `projector edge1 edge2 tolconf tol mode`: both curves updated, their tool members, the
+// projection of the middle of curve 1 on curve 2, then HLRBRep_CInter by mode 0 (C1, D1,
+// C2, D2 with ComputeDomain), 1 (C1, C2), 2 (C1, D1) or 3 (C1).
+void hb_cinter_case(std::istream& input){
+ GaReader r{input};HLRAlgo_Projector projector=hb_projector(r);TopoDS_Edge e1=hb_edge(r),e2=hb_edge(r);
+ double tc=r.real(),t=r.real();int mode=r.integer();
+ HLRBRep_Curve c1,c2;double mn[16],mx[16];HLRAlgo::InitMinMax(1e100,mn,mx);
+ c1.Projector(&projector);c1.Curve(e1);c2.Projector(&projector);c2.Curve(e2);
+ GA_TRY(c1.Update(mn,mx);c2.Update(mn,mx);hb_curve_tool(c1);hb_curve_tool(c2);
+  HLRBRep_CurvePtr p1=&c1,p2=&c2;
+  GA_TRY(double m=(HLRBRep_CurveTool::FirstParameter(p1)+HLRBRep_CurveTool::LastParameter(p1))/2;
+   ga_real(HLRBRep_TheProjPCurOfCInter::FindParameter(p2,HLRBRep_CurveTool::Value(p1,m),t)));
+  HLRBRep_CInter i;
+  GA_TRY(IntRes2d_Domain d1=i.ComputeDomain(p1,t),d2=i.ComputeDomain(p2,t);hb_domain(d1);
+   if(mode==0)i.Perform(p1,d1,p2,d2,tc,t);else if(mode==1)i.Perform(p1,p2,tc,t);
+   else if(mode==2)i.Perform(p1,d1,tc,t);else i.Perform(p1,tc,t);ga_inter(i)));
+ ga_end();}

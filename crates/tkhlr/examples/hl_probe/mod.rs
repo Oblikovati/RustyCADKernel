@@ -46,3 +46,6 @@ pub mod contap_walking;
 
 pub mod hlrbrep_curve;
 pub mod hlrbrep_fixtures;
+#[allow(dead_code)]
+#[path = "../../../tkgeomalgo/examples/ga_probe/int_res2d.rs"]
+pub mod int_res2d;

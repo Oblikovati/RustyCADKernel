@@ -46,3 +46,8 @@ TopoDS_Edge hb_edge(GaReader& r){
 void hb_lin2d(const gp_Lin2d& l){ga_pnt2d(l.Location());ga_xy(l.Direction().XY());}
 void hb_circ2d(const gp_Circ2d& c){ga_pnt2d(c.Location());ga_xy(c.XAxis().Direction().XY());ga_xy(c.YAxis().Direction().XY());ga_real(c.Radius());}
 void hb_elips2d(const gp_Elips2d& e){ga_pnt2d(e.Location());ga_xy(e.XAxis().Direction().XY());ga_xy(e.YAxis().Direction().XY());ga_real(e.MajorRadius());ga_real(e.MinorRadius());}
+#include <IntRes2d_Domain.hxx>
+void hb_domain(const IntRes2d_Domain& d){
+ ga_flag(d.HasFirstPoint());if(d.HasFirstPoint()){ga_real(d.FirstParameter());ga_pnt2d(d.FirstPoint());ga_real(d.FirstTolerance());}
+ ga_flag(d.HasLastPoint());if(d.HasLastPoint()){ga_real(d.LastParameter());ga_pnt2d(d.LastPoint());ga_real(d.LastTolerance());}
+ ga_flag(d.IsClosed());if(d.IsClosed()){double a,b;d.EquivalentParameters(a,b);ga_real(a);ga_real(b);}}

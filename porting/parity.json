@@ -319182,6 +319182,134 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_CInter(const HLRBRep_CurvePtr&,const HLRBRep_CurvePtr&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::between",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::of_self_on",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::with_domains",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::GetMinNbSamples() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::get_min_nb_samples",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter(const HLRBRep_CurvePtr&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::with_second_domain",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::perform_self_on",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::Perform(const HLRBRep_CurvePtr&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::perform_self",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::SetMinNbSamples(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::set_min_nb_samples",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::perform",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::with_first_domain",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::perform_first_domain",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter(const HLRBRep_CurvePtr&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::of_self",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::ComputeDomain(const HLRBRep_CurvePtr&,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::compute_domain",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::Perform(const HLRBRep_CurvePtr&,const HLRBRep_CurvePtr&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::perform_between",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CInter::Perform(const HLRBRep_CurvePtr&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntCurveCurveGen::perform_second_domain",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_CLPropsATool::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.hxx",
@@ -319326,7 +319454,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Parameter2d(const double) const",
+      "upstream_id": "HLRBRep_Curve::Parameter2d(double) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::parameter_2d",
@@ -319334,7 +319462,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Parameter3d(const double) const",
+      "upstream_id": "HLRBRep_Curve::Parameter3d(double) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::parameter_3d",
@@ -319358,7 +319486,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Z(const double) const",
+      "upstream_id": "HLRBRep_Curve::Z(double) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::z",
@@ -319366,7 +319494,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Tangent(const bool,gp_Pnt2d&,gp_Dir2d&) const",
+      "upstream_id": "HLRBRep_Curve::Tangent(bool,gp_Pnt2d&,gp_Dir2d&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::tangent",
@@ -319374,7 +319502,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::D0(const double,gp_Pnt2d&) const",
+      "upstream_id": "HLRBRep_Curve::D0(double,gp_Pnt2d&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d0",
@@ -319382,7 +319510,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::D1(const double,gp_Pnt2d&,gp_Vec2d&) const",
+      "upstream_id": "HLRBRep_Curve::D1(double,gp_Pnt2d&,gp_Vec2d&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d1",
@@ -319390,7 +319518,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::D2(const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "upstream_id": "HLRBRep_Curve::D2(double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d2",
@@ -319398,7 +319526,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::D3(const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "upstream_id": "HLRBRep_Curve::D3(double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d3",
@@ -319406,7 +319534,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::DN(const double,const int) const",
+      "upstream_id": "HLRBRep_Curve::DN(double,int) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.hxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::dn",
@@ -319560,6 +319688,22 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "948b7d16cf565e985a0c2d0c81e614dba3f4f0bb2596d0fa59dec072b3fbfabb",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::NbSamples(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::nb_samples",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::NbSamples(HLRBRep_CurvePtr,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::nb_samples_in",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
     },
     {
       "upstream_id": "HLRBRep_EdgeBuilder::operator delete(void*) noexcept",
@@ -319922,6 +320066,54 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter(const HLRBRep_CurvePtr&,const HLRBRep_CurvePtr&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ExactIntersectionPoint::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter::AnErrorOccurred() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ExactIntersectionPoint::an_error_occurred",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter::NbRoots() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ExactIntersectionPoint::nb_roots",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter::Perform(const HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter&,const HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter&,int&,int&,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ExactIntersectionPoint::perform_polygons",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter::Perform(double,double,double,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ExactIntersectionPoint::perform",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter::Roots(double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ExactIntersectionPoint::roots",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_FaceData::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_FaceData.hxx",
@@ -320222,6 +320414,94 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter(const gp_Elips2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::ellipse",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter::Perform(const gp_Hypr2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::perform_hyperbola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::perform_ellipse",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter(const gp_Circ2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::circle",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter(const gp_Hypr2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::hyperbola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::perform_circle",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter(const gp_Parab2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::parabola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter::Perform(const gp_Parab2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::perform_parabola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter(const gp_Lin2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::line",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_IntConicCurveOfCInter::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_IntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::UserIntConicCurveGen::perform_line",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_InterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_InterCSurf.hxx",
@@ -320460,6 +320740,38 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "c04d1613c466ff390f4479a42ec4d0a2c8d5709ce94e73701b602205c7629cdb",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter::Value(double,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::MyImpParTool::<rustycad_tkmath::math::Function>::value",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter::Derivative(double,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::MyImpParTool::<rustycad_tkmath::math::FunctionWithDerivative>::derivative",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter::Values(double,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::MyImpParTool::<rustycad_tkmath::math::FunctionWithDerivative>::values",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter(const IntCurve_IConicTool&,const HLRBRep_CurvePtr&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::MyImpParTool::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
     },
     {
       "upstream_id": "HLRBRep_PolyHLRToShape::operator delete(void*) noexcept",
@@ -320942,6 +321254,54 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::DistBetweenPCurvesGen::<rustycad_tkmath::math::FunctionSet>::value",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter::Values(const math_Vector&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::DistBetweenPCurvesGen::<rustycad_tkmath::math::FunctionSetWithDerivatives>::values",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter::Derivatives(const math_Vector&,math_Matrix&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::DistBetweenPCurvesGen::<rustycad_tkmath::math::FunctionSetWithDerivatives>::derivatives",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter::NbEquations() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::DistBetweenPCurvesGen::nb_equations",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter::NbVariables() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::DistBetweenPCurvesGen::nb_variables",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter(const HLRBRep_CurvePtr&,const HLRBRep_CurvePtr&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::DistBetweenPCurvesGen::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_TheExactInterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheExactInterCSurf.hxx",
@@ -321062,6 +321422,38 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter(const gp_Parab2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::parabola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter(const gp_Hypr2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::hyperbola",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter(const gp_Circ2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::circle",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntConicCurveOfCInter(const gp_Elips2d&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicCurveGen::ellipse",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
@@ -321120,6 +321512,62 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "940771dacf16b9dad96b434a00f3d989cd137b25be3915bafd6f313758a413ef",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::GetMinNbSamples() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::get_min_nb_samples",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::perform_self",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::SetMinNbSamples(int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::set_min_nb_samples",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::perform",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double,int,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::perform_self_iter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntPCurvePCurveOfCInter::Perform(const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double,int,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntPolyPolyGen::perform_iter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
     },
     {
       "upstream_id": "HLRBRep_TheInterferenceOfInterCSurf::operator delete(void*) noexcept",
@@ -321242,6 +321690,54 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter::FindV(double,gp_Pnt2d&,const IntCurve_IConicTool&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::Intersector::find_v",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter()",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::Intersector::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter::Perform(const IntCurve_IConicTool&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::Intersector::perform",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter::FindU(double,gp_Pnt2d&,const HLRBRep_CurvePtr&,const IntCurve_IConicTool&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::Intersector::find_u",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter(const IntCurve_IConicTool&,const IntRes2d_Domain&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::Intersector::with_curves",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter::And_Domaine_Objet1_Intersections(const IntCurve_IConicTool&,const HLRBRep_CurvePtr&,const IntRes2d_Domain&,const IntRes2d_Domain&,int&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::Intersector::and_domaine_objet1_intersections",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
@@ -321300,6 +321796,118 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "b51f806cf8d794406d0592682322978b33885fb8b973ad42b1d3a7f6a00292fd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::SupParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::sup_parameter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::ApproxParamOnCurve(int,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::approx_param_on_curve",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::NbSegments() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::nb_segments",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::InfParameter() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::inf_parameter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter(const HLRBRep_CurvePtr&,int,const IntRes2d_Domain&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::new",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::CalculRegion(double,double,double,double,double,double) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::calcul_region",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::Closed() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::closed",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::DeflectionOverEstimation() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::Segment(int,gp_Pnt2d&,gp_Pnt2d&) const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::segment",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::ComputeWithBox(const HLRBRep_CurvePtr&,const Bnd_Box2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::compute_with_box",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::AutoIntersectionIsPossible() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::auto_intersection_is_possible",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::Dump() const",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::dump",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::Closed(bool)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::set_closed",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter::SetDeflectionOverEstimation(double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Polygon2dGen::set_deflection_over_estimation",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
     },
     {
       "upstream_id": "HLRBRep_ThePolygonOfInterCSurf::operator delete(void*) noexcept",
@@ -321602,6 +322210,22 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "HLRBRep_TheProjPCurOfCInter::FindParameter(const HLRBRep_CurvePtr&,const gp_Pnt2d&,double,double,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheProjPCurOfCInter.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TheProjPCurOfCInter::find_parameter_in",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheProjPCurOfCInter::FindParameter(const HLRBRep_CurvePtr&,const gp_Pnt2d&,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheProjPCurOfCInter.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TheProjPCurOfCInter::find_parameter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
       "upstream_id": "HLRBRep_TheQuadCurvExactInterCSurf::operator delete(void*) noexcept",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheQuadCurvExactInterCSurf.hxx",
@@ -321798,7 +322422,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Value3D(const double) const",
+      "upstream_id": "HLRBRep_Curve::Value3D(double) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::value_3d",
@@ -321806,7 +322430,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::D0(const double,gp_Pnt&) const",
+      "upstream_id": "HLRBRep_Curve::D0(double,gp_Pnt&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d0_3d",
@@ -321814,7 +322438,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::D1(const double,gp_Pnt&,gp_Vec&) const",
+      "upstream_id": "HLRBRep_Curve::D1(double,gp_Pnt&,gp_Vec&) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::d1_3d",
@@ -321846,7 +322470,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::NbIntervals(const GeomAbs_Shape) const",
+      "upstream_id": "HLRBRep_Curve::NbIntervals(GeomAbs_Shape) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::nb_intervals",
@@ -321854,7 +322478,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Intervals(NCollection_Array1<double>&,const GeomAbs_Shape) const",
+      "upstream_id": "HLRBRep_Curve::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::intervals",
@@ -321886,7 +322510,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Value(const double) const",
+      "upstream_id": "HLRBRep_Curve::Value(double) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::value",
@@ -321894,7 +322518,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_Curve::Resolution(const double) const",
+      "upstream_id": "HLRBRep_Curve::Resolution(double) const",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_Curve.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::Curve::resolution",
@@ -321942,7 +322566,7 @@
       "notes": "Ported from HLRBRep_Curve.hxx/.lxx/.cxx line by line. The native raw projector pointer is a shared Arc<Projector> that HLRBRep_Data replaces in every curve when it changes the projector; a curve without projector returns Standard_NullObject where the native code dereferences null. hb_curve (600 numeric requests: parallel, perspective and default projectors; lines, circles and ellipses along, across and oblique to the sight, Bezier and B-spline edges) compares Update with its 16-direction box, the parameters, Z, D0-D2 with preset outputs, Tangent, the projected conics and the projected poles bit for bit; tests/hlr_brep_curve.rs adds direct regressions."
     },
     {
-      "upstream_id": "HLRBRep_CLPropsATool::Value(const HLRBRep_Curve*,const double,gp_Pnt2d&)",
+      "upstream_id": "HLRBRep_CLPropsATool::Value(const HLRBRep_Curve*,double,gp_Pnt2d&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::value",
@@ -321950,7 +322574,7 @@
       "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
     },
     {
-      "upstream_id": "HLRBRep_CLPropsATool::D1(const HLRBRep_Curve*,const double,gp_Pnt2d&,gp_Vec2d&)",
+      "upstream_id": "HLRBRep_CLPropsATool::D1(const HLRBRep_Curve*,double,gp_Pnt2d&,gp_Vec2d&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::d1",
@@ -321958,7 +322582,7 @@
       "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
     },
     {
-      "upstream_id": "HLRBRep_CLPropsATool::D2(const HLRBRep_Curve*,const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "upstream_id": "HLRBRep_CLPropsATool::D2(const HLRBRep_Curve*,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::d2",
@@ -321966,7 +322590,7 @@
       "notes": "Ported from HLRBRep_CLPropsATool.lxx: static evaluation of a projected HLRBRep_Curve for GeomLProp_CLPropsBase through LProp ToolAccess (CurveTool impl). Exercised by HLRBRep_Curve::Tangent in the hb_curve numeric family."
     },
     {
-      "upstream_id": "HLRBRep_CLPropsATool::D3(const HLRBRep_Curve*,const double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "upstream_id": "HLRBRep_CLPropsATool::D3(const HLRBRep_Curve*,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CLPropsATool.lxx",
       "rust_item": "rustycad_tkhlr::hlr_brep::CLPropsATool::d3",
@@ -322004,6 +322628,246 @@
       "rust_item": "rustycad_tkhlr::hlr_brep::CLProps",
       "status": "implemented",
       "notes": "Alias of GeomLProp_CLPropsBase<Vector2, &Curve, ToolAccess<CLPropsATool>>, the native template instance; exercised through HLRBRep_Curve::Tangent (hb_curve) and tests/hlr_brep_curve.rs."
+    },
+    {
+      "upstream_id": "HLRBRep_TheLocateExtPCOfTheProjPCurOfCInter",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheLocateExtPCOfTheProjPCurOfCInter.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TheLocateExtPCOfTheProjPCurOfCInter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_TheCurveLocatorOfTheProjPCurOfCInter",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TheCurveLocatorOfTheProjPCurOfCInter.hxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::TheCurveLocatorOfTheProjPCurOfCInter",
+      "status": "implemented",
+      "notes": "Instance of the IntCurve/IntImpParGen/Extrema template on HLRBRep_CurveTool (hlr_brep::c_inter, docs/geomalgo-design.md sections 3-5): the generic body is the TKGeomAlgo port, the curve tool and HLRBRep_TheProjPCurOfCInter are ported here. hb_cinter (800 numeric requests: CurveTool queries, projections and HLRBRep_CInter in its four Perform forms on pairs of projected lines, circles, ellipses, Bezier and B-spline edges) matches OCCT bit for bit. Porting HLR exposed that the generic ComputeDomain and self-intersection Perform built the conic where the native switch reads only the type; that is fixed in tkgeomalgo."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::FirstParameter(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::first_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::LastParameter(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::last_parameter",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Continuity(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::continuity",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::NbIntervals(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::nb_intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Intervals(HLRBRep_CurvePtr,NCollection_Array1<double>&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::intervals",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::GetInterval(HLRBRep_CurvePtr,int,const NCollection_Array1<double>&,double&,double&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::get_interval",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::IsClosed(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::is_closed",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::IsPeriodic(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::is_periodic",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Period(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::period",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Value(HLRBRep_CurvePtr,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::value",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::D0(HLRBRep_CurvePtr,double,gp_Pnt2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::d0",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::D1(HLRBRep_CurvePtr,double,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::d1",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::D2(HLRBRep_CurvePtr,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::d2",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::D3(HLRBRep_CurvePtr,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::d3",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::DN(HLRBRep_CurvePtr,double,int)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::dn",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Resolution(HLRBRep_CurvePtr,double)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::resolution",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::GetType(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::get_type",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::TheType(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::the_type",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Line(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::line",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Circle(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::circle",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Ellipse(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::ellipse",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Hyperbola(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::hyperbola",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Parabola(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::parabola",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Bezier(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::bezier",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::BSpline(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::bspline",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::EpsX(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::eps_x",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
+    },
+    {
+      "upstream_id": "HLRBRep_CurveTool::Degree(HLRBRep_CurvePtr)",
+      "toolkit": "TKHLR",
+      "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_CurveTool.lxx",
+      "rust_item": "rustycad_tkhlr::hlr_brep::CurveTool::degree",
+      "status": "implemented",
+      "notes": "Ported from HLRBRep_CurveTool.hxx/.lxx/.cxx (C1 intervals, EpsX 1e-10, the two NbSamples rules capped at 50, null Bezier/BSpline). The tool also implements the template traits (ParTool, PCurveTool, ExtremaCurveAccess) on &HLRBRep_Curve, where the native templates pass void*. hb_cinter compares its samples, intervals and types and every template instance it feeds bit for bit."
     },
     {
       "upstream_id": "BOPAlgo_PaveFiller::PerformFF(const Message_ProgressRange &)",

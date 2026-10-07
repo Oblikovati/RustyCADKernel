@@ -43,6 +43,7 @@
 #include "tkhlr_probe_contap_search_inside.cxx"
 #include "tkhlr_probe_contap_search_boundary.cxx"
 #include "tkhlr_probe_contap_walking.cxx"
+#include "tkgeomalgo_probe_intres2d.cxx"
 #include "tkhlr_probe_hlrbrep_fixtures.cxx"
 #include "tkhlr_probe_hlrbrep_curve.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
@@ -87,6 +88,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ha_grow", hl_ha_grow_case},
  // HLRBRep (tkhlr_probe_hlrbrep_*.cxx)
  {"hb_curve", hb_curve_case},
+ {"hb_cinter", hb_cinter_case},
 };
 int main() {
  std::string line;

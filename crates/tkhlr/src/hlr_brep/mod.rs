@@ -13,6 +13,18 @@ pub use cl_props::{CLProps, CLPropsATool};
 mod curve;
 mod curve_2d;
 pub use curve::{Curve, MinMaxBox};
+mod curve_tool;
+pub use curve_tool::CurveTool;
+mod c_inter;
+pub use c_inter::{
+    CInter, CInterTypes, ExactIntersectionPointOfTheIntPCurvePCurveOfCInter, IntConicCurveOfCInter,
+    MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter,
+    PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter, TheCurveLocatorOfTheProjPCurOfCInter,
+    TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter, TheIntConicCurveOfCInter,
+    TheIntPCurvePCurveOfCInter, TheIntersectorOfTheIntConicCurveOfCInter,
+    TheLocateExtPCOfTheProjPCurOfCInter, ThePolygon2dOfTheIntPCurvePCurveOfCInter,
+    TheProjPCurOfCInter,
+};
 
 // Consumed by the remaining HLRBRep_Data port; not a public OCCT declaration.
 #[cfg_attr(not(test), expect(dead_code))]

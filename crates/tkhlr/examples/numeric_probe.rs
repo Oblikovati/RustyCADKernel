@@ -63,6 +63,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ha_grow", hlr_algo_internal::grow_case),
     // HLRBRep (hl_probe/hlrbrep_*.rs)
     ("hb_curve", hl_probe::hlrbrep_curve::curve_case),
+    ("hb_cinter", hl_probe::hlrbrep_curve::cinter_case),
 ];
 
 fn main() {

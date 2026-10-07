@@ -41,7 +41,9 @@ pub use curve_curve::{
 pub use curve_surface::{
     ExtCS, FuncExtCS, GenExtCS, GlobOptFuncCQuadric, GlobOptFuncCS, GlobOptFuncConicS,
 };
-pub use curve_tool::{ExtremaCurveTool, SplineKnots, ToolD1, ToolD2, ToolD3};
+pub use curve_tool::{
+    AccessD1, AccessD2, ExtremaCurveAccess, ExtremaCurveTool, SplineKnots, ToolD1, ToolD2, ToolD3,
+};
 pub use curve_tools::{Curve2dTool, CurveTool};
 pub use elementary_point_curve::{ElementaryPointCurve, PointCurveExtrema};
 pub use ext_el_c::ExtElC;

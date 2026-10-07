@@ -1,6 +1,6 @@
 //! HLRBRep fixtures, the Rust twin of tools/oracle/tkhlr_probe_hlrbrep_fixtures.cxx:
 //! projectors and located edges read from a request, and the 2D conic printers.
-use super::common::{Reader, pnt2d, real, xy};
+use super::common::{Reader, flag, pnt2d, real, xy};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topods::Edge;
 use rustycad_tkernel::ncollection::Array1;
@@ -8,6 +8,7 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{
     GeomBSplineCurve, GeomBezierCurve, GeomCircle, GeomCurve, GeomEllipse, GeomLine,
 };
+use rustycad_tkgeomalgo::int_res2d::Domain;
 use rustycad_tkhlr::hlr_algo::Projector;
 use rustycad_tkmath::gp::{Axis2, Circle2, Ellipse2, Line2, Point3};
 
@@ -94,4 +95,27 @@ pub fn elips2d(e: Ellipse2) {
     xy(e.y_axis().direction().xy());
     real(e.major_radius());
     real(e.minor_radius());
+}
+
+/// `hb_domain`: the bounds of an IntRes2d domain.
+pub fn domain(d: &Domain) -> Result<(), Failure> {
+    flag(d.has_first_point());
+    if d.has_first_point() {
+        real(d.first_parameter()?);
+        pnt2d(d.first_point()?);
+        real(d.first_tolerance()?);
+    }
+    flag(d.has_last_point());
+    if d.has_last_point() {
+        real(d.last_parameter()?);
+        pnt2d(d.last_point()?);
+        real(d.last_tolerance()?);
+    }
+    flag(d.is_closed());
+    if d.is_closed() {
+        let (a, b) = d.equivalent_parameters();
+        real(a);
+        real(b);
+    }
+    Ok(())
 }

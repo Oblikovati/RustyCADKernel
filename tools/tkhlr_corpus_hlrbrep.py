@@ -9,6 +9,9 @@ degree 2 B-splines.
 - `hb_curve`: HLRBRep_Curve Update with its 16-direction box, the 2D/3D parameters,
   depth, D0-D2 (with preset outputs), Tangent at both ends, the projected line,
   circle and ellipse, and the projected poles, weights, knots and multiplicities.
+- `hb_cinter`: HLRBRep_CurveTool (samples, C1 intervals, types), HLRBRep_TheProjPCurOfCInter
+  and HLRBRep_CInter (every helper instance: conic-conic, conic-curve, polygon-polygon and
+  self intersection) on pairs of projected edges.
 """
 from __future__ import annotations
 import math
@@ -93,7 +96,21 @@ def curve_requests(rng: random.Random) -> list[str]:
     return requests
 
 
+def cinter_requests(rng: random.Random) -> list[str]:
+    """hb_cinter over random pairs of edges under one projector, in the four modes."""
+    requests = []
+    for index in range(800):
+        proj = projector(rng)
+        view = tuple(proj[4:7]) if proj[0] != 2 else (0.0, 0.0, 1.0)
+        first, _, _ = edge(rng, view)
+        second, _, _ = edge(rng, view)
+        tol = rng.choice((1e-7, 1e-6, 1e-4))
+        requests.append('hb_cinter ' + numbers(proj + first + second + [1e-9, tol, index % 4]))
+    return requests
+
+
 def append_hlrbrep_requests(requests: list[str]) -> None:
     """Append every HLRBRep request family in a fixed order."""
     rng = random.Random(0x41B12E9)
     requests.extend(curve_requests(rng))
+    requests.extend(cinter_requests(rng))

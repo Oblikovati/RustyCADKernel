@@ -1,10 +1,11 @@
 //! HLRBRep_Curve, the Rust twin of tools/oracle/tkhlr_probe_hlrbrep_curve.cxx.
-use super::common::{Reader, attempt, end, int, pnt, pnt2d, real, show, xy};
-use super::hlrbrep_fixtures::{circ2d, edge, elips2d, lin2d, projector};
+use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real, show, xy};
+use super::hlrbrep_fixtures::{circ2d, domain, edge, elips2d, lin2d, projector};
+use super::int_res2d::inter;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkhlr::hlr_algo::init_min_max;
-use rustycad_tkhlr::hlr_brep::{BCurveTool, Curve};
+use rustycad_tkhlr::hlr_brep::{BCurveTool, CInter, Curve, CurveTool, TheProjPCurOfCInter};
 use rustycad_tkmath::geom_abs::CurveType;
 use rustycad_tkmath::gp::{Point2, Vector2};
 use std::sync::Arc;
@@ -138,6 +139,88 @@ pub fn curve_case(values: &[f64]) {
         }
         curve_conics(&c);
         curve_poles(&c)
+    });
+    end();
+}
+
+fn curve_tool(c: &Curve) {
+    show(CurveTool::nb_samples(c), int);
+    attempt(|| {
+        let (first, last) = (
+            CurveTool::first_parameter(c)?,
+            CurveTool::last_parameter(c)?,
+        );
+        int(CurveTool::nb_samples_in(c, first, last)?);
+        Ok(())
+    });
+    attempt(|| {
+        let n = CurveTool::nb_intervals(c)?;
+        int(n);
+        let mut tab = Array1::with_bounds(1, n + 1).expect("probe intervals");
+        CurveTool::intervals(c, &mut tab)?;
+        tab.iter().for_each(|v| real(*v));
+        let (a, b) = CurveTool::get_interval(c, 1, &tab)?;
+        real(a);
+        real(b);
+        Ok(())
+    });
+    int(CurveTool::the_type(c) as i32);
+    flag(CurveTool::bezier(c).is_null());
+    flag(CurveTool::bspline(c).is_null());
+}
+
+fn cinter(c1: &Curve, c2: &Curve, tc: f64, t: f64, mode: i32) -> Result<(), Failure> {
+    let mut i = CInter::new();
+    let (d1, d2) = (i.compute_domain(c1, t)?, i.compute_domain(c2, t)?);
+    domain(&d1)?;
+    match mode {
+        0 => i.perform(c1, &d1, c2, &d2, tc, t)?,
+        1 => i.perform_between(c1, c2, tc, t)?,
+        2 => i.perform_self_on(c1, &d1, tc, t)?,
+        _ => i.perform_self(c1, tc, t)?,
+    }
+    inter(&i)
+}
+
+fn updated_pair(r: &mut Reader) -> Result<(Curve, Curve), Failure> {
+    let projector = Arc::new(projector(r)?);
+    let (e1, e2) = (edge(r)?, edge(r)?);
+    let (mut c1, mut c2) = (Curve::new(), Curve::new());
+    c1.set_projector(Some(projector.clone()));
+    c1.set_curve(&e1)?;
+    c2.set_projector(Some(projector));
+    c2.set_curve(&e2)?;
+    Ok((c1, c2))
+}
+
+fn projected_middle(c1: &Curve, c2: &Curve, t: f64) -> Result<(), Failure> {
+    let (first, last) = (
+        CurveTool::first_parameter(c1)?,
+        CurveTool::last_parameter(c1)?,
+    );
+    let p = CurveTool::value(c1, (first + last) / 2.)?;
+    real(TheProjPCurOfCInter::find_parameter(c2, p, t)?);
+    Ok(())
+}
+
+/// `projector edge1 edge2 tolconf tol mode`: see `hb_cinter_case`.
+pub fn cinter_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    attempt(|| {
+        let (mut c1, mut c2) = updated_pair(&mut r)?;
+        let (tc, t, mode) = (r.real(), r.real(), r.integer());
+        let (mut mn, mut mx) = ([0.; 16], [0.; 16]);
+        init_min_max(1e100, &mut mn, &mut mx);
+        attempt(|| {
+            c1.update(&mut mn, &mut mx)?;
+            c2.update(&mut mn, &mut mx)?;
+            curve_tool(&c1);
+            curve_tool(&c2);
+            attempt(|| projected_middle(&c1, &c2, t));
+            attempt(|| cinter(&c1, &c2, tc, t, mode));
+            Ok(())
+        });
+        Ok(())
     });
     end();
 }
