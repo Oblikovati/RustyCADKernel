@@ -240,8 +240,9 @@ impl MMgrOpt {
         let Some(storage) = storage else {
             return Ok(());
         };
-        let round_size = self.claim(storage)?;
+        let round_size = self.round_size_of(storage)?;
         notify(false, storage, round_size, 0);
+        self.retire_notified_storage(storage);
         let block = storage.get() - WORD * BLOCK_SHIFT;
         let index = index_cell(round_size);
         if index > self.free_list_max {
@@ -356,11 +357,10 @@ impl MMgrOpt {
         Ok(address)
     }
 
-    /// Takes a live block back from the caller, returning its rounded size.
-    fn claim(&mut self, storage: StorageAddress) -> Result<usize, Failure> {
-        let round_size = self.round_size_of(storage)?;
+    /// Takes a live block back from the caller after its notification completes.
+    fn retire_notified_storage(&mut self, storage: StorageAddress) {
+        // OCCT Free notifies before mutation; a callback unwind must leave this handle live.
         self.live.remove(&storage.get());
-        Ok(round_size)
     }
 
     fn round_size_of(&self, storage: StorageAddress) -> Result<usize, Failure> {
