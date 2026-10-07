@@ -5,7 +5,7 @@ use std::fmt::Debug;
 impl<T> DynamicArray<T> {
     /// Appends a copy of an existing logical item after allocating its destination block.
     /// `array.append_from_index_with_constructor(0, |source| *source)?`.
-    /// This represents native Append(array[index]); no Clone or Default bound is required.
+    /// This represents native `Append(array[index])`; no Clone or Default bound is required.
     pub fn append_from_index_with_constructor<I: TryInto<usize> + Copy + Debug>(
         &mut self,
         source_index: I,
@@ -21,7 +21,7 @@ impl<T> DynamicArray<T> {
 
     /// Move-constructs an appended item from an existing logical donor that remains in the array.
     /// `array.append_moved_from_index_with_constructor(0, std::mem::take)?`.
-    /// This represents native Append(std::move(array[index])). A constructor panic retains
+    /// This represents native `Append(std::move(array[index]))`. A constructor panic retains
     /// the old logical size and any donor mutation; its block allocation is retained for retry.
     pub fn append_moved_from_index_with_constructor<I: TryInto<usize> + Copy + Debug>(
         &mut self,

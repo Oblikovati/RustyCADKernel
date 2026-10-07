@@ -19,6 +19,7 @@ impl MMgrOpt {
     }
 
     fn pool_size(&self) -> usize {
+        // Native FreePools recomputes this from current settings, even after Initialize.
         self.page_size.wrapping_mul(self.nb_pages as usize)
     }
 
@@ -27,7 +28,11 @@ impl MMgrOpt {
         pools: &[usize],
         pool_size: usize,
     ) -> Result<(), Failure> {
-        let indexes: Vec<usize> = self.free_lists.keys().copied().collect();
+        let indexes: Vec<usize> = self
+            .free_lists
+            .heads()?
+            .filter_map(|(index, head)| (head != 0).then_some(index))
+            .collect();
         for index in indexes {
             self.rebuild_free_list_without_pools(index, pools, pool_size)?;
         }
@@ -42,7 +47,7 @@ impl MMgrOpt {
     ) -> Result<(), Failure> {
         let mut blocks = self.free_list_blocks(index)?;
         blocks.retain(|block| !is_in_pool(*block, pools, pool_size));
-        self.free_lists.remove(&index);
+        self.set_head(index, 0)?;
         for block in blocks.into_iter().rev() {
             self.push_free(index, block)?;
         }
@@ -51,7 +56,7 @@ impl MMgrOpt {
 
     fn free_list_blocks(&self, index: usize) -> Result<Vec<usize>, Failure> {
         let mut blocks = Vec::new();
-        let mut block = self.free_lists.get(&index).copied().unwrap_or(0);
+        let mut block = self.free_lists.head(index)?;
         while block != 0 {
             blocks.push(block);
             block = self
@@ -63,6 +68,7 @@ impl MMgrOpt {
     }
 
     fn invalid_pool_link(&self, block: usize) -> Failure {
+        // Invalid intrusive links use the same header diagnosis as allocation-bound failures.
         super::header_overflow(block, 0)
     }
 
@@ -84,7 +90,7 @@ impl MMgrOpt {
     }
 }
 
-fn is_in_pool(address: usize, pools: &[usize], pool_size: usize) -> bool {
+pub(super) fn is_in_pool(address: usize, pools: &[usize], pool_size: usize) -> bool {
     pools
         .iter()
         .any(|pool| address.wrapping_sub(*pool) < pool_size)

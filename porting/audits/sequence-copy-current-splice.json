@@ -1,0 +1,32 @@
+{
+  "schema": "rustycad.sequence-copy-current-splice.v1",
+  "status": "partial_current_body_proof",
+  "scope": "Superseding current proof of both copy constructors and Sequence Assign/copy-operator after neighbor insertion fix. All previous behavior/status obligations preserved; historical receipts byte-identical.",
+  "historical_receipts": [
+    "porting/audits/hsequence-copy-construction.json",
+    "porting/audits/sequence-assignment-policy.json",
+    "porting/audits/sequence-copy-construction-current-assignment.json"
+  ],
+  "current_primary_receipt": "porting/audits/sequence-splice-max.json",
+  "current_primary_receipt_sha256": "41cbbc3bf20fe86dfabf9bc280647aed4fd8bee0434262d05963758aef1497d7",
+  "bindings_path": "porting/runtime-evidence/sequence-splice-max-prior-bindings.json.gz",
+  "bindings_sha256": "4f9c9962c05d9b0dc3a3d908341874bed9ed896b4f1d2613badf60751d0718ea",
+  "preserved_bodies_path": "porting/runtime-evidence/sequence-splice-max-preserved.json.gz",
+  "preserved_bodies_sha256": "87fbdcbe57e5776eb5294b4d747f022cbb5ad1ba2871d68f616b8595c1b4af34",
+  "native_ids": [
+    "0fdc7d1765ad406be5253a7c95806ce13355414716eff14512da45af26a5c095",
+    "e2316d434c3d8ed32574efafc55e0e4a55993b6aac3b231679863f19365f8643",
+    "06254ed754485fc10d71c972779d99bce5cc0f3d370414d3ecb4dc72ee456bef",
+    "b68e5aaca70428ecd6149f219ee7934f927b5084a9fce2e0b3dbb26e51e77393"
+  ],
+  "public_body_bindings": 11,
+  "partial_status_unchanged": true,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sequence/operations.rs": "834abc2c9793dda297e7aea7114f85ef3f888b7a010c586109ed649a494fc0d9",
+    "crates/tkernel/src/ncollection/sequence/copy_construction.rs": "6c1497d29c679a895561ad17660eae3f7d4bb18dfe9eb70fcdd2b8d2d8bbebe2",
+    "crates/tkernel/src/ncollection/sequence/copy_assignment.rs": "ad38d332d10393415654356f4a55718e5822e5cb91b7c4984c48c67a9972962e",
+    "crates/tkernel/src/ncollection/sequence/method_contracts.rs": "de6e4f4d8a487f4a2fb11ea91e6f0034468e2867870c6d2b52c7d7fc7134e117",
+    "crates/tkernel/src/ncollection/h_sequence/copy_construction.rs": "d521de9946841d9a8e307cadd737c9ecd0da29934c3b3ce162fe141cfda1f3ab"
+  },
+  "replay_command": "gzip -dc porting/runtime-evidence/sequence-splice-max-replay.py.gz > /tmp/replay-sequence-splice-max.py && python3 /tmp/replay-sequence-splice-max.py \"$PWD\""
+}

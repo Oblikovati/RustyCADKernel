@@ -47,10 +47,63 @@ impl<T> Array1<'_, T> {
             count == 0 || size_of::<T>() > 0,
             "element size 0; expected nonzero size for {count} construction slots"
         );
-        for offset in 0..count {
-            let value = construct(unsafe { &*source.add(offset) });
-            // MaybeUninit retains the native caller-owned prefix during unwinding.
-            unsafe { target.add(offset).write(MaybeUninit::new(value)) };
-        }
+        unsafe { construct_raw_range(target, 0, count, |offset| construct(&*source.add(offset))) };
+    }
+
+    /// Default-constructs a native nontrivial raw range with caller-owned prefix recovery.
+    ///
+    /// ```
+    /// use rustycad_tkernel::ncollection::Array1;
+    /// use std::mem::MaybeUninit;
+    /// let mut slots = [MaybeUninit::<String>::uninit()];
+    /// unsafe {
+    ///     Array1::construct_nontrivial_raw(slots.as_mut_ptr(), 0, 1, String::new);
+    ///     slots[0].assume_init_drop();
+    /// }
+    /// ```
+    ///
+    /// The callback creates a value before writing its slot. Native constructors
+    /// observing their placement address or failing-slot bytes need a separate policy.
+    ///
+    /// # Safety
+    /// For a nonempty range and nonzero-sized `T`, each `target.add(index)` in
+    /// `from..to` must designate writable aligned `MaybeUninit<T>` storage within
+    /// one allocation and `isize::MAX` bytes, with valid provenance and no conflicting
+    /// references. The callback must not reenter the destination through aliases.
+    /// Existing payloads are not implicitly destroyed when slots are overwritten.
+    ///
+    /// Caller owns every completed slot, including the prefix after a panic; track
+    /// successful callbacks to recover its length, then move or destroy only those
+    /// initialized slots. Neither unwinding nor returning cleans this prefix. Empty
+    /// and reversed ranges permit null pointers without invoking the callback.
+    ///
+    /// # Panics
+    /// Nonempty zero-sized `T` is rejected before pointer arithmetic; constructor
+    /// panic payloads propagate unchanged without initializing remaining slots.
+    pub unsafe fn construct_nontrivial_raw(
+        target: *mut MaybeUninit<T>,
+        from: usize,
+        to: usize,
+        mut construct: impl FnMut() -> T,
+    ) {
+        assert!(
+            from >= to || size_of::<T>() > 0,
+            "element size 0; expected nonzero size for construction range {from}..{to}"
+        );
+        unsafe { construct_raw_range(target, from, to, |_| construct()) };
+    }
+}
+
+#[allow(unsafe_code)]
+unsafe fn construct_raw_range<T>(
+    target: *mut MaybeUninit<T>,
+    from: usize,
+    to: usize,
+    mut construct: impl FnMut(usize) -> T,
+) {
+    for offset in from..to {
+        let value = construct(offset);
+        // MaybeUninit retains the native caller-owned prefix during unwinding.
+        unsafe { target.add(offset).write(MaybeUninit::new(value)) };
     }
 }

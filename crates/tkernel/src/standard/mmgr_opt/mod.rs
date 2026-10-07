@@ -6,9 +6,11 @@
 use super::mmgr_root::{MMgrRoot, StorageAddress};
 use super::{Failure, exceptions};
 use address_space::{AddressSpace, WORD};
-use std::collections::{BTreeMap, BTreeSet};
+use free_list_slots::NativeFreeListSlots;
+use std::collections::BTreeSet;
 use std::sync::RwLock;
 mod address_space;
+mod free_list_slots;
 mod free_pools;
 mod initialize;
 mod mapped_region;
@@ -60,7 +62,7 @@ pub struct MMgrOpt {
     page_size: usize,
     threshold: usize,
     free_list_max: usize,
-    free_lists: BTreeMap<usize, usize>,
+    free_lists: NativeFreeListSlots,
     alloc_list: usize,
     next_addr: usize,
     end_block: usize,
@@ -240,11 +242,10 @@ impl MMgrOpt {
         let Some(storage) = storage else {
             return Ok(());
         };
-        let round_size = self.round_size_of(storage)?;
+        let (round_size, index) = self.validate_release(storage)?;
         notify(false, storage, round_size, 0);
         self.retire_notified_storage(storage);
         let block = storage.get() - WORD * BLOCK_SHIFT;
-        let index = index_cell(round_size);
         if index > self.free_list_max {
             self.free_memory(block);
             return Ok(());
@@ -320,29 +321,35 @@ impl MMgrOpt {
     }
 
     fn pop_free(&mut self, index: usize) -> Result<Option<usize>, Failure> {
-        let Some(&block) = self.free_lists.get(&index) else {
+        let block = self.free_lists.head(index)?;
+        if block == 0 {
             return Ok(None);
-        };
+        }
         let next = self.read_link(block)?;
-        self.set_head(index, next);
+        self.set_head(index, next)?;
         Ok(Some(block))
     }
 
     fn push_free(&mut self, index: usize, block: usize) -> Result<(), Failure> {
-        let head = self.free_lists.get(&index).copied().unwrap_or(0);
+        let head = self.free_lists.head(index)?;
         self.space
             .write_word(block, head)
             .ok_or_else(|| header_overflow(block, 0))?;
-        self.set_head(index, block);
-        Ok(())
+        self.set_head(index, block)
     }
 
-    fn set_head(&mut self, index: usize, block: usize) {
-        if block == 0 {
-            self.free_lists.remove(&index);
-        } else {
-            self.free_lists.insert(index, block);
+    fn set_head(&mut self, index: usize, block: usize) -> Result<(), Failure> {
+        // The contiguous slot is the sole current head authority, including an explicit zero.
+        self.free_lists.set_head(index, block)
+    }
+
+    fn validate_release(&self, storage: StorageAddress) -> Result<(usize, usize), Failure> {
+        let round_size = self.round_size_of(storage)?;
+        let index = index_cell(round_size);
+        if index <= self.free_list_max {
+            self.free_lists.validate_index(index)?;
         }
+        Ok((round_size, index))
     }
 
     fn read_link(&self, block: usize) -> Result<usize, Failure> {

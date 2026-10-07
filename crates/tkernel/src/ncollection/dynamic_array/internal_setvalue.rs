@@ -71,7 +71,8 @@ impl<T: Default> DynamicArray<T> {
         let source = self.logical_source_index(source_index)?;
         self.ensure_storage_for_index(index);
         let constructor = |array: &mut Self| {
-            construct(&mut array.blocks[source / array.increment][source % array.increment])
+            let (block, offset) = array.element_coordinates(source);
+            construct(&mut array.blocks[block][offset])
         };
         if index >= self.used {
             self.emplace_new(index, constructor);
