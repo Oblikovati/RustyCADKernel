@@ -220421,6 +220421,400 @@
       "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena). Additive CellGeometry policy and try_inspect_with/try_inspect_range_with preserve native throwing-callback early stop and prior purges while retaining existing CellInspector entry points."
     },
     {
+      "upstream_id": "NCollection_CellFilter",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "implemented",
+      "notes": "Class template NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>."
+    },
+    {
+      "upstream_id": "CellFilter_Keep",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellAction::Keep",
+      "status": "implemented",
+      "notes": "Inspector result keeping the target."
+    },
+    {
+      "upstream_id": "CellFilter_Purge",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellAction::Purge",
+      "status": "implemented",
+      "notes": "Inspector result removing the target."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Point",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellInspector::Point",
+      "status": "implemented",
+      "notes": "Inspector::Point typedef is the CellInspector::Point associated type."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Target",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellInspector::Target",
+      "status": "implemented",
+      "notes": "Inspector::Target typedef is the CellInspector::Target associated type."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::CellIndex",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected typedef NCollection_LocalArray<int, 10>; The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell_IndexType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected typedef int of one cell coordinate; Rust spells i32."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::CellMap",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected typedef of the cell map; private Map<CellFilterCell, CellFilterCellHasher> state of CellFilter."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::myAllocator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected arena handle; private state of CellFilter, replaced by reset/reset_allocator."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::myCellSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected per-axis cell sizes; private state of CellFilter set by with_sizes/reset_sizes."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::myCells",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected map of populated cells; private state of CellFilter."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::myDim",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected dimension; private state of CellFilter (CellInspector::DIMENSION or with_dimension)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell",
+      "status": "implemented",
+      "notes": "Protected cell record is CellFilterCell<T>."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::Cell(const NCollection_CellFilter::CellIndex&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::from_indices",
+      "status": "implemented",
+      "notes": "Cell from integer coordinates. The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::Cell(const NCollection_CellFilter::Point&,const NCollection_Array1<double>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::from_point",
+      "status": "implemented",
+      "notes": "Cell containing a point for the given per-axis sizes (native floor of coordinate / size)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::Cell(NCollection_CellFilter::Cell&&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::move_construct",
+      "status": "implemented",
+      "notes": "Move construction transfers index storage and targets, leaving the source empty as natively."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::IsEqual(const NCollection_CellFilter::Cell&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::is_equal",
+      "status": "implemented",
+      "notes": "Coordinate-wise equality of two cells."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::operator==(const NCollection_CellFilter::Cell&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::<core::cmp::PartialEq>::eq",
+      "status": "implemented",
+      "notes": "operator== forwards to IsEqual."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::index",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::index",
+      "status": "implemented",
+      "notes": "Public coordinate array; read through index() as &[i32]. The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Cell::Objects",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::targets",
+      "status": "partial",
+      "notes": "Public head of the intrusive target list; Rust keeps the newest-first list private and exposes it as the targets() iterator (prepend_target to add)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::CellHasher",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCellHasher",
+      "status": "implemented",
+      "notes": "Protected cell hasher is CellFilterCellHasher, a HashPolicy for CellFilterCell."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::CellHasher::operator()(const NCollection_CellFilter::Cell&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::hash",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::hash",
+          "declaration_sha256": "a906cea3ed3e917d25cfb9fc3ed1eb7e5f531c56f63cb939371badb433f44617",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "CellFilterCellHasher",
+                "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCellHasher"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "path": "CellFilterCell",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "HashPolicy",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy"
+            }
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Native cell hash (HashCode over the coordinates) through HashPolicy::hash."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::CellHasher::operator()(const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::equal",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::equal",
+          "declaration_sha256": "a43831d10228de7f07f1c1b37d6b90d4aeb3250577669f64096b80b8b9026d4a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "CellFilterCellHasher",
+                "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCellHasher"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "T"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "generic": "T"
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "path": "CellFilterCell",
+                          "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "HashPolicy",
+              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy"
+            }
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Cell equality through HashPolicy::equal."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::ListNode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Protected intrusive target-list node; Rust CellFilterCell owns its target list privately and exposes targets()/prepend_target."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::ListNode::ListNode()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Constructor of the protected intrusive list node; see NCollection_CellFilter::ListNode."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::ListNode::Object",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Target stored in the intrusive node; yielded by CellFilterCell::targets()."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::ListNode::Next",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Intrusive next link; private to the Rust target list behind CellFilterCell::targets()."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::add(const NCollection_CellFilter::CellIndex&,const NCollection_CellFilter::Target&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::add_index",
+      "status": "implemented",
+      "notes": "Protected add of a target to one cell. The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::remove(const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Target&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::remove_index",
+      "status": "implemented",
+      "notes": "Protected removal of all equal targets from one cell; the cell is given by its index slice."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::inspect(const NCollection_CellFilter::Cell&,Inspector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect_index",
+      "status": "implemented",
+      "notes": "Protected inspection of one cell, purging targets for which the inspector returns Purge."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::iterateAdd(int,NCollection_CellFilter::CellIndex&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Target&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::iterate_add_indices",
+      "status": "implemented",
+      "notes": "Protected recursion over a cell range adding a target; out-of-bounds axes return an error before mutation where native access is undefined."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::iterateRemove(int,NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Target&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::iterate_remove_indices",
+      "status": "implemented",
+      "notes": "Protected recursion over a cell range removing a target."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::iterateInspect(int,NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,Inspector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::iterate_inspect_indices",
+      "status": "implemented",
+      "notes": "Protected recursion over a cell range inspecting targets; axis zero varies fastest."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::resetAllocator(const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::reset_allocator",
+      "status": "implemented",
+      "notes": "Protected arena replacement clearing all cells while keeping dimension and sizes."
+    },
+    {
       "upstream_id": "HLRBRep_BCurveTool::FirstParameter(const BRepAdaptor_Curve&)",
       "toolkit": "TKHLR",
       "source": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_BCurveTool.hxx",
@@ -248893,6 +249287,578 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "C++ STL-protocol member typedef pointer (std::conditional<value-parameter-0-2, const type-parameter-0-1 *, type-parameter-0-1 *>::type) of NCollection_SparseArrayBase::BasicIterator. Rust SparseArrayBase spells &mut T / *mut T in its accessors; there is no named alias to map."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator",
+      "status": "implemented",
+      "notes": "Protected typed iterator template is BaseSparseArrayBasicIterator<'a, C, V, MUTABLE>."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Default iterator without container."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>(const BasicIterator<TheContainer,TheValue,NCollection_SparseArrayBase::BasicIterator::IsConstant>&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::<core::clone::Clone>::clone",
+      "status": "implemented",
+      "notes": "Copy construction of the cursor (Copy + Clone)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>(const NCollection_SparseArrayBase::BasicIterator<TheContainer,TheValue,false>&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::as_const",
+      "status": "implemented",
+      "notes": "Conversion from the mutable to the const iterator; Rust converts with as_const() on the source cursor."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>(const TheContainer&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::new",
+      "status": "implemented",
+      "notes": "Starts at the first present item of the container."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>(TheContainer&) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::new",
+      "status": "implemented",
+      "notes": "Starts at the first present item; constness is the MUTABLE parameter of the same generic new."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>(const TheContainer&,const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::from_index",
+      "status": "implemented",
+      "notes": "Starts at the first present item at or after the index."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::BasicIterator<TheContainer, TheValue, IsConstant>(TheContainer&,const size_t) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::from_index",
+      "status": "implemented",
+      "notes": "Mutable form of the index constructor; same generic from_index."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::More() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::more",
+      "status": "implemented",
+      "notes": "True while the cursor addresses a present item."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::Key() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::key",
+      "status": "implemented",
+      "notes": "Index of the current item (Key spelling)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::Index() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::index",
+      "status": "implemented",
+      "notes": "Index of the current item: block * block size + offset."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::Restart() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::restart",
+      "status": "implemented",
+      "notes": "Rewinds to the first present item."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator++() noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::advance_returning",
+      "status": "implemented",
+      "notes": "Prefix increment to the next present item."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator++(int) noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::advance_post",
+      "status": "implemented",
+      "notes": "Postfix increment returning the previous cursor."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator*() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::dereference",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::dereference",
+          "declaration_sha256": "3b22439a4ed2e492d956c00a998344c9fedfd08a566526578fa98a265fcac19d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSparseArrayBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BaseSparseArrayBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "V"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "BasicSparseArraySource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BasicSparseArraySource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::dereference",
+          "declaration_sha256": "9efbc28933401575e1ca216641d1dcac2d51727a44eac379f954b639dfa08465",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSparseArrayBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BaseSparseArrayBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "V"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "BasicSparseArraySourceMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BasicSparseArraySourceMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Current item reference; the IsConstant parameter maps to the MUTABLE=false/true impls (both selected). Unsafe: the caller proves the item is present."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator->() const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::arrow",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::arrow",
+          "declaration_sha256": "cfaae64263493cf22ed5cf9913a5f16a943aa54248b21b6c0396af599aba2b9c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "false",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSparseArrayBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BaseSparseArrayBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "V"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "BasicSparseArraySource",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BasicSparseArraySource"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        },
+        {
+          "path": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::arrow",
+          "declaration_sha256": "5ce22a63e274842d5d154f37918025ab3bca3d28e2ef6fcbe6bf91f8e1be9b81",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "generic": "C"
+                        }
+                      },
+                      {
+                        "type": {
+                          "generic": "V"
+                        }
+                      },
+                      {
+                        "const": {
+                          "expr": "true",
+                          "is_literal": true,
+                          "value": null
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "super::BaseSparseArrayBasicIterator",
+                "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BaseSparseArrayBasicIterator"
+              }
+            },
+            "generics": {
+              "params": [
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [
+                        {
+                          "trait_bound": {
+                            "generic_params": [],
+                            "modifier": "none",
+                            "trait": {
+                              "args": {
+                                "angle_bracketed": {
+                                  "args": [
+                                    {
+                                      "type": {
+                                        "generic": "V"
+                                      }
+                                    }
+                                  ],
+                                  "constraints": []
+                                }
+                              },
+                              "path": "BasicSparseArraySourceMut",
+                              "resolved_item_path": "rustycad_tkernel::ncollection::sparse_array_base::basic_iterator::BasicSparseArraySourceMut"
+                            }
+                          }
+                        }
+                      ],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "C"
+                },
+                {
+                  "kind": {
+                    "type": {
+                      "bounds": [],
+                      "default": null,
+                      "is_synthetic": false
+                    }
+                  },
+                  "name": "V"
+                }
+              ],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "partial",
+      "notes": "Current item address; MUTABLE=false/true impls (both selected)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator==(const NCollection_SparseArrayBase::BasicIterator<TheContainer,TheValue,theOtherIsConstant>&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::is_equal",
+      "status": "implemented",
+      "notes": "Cross-constness comparison of container and position; is_equal<O> (the PartialEq impl delegates to it)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::BasicIterator::operator!=(const NCollection_SparseArrayBase::BasicIterator<TheContainer,TheValue,theOtherIsConstant>&) const noexcept",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseSparseArrayBasicIterator::is_equal",
+      "status": "implemented",
+      "notes": "Negation of is_equal<O>."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::CreateItemFunc",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseCreateItemFunc",
+      "status": "implemented",
+      "notes": "Copy-construction callback typedef is SparseCreateItemFunc."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::CopyItemFunc",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseCopyItemFunc",
+      "status": "implemented",
+      "notes": "Assignment callback typedef is SparseCopyItemFunc."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::DestroyItemFunc",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseDestroyItemFunc",
+      "status": "implemented",
+      "notes": "Destruction callback typedef is SparseDestroyItemFunc."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::myItemSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::item_size",
+      "status": "implemented",
+      "notes": "Protected item stride; read through item_size()."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::myBlockSize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::block_size",
+      "status": "implemented",
+      "notes": "Protected items per block; read through block_size()."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::myNbBlocks",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::block_slots",
+      "status": "implemented",
+      "notes": "Protected block-table length; read through block_slots()."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::mySize",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::size",
+      "status": "implemented",
+      "notes": "Protected item count; read through size()."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::myData",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::native_state",
+      "status": "partial",
+      "notes": "Protected block table; reachable through the unsafe native_state() state pointer (table field) and block_address(n) for reads."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::myDestroyItem",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArrayBase::native_state",
+      "status": "partial",
+      "notes": "Protected destruction callback; held in the state reached through the unsafe native_state() pointer."
     },
     {
       "notes": "Exact partial adapter, not full C++ template parity. Rust M is inverse native IsConstant; const construction/value policies use M=false and writable policies M=true. Explicit owner arguments preserve valid native identity domains; reference and explicit callback accessors share dispatch and Result propagation. Callbacks preserve returned R without Clone/Default bounds but do not automatically emulate arbitrary C++ user copy/move hooks. Signed arithmetic is credited only on native defined conversion/non-overflow domains; no ABI/noexcept/invalid raw owner claim. See porting/audits/base-map-indexed-method-tail.json.",
