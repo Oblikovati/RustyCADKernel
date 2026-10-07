@@ -401525,9 +401525,9 @@
       "upstream_id": "TDF_Label::operator!=",
       "toolkit": "TKLCAF",
       "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Label.hxx",
-      "rust_item": "rustycad_tklcaf::tdf::TdfLabel::<core::cmp::PartialEq>::ne",
+      "rust_item": "rustycad_tklcaf::tdf::TdfLabel::is_different",
       "status": "implemented",
-      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec."
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. operator!= is IsDifferent; the Rust != operator comes from PartialEq."
     },
     {
       "upstream_id": "TDF_Label::IsRoot",
@@ -402496,6 +402496,70 @@
       "rust_item": "rustycad_tklcaf::tdf::TdfTransaction::dump_json",
       "status": "implemented",
       "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Label.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. The friend declaration of std::hash in TDF_Label: Rust hashes labels through the Hash and HashKey impls of rustycad_tklcaf::tdf::TdfLabel (node address), claimed by the operator() row."
+    },
+    {
+      "upstream_id": "std::hash<TDF_Label>::operator()(const TDF_Label &) const",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Label.lxx",
+      "rust_item": "rustycad_tklcaf::tdf::TdfLabel::<rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. The node address, as the native specialization."
+    },
+    {
+      "upstream_id": "std::hash",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Label.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. std::hash<TDF_Label> specialization record; the Rust behavior is the HashKey impl of rustycad_tklcaf::tdf::TdfLabel, claimed by the operator() row."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream &,const TDF_Label &)",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Label.lxx",
+      "rust_item": "rustycad_tklcaf::tdf::TdfLabel::dump",
+      "status": "implemented",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. The free operator calls Dump."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream &,const occ::handle<TDF_Attribute> &)",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Attribute.lxx",
+      "rust_item": "rustycad_tklcaf::tdf::TdfAttribute::dump",
+      "status": "implemented",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. The free operator calls the virtual Dump."
+    },
+    {
+      "upstream_id": "(unnamed enum at /home/vmiguel/git/oblikovati-workspace/OCCT/src/ApplicationFramework/TKLCAF/TDF/TDF_Attribute.lxx:22:1)",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Attribute.lxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. Anonymous enum that only declares the attribute flag masks; Rust has no anonymous enum, its enumerators are the constants rustycad_tklcaf::tdf::VALID_MASK, BACKUP_MASK and FORGOTTEN_MASK, mapped by their own rows."
+    },
+    {
+      "upstream_id": "operator<<(Standard_OStream &,const occ::handle<TDF_Data> &)",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_Data.lxx",
+      "rust_item": "rustycad_tklcaf::tdf::TdfData::dump",
+      "status": "implemented",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. The free operator calls Dump."
+    },
+    {
+      "upstream_id": "(unnamed enum at /home/vmiguel/git/oblikovati-workspace/OCCT/src/ApplicationFramework/TKLCAF/TDF/TDF_LabelNode.hxx:33:1)",
+      "toolkit": "TKLCAF",
+      "source": "src/ApplicationFramework/TKLCAF/TDF/TDF_LabelNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "TDF mapping (docs/ocaf-design.md sections 2-5): TDF_Label is the value TdfLabel over an Arc of TdfLabelNode (identity and hash by node address); TDF_Attribute is the trait TdfAttribute (virtual members) plus the extension trait TdfAttributeState (non-virtual members) over the embedded TdfAttributeBase, with the native myNext/myBackup chains; TDF_Data keeps its state in a shared core reached by the nodes; exceptions and null dereferences are Failure errors; Standard_OStream is std::io::Write; NCollection_List outputs are Vec. Anonymous enum that only declares the label node flag masks; Rust has no anonymous enum, its enumerators are the constants rustycad_tklcaf::tdf::IMPORT_MASK, ATTRIBUTES_MODIFIED_MASK, MAY_BE_MODIFIED_MASK and FLAGS_MASK, mapped by their own rows."
     }
   ],
   "tests": [
