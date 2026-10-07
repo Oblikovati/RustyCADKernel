@@ -400002,6 +400002,814 @@
       "notes": "PCDM mapping (docs/ocaf-design.md section 1): the driver interfaces are traits over embedded bases (PcdmReaderBase, PcdmRetrievalDriverBase, PcdmStorageDriverBase) reached through Handle<dyn Trait>; static members live on the base structs; Standard_IStream/OStream are std::io::Read/Write; occ::handle<Message_Messenger> is Arc<Messenger>; output sequences are Vec; exceptions are Failure errors."
     },
     {
+      "upstream_id": "CDF_TypeOfActivation",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_TypeOfActivation.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfTypeOfActivation",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_TOA_New",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_TypeOfActivation.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfTypeOfActivation::New",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_TOA_Modified",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_TypeOfActivation.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfTypeOfActivation::Modified",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_TOA_Unchanged",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_TypeOfActivation.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfTypeOfActivation::Unchanged",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_StoreSetNameStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreSetNameStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreSetNameStatus",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_SSNS_OK",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreSetNameStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreSetNameStatus::Ok",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_SSNS_ReplacingAnExistentDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreSetNameStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreSetNameStatus::ReplacingAnExistentDocument",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_SSNS_OpenDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreSetNameStatus.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreSetNameStatus::OpenDocument",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::CDF_Application",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The protected constructor is the Default of the embedded base: status OK, an empty directory and a CDF_FWOSDriver over the shared meta-data table."
+    },
+    {
+      "upstream_id": "CDF_Application::Load",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::load",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. Plugin::Load through the native resource lookup; the port registers no native library, so only an injected loader can make an application."
+    },
+    {
+      "upstream_id": "CDF_Application::NewDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplication::new_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::InitDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplication::init_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::Open",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::open_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::CanClose",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::can_close_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::Close",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::close_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::Retrieve(const TCollection_ExtendedString &,const TCollection_ExtendedString &,const bool,const occ::handle<PCDM_ReaderFilter> &,const Message_ProgressRange &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::retrieve_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::Retrieve(const TCollection_ExtendedString &,const TCollection_ExtendedString &,const TCollection_ExtendedString &,const bool,const occ::handle<PCDM_ReaderFilter> &,const Message_ProgressRange &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::retrieve_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::CanRetrieve(const TCollection_ExtendedString &,const TCollection_ExtendedString &,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::can_retrieve",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::CanRetrieve(const TCollection_ExtendedString &,const TCollection_ExtendedString &,const TCollection_ExtendedString &,const bool)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::can_retrieve_version",
+      "status": "partial",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The format of a file comes from its extension resource only: the native header probe (native file formats, not ported by user decision 2026-09) answers as for a file in no native format."
+    },
+    {
+      "upstream_id": "CDF_Application::GetRetrieveStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::get_retrieve_status",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::Read",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::read_stream",
+      "status": "partial",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The stream format comes from a native container header (native file formats, not ported by user decision 2026-09); a stream in no native format gives PCDM_RS_FormatFailure without reading, as natively."
+    },
+    {
+      "upstream_id": "CDF_Application::ReaderFromFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplication::reader_from_format",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::WriterFromFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplication::writer_from_format",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::Format",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::format",
+      "status": "partial",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The native header probe (native file formats, not ported by user decision 2026-09) answers as for a file in no native format; the extension resource fallback is native."
+    },
+    {
+      "upstream_id": "CDF_Application::DefaultFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::default_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::SetDefaultFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::set_default_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::MetaDataDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationServices::meta_data_driver",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Application::myMetaDataDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::meta_data_driver_field",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The public field is read by meta_data_driver_field and assigned by set_meta_data_driver."
+    },
+    {
+      "upstream_id": "CDF_Application::myDirectory",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::directory",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The public field is read by directory and assigned by set_directory."
+    },
+    {
+      "upstream_id": "CDF_Application::myRetrievableStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::retrievable_status",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The protected field is read by retrievable_status and assigned by set_retrievable_status."
+    },
+    {
+      "upstream_id": "CDF_Application::myReaders",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::readers",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The protected map is lent through its write guard."
+    },
+    {
+      "upstream_id": "CDF_Application::myWriters",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Application.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfApplicationBase::writers",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The protected map is lent through its write guard."
+    },
+    {
+      "upstream_id": "CDF_Directory::CDF_Directory",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::new",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Directory::Add",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::add",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Directory::Remove",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::remove",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Directory::Contains",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::contains",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Directory::Last",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::last",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Directory::Length",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::length",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Directory::IsEmpty",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Directory.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectory::is_empty",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_DirectoryIterator::CDF_DirectoryIterator()",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectoryIterator::new",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_DirectoryIterator::CDF_DirectoryIterator(const occ::handle<CDF_Directory> &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectoryIterator::with_directory",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The iterator walks a copy of the list taken at creation."
+    },
+    {
+      "upstream_id": "CDF_DirectoryIterator::MoreDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectoryIterator::more_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_DirectoryIterator::NextDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectoryIterator::next_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_DirectoryIterator::Document",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfDirectoryIterator::document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::CDF_FWOSDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::new",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The native pointer to the application's table is the shared SharedMetaDataLookUpTable."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::Find",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::<rustycad_tkcdf::cdf::CdfMetaDataDriver>::find",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::HasReadPermission",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::<rustycad_tkcdf::cdf::CdfMetaDataDriver>::has_read_permission",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::FindFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::<rustycad_tkcdf::cdf::CdfMetaDataDriver>::find_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::DefaultFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::<rustycad_tkcdf::cdf::CdfMetaDataDriver>::default_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::BuildFileName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::<rustycad_tkcdf::cdf::CdfMetaDataDriver>::build_file_name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_FWOSDriver::SetName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_FWOSDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfFwosDriver::<rustycad_tkcdf::cdf::CdfMetaDataDriver>::set_name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::CDF_MetaDataDriver",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The protected constructor initializes no field: CDF_MetaDataDriver is the stateless trait rustycad_tkcdf::cdf::CdfMetaDataDriver, whose implementations construct themselves (rustycad_tkcdf::cdf::CdfFwosDriver::new)."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::HasVersionCapability",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::has_version_capability",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::CreateDependsOn",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::create_depends_on",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::CreateReference",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::create_reference",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::HasVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::has_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::BuildFileName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::build_file_name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::SetName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::set_name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::Find(const TCollection_ExtendedString &,const TCollection_ExtendedString &,const TCollection_ExtendedString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::find",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::Find(const TCollection_ExtendedString &,const TCollection_ExtendedString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::find_without_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::HasReadPermission",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::has_read_permission",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::MetaData(const TCollection_ExtendedString &,const TCollection_ExtendedString &,const TCollection_ExtendedString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::meta_data",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::MetaData(const TCollection_ExtendedString &,const TCollection_ExtendedString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::meta_data_without_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::LastVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::last_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::CreateMetaData",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::create_meta_data",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::FindFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::find_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::DefaultFolder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::default_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_MetaDataDriver::ReferenceIterator",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_MetaDataDriver.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfMetaDataDriver::reference_iterator",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::CDF_Store",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::new",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::Folder",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::Name",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::IsStored",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::is_stored",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::IsModified",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::is_modified",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::CurrentIsConsistent",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::current_is_consistent",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::IsConsistent",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::is_consistent",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::HasAPreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::has_a_previous_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::PreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::previous_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::IsMainDocument",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::is_main_document",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetFolder(const TCollection_ExtendedString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_folder",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetFolder(const char16_t *const)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_folder_units",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetName(const TCollection_ExtendedString &)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetName(const char16_t *const)",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_name_units",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetComment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_comment",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::Comment",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::comment",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::RecheckName",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::recheck_name",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetPreviousVersion",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_previous_version",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::Realize",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::realize",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::Path",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::path",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The returned C string is a copy of the path."
+    },
+    {
+      "upstream_id": "CDF_Store::MetaDataPath",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::meta_data_path",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::Description",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::description",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetCurrent",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_current",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::SetMain",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::set_main",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::StoreStatus",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::store_status",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_Store::AssociatedStatusText",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_Store.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStore::associated_status_text",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The returned C string is a copy of the text."
+    },
+    {
+      "upstream_id": "CDF_StoreList::CDF_StoreList",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::new",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_StoreList::IsConsistent",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::is_consistent",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_StoreList::Store",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::store",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_StoreList::Init",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::init",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors. The iteration walks the documents of the native map in its iteration order (by handle address)."
+    },
+    {
+      "upstream_id": "CDF_StoreList::More",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::more",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_StoreList::Next",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::next",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
+      "upstream_id": "CDF_StoreList::Value",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/CDF/CDF_StoreList.hxx",
+      "rust_item": "rustycad_tkcdf::cdf::CdfStoreList::value",
+      "status": "implemented",
+      "notes": "CDF mapping (docs/ocaf-design.md section 6): CDF_Application is the trait CdfApplication (virtual members) plus the extension trait CdfApplicationServices (non-virtual members) over the embedded CdfApplicationBase, which embeds the CDM base; a concrete application fills its CdmApplication impl with cdf_application_cdm_members!; CDF_MetaDataDriver is a trait; Plugin::Load is an injectable loader (native_plugin_load by default); the native header probes answer as for a file in no native format (native formats are not ported); exceptions are Failure errors."
+    },
+    {
       "upstream_id": "TDF::LowestID",
       "toolkit": "TKLCAF",
       "source": "src/ApplicationFramework/TKLCAF/TDF/TDF.hxx",
@@ -507638,6 +508446,76 @@
       "rust_target": "pcdm_read_writer",
       "rust_test": "PCDM_ReadWriterTest__RejectMalformedReferenceWithoutChangingOutputs",
       "rust_source": "crates/tkcdf/tests/pcdm_read_writer.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CDF_ApplicationTest.FormatFromExtensionResource",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/CDF_Application_Test.cxx",
+      "source_sha256": "ca445b8ad1d16c9bde8627dd7d85aa7f852580597bf159f24470560cd8039067",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "cdf_application",
+      "rust_test": "CDF_ApplicationTest__FormatFromExtensionResource",
+      "rust_source": "crates/tkcdf/tests/cdf_application.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CDF_ApplicationTest.ExtensionlessFileHasNoFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/CDF_Application_Test.cxx",
+      "source_sha256": "ca445b8ad1d16c9bde8627dd7d85aa7f852580597bf159f24470560cd8039067",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "cdf_application",
+      "rust_test": "CDF_ApplicationTest__ExtensionlessFileHasNoFormat",
+      "rust_source": "crates/tkcdf/tests/cdf_application.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CDF_ApplicationTest.EmptyExtensionHasNoFormat",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/CDF_Application_Test.cxx",
+      "source_sha256": "ca445b8ad1d16c9bde8627dd7d85aa7f852580597bf159f24470560cd8039067",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "cdf_application",
+      "rust_test": "CDF_ApplicationTest__EmptyExtensionHasNoFormat",
+      "rust_source": "crates/tkcdf/tests/cdf_application.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CDF_FWOSDriverTest.ExistingReadableFile",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/CDF_FWOSDriver_Test.cxx",
+      "source_sha256": "6c157cdd40191e39391cd8f0b0172c30ec5f6dc2f6580882bc6f5aca4f57a54f",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "cdf_fwos_driver",
+      "rust_test": "CDF_FWOSDriverTest__ExistingReadableFile",
+      "rust_source": "crates/tkcdf/tests/cdf_fwos_driver.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CDF_FWOSDriverTest.MissingFileIsNotReadable",
+      "toolkit": "TKCDF",
+      "source": "src/ApplicationFramework/TKCDF/GTests/CDF_FWOSDriver_Test.cxx",
+      "source_sha256": "6c157cdd40191e39391cd8f0b0172c30ec5f6dc2f6580882bc6f5aca4f57a54f",
+      "rust_package": "rustycad-tkcdf",
+      "rust_target": "cdf_fwos_driver",
+      "rust_test": "CDF_FWOSDriverTest__MissingFileIsNotReadable",
+      "rust_source": "crates/tkcdf/tests/cdf_fwos_driver.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

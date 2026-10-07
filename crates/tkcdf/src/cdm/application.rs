@@ -25,24 +25,33 @@ use crate::pcdm::PcdmReaderFilter;
 /// meta-data of an application by conventional path.
 pub type MetaDataLookUpTable = DataMap<ExtendedString, Handle<CdmMetaData>>;
 
+/// The application's table shared with its meta-data driver (`CDF_FWOSDriver` keeps a
+/// pointer to it natively).
+pub type SharedMetaDataLookUpTable = Arc<SharedState<MetaDataLookUpTable>>;
+
 /// The private fields of `CDM_Application`; `CdmApplicationBase::default()` is the
 /// protected constructor (it creates the default messenger).
 pub struct CdmApplicationBase {
     this: OnceLock<WeakHandle<dyn CdmApplication>>,
     messenger: Arc<Messenger>,
-    meta_data_look_up_table: SharedState<MetaDataLookUpTable>,
+    meta_data_look_up_table: SharedMetaDataLookUpTable,
 }
 impl Default for CdmApplicationBase {
     fn default() -> Self {
         Self {
             this: OnceLock::new(),
             messenger: Arc::new(Messenger::new()),
-            meta_data_look_up_table: SharedState::new(MetaDataLookUpTable::default()),
+            meta_data_look_up_table: Arc::new(SharedState::new(MetaDataLookUpTable::default())),
         }
     }
 }
 
 impl CdmApplicationBase {
+    /// The shared table, for the drivers that keep a pointer to it;
+    /// `base.shared_meta_data_look_up_table()`.
+    pub fn shared_meta_data_look_up_table(&self) -> SharedMetaDataLookUpTable {
+        self.meta_data_look_up_table.clone()
+    }
     /// Records the owning handle of this application, once (ocaf-design.md section 2);
     /// `application.application_base().bind_self(&application)`.
     pub fn bind_self(&self, application: &Handle<dyn CdmApplication>) {
