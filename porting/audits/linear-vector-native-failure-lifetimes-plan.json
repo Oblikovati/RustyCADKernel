@@ -1,6 +1,6 @@
 {
   "schema": "rustycad.native-lifetime-followup.v1",
-  "status": "unpublished_resize_tail_implemented_pending_integration",
+  "status": "unpublished_tail_copy_and_fill_constructor_slices_implemented_growth_and_shrink_pending",
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "objective": "Preserve current OCCT unpublished-tail behavior; safe rollback is a temporary partial adapter, not an accepted replacement for native semantics.",
   "current_evidence": {
@@ -10,9 +10,10 @@
       "late-default",
       "late-fill"
     ],
-    "observed_gap": "Prior Resize/SetValue receipts recorded automatic Rust rollback. The native-tail slice replaces that policy with unpublished spare lifetimes; those historical receipts remain accurate for their archived commits. Outer constructor, growth allocation ownership, and destructive shrink exceptions remain subsequent slices.",
+    "observed_gap": "Prior Resize/SetValue receipts recorded automatic Rust rollback. Unpublished spare lifetimes and copy/fill constructor abandoned allocation ownership now have separate bounded receipts; historical receipts describe their archived commits. Growth relocation allocation ownership and destructive shrink exceptions remain required subsequent slices.",
     "implementation_receipt": "porting/audits/linear-vector-native-tail-methods.json",
-    "copy_constructor_receipt": "porting/audits/linear-vector-copy-constructor-methods.json"
+    "copy_constructor_receipt": "porting/audits/linear-vector-copy-constructor-methods.json",
+    "fill_constructor_receipt": "porting/audits/linear-vector-fill-constructor-methods.json"
   },
   "next_slice": {
     "name": "Preserve initialized spare slots on native tail-constructor failure",
@@ -57,14 +58,6 @@
       "design": "Use explicit unpublished allocation ownership/progress, with commit transferring ownership only after all relocations and old storage disposal succeed. An intentionally disarmed-on-unwind owner can preserve native leaks. Keep native allocated/constructed/published states distinct, and provide test-only typed recovery of leaked replacement allocations under strict Miri."
     },
     {
-      "name": "Fill constructor failure ownership",
-      "native_methods": [
-        "NCollection_LinearVector(size_t,const T&)"
-      ],
-      "gap": "Copy construction now retains its native allocation/prefix on failure, with a separate exact-method receipt. The fill constructor still uses a local Rust Vec guard that drops completed copies and frees storage on panic.",
-      "design": "Reuse explicit unpublished allocation ownership for the fill constructor, preserving Resize's initial growth capacity rule rather than copy construction's exact source.Size capacity. Transfer to the normal vector only after full construction succeeds. Record failure storage/progress only in test instrumentation for explicit typed recovery; do not introduce production cleanup of native leaks."
-    },
-    {
       "name": "Destructive shrink exceptions",
       "native_methods": [
         "Resize shrink",
@@ -77,5 +70,17 @@
   ],
   "completion_rule": "Close each gap only with direct native-state comparisons and exact method/compiler bindings. Explicit test repair and safe cleanup alternatives receive no native-parity credit.",
   "api_parity_complete": false,
-  "global_api_claims_added": 0
+  "global_api_claims_added": 0,
+  "completed_constructor_slices": [
+    {
+      "name": "Copy constructor and insufficient-capacity assignment temporary",
+      "receipt": "porting/audits/linear-vector-copy-constructor-methods.json",
+      "capacity": "Exactly source.Size, including retained-empty source producing an unallocated result."
+    },
+    {
+      "name": "Fill constructor failure ownership",
+      "receipt": "porting/audits/linear-vector-fill-constructor-methods.json",
+      "capacity": "Zero for empty fill, otherwise max(2,count), preserving initial Resize growth. Shared unpublished construction transfers ownership only after success; failure retains the allocation and completed copies without implicit destruction or free."
+    }
+  ]
 }

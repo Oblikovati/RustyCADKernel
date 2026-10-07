@@ -7,8 +7,10 @@ use std::{
 };
 #[path = "../../../../tests/support/linear_copy_constructor_fixture.rs"]
 mod fixture;
+#[path = "../../../../tests/support/linear_constructor_recovery.rs"]
+mod recovery;
 mod safety;
-use fixture::{COPY_CASES, CopyItem, CopySpec, CopyTrace, filled, row};
+use fixture::{COPY_CASES, CopySpec, CopyTrace, filled, row};
 
 fn assert_native(row: &str) {
     let expected =
@@ -17,26 +19,6 @@ fn assert_native(row: &str) {
         expected.lines().any(|native| native == row),
         "missing native constructor row {row:?}"
     );
-}
-
-fn repair(spec: &CopySpec, trace: &CopyTrace, allocation: (*mut CopyItem<'_>, usize)) {
-    let (pointer, capacity) = allocation;
-    assert_eq!(capacity, spec.count);
-    let count = trace.completed.get();
-    // SAFETY: the failed construction observer captured fresh storage provenance. Exactly
-    // count copies returned successfully; the failed next slot never became a live CopyItem.
-    let values: String = unsafe { std::slice::from_raw_parts(pointer, count) }
-        .iter()
-        .map(|item| format!("{},", item.value))
-        .collect();
-    assert_native(&format!(
-        "unpublished:{}:{capacity}:{count}:{values}:{}",
-        spec.name,
-        trace.resources.get()
-    ));
-    // SAFETY: native state is asserted first. This test-only owner reclaims the exact
-    // leaked Vec allocation and known live prefix once; production has no recovery owner.
-    unsafe { drop(Vec::from_raw_parts(pointer, count, capacity)) };
 }
 
 fn run(spec: &CopySpec) {
@@ -83,7 +65,7 @@ fn run(spec: &CopySpec) {
             outcome.as_ref().unwrap_err().downcast_ref::<usize>(),
             Some(&spec.fail)
         );
-        repair(spec, &trace, allocation);
+        recovery::repair(spec.name, spec.count, &trace, allocation);
         assert_native(&row(
             "repaired", spec, &source, result, before, &trace, false,
         ));

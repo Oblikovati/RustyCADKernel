@@ -151,23 +151,8 @@ fn borrowed_fill_constructor_keeps_native_empty_and_growth_capacities() {
     assert_values(&many, &[9, 9, 9]);
 }
 
-#[test]
-fn borrowed_fill_constructor_panic_drops_completed_rust_tail() {
-    let control = Rc::new(CloneControl::default());
-    control.panic_at.set(2);
-    let fill = CloneProbe {
-        value: 9,
-        control: Rc::clone(&control),
-    };
-    let failure = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-        LinearVector::with_value_ref(4, &fill)
-    }));
-    assert!(failure.is_err());
-    assert_eq!(control.attempts.get(), 2);
-    assert_eq!(control.drops.get(), 1);
-    drop(fill);
-    assert_eq!(control.drops.get(), 2);
-}
+// Failed constructor ownership now lives in cfg(test) fill_construction tests, where
+// explicit typed repair can reclaim native leaks. The public failure oracle has no repair.
 
 #[test]
 fn owned_fill_constructor_uses_the_borrowed_native_capacity_path() {
