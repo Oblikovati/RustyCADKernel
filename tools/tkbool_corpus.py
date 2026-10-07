@@ -51,3 +51,7 @@ def append_tkbool_requests(requests: list[str]) -> None:
     __import__('tkbool_corpus_topopebreptool_shapes').append_topopebreptool_shapes_requests(requests)
     # TopOpeBRepDS data structure and build tool (tkbool_corpus_topopebrepds_build.py)
     __import__('tkbool_corpus_topopebrepds_build').append_topopebrepds_build_requests(requests)
+    # TopOpeBRepTool classifiers (tkbool_corpus_topopebreptool_classifier.py)
+    __import__('tkbool_corpus_topopebreptool_classifier').append_topopebreptool_classifier_requests(requests)
+    # TopOpeBRepBuild face chain (tkbool_corpus_topopebrepbuild.py)
+    __import__('tkbool_corpus_topopebrepbuild').append_topopebrepbuild_requests(requests)

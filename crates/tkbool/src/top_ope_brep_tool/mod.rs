@@ -8,9 +8,12 @@ mod geometry;
 mod hbox_tool;
 mod normal;
 mod project;
+mod shape_classifier;
 mod shape_tool;
+mod solid_classifier;
 mod tol;
 mod tool_iso;
+mod tool_tangent;
 mod two_d;
 
 pub use c2df::TopOpeBRepToolC2DF;
@@ -30,12 +33,18 @@ pub use project::{
     fun_tool_proj_ponc2d_tol, fun_tool_proj_pone, fun_tool_proj_pone_tol, fun_tool_proj_ponf,
     fun_tool_proj_pons,
 };
+pub use shape_classifier::{
+    TopOpeBRepToolShapeClassifier, fsc_get_psc, fsc_get_psc_with_reference, fsc_state_eonface,
+    fsc_state_ponface,
+};
 pub use shape_tool::{TopOpeBRepToolShapeTool, UvBounds};
+pub use solid_classifier::TopOpeBRepToolSolidClassifier;
 pub use tol::{
     FaceTolerances, ftol_face_tolerances, ftol_face_tolerances2d, ftol_face_tolerances3d,
     ftol_face_tolerances3d_on_boxes,
 };
 pub use tool_iso::{UvIsoFlags, uviso, uviso_c2df, uviso_edge};
+pub use tool_tangent::{tggeom_e, tggeom_e_on_curve};
 pub use two_d::{
     PCurveOnFace, fc2d_add_new_curve_on_surface, fc2d_curve_on_surface,
     fc2d_curve_on_surface_on_edge, fc2d_editable_curve_on_surface, fc2d_has_c3d,

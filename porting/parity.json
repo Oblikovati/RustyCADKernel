@@ -313731,6 +313731,254 @@
       "notes": "Translated from TopOpeBRepTool_PROJECT.cxx; the output arguments are &mut, written only where natively written (projPonE, projPonF and projPonboundedF first set the distance to 1); compared with OCCT by tools/verify_tkbool_numeric.py (tt_project: the faces, edges and shell of a cube, a cylinder face with its seam and circles, segments on and off the cylinder, a sphere and a cone of radius 0). FUN_tool_projPonC2D reads NbExt before the done test, so a failed 2d extrema raises StdFail_NotDone as natively."
     },
     {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::TopOpeBRepTool_ShapeClassifier()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::TopOpeBRepTool_ShapeClassifier(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::with_reference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::TopOpeBRepTool_SolidClassifier()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::ChangeSolidClassifier()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::change_solid_classifier",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::ClearAll()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::clear_all",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::ClearCurrent()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::clear_current",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::P2D() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::p2d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::P3D() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::p3d",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::SameDomain() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::same_domain",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::SameDomain(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::set_same_domain",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::SetReference(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::set_reference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::State() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateP2DReference(const gp_Pnt2d&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_p2d_reference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateP3DReference(const gp_Pnt&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_p3d_reference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateShapeReference(const TopoDS_Shape&,const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_shape_reference_avoiding_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateShapeReference(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_shape_reference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateShapeShape(const TopoDS_Shape&,const NCollection_List<TopoDS_Shape>&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_shape_shape_avoiding_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateShapeShape(const TopoDS_Shape&,const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_shape_shape_avoiding",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_ShapeClassifier::StateShapeShape(const TopoDS_Shape&,const TopoDS_Shape&,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_ShapeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolShapeClassifier::state_shape_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_ShapeClassifier.cxx; the list of shapes to avoid is copied (a pointer natively) and the uninitialized same domain flag of the default constructor is 0; compared with OCCT by tools/verify_tkbool_numeric.py (tt_shape_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). Native quirks kept: StateP2DReference prints \"StateP2DReference o<>E,I\" for an EXTERNAL or INTERNAL reference, P3D and P2D raise Standard_ProgramError when undefined."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::Classify(const TopoDS_Shell&,const gp_Pnt&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::classify_shell",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::Classify(const TopoDS_Solid&,const gp_Pnt&,double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::classify_solid",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::Clear()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::clear",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::LoadShell(const TopoDS_Shell&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::load_shell",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::LoadSolid(const TopoDS_Solid&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::load_solid",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_SolidClassifier::State() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SolidClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::TopOpeBRepToolSolidClassifier::state",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SolidClassifier.cxx; the classifiers are kept in an IndexedDataMap keyed by the solid or shell and the current one is its index (a pointer natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_solid_classifier: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges). The solid classification keeps the native EXTERNAL/INTERNAL face fix-up (OUT and IN unless ON)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TggeomE(double,const BRepAdaptor_Curve&,gp_Vec&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::tggeom_e_on_curve",
+      "status": "implemented",
+      "notes": "Translated from the TggeomE overloads and the static CheckEdgeLength of TopOpeBRepTool_TOOL.cxx as free functions returning the unit tangent (None for false, the output untouched natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tggeom: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges)."
+    },
+    {
+      "upstream_id": "TopOpeBRepTool_TOOL::TggeomE(double,const TopoDS_Edge&,gp_Vec&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_TOOL.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::tggeom_e",
+      "status": "implemented",
+      "notes": "Translated from the TggeomE overloads and the static CheckEdgeLength of TopOpeBRepTool_TOOL.cxx as free functions returning the unit tangent (None for false, the output untouched natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_tggeom: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges)."
+    },
+    {
+      "upstream_id": "FSC_GetPSC()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SC.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fsc_get_psc",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SC.cxx; the per-thread static classifier is a thread_local reached through a closure (FSC_GetPSC returns a reference natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fsc: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges)."
+    },
+    {
+      "upstream_id": "FSC_GetPSC(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SC.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fsc_get_psc_with_reference",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SC.cxx; the per-thread static classifier is a thread_local reached through a closure (FSC_GetPSC returns a reference natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fsc: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges)."
+    },
+    {
+      "upstream_id": "FSC_StateEonFace(const TopoDS_Shape&,double,const TopoDS_Shape&,TopOpeBRepTool_ShapeClassifier&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SC.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fsc_state_eonface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SC.cxx; the per-thread static classifier is a thread_local reached through a closure (FSC_GetPSC returns a reference natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fsc: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges)."
+    },
+    {
+      "upstream_id": "FSC_StatePonFace(const gp_Pnt&,const TopoDS_Shape&,TopOpeBRepTool_ShapeClassifier&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepTool/TopOpeBRepTool_SC.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_tool::fsc_state_ponface",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepTool_SC.cxx; the per-thread static classifier is a thread_local reached through a closure (FSC_GetPSC returns a reference natively); compared with OCCT by tools/verify_tkbool_numeric.py (tt_fsc: the cube [0, 2]^3 with its shell and solid, the cylinder face with its seam and circles, segments inside, above and on them, points inside, outside, on faces and edges)."
+    },
+    {
       "upstream_id": "ChFi3d::IsTangentFaces(const TopoDS_Edge &, const TopoDS_Face &, const TopoDS_Face &, const GeomAbs_Shape)",
       "toolkit": "TKFillet",
       "source": "src/ModelingAlgorithms/TKFillet/ChFi3d/ChFi3d.hxx",
@@ -436602,6 +436850,1294 @@
       "notes": "Excluded: DEFINE_STANDARD_ALLOC generates this class-specific operator, which allocates an object array through Standard::Allocate. Rust has no per-type allocation or placement operator: a value lives inline, in a Box, a Handle or a collection, and its storage comes from and returns to the owner's allocator when it is created and dropped. A Rust port of the class needs no counterpart; no behavior is lost.",
       "cpp_declaration_id": "14427f64e535b589f96d652c396de3090bf30263e1e24411496b0006322a17fd",
       "generated_by": "tools/generate_api_macro_rows.py"
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::base_type",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Typedef base_type that DEFINE_STANDARD_RTTIEXT(TopOpeBRepBuild_Loop, Standard_Transient) expands: Rust has no class inheritance to name; the class is registered with Standard_Transient as its parent, so there is no public item to port."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ANYLOOP",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopEnum.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopEnum::AnyLoop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopEnum.hxx (same discriminants); exercised by the area builders in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BLOCK",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopEnum.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopEnum::Block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopEnum.hxx (same discriminants); exercised by the area builders in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BOUNDARY",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopEnum.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopEnum::Boundary",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopEnum.hxx (same discriminants); exercised by the area builders in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Area2dBuilder::TopOpeBRepBuild_Area2dBuilder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Area2dBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildArea2dBuilder::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Area2dBuilder.cxx (an AreaBuilder through Deref); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Area2dBuilder::TopOpeBRepBuild_Area2dBuilder(TopOpeBRepBuild_LoopSet&,TopOpeBRepBuild_LoopClassifier&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Area2dBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildArea2dBuilder::with_loops",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Area2dBuilder.cxx (an AreaBuilder through Deref); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::TopOpeBRepBuild_AreaBuilder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::TopOpeBRepBuild_AreaBuilder(TopOpeBRepBuild_LoopSet&,TopOpeBRepBuild_LoopClassifier&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::with_loops",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::TopOpeBRepBuild_BlockBuilder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::TopOpeBRepBuild_BlockBuilder(TopOpeBRepBuild_ShapeSet&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::with_shape_set",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockIterator::TopOpeBRepBuild_BlockIterator()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockIterator.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockIterator::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockIterator.cxx/.lxx; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockIterator::TopOpeBRepBuild_BlockIterator(int,int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockIterator.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockIterator::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockIterator.cxx/.lxx; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::TopOpeBRepBuild_CompositeClassifier(const TopOpeBRepBuild_BlockBuilder&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::block_builder",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceAreaBuilder::TopOpeBRepBuild_FaceAreaBuilder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceAreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceAreaBuilder::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceAreaBuilder.cxx (an Area2dBuilder through Deref); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceAreaBuilder::TopOpeBRepBuild_FaceAreaBuilder(TopOpeBRepBuild_LoopSet&,TopOpeBRepBuild_LoopClassifier&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceAreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceAreaBuilder::with_loops",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceAreaBuilder.cxx (an Area2dBuilder through Deref); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::TopOpeBRepBuild_FaceBuilder()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::TopOpeBRepBuild_FaceBuilder(TopOpeBRepBuild_WireEdgeSet&,const TopoDS_Shape&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::with_wire_edge_set",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::TopOpeBRepBuild_Loop(const TopOpeBRepBuild_BlockIterator&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopBase::from_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Loop.cxx; the virtual class is the trait TopOpeBRepBuildLoop (overridden by Pave) with the concrete TopOpeBRepBuildLoopBase; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::TopOpeBRepBuild_Loop(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopBase::from_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Loop.cxx; the virtual class is the trait TopOpeBRepBuildLoop (overridden by Pave) with the concrete TopOpeBRepBuildLoopBase; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopSet::TopOpeBRepBuild_LoopSet()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildPlainLoopSet::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopSet.cxx; the virtual members are the trait TopOpeBRepBuildLoopSet (iteration over a copy of the list) with the plain TopOpeBRepBuildPlainLoopSet; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::with_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape(const TopoDS_Shape&,const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::with_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::TopOpeBRepBuild_ShapeSet(TopAbs_ShapeEnum,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildPlainShapeSet::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::TopOpeBRepBuild_WireEdgeClassifier(const TopoDS_Shape&,const TopOpeBRepBuild_BlockBuilder&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireEdgeClassifier::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::TopOpeBRepBuild_WireEdgeSet(const TopoDS_Shape&,void*)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireEdgeSet::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireToFace::TopOpeBRepBuild_WireToFace()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireToFace.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireToFace::new",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireToFace.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Area2dBuilder::InitAreaBuilder(TopOpeBRepBuild_LoopSet&,TopOpeBRepBuild_LoopClassifier&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Area2dBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildArea2dBuilder::init_area_builder",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Area2dBuilder.cxx (an AreaBuilder through Deref); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::ADD_LISTOFLoop_TO_LISTOFLoop(NCollection_List<occ::handle<TopOpeBRepBuild_Loop>>&,NCollection_List<occ::handle<TopOpeBRepBuild_Loop>>&,void*,void*,void*) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::add_list_of_loop_to_list_of_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::ADD_Loop_TO_LISTOFLoop(const occ::handle<TopOpeBRepBuild_Loop>&,NCollection_List<occ::handle<TopOpeBRepBuild_Loop>>&,void*) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::add_loop_to_list_of_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::Atomize(TopAbs_State&,TopAbs_State) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::atomize",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::CompareLoopWithListOfLoop(TopOpeBRepBuild_LoopClassifier&,const occ::handle<TopOpeBRepBuild_Loop>&,const NCollection_List<occ::handle<TopOpeBRepBuild_Loop>>&,TopOpeBRepBuild_LoopEnum) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::compare_loop_with_list_of_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::InitArea()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::init_area",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::InitAreaBuilder(TopOpeBRepBuild_LoopSet&,TopOpeBRepBuild_LoopClassifier&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::init_area_builder",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::InitLoop()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::init_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::Loop() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::loop_",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::MoreArea() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::more_area",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::MoreLoop() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::more_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::NextArea()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::next_area",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::NextLoop()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::next_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::AddElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::add_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::BlockIterator() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::block_iterator",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::CurrentBlockIsRegular()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::current_block_is_regular",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::Element(const TopOpeBRepBuild_BlockIterator&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::element_at",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::Element(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::Element(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::element_index",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::ElementIsValid(const TopOpeBRepBuild_BlockIterator&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::element_is_valid_at",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::ElementIsValid(int) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::element_is_valid",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::InitBlock()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::init_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::MakeBlock(TopOpeBRepBuild_ShapeSet&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::make_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::MoreBlock() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::more_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::NextBlock()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::next_block",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::SetValid(const TopOpeBRepBuild_BlockIterator&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::set_valid_at",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_BlockBuilder::SetValid(int,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_BlockBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildBlockBuilder::set_valid",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_BlockBuilder.cxx; the uninitialized block index is 0 until InitBlock; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::Compare(const occ::handle<TopOpeBRepBuild_Loop>&,const occ::handle<TopOpeBRepBuild_Loop>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::composite_compare",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::CompareElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::compare_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::CompareElementToShape(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::compare_element_to_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::CompareShapes(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::compare_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::ResetElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::reset_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::ResetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::reset_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_CompositeClassifier::State()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_CompositeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::state",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_CompositeClassifier.cxx as the trait TopOpeBRepBuildCompositeClassifier; the block builder is borrowed by the implementor (a void pointer natively) and Compare is the provided composite_compare; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceAreaBuilder::InitFaceAreaBuilder(TopOpeBRepBuild_LoopSet&,TopOpeBRepBuild_LoopClassifier&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceAreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceAreaBuilder::init_face_area_builder",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceAreaBuilder.cxx (an Area2dBuilder through Deref); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::AddEdgeWire(const TopoDS_Shape&,TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::add_edge_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::CorrectGclosedWire(const NCollection_IndexedDataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher>&,const NCollection_IndexedDataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::correct_gclosed_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::DetectPseudoInternalEdge(NCollection_IndexedMap<TopoDS_Shape, TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::detect_pseudo_internal_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::DetectUnclosedWire(NCollection_IndexedDataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher>&,NCollection_IndexedDataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::detect_unclosed_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::Edge() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::EdgeConnexity(const TopoDS_Shape&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::edge_connexity",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::Face() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::FindNextValidElement()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::find_next_valid_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::InitEdge()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::init_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::InitFace()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::init_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::InitFaceBuilder(TopOpeBRepBuild_WireEdgeSet&,const TopoDS_Shape&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::init_face_builder",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::InitWire()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::init_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::IsOldWire() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::is_old_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::MoreEdge() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::more_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::MoreFace() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::more_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::MoreWire() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::more_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::NextEdge()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::next_edge",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::NextFace()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::next_face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::NextWire()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::next_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_FaceBuilder::OldWire() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_FaceBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildFaceBuilder::old_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_FaceBuilder.cxx with RM_HANGING undefined (FUN_DetectVerticesOn1Edge and FUN_AnalyzemapVon1E are public helpers); EdgeConnexity answers 0 as a release build; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::BlockIterator() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoop::block_iterator",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Loop.cxx; the virtual class is the trait TopOpeBRepBuildLoop (overridden by Pave) with the concrete TopOpeBRepBuildLoopBase; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::Dump() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoop::dump",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Loop.cxx; the virtual class is the trait TopOpeBRepBuildLoop (overridden by Pave) with the concrete TopOpeBRepBuildLoopBase; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::IsShape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoop::is_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Loop.cxx; the virtual class is the trait TopOpeBRepBuildLoop (overridden by Pave) with the concrete TopOpeBRepBuildLoopBase; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoop::shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_Loop.cxx; the virtual class is the trait TopOpeBRepBuildLoop (overridden by Pave) with the concrete TopOpeBRepBuildLoopBase; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopClassifier::Compare(const occ::handle<TopOpeBRepBuild_Loop>&,const occ::handle<TopOpeBRepBuild_Loop>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopClassifier::compare",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopClassifier.hxx as the trait TopOpeBRepBuildLoopClassifier; exercised by the wire edge classifier in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopSet::ChangeListOfLoop()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopSet::change_list_of_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopSet.cxx; the virtual members are the trait TopOpeBRepBuildLoopSet (iteration over a copy of the list) with the plain TopOpeBRepBuildPlainLoopSet; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopSet::InitLoop()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopSet::init_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopSet.cxx; the virtual members are the trait TopOpeBRepBuildLoopSet (iteration over a copy of the list) with the plain TopOpeBRepBuildPlainLoopSet; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopSet::Loop() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopSet::loop_",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopSet.cxx; the virtual members are the trait TopOpeBRepBuildLoopSet (iteration over a copy of the list) with the plain TopOpeBRepBuildPlainLoopSet; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopSet::MoreLoop() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopSet::more_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopSet.cxx; the virtual members are the trait TopOpeBRepBuildLoopSet (iteration over a copy of the list) with the plain TopOpeBRepBuildPlainLoopSet; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopSet::NextLoop()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopSet::next_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopSet.cxx; the virtual members are the trait TopOpeBRepBuildLoopSet (iteration over a copy of the list) with the plain TopOpeBRepBuildPlainLoopSet; exercised by the face builder in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::ChangeList()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::change_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::ChangeShape()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::change_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::List() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeListOfShape::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeListOfShape.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeListOfShape::shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeListOfShape.cxx (plain accessors of a shape and a list)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::AddElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::add_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::AddShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::add_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::AddStartElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::add_start_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::ChangeStartShapes()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::change_start_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::CheckShape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::check_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::CheckShape(const TopoDS_Shape&,bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::check_shape_of",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::CheckShape(bool)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::set_check_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DEBName() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::deb_name",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DEBName(const TCollection_AsciiString&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::set_deb_name",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DEBNumber() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::deb_number",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DEBNumber(int)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::set_deb_number",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DumpBB()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::dump_bb",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DumpCheck(Standard_OStream&,const TCollection_AsciiString&,const TopoDS_Shape&,bool) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::dump_check",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DumpName(Standard_OStream&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::dump_name",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::DumpSS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::dump_ss",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::FindNeighbours()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::find_neighbours",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::InitNeighbours(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::init_neighbours",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::InitShapes()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::init_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::InitStartElements()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::init_start_elements",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::MakeNeighboursList(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::make_neighbours_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::MaxNumberSubShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::max_number_sub_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::MoreNeighbours()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::more_neighbours",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::MoreShapes() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::more_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::MoreStartElements() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::more_start_elements",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::Neighbour() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::neighbour",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::NextNeighbour()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::next_neighbour",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::NextShape()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::next_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::NextStartElement()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::next_start_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::ProcessAddElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::process_add_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::ProcessAddShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::process_add_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::ProcessAddStartElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::process_add_start_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::SName(const NCollection_List<TopoDS_Shape>&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::sname_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::SName(const TopoDS_Shape&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::sname",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::SNameori(const NCollection_List<TopoDS_Shape>&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::snameori_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::SNameori(const TopoDS_Shape&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::snameori",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::Shape() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::StartElement() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::start_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_ShapeSet::StartElements() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::start_elements",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_ShapeSet.cxx; the virtual members are the trait TopOpeBRepBuildShapeSet over the protected data TopOpeBRepBuildShapeSetBase; the debug names and dumps print nothing as in a release build; exercised by the wire edge set in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::Compare(const occ::handle<TopOpeBRepBuild_Loop>&,const occ::handle<TopOpeBRepBuild_Loop>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireEdgeClassifier::compare",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::CompareElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::compare_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::CompareElementToShape(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::compare_element_to_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::CompareShapes(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::compare_shapes",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::LoopToShape(const occ::handle<TopOpeBRepBuild_Loop>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireEdgeClassifier::loop_to_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::ResetElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::reset_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::ResetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::reset_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeClassifier::State()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeClassifier.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildCompositeClassifier::state",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeClassifier.cxx (FUN_tgINE static); the block builder is borrowed for the classifier lifetime; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wec, tb_face_builder: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam). Native quirks kept: CompareElement always answers true, the missing p-curves are stored on the edges, an UNKNOWN block/block comparison falls back on the per-thread shape classifier in same domain mode, and two wires still UNKNOWN are classified by the point at 0.45678 of the first edge of B2 not in B1; a null p-curve raises Standard_ProgramError where the native code dereferences it."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::AddElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::add_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::AddShape(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::add_shape",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::AddStartElement(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::add_start_element",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::DumpSS()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::dump_ss",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::Face() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireEdgeSet::face",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::FindNeighbours()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::find_neighbours",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::InitNeighbours(const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::init_neighbours",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::IsUVISO(const TopoDS_Edge&,const TopoDS_Face&,bool&,bool&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireEdgeSet::is_uviso",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::MakeNeighboursList(const TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::make_neighbours_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::SName(const NCollection_List<TopoDS_Shape>&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::sname_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::SName(const TopoDS_Shape&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::sname",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::SNameori(const NCollection_List<TopoDS_Shape>&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::snameori_list",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireEdgeSet::SNameori(const TopoDS_Shape&,const TCollection_AsciiString&,const TCollection_AsciiString&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireEdgeSet.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildShapeSet::snameori",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireEdgeSet.cxx; the overrides that only call the ShapeSet code (AddElement, InitNeighbours, FindNeighbours) are the trait defaults, MakeNeighboursList keeps the native closing-edge and UV-iso filtering; compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireToFace::AddWire(const TopoDS_Wire&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireToFace.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireToFace::add_wire",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireToFace.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireToFace::Init()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireToFace.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireToFace::init",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireToFace.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_WireToFace::MakeFaces(const TopoDS_Face&,NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_WireToFace.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildWireToFace::make_faces",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_WireToFace.cxx; compared with OCCT by tools/verify_tkbool_numeric.py (tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_LoopEnum",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_LoopEnum.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopEnum",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_LoopEnum.hxx (same discriminants); exercised by the area builders in compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_Loop",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_Loop.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopBase",
+      "status": "implemented",
+      "notes": "Class record: ported as a type, rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildLoopBase; each member is mapped by its own row."
+    },
+    {
+      "upstream_id": "TopOpeBRepBuild_AreaBuilder::REM_Loop_FROM_LISTOFLoop(NCollection_List<class opencascade::handle<class TopOpeBRepBuild_Loop>>::Iterator&,NCollection_List<occ::handle<TopOpeBRepBuild_Loop>>&,void*) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepBuild/TopOpeBRepBuild_AreaBuilder.hxx",
+      "rust_item": "rustycad_tkbool::top_ope_brep_build::TopOpeBRepBuildAreaBuilder::rem_loop_from_list_of_loop",
+      "status": "implemented",
+      "notes": "Translated from TopOpeBRepBuild_AreaBuilder.cxx; the lists of loops are vectors and the list iterators indices; the UNKNOWN raise flag follows the native default (no raise); compared with OCCT by tools/verify_tkbool_numeric.py (tb_face_builder, tb_wire_to_face: wires and edges on the face of the square [0, 10]^2 of a plane, with p-curves or without (made by FC2D): holes, disjoint squares, a triangle sharing a corner, open chains, an edge given both ways, and the lateral face of a cylinder with its seam)."
     },
     {
       "upstream_id": "TopOpeBRepDS::operator delete(void*) noexcept",

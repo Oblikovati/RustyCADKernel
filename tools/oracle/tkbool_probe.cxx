@@ -57,6 +57,8 @@
 #include "tkbool_probe_topopebrepds.cxx"
 #include "tkbool_probe_topopebreptool_shapes.cxx"
 #include "tkbool_probe_topopebrepds_build.cxx"
+#include "tkbool_probe_topopebreptool_classifier.cxx"
+#include "tkbool_probe_topopebrepbuild.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // BRepFill (tkbool_probe_brepfill_generator.cxx, tkbool_probe_brepfill_package.cxx,
  // tkbool_probe_brepfill_compatible.cxx, tkbool_probe_brepfill_section_law.cxx,
@@ -111,6 +113,15 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ds_recompute", bl_ds_recompute_case},
  {"ds_same_domain", bl_ds_same_domain_case},
  {"ds_sort", bl_ds_sort_case},
+ // TopOpeBRepTool classifiers (tkbool_probe_topopebreptool_classifier.cxx)
+ {"tt_solid_classifier", bl_tt_solid_classifier_case},
+ {"tt_shape_classifier", bl_tt_shape_classifier_case},
+ {"tt_fsc", bl_tt_fsc_case},
+ {"tt_tggeom", bl_tt_tggeom_case},
+ // TopOpeBRepBuild (tkbool_probe_topopebrepbuild.cxx)
+ {"tb_wire_to_face", bl_tb_wire_to_face_case},
+ {"tb_face_builder", bl_tb_face_builder_case},
+ {"tb_wec", bl_tb_wec_case},
 };
 int main() {
  std::string line;
