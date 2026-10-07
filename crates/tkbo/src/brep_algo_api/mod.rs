@@ -14,5 +14,8 @@ pub use operations::{BRepAlgoAPICommon, BRepAlgoAPICut, BRepAlgoAPIFuse};
 mod section;
 pub use section::BRepAlgoAPISection;
 
+mod check;
+pub use check::BRepAlgoAPICheck;
+
 mod splitter;
 pub use splitter::BRepAlgoAPISplitter;

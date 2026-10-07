@@ -301847,6 +301847,132 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BRepAlgoAPI_Check()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::new",
+      "status": "implemented",
+      "notes": "Small-edge and self-interference tests on, unknown operation. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check(const TopoDS_Shape&,bool,bool,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::from_shape",
+      "status": "implemented",
+      "notes": "Constructs and performs; the BRepCheck failure the native code would raise is returned. No Message_ProgressRange (the Rust Boolean pipeline runs without progress reporting). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check(const TopoDS_Shape&,const TopoDS_Shape&,BOPAlgo_Operation,bool,bool,const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::from_shapes",
+      "status": "implemented",
+      "notes": "Constructs and performs; the BRepCheck failure the native code would raise is returned. No Message_ProgressRange (the Rust Boolean pipeline runs without progress reporting). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::SetData(const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::set_data",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::SetData(const TopoDS_Shape&,const TopoDS_Shape&,BOPAlgo_Operation,bool,bool)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::set_data_pair",
+      "status": "implemented",
+      "notes": "The two-shape overload is a separately named method. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange (the Rust Boolean pipeline runs without progress reporting). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::IsValid()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::is_valid",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::Result()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck::result",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::myS1",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPICheck, which no derived class needs (Rust has no subclassing); set_data/set_data_pair write it and perform checks it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::myS2",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPICheck, which no derived class needs (Rust has no subclassing); set_data_pair writes it and perform checks it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::myTestSE",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPICheck, which no derived class needs (Rust has no subclassing); set_data/set_data_pair write it and perform reads it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::myTestSI",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPICheck, which no derived class needs (Rust has no subclassing); set_data/set_data_pair write it and perform reads it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::myOperation",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPICheck, which no derived class needs (Rust has no subclassing); set_data_pair writes it and perform reads it."
+    },
+    {
+      "upstream_id": "BRepAlgoAPI_Check::myFaultyShapes",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Check.hxx",
+      "source_sha256": "5f9c44874a9ab1674558b10e32fb7809151fb98bb776d23dabe9a3e83149c4c6",
+      "rust_item": "rustycad_tkbo::brep_algo_api::BRepAlgoAPICheck",
+      "status": "excluded",
+      "notes": "protected data member of the C++ class; the Rust port keeps it as private state of BRepAlgoAPICheck, which no derived class needs (Rust has no subclassing); perform fills it and result/is_valid read it."
+    },
+    {
       "upstream_id": "BRepAlgoAPI_Common::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Common.hxx",
@@ -322993,6 +323119,276 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::new",
+      "status": "implemented",
+      "notes": "Every test off, unknown operation. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::SetShape1(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::set_shape1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::SetShape2(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::set_shape2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::GetShape1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::shape1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::GetShape2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::shape2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::HasFaulty() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::has_faulty",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::GetCheckResult() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::check_result",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::OperationType()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::operation_type",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.operation_type() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::StopOnFirstFaulty()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::stop_on_first_faulty",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.stop_on_first_faulty() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::ArgumentTypeMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::argument_type_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.argument_type_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::SelfInterMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::self_inter_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.self_inter_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::SmallEdgeMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::small_edge_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.small_edge_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::RebuildFaceMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::rebuild_face_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.rebuild_face_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TangentMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::tangent_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.tangent_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::MergeVertexMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::merge_vertex_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.merge_vertex_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::MergeEdgeMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::merge_edge_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.merge_edge_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::ContinuityMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::continuity_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.continuity_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::CurveOnSurfaceMode()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::curve_on_surface_mode",
+      "status": "implemented",
+      "notes": "The native non-const reference accessor maps to a `&mut` accessor (`*analyzer.curve_on_surface_mode() = true`). Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::Perform(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "No Message_ProgressRange: the Rust Boolean pipeline runs without progress reporting. A failing test appends the unknown fault the native catch appends. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::Prepare()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `prepare` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestTypes()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_types` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestSelfInterferences(const Message_ProgressRange&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_self_interferences` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestSmallEdge()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_small_edge` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestRebuildFace()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_rebuild_face` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestTangent()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_tangent` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestMergeSubShapes(TopAbs_ShapeEnum)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_merge_sub_shapes` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestMergeVertex()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_merge_vertex` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestMergeEdge()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_merge_edge` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestContinuity()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_continuity` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_ArgumentAnalyzer::TestCurveOnSurface()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_ArgumentAnalyzer.hxx",
+      "source_sha256": "18fa84c5ecdc6c3670e84dcc1312016e423673efaa956fe630c65ed08fac3642",
+      "rust_item": "rustycad_tkbo::bop_algo::BOPAlgoArgumentAnalyzer::perform",
+      "status": "implemented",
+      "notes": "Protected step ported as the private `test_curve_on_surface` run by `BOPAlgoArgumentAnalyzer::perform`; Rust has no subclass extension point for it. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
       "upstream_id": "BOPAlgo_BOP::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_BOP.hxx",
@@ -324476,6 +324872,177 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "BOPAlgo_CheckResult()",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::new",
+      "status": "implemented",
+      "notes": "Unknown status, null shapes, zero distances. Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetShape1(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_shape1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::AddFaultyShape1(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::add_faulty_shape1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetShape2(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_shape2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::AddFaultyShape2(const TopoDS_Shape&)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::add_faulty_shape2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetShape1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::shape1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetShape2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::shape2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetFaultyShapes1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::faulty_shapes1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetFaultyShapes2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::faulty_shapes2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetCheckStatus(BOPAlgo_CheckStatus)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_check_status",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetCheckStatus() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::check_status",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetMaxDistance1(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_max_distance1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetMaxDistance2(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_max_distance2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetMaxParameter1(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_max_parameter1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::SetMaxParameter2(double)",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::set_max_parameter2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetMaxDistance1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::max_distance1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetMaxDistance2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::max_distance2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetMaxParameter1() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::max_parameter1",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckResult::GetMaxParameter2() const",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckResult.hxx",
+      "source_sha256": "e7b31b8f0128c6900b1744ef72876f3dfbbdd95b24e96ac2191cd03942a2c648",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckResult::max_parameter2",
+      "status": "implemented",
+      "notes": "Verified bit for bit (statuses, faulty sub-shapes, distances) by the native replay tools/oracle/tkbo_argument_analyzer.cxx (crates/tkbo/tests/bop_algo_argument_analyzer.rs)."
+    },
+    {
       "upstream_id": "BOPAlgo_CheckerSI::operator delete(void*) noexcept",
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckerSI.hxx",
@@ -325804,6 +326371,123 @@
       "rust_item": "rustycad_tkbo::bop_algo::EdgeInfo::new",
       "status": "implemented",
       "notes": "Source translation verified bit for bit by the native replay tools/oracle/tkbo_builder_face.cxx (crates/tkbo/tests/bop_algo_builder_face.rs)."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckStatus",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus",
+      "status": "implemented",
+      "notes": "Rust enum with the native i32 discriminants."
+    },
+    {
+      "upstream_id": "BOPAlgo_CheckUnknown",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::CheckUnknown",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_BadType",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::BadType",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_SelfIntersect",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::SelfIntersect",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_TooSmallEdge",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::TooSmallEdge",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_NonRecoverableFace",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::NonRecoverableFace",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_IncompatibilityOfVertex",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::IncompatibilityOfVertex",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_IncompatibilityOfEdge",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::IncompatibilityOfEdge",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_IncompatibilityOfFace",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::IncompatibilityOfFace",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_OperationAborted",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::OperationAborted",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_GeomAbs_C0",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::GeomAbsC0",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_InvalidCurveOnSurface",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::InvalidCurveOnSurface",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
+    },
+    {
+      "upstream_id": "BOPAlgo_NotValid",
+      "toolkit": "TKBO",
+      "source": "src/ModelingAlgorithms/TKBO/BOPAlgo/BOPAlgo_CheckStatus.hxx",
+      "source_sha256": "a2245fe34ee1f6d53235719f0a86db80fdfcd675a56bf287d6b8e8e7338cdeef",
+      "rust_item": "rustycad_tkbo::bop_algo::CheckStatus::NotValid",
+      "status": "implemented",
+      "notes": "Enumerator mapped to the Rust enum variant with the native i32 discriminant."
     },
     {
       "upstream_id": "Geom2dAdaptor_Curve::OffsetData",
@@ -510492,10 +511176,11 @@
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
       "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BOPAlgo_ArgumentAnalyzer"
-      ],
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_ArgumentAnalyzerTest__ModalgBug_24213_SphereIsValidBOPArgument",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]
@@ -510505,10 +511190,11 @@
       "toolkit": "TKBO",
       "source": "src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx",
       "source_sha256": "3f01e43f6b53a6a2d189ab998e70fa20a5b72ea418ef630d55dc6c7a612a188e",
-      "status": "pending_dependency",
-      "blocked_by": [
-        "BOPAlgo_ArgumentAnalyzer"
-      ],
+      "rust_package": "rustycad-tkbo",
+      "rust_target": "bop_algo_bop_legacy",
+      "rust_test": "BOPAlgo_ArgumentAnalyzerTest__ModalgBug_24492_MixedDimensionalCompoundIsFaulty",
+      "rust_source": "crates/tkbo/tests/bop_algo_bop_legacy.rs",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
       ]

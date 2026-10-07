@@ -12,8 +12,12 @@ pub use section_attribute::SectionAttribute;
 
 pub(crate) mod alerts;
 pub use alerts::*;
+mod argument_analyzer;
 mod bop;
+mod check_result;
 mod checker_si;
+pub use argument_analyzer::BOPAlgoArgumentAnalyzer;
+pub use check_result::{CheckResult, CheckStatus};
 pub use checker_si::BOPAlgoCheckerSI;
 mod builder;
 pub use bop::BOPAlgoBOP;

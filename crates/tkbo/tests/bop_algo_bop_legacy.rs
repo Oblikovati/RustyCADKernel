@@ -1,11 +1,12 @@
 //! Direct translation of src/ModelingAlgorithms/TKBO/GTests/BOPAlgo_BOP_Test.cxx (3d097a0).
-//! The BOPAlgo_ArgumentAnalyzer cases wait for that class.
 #![allow(non_snake_case)]
 
 #[path = "bop_test_utilities/mod.rs"]
 mod bop_test_utilities;
 use bop_test_utilities::*;
-use rustycad_tkbo::bop_algo::{BOPAlgoBOP, BOPAlgoCheckerSI, Operation};
+use rustycad_tkbo::bop_algo::{
+    BOPAlgoArgumentAnalyzer, BOPAlgoBOP, BOPAlgoCheckerSI, CheckStatus, Operation,
+};
 use rustycad_tkbrep::brep::BRepBuilder;
 use rustycad_tkbrep::topexp;
 use rustycad_tkbrep::topods::{Compound, Face, Shape};
@@ -344,6 +345,51 @@ fn BOPAlgo_DegenerateToolTest__Common_SolidAndHalfspace_Unaffected() {
     let result = PerformDirectBOP(&box_shape, &half_space, Operation::Common);
     assert!(!result.is_null());
     assert!(GetVolume(&result) > 1.0);
+}
+
+fn ConfigureArgumentAnalyzer(analyzer: &mut BOPAlgoArgumentAnalyzer) {
+    *analyzer.argument_type_mode() = true;
+    *analyzer.self_inter_mode() = true;
+    *analyzer.small_edge_mode() = true;
+    *analyzer.rebuild_face_mode() = true;
+    *analyzer.continuity_mode() = true;
+    *analyzer.curve_on_surface_mode() = true;
+}
+
+// Migrated from tests/bugs/modalg_5/bug24213.  The standard sphere must be
+// accepted as a valid single Boolean-operation argument.
+#[test]
+fn BOPAlgo_ArgumentAnalyzerTest__ModalgBug_24213_SphereIsValidBOPArgument() {
+    let mut analyzer = BOPAlgoArgumentAnalyzer::new();
+    analyzer.set_shape1(&CreateSphere(Point3::new(0.0, 0.0, 0.0), 10.0));
+    ConfigureArgumentAnalyzer(&mut analyzer);
+    analyzer.perform();
+    assert!(!analyzer.has_faulty());
+    assert!(analyzer.check_result().is_empty());
+}
+
+// Migrated from tests/bugs/modalg_5/bug24492.  A compound containing a solid
+// and an isolated vertex must be reported as a faulty BOP argument.
+#[test]
+fn BOPAlgo_ArgumentAnalyzerTest__ModalgBug_24492_MixedDimensionalCompoundIsFaulty() {
+    let box_shape = CreateBox(Point3::new(0.0, 0.0, 0.0), 10.0, 10.0, 10.0);
+    let vertex = CreateVertex(Point3::new(3.0, 3.0, 3.0)).into_shape();
+    let builder = BRepBuilder::default();
+    let mut compound = Compound::default();
+    builder.make_compound(&mut compound);
+    builder.add(&mut compound, &box_shape).unwrap();
+    builder.add(&mut compound, &vertex).unwrap();
+    let mut analyzer = BOPAlgoArgumentAnalyzer::new();
+    analyzer.set_shape1(&compound.into_shape());
+    ConfigureArgumentAnalyzer(&mut analyzer);
+    analyzer.perform();
+    assert!(analyzer.has_faulty());
+    let results = analyzer.check_result();
+    assert_eq!(results.extent(), 1);
+    assert_eq!(
+        results.first().unwrap().check_status(),
+        CheckStatus::SelfIntersect
+    );
 }
 
 /// The interfering pairs of source shapes the checker finds at `level`.
