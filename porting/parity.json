@@ -291413,7 +291413,7 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve3d.hxx",
       "source_sha256": "38fcb22f964ab82aceee65a03a2fe61702aed72b6a484e01e9c4a8ce9935a3c9",
-      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::build",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve3d::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::build",
       "status": "implemented",
       "notes": "Reviewed line by line against the C++ (2026-10-07). Trimmed and offset recursion, OCC966 clamping of non-periodic bounds, one-piece reuse and trimming, knot snapping and per-piece Segment with the trimmed fallback match. The 16 multipart offset Build(false) requests crash natively (Geom_OffsetCurve on the null pieces Build(false) leaves) and return a named Rust failure (D3); tools/verify_split_curve3d.py replays all 348 candidates (332 exact)."
     },
@@ -291659,7 +291659,7 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
       "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
-      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::build",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitSurface::build",
       "status": "implemented",
       "notes": "Reviewed line by line against the C++ (2026-10-07). Revolution and extrusion sweeps (the extrusion end trim with the U ends read before the basis split, std::max/std::min order), trimmed and offset recursion, one-patch reuse, knot snapping and the patch grid with Segment fallback match. The 16 swept multipart Build(false) requests crash natively (sweeps of null pieces) and return a named Rust failure (D3). 658 candidates: 642 exact sh_split_surface requests match, including the extrusion-end requests; tools/verify_split_surface.py replays the crash candidates."
     },
@@ -291677,7 +291677,7 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitSurface.hxx",
       "source_sha256": "3b7357f9f9634a8d2d0bf7d448a4c75a1baacc9271db3f339c7dd63118396723",
-      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitSurface::perform",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::SplitSurface::perform",
       "status": "implemented",
       "notes": "Reviewed line by line against the C++ (2026-10-07). Compute (status reset, virtual) then Build, as natively; see Build."
     },
@@ -292083,7 +292083,7 @@
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeUpgrade/ShapeUpgrade_SplitCurve2d.hxx",
       "source_sha256": "3ba87b8d468f51115f255e9a01047885b03272f653eacbbe77417f17a7885f8c",
-      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::build",
+      "rust_item": "rustycad_tkshhealing::shape_upgrade::ShapeUpgradeSplitCurve2d::<rustycad_tkshhealing::shape_upgrade::SplitCurve>::build",
       "status": "implemented",
       "notes": "Reviewed line by line against the C++ (2026-10-07). As SplitCurve3d, without OCC966 clamping and with the native single-spline Segment even for Segment = false. The 70 offset Build(false) requests crash natively (Geom2d_OffsetCurve on null pieces) and return a named Rust failure (D3); tools/verify_split_curve2d.py replays all 600 candidates (530 exact)."
     },
