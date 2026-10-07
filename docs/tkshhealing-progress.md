@@ -216,6 +216,19 @@ kept out of the corpus: natively FixFaceSize or FixShape after ToBezier crash on
 converted plane face; ToBezier with SurfaceMode on extrusion faces diverges in
 ShapeUpgrade_ShapeConvertToBezier (whose Perform row is partial).
 
+## ShapeAlgo
+
+Ported in October 2026 (wave 3): ShapeAlgo_ToolContainer, ShapeAlgo_AlgoContainer
+(ConnectNextWire, both ApproxBSplineCurve overloads through GeomInt_WLApprox, HomoWires
+and the members that delegate to ShapeUpgrade, ShapeConstruct, ShapeCustom_Surface and
+ShapeAnalysis) and the package functions (Init, SetAlgoContainer, AlgoContainer with the
+process-wide current container). The native members are virtual, but no OCCT class
+overrides them, so the Rust types are concrete. They are compared with OCCT by the
+`sh_algo_geom` and `sh_algo_shape` requests (tools/tkshhealing_corpus_shape_algo.py).
+Native quirks kept: ApproxBSplineCurve drops the poles after the last coincident pair
+once a piece is cut; HomoWires gives a wire of nearly null range as its first edge
+repeated once per edge of the other wire.
+
 ## ShapeUpgrade
 
 Ported: the package functions (C0BSplineToSequenceOfC1BSplineCurve in 3D and 2D),

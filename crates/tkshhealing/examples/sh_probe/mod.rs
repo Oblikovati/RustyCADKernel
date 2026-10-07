@@ -54,6 +54,8 @@ pub mod construct_package;
 
 pub mod custom_surface;
 
+pub mod shape_algo;
+
 pub mod shape_process;
 
 pub mod analysis_surface;

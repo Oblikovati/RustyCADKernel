@@ -390313,6 +390313,195 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
+      "upstream_id": "ShapeAlgo::Init()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgo::init",
+      "status": "implemented",
+      "notes": "Once per process: a new container, then ShapeExtend::Init.",
+      "cpp_declaration_id": "570ffe78956a31483626aaa0b14028501fc51acdba073cc08d186b643fbbd1c7"
+    },
+    {
+      "upstream_id": "ShapeAlgo::SetAlgoContainer(const occ::handle<ShapeAlgo_AlgoContainer>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgo::set_algo_container",
+      "status": "implemented",
+      "notes": "The process-wide current container.",
+      "cpp_declaration_id": "7251e98bb0114a7e1a684eba1193a4bdcde0221b44f32506acff07d3842abf59"
+    },
+    {
+      "upstream_id": "ShapeAlgo::AlgoContainer()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgo::algo_container",
+      "status": "implemented",
+      "notes": "Null before Init or SetAlgoContainer.",
+      "cpp_declaration_id": "04f33eb122195341c102e7311cb924eab89035620333ab5b18d8ad4f2613fce1"
+    },
+    {
+      "upstream_id": "ShapeAlgo_ToolContainer::ShapeAlgo_ToolContainer()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_ToolContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoToolContainer::new",
+      "status": "implemented",
+      "notes": "",
+      "cpp_declaration_id": "a173f3633ea75698ac310ca3bd914ee7ce8fc4cb26073f134957ea8b6a94463d"
+    },
+    {
+      "upstream_id": "ShapeAlgo_ToolContainer::FixShape() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_ToolContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoToolContainer::fix_shape",
+      "status": "implemented",
+      "notes": "A new empty ShapeFix_Shape.",
+      "cpp_declaration_id": "5c86c7cceebb75333b335bc5b724877a5a5fe18df1065f0b4d66c62dde55d9a9"
+    },
+    {
+      "upstream_id": "ShapeAlgo_ToolContainer::EdgeProjAux() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_ToolContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoToolContainer::edge_proj_aux",
+      "status": "implemented",
+      "notes": "A new empty ShapeFix_EdgeProjAux.",
+      "cpp_declaration_id": "7aed77418ae534b52bda63858d415068e34a307f32f7adddc126dbd9b6fb1c97"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ShapeAlgo_AlgoContainer()",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::new",
+      "status": "implemented",
+      "notes": "With a new tool container.",
+      "cpp_declaration_id": "325327232d81c03d61a100a70726483e8c08d9614cc7eef0d39723a2f0780ce5"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::SetToolContainer(const occ::handle<ShapeAlgo_ToolContainer>&)",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::set_tool_container",
+      "status": "implemented",
+      "notes": "",
+      "cpp_declaration_id": "dd6b9f9c689f7f62a0f62094dbcd228a30c8026e7a084a790f261ed88724b045"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ToolContainer() const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::tool_container",
+      "status": "implemented",
+      "notes": "",
+      "cpp_declaration_id": "168a4d2a33617ecee697317990fb2352ff79b2b9bf404642ac8a1e7303388afe"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ConnectNextWire(const occ::handle<ShapeAnalysis_Wire>&,const occ::handle<ShapeExtend_WireData>&,const double,double&,bool&,bool&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::connect_next_wire",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). The outputs distmin, revsewd and revnextsewd are the fields of ShapeAlgoWireConnection.",
+      "cpp_declaration_id": "cbd8f291697b268fe589d617cf485560f23fcd722cb5c6aea89073ae2b698d9a"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ApproxBSplineCurve(const occ::handle<Geom_BSplineCurve>&,NCollection_Sequence<occ::handle<Geom_Curve>>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::approx_bspline_curve",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). Native quirk kept: once a piece is cut, the poles after the last coincident pair are dropped.",
+      "cpp_declaration_id": "b0dd464428092a70935a4a247f424bba9cb5dbd026d1ee65b81c1a3f73b692c3"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ApproxBSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,NCollection_Sequence<occ::handle<Geom2d_Curve>>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::approx_bspline_curve_2d",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). Native quirk kept: once a piece is cut, the poles after the last coincident pair are dropped.",
+      "cpp_declaration_id": "63c58a7bd96244b6c6523d654c3e4b211e5811c7fb7a5afe25c888cca7877722"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom_BoundedCurve>>>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::c0_bspline_to_sequence_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). None is the native false.",
+      "cpp_declaration_id": "1d3dd70d5ee6754fbccd783da6363e4bb343af56de5d7599ab4de6eba980551d"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::C0BSplineToSequenceOfC1BSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,occ::handle<NCollection_HSequence<occ::handle<Geom2d_BoundedCurve>>>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::c0_bspline2d_to_sequence_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). None is the native false.",
+      "cpp_declaration_id": "2d84f5a76cc5dc24be23dfa750f6c882324723afc87964b24dd672bab1b806b0"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::C0ShapeToC1Shape(const TopoDS_Shape&,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::c0_shape_to_c1_shape",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). ",
+      "cpp_declaration_id": "f36e4df777d76d194ad1a1d9e6c175cafcf629630a555b209975d76ed4822e45"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ConvertSurfaceToBSpline(const occ::handle<Geom_Surface>&,const double,const double,const double,const double) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::convert_surface_to_bspline",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). The four bounds are ShapeConstructSurfaceBounds.",
+      "cpp_declaration_id": "88f9d7df90781faca01ca4e5ed210ab4e786a1d39b9778413139a8544a32a6c6"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::HomoWires(const TopoDS_Wire&,const TopoDS_Wire&,TopoDS_Wire&,TopoDS_Wire&,const bool) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::homo_wires",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). None is the native false (the output wires untouched); byParam is unused natively.",
+      "cpp_declaration_id": "0d468b333b71a51b739137c8d4f6ff7c8e859e86c6b0275a9863910da87ed38f"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::OuterWire(const TopoDS_Face&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::outer_wire",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). ",
+      "cpp_declaration_id": "c3576953c19b45d38092601c1016de76c8b147eec31867f3800f6ea98d8d6ccb"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ConvertToPeriodic(const occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::convert_to_periodic",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). ",
+      "cpp_declaration_id": "74f34cda3bf445c51619b79658037af057a8eee0108c00148738efc9a206641d"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::GetFaceUVBounds(const TopoDS_Face&,double&,double&,double&,double&) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::get_face_uv_bounds",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). Returns the four bounds.",
+      "cpp_declaration_id": "fbb0e6ba25ae9d2b533a512cca523f1673074c63580799292cd2b60f5b84020c"
+    },
+    {
+      "upstream_id": "ShapeAlgo_AlgoContainer::ConvertCurveToBSpline(const occ::handle<Geom_Curve>&,const double,const double,const double,const GeomAbs_Shape,const int,const int) const",
+      "toolkit": "TKShHealing",
+      "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_AlgoContainer.hxx",
+      "rust_item": "rustycad_tkshhealing::shape_algo::ShapeAlgoAlgoContainer::convert_curve_to_bspline",
+      "status": "implemented",
+      "notes": "Compared with OCCT by the sh_algo_geom and sh_algo_shape requests (tkshhealing_probe_shape_algo.cxx). Tol3d, Continuity, MaxSegments and MaxDegree are ShapeConstructApproxSettings.",
+      "cpp_declaration_id": "962d7e6c6eed60570b8f817bcf82953482ca0f35486eb43f3b87a12d1bd3ecd1"
+    },
+    {
       "upstream_id": "ShapeFix_EdgeProjAux",
       "toolkit": "TKShHealing",
       "source": "src/ModelingAlgorithms/TKShHealing/ShapeAlgo/ShapeAlgo_ToolContainer.hxx",
