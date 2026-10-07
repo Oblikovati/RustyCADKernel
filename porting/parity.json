@@ -135707,6 +135707,21 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
+      "upstream_id": "BRepGraphInc_Populate::BRepGraphInc_Populate()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Populate.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Populate::Options",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Populate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::populate::Options",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Option struct with the native public fields and defaults."
+    },
+    {
       "upstream_id": "BRepGraphInc_Reconstruct::Cache::TempScope::TempScope(BRepGraphInc_Reconstruct::Cache&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
@@ -135777,6 +135792,64 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::reconstruct::face_with_cache",
       "status": "implemented",
       "notes": "Manual BRepGraphInc mapping (docs/topology-design.md section 11): the storage tables are Vec-backed EntityStore/RepStore values; typed accessors keep the native names in snake_case; the relation, removal, ownership and guard planes are BitFlags; C++ exceptions become Failure errors. Compared with OCCT by the br_graph probes."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::BRepGraphInc_Reconstruct()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::THE_DEFAULT_INCREMENT",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::reconstruct::Cache::DEFAULT_INCREMENT",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::THE_KIND_COUNT",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::reconstruct::Cache::KIND_COUNT",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::TempScope::myCache",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of BRepGraphInc_Reconstruct::Cache: the Rust Cache keeps the per-kind tables as private Vec state and allocates through Vec instead of NCollection_IncAllocator, so the allocator members have no counterpart; the behaviour is Cache::bind/seek/is_bound. TempScope itself is excluded (it resets an allocator Rust does not have)."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::myAllocator",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of BRepGraphInc_Reconstruct::Cache: the Rust Cache keeps the per-kind tables as private Vec state and allocates through Vec instead of NCollection_IncAllocator, so the allocator members have no counterpart; the behaviour is Cache::bind/seek/is_bound."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::myKinds",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of BRepGraphInc_Reconstruct::Cache: the Rust Cache keeps the per-kind tables as private Vec state and allocates through Vec instead of NCollection_IncAllocator, so the allocator members have no counterpart; the behaviour is Cache::bind/seek/is_bound."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::myTempAllocator",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of BRepGraphInc_Reconstruct::Cache: the Rust Cache keeps the per-kind tables as private Vec state and allocates through Vec instead of NCollection_IncAllocator, so the allocator members have no counterpart; the behaviour is Cache::bind/seek/is_bound."
+    },
+    {
+      "upstream_id": "BRepGraphInc_Reconstruct::Cache::myTempScopeDepth",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reconstruct.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of BRepGraphInc_Reconstruct::Cache: the Rust Cache keeps the per-kind tables as private Vec state and allocates through Vec instead of NCollection_IncAllocator, so the allocator members have no counterpart; the behaviour is Cache::bind/seek/is_bound."
     },
     {
       "upstream_id": "BRepGraph_RepId::Kind",
@@ -136065,6 +136138,118 @@
       "rust_item": "rustycad_tkbrep::brep_graph::RepId::index",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::CoEdgePolygonOnTri",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::CO_EDGE_POLYGON_ON_TRI",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::FaceSurface",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::FACE_SURFACE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::FaceTriangulation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::FACE_TRIANGULATION",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Typed",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Typed::Index",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::index",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::RepKind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepId::kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: public field of RepId."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::CoEdgeCurve2D",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::CO_EDGE_CURVE_2D",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: associated constant of RepKind with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::CoEdgePolygon2D",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::CO_EDGE_POLYGON_2D",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: associated constant of RepKind with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::EdgeCurve3D",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::EDGE_CURVE_3D",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: associated constant of RepKind with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Kind::EdgePolygon3D",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepKind::EDGE_POLYGON_3D",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: associated constant of RepKind with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::THE_INVALID_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepId::INVALID_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Typed::THE_INVALID_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::INVALID_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::THE_START_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RepId::START_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RepId::Typed::THE_START_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_RepId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::START_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
     },
     {
       "upstream_id": "BRepGraphInc_Storage::BRepGraphInc_Storage()",
@@ -138611,6 +138796,30 @@
       "notes": "Manual BRepGraph id mapping (docs/topology-design.md section 11.1): the kind enums are transparent i32 newtypes so the reserved kind 9 stays representable; BRepGraph_*Id::Typed<Kind> is TypedId<Tag> with zero-sized tags; ++ and +/- map to pre_increment/post_increment/offset/retreat; hashes reproduce the native opencascade::hash combinations. Compared with OCCT by the br_graph probes."
     },
     {
+      "upstream_id": "BRepGraph_ItemId::Domain::Node",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemDomain::Node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_ItemId::Domain::None",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemDomain::None",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_ItemId::Domain::Reference",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemDomain::Reference",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
       "upstream_id": "BRepGraph_ItemUID::Domain",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemUID.hxx",
@@ -138753,6 +138962,30 @@
       "rust_item": "rustycad_tkbrep::brep_graph::ItemUid::hash_value",
       "status": "excluded",
       "notes": "std::hash<BRepGraph_ItemUID> returns HashValue(); the Rust HashValue member brep_graph::ItemUid::hash_value is the same function (docs/topology-design.md 11.8)."
+    },
+    {
+      "upstream_id": "BRepGraph_ItemUID::Domain::Node",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemUID.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemDomain::Node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_ItemUID::Domain::None",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemUID.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemDomain::None",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_ItemUID::Domain::Reference",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ItemUID.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ItemDomain::Reference",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
       "upstream_id": "BRepGraph_NodeId::Kind",
@@ -139241,6 +139474,165 @@
       "rust_item": "rustycad_tkbrep::brep_graph::WireId",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::CoEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::CO_EDGE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::CompSolid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::COMP_SOLID",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Compound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::COMPOUND",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Edge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::EDGE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Face",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::FACE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Occurrence",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::OCCURRENCE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Product",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::PRODUCT",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Shell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::SHELL",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Solid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::SOLID",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Vertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::VERTEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Kind::Wire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeKind::WIRE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Typed",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Typed::Index",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::index",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Typed::Typed<TheKind>(const BRepGraph_NodeId::Typed<OtherKind>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor. TypedId<A> and TypedId<B> are distinct Rust types, so the cross-kind conversion does not compile either."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::NodeKind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId::kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: public field of NodeId."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::THE_KIND_COUNT",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId::KIND_COUNT",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::THE_INVALID_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId::INVALID_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Typed::THE_INVALID_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::INVALID_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::THE_START_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId::START_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_NodeId::Typed::THE_START_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_NodeId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::START_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
     },
     {
       "upstream_id": "BRepGraph_ParallelPolicy::WorkerCount()",
@@ -139745,6 +140137,125 @@
       "rust_item": "rustycad_tkbrep::brep_graph::WireRefId",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Child",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::CHILD",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Face",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::FACE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Occurrence",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::OCCURRENCE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Shell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::SHELL",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Solid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::SOLID",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Vertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::VERTEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Kind::Wire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefKind::WIRE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Typed",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Typed::Index",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::index",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Typed::Typed<TheKind>(const BRepGraph_RefId::Typed<OtherKind>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor. TypedId<A> and TypedId<B> are distinct Rust types, so the cross-kind conversion does not compile either."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::RefKind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId::kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: public field of RefId."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::THE_INVALID_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId::INVALID_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Typed::THE_INVALID_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::INVALID_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::THE_START_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId::START_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_RefId::Typed::THE_START_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefId.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::TypedId::START_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
     },
     {
       "upstream_id": "BRepGraph_RefUID()",
@@ -141723,6 +142234,30 @@
       "notes": "std::hash<BRepGraph_UsagePath> returns HashCode(); the Rust HashCode member brep_graph::UsagePath::hash_code is the same function (docs/topology-design.md 11.8)."
     },
     {
+      "upstream_id": "BRepGraph_UsagePath::Step::Node",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_UsagePath.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::UsageStep::node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_UsagePath::Step::StepIndex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_UsagePath.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::UsageStep::step_index",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_UsagePath::Step::Ref",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_UsagePath.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::UsageStep::reference",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: public field of UsageStep (ref is a Rust keyword)."
+    },
+    {
       "upstream_id": "BRepGraph_VersionStamp::Domain",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_VersionStamp.hxx",
@@ -141873,6 +142408,30 @@
       "rust_item": "rustycad_tkbrep::brep_graph::VersionStamp::ref_uid",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_VersionStamp::Domain::Node",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_VersionStamp.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::StampDomain::Node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_VersionStamp::Domain::None",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_VersionStamp.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::StampDomain::None",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_VersionStamp::Domain::Reference",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_VersionStamp.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::StampDomain::Reference",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
       "upstream_id": "BRepGraph_ChildExplorer::LinkKind",
@@ -142507,6 +143066,13 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
+      "upstream_id": "BRepGraph_Copy::BRepGraph_Copy()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Copy.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
+    },
+    {
       "upstream_id": "BRepGraph_Compact::Options::CachePolicy",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
@@ -142665,6 +143231,13 @@
       "rust_item": "rustycad_tkbrep::brep_graph::compact::CompactResult::nb_unmapped_active_defs",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_Compact::BRepGraph_Compact()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
     },
     {
       "upstream_id": "BRepGraph_Deduplicate::Perform(BRepGraph&)",
@@ -142857,6 +143430,13 @@
       "rust_item": "rustycad_tkbrep::brep_graph::deduplicate::DeduplicateResult::nb_tolerance_ordered_wires",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_Deduplicate::BRepGraph_Deduplicate()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Deduplicate.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
     },
     {
       "upstream_id": "BRepGraph_DefsIterator::ShellOfSolidTraits::IsParentValid(const BRepGraph&,const BRepGraph_DefsIterator::BaseTraits<struct BRepGraph_NodeId::Typed<BRepGraph_NodeId::Kind::Solid>,struct BRepGraph_RefId::Typed<BRepGraph_RefId::Kind::Shell>,struct BRepGraphInc::ShellRef,struct BRepGraph_NodeId::Typed<BRepGraph_NodeId::Kind::Shell>,struct BRepGraphInc::ShellDef>::ParentId)",
@@ -143419,6 +143999,93 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
     },
     {
+      "upstream_id": "BRepGraph_DefsIterator",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::defs_iterator",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ namespace: the Rust module that holds the same items."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::BaseTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::BaseTraits::THE_IS_DIRECT",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. THE_IS_DIRECT only selects a fast path of Next() that checks exactly what the slow path checks; the port keeps the slow path for every traits struct (parent_traits module documentation), so the flag has no Rust counterpart and no observable effect."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::BaseTraits::ChildDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::ChildDef",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::BaseTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::BaseTraits::ParentId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Parent",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::DefsOfParent::ChildDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::ChildDef",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::DefsOfParent::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::DefsOfParent::ParentId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Parent",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::DefsVertexOfEdge::ChildDef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc::VertexDef",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_DefsIterator::DefsVertexOfEdge::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::VertexId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
       "upstream_id": "BRepGraph_IteratorDetail::NodeTraits<BRepGraphInc::SolidDef>::Count(const BRepGraph&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
@@ -143977,6 +144644,30 @@
       "rust_item": "rustycad_tkbrep::brep_graph::iterator::WireIterator",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_Iterator",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::DefIterator",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraph_IteratorDetail",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ namespace: the Rust module that holds the same items."
+    },
+    {
+      "upstream_id": "BRepGraph_Iterator::Traits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::iterator::NodeTraits",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
       "upstream_id": "BRepGraph_ParentExplorer::LinkKind",
@@ -145009,6 +145700,132 @@
       "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::WireRefIterator",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ namespace: the Rust module that holds the same items."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::BaseTraits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::Detail",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ namespace: the Rust module that holds the same items."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::BaseTraits::THE_IS_DIRECT",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. THE_IS_DIRECT only selects a fast path of Next() that checks exactly what the slow path checks; the port keeps the slow path for every traits struct (parent_traits module documentation), so the flag has no Rust counterpart and no observable effect."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::CoEdgeOfWireTraits::THE_IS_DIRECT",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. THE_IS_DIRECT only selects a fast path of Next() that checks exactly what the slow path checks; the port keeps the slow path for every traits struct (parent_traits module documentation), so the flag has no Rust counterpart and no observable effect."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::BaseTraits::ParentId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Parent",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::RefsOfParent::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::RefsOfParent::ParentId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ParentTraits::Parent",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::RefIterator::Traits",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::refs_iterator::RefTraits",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::ChildOfCompoundTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ChildOfCompoundTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::CoEdgeOfWireTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::CoEdgeOfWireTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::FaceOfShellTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::FaceOfShellTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::OccurrenceOfProductTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::OccurrenceOfProductTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::ShellOfSolidTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::ShellOfSolidTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::SolidOfCompSolidTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::SolidOfCompSolidTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraph_RefsIterator::WireOfFaceTraits::ChildId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_RefsIterator.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::parent_traits::WireOfFaceTraits::<rustycad_tkbrep::brep_graph::parent_traits::ParentTraits>::Child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
       "upstream_id": "BRepGraph_RelatedIterator::RelationKind",
@@ -147040,6 +147857,13 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ type alias: the Rust item of the same name (type alias, struct or associated type) names the same type."
     },
     {
+      "upstream_id": "BRepGraph_Tool::BRepGraph_Tool()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Tool.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
+    },
+    {
       "upstream_id": "BRepGraph::TopoView::EdgeOps::WiresOf(BRepGraph_EdgeId) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_TopoView.hxx",
@@ -147376,6 +148200,110 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
     },
     {
+      "upstream_id": "BRepGraphInc",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ namespace: the Rust module that holds the same items."
+    },
+    {
+      "upstream_id": "BRepGraphInc::VertexDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::VertexId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgeDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::EdgeId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgeDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::CoEdgeId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::WireDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::WireId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::FaceId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ShellDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ShellId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::SolidDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::SolidId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CompoundDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::CompoundId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CompSolidDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::CompSolidId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ProductDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ProductId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::OccurrenceDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::OccurrenceId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::BaseDef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Definition.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::NodeId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
       "upstream_id": "BRepGraphInc_Load::Counts::NbChildRefs",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Load.hxx",
@@ -147584,6 +148512,14 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
     },
     {
+      "upstream_id": "BRepGraphInc_Load",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Load.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph_inc",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The BRepGraphInc_Load namespace holds only Counts, which the brep_graph_inc module exports as LoadCounts."
+    },
+    {
       "upstream_id": "BRepGraphInc::BaseRef::UID",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
@@ -147766,6 +148702,70 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::WireRef::parent_face_id",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraphInc::BaseRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::RefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ShellRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ShellRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::FaceRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::WireRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::WireRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::VertexRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::VertexRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::SolidRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::SolidRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::ChildRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::ChildRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::OccurrenceRef::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Reference.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::OccurrenceRefId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
       "upstream_id": "BRepGraphInc::CompSolidRelations::SolidRefIds",
@@ -148022,6 +149022,62 @@
       "rust_item": "rustycad_tkbrep::brep_graph_inc::FaceTriangulationRep::triangulation",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgeCurve3DRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::EdgeCurve3DRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::EdgePolygon3DRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::EdgePolygon3DRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgeCurve2DRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::CoEdgeCurve2DRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgePolygon2DRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::CoEdgePolygon2DRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::CoEdgePolygonOnTriRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::CoEdgePolygonOnTriRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceSurfaceRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::FaceSurfaceRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
+    },
+    {
+      "upstream_id": "BRepGraphInc::FaceTriangulationRep::TypeId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraphInc/BRepGraphInc_Representation.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::FaceTriangulationRepId",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. C++ member typedef: the associated type of the Rust trait (or the Rust type) names the same type."
     },
     {
       "upstream_id": "BRepGraph::LayerRegistry()",
@@ -149368,6 +150424,38 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
     },
     {
+      "upstream_id": "BRepGraph_LayerParametric::THE_DEFAULT_GENERATION_FLAGS",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::DEFAULT_GENERATION_FLAGS",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::THE_INVALID_INSTANCE",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::INVALID_INSTANCE",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::AddResult::Instance",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::ParametricAddResult::instance",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: public field of ParametricAddResult."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerParametric::AddResult::Root",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerParametric.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_parametric::ParametricAddResult::root",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: public field of ParametricAddResult."
+    },
+    {
       "upstream_id": "BRepGraph_LayerRegistry::BRepGraph_LayerRegistry()",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
@@ -150046,6 +151134,13 @@
       "rust_item": "rustycad_tkbrep::brep_graph::layer_lock::ScopedOwnerEdit",
       "status": "excluded",
       "notes": "C++ move constructor/assignment: a Rust scope moves by value, and assigning over a live scope drops it first, which restores its bit as the native move assignment does."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerLock::ScopedOwnerEdit::ScopedOwnerEdit(const BRepGraph_LayerLock::ScopedOwnerEdit&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerLock.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
     },
     {
       "upstream_id": "BRepGraph_CacheDerivedState::GetID()",
@@ -150824,6 +151919,14 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
     },
     {
+      "upstream_id": "BRepGraph_CacheMesh::DefaultDisplaySlot",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheMesh.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache_mesh::DEFAULT_DISPLAY_SLOT",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
       "upstream_id": "BRepGraph::MeshView::CacheView::FaceOps::Has(BRepGraph_FaceId) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
@@ -151488,6 +152591,110 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
     },
     {
+      "upstream_id": "BRepGraph_Cache::AttachedGraph() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::attached_graph",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::Graph() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::graph",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::IsAttached() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::is_attached",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::ItemOwnGen(const BRepGraph_ItemId,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::item_own_gen",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::NodeOwnGen(const BRepGraph_NodeId,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::node_own_gen",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::NodeSubtreeGen(const BRepGraph_NodeId,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::node_subtree_gen",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::RefOwnGen(const BRepGraph_RefId,uint32_t&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::ref_own_gen",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::ResolveActiveFaceRef(const BRepGraph_FaceRefId,BRepGraph_FaceId&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::resolve_active_face_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::ResolveActiveRefChild(const BRepGraph_RefId,BRepGraph_NodeId&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::resolve_active_ref_child",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::BRepGraph_Cache()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::CacheBase::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The protected constructor builds the CacheBase each cache embeds."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::OnAttached()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::on_attached",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Virtual hook: provided method of the BRepGraphCache trait."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::OnDetached()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::BRepGraphCache::on_detached",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Virtual hook: provided method of the BRepGraphCache trait."
+    },
+    {
+      "upstream_id": "BRepGraph_Cache::RefEntry::Ref() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Cache.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::cache::RefEntry::reference",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The accessor is reference() because ref is a Rust keyword."
+    },
+    {
       "upstream_id": "BRepGraph_CacheRegistry::CopyFreshCachesTo(BRepGraph&,const NCollection_FlatDataMap<BRepGraph_ItemId,BRepGraph_ItemId>&,BRepGraph_CopyRemap::Mode) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_CacheRegistry.hxx",
@@ -151526,6 +152733,62 @@
       "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::on_detached",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::AttachedGraph() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerBase::attached_graph",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::Graph() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerBase::graph",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::IsAttached() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerBase::is_attached",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::touch()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerBase::touch",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Member function: same-named Rust method with the native body; output references become returned values."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::BRepGraph_Layer()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::LayerBase::new",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The protected constructor builds the LayerBase each layer embeds."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::RemappedItem(const BRepGraph_CopyRemap&,const BRepGraph_NodeId::Typed<TheKind>)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::remapped_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The protected static template is a free function per id family."
+    },
+    {
+      "upstream_id": "BRepGraph_Layer::RemappedItem(const BRepGraph_CopyRemap&,const BRepGraph_RefId::Typed<TheKind>)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Layer.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer::remapped_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. The protected static template is a free function per id family."
     },
     {
       "upstream_id": "BRepGraph_LayerDeferred::CopyTo(const BRepGraph_CopyRemap&) const",
@@ -151584,12 +152847,172 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::Provider",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredEntry::provider",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::Representations",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredEntry::representations",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::SourceKey",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredEntry::source_key",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Representation::Kind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredRepresentation::kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Representation::Name",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredRepresentation::name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Representation::Role",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredRepresentation::role",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Representation::SourceIndex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::DeferredRepresentation::source_index",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Entry::RepresentationStorage::THE_MAX_REPRESENTATIONS_PER_ITEM",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::MAX_REPRESENTATIONS_PER_ITEM",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerDeferred::Representation::THE_INVALID_SOURCE_INDEX",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerDeferred.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_deferred::INVALID_SOURCE_INDEX",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Static constant with the native value."
+    },
+    {
       "upstream_id": "BRepGraph_LayerHistory::CopyTo(const BRepGraph_CopyRemap&) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
       "rust_item": "rustycad_tkbrep::brep_graph::layer::BRepGraphLayer::copy_to",
       "status": "implemented",
       "notes": "Manual BRepGraph layer/cache mapping (docs/topology-design.md sections 11.9 and 11.10): layers and caches are Transient trait objects (BRepGraphLayer, BRepGraphCache) with their state behind one SharedState, so every member takes &self; members that read AttachedGraph()/Graph() take the graph explicitly and use it only when attached to it. Compared with OCCT by the br_bcache probes."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::ExtraInfo",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::extra_info",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::ItemUidMapping",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::item_uid_mapping",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::Mapping",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::mapping",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::OperationName",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::operation_name",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::RecordKind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::record_kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::SequenceNumber",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::sequence_number",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Event::UidMapping",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryEvent::uid_mapping",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Kind::Deleted",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryKind::Deleted",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Kind::Generated",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryKind::Generated",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Kind::Modified",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryKind::Modified",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerHistory::Kind::Replaced",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerHistory.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_history::HistoryKind::Replaced",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
       "upstream_id": "BRepGraph_LayerTopoSupplement::CopyTo(const BRepGraph_CopyRemap&) const",
@@ -151664,6 +153087,38 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Entry::BaseOwner",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::SupplementEntry::base_owner",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Entry::Kind",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::SupplementEntry::kind",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Entry::LocalUid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::SupplementEntry::local_uid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplement::Entry::Shape",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerTopoSupplement.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::layer_topo_supplement::SupplementEntry::shape",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
       "upstream_id": "BRepGraph_LayerRegistry::CopyLayersTo(BRepGraph&,const NCollection_FlatDataMap<BRepGraph_ItemId,BRepGraph_ItemId>&,BRepGraph_CopyRemap::Mode) const",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_LayerRegistry.hxx",
@@ -151694,6 +153149,20 @@
       "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard",
       "status": "implemented",
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Class template: the generic Rust struct; the template parameters are Rust type parameters or kind tags."
+    },
+    {
+      "upstream_id": "BRepGraphODE",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Forward declaration of a friend class that TKBRep never defines (it belongs to an optional ODE extension outside this toolkit); BRepGraph only names it as a friend, so there is no TKBRep behaviour to port."
+    },
+    {
+      "upstream_id": "BRepGraphODE_Storage",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Forward declaration of a friend class that TKBRep never defines (it belongs to an optional ODE extension outside this toolkit); BRepGraph only names it as a friend, so there is no TKBRep behaviour to port."
     },
     {
       "upstream_id": "BRepGraph_DeferredScope::BRepGraph_DeferredScope(BRepGraph&)",
@@ -153240,6 +154709,54 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
     },
     {
+      "upstream_id": "BRepGraph::ShapesView::Result::AddedNodes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::added_nodes",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Result::InsertedRef",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::inserted_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Result::Occurrence",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::occurrence",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Result::Product",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::product",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Result::Status",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::status",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::Result::TopologyRoot",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::AddResult::topology_root",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
       "upstream_id": "BRepGraph_SupplementEditor::BRepGraph_SupplementEditor(BRepGraph&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
@@ -153464,6 +154981,21 @@
       "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Enumerator: the Rust enum variant or constant with the same native value and order."
     },
     {
+      "upstream_id": "BRepGraph_Validate::Result::Issues",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::ValidationResult::issues",
+      "status": "implemented",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Public data member: the Rust struct keeps it as a public field (snake_case) or a same-named accessor with the native value."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::BRepGraph_Validate()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
+    },
+    {
       "upstream_id": "BRepGraph_Transform::MoveRef(BRepGraph&,BRepGraph_ChildRefId,const gp_Trsf&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Transform.hxx",
@@ -153494,6 +155026,76 @@
       "rust_item": "rustycad_tkbrep::brep_graph::transform::transform_node",
       "status": "implemented",
       "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.13): the native policy checks, then BRepGraph_Copy (copy::perform or copy::copy_node, default cache policy), then the copied-range transform; a self transform (the same source and target graph) is the separate function transform::transform_node_in_place taking the graph mutably; C++ exceptions are Failure errors. Compared with OCCT by the br_balgo transform requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Transform::BRepGraph_Transform()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Transform.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Deleted in C++ (a static-only class or a non-copyable/non-convertible type): there is no callable behaviour; Rust gives the type no such constructor."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myCacheRegistry",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myEditorView",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myIncStorage",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myLayerRegistry",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myMeshView",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myRefsView",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myShapesView",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myTopoView",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
+    },
+    {
+      "upstream_id": "BRepGraph_Data::myUIDsView",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Data.hxx",
+      "status": "excluded",
+      "notes": "Manual BRepGraph mapping (docs/topology-design.md section 11), compared with OCCT by the br_bgraph* probes of tools/verify_tkbrep_numeric.py. Data member of the internal BRepGraph_Data: the Rust Data keeps the storage and the two registries as crate-private fields (inc_storage, layers, caches); the views are borrows that BRepGraph builds on demand (topo(), refs(), shapes(), mesh(), uids(), editor()), so no field stores them."
     },
     {
       "upstream_id": "TopTrans_CurveTransition::TopTrans_CurveTransition()",
