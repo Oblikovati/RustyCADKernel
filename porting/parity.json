@@ -90337,6 +90337,326 @@
       "notes": "Interface mapping (docs/xsbase-design.md section 1): transients keep their fields in one SharedState; abstract classes are traits over embedded bases; const char* arguments are &str and const char* results are owned texts; Standard_OStream/IStream are std::io::Write/BufRead; native exceptions, and the Standard_OutOfRange of the checked NCollection accessors, are Failure errors. Interface_Check keeps its six message sequences as Option<Vec<Handle<HAsciiString>>> (None is the native null sequence); the getters of a whole sequence return a copy."
     },
     {
+      "upstream_id": "Interface_EntityIterator::Interface_EntityIterator()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Interface_EntityIterator(const occ::handle<NCollection_HSequence<occ::handle<Standard_Transient>>>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::from_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation. The shared HSequence is InterfaceEntityListHandle; copies of the iterator share the list and the cursor."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::AddList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::add_list",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation. The appended HSequence is a slice of entities."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::AddItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::add_item",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::GetOneItem",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::get_one_item",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::SelectType",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::select_type",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::NbEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::nb_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::NbTyped",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::nb_typed",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Typed",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::typed",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Start",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::start",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation. No OCCT class overrides the virtual Start."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::More",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::more",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Next",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::next",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Content",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::content",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation. Returns a copy of the list; content_handle gives the shared list itself."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Destroy",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::destroy",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityIterator::Reset",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityIterator.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityIterator::reset",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Interface_EntityCluster()",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Interface_EntityCluster(const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::with_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Interface_EntityCluster(const occ::handle<Interface_EntityCluster>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::with_next",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Interface_EntityCluster(const occ::handle<Standard_Transient>&,const occ::handle<Interface_EntityCluster>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::with_entity_and_next",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Append",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::append",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Remove(const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::remove",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Remove(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::remove_rank",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation. Native quirks kept (only the fourth place is cleared); the native shift loop that runs out of the array for a rank below the local count is reported as Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::NbEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::nb_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::SetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::set_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityCluster::FillIterator",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityCluster.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityCluster::fill_iterator",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Interface_EntityList",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::new",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Clear",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::clear",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Append",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::append",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Add",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::add",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Remove(const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::remove",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Remove(const int)",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::remove_rank",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::IsEmpty",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::is_empty",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::NbEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::nb_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::Value",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::SetValue",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::set_value",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::FillIterator",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::fill_iterator",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::NbTypedEntities",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::nb_typed_entities",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
+      "upstream_id": "Interface_EntityList::TypedEntity",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Interface/Interface_EntityList.hxx",
+      "rust_item": "rustycad_tkxsbase::interface::InterfaceEntityList::typed_entity",
+      "status": "implemented",
+      "notes": "Interface mapping (docs/xsbase-design.md section 1): entities are Handle<StandardTransient>; occ::handle<Standard_Type> arguments are &RuntimeType; native exceptions are Failure errors with the native exception names; a native null dereference or out-of-array access is reported as the Failure named in the member's documentation."
+    },
+    {
       "upstream_id": "Standard_DomainError::Standard_DomainError(const char*)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_DomainError.hxx",
