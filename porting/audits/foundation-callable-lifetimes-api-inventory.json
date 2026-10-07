@@ -1,0 +1,107 @@
+{
+  "schema": "rustycad.compiler-inventory-refresh.v1",
+  "source_revision": "4be8ba8c0fab63a2f1ec72693cd96a669f55b221",
+  "previous_snapshot_revision": "d49161de",
+  "rust_libraries": 20,
+  "all_features_per_library": true,
+  "source_and_artifact_hashes_verified": true,
+  "observed_cpp_api_declarations": 108622,
+  "resolved_implementation_claims": 23598,
+  "unresolved_ledger_rows": 4367,
+  "unclaimed_cpp_declarations": 80775,
+  "rust_public_paths": 63699,
+  "artifacts": {
+    "raw_rustdoc": {
+      "path": "porting/runtime-evidence/foundation-callable-lifetimes-api-raw-rustdoc.tar.gz",
+      "sha256": "a8d8218cf495976b0980c9504eda5fafa8620bbbb4c0e26c1bea6a6f44a51fe5"
+    },
+    "capture": {
+      "path": "porting/runtime-evidence/foundation-callable-lifetimes-api-capture.gz",
+      "sha256": "7df2d6292e467eba319c750f5a2414f3e8109b9cfe4e287568a8e2f8f86d4628"
+    },
+    "normalizer": {
+      "path": "porting/runtime-evidence/foundation-callable-lifetimes-api-normalizer.gz",
+      "sha256": "98b415bb851b6fc531dd8bc18f9bc2e9cb9f505ce14cc131aaaa45de53a1be6e"
+    },
+    "crosswalk": {
+      "path": "porting/runtime-evidence/foundation-callable-lifetimes-api-crosswalk.gz",
+      "sha256": "1d80c05d3418ee17bd332ff78673d5f23f2c1e71130c20327048dfcd72123c6f"
+    },
+    "rust-api.json.gz": {
+      "path": "porting/api-inventory/rust-api.json.gz",
+      "sha256": "9a26b1bf22b68a4ccc11cd76a789fe452f15a5d08250f963951f09206af64761"
+    },
+    "api-crosswalk.json.gz": {
+      "path": "porting/api-inventory/api-crosswalk.json.gz",
+      "sha256": "e49baab66e8ead4eb496e2dd6e4b6328db2d0dfb2a9df9194bc5f9bba9f18f49"
+    },
+    "completeness.json": {
+      "path": "porting/api-inventory/completeness.json",
+      "sha256": "21a3013bb418aae311435d8250afd10dfa207788110953c48444b4b6f6171370"
+    }
+  },
+  "current_status_lines": [
+    "Compiler API snapshot: 108622 observed C++ declarations; 23598 resolved implementation claims (source/ledger/artifact/tool fingerprints current)",
+    "Unresolved ledger rows: 4367; unclaimed C++ declarations: 80775",
+    "Full API coverage: UNKNOWN (explicit configuration/identity/mapping gaps); port completion: NOT COMPLETE"
+  ],
+  "api_parity_complete": false,
+  "configuration_matrix_complete": false,
+  "resolved_claim_delta": -1,
+  "carried_ambiguous_mappings": [],
+  "ambiguity_reason": "Existing vector selectors remain explicit. HSequence Append receipts narrow overbroad implemented claims to exact partial behavior; inventory counts are not behavior-completeness proof.",
+  "limitations": [
+    "Raw all-features rustdoc capture and reachable-path normalization do not establish C++ overload/template behavioral equivalence.",
+    "Native capture retains existing platform/configuration/identity gaps;108622 is an observed candidate count, not a proven complete denominator.",
+    "No new native API implementations or original legacy mappings receive coverage credit from this inventory refresh."
+  ],
+  "crosswalk_resolution_changes": [
+    {
+      "upstream_id": "NCollection_HSequence::Append(const TheItemType &)",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "previous_resolution": null,
+      "current_resolution": "partial",
+      "previous_status": null,
+      "current_status": "partial",
+      "previous_cpp_ids": null,
+      "current_cpp_ids": [
+        "5ca0c896c932a9b8ee554b5da5ca9a4d0aeaae60fab1026b72aeec79ea6b6c92"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const TheItemType&)",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "previous_resolution": "implemented",
+      "current_resolution": null,
+      "previous_status": "implemented",
+      "current_status": null,
+      "previous_cpp_ids": [
+        "5ca0c896c932a9b8ee554b5da5ca9a4d0aeaae60fab1026b72aeec79ea6b6c92"
+      ],
+      "current_cpp_ids": null
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const opencascade::handle<T> &,typename std::enable_if<std::is_base_of<NCollection_HSequence<TheItemType>, T>::value>::type *)",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "previous_resolution": null,
+      "current_resolution": "partial",
+      "previous_status": null,
+      "current_status": "partial",
+      "previous_cpp_ids": null,
+      "current_cpp_ids": [
+        "e276c3d37896aac6992e65f0ae4c5e6e61883abc5bbace4783c2506915cc0a9f"
+      ]
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const opencascade::handle<T>&,std::enable_if<std::is_base_of<NCollection_HSequence,T>::value>::type*)",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "previous_resolution": "missing_cpp",
+      "current_resolution": null,
+      "previous_status": "implemented",
+      "current_status": null,
+      "previous_cpp_ids": [],
+      "current_cpp_ids": null
+    }
+  ],
+  "resolved_claim_delta_explanation": "The const-item HSequence Append row moves from implemented to partial. The derived-handle Append row moves from a missing native match to an exact partial template match. No new implemented claim is added."
+}
