@@ -17,17 +17,24 @@ impl OrderedDataCursor {
         *self = map.cursor();
     }
     /// Native `Reset`: a bound cursor restarts at the current first binding of `map` (the map
-    /// it was created on), a default cursor stays exhausted; `cursor.reset(&map)`.
-    pub fn reset<K, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
+    /// it was created on), a default cursor stays exhausted; `cursor.reset(&map)?`.
+    ///
+    /// The native iterator keeps its map, so it cannot name another one. The detached Rust
+    /// cursor takes the map as an argument: a map other than its owner is caller input, so it
+    /// gives Standard_NoSuchObject and leaves the cursor unchanged (plan D3), never a panic.
+    pub fn reset<K, V, H: HashPolicy<K>>(
+        &mut self,
+        map: &OrderedDataMap<K, V, H>,
+    ) -> Result<(), Failure> {
         if self.owner.is_null() {
-            return;
+            return Ok(());
         }
-        assert_eq!(
-            self.owner,
-            std::ptr::from_ref(map).cast(),
-            "OrderedDataCursor reset map; expected original owner"
-        );
+        let owner: *const () = std::ptr::from_ref(map).cast();
+        if owner != self.owner {
+            return Err(self.foreign_map_failure(owner));
+        }
         *self = map.cursor();
+        Ok(())
     }
     /// Checks whether the cursor is exhausted; `cursor.more()`.
     pub fn more(&self) -> bool {
@@ -74,16 +81,18 @@ impl OrderedDataCursor {
             .then_some(self.entry)
             .flatten()
             .and_then(|entry| map.table.slot_of(entry));
-        slot.ok_or_else(|| {
-            Failure::with_type(
-                "Standard_NoSuchObject",
-                &format!(
-                    "OrderedDataCursor owner {owner:p}, entry {:?}; expected owner {:p} and a live entry",
-                    self.entry, self.owner
-                ),
-                "",
-            )
-        })
+        slot.ok_or_else(|| self.foreign_map_failure(owner))
+    }
+    // Standard_NoSuchObject naming the offending map and entry against the expected owner.
+    fn foreign_map_failure(&self, owner: *const ()) -> Failure {
+        Failure::with_type(
+            "Standard_NoSuchObject",
+            &format!(
+                "OrderedDataCursor owner {owner:p}, entry {:?}; expected owner {:p} and a live entry",
+                self.entry, self.owner
+            ),
+            "",
+        )
     }
 
     /// Copies cursor state and returns the destination; `cursor.assign(&other)`.

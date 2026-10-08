@@ -162,7 +162,7 @@ fn ordered_cursor_prefix_postfix_assignment_and_reset_preserve_native_state() {
     assert!(!cursor.more());
     assert_eq!(cursor.assign(&previous) as *const _, destination);
     assert_eq!(cursor.assign_self() as *const _, destination);
-    cursor.reset(&map);
+    cursor.reset(&map).unwrap();
     assert_eq!(cursor.key(&map), Ok(&1));
 }
 
@@ -174,10 +174,10 @@ fn ordered_cursor_reset_uses_current_head_and_default_remains_detached() {
     let mut cursor = map.cursor();
     assert!(map.unbind(&1));
     assert!(cursor.value(&map).is_err());
-    cursor.reset(&map);
+    cursor.reset(&map).unwrap();
     assert_eq!(cursor.key(&map), Ok(&2));
     let mut detached = OrderedDataCursor::default();
-    detached.reset(&map);
+    assert_eq!(detached.reset(&map), Ok(()));
     assert!(!detached.more());
     detached.initialize(&map);
     assert!(detached == cursor);
@@ -220,4 +220,23 @@ fn ordered_borrowed_copy_allocates_first_and_unwinds_failed_node() {
     };
     assert!(map.bind_ref(&1, &item));
     assert_eq!(map.first(), Ok(&1));
+}
+
+#[test]
+fn ordered_cursor_reset_on_foreign_map_fails_and_keeps_position() {
+    // Regression (plan D3): reset with another map panicked; that map is caller input, so it
+    // must give Standard_NoSuchObject and leave the cursor on its own map's entry.
+    let mut map = OrderedDataMap::<i32, i32>::default();
+    map.bind(1, 10);
+    map.bind(2, 20);
+    let mut other = OrderedDataMap::<i32, i32>::default();
+    other.bind(3, 30);
+    let mut cursor = map.cursor();
+    cursor.advance(&map);
+    let failure = cursor.reset(&other).unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_NoSuchObject");
+    assert!(failure.message().contains("expected owner"));
+    assert_eq!(cursor.key(&map), Ok(&2));
+    assert_eq!(cursor.reset(&map), Ok(()));
+    assert_eq!(cursor.key(&map), Ok(&1));
 }
