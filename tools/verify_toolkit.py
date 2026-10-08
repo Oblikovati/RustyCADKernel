@@ -3,7 +3,7 @@
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
        TKPrim, TKHelix, TKShHealing, TKBO, TKFillet, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase,
-       TKService)
+       TKService, TKExpress)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -22,6 +22,7 @@ from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
 from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS, CLOSURE_TARGETS,
+                          EXPRESS_CLOSURE_TARGETS, EXPRESS_LINKED_TOOLKITS, EXPRESS_TOOLKITS,
                           DE_CLOSURE_TARGETS, DE_LINKED_TOOLKITS, DE_TOOLKITS, EXCHANGE_CLOSURE_TARGETS,
                           EXCHANGE_LINKED_TOOLKITS, EXCHANGE_TOOLKITS, LINKED_TOOLKITS,
                           OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
@@ -55,6 +56,7 @@ NUMERIC_VERIFIERS = {
     'TKHLR': ('tools/verify_tkhlr_numeric.py', 'target/oracle-tkhlr/numeric'),
     'TKFillet': ('tools/verify_tkfillet_numeric.py', 'target/oracle-tkfillet/numeric'),
     'TKService': ('tools/verify_tkservice_numeric.py', 'target/oracle-tkservice/numeric'),
+    'TKExpress': ('tools/verify_tkexpress_numeric.py', 'target/oracle-tkexpress/numeric'),
 }
 
 
@@ -79,12 +81,15 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKXSBase': (EXCHANGE_TOOLKITS, EXCHANGE_CLOSURE_TARGETS, 'target/occt-exchange-full'),
     # TKService needs FreeType, fontconfig and Xlib, which the other closures must not require.
     'TKService': (VISUALIZATION_TOOLKITS, VISUALIZATION_CLOSURE_TARGETS, 'target/occt-visualization-full'),
+    # TKExpress sits on TKernel only; its closure builds no geometry toolkit.
+    'TKExpress': (EXPRESS_TOOLKITS, EXPRESS_CLOSURE_TARGETS, 'target/occt-express-full'),
 }
 
 
 # The numeric profiles that link their own closure instead of the geometry one.
 OWN_CLOSURE_PROFILES: dict[str, tuple[str, ...]] = {
     'TKService': VISUALIZATION_LINKED_TOOLKITS,
+    'TKExpress': EXPRESS_LINKED_TOOLKITS,
 }
 
 

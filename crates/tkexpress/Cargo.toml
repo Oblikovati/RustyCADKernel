@@ -1,0 +1,17 @@
+[package]
+name = "rustycad-tkexpress"
+description = "OCCT TKExpress toolkit: symbolic expressions, relations, functions and the expression interpreter"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-cmath = { path = "../cmath" }
+rustycad-tkernel = { path = "../tkernel" }
+
+[[example]]
+name = "rustycad-tkexpress-numeric-probe"
+path = "examples/numeric_probe.rs"
