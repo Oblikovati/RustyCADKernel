@@ -403677,211 +403677,89 @@
       "upstream_id": "NCollection_CellFilter::Cell",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell",
-      "status": "implemented",
-      "notes": "Protected cell record is CellFilterCell<T>."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::Cell(const NCollection_CellFilter::CellIndex&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::from_indices",
-      "status": "implemented",
-      "notes": "Cell from integer coordinates. The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::Cell(const NCollection_CellFilter::Point&,const NCollection_Array1<double>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::from_point",
-      "status": "implemented",
-      "notes": "Cell containing a point for the given per-axis sizes: coordinate / size converted to int by truncation, wrapped with fmod by INT_MAX/INT_MIN beyond the int range (cell_filter/indices.rs)."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::Cell(NCollection_CellFilter::Cell&&) noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::move_construct",
-      "status": "implemented",
-      "notes": "Move construction transfers index storage and targets, leaving the source empty as natively."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::IsEqual(const NCollection_CellFilter::Cell&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::is_equal",
-      "status": "implemented",
-      "notes": "Coordinate-wise equality of two cells."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::operator==(const NCollection_CellFilter::Cell&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::<core::cmp::PartialEq>::eq",
-      "status": "implemented",
-      "notes": "operator== forwards to IsEqual."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::index",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::index",
-      "status": "implemented",
-      "notes": "Public coordinate array; read through index() as &[i32]. The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::Objects",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCell::targets",
-      "status": "partial",
-      "notes": "Public head of the intrusive target list; Rust keeps the newest-first list private and exposes it as the targets() iterator (prepend_target to add)."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::CellHasher",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCellHasher",
-      "status": "implemented",
-      "notes": "Protected cell hasher is CellFilterCellHasher, a HashPolicy for CellFilterCell."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::CellHasher::operator()(const NCollection_CellFilter::Cell&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::hash",
-      "rust_declaration_selectors": [
-        {
-          "path": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::hash",
-          "declaration_sha256": "a906cea3ed3e917d25cfb9fc3ed1eb7e5f531c56f63cb939371badb433f44617",
-          "impl_context": {
-            "for": {
-              "resolved_path": {
-                "args": null,
-                "path": "CellFilterCellHasher",
-                "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCellHasher"
-              }
-            },
-            "generics": {
-              "params": [
-                {
-                  "kind": {
-                    "type": {
-                      "bounds": [],
-                      "default": null,
-                      "is_synthetic": false
-                    }
-                  },
-                  "name": "T"
-                }
-              ],
-              "where_predicates": []
-            },
-            "trait": {
-              "args": {
-                "angle_bracketed": {
-                  "args": [
-                    {
-                      "type": {
-                        "resolved_path": {
-                          "args": {
-                            "angle_bracketed": {
-                              "args": [
-                                {
-                                  "type": {
-                                    "generic": "T"
-                                  }
-                                }
-                              ],
-                              "constraints": []
-                            }
-                          },
-                          "path": "CellFilterCell",
-                          "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell"
-                        }
-                      }
-                    }
-                  ],
-                  "constraints": []
-                }
-              },
-              "path": "HashPolicy",
-              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy"
-            }
-          }
-        }
-      ],
-      "status": "implemented",
-      "notes": "Native cell hash (HashCode over the coordinates) through HashPolicy::hash."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::CellHasher::operator()(const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&) const noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::equal",
-      "rust_declaration_selectors": [
-        {
-          "path": "rustycad_tkernel::ncollection::CellFilterCellHasher::<rustycad_tkernel::ncollection::HashPolicy<rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell<T>>>::equal",
-          "declaration_sha256": "a43831d10228de7f07f1c1b37d6b90d4aeb3250577669f64096b80b8b9026d4a",
-          "impl_context": {
-            "for": {
-              "resolved_path": {
-                "args": null,
-                "path": "CellFilterCellHasher",
-                "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCellHasher"
-              }
-            },
-            "generics": {
-              "params": [
-                {
-                  "kind": {
-                    "type": {
-                      "bounds": [],
-                      "default": null,
-                      "is_synthetic": false
-                    }
-                  },
-                  "name": "T"
-                }
-              ],
-              "where_predicates": []
-            },
-            "trait": {
-              "args": {
-                "angle_bracketed": {
-                  "args": [
-                    {
-                      "type": {
-                        "resolved_path": {
-                          "args": {
-                            "angle_bracketed": {
-                              "args": [
-                                {
-                                  "type": {
-                                    "generic": "T"
-                                  }
-                                }
-                              ],
-                              "constraints": []
-                            }
-                          },
-                          "path": "CellFilterCell",
-                          "resolved_item_path": "rustycad_tkernel::ncollection::cell_filter::cell::CellFilterCell"
-                        }
-                      }
-                    }
-                  ],
-                  "constraints": []
-                }
-              },
-              "path": "HashPolicy",
-              "resolved_item_path": "rustycad_tkernel::ncollection::hash_policy::HashPolicy"
-            }
-          }
-        }
-      ],
-      "status": "implemented",
-      "notes": "Cell equality through HashPolicy::equal."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::ListNode",
@@ -403919,57 +403797,57 @@
       "upstream_id": "NCollection_CellFilter::add(const NCollection_CellFilter::CellIndex&,const NCollection_CellFilter::Target&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::add_index",
-      "status": "implemented",
-      "notes": "Protected add of a target to one cell. The cell index is passed as an i32 slice instead of NCollection_LocalArray<int, 10>."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::remove(const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Target&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::remove_index",
-      "status": "implemented",
-      "notes": "Protected removal of all equal targets from one cell; the cell is given by its index slice."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::inspect(const NCollection_CellFilter::Cell&,Inspector&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect_index",
-      "status": "implemented",
-      "notes": "Protected inspection of one cell, purging targets for which the inspector returns Purge."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::iterateAdd(int,NCollection_CellFilter::CellIndex&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Target&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::iterate_add_indices",
-      "status": "implemented",
-      "notes": "Protected recursion over a cell range adding a target; out-of-bounds axes return an error before mutation where native access is undefined."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::iterateRemove(int,NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Target&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::iterate_remove_indices",
-      "status": "implemented",
-      "notes": "Protected recursion over a cell range removing a target."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::iterateInspect(int,NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,const NCollection_CellFilter::Cell&,Inspector&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::iterate_inspect_indices",
-      "status": "implemented",
-      "notes": "Protected recursion over a cell range inspecting targets; axis zero varies fastest."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::resetAllocator(const occ::handle<NCollection_IncAllocator>&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::CellFilter::reset_allocator",
-      "status": "implemented",
-      "notes": "Protected arena replacement clearing all cells while keeping dimension and sizes."
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter",
+      "status": "excluded",
+      "notes": "Excluded (plan D1 class B6, user decision 2026-10-07): protected member of NCollection_CellFilter (the cell record, its hasher and the recursive add/remove/inspect helpers are declared after `protected:` in NCollection_CellFilter.hxx). Rust has no subclassing, so a Rust caller cannot reach it. The public behaviour it serves (cell index computation with the INT_MAX/INT_MIN fmod wrap, cell hashing over the index bytes, target lists per cell, and the native add/remove/inspect order over the cell range) is the public API of CellFilter: add, add_range, remove, remove_range, inspect, inspect_range, reset and reset_sizes. The Rust helper items CellFilterCell, CellFilterCellHasher and the *_index methods stay as tested Rust items but earn no OCCT parity credit."
     },
     {
       "upstream_id": "NCollection_CellFilter::Cell::~Cell",
