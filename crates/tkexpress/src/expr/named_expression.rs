@@ -48,6 +48,12 @@ pub fn named_is_identical<T: ExprNamedExpression + ?Sized>(
     Ok(same_object || named.get_name() == me.get_name())
 }
 
+/// `Expr_NamedExpression::IsShareable`: a named expression is shared, never copied, by
+/// `Expr::CopyShare`; `named_is_shareable()`.
+pub fn named_is_shareable() -> bool {
+    true
+}
+
 /// `Expr_NamedExpression::String`: the name; `named_string(&x)`.
 pub fn named_string<T: ExprNamedExpression + ?Sized>(me: &T) -> Result<AsciiString, Failure> {
     Ok(me.get_name())

@@ -4,7 +4,9 @@
 use super::errors::out_of_range;
 use super::general_expression::{ExprGeneralExpression, ExprValues, ExprVariables};
 use super::handles::{ExprHandle, ExprSelfLink, adopt};
-use super::named_expression::{ExprNamedExpression, named_is_identical, named_string};
+use super::named_expression::{
+    ExprNamedExpression, named_is_identical, named_is_shareable, named_string,
+};
 use super::named_unknown::ExprNamedUnknown;
 use super::numeric_value::ExprNumericValue;
 use rustycad_tkernel::impl_transient;
@@ -76,7 +78,7 @@ impl ExprGeneralExpression for ExprNamedConstant {
         Ok(true)
     }
     fn is_shareable(&self) -> bool {
-        true
+        named_is_shareable()
     }
     fn is_identical(&self, other: &ExprHandle) -> Result<bool, Failure> {
         named_is_identical(self, other)

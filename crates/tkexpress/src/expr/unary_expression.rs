@@ -72,6 +72,11 @@ pub fn check_new_operand(me: &ExprHandle, exp: &ExprHandle, member: &str) -> Res
     Ok(())
 }
 
+/// `Expr_UnaryExpression::NbSubExpressions`: one operand; `unary_nb_sub_expressions() == 1`.
+pub fn unary_nb_sub_expressions() -> i32 {
+    1
+}
+
 /// `Expr_UnaryExpression::SubExpression`; `unary_sub_expression(&sine, 1)?`.
 pub fn unary_sub_expression<T: ExprUnaryExpression + ?Sized>(
     me: &T,
@@ -148,7 +153,7 @@ pub fn unary_simplified<T: ExprUnaryExpression + ?Sized>(me: &T) -> Result<ExprH
 macro_rules! unary_expression_members {
     () => {
         fn nb_sub_expressions(&self) -> i32 {
-            1
+            $crate::expr::unary_expression::unary_nb_sub_expressions()
         }
         fn sub_expression(
             &self,

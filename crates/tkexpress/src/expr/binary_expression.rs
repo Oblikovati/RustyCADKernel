@@ -72,6 +72,11 @@ impl_transient_interface!(
     dyn ExprGeneralExpression
 );
 
+/// `Expr_BinaryExpression::NbSubExpressions`: two operands; `binary_nb_sub_expressions() == 2`.
+pub fn binary_nb_sub_expressions() -> i32 {
+    2
+}
+
 /// `Expr_BinaryExpression::SubExpression`; `binary_sub_expression(&difference, 2)?`.
 pub fn binary_sub_expression<T: ExprBinaryExpression + ?Sized>(
     me: &T,
@@ -183,7 +188,7 @@ pub fn evaluate_operands<T: ExprBinaryExpression + ?Sized>(
 macro_rules! binary_expression_members {
     () => {
         fn nb_sub_expressions(&self) -> i32 {
-            2
+            $crate::expr::binary_expression::binary_nb_sub_expressions()
         }
         fn sub_expression(
             &self,

@@ -6,7 +6,9 @@ use super::errors::{
 };
 use super::general_expression::{ExprGeneralExpression, ExprValues, ExprVariables};
 use super::handles::{ExprHandle, ExprSelfLink, adopt, deref, is_kind, lossy};
-use super::named_expression::{ExprNamedExpression, named_is_identical, named_string};
+use super::named_expression::{
+    ExprNamedExpression, named_is_identical, named_is_shareable, named_string,
+};
 use super::numeric_value::ExprNumericValue;
 use super::package::copy_share;
 use rustycad_tkernel::impl_transient;
@@ -193,7 +195,7 @@ impl ExprGeneralExpression for ExprNamedUnknown {
         deref(&expression, "Expr_NamedUnknown::IsLinear")?.is_linear()
     }
     fn is_shareable(&self) -> bool {
-        true
+        named_is_shareable()
     }
     fn is_identical(&self, other: &ExprHandle) -> Result<bool, Failure> {
         named_is_identical(self, other)

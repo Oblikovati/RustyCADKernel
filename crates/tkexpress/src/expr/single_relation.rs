@@ -91,6 +91,18 @@ pub fn single_replace<T: ExprSingleRelation + ?Sized>(
     replace_inside(&second, var, with)
 }
 
+/// `Expr_SingleRelation::NbOfSubRelations`: a single relation has no sub-relation;
+/// `single_nb_of_sub_relations() == 0`.
+pub fn single_nb_of_sub_relations() -> i32 {
+    0
+}
+
+/// `Expr_SingleRelation::NbOfSingleRelations`: a single relation counts once;
+/// `single_nb_of_single_relations()? == 1`.
+pub fn single_nb_of_single_relations() -> Result<i32, Failure> {
+    Ok(1)
+}
+
 /// `Expr_SingleRelation::SubRelation`: a single relation has none;
 /// `single_sub_relation(1)` fails with Standard_OutOfRange.
 pub fn single_sub_relation(index: i32) -> Result<ExprRelationHandle, Failure> {
@@ -107,10 +119,10 @@ macro_rules! single_relation_members {
             $crate::expr::single_relation::single_is_linear(self)
         }
         fn nb_of_sub_relations(&self) -> i32 {
-            0
+            $crate::expr::single_relation::single_nb_of_sub_relations()
         }
         fn nb_of_single_relations(&self) -> Result<i32, rustycad_tkernel::standard::Failure> {
-            Ok(1)
+            $crate::expr::single_relation::single_nb_of_single_relations()
         }
         fn sub_relation(
             &self,
