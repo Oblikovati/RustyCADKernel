@@ -3,7 +3,7 @@
 //! `Expr_BinaryExpression`: an expression with two operands.
 //!
 //! The operands (private natively) live in an [`ExprBinaryCore`] that each concrete
-//! class embeds; [`binary_expression_members!`] writes the inherited members.
+//! class embeds; `binary_expression_members!` writes the inherited members.
 use super::errors::out_of_range;
 use super::general_expression::{ExprGeneralExpression, ExprValues, ExprVariables};
 use super::handles::{ExprHandle, ExprSelfLink, deref, is_kind};

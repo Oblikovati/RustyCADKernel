@@ -3,7 +3,7 @@
 //! `Expr_SingleRelation`: a relation between two members.
 //!
 //! The members (private natively) live in an [`ExprSingleCore`] that each concrete
-//! class embeds; [`single_relation_members!`] writes the inherited members.
+//! class embeds; `single_relation_members!` writes the inherited members.
 use super::errors::out_of_range;
 use super::general_relation::{ExprGeneralRelation, ExprRelationHandle};
 use super::handles::{ExprHandle, deref};

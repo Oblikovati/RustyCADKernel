@@ -3,7 +3,7 @@
 //! `Expr_PolyExpression`: an expression with any number of operands.
 //!
 //! The operands (an `NCollection_Sequence`, private natively) live in an
-//! [`ExprPolyCore`] that each concrete class embeds; [`poly_expression_members!`]
+//! [`ExprPolyCore`] that each concrete class embeds; `poly_expression_members!`
 //! writes the inherited members.
 use super::errors::{dimension_mismatch, out_of_range};
 use super::general_expression::ExprGeneralExpression;

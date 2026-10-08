@@ -3,7 +3,7 @@
 //! `Expr_UnaryExpression`: an expression with one operand.
 //!
 //! The operand (`myOperand`, private natively) lives in an [`ExprUnaryCore`] that each
-//! concrete class embeds; [`unary_expression_members!`] writes the members that every
+//! concrete class embeds; `unary_expression_members!` writes the members that every
 //! unary class inherits from `Expr_UnaryExpression` natively.
 use super::errors::{invalid_operand, out_of_range};
 use super::general_expression::ExprGeneralExpression;
