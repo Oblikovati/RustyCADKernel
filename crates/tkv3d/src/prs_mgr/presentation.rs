@@ -161,7 +161,8 @@ impl PrsMgrPresentation {
     /// Example: `prs.unhighlight_restore()`.
     pub fn unhighlight_restore(&self) {
         rustycad_tkservice::graphic3d::Graphic3dStructureDisplay::unhighlight(self);
-        match self.state.read().before_highlight_state {
+        let before = self.state.read().before_highlight_state;
+        match before {
             BeforeHighlightState::Visible => {}
             BeforeHighlightState::Hidden => self.set_visible(false),
             BeforeHighlightState::Empty => graphic3d_structure_erase(self),
