@@ -5,6 +5,7 @@
 // through pr_shape (tkprim_probe_shape.cxx).
 #include <BRepAlgo.hxx>
 #include <BRepAlgo_FaceRestrictor.hxx>
+#include <BRepAlgo_Loop.hxx>
 // `program wire option angtol`: ConcatenateWire (option as a GeomAbs_Shape value).
 void bl_ba_concat_case(std::istream& input){
  GaReader r{input};TpShapes t;
@@ -51,4 +52,46 @@ void bl_ba_face_restrictor_case(std::istream& input){
  int count=0;
  GA_TRY(for(;fr.More();fr.Next()){pr_shape(fr.Current());count++;})
  ga_int(count);
+ ga_end();}
+// A list of shapes of the table: `n index...` with an orientation per index (-1 as is).
+NCollection_List<TopoDS_Shape> bl_shape_list(GaReader& r,const TpShapes& t){
+ NCollection_List<TopoDS_Shape> l;int n=r.integer();
+ for(int i=0;i<n;i++){TopoDS_Shape s=t.shapes.at(r.integer());int o=r.integer();if(o>=0)s.Orientation((TopAbs_Orientation)o);l.Append(s);}
+ return l;}
+// The pieces of a cut edge: count, then per piece its range, orientation and the table
+// indices (IsSame) of its vertices.
+void bl_ba_pieces(const NCollection_List<TopoDS_Shape>& ne,const TpShapes& t){
+ ga_int(ne.Extent());
+ for(NCollection_List<TopoDS_Shape>::Iterator it(ne);it.More();it.Next()){
+  const TopoDS_Edge e=TopoDS::Edge(it.Value());double f,l;BRep_Tool::Range(e,f,l);ga_real(f);ga_real(l);ga_int(e.Orientation());
+  TopoDS_Vertex v1,v2;TopExp::Vertices(e,v1,v2);ga_int(tp_same_index(t,v1));ga_int(tp_same_index(t,v2));}}
+// `program face edge list`: CutEdge of the edge at the listed vertices.
+void bl_ba_cut_edge_case(std::istream& input){
+ GaReader r{input};TpShapes t;
+ try{t=tp_shapes(r);}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';ga_end();return;}
+ const TopoDS_Face f=TopoDS::Face(t.shapes.at(r.integer()));const TopoDS_Edge e=TopoDS::Edge(t.shapes.at(r.integer()));
+ NCollection_List<TopoDS_Shape> lv=bl_shape_list(r,t);
+ BRepAlgo_Loop lp;lp.Init(f);
+ GA_TRY(NCollection_List<TopoDS_Shape> ne;lp.CutEdge(e,lv,ne);bl_ba_pieces(ne,t))
+ ga_end();}
+// `program face n (edge list)... consts tolconf`: a Loop with the cut edges and the
+// constant edges: Perform, the new wires, WiresToFaces and the new faces, the new edges
+// of each cut edge, and the substitute count.
+void bl_ba_loop_case(std::istream& input){
+ GaReader r{input};TpShapes t;
+ try{t=tp_shapes(r);}catch(const Standard_Failure& e){std::cout<<e.ExceptionType()<<' ';ga_end();return;}
+ const TopoDS_Face f=TopoDS::Face(t.shapes.at(r.integer()));int n=r.integer();
+ BRepAlgo_Loop lp;lp.Init(f);std::vector<TopoDS_Edge> cut;
+ for(int i=0;i<n;i++){TopoDS_Edge e=TopoDS::Edge(t.shapes.at(r.integer()));NCollection_List<TopoDS_Shape> lv=bl_shape_list(r,t);lp.AddEdge(e,lv);cut.push_back(e);}
+ NCollection_List<TopoDS_Shape> consts=bl_shape_list(r,t);lp.AddConstEdges(consts);
+ lp.SetTolConf(r.real());ga_real(lp.GetTolConf());
+ GA_TRY(lp.Perform())
+ ga_int(lp.NewWires().Extent());
+ for(NCollection_List<TopoDS_Shape>::Iterator it(lp.NewWires());it.More();it.Next())pr_shape(it.Value());
+ GA_TRY(lp.WiresToFaces())
+ ga_int(lp.NewFaces().Extent());
+ for(NCollection_List<TopoDS_Shape>::Iterator it(lp.NewFaces());it.More();it.Next())pr_shape(it.Value());
+ for(const TopoDS_Edge& e:cut)GA_TRY(bl_ba_pieces(lp.NewEdges(e),t))
+ GA_TRY(lp.NewEdges(TopoDS::Edge(t.shapes.at(r.integer()))))
+ NCollection_DataMap<TopoDS_Shape,TopoDS_Shape,TopTools_ShapeMapHasher> vv;lp.GetVerticesForSubstitute(vv);ga_int(vv.Extent());
  ga_end();}

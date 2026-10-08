@@ -318782,6 +318782,142 @@
       "notes": "Translated from BRepAlgo_FaceRestrictor.cxx (ChangePCurve, ProjCurve3d, IsClosed, IsInside, Store and BuildFaceIn static); the flags uninitialized by the default constructor are false; compared with OCCT by tools/verify_tkbool_numeric.py (ba_face_restrictor: wires on the face of the square [0, 10]^2 of a plane with and without p-curves, projected or not, holes, an island in a hole, a square off the face, wrong orientations with orientation control, and the lateral face of a cylinder). Native quirks kept: ChangePCurve answers whether the edge has no p-curve, so an edge with one is set on the surface and then projected; IsInside builds its own classifier; BuildFaceIn copies the first face of the list for the faces of islands; Next and Current raise Standard_NoSuchObject without face."
     },
     {
+      "upstream_id": "BRepAlgo_Loop::BRepAlgo_Loop()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::new",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::AddConstEdge(const TopoDS_Edge&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::add_const_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::AddConstEdges(const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::add_const_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::AddEdge(TopoDS_Edge&,const NCollection_List<TopoDS_Shape>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::add_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::CutEdge(const TopoDS_Edge&,const NCollection_List<TopoDS_Shape>&,NCollection_List<TopoDS_Shape>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::cut_edge",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::GetTolConf() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::get_tol_conf",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::GetVerticesForSubstitute(NCollection_DataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher>&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::get_vertices_for_substitute",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::Init(const TopoDS_Face&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::init",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::NewEdges(const TopoDS_Edge&) const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::new_edges",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::NewFaces() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::new_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::NewWires() const",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::new_wires",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::Perform()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::perform",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::SetImageVV(const BRepAlgo_Image&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::set_image_vv",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::SetTolConf(double)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::set_tol_conf",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::UpdateVEmap(NCollection_IndexedDataMap<TopoDS_Shape, NCollection_List<TopoDS_Shape>, TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::update_ve_map",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::VerticesForSubstitute(NCollection_DataMap<TopoDS_Shape, TopoDS_Shape, TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::vertices_for_substitute",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
+      "upstream_id": "BRepAlgo_Loop::WiresToFaces()",
+      "toolkit": "TKBool",
+      "source": "src/ModelingAlgorithms/TKBool/BRepAlgo/BRepAlgo_Loop.hxx",
+      "rust_item": "rustycad_tkbool::brep_algo::BRepAlgoLoop::wires_to_faces",
+      "status": "implemented",
+      "notes": "Translated from BRepAlgo_Loop.cxx (Bubble, UpdateClosedEdge, RemovePendingEdges, SamePnt2d, SelectEdge, PurgeNewEdges and StoreInMVE static) with OCCT_DEBUG_ALGO undefined; compared with OCCT by tools/verify_tkbool_numeric.py (ba_cut_edge: the bottom edge of a square cut at sorted, unsorted, duplicated, INTERNAL and end vertices, reversed, and the closed bottom circle of a cylinder face cut at the angle pi and at its own vertex; ba_loop: the boundary of the square, the square split by an inner edge given once or both ways, with a hanging edge, a corner vertex merged within the comparison tolerance or not, and several cuts of one side). Native quirks kept: the cut and constant edges are stored once each (IsSame) so a seam is doubled only by StoreInMVE; UpdateVEmap rebuilds the map from its edges taken once (IsSame); a start vertex missing from the map loops again on the same map; NewEdges raises Standard_NoSuchObject for an edge not cut."
+    },
+    {
       "upstream_id": "BRepOffset_Inter3d",
       "toolkit": "TKOffset",
       "source": "src/ModelingAlgorithms/TKOffset/BRepOffset/BRepOffset_Inter3d.hxx",

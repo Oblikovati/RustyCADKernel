@@ -2,15 +2,15 @@
 //! (the records are documented there).
 use super::brep_fill_generator::failed;
 use super::brep_fill_location_law::at;
-use super::common::{Reader, attempt, end, flag, int};
+use super::common::{Reader, attempt, end, flag, int, real};
 use super::shape::shape;
-use super::shapes::{TpShapes, tp_shapes};
+use super::shapes::{TpShapes, tp_same_index, tp_shapes};
 use rustycad_tkbool::brep_algo;
 use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Shape};
 use rustycad_tkernel::ncollection::List;
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg3d::top_abs::ShapeEnum;
+use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
 use rustycad_tkmath::geom_abs::Shape as Continuity;
 
 /// The continuity of its enumeration value (C0..CN).
@@ -122,5 +122,110 @@ pub fn face_restrictor_case(values: &[f64]) {
         Ok(())
     });
     int(count);
+    end();
+}
+
+/// `bl_shape_list`: `n (index orientation)...` (orientation -1 as is).
+fn shape_list(r: &mut Reader<'_>, t: &TpShapes) -> Result<List<Shape>, Failure> {
+    let n = r.integer();
+    let mut l = List::default();
+    for _ in 0..n {
+        let (index, o) = (r.integer(), r.integer());
+        let s = at(t, index)?;
+        l.append(if o >= 0 {
+            s.oriented(Orientation::ALL[o as usize])
+        } else {
+            s
+        });
+    }
+    Ok(l)
+}
+
+/// `bl_ba_pieces`.
+fn pieces(ne: &List<Shape>, t: &TpShapes) -> Result<(), Failure> {
+    int(ne.len() as i32);
+    for s in ne.iter() {
+        let e = topods::edge(s)?;
+        let (f, l) = rustycad_tkbrep::brep::BRepTool::range(&e)?;
+        real(f);
+        real(l);
+        int(s.orientation() as i32);
+        let (v1, v2) = rustycad_tkbrep::topexp::vertices(&e, false);
+        int(tp_same_index(t, v1.as_ref()));
+        int(tp_same_index(t, v2.as_ref()));
+    }
+    Ok(())
+}
+
+/// `ba_cut_edge program face edge list`.
+pub fn cut_edge_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let Some(t) = program(&mut r) else { return };
+    let read = |r: &mut Reader<'_>| -> Result<(Shape, Shape, List<Shape>), Failure> {
+        let (f, e) = (at(&t, r.integer())?, at(&t, r.integer())?);
+        Ok((f, e, shape_list(r, &t)?))
+    };
+    let (f, e, lv) = match read(&mut r) {
+        Ok(x) => x,
+        Err(error) => return failed(error),
+    };
+    let mut lp = brep_algo::BRepAlgoLoop::new();
+    attempt(|| {
+        lp.init(&topods::face(&f)?);
+        let mut ne = List::default();
+        lp.cut_edge(&topods::edge(&e)?, &lv, &mut ne)?;
+        pieces(&ne, &t)
+    });
+    end();
+}
+
+/// The loop of `ba_loop` with its edges read; the cut edges.
+fn loop_with_edges(
+    r: &mut Reader<'_>,
+    t: &TpShapes,
+    lp: &mut brep_algo::BRepAlgoLoop,
+) -> Result<Vec<Shape>, Failure> {
+    lp.init(&topods::face(&at(t, r.integer())?)?);
+    let n = r.integer();
+    let mut cut = Vec::new();
+    for _ in 0..n {
+        let e = at(t, r.integer())?;
+        let lv = shape_list(r, t)?;
+        lp.add_edge(&topods::edge(&e)?, &lv);
+        cut.push(e);
+    }
+    lp.add_const_edges(&shape_list(r, t)?);
+    lp.set_tol_conf(r.real());
+    Ok(cut)
+}
+
+/// The count and each shape of a list.
+fn shapes(l: &List<Shape>) -> Result<(), Failure> {
+    int(l.len() as i32);
+    l.iter().try_for_each(shape)
+}
+
+/// `ba_loop program face n (edge list)... consts tolconf other`.
+pub fn loop_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let Some(t) = program(&mut r) else { return };
+    let mut lp = brep_algo::BRepAlgoLoop::new();
+    let cut = match loop_with_edges(&mut r, &t, &mut lp) {
+        Ok(cut) => cut,
+        Err(error) => return failed(error),
+    };
+    let other = r.integer();
+    real(lp.get_tol_conf());
+    attempt(|| lp.perform());
+    attempt(|| shapes(lp.new_wires()));
+    attempt(|| lp.wires_to_faces());
+    attempt(|| shapes(lp.new_faces()));
+    for e in &cut {
+        attempt(|| pieces(lp.new_edges(&topods::edge(e)?)?, &t));
+    }
+    attempt(|| lp.new_edges(&topods::edge(&at(&t, other)?)?).map(|_| ()));
+    let mut vv = brep_algo::VertexSubstitutes::default();
+    lp.get_vertices_for_substitute(&mut vv);
+    int(vv.len() as i32);
     end();
 }

@@ -95,6 +95,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ba_convert", bl_ba_convert_case},
  {"ba_valid", bl_ba_valid_case},
  {"ba_face_restrictor", bl_ba_face_restrictor_case},
+ {"ba_cut_edge", bl_ba_cut_edge_case},
+ {"ba_loop", bl_ba_loop_case},
  // BRepAlgo_NormalProjection and BRepProj (tkbool_probe_brepproj.cxx)
  {"ba_normal_projection", bl_ba_normal_projection_case},
  {"bp_projection", bl_bp_projection_case},

@@ -11,7 +11,7 @@ from __future__ import annotations
 import math
 from tkbool_corpus_brepfill_offset_wire import bump, disc, polygon_face, stadium
 from tkprim_corpus_sweep_shapes import segment
-from tktopalgo_corpus_brepcheck_shapes import cube, solid_of
+from tktopalgo_corpus_brepcheck_shapes import PlanarShapes, cube, cylinder_face, solid_of
 from tktopalgo_shape_program import FORWARD, REVERSED, WIRE, ShapeProgram
 
 G1, C1, C0 = 1, 2, 0
@@ -128,3 +128,109 @@ def append_brepalgo_requests(requests: list[str]) -> None:
     requests.extend(valid_requests())
     # BRepAlgo_FaceRestrictor on the scenes of the TopOpeBRepBuild requests.
     __import__('tkbool_corpus_topopebrepbuild').append_face_restrictor_requests(requests)
+    append_loop_requests(requests)
+
+
+# The loop scene: the square [0, 10]^2 of z = 0 (points 0-3), the points (5, 0) and
+# (5, 10) on its bottom and top sides (4, 5), the centre (6), a copy of the corner (0, 0)
+# moved by 1e-4 (7) and the points (2, 0) and (8, 0) of the bottom side (8, 9).
+LOOP_POINTS = [(0, 0, 0), (10, 0, 0), (10, 10, 0), (0, 10, 0), (5, 0, 0), (5, 10, 0), (5, 5, 0),
+               (0, 1e-4, 0), (2, 0, 0), (8, 0, 0)]
+# The parameters of the side points on the bottom (0, 1) and top (2, 3) edges.
+ON_SIDES = [(4, (0, 1), 5.0), (5, (2, 3), 5.0), (8, (0, 1), 2.0), (9, (0, 1), 8.0)]
+F, R, I = 0, 1, 2
+
+
+class LoopScene:
+    """The face of the square, its edges, the side points as vertices on the edges and
+    inner edges with p-curves on the face."""
+
+    def __init__(self) -> None:
+        self.p = ShapeProgram()
+        self.pl = PlanarShapes(self.p, LOOP_POINTS)
+        self.face = self.pl.face([[0, 1, 2, 3]])
+        self.surface, self.frame = self.pl.surfaces[0], self.pl.frames[0]
+        for v, key, par in ON_SIDES:
+            self.p.vertex_on_curve(self.pl.vertices[v], par, self.pl.edges[key])
+
+    def edge(self, a: int, b: int) -> int:
+        """The edge between points a and b (a p-curve on the face for a new one)."""
+        key = (min(a, b), max(a, b))
+        if key not in self.pl.edges:
+            self.pl.edge(a, b)
+            self.pl.pcurve(key, self.surface, self.frame)
+        return self.pl.edges[key]
+
+    def vertex(self, i: int) -> int:
+        return self.pl.vertices[i]
+
+    def tokens(self) -> str:
+        self.pl.finish()
+        return self.p.tokens()
+
+
+def shape_list(items) -> str:
+    return ' '.join([str(len(items))] + [f'{s} {o}' for s, o in items])
+
+
+def cut_edge_requests() -> list[str]:
+    out = []
+    for edge_ori, lv in ((F, []), (F, [(0, F), (1, R)]), (F, [(4, R), (4, F)]), (F, [(9, R), (9, F), (8, R), (8, F)]),
+                         (F, [(4, I)]), (R, [(4, R), (4, F)]), (F, [(4, R), (4, R), (4, F)]), (F, [(8, F), (9, R)])):
+        s = LoopScene()
+        e = s.edge(0, 1)
+        if edge_ori == R:
+            e = s.p.oriented(e, REVERSED)
+        items = [(s.vertex(v), o) for v, o in lv]
+        out.append(f'ba_cut_edge {s.tokens()} {s.face} {e} {shape_list(items)}')
+    return out
+
+
+def closed_cut_edge_requests() -> list[str]:
+    """The bottom circle of a cylinder face cut at the angle pi and at its own vertex."""
+    out = []
+    for at_pi, at_seam in ((True, False), (False, True), (True, True)):
+        p = ShapeProgram()
+        cyl = cylinder_face(p, 1.0, 2.0)
+        vpi = p.vertex((-1.0, 0.0, 0.0))
+        p.vertex_on_curve(vpi, math.pi, cyl['bottom'])
+        items = []
+        if at_seam:
+            items += [(cyl['v0'], R), (cyl['v0'], F)]
+        if at_pi:
+            items += [(vpi, R), (vpi, F)]
+        out.append(f"ba_cut_edge {p.tokens()} {cyl['face']} {cyl['bottom']} {shape_list(items)}")
+    return out
+
+
+def loop_request(cuts, consts, tol_conf: float) -> str:
+    """`cuts` are (a, b, [(vertex point, orientation)]), `consts` (a, b, orientation)."""
+    s = LoopScene()
+    fields = [s.face, len(cuts)]
+    for a, b, lv in cuts:
+        fields += [s.edge(a, b), shape_list([(s.vertex(v), o) for v, o in lv])]
+    const_items = [(s.edge(a, b), o) for a, b, o in consts]
+    other = s.edge(1, 2)
+    return f"ba_loop {s.tokens()} {' '.join(map(str, fields))} {shape_list(const_items)} {tol_conf!r} {other}"
+
+
+def loop_requests() -> list[str]:
+    boundary = [(0, 1, F), (1, 2, F), (2, 3, F), (0, 3, R)]
+    sides = [(1, 2, F), (0, 3, R)]
+    split = [(0, 1, [(4, R), (4, F)]), (2, 3, [(5, R), (5, F)])]
+    out = [loop_request([], boundary, 0.001)]
+    out.append(loop_request(split, sides + [(4, 5, F), (4, 5, R)], 0.001))
+    out.append(loop_request(split, sides + [(4, 5, F)], 0.001))
+    out.append(loop_request(split, sides + [(4, 5, R), (4, 5, F), (4, 6, F)], 0.001))
+    for tol in (0.001, 1e-5):
+        out.append(loop_request([], [(0, 1, F), (1, 2, F), (2, 3, F), (3, 7, F)], tol))
+    out.append(loop_request([(0, 1, [(9, R), (9, F), (8, R), (8, F)])], sides + [(2, 3, F)], 0.001))
+    out.append(loop_request([(0, 1, [])], sides + [(2, 3, F)], 0.001))
+    return out
+
+
+def append_loop_requests(requests: list[str]) -> None:
+    """BRepAlgo_Loop: edge cuts and loops on the square and the cylinder."""
+    requests.extend(cut_edge_requests())
+    requests.extend(closed_cut_edge_requests())
+    requests.extend(loop_requests())

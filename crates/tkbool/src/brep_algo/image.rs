@@ -8,6 +8,7 @@ static UNBOUND_IMAGE_CACHE: OnceLock<Mutex<Vec<Shape>>> = OnceLock::new();
 
 /// Links each source shape to its direct and recursively final images.
 /// `let mut images = BRepAlgoImage::new(); images.bind(&source, &image)?;`.
+#[derive(Clone)]
 pub struct BRepAlgoImage {
     roots: Vec<Shape>,
     up: DataMap<Shape, Shape, ShapeMapHasher>,

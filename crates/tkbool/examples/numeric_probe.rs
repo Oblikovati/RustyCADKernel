@@ -58,6 +58,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ba_convert", brep_algo::convert_case),
     ("ba_valid", brep_algo::valid_case),
     ("ba_face_restrictor", brep_algo::face_restrictor_case),
+    ("ba_cut_edge", brep_algo::cut_edge_case),
+    ("ba_loop", brep_algo::loop_case),
     // BRepAlgo_NormalProjection and BRepProj (bl_probe/brep_proj.rs)
     ("ba_normal_projection", brep_proj::normal_projection_case),
     ("bp_projection", brep_proj::projection_case),
