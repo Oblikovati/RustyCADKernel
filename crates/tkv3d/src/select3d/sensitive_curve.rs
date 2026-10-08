@@ -145,11 +145,11 @@ impl Select3DSensitiveEntity for Select3DSensitiveCircle {
                     &self.trsf,
                     is_filled,
                     Some(&mut is_inside),
-                ) && is_inside);
+                )? && is_inside);
             }
-            return Ok(manager.overlaps_circle_inside(self.radius, &self.trsf, is_filled, None));
+            return manager.overlaps_circle_inside(self.radius, &self.trsf, is_filled, None);
         }
-        if !manager.overlaps_circle(self.radius, &self.trsf, is_filled, pick_result) {
+        if !manager.overlaps_circle(self.radius, &self.trsf, is_filled, pick_result)? {
             return Ok(false);
         }
         pick_result

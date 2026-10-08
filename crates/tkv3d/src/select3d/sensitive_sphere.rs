@@ -77,11 +77,11 @@ impl Select3DSensitiveEntity for Select3DSensitiveSphere {
                     &self.center,
                     self.radius,
                     Some(&mut is_inside),
-                ) && is_inside);
+                )? && is_inside);
             }
-            return Ok(manager.overlaps_sphere_inside(&self.center, self.radius, None));
+            return manager.overlaps_sphere_inside(&self.center, self.radius, None);
         }
-        if !manager.overlaps_sphere(&self.center, self.radius, pick_result) {
+        if !manager.overlaps_sphere(&self.center, self.radius, pick_result)? {
             return Ok(false);
         }
         *self.last_detected_point.write() = *pick_result.picked_point();
@@ -193,11 +193,11 @@ impl Select3DSensitiveEntity for Select3DSensitiveCylinder {
                     trsf,
                     hollow,
                     Some(&mut is_inside),
-                ) && is_inside);
+                )? && is_inside);
             }
-            return Ok(manager.overlaps_cylinder_inside(b, t, h, trsf, hollow, None));
+            return manager.overlaps_cylinder_inside(b, t, h, trsf, hollow, None);
         }
-        if !manager.overlaps_cylinder(b, t, h, trsf, hollow, pick_result) {
+        if !manager.overlaps_cylinder(b, t, h, trsf, hollow, pick_result)? {
             return Ok(false);
         }
         pick_result

@@ -82,9 +82,9 @@ impl Select3DSensitiveEntity for Select3DSensitiveBox {
         let (min, max) = (self.bounds.corner_min(), self.bounds.corner_max());
         if !manager.is_overlap_allowed() {
             let mut is_inside = true;
-            return Ok(manager.overlaps_box_inside(min, max, Some(&mut is_inside)) && is_inside);
+            return Ok(manager.overlaps_box_inside(min, max, Some(&mut is_inside))? && is_inside);
         }
-        if !manager.overlaps_box(min, max, pick_result) {
+        if !manager.overlaps_box(min, max, pick_result)? {
             return Ok(false);
         }
         pick_result.set_dist_to_geom_center(manager.dist_to_geometry_center(&self.center3d));

@@ -331,24 +331,24 @@ impl Select3DSensitiveTriangulation {
         &self,
         manager: &dyn SelectBasicsSelectingVolumeManager,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let bounds = self.bounding_box();
         if !bounds.is_valid() {
-            return false;
+            return Ok(false);
         }
         if !manager.is_overlap_allowed() {
             let mut is_inside = true;
-            return manager.overlaps_box_inside(
+            return Ok(manager.overlaps_box_inside(
                 bounds.corner_min(),
                 bounds.corner_max(),
                 Some(&mut is_inside),
-            ) && is_inside;
+            )? && is_inside);
         }
-        if !manager.overlaps_box(bounds.corner_min(), bounds.corner_max(), pick_result) {
-            return false;
+        if !manager.overlaps_box(bounds.corner_min(), bounds.corner_max(), pick_result)? {
+            return Ok(false);
         }
         pick_result.set_dist_to_geom_center(manager.dist_to_geometry_center(&self.cdg3d));
-        true
+        Ok(true)
     }
 }
 
@@ -364,7 +364,7 @@ impl Select3DSensitiveEntity for Select3DSensitiveTriangulation {
         if self.triangul.get().is_some_and(Triangulation::has_geometry) {
             return select3d_set_matches(self, manager, pick_result, false);
         }
-        Ok(self.matches_box(manager, pick_result))
+        self.matches_box(manager, pick_result)
     }
     fn nb_sub_elements(&self) -> i32 {
         self.triangul.get().map_or(0, Triangulation::nb_nodes)
@@ -482,20 +482,20 @@ impl Select3DSensitiveSet for Select3DSensitiveTriangulation {
         if self.sens_type == Select3DTypeOfSensitivity::Boundary {
             let (a, b) = self.edge_nodes(prim);
             let points = [a, b];
-            return Ok(manager.overlaps_polygon(
+            return manager.overlaps_polygon(
                 &Array1::from_shared(&points, 1),
                 Select3DTypeOfSensitivity::Boundary as i32,
                 pick_result,
-            ));
+            );
         }
         let [a, b, c] = self.prim_triangle(prim);
-        Ok(manager.overlaps_triangle(
+        manager.overlaps_triangle(
             &a,
             &b,
             &c,
             Select3DTypeOfSensitivity::Interior as i32,
             pick_result,
-        ))
+        )
     }
     /// `elementIsInside`: the segment or triangle (polyline) or all its points.
     fn element_is_inside(
@@ -513,18 +513,18 @@ impl Select3DSensitiveSet for Select3DSensitiveTriangulation {
         if self.sens_type == Select3DTypeOfSensitivity::Boundary {
             let (a, b) = self.edge_nodes(prim);
             return Ok(if polyline {
-                manager.overlaps_segment(&a, &b, &mut dummy)
+                manager.overlaps_segment(&a, &b, &mut dummy)?
             } else {
-                manager.overlaps_point_only(&a) && manager.overlaps_point_only(&b)
+                manager.overlaps_point_only(&a)? && manager.overlaps_point_only(&b)?
             });
         }
         let [a, b, c] = self.prim_triangle(prim);
         if polyline {
-            return Ok(manager.overlaps_triangle(&a, &b, &c, self.sens_type as i32, &mut dummy));
+            return manager.overlaps_triangle(&a, &b, &c, self.sens_type as i32, &mut dummy);
         }
-        Ok(manager.overlaps_point_only(&a)
-            && manager.overlaps_point_only(&b)
-            && manager.overlaps_point_only(&c))
+        Ok(manager.overlaps_point_only(&a)?
+            && manager.overlaps_point_only(&b)?
+            && manager.overlaps_point_only(&c)?)
     }
     fn distance_to_cog(&self, manager: &dyn SelectBasicsSelectingVolumeManager) -> f64 {
         manager.dist_to_geometry_center(&self.cdg3d)

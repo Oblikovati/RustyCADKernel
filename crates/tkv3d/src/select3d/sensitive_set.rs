@@ -337,7 +337,7 @@ fn traverse_set<S: Select3DSensitiveSet + ?Sized>(
         global_box.corner_min(),
         global_box.corner_max(),
         Some(&mut is_full_inside),
-    ) {
+    )? {
         return Ok(false);
     }
     let mut matches_nb = -1;
@@ -423,7 +423,7 @@ fn overlaps_node(
         min,
         max,
         full_inside_check.then_some(&mut node.is_full_inside),
-    );
+    )?;
     if !overlaps {
         node.is_full_inside = false;
     }

@@ -221,7 +221,7 @@ impl Select3DSensitivePolyCore {
             Select3DTypeOfSensitivity::Boundary => {
                 select3d_set_matches(set, manager, pick_result, false)
             }
-            Select3DTypeOfSensitivity::Interior => Ok(self.matches_interior(manager, pick_result)),
+            Select3DTypeOfSensitivity::Interior => self.matches_interior(manager, pick_result),
         }
     }
     /// The interior test of `Matches`.
@@ -229,7 +229,7 @@ impl Select3DSensitivePolyCore {
         &self,
         manager: &dyn SelectBasicsSelectingVolumeManager,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let points = self.points_3d();
         let array = Array1::from_shared(&points, 1);
         let interior = Select3DTypeOfSensitivity::Interior as i32;
@@ -238,13 +238,18 @@ impl Select3DSensitivePolyCore {
                 let mut dummy = SelectBasicsPickResult::default();
                 return manager.overlaps_polygon(&array, interior, &mut dummy);
             }
-            return points.iter().all(|p| manager.overlaps_point_only(p));
+            for p in &points {
+                if !manager.overlaps_point_only(p)? {
+                    return Ok(false);
+                }
+            }
+            return Ok(true);
         }
-        if !manager.overlaps_polygon(&array, interior, pick_result) {
-            return false;
+        if !manager.overlaps_polygon(&array, interior, pick_result)? {
+            return Ok(false);
         }
         pick_result.set_dist_to_geom_center(self.distance_to_cog(manager));
-        true
+        Ok(true)
     }
     /// `BoundingBox`: the box of the points, computed once.
     pub fn bounding_box(&self) -> Select3DBndBox3d {
@@ -327,9 +332,10 @@ impl Select3DSensitivePolyCore {
         if is_full_inside {
             return Ok(true);
         }
-        Ok(self
-            .segment(elem_idx)
-            .is_some_and(|(a, b)| manager.overlaps_segment(&a, &b, pick_result)))
+        match self.segment(elem_idx) {
+            Some((a, b)) => manager.overlaps_segment(&a, &b, pick_result),
+            None => Ok(false),
+        }
     }
     /// `elementIsInside`: the segment (polyline) or both its points are inside.
     pub fn element_is_inside(
@@ -346,9 +352,9 @@ impl Select3DSensitivePolyCore {
         };
         if manager.get_active_selection_type() == SelectMgrSelectionType::Polyline {
             let mut dummy = SelectBasicsPickResult::default();
-            return Ok(manager.overlaps_segment(&a, &b, &mut dummy));
+            return manager.overlaps_segment(&a, &b, &mut dummy);
         }
-        Ok(manager.overlaps_point_only(&a) && manager.overlaps_point_only(&b))
+        Ok(manager.overlaps_point_only(&a)? && manager.overlaps_point_only(&b)?)
     }
     /// The center of geometry, computed once from the single-precision points.
     pub fn center_of_geometry(&self) -> Point3 {

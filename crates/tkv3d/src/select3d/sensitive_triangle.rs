@@ -94,13 +94,13 @@ impl Select3DSensitiveEntity for Select3DSensitiveTriangle {
         if !manager.is_overlap_allowed() {
             if manager.get_active_selection_type() == SelectMgrSelectionType::Polyline {
                 let mut dummy = SelectBasicsPickResult::default();
-                return Ok(manager.overlaps_triangle(a, b, c, self.sens_type as i32, &mut dummy));
+                return manager.overlaps_triangle(a, b, c, self.sens_type as i32, &mut dummy);
             }
-            return Ok(manager.overlaps_point_only(a)
-                && manager.overlaps_point_only(b)
-                && manager.overlaps_point_only(c));
+            return Ok(manager.overlaps_point_only(a)?
+                && manager.overlaps_point_only(b)?
+                && manager.overlaps_point_only(c)?);
         }
-        if !manager.overlaps_triangle(a, b, c, self.sens_type as i32, pick_result) {
+        if !manager.overlaps_triangle(a, b, c, self.sens_type as i32, pick_result)? {
             return Ok(false);
         }
         pick_result.set_dist_to_geom_center(manager.dist_to_geometry_center(&self.centroid));

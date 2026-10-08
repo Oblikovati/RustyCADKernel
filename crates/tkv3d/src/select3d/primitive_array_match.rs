@@ -132,7 +132,7 @@ impl Select3DSensitivePrimitiveArray {
         elem_idx: i32,
         patch_size: i32,
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let (mut result, mut pick) = (false, SelectBasicsPickResult::default());
         let is_range = manager.get_active_selection_type() != SelectMgrSelectionType::Point;
         for iter in 0..patch_size {
@@ -143,7 +143,7 @@ impl Select3DSensitivePrimitiveArray {
                 (s.to_detect_node, s.to_detect_elem)
             };
             if (detect_node || detect_elem)
-                && (is_full_inside || manager.overlaps_point(&point, &mut pick))
+                && (is_full_inside || manager.overlaps_point(&point, &mut pick)?)
             {
                 let mut own = self.state.write();
                 if pick.depth() <= own.min_depth_node {
@@ -158,7 +158,7 @@ impl Select3DSensitivePrimitiveArray {
             }
             *pick_result = *SelectBasicsPickResult::min(pick_result, &pick);
         }
-        result
+        Ok(result)
     }
     /// `overlapsElement` for the triangles of a patch: the elements, nodes and edges asked for.
     fn overlaps_triangles(
@@ -169,18 +169,19 @@ impl Select3DSensitivePrimitiveArray {
         elem_idx: i32,
         patch_size: i32,
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let (mut result, mut pick) = (false, SelectBasicsPickResult::default());
         for iter in 0..patch_size {
             let tri_index = elem_idx + iter;
             let nodes = tri_indices(&state.indices, tri_index * 3);
             let points = nodes.map(|n| position_point(state, n));
-            result |= self.detect_element(manager, &mut pick, tri_index, &points, is_full_inside);
-            result |= self.detect_nodes(manager, &mut pick, &nodes, &points, is_full_inside);
-            result |= self.detect_edges(manager, &mut pick, &nodes, &points, is_full_inside);
+            result |=
+                self.detect_element(manager, &mut pick, tri_index, &points, is_full_inside)?;
+            result |= self.detect_nodes(manager, &mut pick, &nodes, &points, is_full_inside)?;
+            result |= self.detect_edges(manager, &mut pick, &nodes, &points, is_full_inside)?;
             *pick_result = *SelectBasicsPickResult::min(pick_result, &pick);
         }
-        result
+        Ok(result)
     }
     /// The element detection of a triangle.
     fn detect_element(
@@ -190,9 +191,9 @@ impl Select3DSensitivePrimitiveArray {
         tri_index: i32,
         p: &[Point3; 3],
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         if !self.state.read().to_detect_elem {
-            return false;
+            return Ok(false);
         }
         if !is_full_inside
             && !manager.overlaps_triangle(
@@ -201,9 +202,9 @@ impl Select3DSensitivePrimitiveArray {
                 &p[2],
                 Select3DTypeOfSensitivity::Interior as i32,
                 pick,
-            )
+            )?
         {
-            return false;
+            return Ok(false);
         }
         let mut own = self.state.write();
         if pick.depth() <= own.min_depth_elem {
@@ -212,7 +213,7 @@ impl Select3DSensitivePrimitiveArray {
         if manager.get_active_selection_type() != SelectMgrSelectionType::Point {
             Self::add_detected(&own.detected_elem_map, tri_index);
         }
-        true
+        Ok(true)
     }
     /// The node detection of a triangle.
     fn detect_nodes(
@@ -222,13 +223,13 @@ impl Select3DSensitivePrimitiveArray {
         nodes: &[i32; 3],
         p: &[Point3; 3],
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         if !self.state.read().to_detect_node {
-            return false;
+            return Ok(false);
         }
         let mut result = false;
         for k in 0..3 {
-            if !is_full_inside && !manager.overlaps_point(&p[k], pick) {
+            if !is_full_inside && !manager.overlaps_point(&p[k], pick)? {
                 continue;
             }
             let mut own = self.state.write();
@@ -240,7 +241,7 @@ impl Select3DSensitivePrimitiveArray {
             }
             result = true;
         }
-        result
+        Ok(result)
     }
     /// The edge detection of a triangle (the edges (2,0), (0,1), (1,2)).
     fn detect_edges(
@@ -250,14 +251,14 @@ impl Select3DSensitivePrimitiveArray {
         nodes: &[i32; 3],
         p: &[Point3; 3],
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         if !self.state.read().to_detect_edge {
-            return false;
+            return Ok(false);
         }
         let mut result = false;
         for k in 0..3 {
             let first = if k == 0 { 2 } else { k - 1 };
-            if !is_full_inside && !manager.overlaps_segment(&p[first], &p[k], pick) {
+            if !is_full_inside && !manager.overlaps_segment(&p[first], &p[k], pick)? {
                 continue;
             }
             let mut own = self.state.write();
@@ -270,7 +271,7 @@ impl Select3DSensitivePrimitiveArray {
             }
             result = true;
         }
-        result
+        Ok(result)
     }
     /// `elementIsInside` for the points of a patch.
     fn points_inside(
@@ -280,11 +281,11 @@ impl Select3DSensitivePrimitiveArray {
         elem_idx: i32,
         patch_size: i32,
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         for iter in 0..patch_size {
             let index = point_index(&state.indices, elem_idx + iter);
-            if !is_full_inside && !manager.overlaps_point_only(&position_point(state, index)) {
-                return false;
+            if !is_full_inside && !manager.overlaps_point_only(&position_point(state, index))? {
+                return Ok(false);
             }
             if manager.get_active_selection_type() != SelectMgrSelectionType::Point {
                 let own = self.state.read();
@@ -292,7 +293,7 @@ impl Select3DSensitivePrimitiveArray {
                 Self::add_detected(&own.detected_node_map, index);
             }
         }
-        true
+        Ok(true)
     }
     /// `elementIsInside` for the triangles of a patch.
     fn triangles_inside(
@@ -302,17 +303,17 @@ impl Select3DSensitivePrimitiveArray {
         elem_idx: i32,
         patch_size: i32,
         is_full_inside: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         for iter in 0..patch_size {
             let tri_index = elem_idx + iter;
             let nodes = tri_indices(&state.indices, tri_index * 3);
             let p = nodes.map(|n| position_point(state, n));
             if !is_full_inside
-                && (!manager.overlaps_point_only(&p[0])
-                    || !manager.overlaps_point_only(&p[1])
-                    || !manager.overlaps_point_only(&p[2]))
+                && (!manager.overlaps_point_only(&p[0])?
+                    || !manager.overlaps_point_only(&p[1])?
+                    || !manager.overlaps_point_only(&p[2])?)
             {
-                return false;
+                return Ok(false);
             }
             if manager.get_active_selection_type() != SelectMgrSelectionType::Point {
                 let own = self.state.read();
@@ -322,7 +323,7 @@ impl Select3DSensitivePrimitiveArray {
                     .for_each(|&n| Self::add_detected(&own.detected_node_map, n));
             }
         }
-        true
+        Ok(true)
     }
     /// `applyTransformation` (protected): the box of the eight corners at the initial location.
     fn apply_transformation(&self) -> Select3DBndBox3d {
@@ -610,15 +611,15 @@ impl Select3DSensitiveSet for Select3DSensitivePrimitiveArray {
             self.bvh_indices.index(elem_idx),
             self.bvh_indices.patch_size(elem_idx),
         );
-        Ok(match state.prim_type {
+        match state.prim_type {
             Graphic3dTypeOfPrimitiveArray::Points => {
                 self.overlaps_points(&state, pick_result, manager, index, patch, is_full_inside)
             }
             Graphic3dTypeOfPrimitiveArray::Triangles => {
                 self.overlaps_triangles(&state, pick_result, manager, index, patch, is_full_inside)
             }
-            _ => false,
-        })
+            _ => Ok(false),
+        }
     }
     fn element_is_inside(
         &self,
@@ -638,15 +639,15 @@ impl Select3DSensitiveSet for Select3DSensitivePrimitiveArray {
             self.bvh_indices.index(elem_idx),
             self.bvh_indices.patch_size(elem_idx),
         );
-        Ok(match state.prim_type {
+        match state.prim_type {
             Graphic3dTypeOfPrimitiveArray::Points => {
                 self.points_inside(&state, manager, index, patch, is_full_inside)
             }
             Graphic3dTypeOfPrimitiveArray::Triangles => {
                 self.triangles_inside(&state, manager, index, patch, is_full_inside)
             }
-            _ => false,
-        })
+            _ => Ok(false),
+        }
     }
     fn distance_to_cog(&self, manager: &dyn SelectBasicsSelectingVolumeManager) -> f64 {
         manager.dist_to_geometry_center(&self.state.read().cdg3d)

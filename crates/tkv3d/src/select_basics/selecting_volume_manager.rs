@@ -8,6 +8,7 @@
 use super::SelectBasicsPickResult;
 use crate::select_mgr::SelectMgrSelectionType;
 use rustycad_tkernel::ncollection::{Array1, DynamicArray, HArray1, Vec3, Vec4};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkmath::gp::{Direction3, Point2, Point3, Transform3};
 use std::io;
@@ -24,18 +25,22 @@ pub trait SelectBasicsSelectingVolumeManager {
         box_min: &Vec3<f64>,
         box_max: &Vec3<f64>,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsBox` with the full-inside flag; `manager.overlaps_box_inside(&min, &max, Some(&mut inside))`.
     fn overlaps_box_inside(
         &self,
         box_min: &Vec3<f64>,
         box_max: &Vec3<f64>,
         inside: Option<&mut bool>,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsPoint` with depth; `manager.overlaps_point(&p, &mut pick)`.
-    fn overlaps_point(&self, point: &Point3, pick_result: &mut SelectBasicsPickResult) -> bool;
+    fn overlaps_point(
+        &self,
+        point: &Point3,
+        pick_result: &mut SelectBasicsPickResult,
+    ) -> Result<bool, Failure>;
     /// `OverlapsPoint` without depth (the inclusion helper); `manager.overlaps_point_only(&p)`.
-    fn overlaps_point_only(&self, point: &Point3) -> bool;
+    fn overlaps_point_only(&self, point: &Point3) -> Result<bool, Failure>;
     /// `OverlapsPolygon`; `sens_type` is a `Select3D_TypeOfSensitivity` value.
     /// Example: `manager.overlaps_polygon(&points, 0, &mut pick)`.
     fn overlaps_polygon(
@@ -43,14 +48,14 @@ pub trait SelectBasicsSelectingVolumeManager {
         points: &Array1<'_, Point3>,
         sens_type: i32,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsSegment`; `manager.overlaps_segment(&a, &b, &mut pick)`.
     fn overlaps_segment(
         &self,
         pt1: &Point3,
         pt2: &Point3,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsTriangle`; `manager.overlaps_triangle(&a, &b, &c, 0, &mut pick)`.
     fn overlaps_triangle(
         &self,
@@ -59,21 +64,21 @@ pub trait SelectBasicsSelectingVolumeManager {
         pt3: &Point3,
         sens_type: i32,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsSphere` with depth; `manager.overlaps_sphere(&center, 1.0, &mut pick)`.
     fn overlaps_sphere(
         &self,
         center: &Point3,
         radius: f64,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsSphere` with the full-inside flag; `manager.overlaps_sphere_inside(&c, 1.0, None)`.
     fn overlaps_sphere_inside(
         &self,
         center: &Point3,
         radius: f64,
         inside: Option<&mut bool>,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsCylinder` with depth (a cone when the radii differ).
     /// Example: `manager.overlaps_cylinder(1.0, 1.0, 2.0, &trsf, false, &mut pick)`.
     fn overlaps_cylinder(
@@ -84,7 +89,7 @@ pub trait SelectBasicsSelectingVolumeManager {
         trsf: &Transform3,
         is_hollow: bool,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsCylinder` with the full-inside flag.
     /// Example: `manager.overlaps_cylinder_inside(1.0, 1.0, 2.0, &trsf, false, None)`.
     fn overlaps_cylinder_inside(
@@ -95,7 +100,7 @@ pub trait SelectBasicsSelectingVolumeManager {
         trsf: &Transform3,
         is_hollow: bool,
         inside: Option<&mut bool>,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsCircle` with depth: a circle of `gp::XOY()` placed by `trsf`.
     /// Example: `manager.overlaps_circle(1.0, &trsf, true, &mut pick)`.
     fn overlaps_circle(
@@ -104,7 +109,7 @@ pub trait SelectBasicsSelectingVolumeManager {
         trsf: &Transform3,
         is_filled: bool,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `OverlapsCircle` with the full-inside flag; `manager.overlaps_circle_inside(1.0, &trsf, true, None)`.
     fn overlaps_circle_inside(
         &self,
@@ -112,7 +117,7 @@ pub trait SelectBasicsSelectingVolumeManager {
         trsf: &Transform3,
         is_filled: bool,
         inside: Option<&mut bool>,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// `DistToGeometryCenter`; `manager.dist_to_geometry_center(&cog)`.
     fn dist_to_geometry_center(&self, cog: &Point3) -> f64;
     /// `DetectedPoint`: the point at a depth of the picking ray; `manager.detected_point(1.0)`.
@@ -143,7 +148,7 @@ pub trait SelectBasicsSelectingVolumeManager {
         points: &HArray1<Point3>,
         sens_type: i32,
         pick_result: &mut SelectBasicsPickResult,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         self.overlaps_polygon(&points.array1(), sens_type, pick_result)
     }
 }

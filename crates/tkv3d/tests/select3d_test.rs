@@ -3,7 +3,7 @@
 //! GTests/Select3D_SensitivePrimitiveArray_Test.cxx.
 use rustycad_tkernel::ncollection::{Array1, DynamicArray, Vec3, Vec4};
 use rustycad_tkernel::precision::confusion;
-use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::{Direction3, Point2, Point3, Transform3};
 use rustycad_tkmath::poly::{Triangle, Triangulation};
 use rustycad_tkmath::toploc::Location;
@@ -50,48 +50,63 @@ impl SelectBasicsSelectingVolumeManager for BoxVolumeManager {
         min: &Vec3<f64>,
         max: &Vec3<f64>,
         pick: &mut SelectBasicsPickResult,
-    ) -> bool {
-        let hit = self.overlaps_box_inside(min, max, None);
-        if hit {
-            pick.set_depth(-max.z);
-        }
-        hit
+    ) -> Result<bool, Failure> {
+        Ok({
+            let hit = self.overlaps_box_inside(min, max, None)?;
+            if hit {
+                pick.set_depth(-max.z);
+            }
+            hit
+        })
     }
     fn overlaps_box_inside(
         &self,
         min: &Vec3<f64>,
         max: &Vec3<f64>,
         inside: Option<&mut bool>,
-    ) -> bool {
-        let overlaps = min.x <= self.max.x()
-            && max.x >= self.min.x()
-            && min.y <= self.max.y()
-            && max.y >= self.min.y()
-            && min.z <= self.max.z()
-            && max.z >= self.min.z();
-        if let Some(flag) = inside {
-            *flag = self.inside(&Point3::new(min.x, min.y, min.z))
-                && self.inside(&Point3::new(max.x, max.y, max.z));
-        }
-        overlaps
+    ) -> Result<bool, Failure> {
+        Ok({
+            let overlaps = min.x <= self.max.x()
+                && max.x >= self.min.x()
+                && min.y <= self.max.y()
+                && max.y >= self.min.y()
+                && min.z <= self.max.z()
+                && max.z >= self.min.z();
+            if let Some(flag) = inside {
+                *flag = self.inside(&Point3::new(min.x, min.y, min.z))
+                    && self.inside(&Point3::new(max.x, max.y, max.z));
+            }
+            overlaps
+        })
     }
-    fn overlaps_point(&self, point: &Point3, pick: &mut SelectBasicsPickResult) -> bool {
-        self.pick(&[point], pick)
+    fn overlaps_point(
+        &self,
+        point: &Point3,
+        pick: &mut SelectBasicsPickResult,
+    ) -> Result<bool, Failure> {
+        Ok(self.pick(&[point], pick))
     }
-    fn overlaps_point_only(&self, point: &Point3) -> bool {
-        self.inside(point)
+    fn overlaps_point_only(&self, point: &Point3) -> Result<bool, Failure> {
+        Ok(self.inside(point))
     }
     fn overlaps_polygon(
         &self,
         points: &Array1<'_, Point3>,
         _sens_type: i32,
         pick: &mut SelectBasicsPickResult,
-    ) -> bool {
-        let refs: Vec<&Point3> = points.iter().collect();
-        self.pick(&refs, pick)
+    ) -> Result<bool, Failure> {
+        Ok({
+            let refs: Vec<&Point3> = points.iter().collect();
+            self.pick(&refs, pick)
+        })
     }
-    fn overlaps_segment(&self, a: &Point3, b: &Point3, pick: &mut SelectBasicsPickResult) -> bool {
-        self.pick(&[a, b], pick)
+    fn overlaps_segment(
+        &self,
+        a: &Point3,
+        b: &Point3,
+        pick: &mut SelectBasicsPickResult,
+    ) -> Result<bool, Failure> {
+        Ok(self.pick(&[a, b], pick))
     }
     fn overlaps_triangle(
         &self,
@@ -100,24 +115,24 @@ impl SelectBasicsSelectingVolumeManager for BoxVolumeManager {
         c: &Point3,
         _sens_type: i32,
         pick: &mut SelectBasicsPickResult,
-    ) -> bool {
-        self.pick(&[a, b, c], pick)
+    ) -> Result<bool, Failure> {
+        Ok(self.pick(&[a, b, c], pick))
     }
     fn overlaps_sphere(
         &self,
         center: &Point3,
         _radius: f64,
         pick: &mut SelectBasicsPickResult,
-    ) -> bool {
-        self.pick(&[center], pick)
+    ) -> Result<bool, Failure> {
+        Ok(self.pick(&[center], pick))
     }
     fn overlaps_sphere_inside(
         &self,
         center: &Point3,
         _radius: f64,
         _inside: Option<&mut bool>,
-    ) -> bool {
-        self.inside(center)
+    ) -> Result<bool, Failure> {
+        Ok(self.inside(center))
     }
     fn overlaps_cylinder(
         &self,
@@ -127,8 +142,8 @@ impl SelectBasicsSelectingVolumeManager for BoxVolumeManager {
         _trsf: &Transform3,
         _hollow: bool,
         _pick: &mut SelectBasicsPickResult,
-    ) -> bool {
-        false
+    ) -> Result<bool, Failure> {
+        Ok(false)
     }
     fn overlaps_cylinder_inside(
         &self,
@@ -138,8 +153,8 @@ impl SelectBasicsSelectingVolumeManager for BoxVolumeManager {
         _trsf: &Transform3,
         _hollow: bool,
         _inside: Option<&mut bool>,
-    ) -> bool {
-        false
+    ) -> Result<bool, Failure> {
+        Ok(false)
     }
     fn overlaps_circle(
         &self,
@@ -147,8 +162,8 @@ impl SelectBasicsSelectingVolumeManager for BoxVolumeManager {
         _trsf: &Transform3,
         _filled: bool,
         _pick: &mut SelectBasicsPickResult,
-    ) -> bool {
-        false
+    ) -> Result<bool, Failure> {
+        Ok(false)
     }
     fn overlaps_circle_inside(
         &self,
@@ -156,8 +171,8 @@ impl SelectBasicsSelectingVolumeManager for BoxVolumeManager {
         _trsf: &Transform3,
         _filled: bool,
         _inside: Option<&mut bool>,
-    ) -> bool {
-        false
+    ) -> Result<bool, Failure> {
+        Ok(false)
     }
     fn dist_to_geometry_center(&self, cog: &Point3) -> f64 {
         cog.distance(&Point3::new(0.0, 0.0, 0.0))

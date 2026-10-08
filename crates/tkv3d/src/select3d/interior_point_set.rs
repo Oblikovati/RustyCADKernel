@@ -234,11 +234,11 @@ impl Select3DSensitiveSet for Select3DInteriorSensitivePointSet {
             return Ok(false);
         };
         let points = part.points_3d();
-        Ok(manager.overlaps_polygon(
+        manager.overlaps_polygon(
             &Array1::from_shared(&points, 1),
             Select3DTypeOfSensitivity::Interior as i32,
             pick_result,
-        ))
+        )
     }
     fn element_is_inside(
         &self,

@@ -71,12 +71,12 @@ impl Select3DSensitiveEntity for Select3DSensitiveSegment {
         let (start, end) = *self.ends.read();
         if !manager.is_overlap_allowed() {
             if manager.get_active_selection_type() == SelectMgrSelectionType::Polyline {
-                return Ok(manager.overlaps_segment(&start, &end, pick_result));
+                return manager.overlaps_segment(&start, &end, pick_result);
             }
-            return Ok(manager.overlaps_point(&start, pick_result)
-                && manager.overlaps_point(&end, pick_result));
+            return Ok(manager.overlaps_point(&start, pick_result)?
+                && manager.overlaps_point(&end, pick_result)?);
         }
-        if !manager.overlaps_segment(&start, &end, pick_result) {
+        if !manager.overlaps_segment(&start, &end, pick_result)? {
             return Ok(false);
         }
         pick_result

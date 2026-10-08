@@ -51,7 +51,7 @@ impl Select3DSensitiveEntity for Select3DSensitivePoint {
         manager: &dyn SelectBasicsSelectingVolumeManager,
         pick_result: &mut SelectBasicsPickResult,
     ) -> Result<bool, Failure> {
-        if !manager.overlaps_point(&self.point, pick_result) {
+        if !manager.overlaps_point(&self.point, pick_result)? {
             return Ok(false);
         }
         pick_result.set_dist_to_geom_center(pick_result.depth());
