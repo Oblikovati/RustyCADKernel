@@ -34,7 +34,9 @@ ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKBO', 'TKTopAlgo', 'TKPrim', 'TKMesh',
 # also an additional toolkit, so every closure build (verify_tkernel too) produces the library.
 # TKFillet is linked for the TKBO GTest BRepAlgoAPI_Fuse_Test (BOPTest_Utilities::CreateBlend
 # builds a BRepFilletAPI_MakeFillet); TKOffset depends on it, so the closure builds it too.
-LINKED_TOOLKITS: tuple[str, ...] = ('TKOffset', 'TKFillet', 'TKBO', 'TKMesh', 'TKPrim',
+# TKBool (BRepFill, BRepAlgo, TopOpeBRep...) sits between TKOffset/TKFillet and TKBO;
+# TKOffset depends on it, so the closure builds it too.
+LINKED_TOOLKITS: tuple[str, ...] = ('TKOffset', 'TKFillet', 'TKBool', 'TKBO', 'TKMesh', 'TKPrim',
                                     'TKHelix',
                                     'TKShHealing',
                                         'TKHLR',
