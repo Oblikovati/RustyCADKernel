@@ -126,6 +126,7 @@ fn read_position(
     kind: Graphic3dTypeOfData,
     offset: usize,
 ) -> Result<[f32; 3], RenderError> {
+    validate_homogeneous_position(buffer, kind, offset)?;
     let dimensions = match kind {
         Graphic3dTypeOfData::Vec2 => 2,
         Graphic3dTypeOfData::Vec3 | Graphic3dTypeOfData::Vec4 => 3,
@@ -161,4 +162,24 @@ fn validate_bounds(bounds: &Graphic3dBoundBuffer) -> Result<(), RenderError> {
         ));
     }
     validate_count(bounds.state().nb_bounds)
+}
+
+fn validate_homogeneous_position(
+    buffer: &dyn Graphic3dBufferSource,
+    kind: Graphic3dTypeOfData,
+    offset: usize,
+) -> Result<(), RenderError> {
+    if kind != Graphic3dTypeOfData::Vec4 {
+        return Ok(());
+    }
+    // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871 multiplies the full occVertex
+    // in Graphic3d_ShaderManager.cxx; dropping a non-unit w changes clip coordinates.
+    let w = buffer.read_at::<f32>(offset + 12);
+    if w != Some(1.0) {
+        return Err(rejected(
+            w,
+            "unit homogeneous w in the current renderer slice",
+        ));
+    }
+    Ok(())
 }
