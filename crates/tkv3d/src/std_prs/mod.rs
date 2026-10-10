@@ -6,3 +6,8 @@ mod curve_match;
 pub use curve::StdPrsCurve;
 mod point;
 pub use point::{StdPrsPoint, StdPrsToolPoint};
+mod deflection_curve;
+mod deflection_match;
+mod deflection_queries;
+mod deflection_sampling;
+pub use deflection_curve::StdPrsDeflectionCurve;

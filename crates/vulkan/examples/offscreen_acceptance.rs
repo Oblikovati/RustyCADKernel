@@ -55,7 +55,8 @@ fn main() {
     ais_axis_runtime::check_axis_datums();
     plane_trihedron_runtime::check_plane_datums();
     window_runtime::check_windows();
-    println!("PASS: 17 Vulkan runtime checks; validation errors: 0");
+    ais_circle_runtime::check_circle_datums();
+    println!("PASS: 18 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -170,3 +171,8 @@ mod window_runtime;
 mod window_scene;
 
 use ais_runtime::scene as ais_scene;
+
+#[path = "support/ais_circle_runtime.rs"]
+mod ais_circle_runtime;
+#[path = "../tests/support/ais_circle_scene.rs"]
+mod circle_scene;

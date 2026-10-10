@@ -46,6 +46,7 @@ def performance_rows(output: str) -> list[dict[str, object]]:
         "text-glyphs",
         "ais-axis-appearance",
         "plane-trihedron-updates",
+        "circle-datum-updates",
         "window-present",
         "window-resize-present",
     }

@@ -102,3 +102,7 @@ pub mod ais_point;
 pub mod ais_axis;
 
 pub mod ais_plane_trihedron;
+
+pub mod deflection_curve;
+
+pub mod ais_circle;

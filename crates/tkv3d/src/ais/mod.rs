@@ -90,3 +90,7 @@ mod plane_trihedron;
 mod plane_trihedron_presentations;
 mod plane_trihedron_selection;
 pub use plane_trihedron::AisPlaneTrihedron;
+
+mod circle;
+mod circle_presentations;
+pub use circle::AisCircle;

@@ -575012,6 +575012,266 @@
       "rust_item": "rustycad_tkv3d::ais::AisPlaneTrihedron::<rustycad_tkv3d::ais::AisInteractiveObject>::signature",
       "status": "implemented",
       "notes": "Native plane trihedron presentation, retained child selection owners and live plane mutations. 210 exact native requests plus CPU tests; strict renderer parity is tracked separately. See docs/ais-plane-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::IsFilledCircleSens()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "006f35bf8cd2a8083765211d19d9c1a8ab864b66a09b83095ee30e0a737e5d0b",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::is_filled_circle_sens",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "0395094cb0bf5e261e6953c1505881ae3ec372914aa20b53fef5cc2f13f3fe80",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "144e95215884ca5baff9186883de5552d17cfd5cda299556480f7402cc316033",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::SetLastParam(const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "3c22da05c3088ce07824914d066d6a44297218d9724cb657ef2411bcf838fdad",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::set_last_param",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::Type()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "5999406ad55e2dbdac97f9bbcc615c16849280d672f9ddb5f76a326ff4c93df9",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::kind_of_interactive",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const double,const double,const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "640862ba164bcc59fb6046eaf184b3b44e96869be89de1adef31abd17dd8b806",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::matches_with_deflection",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const double,const double,const class opencascade::handle<class Prs3d_Drawer> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "6734cd4085dc8051c66553e6aa630f742fd74996bf6ea63a7df497a982d76ad0",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::matches_range",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::Circle()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "6fdecae76965f5039a0ec6d994841599537ebffc721a3bd74e2158834692c6b8",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::circle",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Add(const class opencascade::handle<class Graphic3d_Structure> &,class Adaptor3d_Curve &,const class opencascade::handle<class Prs3d_Drawer> &,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "708206d2b37d3df688a69e6efec0472809b9c027ca43ccb5aa22ab8e6722a166",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::add",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const class opencascade::handle<class Prs3d_Drawer> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "74489e20779c361b01ab31346706211de124630fc49c364ec555b9be975f0d59",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::matches",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::AIS_Circle(const class opencascade::handle<class Geom_Circle> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "7f116e78df54eec6597c0d359b063250b0426c5a7bfe1bb73f962d13bc521aee",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::new",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Add(const class opencascade::handle<class Graphic3d_Structure> &,class Adaptor3d_Curve &,const double,const double,const double,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "81352ce8cd79479d37582b559af936253345b09b816992af2e074243668dcf8e",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::add_with_deflection",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const double,const double,const double,const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "9613c0ff5b432a798ebac4c0a71b72632a53e0dc2c849bc5a29b847cf9c88c97",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::matches_range_with_deflection",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::Parameters(double &,double &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "9ce425eb2ba0264fa29cbdc77243a6e21a187c839f511822ddea40f87eb54202",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::parameters",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::UnsetWidth()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "aef6c76a7d063518d360ed765f2af918781ee97be38cfeefaa40a0f2e855d42c",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::unset_width",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::SetFilledCircleSens(const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "b7f92503840a1c8ba22e115f2c8c9d4d5bcd3b077f4142c6f3f0d8953c2d51d6",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::set_filled_circle_sens",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Add(const class opencascade::handle<class Graphic3d_Structure> &,class Adaptor3d_Curve &,const double,const class opencascade::handle<class Prs3d_Drawer> &,class NCollection_Sequence<class gp_Pnt> &,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "c73cb9513e018276795441527e4fe2967335dfd5127e3eee197c69563dca4459",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::add_points",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::SetFirstParam(const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "d164cd3ebbe5f4d9adcfce450752421860e0702b3544c48c5cf4a7b3fb742679",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::set_first_param",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Add(const class opencascade::handle<class Graphic3d_Structure> &,class Adaptor3d_Curve &,const double,const double,const double,class NCollection_Sequence<class gp_Pnt> &,const double,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "d23e3289e768a0ce9ffd997d8c0d2e450f7b187a35c7853d4e6a662c0b1bdcad",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::add_range_points",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::SetColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "d4747648c50f404bc3674544426ad8d39b60dea35cabdb4670520c6a19c0a602",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::set_color",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "StdPrs_DeflectionCurve::Add(const class opencascade::handle<class Graphic3d_Structure> &,class Adaptor3d_Curve &,const double,const double,const class opencascade::handle<class Prs3d_Drawer> &,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_DeflectionCurve.hxx",
+      "source_sha256": "ee19496d2eb345279819966218ff2a4369402f49553ca6f016ded227fead1bd9",
+      "cpp_declaration_id": "dd1b5ab58f564b53cd244ae41fec7f49610e4b5a376f104ce3145e3bd22821b3",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsDeflectionCurve::add_range",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::SetCircle(const class opencascade::handle<class Geom_Circle> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "e71b53b7f2f3cead446c4f65ba5378c7593de1daecdd65444346010b06f28dab",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::set_circle",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::SetWidth(const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "ea8cab592d9c59dd9b97a42e39a55da54b3e39c3c9091895fa526c34d9fb7b91",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::set_width",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::AIS_Circle(const class opencascade::handle<class Geom_Circle> &,const double,const double,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "ecabfd69c2716b3e6ec7380efa4fd578c7adabb865ae16cc71bea526495d897b",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::with_parameters",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "fcd47a6d4277b9050cf63a06599882c62335c2b617922aa9507fe8878e251ddd",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::unset_color",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Circle::Signature()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Circle.hxx",
+      "source_sha256": "e051539a575961e9ccf6ac3ae49a4558a7cd43a274f38af7c26ab22fc95071f6",
+      "cpp_declaration_id": "feb3dd08c7b00248d6dd04319540c660f85e21e791f8d023aebba40987fcf8f8",
+      "rust_item": "rustycad_tkv3d::ais::AisCircle::signature",
+      "status": "implemented",
+      "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
     }
   ],
   "tests": [

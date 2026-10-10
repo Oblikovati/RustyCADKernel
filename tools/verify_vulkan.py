@@ -22,6 +22,8 @@ from vulkan_text_cases import TEXT_MODES
 from vulkan_ais_axis_cases import AIS_AXIS_MODES
 from vulkan_plane_trihedron_cases import PLANE_TRIHEDRON_MODES
 from vulkan_window_cases import WINDOW_MODES, compare_window_pixels
+from vulkan_circle_cases import CIRCLE_MODES
+from vulkan_case_dispatch import capture_executable
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
@@ -168,19 +170,7 @@ def capture_case(
     clear_previous_case(gl, vk)
     args = list(map(str, case))
     native_output = run([str(native), *args, str(gl), mode], profile.environment)
-    executable = rust.with_name("ais_capture") if mode.startswith("ais-") else rust
-    if mode.startswith("datum-"):
-        executable = rust.with_name("ais_line_capture")
-    if mode.startswith("text-"):
-        executable = rust.with_name("text_capture")
-    if mode.startswith("plane-"):
-        executable = rust.with_name("plane_trihedron_capture")
-    if mode.startswith("axis-"):
-        executable = rust.with_name("ais_axis_capture")
-    if mode.startswith("window-"):
-        executable = rust.with_name("window_capture")
-    if mode.startswith("point-"):
-        executable = rust.with_name("ais_point_capture")
+    executable = capture_executable(rust, mode)
     output = run([str(executable), *args, str(vk), mode], profile.environment)
     confirm_device(output, profile.device)
     software_gl = any(
@@ -240,6 +230,7 @@ def capture_cases(
             *AIS_AXIS_MODES,
             *PLANE_TRIHEDRON_MODES,
             *WINDOW_MODES,
+            *CIRCLE_MODES,
         )
     ]:
         try:
@@ -272,6 +263,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_ais_point.cxx",
             "tools/oracle/martensite_vulkan_text.cxx",
             "tools/oracle/martensite_vulkan_ais_axis.cxx",
+            "tools/oracle/martensite_vulkan_ais_circle.cxx",
             "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
             "tools/oracle/martensite_vulkan_window.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",

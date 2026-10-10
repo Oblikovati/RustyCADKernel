@@ -2,7 +2,7 @@
 use super::common::{Reader, attempt, end, flag, int, pnt, real};
 use super::sensitive_display::display_driver;
 #[path = "../../tests/support/stdprs_curve_geometry.rs"]
-mod geometry;
+pub(super) mod geometry;
 use rustycad_tkernel::{
     ncollection::Sequence,
     standard::{Failure, Handle},
@@ -77,7 +77,7 @@ fn curve_add(
         ),
     }
 }
-fn curve_drawer(count: i32, arrow: bool) -> Handle<Prs3dDrawer> {
+pub(super) fn curve_drawer(count: i32, arrow: bool) -> Handle<Prs3dDrawer> {
     let drawer = Handle::new(Prs3dDrawer::new());
     drawer.setup_own_defaults().unwrap();
     drawer.set_discretisation(count);
