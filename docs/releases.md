@@ -76,3 +76,19 @@ Creating these tools does not certify all kernel capabilities or publish a
 release. The application pin remains empty until the owner release passes.
 Track this work in
 [issue #3](https://github.com/Oblikovati/RustyCADKernel/issues/3).
+
+## Hosted runner prerequisites
+
+The formatting check uses `tools/check_rust_format.py` to check every workspace
+target with edition-specific, bounded rustfmt commands. Windows could not launch
+the original aggregate formatter command at `v0.1.0` (`os error 206`); batching
+preserves the full check while staying below the process argument limit.
+The Vulkan runtime and performance checks run under Xvfb with the lavapipe ICD,
+so native-window tests have an actual X server even on headless hosted runners.
+Neither workaround skips a test or relaxes a renderer comparison.
+
+The Linux workspace and coverage jobs install the Tcl/Tk and visualization
+development libraries explicitly. macOS uses Homebrew `tcl-tk@8` with local
+versioned pkg-config aliases, alongside FreeType and Fontconfig. This repairs the
+missing `tcl8.6` prerequisite observed in Dependabot run `38073783006`; it does not
+accept or merge the dependency update. Hosted verification of these fixes is pending.
