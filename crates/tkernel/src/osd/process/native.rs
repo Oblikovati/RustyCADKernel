@@ -144,8 +144,27 @@ fn local_time() -> Result<LocalTime, i32> {
         millisecond: 0,
     })
 }
-#[cfg(not(unix))]
+#[cfg(windows)]
 fn local_time() -> Result<LocalTime, i32> {
-    // Windows GetLocalTime has no standard-library counterpart (pending).
+    use windows_sys::Win32::{Foundation::SYSTEMTIME, System::SystemInformation::GetLocalTime};
+    // OCCT 3d097a0 OSD_Process::SystemDate uses GetLocalTime, including milliseconds.
+    // CI job 114325767580 exposed the previous ERROR_CALL_NOT_IMPLEMENTED fallback.
+    // SAFETY: SYSTEMTIME consists of eight WORD fields, all valid when zeroed.
+    let mut clock: SYSTEMTIME = unsafe { std::mem::zeroed() };
+    // SAFETY: GetLocalTime writes exactly one live SYSTEMTIME and has no failure return.
+    unsafe { GetLocalTime(&mut clock) };
+    Ok(LocalTime {
+        month: i32::from(clock.wMonth),
+        day: i32::from(clock.wDay),
+        year: i32::from(clock.wYear),
+        hour: i32::from(clock.wHour),
+        minute: i32::from(clock.wMinute),
+        second: i32::from(clock.wSecond),
+        millisecond: i32::from(clock.wMilliseconds),
+    })
+}
+#[cfg(not(any(unix, windows)))]
+fn local_time() -> Result<LocalTime, i32> {
+    // Hosts without either supported native clock API remain explicitly unsupported.
     Err(120)
 }
