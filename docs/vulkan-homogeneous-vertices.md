@@ -81,3 +81,9 @@ still lack accepted baselines in the broader gate.
 This integration adds no OCCT API inventory claims and marks no renderer family
 complete. Stencil attachments, closed-group odd/even masks, remaining-plane cap
 clipping and plane/object section appearance are the next capping work.
+
+The [main integration receipt](../porting/runtime-evidence/vulkan-homogeneous-main-2026-10-10.json)
+confirms all 10,840 final capture-source fingerprints match merged `main`, the
+126 renderer tests and 36 harness tests pass there, and all retained raw buffers
+have the expected extents. The completed worktree and branch were deleted after
+checking ancestry, cleanliness and active processes; only capture evidence remains.

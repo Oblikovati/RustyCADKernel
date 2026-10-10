@@ -99,3 +99,20 @@ for its bounds. `OpenGl_CappingAlgo.cxx` then builds an odd/even stencil mask fr
 closed groups using the selected plane, draws the cap through the remaining
 planes, and applies plane or object aspects. Stencil targets, chain filtering,
 section appearance and strict clipping-boundary parity remain open.
+
+For the next implementation, preserve the native cap-pass clipping filter rather
+than merely deleting the selected equation. `OpenGl_ShaderManager.cxx` at the
+pinned revision emits only the selected sub-plane, with its original equation,
+for stencil-mask geometry. For the cap itself, it reverses every other member of
+that same chain and emits each as a singleton chain; unrelated enabled chains
+keep their ordinary equations and chain lengths. This restricts a union's cap to
+the region not already kept by its other members.
+
+`OpenGl_CappingAlgo.cxx` clears and inverts stencil bit zero using closed groups,
+with color/depth writes and depth testing suppressed. Plane appearance accumulates
+all closed groups in the structure in one odd/even mask; object appearance builds
+a separate mask for each closed group. The cap tests stencil equality to one and
+uses `LESS` depth comparison when the layer uses depth testing. Its infinite-plane
+orientation replaces the model-world matrix, rather than multiplying the current
+structure transform. Instanced structures recurse through the same algorithm.
+Those ordering, transform and chain-filter contracts need paired native tests.
