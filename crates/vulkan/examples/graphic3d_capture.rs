@@ -1,111 +1,120 @@
-//! Controlled Graphic3d camera/geometry capture for comparison with the pinned OpenGL renderer.
-#[path = "../tests/support/graphic_scene.rs"]
+//! Viewer-driven capture for comparison with the pinned OpenGL renderer.
+#[path = "../tests/support/viewer_scene.rs"]
 mod scene;
-use martensite_vulkan::{RenderBackend, RenderFrame, VulkanOptions, VulkanRenderer};
+use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::{
-    gp::{Direction3, Point3, Transform3, Vector3},
+    gp::{Transform3, Vector3},
     toploc::Datum3,
 };
-use rustycad_tkservice::graphic3d::*;
+use rustycad_tkservice::{graphic3d::*, image::ImagePixMap};
+use rustycad_tkv3d::v3d::V3dImageDumpOptions;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() != 6 {
-        return Err("expected width height perspective offset output-prefix".into());
+    if !(6..=7).contains(&args.len()) {
+        return Err("expected width height perspective offset output-prefix [full]".into());
     }
-    let (width, height, perspective, offset) = (
-        args[1].parse::<u32>()?,
-        args[2].parse::<u32>()?,
-        args[3].parse::<i32>()?,
-        args[4].parse::<f64>()?,
-    );
-    let scene = prepare_scene(width, height, perspective, offset)?;
-    capture_scene(&scene, width, height, &args[5])
-}
-fn prepare_scene(
-    width: u32,
-    height: u32,
-    perspective: i32,
-    offset: f64,
-) -> Result<scene::GraphicScene, Box<dyn std::error::Error>> {
-    let scene = scene::GraphicScene::new();
-    configure(&scene, width, height, perspective, offset)?;
-    let vertices = scene.triangle();
-    for (index, [x, y, z]) in [[-8., -8., 0.], [8., -8., 0.], [0., 8., 0.]]
-        .into_iter()
-        .enumerate()
-    {
-        vertices.set_vertice(index as i32 + 1, x, y, z)?;
-    }
-    Ok(scene)
-}
-fn capture_scene(
-    scene: &scene::GraphicScene,
-    width: u32,
-    height: u32,
-    prefix: &str,
-) -> Result<(), Box<dyn std::error::Error>> {
-    let frame = RenderFrame::new(
+    let driver = Graphic3dRenderDriver::new(device_options::validation_options())?;
+    let scene = scene::ViewerScene::new(&driver);
+    let (width, height) = (args[1].parse::<i32>()?, args[2].parse::<i32>()?);
+    configure(&scene, width, height, args[3].parse()?, args[4].parse()?);
+    capture_scene(
+        &scene,
         width,
         height,
-        [0., 0., 1., 1.],
-        scene.group.triangle_draws(&scene.camera)?,
+        &args[5],
+        args.get(6).is_some_and(|s| s == "full"),
     )?;
-    let mut renderer = VulkanRenderer::new(VulkanOptions {
-        validation: true,
-        ..Default::default()
-    })?;
-    let capture = renderer.render(&frame)?;
-    check_validation(&renderer);
-    write_capture(prefix, &capture)?;
-    println!(
-        "PASS: Graphic3d capture on {}; validation errors: 0",
-        renderer.device_name()
-    );
+    check_capture(&driver, &scene);
     Ok(())
 }
-fn configure(
-    scene: &scene::GraphicScene,
-    width: u32,
-    height: u32,
-    perspective: i32,
-    offset: f64,
-) -> Result<(), Box<dyn std::error::Error>> {
-    scene.camera.set_eye(&Point3::new(0., 0., 20.))?;
-    scene.camera.set_center(&Point3::default())?;
-    scene.camera.set_up(&Direction3::new(0., 1., 0.)?);
-    scene.camera.set_projection_type(if perspective != 0 {
-        Graphic3dCameraProjection::Perspective
-    } else {
-        Graphic3dCameraProjection::Orthographic
-    });
-    scene.camera.set_scale(20.);
+fn configure(scene: &scene::ViewerScene, width: i32, height: i32, perspective: i32, offset: f64) {
+    scene.window.set_size(width, height);
+    scene.view.must_be_resized();
     scene
-        .camera
-        .set_aspect(f64::from(width) / f64::from(height));
-    scene.camera.set_z_range(1., 100.)?;
+        .view
+        .camera()
+        .set_projection_type(if perspective != 0 {
+            Graphic3dCameraProjection::Perspective
+        } else {
+            Graphic3dCameraProjection::Orthographic
+        });
+    scene.view.camera().set_scale(20.);
+    scene.view.camera().set_z_range(1., 100.).unwrap();
     let transform = Transform3::translation_vector(Vector3::new(offset, 0., 0.));
     scene
         .structure
         .set_transformation(&Handle::new(Datum3::new(transform)));
+}
+fn capture_scene(
+    scene: &scene::ViewerScene,
+    width: i32,
+    height: i32,
+    prefix: &str,
+    full: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let options = capture_options(width, height, full);
+    for (kind, extension) in [
+        (Graphic3dBufferType::Rgba, "rgba"),
+        (Graphic3dBufferType::Depth, "depth"),
+    ] {
+        let options = V3dImageDumpOptions {
+            buffer_type: kind,
+            ..options.clone()
+        };
+        capture_image(scene, &options, &format!("{prefix}.{extension}"))?;
+    }
     Ok(())
 }
 
-fn write_capture(prefix: &str, capture: &martensite_vulkan::FrameCapture) -> std::io::Result<()> {
-    std::fs::write(format!("{}.rgba", prefix), &capture.rgba)?;
-    let depth: Vec<u8> = capture
-        .depth
-        .iter()
-        .flat_map(|value| value.to_ne_bytes())
-        .collect();
-    std::fs::write(format!("{}.depth", prefix), depth)?;
-    Ok(())
-}
-
-fn check_validation(renderer: &VulkanRenderer) {
+fn check_capture(driver: &Graphic3dRenderDriver, scene: &scene::ViewerScene) {
+    println!("MARTENSITE_DEVICE={}", driver.device_name());
+    println!("PASS: V3d viewer capture; validation errors: 0");
     assert!(
-        renderer.validation_errors().is_empty(),
+        driver.validation_errors().is_empty(),
         "{:?}",
-        renderer.validation_errors()
+        driver.validation_errors()
     );
+    assert_eq!(scene.viewer.active_views().len(), 1);
+    assert!(!scene.group.is_null() && scene.vertices.vertex_number() == 3);
+    assert!(scene.render_view().capture().is_ok());
 }
+
+fn capture_options(width: i32, height: i32, full: bool) -> V3dImageDumpOptions {
+    V3dImageDumpOptions {
+        width,
+        height,
+        to_adjust_aspect: false,
+        target_z_layer_id: if full {
+            GRAPHIC3D_ZLAYER_ID_BOT_OSD
+        } else {
+            GRAPHIC3D_ZLAYER_ID_DEFAULT
+        },
+        is_single_layer: !full,
+        ..Default::default()
+    }
+}
+
+fn capture_image(
+    scene: &scene::ViewerScene,
+    options: &V3dImageDumpOptions,
+    path: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let image = ImagePixMap::default();
+    if !scene.view.to_pix_map(&image, options)? {
+        return Err(format!("capture failed: {:?}", scene.render_view().capture()).into());
+    }
+    let pixels = image.data();
+    let bytes: Vec<u8> = (0..options.height as usize)
+        .flat_map(|y| {
+            pixels.data.row(y).unwrap()[..options.width as usize * 4]
+                .iter()
+                .copied()
+        })
+        .collect();
+    std::fs::write(path, bytes)?;
+    Ok(())
+}
+
+#[path = "support/device_options.rs"]
+mod device_options;

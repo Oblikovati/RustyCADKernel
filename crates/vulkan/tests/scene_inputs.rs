@@ -78,3 +78,24 @@ fn injected_backends_can_report_input_errors() {
     let error = RenderError::rejected(0, "positive extent");
     assert_eq!(error.to_string(), "received 0; expected positive extent");
 }
+
+#[test]
+fn ordered_layers_retain_draw_ranges_and_empty_frame_clear() {
+    let draw = TriangleDraw::new(vec![], vec![], identity_clip()).unwrap();
+    let frame = RenderFrame::with_layers(
+        1,
+        1,
+        [0.; 4],
+        vec![
+            RenderLayer::new(vec![draw.clone()], true, false, true),
+            RenderLayer::new(vec![draw.clone(), draw], false, true, false),
+        ],
+    )
+    .unwrap();
+    assert_eq!(frame.layers()[0].draw_range(), 0..1);
+    assert_eq!(frame.layers()[1].draw_range(), 1..3);
+    assert_eq!(frame.layers()[1].depth_policy(), (false, true, false));
+    let empty = RenderFrame::with_layers(1, 1, [0.; 4], vec![]).unwrap();
+    assert_eq!(empty.layers()[0].depth_policy(), (true, true, true));
+    assert_eq!(empty.layers()[0].draw_range(), 0..0);
+}

@@ -15,6 +15,13 @@ impl VulkanRenderer {
             runtime: VulkanRuntime::create(options)?,
         })
     }
+    pub(crate) fn capture_limit(&self) -> u32 {
+        let limits = &self.runtime.limits;
+        limits
+            .max_framebuffer_width
+            .min(limits.max_framebuffer_height)
+            .min(limits.max_image_dimension2_d)
+    }
     /// Inspect the selected device name; `renderer.device_name()`.
     pub fn device_name(&self) -> &str {
         &self.runtime.name

@@ -66,16 +66,18 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
   return structure;
 }
 static void write_capture(const occ::handle<V3d_View> &view, int width,
-                          int height, const std::string &prefix) {
+                          int height, const std::string &prefix, bool full) {
   // The default-layer capture isolates geometry depth. The later native Topmost
   // layer clears depth (OpenGl_LayerList.cxx:827 at
   // 3d097a0328e71b826377d4814ab05ec3c3d23871), so a full-view final depth dump
   // measures the overlay pass instead.
+  const int target =
+      full ? Graphic3d_ZLayerId_BotOSD : Graphic3d_ZLayerId_Default;
   Image_PixMap color, depth;
-  if (!view->ToPixMap(color, width, height, Graphic3d_BT_RGBA, false,
-                      Graphic3d_ZLayerId_Default, true) ||
-      !view->ToPixMap(depth, width, height, Graphic3d_BT_Depth, false,
-                      Graphic3d_ZLayerId_Default, true))
+  if (!view->ToPixMap(color, width, height, Graphic3d_BT_RGBA, false, target,
+                      !full) ||
+      !view->ToPixMap(depth, width, height, Graphic3d_BT_Depth, false, target,
+                      !full))
     throw Standard_Failure("offscreen capture failed");
   std::ofstream rgba(prefix + ".rgba", std::ios::binary),
       z(prefix + ".depth", std::ios::binary);
@@ -105,7 +107,7 @@ create_view(const occ::handle<Aspect_DisplayConnection> &display,
   view->SetWindow(window);
   return view;
 }
-static void run_scene(char **argv) {
+static void run_scene(int argc, char **argv) {
   const int width = std::stoi(argv[1]), height = std::stoi(argv[2]),
             perspective = std::stoi(argv[3]);
   const double offset = std::stod(argv[4]);
@@ -117,20 +119,21 @@ static void run_scene(char **argv) {
   auto view = create_view(display, viewer, width, height);
   configure_camera(view, width, height, perspective);
   auto structure = triangle_scene(viewer, offset);
-  write_capture(view, width, height, argv[5]);
+  write_capture(view, width, height, argv[5],
+                argc == 7 && std::string(argv[6]) == "full");
   print_device(view);
   structure->Erase();
   view->Remove();
 }
 int main(int argc, char **argv) {
-  if (argc != 6) {
+  if (argc != 6 && argc != 7) {
     std::cerr << "received " << argc
               << " arguments; expected width height perspective offset "
-                 "output-prefix\n";
+                 "output-prefix [full]\n";
     return 2;
   }
   try {
-    run_scene(argv);
+    run_scene(argc, argv);
     return 0;
   } catch (const Standard_Failure &error) {
     std::cerr << error.what() << "\n";

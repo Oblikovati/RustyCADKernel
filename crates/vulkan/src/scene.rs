@@ -1,5 +1,6 @@
 //! Immutable submissions separate geometry validation from device operations.
 use crate::error::{RenderError, rejected};
+use crate::{RenderLayer, RenderLayerSpan, render_layers::flatten_layers};
 /// Position and linear RGBA color; `RenderVertex::new([0.,0.,0.],[1.,0.,0.,1.])`.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct RenderVertex {
@@ -62,6 +63,7 @@ pub struct RenderFrame {
     pub(crate) height: u32,
     pub(crate) clear_color: [f32; 4],
     pub(crate) draws: Vec<TriangleDraw>,
+    pub(crate) layers: Vec<RenderLayerSpan>,
 }
 impl RenderFrame {
     /// Read target dimensions; `frame.extent()`.
@@ -83,6 +85,29 @@ impl RenderFrame {
         clear_color: [f32; 4],
         draws: Vec<TriangleDraw>,
     ) -> Result<Self, RenderError> {
+        Self::with_layers(
+            width,
+            height,
+            clear_color,
+            vec![RenderLayer::new(draws, true, true, true)],
+        )
+    }
+    /// Read ordered depth policies; `frame.layers()`.
+    pub fn layers(&self) -> &[RenderLayerSpan] {
+        &self.layers
+    }
+    /// Build an ordered frame; an empty layer list still clears its attachments.
+    /// Example: `RenderFrame::with_layers(64, 64, [0.;4], layers)?`.
+    pub fn with_layers(
+        width: u32,
+        height: u32,
+        clear_color: [f32; 4],
+        mut layers: Vec<RenderLayer>,
+    ) -> Result<Self, RenderError> {
+        if layers.is_empty() {
+            layers.push(RenderLayer::new(vec![], true, true, true));
+        }
+        let (draws, layers) = flatten_layers(layers);
         validate_extent(width, height)?;
         if !clear_color.iter().all(|v| v.is_finite()) {
             return Err(rejected(clear_color, "finite clear color"));
@@ -92,6 +117,7 @@ impl RenderFrame {
             height,
             clear_color,
             draws,
+            layers,
         })
     }
 }

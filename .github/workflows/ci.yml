@@ -41,6 +41,13 @@ jobs:
       - name: Select the installed software Vulkan ICD
         run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
       - run: cargo run -p martensite-vulkan --example offscreen_acceptance --locked
+      - name: Measure release renderer performance on lavapipe
+        run: cargo run -p martensite-vulkan --release --example renderer_performance --locked > target/renderer-performance.log
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: lavapipe-renderer-performance
+          path: target/renderer-performance.log
       - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.vert -o /tmp/unlit.vert.spv
       - run: spirv-val --target-env vulkan1.3 crates/vulkan/shaders/unlit.vert.spv
       - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.frag -o /tmp/unlit.frag.spv
