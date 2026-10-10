@@ -116,13 +116,16 @@ buffer layout.
 ## 6. Vulkan implementation sequence
 
 The [current priorities](porting-plan.md#current-priorities) make visualization and
-Vulkan active work. At this planning revision, Martensite has the Graphic3d driver
-interfaces and a null driver, but no Vulkan renderer crate. The sibling
+Vulkan active work. Martensite now has the `martensite-vulkan` crate with tested
+Graphic3d triangle extraction and Vulkan 1.3 offscreen rendering. The
+[renderer implementation note](vulkan-renderer.md) records its current limits and
+reproducible acceptance checks. V3d driver/view integration remains the next slice. The sibling
 `Oblikovati/renderer` implementation and its
 `architecture/core/08-renderer-vulkan.md` are design references, not evidence of a
 working renderer in Martensite.
 
-First inventory the legacy renderer's observable capabilities and configurations
+Continue auditing the [enumerated legacy baseline](../porting/renderer/legacy-source-baseline.json)
+and [capability ledger](../porting/renderer/capabilities.json). Inventory observable capabilities and configurations
 from the pinned `TKOpenGl` implementation, `Graphic3d_RenderingParams`, driver/view
 interfaces and viewer regression cases. Track each capability with its native
 reference, Martensite implementation, applicable profiles, test scenes and evidence.
