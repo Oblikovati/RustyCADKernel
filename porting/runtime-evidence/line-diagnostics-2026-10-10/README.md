@@ -45,3 +45,12 @@ All three software surface medians improve (4.192/4.397/4.444 to
 2.932/3.235/3.061 ms). Host medians are broadly unchanged. Tests cover transform
 mutation and pipeline/layout transitions. The main receipt verifies the final
 implementation and preserves any remaining budget failures.
+
+
+`main-revision-overlap.json` is explicitly invalid for acceptance: another task
+merged release-package work during that run. The final main receipt was rebuilt
+from combined main at `869483e33`; all six established timing budgets pass on
+both profiles. Its strict failures remain 3 software gradients, 34 host persistence
+cases, 4 host sloped lines, and unmatched line/persistence timing baselines.
+`main-buffer-audit.json` verifies all 2,640 raw buffers remained byte-identical
+through constant reuse and integration. No precision tolerance was widened.

@@ -68,3 +68,25 @@ differences and one perspective case with two coverage differences. These are
 strict failures, not waived tolerances. The existing 34 host persistence failures
 also remain. Points, antialiasing, textured/transparent lines and wider built-in
 AIS presentations remain future work.
+
+## Integrated verification
+
+[Combined-main evidence](../porting/runtime-evidence/vulkan-lines-main-2026-10-10.json)
+was rebuilt at `869483e33`, after release-package integration. Seventy Rust tests,
+28 Python harness tests, Clippy and ten validated GPU runtime checks per profile
+pass. Strict captures pass 327/330 on lavapipe and 292/330 on native AMD. The
+six established timing budgets pass on both devices; the two new workload
+baselines remain unaccepted. The overall strict gate therefore remains failed.
+
+All 2,640 raw color/depth buffers are byte-identical before and after constant
+reuse, including the known failing cases; see the
+[buffer audit](../porting/runtime-evidence/line-diagnostics-2026-10-10/main-buffer-audit.json).
+The line branch was merged directly into main and its worktree, branch and about
+11.5 GB of checkout/build artifacts were deleted after ancestry, status and process
+checks. Main retains the final raw captures under `target/vulkan-lines-main-captures`.
+
+The compiler inventory was recaptured and verified after integration: 31 crate
+artifacts, zero unresolved ledger rows and current source fingerprints. Port-scope
+metrics remain 51,551 done, 974 partial and 23,516 open out of 76,041. Renderer
+replacement progress is tracked by the capability ledger; this slice adds no
+OCCT API completion credit. The broader port remains incomplete.

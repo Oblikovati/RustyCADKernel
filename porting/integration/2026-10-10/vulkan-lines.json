@@ -1,0 +1,251 @@
+{
+  "scope": "Martensite Vulkan line primitives, native sRGB output and draw-state performance",
+  "implementation_commit": "a8b25aed171a6605d1c9f216d8f7e95682aeccdc",
+  "line_merge": "b2f706a40",
+  "combined_main_verified": "869483e331c3cf9d6479ca7c3fe73a7f6aed9e8e",
+  "strict_status": "failed",
+  "cpu_tests": 70,
+  "python_harness_tests": 28,
+  "clippy": "passed -D warnings, all targets",
+  "raw_buffer_comparison": {
+    "count": 2640,
+    "mismatches": []
+  },
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "passed": 327,
+      "total": 330,
+      "failed_cases": [
+        "96-48-0-2-line-gradient",
+        "48-96-0--3-line-gradient",
+        "48-96-1--3-line-gradient"
+      ],
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration"
+      ],
+      "runtime": "PASS: 10 Vulkan runtime checks; validation errors: 0"
+    },
+    {
+      "profile": "host",
+      "passed": 292,
+      "total": 330,
+      "failed_cases": [
+        "64-64-0-0-pers-zoom",
+        "64-64-0-0-pers-axial",
+        "64-64-0-0-pers-zoom-axial",
+        "64-64-0-0-pers-triedron",
+        "64-64-0-0-pers-ortho",
+        "64-64-0-0-pers-triedron-ortho",
+        "64-64-0-0-pers-group-zoom",
+        "64-64-0-0-pers-nested",
+        "64-64-0-0-pers-scaled-above",
+        "64-64-0-0-line-depth",
+        "96-48-0-2-pers-zoom",
+        "96-48-0-2-pers-axial",
+        "96-48-0-2-pers-zoom-axial",
+        "96-48-0-2-pers-triedron",
+        "96-48-0-2-pers-ortho",
+        "96-48-0-2-pers-triedron-ortho",
+        "96-48-0-2-pers-group-zoom",
+        "96-48-0-2-pers-nested",
+        "96-48-0-2-pers-scaled-above",
+        "96-48-0-2-line-depth",
+        "48-96-0--3-pers-zoom",
+        "48-96-0--3-pers-axial",
+        "48-96-0--3-pers-zoom-axial",
+        "48-96-0--3-pers-triedron",
+        "48-96-0--3-pers-ortho",
+        "48-96-0--3-pers-triedron-ortho",
+        "48-96-0--3-pers-group-zoom",
+        "48-96-0--3-pers-nested",
+        "48-96-0--3-pers-scaled-above",
+        "48-96-0--3-line-depth",
+        "64-64-1-0-pers-ortho",
+        "64-64-1-0-pers-triedron-ortho",
+        "64-64-1-0-line-depth",
+        "96-48-1-2-pers-ortho",
+        "96-48-1-2-pers-triedron-ortho",
+        "48-96-1--3-pers-zoom",
+        "48-96-1--3-pers-ortho",
+        "48-96-1--3-pers-triedron-ortho"
+      ],
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration"
+      ],
+      "runtime": "PASS: 10 Vulkan runtime checks; validation errors: 0"
+    }
+  ],
+  "cleanup_receipt": "vulkan-lines-cleanup.json",
+  "remaining_work": [
+    "Three software gradient cases differ by one byte in two/four pixels.",
+    "Four native host sloped-line cases fail exact color/depth comparison; 34 previously diagnosed host persistence cases remain.",
+    "Line and persistence benchmarks have no accepted baseline. Existing six-workload baseline and limits are unchanged.",
+    "Point primitives, wider built-in AIS presentations, native presentation and the other legacy renderer capability families remain partial/pending."
+  ],
+  "preserved_unmerged_branches": [
+    {
+      "branch": "port/mmgropt-resource-storage",
+      "revision": "8c99b88497105f8285068c506df952ad6730217b",
+      "merged_into_main": false
+    },
+    {
+      "branch": "porting/linked-slot-recovery",
+      "revision": "7f9efad84a7237773ee1856c4ca96a2222268f89",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-array-trivial-resize-phase",
+      "revision": "011032f529001aa8ca2f669e0598baebc123d6e3",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-bvh-perf-diag",
+      "revision": "6f4cfaf0f80f4bc55a07bca3effd077a361a8f8c",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-continuity3d-periodic",
+      "revision": "347dd7a99e8f3c0023a352af3dcc526416ce1008",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-dynamic-storage-noop-domains",
+      "revision": "0696c64bbdaf7865dbe34fc0c7cd33f9939afd67",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-hlr-line-tool",
+      "revision": "8ae7ff44f2dd1031995799894c66386bd4b4a66b",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-indexed-map-borrowed-add",
+      "revision": "0782dd9afa51d56ae424e18513ce904ae7e5a859",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-linear-vector-trivial-insert",
+      "revision": "c852072e6c2383814e94be063f5d52a254104f73",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-osd-concrete-iterator-wrapper",
+      "revision": "a237fa941889f9583c5f3b4071e9938d2521156c",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-packed-map-extent-boundaries",
+      "revision": "66b1cbd87b65a29dd80b5b160882153a8c811a86",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-recovery-import",
+      "revision": "ee4e6da05da53cb6d1326929b84c3d2c115f0d63",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-recovery-inc",
+      "revision": "f634acabdcc33818f077d42809a6d805885047e3",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-recovery-views",
+      "revision": "5ba22f158329f827bcb9149a722b7e25d36289ee",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-shape-fix-add-pcurve-oracle",
+      "revision": "f5732806545c41cdbb1d920164e94a22d5591ed0",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-shapefix-wirevertex",
+      "revision": "e5b764830e4a67f2fd0ace9db8242b83085fe091",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-split-curve3d-continuity",
+      "revision": "92fe1a46c97c1d8a4d59a738ad1941f17be27a58",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-tkernel-arc-validation",
+      "revision": "f6693cf19bd6d4ad4b821e245295febe3faf7b07",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-tkoffset-boundary-next",
+      "revision": "cbf73a725e365aa26d022bf55d7eb3bb623dd845",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-tkoffset-face-data",
+      "revision": "086b2a352a2b2304cddb3f5f5306be4ba5e2d7e5",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-tkoffset-get-analyse",
+      "revision": "6625110e761cabe3a061d1ea9a2e67c56f5e9b4c",
+      "merged_into_main": false
+    },
+    {
+      "branch": "wip/codex-ubtree-filler-stream-check",
+      "revision": "e05562b4044760c638260bd3577af8374d73187b",
+      "merged_into_main": false
+    }
+  ],
+  "prior_unfinished_failure_note": "linked-slot-recovery previously reported 39 compile errors; not rechecked in this slice. See vulkan-raster-precision.json for prior branch handoff.",
+  "release_work": {
+    "merge": "869483e33",
+    "worktree_deleted": true,
+    "branch_deleted": true
+  },
+  "goal_complete": false,
+  "renderer_receipt": "../../runtime-evidence/vulkan-lines-main-2026-10-10.json",
+  "inventory": {
+    "verified_revision": "869483e331c3cf9d6479ca7c3fe73a7f6aed9e8e",
+    "rustdoc_verification": "Verified 31 pinned rustdoc JSON crate artifacts; inventory normalization remains false.",
+    "scope_totals": {
+      "excluded": {
+        "api_declarations": 1855,
+        "api_done": 0,
+        "api_open": 1855,
+        "api_partial": 0,
+        "gtests_mapped": 0,
+        "gtests_not_applicable": 0,
+        "gtests_unmapped": 197,
+        "toolkits": 10
+      },
+      "port": {
+        "api_declarations": 76041,
+        "api_done": 51551,
+        "api_open": 23516,
+        "api_partial": 974,
+        "gtests_mapped": 7969,
+        "gtests_not_applicable": 2,
+        "gtests_unmapped": 480,
+        "toolkits": 56
+      },
+      "replaced": {
+        "api_declarations": 6418,
+        "api_done": 0,
+        "api_open": 6418,
+        "api_partial": 0,
+        "gtests_mapped": 0,
+        "gtests_not_applicable": 0,
+        "gtests_unmapped": 0,
+        "toolkits": 2
+      }
+    },
+    "status_summary": [
+      "TKDE: 5/5 GoogleTest declarations mapped (source discovery, not full runtime/DRAW coverage)",
+      "Compiler API snapshot: 108622 observed C++ declarations; 51379 resolved implementation claims (source/ledger/artifact/tool fingerprints current)",
+      "Unresolved ledger rows: 0; unclaimed C++ declarations: 42594",
+      "Full API coverage: UNKNOWN (explicit configuration/identity/mapping gaps); port completion: NOT COMPLETE"
+    ],
+    "new_port_scope_api_credit": 0
+  }
+}
