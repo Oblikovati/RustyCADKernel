@@ -1,0 +1,63 @@
+{
+  "project": "Martensite",
+  "source_revision": "0c2b81f509aa9ffc4abbd80b5139965e48879311",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "implementation_commit": "d9670623a",
+  "merge_commit": "0c2b81f509aa9ffc4abbd80b5139965e48879311",
+  "rust_capture_revision": "0c2b81f509aa9ffc4abbd80b5139965e48879311",
+  "new_api_mappings": 53,
+  "checks": {
+    "rust_tests_passed": 312,
+    "rust_test_targets": 36,
+    "new_direct_tests": 12,
+    "clippy_warnings_denied": true,
+    "cargo_fmt": true,
+    "tool_tests_passed": 7,
+    "numeric_cases_passed": 141369,
+    "new_numeric_cases": 648,
+    "legacy_native_passed": 1,
+    "legacy_rust_passed": 1
+  },
+  "native_report_sha256": "3b15d96830213c3d23c2e1da7c209005177e72b9fd37c9a0347d07ae99b1c1e2",
+  "verified_source_hash_count": 12638,
+  "numeric_report": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKV3d",
+    "cases_passed": 141369,
+    "input_sha256": "8dad553461e29fb6345608ecc6c4506b9109385351fb3b14690b2ceb1e8ecb92",
+    "output_sha256": "b3371e643365cc0e8c960ea98d78f4cc3d62b87e91abdecb8d1514507584f55b",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0,
+    "shutdown_failure": {
+      "request": "v3_ais_context_shutdown 1 1 2",
+      "return_codes": {
+        "native": -6,
+        "rust": -6
+      }
+    }
+  },
+  "removed_worktree": "/tmp/rustycad-ais-selection-actions",
+  "removed_branch": "porting/ais-selection-actions",
+  "removed_generated_artifacts": true,
+  "unfinished_worktree": "/tmp/rustycad-linked-slot-recovery",
+  "unfinished_branch": "porting/linked-slot-recovery",
+  "unfinished_compile_errors_at_last_check": 39,
+  "full_port_complete": false,
+  "scope_note": "AIS selection schemes, camera picks, selected queries, object/owner setters and highlight grouping with live callbacks, style replacement and native partial failures. This toolkit check does not establish full workspace or renderer parity. AIS_Shape and remaining context APIs stay open. Vulkan legacy capability parity is the next prioritized implementation track.",
+  "inventory": {
+    "api_declarations": 76041,
+    "api_done": 51520,
+    "api_open": 23547,
+    "api_partial": 974,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "unresolved_ledger_rows": 0,
+  "inventory_snapshot_sha256": {
+    "porting/api-inventory/rust-api.json.gz": "a12a1064198b929be26c7a980e48315921c5959572632be62492b2245a298b46",
+    "porting/api-inventory/api-crosswalk.json.gz": "839d4f6608e32fc7c360c02ececf5519809743e683b9b8184605dd620e05f10e",
+    "porting/api-inventory/metrics.json": "63c2e4ef890f7f01087802d11ebbfcbf71029379e8887f0b500a435f43370bd7"
+  }
+}
