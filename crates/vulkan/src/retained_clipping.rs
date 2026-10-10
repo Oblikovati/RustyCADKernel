@@ -109,12 +109,7 @@ fn snapshot_chain(mut cursor: Handle<Graphic3dClipPlane>) -> Result<Vec<[f32; 4]
     let mut equations = Vec::new();
     while let Some(plane) = cursor.get() {
         let equation = plane.get_equation();
-        equations.push([
-            equation.x as f32,
-            equation.y as f32,
-            equation.z as f32,
-            equation.w as f32,
-        ]);
+        equations.push(equation.data().map(|value| value as f32));
         cursor = plane.chain_next_plane();
     }
     Ok(equations)

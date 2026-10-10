@@ -54,6 +54,9 @@ pub fn configure_clipping(scene: &ViewerScene, mode: &str) {
     configure_geometry(scene, mode);
     persistence::configure(scene, mode);
     scene.structure.calculate_bound_box();
+    update_live_planes(scene, &first, mode);
+}
+fn update_live_planes(scene: &ViewerScene, first: &Graphic3dClipPlane, mode: &str) {
     if mode == "clip-equation-updated" || mode == "clip-cleared" {
         scene.render_view().try_redraw().unwrap();
     }

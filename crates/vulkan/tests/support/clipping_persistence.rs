@@ -17,15 +17,22 @@ pub(super) fn configure(scene: &ViewerScene, mode: &str) {
     if !mode.contains("pers") {
         return;
     }
+    place_persistent_groups(scene, mode);
+    configure_local(scene, mode);
+}
+fn clipping_zoom(mode: &str) -> Handle<dyn Graphic3dTransformPersSource> {
     let x = if matches!(mode, "clip-pers-out" | "clip-pers-override") {
         -1.
     } else {
         1.
     };
-    let zoom: Handle<dyn Graphic3dTransformPersSource> = Handle::new(
+    Handle::new(
         Graphic3dTransformPers::with_point(Flags::ZOOM_PERS, &Point3::new(x, 0., 0.)).unwrap(),
     )
-    .cast();
+    .cast()
+}
+fn place_persistent_groups(scene: &ViewerScene, mode: &str) {
+    let zoom = clipping_zoom(mode);
     if matches!(mode, "clip-group-pers" | "clip-nested-pers") {
         scene.group.set_transform_persistence(&zoom);
         scene
@@ -37,7 +44,6 @@ pub(super) fn configure(scene: &ViewerScene, mode: &str) {
     if matches!(mode, "clip-pers-2d" | "clip-nested-pers") {
         scene.structure.set_transform_persistence(&corner());
     }
-    configure_local(scene, mode);
 }
 fn corner() -> Handle<dyn Graphic3dTransformPersSource> {
     Handle::new(
@@ -76,6 +82,9 @@ fn configure_text(scene: &ViewerScene, mode: &str) {
     text.set_position(&Point3::new(-5., 0., 1.));
     scene.group.set_primitives_aspect(&style.cast());
     scene.group.add_text(&text, true);
+    configure_text_planes(scene, mode);
+}
+fn configure_text_planes(scene: &ViewerScene, mode: &str) {
     if mode == "clip-text-baseline" {
         scene.view.set_clip_planes(&Handle::default());
     } else if mode != "clip-text-cut" {

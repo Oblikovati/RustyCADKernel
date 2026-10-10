@@ -44,6 +44,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    resize/rebind/remap checks, actual window captures and presentation timings.
    [Circle datums and adaptive deflection curves](ais-circle.md) add circular/arc
    construction geometry, filled/boundary selection and live geometry-update workloads.
+   [Retained clipping](vulkan-clipping.md) adds live plane chains, persistent-anchor
+   and bounding-box policy, view frustum culling, native capture controls and a
+   measured plane-update workload. Capping and section materials remain open.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

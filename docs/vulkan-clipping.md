@@ -1,7 +1,7 @@
-# Martensite clipping implementation in progress
+# Martensite retained clipping
 
-Worktree branch: `porting/martensite-clipping`, with main through `2b0ecc12a` integrated.
-This work is not yet integrated and adds no API inventory credit.
+This renderer slice adds no OCCT API inventory credit. Capping and complete legacy
+rendering parity remain unfinished.
 
 The new immutable `RenderClipping` submission carries world-space plane chains
 and an affine model matrix. Fragment shaders preserve the pinned OCCT rule:
@@ -37,10 +37,10 @@ Validated locally on 2026-10-10:
 - The existing eighteen offscreen/window acceptance checks passed on both devices.
 - Immutable upload layout, invalid inputs, live equations, head flags, local/global
   override, structure/group model composition, and failed-capture tests pass.
-- Vulkan Clippy and eight Python harness test modules pass.
+- Vulkan Clippy and 35 Python harness tests pass.
 - Release measurements include `clipping-plane-updates`, with twenty warmups and
-  one hundred samples per device. These are collected timings, not an accepted
-  regression baseline. All existing workloads remain present.
+  one hundred samples per device. Controlled repeats validate its timing baseline
+  below. All existing workloads remain present.
 
 The paired native oracle contains 27 clipping modes across six camera, viewport
 and structure-offset cases on both devices. The full 2,448-case run passed 844/1,224
@@ -64,8 +64,21 @@ retains timing failures: lavapipe AIS removal median/p95 and circle-update p95
 exceeded existing limits. Its host profile used an explicit Radeon ICD rather
 than the full run's default enumeration, so exact profile comparison is rejected;
 the selected hardware is identical, but these records are not treated as a pass.
-The new clipping workload has no accepted baseline yet. A controlled main/branch
-comparison with matching profile configuration is pending before integration.
+A fixed main/clipping/clipping/main comparison with matching profile configuration
+is retained in the [controlled receipt](../porting/runtime-evidence/vulkan-clipping-controlled-performance-2026-10-10.json).
+Unchanged main also exceeded surface/window budgets. Both software clipping runs
+met the nine established limits; one host clipping run met them and the other had
+circle-update p95 1.023 ms against a 1.016 ms limit. These noisy failures remain
+recorded; the full strict performance gate is not claimed to pass every run.
+
+The new clipping workload passes its original 1.25x median / 1.5x p95 limits in
+both controlled repeats on both profiles. The initial median/p95 is 0.421/0.517 ms
+on lavapipe and 0.304/0.393 ms on AMD; controlled repeats are 0.380/0.510 and
+0.380/0.496 ms on software, 0.339/0.502 and 0.331/0.577 ms on AMD.
+The [ten-workload baseline](../porting/runtime-evidence/vulkan-clipping-baseline-2026-10-10.json)
+preserves all nine previous rows and adds only `clipping-plane-updates`. Eight
+other workloads still lack accepted baselines. The raw failures and budgets have
+not been replaced or relaxed.
 
 Capping remains part of the renderer completion scope. No capability family is
-marked complete by this checkpoint, and no OCCT API inventory credit is added.
+marked complete by this slice, and no OCCT API inventory credit is added.
