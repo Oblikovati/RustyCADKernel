@@ -1,0 +1,125 @@
+{
+  "status": "partial",
+  "implementation_revision": "bcdc077256dfa4f7c45d4b4807de65e90956e8fd",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rust_test_executions": 176,
+  "python_tests": 40,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "passed": 172,
+      "total": 174,
+      "lit_passed": 24,
+      "lit_total": 24,
+      "lit_median_ms": 0.81611,
+      "lit_p95_ms": 0.9677699999999999,
+      "performance_workloads": 22,
+      "samples": 100,
+      "warmup": 20,
+      "failures": [
+        {
+          "case": "64-64-1-0-cap-overlap",
+          "error": "received CaptureComparison(case='64-64-1-0-cap-overlap', pixels=4096, color_mismatch_pixels=18, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "48-96-1--3-cap-overlap",
+          "error": "received CaptureComparison(case='48-96-1--3-cap-overlap', pixels=4608, color_mismatch_pixels=30, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6"
+        }
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "passed": 159,
+      "total": 174,
+      "lit_passed": 24,
+      "lit_total": 24,
+      "lit_median_ms": 0.45043849999999996,
+      "lit_p95_ms": 0.653369,
+      "performance_workloads": 22,
+      "samples": 100,
+      "warmup": 20,
+      "failures": [
+        {
+          "case": "64-64-1-0-cap-open",
+          "error": "received CaptureComparison(case='64-64-1-0-cap-open', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=1.7285346984863281e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "64-64-1-0-cap-off",
+          "error": "received CaptureComparison(case='64-64-1-0-cap-off', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=1.7285346984863281e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "64-64-1-0-cap-transformed",
+          "error": "received CaptureComparison(case='64-64-1-0-cap-transformed', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=5.185604095458984e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "64-64-1-0-cap-front",
+          "error": "received CaptureComparison(case='64-64-1-0-cap-front', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=1.7285346984863281e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "64-64-1-0-cap-overlap",
+          "error": "received CaptureComparison(case='64-64-1-0-cap-overlap', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=6.4373016357421875e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "96-48-1-2-cap-open",
+          "error": "received CaptureComparison(case='96-48-1-2-cap-open', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=6.4373016357421875e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "96-48-1-2-cap-off",
+          "error": "received CaptureComparison(case='96-48-1-2-cap-off', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=6.4373016357421875e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "96-48-1-2-cap-transformed",
+          "error": "received CaptureComparison(case='96-48-1-2-cap-transformed', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=2.8014183044433594e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "96-48-1-2-cap-front",
+          "error": "received CaptureComparison(case='96-48-1-2-cap-front', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=6.4373016357421875e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "96-48-1-2-cap-overlap",
+          "error": "received CaptureComparison(case='96-48-1-2-cap-overlap', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=4.470348358154297e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "48-96-1--3-cap-open",
+          "error": "received CaptureComparison(case='48-96-1--3-cap-open', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=4.887580871582031e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "48-96-1--3-cap-off",
+          "error": "received CaptureComparison(case='48-96-1--3-cap-off', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=4.887580871582031e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "48-96-1--3-cap-transformed",
+          "error": "received CaptureComparison(case='48-96-1--3-cap-transformed', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=1.1324882507324219e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "48-96-1--3-cap-front",
+          "error": "received CaptureComparison(case='48-96-1--3-cap-front', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=4.887580871582031e-06); expected identical RGBA and depth delta <= 1e-6"
+        },
+        {
+          "case": "48-96-1--3-cap-overlap",
+          "error": "received CaptureComparison(case='48-96-1--3-cap-overlap', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=4.887580871582031e-06); expected identical RGBA and depth delta <= 1e-6"
+        }
+      ]
+    }
+  ],
+  "remaining_work": [
+    "Original strict cap depth/overlap differences",
+    "Accepted timing baseline and full performance regression gate",
+    "PBR, transparent surfaces, textures, custom shaders, shadows"
+  ],
+  "initial_diagnosis": "The initial native fixtures used an Unlit view while Rust used a lit view. OCCT substitutes white ambient lighting for an Unlit view even with explicit lit aspects; Martensite now implements this policy. Initial mismatched-view receipt and representative images are retained separately."
+}

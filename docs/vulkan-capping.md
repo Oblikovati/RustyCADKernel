@@ -138,3 +138,20 @@ DISPLAY=:1 python3 tools/verify_vulkan.py --source ../OCCT \
 The release `lit-capping-plane-updates` workload measures the same 256×256 moving
 section with Phong shading. The harness requires this workload alongside existing
 timings; exact native RGBA and the 1e-6 depth threshold remain unchanged.
+
+The receipt in `porting/runtime-evidence/vulkan-lit-capping-2026-10-11` records
+176 Rust test executions, 40 Python tests and zero validation errors. All 24 new
+lit-section comparisons pass on each GPU. The complete focused matrix passes
+172/174 on lavapipe and 159/174 on AMD; the two overlap color differences and
+fifteen perspective depth differences from the original matrix remain strict
+failures. Twenty shader variants regenerate successfully.
+
+Both profiles collect all 22 release workloads with 100 samples after 20 warmup
+frames. Lit-cap median/p95 is 0.816/0.968 ms on lavapipe and 0.450/0.653 ms on AMD.
+These measurements do not accept a timing baseline. The retained preview timing
+comparison is diagnostic and does not close the full performance gate.
+
+An initial brightness discrepancy exposed a fixture view-mode mismatch and an
+implementation gap: OCCT replaces all lights with white ambient when the view
+is Unlit, including explicit lit cap aspects. Martensite now does the same; a
+separate paired fixture and CPU regression test lock down that behavior.
