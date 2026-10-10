@@ -125,6 +125,11 @@ image inspectable. It does not yet capture a presented swapchain or application 
 
 ## Rendering performance
 
+The harness owns `target/vulkan-harness` under its current checkout, overriding
+an inherited `CARGO_TARGET_DIR` for its Cargo commands. This keeps a fresh build
+from accidentally running another worktree's executable through Cargo's shared
+example alias. Removing the checkout also removes this cache.
+
 The same matrix builds `renderer_performance` in **release** mode, warms each
 workload for 20 frames and records 100 measured frames. Workloads are one triangle
 at 256×256, 256 triangle submissions at 256×256, and repeated 128/256×256 resize.
