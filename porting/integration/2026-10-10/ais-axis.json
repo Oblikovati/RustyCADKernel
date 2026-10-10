@@ -1,0 +1,115 @@
+{
+  "scope": "Martensite AIS_Axis, both DsgPrs axis presentation overloads, unblended Vulkan text and native fixed font cutoff",
+  "implementation_commit": "790fbf6f5135690255f638c6755c2917ab2a2f2d",
+  "main_verified": "95db0d773f8823dc6e2657f628d621954c39be0d",
+  "numeric_cases": 151496,
+  "new_axis_requests": 610,
+  "tkv3d_cpu_tests": 367,
+  "vulkan_all_target_tests": 94,
+  "python_harness_tests": 28,
+  "clippy": "passed all targets -D warnings",
+  "strict_renderer_status": "failed",
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "passed": 526,
+      "total": 828,
+      "axis_passed": 36,
+      "axis_total": 108,
+      "new_text_passed": 0,
+      "new_text_total": 30,
+      "prior_capture_status_changes": [],
+      "runtime": "PASS: 15 Vulkan runtime checks; validation errors: 0",
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration",
+        "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+        "received unmatched workload point-sprites; expected matching baseline configuration",
+        "received unmatched workload text-glyphs; expected matching baseline configuration",
+        "received unmatched workload ais-axis-appearance; expected matching baseline configuration"
+      ],
+      "axis_performance": {
+        "median_ms": 0.49581749999999997,
+        "p95_ms": 0.619086,
+        "samples": 100,
+        "warmup": 20
+      }
+    },
+    {
+      "profile": "host",
+      "passed": 451,
+      "total": 828,
+      "axis_passed": 30,
+      "axis_total": 108,
+      "new_text_passed": 0,
+      "new_text_total": 30,
+      "prior_capture_status_changes": [],
+      "runtime": "PASS: 15 Vulkan runtime checks; validation errors: 0",
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration",
+        "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+        "received unmatched workload point-sprites; expected matching baseline configuration",
+        "received unmatched workload text-glyphs; expected matching baseline configuration",
+        "received unmatched workload ais-axis-appearance; expected matching baseline configuration"
+      ],
+      "axis_performance": {
+        "median_ms": 0.361223,
+        "p95_ms": 0.46526100000000004,
+        "samples": 100,
+        "warmup": 20
+      }
+    }
+  ],
+  "unmerged_branches": [
+    "port/mmgropt-resource-storage",
+    "porting/linked-slot-recovery",
+    "wip/codex-array-trivial-resize-phase",
+    "wip/codex-bvh-perf-diag",
+    "wip/codex-continuity3d-periodic",
+    "wip/codex-dynamic-storage-noop-domains",
+    "wip/codex-hlr-line-tool",
+    "wip/codex-indexed-map-borrowed-add",
+    "wip/codex-linear-vector-trivial-insert",
+    "wip/codex-osd-concrete-iterator-wrapper",
+    "wip/codex-packed-map-extent-boundaries",
+    "wip/codex-recovery-import",
+    "wip/codex-recovery-inc",
+    "wip/codex-recovery-views",
+    "wip/codex-shape-fix-add-pcurve-oracle",
+    "wip/codex-shapefix-wirevertex",
+    "wip/codex-split-curve3d-continuity",
+    "wip/codex-tkernel-arc-validation",
+    "wip/codex-tkoffset-boundary-next",
+    "wip/codex-tkoffset-face-data",
+    "wip/codex-tkoffset-get-analyse",
+    "wip/codex-ubtree-filler-stream-check"
+  ],
+  "remaining_work": [
+    "Strict axis and text raster parity remains partial; thresholds unchanged",
+    "The two AMD infinite-line pixel-row special cases remain deferred",
+    "Additional text display modes and transparent text",
+    "Native window presentation and broader legacy OpenGL renderer capabilities",
+    "Seven newer performance workloads lack accepted baselines"
+  ],
+  "prior_unfinished_failure_note": "linked-slot-recovery previously reported 39 compile errors; not rechecked in this slice.",
+  "inventory": {
+    "captured_and_verified_crates": 31,
+    "verified_revision": "95db0d773f8823dc6e2657f628d621954c39be0d",
+    "new_axis_mappings": 29,
+    "new_axis_mappings_uniquely_resolved": 29,
+    "unresolved_ledger_rows": 0,
+    "totals_by_scope_port": {
+      "api_declarations": 76041,
+      "api_done": 51621,
+      "api_open": 23446,
+      "api_partial": 974,
+      "gtests_mapped": 7969,
+      "gtests_not_applicable": 2,
+      "gtests_unmapped": 480,
+      "toolkits": 56
+    }
+  }
+}

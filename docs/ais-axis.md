@@ -82,3 +82,18 @@ profile retain strict raster differences. All 690 previous capture statuses are
 unchanged on each device. The six established performance budgets pass; seven
 newer workloads remain explicitly unmatched. Worktree axis median/p95 is
 0.439/0.487 ms on lavapipe and 0.351/0.507 ms on native AMD.
+
+The [main integration receipt](../porting/integration/2026-10-10/ais-axis.json)
+records verification at `95db0d773`. Main reproduces the worktree results, including
+all [6,624 raw color/depth buffers](../porting/runtime-evidence/ais-axis-main-buffer-audit-2026-10-10.json).
+Main axis median/p95 is 0.496/0.619 ms on lavapipe and 0.361/0.465 ms on native AMD.
+The [cleanup receipt](../porting/integration/2026-10-10/ais-axis-cleanup.json)
+confirms deletion of the merged worktree, branch and 27,696,985,198 bytes of
+build/probe artifacts after checking ancestry, local changes and active processes.
+No checkout or build artifacts were archived.
+
+The refreshed compiler inventory resolves all 29 new mappings uniquely, with zero
+unresolved ledger rows. The in-scope totals are 51,621 done, 974 partial and 23,446
+open out of 76,041 declarations. All 31 Rust crate artifacts were captured and
+verified at the integration revision above; this does not establish full port
+completion or renderer raster parity.
