@@ -30,6 +30,9 @@ impl PrimitiveDraw {
             ));
         }
         self.capping_pass = pass;
+        if pass.is_mask() {
+            self.lighting = None;
+        }
         Ok(self)
     }
     /// Inspect the immutable phase; `draw.capping_pass()`.

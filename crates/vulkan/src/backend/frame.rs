@@ -18,6 +18,7 @@ pub(super) struct UploadedDraw {
     pub mirrored: bool,
     pub face_culling: crate::RenderFaceCulling,
     pub clipping: Option<super::storage_descriptor::UploadedStorage>,
+    pub lighting: Option<super::storage_descriptor::UploadedStorage>,
     pub sprite: Option<super::storage_descriptor::UploadedStorage>,
 }
 pub(super) struct FrameResources {
@@ -150,7 +151,22 @@ fn upload_draw(
             )
         })
         .transpose()?;
+    let lighting = draw
+        .lighting
+        .as_ref()
+        .map(|lighting| {
+            super::storage_descriptor::UploadedStorage::new(
+                runtime,
+                pipeline
+                    .lighting_layout
+                    .as_ref()
+                    .expect("lighting pipeline layout"),
+                &lighting.encode(),
+            )
+        })
+        .transpose()?;
     Ok(UploadedDraw {
+        lighting,
         clipping,
         sprite,
         annotation: draw.annotation,
@@ -189,6 +205,9 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
         );
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
+        }
+        if let Some(lighting) = &draw.lighting {
+            bytes.extend(lighting.normals[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
     }
     bytes

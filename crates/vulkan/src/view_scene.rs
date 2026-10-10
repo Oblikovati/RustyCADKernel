@@ -32,6 +32,7 @@ pub(crate) fn frame_for_view(
         })
         .collect::<Result<_, _>>()?;
     apply_view_culling(&mut passes, view.backfacing_model());
+    crate::retained_lighting::apply_view_lights(&mut passes, view)?;
     let color = view.cview_base().fields.read().bg_color;
     let clear = [
         color.rgb().red() as f32,

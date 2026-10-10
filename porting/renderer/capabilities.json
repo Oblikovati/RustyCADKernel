@@ -9,7 +9,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_PrimitiveArray.cxx"
       ],
-      "current_evidence_or_remaining_work": "Indexed/unindexed triangle buffers, live aspects and ordinary transforms through Graphic3d factories; only unlit opaque solid styles. Twelve native viewer captures plus CPU submission and live Vulkan mutation tests. Both lavapipe and native RADV profiles retain PNG/depth captures and explicit device identity.",
+      "current_evidence_or_remaining_work": "Indexed/unindexed triangle buffers, live aspects and ordinary transforms through Graphic3d factories; unlit and opaque Phong-family solid styles (docs/vulkan-lighting.md). Twelve native viewer captures plus CPU submission and live Vulkan mutation tests. Both lavapipe and native RADV profiles retain PNG/depth captures and explicit device identity.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
@@ -76,7 +76,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_ShaderManager.cxx"
       ],
-      "current_evidence_or_remaining_work": "Native material coefficient packing is implemented with 417 exact differential records (23,352 float patterns); see docs/vulkan-materials.md. GPU lighting remains unimplemented: normal extraction, light snapshots, Flat/Gouraud/Phong/PBR shaders, lit capping and shadows need rendering and performance evidence.",
+      "current_evidence_or_remaining_work": "Material packing matches 417 native records. Opaque PhongFacet/Gouraud/Phong now reach Vulkan through retained normals and directional/point/spot/head lights, separate front/back materials, vertex colors and clipping. Both devices pass 15 analytic lighting scenes and validation checks; native captures pass 124/126 on lavapipe and 64/126 on AMD. Strict pixel parity, timing gates, PBR, shadows and lit capping remain open; docs/vulkan-lighting.md records all failures and measurements.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]

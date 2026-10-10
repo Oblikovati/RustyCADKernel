@@ -196,3 +196,19 @@ pub(crate) fn cap_mask_transform(
     let (clip, clamp) = plane_clip_transform(camera, model, structure, extent)?;
     Ok((clip, model.data(), clamp))
 }
+
+pub(crate) fn lighting_matrices(
+    context: &crate::text_submission::TextSceneContext<'_>,
+) -> Result<([f32; 16], [f32; 16]), RenderError> {
+    let model = model_transform(context.group, context.structure);
+    let parent = &context.structure.trsf_pers;
+    let local = context.group.transform_persistence();
+    if parent.is_null() && local.is_null() {
+        return Ok((
+            Mat4::<f32>::from_other(&model).data(),
+            Mat4::<f32>::from_other(&context.camera.orientation_matrix()).data(),
+        ));
+    }
+    let transform = persistent_view(context.camera, model, parent, &local, context.extent)?;
+    Ok((transform.model.data(), transform.world_view.data()))
+}

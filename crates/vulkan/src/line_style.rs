@@ -18,7 +18,7 @@ pub(crate) fn primitive_style(
         kind,
         Graphic3dTypeOfPrimitiveArray::Segments | Graphic3dTypeOfPrimitiveArray::Polylines
     ) {
-        return Ok((crate::style::unlit_color(aspects, closed)?, None));
+        return Ok((crate::style::surface_color(aspects, closed)?, None));
     }
     let style = aspects
         .get()

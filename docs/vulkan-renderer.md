@@ -45,7 +45,7 @@ in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
 triangle lists/strips/fans, segments/polylines and point sprites, full homogeneous Vec4 positions, opaque
-vertex/interior colors, unlit solid shading,
+vertex/interior colors, unlit solid shading and [opaque Phong-family surfaces](vulkan-lighting.md),
 opaque face culling and disabled polygon offsets. General group stencil commands, flipping,
 bounding-box highlighting, textures and custom shaders are not implemented.
 [Stencil capping](vulkan-capping.md) now renders opaque unlit sections with native
@@ -518,6 +518,8 @@ harness collects 17 timing workloads; nine have accepted baselines.
 ## Shader material preparation
 
 [Material records](vulkan-materials.md) now provide native Phong/PBR coefficient
-packing with exact differential evidence. Lit submissions and shaders remain
-unimplemented; this preparation does not change rendered output or claim a
-lighting performance baseline.
+packing with exact differential evidence. [Lighting](vulkan-lighting.md) now
+consumes them in Vulkan PhongFacet, Gouraud and Phong shaders with retained
+normals and lights, clipping, front/back coefficients and live updates. Analytic
+GPU checks pass on lavapipe and AMD; strict native captures and timing budgets
+remain open. PBR, shadow maps and lit section materials still require implementation.

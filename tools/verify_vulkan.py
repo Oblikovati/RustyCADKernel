@@ -26,6 +26,7 @@ from vulkan_circle_cases import CIRCLE_MODES
 from vulkan_clipping_cases import CLIPPING_MODES
 from vulkan_homogeneous_cases import HOMOGENEOUS_MODES
 from vulkan_capping_cases import CAPPING_MODES
+from vulkan_lighting_cases import LIGHTING_MODES
 from vulkan_case_dispatch import capture_executable
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
@@ -83,6 +84,8 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
         "point.frag",
         "text.vert",
         "text.frag",
+        "lighting.vert",
+        "lighting.frag",
     ):
         for clipped in (False, True):
             source = ROOT / f"crates/vulkan/shaders/{name}"
@@ -149,6 +152,7 @@ class HarnessConfig:
     baseline: dict[str, object] | None = None
     median_ratio: float = 1.25
     p95_ratio: float = 1.5
+    case_family: str = "all"
 
     def __post_init__(self) -> None:
         if not 20 <= self.samples <= 10000 or not 1 <= self.warmup <= 10000:
@@ -217,33 +221,17 @@ def clear_previous_case(native: Path, ported: Path) -> None:
 
 
 def capture_cases(
-    native: Path, rust: Path, folder: Path, profile: VulkanProfile
+    native: Path,
+    rust: Path,
+    folder: Path,
+    profile: VulkanProfile,
+    case_family: str = "all",
 ) -> list[dict[str, object]]:
     """Retain raw and AIS lifecycle scenes and continue collecting failures; e.g. capture_cases(gl, vk, folder, profile)."""
     folder.mkdir(parents=True, exist_ok=True)
     results = []
     for case, mode in [
-        (case, mode)
-        for case in CASES
-        for mode in (
-            "default",
-            "full",
-            *AIS_MODES,
-            *SURFACE_MODES,
-            *PERSISTENCE_MODES,
-            *LINE_MODES,
-            *STDPRS_MODES,
-            *AIS_LINE_MODES,
-            *AIS_POINT_MODES,
-            *TEXT_MODES,
-            *AIS_AXIS_MODES,
-            *PLANE_TRIHEDRON_MODES,
-            *WINDOW_MODES,
-            *CIRCLE_MODES,
-            *CLIPPING_MODES,
-            *HOMOGENEOUS_MODES,
-            *CAPPING_MODES,
-        )
+        (case, mode) for case in CASES for mode in capture_modes(case_family)
     ]:
         try:
             results.append(capture_case(native, rust, folder, profile, case, mode))
@@ -252,6 +240,36 @@ def capture_cases(
                 {"case": [*case, mode], "status": "failed", "error": str(error)}
             )
     return results
+
+
+def capture_modes(case_family: str) -> tuple[str, ...]:
+    """Select an explicit fixture family without changing parity gates; capture_modes('lighting')."""
+    if case_family == "lighting":
+        return LIGHTING_MODES
+    if case_family != "all":
+        raise ValueError(
+            f"received case family {case_family!r}; expected all or lighting"
+        )
+    return (
+        "default",
+        "full",
+        *AIS_MODES,
+        *SURFACE_MODES,
+        *PERSISTENCE_MODES,
+        *LINE_MODES,
+        *STDPRS_MODES,
+        *AIS_LINE_MODES,
+        *AIS_POINT_MODES,
+        *TEXT_MODES,
+        *AIS_AXIS_MODES,
+        *PLANE_TRIHEDRON_MODES,
+        *WINDOW_MODES,
+        *CIRCLE_MODES,
+        *CLIPPING_MODES,
+        *HOMOGENEOUS_MODES,
+        *CAPPING_MODES,
+        *LIGHTING_MODES,
+    )
 
 
 def source_hashes() -> dict[str, str]:
@@ -266,6 +284,8 @@ def source_hashes() -> dict[str, str]:
             "tools/vulkan_capture_compare.py",
             "tools/oracle/martensite_vulkan_reference.cxx",
             "tools/oracle/martensite_vulkan_capping.cxx",
+            "tools/oracle/martensite_vulkan_lighting.cxx",
+            "tools/vulkan_lighting_cases.py",
             "tools/vulkan_capping_cases.py",
             "tools/oracle/martensite_vulkan_ais.cxx",
             "tools/oracle/martensite_vulkan_surfaces.cxx",
@@ -302,11 +322,17 @@ def verify_profile(
         [str(target / "debug/examples/offscreen_acceptance")], profile.environment
     )
     confirm_device(runtime, profile.device)
+    lighting_runtime = run(
+        [str(target / "debug/examples/lighting_acceptance")], profile.environment
+    )
+    confirm_device(lighting_runtime, profile.device)
+    runtime += "\n" + lighting_runtime
     cases = capture_cases(
         native,
         target / "debug/examples/graphic3d_capture",
         config.captures / profile.name,
         profile,
+        config.case_family,
     )
     output = measure_profile(profile, target, config)
     result = profile_result(profile, runtime, cases, output)
@@ -431,7 +457,7 @@ def receipt(
             "median_ratio": config.median_ratio,
             "p95_ratio": config.p95_ratio,
         },
-        "scope": "opaque unlit surfaces and lines through V3d/Graphic3d/AIS; default/full-layer and AIS lifecycle captures; end-to-end frame benchmarks",
+        "scope": f"{config.case_family} capture family through V3d/Graphic3d/AIS; opaque Phong-family lighting and unlit analytic checks; all end-to-end frame benchmarks",
     }
 
 
@@ -453,6 +479,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
         default=["lavapipe", "host"],
     )
     parser.add_argument("--host-icd", type=Path)
+    parser.add_argument("--case-family", choices=("all", "lighting"), default="all")
     performance_arguments(parser)
     return parser.parse_args(argv)
 
@@ -496,6 +523,7 @@ def configuration(args: argparse.Namespace) -> HarnessConfig:
         ),
         args.median_ratio,
         args.p95_ratio,
+        args.case_family,
     )
 
 
