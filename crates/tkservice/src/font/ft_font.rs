@@ -267,12 +267,10 @@ fn configure_face(face: usize, path: &AsciiString, params: &FontFTFontParams) ->
         ]);
         return false;
     }
-    let Some(point_size) = freetype_point_size(params.point_size) else {
-        return false;
-    };
-    // SAFETY: an open face; FT_Set_Char_Size only reads the arguments.
-    let error =
-        unsafe { (api.FT_Set_Char_Size)(raw, 0, point_size, params.resolution, params.resolution) };
+    let error = freetype_point_size(params.point_size).map_or(1, |point_size| {
+        // SAFETY: an open face; FT_Set_Char_Size only reads the arguments.
+        unsafe { (api.FT_Set_Char_Size)(raw, 0, point_size, params.resolution, params.resolution) }
+    });
     if error != 0 {
         trace(&[
             b"Font '",
@@ -348,7 +346,8 @@ impl FontFTFont {
 
 // OCCT Font_FTFont::toFTPoints checks the platform FT_F26Dot6 range before scaling.
 fn freetype_point_size(point_size: u32) -> Option<FtLong> {
-    FtLong::try_from(u64::from(point_size) * 64).ok()
+    let scaled = u64::from(point_size) * 64;
+    FtLong::try_from(scaled).ok()
 }
 
 #[cfg(test)]
