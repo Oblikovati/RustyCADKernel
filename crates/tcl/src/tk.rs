@@ -18,12 +18,26 @@ pub struct TkApp<'interp> {
 
 /// `Tk_Init`: loads Tk into `interp`, opening the display (`$DISPLAY` on X11). On
 /// failure the error is the interpreter result (Tk's reason).
+/// On macOS, call on the main application thread: `tk_init(&interp)?`.
 pub fn tk_init(interp: &InterpHandle) -> Result<TkApp<'_>, String> {
-    // SAFETY: live interpreter.
+    #[cfg(target_os = "macos")]
+    // CI job 114323792463: Aqua raises a foreign exception from Rust test workers.
+    // SAFETY: pthread_main_np has no arguments or initialization prerequisites.
+    if unsafe { pthread_main_np() } == 0 {
+        return Err(
+            "Tk_Init received a worker thread; expected the macOS main application thread".into(),
+        );
+    }
+    // SAFETY: live interpreter, and Aqua is restricted to the main application thread.
     match Completion::from_code(unsafe { sys::Tk_Init(interp.as_ptr()) }) {
         Completion::Ok => Ok(TkApp { interp }),
         _ => Err(interp.result()),
     }
+}
+
+#[cfg(target_os = "macos")]
+unsafe extern "C" {
+    fn pthread_main_np() -> c_int;
 }
 
 /// The Tk package for [`InterpHandle::static_package`], as DRAW registers it.

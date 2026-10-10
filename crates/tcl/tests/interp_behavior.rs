@@ -1,7 +1,7 @@
 //! Behavior of the safe wrapper against the real Tcl library.
 use rustycad_tcl::{
     Completion, DString, Interp, InterpHandle, StaticPackage, TkWindow, TraceEvent, TraceTag,
-    command_complete, external_to_utf, sys, tk_init, utf_to_unichars,
+    command_complete, external_to_utf, sys, utf_to_unichars,
 };
 use std::cell::Cell;
 use std::rc::Rc;
@@ -250,35 +250,32 @@ fn tk_main_window_is_absent_before_tk_init() {
     assert!(TkWindow::main(&interp).is_none());
 }
 
-/// Needs an X display; without one, Tk's refusal is checked instead.
+/// A child process runs Aqua on its actual main thread, even under libtest/nextest.
 #[test]
 fn tk_init_opens_the_main_window_or_names_the_missing_display() {
-    let interp = Interp::new();
-    // Tk_Init runs tk.tcl, which needs Tcl's own init.tcl (tcl_findLibrary), as in DRAW.
-    assert_eq!(interp.init(), Completion::Ok, "{}", interp.result());
-    let app = match tk_init(&interp) {
-        Ok(app) => app,
-        Err(reason) => {
-            assert!(
-                std::env::var_os("DISPLAY").is_none(),
-                "Tk_Init failed with a display: {reason}"
-            );
-            assert!(reason.contains("display"), "{reason}");
-            return;
-        }
-    };
-    interp.eval("wm withdraw .").unwrap();
-    let window = app.main_window().expect("Tk_Init creates the main window");
-    let name = window.set_app_name("RustyCadTclTest").unwrap();
-    assert!(name.starts_with("RustyCadTclTest"), "{name}");
-    window.set_name_uid(app.get_uid(&name).unwrap());
-    assert_eq!(window.name(), name);
-    assert!(std::ptr::eq(
-        app.get_uid("x").unwrap(),
-        app.get_uid("x").unwrap()
-    ));
-    assert!(app.main_window_count() >= 1);
-    assert!(!window.display().is_null());
-    window.geometry_request(200, 200);
-    interp.eval("destroy .").unwrap();
+    let result = std::process::Command::new(env!("CARGO_BIN_EXE_martensite-tk-probe"))
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "Tk main-thread probe failed: status={} stdout={} stderr={}",
+        result.status,
+        String::from_utf8_lossy(&result.stdout),
+        String::from_utf8_lossy(&result.stderr)
+    );
+}
+
+#[cfg(target_os = "macos")]
+#[test]
+fn aqua_initialization_rejects_worker_threads_before_native_exception() {
+    let error = std::thread::spawn(|| {
+        let interp = Interp::new();
+        rustycad_tcl::tk_init(&interp)
+            .err()
+            .expect("worker Tk_Init must be rejected")
+    })
+    .join()
+    .unwrap();
+    assert!(error.contains("worker thread"), "{error}");
+    assert!(error.contains("main application thread"), "{error}");
 }
