@@ -1,0 +1,14 @@
+   Compiling martensite-vulkan v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/vulkan)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.36s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-9a6718762fc5f3d5)
+
+running 6 tests
+test backend::memory_selection::tests::readback_falls_back_when_cached_type_is_not_allowed ... ok
+test backend::memory_selection::tests::device_memory_selection_preserves_required_properties ... ok
+test backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match ... ok
+test backend::memory_selection::tests::uploads_keep_first_compatible_memory ... ok
+test backend::memory_selection::tests::unsupported_memory_returns_no_selection ... ok
+test backend::memory_selection::tests::readback_requires_coherence_even_when_cached ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+

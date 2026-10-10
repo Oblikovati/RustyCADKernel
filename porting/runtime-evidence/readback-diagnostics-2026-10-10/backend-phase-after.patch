@@ -1,0 +1,147 @@
+diff --git a/crates/vulkan/src/backend/buffer.rs b/crates/vulkan/src/backend/buffer.rs
+index b3cceb233..13151ebb5 100644
+--- a/crates/vulkan/src/backend/buffer.rs
++++ b/crates/vulkan/src/backend/buffer.rs
+@@ -1,4 +1,5 @@
+ //! Buffer allocations are released on every construction, recording and readback failure.
++use super::memory_selection::{HostBufferAccess, host_buffer_memory_type};
+ use super::runtime::{VulkanRuntime, vk_error};
+ use crate::error::{RenderError, rejected};
+ use ash::vk;
+@@ -14,6 +15,7 @@ impl DeviceBuffer {
+         runtime: &Arc<VulkanRuntime>,
+         size: u64,
+         usage: vk::BufferUsageFlags,
++        access: HostBufferAccess,
+     ) -> Result<Self, RenderError> {
+         let info = vk::BufferCreateInfo::default()
+             .size(size.max(4))
+@@ -27,19 +29,24 @@ impl DeviceBuffer {
+             memory: vk::DeviceMemory::null(),
+             size: size.max(4),
+         };
+-        buffer.allocate()?;
++        buffer.allocate(access)?;
+         Ok(buffer)
+     }
+-    fn allocate(&mut self) -> Result<(), RenderError> {
++    fn allocate(&mut self, access: HostBufferAccess) -> Result<(), RenderError> {
+         let requirements = unsafe {
+             self.runtime
+                 .device()
+                 .get_buffer_memory_requirements(self.handle)
+         };
+-        let flags = vk::MemoryPropertyFlags::HOST_VISIBLE | vk::MemoryPropertyFlags::HOST_COHERENT;
+-        let index = self
+-            .runtime
+-            .memory_type(requirements.memory_type_bits, flags)?;
++        let index =
++            host_buffer_memory_type(&self.runtime.memory, requirements.memory_type_bits, access)
++                .ok_or_else(|| {
++                    rejected(
++                        requirements.memory_type_bits,
++                        "a host-visible coherent Vulkan memory type",
++                    )
++                })?;
++        println!("{{\"diagnostic\":\"DEBUG-martensite-memory-selection\",\"index\":{index},\"allowed\":{},\"flags\":{}}}", requirements.memory_type_bits, self.runtime.memory.memory_types[index as usize].property_flags.as_raw());
+         let info = vk::MemoryAllocateInfo::default()
+             .allocation_size(requirements.size)
+             .memory_type_index(index);
+diff --git a/crates/vulkan/src/backend/frame.rs b/crates/vulkan/src/backend/frame.rs
+index 13023b394..1d765d424 100644
+--- a/crates/vulkan/src/backend/frame.rs
++++ b/crates/vulkan/src/backend/frame.rs
+@@ -1,6 +1,7 @@
+ //! Frame resources are private and never outlive the device that created them.
+ use super::{
+-    buffer::DeviceBuffer, image::TargetImage, pipeline::TrianglePipeline, runtime::VulkanRuntime,
++    buffer::DeviceBuffer, image::TargetImage, memory_selection::HostBufferAccess,
++    pipeline::TrianglePipeline, runtime::VulkanRuntime,
+ };
+ use crate::{FrameCapture, RenderError, RenderFrame, TriangleDraw, error::rejected};
+ use ash::vk;
+@@ -36,8 +37,18 @@ impl FrameResources {
+             extent,
+             color: TargetImage::new(runtime, extent, false)?,
+             depth: TargetImage::new(runtime, extent, true)?,
+-            color_read: DeviceBuffer::new(runtime, bytes, vk::BufferUsageFlags::TRANSFER_DST)?,
+-            depth_read: DeviceBuffer::new(runtime, bytes, vk::BufferUsageFlags::TRANSFER_DST)?,
++            color_read: DeviceBuffer::new(
++                runtime,
++                bytes,
++                vk::BufferUsageFlags::TRANSFER_DST,
++                HostBufferAccess::Readback,
++            )?,
++            depth_read: DeviceBuffer::new(
++                runtime,
++                bytes,
++                vk::BufferUsageFlags::TRANSFER_DST,
++                HostBufferAccess::Readback,
++            )?,
+             pipeline: pipeline.clone(),
+             draws: frame
+                 .draws
+@@ -104,7 +115,7 @@ fn upload_bytes(
+     bytes: &[u8],
+     usage: vk::BufferUsageFlags,
+ ) -> Result<DeviceBuffer, RenderError> {
+-    let buffer = DeviceBuffer::new(runtime, bytes.len() as u64, usage)?;
++    let buffer = DeviceBuffer::new(runtime, bytes.len() as u64, usage, HostBufferAccess::Upload)?;
+     buffer.write(bytes)?;
+     Ok(buffer)
+ }
+diff --git a/crates/vulkan/src/backend/mod.rs b/crates/vulkan/src/backend/mod.rs
+index 9aaba8ed3..1b98b6485 100644
+--- a/crates/vulkan/src/backend/mod.rs
++++ b/crates/vulkan/src/backend/mod.rs
+@@ -34,6 +34,7 @@ impl VulkanRenderer {
+     }
+ }
+ mod buffer;
++mod memory_selection;
+ mod frame;
+ mod image;
+ mod pipeline;
+@@ -42,10 +43,22 @@ mod record;
+ mod submission;
+ impl RenderBackend for VulkanRenderer {
+     fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
++        let start = std::time::Instant::now();
+         let resources = frame::FrameResources::new(&self.runtime, frame, &self.pipeline)?;
++        let allocated = start.elapsed();
+         let commands = submission::CommandSubmission::new(&self.runtime)?;
+         record::record_frame(&self.runtime, commands.command, &resources, frame);
++        let recorded = start.elapsed();
+         commands.finish()?;
+-        resources.capture()
++        let submitted = start.elapsed();
++        let result = resources.capture();
++        let captured = start.elapsed();
++        drop(commands);
++        drop(resources);
++        let ended = start.elapsed();
++        let phases = [allocated, recorded-allocated, submitted-recorded, captured-submitted, ended-captured]
++            .map(|duration| duration.as_secs_f64()*1000.);
++        println!("{{\"diagnostic\":\"DEBUG-martensite-backend-phases\",\"phases_ms\":{phases:?}}}");
++        result
+     }
+ }
+diff --git a/crates/vulkan/src/backend/runtime.rs b/crates/vulkan/src/backend/runtime.rs
+index 2259c0a9a..20d336c08 100644
+--- a/crates/vulkan/src/backend/runtime.rs
++++ b/crates/vulkan/src/backend/runtime.rs
+@@ -79,13 +79,7 @@ impl VulkanRuntime {
+         bits: u32,
+         flags: vk::MemoryPropertyFlags,
+     ) -> Result<u32, RenderError> {
+-        (0..self.memory.memory_type_count)
+-            .find(|&i| {
+-                bits & (1 << i) != 0
+-                    && self.memory.memory_types[i as usize]
+-                        .property_flags
+-                        .contains(flags)
+-            })
++        super::memory_selection::compatible_memory_type(&self.memory, bits, flags)
+             .ok_or_else(|| rejected((bits, flags), "a compatible Vulkan memory type"))
+     }
+ }

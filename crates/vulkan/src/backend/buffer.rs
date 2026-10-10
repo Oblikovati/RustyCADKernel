@@ -1,4 +1,5 @@
 //! Buffer allocations are released on every construction, recording and readback failure.
+use super::memory_selection::{HostBufferAccess, host_buffer_memory_type};
 use super::runtime::{VulkanRuntime, vk_error};
 use crate::error::{RenderError, rejected};
 use ash::vk;
@@ -14,6 +15,7 @@ impl DeviceBuffer {
         runtime: &Arc<VulkanRuntime>,
         size: u64,
         usage: vk::BufferUsageFlags,
+        access: HostBufferAccess,
     ) -> Result<Self, RenderError> {
         let info = vk::BufferCreateInfo::default()
             .size(size.max(4))
@@ -27,19 +29,23 @@ impl DeviceBuffer {
             memory: vk::DeviceMemory::null(),
             size: size.max(4),
         };
-        buffer.allocate()?;
+        buffer.allocate(access)?;
         Ok(buffer)
     }
-    fn allocate(&mut self) -> Result<(), RenderError> {
+    fn allocate(&mut self, access: HostBufferAccess) -> Result<(), RenderError> {
         let requirements = unsafe {
             self.runtime
                 .device()
                 .get_buffer_memory_requirements(self.handle)
         };
-        let flags = vk::MemoryPropertyFlags::HOST_VISIBLE | vk::MemoryPropertyFlags::HOST_COHERENT;
-        let index = self
-            .runtime
-            .memory_type(requirements.memory_type_bits, flags)?;
+        let index =
+            host_buffer_memory_type(&self.runtime.memory, requirements.memory_type_bits, access)
+                .ok_or_else(|| {
+                    rejected(
+                        requirements.memory_type_bits,
+                        "a host-visible coherent Vulkan memory type",
+                    )
+                })?;
         let info = vk::MemoryAllocateInfo::default()
             .allocation_size(requirements.size)
             .memory_type_index(index);

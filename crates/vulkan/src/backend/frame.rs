@@ -1,6 +1,7 @@
 //! Frame resources are private and never outlive the device that created them.
 use super::{
-    buffer::DeviceBuffer, image::TargetImage, pipeline::TrianglePipeline, runtime::VulkanRuntime,
+    buffer::DeviceBuffer, image::TargetImage, memory_selection::HostBufferAccess,
+    pipeline::TrianglePipeline, runtime::VulkanRuntime,
 };
 use crate::{FrameCapture, RenderError, RenderFrame, TriangleDraw, error::rejected};
 use ash::vk;
@@ -36,8 +37,18 @@ impl FrameResources {
             extent,
             color: TargetImage::new(runtime, extent, false)?,
             depth: TargetImage::new(runtime, extent, true)?,
-            color_read: DeviceBuffer::new(runtime, bytes, vk::BufferUsageFlags::TRANSFER_DST)?,
-            depth_read: DeviceBuffer::new(runtime, bytes, vk::BufferUsageFlags::TRANSFER_DST)?,
+            color_read: DeviceBuffer::new(
+                runtime,
+                bytes,
+                vk::BufferUsageFlags::TRANSFER_DST,
+                HostBufferAccess::Readback,
+            )?,
+            depth_read: DeviceBuffer::new(
+                runtime,
+                bytes,
+                vk::BufferUsageFlags::TRANSFER_DST,
+                HostBufferAccess::Readback,
+            )?,
             pipeline: pipeline.clone(),
             draws: frame
                 .draws
@@ -104,7 +115,7 @@ fn upload_bytes(
     bytes: &[u8],
     usage: vk::BufferUsageFlags,
 ) -> Result<DeviceBuffer, RenderError> {
-    let buffer = DeviceBuffer::new(runtime, bytes.len() as u64, usage)?;
+    let buffer = DeviceBuffer::new(runtime, bytes.len() as u64, usage, HostBufferAccess::Upload)?;
     buffer.write(bytes)?;
     Ok(buffer)
 }

@@ -349,9 +349,9 @@ separate distribution medians, not additive components of a single sample.
 Render-thread run-queue wait is 0.396 ms across the full failing batch, too small
 to explain the difference by itself. Backend wall time includes allocations,
 submission, waits, capture and scheduling; this is not a GPU timestamp result.
-Driver worker threads and CPU frequency effects are not isolated. The next
-measurement must separate backend resource creation, submission/wait and readback.
-No timing fix is claimed, and these diagnostics do not replace the failed gate.
+Driver worker threads and CPU frequency effects are not isolated. At this stage, the next measurement was to separate backend resource creation,
+submission/wait and readback. These diagnostics did not establish a timing fix
+and do not replace the failed gate. The follow-up below isolates readback.
 
 The diagnostic sources are small reproducibility artifacts for `dec117cd3`, not
 production instrumentation. To rebuild them against that revision, copy the four
@@ -371,3 +371,42 @@ Each command returns failure if any of its six runs exceeds the original AIS
 median/p95 budget; raw samples and binary hashes are retained. Temporary example
 sources were removed after measurement. The completed surface worktree, branch
 and build cache were deleted; all implementation commits are integrated into `main`.
+
+## Coherent cached capture memory
+
+The [backend phase measurements](../porting/runtime-evidence/readback-diagnostics-2026-10-10/backend-phase-results.json)
+on the native AMD Radeon 8060S locate the dominant cost in CPU capture reads:
+six two-frame AIS runs have capture medians of 2.925–4.405 ms. Every buffer used
+memory type 2, flags 6 (`HOST_VISIBLE | HOST_COHERENT`), without `HOST_CACHED`.
+Coherence removes the need for explicit invalidation; it does not imply CPU
+caching. See the [Vulkan memory properties](https://docs.vulkan.org/refpages/latest/refpages/source/VkMemoryPropertyFlagBits.html).
+
+Martensite now passes an explicit upload/readback policy to its private buffer
+allocator. Readback prefers host-visible, coherent, cached memory, falling back
+to the original coherent memory requirement when no compatible cached type is
+available. Uploads retain first-compatible selection. Six unit regressions cover
+preference, upload behavior, allowed-type masks, coherence, unsupported layouts
+and device-local selection; the preference test failed before the policy change.
+
+The [same phase probe after the change](../porting/runtime-evidence/readback-diagnostics-2026-10-10/backend-phase-after.json)
+selects type 5, flags 14, for readback and retains type 2 for uploads. Its six
+capture medians are 0.070–0.072 ms. The [uninstrumented original AIS loop](../porting/runtime-evidence/readback-diagnostics-2026-10-10/ais-readback-isolation.json)
+passes all six runs against the unchanged median/p95 limits, with medians
+0.594–0.624 ms. Phase measurements are diagnostic wall times, not GPU timestamps
+or replacements for the complete acceptance matrix. Raw samples and rebuilding
+instructions are in the [diagnostic folder](../porting/runtime-evidence/readback-diagnostics-2026-10-10/README.md).
+
+Oblikovati at `aa8297d1b0ac33c024f19e54821536d76e8a447a` was inspected as a
+reference (`head/internal/native/app.cpp` and `viewport.cpp`). Its screenshot
+path also uses first-compatible coherent memory; its interactive renderer keeps
+readback separate and reuses persistently mapped geometry buffers. Those are
+useful future architectural references. This change preserves Martensite's
+current synchronous color/depth capture contract and all six timing workloads.
+
+The [worktree acceptance matrix](../porting/runtime-evidence/vulkan-readback-worktree-2026-10-10.json)
+passes 252 native OpenGL/Vulkan capture comparisons, 14 runtime checks and all
+six performance workloads on lavapipe and native AMD, with zero validation errors.
+The native AIS erase/display median/p95 is 0.478/0.710 ms. All 54 Rust tests
+(including example targets), 22 Python harness tests and Clippy with warnings denied
+pass. The six-workload baseline is unchanged. Renderer capability families remain
+partial: this allocation improvement adds no OCCT API completion credit.

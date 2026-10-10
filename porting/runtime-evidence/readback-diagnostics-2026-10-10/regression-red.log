@@ -1,0 +1,57 @@
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling smallvec v1.16.2
+   Compiling rustc_apfloat v0.2.3+llvm-462a31f5a5ab
+   Compiling rustycad-cmath v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/cmath)
+   Compiling allocator-api2 v0.4.0
+   Compiling bytemuck v1.25.2
+   Compiling bitflags v2.13.2
+   Compiling pkg-config v0.3.34
+   Compiling once_cell v1.21.4
+   Compiling cfg-if v1.0.5
+   Compiling ash v0.38.0+1.3.281
+   Compiling libloading v0.8.9
+   Compiling num-traits v0.2.19
+   Compiling x11-dl v2.21.0
+   Compiling num-complex v0.4.6
+   Compiling rustycad-tkernel v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkernel)
+   Compiling rustycad-tkmath v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkmath)
+   Compiling rustycad-tkg2d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkg2d)
+   Compiling rustycad-tkservice v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkservice)
+   Compiling rustycad-tkg3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tktopalgo)
+   Compiling rustycad-tkshhealing v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkshhealing)
+   Compiling rustycad-tkmesh v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkmesh)
+   Compiling rustycad-tkv3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/tkv3d)
+   Compiling martensite-vulkan v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-readback-perf/crates/vulkan)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 53.14s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-9a6718762fc5f3d5)
+
+running 6 tests
+test backend::memory_selection::tests::device_memory_selection_preserves_required_properties ... ok
+test backend::memory_selection::tests::readback_falls_back_when_cached_type_is_not_allowed ... ok
+test backend::memory_selection::tests::readback_requires_coherence_even_when_cached ... ok
+test backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match ... FAILED
+test backend::memory_selection::tests::uploads_keep_first_compatible_memory ... ok
+test backend::memory_selection::tests::unsupported_memory_returns_no_selection ... ok
+
+failures:
+
+---- backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match stdout ----
+
+thread 'backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match' (803769) panicked at crates/vulkan/src/backend/memory_selection.rs:50:9:
+assertion `left == right` failed
+  left: Some(0)
+ right: Some(1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match
+
+test result: FAILED. 5 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p martensite-vulkan --lib`
