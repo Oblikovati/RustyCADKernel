@@ -50,6 +50,7 @@ def performance_rows(output: str) -> list[dict[str, object]]:
         "clipping-plane-updates",
         "homogeneous-position-updates",
         "capping-plane-updates",
+        "lit-capping-plane-updates",
         "lighting-updates",
         "window-present",
         "window-resize-present",

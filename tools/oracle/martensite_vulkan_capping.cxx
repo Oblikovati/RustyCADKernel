@@ -1,4 +1,6 @@
 // Paired native closed-solid fixtures for retained_capping, pinned OCCT 3d097a0.
+#include <Graphic3d_CLight.hxx>
+#include <Graphic3d_LightSet.hxx>
 static void cap_cube(const occ::handle<Graphic3d_Group>& group, double offset) {
   occ::handle<Graphic3d_ArrayOfTriangles> array = new Graphic3d_ArrayOfTriangles(8,36);
   for (const auto& p : std::array<std::array<double,3>,8>{{{-6,-6,-6},{6,-6,-6},{6,6,-6},{-6,6,-6},
@@ -17,6 +19,15 @@ static void capping_scene(const occ::handle<Graphic3d_Structure>& structure,
   auto group=structure->Groups().First(); group->Clear(false);
   group->SetGroupPrimitivesAspect(unlit_aspects()); cap_cube(group,0); group->SetClosed(mode!="cap-open");
   auto plane=mode=="cap-oblique"?cap_plane(.6,0,-.8,0):cap_plane(0,0,-1,0);
+  if(mode.rfind("cap-lit-",0)==0) {
+    auto model=mode=="cap-lit-facet"?Graphic3d_TypeOfShadingModel_PhongFacet:
+      mode=="cap-lit-gouraud"?Graphic3d_TypeOfShadingModel_Gouraud:Graphic3d_TypeOfShadingModel_Phong;
+    plane->CappingAspect()->SetShadingModel(model);
+    occ::handle<Graphic3d_CLight> light=new Graphic3d_CLight(Graphic3d_TypeOfLightSource_Directional);
+    light->SetDirection(gp_Dir(0,0,-1));
+    occ::handle<Graphic3d_LightSet> lights=new Graphic3d_LightSet(); lights->Add(light);
+    view->View()->SetLights(lights);
+  }
   if(mode=="cap-off") plane->SetCapping(false);
   if(mode=="cap-disabled") plane->SetOn(false);
   if(mode=="cap-moved") plane->SetEquation(NCollection_Vec4<double>(0,0,-1,-2));

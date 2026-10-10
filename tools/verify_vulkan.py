@@ -244,11 +244,13 @@ def capture_cases(
 
 def capture_modes(case_family: str) -> tuple[str, ...]:
     """Select an explicit fixture family without changing parity gates; capture_modes('lighting')."""
+    if case_family == "capping":
+        return CAPPING_MODES
     if case_family == "lighting":
         return LIGHTING_MODES
     if case_family != "all":
         raise ValueError(
-            f"received case family {case_family!r}; expected all or lighting"
+            f"received case family {case_family!r}; expected all, lighting or capping"
         )
     return (
         "default",
@@ -479,7 +481,9 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
         default=["lavapipe", "host"],
     )
     parser.add_argument("--host-icd", type=Path)
-    parser.add_argument("--case-family", choices=("all", "lighting"), default="all")
+    parser.add_argument(
+        "--case-family", choices=("all", "lighting", "capping"), default="all"
+    )
     performance_arguments(parser)
     return parser.parse_args(argv)
 

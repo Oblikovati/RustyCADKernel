@@ -218,3 +218,59 @@ fn persistent_parent_uses_local_caps_but_disables_global_fragment_planes() {
         );
     }
 }
+
+#[test]
+fn lit_caps_keep_native_normals_and_unlit_masks_for_every_legacy_model() {
+    for (model, shading) in [
+        (
+            Graphic3dTypeOfShadingModel::PhongFacet,
+            RenderShading::PhongFacet,
+        ),
+        (Graphic3dTypeOfShadingModel::Gouraud, RenderShading::Gouraud),
+        (Graphic3dTypeOfShadingModel::Phong, RenderShading::Phong),
+    ] {
+        assert_lit_cap_snapshot(model, shading);
+    }
+}
+
+#[test]
+fn cap_default_resolves_live_view_model_and_rejects_pbr() {
+    let (scene, device, plane) = setup("cap-basic");
+    plane
+        .capping_aspect()
+        .set_shading_model(Graphic3dTypeOfShadingModel::Default);
+    scene
+        .view
+        .set_shading_model(Graphic3dTypeOfShadingModel::Phong)
+        .unwrap();
+    scene.render_view().try_redraw().unwrap();
+    assert_eq!(
+        device.last_frame().draws()[2].lighting().unwrap().shading(),
+        RenderShading::Phong
+    );
+    scene
+        .view
+        .set_shading_model(Graphic3dTypeOfShadingModel::Unlit)
+        .unwrap();
+    scene.render_view().try_redraw().unwrap();
+    assert!(device.last_frame().draws()[2].lighting().is_none());
+    plane
+        .capping_aspect()
+        .set_shading_model(Graphic3dTypeOfShadingModel::Pbr);
+    assert!(scene.render_view().try_redraw().is_err());
+}
+
+fn assert_lit_cap_snapshot(model: Graphic3dTypeOfShadingModel, shading: RenderShading) {
+    let (scene, device, plane) = setup("cap-transformed");
+    plane.capping_aspect().set_shading_model(model);
+    scene.render_view().try_redraw().unwrap();
+    let frame = device.last_frame();
+    assert!(frame.draws()[1].lighting().is_none());
+    let cap = frame.draws()[2].lighting().unwrap();
+    assert_eq!(cap.shading(), shading);
+    assert_eq!(cap.normals(), &[[0., -1., 0.]; 12]);
+    let (plain, other, basic) = setup("cap-basic");
+    basic.capping_aspect().set_shading_model(model);
+    plain.render_view().try_redraw().unwrap();
+    assert_eq!(cap, other.last_frame().draws()[2].lighting().unwrap());
+}

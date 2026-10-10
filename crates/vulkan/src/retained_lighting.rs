@@ -33,7 +33,9 @@ pub(crate) fn apply_surface_lighting(
     }
     Ok(())
 }
-fn validate_unlit_surface(aspects: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
+pub(crate) fn validate_unlit_surface(
+    aspects: &dyn Graphic3dAspectsSource,
+) -> Result<(), RenderError> {
     if aspects.distinguish() || !aspects.to_use_vertex_color_for_back_faces() {
         return Err(rejected(
             (
@@ -69,7 +71,7 @@ fn surface_lighting(
     .with_vertex_colors(colored, !aspects.to_use_vertex_color_for_back_faces()))
 }
 
-fn resolved_model(
+pub(crate) fn resolved_model(
     aspect: &dyn Graphic3dAspectsSource,
     view: Graphic3dTypeOfShadingModel,
 ) -> Graphic3dTypeOfShadingModel {
@@ -78,7 +80,7 @@ fn resolved_model(
     }
     aspect.shading_model()
 }
-fn surface_algorithm(
+pub(crate) fn surface_algorithm(
     model: Graphic3dTypeOfShadingModel,
     normals: bool,
 ) -> Result<RenderShading, RenderError> {
@@ -113,7 +115,7 @@ fn validate_non_surface_lighting(
     }
     Ok(())
 }
-fn aspect_material(aspect: &dyn Graphic3dAspectsSource) -> RenderMaterial {
+pub(crate) fn aspect_material(aspect: &dyn Graphic3dAspectsSource) -> RenderMaterial {
     let front = aspect.front_material();
     let back = aspect.back_material();
     let mut material = RenderMaterial::default();

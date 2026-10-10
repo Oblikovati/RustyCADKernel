@@ -1,6 +1,6 @@
 # Martensite stencil capping
 
-Martensite renders opaque unlit sections of closed retained groups through the
+Martensite renders opaque Unlit, PhongFacet, Gouraud and Phong sections of closed retained groups through the
 existing `Graphic3d_ClipPlane` interface. The reference is OCCT
 `3d097a0328e71b826377d4814ab05ec3c3d23871`, principally
 `OpenGl_CappingAlgo.cxx`, `OpenGl_CappingPlaneResource.cxx`,
@@ -49,9 +49,14 @@ are respected. Mirrored structure winding is corrected for ordinary rendering;
 the native cap pass resets that correction. These states are dynamic Vulkan
 pipeline state and are covered by device checks and native captures.
 
+Lit caps use OCCT's constant local normal `(0, -1, 0)` and the plane orientation
+as ModelWorld. They retain structure persistence for the eye transform, resolve
+`Default` from the live view, and snapshot the inherited material and view lights.
+Stencil masks remain unlit. PBR, cap textures and custom shaders remain open.
+
 ## Verification
 
-The 25 native scene modes span six projection/extent/translation cases on each
+The original 25 native scene modes span six projection/extent/translation cases on each
 of lavapipe and the AMD Radeon 8060S. They include open/disabled/uncapped controls,
 plane changes, union/intersection chains, disabled children, object appearance,
 overlapping groups, group transforms/persistence, persistent structures, shadow
@@ -118,3 +123,18 @@ confirms all 10,857 verification input fingerprints match, all 144 renderer test
 executions pass, and both devices pass the nineteen runtime checks plus fifteen
 analytic clipping scenes with zero validation errors. The completed capping
 worktree and branch were deleted, reclaiming approximately 14 GiB of build cache.
+
+## Lit-section verification
+
+Three paired fixtures add directional lighting for PhongFacet, Gouraud and Phong,
+bringing the capping matrix to 28 modes and 168 comparisons per device. Run:
+
+```sh
+DISPLAY=:1 python3 tools/verify_vulkan.py --source ../OCCT \
+  --build target/occt-all-full --case-family capping \
+  --output target/lit-capping.json --captures target/lit-capping-captures
+```
+
+The release `lit-capping-plane-updates` workload measures the same 256×256 moving
+section with Phong shading. The harness requires this workload alongside existing
+timings; exact native RGBA and the 1e-6 depth threshold remain unchanged.
