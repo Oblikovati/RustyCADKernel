@@ -1,0 +1,64 @@
+{
+  "source_revision": "48437bc522c472832206fcd870e48f868e1d36cd",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "implementation_commit": "e3551dc2a",
+  "merge_commit": "94806d7e8",
+  "ledger_correction_commit": "48437bc52",
+  "rust_capture_revision": "94806d7e8f048f4fc97f2ae4a3664cc9b80acc03",
+  "new_api_mappings": 28,
+  "checks": {
+    "rust_tests_passed": 300,
+    "rust_test_targets": 35,
+    "new_direct_tests": 8,
+    "clippy_warnings_denied": true,
+    "cargo_fmt": true,
+    "tool_tests_passed": 7,
+    "numeric_cases_passed": 140721,
+    "new_numeric_cases": 1332,
+    "legacy_native_passed": 1,
+    "legacy_rust_passed": 1
+  },
+  "native_report_sha256": "c9aaf0403e5073f74b9a898e052ba9cd6d1013d757c37432182081cad380daa9",
+  "verified_source_hash_count": 12621,
+  "numeric_report": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKV3d",
+    "cases_passed": 140721,
+    "input_sha256": "eb1201c0e40c47ad670a2d547d31f9f2f43aea0f23ddc169e4a9e75bbf1a7661",
+    "output_sha256": "36f6bce4f071c770a653904a647faf927607a4c0a9526a13f2709554421b68d2",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0,
+    "shutdown_failure": {
+      "request": "v3_ais_context_shutdown 1 1 2",
+      "return_codes": {
+        "native": -6,
+        "rust": -6
+      }
+    }
+  },
+  "removed_worktree": "/tmp/rustycad-ais-detection",
+  "removed_branch": "porting/ais-detection",
+  "removed_generated_artifacts": true,
+  "unfinished_worktree": "/tmp/rustycad-linked-slot-recovery",
+  "unfinished_branch": "porting/linked-slot-recovery",
+  "unfinished_compile_errors_at_last_check": 39,
+  "full_port_complete": false,
+  "scope_note": "AIS point/axis detection, current/cycling owners, dynamic highlight slot reads and status enum. Includes real selector geometry, perspective/orthographic cameras, computed redraw, filters, selected/automatic/forced highlight flags, native partial failures and callback drawer replacement. Main native gate rerun; full workspace tests not repeated for this TKV3d change. Selection actions and shape-specific detection accessors remain open.",
+  "inventory": {
+    "api_declarations": 76041,
+    "api_done": 51467,
+    "api_open": 23600,
+    "api_partial": 974,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "unresolved_ledger_rows": 0,
+  "rust_capture_reuse_reason": "Only porting/parity.json changed after the Rust capture; all Rust source hashes remain current.",
+  "inventory_snapshot_sha256": {
+    "porting/api-inventory/rust-api.json.gz": "cdcec2f01c1baa69c59955ad14baf2d1321ebd0854cd4a1244e1ca520aeb7e4c",
+    "porting/api-inventory/api-crosswalk.json.gz": "4a6a1eff8d7fd2bf56e7ba8196411756dcb6b8778e938e24547316a91e359111",
+    "porting/api-inventory/metrics.json": "2f79f544e64d097d91aeb6bd903f6b57458e8b99b03d437f2b31380086d4e635"
+  }
+}
