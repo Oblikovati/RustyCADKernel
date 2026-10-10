@@ -44,7 +44,8 @@ fn main() {
     viewer_runtime::check_viewer_lifecycle();
     ais_runtime::check_ais_lifecycle();
     ais_removal_runtime::check_ais_removal();
-    println!("PASS: 6 Vulkan runtime checks; validation errors: 0");
+    surface_runtime::check_surface_lifecycle();
+    println!("PASS: 7 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -108,3 +109,6 @@ fn check_empty_depth_clear(renderer: &mut VulkanRenderer) {
 
 #[path = "support/device_options.rs"]
 mod device_options;
+
+#[path = "support/surface_runtime.rs"]
+mod surface_runtime;

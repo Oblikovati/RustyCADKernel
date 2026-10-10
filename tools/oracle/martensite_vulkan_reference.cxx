@@ -66,6 +66,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
   return structure;
 }
 #include "martensite_vulkan_ais.cxx"
+#include "martensite_vulkan_surfaces.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
   // The default-layer capture isolates geometry depth. The later native Topmost
@@ -128,6 +129,12 @@ static void run_scene(int argc, char **argv) {
     scene.context->Erase(scene.object, false);
   } else {
     auto structure = triangle_scene(viewer, offset);
+    if (mode.rfind("surface-", 0) == 0) {
+      structure->Clear();
+      auto group = structure->NewGroup();
+      group->SetGroupPrimitivesAspect(unlit_aspects());
+      group->AddPrimitiveArray(surface_vertices(mode));
+    }
     write_capture(view, width, height, argv[5], mode == "full");
     print_device(view);
     structure->Erase();

@@ -18,6 +18,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let driver = Graphic3dRenderDriver::new(device_options::validation_options())?;
     let scene = scene::ViewerScene::new(&driver);
     request.configure(&scene.window, &scene.view);
+    if request.mode.starts_with("surface-") {
+        surface_arrays::replace_surface(&*scene.group, &request.mode, 1);
+    }
     let transform = Transform3::translation_vector(Vector3::new(request.offset, 0., 0.));
     scene
         .structure
@@ -51,3 +54,6 @@ mod device_options;
 
 #[path = "support/capture_request.rs"]
 mod capture_request;
+
+#[path = "../tests/support/surface_arrays.rs"]
+mod surface_arrays;

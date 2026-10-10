@@ -36,23 +36,34 @@ impl PrimitiveSubmission {
         color: [f32; 4],
         matrix: [f32; 16],
     ) -> Result<Vec<TriangleDraw>, RenderError> {
-        if self.kind != Graphic3dTypeOfPrimitiveArray::Triangles {
-            return Err(rejected(
-                self.kind,
-                "triangle primitives in the current renderer slice",
-            ));
-        }
         let positions = self.positions()?;
+        let indices = self.read_indices(positions.len())?;
         let vertices = positions
             .into_iter()
             .enumerate()
-            .map(|(i, p)| self.vertex(i, p, color))
+            .map(|(index, position)| self.vertex(index, position, color))
             .collect::<Result<Vec<_>, _>>()?;
-        let indices = self.read_indices(vertices.len())?;
-        self.ranges(&indices)?
+        crate::primitive_ranges::primitive_ranges(&self.bounds, &indices, color)?
             .into_iter()
-            .map(|range| TriangleDraw::new(vertices.clone(), range, matrix))
+            .map(|range| self.range_draw(range, &vertices, matrix))
             .collect()
+    }
+    fn range_draw(
+        &self,
+        range: crate::primitive_ranges::PrimitiveRange,
+        vertices: &[RenderVertex],
+        matrix: [f32; 16],
+    ) -> Result<TriangleDraw, RenderError> {
+        let indices = crate::primitive_topology::triangle_indices(self.kind, &range.indices)?;
+        let colored = self
+            .attributes
+            .attribute_data(Graphic3dTypeOfAttribute::Color)
+            .is_some();
+        TriangleDraw::new(
+            range_vertices(vertices, range.color, colored),
+            indices,
+            matrix,
+        )
     }
     fn vertex(
         &self,
@@ -100,27 +111,8 @@ impl PrimitiveSubmission {
             })
             .collect()
     }
-    fn ranges(&self, indices: &[u32]) -> Result<Vec<Vec<u32>>, RenderError> {
-        if self.bounds.is_null() {
-            return Ok(vec![indices.to_vec()]);
-        }
-        validate_bounds(&self.bounds)?;
-        let mut ranges = Vec::new();
-        let mut offset = 0usize;
-        for index in 0..self.bounds.state().nb_bounds {
-            let count = bound_count(&self.bounds, index)?;
-            let end = offset
-                .checked_add(count)
-                .ok_or_else(|| rejected(count, "a bound within the index count"))?;
-            let range = indices
-                .get(offset..end)
-                .ok_or_else(|| rejected((offset, end), "a bound within the index count"))?;
-            ranges.push(range.to_vec());
-            offset = end;
-        }
-        Ok(ranges)
-    }
 }
+
 fn read_position(
     buffer: &dyn Graphic3dBufferSource,
     kind: Graphic3dTypeOfData,
@@ -141,27 +133,11 @@ fn read_position(
     Ok(position)
 }
 
-fn bound_count(bounds: &Graphic3dBoundBuffer, index: i32) -> Result<usize, RenderError> {
-    bounds
-        .bound(index)
-        .and_then(|v| usize::try_from(v).ok())
-        .ok_or_else(|| rejected(index, "a nonnegative bound count"))
-}
 fn validate_count(count: i32) -> Result<(), RenderError> {
     if count < 0 {
         return Err(rejected(count, "a nonnegative buffer element count"));
     }
     Ok(())
-}
-
-fn validate_bounds(bounds: &Graphic3dBoundBuffer) -> Result<(), RenderError> {
-    if bounds.state().has_colors {
-        return Err(rejected(
-            "bound colors",
-            "uncolored bounds in the current renderer slice",
-        ));
-    }
-    validate_count(bounds.state().nb_bounds)
 }
 
 fn validate_homogeneous_position(
@@ -182,4 +158,19 @@ fn validate_homogeneous_position(
         ));
     }
     Ok(())
+}
+
+fn range_vertices(
+    vertices: &[RenderVertex],
+    color: [f32; 4],
+    vertex_colors: bool,
+) -> Vec<RenderVertex> {
+    // OpenGl_PrimitiveArray::drawArray sets the bound's uniform; a vertex color still wins.
+    vertices
+        .iter()
+        .map(|vertex| RenderVertex {
+            color: if vertex_colors { vertex.color } else { color },
+            ..*vertex
+        })
+        .collect()
 }

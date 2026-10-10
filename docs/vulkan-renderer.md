@@ -43,7 +43,7 @@ Ash's dynamic loader dependency `libloading` 0.8.9 has a narrow ISC license exce
 in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
-triangle primitives, unit homogeneous `w` for Vec4 positions, opaque
+triangle lists, triangle strips and triangle fans, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
 transform persistence, structure clipping/highlighting, textures and custom shaders
@@ -105,7 +105,7 @@ python3 tools/verify_vulkan.py \
   --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-acceptance.json \
   --captures target/vulkan-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-removal-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-surfaces-baseline-2026-10-10.json
 ```
 
 The default matrix requires both `lavapipe` and `host`. It clears inherited
@@ -116,10 +116,12 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures 90 scenes spanning orthographic/perspective cameras,
+Each profile captures 126 scenes spanning orthographic/perspective cameras,
 three aspect ratios, translations, default/full-layer rendering and thirteen AIS
 lifecycle states: ordinary display/erase, mode/affinity changes, presentation
-clearing, permanent removal/recreation, bulk and selected-object transitions. It requires
+clearing, permanent removal/recreation, bulk and selected-object transitions. Six
+surface modes add indexed/unindexed strips and fans, bound colors and vertex-color
+precedence. It requires
 byte-identical RGBA and finite depth with maximum error `1e-6`.
 Color/depth PNGs, raw buffers and color/depth error masks remain in the capture
 directory even when comparisons fail. The JSON report records error bounds,
@@ -142,7 +144,8 @@ example alias. Removing the checkout also removes this cache.
 The same matrix builds `renderer_performance` in **release** mode, warms each
 workload for 20 samples and records 100 measured samples. Workloads are one triangle
 at 256×256, 256 triangle submissions at 256×256, repeated 128/256×256 resize,
-AIS display/erase and AIS remove/recreate at 256×256. Each AIS sample includes two completed frames
+AIS display/erase, AIS remove/recreate, and one indexed strip array with 256 colored
+bounds at 256×256. Each AIS sample includes two completed frames
 and selection deactivation/reactivation; other samples contain one frame. Every
 redraw must succeed. Erase reuses the presentation; removal must destroy it and
 force one new computation per redisplay.
@@ -153,13 +156,13 @@ the separate functional gate. Raw samples, median, mean, p95 and p99 are retaine
 is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
-The recorded host and lavapipe profiles use the checked-in five-workload baseline.
+The recorded host and lavapipe profiles use the checked-in six-workload baseline.
 Run functional and timing regression checks together:
 
 ```sh
 python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-followup.json --captures target/vulkan-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-removal-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-surfaces-baseline-2026-10-10.json
 ```
 
 For a new device/driver profile, omit `--performance-baseline` to collect its first
@@ -297,3 +300,33 @@ uses the same five-workload baseline. AIS display/erase median/p95 is 0.675/0.82
 on lavapipe and 3.338/3.803 ms on the host; removal/recreation is 0.794/0.954 ms
 and 4.327/5.004 ms. This passing run does not establish that the earlier timing
 variation is resolved. Final captures remain in `target/vulkan-null-object-main-captures`.
+
+## Surface primitive assembly
+
+Martensite lowers Graphic3d triangle strips and fans to indexed triangle lists,
+restarting assembly at each bound and preserving strip winding. Incomplete
+primitives at the end of a draw are ignored as in the legacy OpenGL path. Bound
+colors supply the uniform fallback; vertex colors take precedence. Geometry,
+indices and bound colors are read again for each frame so shared buffer updates
+remain visible. Bound counts and accesses are checked before submission.
+
+The replacement still supports opaque unlit surfaces only. Quads, polygons, lines,
+points, lighting, edge rendering and highlight rendering remain open. No complete
+legacy primitive capability family is claimed. The `surface-bounds` workload
+times extraction, submission and readback of 256 colored strip bounds in one
+Graphic3d array; the previous five workloads retain their original baselines.
+
+The [initial surface collection](../porting/runtime-evidence/vulkan-surfaces-initial-2026-10-10.json)
+passes 252 native image comparisons and fourteen runtime checks with zero validation
+errors. The [earlier fixture failure](../porting/runtime-evidence/vulkan-surfaces-fixture-failure-2026-10-10.json)
+is preserved: the native factory discards strip index capacity and triangle bound
+capacity, so the corrected oracle uses a subclass exposing the protected base
+constructor, matching the Rust fixture.
+
+Initial collection is not a regression pass. The [composite baseline](../porting/runtime-evidence/vulkan-surfaces-baseline-2026-10-10.json)
+initializes only the new workload; all five prior distributions and limits remain
+unchanged. The new workload's initial median/p95 is 3.437/3.816 ms on lavapipe and
+8.880/10.128 ms on the host. The final CPU suite passes 48 tests, including eight
+surface regressions; Clippy passes all targets with warnings denied. The harness
+suite passes 22 tests. The final bound-count error includes the offending stored
+value; integrated acceptance validates that final source revision.

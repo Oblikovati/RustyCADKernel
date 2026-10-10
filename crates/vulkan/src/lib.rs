@@ -10,6 +10,8 @@ pub use scene::{
 };
 mod graphic_group;
 mod primitive;
+mod primitive_ranges;
+mod primitive_topology;
 pub use graphic_group::Graphic3dDrawGroup;
 
 mod style;
