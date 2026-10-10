@@ -32,6 +32,14 @@ CASES = [
     (96, 48, 1, 2),
     (48, 96, 1, -3),
 ]
+SURFACE_MODES = (
+    "surface-strip",
+    "surface-strip-indexed",
+    "surface-fan",
+    "surface-fan-indexed",
+    "surface-bound-colors",
+    "surface-vertex-colors",
+)
 AIS_MODES = (
     "ais-displayed",
     "ais-erased",
@@ -201,7 +209,9 @@ def capture_cases(
     folder.mkdir(parents=True, exist_ok=True)
     results = []
     for case, mode in [
-        (case, mode) for case in CASES for mode in ("default", "full", *AIS_MODES)
+        (case, mode)
+        for case in CASES
+        for mode in ("default", "full", *AIS_MODES, *SURFACE_MODES)
     ]:
         try:
             results.append(capture_case(native, rust, folder, profile, case, mode))
@@ -224,6 +234,7 @@ def source_hashes() -> dict[str, str]:
             "tools/vulkan_capture_compare.py",
             "tools/oracle/martensite_vulkan_reference.cxx",
             "tools/oracle/martensite_vulkan_ais.cxx",
+            "tools/oracle/martensite_vulkan_surfaces.cxx",
         )
     )
     paths.extend(ROOT.glob("tools/vulkan_*.py"))

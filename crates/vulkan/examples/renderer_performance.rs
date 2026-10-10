@@ -31,6 +31,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         benchmark(&driver, name, draws, resize, warmup, samples);
     }
     ais_performance::benchmark(&driver, warmup, samples)?;
+    surface_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -84,3 +85,8 @@ fn timed_redraw(scene: &scene::ViewerScene, index: usize, resize: bool) -> f64 {
     scene.render_view().try_redraw().unwrap();
     start.elapsed().as_secs_f64() * 1000.
 }
+
+#[path = "../tests/support/surface_arrays.rs"]
+mod surface_arrays;
+#[path = "support/surface_performance.rs"]
+mod surface_performance;

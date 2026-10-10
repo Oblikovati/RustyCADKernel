@@ -1,6 +1,6 @@
 //! Runtime checks cover mutations on one live view and device, beyond static oracle scenes.
 #[path = "../../tests/support/viewer_scene.rs"]
-mod scene;
+pub(super) mod scene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkservice::graphic3d::*;
 pub fn check_viewer_lifecycle() {
