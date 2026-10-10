@@ -104,7 +104,8 @@ library build. Set `DISPLAY` to an existing X server (or run under `xvfb-run`):
 python3 tools/verify_vulkan.py \
   --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-acceptance.json \
-  --captures target/vulkan-captures
+  --captures target/vulkan-captures \
+  --performance-baseline porting/runtime-evidence/vulkan-removal-baseline-2026-10-10.json
 ```
 
 The default matrix requires both `lavapipe` and `host`. It clears inherited
@@ -152,13 +153,18 @@ the separate functional gate. Raw samples, median, mean, p95 and p99 are retaine
 is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
-The first run collects a baseline. To make timing regressions fail the gate:
+The recorded host and lavapipe profiles use the checked-in five-workload baseline.
+Run functional and timing regression checks together:
 
 ```sh
 python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-followup.json --captures target/vulkan-captures \
-  --performance-baseline target/vulkan-acceptance.json
+  --performance-baseline porting/runtime-evidence/vulkan-removal-baseline-2026-10-10.json
 ```
+
+For a new device/driver profile, omit `--performance-baseline` to collect its first
+distribution, then pass that receipt explicitly on subsequent runs. Collection
+alone does not establish a performance regression pass.
 
 Comparisons require identical device/driver identity and workload configuration.
 Default limits are 1.25× baseline median and 1.5× baseline p95, configurable with
@@ -257,3 +263,37 @@ retain their previous distributions and limits. The final status-handle lifetime
 adjustment is checked by the integrated main run against this initial collection.
 The wider AIS presentation catalog, highlighting and native window presentation
 remain open; no full legacy renderer capability family is marked complete.
+
+The [integrated removal receipt](../porting/runtime-evidence/vulkan-removal-main-2026-10-10.json)
+passes all 180 image comparisons and twelve runtime checks, with zero validation
+errors. All lavapipe timings and the new remove/recreate budgets pass. That run
+is **failed** because host `ais-display-erase` median is 5.409 ms
+against its unchanged 5.147 ms limit; p95 passes. That source revision also passes
+574 TKService/TKV3d Rust tests, 35 handle tests, 40 renderer tests, 22 harness tests
+and 142,540 native numeric comparisons. Captures remain in
+`target/vulkan-removal-main-captures`.
+
+[Paired diagnostics](../porting/runtime-evidence/vulkan-removal-host-timing-2026-10-10.json)
+retain raw samples and binary hashes. Three runs per unchanged binary crossed the
+same median limit once for the initial binary and twice for main. Medians ranged
+2.972–5.189 ms and 3.212–5.569 ms respectively. These measurements demonstrate
+within-binary variation, without isolating its cause or ruling out a code-related
+cost. They do not replace the failed integration receipt or relax its limits.
+The [two-file reproduction patch](../porting/runtime-evidence/ais-removal-initial-source.patch),
+applied to integration commit `0b4bc21d0`, reproduces the initial measurement's
+source hashes. Completed worktrees and their build caches were deleted.
+
+A [null-registration follow-up](../porting/runtime-evidence/tkv3d-null-object-walk-2026-10-10.json)
+preserves null keys in the protected object map during unfiltered ObjectsInside
+queries. ClearPrs and ClearGlobalPrs return immediately for a null object even if
+that key is registered. This brings the TKService/TKV3d suite to 576 passing tests
+and native numeric comparisons to 142,542. Both completed worktrees and their
+merged branches were deleted after integration.
+
+The [final null-key integration matrix](../porting/runtime-evidence/vulkan-null-object-main-2026-10-10.json)
+passes all 180 image comparisons, twelve runtime checks and all ten workload/device
+timing budgets, with zero validation errors. It records commit `b616efd436` and
+uses the same five-workload baseline. AIS display/erase median/p95 is 0.675/0.824 ms
+on lavapipe and 3.338/3.803 ms on the host; removal/recreation is 0.794/0.954 ms
+and 4.327/5.004 ms. This passing run does not establish that the earlier timing
+variation is resolved. Final captures remain in `target/vulkan-null-object-main-captures`.

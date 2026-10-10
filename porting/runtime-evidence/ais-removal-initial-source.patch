@@ -1,0 +1,28 @@
+--- a/crates/tkv3d/src/ais/context_clear_prs.rs
++++ b/crates/tkv3d/src/ais/context_clear_prs.rs
+@@ -20,10 +20,10 @@
+         mode: i32,
+         update: bool,
+     ) -> Result<(), Failure> {
+-        let status = self.fields.read().objects.seek(object).map(Handle::observe);
+-        let Some(status) = status else {
++        let status = self.object_status(object);
++        if status.is_null() {
+             return Ok(());
+-        };
++        }
+         if status.display_mode() == mode {
+             self.erase_registered_presentation(object, mode)?;
+         }
+--- a/crates/tkv3d/src/ais/context_remove.rs
++++ b/crates/tkv3d/src/ais/context_remove.rs
+@@ -56,8 +56,7 @@
+         object: &Handle<dyn AisInteractiveObject>,
+         update: bool,
+     ) -> Result<(), Failure> {
+-        let status = self.object_status(object);
+-        if object.is_null() || status.is_null() {
++        if object.is_null() || self.object_status(object).is_null() {
+             let manager = self.selection_manager().clone();
+             manager.remove(&object.cast())?;
+             return Ok(());
