@@ -3,7 +3,8 @@
 `rustycad_tkv3d::ais::AisPoint` ports the native `AIS_Point` geometry, appearance,
 selection and presentation behavior at OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 `StdPrsToolPoint` supplies live coordinates to the existing generic `Prs3dPoint`;
-`StdPrsPoint` names that specialization. `vertex()` builds a fresh topological
+`StdPrsPoint` names that specialization. Seventeen declarations, including the
+protected presentation hook, have explicit compiler-ID mappings. `vertex()` builds a fresh topological
 vertex from the current geometric point.
 
 The component handle stays live. Replacing it does not schedule redisplay.
@@ -56,3 +57,30 @@ python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-ais-point.json --captures target/vulkan-ais-point-captures \
   --performance-baseline porting/runtime-evidence/vulkan-surfaces-baseline-2026-10-10.json
 ```
+
+## Main integration evidence
+
+Merge `93724656d` passes 361 TKV3d tests, 81 Vulkan tests, 28 Python harness tests,
+Clippy with warnings denied, and all 150,886 native numeric comparisons. Both
+devices pass 13 runtime checks with zero validation errors. Existing capture
+statuses and all six established timing budgets are unchanged.
+
+| Profile | Strict captures | New point captures | 1,024-point median / p95 |
+| --- | ---: | ---: | ---: |
+| lavapipe | 484 / 582 | 49 / 144 | 0.872 / 1.031 ms |
+| native AMD | 415 / 582 | 24 / 144 | 0.370 / 0.630 ms |
+
+The [main receipt](../porting/runtime-evidence/vulkan-ais-point-main-2026-10-10.json)
+retains every strict failure. The 95 software and 120 native point failures remain
+unresolved renderer parity gaps; the earlier two AMD AIS line special cases stay
+separate and deferred. Five workloads, including point sprites, still have no
+accepted timing baseline. These outcomes do not claim renderer completion.
+
+All 4,656 raw buffers match the pre-integration worktree captures byte for byte.
+The [integration record](../porting/integration/2026-10-10/ais-point.json) links
+that audit and the cleanup receipt. The completed point worktree, merged branch
+and 25,962,254,227-byte checkout/build cache were deleted, without archiving.
+
+The refreshed inventory records 51,592 done, 974 partial and 23,475 open APIs
+out of 76,041 in scope, with zero unresolved ledger rows. Full port completion
+and renderer parity remain unproven.

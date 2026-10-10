@@ -4,7 +4,7 @@ The completion target is the pinned legacy OCCT OpenGL renderer's capabilities,
 implemented with Vulkan 1.3. Additional renderer features are outside this scope.
 Visualization and renderer work precede exchange-format expansion.
 
-`martensite-vulkan` now executes an offscreen opaque, unlit triangle and line path. It takes
+`martensite-vulkan` now executes an offscreen triangle, line and point-sprite paths. It takes
 live Graphic3d attribute/index/bound buffers, ordered group and primitive aspects,
 visibility, structure/group transforms and a camera snapshot. A project-owned
 `RenderBackend` interface receives validated immutable draws and returns top-left
@@ -19,8 +19,8 @@ now have native parity coverage. Loading prepares selection membership without
 computing or activating selection modes. AIS Display overloads and Erase now compute
 and reuse presentations, activate/deactivate selection modes and submit groups to
 Vulkan. A custom interactive triangle exercises display, erase, redisplay, display
-mode changes and per-view affinity. Highlight rendering and the wider built-in AIS
-presentation catalog remain open.
+mode changes and per-view affinity. Opaque color highlights and built-in AIS line/point
+presentations are implemented; broader highlighting and the presentation catalog remain open.
 
 Views currently render to virtual windows or offscreen framebuffer targets. RGB,
 RGBA, red-channel and depth dumps honor image row orientation and padding. Ordered
@@ -43,7 +43,7 @@ Ash's dynamic loader dependency `libloading` 0.8.9 has a narrow ISC license exce
 in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
-triangle lists/strips/fans and segments/polylines, unit homogeneous `w` for Vec4 positions, opaque
+triangle lists/strips/fans, segments/polylines and point sprites, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
 structure clipping, bounding-box highlighting, textures and custom shaders are not implemented.
@@ -116,13 +116,14 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures 240 scenes spanning orthographic/perspective cameras,
+Each profile captures 582 scenes spanning orthographic/perspective cameras,
 three aspect ratios, translations, default/full-layer rendering and thirteen AIS
 lifecycle states: ordinary display/erase, mode/affinity changes, presentation
 clearing, permanent removal/recreation, bulk and selected-object transitions. Six
 surface modes add indexed/unindexed strips and fans, bound colors and vertex-color
 precedence. Nineteen persistence modes add structure/group anchors, corner and
-camera-relative transforms, nested persistence, and near/far depth clamping. It requires
+camera-relative transforms, nested persistence, and near/far depth clamping. Line,
+standard-curve, AIS line and 24 AIS point modes complete the current matrix. It requires
 byte-identical RGBA and finite depth with maximum error `1e-6`.
 Color/depth PNGs, raw buffers and color/depth error masks remain in the capture
 directory even when comparisons fail. The JSON report records error bounds,
@@ -479,3 +480,8 @@ color highlights. Nested shadows share the original geometry while retaining
 independent transforms and visibility. See [AIS line datums](ais-line.md) for
 the 438-case device matrix, remaining rasterization differences and benchmark
 coverage. Bounding-box and transparent highlights are still open.
+
+Built-in [AIS point datums and sprites](ais-point.md) add standard/user markers,
+selection, detection and one-draw batching of 1,024 points. The 582-case matrix
+retains point raster/color differences as failures. The new `point-sprites`
+release benchmark accompanies the functional fixtures on both devices.
