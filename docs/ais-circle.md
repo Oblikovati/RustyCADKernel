@@ -58,3 +58,18 @@ distribution is collected separately from accepted performance baselines.
 
 Strict raster comparisons remain visible in the receipts. The two previously
 identified AMD infinite-line pixel-row special cases remain deferred and nonblocking.
+
+## Worktree verification
+
+The [full worktree receipt](../porting/runtime-evidence/vulkan-circle-worktree-2026-10-10.json)
+records 1,062 strict captures per profile: 688 pass on lavapipe and 608 on AMD.
+All 114 new circle captures pass on both profiles, and all 948 earlier statuses
+remain unchanged. Both profiles pass 18 runtime checks with zero validation
+errors. The eight accepted timing workloads remain within their existing budgets.
+The circle workload is initially collected at median/p95 0.737/0.924 ms on
+lavapipe and 0.509/0.678 ms on AMD; independent main validation is still pending.
+
+The complete TKV3d native oracle passes 154,984 numeric comparisons plus the
+noexcept-abort check. TKV3d and Vulkan all-target tests pass (487 tests combined),
+as do all-target Clippy and 31 Python harness tests. This evidence precedes main
+integration and does not claim complete renderer parity.
