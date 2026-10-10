@@ -30,6 +30,7 @@ The baseline is OCCT **8.1.0-dev1**, commit
 
 - [Porting plan and completion criteria](docs/porting-plan.md)
 - [Development and testing](docs/development.md)
+- [Tested Cargo packages and releases](docs/releases.md)
 - [Tooling versions and dependency research](docs/tooling-research.md)
 - [Source inventory](porting/inventory.json)
 - [Compiler API proof and remaining gaps](docs/api-coverage-proof.md)
