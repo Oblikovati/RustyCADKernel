@@ -1,0 +1,49 @@
+name: Native platform Boolean oracle
+on:
+  workflow_dispatch:
+    inputs:
+      fp_contract:
+        description: Native floating-point contraction policy
+        type: choice
+        options: ['off', 'on', 'fast']
+        default: 'off'
+permissions:
+  contents: read
+env:
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  CARGO_INCREMENTAL: '0'
+jobs:
+  macos-torus:
+    runs-on: macos-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7.0.1
+        with:
+          repository: Open-Cascade-SAS/OCCT
+          ref: 3d097a0328e71b826377d4814ab05ec3c3d23871
+          path: target/occt-source
+      - name: Configure pinned native modeling dependencies
+        env:
+          FP_CONTRACT: ${{ inputs.fp_contract }}
+        run: |
+          cmake -S target/occt-source -B target/native-platform \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_LIBRARY_TYPE=Shared \
+            -DBUILD_MODULE_Visualization=OFF -DBUILD_MODULE_ApplicationFramework=OFF \
+            -DBUILD_MODULE_DataExchange=OFF -DBUILD_MODULE_Draw=OFF \
+            -DBUILD_GTEST=OFF -DUSE_TBB=OFF -DUSE_FREETYPE=OFF \
+            -DCMAKE_CXX_FLAGS="-ffp-contract=$FP_CONTRACT"
+      - name: Build native Boolean and primitive toolkits
+        run: cmake --build target/native-platform --target TKBO TKPrim --parallel 3
+      - name: Capture native and Rust Boolean rows
+        env:
+          MARTENSITE_FP_CONTRACT: ${{ inputs.fp_contract }}
+        run: python3 tools/ci/capture_platform_torus.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: macos-torus-oracle
+          path: |
+            target/platform-torus/
+            target/native-platform/CMakeCache.txt

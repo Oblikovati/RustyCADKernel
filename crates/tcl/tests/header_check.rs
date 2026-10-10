@@ -7,8 +7,10 @@ use header_probe::{
 };
 use rustycad_tcl::sys::{self, Signature};
 
-const ALL_FUNCTION_TABLES: [&[Signature]; 3] = [
+const ALL_FUNCTION_TABLES: &[&[Signature]] = &[
     sys::TCL_SIGNATURES,
+    #[cfg(unix)]
+    sys::TCL_UNIX_SIGNATURES,
     sys::TCL_VARIADIC_SIGNATURES,
     sys::TK_SIGNATURES,
 ];
@@ -21,6 +23,7 @@ const OCCT_DRAW_FUNCTIONS: &[&str] = &[
     "Tcl_GetStdChannel",
     "Tcl_Eval",
     "Tcl_GetStringResult",
+    #[cfg(unix)]
     "Tcl_CreateFileHandler",
     "Tcl_AppendResult",
     "Tk_MainWindow",
@@ -55,6 +58,7 @@ const OCCT_DRAW_FUNCTIONS: &[&str] = &[
     "Tk_HandleEvent",
     "Tk_GetNumMainWindows",
     "Tk_Display",
+    #[cfg(unix)]
     "Tk_CreateFileHandler",
     "Tcl_UtfToUniCharDString",
     "Tcl_UnsetVar",
@@ -69,6 +73,7 @@ const OCCT_DRAW_FUNCTIONS: &[&str] = &[
     "Tcl_Gets",
     "Tcl_ExternalToUtfDString",
     "Tcl_EvalFile",
+    #[cfg(unix)]
     "Tcl_DeleteFileHandler",
     "Tcl_DeleteCommand",
     "Tcl_DeleteChannelHandler",
@@ -91,12 +96,13 @@ const MACRO_EXPANSIONS: &[(&str, &str)] = &[
         "sys::Tk_Display reads Tk_FakeWinHead::display",
     ),
     ("Tk_Main", "Tk_MainEx(argc, argv, proc, Tcl_CreateInterp())"),
+    #[cfg(unix)]
     ("Tk_CreateFileHandler", "Tcl_CreateFileHandler"),
 ];
 
 #[test]
 fn every_declaration_matches_the_installed_headers() {
-    let source = translation_unit(&ALL_FUNCTION_TABLES);
+    let source = translation_unit(ALL_FUNCTION_TABLES);
     if let Err(diagnostics) = compile(&source) {
         panic!("declarations disagree with tcl.h/tk.h:\n{diagnostics}\n--- probe ---\n{source}");
     }
@@ -187,4 +193,15 @@ fn compile_with(check: &str) -> Result<(), String> {
     compile(&format!(
         "#include <stddef.h>\n#include <tcl.h>\n#include <tk.h>\n{check}"
     ))
+}
+
+#[test]
+fn tk_window_xid_obeys_the_installed_platform_abi() {
+    let expected = if cfg!(all(windows, target_pointer_width = "64")) {
+        8
+    } else {
+        std::mem::size_of::<std::ffi::c_ulong>()
+    };
+    assert_eq!(std::mem::size_of::<sys::Window>(), expected);
+    assert!(compile_with(&size_check("Window", expected)).is_ok());
 }

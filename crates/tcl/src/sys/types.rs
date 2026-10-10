@@ -2,7 +2,7 @@
 //! zero-sized `#[repr(C)]` types that only appear behind pointers.
 #![allow(non_camel_case_types, non_snake_case)]
 
-use std::ffi::{c_char, c_int, c_ulong, c_ushort, c_void};
+use std::ffi::{c_char, c_int, c_ushort, c_void};
 use std::marker::{PhantomData, PhantomPinned};
 
 /// Declares opaque C structs that Rust only handles by pointer.
@@ -55,8 +55,12 @@ pub type Tk_Window = *mut Tk_Window_;
 pub type Tk_Uid = *const c_char;
 /// `Tcl_UniChar`: UTF-16 code unit in a default 8.6 build.
 pub type Tcl_UniChar = c_ushort;
-/// Xlib `Window`: an XID.
-pub type Window = c_ulong;
+/// Xlib `Window`: Tk's bundled X11/X.h makes XID 64-bit under `_WIN64`.
+#[cfg(all(windows, target_pointer_width = "64"))]
+pub type Window = u64;
+/// Xlib `Window`: an unsigned long XID outside Win64.
+#[cfg(not(all(windows, target_pointer_width = "64")))]
+pub type Window = std::ffi::c_ulong;
 /// `Tcl_FreeProc *` as passed to `Tcl_SetResult`.
 pub type Tcl_FreeProcPointer = *const Tcl_FreeProcTarget;
 

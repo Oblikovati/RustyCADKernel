@@ -105,6 +105,12 @@ foreign_functions! {
     fn Tcl_DeleteChannelHandler(chan: Tcl_Channel, proc_: Option<Tcl_ChannelProc>,
                                 client_data: ClientData) -> ();
     fn Tcl_DoOneEvent(flags: c_int) -> c_int;
+
+}
+
+#[cfg(unix)]
+foreign_functions! {
+    TCL_UNIX_SIGNATURES;
     /// Unix only (`tclPlatDecls`/`tclDecls` slot reserved on Windows); also `Tk_CreateFileHandler`.
     fn Tcl_CreateFileHandler(fd: c_int, mask: c_int, proc_: Option<Tcl_FileProc>,
                              client_data: ClientData) -> ();

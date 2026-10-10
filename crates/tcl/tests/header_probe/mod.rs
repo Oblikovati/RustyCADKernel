@@ -96,7 +96,9 @@ pub fn offset_checks(c_struct: &str, offsets: &[(&str, usize)]) -> String {
 
 /// The full translation unit for the given function tables.
 pub fn translation_unit(functions: &[&[Signature]]) -> String {
-    let mut text = String::from("#include <stddef.h>\n#include <tcl.h>\n#include <tk.h>\n");
+    let mut text = String::from(
+        "#include <stddef.h>\n#include <stdint.h>\n#include <tcl.h>\n#include <tk.h>\n",
+    );
     text += &sys::CALLBACK_SIGNATURES
         .iter()
         .map(callback_check)
@@ -108,7 +110,7 @@ pub fn translation_unit(functions: &[&[Signature]]) -> String {
         .iter()
         .map(|(n, v)| constant_check(n, *v))
         .collect::<String>();
-    text += "_Static_assert((long)TCL_VOLATILE == 1L && (long)TCL_STATIC == 0L, \"free procs\");\n";
+    text += "_Static_assert((intptr_t)TCL_VOLATILE == 1 && (intptr_t)TCL_STATIC == 0, \"free procs\");\n";
     text += &dstring_layout();
     text += &tk_window_layout();
     text

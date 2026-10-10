@@ -1,0 +1,13 @@
+{
+  "status": "native Windows runtime validation pending; Wine symbol-loader diagnostic only",
+  "wine_version": "9.0 (Ubuntu 9.0~repack-4build3)",
+  "source_revision": "448690150",
+  "target": "x86_64-pc-windows-gnu",
+  "baseline_stack_test": "1 passed, 3 failed: Windows backend returned None",
+  "independent_probe": {
+    "c_source": "#include <windows.h>\n#include <dbghelp.h>\nint initialize_native_symbols(void) { return SymInitialize(GetCurrentProcess(), NULL, TRUE); }\n",
+    "rust_entry": "unsafe extern \"C\" { fn initialize_native_symbols() -> i32; }\nfn main() { println!(\"native C initialization: {}\", unsafe { initialize_native_symbols() }); }\n",
+    "outcome": "access violation inside SymInitialize before any Martensite code; reproduces with a native C call linked into a Rust process"
+  },
+  "production_validation": "Linux stack tests pass, including concurrent captures; Windows and macOS all-target Clippy pass. Wine cannot provide a successful runtime verdict for DbgHelp on this host."
+}

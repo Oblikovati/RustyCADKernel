@@ -3,6 +3,7 @@
 //! `tools/verify_tkdraw_oracle.py --record`, which also compares both executables live).
 use std::path::{Path, PathBuf};
 use std::process::Command;
+mod platform_oracle;
 
 /// The oracle scripts, sorted.
 fn oracle_scripts() -> Vec<PathBuf> {
@@ -44,6 +45,7 @@ fn drawexe_matches_native_drawexe_on_every_oracle_script() {
     for script in &scripts {
         let expected = std::fs::read_to_string(script.with_extension("expected"))
             .expect("a recorded native output");
+        let expected = platform_oracle::expected_on_host(&expected);
         let actual = run_drawexe(script, &empty_default);
         if actual != expected {
             mismatches.push(format!(
