@@ -34,7 +34,7 @@ contexts are explicitly unsupported by this implementation slice.
 
 The backend requires a Vulkan 1.3 graphics device with dynamic rendering and
 synchronization2. It uses owned buffers, images, shader modules, pipelines, command
-pools and fences. The fixed unlit pipeline is shared across frames and resizes;
+pools and fences. The fixed unlit pipeline variants are shared across frames and resizes;
 viewport and layer depth policy remain dynamic. Submissions finish before resources are released. A negative
 viewport height and shader depth conversion preserve the camera's OpenGL clip
 convention in Vulkan's depth range. GLSL and its generated SPIR-V are checked in.
@@ -452,3 +452,12 @@ two have one differing edge pixel; common-color depth differences reach about
 remaining depth errors exceed that observed native range. Their cause is unresolved.
 These failures remain visible in the default acceptance command; camera capability
 is partial and this change is not a complete native parity pass.
+
+The [main receipt](../porting/runtime-evidence/vulkan-persistence-main-2026-10-10.json)
+at `97775a9f1` reproduces those 34 failures, passes all 16 GPU runtime checks with
+zero validation errors, and matches the worktree's source fingerprints. All
+59 Rust tests, 22 Python tests and Clippy pass. Six existing timing workloads pass
+unchanged budgets on both profiles; the seventh remains explicitly unmatched. Its
+main median/p95 is 0.940/1.089 ms on lavapipe and 1.764/2.034 ms on native AMD.
+The merged persistence worktree, branch and 9.9 GiB checkout/build cache were
+deleted after an ancestry, local-change and process-reference audit; none was archived.

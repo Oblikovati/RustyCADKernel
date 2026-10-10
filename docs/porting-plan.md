@@ -20,7 +20,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    rendering path before broadening unrelated porting. The initial offscreen path
    now runs through V3d views and AIS display/erase presentations. AIS lifecycle,
    bulk and selected-object transitions, removal, status queries and per-view affinity
-   have native comparisons; continue presentation
+   have native comparisons. Structure/group transform persistence is integrated as
+   partial: resolve the 34 native AMD capture differences before claiming its parity
+   or accepting the new persistence timing baseline. Then continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

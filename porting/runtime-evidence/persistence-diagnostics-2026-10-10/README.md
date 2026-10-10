@@ -28,7 +28,7 @@ results and raw buffers isolate this scene. Main captures remain under
 - `precise.json`: disabling contraction of the vertex matrix multiplication
   does not change it, including the common-color depth error above.
 - The native FBO requests D24/stencil, while Martensite and Oblikovati use D32.
-  `depth-format.json` and `depth-stencil.json` record explicit rejection of both
+  `depth-format.log` and `depth-stencil.log` record explicit rejection of both
   X8_D24 and D24_S8 by this RADV device's attachment format feature query.
   These are unsupported probes, not passing tests or proof of the cause.
 
