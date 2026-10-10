@@ -80,7 +80,7 @@ impl AisInteractiveContextFields {
         })
     }
 }
-/// Interactive context; construction and object ownership are native, while picking remains partial.
+/// Interactive context; construction, detection and dynamic highlighting follow native behavior.
 /// Example: `let context=AisInteractiveContext::new(&viewer)?`.
 pub struct AisInteractiveContext {
     transient: StandardTransient,

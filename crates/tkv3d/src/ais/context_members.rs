@@ -22,7 +22,7 @@ impl<T: ?Sized + RuntimeTyped> Deref for AisContextHandle<'_, T> {
     }
 }
 impl AisInteractiveContext {
-    fn borrow_handle<T: ?Sized + RuntimeTyped>(
+    pub(super) fn borrow_handle<T: ?Sized + RuntimeTyped>(
         &self,
         slot: usize,
         project: fn(&AisInteractiveContextFields, usize) -> &Handle<T>,
