@@ -38,7 +38,9 @@ static occ::handle<Graphic3d_AspectFillArea3d> unlit_aspects() {
   aspect->SetInteriorStyle(Aspect_IS_SOLID);
   aspect->SetShadingModel(Graphic3d_TypeOfShadingModel_Unlit);
   aspect->SetInteriorColor(Quantity_Color(1, 0, 0, Quantity_TOC_RGB));
-  aspect->SetPolygonOffsets(Aspect_POM_None, 0.0f, 0.0f);
+  // POM_None inherits the layer's (1, 1) bias; Martensite fixtures explicitly
+  // use POM_Off.
+  aspect->SetPolygonOffsets(Aspect_POM_Off, 0.0f, 0.0f);
   return aspect;
 }
 static occ::handle<Graphic3d_ArrayOfTriangles> triangle_vertices() {
@@ -66,6 +68,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
   return structure;
 }
 #include "martensite_vulkan_ais.cxx"
+#include "martensite_vulkan_persistence.cxx"
 #include "martensite_vulkan_surfaces.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
@@ -135,6 +138,8 @@ static void run_scene(int argc, char **argv) {
       group->SetGroupPrimitivesAspect(unlit_aspects());
       group->AddPrimitiveArray(surface_vertices(mode));
     }
+    if (mode.rfind("pers-", 0) == 0)
+      persistence_scene(structure, view, mode);
     write_capture(view, width, height, argv[5], mode == "full");
     print_device(view);
     structure->Erase();

@@ -45,7 +45,8 @@ fn main() {
     ais_runtime::check_ais_lifecycle();
     ais_removal_runtime::check_ais_removal();
     surface_runtime::check_surface_lifecycle();
-    println!("PASS: 7 Vulkan runtime checks; validation errors: 0");
+    persistence_runtime::check_persistence_lifecycle();
+    println!("PASS: 8 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -112,3 +113,6 @@ mod device_options;
 
 #[path = "support/surface_runtime.rs"]
 mod surface_runtime;
+
+#[path = "support/persistence_runtime.rs"]
+mod persistence_runtime;

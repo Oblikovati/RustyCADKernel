@@ -18,7 +18,7 @@ pub(crate) fn frame_for_view(
         .iter()
         .filter(|layer| layer_selected(view, layer.layer_id()));
     let passes = selected
-        .map(|layer| layer_pass(layer, &camera, view.identification()))
+        .map(|layer| layer_pass(layer, &camera, view.identification(), extent))
         .collect::<Result<_, _>>()?;
     let color = view.cview_base().fields.read().bg_color;
     let clear = [
@@ -39,13 +39,14 @@ fn layer_pass(
     layer: &Graphic3dLayer,
     camera: &Graphic3dCamera,
     view_id: i32,
+    extent: [u32; 2],
 ) -> Result<RenderLayer, RenderError> {
     let settings = layer.layer_settings();
     validate_layer(layer.layer_id(), &settings)?;
     let mut draws = Vec::new();
     for priority in layer.array_of_structures() {
         for weak in priority.iter() {
-            draws.extend(structure_draws(&weak.upgrade(), camera, view_id)?);
+            draws.extend(structure_draws(&weak.upgrade(), camera, view_id, extent)?);
         }
     }
     Ok(RenderLayer::new(
@@ -59,6 +60,7 @@ fn structure_draws(
     structure: &Handle<dyn Graphic3dCStructure>,
     camera: &Graphic3dCamera,
     view_id: i32,
+    extent: [u32; 2],
 ) -> Result<Vec<TriangleDraw>, RenderError> {
     if structure.is_null() {
         return Ok(vec![]);
@@ -67,7 +69,7 @@ fn structure_draws(
     retained
         .get()
         .ok_or_else(|| rejected(structure.object_address(), "a Martensite driver structure"))?
-        .draws(camera, view_id)
+        .draws(camera, view_id, extent)
 }
 fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     let params = view.rendering_params();

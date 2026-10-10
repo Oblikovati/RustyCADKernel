@@ -18,9 +18,10 @@
       "id": "camera",
       "status": "partial",
       "upstream": [
-        "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.cxx"
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.cxx",
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Structure.cxx"
       ],
-      "current_evidence_or_remaining_work": "Orthographic and perspective snapshots checked. Stereo, tiled/large-coordinate and persistent transforms remain pending.",
+      "current_evidence_or_remaining_work": "Orthographic/perspective snapshots and structure/group transform persistence reach Vulkan. Nineteen persistence modes: 240 total captures pass on lavapipe; native AMD retains 34 strict persistence failures (two one-pixel edges and depth errors up to approximately 4.1e-6 on common-color pixels). Viewport/local-anchor and live-camera isolation CPU regressions; depth-clamp/lifecycle GPU checks on both profiles. Structure CameraPers requires depthClamp. Native raster parity, stereo, tiled/large-coordinate behavior remain open. See vulkan-persistence-worktree-2026-10-10.json and persistence-diagnostics-2026-10-10.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-transform-persistence/target/persistence-diagnostics/check-one.py", line 10, in <module>
+    result=capture_case(native,Path('target/vulkan-harness/debug/examples/graphic3d_capture').resolve(),folder,profile,(64,64,0,0),sys.argv[2] if len(sys.argv)>2 else 'pers-zoom')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-transform-persistence/tools/verify_vulkan.py", line 197, in capture_case
+    output = run([str(executable), *args, str(vk), mode], profile.environment)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-transform-persistence/tools/verify_vulkan.py", line 85, in run
+    raise RuntimeError(
+RuntimeError: received exit 1 from ['/home/vmiguel/git/oblikovati-workspace/Martensite-transform-persistence/target/vulkan-harness/debug/examples/graphic3d_capture', '64', '64', '0', '0', '/home/vmiguel/git/oblikovati-workspace/Martensite-transform-persistence/target/persistence-diagnostics/vk-64-64-0-0-pers-axial', 'pers-axial']:
+
+Error: "capture failed: Err(RenderError(\"received (D24_UNORM_S8_UINT, ); expected attachment and transfer-source format support\"))"
+; expected success

@@ -7,14 +7,14 @@ use runtime::VulkanRuntime;
 /// Vulkan 1.3 offscreen renderer; `VulkanRenderer::new(VulkanOptions::default())?`.
 pub struct VulkanRenderer {
     runtime: std::sync::Arc<VulkanRuntime>,
-    pipeline: std::sync::Arc<pipeline::TrianglePipeline>,
+    pipeline: pipeline_variants::TrianglePipelines,
 }
 impl VulkanRenderer {
     /// Load Vulkan and select a capable graphics device; `VulkanRenderer::new(options)?`.
     pub fn new(options: VulkanOptions) -> Result<Self, RenderError> {
         let runtime = VulkanRuntime::create(options)?;
         // Formats and topology are fixed; viewport and layer depth policies are dynamic.
-        let pipeline = std::sync::Arc::new(pipeline::TrianglePipeline::new(&runtime)?);
+        let pipeline = pipeline_variants::TrianglePipelines::new(&runtime)?;
         Ok(Self { runtime, pipeline })
     }
     pub(crate) fn capture_limit(&self) -> u32 {
@@ -39,6 +39,7 @@ mod image;
 mod memory_selection;
 mod pipeline;
 mod pipeline_state;
+mod pipeline_variants;
 mod record;
 mod submission;
 impl RenderBackend for VulkanRenderer {

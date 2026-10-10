@@ -22,6 +22,7 @@ impl RenderStructure {
         &self,
         camera: &Graphic3dCamera,
         view_id: i32,
+        extent: [u32; 2],
     ) -> Result<Vec<TriangleDraw>, RenderError> {
         if !self.is_visible_in_view(view_id) {
             return Ok(vec![]);
@@ -39,7 +40,7 @@ impl RenderStructure {
                 retained
                     .get()
                     .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?
-                    .triangle_draws(camera)
+                    .triangle_draws_for_view(camera, extent)
             })
             .collect::<Result<Vec<_>, _>>()
             .map(|groups| groups.into_iter().flatten().collect())

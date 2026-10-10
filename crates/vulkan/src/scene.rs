@@ -22,6 +22,7 @@ pub struct TriangleDraw {
     pub(crate) vertices: Vec<RenderVertex>,
     pub(crate) indices: Vec<u32>,
     pub(crate) clip_transform: [f32; 16],
+    pub(crate) depth_clamp: bool,
 }
 impl TriangleDraw {
     /// Validate geometry and transforms before any GPU work; `TriangleDraw::new(vertices,indices,matrix)?`.
@@ -35,7 +36,12 @@ impl TriangleDraw {
             vertices,
             indices,
             clip_transform,
+            depth_clamp: false,
         })
+    }
+    /// Whether camera persistence clamps depth; `draw.depth_clamp()`.
+    pub fn depth_clamp(&self) -> bool {
+        self.depth_clamp
     }
     /// Read the column-major transform; `draw.clip_transform()`.
     pub fn clip_transform(&self) -> &[f32; 16] {
