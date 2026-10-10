@@ -302,7 +302,7 @@ impl FontFTFont {
             return false;
         };
         let face = font.face(self);
-        face_rec(face).is_some_and(|f| i64::from(glyph.index()) < f.num_glyphs)
+        face_rec(face).is_some_and(|f| i128::from(glyph.index()) < i128::from(f.num_glyphs))
     }
 }
 

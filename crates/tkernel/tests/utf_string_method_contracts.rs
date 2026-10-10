@@ -70,7 +70,11 @@ fn returning_unicode_assignment_and_nullable_conversion_preserve_encoding() {
         address
     );
     assert_eq!(text.to_c_string(), [0xE9, 0]);
-    text.assign_unicode(&[0x1F600 as WideChar]);
+    #[cfg(windows)]
+    let wide: [WideChar; 2] = [0xD83D, 0xDE00];
+    #[cfg(not(windows))]
+    let wide: [WideChar; 1] = [0x1F600];
+    text.assign_unicode(&wide);
     assert_eq!(text.to_c_string(), [0xD83D, 0xDE00, 0]);
     text.from_optional_unicode::<u8>(None, -1);
     assert_eq!((text.size(), text.length()), (0, 0));

@@ -41,6 +41,22 @@ jobs:
           echo "PKG_CONFIG_PATH=$shim_dir:$tcl_prefix/lib/pkgconfig" >> "$GITHUB_ENV"
           echo "DYLD_LIBRARY_PATH=$tcl_prefix/lib:$(brew --prefix freetype)/lib:$(brew --prefix fontconfig)/lib" >> "$GITHUB_ENV"
           PKG_CONFIG_PATH="$shim_dir:$tcl_prefix/lib/pkgconfig" pkg-config --modversion tcl8.6 tk8.6
+      - uses: actions/checkout@v7.0.1
+        if: runner.os == 'Windows'
+        with:
+          repository: tcltk/tcl
+          ref: 515167c897a7c8066abfbd71e8fe7bd8bf3569de # Tcl 8.6.18
+          path: target/tcl-source
+      - uses: actions/checkout@v7.0.1
+        if: runner.os == 'Windows'
+        with:
+          repository: tcltk/tk
+          ref: 6dbe68819aac4a22f6f7a143133ce26c5e8d2b05 # Tk 8.6.18
+          path: target/tk-source
+      - name: Install Windows Tcl/Tk prerequisites
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: tools/ci/install_windows_tcl.ps1
       - run: rustup show
       - run: python3 tools/check_rust_format.py
       - run: cargo lint

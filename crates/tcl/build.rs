@@ -8,6 +8,8 @@
 //! The include directory is exported as `RUSTYCAD_TCL_INCLUDE` for the header checks.
 use std::path::{Path, PathBuf};
 use std::process::Command;
+#[path = "build/pkg_config_path.rs"]
+mod pkg_config_path;
 
 /// The pkg-config module that describes the Tcl library.
 const TCL_MODULE: &str = "tcl8.6";
@@ -78,9 +80,11 @@ fn pkg_config(arguments: &[&str], extra_path: Option<&Path>) -> String {
     let mut command = Command::new("pkg-config");
     command.args(arguments);
     if let Some(directory) = extra_path {
-        let current = std::env::var("PKG_CONFIG_PATH").unwrap_or_default();
-        let joined = format!("{}:{current}", directory.display());
-        command.env("PKG_CONFIG_PATH", joined.trim_end_matches(':'));
+        let current = std::env::var_os("PKG_CONFIG_PATH").unwrap_or_default();
+        let joined = pkg_config_path::prepend(directory, &current).unwrap_or_else(|error| {
+            panic!("pkg-config path {directory:?}: expected native path list: {error}")
+        });
+        command.env("PKG_CONFIG_PATH", joined);
     }
     let output = command.output().unwrap_or_else(|error| {
         panic!("rustycad-tcl: cannot run pkg-config ({error}); install pkg-config")

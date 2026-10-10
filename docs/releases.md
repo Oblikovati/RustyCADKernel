@@ -105,3 +105,16 @@ X11 window APIs, examples, and their tests are Linux-specific, matching the
 existing Xlib dependency and display implementation. Other window and offscreen
 checks remain enabled on macOS and Windows. The matrix completes every platform
 even when another fails, so a macOS failure no longer cancels Windows diagnostics.
+
+Windows Tcl/Tk prerequisites are built with MSVC from the pinned upstream 8.6.18
+commits in the workflow. The installer supplies matching import-library metadata
+and runtime DLL/library paths. The Tcl build script preserves native path-list
+separators, and header checks use Clang on Windows while retaining the positive
+and negative ABI checks. Tcl header tests pass locally; hosted Windows linking
+and execution remain a required release gate.
+
+The Windows cross-check also exposed C `long`/wide-character assumptions:
+FreeType point sizes now reject overflow before conversion, glyph comparisons
+preserve the native width, and Vulkan rejects an XID that cannot fit its ABI.
+Test fixtures encode Windows wide characters as UTF-16 and apply their existing
+platform guards consistently. No renderer parity threshold was relaxed.

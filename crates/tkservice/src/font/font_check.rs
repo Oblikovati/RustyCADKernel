@@ -121,6 +121,8 @@ pub(crate) fn check_font(
     let mut style = c_text(record.style_name).unwrap_or_default();
     let aspect = aspect_of(record.style_flags, &mut style)?;
     let font = FontSystemFont::new(&family_with_style(family, style)?)?;
+    // FreeType uses C long, which is 32-bit on Windows and 64-bit on LP64 hosts.
+    #[allow(clippy::unnecessary_cast)]
     font.set_font_path(aspect, path, opened_id as i32)?;
     font.set_single_stroke_font(font.font_key().starts_with("olf "));
     fonts.push(Handle::new(font));

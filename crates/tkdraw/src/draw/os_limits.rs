@@ -46,6 +46,7 @@ extern "C" fn cpu_limit_handler(_signal: c_int) {
 
 /// Writes `Process killed by CPU limit  (N sec)\n` into `buffer` without allocating
 /// (the handler may not allocate); returns the length.
+#[cfg(any(unix, test))]
 fn limit_message(limit: i64, buffer: &mut [u8; 64]) -> usize {
     let mut length = 0;
     let mut push = |bytes: &[u8]| {

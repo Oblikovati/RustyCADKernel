@@ -1,6 +1,6 @@
+//! Thread locales isolate native conversion tests from other test threads.
 #![cfg(all(unix, not(target_os = "android")))]
 #![allow(unsafe_code)]
-//! Thread locales isolate native conversion tests from other test threads.
 use rustycad_tkernel::ncollection::{UtfString, UtfStringTool};
 use rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry;
 use std::ffi::CStr;

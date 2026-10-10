@@ -200,6 +200,7 @@ fn format_variadic_slice() -> (Vec<u8>, usize) {
     (output, count)
 }
 
+#[cfg(all(target_os = "linux", target_pointer_width = "64"))]
 fn format_long_integer_lengths() -> (Vec<u8>, usize) {
     format_buffer(
         b"%ld|%ld|%lu|%#018lx",

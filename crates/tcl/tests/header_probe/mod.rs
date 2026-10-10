@@ -149,26 +149,25 @@ fn tk_window_layout() -> String {
 /// Compiles `source` with `-fsyntax-only -Werror`; returns the compiler diagnostics on failure.
 pub fn compile(source: &str) -> Result<(), String> {
     let include = format!("-I{}", env!("RUSTYCAD_TCL_INCLUDE"));
-    let mut child = Command::new("cc")
+    let compiler = if cfg!(windows) { "clang" } else { "cc" };
+    let mut child = Command::new(compiler)
         .args(["-x", "c", "-std=c11", "-fsyntax-only", "-Wall", "-Werror"])
-        .args([
-            "-Wincompatible-pointer-types",
-            "-Wdiscarded-qualifiers",
-            "-Wno-unused-variable",
-        ])
+        .args(["-Wincompatible-pointer-types", "-Wno-unused-variable"])
         .arg(include)
         .arg("-")
         .stdin(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
-        .expect("the header check needs a C compiler named `cc`");
+        .unwrap_or_else(|error| {
+            panic!("C compiler {compiler}: expected runnable header checker: {error}")
+        });
     child
         .stdin
         .take()
         .expect("piped")
         .write_all(source.as_bytes())
         .expect("write the probe");
-    let output = child.wait_with_output().expect("cc finishes");
+    let output = child.wait_with_output().expect("header compiler finishes");
     if output.status.success() {
         Ok(())
     } else {

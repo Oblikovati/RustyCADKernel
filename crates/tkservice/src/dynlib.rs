@@ -2,11 +2,14 @@
 //! visualization-design.md section 2): `dlopen` once, `dlsym` per entry point, never closed.
 //! On a platform without `dlopen` every library is reported as missing.
 #![allow(unsafe_code)]
-use std::ffi::{CString, c_void};
+#[cfg(unix)]
+use std::ffi::CString;
+use std::ffi::c_void;
 
 /// An open shared library; `DynamicLibrary::open(&["libfreetype.so.6"])`.
 pub(crate) struct DynamicLibrary {
     /// The `dlopen` handle (an address; the library stays loaded for the process).
+    #[cfg(unix)]
     handle: usize,
 }
 
