@@ -65,3 +65,11 @@ Lavapipe passes 490/690 strict captures and AMD passes 421/690; the new text cas
 pass 6/108 on each device (empty text), with the other 102 retained as failures.
 The established six workload budgets pass on both devices. Six newer workloads,
 including text, remain unmatched against the accepted baseline.
+
+The [main receipt](../porting/runtime-evidence/vulkan-text-main-2026-10-10.json)
+at `e13bc26f0` reproduces those results. All
+[5,520 raw buffers](../porting/runtime-evidence/text-main-buffer-audit-2026-10-10.json)
+match the worktree. Main's text median/p95 is 1.747/2.246 ms on lavapipe and
+0.739/0.878 ms on native AMD. The merged worktree, branch and 27.6 GB checkout/build
+cache were [deleted](../porting/integration/2026-10-10/vulkan-text-cleanup.json)
+after ancestry, local-change, artifact and process checks; nothing was archived.

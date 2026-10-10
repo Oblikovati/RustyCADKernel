@@ -1,0 +1,109 @@
+{
+  "scope": "Martensite retained Vulkan text, glyph atlases, native captures and performance workload",
+  "implementation_commit": "77f5846658edad5bc6116251d744edf0abc605d8",
+  "main_verified": "e13bc26f0cf09b03572f149290ffac58cba8a56f",
+  "numeric_cases": 3142,
+  "toolkit_cpu_tests": 592,
+  "vulkan_all_target_tests": 92,
+  "python_harness_tests": 28,
+  "clippy": "passed all targets -D warnings",
+  "strict_renderer_status": "failed",
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "passed": 490,
+      "total": 690,
+      "new_text_passed": 6,
+      "text_total": 108,
+      "prior_capture_status_changes": [],
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration",
+        "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+        "received unmatched workload point-sprites; expected matching baseline configuration",
+        "received unmatched workload text-glyphs; expected matching baseline configuration"
+      ],
+      "runtime": "PASS: 14 Vulkan runtime checks; validation errors: 0",
+      "text_performance": {
+        "median_ms": 1.7474245000000002,
+        "p95_ms": 2.2458970000000003,
+        "samples": 100,
+        "warmup": 20
+      }
+    },
+    {
+      "profile": "host",
+      "passed": 421,
+      "total": 690,
+      "new_text_passed": 6,
+      "text_total": 108,
+      "prior_capture_status_changes": [],
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration",
+        "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+        "received unmatched workload point-sprites; expected matching baseline configuration",
+        "received unmatched workload text-glyphs; expected matching baseline configuration"
+      ],
+      "runtime": "PASS: 14 Vulkan runtime checks; validation errors: 0",
+      "text_performance": {
+        "median_ms": 0.7390375,
+        "p95_ms": 0.8784860000000001,
+        "samples": 100,
+        "warmup": 20
+      }
+    }
+  ],
+  "unmerged_branches": [
+    "port/mmgropt-resource-storage",
+    "porting/linked-slot-recovery",
+    "wip/codex-array-trivial-resize-phase",
+    "wip/codex-bvh-perf-diag",
+    "wip/codex-continuity3d-periodic",
+    "wip/codex-dynamic-storage-noop-domains",
+    "wip/codex-hlr-line-tool",
+    "wip/codex-indexed-map-borrowed-add",
+    "wip/codex-linear-vector-trivial-insert",
+    "wip/codex-osd-concrete-iterator-wrapper",
+    "wip/codex-packed-map-extent-boundaries",
+    "wip/codex-recovery-import",
+    "wip/codex-recovery-inc",
+    "wip/codex-recovery-views",
+    "wip/codex-shape-fix-add-pcurve-oracle",
+    "wip/codex-shapefix-wirevertex",
+    "wip/codex-split-curve3d-continuity",
+    "wip/codex-tkernel-arc-validation",
+    "wip/codex-tkoffset-boundary-next",
+    "wip/codex-tkoffset-face-data",
+    "wip/codex-tkoffset-get-analyse",
+    "wip/codex-ubtree-filler-stream-check"
+  ],
+  "remaining_work": [
+    "Text placement/raster parity: 102/108 strict new captures fail per profile; no threshold changes",
+    "Additional text display and alpha modes, font/platform configurations and exhaustive text persistence coverage",
+    "Existing two AMD infinite-line pixel-row special cases remain deferred",
+    "Labeled datum presentations including DsgPrs_XYZAxisPresentation and AIS_Axis",
+    "Native window presentation and broader legacy renderer capabilities",
+    "Six new performance workloads lack accepted baselines"
+  ],
+  "prior_unfinished_failure_note": "linked-slot-recovery previously reported 39 compile errors; not rechecked in this slice.",
+  "next_slice_notes": [
+    "AIS_Axis::Compute uses the first DsgPrs_XYZAxisPresentation::Add overload, inheriting the line aspect for labels; the current text MaskBlend-only check rejects this. Extend native alpha-mode support with functional/performance fixtures before claiming labeled-axis GPU coverage.",
+    "Prs3dArrow, Prs3dDatumAspect and StdPrsCurve prerequisites already exist. Port both DsgPrs_XYZAxisPresentation overloads and AIS_Axis with native appearance/selection comparisons; do not resume the deferred line-row diagnosis."
+  ],
+  "inventory": {
+    "api_declarations": 76041,
+    "api_done": 51592,
+    "api_open": 23475,
+    "api_partial": 974,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56,
+    "new_explicit_mappings": 0,
+    "unresolved_ledger_rows": 0,
+    "capture_validation": "31 pinned rustdoc crate artifacts captured and verified at main e13bc26f0 before inventory publication; source fingerprints current."
+  }
+}
