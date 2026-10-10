@@ -1,0 +1,143 @@
+{
+  "scope": "Martensite Vulkan 1.3 native X11 presentation, actual drawable captures, lifecycle regression tests and presentation performance workloads",
+  "implementation_commits": [
+    "6b555967f",
+    "5c24315f8"
+  ],
+  "main_verified": "90fce366549d695af6c5ecacf6166c1c03c993a9",
+  "tkservice_cpu_tests": 231,
+  "tkv3d_cpu_tests": 373,
+  "vulkan_all_target_tests": 105,
+  "python_harness_tests": 30,
+  "clippy": "passed all targets -D warnings",
+  "strict_renderer_status": "failed: pre-existing raster gaps; deferred pixel-row special cases remain nonblocking",
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "full_strict_passed": 574,
+      "full_strict_total": 948,
+      "window_passed": 36,
+      "window_total": 36,
+      "prior_capture_status_changes": [],
+      "runtime": "PASS: 17 Vulkan runtime checks; validation errors: 0",
+      "performance_gate": {
+        "profile": "lavapipe",
+        "accepted_workloads": 8,
+        "accepted_budget_failures": [],
+        "unmatched_workloads": [
+          "received unmatched workload line-bounds; expected matching baseline configuration",
+          "received unmatched workload persistence-groups; expected matching baseline configuration",
+          "received unmatched workload curve-presentations; expected matching baseline configuration",
+          "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+          "received unmatched workload point-sprites; expected matching baseline configuration",
+          "received unmatched workload text-glyphs; expected matching baseline configuration",
+          "received unmatched workload ais-axis-appearance; expected matching baseline configuration",
+          "received unmatched workload plane-trihedron-updates; expected matching baseline configuration"
+        ]
+      },
+      "window_performance": [
+        {
+          "workload": "window-present",
+          "median_ms": 0.5648344999999999,
+          "p95_ms": 0.730792,
+          "samples": 100,
+          "warmup": 20
+        },
+        {
+          "workload": "window-resize-present",
+          "median_ms": 1.7940335,
+          "p95_ms": 16.044038999999998,
+          "samples": 100,
+          "warmup": 20
+        }
+      ]
+    },
+    {
+      "profile": "host",
+      "full_strict_passed": 494,
+      "full_strict_total": 948,
+      "window_passed": 36,
+      "window_total": 36,
+      "prior_capture_status_changes": [],
+      "runtime": "PASS: 17 Vulkan runtime checks; validation errors: 0",
+      "performance_gate": {
+        "profile": "host",
+        "accepted_workloads": 8,
+        "accepted_budget_failures": [],
+        "unmatched_workloads": [
+          "received unmatched workload line-bounds; expected matching baseline configuration",
+          "received unmatched workload persistence-groups; expected matching baseline configuration",
+          "received unmatched workload curve-presentations; expected matching baseline configuration",
+          "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+          "received unmatched workload point-sprites; expected matching baseline configuration",
+          "received unmatched workload text-glyphs; expected matching baseline configuration",
+          "received unmatched workload ais-axis-appearance; expected matching baseline configuration",
+          "received unmatched workload plane-trihedron-updates; expected matching baseline configuration"
+        ]
+      },
+      "window_performance": [
+        {
+          "workload": "window-present",
+          "median_ms": 0.363367,
+          "p95_ms": 0.775986,
+          "samples": 100,
+          "warmup": 20
+        },
+        {
+          "workload": "window-resize-present",
+          "median_ms": 0.968546,
+          "p95_ms": 1.359786,
+          "samples": 100,
+          "warmup": 20
+        }
+      ]
+    }
+  ],
+  "raw_buffer_audit": "../../runtime-evidence/window-main-buffer-audit-2026-10-10.json",
+  "inventory": {
+    "captured_and_verified_crates": 31,
+    "verified_revision": "90fce366549d695af6c5ecacf6166c1c03c993a9",
+    "unresolved_ledger_rows": 0,
+    "totals_by_scope_port": {
+      "api_declarations": 76041,
+      "api_done": 51636,
+      "api_open": 23431,
+      "api_partial": 974,
+      "gtests_mapped": 7969,
+      "gtests_not_applicable": 2,
+      "gtests_unmapped": 480,
+      "toolkits": 56
+    }
+  },
+  "unmerged_branches": [
+    "port/mmgropt-resource-storage",
+    "porting/linked-slot-recovery",
+    "wip/codex-array-trivial-resize-phase",
+    "wip/codex-bvh-perf-diag",
+    "wip/codex-continuity3d-periodic",
+    "wip/codex-dynamic-storage-noop-domains",
+    "wip/codex-hlr-line-tool",
+    "wip/codex-indexed-map-borrowed-add",
+    "wip/codex-linear-vector-trivial-insert",
+    "wip/codex-osd-concrete-iterator-wrapper",
+    "wip/codex-packed-map-extent-boundaries",
+    "wip/codex-recovery-import",
+    "wip/codex-recovery-inc",
+    "wip/codex-recovery-views",
+    "wip/codex-shape-fix-add-pcurve-oracle",
+    "wip/codex-shapefix-wirevertex",
+    "wip/codex-split-curve3d-continuity",
+    "wip/codex-tkernel-arc-validation",
+    "wip/codex-tkoffset-boundary-next",
+    "wip/codex-tkoffset-face-data",
+    "wip/codex-tkoffset-get-analyse",
+    "wip/codex-ubtree-filler-stream-check"
+  ],
+  "remaining_work": [
+    "Broader legacy OpenGL capability parity",
+    "Other native window systems and device/surface-loss recovery",
+    "Strict raster parity; the two AMD infinite-line pixel-row cases remain deferred",
+    "Eight newer performance workloads still lack accepted baselines"
+  ],
+  "prior_unfinished_failure_note": "linked-slot-recovery previously reported 39 compile errors; not rechecked in this slice."
+}

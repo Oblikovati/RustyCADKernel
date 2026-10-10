@@ -1,0 +1,39 @@
+{
+  "scope": "Independent main distributions compared with six established and two new window baselines; broader workload coverage remains incomplete.",
+  "baseline": "vulkan-window-baseline-2026-10-10.json",
+  "current": "vulkan-window-main-2026-10-10.json",
+  "median_ratio": 1.25,
+  "p95_ratio": 1.5,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "accepted_workloads": 8,
+      "accepted_budget_failures": [],
+      "unmatched_workloads": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration",
+        "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+        "received unmatched workload point-sprites; expected matching baseline configuration",
+        "received unmatched workload text-glyphs; expected matching baseline configuration",
+        "received unmatched workload ais-axis-appearance; expected matching baseline configuration",
+        "received unmatched workload plane-trihedron-updates; expected matching baseline configuration"
+      ]
+    },
+    {
+      "profile": "host",
+      "accepted_workloads": 8,
+      "accepted_budget_failures": [],
+      "unmatched_workloads": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration",
+        "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+        "received unmatched workload point-sprites; expected matching baseline configuration",
+        "received unmatched workload text-glyphs; expected matching baseline configuration",
+        "received unmatched workload ais-axis-appearance; expected matching baseline configuration",
+        "received unmatched workload plane-trihedron-updates; expected matching baseline configuration"
+      ]
+    }
+  ]
+}

@@ -52,7 +52,7 @@ DISPLAY=:1 cargo run -p martensite-vulkan --example window_acceptance --locked
 DISPLAY=:1 python3 tools/verify_vulkan.py --source ../OCCT \
   --build target/occt-all-full --output target/vulkan-window.json \
   --captures target/vulkan-window-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-surfaces-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-window-baseline-2026-10-10.json
 ```
 
 The default matrix requires lavapipe and the native host. Two additional release
@@ -61,3 +61,39 @@ presentation, with 20 warmup and 100 measured samples. They include scene
 extraction, allocation, acquisition, rendering, blit, GPU readback and presentation
 queue submission. They do not measure scanout latency. Timing validation remains
 disabled; the functional checks require synchronization validation.
+
+## Integrated evidence
+
+Main `90fce3665` passes 105 Vulkan, 231 TKService and 373 TKV3d Rust tests,
+30 Python harness tests and Clippy with warnings denied. Each device passes all
+36 new window comparisons and 17 runtime checks with zero validation errors.
+The full worktree matrix retains 574/948 strict matches on lavapipe and 494/948
+on AMD; all 912 earlier statuses are unchanged. The focused main run independently
+repeats the new cases, all runtime checks and all performance workloads.
+
+| Workload | Lavapipe median / p95 | AMD median / p95 |
+| --- | --- | --- |
+| Present, 256×256 | 0.565 / 0.731 ms | 0.363 / 0.776 ms |
+| Resize and present | 1.794 / 16.044 ms | 0.969 / 1.360 ms |
+
+The six established timing budgets and both new window budgets pass against the
+[combined baseline](../porting/runtime-evidence/vulkan-window-baseline-2026-10-10.json).
+Eight other workloads still have unmatched baselines; full strict renderer
+acceptance remains incomplete. Lavapipe resize samples include presentation
+retirement waits: the worktree median was 7.817 ms with p95 16.041 ms. The raw
+samples preserve this observed variation; these measurements are end-to-end latency.
+
+The [integration receipt](../porting/integration/2026-10-10/vulkan-window.json),
+[full worktree matrix](../porting/runtime-evidence/vulkan-window-worktree-2026-10-10.json),
+[focused main checks](../porting/runtime-evidence/vulkan-window-main-2026-10-10.json)
+and [timing comparison](../porting/runtime-evidence/vulkan-window-performance-2026-10-10.json)
+record the separate scopes. All 7,728 raw buffers match retained main artifacts:
+7,296 earlier captures and 432 newly captured window buffers. The
+[buffer audit](../porting/runtime-evidence/window-main-buffer-audit-2026-10-10.json)
+accounts for the captures before deleting the completed worktree and branch;
+[cleanup evidence](../porting/integration/2026-10-10/vulkan-window-cleanup.json)
+records deletion without archiving.
+
+The refreshed 31-crate inventory remains at 51,636 done, 974 partial and 23,431
+open APIs out of 76,041, with zero unresolved ledger rows. Renderer replacement
+work does not inflate mapped OCCT API counts.
