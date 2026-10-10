@@ -1,4 +1,12 @@
 //! The AIS package: interactive objects and the interactive context.
+mod animation;
+mod animation_members;
+mod animation_playback;
+pub use animation::{
+    AisAnimation, AisAnimationBase, AisAnimationFields, AisAnimationProgress, AisAnimationSource,
+    AisAnimationState, AisAnimationTimer,
+};
+pub use animation_members::{AisAnimationChildren, AisAnimationMembers};
 mod selection_scheme;
 
 pub use selection_scheme::AisSelectionScheme;
@@ -94,3 +102,8 @@ pub use plane_trihedron::AisPlaneTrihedron;
 mod circle;
 mod circle_presentations;
 pub use circle::AisCircle;
+
+pub use animation_playback::{
+    ais_animation_pause, ais_animation_start, ais_animation_start_timer, ais_animation_stop,
+    ais_animation_update, ais_animation_update_timer, ais_animation_update_with_children,
+};

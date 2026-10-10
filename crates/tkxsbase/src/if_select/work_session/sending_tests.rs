@@ -243,13 +243,20 @@ fn session_share_out_and_files() {
         b"out/m.igs",
         "the extension mark is present, the prefix one not"
     );
-    // OSD_Path uses native platform syntax; Windows does not parse this Unix path.
+    // OCCT 3d097a0 Analyse_DOS rejects drive colons during GiveFileRoot validation.
     let root_fixture = if cfg!(windows) {
-        r"C:\tmp\dir\name.stp"
+        r"\tmp\dir\name.stp"
     } else {
         "/tmp/dir/name.stp"
     };
     assert_eq!(session.give_file_root(root_fixture).as_bytes(), b"name");
+    if cfg!(windows) {
+        let qualified = r"C:\tmp\dir\name.stp";
+        assert_eq!(
+            session.give_file_root(qualified).as_bytes(),
+            qualified.as_bytes()
+        );
+    }
     session.evaluate_file().unwrap();
     assert!(session.nb_files() == 1 && session.file_name(1).unwrap().as_bytes() == b"out/part.stp");
     assert!(session.file_model(1).unwrap().is_some() && session.file_model(2).unwrap().is_null());
@@ -440,4 +447,26 @@ fn session_sending() {
         IFSelectReturnStatus::RetVoid
     );
     assert!(!empty.send_split().unwrap());
+}
+
+#[test]
+fn give_file_root_windows_fixture_uses_valid_unqualified_path() {
+    use rustycad_tkernel::osd::{CadPath, PathSyntax, SysType};
+    let fixture = r"\tmp\dir\name.stp";
+    assert!(CadPath::is_valid_on(
+        fixture,
+        SysType::Default,
+        PathSyntax::Windows
+    ));
+    assert_eq!(
+        CadPath::with_syntax(fixture, PathSyntax::Windows)
+            .name()
+            .as_bytes(),
+        b"name"
+    );
+    assert!(!CadPath::is_valid_on(
+        r"C:\tmp\dir\name.stp",
+        SysType::Default,
+        PathSyntax::Windows
+    ));
 }

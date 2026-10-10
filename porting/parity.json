@@ -575272,6 +575272,466 @@
       "rust_item": "rustycad_tkv3d::ais::AisCircle::<rustycad_tkv3d::ais::AisInteractiveObject>::signature",
       "status": "implemented",
       "notes": "Pinned circle datums and adaptive deflection curves: native exact point/callback, appearance/selection state and exception comparisons; all public overloads. Point3 groups Match XYZ. Vulkan lifecycle/capture and geometry-update performance fixtures; see docs/ais-circle.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::SetTimer(const class opencascade::handle<class Media_Timer> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "0077916315abeb2fa4d22fbfdcd98b066814d08c0bee2158c39fdc7161ede401",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::set_timer",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::update(const struct AIS_AnimationProgress &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "07980fa3d97677d5361a71b9d62e6a87269d4057650478c847b7906421446b9b",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::update_own",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Update(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "0886bfee856078deec2b2d92a2a58b0c39e8a2a53f649e4013c0e39c10f77638",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::update",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::SetOwnDuration(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "0c9e583f2e11813cfa81f2a37be95819346f7079696a88bedee9bf9a3715ccf4",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::set_own_duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::AnimationState_Started",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "1409ab0ca96af11e598fc290e2b142ee5302031d701d6f80707eca3c8215dad6",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationState::Started",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Timer() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "1fc94577605f2f8d38cc95be9a733468665560e1f840034e041fe845f2a2e8d4",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::timer",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::updateWithChildren(const struct AIS_AnimationProgress &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "2e3099fdef20f9c867124bf93ff9e63b528a3daad0d0fc12ea08cd1870a7b9e1",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::update_with_children",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_AnimationProgress::LocalNormalized",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "2e5d659fe2605e23cacfc4c4258503356725bcab445db65b02480ba6db1263d7",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationProgress::local_normalized",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myOwnDuration",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "30040fabc76359a8d5f0458414c2c76cc7705ae95cd7d0f877c01683ace9cc2c",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::own_duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::StartTimer(double, double, bool, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "3c9cd8faf1879ef7d0f539cadb12c260e887172b880f601480c79127fd0dbc8b",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::start_timer",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Stop()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "4063528a07d4dadacac00f3108c639e1dd9aa06096367f52fadcf2c551d9a5c9",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::stop",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Start(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "44edd1a734463441af923cad59c622812d1552a2cbdee9d82943dbb919f75abe",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::start",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Add(const class opencascade::handle<class AIS_Animation> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "58e9324233c4e7b09e733673998e4e60cfed892ad759e45c65dc3363c32f1fe9",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::add",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::AnimationState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "592dc87ede49ca1a2a6c75ad82c5609e7a4b4e41b4d2fca324f241a4d7c913ca",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationState",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::UpdateTimer()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "5a094cf93d4746da215d9948c791dae3647ae82a635d4dff1d3d53401c1904b9",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::update_timer",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Duration() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "61c8466a691233b2b5b10738c43a036f824b8cf477fb2e579e10cdb2b440daff",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Replace(const class opencascade::handle<class AIS_Animation> &, const class opencascade::handle<class AIS_Animation> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "6470129c7c15aeee14edf76f7c4f1f8786b76debbf126709f4ffa168422a3696",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::replace",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myPtsStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "68aedcc857b2d119d4000f7aa839ab28562fd5abdd4fd00a261817a26ba5091e",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::start_pts",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Name() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "68f16b96246c607564633b6dad0d95f9d123cc08d0bc80eb1685f704842c045a",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::name",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Children() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "6c52f54ea5ef411ee4cc3ae58932e9f0782619e716df098d260cf9981b69f253",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::children",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::UpdateTotalDuration()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "77bdc5021d86de3f428624f126e9f20fc6d79581af36b955efb35d4cad65c8cb",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::update_total_duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Remove(const class opencascade::handle<class AIS_Animation> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "78aa9865db5b37821d7d0e9298c0b9b9f8b74e051ba59b2840eae5ab71c6ae8c",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::remove",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myChildrenDuration",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "7e3e597f2d67b5d7404a9f2d4ccb9c9820f0e996ee46550a7624f654b4b37e3b",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::children_duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myTimer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "83cd95753d6cfe458c50f8874f158023b22d9515574c1b8291dd9423a8b681ae",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::timer",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myAnimations",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "868d5d88ecda46dcf473d6fb31a2e6c0482882b8d0ca630c198c288d0c01b068",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::children",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Find(const class TCollection_AsciiString &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "8e5e8db01595e059ca552b18d43d0b061aa67820bb67fae6b31ed7657b6543e5",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::find",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Clear()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "9a4270f992b373ab6f229121e53978ed4a4d1a63a37b9a0256b28d9d1237c1c4",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::clear",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "a09912828eabd8dd2e5637999abdff83c374a70f9958a608db60e8b7d0d78537",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimation",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_AnimationProgress::Pts",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "a7a4bbe845ade120b4fc1a1404ba5daba2be58fcac6d0c71fa3cfbfbed87b171",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationProgress::pts",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::ElapsedTime() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "ad51b02f5436e26d42ef1c86ca82fd871df2beb5a94d88cfed1b9fca4a3e1b77",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::elapsed_time",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::Pause()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "b19308d03c2da79491f7457ae41bfc966b9a9cda11baad9ccaec008bd0e7a963",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationSource::pause",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myName",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "bfb95ccf7f508118fb16116b0e66aecf214066ffe7527b69bbd08980f0aeafdc",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::name",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_AnimationProgress::AIS_AnimationProgress()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "c009c09405e7e902aac371fe82b6e47d21eccc38e0ff1920743001ac813dc6a3",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationProgress::default",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::StartPts() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "c0170f3cc5200a631ec488f5457b77e2ba93828e0c427a5008a788dbddf7c415",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::start_pts",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::SetStartPts(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "c29a5325c4c992378d11da2418479c2fa5b87b9be59e879000cc800b4b93b2b5",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::set_start_pts",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_AnimationProgress",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "c3d6df61985cb9940d961a588d54a20e44b8688728f4a81938d712ec0021acf7",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationProgress",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::AIS_Animation(const class TCollection_AsciiString &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "c9ca050a942be74cac25d458b59941fe6a65c3a4d667d940e4d3dfcf2de65ad1",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimation::new",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::CopyFrom(const class opencascade::handle<class AIS_Animation> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "cb32d68f58d2ea3ce36ef219e57dd2ce89fc9696bd8feb1d826cf8b105294724",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::copy_from",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_AnimationTimer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_AnimationTimer.hxx",
+      "source_sha256": "5f8b68ce7bb7d86751f085f6394e96639e6a96f0bdb6a34bdf9fcb76f2161222",
+      "cpp_declaration_id": "d52c3f01e44984380e38001070e1f3a92d9bc562ae64e2570919520c9551633b",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationTimer",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::IsStopped()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "d60210e60db74d5236676681fcca4925aa783046113e09e3f33fdce3d63d4630",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::is_stopped",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::OwnDuration() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "d958d44a47ac7f9ded1f2d5ece4e22d21609e1109ad886506cc5571e420b770a",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::own_duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::myState",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "dd666a19d31fe4499b03034736626677ca04267bfa8d655409a837c14725ae0b",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationFields::state",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::AnimationState_Paused",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "e9b5763ab0d2158c4020df99e8d0408fcd6ca51cb59920831747c740cfe8312f",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationState::Paused",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::HasOwnDuration() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "edc0f22dad6b72b36f3c17fef5a05c3c2500d2da176139c076cb8a2ee4c90f02",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationMembers::has_own_duration",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_Animation::AnimationState_Stopped",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "f7e3e604ccec86192cda8f177ff5b219745e150e8ee089e1220dbe7f86b671bd",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationState::Stopped",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_AnimationProgress::LocalPts",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Animation.hxx",
+      "source_sha256": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+      "cpp_declaration_id": "fe00ad0c874f77c9de4e87e70edab1a15b8d3176e0d0436d74a062b7657e9941",
+      "rust_item": "rustycad_tkv3d::ais::AisAnimationProgress::local_pts",
+      "status": "implemented",
+      "notes": "Martensite AIS timeline at OCCT 3d097a0. Native callback ordering, duration caches, child identity edits, self-copy and frozen timer parity; injected clocks and reentrant child traversal tests. Camera/object animation subclasses remain separate open work. See docs/v3d-design.md."
     }
   ],
   "tests": [
