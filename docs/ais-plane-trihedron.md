@@ -66,3 +66,19 @@ pass respectively. All 828 earlier capture statuses are unchanged. The six
 established timing budgets pass, while eight newer workloads have no accepted
 baseline. The new plane workload's median/p95 is 0.555/0.674 ms on lavapipe and
 0.456/0.630 ms on AMD. Overall strict renderer acceptance remains failed.
+
+The [main integration receipt](../porting/integration/2026-10-10/plane-trihedron.json)
+records verification at `6c5978905`. Main repeats the native, CPU and Clippy checks,
+and all [7,296 raw color/depth buffers](../porting/runtime-evidence/plane-trihedron-main-buffer-audit-2026-10-10.json)
+match the worktree byte for byte. Main plane workload median/p95 is 0.548/0.696 ms
+on lavapipe and 0.481/0.626 ms on AMD. The
+[cleanup receipt](../porting/integration/2026-10-10/plane-trihedron-cleanup.json)
+confirms deletion of the merged worktree, branch and 27,351,297,902 bytes of build
+and probe artifacts, after checking ancestry, local changes and active processes.
+Nothing was archived.
+
+The refreshed compiler inventory uniquely resolves all 15 new mappings and reports
+zero unresolved ledger rows. The defined scope now contains 51,636 done, 974 partial
+and 23,431 open APIs out of 76,041 declarations. All 31 Rust crate artifacts were
+captured and verified at the integration revision above. Full port completion
+and complete renderer parity remain unproven.
