@@ -61,8 +61,11 @@ not inflate the mapped OCCT API count.
 
 ## Integrated evidence
 
+The latest [AIS integration receipt](../porting/runtime-evidence/vulkan-ais-main-2026-10-10.json)
+passes the functional and performance gates on both devices; details appear below.
+
 The [main acceptance receipt](../porting/runtime-evidence/vulkan-offscreen-b7e4abc9b.json)
-records the original offscreen slice. The current viewer acceptance receipt is
+records the original offscreen slice. The first viewer acceptance receipt is
 [vulkan-view-driver-2026-10-10.json](../porting/runtime-evidence/vulkan-view-driver-2026-10-10.json):
 30 Rust tests, four Vulkan runtime checks per profile and twelve native comparison
 scenes per profile. Both lavapipe and this host's AMD Radeon 8060S (RADV) execute
@@ -217,3 +220,12 @@ retains the original three workload distributions unchanged and initializes only
 AIS medians were 0.675 ms on lavapipe and 4.117 ms on the native host, per two-frame
 cycle. This custom unlit triangle does not establish built-in AIS shape, highlight
 or complete OpenGL renderer parity.
+
+The [integrated main receipt](../porting/runtime-evidence/vulkan-ais-main-2026-10-10.json)
+passes all 84 image comparisons, ten runtime checks and all eight workload/device
+timing comparisons against that composite baseline. Vulkan CPU tests pass 38 cases
+and the Python harness passes 22. Native captures remain in
+`target/vulkan-ais-main-captures`. AIS two-frame medians/p95 were 0.709/1.117 ms
+on lavapipe and 5.118/5.790 ms on the host. Earlier failed timing receipts remain
+valid historical observations; this passing run does not establish a cure for
+previous timing variation.
