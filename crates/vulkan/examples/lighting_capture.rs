@@ -26,12 +26,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let driver = Graphic3dRenderDriver::new(device_options::validation_options())?;
     let scene = lighting_scene::LightingScene::new(&driver, &request.mode);
     request.configure(&scene.base.window, &scene.base.view);
-    scene
-        .base
-        .structure
-        .set_transformation(&Handle::new(Datum3::new(Transform3::translation_vector(
-            Vector3::new(request.offset, 0., 0.),
-        ))));
+    translate_lighting_scene(&scene, request.offset);
     scene.base.view.redraw();
     scene.mutate(&request.mode);
     view_capture::capture_view(
@@ -41,12 +36,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         &request.prefix,
         false,
     )?;
+    check_lighting_validation(&driver);
+    println!("MARTENSITE_DEVICE={}", driver.device_name());
+    scene.base.view.remove();
+    Ok(())
+}
+
+fn translate_lighting_scene(scene: &lighting_scene::LightingScene, offset: f64) {
+    let transform = Transform3::translation_vector(Vector3::new(offset, 0., 0.));
+    scene
+        .base
+        .structure
+        .set_transformation(&Handle::new(Datum3::new(transform)));
+}
+fn check_lighting_validation(driver: &Graphic3dRenderDriver) {
     assert!(
         driver.validation_errors().is_empty(),
         "{:?}",
         driver.validation_errors()
     );
-    println!("MARTENSITE_DEVICE={}", driver.device_name());
-    scene.base.view.remove();
-    Ok(())
 }

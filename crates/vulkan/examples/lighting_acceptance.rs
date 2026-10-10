@@ -43,7 +43,13 @@ fn quad(
     } else {
         vec![0, 1, 2, 0, 2, 3]
     };
-    let lighting = RenderLighting::new(
+    PrimitiveDraw::new(vertices.to_vec(), indices, identity_clip())
+        .unwrap()
+        .with_lighting(quad_lighting(shading, lights, colored))
+        .unwrap()
+}
+fn quad_lighting(shading: RenderShading, lights: RenderLightSet, colored: bool) -> RenderLighting {
+    RenderLighting::new(
         vec![[0., 0., 1.]; 4],
         material(),
         identity_clip(),
@@ -53,11 +59,7 @@ fn quad(
     )
     .unwrap()
     .with_lights(lights)
-    .with_vertex_colors(colored, false);
-    PrimitiveDraw::new(vertices.to_vec(), indices, identity_clip())
-        .unwrap()
-        .with_lighting(lighting)
-        .unwrap()
+    .with_vertex_colors(colored, false)
 }
 fn check_constant(renderer: &mut VulkanRenderer, draw: PrimitiveDraw, expected: [u8; 4]) {
     let capture = renderer
@@ -94,6 +96,27 @@ fn check_clipped(renderer: &mut VulkanRenderer, shading: RenderShading) {
         assert_eq!(capture.depth[index], if retained { 0.5 } else { 1. });
     }
 }
+fn check_algorithm(renderer: &mut VulkanRenderer, shading: RenderShading) {
+    use Graphic3dTypeOfLightSource::{Ambient, Directional};
+    let back_color = if shading == RenderShading::PhongFacet {
+        [137, 0, 137, 255]
+    } else {
+        [0, 0, 137, 255]
+    };
+    for (kind, back, colored, expected) in [
+        (Directional, false, false, [137, 0, 137, 255]),
+        (Directional, true, false, back_color),
+        (Ambient, false, false, [0, 137, 137, 255]),
+        (Directional, false, true, [0, 0, 137, 255]),
+    ] {
+        check_constant(
+            renderer,
+            quad(shading, lights(kind), back, colored),
+            expected,
+        );
+    }
+    check_clipped(renderer, shading);
+}
 fn main() {
     let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
     for shading in [
@@ -101,57 +124,7 @@ fn main() {
         RenderShading::Gouraud,
         RenderShading::Phong,
     ] {
-        check_constant(
-            &mut renderer,
-            quad(
-                shading,
-                lights(Graphic3dTypeOfLightSource::Directional),
-                false,
-                false,
-            ),
-            [137, 0, 137, 255],
-        );
-        check_constant(
-            &mut renderer,
-            quad(
-                shading,
-                lights(Graphic3dTypeOfLightSource::Directional),
-                true,
-                false,
-            ),
-            if shading == RenderShading::PhongFacet {
-                [137, 0, 137, 255]
-            } else {
-                [0, 0, 137, 255]
-            },
-        );
-        check_constant(
-            &mut renderer,
-            quad(
-                shading,
-                lights(Graphic3dTypeOfLightSource::Ambient),
-                false,
-                false,
-            ),
-            [0, 137, 137, 255],
-        );
-        check_constant(
-            &mut renderer,
-            quad(
-                shading,
-                lights(Graphic3dTypeOfLightSource::Directional),
-                false,
-                true,
-            ),
-            [0, 0, 137, 255],
-        );
-    }
-    for shading in [
-        RenderShading::PhongFacet,
-        RenderShading::Gouraud,
-        RenderShading::Phong,
-    ] {
-        check_clipped(&mut renderer, shading);
+        check_algorithm(&mut renderer, shading);
     }
     assert!(
         renderer.validation_errors().is_empty(),
