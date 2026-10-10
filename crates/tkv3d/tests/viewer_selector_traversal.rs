@@ -84,3 +84,17 @@ fn view_affinity_is_ignored_only_for_the_all_views_sentinel() {
     assert_eq!(scene.selector.nb_picked(), 1);
     assert_eq!(scene.selector.picked(1).unwrap(), scene.owners[1]);
 }
+
+#[test]
+fn replacing_camera_in_matches_changes_later_persistent_entity_results() {
+    let scene = TraversalScene::new(TraversalConfig {
+        entity_persistence: 1,
+        flags: 16,
+        count: 6,
+        ..TraversalConfig::default()
+    });
+    scene.selector.traverse_sensitives(-1).unwrap();
+    assert_eq!(*scene.events.read(), [12, 13, 14, 3, 4, 5]);
+    assert_eq!(scene.selector.nb_picked(), 1);
+    assert_eq!(scene.selector.picked(1).unwrap(), scene.owners[4]);
+}

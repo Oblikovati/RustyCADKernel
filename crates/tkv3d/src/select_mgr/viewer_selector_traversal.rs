@@ -20,14 +20,14 @@ pub trait SelectMgrViewerSelectorTraversalMembers: SelectMgrViewerSelectorSource
         }
         let global = base.selecting_volume.read().clone();
         let mut view = SelectMgrTraversalView::from_volume(&global);
-        if let Some(camera) = view.camera.get() {
+        if let Some(camera) = view.camera().get() {
             set_selector_camera_frame(base, camera);
         }
         base.selectable_objects
-            .update_bvh(&view.camera, view.size)?;
+            .update_bvh(&view.camera(), view.size)?;
         for subset in SelectMgrBvhSubset::ALL {
             if base.selectable_objects.is_subset_empty(subset)
-                || (view.camera.is_null() && subset != SelectMgrBvhSubset::ThreeD)
+                || (view.camera().is_null() && subset != SelectMgrBvhSubset::ThreeD)
             {
                 continue;
             }

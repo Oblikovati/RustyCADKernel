@@ -7,11 +7,11 @@ use rustycad_tkernel::{
 use rustycad_tkmath::gp::{GeneralTransform3, Xyz};
 use rustycad_tkservice::graphic3d::*;
 /// View arguments shared by object traversal; matrix values follow native subset order.
-/// Example: `SelectMgrTraversalView { camera, projection, world_view, size: [800,600] }`.
+/// Example: `SelectMgrTraversalView::new(camera, projection, world_view, [800,600])`.
 #[derive(Clone)]
 pub struct SelectMgrTraversalView {
-    /// The original viewer camera.
-    pub camera: Handle<Graphic3dCamera>,
+    camera: Handle<Graphic3dCamera>,
+    camera_source: Handle<dyn SelectMgrBaseIntersector>,
     /// Projection for the current BVH subset.
     pub projection: Mat4<f64>,
     /// World-view matrix for the current BVH subset.
@@ -20,6 +20,29 @@ pub struct SelectMgrTraversalView {
     pub size: [i32; 2],
 }
 impl SelectMgrTraversalView {
+    /// Use a caller-owned camera value, as in a direct native traverseObject call.
+    /// Example: `SelectMgrTraversalView::new(camera, projection, world_view, [800,600])`.
+    pub fn new(
+        camera: Handle<Graphic3dCamera>,
+        projection: Mat4<f64>,
+        world_view: Mat4<f64>,
+        size: [i32; 2],
+    ) -> Self {
+        Self {
+            camera,
+            camera_source: Handle::default(),
+            projection,
+            world_view,
+            size,
+        }
+    }
+    /// Read the retained original camera slot without holding a guard over callbacks.
+    /// Example: `view.camera().is_null()`.
+    pub fn camera(&self) -> Handle<Graphic3dCamera> {
+        self.camera_source
+            .get()
+            .map_or_else(|| self.camera.clone(), |source| source.camera())
+    }
     pub(super) fn from_volume(volume: &SelectMgrSelectingVolumeManager) -> Self {
         let camera = volume.camera();
         let (width, height) = volume.window_size().unwrap_or((0, 0));
@@ -32,12 +55,11 @@ impl SelectMgrTraversalView {
         if let Some(camera) = camera.get() {
             let _ = camera.world_view_proj_state();
         }
-        Self {
-            camera,
-            projection,
-            world_view,
-            size: [width, height],
-        }
+        let mut view = Self::new(Handle::default(), projection, world_view, [width, height]);
+        // OCCT 3d097a0 TraverseSensitives binds Camera() by reference to the original
+        // intersector slot: callbacks can replace its handle during later traversal.
+        view.camera_source = volume.active_volume().clone();
+        view
     }
     pub(super) fn subset_volume(
         &mut self,
@@ -50,7 +72,7 @@ impl SelectMgrTraversalView {
         if subset != SelectMgrBvhSubset::OrthoThreeDPersistent {
             return Ok(global.clone());
         }
-        let camera = Handle::new(self.camera.copy_members());
+        let camera = Handle::new(self.camera().copy_members());
         camera.set_projection_type(Graphic3dCameraProjection::Orthographic);
         self.world_view = camera.orientation_matrix();
         self.projection = camera.projection_matrix();
@@ -63,7 +85,7 @@ impl SelectMgrTraversalView {
     ) -> Result<SelectMgrSelectingVolumeManager, Failure> {
         let inverse = screen_selection_transform(&self.world_view)?;
         let camera = Handle::new(Graphic3dCamera::default());
-        camera.copy_mapping_data(&self.camera);
+        camera.copy_mapping_data(&self.camera());
         camera.set_identity_orientation()?;
         if subset == SelectMgrBvhSubset::OrthoTwoDPersistent {
             camera.set_projection_type(Graphic3dCameraProjection::Orthographic);
@@ -96,4 +118,53 @@ fn screen_selection_transform(world: &Mat4<f64>) -> Result<GeneralTransform3, Fa
         world.get_value(2, 3),
     ));
     Ok(transform)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustycad_tkmath::gp::{Axis1, Point2};
+
+    #[test]
+    fn direct_object_frame_keeps_its_camera_value_and_matrices() {
+        let camera = Handle::new(Graphic3dCamera::default());
+        let projection = camera.projection_matrix();
+        let world = camera.orientation_matrix();
+        let view = SelectMgrTraversalView::new(camera.clone(), projection, world, [80, 60]);
+        assert_eq!(view.camera(), camera);
+        assert_eq!(view.projection, projection);
+        assert_eq!(view.world_view, world);
+        assert_eq!(view.size, [80, 60]);
+    }
+
+    #[test]
+    fn root_frame_does_not_keep_a_replaced_camera_alive() {
+        let mut manager = SelectMgrSelectingVolumeManager::new();
+        manager.init_point_selecting_volume(Point2::default());
+        let camera = Handle::new(Graphic3dCamera::default());
+        let weak = camera.downgrade();
+        manager.set_camera(&camera).unwrap();
+        drop(camera);
+        let view = SelectMgrTraversalView::from_volume(&manager);
+        manager
+            .set_camera(&Handle::new(Graphic3dCamera::default()))
+            .unwrap();
+        assert!(weak.upgrade().is_null());
+        assert_eq!(view.camera(), manager.camera());
+    }
+
+    #[test]
+    fn root_frame_observes_original_camera_slot_after_manager_replacement() {
+        let mut manager = SelectMgrSelectingVolumeManager::new();
+        manager.init_point_selecting_volume(Point2::default());
+        let original = manager.active_volume().clone();
+        let view = SelectMgrTraversalView::from_volume(&manager);
+        manager.init_axis_selecting_volume(Axis1::default());
+        let camera = Handle::new(Graphic3dCamera::default());
+        original.set_camera(&camera);
+        assert_eq!(view.camera(), camera);
+        assert!(manager.camera().is_null());
+        original.set_camera(&Handle::default());
+        assert!(view.camera().is_null());
+    }
 }

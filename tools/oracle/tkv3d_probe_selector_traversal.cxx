@@ -34,11 +34,11 @@ public:
 };
 class V3TraversalPoint : public Select3D_SensitivePoint {
 public:
-  int tag,fail=0;std::vector<int>& events;SelectMgr_ViewerSelector* selector;
+  int tag,fail=0,cameraEdit=0;std::vector<int>& events;SelectMgr_ViewerSelector* selector;
   V3TraversalPoint(const occ::handle<SelectMgr_EntityOwner>& owner,int id,std::vector<int>& trace,SelectMgr_ViewerSelector* source)
     :Select3D_SensitivePoint(owner,gp_Pnt(id%3==0?-2.:(id%3==1?0.:8.),id%3==2?-1.:0.,0.)),tag(id),events(trace),selector(source){}
   bool Matches(SelectBasics_SelectingVolumeManager& volume,SelectBasics_PickResult& pick) override {
-    events.push_back(tag);(void)selector->NbPicked();if(fail)throw Standard_Failure("fixture match failure");return Select3D_SensitivePoint::Matches(volume,pick);
+    events.push_back(tag);(void)selector->NbPicked();if(cameraEdit==1){auto camera=new Graphic3d_Camera(*selector->GetManager().Camera());camera->SetScale(8.);camera->SetProjectionType(Graphic3d_Camera::Projection_Perspective);selector->GetManager().SetCamera(camera);}if(fail)throw Standard_Failure("fixture match failure");return Select3D_SensitivePoint::Matches(volume,pick);
   }
 };
 class V3TraversalSelector : public SelectMgr_ViewerSelector {
@@ -72,7 +72,7 @@ public:
     occ::handle<V3TraversalObject> object=new V3TraversalObject();v3_configure_traversal_object(object,config,index);
     occ::handle<SelectMgr_EntityOwner> owner=new SelectMgr_EntityOwner(object,index%4);owners.push_back(owner);occ::handle<SelectMgr_Selection> selection=new SelectMgr_Selection(0);
     for(int part=0;part<3;++part){int tag=index*3+part;occ::handle<V3TraversalPoint> entity=new V3TraversalPoint(owner,tag,events,selector.get());
-      entity->SetSensitivityFactor(part+1);entity->fail=config.failing==tag;
+      entity->SetSensitivityFactor(part+1);entity->fail=config.failing==tag;entity->cameraEdit=(config.flags&16)?1:0;
       if(part==1)entity->SetTransformPersistence(v3_traversal_persistence(config.entityPersistence));
       if((config.flags&1)&&part==2)entity->SetFlippingOptions(true,gp_Ax2(gp_Pnt(),gp_Dir(0.,0.,-1.)));
       selection->Add(entity);entities.push_back(entity);

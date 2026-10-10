@@ -14,3 +14,5 @@ def append_selector_traversal_requests(requests: list[str]) -> None:
         requests.append(f"v3_selector_traversal {kind} 1 0 0 0 0 1 {flags} {failing} 3 2 -1")
     for kind, persistence, count in itertools.product((0, 3), range(7), (0, 1, 6)):
         requests.append(f"v3_selector_traversal {kind} 0 {persistence} 0 0 0 1 0 -1 {count} 2 -1")
+    for kind, camera, persistence, entity in itertools.product((1, 2, 4), (1, 2), (0, 1, 6), range(6)):
+        requests.append(f"v3_selector_traversal {kind} {camera} {persistence} {entity} 0 0 1 16 -1 6 1 -1")

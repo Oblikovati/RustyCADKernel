@@ -84,6 +84,7 @@ pub struct TraversalPoint {
     point: Select3DSensitivePoint,
     pub tag: i32,
     pub fail: AtomicI32,
+    pub camera_edit: AtomicI32,
     selector: WeakHandle<dyn SelectMgrViewerSelectorSource>,
     events: Arc<SharedState<Vec<i32>>>,
 }
@@ -105,6 +106,7 @@ impl TraversalPoint {
             point: Select3DSensitivePoint::new(owner, position),
             tag,
             fail: AtomicI32::new(0),
+            camera_edit: AtomicI32::new(0),
             selector: selector
                 .cast::<dyn SelectMgrViewerSelectorSource>()
                 .downgrade(),
@@ -124,6 +126,19 @@ impl Select3DSensitiveEntity for TraversalPoint {
         self.events.write().push(self.tag);
         if let Some(selector) = self.selector.upgrade().get() {
             let _ = selector.nb_picked();
+            if self.camera_edit.load(Ordering::Acquire) == 1 {
+                let original = selector
+                    .viewer_selector_base()
+                    .selecting_volume
+                    .read()
+                    .clone();
+                let camera = Handle::new(original.camera().copy_members());
+                camera.set_scale(8.);
+                camera.set_projection_type(
+                    rustycad_tkservice::graphic3d::Graphic3dCameraProjection::Perspective,
+                );
+                original.set_camera(&camera)?;
+            }
         }
         if self.fail.load(Ordering::Acquire) != 0 {
             return Err(Failure::with_message(
@@ -208,6 +223,9 @@ impl TraversalScene {
     ) {
         let entity = TraversalPoint::new(owner, tag, &self.selector, self.events.clone());
         entity.set_sensitivity_factor(tag % 3 + 1).unwrap();
+        entity
+            .camera_edit
+            .store(i32::from(config.flags & 16 != 0), Ordering::Release);
         entity
             .fail
             .store(i32::from(config.failing == tag), Ordering::Release);

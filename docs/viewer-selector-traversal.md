@@ -46,6 +46,12 @@ separate invalid-input behavior coverage.
 The selector class remains partial: DisplaySensitive and ToPixMap still need
 ports. Arbitrary graph mutation that invalidates OCCT's borrowed references or
 BVH iteration is not claimed as a supported concurrent operation. Root traversal
-currently captures the original camera handle; replacing that handle during a
-Matches callback remains an unverified reentrancy edge. Ordinary mutations of
-the shared camera object remain visible.
+retains the original intersector's camera slot and reads its current handle at
+persistence and subset boundaries. A Matches callback can replace that handle;
+108 native comparisons cover point, box and polygon selection, both projection
+types, entity persistence and mixed object subsets. The minimized regression
+previously picked two owners where OCCT picked one. Matrix values still follow
+native snapshot/subset timing. Replacing the active manager does not redirect the
+retained camera slot, and no camera guard spans a client callback. Clearing a
+camera during a traversal can make OCCT dereference null while rebuilding a
+frustum; that invalid native path is not counted as parity evidence.
