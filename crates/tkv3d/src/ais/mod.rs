@@ -59,3 +59,7 @@ mod context_toggle_selected;
 mod context_load;
 mod context_object_status;
 mod context_view_affinity;
+
+mod context_display;
+mod context_display_selection;
+mod context_erase;

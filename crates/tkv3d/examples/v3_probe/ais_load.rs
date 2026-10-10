@@ -7,14 +7,14 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkservice::{graphic3d::*, null_driver::NullGraphicDriver};
 use rustycad_tkv3d::{ais::*, prs_mgr::*, select_mgr::*, v3d::*};
 use std::sync::atomic::Ordering;
-struct LoadScene {
-    viewer: Handle<V3dViewer>,
-    ctx: Handle<AisInteractiveContext>,
-    foreign: Handle<AisInteractiveContext>,
-    objects: [Handle<ContextObject>; 4],
-    views: [Handle<V3dView>; 2],
+pub(super) struct LoadScene {
+    pub(super) viewer: Handle<V3dViewer>,
+    pub(super) ctx: Handle<AisInteractiveContext>,
+    pub(super) foreign: Handle<AisInteractiveContext>,
+    pub(super) objects: [Handle<ContextObject>; 4],
+    pub(super) views: [Handle<V3dView>; 2],
 }
-fn display_state(value: i32) -> PrsMgrDisplayStatus {
+pub(super) fn display_state(value: i32) -> PrsMgrDisplayStatus {
     match value {
         0 => PrsMgrDisplayStatus::Displayed,
         1 => PrsMgrDisplayStatus::Erased,
@@ -22,7 +22,7 @@ fn display_state(value: i32) -> PrsMgrDisplayStatus {
     }
 }
 impl LoadScene {
-    fn new() -> Self {
+    pub(super) fn new() -> Self {
         let viewer = V3dViewer::new(&NullGraphicDriver::new_handle()).unwrap();
         Self {
             ctx: AisInteractiveContext::new(&viewer).unwrap(),
@@ -37,7 +37,13 @@ impl LoadScene {
             viewer,
         }
     }
-    fn operate(&self, op: i32, index: usize, value: i32, other: i32) -> Result<(), Failure> {
+    pub(super) fn operate(
+        &self,
+        op: i32,
+        index: usize,
+        value: i32,
+        other: i32,
+    ) -> Result<(), Failure> {
         let object = &self.objects[index];
         match op {
             0 => self.ctx.load(&object.cast(), value)?,
@@ -101,7 +107,7 @@ impl LoadScene {
         int(highlight);
         int(selection);
     }
-    fn state(&self, object: &Handle<ContextObject>) {
+    pub(super) fn state(&self, object: &Handle<ContextObject>) {
         int(self.ctx.display_status(&object.cast()) as i32);
         flag(self.ctx.is_displayed(&object.cast()));
         for mode in [-2, 0, 2, 4, 7] {

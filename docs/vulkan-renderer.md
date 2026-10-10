@@ -16,8 +16,11 @@ structures, groups and views through the ordinary Graphic3d factories.
 `ToPixMap` reach Vulkan. The shared `Graphic3dRetainedView` keeps scene bookkeeping
 consistent with the recording driver. AIS context loading, recursive registration, display-status queries and view affinity
 now have native parity coverage. Loading prepares selection membership without
-computing or activating selection modes. AIS Display/Erase and presentation/highlight
-rendering remain open.
+computing or activating selection modes. AIS Display overloads and Erase now compute
+and reuse presentations, activate/deactivate selection modes and submit groups to
+Vulkan. A custom interactive triangle exercises display, erase, redisplay, display
+mode changes and per-view affinity. Highlight rendering and the wider built-in AIS
+presentation catalog remain open.
 
 Views currently render to virtual windows or offscreen framebuffer targets. RGB,
 RGBA, red-channel and depth dumps honor image row orientation and padding. Ordered
@@ -109,8 +112,9 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures twelve V3d scenes spanning orthographic/perspective cameras,
-three aspect ratios, translations and default/full-layer rendering. It requires
+Each profile captures 42 scenes spanning orthographic/perspective cameras,
+three aspect ratios, translations, default/full-layer rendering and five AIS
+lifecycle states (displayed, erased, redisplayed, mode 1 and affinity hidden). It requires
 byte-identical RGBA and finite depth with maximum error `1e-6`.
 Color/depth PNGs, raw buffers and color/depth error masks remain in the capture
 directory even when comparisons fail. The JSON report records error bounds,
@@ -131,8 +135,11 @@ from accidentally running another worktree's executable through Cargo's shared
 example alias. Removing the checkout also removes this cache.
 
 The same matrix builds `renderer_performance` in **release** mode, warms each
-workload for 20 frames and records 100 measured frames. Workloads are one triangle
-at 256×256, 256 triangle submissions at 256×256, and repeated 128/256×256 resize.
+workload for 20 samples and records 100 measured samples. Workloads are one triangle
+at 256×256, 256 triangle submissions at 256×256, repeated 128/256×256 resize,
+and AIS display/erase at 256×256. The AIS sample includes two completed frames
+and selection deactivation/reactivation; other samples contain one frame. Every
+redraw must succeed, and the AIS presentation must be reused without recomputation.
 Timings cover V3d scene extraction, current per-frame Vulkan resource allocation,
 submission, fence completion and color/depth readback. They are end-to-end latency,
 not GPU timestamp measurements. Validation is disabled for timing and required by
@@ -173,7 +180,7 @@ establish an AIS-related slowdown or isolate the cause of timing variability;
 the original matrix remains failed, with its baseline and limits unchanged.
 
 The [isolated-build rerun](../porting/runtime-evidence/vulkan-isolated-build-2026-10-10.json)
-is the authoritative current-code receipt after fixing Cargo cache contamination.
+records the earlier rerun after fixing Cargo cache contamination.
 It passed all functional and host timing checks; lavapipe resize median was
 0.611 ms against 0.482 ms, and p95 was 1.362 ms against 0.948 ms, so the matrix
 remains failed. Earlier diagnostic binary hashes remain available, but their
@@ -192,3 +199,21 @@ python3 tools/inventory_vulkan_baseline.py --source ../OCCT \
   --output porting/renderer/legacy-source-baseline.json
 python3 tools/run_tool_tests.py --pattern test_vulkan_capture_compare.py
 ```
+
+## AIS display/erase integration
+
+The AIS lifecycle slice adds five mapped OCCT methods and 387 native traces; the
+[native receipt](../porting/runtime-evidence/tkv3d-ais-display-2026-10-10.json)
+records 141,997 passing comparisons and 559 passing TKService/TKV3d Rust tests.
+Six renderer submission tests cover real AIS presentation groups, mode changes,
+affinity, live geometry and selection activation. The two device profiles each
+run five validated runtime checks and 42 native color/depth comparisons.
+
+The [initial AIS collection](../porting/runtime-evidence/vulkan-ais-initial-2026-10-10.json)
+passed all 84 comparisons with zero Vulkan validation errors. Its timing collection
+is not a regression pass. The [composite timing baseline](../porting/runtime-evidence/vulkan-ais-baseline-2026-10-10.json)
+retains the original three workload distributions unchanged and initializes only
+`ais-display-erase`. Use it with `--performance-baseline` for the four-workload gate.
+AIS medians were 0.675 ms on lavapipe and 4.117 ms on the native host, per two-frame
+cycle. This custom unlit triangle does not establish built-in AIS shape, highlight
+or complete OpenGL renderer parity.

@@ -2,7 +2,12 @@
 // entry points.
 class V3LoadContext : public V3ContextFixture {
 public:
+  using AIS_InteractiveContext::EraseGlobal;
   using AIS_InteractiveContext::GetDefModes;
+  using AIS_InteractiveContext::unselectOwners;
+  void picked(const occ::handle<SelectMgr_EntityOwner> &owner) {
+    myLastPicked = owner;
+  }
   using AIS_InteractiveContext::setObjectStatus;
   using V3ContextFixture::V3ContextFixture;
   occ::handle<AIS_GlobalStatus>

@@ -9,6 +9,7 @@ from vulkan_performance import (
     summarize_samples,
     performance_rows,
     regression_failures,
+    same_workload,
 )
 
 
@@ -26,10 +27,10 @@ class VulkanPerformanceTests(unittest.TestCase):
         lines = [
             "MARTENSITE_PERFORMANCE="
             + json.dumps({"workload": name, "samples_ms": [1.0, 2.0, 3.0]})
-            for name in ("single-triangle", "many-draws", "resize")
+            for name in ("single-triangle", "many-draws", "resize", "ais-display-erase")
         ]
         rows = performance_rows("\n".join(lines))
-        self.assertEqual(len(rows), 3)
+        self.assertEqual(len(rows), 4)
         self.assertEqual(rows[0]["median_ms"], 2.0)
         with self.assertRaises(ValueError):
             performance_rows(lines[0])
@@ -60,6 +61,17 @@ class VulkanPerformanceTests(unittest.TestCase):
         self.assertIn(
             "unmatched workload", regression_failures(changed, baseline, 1.25, 1.5)[0]
         )
+
+    def test_frame_count_must_match_and_old_rows_mean_one_frame(self) -> None:
+        row = {"draws": 1, "warmup": 20, "validation": False, "samples": 100}
+        self.assertTrue(same_workload(row, {**row, "frames_per_sample": 1}))
+        self.assertFalse(same_workload(row, {**row, "frames_per_sample": 2}))
+        self.assertTrue(
+            same_workload(
+                {**row, "frames_per_sample": 2}, {**row, "frames_per_sample": 2}
+            )
+        )
+        self.assertFalse(same_workload(row, None))
 
     def test_invalid_budgets_and_missing_baselines_fail(self) -> None:
         for ratio in (float("nan"), float("inf"), 0.9):

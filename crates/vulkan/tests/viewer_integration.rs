@@ -1,48 +1,19 @@
 //! Viewer-driven CPU tests inspect the real Graphic3d draw stream through a named fake device.
 #[path = "support/viewer_scene.rs"]
 mod scene;
+#[path = "support/view_setup.rs"]
+mod view_setup;
 use martensite_vulkan::*;
-use rustycad_tkernel::standard::{Handle, SharedState};
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{
     graphic3d::*,
     image::{ImageFormat, ImagePixMap},
 };
 use rustycad_tkv3d::v3d::V3dImageDumpOptions;
-use std::sync::{
-    Arc,
-    atomic::{AtomicBool, Ordering},
-};
-#[derive(Clone, Default)]
-struct RecordingDevice {
-    frames: Arc<SharedState<Vec<RenderFrame>>>,
-    fail: Arc<AtomicBool>,
-}
-impl RenderBackend for RecordingDevice {
-    fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
-        if self.fail.load(Ordering::Relaxed) {
-            return Err(RenderError::rejected(
-                "injected failure",
-                "successful device submission",
-            ));
-        }
-        self.frames.write().push(frame.clone());
-        let [width, height] = frame.extent();
-        let rgba = (0..height)
-            .flat_map(|y| (0..width).flat_map(move |x| [x as u8, y as u8, 91, 255]))
-            .collect();
-        Ok(FrameCapture {
-            width,
-            height,
-            rgba,
-            depth: vec![0.25; (width * height) as usize],
-        })
-    }
-}
-impl RecordingDevice {
-    fn last_frame(&self) -> RenderFrame {
-        self.frames.read().last().unwrap().clone()
-    }
-}
+use std::sync::atomic::Ordering;
+#[path = "support/recording_device.rs"]
+mod recording_device;
+use recording_device::RecordingDevice;
 fn setup() -> (
     Handle<Graphic3dRenderDriver>,
     scene::ViewerScene,

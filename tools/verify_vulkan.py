@@ -32,6 +32,13 @@ CASES = [
     (96, 48, 1, 2),
     (48, 96, 1, -3),
 ]
+AIS_MODES = (
+    "ais-displayed",
+    "ais-erased",
+    "ais-redisplayed",
+    "ais-mode1",
+    "ais-affinity-off",
+)
 
 
 def run(command: list[str], env: dict[str, str]) -> str:
@@ -149,7 +156,8 @@ def capture_case(
     clear_previous_case(gl, vk)
     args = list(map(str, case))
     native_output = run([str(native), *args, str(gl), mode], profile.environment)
-    output = run([str(rust), *args, str(vk), mode], profile.environment)
+    executable = rust.with_name("ais_capture") if mode.startswith("ais-") else rust
+    output = run([str(executable), *args, str(vk), mode], profile.environment)
     confirm_device(output, profile.device)
     software_gl = any(
         name in native_output.lower()
@@ -181,10 +189,12 @@ def clear_previous_case(native: Path, ported: Path) -> None:
 def capture_cases(
     native: Path, rust: Path, folder: Path, profile: VulkanProfile
 ) -> list[dict[str, object]]:
-    """Retain all twelve scenes and continue collecting failures; e.g. capture_cases(gl, vk, folder, profile)."""
+    """Retain raw and AIS lifecycle scenes and continue collecting failures; e.g. capture_cases(gl, vk, folder, profile)."""
     folder.mkdir(parents=True, exist_ok=True)
     results = []
-    for case, mode in [(case, mode) for case in CASES for mode in ("default", "full")]:
+    for case, mode in [
+        (case, mode) for case in CASES for mode in ("default", "full", *AIS_MODES)
+    ]:
         try:
             results.append(capture_case(native, rust, folder, profile, case, mode))
         except (RuntimeError, ValueError) as error:
@@ -205,6 +215,7 @@ def source_hashes() -> dict[str, str]:
             "tools/verify_vulkan.py",
             "tools/vulkan_capture_compare.py",
             "tools/oracle/martensite_vulkan_reference.cxx",
+            "tools/oracle/martensite_vulkan_ais.cxx",
         )
     )
     paths.extend(ROOT.glob("tools/vulkan_*.py"))
@@ -352,7 +363,7 @@ def receipt(
             "median_ratio": config.median_ratio,
             "p95_ratio": config.p95_ratio,
         },
-        "scope": "opaque unlit triangles through V3d/Graphic3d factories; default/full-layer captures; end-to-end frame benchmarks",
+        "scope": "opaque unlit triangles through V3d/Graphic3d/AIS; default/full-layer and AIS lifecycle captures; end-to-end frame benchmarks",
     }
 
 

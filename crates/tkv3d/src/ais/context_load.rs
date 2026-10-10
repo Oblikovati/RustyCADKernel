@@ -46,11 +46,14 @@ impl AisInteractiveContext {
             display,
             if mode != -1 { mode } else { selection },
         )?;
+        self.register_context_affinity(object);
+        Ok(())
+    }
+    pub(super) fn register_context_affinity(&self, object: &Handle<dyn AisInteractiveObject>) {
         object.view_affinity().set_visible(true);
-        self.current_viewer()
+        self.detection_viewer()
             .structure_manager()
             .register_object(&object.cast(), &object.view_affinity());
-        Ok(())
     }
     /// Resolve native defaults; null objects leave all three outputs unchanged.
     /// Example: `context.get_def_modes(&object, &mut display, &mut highlight, &mut selection)`.

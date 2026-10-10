@@ -54,7 +54,9 @@ impl PrsMgrPresentableObject for ContextObject {
                 &format!("presentation mode {mode}; expected a non-failing fixture mode"),
             ));
         }
-        presentation.new_group()?;
+        if !presentation.is_null() {
+            presentation.new_group()?;
+        }
         Ok(())
     }
     fn recompute_transformation(&self, _: &Handle<Graphic3dCamera>) {
@@ -65,6 +67,18 @@ impl PrsMgrPresentableObject for ContextObject {
 impl SelectMgrSelectableObject for ContextObject {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.base.selectable
+    }
+    fn clear_selected(&self) {
+        self.observe_context(400);
+        if let Some(presentation) = self.selectable_base().read().selection_prs.get() {
+            presentation.clear(true);
+        }
+    }
+    fn clear_dynamic_highlight(&self, manager: &Handle<PrsMgrPresentationManager>) {
+        self.observe_context(401);
+        if let Some(manager) = manager.get() {
+            manager.clear_immediate_draw();
+        }
     }
     fn compute_selection(
         &self,
