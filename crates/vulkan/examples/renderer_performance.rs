@@ -32,6 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     ais_performance::benchmark(&driver, warmup, samples)?;
     surface_performance::benchmark(&driver, warmup, samples);
+    persistence_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -90,3 +91,8 @@ fn timed_redraw(scene: &scene::ViewerScene, index: usize, resize: bool) -> f64 {
 mod surface_arrays;
 #[path = "support/surface_performance.rs"]
 mod surface_performance;
+
+#[path = "support/persistence_performance.rs"]
+mod persistence_performance;
+#[path = "../tests/support/persistence_scene.rs"]
+mod persistence_scene;

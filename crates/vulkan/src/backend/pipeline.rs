@@ -10,7 +10,7 @@ pub(super) struct TrianglePipeline {
     shaders: Vec<vk::ShaderModule>,
 }
 impl TrianglePipeline {
-    pub fn new(runtime: &Arc<VulkanRuntime>) -> Result<Self, RenderError> {
+    pub fn new(runtime: &Arc<VulkanRuntime>, depth_clamp: bool) -> Result<Self, RenderError> {
         let mut pipeline = Self {
             runtime: runtime.clone(),
             handle: vk::Pipeline::null(),
@@ -26,12 +26,12 @@ impl TrianglePipeline {
             include_bytes!("../../shaders/unlit.frag.spv"),
         )?);
         pipeline.layout = create_layout(runtime)?;
-        pipeline.create()?;
+        pipeline.create(depth_clamp)?;
         Ok(pipeline)
     }
-    fn create(&mut self) -> Result<(), RenderError> {
+    fn create(&mut self, depth_clamp: bool) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state = super::pipeline_state::PipelineState::new();
+        let state = super::pipeline_state::PipelineState::new(depth_clamp);
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&[vk::Format::R8G8B8A8_UNORM])
             .depth_attachment_format(vk::Format::D32_SFLOAT);

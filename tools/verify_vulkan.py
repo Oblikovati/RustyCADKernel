@@ -40,6 +40,27 @@ SURFACE_MODES = (
     "surface-bound-colors",
     "surface-vertex-colors",
 )
+PERSISTENCE_MODES = (
+    "pers-zoom",
+    "pers-rotate",
+    "pers-zoom-rotate",
+    "pers-axial",
+    "pers-zoom-axial",
+    "pers-2d",
+    "pers-triedron",
+    "pers-ortho",
+    "pers-2d-ortho",
+    "pers-triedron-ortho",
+    "pers-camera",
+    "pers-camera-near",
+    "pers-camera-far",
+    "pers-group-zoom",
+    "pers-group-rotate",
+    "pers-group-2d",
+    "pers-nested",
+    "pers-scaled-above",
+    "pers-group-camera-near",
+)
 AIS_MODES = (
     "ais-displayed",
     "ais-erased",
@@ -211,7 +232,7 @@ def capture_cases(
     for case, mode in [
         (case, mode)
         for case in CASES
-        for mode in ("default", "full", *AIS_MODES, *SURFACE_MODES)
+        for mode in ("default", "full", *AIS_MODES, *SURFACE_MODES, *PERSISTENCE_MODES)
     ]:
         try:
             results.append(capture_case(native, rust, folder, profile, case, mode))
@@ -235,6 +256,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_reference.cxx",
             "tools/oracle/martensite_vulkan_ais.cxx",
             "tools/oracle/martensite_vulkan_surfaces.cxx",
+            "tools/oracle/martensite_vulkan_persistence.cxx",
         )
     )
     paths.extend(ROOT.glob("tools/vulkan_*.py"))

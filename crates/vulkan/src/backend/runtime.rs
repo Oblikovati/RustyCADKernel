@@ -22,6 +22,7 @@ pub(super) struct VulkanRuntime {
     pub queue_family: u32,
     pub memory: vk::PhysicalDeviceMemoryProperties,
     pub limits: vk::PhysicalDeviceLimits,
+    pub depth_clamp: bool,
     pub name: String,
 }
 impl VulkanRuntime {
@@ -51,6 +52,7 @@ impl VulkanRuntime {
             queue_family: 0,
             memory: Default::default(),
             limits: Default::default(),
+            depth_clamp: false,
             name: String::new(),
         })
     }
@@ -64,11 +66,18 @@ impl VulkanRuntime {
             .to_string_lossy()
             .into_owned();
         self.limits = properties.limits;
+        self.depth_clamp =
+            unsafe { self.instance.get_physical_device_features(physical) }.depth_clamp == vk::TRUE;
         self.memory = unsafe {
             self.instance
                 .get_physical_device_memory_properties(physical)
         };
-        self.device = Some(create_device(&self.instance, physical, family)?);
+        self.device = Some(create_device(
+            &self.instance,
+            physical,
+            family,
+            self.depth_clamp,
+        )?);
         self.queue = unsafe { self.device().get_device_queue(family, 0) };
         self.physical = physical;
         self.queue_family = family;
@@ -162,6 +171,7 @@ fn create_device(
     instance: &Instance,
     physical: vk::PhysicalDevice,
     family: u32,
+    depth_clamp: bool,
 ) -> Result<Device, RenderError> {
     let queues = [vk::DeviceQueueCreateInfo::default()
         .queue_family_index(family)
@@ -169,7 +179,9 @@ fn create_device(
     let mut features = vk::PhysicalDeviceVulkan13Features::default()
         .dynamic_rendering(true)
         .synchronization2(true);
+    let core_features = vk::PhysicalDeviceFeatures::default().depth_clamp(depth_clamp);
     let info = vk::DeviceCreateInfo::default()
+        .enabled_features(&core_features)
         .queue_create_infos(&queues)
         .push_next(&mut features);
     unsafe { instance.create_device(physical, &info, None) }

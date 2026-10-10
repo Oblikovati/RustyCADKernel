@@ -6,7 +6,7 @@ Visualization and renderer work precede exchange-format expansion.
 
 `martensite-vulkan` now executes an offscreen opaque, unlit triangle path. It takes
 live Graphic3d attribute/index/bound buffers, ordered group and primitive aspects,
-visibility, ordinary structure/group transforms and a camera snapshot. A project-owned
+visibility, structure/group transforms and a camera snapshot. A project-owned
 `RenderBackend` interface receives validated immutable draws and returns top-left
 RGBA8 and float depth captures. Ash is confined to the private backend; production
 rendering does not link to OCCT. This is an initial implementation slice, not a
@@ -46,8 +46,8 @@ Unsupported styles and commands return errors. Current restrictions include
 triangle lists, triangle strips and triangle fans, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
-transform persistence, structure clipping/highlighting, textures and custom shaders
-are not implemented. The [capability ledger](../porting/renderer/capabilities.json)
+structure clipping/highlighting, textures and custom shaders are not implemented.
+Transform persistence is partial, with native-host capture differences recorded below. The [capability ledger](../porting/renderer/capabilities.json)
 retains all those features, plus materials/lights/PBR, transparency/OIT, ray/path
 tracing, stereo/VR, layers, backgrounds, statistics and native window presentation.
 No capability family is marked complete.
@@ -116,12 +116,13 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures 126 scenes spanning orthographic/perspective cameras,
+Each profile captures 240 scenes spanning orthographic/perspective cameras,
 three aspect ratios, translations, default/full-layer rendering and thirteen AIS
 lifecycle states: ordinary display/erase, mode/affinity changes, presentation
 clearing, permanent removal/recreation, bulk and selected-object transitions. Six
 surface modes add indexed/unindexed strips and fans, bound colors and vertex-color
-precedence. It requires
+precedence. Nineteen persistence modes add structure/group anchors, corner and
+camera-relative transforms, nested persistence, and near/far depth clamping. It requires
 byte-identical RGBA and finite depth with maximum error `1e-6`.
 Color/depth PNGs, raw buffers and color/depth error masks remain in the capture
 directory even when comparisons fail. The JSON report records error bounds,
@@ -145,7 +146,7 @@ The same matrix builds `renderer_performance` in **release** mode, warms each
 workload for 20 samples and records 100 measured samples. Workloads are one triangle
 at 256×256, 256 triangle submissions at 256×256, repeated 128/256×256 resize,
 AIS display/erase, AIS remove/recreate, and one indexed strip array with 256 colored
-bounds at 256×256. Each AIS sample includes two completed frames
+bounds at 256×256, plus 64 independently persistent groups with a changing camera. Each AIS sample includes two completed frames
 and selection deactivation/reactivation; other samples contain one frame. Every
 redraw must succeed. Erase reuses the presentation; removal must destroy it and
 force one new computation per redisplay.
@@ -156,7 +157,9 @@ the separate functional gate. Raw samples, median, mean, p95 and p99 are retaine
 is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
-The recorded host and lavapipe profiles use the checked-in six-workload baseline.
+The existing six workloads retain their checked-in baseline. The new persistence
+workload collects timings but has no accepted baseline while native capture parity
+remains unresolved; the timing gate explicitly reports its unmatched workload.
 Run functional and timing regression checks together:
 
 ```sh
@@ -417,3 +420,35 @@ erase/display median/p95 is 0.488/0.747 ms; lavapipe is 0.787/1.072 ms. The comp
 `Martensite-readback-perf` worktree, branch and build cache were deleted after checks
 and a process-reference audit. Only the main checkout remains. The original failed
 surface acceptance receipt is retained as historical evidence.
+
+## Transform persistence: partial integration
+
+Structure and group persistence now reaches the Vulkan draw stream through the
+ported `Graphic3dTransformPers` APIs, using the actual viewport dimensions. Local
+group anchors include the full model transform once, matching
+`OpenGl_Structure::applyPersistence` at upstream `3d097a0`. Orthographic persistence
+uses a camera copy. Structure `CameraPers` selects a cached depth-clamped pipeline;
+group-only persistence retains clipping. Devices lacking Vulkan `depthClamp` reject
+structure `CameraPers` explicitly. Stereo and tiled/large-coordinate parity remain open.
+
+The [worktree receipt](../porting/runtime-evidence/vulkan-persistence-worktree-2026-10-10.json)
+retains strict failures as well as successes. Five new CPU regressions cover all
+19 modes, local anchors, live changes/resize, invalid viewport dimensions and camera
+isolation. GPU lifecycle checks cover near-plane clamping, mixed clamped/unclamped
+draws, and fixed pixel size after zoom/resize. No new OCCT API mapping is credited.
+
+The native reference now explicitly disables polygon offsets (`Aspect_POM_Off`),
+matching the Martensite fixture. `Aspect_POM_None` inherited the default layer's
+fill offset and biased sloped triangles. The earlier
+[fixture failure](../porting/runtime-evidence/vulkan-persistence-fixture-failure-2026-10-10.json)
+and [offset failures](../porting/runtime-evidence/vulkan-persistence-offset-failure-2026-10-10.json)
+are retained. The [diagnostic record](../porting/runtime-evidence/persistence-diagnostics-2026-10-10/README.md)
+distinguishes that fixed fixture mismatch from remaining native-host raster differences.
+
+The strict gate still requires identical RGBA and depth error at most `1e-6`.
+Lavapipe passes all 240 captures. Native AMD has 34 failed persistence captures:
+two have one differing edge pixel; common-color depth differences reach about
+`4.1e-6`. The two edge pixels also vary between native OpenGL drivers, but the
+remaining depth errors exceed that observed native range. Their cause is unresolved.
+These failures remain visible in the default acceptance command; camera capability
+is partial and this change is not a complete native parity pass.

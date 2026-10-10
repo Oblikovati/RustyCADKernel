@@ -2,7 +2,7 @@
 use crate::style::unlit_color;
 use crate::{RenderError, TriangleDraw, error::rejected, primitive::PrimitiveSubmission};
 use rustycad_tkernel::{
-    ncollection::{Mat4, Vec4},
+    ncollection::Vec4,
     standard::{Handle, SharedState, StandardTransient},
 };
 use rustycad_tkmath::gp::Axis2;
@@ -42,7 +42,27 @@ impl Graphic3dDrawGroup {
         if self.is_deleted() || !self.structure().is_visible() {
             return Ok(vec![]);
         }
-        let matrix = self.clip_transform(camera)?;
+        self.extract_draws(camera, None)
+    }
+    /// Extract using the actual pixel viewport, including persistence; `group.triangle_draws_for_view(&camera, [800, 600])?`.
+    pub fn triangle_draws_for_view(
+        &self,
+        camera: &Graphic3dCamera,
+        extent: [u32; 2],
+    ) -> Result<Vec<TriangleDraw>, RenderError> {
+        if self.is_deleted() || !self.structure().is_visible() {
+            return Ok(vec![]);
+        }
+        self.extract_draws(camera, Some(extent))
+    }
+    fn extract_draws(
+        &self,
+        camera: &Graphic3dCamera,
+        extent: Option<[u32; 2]>,
+    ) -> Result<Vec<TriangleDraw>, RenderError> {
+        self.validate_structure()?;
+        let (matrix, depth_clamp) =
+            crate::persistent_transform::group_clip_transform(self, camera, extent)?;
         let (mut aspects, commands) = self.retained_commands()?;
         let mut draws = Vec::new();
         for command in commands {
@@ -52,6 +72,9 @@ impl Graphic3dDrawGroup {
                     draws.extend(primitive.draws(unlit_color(&aspects, self.is_closed())?, matrix)?)
                 }
             }
+        }
+        for draw in &mut draws {
+            draw.depth_clamp = depth_clamp;
         }
         Ok(draws)
     }
@@ -66,12 +89,6 @@ impl Graphic3dDrawGroup {
     }
     fn validate_structure(&self) -> Result<(), RenderError> {
         let parent = self.structure();
-        if !self.transform_persistence().is_null() || !parent.transform_persistence().is_null() {
-            return Err(rejected(
-                "transform persistence",
-                "ordinary transforms in this renderer slice",
-            ));
-        }
         if !parent.clip_planes().is_null() || parent.is_highlighted() {
             return Err(rejected(
                 "structure clipping or highlighting",
@@ -79,20 +96,6 @@ impl Graphic3dDrawGroup {
             ));
         }
         Ok(())
-    }
-    fn clip_transform(&self, camera: &Graphic3dCamera) -> Result<[f32; 16], RenderError> {
-        self.validate_structure()?;
-        let mut group = Mat4::<f64>::default();
-        self.transformation().get_mat4(&mut group);
-        let mut model = Mat4::<f64>::default();
-        if let Some(datum) = self.structure().transformation().get() {
-            datum.transformation().get_mat4(&mut model);
-        }
-        Ok(
-            (camera.projection_matrix() * camera.orientation_matrix() * model * group)
-                .data()
-                .map(|v| v as f32),
-        )
     }
     fn retain_primitive(&self, primitive: PrimitiveSubmission, evaluate_bounds: bool) {
         if self.is_deleted() {

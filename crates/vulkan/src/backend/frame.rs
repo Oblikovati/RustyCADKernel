@@ -1,7 +1,7 @@
 //! Frame resources are private and never outlive the device that created them.
 use super::{
     buffer::DeviceBuffer, image::TargetImage, memory_selection::HostBufferAccess,
-    pipeline::TrianglePipeline, runtime::VulkanRuntime,
+    pipeline::TrianglePipeline, pipeline_variants::TrianglePipelines, runtime::VulkanRuntime,
 };
 use crate::{FrameCapture, RenderError, RenderFrame, TriangleDraw, error::rejected};
 use ash::vk;
@@ -11,6 +11,7 @@ pub(super) struct UploadedDraw {
     pub indices: DeviceBuffer,
     pub count: u32,
     pub transform: Vec<u8>,
+    pub pipeline: Arc<TrianglePipeline>,
 }
 pub(super) struct FrameResources {
     pub extent: vk::Extent2D,
@@ -18,14 +19,13 @@ pub(super) struct FrameResources {
     pub depth: TargetImage,
     pub color_read: DeviceBuffer,
     pub depth_read: DeviceBuffer,
-    pub pipeline: Arc<TrianglePipeline>,
     pub draws: Vec<UploadedDraw>,
 }
 impl FrameResources {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
         frame: &RenderFrame,
-        pipeline: &Arc<TrianglePipeline>,
+        pipeline: &TrianglePipelines,
     ) -> Result<Self, RenderError> {
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
@@ -49,11 +49,10 @@ impl FrameResources {
                 vk::BufferUsageFlags::TRANSFER_DST,
                 HostBufferAccess::Readback,
             )?,
-            pipeline: pipeline.clone(),
             draws: frame
                 .draws
                 .iter()
-                .map(|draw| upload_draw(runtime, draw))
+                .map(|draw| upload_draw(runtime, draw, pipeline))
                 .collect::<Result<_, _>>()?,
         })
     }
@@ -91,6 +90,7 @@ fn check_extent(runtime: &VulkanRuntime, frame: &RenderFrame) -> Result<(), Rend
 fn upload_draw(
     runtime: &Arc<VulkanRuntime>,
     draw: &TriangleDraw,
+    pipelines: &TrianglePipelines,
 ) -> Result<UploadedDraw, RenderError> {
     let vertices = encode_vertices(draw);
     let indices: Vec<u8> = draw.indices.iter().flat_map(|i| i.to_ne_bytes()).collect();
@@ -98,7 +98,9 @@ fn upload_draw(
     let index_buffer = upload_bytes(runtime, &indices, vk::BufferUsageFlags::INDEX_BUFFER)?;
     let count = u32::try_from(draw.indices.len())
         .map_err(|_| rejected(draw.indices.len(), "a 32-bit index count"))?;
+    let pipeline = pipelines.select(draw.depth_clamp)?;
     Ok(UploadedDraw {
+        pipeline,
         vertices: vertex_buffer,
         indices: index_buffer,
         count,

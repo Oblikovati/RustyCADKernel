@@ -126,16 +126,19 @@ fn record_draws(
     resources: &FrameResources,
     range: std::ops::Range<usize>,
 ) {
-    let device = runtime.device();
-    unsafe {
-        device.cmd_bind_pipeline(
-            command,
-            vk::PipelineBindPoint::GRAPHICS,
-            resources.pipeline.handle,
-        )
-    };
+    let mut previous = vk::Pipeline::null();
     for draw in &resources.draws[range] {
-        record_draw(runtime, command, resources.pipeline.layout, draw);
+        if previous != draw.pipeline.handle {
+            unsafe {
+                runtime.device().cmd_bind_pipeline(
+                    command,
+                    vk::PipelineBindPoint::GRAPHICS,
+                    draw.pipeline.handle,
+                )
+            };
+            previous = draw.pipeline.handle;
+        }
+        record_draw(runtime, command, draw.pipeline.layout, draw);
     }
 }
 fn record_draw(

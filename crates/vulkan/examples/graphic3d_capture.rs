@@ -25,6 +25,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     scene
         .structure
         .set_transformation(&Handle::new(Datum3::new(transform)));
+    if request.mode.starts_with("pers-") {
+        persistence_scene::configure_persistence(
+            &scene.structure,
+            &*scene.group,
+            &scene.vertices,
+            &scene.view.camera(),
+            &request.mode,
+        );
+    }
     view_capture::capture_view(
         &scene.view,
         request.width,
@@ -57,3 +66,6 @@ mod capture_request;
 
 #[path = "../tests/support/surface_arrays.rs"]
 mod surface_arrays;
+
+#[path = "../tests/support/persistence_scene.rs"]
+mod persistence_scene;

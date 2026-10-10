@@ -30,3 +30,5 @@ mod view_scene;
 mod view_target;
 pub use driver::Graphic3dRenderDriver;
 pub use driver_view::Graphic3dRenderView;
+
+mod persistent_transform;

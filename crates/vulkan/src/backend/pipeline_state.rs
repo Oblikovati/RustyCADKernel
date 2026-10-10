@@ -40,7 +40,7 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
-    pub fn new() -> Self {
+    pub fn new(depth_clamp: bool) -> Self {
         Self {
             vertex: vertex_state(),
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default()
@@ -48,7 +48,7 @@ impl PipelineState {
             viewport: vk::PipelineViewportStateCreateInfo::default()
                 .viewport_count(1)
                 .scissor_count(1),
-            raster: raster_state(),
+            raster: raster_state(depth_clamp),
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: depth_state(),
@@ -84,8 +84,9 @@ fn vertex_state() -> vk::PipelineVertexInputStateCreateInfo<'static> {
         .vertex_binding_descriptions(&BINDINGS)
         .vertex_attribute_descriptions(&ATTRIBUTES)
 }
-fn raster_state() -> vk::PipelineRasterizationStateCreateInfo<'static> {
+fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
     vk::PipelineRasterizationStateCreateInfo::default()
+        .depth_clamp_enable(depth_clamp)
         .polygon_mode(vk::PolygonMode::FILL)
         .cull_mode(vk::CullModeFlags::NONE)
         .line_width(1.0)
