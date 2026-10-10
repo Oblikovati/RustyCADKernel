@@ -50,6 +50,7 @@
 #include "tkv3d_probe_selector_geometry.cxx"
 #include "tkv3d_probe_ais_context.cxx"
 #include "tkv3d_probe_ais_object.cxx"
+#include "tkv3d_probe_ais_load.cxx"
 #include "tkv3d_probe_selector_overlap.cxx"
 #include "tkv3d_probe_selector_traversal.cxx"
 #include "tkv3d_probe_selector_pick.cxx"
@@ -66,6 +67,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_selector_traversal",v3_selector_traversal},
  {"v3_selector_overlap",v3_selector_overlap},
  {"v3_ais_object",v3_ais_object},
+ {"v3_ais_load",v3_ais_load},
  {"v3_ais_context_shutdown",v3_ais_context_shutdown},
  {"v3_ais_context",v3_ais_context},
  {"v3_ais_detection",v3_ais_detection},

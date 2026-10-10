@@ -84,3 +84,5 @@ pub mod sensitive_display;
 pub mod ais_detection;
 
 pub mod ais_selection_actions;
+
+pub mod ais_load;

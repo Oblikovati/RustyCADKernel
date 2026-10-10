@@ -14,7 +14,10 @@ complete legacy renderer. `Graphic3dRenderDriver` now creates renderer-backed
 structures, groups and views through the ordinary Graphic3d factories.
 `V3dViewer::create_view`, redraw, camera/geometry changes, visibility, resize and
 `ToPixMap` reach Vulkan. The shared `Graphic3dRetainedView` keeps scene bookkeeping
-consistent with the recording driver. AIS presentation/highlight rendering remains open.
+consistent with the recording driver. AIS context loading, recursive registration, display-status queries and view affinity
+now have native parity coverage. Loading prepares selection membership without
+computing or activating selection modes. AIS Display/Erase and presentation/highlight
+rendering remain open.
 
 Views currently render to virtual windows or offscreen framebuffer targets. RGB,
 RGBA, red-channel and depth dumps honor image row orientation and padding. Ordered
