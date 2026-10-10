@@ -4,6 +4,7 @@ CAPPING_MODES = (
     "cap-lit-facet",
     "cap-lit-gouraud",
     "cap-lit-phong",
+    "cap-lit-unlit-view",
     "cap-basic",
     "cap-open",
     "cap-off",

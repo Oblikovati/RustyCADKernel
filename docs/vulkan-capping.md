@@ -126,8 +126,8 @@ worktree and branch were deleted, reclaiming approximately 14 GiB of build cache
 
 ## Lit-section verification
 
-Three paired fixtures add directional lighting for PhongFacet, Gouraud and Phong,
-bringing the capping matrix to 28 modes and 168 comparisons per device. Run:
+Four paired fixtures add the Unlit-view ambient override and directional lighting for PhongFacet, Gouraud and Phong,
+bringing the capping matrix to 29 modes and 174 comparisons per device. Run:
 
 ```sh
 DISPLAY=:1 python3 tools/verify_vulkan.py --source ../OCCT \

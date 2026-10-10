@@ -23,6 +23,8 @@ static void capping_scene(const occ::handle<Graphic3d_Structure>& structure,
     auto model=mode=="cap-lit-facet"?Graphic3d_TypeOfShadingModel_PhongFacet:
       mode=="cap-lit-gouraud"?Graphic3d_TypeOfShadingModel_Gouraud:Graphic3d_TypeOfShadingModel_Phong;
     plane->CappingAspect()->SetShadingModel(model);
+    view->ChangeRenderingParams().ShadingModel=mode=="cap-lit-unlit-view"?
+      Graphic3d_TypeOfShadingModel_Unlit:Graphic3d_TypeOfShadingModel_Phong;
     occ::handle<Graphic3d_CLight> light=new Graphic3d_CLight(Graphic3d_TypeOfLightSource_Directional);
     light->SetDirection(gp_Dir(0,0,-1));
     occ::handle<Graphic3d_LightSet> lights=new Graphic3d_LightSet(); lights->Add(light);

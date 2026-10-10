@@ -95,3 +95,18 @@ fn snapshot_rejects_nonfinite_inverse_view_with_offending_value() {
             .contains("finite inverse world-view matrix")
     );
 }
+
+#[test]
+fn unlit_view_replaces_sources_with_white_ambient_even_for_lit_aspects() {
+    let lights = set(&[source(Kind::Directional)]);
+    let unlit =
+        RenderLightSet::for_view(Graphic3dTypeOfShadingModel::Unlit, &lights, identity_clip())
+            .unwrap();
+    assert_eq!(unlit.ambient_color(), [1.; 4]);
+    assert_eq!(unlit.source_count(), 0);
+    let phong =
+        RenderLightSet::for_view(Graphic3dTypeOfShadingModel::Phong, &lights, identity_clip())
+            .unwrap();
+    assert_eq!(phong.source_count(), 1);
+    assert_eq!(phong.ambient_color(), [0., 0., 0., 1.]);
+}

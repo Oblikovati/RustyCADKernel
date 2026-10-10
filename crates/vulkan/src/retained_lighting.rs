@@ -140,11 +140,17 @@ pub(crate) fn apply_view_lights(
     {
         return Ok(());
     }
-    validate_shadow_requests(view)?;
+    if view.rendering_params().shading_model != Graphic3dTypeOfShadingModel::Unlit {
+        validate_shadow_requests(view)?;
+    }
     let inverse = Mat4::<f32>::from_other(&view.camera().orientation_matrix())
         .inverted()
         .map_err(|e| rejected(e, "an invertible camera world-view matrix"))?;
-    let lights = crate::RenderLightSet::snapshot(&view.lights(), inverse.data())?;
+    let lights = crate::RenderLightSet::for_view(
+        view.rendering_params().shading_model,
+        &view.lights(),
+        inverse.data(),
+    )?;
     for lighting in layers
         .iter_mut()
         .flat_map(|layer| &mut layer.draws)

@@ -209,10 +209,18 @@ fn configure_lit_cap(scene: &ViewerScene, plane: &Graphic3dClipPlane, mode: &str
     let model = match mode {
         "cap-lit-facet" => Graphic3dTypeOfShadingModel::PhongFacet,
         "cap-lit-gouraud" => Graphic3dTypeOfShadingModel::Gouraud,
-        "cap-lit-phong" => Graphic3dTypeOfShadingModel::Phong,
+        "cap-lit-phong" | "cap-lit-unlit-view" => Graphic3dTypeOfShadingModel::Phong,
         _ => return,
     };
     plane.capping_aspect().set_shading_model(model);
+    scene
+        .view
+        .set_shading_model(if mode == "cap-lit-unlit-view" {
+            Graphic3dTypeOfShadingModel::Unlit
+        } else {
+            Graphic3dTypeOfShadingModel::Phong
+        })
+        .unwrap();
     let lights = Handle::new(Graphic3dLightSet::default());
     let light = Handle::new(Graphic3dCLight::new(
         Graphic3dTypeOfLightSource::Directional,
