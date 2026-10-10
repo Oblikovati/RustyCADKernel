@@ -1,0 +1,25 @@
+{
+  "run_id": 38094826249,
+  "head": "ea6c0dbb3a3ebf10ee5dafd4a72624a18e10c9bf",
+  "scope": "Selected completed jobs; other jobs were running, not a final run audit",
+  "windows4": {
+    "job": 114338480882,
+    "conclusion": "success",
+    "includes": "corrected IFSelect file-root fixture"
+  },
+  "observed_failures": [
+    {
+      "job": 114338481031,
+      "platform": "macOS",
+      "test": "cylinder_seam_copy_matches_pinned_native_order",
+      "actual_fingerprint": 6632932043137629383,
+      "expected_fingerprint": 8261614461542172911
+    },
+    {
+      "job": 114338480903,
+      "platform": "Windows",
+      "test": "box_torus_fuse_matches_native_oracle",
+      "first_difference_line": 21
+    }
+  ]
+}
