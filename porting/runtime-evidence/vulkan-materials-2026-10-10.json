@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "status": "partial",
+  "scope": "Shader coefficient records only; GPU lighting remains unimplemented.",
+  "base_revision": "7efd08d33dafc2c3ae8f557aa29bff4f20ac18eb",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "comparison": {
+    "cases": 417,
+    "float_patterns": 23352,
+    "failures": [],
+    "sha256": {
+      "native.jsonl": "f92b1b7ec6b99edb58d41140e44f50d33937329ad307e8ad79f1e9678a702636",
+      "rust.jsonl": "0b12fd232b35523195fc83179c4dc8054a1eb80c3432626d9634abc1d8ecf125"
+    }
+  },
+  "checks": {
+    "rust_test_executions": 153,
+    "new_material_tests": 9,
+    "python_verifier_tests": 4,
+    "clippy": "passed with -D warnings",
+    "format": "cargo fmt -p martensite-vulkan -- --check passed"
+  },
+  "artifacts": {
+    "native.jsonl": {
+      "path": "porting/runtime-evidence/vulkan-materials-2026-10-10/native.jsonl.gz",
+      "uncompressed_sha256": "f92b1b7ec6b99edb58d41140e44f50d33937329ad307e8ad79f1e9678a702636"
+    },
+    "rust.jsonl": {
+      "path": "porting/runtime-evidence/vulkan-materials-2026-10-10/rust.jsonl.gz",
+      "uncompressed_sha256": "0b12fd232b35523195fc83179c4dc8054a1eb80c3432626d9634abc1d8ecf125"
+    },
+    "tests.log": {
+      "path": "porting/runtime-evidence/vulkan-materials-2026-10-10/tests.log.gz",
+      "uncompressed_sha256": "9221c2afbdef5a13c13fc4b5c2bb992c4bc040b82e80b7491ac4c422f55f5db5"
+    },
+    "clippy.log": {
+      "path": "porting/runtime-evidence/vulkan-materials-2026-10-10/clippy.log.gz",
+      "uncompressed_sha256": "9c012b5e344d90d59f460d452108f7ee3f88f8e0bced078fa350bdd9f5db877b"
+    },
+    "comparison.log": {
+      "path": "porting/runtime-evidence/vulkan-materials-2026-10-10/comparison.log.gz",
+      "uncompressed_sha256": "0155d1705f8ecdf0c5ea1d92b96ba7443517f047db01ab18d8f7d50afc8f31c9"
+    }
+  },
+  "source_sha256": {
+    "crates/vulkan/src/material.rs": "8177a3abf3572199749dec4de659ebd5579292f598bff428a477c8a5ec2a5fad",
+    "crates/vulkan/src/material_components.rs": "9e6842d6e317e07c55fc4084f1c348db29621910a3f6b6130ce3878ed852a708",
+    "crates/vulkan/src/lib.rs": "ff758250fd4d3a1ab63760f792b69e352bd79d6b540ba7b17f64f3905bab27b8",
+    "crates/vulkan/tests/material_packing.rs": "eca30a99acf139562a4d04cc8d7f7cd1eef2a1cc42d06b234ed9c3bafab9a7d0",
+    "crates/vulkan/examples/material_probe.rs": "dc02a2652833c6e42be87fedcfd8489c057784e840889f8e9268ca5ee8f87d02",
+    "tools/oracle/martensite_material_reference.cxx": "40fdd3cbb9700e89f99ce8e89f3bee47731fb807b050354ebcc878938ff2765d",
+    "tools/verify_renderer_material.py": "0fd0696ea44b2de47a372af593ef132a7eb0744679a93aa204b923cdd40be695",
+    "tools/tests/test_verify_renderer_material.py": "a8df13ea8adaa82e2321c206540fb42e62ed68d61f3bd9425a4bf3e0369c728e"
+  },
+  "remaining": [
+    "live normal and light submission",
+    "GPU shading and lit capping",
+    "native lighting captures and release performance on both GPU profiles",
+    "full API and configuration coverage"
+  ],
+  "runtime_regression": {
+    "lavapipe": {
+      "checks": 19,
+      "validation_errors": 0,
+      "devices": [
+        "llvmpipe (LLVM 20.1.2, 256 bits)"
+      ],
+      "log": "porting/runtime-evidence/vulkan-materials-2026-10-10/runtime-lavapipe.log.gz",
+      "uncompressed_sha256": "1139b8d013f0dc31906f9beb7d20e1eb236b76bbec6da3f8bf351cb227a1441c"
+    },
+    "host": {
+      "checks": 19,
+      "validation_errors": 0,
+      "devices": [
+        "AMD Radeon 8060S Graphics (RADV STRIX_HALO)"
+      ],
+      "log": "porting/runtime-evidence/vulkan-materials-2026-10-10/runtime-host.log.gz",
+      "uncompressed_sha256": "378d47d1f786c137a6da4b7f803e9ef6cd80d305c759837b4596e2123c821278"
+    }
+  }
+}

@@ -514,3 +514,10 @@ and unmatched timing baselines remain open; this adds presentation capability.
 presentations, filled/boundary selection, live geometry and appearance updates,
 114 captures per device and a radius-update performance workload. The complete
 harness collects 17 timing workloads; nine have accepted baselines.
+
+## Shader material preparation
+
+[Material records](vulkan-materials.md) now provide native Phong/PBR coefficient
+packing with exact differential evidence. Lit submissions and shaders remain
+unimplemented; this preparation does not change rendered output or claim a
+lighting performance baseline.
