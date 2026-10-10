@@ -11,6 +11,7 @@ pub struct ContextObject {
     base: AisInteractiveObjectBase,
     pub events: SharedState<Vec<i32>>,
     pub fail_mode: AtomicI32,
+    pub accepted_mode: AtomicI32,
 }
 rustycad_tkernel::impl_transient!(ContextObject,"ContextObject",dyn AisInteractiveObject,transient,interfaces:[dyn AisInteractiveObject,dyn SelectMgrSelectableObject,dyn PrsMgrPresentableObject]);
 impl ContextObject {
@@ -20,6 +21,7 @@ impl ContextObject {
             base: AisInteractiveObjectBase::new(PrsMgrTypeOfPresentation3d::AllView),
             events: SharedState::default(),
             fail_mode: AtomicI32::new(-999),
+            accepted_mode: AtomicI32::new(-999),
         });
         prs_mgr_presentable_bind(&object.cast());
         object
@@ -34,6 +36,10 @@ impl ContextObject {
 impl PrsMgrPresentableObject for ContextObject {
     fn presentable_base(&self) -> &PrsMgrPresentableObjectBase {
         &self.base.presentable
+    }
+    fn accept_display_mode(&self, mode: i32) -> bool {
+        let accepted = self.accepted_mode.load(Ordering::Acquire);
+        accepted == -999 || accepted == mode
     }
     fn compute(
         &self,

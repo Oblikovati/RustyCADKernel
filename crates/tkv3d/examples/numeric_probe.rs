@@ -46,6 +46,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "v3_ais_context_shutdown",
         v3_probe::ais_object::context_shutdown_case,
     ),
+    ("v3_ais_load", v3_probe::ais_load::ais_load_case),
     ("v3_ais_object", v3_probe::ais_object::ais_object_case),
     ("v3_ais_context", v3_probe::ais_context::ais_context_case),
     (

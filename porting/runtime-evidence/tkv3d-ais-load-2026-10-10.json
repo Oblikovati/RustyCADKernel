@@ -1,0 +1,59 @@
+{
+  "native": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKV3d",
+    "cases_passed": 141610,
+    "input_sha256": "a69f40cc304416e0138618e421efcc0b9e80ff3b40dc199915a1a986241133f1",
+    "output_sha256": "8d341265636c967c712f0a1f53988b9aeb4c55cfaa1188c2eed35af083bdcca9",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0,
+    "shutdown_failure": {
+      "request": "v3_ais_context_shutdown 1 1 2",
+      "return_codes": {
+        "native": -6,
+        "rust": -6
+      }
+    }
+  },
+  "rust_tests_passed": 550,
+  "new_rust_tests": 7,
+  "new_native_traces": 241,
+  "new_api_mappings": 8,
+  "source_sha256": {
+    "crates/tkv3d/src/ais/context_detection_cursor.rs": "6735ce6ecb2936e278f7dff6013c9a8d14b08d9aef324a9f18dad8000e477561",
+    "crates/tkv3d/src/ais/context_detection_cycle.rs": "fa058188c9566ac0e4ee0f2fda7a731abe530e0333bdce077ba906f330303c75",
+    "crates/tkv3d/src/ais/context_global_highlight.rs": "4e2252808acdc050b7aad13da4fab1af8178cf16ecff5c249cde34aca096da57",
+    "crates/tkv3d/src/ais/context_highlight.rs": "e685101131b9b8aca66672234755bae28e7d9fc9c3230d99dc98a7bfd73344c2",
+    "crates/tkv3d/src/ais/context_highlight_owners.rs": "f32817c88987dfd1a7cf3590361056cc6406b2b519da291af97343842a1bafde",
+    "crates/tkv3d/src/ais/context_load.rs": "b153a8a4eefbf4e86f5ba70f20eb7a70fa1dd29f3520666c6c9b63b819668000",
+    "crates/tkv3d/src/ais/context_members.rs": "ff1f96956b5ac1aa9065f98f7610c06a77781d749025032212f125dfef592fcf",
+    "crates/tkv3d/src/ais/context_move_to.rs": "67d7159f48fa664fe91e0bc05d2eb2b8bf59437d95bd141df1ada0a03303ed1c",
+    "crates/tkv3d/src/ais/context_object_highlight.rs": "ca69fb9cfae5dd7ab5c034eb2de2065569d7e37ead225b582b3286f5273b5515",
+    "crates/tkv3d/src/ais/context_object_status.rs": "77c3f7f8cf9a884d936fe1a59646d9fd3fc2a75dd07044174ca5be7850e9deee",
+    "crates/tkv3d/src/ais/context_owner_walk.rs": "8f280abccd5c0e3b11a128d841d209330903e712e2577f6f3918bcfc4e7803d5",
+    "crates/tkv3d/src/ais/context_select_legacy.rs": "b2a1a77ff5cea76d7b74bfe6edb063c86dcecb608628ab7855291cbad5b42783",
+    "crates/tkv3d/src/ais/context_select_pick.rs": "6db02aed5f97a6e5495877725d5e237e908187fb992cac315a7031d0c8a869c2",
+    "crates/tkv3d/src/ais/context_selected_members.rs": "d8352af5e642bdfbb3d625fb18579469eeea952764c92e24581dccd10fd5ac07",
+    "crates/tkv3d/src/ais/context_selection_actions.rs": "5b3f64850306763b18b8cc75eb75bb8800d5965db44960db39db2de4dfc24da4",
+    "crates/tkv3d/src/ais/context_set_selected.rs": "efc3efdb8d2d0bf1fa846be4748120f23b71e8b0a71d84a8ddb8c113b2ee412a",
+    "crates/tkv3d/src/ais/context_styles.rs": "6dc399c25f8ce787427f89c8d27c0301282688eb49e3351f87f936d9a75526b0",
+    "crates/tkv3d/src/ais/context_toggle_selected.rs": "dbb174e8e073710bedaa098ddcec105fc49354364da60c9f04cc489caa83a8e6",
+    "crates/tkv3d/src/ais/context_unhighlight_owners.rs": "1ea65acc3c5c9bcbb4293b380bfc56c2e5d5f7310fc40d44f11bc19ee2827c9b",
+    "crates/tkv3d/src/ais/context_updates.rs": "3bd2caf0a859fa1784eb9869d00c2711bd136dcb02b3a2cef92a33e85dd70f4d",
+    "crates/tkv3d/src/ais/context_view_affinity.rs": "aa2a76dc49a7400eb0301c12ad678809202dd7997b6b1a35e2695ecad97b33d9",
+    "crates/tkv3d/src/ais/detection_status.rs": "8caba6a3129eca0aec2b601b3f4ec6bc5c3029c7eb1d259eeee13c385532d66c",
+    "crates/tkv3d/src/ais/global_status.rs": "4690659ba33fbcc2eb00177568c9703e07bdac82de7a60ea43df8dc724786c6c",
+    "crates/tkv3d/src/ais/interactive_context.rs": "1ee1b52ab620e46267411bf872777f11ac0573ee5b1f240a28e2f4e1e6d93bc9",
+    "crates/tkv3d/src/ais/interactive_enums.rs": "83d6e08332b9a7cef587892bf3de53f6ec0f42d988f4d4bcd5097e7c867e27b8",
+    "crates/tkv3d/src/ais/interactive_object.rs": "c461409670315e41c62e78468b7e5ee6faffe956d1ee2f48ac1b1c68bb5802aa",
+    "crates/tkv3d/src/ais/interactive_object_members.rs": "194ab24eb215ad82fe4ee4f43a3932040fc4688c6b9d4198a502af143ff90295",
+    "crates/tkv3d/src/ais/mod.rs": "357537bfa572a62bb596dab5b66fe31cc3eb7537f3b465e0b9ad27915e4e34ba",
+    "crates/tkv3d/src/ais/pick_status.rs": "1ad5745fd5c46429a0ac7d285edffeb960e46391c8ffbabc7e9e7c5293e7f5b4",
+    "crates/tkv3d/src/ais/select_status.rs": "ff20f17047c14223caf96e693d90f9b7a54839abfd3eb68f26f5d048f214ecd8",
+    "crates/tkv3d/src/ais/selection.rs": "6aed694628bde52b8909ed862ca12c119dc1c8fb31890f5303f24d6382bdba1a",
+    "crates/tkv3d/src/ais/selection_edit.rs": "684bd2e4de015740d95b22fa9dd6b4dc7e26ca11ae379174de2764ce35f094af",
+    "crates/tkv3d/src/ais/selection_members.rs": "809ee38891217492ee613fd7c17c7e5551bee2f2d9cfe66b68eb1a9734274c6d",
+    "crates/tkv3d/src/ais/selection_scheme.rs": "214a18cdf663a4337a6bf6f71cd5d7352dd25fdad33c2081d7a33f759eab45a4"
+  },
+  "scope": "AIS Load, legacy Load, GetDefModes, setObjectStatus, DisplayStatus, IsDisplayed overloads and SetViewAffinity. Display/Erase rendering remains open."
+}
