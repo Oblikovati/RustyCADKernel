@@ -243,10 +243,13 @@ fn session_share_out_and_files() {
         b"out/m.igs",
         "the extension mark is present, the prefix one not"
     );
-    assert_eq!(
-        session.give_file_root("/tmp/dir/name.stp").as_bytes(),
-        b"name"
-    );
+    // OSD_Path uses native platform syntax; Windows does not parse this Unix path.
+    let root_fixture = if cfg!(windows) {
+        r"C:\tmp\dir\name.stp"
+    } else {
+        "/tmp/dir/name.stp"
+    };
+    assert_eq!(session.give_file_root(root_fixture).as_bytes(), b"name");
     session.evaluate_file().unwrap();
     assert!(session.nb_files() == 1 && session.file_name(1).unwrap().as_bytes() == b"out/part.stp");
     assert!(session.file_model(1).unwrap().is_some() && session.file_model(2).unwrap().is_null());

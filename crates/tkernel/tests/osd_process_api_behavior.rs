@@ -239,3 +239,17 @@ fn native_host_matches_uname_on_linux() {
         3
     );
 }
+
+#[cfg(windows)]
+#[test]
+fn native_windows_system_date_reads_calendar_and_milliseconds() {
+    let mut process = Process::new();
+    let (month, day, year, hour, minute, second, millisecond, microsecond) =
+        process.system_date().unwrap().values();
+    assert!((1..=12).contains(&month) && (1..=31).contains(&day));
+    assert!(year >= 1979 && (0..=23).contains(&hour));
+    assert!((0..=59).contains(&minute) && (0..=59).contains(&second));
+    assert!((0..=999).contains(&millisecond));
+    assert_eq!(microsecond, 0);
+    assert!(!process.failed());
+}
