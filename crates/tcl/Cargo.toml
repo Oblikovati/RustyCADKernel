@@ -20,3 +20,10 @@ unsafe_op_in_unsafe_fn = "deny"
 [lints.clippy]
 all = "warn"
 undocumented_unsafe_blocks = "warn"
+
+# Aqua requires an OS main thread; integration tests invoke this native probe as a child.
+[[bin]]
+name = "martensite-tk-probe"
+path = "tests/support/tk_probe.rs"
+test = false
+bench = false
