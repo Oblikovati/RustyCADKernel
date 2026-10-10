@@ -10,6 +10,7 @@ from __future__ import annotations
 
 
 def append_tkv3d_requests(requests: list[str]) -> None:
+    __import__('tkv3d_corpus_animation_camera').append_camera_requests(requests)
     __import__('tkv3d_corpus_ais_animation').append_animation_requests(requests)
     """Append every TKV3d request family in a fixed order."""
     __import__("tkv3d_corpus_ais_circle").append_ais_circle_requests(requests)

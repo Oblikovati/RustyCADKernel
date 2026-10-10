@@ -108,3 +108,5 @@ pub mod deflection_curve;
 pub mod ais_circle;
 
 pub mod ais_animation;
+
+pub mod animation_camera;

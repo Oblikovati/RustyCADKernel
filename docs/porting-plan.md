@@ -57,7 +57,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    directional/point/spot/head lights, front/back materials and clipped shaders;
    strict native capture and performance gates remain open.
    [AIS animation timelines](v3d-design.md#ais-animation-timelines) now provide
-   native child scheduling and timer lifecycle; camera/object subclasses remain open.
+   native child scheduling and timer lifecycle. [Camera animation](v3d-design.md#ais-camera-animation)
+   adds live camera interpolation and deferred redraw; object subclasses remain open.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

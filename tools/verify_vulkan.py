@@ -31,6 +31,7 @@ from vulkan_case_dispatch import capture_executable
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
+from vulkan_camera_animation_cases import CAMERA_ANIMATION_MODES
 from vulkan_performance import (
     performance_rows,
     regression_failures,
@@ -244,18 +245,21 @@ def capture_cases(
 
 def capture_modes(case_family: str) -> tuple[str, ...]:
     """Select an explicit fixture family without changing parity gates; capture_modes('lighting')."""
+    if case_family == "camera-animation":
+        return CAMERA_ANIMATION_MODES
     if case_family == "capping":
         return CAPPING_MODES
     if case_family == "lighting":
         return LIGHTING_MODES
     if case_family != "all":
         raise ValueError(
-            f"received case family {case_family!r}; expected all, lighting or capping"
+            f"received case family {case_family!r}; expected all, lighting, capping or camera-animation"
         )
     return (
         "default",
         "full",
         *AIS_MODES,
+        *CAMERA_ANIMATION_MODES,
         *SURFACE_MODES,
         *PERSISTENCE_MODES,
         *LINE_MODES,
@@ -300,6 +304,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_text.cxx",
             "tools/oracle/martensite_vulkan_ais_axis.cxx",
             "tools/oracle/martensite_vulkan_ais_circle.cxx",
+            "tools/oracle/martensite_vulkan_camera_animation.cxx",
             "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
             "tools/oracle/martensite_vulkan_window.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
@@ -482,7 +487,9 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--host-icd", type=Path)
     parser.add_argument(
-        "--case-family", choices=("all", "lighting", "capping"), default="all"
+        "--case-family",
+        choices=("all", "lighting", "capping", "camera-animation"),
+        default="all",
     )
     performance_arguments(parser)
     return parser.parse_args(argv)

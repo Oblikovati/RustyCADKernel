@@ -579,6 +579,38 @@ retains the old child-duration cache, and self-copy empties the child list.
 `python3 tools/verify_ais_animation.py --source ../OCCT --native-build BUILD`
 compares 319 independent native timeline, identity-edit and frozen-timer cases.
 Eleven Rust tests cover reentrant callbacks, RTTI, signed zero/NaN and deterministic
-running timers. These timeline checks do not claim camera/object subclasses or
-renderer coverage; those remain visualization work to port and exercise with
-functional captures and performance measurements.
+running timers. These timeline checks cover the base timeline. Camera animation is tracked below;
+object animation remains open visualization work.
+
+
+## AIS camera animation
+
+Martensite ports `AIS_AnimationCamera` from OCCT `3d097a0`. A camera atom retains
+its target view and start/end camera handles, interpolates into the existing live
+view camera, restores the view's immediate-update mode, and invalidates the view.
+It schedules no immediate redraw. Missing view or endpoint handles skip the frame;
+without a positive own duration the atom applies the end camera. Endpoint edits
+remain visible because setters retain handles rather than copying camera values.
+`target_view()` corresponds to native `View()` and avoids Rust `Handle::view()`.
+
+For example, construct `AisAnimationCamera::new("orbit", &view)`, set endpoints and
+own duration, call `start(false)`, then apply `update(pts)` before redrawing. It
+implements `AisAnimationSource`, so a parent timeline can schedule it with ordinary
+relative start times. The live view camera keeps its original handle identity.
+
+`python3 tools/verify_animation_camera.py --source ../OCCT --native-build BUILD`
+compares 594 native endpoint/lifecycle/camera cases. The Vulkan harness's
+`--case-family camera-animation` retains eight modes across every size, projection
+and translation case on lavapipe and the native host. The `camera-animation-updates`
+release workload measures interpolation, invalidation and GPU redraw/readback
+with 20 warmup and 100 measured frames. Capture results and raw timing distributions
+are retained in the runtime receipt; strict differences remain failures.
+
+The [2026-10-11 runtime receipt](../porting/runtime-evidence/camera-animation-2026-10-11/summary.json)
+records 48/48 strict native captures per device and zero validation errors. Three
+camera tests, three retained-stream tests, the full TKV3d suite, 42 Python tests
+and Clippy pass. Lavapipe passed the timing comparison. The final host timing
+window exceeded camera/resize p95 and AIS remove/display limits; two subsequent
+identical host repetitions passed all 23 comparisons. The failed window and raw
+repetitions are retained. These measurements do not establish an accepted baseline
+for the entire renderer, whose other capability and parity gaps remain open.

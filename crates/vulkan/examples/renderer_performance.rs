@@ -47,6 +47,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     homogeneous_performance::benchmark(&driver, warmup, samples);
     capping_performance::benchmark(&driver, warmup, samples);
     lighting_performance::benchmark(&driver, warmup, samples);
+    camera_animation_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -178,3 +179,9 @@ mod capping_scene;
 
 #[path = "support/lighting_performance.rs"]
 mod lighting_performance;
+
+#[path = "support/camera_animation_performance.rs"]
+mod camera_animation_performance;
+#[allow(dead_code)]
+#[path = "../tests/support/camera_animation_scene.rs"]
+mod camera_animation_scene;

@@ -49,6 +49,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             &request.mode,
         );
     }
+    if request.mode.starts_with("animcam-") {
+        camera_animation_scene::apply(&scene.view, &request.mode);
+    }
     let _shadow = (request.mode == "cap-shadow").then(|| capping_scene::cap_shadow(&scene));
     view_capture::capture_view(
         &scene.view,
@@ -112,3 +115,7 @@ fn configure_homogeneous(scene: &scene::ViewerScene, mode: &str) {
 
 #[path = "../tests/support/capping_scene.rs"]
 mod capping_scene;
+
+#[allow(dead_code)]
+#[path = "../tests/support/camera_animation_scene.rs"]
+mod camera_animation_scene;

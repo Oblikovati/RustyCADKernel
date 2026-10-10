@@ -67,6 +67,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
   structure->Display();
   return structure;
 }
+#include "martensite_vulkan_camera_animation.cxx"
 #include "martensite_vulkan_ais.cxx"
 #include "martensite_vulkan_ais_line.cxx"
 #include "martensite_vulkan_ais_point.cxx"
@@ -214,6 +215,8 @@ static void run_scene(int argc, char **argv) {
       clipping_scene(structure, view, mode);
     if (mode.rfind("pers-", 0) == 0)
       persistence_scene(structure, view, mode, rasterControl);
+    if (mode.rfind("animcam-", 0) == 0)
+      camera_animation_scene(view, mode);
     auto capShadow = mode == "cap-shadow" ? cap_shadow(structure, viewer) : occ::handle<Graphic3d_Structure>();
     write_capture(view, width, height, argv[5], mode == "full");
     print_device(view);
