@@ -1,0 +1,87 @@
+//! Optional line support must not exclude devices capable of the original triangle path.
+use crate::{LineStyle, RenderError, error::rejected};
+use ash::{Instance, vk};
+use std::ffi::CStr;
+#[derive(Clone, Copy, Default)]
+pub(super) struct LineCapabilities {
+    pub bresenham: bool,
+    pub wide: bool,
+}
+impl LineCapabilities {
+    pub fn query(instance: &Instance, physical: vk::PhysicalDevice) -> Result<Self, RenderError> {
+        let extensions = unsafe { instance.enumerate_device_extension_properties(physical) }
+            .map_err(|error| {
+                super::runtime::vk_error("enumerate line rasterization support", error)
+            })?;
+        let present = extensions.iter().any(|extension| unsafe { CStr::from_ptr(extension.extension_name.as_ptr()) } == ash::ext::line_rasterization::NAME);
+        let wide =
+            unsafe { instance.get_physical_device_features(physical) }.wide_lines == vk::TRUE;
+        if !present {
+            return Ok(Self {
+                bresenham: false,
+                wide,
+            });
+        }
+        let mut lines = vk::PhysicalDeviceLineRasterizationFeaturesEXT::default();
+        let mut features = vk::PhysicalDeviceFeatures2::default().push_next(&mut lines);
+        unsafe { instance.get_physical_device_features2(physical, &mut features) };
+        Ok(Self {
+            bresenham: lines.bresenham_lines == vk::TRUE,
+            wide,
+        })
+    }
+    pub fn validate(&self, style: LineStyle, range: [f32; 2]) -> Result<(), RenderError> {
+        if !self.bresenham
+            || (!self.wide && style.width != 1.)
+            || !(range[0]..=range[1]).contains(&style.width)
+        {
+            return Err(rejected(
+                (style.width, self.bresenham, self.wide, range),
+                "Bresenham line support and width within the enabled device range",
+            ));
+        }
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn absent_line_and_wide_capabilities_reject_only_unsupported_requests() {
+        let narrow = LineCapabilities {
+            bresenham: true,
+            wide: false,
+        };
+        assert!(
+            narrow
+                .validate(LineStyle::new(1., 0xffff, 1).unwrap(), [1., 8.])
+                .is_ok()
+        );
+        assert!(
+            narrow
+                .validate(LineStyle::new(2., 0xffff, 1).unwrap(), [1., 8.])
+                .is_err()
+        );
+        assert!(
+            LineCapabilities::default()
+                .validate(LineStyle::new(1., 0xffff, 1).unwrap(), [1., 8.])
+                .is_err()
+        );
+    }
+    #[test]
+    fn widths_must_fit_the_selected_device_range() {
+        let wide = LineCapabilities {
+            bresenham: true,
+            wide: true,
+        };
+        assert!(
+            wide.validate(LineStyle::new(3., 0xffff, 1).unwrap(), [1., 8.])
+                .is_ok()
+        );
+        assert!(
+            wide.validate(LineStyle::new(9., 0xffff, 1).unwrap(), [1., 8.])
+                .is_err()
+        );
+    }
+}

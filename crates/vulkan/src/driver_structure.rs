@@ -1,5 +1,5 @@
 //! Renderer-created groups make ordinary Graphic3d submissions reach the draw stream.
-use crate::{Graphic3dDrawGroup, RenderError, TriangleDraw, error::rejected};
+use crate::{Graphic3dDrawGroup, PrimitiveDraw, RenderError, error::rejected};
 use rustycad_tkernel::standard::exceptions::program_error;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkservice::graphic3d::*;
@@ -23,7 +23,7 @@ impl RenderStructure {
         camera: &Graphic3dCamera,
         view_id: i32,
         extent: [u32; 2],
-    ) -> Result<Vec<TriangleDraw>, RenderError> {
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         if !self.is_visible_in_view(view_id) {
             return Ok(vec![]);
         }
@@ -40,7 +40,7 @@ impl RenderStructure {
                 retained
                     .get()
                     .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?
-                    .triangle_draws_for_view(camera, extent)
+                    .primitive_draws_for_view(camera, extent)
             })
             .collect::<Result<Vec<_>, _>>()
             .map(|groups| groups.into_iter().flatten().collect())

@@ -23,6 +23,7 @@ pub(super) struct VulkanRuntime {
     pub memory: vk::PhysicalDeviceMemoryProperties,
     pub limits: vk::PhysicalDeviceLimits,
     pub depth_clamp: bool,
+    pub lines: super::line_device::LineCapabilities,
     pub name: String,
 }
 impl VulkanRuntime {
@@ -53,6 +54,7 @@ impl VulkanRuntime {
             memory: Default::default(),
             limits: Default::default(),
             depth_clamp: false,
+            lines: Default::default(),
             name: String::new(),
         })
     }
@@ -68,6 +70,7 @@ impl VulkanRuntime {
         self.limits = properties.limits;
         self.depth_clamp =
             unsafe { self.instance.get_physical_device_features(physical) }.depth_clamp == vk::TRUE;
+        self.lines = super::line_device::LineCapabilities::query(&self.instance, physical)?;
         self.memory = unsafe {
             self.instance
                 .get_physical_device_memory_properties(physical)
@@ -77,6 +80,7 @@ impl VulkanRuntime {
             physical,
             family,
             self.depth_clamp,
+            self.lines,
         )?);
         self.queue = unsafe { self.device().get_device_queue(family, 0) };
         self.physical = physical;
@@ -172,6 +176,7 @@ fn create_device(
     physical: vk::PhysicalDevice,
     family: u32,
     depth_clamp: bool,
+    lines: super::line_device::LineCapabilities,
 ) -> Result<Device, RenderError> {
     let queues = [vk::DeviceQueueCreateInfo::default()
         .queue_family_index(family)
@@ -179,11 +184,21 @@ fn create_device(
     let mut features = vk::PhysicalDeviceVulkan13Features::default()
         .dynamic_rendering(true)
         .synchronization2(true);
-    let core_features = vk::PhysicalDeviceFeatures::default().depth_clamp(depth_clamp);
-    let info = vk::DeviceCreateInfo::default()
+    let core_features = vk::PhysicalDeviceFeatures::default()
+        .depth_clamp(depth_clamp)
+        .wide_lines(lines.wide);
+    let mut info = vk::DeviceCreateInfo::default()
         .enabled_features(&core_features)
         .queue_create_infos(&queues)
         .push_next(&mut features);
+    let extensions = [ash::ext::line_rasterization::NAME.as_ptr()];
+    let mut line_features =
+        vk::PhysicalDeviceLineRasterizationFeaturesEXT::default().bresenham_lines(lines.bresenham);
+    if lines.bresenham {
+        info = info
+            .enabled_extension_names(&extensions)
+            .push_next(&mut line_features);
+    }
     unsafe { instance.create_device(physical, &info, None) }
         .map_err(|e| vk_error("create device", e))
 }

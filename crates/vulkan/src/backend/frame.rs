@@ -1,9 +1,9 @@
 //! Frame resources are private and never outlive the device that created them.
 use super::{
     buffer::DeviceBuffer, image::TargetImage, memory_selection::HostBufferAccess,
-    pipeline::TrianglePipeline, pipeline_variants::TrianglePipelines, runtime::VulkanRuntime,
+    pipeline::DrawPipeline, pipeline_variants::RasterPipelines, runtime::VulkanRuntime,
 };
-use crate::{FrameCapture, RenderError, RenderFrame, TriangleDraw, error::rejected};
+use crate::{FrameCapture, PrimitiveDraw, RenderError, RenderFrame, error::rejected};
 use ash::vk;
 use std::sync::Arc;
 pub(super) struct UploadedDraw {
@@ -11,7 +11,8 @@ pub(super) struct UploadedDraw {
     pub indices: DeviceBuffer,
     pub count: u32,
     pub transform: Vec<u8>,
-    pub pipeline: Arc<TrianglePipeline>,
+    pub pipeline: Arc<DrawPipeline>,
+    pub line_width: Option<f32>,
 }
 pub(super) struct FrameResources {
     pub extent: vk::Extent2D,
@@ -25,7 +26,7 @@ impl FrameResources {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
         frame: &RenderFrame,
-        pipeline: &TrianglePipelines,
+        pipeline: &RasterPipelines,
     ) -> Result<Self, RenderError> {
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
@@ -52,7 +53,7 @@ impl FrameResources {
             draws: frame
                 .draws
                 .iter()
-                .map(|draw| upload_draw(runtime, draw, pipeline))
+                .map(|draw| upload_draw(runtime, draw, pipeline, extent))
                 .collect::<Result<_, _>>()?,
         })
     }
@@ -89,26 +90,29 @@ fn check_extent(runtime: &VulkanRuntime, frame: &RenderFrame) -> Result<(), Rend
 }
 fn upload_draw(
     runtime: &Arc<VulkanRuntime>,
-    draw: &TriangleDraw,
-    pipelines: &TrianglePipelines,
+    draw: &PrimitiveDraw,
+    pipelines: &RasterPipelines,
+    extent: vk::Extent2D,
 ) -> Result<UploadedDraw, RenderError> {
+    if let Some(line) = draw.line_style {
+        runtime
+            .lines
+            .validate(line, runtime.limits.line_width_range)?;
+    }
     let vertices = encode_vertices(draw);
     let indices: Vec<u8> = draw.indices.iter().flat_map(|i| i.to_ne_bytes()).collect();
     let vertex_buffer = upload_bytes(runtime, &vertices, vk::BufferUsageFlags::VERTEX_BUFFER)?;
     let index_buffer = upload_bytes(runtime, &indices, vk::BufferUsageFlags::INDEX_BUFFER)?;
     let count = u32::try_from(draw.indices.len())
         .map_err(|_| rejected(draw.indices.len(), "a 32-bit index count"))?;
-    let pipeline = pipelines.select(draw.depth_clamp)?;
+    let pipeline = pipelines.select(draw.depth_clamp, draw.line_style.is_some())?;
     Ok(UploadedDraw {
         pipeline,
         vertices: vertex_buffer,
         indices: index_buffer,
         count,
-        transform: draw
-            .clip_transform
-            .iter()
-            .flat_map(|v| v.to_ne_bytes())
-            .collect(),
+        line_width: draw.line_style.map(|style| style.width),
+        transform: encode_transform(draw, extent),
     })
 }
 
@@ -122,10 +126,28 @@ fn upload_bytes(
     Ok(buffer)
 }
 
-fn encode_vertices(draw: &TriangleDraw) -> Vec<u8> {
+fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
     draw.vertices
         .iter()
         .flat_map(|v| v.position.iter().chain(&v.color))
         .flat_map(|value| value.to_ne_bytes())
         .collect()
+}
+
+fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
+    let mut bytes: Vec<u8> = draw
+        .clip_transform
+        .iter()
+        .flat_map(|v| v.to_ne_bytes())
+        .collect();
+    if let Some(style) = draw.line_style {
+        bytes.extend(
+            [extent.width as f32, extent.height as f32]
+                .iter()
+                .flat_map(|v| v.to_ne_bytes()),
+        );
+        bytes.extend(u32::from(style.pattern).to_ne_bytes());
+        bytes.extend(u32::from(style.factor).to_ne_bytes());
+    }
+    bytes
 }

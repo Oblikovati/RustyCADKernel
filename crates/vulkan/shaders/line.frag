@@ -1,0 +1,15 @@
+#version 450
+layout(location=0) in vec4 vertexColor;
+layout(location=1) in vec2 screenSpaceCoord;
+layout(location=0) out vec4 fragmentColor;
+layout(push_constant) uniform LineTransform { mat4 clip; vec2 viewport; uint pattern; uint factor; } transform;
+void main() {
+    // OCCT 3d097a0 Graphic3d_ShaderManager uses the dominant screen derivative,
+    // not a stipple counter restarted at each segment. Convert Vulkan's Y origin.
+    float coordinate = transform.viewport.y - gl_FragCoord.y;
+    if (abs(dFdx(screenSpaceCoord.x)) - abs(dFdy(screenSpaceCoord.y)) > 0.001)
+        coordinate = gl_FragCoord.x;
+    uint bit = uint(floor(coordinate / float(transform.factor) + 0.5)) & 15u;
+    if ((transform.pattern & (1u << bit)) == 0u) discard;
+    fragmentColor = vertexColor;
+}

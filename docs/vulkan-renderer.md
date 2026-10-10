@@ -4,11 +4,11 @@ The completion target is the pinned legacy OCCT OpenGL renderer's capabilities,
 implemented with Vulkan 1.3. Additional renderer features are outside this scope.
 Visualization and renderer work precede exchange-format expansion.
 
-`martensite-vulkan` now executes an offscreen opaque, unlit triangle path. It takes
+`martensite-vulkan` now executes an offscreen opaque, unlit triangle and line path. It takes
 live Graphic3d attribute/index/bound buffers, ordered group and primitive aspects,
 visibility, structure/group transforms and a camera snapshot. A project-owned
 `RenderBackend` interface receives validated immutable draws and returns top-left
-RGBA8 and float depth captures. Ash is confined to the private backend; production
+sRGB RGBA8 and float depth captures. Ash is confined to the private backend; production
 rendering does not link to OCCT. This is an initial implementation slice, not a
 complete legacy renderer. `Graphic3dRenderDriver` now creates renderer-backed
 structures, groups and views through the ordinary Graphic3d factories.
@@ -43,7 +43,7 @@ Ash's dynamic loader dependency `libloading` 0.8.9 has a narrow ISC license exce
 in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
-triangle lists, triangle strips and triangle fans, unit homogeneous `w` for Vec4 positions, opaque
+triangle lists/strips/fans and segments/polylines, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
 structure clipping/highlighting, textures and custom shaders are not implemented.
@@ -463,3 +463,6 @@ unchanged budgets on both profiles; the seventh remains explicitly unmatched. It
 main median/p95 is 0.940/1.089 ms on lavapipe and 1.764/2.034 ms on native AMD.
 The merged persistence worktree, branch and 9.9 GiB checkout/build cache were
 deleted after an ancestry, local-change and process-reference audit; none was archived.
+
+Line primitives, sRGB encoding, their regression tests and remaining strict capture
+failures are documented in [Martensite line primitives](vulkan-lines.md).

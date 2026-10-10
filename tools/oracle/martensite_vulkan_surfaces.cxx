@@ -1,17 +1,9 @@
 // Surface assembly oracle uses native arrays and per-bound colors (OCCT
 // 3d097a0).
+#include "martensite_vulkan_bound_array.hxx"
 #include <Graphic3d_ArrayOfPrimitives.hxx>
 #include <array>
 #include <vector>
-// The factory intentionally discards strip indices and triangle bounds; this
-// tests the protected base constructor's broader buffer contract, as the Rust
-// fixture does.
-class MartensiteSurfaceArray : public Graphic3d_ArrayOfPrimitives {
-public:
-  MartensiteSurfaceArray(Graphic3d_TypeOfPrimitiveArray kind, int count,
-                         int edges, Graphic3d_ArrayFlags flags)
-      : Graphic3d_ArrayOfPrimitives(kind, count, 2, edges, flags) {}
-};
 static Graphic3d_TypeOfPrimitiveArray surface_kind(const std::string &mode) {
   if (mode == "surface-bound-colors")
     return Graphic3d_TOPA_TRIANGLES;
@@ -50,7 +42,8 @@ surface_vertices(const std::string &mode) {
       Graphic3d_ArrayFlags(Graphic3d_ArrayFlags_BoundColor |
                            (colored ? Graphic3d_ArrayFlags_VertexColor : 0));
   occ::handle<Graphic3d_ArrayOfPrimitives> array =
-      new MartensiteSurfaceArray(kind, count, indexed ? count : 0, flags);
+      new MartensiteOracleBoundArray(kind, count, 2, indexed ? count : 0,
+                                     flags);
   for (const auto &p : points)
     array->AddVertex(p[0], p[1], p[2]);
   array->AddBound(count / 2, 1, 0, 0);

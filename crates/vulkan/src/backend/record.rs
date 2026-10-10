@@ -126,9 +126,10 @@ fn record_draws(
     resources: &FrameResources,
     range: std::ops::Range<usize>,
 ) {
-    let mut previous = vk::Pipeline::null();
+    let mut state = super::draw_state::DrawState::default();
     for draw in &resources.draws[range] {
-        if previous != draw.pipeline.handle {
+        let (bind, push) = state.advance(draw.pipeline.handle, &draw.transform);
+        if bind {
             unsafe {
                 runtime.device().cmd_bind_pipeline(
                     command,
@@ -136,28 +137,26 @@ fn record_draws(
                     draw.pipeline.handle,
                 )
             };
-            previous = draw.pipeline.handle;
         }
-        record_draw(runtime, command, draw.pipeline.layout, draw);
+        record_draw(runtime, command, draw, push);
     }
 }
 fn record_draw(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
-    layout: vk::PipelineLayout,
     draw: &super::frame::UploadedDraw,
+    push: bool,
 ) {
     let device = runtime.device();
     unsafe {
+        if let Some(width) = draw.line_width {
+            device.cmd_set_line_width(command, width);
+        }
         device.cmd_bind_vertex_buffers(command, 0, &[draw.vertices.handle], &[0]);
         device.cmd_bind_index_buffer(command, draw.indices.handle, 0, vk::IndexType::UINT32);
-        device.cmd_push_constants(
-            command,
-            layout,
-            vk::ShaderStageFlags::VERTEX,
-            0,
-            &draw.transform,
-        );
+        if push {
+            push_draw_transform(runtime, command, draw);
+        }
         device.cmd_draw_indexed(command, draw.count, 1, 0, 0, 0);
     }
 }
@@ -305,5 +304,21 @@ fn set_depth_policy(
         runtime
             .device()
             .cmd_set_depth_write_enable(command, layer.depth_write);
+    }
+}
+
+fn push_draw_transform(
+    runtime: &VulkanRuntime,
+    command: vk::CommandBuffer,
+    draw: &super::frame::UploadedDraw,
+) {
+    unsafe {
+        runtime.device().cmd_push_constants(
+            command,
+            draw.pipeline.layout,
+            draw.pipeline.push_stages,
+            0,
+            &draw.transform,
+        );
     }
 }

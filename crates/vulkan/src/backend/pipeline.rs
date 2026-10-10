@@ -3,46 +3,69 @@ use super::runtime::{VulkanRuntime, vk_error};
 use crate::{RenderError, error::rejected};
 use ash::vk;
 use std::sync::Arc;
-pub(super) struct TrianglePipeline {
+pub(super) struct DrawPipeline {
     runtime: Arc<VulkanRuntime>,
     pub handle: vk::Pipeline,
     pub layout: vk::PipelineLayout,
+    pub push_stages: vk::ShaderStageFlags,
     shaders: Vec<vk::ShaderModule>,
 }
-impl TrianglePipeline {
-    pub fn new(runtime: &Arc<VulkanRuntime>, depth_clamp: bool) -> Result<Self, RenderError> {
+impl DrawPipeline {
+    pub fn new(
+        runtime: &Arc<VulkanRuntime>,
+        depth_clamp: bool,
+        line: bool,
+    ) -> Result<Self, RenderError> {
         let mut pipeline = Self {
             runtime: runtime.clone(),
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
+            push_stages: push_range(line).stage_flags,
             shaders: vec![],
         };
-        pipeline.shaders.push(load_shader(
-            runtime,
-            include_bytes!("../../shaders/unlit.vert.spv"),
-        )?);
-        pipeline.shaders.push(load_shader(
-            runtime,
-            include_bytes!("../../shaders/unlit.frag.spv"),
-        )?);
-        pipeline.layout = create_layout(runtime)?;
-        pipeline.create(depth_clamp)?;
+        pipeline.load_shaders(line)?;
+        pipeline.layout = create_layout(runtime, line)?;
+        pipeline.create(depth_clamp, line)?;
         Ok(pipeline)
     }
-    fn create(&mut self, depth_clamp: bool) -> Result<(), RenderError> {
+    fn load_shaders(&mut self, line: bool) -> Result<(), RenderError> {
+        let shaders: [&[u8]; 2] = if line {
+            [
+                include_bytes!("../../shaders/line.vert.spv"),
+                include_bytes!("../../shaders/line.frag.spv"),
+            ]
+        } else {
+            [
+                include_bytes!("../../shaders/unlit.vert.spv"),
+                include_bytes!("../../shaders/unlit.frag.spv"),
+            ]
+        };
+        for bytes in shaders {
+            self.shaders.push(load_shader(&self.runtime, bytes)?);
+        }
+        Ok(())
+    }
+    fn create(&mut self, depth_clamp: bool, line: bool) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state = super::pipeline_state::PipelineState::new(depth_clamp);
+        let state = super::pipeline_state::PipelineState::new(depth_clamp, line);
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
-            .color_attachment_formats(&[vk::Format::R8G8B8A8_UNORM])
+            .color_attachment_formats(&[vk::Format::R8G8B8A8_SRGB])
             .depth_attachment_format(vk::Format::D32_SFLOAT);
-        let info = state
+        let mut info = state
             .description(self.layout, &stages)
             .push_next(&mut rendering);
+        let mut line_state = vk::PipelineRasterizationLineStateCreateInfoEXT::default()
+            .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM);
+        let mut raster = super::pipeline_state::raster_state(depth_clamp);
+        if line {
+            raster = raster.push_next(&mut line_state);
+            info = info.rasterization_state(&raster);
+        }
         self.handle = create_pipeline(&self.runtime, info)?;
         Ok(())
     }
 }
-impl Drop for TrianglePipeline {
+impl Drop for DrawPipeline {
     fn drop(&mut self) {
         unsafe {
             let device = self.runtime.device();
@@ -106,12 +129,38 @@ fn create_pipeline(
     }
 }
 
-fn create_layout(runtime: &VulkanRuntime) -> Result<vk::PipelineLayout, RenderError> {
-    let ranges = [vk::PushConstantRange::default()
-        .stage_flags(vk::ShaderStageFlags::VERTEX)
-        .size(64)];
+fn create_layout(runtime: &VulkanRuntime, line: bool) -> Result<vk::PipelineLayout, RenderError> {
+    // Fragment constants force redundant lavapipe state work on every surface draw.
+    let ranges = [push_range(line)];
     let info = vk::PipelineLayoutCreateInfo::default().push_constant_ranges(&ranges);
     let layout = unsafe { runtime.device().create_pipeline_layout(&info, None) }
         .map_err(|e| vk_error("create pipeline layout", e))?;
     Ok(layout)
+}
+
+fn push_range(line: bool) -> vk::PushConstantRange {
+    let stages = if line {
+        vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT
+    } else {
+        vk::ShaderStageFlags::VERTEX
+    };
+    vk::PushConstantRange::default()
+        .stage_flags(stages)
+        .size(if line { 80 } else { 64 })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn triangle_constants_do_not_invalidate_fragment_state() {
+        assert_eq!(push_range(false).stage_flags, vk::ShaderStageFlags::VERTEX);
+        assert_eq!(push_range(false).size, 64);
+        assert_eq!(push_range(true).size, 80);
+        assert!(
+            push_range(true)
+                .stage_flags
+                .contains(vk::ShaderStageFlags::FRAGMENT)
+        );
+    }
 }

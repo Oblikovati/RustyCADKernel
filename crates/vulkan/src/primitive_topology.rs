@@ -38,3 +38,18 @@ fn fan_triangles(indices: &[u32]) -> Vec<u32> {
         .flat_map(|edge| [center, edge[0], edge[1]])
         .collect()
 }
+
+pub(crate) fn line_indices(
+    kind: Graphic3dTypeOfPrimitiveArray,
+    indices: &[u32],
+) -> Result<Vec<u32>, RenderError> {
+    use Graphic3dTypeOfPrimitiveArray::{Polylines, Segments};
+    match kind {
+        Segments => Ok(indices[..indices.len() / 2 * 2].to_vec()),
+        Polylines => Ok(indices
+            .windows(2)
+            .flat_map(|pair| [pair[0], pair[1]])
+            .collect()),
+        _ => Err(rejected(kind, "segments or polylines")),
+    }
+}

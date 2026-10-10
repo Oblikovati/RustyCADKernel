@@ -24,7 +24,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    partial. The 34 native AMD capture differences are traced to rasterizer precision
    ([controlled evidence](vulkan-raster-precision.md)); retain the raw failures and
    separate diagnostic gate before claiming bitwise parity or accepting its timing
-   baseline. Continue presentation
+   baseline. Segments/polylines, widths and shader patterns now reach Vulkan;
+   [line evidence](vulkan-lines.md) records remaining gradient/depth parity gaps
+   and the new performance workload. Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

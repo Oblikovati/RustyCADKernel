@@ -1,0 +1,126 @@
+//! Validated primitive submissions keep topology and line state independent of Vulkan.
+use crate::{RenderError, RenderVertex, error::rejected};
+/// Primitive assembly after Graphic3d lowering; `PrimitiveTopology::Lines`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum PrimitiveTopology {
+    /// Independent vertex triples.
+    Triangles,
+    /// Independent endpoint pairs.
+    Lines,
+}
+/// Native line width and screen-space stipple; `LineStyle::new(2., 0xffc0, 1)?`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct LineStyle {
+    pub(crate) width: f32,
+    pub(crate) pattern: u16,
+    pub(crate) factor: u16,
+}
+impl LineStyle {
+    /// Validate line state before GPU work; `LineStyle::new(1., 0xffff, 1)?`.
+    pub fn new(width: f32, pattern: u16, factor: u16) -> Result<Self, RenderError> {
+        if !width.is_finite() || width <= 0. || !(1..=256).contains(&factor) {
+            return Err(rejected(
+                (width, pattern, factor),
+                "positive finite line width and stipple factor 1..=256",
+            ));
+        }
+        Ok(Self {
+            width,
+            pattern,
+            factor,
+        })
+    }
+    /// Read `(width, pattern, factor)`; `style.parameters()`.
+    pub fn parameters(&self) -> (f32, u16, u16) {
+        (self.width, self.pattern, self.factor)
+    }
+}
+/// One immutable indexed primitive submission; `PrimitiveDraw::new(vertices, indices, matrix)?`.
+#[derive(Clone, Debug, PartialEq)]
+pub struct PrimitiveDraw {
+    pub(crate) vertices: Vec<RenderVertex>,
+    pub(crate) indices: Vec<u32>,
+    pub(crate) clip_transform: [f32; 16],
+    pub(crate) depth_clamp: bool,
+    pub(crate) line_style: Option<LineStyle>,
+}
+/// Compatibility name for the original submission type; `TriangleDraw::new(vertices, indices, matrix)?`.
+pub type TriangleDraw = PrimitiveDraw;
+impl PrimitiveDraw {
+    /// Validate triangle geometry before GPU work; `PrimitiveDraw::new(vertices,indices,matrix)?`.
+    pub fn new(
+        vertices: Vec<RenderVertex>,
+        indices: Vec<u32>,
+        clip_transform: [f32; 16],
+    ) -> Result<Self, RenderError> {
+        Self::validated(vertices, indices, clip_transform, None)
+    }
+    /// Validate independent line segments; `PrimitiveDraw::segments(vertices, indices, matrix, style)?`.
+    pub fn segments(
+        vertices: Vec<RenderVertex>,
+        indices: Vec<u32>,
+        clip_transform: [f32; 16],
+        style: LineStyle,
+    ) -> Result<Self, RenderError> {
+        Self::validated(vertices, indices, clip_transform, Some(style))
+    }
+    fn validated(
+        vertices: Vec<RenderVertex>,
+        indices: Vec<u32>,
+        clip_transform: [f32; 16],
+        line_style: Option<LineStyle>,
+    ) -> Result<Self, RenderError> {
+        validate_indices(&indices, vertices.len(), line_style.is_some())?;
+        crate::scene::validate_components(&vertices, &clip_transform)?;
+        Ok(Self {
+            vertices,
+            indices,
+            clip_transform,
+            depth_clamp: false,
+            line_style,
+        })
+    }
+    /// Read assembly topology; `draw.topology()`.
+    pub fn topology(&self) -> PrimitiveTopology {
+        if self.line_style.is_some() {
+            PrimitiveTopology::Lines
+        } else {
+            PrimitiveTopology::Triangles
+        }
+    }
+    /// Read optional line state; `draw.line_style()`.
+    pub fn line_style(&self) -> Option<LineStyle> {
+        self.line_style
+    }
+    /// Whether camera persistence clamps depth; `draw.depth_clamp()`.
+    pub fn depth_clamp(&self) -> bool {
+        self.depth_clamp
+    }
+    /// Read the column-major transform; `draw.clip_transform()`.
+    pub fn clip_transform(&self) -> &[f32; 16] {
+        &self.clip_transform
+    }
+    /// Read retained vertices; `draw.vertices().len()`.
+    pub fn vertices(&self) -> &[RenderVertex] {
+        &self.vertices
+    }
+    /// Read zero-based primitive indices; `draw.indices().len()`.
+    pub fn indices(&self) -> &[u32] {
+        &self.indices
+    }
+}
+
+fn validate_indices(indices: &[u32], vertices: usize, line: bool) -> Result<(), RenderError> {
+    let arity = if line { 2 } else { 3 };
+    if indices.len().is_multiple_of(arity) && indices.iter().all(|&i| (i as usize) < vertices) {
+        return Ok(());
+    }
+    Err(rejected(
+        indices,
+        if line {
+            "line index pairs within the vertex array"
+        } else {
+            "triangle index triples within the vertex array"
+        },
+    ))
+}
