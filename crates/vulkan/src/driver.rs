@@ -17,6 +17,7 @@ pub struct Graphic3dRenderDriver {
     transient: StandardTransient,
     base: Graphic3dGraphicDriverBase,
     device: SharedRenderDevice,
+    text_source: Arc<dyn crate::TextLayoutSource>,
     views: SharedState<Vec<WeakHandle<dyn Graphic3dCView>>>,
     limit: u32,
     vertical_sync: SharedState<bool>,
@@ -27,12 +28,28 @@ impl Graphic3dRenderDriver {
     pub fn new(options: VulkanOptions) -> Result<Handle<Self>, RenderError> {
         let renderer = VulkanRenderer::new(options)?;
         let limit = renderer.capture_limit();
-        Ok(Self::build(DriverBackend::Vulkan(renderer), limit))
+        Ok(Self::build(
+            DriverBackend::Vulkan(renderer),
+            limit,
+            Arc::new(crate::FreeTypeTextSource::default()),
+        ))
     }
     /// Inject a named backend and its extent limit; `Graphic3dRenderDriver::with_backend(recorder, 4096)?`.
     pub fn with_backend(
         backend: impl RenderBackend + Send + Sync + 'static,
         limit: u32,
+    ) -> Result<Handle<Self>, RenderError> {
+        Self::with_backend_and_fonts(
+            backend,
+            limit,
+            Arc::new(crate::FreeTypeTextSource::default()),
+        )
+    }
+    /// Inject both graphics and font I/O; `Graphic3dRenderDriver::with_backend_and_fonts(recorder, 4096, fonts)?`.
+    pub fn with_backend_and_fonts(
+        backend: impl RenderBackend + Send + Sync + 'static,
+        limit: u32,
+        fonts: Arc<dyn crate::TextLayoutSource>,
     ) -> Result<Handle<Self>, RenderError> {
         if limit == 0 || limit > i32::MAX as u32 {
             return Err(rejected(limit, "a positive 31-bit capture limit"));
@@ -40,13 +57,19 @@ impl Graphic3dRenderDriver {
         Ok(Self::build(
             DriverBackend::Injected(Box::new(backend)),
             limit,
+            fonts,
         ))
     }
-    fn build(backend: DriverBackend, limit: u32) -> Handle<Self> {
+    fn build(
+        backend: DriverBackend,
+        limit: u32,
+        text_source: Arc<dyn crate::TextLayoutSource>,
+    ) -> Handle<Self> {
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dGraphicDriverBase::new(&Handle::default()),
             device: Arc::new(SharedState::new(backend)),
+            text_source,
             views: SharedState::default(),
             limit,
             vertical_sync: SharedState::new(false),
@@ -86,7 +109,7 @@ impl Graphic3dGraphicDriver for Graphic3dRenderDriver {
         &self,
         manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCStructure>, Failure> {
-        Ok(RenderStructure::new(manager)?.cast())
+        Ok(RenderStructure::new(manager, self.text_source.clone())?.cast())
     }
     fn remove_structure(&self, structure: &mut Handle<dyn Graphic3dCStructure>) {
         if let Some(value) = structure.get() {

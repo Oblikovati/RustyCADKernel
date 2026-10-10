@@ -14,11 +14,12 @@ pub(crate) fn frame_for_view(
     let mut layers = view.layers();
     // OpenGl_FilteredIndexedLayerIterator at the pinned baseline renders normal layers before immediate ones.
     layers.sort_by_key(|layer| layer.is_immediate());
+    let rendering = view.rendering_params();
     let selected = layers
         .iter()
         .filter(|layer| layer_selected(view, layer.layer_id()));
     let passes = selected
-        .map(|layer| layer_pass(layer, &camera, view.identification(), extent))
+        .map(|layer| layer_pass(layer, &camera, view.identification(), extent, &rendering))
         .collect::<Result<_, _>>()?;
     let color = view.cview_base().fields.read().bg_color;
     let clear = [
@@ -40,13 +41,20 @@ fn layer_pass(
     camera: &Graphic3dCamera,
     view_id: i32,
     extent: [u32; 2],
+    rendering: &Graphic3dRenderingParams,
 ) -> Result<RenderLayer, RenderError> {
     let settings = layer.layer_settings();
     validate_layer(layer.layer_id(), &settings)?;
     let mut draws = Vec::new();
     for priority in layer.array_of_structures() {
         for weak in priority.iter() {
-            draws.extend(structure_draws(&weak.upgrade(), camera, view_id, extent)?);
+            draws.extend(structure_draws(
+                &weak.upgrade(),
+                camera,
+                view_id,
+                extent,
+                rendering,
+            )?);
         }
     }
     Ok(RenderLayer::new(
@@ -61,6 +69,7 @@ fn structure_draws(
     camera: &Graphic3dCamera,
     view_id: i32,
     extent: [u32; 2],
+    rendering: &Graphic3dRenderingParams,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     if structure.is_null() {
         return Ok(vec![]);
@@ -69,7 +78,7 @@ fn structure_draws(
     retained
         .get()
         .ok_or_else(|| rejected(structure.object_address(), "a Martensite driver structure"))?
-        .draws(camera, view_id, extent)
+        .draws(camera, view_id, extent, rendering)
 }
 fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     let params = view.rendering_params();

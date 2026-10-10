@@ -40,3 +40,16 @@ mod highlight_style;
 
 mod point_style;
 pub use point_style::PointStyle;
+
+mod raster_image;
+pub use raster_image::RasterImage;
+mod textured_draw;
+pub use textured_draw::TexturedStyle;
+mod text_layout;
+pub use text_layout::{GlyphLayout, TextLayoutSource};
+mod text_font;
+pub use text_font::FreeTypeTextSource;
+mod text_atlas;
+
+mod text_submission;
+mod text_transform;

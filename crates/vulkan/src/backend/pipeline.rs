@@ -17,26 +17,36 @@ impl DrawPipeline {
         depth_clamp: bool,
         line: bool,
         point: bool,
+        text: bool,
     ) -> Result<Self, RenderError> {
         let mut pipeline = Self {
             runtime: runtime.clone(),
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
-            push_stages: push_range(line || point).stage_flags,
+            push_stages: push_range(line || point || text).stage_flags,
             shaders: vec![],
-            sprite_layout: if point {
+            sprite_layout: if point || text {
                 Some(super::point_sprite::SpriteLayout::new(runtime)?)
             } else {
                 None
             },
         };
-        pipeline.load_shaders(line, point)?;
-        pipeline.layout = create_layout(runtime, line || point, pipeline.sprite_layout.as_ref())?;
-        pipeline.create(depth_clamp, line, point)?;
+        pipeline.load_shaders(line, point, text)?;
+        pipeline.layout = create_layout(
+            runtime,
+            line || point || text,
+            pipeline.sprite_layout.as_ref(),
+        )?;
+        pipeline.create(depth_clamp, line, point, text)?;
         Ok(pipeline)
     }
-    fn load_shaders(&mut self, line: bool, point: bool) -> Result<(), RenderError> {
-        let shaders: [&[u8]; 2] = if point {
+    fn load_shaders(&mut self, line: bool, point: bool, text: bool) -> Result<(), RenderError> {
+        let shaders: [&[u8]; 2] = if text {
+            [
+                include_bytes!("../../shaders/text.vert.spv"),
+                include_bytes!("../../shaders/text.frag.spv"),
+            ]
+        } else if point {
             [
                 include_bytes!("../../shaders/point.vert.spv"),
                 include_bytes!("../../shaders/point.frag.spv"),
@@ -57,9 +67,15 @@ impl DrawPipeline {
         }
         Ok(())
     }
-    fn create(&mut self, depth_clamp: bool, line: bool, point: bool) -> Result<(), RenderError> {
+    fn create(
+        &mut self,
+        depth_clamp: bool,
+        line: bool,
+        point: bool,
+        text: bool,
+    ) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state = super::pipeline_state::PipelineState::new(depth_clamp, line, point);
+        let state = super::pipeline_state::PipelineState::new(depth_clamp, line, point, text);
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&[vk::Format::R8G8B8A8_SRGB])
             .depth_attachment_format(vk::Format::D32_SFLOAT);

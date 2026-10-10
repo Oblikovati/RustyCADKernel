@@ -34,6 +34,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    special cases; keep their evidence and continue feature work. [AIS_Point](ais-point.md)
    now adds live point datums, native selection and a batched Vulkan sprite path
    with functional and performance coverage. Point raster/color parity remains partial.
+   [Vulkan text](vulkan-text.md) now renders retained font glyphs and oriented labels;
+   strict text raster parity and additional display modes remain partial.
    Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

@@ -131,7 +131,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.cxx"
       ],
-      "current_evidence_or_remaining_work": "Standard and user point sprites, alpha-only highlighted sprites, AIS_Point selection/detection, runtime validation and a batched performance workload are implemented. Strict raster/color/highlight differences remain recorded in docs/ais-point.md. Fonts, text placement/orientation and broader billboard behavior remain open.",
+      "current_evidence_or_remaining_work": "Standard and user point sprites, alpha-only highlighted sprites, AIS_Point selection/detection, runtime validation and a batched performance workload are implemented. Strict raster/color/highlight differences remain recorded in docs/ais-point.md. Retained Graphic3d_Text now uses ported FreeType/formatter adapters, indexed glyph atlases, fixed-size/zoomable billboards, oriented anchors and annotation depth policy. Eighteen modes and a 1,024-glyph workload exercise both profiles. Strict text raster parity, additional display modes and broader billboard behavior remain open; see docs/vulkan-text.md.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
