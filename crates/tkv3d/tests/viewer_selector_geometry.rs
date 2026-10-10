@@ -4,7 +4,7 @@ mod geometry_sensitive;
 use geometry_sensitive::{GeometrySensitivePoint, geometry_transform};
 use rustycad_tkernel::{
     ncollection::{DataMap, Vec3},
-    standard::Handle,
+    standard::{Failure, Handle},
 };
 use rustycad_tkmath::{
     bnd::Range1,
@@ -234,25 +234,36 @@ fn layer_order_follows_clear_and_write_transitions_and_discards_old_entries() {
 }
 
 #[test]
-fn singular_transform_preserves_native_nonfinite_coordinates() {
+fn singular_transform_matches_native_exception_profile() {
+    let (outcome, result) = singular_pick_case();
+    if rustycad_tkmath::OCCT_DEBUG_CHECKS {
+        assert_eq!(
+            outcome.unwrap_err().exception_type(),
+            "Standard_ConstructionError"
+        );
+        return;
+    }
+    outcome.unwrap();
+    // The pinned release gp_Mat inversion deliberately has no singularity raise.
+    assert!(result.point.x().is_nan());
+    assert!(result.normal.x.is_nan());
+    assert_eq!(result.tolerance, 12.);
+}
+fn singular_pick_case() -> (Result<(), Failure>, SelectMgrSortCriterion) {
     let base = SelectMgrViewerSelectorBase::new();
     let entity = GeometrySensitivePoint::new(false, geometry_transform(0)).cast();
     let mut result = criterion(&entity);
     let mut pick = SelectBasicsPickResult::new(2., 0., Point3::new(5., 8., 11.));
     pick.set_surface_normal(Vec3::new(3., 4., 0.));
-    select_mgr_update_point3d(
+    let outcome = select_mgr_update_point3d(
         &base,
         &mut result,
         &pick,
         &entity,
         &geometry_transform(4),
         &point_volume(),
-    )
-    .unwrap();
-    // The pinned release gp_Mat inversion deliberately has no singularity raise.
-    assert!(result.point.x().is_nan());
-    assert!(result.normal.x.is_nan());
-    assert_eq!(result.tolerance, 12.);
+    );
+    (outcome, result)
 }
 #[test]
 fn clear_sensitive_removes_retained_structures_then_releases_sequence() {

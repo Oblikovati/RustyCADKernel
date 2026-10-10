@@ -1,7 +1,17 @@
 name: Rust
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
+# Thousands of test executables exceed hosted-runner disk with full debug symbols.
+# These settings keep debug assertions and optimization levels unchanged.
+env:
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  CARGO_INCREMENTAL: '0'
 jobs:
   rust:
     strategy:

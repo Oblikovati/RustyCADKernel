@@ -9,13 +9,13 @@ publish.workspace = true
 [lints]
 workspace = true
 [dependencies]
-rustycad-cmath = { path = "../cmath" }
-rustycad-tkernel = { path = "../tkernel" }
-rustycad-tkmath = { path = "../tkmath" }
+rustycad-cmath = { path = "../cmath", version = "0.1.0" }
+rustycad-tkernel = { path = "../tkernel", version = "0.1.0" }
+rustycad-tkmath = { path = "../tkmath", version = "0.1.0" }
 
 [dev-dependencies]
-rustycad-tkgeombase = { path = "../tkgeombase" }
-rustycad-tkgeomalgo = { path = "../tkgeomalgo" }
+rustycad-tkgeombase = { path = "../tkgeombase", version = "0.1.0" }
+rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.1.0" }
 
 [[example]]
 name = "rustycad-tkg2d-numeric-probe"
