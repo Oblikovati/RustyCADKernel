@@ -330,3 +330,44 @@ unchanged. The new workload's initial median/p95 is 3.437/3.816 ms on lavapipe a
 surface regressions; Clippy passes all targets with warnings denied. The harness
 suite passes 22 tests. The final bound-count error includes the offending stored
 value; integrated acceptance validates that final source revision.
+
+The [integrated surface matrix](../porting/runtime-evidence/vulkan-surfaces-main-2026-10-10.json)
+records commit `dec117cd3`: all 252 native image comparisons and fourteen runtime
+checks pass, with zero validation errors. The six lavapipe workload budgets and
+five host budgets pass, including `surface-bounds` at median/p95 3.564/4.118 ms
+and 8.987/10.011 ms respectively. The matrix is **failed** because the host's
+existing AIS display/erase median is 5.359 ms against the unchanged 5.147 ms limit.
+Final captures are retained in `target/vulkan-surfaces-main-captures`.
+
+An [isolated AIS loop](../porting/runtime-evidence/ais-surface-diagnostics-2026-10-10/ais-surface-isolation.json)
+removes the other workloads while preserving 20 warmup and 100 two-frame samples.
+One of six unchanged-binary runs fails the same limit; medians span 3.423–5.754 ms.
+A [phase probe](../porting/runtime-evidence/ais-surface-diagnostics-2026-10-10/ais-surface-phases.json)
+also fails once in six runs. Its failing run has median total 5.702 ms, backend
+5.640 ms, outside-backend 0.041 ms and AIS context operations 0.019 ms. Those are
+separate distribution medians, not additive components of a single sample.
+Render-thread run-queue wait is 0.396 ms across the full failing batch, too small
+to explain the difference by itself. Backend wall time includes allocations,
+submission, waits, capture and scheduling; this is not a GPU timestamp result.
+Driver worker threads and CPU frequency effects are not isolated. The next
+measurement must separate backend resource creation, submission/wait and readback.
+No timing fix is claimed, and these diagnostics do not replace the failed gate.
+
+The diagnostic sources are small reproducibility artifacts for `dec117cd3`, not
+production instrumentation. To rebuild them against that revision, copy the four
+`.rs`/`.py` files from
+`porting/runtime-evidence/ais-surface-diagnostics-2026-10-10` into
+`target/diagnostics`. Temporarily copy each Rust file into `crates/vulkan/examples`
+under the same name, build it using
+`CARGO_TARGET_DIR="$PWD/target/vulkan-harness" cargo build -p martensite-vulkan --release --example NAME --locked`,
+and remove the temporary example source. Then run:
+
+```sh
+python3 target/diagnostics/run-ais-isolation.py
+python3 target/diagnostics/run-ais-phases.py
+```
+
+Each command returns failure if any of its six runs exceeds the original AIS
+median/p95 budget; raw samples and binary hashes are retained. Temporary example
+sources were removed after measurement. The completed surface worktree, branch
+and build cache were deleted; all implementation commits are integrated into `main`.
