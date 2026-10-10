@@ -1,0 +1,148 @@
+{
+  "scope": "Martensite StdPrs_Curve complete Add/Match overload family and renderer fixtures",
+  "implementation_commit": "ea29888c2a4773149043ebbcda0bdd854fdf0f68",
+  "main_verified": "ba4e628dfe8da30eba55610d5f4082905afc535a",
+  "numeric_cases": 148918,
+  "new_curve_cases": 6376,
+  "tkv3d_cpu_tests": 350,
+  "vulkan_cpu_tests": 70,
+  "python_harness_tests": 28,
+  "clippy": "passed all targets -D warnings",
+  "strict_renderer_status": "failed",
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "passed": 369,
+      "total": 372,
+      "failed_cases": [
+        "96-48-0-2-line-gradient",
+        "48-96-0--3-line-gradient",
+        "48-96-1--3-line-gradient"
+      ],
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration"
+      ],
+      "runtime": "PASS: 11 Vulkan runtime checks; validation errors: 0",
+      "curve_performance": {
+        "median_ms": 2.3530439999999997,
+        "p95_ms": 2.695167,
+        "samples": 100,
+        "warmup": 20
+      }
+    },
+    {
+      "profile": "host",
+      "passed": 327,
+      "total": 372,
+      "failed_cases": [
+        "64-64-0-0-pers-zoom",
+        "64-64-0-0-pers-axial",
+        "64-64-0-0-pers-zoom-axial",
+        "64-64-0-0-pers-triedron",
+        "64-64-0-0-pers-ortho",
+        "64-64-0-0-pers-triedron-ortho",
+        "64-64-0-0-pers-group-zoom",
+        "64-64-0-0-pers-nested",
+        "64-64-0-0-pers-scaled-above",
+        "64-64-0-0-line-depth",
+        "64-64-0-0-stdprs-circle",
+        "64-64-0-0-stdprs-arrow",
+        "96-48-0-2-pers-zoom",
+        "96-48-0-2-pers-axial",
+        "96-48-0-2-pers-zoom-axial",
+        "96-48-0-2-pers-triedron",
+        "96-48-0-2-pers-ortho",
+        "96-48-0-2-pers-triedron-ortho",
+        "96-48-0-2-pers-group-zoom",
+        "96-48-0-2-pers-nested",
+        "96-48-0-2-pers-scaled-above",
+        "96-48-0-2-line-depth",
+        "96-48-0-2-stdprs-arrow",
+        "48-96-0--3-pers-zoom",
+        "48-96-0--3-pers-axial",
+        "48-96-0--3-pers-zoom-axial",
+        "48-96-0--3-pers-triedron",
+        "48-96-0--3-pers-ortho",
+        "48-96-0--3-pers-triedron-ortho",
+        "48-96-0--3-pers-group-zoom",
+        "48-96-0--3-pers-nested",
+        "48-96-0--3-pers-scaled-above",
+        "48-96-0--3-line-depth",
+        "48-96-0--3-stdprs-arrow",
+        "64-64-1-0-pers-ortho",
+        "64-64-1-0-pers-triedron-ortho",
+        "64-64-1-0-line-depth",
+        "64-64-1-0-stdprs-circle",
+        "64-64-1-0-stdprs-arrow",
+        "96-48-1-2-pers-ortho",
+        "96-48-1-2-pers-triedron-ortho",
+        "48-96-1--3-pers-zoom",
+        "48-96-1--3-pers-ortho",
+        "48-96-1--3-pers-triedron-ortho",
+        "48-96-1--3-stdprs-arrow"
+      ],
+      "performance_failures": [
+        "received unmatched workload line-bounds; expected matching baseline configuration",
+        "received unmatched workload persistence-groups; expected matching baseline configuration",
+        "received unmatched workload curve-presentations; expected matching baseline configuration"
+      ],
+      "runtime": "PASS: 11 Vulkan runtime checks; validation errors: 0",
+      "curve_performance": {
+        "median_ms": 2.2315545,
+        "p95_ms": 2.6264499999999997,
+        "samples": 100,
+        "warmup": 20
+      }
+    }
+  ],
+  "raw_buffer_audit": "../../runtime-evidence/stdprs-main-buffer-audit-2026-10-10.json",
+  "cleanup_receipt": "stdprs-curve-cleanup.json",
+  "preserved_unmerged_branches": [
+    "port/mmgropt-resource-storage",
+    "porting/linked-slot-recovery",
+    "wip/codex-array-trivial-resize-phase",
+    "wip/codex-bvh-perf-diag",
+    "wip/codex-continuity3d-periodic",
+    "wip/codex-dynamic-storage-noop-domains",
+    "wip/codex-hlr-line-tool",
+    "wip/codex-indexed-map-borrowed-add",
+    "wip/codex-linear-vector-trivial-insert",
+    "wip/codex-osd-concrete-iterator-wrapper",
+    "wip/codex-packed-map-extent-boundaries",
+    "wip/codex-recovery-import",
+    "wip/codex-recovery-inc",
+    "wip/codex-recovery-views",
+    "wip/codex-shape-fix-add-pcurve-oracle",
+    "wip/codex-shapefix-wirevertex",
+    "wip/codex-split-curve3d-continuity",
+    "wip/codex-tkernel-arc-validation",
+    "wip/codex-tkoffset-boundary-next",
+    "wip/codex-tkoffset-face-data",
+    "wip/codex-tkoffset-get-analyse",
+    "wip/codex-ubtree-filler-stream-check"
+  ],
+  "prior_unfinished_failure_note": "linked-slot-recovery previously reported 39 compile errors; not rechecked in this slice. See vulkan-raster-precision.json for prior branch handoff.",
+  "remaining_work": [
+    "AIS_Line object and selection integration",
+    "Renderer circle coverage and arrow depth differences; prior line/persistence failures",
+    "Accept performance baselines only after corresponding parity work",
+    "Points, broader presentations and native window rendering"
+  ],
+  "goal_complete": false,
+  "next_slice_notes": [
+    "AIS_Line uses StdPrsCurve for finite and infinite presentations, SensitiveSegment for mode-zero selection, and live aspect replacement.",
+    "Infinite selection extent must call UnitsApi::any_to_ls(250000, mm); preserve injected unit-system state, not a fixed distance.",
+    "SetLine/SetPoints only change geometry and segment flag; native infinite-state and UnsetWidth quirks need differential coverage."
+  ],
+  "inventory": {
+    "done": 51560,
+    "partial": 974,
+    "open": 23507,
+    "total": 76041,
+    "new_resolved_curve_declarations": 9,
+    "unresolved_ledger_rows": 0,
+    "full_port_complete": false
+  }
+}

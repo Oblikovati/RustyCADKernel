@@ -1,0 +1,32 @@
+{
+  "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "toolkit": "TKV3d",
+  "cases_passed": 148918,
+  "input_sha256": "7de9de9490deb8a9a8d38aff889429df7f2f4caba73468af1fdf1f705b03524f",
+  "output_sha256": "5ec8c892cbeaa574663db702a1e464e518f976eeacf6e68fe4befa03aac79671",
+  "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+  "nan_representation_difference_cases": 0,
+  "shutdown_failure": {
+    "request": "v3_ais_context_shutdown 1 1 2",
+    "return_codes": {
+      "native": -6,
+      "rust": -6
+    }
+  },
+  "martensite_revision": "ba4e628dfe8da30eba55610d5f4082905afc535a",
+  "stdprs_cases": 6376,
+  "source_sha256": {
+    "crates/tkv3d/examples/v3_probe/stdprs_curve.rs": "c11f62b8693f67955734c204b5e7aa14107ba5b8814ecaa74913889bf15c2581",
+    "crates/tkv3d/src/std_prs/curve.rs": "b187586914b74c1a3b9855ecd0574e2cfc101b0ba1aaf979c98354f0195a0864",
+    "crates/tkv3d/src/std_prs/curve_draw.rs": "45dc51812513882e5ea39d1377f12ef037300fa075f1662e9700507d1759f35c",
+    "crates/tkv3d/src/std_prs/curve_limits.rs": "96e6b87d2a127c180d6cdd453da7e7ad30c1c2b4e3ce8ccd1e1631f6def9e37e",
+    "crates/tkv3d/src/std_prs/curve_match.rs": "48095ec9f0491244b0062ddda38e2179ba30c3bd88fe686cb2654682620e22cf",
+    "crates/tkv3d/src/std_prs/mod.rs": "4d96879971a4e18f972ab0654e980779fb37725ff5b787b62201f52df1e11987",
+    "crates/tkv3d/tests/support/stdprs_curve_geometry.rs": "d1a1b782795c7d7c74a3ca396ff16d9cf9d05a24ff0c2f38117fd1e0eac3e3d6",
+    "tools/oracle/martensite_stdprs_geometry.hxx": "a93a20e64edaf2eb0ed1434355b8bacd9c495839bc5bf37071d3a3de82f7185a",
+    "tools/oracle/tkv3d_probe_stdprs_curve.cxx": "3b4f3ae684ec10a4a5fc7ec67238522eb9a4ccf9691c28a4d1f84f0c4ca4cb5a",
+    "tools/tkv3d_corpus_stdprs_curve.py": "d1ef4b3d3e8668847a91a102c108c8e925b37188420ef435d8562e95d39b0466"
+  },
+  "tkv3d_cpu_tests": 350,
+  "clippy": "passed all targets, -D warnings"
+}

@@ -56,3 +56,18 @@ This completes the standard curve overload family, not the StdPrs package or
 renderer capability family. `AIS_Line` can now use this prerequisite; its object
 API and selection integration remain to be ported. Point primitives, additional
 presentations and native window rendering also remain priorities.
+
+## Integrated result
+
+Merged main at `ba4e628df` passes 350 TKV3d tests, 70 Vulkan CPU tests,
+28 Python harness tests, Clippy and the full 148,918-case native oracle.
+[Main GPU evidence](../porting/runtime-evidence/vulkan-stdprs-main-2026-10-10.json)
+reproduces the capture counts and strict failures above. All 2,976 raw buffers
+match the worktree run byte for byte. The six established performance budgets
+pass on both devices. Integrated curve-rebuild medians are 2.353 ms on lavapipe
+and 2.232 ms on AMD (p95 2.695 / 2.626 ms). The completed worktree, branch and build cache were
+deleted after ancestry, local-change and process checks; no archive was created.
+
+The refreshed compiler inventory resolves all nine curve mappings uniquely.
+Defined port scope: 51,560 done, 974 partial and 23,507 open of 76,041
+declarations; zero unresolved ledger rows. The overall port remains incomplete.
