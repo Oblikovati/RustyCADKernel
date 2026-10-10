@@ -1,0 +1,165 @@
+{
+  "implementation_commit": "341f2ee35",
+  "integration_commit": "a145c2f2e",
+  "completed_branches_deleted": [
+    "porting/martensite-raster-parity"
+  ],
+  "completed_worktrees_deleted": [
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-raster-parity"
+  ],
+  "worktrees_archived": false,
+  "deleted_checkout_size_before_cleanup": "2.0 GiB (du -sh)",
+  "process_references_to_deleted_worktrees": [],
+  "checks": {
+    "harness_python": 28,
+    "default_native_captures_byte_identical": 480,
+    "invalid_native_control_arguments_rejected": 2,
+    "host_precision_controls_passed": 114,
+    "host_precision_controls_total": 114,
+    "lavapipe_precision_controls_passed": 84,
+    "lavapipe_precision_controls_total": 114,
+    "worktree_main_control_sources_and_buffers_identical": true,
+    "raw_acceptance": "Unchanged: original 34 native failures remain failures. Production renderer sources and shaders unchanged.",
+    "performance": "No production rendering changes or timing rerun. Existing six baselines and budgets unchanged. No persistence baseline accepted.",
+    "inventory": "Published source/ledger/artifact/tool fingerprints current, zero unresolved ledger rows. Raw capture verify rejects changed workspace_revision; all other capture-context fields match exactly, retained in inventory-context.json."
+  },
+  "preserved_unfinished": [
+    {
+      "branch": "port/mmgropt-resource-storage",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "porting/linked-slot-recovery",
+      "worktree": null,
+      "remaining_failures": "39 compile errors at last linked-slot handoff; not rechecked"
+    },
+    {
+      "branch": "wip/codex-array-trivial-resize-phase",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-bvh-perf-diag",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-continuity3d-periodic",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-dynamic-storage-noop-domains",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-hlr-line-tool",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-indexed-map-borrowed-add",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-linear-vector-trivial-insert",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-osd-concrete-iterator-wrapper",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-packed-map-extent-boundaries",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-recovery-import",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-recovery-inc",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-recovery-views",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-shape-fix-add-pcurve-oracle",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-shapefix-wirevertex",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-split-curve3d-continuity",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-tkernel-arc-validation",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-tkoffset-boundary-next",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-tkoffset-face-data",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-tkoffset-get-analyse",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "wip/codex-ubtree-filler-stream-check",
+      "worktree": null,
+      "remaining_failures": "not rechecked in this batch"
+    },
+    {
+      "branch": "feat/release-packages",
+      "worktree": "/home/vmiguel/git/oblikovati-workspace/martensite-release-packages",
+      "remaining_failures": "Observed at a7bbda987 with a clean checkout; extracted-package Rust tests were actively compiling. Owned by concurrent task; not integrated or deleted by this diagnostic task."
+    }
+  ],
+  "evidence": [
+    "docs/vulkan-raster-precision.md",
+    "porting/runtime-evidence/vulkan-raster-control-worktree-2026-10-10.json",
+    "porting/runtime-evidence/vulkan-raster-control-main-2026-10-10.json",
+    "porting/runtime-evidence/vulkan-raster-default-regression-2026-10-10.json",
+    "porting/runtime-evidence/raster-precision-2026-10-10/planes.json",
+    "porting/runtime-evidence/raster-precision-2026-10-10/inventory-context.json"
+  ],
+  "inventory": {
+    "port": {
+      "api_declarations": 76041,
+      "api_done": 51551,
+      "api_open": 23516,
+      "api_partial": 974,
+      "gtests_mapped": 7969,
+      "gtests_not_applicable": 2,
+      "gtests_unmapped": 480,
+      "toolkits": 56
+    },
+    "new_api_mappings": 0
+  },
+  "remaining_work": "Continue prioritized Vulkan/visualization implementation, especially line and point primitives and presentation support. Persistence raw bitwise comparisons remain unmet; their cause is now isolated to native subpixel/depth interpolation behavior. Do not repeat falsified matrix/depth-format probes, suppress raw failures, treat the host-only control as universal, or accept the missing timing baseline without explicit acceptance evidence. Stereo/tiled/large-coordinate and wider renderer families remain partial."
+}

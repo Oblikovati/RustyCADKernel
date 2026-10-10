@@ -69,3 +69,9 @@ Native bitwise parity and an accepted persistence timing baseline remain open.
 This diagnosis removes the reason to keep changing camera matrices or depth
 formats to chase these driver-dependent differences. Continue renderer capability
 work while retaining both the original failures and the isolated precision evidence.
+
+The [main control receipt](../porting/runtime-evidence/vulkan-raster-control-main-2026-10-10.json)
+at `a145c2f2e` reproduces every worktree control buffer and result. All 28 Python
+harness tests pass. The completed diagnostic worktree, branch and 2.0 GiB checkout
+were deleted after ancestry, local-change and process-reference checks. No cache
+was archived; the separate release-packaging task remains active and preserved.
