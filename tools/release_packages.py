@@ -8,6 +8,7 @@ Requires Python 3.12+, the pinned Rust toolchain, and native build prerequisites
 from __future__ import annotations
 
 import argparse
+import gzip
 from pathlib import Path
 import tempfile
 import tarfile
@@ -61,11 +62,26 @@ def package_test_support(root: Path, commands: Commands) -> None:
     tracked = commands.run(
         ["git", "ls-files", "-z", "tools/oracle", "porting/parity.json"], root
     ).split("\0")
-    with tarfile.open(
-        root / "target/package/martensite-test-support.tar.gz", "w:gz"
-    ) as stream:
+    target = root / "target/package/martensite-test-support.tar.gz"
+    with target.open("wb") as raw, gzip.GzipFile(
+        filename="", fileobj=raw, mode="wb", mtime=0
+    ) as compressed, tarfile.open(fileobj=compressed, mode="w") as stream:
         for name in sorted(filter(None, tracked)):
-            stream.add(root / name, arcname=name, recursive=False)
+            stream.add(
+                root / name, arcname=name, recursive=False, filter=release_metadata
+            )
+
+
+def release_metadata(member: tarfile.TarInfo) -> tarfile.TarInfo:
+    """Remove checkout-specific archive metadata; example: ``release_metadata(member)``."""
+    if not member.isfile():
+        raise ValueError(
+            f"test support member {member.name!r}: expected a regular tracked file"
+        )
+    # TarInfo holds its open archive; only scalar metadata needs replacement.
+    return member.replace(
+        uid=0, gid=0, uname="", gname="", mtime=0, mode=0o644, deep=False
+    )
 
 
 def main() -> None:

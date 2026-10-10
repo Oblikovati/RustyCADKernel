@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import tarfile
@@ -19,7 +20,7 @@ from release_inventory import (
     release_revision,
     validate_inventory,
 )
-from release_packages import build_release
+from release_packages import build_release, package_test_support, release_metadata
 
 REVISION = "a" * 40
 CRATE = ReleaseCrate("rustycad-kernel", "0.1.0", "crates/kernel")
@@ -191,6 +192,18 @@ class ReleasePackageTests(unittest.TestCase):
         self.assertIn('path = "crates/kernel"', (stage / "Cargo.toml").read_text())
         with self.assertRaises(FileExistsError):
             stage_workspace(output, stage, [CRATE], output / "Cargo.lock")
+
+    def test_test_support_is_independent_of_checkout_timestamps(self) -> None:
+        package_test_support(self.fixture.root, self.runner)
+        archive = self.fixture.root / "target/package/martensite-test-support.tar.gz"
+        first = archive.read_bytes()
+        os.utime(self.fixture.root / "tools/oracle/check.expected", (10, 10))
+        package_test_support(self.fixture.root, self.runner)
+        self.assertEqual(first, archive.read_bytes())
+        member = tarfile.TarInfo("linked-fixture")
+        member.type = tarfile.SYMTYPE
+        with self.assertRaisesRegex(ValueError, "regular tracked file"):
+            release_metadata(member)
 
     def test_system_commands_propagates_failures(self) -> None:
         runner = SystemCommands()
