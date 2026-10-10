@@ -51,10 +51,15 @@
 #include "tkbool_probe_brepfill_offset_wire.cxx"
 #include "tkbool_probe_brepfill_multi_line.cxx"
 #include "tkbool_probe_brepfill_advanced_evolved.cxx"
+#include "tkbool_probe_evolved_digest.cxx"
+#include "tkbool_probe_brepfill_evolved.cxx"
 #include "tkbool_probe_brepalgo.cxx"
 #include "tkbool_probe_brepproj.cxx"
 #include "tkbool_probe_topopebreptool_curve_tool.cxx"
 #include "tkbool_probe_topopebrepds.cxx"
+#include "tkbool_probe_curve_explorer.cxx"
+#include "tkbool_probe_point_explorer.cxx"
+#include "tkbool_probe_interference_tool.cxx"
 #include "tkbool_probe_topopebreptool_shapes.cxx"
 #include "tkbool_probe_topopebrepds_build.cxx"
 #include "tkbool_probe_topopebreptool_classifier.cxx"
@@ -89,6 +94,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"bf_multi_line", bl_bf_multi_line_case},
  {"bf_trim_surface", bl_bf_trim_surface_case},
  {"bf_advanced_evolved", bl_bf_advanced_evolved_case},
+ {"bf_evolved", bl_bf_evolved_case},
+ {"bf_evolved_empty", bl_bf_evolved_empty_case},
  // BRepAlgo (tkbool_probe_brepalgo.cxx)
  {"ba_concat", bl_ba_concat_case},
  {"ba_concat_c0", bl_ba_concat_c0_case},
@@ -106,6 +113,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopOpeBRepDS (tkbool_probe_topopebrepds.cxx)
  {"ds_transition", bl_ds_transition_case},
  {"ds_kind", bl_ds_kind_case},
+ {"ds_curve_explorer", bl_curve_explorer_case},
+ {"ds_curve_explorer_mutation", bl_curve_explorer_mutation_case},
+ {"ds_point_explorer", bl_point_explorer_case},
+ {"ds_point_explorer_mutation", bl_point_explorer_mutation_case},
+ {"ds_interference_tool", bl_interference_tool_case},
  // TopOpeBRepTool shape helpers (tkbool_probe_topopebreptool_shapes.cxx)
  {"tt_shape_tool", bl_tt_shape_tool_case},
  {"tt_project", bl_tt_project_case},

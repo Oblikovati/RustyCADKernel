@@ -101,6 +101,15 @@ VISUALIZATION_CLOSURE_TARGETS: list[str] = [*VISUALIZATION_TOOLKITS, 'gtest_main
 EXPRESS_TOOLKITS: tuple[str, ...] = ('TKExpress',)
 EXPRESS_LINKED_TOOLKITS: tuple[str, ...] = ('TKExpress', 'TKernel')
 EXPRESS_CLOSURE_TARGETS: list[str] = [*EXPRESS_TOOLKITS, 'gtest_main']
+# The TKV3d oracle closure (TKV3d suites and numeric oracle) lives in its own build tree too:
+# TKV3d sits on TKService (FreeType, fontconfig, Xlib) and on the modeling toolkits of its
+# EXTERNLIB. The shared all-modules build can be reused instead.
+V3D_TOOLKITS: tuple[str, ...] = ('TKV3d',)
+# The TKV3d closure's shared libraries in link order, dependants first (its EXTERNLIB).
+V3D_LINKED_TOOLKITS: tuple[str, ...] = ('TKV3d', 'TKService', 'TKHLR', 'TKMesh', 'TKShHealing',
+                                        'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+                                        'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
+V3D_CLOSURE_TARGETS: list[str] = [*V3D_TOOLKITS, 'gtest_main']
 
 
 def closure_flags(modules: list[str], toolkits: tuple[str, ...] = ADDITIONAL_TOOLKITS) -> list[str]:

@@ -141,7 +141,7 @@ fn IntPatch_PolyhedronBVHTest__OriginalIndex() {
     }
 
     // Force BVH build
-    a_bvh.built_bvh().unwrap();
+    drop(a_bvh.built_bvh().unwrap());
 
     // After BVH build, each original index should appear exactly once
     let mut a_used = vec![false; (a_nb_poly_tri + 1) as usize];

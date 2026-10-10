@@ -68,3 +68,5 @@ pub use istream_state::{IstreamException, IstreamExceptionMask, IstreamReadResul
 pub use istream_stream::IstreamStream;
 pub use read_buffer::{ReadBuffer, ReadChunkIstreamError};
 pub use read_line_buffer::ReadLineBuffer;
+mod nonrecursive_mutex;
+pub use nonrecursive_mutex::{NonRecursiveMutex, NonRecursiveMutexGuard};

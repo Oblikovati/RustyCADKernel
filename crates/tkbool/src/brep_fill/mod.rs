@@ -57,3 +57,6 @@ pub use trim_surface_tool::{BRepFillTrimSurfaceTool, ProjectedCurves};
 /// AppCont_Function, fitting a [`BRepFillMultiLine`];
 /// `BRepFillComputeCLine::with_line(&multi_line, ComputeCLineOptions::default())?`.
 pub type BRepFillComputeCLine = rustycad_tkgeombase::approx::ComputeCLine;
+
+mod evolved;
+pub use evolved::BRepFillEvolved;

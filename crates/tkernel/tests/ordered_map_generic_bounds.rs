@@ -60,7 +60,7 @@ fn unformatted_keys_support_cursors_and_node_edges() {
     *cursor.change_value(&mut map).unwrap() = 15;
     assert_eq!(cursor.post_advance(&map).value(&map), Ok(&15));
     assert_eq!(cursor.value(&map), Ok(&20));
-    cursor.reset(&map);
+    cursor.reset(&map).unwrap();
     assert_eq!(cursor.key(&map).unwrap().0, 1);
     *map.first_node_mut().unwrap().change_value() = 16;
     assert_eq!(map.first_node().unwrap().order_next().unwrap().key().0, 2);

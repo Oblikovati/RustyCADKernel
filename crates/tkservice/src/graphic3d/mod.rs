@@ -252,10 +252,13 @@ pub use small_values::{Graphic3dBufferRange, Graphic3dPolygonOffset, Graphic3dVe
 pub use stats_enums::*;
 pub use structure::{
     Graphic3dStructure, Graphic3dStructureBase, Graphic3dStructureFields, Graphic3dStructureSource,
-    graphic3d_structure_bind,
+    graphic3d_structure_bind, graphic3d_structure_dump_json,
 };
 pub use structure_bounds::Graphic3dStructureBounds;
-pub use structure_display::Graphic3dStructureDisplay;
+pub use structure_display::{
+    Graphic3dStructureDisplay, graphic3d_structure_clear, graphic3d_structure_display,
+    graphic3d_structure_erase,
+};
 pub use structure_manager::{
     Graphic3dStructureManager, Graphic3dStructureManagerFields, Graphic3dStructureSet,
 };

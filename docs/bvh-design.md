@@ -207,3 +207,17 @@ Upstream slices build dirty trees lazily and concurrently.
 | `BVH_Traverse.hxx`, `BVH_Traverse.lxx` | `traverse`, `tree_owner` |
 | `BVH_Triangulation.hxx` | `triangulation` |
 | `BVH_Types.hxx` | `scalar`, `vector`, `array` |
+
+## Retained primitive tree handles
+
+`BvhTreeHandle` owns shared tree storage. Primitive sets rebuild that same storage,
+so retained handles observe both successful rebuilds and partial builder failures.
+Reading requires a guard; release it before rebuilding the set. The existing
+traversal adapter copies its working tree and restores into the shared object,
+which avoids temporarily emptying externally retained handles. Distance-field
+workers likewise take a snapshot before borrowing mesh vertices.
+
+`BvhObjectTransientSource` provides runtime casts, shared properties and dirty
+state for handle-owned derived sets. Its native descriptor is BVH_ObjectTransient;
+the unnamed template bases introduce no additional runtime parent. Three direct
+tests exercise retained identity, traversal restoration and partial failure.

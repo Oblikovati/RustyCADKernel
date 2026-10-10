@@ -31,7 +31,7 @@ dispatch. The handle is extended, not replaced:
 - `Handle<T: ?Sized>`: `T` can be a trait object.
 - `RuntimeTyped` gets `project_from(&dyn Transient) -> Option<&Self>`. Structs
   implement it with the existing projection and downcast; trait objects with a
-  lookup in the dynamic descriptor.
+  lookup in `Transient::rust_interface_descriptor()`, normally the dynamic descriptor.
 - `RuntimeType::register_with_interfaces` stores, for each abstract ancestor trait, an
   `InterfaceCaster<dyn Trait>`: a plain `fn(&dyn Transient) -> Option<&dyn Trait>`
   that the concrete class generates (`impl_transient!(..., interfaces: [...])`).
@@ -41,6 +41,14 @@ dispatch. The handle is extended, not replaced:
   gives each abstract class its own descriptor, so `DynamicType`, `IsKind`,
   `IsInstance` and names follow the native chain
   `Geom2d_Circle -> Geom2d_Conic -> Geom2d_Curve -> Geom2d_Geometry -> Standard_Transient`.
+
+A class without its own native RTTI declaration, such as `SelectMgr_AxisIntersector`
+(OCCT 3d097a0), inherits its parent's `DynamicType` and static descriptor. It overrides
+`rust_interface_descriptor()` with a private descriptor holding only Rust casters.
+This keeps handle projection independent of the observable native type identity:
+concrete and trait handles retain the same object and reference count, while
+`IsInstance`, `IsKind`, names and native descriptors still report the inherited type.
+Normal classes use the default method, which returns their existing dynamic type.
 
 `occ::down_cast<Geom2d_Circle>(h)` is `h.cast::<Geom2dCircle>()`, and an up cast
 is the same call. A failed cast returns a null handle, as in OCCT. Handle

@@ -14,6 +14,11 @@ use std::{
 pub trait Transient: Any + Send + Sync {
     /// Dispatch the most-derived OCCT descriptor; `object.dynamic_type()`.
     fn dynamic_type(&self) -> &'static RuntimeType;
+    /// Choose Rust trait casters independently of inherited native RTTI.
+    /// Example: `object.rust_interface_descriptor().name()`; ordinarily this is `dynamic_type()`.
+    fn rust_interface_descriptor(&self) -> &RuntimeType {
+        self.dynamic_type()
+    }
     /// Own the dynamic class descriptor; `object.dynamic_type_handle()`.
     fn dynamic_type_handle(&self) -> Handle<RuntimeType> {
         Handle::from_static(self.dynamic_type())

@@ -19,5 +19,5 @@ mod sort;
 mod uniform_real;
 pub use mt19937::MersenneTwister;
 pub use partition::partition;
-pub use sort::sort_by;
+pub use sort::{sort_by, try_sort_by};
 pub use uniform_real::{UniformRealDistribution, generate_canonical};

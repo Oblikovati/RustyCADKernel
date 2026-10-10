@@ -10,11 +10,12 @@ use rustycad_tkernel::standard::Failure;
 ///
 /// Upstream traversals keep a raw set pointer and a tree handle side by side.
 /// Safe Rust cannot borrow the tree while `Accept` reads the set, so the tree
-/// is moved out for the traversal and moved back afterwards. During that time
-/// the set holds an empty tree.
+/// is owned separately during traversal and restored afterwards. Primitive sets
+/// copy their shared tree so retained handles stay valid; geometry moves its
+/// value tree out and holds an empty tree until restoration.
 /// Example: `let tree = set.take_built_bvh()?; ...; set.restore_bvh(tree);`.
 pub trait BvhTreeOwner<V: BvhVector> {
-    /// `BVH()`: rebuilds the tree while dirty, then moves it out of the set.
+    /// `BVH()`: rebuilds while dirty, then returns an owned tree for traversal.
     fn take_built_bvh(&mut self) -> Result<BvhTree<V>, Failure>;
     /// Moves a tree taken by [`BvhTreeOwner::take_built_bvh`] back into the set.
     fn restore_bvh(&mut self, bvh: BvhTree<V>);

@@ -6,6 +6,7 @@ mod data;
 mod data_structure;
 mod hdata_structure;
 mod interference;
+mod interference_tool;
 mod iterators;
 mod kind;
 mod package;
@@ -22,7 +23,10 @@ pub use data::{
     TopOpeBRepDSListOfShapeOn1State, TopOpeBRepDSPointData, TopOpeBRepDSShapeData,
     TopOpeBRepDSShapeWithState, TopOpeBRepDSSurfaceData,
 };
-pub use data_structure::{MapOfShapeWithState, TopOpeBRepDSDataStructure};
+pub use data_structure::{
+    MapOfShapeWithState, TopOpeBRepDSCurveExplorer, TopOpeBRepDSDataStructure,
+    TopOpeBRepDSPointExplorer,
+};
 pub use hdata_structure::{
     TopOpeBRepDSHDataStructure, fun_hds_facesinterfer, fun_topopebrepds_sort_on_parameter,
 };
@@ -31,6 +35,7 @@ pub use interference::{
     TopOpeBRepDSFaceEdgeInterference, TopOpeBRepDSInterference, TopOpeBRepDSShapeShapeInterference,
     TopOpeBRepDSSolidSurfaceInterference, TopOpeBRepDSSurfaceCurveInterference,
 };
+pub use interference_tool::TopOpeBRepDSInterferenceTool;
 pub use iterators::{
     TopOpeBRepDSCurveIterator, TopOpeBRepDSInterferenceIterator, TopOpeBRepDSPointIterator,
     TopOpeBRepDSSurfaceIterator,

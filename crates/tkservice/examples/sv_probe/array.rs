@@ -226,9 +226,15 @@ pub fn array_case(values: &[f64]) {
             let op = r.integer();
             vertex_op(a, op, &mut r)
         });
-        print_summary(a);
-        print_buffers(a);
-        print_values(a);
+        array_state(a);
     }
     end();
+}
+
+/// `sv_array_state`: the summary, the buffers and the values read back; the TKV3d probe
+/// prints the arrays of its presentation tools with it.
+pub fn array_state(a: &Graphic3dArrayOfPrimitives) {
+    print_summary(a);
+    print_buffers(a);
+    print_values(a);
 }

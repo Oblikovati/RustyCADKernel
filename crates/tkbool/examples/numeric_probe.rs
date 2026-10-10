@@ -48,6 +48,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bf_offset_wire", brep_fill_offset_wire::offset_wire_case),
     ("bf_multi_line", brep_fill_multi_line::multi_line_case),
     ("bf_trim_surface", brep_fill_multi_line::trim_surface_case),
+    ("bf_evolved", bl_probe::brep_fill_evolved::evolved_case),
+    (
+        "bf_evolved_empty",
+        bl_probe::brep_fill_evolved::evolved_empty_case,
+    ),
     (
         "bf_advanced_evolved",
         brep_fill_advanced_evolved::advanced_evolved_case,
@@ -75,6 +80,26 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // TopOpeBRepDS (bl_probe/top_ope_brep_ds.rs)
     ("ds_transition", top_ope_brep_ds::transition_case),
     ("ds_kind", top_ope_brep_ds::kind_case),
+    (
+        "ds_interference_tool",
+        bl_probe::interference_tool::interference_tool_case,
+    ),
+    (
+        "ds_point_explorer",
+        bl_probe::point_explorer::point_explorer_case,
+    ),
+    (
+        "ds_point_explorer_mutation",
+        bl_probe::point_explorer::point_explorer_mutation_case,
+    ),
+    (
+        "ds_curve_explorer",
+        bl_probe::curve_explorer::curve_explorer_case,
+    ),
+    (
+        "ds_curve_explorer_mutation",
+        bl_probe::curve_explorer::curve_explorer_mutation_case,
+    ),
     // TopOpeBRepTool shape helpers (bl_probe/top_ope_brep_tool_shapes.rs)
     ("tt_shape_tool", top_ope_brep_tool_shapes::shape_tool_case),
     ("tt_project", top_ope_brep_tool_shapes::project_case),

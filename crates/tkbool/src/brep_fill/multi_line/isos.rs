@@ -10,6 +10,7 @@ use rustycad_tkbrep::topexp::Explorer;
 use rustycad_tkbrep::topods::{self, Edge, Face};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{GeomCurve, GeomPlane, GeomSurface};
@@ -44,6 +45,8 @@ pub(super) fn is_iso_u(face: &Face, edge: &Edge) -> Result<bool, Failure> {
     Ok(d.dot(Direction2::X).abs() < d.dot(Direction2::Y).abs())
 }
 
+// OCCT 3d097a0 uses std::min/max: keep the first operand on ties. The sign
+// of a zero UV bound survives into evolved p-curves at negative parameters.
 /// The UV box of the ends of the edges of the face: (umin, umax, vmin, vmax).
 fn uv_box(face: &Face) -> Result<(f64, f64, f64, f64), Failure> {
     let mut b: Option<(f64, f64, f64, f64)> = None;
@@ -51,16 +54,19 @@ fn uv_box(face: &Face) -> Result<(f64, f64, f64, f64), Failure> {
     while exp.more() {
         let (p1, p2) = BRepTool::uv_points_on_face(&topods::edge(exp.current())?, face)?;
         let e = (
-            p1.x().min(p2.x()),
-            p1.x().max(p2.x()),
-            p1.y().min(p2.y()),
-            p1.y().max(p2.y()),
+            std_min(p1.x(), p2.x()),
+            std_max(p1.x(), p2.x()),
+            std_min(p1.y(), p2.y()),
+            std_max(p1.y(), p2.y()),
         );
         b = Some(match b {
             None => e,
-            Some((umin, umax, vmin, vmax)) => {
-                (umin.min(e.0), umax.max(e.1), vmin.min(e.2), vmax.max(e.3))
-            }
+            Some((umin, umax, vmin, vmax)) => (
+                std_min(umin, e.0),
+                std_max(umax, e.1),
+                std_min(vmin, e.2),
+                std_max(vmax, e.3),
+            ),
         });
         exp.next()?;
     }

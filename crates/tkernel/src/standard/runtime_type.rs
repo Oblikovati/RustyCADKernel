@@ -265,8 +265,10 @@ pub trait RuntimeTyped: 'static {
 pub fn project_concrete<T: Any>(object: &dyn Transient) -> Option<&T> {
     object.project(TypeId::of::<T>())?.downcast_ref::<T>()
 }
-/// Borrow a live object as an interface through the caster of its dynamic
-/// descriptor; `project_interface::<dyn MyTrait>(object)`.
+/// Borrow a live object through its Rust interface caster, retaining native RTTI; `project_interface::<dyn MyTrait>(object)`.
 pub fn project_interface<I: ?Sized + 'static>(object: &dyn Transient) -> Option<&I> {
-    object.dynamic_type().interface_caster::<I>()?.cast(object)
+    object
+        .rust_interface_descriptor()
+        .interface_caster::<I>()?
+        .cast(object)
 }

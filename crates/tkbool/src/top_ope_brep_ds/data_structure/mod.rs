@@ -5,9 +5,16 @@
 //! topological operation, the shapes they interfere with, the same domain relations of
 //! the shapes and the section edges.
 mod access;
+mod curve_explorer;
+mod explorer_core;
+mod explorer_facade;
 mod geometry;
+mod point_explorer;
 mod same_domain;
 mod shapes;
+
+pub use curve_explorer::TopOpeBRepDSCurveExplorer;
+pub use point_explorer::TopOpeBRepDSPointExplorer;
 
 use super::{
     ListOfInterference, TopOpeBRepDSCurve, TopOpeBRepDSCurveData, TopOpeBRepDSInterference,

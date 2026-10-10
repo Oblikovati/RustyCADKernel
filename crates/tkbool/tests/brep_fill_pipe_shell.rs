@@ -1,85 +1,18 @@
-//! BRepFill_PipeShell: a 1:1 translation of OCCT's GTests BRepFill_PipeShell_Test.cxx
-//! (src/ModelingAlgorithms/TKBool/GTests), then tests of the location modes, the
-//! profiles and the history.
-use rustycad_tkbool::brep_fill::{BRepFillPipeShell, TransitionStyle};
+//! BRepFill_PipeShell supplementary location, profile, and history tests.
+#[path = "brep_fill_pipe_shell/support.rs"]
+mod support;
+use rustycad_tkbool::brep_fill::BRepFillPipeShell;
 use rustycad_tkbrep::topexp::Explorer;
-use rustycad_tkbrep::topods::{Shape, Wire};
+use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkgeomalgo::geom_fill::GeomFillPipeError;
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
-use rustycad_tktopalgo::brep_builder_api::{
-    BRepBuilderAPIMakeEdge, BRepBuilderAPIMakePolygon, BRepBuilderAPIMakeWire,
-};
-use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
-
-/// `MakeSquareProfile(theCenter, theHalfSide)`.
-fn make_square_profile(the_center: Point3, the_half_side: f64) -> Result<Wire, Failure> {
-    let mut a_polygon = BRepBuilderAPIMakePolygon::new();
-    let (x, y, z) = (the_center.x(), the_center.y(), the_center.z());
-    for (dx, dy) in [(-1., -1.), (1., -1.), (1., 1.), (-1., 1.)] {
-        a_polygon.add_point(Point3::new(
-            x + dx * the_half_side,
-            y + dy * the_half_side,
-            z,
-        ))?;
-    }
-    a_polygon.close()?;
-    a_polygon.wire()
-}
-
-/// The polyline spine through the points.
-fn polyline(points: &[(f64, f64, f64)]) -> Result<Wire, Failure> {
-    let mut a_spine_polygon = BRepBuilderAPIMakePolygon::new();
-    for &(x, y, z) in points {
-        a_spine_polygon.add_point(Point3::new(x, y, z))?;
-    }
-    a_spine_polygon.wire()
-}
+use support::{make_square_profile, polyline};
 
 /// The count of the sub-shapes of a kind.
 fn count(shape: &Shape, kind: ShapeEnum) -> Result<usize, Failure> {
     Ok(Explorer::new(shape, kind, ShapeEnum::Shape)?.count())
-}
-
-// TEST(BRepFill_PipeShellTest, MakeSolid_StraightSpineClosedProfile_ProducesClosedSolid)
-#[test]
-fn make_solid_straight_spine_closed_profile_produces_closed_solid() -> Result<(), Failure> {
-    let a_spine_edge = BRepBuilderAPIMakeEdge::from_points(
-        Point3::new(0.0, 0.0, 0.0),
-        Point3::new(0.0, 0.0, 10.0),
-    )?
-    .edge()?;
-    let a_spine = BRepBuilderAPIMakeWire::from_edge(&a_spine_edge)?.wire()?;
-    let a_profile = make_square_profile(Point3::new(0.0, 0.0, 0.0), 1.0)?;
-    let mut a_pipe = BRepFillPipeShell::new(&a_spine)?;
-    a_pipe.add(&a_profile, false, false)?;
-    assert!(a_pipe.is_ready());
-    assert!(a_pipe.build()?);
-    assert!(a_pipe.make_solid()?);
-    let a_result: &Shape = a_pipe.shape();
-    assert!(!a_result.is_null());
-    assert!(a_result.closed()?);
-    let an_analyzer = BRepCheckAnalyzer::new(a_result, true, false, false)?;
-    assert!(an_analyzer.is_valid()?);
-    Ok(())
-}
-
-// TEST(BRepFill_PipeShellTest, MakeSolid_PolylineSpineClosedProfile_ProducesClosedSolid)
-#[test]
-fn make_solid_polyline_spine_closed_profile_produces_closed_solid() -> Result<(), Failure> {
-    let a_spine = polyline(&[(0.0, 0.0, 0.0), (0.0, 0.0, 5.0), (0.0, 5.0, 10.0)])?;
-    let a_profile = make_square_profile(Point3::new(0.0, 0.0, 0.0), 0.5)?;
-    let mut a_pipe = BRepFillPipeShell::new(&a_spine)?;
-    a_pipe.set_transition(TransitionStyle::Right, 1.0e-2, 6.0);
-    a_pipe.add(&a_profile, false, false)?;
-    assert!(a_pipe.is_ready());
-    assert!(a_pipe.build()?);
-    assert!(a_pipe.make_solid()?);
-    let a_result: &Shape = a_pipe.shape();
-    assert!(!a_result.is_null());
-    assert!(a_result.closed()?);
-    Ok(())
 }
 
 #[test]

@@ -16,7 +16,7 @@ mod worker;
 pub use iterator_interface::{ParallelIteratorInterface, destroy_parallel_iterator};
 pub use launcher::Launcher;
 pub use loops::Parallel;
-pub use thread::{OsdThread, ThreadFunction};
+pub use thread::{OsdThread, OsdThreadCallback, ThreadFunction};
 pub use thread_pool::ThreadPool;
 
 pub use universal_iterator::ParallelUniversalIterator;

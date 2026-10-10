@@ -15,6 +15,9 @@ pub mod brep_fill_section;
 pub mod brep_fill_section_law;
 pub mod brep_fill_sweep;
 pub mod brep_proj;
+pub mod curve_explorer;
+pub mod interference_tool;
+pub mod point_explorer;
 pub mod top_ope_brep_build;
 pub mod top_ope_brep_ds;
 pub mod top_ope_brep_ds_build;
@@ -50,3 +53,7 @@ pub mod shapes;
 #[allow(dead_code)]
 #[path = "../../../tktopalgo/examples/tp_probe/shapes_geometry.rs"]
 pub mod shapes_geometry;
+
+pub mod brep_fill_evolved;
+
+pub mod evolved_digest;

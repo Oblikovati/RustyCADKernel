@@ -82,6 +82,7 @@ jobs:
       - run: python3 tools/verify_toolkit.py TKExpress --source target/occt-source --jobs 2
       - run: sudo apt-get install -y libfreetype-dev libfontconfig-dev libx11-dev
       - run: python3 tools/verify_toolkit.py TKService --source target/occt-source --jobs 2
+      - run: python3 tools/verify_toolkit.py TKV3d --source target/occt-source --jobs 2
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

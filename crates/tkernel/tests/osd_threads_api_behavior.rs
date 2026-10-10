@@ -231,11 +231,11 @@ fn spin_until_released(data: usize) -> usize {
 
 #[test]
 fn thread_runs_waits_and_reports_its_identifier() {
-    let mut idle: OsdThread = OsdThread::new();
+    let idle: OsdThread = OsdThread::new();
     assert!(!idle.run(1, 0));
     assert!(!idle.wait());
     assert_eq!(idle.wait_for(5), None);
-    let mut thread: OsdThread = OsdThread::with_function(double);
+    let thread: OsdThread = OsdThread::with_function(double);
     assert_eq!(thread.id(), 0);
     assert!(thread.run(21, 0));
     assert_ne!(thread.id(), 0);
@@ -252,7 +252,7 @@ fn thread_runs_waits_and_reports_its_identifier() {
 #[cfg(not(target_vendor = "apple"))]
 #[test]
 fn timed_wait_times_out_then_joins() {
-    let mut thread: OsdThread = OsdThread::with_function(spin_until_released);
+    let thread: OsdThread = OsdThread::with_function(spin_until_released);
     assert!(thread.run(9, 0));
     let id: usize = thread.id();
     assert_eq!(thread.wait_for(10), None);
@@ -268,9 +268,9 @@ fn timed_wait_times_out_then_joins() {
 
 #[test]
 fn copies_share_one_thread_and_detach_it_for_all() {
-    let mut thread: OsdThread = OsdThread::with_function(double);
+    let thread: OsdThread = OsdThread::with_function(double);
     assert!(thread.run(5, 0));
-    let mut copy: OsdThread = thread.clone();
+    let copy: OsdThread = thread.clone();
     assert_eq!(copy.id(), thread.id());
     assert_eq!(copy.wait_result(), Some(10));
     assert_eq!(thread.wait_result(), None, "joined through the copy");
@@ -294,7 +294,7 @@ fn panicking(_data: usize) -> usize {
 
 #[test]
 fn a_panicking_thread_function_makes_wait_fail() {
-    let mut thread: OsdThread = OsdThread::with_function(panicking);
+    let thread: OsdThread = OsdThread::with_function(panicking);
     assert!(thread.run(0, 0));
     assert_eq!(thread.wait_for(10_000), None);
     assert!(!thread.wait(), "the failed join consumed the handle");

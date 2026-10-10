@@ -85,8 +85,9 @@ fn capture_objects<V: BvhFieldVector>(
 fn capture_triangulation<V: BvhFieldVector>(
     triangulation: &mut BvhTriangulation<V>,
 ) -> Result<BvhTriangleSnapshot<V>, Failure> {
+    let tree = triangulation.bvh()?.clone();
     Ok(BvhTriangleSnapshot {
-        tree: triangulation.bvh()?.clone(),
+        tree,
         vertices: triangulation.vertices.clone(),
         elements: triangulation.elements.clone(),
     })
