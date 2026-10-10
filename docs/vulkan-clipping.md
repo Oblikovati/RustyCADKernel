@@ -97,10 +97,11 @@ through GPU transformation; native
 `Graphic3d_Group::AddPrimitiveArray` deliberately uses raw xyz with `w=1` only
 for its bounds. `OpenGl_CappingAlgo.cxx` then builds an odd/even stencil mask from
 closed groups using the selected plane, draws the cap through the remaining
-planes, and applies plane or object aspects. Stencil targets, chain filtering,
-section appearance and strict clipping-boundary parity remain open.
+planes, and applies plane or object aspects. [Stencil capping](vulkan-capping.md)
+now implements those passes for opaque unlit sections. Broader section appearance
+and strict clipping-boundary parity remain open.
 
-For the next implementation, preserve the native cap-pass clipping filter rather
+The capping implementation preserves the native cap-pass clipping filter rather
 than merely deleting the selected equation. `OpenGl_ShaderManager.cxx` at the
 pinned revision emits only the selected sub-plane, with its original equation,
 for stencil-mask geometry. For the cap itself, it reverses every other member of
@@ -115,4 +116,5 @@ a separate mask for each closed group. The cap tests stencil equality to one and
 uses `LESS` depth comparison when the layer uses depth testing. Its infinite-plane
 orientation replaces the model-world matrix, rather than multiplying the current
 structure transform. Instanced structures recurse through the same algorithm.
-Those ordering, transform and chain-filter contracts need paired native tests.
+Those ordering, transform and chain-filter contracts have paired native tests
+recorded in the capping notes.

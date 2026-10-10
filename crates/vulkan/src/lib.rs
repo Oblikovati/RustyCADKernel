@@ -58,3 +58,14 @@ mod clipping;
 pub use clipping::RenderClipping;
 
 mod retained_clipping;
+
+mod capping_pass;
+pub use capping_pass::RenderCappingPass;
+
+mod face_culling;
+pub use face_culling::RenderFaceCulling;
+
+mod capping_geometry;
+mod capping_planes;
+mod capping_style;
+mod retained_capping;

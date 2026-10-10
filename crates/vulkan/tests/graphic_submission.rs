@@ -83,10 +83,16 @@ fn unsupported_raster_states_fail_instead_of_being_ignored() {
     );
     style.set_polygon_offsets(0, 0., 0.);
     style.set_face_culling(Graphic3dTypeOfBackfacingModel::BackCulled);
-    assert!(scene.group.triangle_draws(&scene.camera).is_err());
+    assert_eq!(
+        scene.group.triangle_draws(&scene.camera).unwrap()[0].face_culling(),
+        martensite_vulkan::RenderFaceCulling::Back
+    );
     style.set_face_culling(Graphic3dTypeOfBackfacingModel::Auto);
     scene.group.set_closed(true);
-    assert!(scene.group.triangle_draws(&scene.camera).is_err());
+    assert_eq!(
+        scene.group.triangle_draws(&scene.camera).unwrap()[0].face_culling(),
+        martensite_vulkan::RenderFaceCulling::Back
+    );
     scene.group.set_closed(false);
     assert!(scene.group.triangle_draws(&scene.camera).is_ok());
 }

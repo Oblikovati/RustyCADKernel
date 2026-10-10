@@ -15,8 +15,9 @@ impl TargetImage {
         runtime: &Arc<VulkanRuntime>,
         extent: vk::Extent2D,
         depth: bool,
+        stencil: bool,
     ) -> Result<Self, RenderError> {
-        let (format, usage, aspect) = attachment_properties(depth);
+        let (format, usage, aspect) = attachment_properties(depth, stencil);
         check_format(runtime, format, depth)?;
         let info = image_description(extent, format, usage);
         let handle = unsafe { runtime.device().create_image(&info, None) }
@@ -84,7 +85,7 @@ impl Drop for TargetImage {
         }
     }
 }
-fn check_format(
+pub(super) fn check_format(
     runtime: &VulkanRuntime,
     format: vk::Format,
     depth: bool,
@@ -110,12 +111,23 @@ fn check_format(
     Ok(())
 }
 
-fn attachment_properties(depth: bool) -> (vk::Format, vk::ImageUsageFlags, vk::ImageAspectFlags) {
+fn attachment_properties(
+    depth: bool,
+    stencil: bool,
+) -> (vk::Format, vk::ImageUsageFlags, vk::ImageAspectFlags) {
     if depth {
         return (
-            vk::Format::D32_SFLOAT,
+            if stencil {
+                vk::Format::D32_SFLOAT_S8_UINT
+            } else {
+                vk::Format::D32_SFLOAT
+            },
             vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
-            vk::ImageAspectFlags::DEPTH,
+            if stencil {
+                vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL
+            } else {
+                vk::ImageAspectFlags::DEPTH
+            },
         );
     }
     // OCCT 3d097a0 OpenGl_View uses GL_SRGB8_ALPHA8: inputs stay linear, captures encode sRGB.
@@ -143,4 +155,35 @@ fn image_description(
         .samples(vk::SampleCountFlags::TYPE_1)
         .tiling(vk::ImageTiling::OPTIMAL)
         .usage(usage | vk::ImageUsageFlags::TRANSFER_SRC)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn only_capped_depth_targets_allocate_a_combined_depth_stencil_attachment() {
+        let plain = attachment_properties(true, false);
+        let cap = attachment_properties(true, true);
+        assert_eq!(plain.0, vk::Format::D32_SFLOAT);
+        assert_eq!(plain.2, vk::ImageAspectFlags::DEPTH);
+        assert_eq!(cap.0, vk::Format::D32_SFLOAT_S8_UINT);
+        assert_eq!(
+            cap.2,
+            vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL
+        );
+        assert_eq!(
+            attachment_properties(false, true),
+            attachment_properties(false, false)
+        );
+        let info = image_description(
+            vk::Extent2D {
+                width: 64,
+                height: 48,
+            },
+            cap.0,
+            cap.1,
+        );
+        assert!(info.usage.contains(vk::ImageUsageFlags::TRANSFER_SRC));
+        assert_eq!(info.extent.height, 48);
+    }
 }

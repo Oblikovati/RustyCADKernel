@@ -47,16 +47,10 @@ pub(crate) fn structure_clipping(
     structure: &Graphic3dCStructureFields,
     model: [f32; 16],
 ) -> Result<Option<RenderClipping>, RenderError> {
-    let planes = effective_planes(global, structure)?;
-    let mut chains = Vec::new();
-    for plane in planes {
-        if !structure.trsf_pers.is_null()
-            || !structure.bnd_box.is_valid()
-            || plane.probe_box(&structure.bnd_box) != Graphic3dClipState::In
-        {
-            chains.push(snapshot_chain(plane)?);
-        }
-    }
+    let chains = structure_planes(global, structure)?
+        .into_iter()
+        .map(snapshot_chain)
+        .collect::<Result<Vec<_>, _>>()?;
     if chains.is_empty() {
         return Ok(None);
     }
@@ -99,13 +93,9 @@ fn enabled_planes(
     }
     Ok(planes)
 }
-fn snapshot_chain(mut cursor: Handle<Graphic3dClipPlane>) -> Result<Vec<[f32; 4]>, RenderError> {
-    if cursor.is_capping() {
-        return Err(rejected(
-            cursor.get_id(),
-            "clipping without capping until the cap pass is implemented",
-        ));
-    }
+pub(crate) fn snapshot_chain(
+    mut cursor: Handle<Graphic3dClipPlane>,
+) -> Result<Vec<[f32; 4]>, RenderError> {
     let mut equations = Vec::new();
     while let Some(plane) = cursor.get() {
         let equation = plane.get_equation();
@@ -113,4 +103,18 @@ fn snapshot_chain(mut cursor: Handle<Graphic3dClipPlane>) -> Result<Vec<[f32; 4]
         cursor = plane.chain_next_plane();
     }
     Ok(equations)
+}
+
+pub(crate) fn structure_planes(
+    global: &Handle<Graphic3dSequenceOfHClipPlane>,
+    structure: &Graphic3dCStructureFields,
+) -> Result<ClipPlanes, RenderError> {
+    Ok(effective_planes(global, structure)?
+        .into_iter()
+        .filter(|plane| {
+            !structure.trsf_pers.is_null()
+                || !structure.bnd_box.is_valid()
+                || plane.probe_box(&structure.bnd_box) != Graphic3dClipState::In
+        })
+        .collect())
 }

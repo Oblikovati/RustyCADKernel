@@ -161,3 +161,38 @@ fn ordinary_clip(camera: &Graphic3dCamera, model: Mat4<f64>) -> [f32; 16] {
         .data()
         .map(|value| value as f32)
 }
+
+// The section plane replaces ModelWorld, retaining only structure persistence.
+pub(crate) fn plane_clip_transform(
+    camera: &Graphic3dCamera,
+    orientation: Mat4<f32>,
+    structure: &Graphic3dCStructureFields,
+    extent: [u32; 2],
+) -> Result<([f32; 16], bool), RenderError> {
+    let model = Mat4::<f64>::from_other(&orientation);
+    if structure.trsf_pers.is_null() {
+        return Ok((ordinary_clip(camera, model), false));
+    }
+    let mut transform = PersistentView::new(camera, model);
+    transform.apply(&structure.trsf_pers, viewport_size(Some(extent))?, None)?;
+    Ok((
+        transform.clip_matrix(),
+        structure.trsf_pers.mode() == Graphic3dTransModeFlags::CAMERA_PERS,
+    ))
+}
+
+// OpenGl_CappingAlgo calls Group::Render directly, bypassing renderGeometry's
+// group transform/persistence wrapper at OCCT 3d097a0.
+pub(crate) fn cap_mask_transform(
+    camera: &Graphic3dCamera,
+    structure: &Graphic3dCStructureFields,
+    extent: [u32; 2],
+) -> Result<([f32; 16], [f32; 16], bool), RenderError> {
+    let mut model = Mat4::<f64>::identity();
+    if let Some(datum) = structure.trsf.get() {
+        datum.transformation().get_mat4(&mut model);
+    }
+    let model = Mat4::<f32>::from_other(&model);
+    let (clip, clamp) = plane_clip_transform(camera, model, structure, extent)?;
+    Ok((clip, model.data(), clamp))
+}

@@ -15,13 +15,17 @@ pub(super) struct DrawPipeline {
 impl DrawPipeline {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
-        depth_clamp: bool,
-        line: bool,
-        point: bool,
-        text: bool,
-        text_blend: bool,
-        clipped: bool,
+        kind: super::pipeline_variants::PipelineVariant,
     ) -> Result<Self, RenderError> {
+        let super::pipeline_variants::PipelineVariant {
+            clamp: _,
+            line,
+            point,
+            text,
+            text_blend: _,
+            clipped,
+            ..
+        } = kind;
         let mut pipeline = Self {
             runtime: runtime.clone(),
             handle: vk::Pipeline::null(),
@@ -52,7 +56,7 @@ impl DrawPipeline {
             pipeline.sprite_layout.as_ref(),
             pipeline.clipping_layout.as_ref(),
         )?;
-        pipeline.create(depth_clamp, line, point, text, text_blend)?;
+        pipeline.create(kind)?;
         Ok(pipeline)
     }
     fn load_shaders(
@@ -92,25 +96,25 @@ impl DrawPipeline {
     }
     fn create(
         &mut self,
-        depth_clamp: bool,
-        line: bool,
-        point: bool,
-        text: bool,
-        text_blend: bool,
+        kind: super::pipeline_variants::PipelineVariant,
     ) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state =
-            super::pipeline_state::PipelineState::new(depth_clamp, line, point, text, text_blend);
+        let state = super::pipeline_state::PipelineState::new(kind);
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&[vk::Format::R8G8B8A8_SRGB])
-            .depth_attachment_format(vk::Format::D32_SFLOAT);
+            .depth_attachment_format(kind.depth_format())
+            .stencil_attachment_format(if kind.stencil {
+                kind.depth_format()
+            } else {
+                vk::Format::UNDEFINED
+            });
         let mut info = state
             .description(self.layout, &stages)
             .push_next(&mut rendering);
         let mut line_state = vk::PipelineRasterizationLineStateCreateInfoEXT::default()
             .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM);
-        let mut raster = super::pipeline_state::raster_state(depth_clamp);
-        if line {
+        let mut raster = super::pipeline_state::raster_state(kind.clamp);
+        if kind.line {
             raster = raster.push_next(&mut line_state);
             info = info.rasterization_state(&raster);
         }

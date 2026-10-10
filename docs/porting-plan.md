@@ -48,7 +48,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    and bounding-box policy, view frustum culling, native capture controls and a
    measured plane-update workload. [Homogeneous vertex input](vulkan-homogeneous-vertices.md)
    preserves full position weights for the infinite planes needed by capping.
-   Capping, section materials and strict clipping-boundary parity remain open.
+   [Stencil capping](vulkan-capping.md) now builds closed-group masks and infinite
+   section surfaces, including native chain, instance and persistence policy.
+   Broader section materials and strict clipping-boundary parity remain open.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

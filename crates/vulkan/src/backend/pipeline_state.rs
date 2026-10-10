@@ -57,7 +57,15 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
-    pub fn new(depth_clamp: bool, line: bool, point: bool, text: bool, text_blend: bool) -> Self {
+    pub fn new(kind: super::pipeline_variants::PipelineVariant) -> Self {
+        let super::pipeline_variants::PipelineVariant {
+            clamp: depth_clamp,
+            line,
+            point,
+            text,
+            text_blend,
+            ..
+        } = kind;
         Self {
             vertex: vertex_state(text),
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
@@ -73,9 +81,11 @@ impl PipelineState {
             raster: raster_state(depth_clamp),
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
-            depth: depth_state(),
+            depth: super::capping_state::depth_state(kind.capping),
             blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(
-                if point || (text && text_blend) {
+                if kind.capping.is_mask() {
+                    &super::capping_state::MASK_BLEND
+                } else if point || (text && text_blend) {
                     &POINT_BLEND
                 } else {
                     &BLEND
@@ -119,24 +129,21 @@ pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateC
         .depth_clamp_enable(depth_clamp)
         .polygon_mode(vk::PolygonMode::FILL)
         .cull_mode(vk::CullModeFlags::NONE)
+        .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
         .line_width(1.0)
-}
-fn depth_state() -> vk::PipelineDepthStencilStateCreateInfo<'static> {
-    vk::PipelineDepthStencilStateCreateInfo::default()
-        .depth_test_enable(true)
-        .depth_write_enable(true)
-        .depth_compare_op(vk::CompareOp::LESS_OR_EQUAL)
 }
 
 fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
-    const STATES: [vk::DynamicState; 5] = [
+    const STATES: [vk::DynamicState; 7] = [
         vk::DynamicState::VIEWPORT,
         vk::DynamicState::SCISSOR,
         vk::DynamicState::DEPTH_TEST_ENABLE,
         vk::DynamicState::DEPTH_WRITE_ENABLE,
+        vk::DynamicState::CULL_MODE,
+        vk::DynamicState::FRONT_FACE,
         vk::DynamicState::LINE_WIDTH,
     ];
-    &STATES[..if line { 5 } else { 4 }]
+    &STATES[..if line { 7 } else { 6 }]
 }
 
 #[cfg(test)]
@@ -146,6 +153,6 @@ mod tests {
     fn triangle_pipelines_do_not_require_dynamic_line_width() {
         assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));
         assert!(dynamic_states(true).contains(&vk::DynamicState::LINE_WIDTH));
-        assert_eq!(&dynamic_states(true)[..4], dynamic_states(false));
+        assert_eq!(&dynamic_states(true)[..6], dynamic_states(false));
     }
 }
