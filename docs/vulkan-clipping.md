@@ -18,7 +18,7 @@ are copied into immutable submissions. Standard font draws retain the native
 font shader's zero-plane policy. Persistent structures classify global planes at
 world anchors and retain local fragment planes. Local group persistence uses the
 same model-translation reset as native OpenGL. Native bounding-box classification
-culls entire structures and disables planes wholly outside their retained geometry.
+culls entire structures and disables planes whose positive halfspace contains the whole box.
 Capping remains unimplemented and active cap passes return explicit errors.
 
 The view now calls the ported Graphic3d layer culling traversal, initializes cached
