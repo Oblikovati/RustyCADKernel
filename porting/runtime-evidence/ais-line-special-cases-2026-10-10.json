@@ -1,0 +1,25 @@
+{
+  "decision": "User requested treating these pixel-row differences as special cases and continuing work.",
+  "profile": "host",
+  "device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+  "cases": [
+    "64-64-0-0-datum-infinite",
+    "64-64-1-0-datum-infinite"
+  ],
+  "observed_difference": {
+    "mismatched_pixels_per_case": 28,
+    "foreground_pixels_per_implementation": 43,
+    "foreground_rgba": [
+      255,
+      255,
+      0,
+      255
+    ],
+    "same_foreground_bounds": true,
+    "coverage_shift": "14 pixels move one row between AMD OpenGL and Vulkan; both software outputs match AMD Vulkan."
+  },
+  "disposition": "known special cases; defer investigation and do not block further visualization implementation",
+  "raw_comparison_status": "failed",
+  "changes_to_tolerances": false,
+  "scope": "Only the two named cases on the named host profile; no blanket acceptance of other mismatches."
+}

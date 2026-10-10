@@ -29,7 +29,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    and the new performance workload. The [standard curve presentation family](stdprs-curve.md)
    now supplies all eight Add/Match overloads, native numeric comparisons and
    GPU/performance fixtures. [AIS_Line](ais-line.md) now consumes this path, with
-   live appearance, unit-aware selection and GPU/performance coverage. Continue presentation
+   live appearance, unit-aware selection and GPU/performance coverage. User decision
+   on 2026-10-10: defer the two AMD infinite-line pixel-row differences as known
+   special cases; keep their evidence and continue feature work. Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

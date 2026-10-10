@@ -87,6 +87,31 @@ including all selected/detected line cases. The earlier three software and
 45 host failures remain. Two new host infinite-line cases have 28 differing
 pixels: both renders contain 43 yellow pixels within identical bounds, but
 AMD OpenGL shifts 14 covered pixels one row relative to AMD Vulkan and both
-software captures. The cause remains unresolved; strict comparison stays failed.
+software captures. User decision on 2026-10-10: treat these two AMD infinite-line row differences
+as known special cases and continue feature work. Raw strict comparisons remain
+recorded as failures; resolving them does not block subsequent visualization slices.
 All six established performance budgets pass. Four newer workloads, including
 `ais-line-appearance`, still have no accepted baseline.
+
+## Integrated evidence
+
+Main revision `22d194183` passes 355 TKV3d tests, 13 UnitsAPI tests,
+75 Vulkan all-target tests, 28 Python harness tests and Clippy with warnings
+forbidden. The full native oracle still passes all 149,514 comparisons.
+Both devices pass 12 Vulkan runtime checks with zero validation errors.
+All 3,504 raw color/depth buffers match the worktree run byte for byte.
+Integrated line-appearance median/p95 times are 0.384/0.529 ms on lavapipe
+and 0.263/0.350 ms on AMD; all six established workload budgets pass.
+The strict matrix retains 435/438 software and 391/438 host matches, with
+the two named AMD infinite-line cases explicitly deferred by user decision.
+
+The completed worktree and branch were deleted after ancestry, local-change
+and process checks, reclaiming 25,381,004,973 bytes with no archive. See the
+[integration receipt](../porting/integration/2026-10-10/ais-line.json),
+[cleanup audit](../porting/integration/2026-10-10/ais-line-cleanup.json) and
+[special-case decision](../porting/runtime-evidence/ais-line-special-cases-2026-10-10.json).
+
+The refreshed compiler inventory resolves all 15 AIS line declarations uniquely.
+Defined port scope is now 51,575 done, 974 partial and 23,492 open of 76,041
+declarations, with zero unresolved ledger rows. The full Martensite port remains
+incomplete; point presentations and markers are next in the visualization sequence.
