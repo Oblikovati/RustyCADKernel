@@ -212,3 +212,17 @@ pub(crate) fn lighting_matrices(
     let transform = persistent_view(context.camera, model, parent, &local, context.extent)?;
     Ok((transform.model.data(), transform.world_view.data()))
 }
+
+// Capping replaces ModelWorld with the plane orientation (OCCT 3d097a0).
+pub(crate) fn cap_lighting_matrices(
+    camera: &Graphic3dCamera,
+    orientation: Mat4<f32>,
+    structure: &Graphic3dCStructureFields,
+    extent: [u32; 2],
+) -> Result<([f32; 16], [f32; 16]), RenderError> {
+    let mut transform = PersistentView::new(camera, Mat4::from_other(&orientation));
+    if !structure.trsf_pers.is_null() {
+        transform.apply(&structure.trsf_pers, viewport_size(Some(extent))?, None)?;
+    }
+    Ok((transform.model.data(), transform.world_view.data()))
+}

@@ -141,7 +141,7 @@ impl CappingScene<'_> {
         group: &Handle<dyn Graphic3dAspectsSource>,
     ) -> Result<PrimitiveDraw, RenderError> {
         let aspect = crate::capping_style::cap_aspect(&cap.plane, group);
-        let color = crate::style::unlit_color(&aspect, true)?;
+        let color = crate::style::surface_color(&aspect, true)?;
         let orientation = crate::capping_geometry::cap_orientation(cap.plane.get_equation().data());
         let (matrix, clamp) = crate::persistent_transform::plane_clip_transform(
             self.camera,
@@ -150,6 +150,7 @@ impl CappingScene<'_> {
             self.extent,
         )?;
         let mut draw = cap_draw(color, matrix, &aspect)?;
+        crate::capping_lighting::apply_cap_lighting(&mut draw, &aspect, self, orientation)?;
         draw.depth_clamp = clamp;
         draw = draw.with_clipping(RenderClipping::new(
             cap.remaining.clone(),

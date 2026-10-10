@@ -50,7 +50,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    preserves full position weights for the infinite planes needed by capping.
    [Stencil capping](vulkan-capping.md) now builds closed-group masks and infinite
    section surfaces, including native chain, instance and persistence policy.
-   Broader section materials and strict clipping-boundary parity remain open.
+   Opaque Phong-family section materials now share live material/light extraction;
+   textures, custom section shaders and strict clipping-boundary parity remain open.
    [Shader material records](vulkan-materials.md) now match native coefficient
    packing. [Opaque Phong-family lighting](vulkan-lighting.md) now adds live normals,
    directional/point/spot/head lights, front/back materials and clipped shaders;

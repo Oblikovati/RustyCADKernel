@@ -69,6 +69,7 @@ pub fn configure_capping(scene: &ViewerScene, mode: &str) -> Handle<Graphic3dCli
     } else {
         [0., 0., -1., 0.]
     });
+    configure_lit_cap(scene, &plane, mode);
     configure_plane(&plane, mode);
     let planes = Handle::new(Graphic3dSequenceOfHClipPlane::default());
     planes.append(plane.clone());
@@ -202,4 +203,29 @@ fn configure_cap_culling(scene: &ViewerScene, mode: &str) {
     if mode == "cap-mirror-uncut" {
         scene.view.set_clip_planes(&Handle::default());
     }
+}
+
+fn configure_lit_cap(scene: &ViewerScene, plane: &Graphic3dClipPlane, mode: &str) {
+    let model = match mode {
+        "cap-lit-facet" => Graphic3dTypeOfShadingModel::PhongFacet,
+        "cap-lit-gouraud" => Graphic3dTypeOfShadingModel::Gouraud,
+        "cap-lit-phong" | "cap-lit-unlit-view" => Graphic3dTypeOfShadingModel::Phong,
+        _ => return,
+    };
+    plane.capping_aspect().set_shading_model(model);
+    scene
+        .view
+        .set_shading_model(if mode == "cap-lit-unlit-view" {
+            Graphic3dTypeOfShadingModel::Unlit
+        } else {
+            Graphic3dTypeOfShadingModel::Phong
+        })
+        .unwrap();
+    let lights = Handle::new(Graphic3dLightSet::default());
+    let light = Handle::new(Graphic3dCLight::new(
+        Graphic3dTypeOfLightSource::Directional,
+    ));
+    light.set_direction_coords(0., 0., -1.).unwrap();
+    lights.add(&light).unwrap();
+    scene.cview().set_lights(&lights);
 }

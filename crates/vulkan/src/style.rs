@@ -2,21 +2,6 @@
 use crate::{RenderError, error::rejected};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{aspect::AspectInteriorStyle, graphic3d::*};
-pub(crate) fn unlit_color(
-    style: &Handle<dyn Graphic3dAspectsSource>,
-    _closed: bool,
-) -> Result<[f32; 4], RenderError> {
-    let Some(style) = style.get() else {
-        return Err(rejected("null aspects", "explicit unlit solid aspects"));
-    };
-    if style.shading_model() != Graphic3dTypeOfShadingModel::Unlit {
-        return Err(rejected(
-            style.shading_model(),
-            "explicit unlit solid aspects",
-        ));
-    }
-    validated_surface_color(style)
-}
 pub(crate) fn surface_color(
     style: &Handle<dyn Graphic3dAspectsSource>,
     _closed: bool,

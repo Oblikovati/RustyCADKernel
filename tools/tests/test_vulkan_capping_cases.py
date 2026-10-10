@@ -8,7 +8,7 @@ from verify_vulkan import CASES
 class CappingCaptureCasesTests(unittest.TestCase):
     def test_section_matrix_keeps_disabled_and_instance_controls(self) -> None:
         self.assertEqual(len(CAPPING_MODES), len(set(CAPPING_MODES)))
-        self.assertEqual(len(CAPPING_MODES) * len(CASES), 150)
+        self.assertEqual(len(CAPPING_MODES) * len(CASES), 174)
         self.assertTrue(
             {
                 "cap-open",

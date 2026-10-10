@@ -20,6 +20,22 @@ pub struct RenderLightSet {
     pub(crate) sources: Vec<PackedRenderLight>,
 }
 impl RenderLightSet {
+    // OpenGl_View::render at OCCT 3d097a0 replaces sources for an Unlit view,
+    // even when individual aspects request a lit shader.
+    pub(crate) fn for_view(
+        shading: Graphic3dTypeOfShadingModel,
+        lights: &Handle<Graphic3dLightSet>,
+        inverse_view: [f32; 16],
+    ) -> Result<Self, RenderError> {
+        if shading == Graphic3dTypeOfShadingModel::Unlit {
+            return Ok(Self {
+                ambient: [1.; 4],
+                sources: Vec::new(),
+            });
+        }
+        Self::snapshot(lights, inverse_view)
+    }
+
     /// Read live lights and transform headlights through the inverse view; `RenderLightSet::snapshot(&lights, inverse_view)?`.
     pub fn snapshot(
         lights: &Handle<Graphic3dLightSet>,

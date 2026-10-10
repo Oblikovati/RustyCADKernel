@@ -1,6 +1,10 @@
 """Closed-solid sections and native clip-chain behavior across both device profiles."""
 
 CAPPING_MODES = (
+    "cap-lit-facet",
+    "cap-lit-gouraud",
+    "cap-lit-phong",
+    "cap-lit-unlit-view",
     "cap-basic",
     "cap-open",
     "cap-off",

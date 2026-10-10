@@ -25,8 +25,9 @@ existing clip-chain storage at descriptor set 1. Pipelines are cached lazily so
 ordinary unlit initialization does not construct the new lighting variants.
 
 Stencil mask passes force unlit rendering. PBR models, transparent surface
-materials, shadows, lit normal-bearing lines/points and lit retained capping
-materials remain unsupported. Requested enabled shadow casters produce an error
+materials, shadows and lit normal-bearing lines/points remain unsupported.
+[Retained cap surfaces](vulkan-capping.md) now use native constant normals and the
+same opaque Phong-family material/light snapshots. Requested enabled shadow casters produce an error
 when shadow maps are enabled. Disabled casters and disabled shadow rendering are
 accepted. Default shading resolved to Unlit rejects unsupported distinguished or
 front-only back-color policy rather than silently ignoring it.
