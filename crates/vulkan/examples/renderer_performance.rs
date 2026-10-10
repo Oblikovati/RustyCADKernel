@@ -46,6 +46,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     clipping_performance::benchmark(&driver, warmup, samples);
     homogeneous_performance::benchmark(&driver, warmup, samples);
     capping_performance::benchmark(&driver, warmup, samples);
+    lighting_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -174,3 +175,6 @@ mod homogeneous_performance;
 mod capping_performance;
 #[path = "../tests/support/capping_scene.rs"]
 mod capping_scene;
+
+#[path = "support/lighting_performance.rs"]
+mod lighting_performance;

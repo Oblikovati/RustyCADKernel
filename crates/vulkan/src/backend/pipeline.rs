@@ -10,6 +10,7 @@ pub(super) struct DrawPipeline {
     pub push_stages: vk::ShaderStageFlags,
     shaders: Vec<vk::ShaderModule>,
     pub clipping_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
+    pub lighting_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
     pub sprite_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
 }
 impl DrawPipeline {
@@ -24,6 +25,7 @@ impl DrawPipeline {
             text,
             text_blend: _,
             clipped,
+            lighting,
             ..
         } = kind;
         let mut pipeline = Self {
@@ -40,6 +42,14 @@ impl DrawPipeline {
             } else {
                 None
             },
+            lighting_layout: if lighting {
+                Some(super::storage_descriptor::StorageDescriptorLayout::new(
+                    runtime,
+                    vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT,
+                )?)
+            } else {
+                None
+            },
             sprite_layout: if point || text {
                 Some(super::storage_descriptor::StorageDescriptorLayout::new(
                     runtime,
@@ -49,11 +59,14 @@ impl DrawPipeline {
                 None
             },
         };
-        pipeline.load_shaders(line, point, text, clipped)?;
+        pipeline.load_shaders(line, point, text, clipped, lighting)?;
         pipeline.layout = create_layout(
             runtime,
             line || point || text,
-            pipeline.sprite_layout.as_ref(),
+            pipeline
+                .sprite_layout
+                .as_ref()
+                .or(pipeline.lighting_layout.as_ref()),
             pipeline.clipping_layout.as_ref(),
         )?;
         pipeline.create(kind)?;
@@ -65,8 +78,11 @@ impl DrawPipeline {
         point: bool,
         text: bool,
         clipped: bool,
+        lighting: bool,
     ) -> Result<(), RenderError> {
-        let shaders: [&[u8]; 2] = if clipped {
+        let shaders: [&[u8]; 2] = if lighting {
+            lighting_shaders(clipped)
+        } else if clipped {
             clipping_shaders(line, point, text)
         } else if text {
             [
@@ -237,6 +253,19 @@ fn clipping_shaders(line: bool, point: bool, text: bool) -> [&'static [u8]; 2] {
     [
         include_bytes!("../../shaders/unlit.clipped.vert.spv"),
         include_bytes!("../../shaders/unlit.clipped.frag.spv"),
+    ]
+}
+
+fn lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
+    if clipped {
+        return [
+            include_bytes!("../../shaders/lighting.clipped.vert.spv"),
+            include_bytes!("../../shaders/lighting.clipped.frag.spv"),
+        ];
+    }
+    [
+        include_bytes!("../../shaders/lighting.vert.spv"),
+        include_bytes!("../../shaders/lighting.frag.spv"),
     ]
 }
 

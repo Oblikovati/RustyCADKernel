@@ -67,7 +67,7 @@ impl PipelineState {
             ..
         } = kind;
         Self {
-            vertex: vertex_state(text),
+            vertex: vertex_state(text, kind.lighting),
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
                 vk::PrimitiveTopology::POINT_LIST
             } else if line {
@@ -113,16 +113,42 @@ impl PipelineState {
             .layout(layout)
     }
 }
-fn vertex_state(text: bool) -> vk::PipelineVertexInputStateCreateInfo<'static> {
+fn vertex_state(text: bool, lighting: bool) -> vk::PipelineVertexInputStateCreateInfo<'static> {
     const TEXT_BINDING: [vk::VertexInputBindingDescription; 1] =
         [vk::VertexInputBindingDescription {
             binding: 0,
             stride: 40,
             input_rate: vk::VertexInputRate::VERTEX,
         }];
+    const LIT_BINDING: [vk::VertexInputBindingDescription; 1] =
+        [vk::VertexInputBindingDescription {
+            binding: 0,
+            stride: 44,
+            input_rate: vk::VertexInputRate::VERTEX,
+        }];
+    const LIT_ATTRIBUTES: [vk::VertexInputAttributeDescription; 3] = [
+        ATTRIBUTES[0],
+        ATTRIBUTES[1],
+        vk::VertexInputAttributeDescription {
+            location: 2,
+            binding: 0,
+            format: vk::Format::R32G32B32_SFLOAT,
+            offset: 32,
+        },
+    ];
     vk::PipelineVertexInputStateCreateInfo::default()
-        .vertex_binding_descriptions(if text { &TEXT_BINDING } else { &BINDINGS })
-        .vertex_attribute_descriptions(&ATTRIBUTES[..if text { 3 } else { 2 }])
+        .vertex_binding_descriptions(if lighting {
+            &LIT_BINDING
+        } else if text {
+            &TEXT_BINDING
+        } else {
+            &BINDINGS
+        })
+        .vertex_attribute_descriptions(if lighting {
+            &LIT_ATTRIBUTES
+        } else {
+            &ATTRIBUTES[..if text { 3 } else { 2 }]
+        })
 }
 pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
     vk::PipelineRasterizationStateCreateInfo::default()

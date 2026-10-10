@@ -31,6 +31,28 @@ impl PrimitiveSubmission {
             .map(|i| read_position(buffer, kind, offset + stride * i as usize))
             .collect()
     }
+    pub(crate) fn normals(&self) -> Result<Option<Vec<[f32; 3]>>, RenderError> {
+        let buffer = self
+            .attributes
+            .get()
+            .ok_or_else(|| rejected("null attributes", "a Graphic3d vertex buffer"))?;
+        let Some((index, offset, stride)) = buffer.attribute_data(Graphic3dTypeOfAttribute::Norm)
+        else {
+            return Ok(None);
+        };
+        validate_count(buffer.nb_elements())?;
+        let kind = buffer
+            .attribute(index)
+            .ok_or_else(|| rejected(index, "a valid normal attribute"))?
+            .data_type;
+        (0..buffer.nb_elements())
+            .map(|i| {
+                read_position(buffer, kind, offset + stride * i as usize)
+                    .map(|v| [v[0], v[1], v[2]])
+            })
+            .collect::<Result<Vec<_>, _>>()
+            .map(Some)
+    }
     pub fn draws(
         &self,
         color: [f32; 4],

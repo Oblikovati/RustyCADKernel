@@ -127,6 +127,7 @@ impl CappingScene<'_> {
             .filter(|draw| is_cap_geometry(draw))
             .map(|draw| {
                 let mut mask = draw.clone().with_clipping(clipping.clone());
+                mask.lighting = None;
                 mask.clip_transform = matrix;
                 mask.depth_clamp = clamp;
                 mask.mirrored = false;

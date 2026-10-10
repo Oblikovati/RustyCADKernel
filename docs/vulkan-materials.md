@@ -4,9 +4,9 @@ Martensite now provides the material coefficient records required by the lightin
 path. This ports `OpenGl_MaterialCommon`, `OpenGl_MaterialPBR` and
 `OpenGl_Material` from OCCT commit
 `3d097a0328e71b826377d4814ab05ec3c3d23871` (`OpenGl_Material.hxx` and the material
-initializers in `OpenGl_Workspace.cxx`) into the Vulkan crate. It does **not** yet
-enable lit draw submissions: normals, light snapshots, GPU shading, lit capping,
-native rendering comparisons and lighting performance workloads remain open.
+initializers in `OpenGl_Workspace.cxx`) into the Vulkan crate. The [lighting path](vulkan-lighting.md) now consumes these
+records for opaque PhongFacet, Gouraud and Phong surfaces. PBR shaders, lit capping
+and shadow maps remain open.
 
 ## Equivalent interfaces
 
@@ -70,6 +70,6 @@ The receipt is `porting/runtime-evidence/vulkan-materials-2026-10-10.json`.
 
 The renderer capability remains partial. These replacement records do not
 justify crediting the entire OCCT lighting family or changing the in-scope API
-denominator. The next step is live normal extraction and light/material
-submission, followed by GPU shaders with functional captures and release
-performance workloads on lavapipe and the native GPU.
+denominator. The lighting path now has live normal/light/material submission, GPU shaders,
+functional captures and release performance workloads on both devices. Strict
+native raster parity and the timing gate remain open; see [lighting evidence](vulkan-lighting.md).

@@ -282,3 +282,37 @@ fn native_windows_reject_fake_devices_and_virtual_dump_remains_available() {
     scene.view.remove();
     assert!(scene.viewer.active_views().is_empty());
 }
+
+#[allow(dead_code)]
+#[path = "support/lighting_scene.rs"]
+mod lighting_scene;
+#[test]
+fn shadow_requests_are_explicit_and_disabled_casters_remain_renderable() {
+    let (driver, _, _) = setup();
+    let lit = lighting_scene::LightingScene::new(&driver, "lit-phong");
+    lit.light.set_cast_shadows(true).unwrap();
+    let error = lit.base.render_view().try_redraw().unwrap_err();
+    assert!(error.to_string().contains("zero enabled shadow casters"));
+    lit.light.set_enabled(false);
+    lit.base.render_view().try_redraw().unwrap();
+    lit.light.set_enabled(true);
+    lit.base
+        .view
+        .change_rendering_params(&mut |params| params.ray_tracing.is_shadow_enabled = false);
+    lit.base.render_view().try_redraw().unwrap();
+}
+#[test]
+fn default_unlit_view_rejects_front_only_color_and_material_distinction() {
+    let (driver, _, _) = setup();
+    let lit = lighting_scene::LightingScene::new(&driver, "lit-default");
+    lit.base.view.change_rendering_params(&mut |params| {
+        params.shading_model = Graphic3dTypeOfShadingModel::Unlit
+    });
+    lit.aspect.set_distinguish(true);
+    assert!(lit.base.render_view().try_redraw().is_err());
+    lit.aspect.set_distinguish(false);
+    lit.aspect.set_use_vertex_color_for_back_faces(false);
+    assert!(lit.base.render_view().try_redraw().is_err());
+    lit.aspect.set_use_vertex_color_for_back_faces(true);
+    lit.base.render_view().try_redraw().unwrap();
+}

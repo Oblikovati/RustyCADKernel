@@ -81,6 +81,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_clipping.cxx"
 #include "martensite_vulkan_homogeneous.cxx"
 #include "martensite_vulkan_capping.cxx"
+#include "martensite_vulkan_lighting.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
   // The default-layer capture isolates geometry depth. The later native Topmost
@@ -203,6 +204,8 @@ static void run_scene(int argc, char **argv) {
       line_scene(structure, mode);
     if (mode.rfind("stdprs-", 0) == 0)
       stdprs_scene(structure, mode);
+    if (mode.rfind("lit-", 0) == 0)
+      lighting_scene(structure, view, mode);
     if (mode.rfind("cap-", 0) == 0)
       capping_scene(structure, view, mode);
     if (mode.rfind("hom-", 0) == 0)

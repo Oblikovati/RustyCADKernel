@@ -5,6 +5,7 @@ use ash::vk;
 use std::sync::Arc;
 #[derive(Clone, Copy)]
 pub(super) struct PipelineVariant {
+    pub lighting: bool,
     pub clamp: bool,
     pub line: bool,
     pub point: bool,
@@ -19,6 +20,7 @@ impl PipelineVariant {
         let base = index % 10;
         let ordinary = index < 20;
         Self {
+            lighting: false,
             clamp: index & 1 != 0,
             line: ordinary && base / 2 == 1,
             point: ordinary && base / 2 == 2,
@@ -50,6 +52,8 @@ impl PipelineVariant {
 pub(super) struct RasterPipelines {
     variants: Vec<Option<Arc<DrawPipeline>>>,
     pub stencil: bool,
+    runtime: Arc<VulkanRuntime>,
+    lit_variants: std::sync::Mutex<std::collections::BTreeMap<usize, Arc<DrawPipeline>>>,
 }
 impl RasterPipelines {
     pub fn new(runtime: &Arc<VulkanRuntime>, stencil: bool) -> Result<Self, RenderError> {
@@ -67,14 +71,40 @@ impl RasterPipelines {
                 None
             });
         }
-        Ok(Self { variants, stencil })
+        Ok(Self {
+            variants,
+            stencil,
+            runtime: runtime.clone(),
+            lit_variants: Default::default(),
+        })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
+        if draw.lighting.is_some() {
+            return self.select_lit(draw);
+        }
         let index = variant_index(draw);
         self.variants.get(index).and_then(Clone::clone).ok_or_else(|| {
             rejected((draw.depth_clamp, draw.line_style.is_some(), draw.capping_pass),
                 "device support for requested stencil, depth-clamp and line rasterization features")
         })
+    }
+    fn select_lit(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
+        let index = variant_index(draw);
+        let mut variants = self
+            .lit_variants
+            .lock()
+            .map_err(|e| rejected(e.to_string(), "an unpoisoned pipeline cache"))?;
+        if let Some(pipeline) = variants.get(&index) {
+            return Ok(pipeline.clone());
+        }
+        let mut kind = PipelineVariant::from_index(index, self.stencil);
+        kind.lighting = true;
+        if kind.clamp && !self.runtime.depth_clamp {
+            return Err(rejected(true, "device depth-clamp support"));
+        }
+        let pipeline = Arc::new(DrawPipeline::new(&self.runtime, kind)?);
+        variants.insert(index, pipeline.clone());
+        Ok(pipeline)
     }
 }
 fn variant_index(draw: &PrimitiveDraw) -> usize {

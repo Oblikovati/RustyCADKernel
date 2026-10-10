@@ -105,5 +105,9 @@ fn surface_only_states_do_not_reject_native_lines() {
     scene.group.clear(false);
     scene.group.set_group_primitives_aspect(&aspects);
     scene.triangle();
-    assert!(scene.group.primitive_draws(&scene.camera).is_err());
+    let draws = scene.group.primitive_draws(&scene.camera).unwrap();
+    assert_eq!(
+        draws[0].lighting().unwrap().shading(),
+        martensite_vulkan::RenderShading::PhongFacet
+    );
 }

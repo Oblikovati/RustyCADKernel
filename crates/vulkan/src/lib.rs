@@ -77,3 +77,8 @@ pub use material_components::{RenderMaterialCommon, RenderMaterialPbr};
 
 mod light_snapshot;
 pub use light_snapshot::RenderLightSet;
+
+mod lighting;
+pub use lighting::{RenderLighting, RenderShading};
+
+mod retained_lighting;

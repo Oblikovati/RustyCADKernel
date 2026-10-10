@@ -52,7 +52,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    section surfaces, including native chain, instance and persistence policy.
    Broader section materials and strict clipping-boundary parity remain open.
    [Shader material records](vulkan-materials.md) now match native coefficient
-   packing; normal/light submission and GPU lighting remain the next steps.
+   packing. [Opaque Phong-family lighting](vulkan-lighting.md) now adds live normals,
+   directional/point/spot/head lights, front/back materials and clipped shaders;
+   strict native capture and performance gates remain open.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

@@ -154,13 +154,22 @@ impl Graphic3dDrawGroup {
             match command {
                 GroupCommand::Aspects(style) => aspects = style,
                 GroupCommand::Text(text) => draws.extend(context.draws(&text, &aspects)?),
-                GroupCommand::Primitives(primitive) => draws.extend(lower_styled_primitive(
-                    &primitive,
-                    &aspects,
-                    self.is_closed() && allow_culling,
-                    matrix,
-                    highlighted,
-                )?),
+                GroupCommand::Primitives(primitive) => {
+                    let mut lowered = lower_styled_primitive(
+                        &primitive,
+                        &aspects,
+                        self.is_closed() && allow_culling,
+                        matrix,
+                        highlighted,
+                    )?;
+                    crate::retained_lighting::apply_surface_lighting(
+                        &mut lowered,
+                        &primitive,
+                        &aspects,
+                        context,
+                    )?;
+                    draws.extend(lowered);
+                }
             }
         }
         Ok(draws)

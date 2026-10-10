@@ -175,6 +175,16 @@ fn record_draw(
         if let Some(width) = draw.line_width {
             device.cmd_set_line_width(command, width);
         }
+        if let Some(lighting) = &draw.lighting {
+            device.cmd_bind_descriptor_sets(
+                command,
+                vk::PipelineBindPoint::GRAPHICS,
+                draw.pipeline.layout,
+                0,
+                &[lighting.set],
+                &[],
+            );
+        }
         if let Some(sprite) = &draw.sprite {
             device.cmd_bind_descriptor_sets(
                 command,
