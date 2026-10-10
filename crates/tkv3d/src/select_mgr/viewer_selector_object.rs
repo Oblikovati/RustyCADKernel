@@ -36,7 +36,7 @@ pub fn select_mgr_traverse_object(
     if set.size() == 0 {
         return Ok(());
     }
-    let bypass_bounds = (set.has_entity_with_persistence() && !view.camera.is_null())
+    let bypass_bounds = (set.has_entity_with_persistence() && !view.camera().is_null())
         || set.has_entity_with_flipping();
     let tree = set.bvh()?;
     let Some(inverse) = selector_object_inverse(object, view)? else {

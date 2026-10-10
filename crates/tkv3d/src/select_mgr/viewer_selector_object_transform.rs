@@ -22,7 +22,7 @@ pub(super) fn selector_object_inverse(
             GeneralTransform3::default()
         }));
     }
-    if view.camera.is_null() {
+    if view.camera().is_null() {
         return Ok(None);
     }
     persistent_object_inverse(&persistence, object, view).map(Some)
@@ -33,7 +33,7 @@ fn persistent_object_inverse(
     view: &SelectMgrTraversalView,
 ) -> Result<GeneralTransform3, Failure> {
     let matrix = persistence.compute(
-        &view.camera,
+        &view.camera(),
         &view.projection,
         &view.world_view,
         view.size,
@@ -52,7 +52,7 @@ pub(super) fn selector_entity_inverse(
     let persistence = entity.transform_persistence();
     let mut sensitive = *inverse;
     if !persistence.is_null() {
-        if view.camera.is_null() {
+        if view.camera().is_null() {
             return Ok(None);
         }
         sensitive = persistent_object_inverse(&persistence, object, view)?;

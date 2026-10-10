@@ -58,12 +58,7 @@ fn run_scene_traversal(scene: &TraversalScene, entry: i32, view_id: i32) -> Resu
     let world_view = camera
         .get()
         .map_or_else(Mat4::identity, Graphic3dCamera::orientation_matrix);
-    let view = SelectMgrTraversalView {
-        camera,
-        projection,
-        world_view,
-        size: [width, height],
-    };
+    let view = SelectMgrTraversalView::new(camera, projection, world_view, [width, height]);
     for object in &scene.objects {
         select_mgr_traverse_object(base, &object.cast(), &volume, &view)?;
     }
