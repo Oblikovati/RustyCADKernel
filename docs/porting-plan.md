@@ -31,7 +31,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    GPU/performance fixtures. [AIS_Line](ais-line.md) now consumes this path, with
    live appearance, unit-aware selection and GPU/performance coverage. User decision
    on 2026-10-10: defer the two AMD infinite-line pixel-row differences as known
-   special cases; keep their evidence and continue feature work. Continue presentation
+   special cases; keep their evidence and continue feature work. [AIS_Point](ais-point.md)
+   now adds live point datums, native selection and a batched Vulkan sprite path
+   with functional and performance coverage. Point raster/color parity remains partial.
+   Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

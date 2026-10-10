@@ -36,6 +36,7 @@ impl PrimitiveSubmission {
         color: [f32; 4],
         matrix: [f32; 16],
         line: Option<crate::LineStyle>,
+        point: Option<crate::PointStyle>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         let positions = self.positions()?;
         let indices = self.read_indices(positions.len())?;
@@ -46,7 +47,7 @@ impl PrimitiveSubmission {
             .collect::<Result<Vec<_>, _>>()?;
         crate::primitive_ranges::primitive_ranges(&self.bounds, &indices, color)?
             .into_iter()
-            .map(|range| self.range_draw(range, &vertices, matrix, line))
+            .map(|range| self.range_draw(range, &vertices, matrix, line, point.as_ref()))
             .collect()
     }
     fn range_draw(
@@ -55,8 +56,11 @@ impl PrimitiveSubmission {
         vertices: &[RenderVertex],
         matrix: [f32; 16],
         line: Option<crate::LineStyle>,
+        point: Option<&crate::PointStyle>,
     ) -> Result<PrimitiveDraw, RenderError> {
-        let indices = if line.is_some() {
+        let indices = if point.is_some() {
+            range.indices.clone()
+        } else if line.is_some() {
             crate::primitive_topology::line_indices(self.kind, &range.indices)?
         } else {
             crate::primitive_topology::triangle_indices(self.kind, &range.indices)?
@@ -66,6 +70,9 @@ impl PrimitiveSubmission {
             .attribute_data(Graphic3dTypeOfAttribute::Color)
             .is_some();
         let vertices = range_vertices(vertices, range.color, colored);
+        if let Some(style) = point {
+            return PrimitiveDraw::points(vertices, indices, matrix, style.clone());
+        }
         match line {
             Some(style) => PrimitiveDraw::segments(vertices, indices, matrix, style),
             None => PrimitiveDraw::new(vertices, indices, matrix),

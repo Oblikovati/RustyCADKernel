@@ -1,0 +1,46 @@
+"""Shared retained-scene capture modes."""
+
+SURFACE_MODES = (
+    "surface-strip",
+    "surface-strip-indexed",
+    "surface-fan",
+    "surface-fan-indexed",
+    "surface-bound-colors",
+    "surface-vertex-colors",
+)
+PERSISTENCE_MODES = (
+    "pers-zoom",
+    "pers-rotate",
+    "pers-zoom-rotate",
+    "pers-axial",
+    "pers-zoom-axial",
+    "pers-2d",
+    "pers-triedron",
+    "pers-ortho",
+    "pers-2d-ortho",
+    "pers-triedron-ortho",
+    "pers-camera",
+    "pers-camera-near",
+    "pers-camera-far",
+    "pers-group-zoom",
+    "pers-group-rotate",
+    "pers-group-2d",
+    "pers-nested",
+    "pers-scaled-above",
+    "pers-group-camera-near",
+)
+AIS_MODES = (
+    "ais-displayed",
+    "ais-erased",
+    "ais-redisplayed",
+    "ais-mode1",
+    "ais-affinity-off",
+    "ais-cleared",
+    "ais-removed",
+    "ais-recreated",
+    "ais-erased-all",
+    "ais-displayed-all",
+    "ais-removed-all",
+    "ais-erased-selected",
+    "ais-displayed-selected",
+)

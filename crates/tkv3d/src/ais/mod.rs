@@ -74,3 +74,8 @@ mod line;
 mod line_appearance;
 mod line_presentations;
 pub use line::AisLine;
+
+mod point;
+mod point_appearance;
+mod point_presentations;
+pub use point::AisPoint;

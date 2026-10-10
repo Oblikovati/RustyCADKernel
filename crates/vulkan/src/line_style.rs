@@ -7,6 +7,13 @@ pub(crate) fn primitive_style(
     aspects: &Handle<dyn Graphic3dAspectsSource>,
     closed: bool,
 ) -> Result<([f32; 4], Option<LineStyle>), RenderError> {
+    if kind == Graphic3dTypeOfPrimitiveArray::Points {
+        let style = aspects
+            .get()
+            .ok_or_else(|| rejected("null point aspects", "explicit Graphic3d aspects"))?;
+        validate_line_shading(style)?;
+        return Ok((rgba_color(style), None));
+    }
     if !matches!(
         kind,
         Graphic3dTypeOfPrimitiveArray::Segments | Graphic3dTypeOfPrimitiveArray::Polylines
@@ -23,13 +30,7 @@ pub(crate) fn primitive_style(
 fn line_parameters(
     style: &dyn Graphic3dAspectsSource,
 ) -> Result<([f32; 4], Option<LineStyle>), RenderError> {
-    let color = style.interior_color_rgba();
-    let rgba = [
-        color.rgb().red() as f32,
-        color.rgb().green() as f32,
-        color.rgb().blue() as f32,
-        color.alpha(),
-    ];
+    let rgba = rgba_color(style);
     let line = LineStyle::new(
         style.line_width(),
         style.line_pattern(),
@@ -52,4 +53,14 @@ fn validate_line_shading(style: &dyn Graphic3dAspectsSource) -> Result<(), Rende
         return Err(rejected(style.alpha_mode(), "opaque line alpha mode"));
     }
     Ok(())
+}
+
+fn rgba_color(style: &dyn Graphic3dAspectsSource) -> [f32; 4] {
+    let color = style.interior_color_rgba();
+    [
+        color.rgb().red() as f32,
+        color.rgb().green() as f32,
+        color.rgb().blue() as f32,
+        color.alpha(),
+    ]
 }

@@ -5,6 +5,8 @@ use crate::{RenderError, RenderVertex, error::rejected};
 pub enum PrimitiveTopology {
     /// Independent vertex triples.
     Triangles,
+    /// Independent screen-space marker centers.
+    Points,
     /// Independent endpoint pairs.
     Lines,
 }
@@ -43,6 +45,7 @@ pub struct PrimitiveDraw {
     pub(crate) clip_transform: [f32; 16],
     pub(crate) depth_clamp: bool,
     pub(crate) line_style: Option<LineStyle>,
+    pub(crate) point_style: Option<crate::PointStyle>,
 }
 /// Compatibility name for the original submission type; `TriangleDraw::new(vertices, indices, matrix)?`.
 pub type TriangleDraw = PrimitiveDraw;
@@ -64,6 +67,30 @@ impl PrimitiveDraw {
     ) -> Result<Self, RenderError> {
         Self::validated(vertices, indices, clip_transform, Some(style))
     }
+    /// Validate point centers and their sprite; `PrimitiveDraw::points(vertices, indices, matrix, style)?`.
+    pub fn points(
+        vertices: Vec<RenderVertex>,
+        indices: Vec<u32>,
+        clip_transform: [f32; 16],
+        style: crate::PointStyle,
+    ) -> Result<Self, RenderError> {
+        if indices.iter().any(|&i| i as usize >= vertices.len()) {
+            return Err(rejected(indices, "point indices within the vertex array"));
+        }
+        crate::scene::validate_components(&vertices, &clip_transform)?;
+        Ok(Self {
+            vertices,
+            indices,
+            clip_transform,
+            depth_clamp: false,
+            line_style: None,
+            point_style: Some(style),
+        })
+    }
+    /// Read the marker sprite when this is a point draw; `draw.point_style()`.
+    pub fn point_style(&self) -> Option<&crate::PointStyle> {
+        self.point_style.as_ref()
+    }
     fn validated(
         vertices: Vec<RenderVertex>,
         indices: Vec<u32>,
@@ -78,11 +105,14 @@ impl PrimitiveDraw {
             clip_transform,
             depth_clamp: false,
             line_style,
+            point_style: None,
         })
     }
     /// Read assembly topology; `draw.topology()`.
     pub fn topology(&self) -> PrimitiveTopology {
-        if self.line_style.is_some() {
+        if self.point_style.is_some() {
+            PrimitiveTopology::Points
+        } else if self.line_style.is_some() {
             PrimitiveTopology::Lines
         } else {
             PrimitiveTopology::Triangles

@@ -29,6 +29,17 @@ const BLEND: [vk::PipelineColorBlendAttachmentState; 1] = [vk::PipelineColorBlen
     alpha_blend_op: vk::BlendOp::ADD,
     color_write_mask: vk::ColorComponentFlags::RGBA,
 }];
+const POINT_BLEND: [vk::PipelineColorBlendAttachmentState; 1] =
+    [vk::PipelineColorBlendAttachmentState {
+        blend_enable: vk::TRUE,
+        src_color_blend_factor: vk::BlendFactor::SRC_ALPHA,
+        dst_color_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        color_blend_op: vk::BlendOp::ADD,
+        src_alpha_blend_factor: vk::BlendFactor::SRC_ALPHA,
+        dst_alpha_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
+        alpha_blend_op: vk::BlendOp::ADD,
+        color_write_mask: vk::ColorComponentFlags::RGBA,
+    }];
 pub(super) struct PipelineState {
     vertex: vk::PipelineVertexInputStateCreateInfo<'static>,
     assembly: vk::PipelineInputAssemblyStateCreateInfo<'static>,
@@ -40,10 +51,12 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
-    pub fn new(depth_clamp: bool, line: bool) -> Self {
+    pub fn new(depth_clamp: bool, line: bool, point: bool) -> Self {
         Self {
             vertex: vertex_state(),
-            assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if line {
+            assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
+                vk::PrimitiveTopology::POINT_LIST
+            } else if line {
                 vk::PrimitiveTopology::LINE_LIST
             } else {
                 vk::PrimitiveTopology::TRIANGLE_LIST
@@ -55,7 +68,11 @@ impl PipelineState {
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: depth_state(),
-            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(&BLEND),
+            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(if point {
+                &POINT_BLEND
+            } else {
+                &BLEND
+            }),
             dynamic: vk::PipelineDynamicStateCreateInfo::default()
                 .dynamic_states(dynamic_states(line)),
         }
