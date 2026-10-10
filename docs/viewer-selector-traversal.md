@@ -43,8 +43,8 @@ polyline builder assumes one-based input while calculating polygon orientation;
 valid traversal fixtures use that indexing. Existing frustum tests retain the
 separate invalid-input behavior coverage.
 
-The selector class remains partial: DisplaySensitive and ToPixMap still need
-ports. Arbitrary graph mutation that invalidates OCCT's borrowed references or
+The subsequent selection-image and sensitive-display ports complete the declared
+non-boilerplate ViewerSelector implementation mappings. Arbitrary graph mutation that invalidates OCCT's borrowed references or
 BVH iteration is not claimed as a supported concurrent operation. Root traversal
 retains the original intersector's camera slot and reads its current handle at
 persistence and subset boundaries. A Matches callback can replace that handle;

@@ -183,3 +183,11 @@ pub use selection_image::{
     select_mgr_create_selection_image_filler,
 };
 pub use viewer_selector_image::SelectMgrViewerSelectorImageMembers;
+
+mod sensitive_presentation;
+mod sensitive_presentation_entities;
+mod sensitive_presentation_solids;
+mod sensitive_presentation_triangles;
+pub use sensitive_presentation::SelectMgr;
+mod viewer_selector_display;
+pub use viewer_selector_display::SelectMgrViewerSelectorDisplayMembers;

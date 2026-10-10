@@ -21,8 +21,8 @@ pub struct Select3DSensitiveCurve {
     /// The poly state.
     pub core: Select3DSensitivePolyCore,
 }
-rustycad_tkernel::impl_transient!(Select3DSensitiveCurve, "Select3D_SensitiveCurve", dyn super::Select3DSensitiveSet, transient,
-    interfaces: [dyn Select3DSensitiveEntity, dyn super::Select3DSensitiveSet]);
+rustycad_tkernel::impl_transient!(Select3DSensitiveCurve, "Select3D_SensitiveCurve", dyn super::Select3DSensitivePolySource, transient,
+    interfaces: [dyn Select3DSensitiveEntity, dyn super::Select3DSensitiveSet, dyn super::Select3DSensitivePolySource]);
 impl_select3d_poly!(Select3DSensitiveCurve, |curve: &Select3DSensitiveCurve| {
     let connected =
         Select3DSensitiveCurve::from_points(&curve.owner_id(), &curve.core.points_3d())?;
