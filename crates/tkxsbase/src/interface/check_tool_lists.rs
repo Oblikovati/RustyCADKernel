@@ -222,8 +222,32 @@ mod tests {
     };
     use super::*;
 
+    // OCCT 3d097a0 keeps errh process-wide; independent tests must not race its mode.
+    fn run_check_tool_child(name: &str) -> bool {
+        const CASE_ENV: &str = "RUSTYCAD_CHECK_TOOL_CHILD_CASE";
+        if std::env::var(CASE_ENV).ok().as_deref() == Some(name) {
+            return false;
+        }
+        let output = std::process::Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", name, "--test-threads=1", "--nocapture"])
+            .env(CASE_ENV, name)
+            .output()
+            .unwrap();
+        assert!(
+            output.status.success()
+                && String::from_utf8_lossy(&output.stdout).contains("test result: ok. 1 passed;"),
+            "isolated case {name} failed: {}\n{}",
+            String::from_utf8_lossy(&output.stdout),
+            String::from_utf8_lossy(&output.stderr)
+        );
+        true
+    }
+
     #[test]
     fn lists_of_the_fake_model() {
+        if run_check_tool_child("interface::check_tool_lists::tests::lists_of_the_fake_model") {
+            return;
+        }
         let (model, _) = fake_chain();
         let mut tool = InterfaceCheckTool::new(&model).unwrap();
         // a and b share nothing: warnings.
@@ -250,6 +274,9 @@ mod tests {
 
     #[test]
     fn failures_and_reports() {
+        if run_check_tool_child("interface::check_tool_lists::tests::failures_and_reports") {
+            return;
+        }
         let (model, ents) = fake_chain();
         model.add_entity(&fake_entity("raise", &[])).unwrap();
         let mut tool =
