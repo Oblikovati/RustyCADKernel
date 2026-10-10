@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "continuation_branch": "porting/resume-claude",
+  "continuation_worktree": "/tmp/rustycad-resume",
+  "continuation_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+  "integrated_into_main": false,
+  "new_work_committed": false,
+  "integration_blocker": "Session filesystem policy makes .git read-only; Git cannot create the worktree index lock.",
+  "runtime_report": "porting/runtime-evidence/tkbool-evolved-2026-10-09.json.gz",
+  "runtime_report_sha256": "69ab9004b8ea732584d66dbe8309cca696cb83d93dc8c96eef517dc4177641b4",
+  "runtime_source_hashes_match": true,
+  "numeric_cases_passed": 1845,
+  "legacy_native_cases_passed": 3,
+  "legacy_rust_cases_passed": 3,
+  "tkbool_rust_tests_passed": 151,
+  "tkbool_rust_tests_failed": 0,
+  "preexisting_ignored_doctests": 8,
+  "clippy_all_tkbool_targets_passed": true,
+  "new_api_mappings_this_checkpoint": 34,
+  "point_explorer_cases": 109,
+  "interference_tool_cases": 288,
+  "evolved_cases": 67,
+  "full_parity_proven": false,
+  "inventory_refresh": "complete",
+  "tool_tests": {
+    "modules_passed": 164,
+    "modules_failed": 0
+  },
+  "continuation_snapshot": {
+    "source_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+    "includes_uncommitted_sources": true,
+    "api_declarations": 76041,
+    "api_done": 49502,
+    "api_open": 25566,
+    "api_partial": 973,
+    "gtests_mapped": 7968,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 481,
+    "toolkits": 56,
+    "tkbool": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 12,
+          "partial": 33,
+          "unclaimed": 1481,
+          "upstream_unimplemented": 0,
+          "verified": 1178
+        },
+        "declarations": 2704,
+        "done": 1190,
+        "done_percent": 44.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 783,
+          "partial": 0,
+          "unclaimed": 96,
+          "upstream_unimplemented": 0,
+          "verified": 3
+        },
+        "declarations": 882,
+        "done": 786,
+        "done_percent": 89.1
+      },
+      "gtests": {
+        "mapped": 3,
+        "not_applicable": 0,
+        "unmapped": 14
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 84,
+        "special-member": 12
+      },
+      "open_gap_by_category": {
+        "enum-constant": 14,
+        "field": 84,
+        "member": 1212,
+        "protected-member": 31,
+        "record": 140
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "new_mappings_resolved": 34,
+    "unresolved_rows": 2,
+    "fingerprints_current": true
+  },
+  "patch_sha256": "f9eb0f59e46f14893fa0cba3eeed04a80fe455223cf82b044a8e79e809761591",
+  "format_check_passed": true
+}

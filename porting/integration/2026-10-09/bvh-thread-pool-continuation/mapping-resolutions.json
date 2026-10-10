@@ -1,0 +1,1973 @@
+[
+  {
+    "cpp_ids": [
+      "01a10248f3666320c737313d4cbb9c965d7f10d927ea335149d114ddae6173f7"
+    ],
+    "cpp_matches": [
+      {
+        "id": "01a10248f3666320c737313d4cbb9c965d7f10d927ea335149d114ddae6173f7",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::Sentry::Unlock",
+        "signature": "void ()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@Sentry@F@Unlock#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::unlock"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "b96a112697ae6d3681e41b53e8d065c8dc70ba94515ea8e7ccdcfc14b1ca7689",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadSentry",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_sentry::SelectMgrBvhThreadSentry"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::unlock",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_sentry.rs",
+        "source_sha256": "820054d49a701c6fc7cb71940a4a85395a7e12a7b938e239f15fa028183e21e0",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::unlock"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Sentry::Unlock()"
+  },
+  {
+    "cpp_ids": [
+      "0998e1c67bed89cb3ffdb890c5f1a67b78d7273b55a5c329f0edaff01a262183"
+    ],
+    "cpp_matches": [
+      {
+        "id": "0998e1c67bed89cb3ffdb890c5f1a67b78d7273b55a5c329f0edaff01a262183",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myIdleEvent",
+        "signature": "class Standard_Condition",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myIdleEvent"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::idle"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "c82abc125f18791376025975a424e7dbdc076a08f0aa7890edf322d485448651",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::idle",
+        "signature": {
+          "resolved_path": {
+            "args": null,
+            "path": "rustycad_tkernel::standard::StandardCondition",
+            "resolved_item_path": "rustycad_tkernel::standard::condition::StandardCondition"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::idle"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myIdleEvent"
+  },
+  {
+    "cpp_ids": [
+      "217ae7e2fa982cdd39cf0b11fc298b5b537a25c92ba0ac23c831889c8aa2a321"
+    ],
+    "cpp_matches": [
+      {
+        "id": "217ae7e2fa982cdd39cf0b11fc298b5b537a25c92ba0ac23c831889c8aa2a321",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::StopThreads",
+        "signature": "void ()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@F@StopThreads#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::stop_threads"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "6c1d9e287f38732ec4d70a2374ba27bae194f3ea747c9231554f8255c23bf975",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadPool",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_pool::SelectMgrBvhThreadPool"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::stop_threads",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::stop_threads"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::StopThreads()"
+  },
+  {
+    "cpp_ids": [
+      "394978dcc8f840bbe2ca471b81a626c9d5f1dfa72bcba12334fba482e71f4442"
+    ],
+    "cpp_matches": [
+      {
+        "id": "394978dcc8f840bbe2ca471b81a626c9d5f1dfa72bcba12334fba482e71f4442",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_BVHThreadPool::Sentry::Sentry",
+        "signature": "void (const class SelectMgr_BVHThreadPool::Sentry &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@Sentry@F@Sentry#&1$@S@SelectMgr_BVHThreadPool@S@Sentry#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "excluded",
+    "resolution": "excluded",
+    "rust_matches": [
+      {
+        "declaration_sha256": "1bd21bfb53b2de00906bb1f9aaf32a04582f8bb47d9cfed60149467131c6e4c3",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 2,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_sentry.rs",
+        "source_sha256": "820054d49a701c6fc7cb71940a4a85395a7e12a7b938e239f15fa028183e21e0",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Sentry::Sentry(const class SelectMgr_BVHThreadPool::Sentry &)"
+  },
+  {
+    "cpp_ids": [
+      "3bfa27d50c9f238f3d4b8dedd1589463383b3a10540d3a6e98e410bf241f7ab0"
+    ],
+    "cpp_matches": [
+      {
+        "id": "3bfa27d50c9f238f3d4b8dedd1589463383b3a10540d3a6e98e410bf241f7ab0",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myWakeEvent",
+        "signature": "class Standard_Condition",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myWakeEvent"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::wake"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "d951e54d382850dd8acea8be57df3403778a43741e39b59985d60e76dc565302",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::wake",
+        "signature": {
+          "resolved_path": {
+            "args": null,
+            "path": "rustycad_tkernel::standard::StandardCondition",
+            "resolved_item_path": "rustycad_tkernel::standard::condition::StandardCondition"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::wake"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myWakeEvent"
+  },
+  {
+    "cpp_ids": [
+      "49c8f1d208e3d580215a7658459256c8993febbc4cffbfdd3c056f41068f4fae"
+    ],
+    "cpp_matches": [
+      {
+        "id": "49c8f1d208e3d580215a7658459256c8993febbc4cffbfdd3c056f41068f4fae",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myBVHThreads",
+        "signature": "class NCollection_Array1<class SelectMgr_BVHThreadPool::BVHThread>",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myBVHThreads"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::threads"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "805ec887b3da80b259f8003b11313e3fc0e20fcbe539357841e58b4b3933f344",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::threads",
+        "signature": {
+          "resolved_path": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "lifetime": "'static"
+                              },
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "super::SelectMgrBvhThread",
+                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::ncollection::Array1",
+                        "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1"
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "path": "rustycad_tkernel::standard::SharedState",
+            "resolved_item_path": "rustycad_tkernel::standard::shared_state::SharedState"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::threads"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myBVHThreads"
+  },
+  {
+    "cpp_ids": [
+      "51f3ee8b874363bf3d3707b6db14b9b836cc20351389f085b48fced37bf4fbdd"
+    ],
+    "cpp_matches": [
+      {
+        "id": "51f3ee8b874363bf3d3707b6db14b9b836cc20351389f085b48fced37bf4fbdd",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myIsStarted",
+        "signature": "bool",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myIsStarted"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::started"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "d439bc35eef82ca9783a2c8a344d3469f1466632136e970a38119234ed630141",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::started",
+        "signature": {
+          "resolved_path": {
+            "args": null,
+            "path": "std::sync::atomic::AtomicBool",
+            "resolved_item_path": "core::sync::atomic::AtomicBool"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::started"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myIsStarted"
+  },
+  {
+    "cpp_ids": [
+      "5a7ffbf23ba3f2881592d59d1066fcda8141b1a96ecefa21962ae2072de1759c"
+    ],
+    "cpp_matches": [
+      {
+        "id": "5a7ffbf23ba3f2881592d59d1066fcda8141b1a96ecefa21962ae2072de1759c",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_BVHThreadPool::BVHThread::BVHThread",
+        "signature": "void ()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@BVHThread@F@BVHThread#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::new"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "ab71c7952060b676245461752fe42aa47a33ad0247c208f2121fe4a74e47ef08",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThread",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::new",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread.rs",
+        "source_sha256": "995935a5ca157cec4a1a41ad5f7fcd2df968b46c675689fc4b9a853f508ee91b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::new"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::BVHThread::BVHThread()"
+  },
+  {
+    "cpp_ids": [
+      "5e9d3adbb709860c5c8e168ad413ae3463023bd42ec93d93932a7ef01ebb4116"
+    ],
+    "cpp_matches": [
+      {
+        "id": "5e9d3adbb709860c5c8e168ad413ae3463023bd42ec93d93932a7ef01ebb4116",
+        "kind": "CXXRecord",
+        "qualified_name": "SelectMgr_BVHThreadPool::Sentry",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@Sentry"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "1bd21bfb53b2de00906bb1f9aaf32a04582f8bb47d9cfed60149467131c6e4c3",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 2,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_sentry.rs",
+        "source_sha256": "820054d49a701c6fc7cb71940a4a85395a7e12a7b938e239f15fa028183e21e0",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Sentry"
+  },
+  {
+    "cpp_ids": [
+      "726fd92de2191944ffd8becbe8354fe7233fb65f85d55478bfbcca82321791bf"
+    ],
+    "cpp_matches": [
+      {
+        "id": "726fd92de2191944ffd8becbe8354fe7233fb65f85d55478bfbcca82321791bf",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::WaitThreads",
+        "signature": "void ()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@F@WaitThreads#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::wait_threads"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "d9d813aab50e7a268408126e8327ffc9236c9ee56df144bd674c6f97fe7c3716",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadPool",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_pool::SelectMgrBvhThreadPool"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::wait_threads",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::wait_threads"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::WaitThreads()"
+  },
+  {
+    "cpp_ids": [
+      "73d780aedf1e30a4f306fa2ffeb865d509213fb92680df874edf4106bf308bcd"
+    ],
+    "cpp_matches": [
+      {
+        "id": "73d780aedf1e30a4f306fa2ffeb865d509213fb92680df874edf4106bf308bcd",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::Threads",
+        "signature": "class NCollection_Array1<class SelectMgr_BVHThreadPool::BVHThread> &()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@F@Threads#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::threads"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "9b8bbb446f429624096f5fe4d0b95f0bc9a6d0ce7a59e2423d794c6a61fe1bdb",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadPool",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_pool::SelectMgrBvhThreadPool"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::threads",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'static"
+                                  },
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "args": null,
+                                        "path": "SelectMgrBvhThread",
+                                        "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Array1",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "RwLockWriteGuard",
+                "resolved_item_path": "std::sync::poison::rwlock::RwLockWriteGuard"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::threads"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Threads()"
+  },
+  {
+    "cpp_ids": [
+      "76eeb49ad38acf8674f8f6a2c517811a97056f2024f920a669f506a1f83a7cfa"
+    ],
+    "cpp_matches": [
+      {
+        "id": "76eeb49ad38acf8674f8f6a2c517811a97056f2024f920a669f506a1f83a7cfa",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::BVHThread::Assign",
+        "signature": "void (const class SelectMgr_BVHThreadPool::BVHThread &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@BVHThread@F@Assign#&1$@S@SelectMgr_BVHThreadPool@S@BVHThread#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::assign"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "9e7645c55bf354dd4c8fb1dc61feb9dca5f354f7870d9d28c5e9b5ddc5ab916d",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThread",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::assign",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "other",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread.rs",
+        "source_sha256": "995935a5ca157cec4a1a41ad5f7fcd2df968b46c675689fc4b9a853f508ee91b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::assign"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::BVHThread::Assign(const class SelectMgr_BVHThreadPool::BVHThread &)"
+  },
+  {
+    "cpp_ids": [
+      "831f8490bf7ea4020b1616048984466951a905a1d5531202b51378b828598fd6"
+    ],
+    "cpp_matches": [
+      {
+        "id": "831f8490bf7ea4020b1616048984466951a905a1d5531202b51378b828598fd6",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::BVHThread::operator=",
+        "signature": "class SelectMgr_BVHThreadPool::BVHThread &(const class SelectMgr_BVHThreadPool::BVHThread &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@BVHThread@F@operator=#&1$@S@SelectMgr_BVHThreadPool@S@BVHThread#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::assign"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "9e7645c55bf354dd4c8fb1dc61feb9dca5f354f7870d9d28c5e9b5ddc5ab916d",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThread",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::assign",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "other",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread.rs",
+        "source_sha256": "995935a5ca157cec4a1a41ad5f7fcd2df968b46c675689fc4b9a853f508ee91b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::assign"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::BVHThread::operator=(const class SelectMgr_BVHThreadPool::BVHThread &)"
+  },
+  {
+    "cpp_ids": [
+      "895acb0d199e931964b60a76f1305a43a280ec0f6b2a0e001874173eddef48ff"
+    ],
+    "cpp_matches": [
+      {
+        "id": "895acb0d199e931964b60a76f1305a43a280ec0f6b2a0e001874173eddef48ff",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_BVHThreadPool::Sentry::Sentry",
+        "signature": "void (const class opencascade::handle<class SelectMgr_BVHThreadPool> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@Sentry@F@Sentry#&1$@N@opencascade@S@handle>#$@S@SelectMgr_BVHThreadPool#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::new"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "03c25b82f4376b0232303bc120760e25662e121b55e92a51ba3aa106f24117b5",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadSentry",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_sentry::SelectMgrBvhThreadSentry"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::new",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "pool",
+                {
+                  "resolved_path": {
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "args": null,
+                                "path": "SelectMgrBvhThreadPool",
+                                "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_pool::SelectMgrBvhThreadPool"
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    },
+                    "path": "Handle",
+                    "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_sentry.rs",
+        "source_sha256": "820054d49a701c6fc7cb71940a4a85395a7e12a7b938e239f15fa028183e21e0",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::new"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Sentry::Sentry(const class opencascade::handle<class SelectMgr_BVHThreadPool> &)"
+  },
+  {
+    "cpp_ids": [
+      "971e4f4495e030d86750e6d90d621c5276a58e26d940353b00125d5e0dcfd448"
+    ],
+    "cpp_matches": [
+      {
+        "id": "971e4f4495e030d86750e6d90d621c5276a58e26d940353b00125d5e0dcfd448",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_BVHThreadPool::BVHThread::BVHThread",
+        "signature": "void (const class SelectMgr_BVHThreadPool::BVHThread &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@BVHThread@F@BVHThread#&1$@S@SelectMgr_BVHThreadPool@S@BVHThread#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::from_thread"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "34a116a0f41a1ed06ef0da0bcacd63a3c13e9bbf3e3fa659ae820ae784317a78",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThread",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::from_thread",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "other",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread.rs",
+        "source_sha256": "995935a5ca157cec4a1a41ad5f7fcd2df968b46c675689fc4b9a853f508ee91b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::from_thread"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::BVHThread::BVHThread(const class SelectMgr_BVHThreadPool::BVHThread &)"
+  },
+  {
+    "cpp_ids": [
+      "a84be93168e5675302279841c3e7eb358af210115c060e870b848fff87e8b5b6"
+    ],
+    "cpp_matches": [
+      {
+        "id": "a84be93168e5675302279841c3e7eb358af210115c060e870b848fff87e8b5b6",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_BVHThreadPool::SelectMgr_BVHThreadPool",
+        "signature": "void (int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@F@SelectMgr_BVHThreadPool#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::new"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "353a179d507d91ad3792f81f3222c32731617bd44b9f01738ce6b8cd2dcd3f81",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadPool",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_pool::SelectMgrBvhThreadPool"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::new",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "count",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::new"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::SelectMgr_BVHThreadPool(int)"
+  },
+  {
+    "cpp_ids": [
+      "b8762081b546801c7bee8d2d0dc0df70cc221fc1343faf72c3b8bb7a3545e8f6"
+    ],
+    "cpp_matches": [
+      {
+        "id": "b8762081b546801c7bee8d2d0dc0df70cc221fc1343faf72c3b8bb7a3545e8f6",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::BVHThread::BVHMutex",
+        "signature": "class std::mutex &()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@BVHThread@F@BVHMutex#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::bvh_mutex"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "fccfb05f4383c9f49c9ee5e0f36492c06a658d2272656ad8dd57876847b08ded",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThread",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread::SelectMgrBvhThread"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::bvh_mutex",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "borrowed_ref": {
+                "is_mutable": false,
+                "lifetime": null,
+                "type": {
+                  "resolved_path": {
+                    "args": null,
+                    "path": "NonRecursiveMutex",
+                    "resolved_item_path": "rustycad_tkernel::standard::nonrecursive_mutex::NonRecursiveMutex"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread.rs",
+        "source_sha256": "995935a5ca157cec4a1a41ad5f7fcd2df968b46c675689fc4b9a853f508ee91b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread::bvh_mutex"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::BVHThread::BVHMutex()"
+  },
+  {
+    "cpp_ids": [
+      "bbe9feb62c23d017474d471cfc66a9a9d6432a0cd874a833b122d4db317e0faa"
+    ],
+    "cpp_matches": [
+      {
+        "id": "bbe9feb62c23d017474d471cfc66a9a9d6432a0cd874a833b122d4db317e0faa",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myToStopBVHThread",
+        "signature": "bool",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myToStopBVHThread"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::stop"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "d2042b607b748b238c7a0ca767de042f67cf63e04ccdbfd4aaa84cb70b578714",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::stop",
+        "signature": {
+          "resolved_path": {
+            "args": null,
+            "path": "std::sync::atomic::AtomicBool",
+            "resolved_item_path": "core::sync::atomic::AtomicBool"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::stop"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myToStopBVHThread"
+  },
+  {
+    "cpp_ids": [
+      "bf0f682de7007c8bb5f36ec86c3377dbe5b3281082ab18667619db6639625557"
+    ],
+    "cpp_matches": [
+      {
+        "id": "bf0f682de7007c8bb5f36ec86c3377dbe5b3281082ab18667619db6639625557",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myBVHToBuildList",
+        "signature": "class NCollection_List<class opencascade::handle<class Select3D_SensitiveEntity>>",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myBVHToBuildList"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::queued"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "8a22305a4a0973972dddf2b2d7eec8921a46c584d68047b478684fa6a1946144",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::queued",
+        "signature": {
+          "resolved_path": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": {
+                                      "angle_bracketed": {
+                                        "args": [
+                                          {
+                                            "type": {
+                                              "dyn_trait": {
+                                                "lifetime": null,
+                                                "traits": [
+                                                  {
+                                                    "generic_params": [],
+                                                    "trait": {
+                                                      "args": null,
+                                                      "path": "Select3DSensitiveEntity",
+                                                      "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_entity::Select3DSensitiveEntity"
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        ],
+                                        "constraints": []
+                                      }
+                                    },
+                                    "path": "rustycad_tkernel::standard::Handle",
+                                    "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::ncollection::List",
+                        "resolved_item_path": "rustycad_tkernel::ncollection::list::List"
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "path": "rustycad_tkernel::standard::SharedState",
+            "resolved_item_path": "rustycad_tkernel::standard::shared_state::SharedState"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::queued"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myBVHToBuildList"
+  },
+  {
+    "cpp_ids": [
+      "e57cc9ea1af35bc8451e97f9798d60ea4988e6f787dfca69d151c7173b3f4ec6"
+    ],
+    "cpp_matches": [
+      {
+        "id": "e57cc9ea1af35bc8451e97f9798d60ea4988e6f787dfca69d151c7173b3f4ec6",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::AddEntity",
+        "signature": "void (const class opencascade::handle<class Select3D_SensitiveEntity> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@F@AddEntity#&1$@N@opencascade@S@handle>#$@S@Select3D_SensitiveEntity#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::add_entity"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "36df293d8ebe59d131da20294c3097de1749f5bfcc7e775a635f0b57bd4c323a",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadPool",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_pool::SelectMgrBvhThreadPool"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::add_entity",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "entity",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "Select3DSensitiveEntity",
+                                          "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_entity::Select3DSensitiveEntity"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool::add_entity"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::AddEntity(const class opencascade::handle<class Select3D_SensitiveEntity> &)"
+  },
+  {
+    "cpp_ids": [
+      "eb2a69949f2b65bdbd54003ae98b3f4c8347b328a24fd8b6ad58f41b8860f1c1"
+    ],
+    "cpp_matches": [
+      {
+        "id": "eb2a69949f2b65bdbd54003ae98b3f4c8347b328a24fd8b6ad58f41b8860f1c1",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::Sentry::operator=",
+        "signature": "class SelectMgr_BVHThreadPool::Sentry &(const class SelectMgr_BVHThreadPool::Sentry &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@Sentry@F@operator=#&1$@S@SelectMgr_BVHThreadPool@S@Sentry#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "excluded",
+    "resolution": "excluded",
+    "rust_matches": [
+      {
+        "declaration_sha256": "1bd21bfb53b2de00906bb1f9aaf32a04582f8bb47d9cfed60149467131c6e4c3",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 2,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_sentry.rs",
+        "source_sha256": "820054d49a701c6fc7cb71940a4a85395a7e12a7b938e239f15fa028183e21e0",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Sentry::operator=(const class SelectMgr_BVHThreadPool::Sentry &)"
+  },
+  {
+    "cpp_ids": [
+      "ec77c824a1ddb4fd6fa26b26132e65c644df4442908439e3081ce9174de6b1ff"
+    ],
+    "cpp_matches": [
+      {
+        "id": "ec77c824a1ddb4fd6fa26b26132e65c644df4442908439e3081ce9174de6b1ff",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BVHThreadPool::Sentry::Lock",
+        "signature": "void ()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@Sentry@F@Lock#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::lock"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "33d1d23869af7a33821e80b4e122c402aa66b9c9af21e2ee97863ce11ecd1dfa",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBvhThreadSentry",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::bvh_thread_sentry::SelectMgrBvhThreadSentry"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::lock",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_sentry.rs",
+        "source_sha256": "820054d49a701c6fc7cb71940a4a85395a7e12a7b938e239f15fa028183e21e0",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry::lock"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::Sentry::Lock()"
+  },
+  {
+    "cpp_ids": [
+      "f290141d7317221ea599394a088ef950651b73bfa31be513daee222a82b191db"
+    ],
+    "cpp_matches": [
+      {
+        "id": "f290141d7317221ea599394a088ef950651b73bfa31be513daee222a82b191db",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BVHThreadPool::myBVHListMutex",
+        "signature": "class std::mutex",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@FI@myBVHListMutex"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::list_mutex"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "9f9272551440b236606677cf586b234206b366a3238df119f1ee65bb92a7f6a3",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::list_mutex",
+        "signature": {
+          "resolved_path": {
+            "args": null,
+            "path": "rustycad_tkernel::standard::NonRecursiveMutex",
+            "resolved_item_path": "rustycad_tkernel::standard::nonrecursive_mutex::NonRecursiveMutex"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPoolFields::list_mutex"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::myBVHListMutex"
+  },
+  {
+    "cpp_ids": [
+      "fbccecbab276ad68fb9a4105279784426820ed63dabff8dc00722ca069d21406"
+    ],
+    "cpp_matches": [
+      {
+        "id": "fbccecbab276ad68fb9a4105279784426820ed63dabff8dc00722ca069d21406",
+        "kind": "CXXRecord",
+        "qualified_name": "SelectMgr_BVHThreadPool::BVHThread",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool@S@BVHThread"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "3168f3ecaaaa02e6cf85d12e24e79dd276a0ce9d4d7cfc2165c3edfbb305f4cd",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThread",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 2,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread.rs",
+        "source_sha256": "995935a5ca157cec4a1a41ad5f7fcd2df968b46c675689fc4b9a853f508ee91b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThread"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool::BVHThread"
+  },
+  {
+    "cpp_ids": [
+      "fc6b5cc71498d71f540479d81570492b12fc144e40a53741d7494c1432e1d3bf"
+    ],
+    "cpp_matches": [
+      {
+        "id": "fc6b5cc71498d71f540479d81570492b12fc144e40a53741d7494c1432e1d3bf",
+        "kind": "CXXRecord",
+        "qualified_name": "SelectMgr_BVHThreadPool",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+        "usr": "c:@S@SelectMgr_BVHThreadPool"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "91f93f2684c348c0568e8d7cb19ad01634c01ca44f3a1356a32a0467762d86eb",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 2,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/bvh_thread_pool.rs",
+        "source_sha256": "827338a861e0633579da156d40afcf94a6b7338f0c0048ac650938f2d15efb1e",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BVHThreadPool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BVHThreadPool"
+  }
+]

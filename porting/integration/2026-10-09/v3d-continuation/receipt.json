@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "continuation_branch": "porting/resume-claude",
+  "continuation_worktree": "/tmp/rustycad-resume",
+  "continuation_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+  "integrated_into_main": false,
+  "new_work_committed": false,
+  "integration_blocker": "Session filesystem policy makes .git read-only; Git cannot create the worktree index lock.",
+  "patch_sha256": "32818a3497357d2ba8cea37c1831eb3bdaf9a7fca9e96647c07efe1989598e79",
+  "patch_reverse_check": true,
+  "inventory_refresh": "complete",
+  "continuation_snapshot": {
+    "api_declarations": 76041,
+    "api_done": 50857,
+    "api_open": 24212,
+    "api_partial": 972,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "toolkits": {
+    "TKernel": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 899,
+          "partial": 510,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 4889
+        },
+        "declarations": 6298,
+        "done": 5788,
+        "done_percent": 91.9
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 546,
+          "partial": 42,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 438
+        },
+        "declarations": 1026,
+        "done": 984,
+        "done_percent": 95.9
+      },
+      "gtests": {
+        "mapped": 1316,
+        "not_applicable": 0,
+        "unmapped": 0
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {},
+      "open_gap_by_category": {},
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKService": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 132,
+          "partial": 11,
+          "unclaimed": 0,
+          "upstream_unimplemented": 0,
+          "verified": 4359
+        },
+        "declarations": 4502,
+        "done": 4491,
+        "done_percent": 99.8
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 144,
+          "partial": 41,
+          "unclaimed": 62,
+          "upstream_unimplemented": 0,
+          "verified": 290
+        },
+        "declarations": 537,
+        "done": 434,
+        "done_percent": 80.8
+      },
+      "gtests": {
+        "mapped": 72,
+        "not_applicable": 0,
+        "unmapped": 3
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 21,
+        "special-member": 41
+      },
+      "open_gap_by_category": {},
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKBool": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 12,
+          "partial": 33,
+          "unclaimed": 1481,
+          "upstream_unimplemented": 0,
+          "verified": 1178
+        },
+        "declarations": 2704,
+        "done": 1190,
+        "done_percent": 44.0
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 783,
+          "partial": 0,
+          "unclaimed": 96,
+          "upstream_unimplemented": 0,
+          "verified": 3
+        },
+        "declarations": 882,
+        "done": 786,
+        "done_percent": 89.1
+      },
+      "gtests": {
+        "mapped": 3,
+        "not_applicable": 0,
+        "unmapped": 14
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "rtti-macro": 84,
+        "special-member": 12
+      },
+      "open_gap_by_category": {
+        "enum-constant": 14,
+        "field": 84,
+        "member": 1212,
+        "protected-member": 31,
+        "record": 140
+      },
+      "scope": "port",
+      "scope_reason": ""
+    },
+    "TKV3d": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 165,
+          "partial": 0,
+          "unclaimed": 3820,
+          "upstream_unimplemented": 0,
+          "verified": 1187
+        },
+        "declarations": 5172,
+        "done": 1352,
+        "done_percent": 26.1
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 923,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 923,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 1,
+        "not_applicable": 0,
+        "unmapped": 72
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 318,
+        "exception-macro": 9,
+        "rtti-macro": 556,
+        "special-member": 40
+      },
+      "open_gap_by_category": {
+        "alias": 29,
+        "enum-constant": 269,
+        "field": 519,
+        "member": 2468,
+        "protected-member": 257,
+        "record": 278
+      },
+      "scope": "port",
+      "scope_reason": ""
+    }
+  },
+  "runtime_reports": {
+    "tkv3d": {
+      "path": "porting/runtime-evidence/tkv3d-v3d-2026-10-09.json.gz",
+      "sha256": "f4cbe171e30268ed7ea56c487732043be311fbb605598f603e19a7bdf6039059",
+      "source_hashes_match": true,
+      "numeric_cases": 554,
+      "native_cases": 1,
+      "rust_cases": 1
+    },
+    "tkservice": {
+      "path": "porting/runtime-evidence/tkservice-v3d-2026-10-09.json.gz",
+      "sha256": "606809eb8b9b75d97fe710725120c441478d3630142a79794fbded2d58bee214",
+      "source_hashes_match": true,
+      "numeric_cases": 3142,
+      "native_cases": 72,
+      "rust_cases": 72
+    },
+    "tkbool": {
+      "path": "porting/runtime-evidence/tkbool-v3d-2026-10-09.json.gz",
+      "sha256": "ec184b5227e38a11309dbe5f8414f2b46f34eaaaf96312961b41108da5ad7788",
+      "source_hashes_match": true,
+      "numeric_cases": 1845,
+      "native_cases": 3,
+      "rust_cases": 3
+    }
+  },
+  "tool_tests": {
+    "modules_passed": 165,
+    "modules_failed": 0
+  },
+  "clippy_tkernel_tkservice_tkv3d_all_targets_passed": true,
+  "inventory_status_current": true,
+  "unresolved_ledger_rows": 0,
+  "rust_crates_captured": 30
+}

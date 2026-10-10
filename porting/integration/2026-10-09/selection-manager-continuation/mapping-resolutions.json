@@ -1,0 +1,2809 @@
+[
+  {
+    "cpp_ids": [
+      "1a9da05c5e831a6c48cfb3365ea76aee2125db5e411f9d37a7d892289ad131c2"
+    ],
+    "cpp_matches": [
+      {
+        "id": "1a9da05c5e831a6c48cfb3365ea76aee2125db5e411f9d37a7d892289ad131c2",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Contains",
+        "signature": "bool (const class opencascade::handle<class SelectMgr_SelectableObject> &) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Contains#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::contains"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "ffebe2a4081a800c83bf803feda40a8c88292314d9581b39b1e112b840adbc27",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::contains",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "primitive": "bool"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager.rs",
+        "source_sha256": "9072795df7918e96f046537389efd033ccb1826ebfedf295a6ca940a20531c67",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::contains"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Contains(const class opencascade::handle<class SelectMgr_SelectableObject> &) const"
+  },
+  {
+    "cpp_ids": [
+      "1efc472f7f925975f42b8f97aab73ec226adfc94130ef388d0c8d464efccff0d"
+    ],
+    "cpp_matches": [
+      {
+        "id": "1efc472f7f925975f42b8f97aab73ec226adfc94130ef388d0c8d464efccff0d",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Activate",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Activate#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::activate"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "21370bf341a35a1f7f16a7ecc325cab5f75d00b8782b60c78805f10b7cf122b3",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::activate",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_lifecycle.rs",
+        "source_sha256": "c58d8b0a442d1494c857e26f89f99184b158e0efd0840ce0c8c00d733ecbd12a",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::activate"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Activate(const class opencascade::handle<class SelectMgr_SelectableObject> &, int)"
+  },
+  {
+    "cpp_ids": [
+      "1ffcdfddc14433e50767c5a52a79978db68a0092a8d32562486162e3e4b1985c"
+    ],
+    "cpp_matches": [
+      {
+        "id": "1ffcdfddc14433e50767c5a52a79978db68a0092a8d32562486162e3e4b1985c",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_SelectionManager::SelectMgr_SelectionManager",
+        "signature": "void (const class opencascade::handle<class SelectMgr_ViewerSelector> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@SelectMgr_SelectionManager#&1$@N@opencascade@S@handle>#$@S@SelectMgr_ViewerSelector#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::new"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "d187b0c7d84fc240f7e45a07c0cbf69a8d2846169afe01f44674d53aa4ad8383",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::new",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "selector",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrViewerSelectorSource",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::viewer_selector::SelectMgrViewerSelectorSource"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager.rs",
+        "source_sha256": "9072795df7918e96f046537389efd033ccb1826ebfedf295a6ca940a20531c67",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::new"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::SelectMgr_SelectionManager(const class opencascade::handle<class SelectMgr_ViewerSelector> &)"
+  },
+  {
+    "cpp_ids": [
+      "2d947f53a45646e1e052f3089c04043a1226b459e686b9c716bbf1b956683e6a"
+    ],
+    "cpp_matches": [
+      {
+        "id": "2d947f53a45646e1e052f3089c04043a1226b459e686b9c716bbf1b956683e6a",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::recomputeSelectionMode",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, const class opencascade::handle<class SelectMgr_Selection> &, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@recomputeSelectionMode#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#&1$@N@opencascade@S@handle>#$@S@SelectMgr_Selection#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::recompute_selection_mode"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "245eec8f137e583e962bfb3424f9f9b2599880410287d712dd821d2b3d9f81bb",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::recompute_selection_mode",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "selection",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "path": "SelectMgrSelection",
+                        "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSelection"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::recompute_selection_mode"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::recomputeSelectionMode(const class opencascade::handle<class SelectMgr_SelectableObject> &, const class opencascade::handle<class SelectMgr_Selection> &, int)"
+  },
+  {
+    "cpp_ids": [
+      "3ba6ce439d07a70eb0151cb5f90bdd1b3f34c270603165b0b0025fe0404aa616"
+    ],
+    "cpp_matches": [
+      {
+        "id": "3ba6ce439d07a70eb0151cb5f90bdd1b3f34c270603165b0b0025fe0404aa616",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Update",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, bool)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Update#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#b#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::update"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "f17ae611a489cc6f3eeb89e75d2c12df5f75e864010b14d5b0e87b08b104cda6",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::update",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "force",
+                {
+                  "primitive": "bool"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::update"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Update(const class opencascade::handle<class SelectMgr_SelectableObject> &, bool)"
+  },
+  {
+    "cpp_ids": [
+      "57827f71f733bed93c290637919b2473b0aa5cc50fe772d2d24d8bcab0fcd24b"
+    ],
+    "cpp_matches": [
+      {
+        "id": "57827f71f733bed93c290637919b2473b0aa5cc50fe772d2d24d8bcab0fcd24b",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::RecomputeSelection",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, bool, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@RecomputeSelection#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#b#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::recompute_selection"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "e2572928ee9259a50caa03384dabdb38612c236ba12f4b1f95bc40359c193867",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::recompute_selection",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "force",
+                {
+                  "primitive": "bool"
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::recompute_selection"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::RecomputeSelection(const class opencascade::handle<class SelectMgr_SelectableObject> &, bool, int)"
+  },
+  {
+    "cpp_ids": [
+      "5cd9357449c3965cecf28c693cb541634b192d9bec073977bdd69271ebe1c202"
+    ],
+    "cpp_matches": [
+      {
+        "id": "5cd9357449c3965cecf28c693cb541634b192d9bec073977bdd69271ebe1c202",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::SetSelectionSensitivity",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@SetSelectionSensitivity#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_selection_sensitivity"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "ef3ddc4853aefde3ac3412e3b15f56decfe72789465730385999468e0b8b735a",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_selection_sensitivity",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "sensitivity",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_selection_sensitivity"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::SetSelectionSensitivity(const class opencascade::handle<class SelectMgr_SelectableObject> &, int, int)"
+  },
+  {
+    "cpp_ids": [
+      "6903a3326066f3fe874c0b18c2fff44c7367243a7f0587f5743d86e57353b70f"
+    ],
+    "cpp_matches": [
+      {
+        "id": "6903a3326066f3fe874c0b18c2fff44c7367243a7f0587f5743d86e57353b70f",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::RestoreSelectionStructures",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@RestoreSelectionStructures#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::restore_selection_structures"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "b8eb8862f37d80264afc61f325d87b4a18dbea76ac199533b839a3d423a63a60",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::restore_selection_structures",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::restore_selection_structures"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::RestoreSelectionStructures(const class opencascade::handle<class SelectMgr_SelectableObject> &, int)"
+  },
+  {
+    "cpp_ids": [
+      "83611c5195f45dda7f0f3bff016765a7e49ec79ec95d4e3d0f0fbff364466877"
+    ],
+    "cpp_matches": [
+      {
+        "id": "83611c5195f45dda7f0f3bff016765a7e49ec79ec95d4e3d0f0fbff364466877",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Selector",
+        "signature": "const class opencascade::handle<class SelectMgr_ViewerSelector> &() const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Selector#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::selector"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "046de57f8754fd4f4486784d14b2c30291463b83cd8c6d852c656cfa7fad29c4",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::selector",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "borrowed_ref": {
+                "is_mutable": false,
+                "lifetime": null,
+                "type": {
+                  "resolved_path": {
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "dyn_trait": {
+                                "lifetime": null,
+                                "traits": [
+                                  {
+                                    "generic_params": [],
+                                    "trait": {
+                                      "args": null,
+                                      "path": "SelectMgrViewerSelectorSource",
+                                      "resolved_item_path": "rustycad_tkv3d::select_mgr::viewer_selector::SelectMgrViewerSelectorSource"
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    },
+                    "path": "Handle",
+                    "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager.rs",
+        "source_sha256": "9072795df7918e96f046537389efd033ccb1826ebfedf295a6ca940a20531c67",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::selector"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Selector() const"
+  },
+  {
+    "cpp_ids": [
+      "896ea9ea8ce826bd04d2cd48f6e99043e9f27c93fa396554513bd2f43977cddc"
+    ],
+    "cpp_matches": [
+      {
+        "id": "896ea9ea8ce826bd04d2cd48f6e99043e9f27c93fa396554513bd2f43977cddc",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Remove",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Remove#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::remove"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "47dfd9f5a7e320047339bc4ddf7c97bc9e380cd634f046f77e409622eb4db5bc",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::remove",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_lifecycle.rs",
+        "source_sha256": "c58d8b0a442d1494c857e26f89f99184b158e0efd0840ce0c8c00d733ecbd12a",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::remove"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Remove(const class opencascade::handle<class SelectMgr_SelectableObject> &)"
+  },
+  {
+    "cpp_ids": [
+      "8a0832083bd46e15e7cad93c64809b0b00911b88847c2d7971ba09607de554b2"
+    ],
+    "cpp_matches": [
+      {
+        "id": "8a0832083bd46e15e7cad93c64809b0b00911b88847c2d7971ba09607de554b2",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::IsActivated",
+        "signature": "bool (const class opencascade::handle<class SelectMgr_SelectableObject> &, int) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@IsActivated#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::is_activated"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "ab0d5466d7af4f063b2153a5fc482ffce80158937c5db7d6d034a185544303a6",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::is_activated",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "primitive": "bool"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_lifecycle.rs",
+        "source_sha256": "c58d8b0a442d1494c857e26f89f99184b158e0efd0840ce0c8c00d733ecbd12a",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::is_activated"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::IsActivated(const class opencascade::handle<class SelectMgr_SelectableObject> &, int) const"
+  },
+  {
+    "cpp_ids": [
+      "9f73a3313a304c78ff3cd399ea8b971511a0bbddb15a44ee34f4640871a79063"
+    ],
+    "cpp_matches": [
+      {
+        "id": "9f73a3313a304c78ff3cd399ea8b971511a0bbddb15a44ee34f4640871a79063",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Deactivate",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Deactivate#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::deactivate"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "61bc8db67ff3592934eaa39900b9b1c2344902251e2766c57e6f7416c2951f8b",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::deactivate",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_lifecycle.rs",
+        "source_sha256": "c58d8b0a442d1494c857e26f89f99184b158e0efd0840ce0c8c00d733ecbd12a",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::deactivate"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Deactivate(const class opencascade::handle<class SelectMgr_SelectableObject> &, int)"
+  },
+  {
+    "cpp_ids": [
+      "bf11d257953cb58cbd53be64af3b994cddfff7873c8db50a58307c6c6d69424a"
+    ],
+    "cpp_matches": [
+      {
+        "id": "bf11d257953cb58cbd53be64af3b994cddfff7873c8db50a58307c6c6d69424a",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::Load",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@Load#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::load"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "9070d3dd64e7125a65ebd40babeae61a5c77ff23ed41ec1ea727c9716bf227fe",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::load",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_lifecycle.rs",
+        "source_sha256": "c58d8b0a442d1494c857e26f89f99184b158e0efd0840ce0c8c00d733ecbd12a",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::load"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::Load(const class opencascade::handle<class SelectMgr_SelectableObject> &, int)"
+  },
+  {
+    "cpp_ids": [
+      "c20f7b4059846c737ec31c3060d0d9183e6130ce825ed86724b059e11ed7bf2b"
+    ],
+    "cpp_matches": [
+      {
+        "id": "c20f7b4059846c737ec31c3060d0d9183e6130ce825ed86724b059e11ed7bf2b",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::SetUpdateMode",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int, enum SelectMgr_TypeOfUpdate)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@SetUpdateMode#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#$@E@SelectMgr_TypeOfUpdate#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_mode_update"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "834fe493cd4b605af608297124c682eaad34592e24294b9f8aaa661da70ee856",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_mode_update",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "status",
+                {
+                  "resolved_path": {
+                    "args": null,
+                    "path": "SelectMgrTypeOfUpdate",
+                    "resolved_item_path": "rustycad_tkv3d::select_mgr::enums::SelectMgrTypeOfUpdate"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_mode_update"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::SetUpdateMode(const class opencascade::handle<class SelectMgr_SelectableObject> &, int, enum SelectMgr_TypeOfUpdate)"
+  },
+  {
+    "cpp_ids": [
+      "db49dfebb0f603378521c9584cd517e2a4b20b1ed06445405d832a814f1302a2"
+    ],
+    "cpp_matches": [
+      {
+        "id": "db49dfebb0f603378521c9584cd517e2a4b20b1ed06445405d832a814f1302a2",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::UpdateSelection",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@UpdateSelection#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::update_selection"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "2b7e973fa5ee77c310dfc8619ba995a0bb3cfaa8dc2188477835952203876d51",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::update_selection",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::update_selection"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::UpdateSelection(const class opencascade::handle<class SelectMgr_SelectableObject> &)"
+  },
+  {
+    "cpp_ids": [
+      "dd48a3dfd9a4ac33ed94042e1bafe144a7698b765df073887abfc737376517bc"
+    ],
+    "cpp_matches": [
+      {
+        "id": "dd48a3dfd9a4ac33ed94042e1bafe144a7698b765df073887abfc737376517bc",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::ClearSelectionStructures",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@ClearSelectionStructures#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::clear_selection_structures"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "1f5d45fd6802f6df8ebc4a10e61d8d62368878890f0a7a86cbf20b9c9472a61c",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::clear_selection_structures",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "mode",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::clear_selection_structures"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::ClearSelectionStructures(const class opencascade::handle<class SelectMgr_SelectableObject> &, int)"
+  },
+  {
+    "cpp_ids": [
+      "e8e2bc8d63fb2fb5bef869b50a1898a6328b05874b642968271b952c7430c08f"
+    ],
+    "cpp_matches": [
+      {
+        "id": "e8e2bc8d63fb2fb5bef869b50a1898a6328b05874b642968271b952c7430c08f",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SelectionManager::SetUpdateMode",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SelectableObject> &, enum SelectMgr_TypeOfUpdate)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager@F@SetUpdateMode#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SelectableObject#$@E@SelectMgr_TypeOfUpdate#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_update_mode"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "afaab68a61321dcd314595a5f3c8bdd8537b0680f46daa072765ec13df979f38",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSelectionManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selection_manager::SelectMgrSelectionManager"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_update_mode",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "object",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrSelectableObject",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "status",
+                {
+                  "resolved_path": {
+                    "args": null,
+                    "path": "SelectMgrTypeOfUpdate",
+                    "resolved_item_path": "rustycad_tkv3d::select_mgr::enums::SelectMgrTypeOfUpdate"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager_update.rs",
+        "source_sha256": "68a9af8cc50bb006c8694f9dc3a48fa8ef16f0a5c54e62ebe1898972837e7fd6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager::set_update_mode"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager::SetUpdateMode(const class opencascade::handle<class SelectMgr_SelectableObject> &, enum SelectMgr_TypeOfUpdate)"
+  },
+  {
+    "cpp_ids": [
+      "f5abed57b6f703bb8a1bf81ef374efb0b9388fedfb88a590b0708e6bc975e271"
+    ],
+    "cpp_matches": [
+      {
+        "id": "f5abed57b6f703bb8a1bf81ef374efb0b9388fedfb88a590b0708e6bc975e271",
+        "kind": "CXXMethod",
+        "qualified_name": "StdSelect_BRepSelectionTool::PreBuildBVH",
+        "signature": "void (const class opencascade::handle<class SelectMgr_Selection> &)",
+        "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
+        "usr": "c:@S@StdSelect_BRepSelectionTool@F@PreBuildBVH#&1$@N@opencascade@S@handle>#$@S@SelectMgr_Selection#S"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool::pre_build_bvh"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "02ccfdaf98c4c24193c4149ec1cb9bb222de166ae0dfe03a9b1337b329414006",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "StdSelectBrepSelectionTool",
+              "resolved_item_path": "rustycad_tkv3d::std_select::brep_selection_tool::StdSelectBrepSelectionTool"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool::pre_build_bvh",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "selection",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "path": "SelectMgrSelection",
+                        "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSelection"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/std_select/brep_selection_tool.rs",
+        "source_sha256": "f35b7e12baa4476e6ebf86fbec05dd6908f499de80d783ec31e82375d02a086b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool::pre_build_bvh"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "StdSelect_BRepSelectionTool::PreBuildBVH(const class opencascade::handle<class SelectMgr_Selection> &)"
+  },
+  {
+    "cpp_ids": [
+      "f7a339fc0718974576b58920204424c364cab28f3a5d5b8a7e8cbf6570c6b0b7"
+    ],
+    "cpp_matches": [
+      {
+        "id": "f7a339fc0718974576b58920204424c364cab28f3a5d5b8a7e8cbf6570c6b0b7",
+        "kind": "CXXRecord",
+        "qualified_name": "SelectMgr_SelectionManager",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+        "usr": "c:@S@SelectMgr_SelectionManager"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "94018d60639ecb0ecad0460531f1c8bd4b056ebfc3a1589a069971f98853bfcd",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 3,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/selection_manager.rs",
+        "source_sha256": "9072795df7918e96f046537389efd033ccb1826ebfedf295a6ca940a20531c67",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SelectionManager"
+  },
+  {
+    "cpp_ids": [
+      "f998ccb0cb06f3c0294a14725b0d5f44f2d191c56fd53be0b0c2619028b5814b"
+    ],
+    "cpp_matches": [
+      {
+        "id": "f998ccb0cb06f3c0294a14725b0d5f44f2d191c56fd53be0b0c2619028b5814b",
+        "kind": "CXXRecord",
+        "qualified_name": "StdSelect_BRepSelectionTool",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
+        "usr": "c:@S@StdSelect_BRepSelectionTool"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "partial",
+    "resolution": "partial",
+    "rust_matches": [
+      {
+        "declaration_sha256": "f324b8640ea6b1f835c1ae5769ab138f2d1bacafbbeacb36194f49ac4272a317",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": "unit"
+        },
+        "source_file": "crates/tkv3d/src/std_select/brep_selection_tool.rs",
+        "source_sha256": "f35b7e12baa4476e6ebf86fbec05dd6908f499de80d783ec31e82375d02a086b",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::std_select::StdSelectBrepSelectionTool"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "StdSelect_BRepSelectionTool"
+  }
+]

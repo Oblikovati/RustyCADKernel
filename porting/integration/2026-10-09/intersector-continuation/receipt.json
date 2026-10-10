@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "continuation_branch": "porting/resume-claude",
+  "continuation_worktree": "/tmp/rustycad-resume",
+  "continuation_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+  "integrated_into_main": false,
+  "new_work_committed": false,
+  "integration_blocker": "Session filesystem policy makes .git read-only; Git cannot create the worktree index lock.",
+  "patch_sha256": "d3fa08c1ce00aaaf6a2741270155e18f2c54ffc0f7257c6e418747601a3a279e",
+  "patch_reverse_check": true,
+  "inventory_refresh": "complete",
+  "continuation_snapshot": {
+    "api_declarations": 76041,
+    "api_done": 50896,
+    "api_open": 24173,
+    "api_partial": 972,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "toolkits": {
+    "TKV3d": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 165,
+          "partial": 0,
+          "unclaimed": 3781,
+          "upstream_unimplemented": 0,
+          "verified": 1226
+        },
+        "declarations": 5172,
+        "done": 1391,
+        "done_percent": 26.9
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 923,
+          "upstream_unimplemented": 0,
+          "verified": 0
+        },
+        "declarations": 923,
+        "done": 0,
+        "done_percent": 0.0
+      },
+      "gtests": {
+        "mapped": 1,
+        "not_applicable": 0,
+        "unmapped": 72
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 318,
+        "exception-macro": 9,
+        "rtti-macro": 556,
+        "special-member": 40
+      },
+      "open_gap_by_category": {
+        "alias": 29,
+        "enum-constant": 269,
+        "field": 517,
+        "member": 2432,
+        "protected-member": 257,
+        "record": 277
+      },
+      "scope": "port",
+      "scope_reason": ""
+    }
+  },
+  "runtime_reports": {
+    "tkv3d": {
+      "path": "porting/runtime-evidence/tkv3d-intersector-2026-10-09.json.gz",
+      "sha256": "008f5037fef6012ef38b96068aa70dce2bbab905eb49592e6c73309c0842369a",
+      "source_hashes_match": true,
+      "numeric_cases": 1487,
+      "native_cases": 1,
+      "rust_cases": 1
+    }
+  },
+  "tkv3d_rust_tests_passed": 87,
+  "tkv3d_rust_tests_failed": 0,
+  "new_behavior_tests": 8,
+  "new_numeric_cases": 933,
+  "new_api_mappings": 39,
+  "clippy_all_tkv3d_targets_passed": true,
+  "format_check_passed": true,
+  "diff_check_passed": true,
+  "tool_tests": {
+    "modules_passed": 1,
+    "modules_failed": 0,
+    "pattern": "test_tkv3d_tooling.py",
+    "previous_complete_suite": "../v3d-continuation/tool-tests.log.gz"
+  },
+  "previous_checkpoint": "../v3d-continuation/README.md",
+  "inventory_status_current": true,
+  "unresolved_ledger_rows": 0,
+  "rust_crates_captured": 30,
+  "pending_work": [
+    {
+      "branch": "worktree-agent-aa64fda07fced1190",
+      "worktree": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/.claude/worktrees/agent-aa64fda07fced1190",
+      "remaining": "Untracked frustum.rs: incomplete sphere/cylinder/circle algorithms, concrete frustums and runtime validation."
+    },
+    {
+      "branch": "worktree-agent-aeed1901b085eca95",
+      "worktree": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/.claude/worktrees/agent-aeed1901b085eca95",
+      "remaining": "Unfinished linked-slot/list refactor remains untouched and unvalidated."
+    },
+    {
+      "branch": "porting/resume-claude",
+      "worktree": "/tmp/rustycad-resume",
+      "remaining": "Git commit/main integration blocked by read-only metadata; 972 partial and 24173 open APIs remain."
+    }
+  ],
+  "new_mappings_resolved": 39
+}

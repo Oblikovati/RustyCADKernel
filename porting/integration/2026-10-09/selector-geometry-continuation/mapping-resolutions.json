@@ -1,0 +1,247 @@
+[
+  {
+    "cpp_ids": [
+      "8cb88f1bc69518bd81dd9897b84ff79f9dd8b5362b62a677ff9091f6978e96ff"
+    ],
+    "cpp_matches": [
+      {
+        "id": "8cb88f1bc69518bd81dd9897b84ff79f9dd8b5362b62a677ff9091f6978e96ff",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_ViewerSelector::ClearSensitive",
+        "signature": "void (const class opencascade::handle<class V3d_View> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+        "usr": "c:@S@SelectMgr_ViewerSelector@F@ClearSensitive#&1$@N@opencascade@S@handle>#$@S@V3d_View#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorMembers::clear_sensitive"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "94110f56aaab799d55b891b3dc0cb04d21d13fa967e3301b072568f04477af97",
+        "impl_context": null,
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorMembers::clear_sensitive",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "view",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "crate::v3d::V3dView",
+                                    "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/viewer_selector_members.rs",
+        "source_sha256": "3fcb36444a52d8fc4a4c5800866ddaf9f61c2f62c90f4d74ca71e2f21630198a",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorMembers::clear_sensitive"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_ViewerSelector::ClearSensitive(const class opencascade::handle<class V3d_View> &)"
+  },
+  {
+    "cpp_ids": [
+      "acffd047e1bcbc09802cfca1c299c8b3e5487baaaa836d4c48f6cc5e49c2dc97"
+    ],
+    "cpp_matches": [
+      {
+        "id": "acffd047e1bcbc09802cfca1c299c8b3e5487baaaa836d4c48f6cc5e49c2dc97",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_ViewerSelector::updateZLayers",
+        "signature": "void (const class opencascade::handle<class V3d_View> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+        "usr": "c:@S@SelectMgr_ViewerSelector@F@updateZLayers#&1$@N@opencascade@S@handle>#$@S@V3d_View#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorGeometryMembers::update_z_layers"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "a6698231a21a223bd30cf19f2aecbd7507e4e1d5bdc20249a2a80e96f505c196",
+        "impl_context": null,
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorGeometryMembers::update_z_layers",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "view",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "path": "V3dView",
+                        "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/viewer_selector_geometry.rs",
+        "source_sha256": "007965d24029852518ef12db5d762abdc45c5a7882c288b0c0e3c56c5154b5ab",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorGeometryMembers::update_z_layers"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_ViewerSelector::updateZLayers(const class opencascade::handle<class V3d_View> &)"
+  }
+]

@@ -1,0 +1,2044 @@
+[
+  {
+    "cpp_ids": [
+      "0529251d06f5b2244002b67c266e280ba756ec102d23d054f638bf6761b8dd26"
+    ],
+    "cpp_matches": [
+      {
+        "id": "0529251d06f5b2244002b67c266e280ba756ec102d23d054f638bf6761b8dd26",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Box",
+        "signature": "class BVH_Box<double, 3> (int) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Box#I#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::element_box"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "01154d05046663caa4afd61390af81578a7c91cd58b9723858519856e9cec355",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "super::SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::element_box",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "index",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "args": null,
+                                        "path": "BvhVec3d",
+                                        "resolved_item_path": "rustycad_tkmath::bvh::vector::BvhVec3d"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "BvhBox",
+                            "resolved_item_path": "rustycad_tkmath::bvh::bounding_box::BvhBox"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_bvh.rs",
+        "source_sha256": "a912a538443f2ea2233af4e4ba7f8094edcd5d6a4ea6ab5078c2fad9b6fe64a6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::element_box"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Box(int) const"
+  },
+  {
+    "cpp_ids": [
+      "0a9f56c4eb48d4d2b378f6549391282b24fb5294a2b793f701cf72157c231cae"
+    ],
+    "cpp_matches": [
+      {
+        "id": "0a9f56c4eb48d4d2b378f6549391282b24fb5294a2b793f701cf72157c231cae",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::HasEntityWithPersistence",
+        "signature": "bool () const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@HasEntityWithPersistence#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::has_entity_with_persistence"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "a54390190b03320a3af635fa59c8d8ca8dd6f764561b2401f6276818a9c0d661",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::has_entity_with_persistence",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "primitive": "bool"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::has_entity_with_persistence"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::HasEntityWithPersistence() const"
+  },
+  {
+    "cpp_ids": [
+      "0b307e4425e4938dea0ef4c38caf661d8de73682a83d86ccb04f68feefd5879a"
+    ],
+    "cpp_matches": [
+      {
+        "id": "0b307e4425e4938dea0ef4c38caf661d8de73682a83d86ccb04f68feefd5879a",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::HasEntityWithFlipping",
+        "signature": "bool () const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@HasEntityWithFlipping#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::has_entity_with_flipping"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "9d92271ab963da999f1c7d1c5025fc1ff30b77a11abd008ed1a75494cc6d03bb",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::has_entity_with_flipping",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "primitive": "bool"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::has_entity_with_flipping"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::HasEntityWithFlipping() const"
+  },
+  {
+    "cpp_ids": [
+      "130e580e87c9706a3ad3254fdb9c6e44befb580bc9bbcb751e97821c4d9ddc99"
+    ],
+    "cpp_matches": [
+      {
+        "id": "130e580e87c9706a3ad3254fdb9c6e44befb580bc9bbcb751e97821c4d9ddc99",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Center",
+        "signature": "double (int, int) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Center#I#I#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::center"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "74bf1b785732e12b7d54ed668f477402bc78a898ab0642e9a2ac9565e6b00e88",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "super::SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::center",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "index",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "axis",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "primitive": "f64"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_bvh.rs",
+        "source_sha256": "a912a538443f2ea2233af4e4ba7f8094edcd5d6a4ea6ab5078c2fad9b6fe64a6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::center"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Center(int, int) const"
+  },
+  {
+    "cpp_ids": [
+      "2c7ff7e9fd20605e2d51bfaf6e4778da8d9efb46ca3cb39cc22f5833df7cd86f"
+    ],
+    "cpp_matches": [
+      {
+        "id": "2c7ff7e9fd20605e2d51bfaf6e4778da8d9efb46ca3cb39cc22f5833df7cd86f",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Sensitives",
+        "signature": "const class NCollection_IndexedMap<class opencascade::handle<class SelectMgr_SensitiveEntity>> &() const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Sensitives#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::sensitives"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "36b75d6b305acf0753c6f70b96423a8a753d43f54ca7c1a6fc2f3e5a640268ab",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::sensitives",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "resolved_path": {
+                                                    "args": null,
+                                                    "path": "SelectMgrSensitiveEntity",
+                                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSensitiveEntity"
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        },
+                                        "path": "Handle",
+                                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "IndexedMap",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::indexed_map::IndexedMap"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "RwLockReadGuard",
+                "resolved_item_path": "std::sync::poison::rwlock::RwLockReadGuard"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::sensitives"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Sensitives() const"
+  },
+  {
+    "cpp_ids": [
+      "393e869812f612aae2ef2006e2cd8596be567a125e5e58a5f35615b2b4628b7a"
+    ],
+    "cpp_matches": [
+      {
+        "id": "393e869812f612aae2ef2006e2cd8596be567a125e5e58a5f35615b2b4628b7a",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::GetSensitiveById",
+        "signature": "const class opencascade::handle<class SelectMgr_SensitiveEntity> &(int) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@GetSensitiveById#I#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::get_sensitive_by_id"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "c7275404ae692f0f9a4b0e87197cb4bd8f0aeec1b08492993f4944da251560d1",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::get_sensitive_by_id",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "index",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "args": null,
+                                        "path": "SelectMgrSensitiveEntity",
+                                        "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSensitiveEntity"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "Handle",
+                            "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::get_sensitive_by_id"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::GetSensitiveById(int) const"
+  },
+  {
+    "cpp_ids": [
+      "45cecb88159fad703e5b79cdcebfaa2f53022a6c522ec5ddc5cfb296da4d42d4"
+    ],
+    "cpp_matches": [
+      {
+        "id": "45cecb88159fad703e5b79cdcebfaa2f53022a6c522ec5ddc5cfb296da4d42d4",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Owners",
+        "signature": "const class NCollection_DataMap<class opencascade::handle<class SelectMgr_EntityOwner>, int> &() const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Owners#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::owners"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "8b981fd0ea8be82802f8f6d94d4f9b6fa3a7e7941f0280d3417e2b63b8aa7d6f",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::owners",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "args": {
+                                          "angle_bracketed": {
+                                            "args": [
+                                              {
+                                                "type": {
+                                                  "dyn_trait": {
+                                                    "lifetime": null,
+                                                    "traits": [
+                                                      {
+                                                        "generic_params": [],
+                                                        "trait": {
+                                                          "args": null,
+                                                          "path": "SelectMgrEntityOwnerSource",
+                                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            ],
+                                            "constraints": []
+                                          }
+                                        },
+                                        "path": "Handle",
+                                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": {
+                                      "primitive": "i32"
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "DataMap",
+                            "resolved_item_path": "rustycad_tkernel::ncollection::data_map::DataMap"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "RwLockReadGuard",
+                "resolved_item_path": "std::sync::poison::rwlock::RwLockReadGuard"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::owners"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Owners() const"
+  },
+  {
+    "cpp_ids": [
+      "6613aa9ccbd4c4c1328424e23480add5e93f43d1b063e65e7ce3b9596f8e6c66"
+    ],
+    "cpp_matches": [
+      {
+        "id": "6613aa9ccbd4c4c1328424e23480add5e93f43d1b063e65e7ce3b9596f8e6c66",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::removeOwner",
+        "signature": "void (const class opencascade::handle<class SelectMgr_EntityOwner> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@removeOwner#&1$@N@opencascade@S@handle>#$@S@SelectMgr_EntityOwner#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::remove_owner"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "64e392ba7dffed40c7122ceb41be7a8a2a889e03af4b9c264e2754c616557017",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::remove_owner",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "owner",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrEntityOwnerSource",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::remove_owner"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::removeOwner(const class opencascade::handle<class SelectMgr_EntityOwner> &)"
+  },
+  {
+    "cpp_ids": [
+      "8b607be42d1526be285ff4b9e3fd103311d609698f979696d237e736a48095b6"
+    ],
+    "cpp_matches": [
+      {
+        "id": "8b607be42d1526be285ff4b9e3fd103311d609698f979696d237e736a48095b6",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Size",
+        "signature": "int () const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Size#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::size"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "ad1bb9317f34d00bcc9c11128c4fd1ada9c11570fe1b92c7e48b689281f655f0",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::size",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "primitive": "i32"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::size"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Size() const"
+  },
+  {
+    "cpp_ids": [
+      "99635765fd563f0af605311f69f7dd93c44ae5877c47f320ee95ce2fd65b110d"
+    ],
+    "cpp_matches": [
+      {
+        "id": "99635765fd563f0af605311f69f7dd93c44ae5877c47f320ee95ce2fd65b110d",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::SelectMgr_SensitiveEntitySet",
+        "signature": "void (const class opencascade::handle<class BVH_Builder<double, 3>> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@SelectMgr_SensitiveEntitySet#&1$@N@opencascade@S@handle>#$@S@BVH_Builder>#d#VI3#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::new"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "7d922f7d3291ce4df5bc756dfc5584ffde63694537c409aeb1509996227cf04d",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::new",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "builder",
+                {
+                  "resolved_path": {
+                    "args": {
+                      "angle_bracketed": {
+                        "args": [
+                          {
+                            "type": {
+                              "resolved_path": {
+                                "args": null,
+                                "path": "BvhVec3d",
+                                "resolved_item_path": "rustycad_tkmath::bvh::vector::BvhVec3d"
+                              }
+                            }
+                          }
+                        ],
+                        "constraints": []
+                      }
+                    },
+                    "path": "BvhBuilderHandle",
+                    "resolved_item_path": "rustycad_tkmath::bvh::primitive_set::BvhBuilderHandle"
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::new"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::SelectMgr_SensitiveEntitySet(const class opencascade::handle<class BVH_Builder<double, 3>> &)"
+  },
+  {
+    "cpp_ids": [
+      "adc8cb31cd758ecbe194f10dc7318c35be02c662bb8a11def47f7e459f500583"
+    ],
+    "cpp_matches": [
+      {
+        "id": "adc8cb31cd758ecbe194f10dc7318c35be02c662bb8a11def47f7e459f500583",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Append",
+        "signature": "void (const class opencascade::handle<class SelectMgr_SensitiveEntity> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Append#&1$@N@opencascade@S@handle>#$@S@SelectMgr_SensitiveEntity#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::append"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "cb79c80e62bda6bff4a60bbcc2c6afb6e7b56452dd4e331c5c828313ae78242b",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::append",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "entity",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "SelectMgrSensitiveEntity",
+                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSensitiveEntity"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::append"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Append(const class opencascade::handle<class SelectMgr_SensitiveEntity> &)"
+  },
+  {
+    "cpp_ids": [
+      "b462ca6544fa40123ae1a02e4c082e10f6418558b962ba4df7c7f9ef63cb6915"
+    ],
+    "cpp_matches": [
+      {
+        "id": "b462ca6544fa40123ae1a02e4c082e10f6418558b962ba4df7c7f9ef63cb6915",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Swap",
+        "signature": "void (int, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Swap#I#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::swap"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "8cc48887c75a9caec410058a59206a89df4be458c8a1d2952dcd604a888ff8a2",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::swap",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "first",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "second",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::swap"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Swap(int, int)"
+  },
+  {
+    "cpp_ids": [
+      "d00d1326b727d39e81c6e5e87ceffafbcfdba4da93190c700f0ea88ee6d28958"
+    ],
+    "cpp_matches": [
+      {
+        "id": "d00d1326b727d39e81c6e5e87ceffafbcfdba4da93190c700f0ea88ee6d28958",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::addOwner",
+        "signature": "void (const class opencascade::handle<class SelectMgr_EntityOwner> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@addOwner#&1$@N@opencascade@S@handle>#$@S@SelectMgr_EntityOwner#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::add_owner"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "39f70097c832f3c0dcfcf3e7f9b7a21fe0c8070636bd5867262ef12f1bec4b87",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::add_owner",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "owner",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "dyn_trait": {
+                                    "lifetime": null,
+                                    "traits": [
+                                      {
+                                        "generic_params": [],
+                                        "trait": {
+                                          "args": null,
+                                          "path": "SelectMgrEntityOwnerSource",
+                                          "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::add_owner"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::addOwner(const class opencascade::handle<class SelectMgr_EntityOwner> &)"
+  },
+  {
+    "cpp_ids": [
+      "d01a725814ad70a89d4727c7cabde4b38fd9af98c4647416b0b74d66c2892430"
+    ],
+    "cpp_matches": [
+      {
+        "id": "d01a725814ad70a89d4727c7cabde4b38fd9af98c4647416b0b74d66c2892430",
+        "kind": "CXXRecord",
+        "qualified_name": "SelectMgr_SensitiveEntitySet",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "4f294ca65232ec7f2429325861ec653d49fd34fc71a8e2f260e202e22bdd0858",
+        "impl_context": null,
+        "kind": "struct",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet",
+        "signature": {
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "shape": {
+            "field_count": 5,
+            "has_stripped_fields": false,
+            "kind": "plain"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet"
+  },
+  {
+    "cpp_ids": [
+      "d823f31790ee0056cb86026f38765e38170e90f23dedc6f44772660435856c01"
+    ],
+    "cpp_matches": [
+      {
+        "id": "d823f31790ee0056cb86026f38765e38170e90f23dedc6f44772660435856c01",
+        "kind": "Using",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Box",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@UD@Box"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::bounding_box"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "faa20ab9515bf0357c431a7ee9cf4b4314c55bcb407edd3f84653d48486e2b58",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "super::SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::bounding_box",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "args": null,
+                                        "path": "BvhVec3d",
+                                        "resolved_item_path": "rustycad_tkmath::bvh::vector::BvhVec3d"
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            },
+                            "path": "BvhBox",
+                            "resolved_item_path": "rustycad_tkmath::bvh::bounding_box::BvhBox"
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_bvh.rs",
+        "source_sha256": "a912a538443f2ea2233af4e4ba7f8094edcd5d6a4ea6ab5078c2fad9b6fe64a6",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::bounding_box"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Box"
+  },
+  {
+    "cpp_ids": [
+      "f08888c9fa93c0143d143e7044b12ab49f07dc00f11abf740323da7a414485a1"
+    ],
+    "cpp_matches": [
+      {
+        "id": "f08888c9fa93c0143d143e7044b12ab49f07dc00f11abf740323da7a414485a1",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Append",
+        "signature": "void (const class opencascade::handle<class SelectMgr_Selection> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Append#&1$@N@opencascade@S@handle>#$@S@SelectMgr_Selection#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::append_selection"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "a8d825f454148cee8f663cb7a36b0d58b7111b9507433072f5c0fb62a0010fe0",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::append_selection",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "selection",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "SelectMgrSelection",
+                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSelection"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::append_selection"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Append(const class opencascade::handle<class SelectMgr_Selection> &)"
+  },
+  {
+    "cpp_ids": [
+      "ffa6f0e6e90e4c6abe17469e6194bba9fd260c7e73e46c0c177ac4832eecc3a5"
+    ],
+    "cpp_matches": [
+      {
+        "id": "ffa6f0e6e90e4c6abe17469e6194bba9fd260c7e73e46c0c177ac4832eecc3a5",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_SensitiveEntitySet::Remove",
+        "signature": "void (const class opencascade::handle<class SelectMgr_Selection> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+        "usr": "c:@S@SelectMgr_SensitiveEntitySet@F@Remove#&1$@N@opencascade@S@handle>#$@S@SelectMgr_Selection#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::remove"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "e06040857884d60f641097b665399b4bd71122281269aec721198fb98499d7c5",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrSensitiveEntitySet",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::sensitive_entity_set::SelectMgrSensitiveEntitySet"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::remove",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "selection",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "SelectMgrSelection",
+                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::selection::SelectMgrSelection"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/sensitive_entity_set.rs",
+        "source_sha256": "79903bf7b767b272b78f222a765e907d9bbcd12483a4b05e7e1eac84104da697",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet::remove"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SensitiveEntitySet.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_SensitiveEntitySet::Remove(const class opencascade::handle<class SelectMgr_Selection> &)"
+  }
+]

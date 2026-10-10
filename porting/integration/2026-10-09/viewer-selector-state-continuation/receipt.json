@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "continuation_branch": "porting/resume-claude",
+  "continuation_worktree": "/tmp/rustycad-resume",
+  "continuation_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+  "integrated_into_main": false,
+  "new_work_committed": false,
+  "integration_blocker": "Session filesystem policy makes .git read-only; Git cannot create the worktree index lock.",
+  "patch_sha256": "8e58b34c0ce08cbb8f9c43c317590f89e3a2dc713aca2d1cd5c111130bc4fd60",
+  "patch_reverse_check": true,
+  "inventory_refresh": "complete",
+  "continuation_snapshot": {
+    "api_declarations": 76041,
+    "api_done": 51258,
+    "api_open": 23810,
+    "api_partial": 973,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "runtime_reports": {
+    "tkv3d": {
+      "path": "porting/runtime-evidence/tkv3d-viewer-selector-state-2026-10-10.json.gz",
+      "sha256": "32526d64c30c848e764e7df539bb017c920f5638f5d7c46fa3d30a53566f6aa0",
+      "source_hashes_match": true
+    },
+    "stl_sort": {
+      "path": "porting/runtime-evidence/tkernel-viewer-selector-sort-2026-10-10.json.gz",
+      "sha256": "eb98bcd1295cf6c587457f7c76c4738898d2915474455c76e836d78ca2e24e45",
+      "source_hashes_match": true
+    }
+  },
+  "tkv3d_rust_tests_passed": 209,
+  "tkernel_rust_tests_passed": 4937,
+  "new_behavior_tests": 12,
+  "new_numeric_cases": 170,
+  "new_api_mappings": 65,
+  "implemented_mappings": 64,
+  "partial_class_mappings": 1,
+  "numeric_cases_passed": 127416,
+  "tkmath_numeric_cases_passed": 75190,
+  "native_legacy_cases_passed": 1,
+  "rust_legacy_cases_passed": 1,
+  "focused_stl_sort_shapes": 8,
+  "focused_stl_sort_trials": 9368,
+  "full_tkernel_runtime_gate": "Not rerun: requires a clean checkout; focused source-bound STL audit and all TKernel Rust targets passed. Previous BVH checkpoint records the clean-tree rejection.",
+  "clippy_all_tkernel_tkv3d_targets_passed": true,
+  "format_check_passed": true,
+  "diff_check_passed": true,
+  "tool_tests_passed": 7,
+  "previous_checkpoint": "../bvh-thread-pool-continuation/README.md",
+  "mapping_resolutions_sha256": "04742a7af9ae8d9e94f479420b4085049aa80b2a2df4734e70bf80fcba259f3c",
+  "unresolved_ledger_rows": 0
+}

@@ -94,8 +94,9 @@ Regenerate after each snapshot publication with `python3 tools/api_metrics_repor
 ## Legacy test obligations
 
 `legacy-test-summary.json` and `legacy-tests.jsonl.gz` independently account for
-all 8,648 GoogleTest declaration candidates: 7,400 have exact Rust mappings and
-1,248 remain unmapped. There are no duplicate or unknown mappings in this
+all 8,648 GoogleTest declaration candidates: 7,965 have exact Rust mappings,
+37 await dependencies, 2 concern C++-only properties, and 644 remain unmapped.
+There are no duplicate or unknown mappings in this
 snapshot. All 16,698 DRAW candidates and 18,309 regression/support files are
 listed as discovered obligations.
 

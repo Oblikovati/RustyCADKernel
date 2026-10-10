@@ -1,0 +1,1205 @@
+[
+  {
+    "cpp_ids": [
+      "14e1174bbc83dbedb7075106278ece2eaac5663e31b9c7ca4991634599b450d2"
+    ],
+    "cpp_matches": [
+      {
+        "id": "14e1174bbc83dbedb7075106278ece2eaac5663e31b9c7ca4991634599b450d2",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::WindowSize",
+        "signature": "void (int &, int &) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@WindowSize#&I#S0_#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::window_size"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "190e4eae90c289e11899955e880b34753fb90c1fa28542204bc0a5b4d9037276",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::window_size",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": [
+                            {
+                              "primitive": "i32"
+                            },
+                            {
+                              "primitive": "i32"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Option",
+                "resolved_item_path": "core::option::Option"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::window_size"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::WindowSize(int &, int &) const"
+  },
+  {
+    "cpp_ids": [
+      "4be48c6d6ac7570230225c307fbccc2a28878c7296f914840c6fb9face3b7851"
+    ],
+    "cpp_matches": [
+      {
+        "id": "4be48c6d6ac7570230225c307fbccc2a28878c7296f914840c6fb9face3b7851",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::SetWindowSize",
+        "signature": "void (int, int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@SetWindowSize#I#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_window_size"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "c5e1f66f903306c93092931ad2798f5330547b65fdc4bd94578817e43e6212c8",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_window_size",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "width",
+                {
+                  "primitive": "i32"
+                }
+              ],
+              [
+                "height",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_window_size"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::SetWindowSize(int, int)"
+  },
+  {
+    "cpp_ids": [
+      "6061622b335a861bce7fa25da86a9493149134eb9a70edaff9daf6293e1f8361"
+    ],
+    "cpp_matches": [
+      {
+        "id": "6061622b335a861bce7fa25da86a9493149134eb9a70edaff9daf6293e1f8361",
+        "kind": "CXXRecord",
+        "qualified_name": "SelectMgr_BaseFrustum",
+        "signature": "",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "951b719d0f6d1df083c9691e2a4696865f93d82c5f5e710b62eee31671607b18",
+        "impl_context": null,
+        "kind": "trait",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum",
+        "signature": {
+          "bounds": [
+            {
+              "trait_bound": {
+                "generic_params": [],
+                "modifier": "none",
+                "trait": {
+                  "args": null,
+                  "path": "SelectMgrBaseIntersector",
+                  "resolved_item_path": "rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector"
+                }
+              }
+            }
+          ],
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "implementations": [],
+          "is_auto": false,
+          "is_dyn_compatible": true,
+          "is_unsafe": false
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum"
+  },
+  {
+    "cpp_ids": [
+      "689b822b7512fb449f38c5c05848c5237194deefe64b6d593b13ce08b4ca0c30"
+    ],
+    "cpp_matches": [
+      {
+        "id": "689b822b7512fb449f38c5c05848c5237194deefe64b6d593b13ce08b4ca0c30",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BaseFrustum::myPixelTolerance",
+        "signature": "int",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@FI@myPixelTolerance"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::pixel_tolerance"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "e7dff8631b93a80a3ced5d26a3829e61a1935a6de80f695abfdca37e90441e87",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::pixel_tolerance",
+        "signature": {
+          "resolved_path": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "primitive": "i32"
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "path": "rustycad_tkernel::standard::SharedState",
+            "resolved_item_path": "rustycad_tkernel::standard::shared_state::SharedState"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::pixel_tolerance"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::myPixelTolerance"
+  },
+  {
+    "cpp_ids": [
+      "6c87c96a20e0c0878c0c1c3ead5d9a72b7ebfb1e7014d3b3675baeb66e366979"
+    ],
+    "cpp_matches": [
+      {
+        "id": "6c87c96a20e0c0878c0c1c3ead5d9a72b7ebfb1e7014d3b3675baeb66e366979",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::SetViewport",
+        "signature": "void (double, double, double, double)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@SetViewport#d#d#d#d#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_viewport"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "e9a30af74d9b3e10b19b15d77983e24f9cf26e8c928534c5a9e48f108d83a65f",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_viewport",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "x",
+                {
+                  "primitive": "f64"
+                }
+              ],
+              [
+                "y",
+                {
+                  "primitive": "f64"
+                }
+              ],
+              [
+                "width",
+                {
+                  "primitive": "f64"
+                }
+              ],
+              [
+                "height",
+                {
+                  "primitive": "f64"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_viewport"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::SetViewport(double, double, double, double)"
+  },
+  {
+    "cpp_ids": [
+      "823c67258aae3d788a3c9e5059c0a71b9b1cc63ef8636e593331abd87671f184"
+    ],
+    "cpp_matches": [
+      {
+        "id": "823c67258aae3d788a3c9e5059c0a71b9b1cc63ef8636e593331abd87671f184",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::DumpJson",
+        "signature": "void (class std::basic_ostream<char> &, int) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@DumpJson#&$@N@std@S@basic_ostream>#C#$@N@std@S@char_traits>#C#I#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::dump_json"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "88909e5e22794a641a9421ce80aae073e0f7363d8a52f81047c9b544cb6badc6",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::dump_json",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "stream",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "path": "DumpStream",
+                        "resolved_item_path": "rustycad_tkernel::standard::dump::stream::DumpStream"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "depth",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "io::Result",
+                "resolved_item_path": "core::io::error::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::dump_json"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::DumpJson(class std::basic_ostream<char> &, int) const"
+  },
+  {
+    "cpp_ids": [
+      "8587e5f570b3c38c67a0ee39e9cc4ae19f0617829094c9897c008fc3388eba4f"
+    ],
+    "cpp_matches": [
+      {
+        "id": "8587e5f570b3c38c67a0ee39e9cc4ae19f0617829094c9897c008fc3388eba4f",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::SetPixelTolerance",
+        "signature": "void (int)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@SetPixelTolerance#I#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_pixel_tolerance"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "b663436f199bc8e4a4f89d01cc9c5363a86d6e0d2dcb76105c8ad71c5dfc77f4",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_pixel_tolerance",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "tolerance",
+                {
+                  "primitive": "i32"
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_pixel_tolerance"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::SetPixelTolerance(int)"
+  },
+  {
+    "cpp_ids": [
+      "9aa0fc2464a239174bd347003494ab04d7a7d7abf3f587dce7714f2b884f3a43"
+    ],
+    "cpp_matches": [
+      {
+        "id": "9aa0fc2464a239174bd347003494ab04d7a7d7abf3f587dce7714f2b884f3a43",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::SetBuilder",
+        "signature": "void (const class opencascade::handle<class SelectMgr_FrustumBuilder> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@SetBuilder#&1$@N@opencascade@S@handle>#$@S@SelectMgr_FrustumBuilder#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::set_builder"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "5af02373d879a8e72c34faef21b62ed10fd7c4ae76ead67bc04144a8b0a3fd01",
+        "impl_context": null,
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::set_builder",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "builder",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "SelectMgrFrustumBuilder",
+                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::set_builder"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::SetBuilder(const class opencascade::handle<class SelectMgr_FrustumBuilder> &)"
+  },
+  {
+    "cpp_ids": [
+      "cf4034c67dfe9006f3fe96a21bfc7d8a300f23aa6cad35c291cdd00652de0b0e"
+    ],
+    "cpp_matches": [
+      {
+        "id": "cf4034c67dfe9006f3fe96a21bfc7d8a300f23aa6cad35c291cdd00652de0b0e",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::IsBoundaryIntersectSphere",
+        "signature": "bool (const class gp_Pnt &, double, const class gp_Dir &, const class NCollection_Array1<class gp_Pnt> &, bool &) const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@IsBoundaryIntersectSphere#&1$@S@gp_Pnt#d#&1$@S@gp_Dir#&1$@S@NCollection_Array1>#S1_#&b#1"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::is_boundary_intersect_sphere"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "60951dda7c69d90802ee2c384d8b4955a3478bca5718015de344215cfdbd08d5",
+        "impl_context": null,
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::is_boundary_intersect_sphere",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "center",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "path": "Point3",
+                        "resolved_item_path": "rustycad_tkmath::gp::point::Point3"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "radius",
+                {
+                  "primitive": "f64"
+                }
+              ],
+              [
+                "normal",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": null,
+                        "path": "Direction3",
+                        "resolved_item_path": "rustycad_tkmath::gp::direction::Direction3"
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "points",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "slice": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Point3",
+                          "resolved_item_path": "rustycad_tkmath::gp::point::Point3"
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "inside",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": true,
+                    "lifetime": null,
+                    "type": {
+                      "primitive": "bool"
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": {
+              "resolved_path": {
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "primitive": "bool"
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "args": null,
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                },
+                "path": "Result",
+                "resolved_item_path": "core::result::Result"
+              }
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::is_boundary_intersect_sphere"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::IsBoundaryIntersectSphere(const class gp_Pnt &, double, const class gp_Dir &, const class NCollection_Array1<class gp_Pnt> &, bool &) const"
+  },
+  {
+    "cpp_ids": [
+      "d37751ca484c90a6536524b08f29c0cb1c24b26c923b05cbd4d4dd0dd1a7f5d0"
+    ],
+    "cpp_matches": [
+      {
+        "id": "d37751ca484c90a6536524b08f29c0cb1c24b26c923b05cbd4d4dd0dd1a7f5d0",
+        "kind": "Field",
+        "qualified_name": "SelectMgr_BaseFrustum::myBuilder",
+        "signature": "class opencascade::handle<class SelectMgr_FrustumBuilder>",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@FI@myBuilder"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::builder"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "53bf646b8e6b0325d947abfbc539ce20e861999f42de2c4fd5ddb9feeb54ecc2",
+        "impl_context": null,
+        "kind": "struct_field",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::builder",
+        "signature": {
+          "resolved_path": {
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "super::SelectMgrFrustumBuilder",
+                                    "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "rustycad_tkernel::standard::Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            },
+            "path": "rustycad_tkernel::standard::SharedState",
+            "resolved_item_path": "rustycad_tkernel::standard::shared_state::SharedState"
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::builder"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::myBuilder"
+  },
+  {
+    "cpp_ids": [
+      "fe3fd64acc2fd93eae1d4a6ea5a5d20039e05b546fd7b4a62d1e21da749cac4f"
+    ],
+    "cpp_matches": [
+      {
+        "id": "fe3fd64acc2fd93eae1d4a6ea5a5d20039e05b546fd7b4a62d1e21da749cac4f",
+        "kind": "CXXMethod",
+        "qualified_name": "SelectMgr_BaseFrustum::SetCamera",
+        "signature": "void (const class opencascade::handle<class Graphic3d_Camera> &)",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@SetCamera#&1$@N@opencascade@S@handle>#$@S@Graphic3d_Camera#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "169b486a4be5b07ba67b6041b17887221df4c4b36fc4104daaa585686a60459a",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "camera",
+                {
+                  "borrowed_ref": {
+                    "is_mutable": false,
+                    "lifetime": null,
+                    "type": {
+                      "resolved_path": {
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "args": null,
+                                    "path": "Graphic3dCamera",
+                                    "resolved_item_path": "rustycad_tkservice::graphic3d::camera::Graphic3dCamera"
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        },
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "is_c_variadic": false,
+            "output": null
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::SetCamera(const class opencascade::handle<class Graphic3d_Camera> &)"
+  },
+  {
+    "cpp_ids": [
+      "fe70097a1fe873d4d980135b23333d060ee82f08b42c60be909d2fa8a993a018"
+    ],
+    "cpp_matches": [
+      {
+        "id": "fe70097a1fe873d4d980135b23333d060ee82f08b42c60be909d2fa8a993a018",
+        "kind": "CXXConstructor",
+        "qualified_name": "SelectMgr_BaseFrustum::SelectMgr_BaseFrustum",
+        "signature": "void ()",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+        "usr": "c:@S@SelectMgr_BaseFrustum@F@SelectMgr_BaseFrustum#"
+      }
+    ],
+    "cpp_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::<core::default::Default>::default"
+    ],
+    "declared_rust_selectors": null,
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "rust_matches": [
+      {
+        "declaration_sha256": "d6e63b9fb9404aa527fa8f7451e8a1f62907dacfcc4edd6830083aa081fd6909",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "args": null,
+              "path": "SelectMgrBaseFrustumBase",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase"
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": {
+            "args": null,
+            "path": "Default",
+            "resolved_item_path": "core::default::Default"
+          }
+        },
+        "kind": "function",
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::<core::default::Default>::default",
+        "signature": {
+          "default_unstable": null,
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "has_body": true,
+          "header": {
+            "abi": "Rust",
+            "is_async": false,
+            "is_const": false,
+            "is_unsafe": false
+          },
+          "sig": {
+            "inputs": [],
+            "is_c_variadic": false,
+            "output": {
+              "generic": "Self"
+            }
+          }
+        },
+        "source_file": "crates/tkv3d/src/select_mgr/base_frustum.rs",
+        "source_sha256": "0d185bf34445ac7d8184119c141799bc9f720d3cc0651ceb2af311b8e4838ed7",
+        "source_status": null
+      }
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::<core::default::Default>::default"
+    ],
+    "rust_status": "unique",
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.hxx",
+    "toolkit": "TKV3d",
+    "upstream_id": "SelectMgr_BaseFrustum::SelectMgr_BaseFrustum()"
+  }
+]

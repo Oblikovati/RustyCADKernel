@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "continuation_branch": "porting/resume-claude",
+  "continuation_worktree": "/tmp/rustycad-resume",
+  "continuation_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+  "integrated_into_main": false,
+  "new_work_committed": false,
+  "integration_blocker": "Session filesystem policy makes .git read-only; Git cannot create the worktree index lock.",
+  "patch_sha256": "0aff0decfe5ac6899b476ccbf3a8b0743bf08705689de42b7aaf2fbb1078b419",
+  "patch_reverse_check": true,
+  "inventory_refresh": "complete",
+  "continuation_snapshot": {
+    "api_declarations": 76041,
+    "api_done": 51146,
+    "api_open": 23923,
+    "api_partial": 972,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "toolkits": {
+    "TKV3d": {
+      "api": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 165,
+          "partial": 0,
+          "unclaimed": 3531,
+          "upstream_unimplemented": 0,
+          "verified": 1476
+        },
+        "declarations": 5172,
+        "done": 1641,
+        "done_percent": 31.7
+      },
+      "boilerplate": {
+        "by_status": {
+          "claimed_unverified": 0,
+          "excluded": 0,
+          "partial": 0,
+          "unclaimed": 922,
+          "upstream_unimplemented": 0,
+          "verified": 1
+        },
+        "declarations": 923,
+        "done": 1,
+        "done_percent": 0.1
+      },
+      "gtests": {
+        "mapped": 1,
+        "not_applicable": 0,
+        "unmapped": 72
+      },
+      "ledger_defects": {},
+      "open_boilerplate_by_category": {
+        "alloc-macro": 318,
+        "exception-macro": 9,
+        "rtti-macro": 556,
+        "special-member": 39
+      },
+      "open_gap_by_category": {
+        "alias": 28,
+        "enum-constant": 269,
+        "field": 494,
+        "member": 2238,
+        "protected-member": 238,
+        "record": 264
+      },
+      "scope": "port",
+      "scope_reason": ""
+    }
+  },
+  "runtime_reports": {
+    "tkv3d": {
+      "path": "porting/runtime-evidence/tkv3d-sensitive-entity-set-2026-10-09.json.gz",
+      "sha256": "52aa3ad87f66f661373105b66363d9c9889bc174243fade1adfb81458d768f09",
+      "source_hashes_match": true,
+      "numeric_cases": 126524,
+      "native_cases": 1,
+      "rust_cases": 1
+    },
+    "tkmath": {
+      "path": "porting/runtime-evidence/tkmath-sensitive-entity-set-2026-10-09.json.gz",
+      "sha256": "a486e30d519708b28d8eccd9a14cf83fdc6358d3d3040a00903d090478d36a26",
+      "source_hashes_match": true,
+      "numeric_cases": 75190
+    }
+  },
+  "rust_tests": {
+    "tkmath_tkgeomalgo_tkv3d_all_targets": 3395,
+    "tktopalgo_tkservice_all_targets": 531,
+    "tkv3d_final_all_targets": 174,
+    "affected_final_tests": 25,
+    "failed": 0
+  },
+  "new_behavior_tests": 10,
+  "new_numeric_cases": 608,
+  "new_api_mappings": 17,
+  "workspace_all_targets_check_passed": true,
+  "clippy_all_tkv3d_targets_passed": true,
+  "format_check_passed": true,
+  "diff_check_passed": true,
+  "tool_tests": {
+    "tests_passed": 7,
+    "pattern": "test_tkv3d_tooling.py"
+  },
+  "previous_checkpoint": "../selection-ranking-continuation/README.md",
+  "mapping_resolutions_sha256": "9930b5e8cc086824b657a479edfbc7f156f496d01a091ced709896204cb8ee5b",
+  "unresolved_ledger_rows": 0
+}

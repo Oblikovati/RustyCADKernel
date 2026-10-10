@@ -1,0 +1,719 @@
+diff --git a/crates/tkbool/examples/bl_probe/mod.rs b/crates/tkbool/examples/bl_probe/mod.rs
+index 3ffe9d3f1..2ff228bc1 100644
+--- a/crates/tkbool/examples/bl_probe/mod.rs
++++ b/crates/tkbool/examples/bl_probe/mod.rs
+@@ -15,6 +15,7 @@ pub mod brep_fill_section;
+ pub mod brep_fill_section_law;
+ pub mod brep_fill_sweep;
+ pub mod brep_proj;
++pub mod curve_explorer;
+ pub mod top_ope_brep_build;
+ pub mod top_ope_brep_ds;
+ pub mod top_ope_brep_ds_build;
+diff --git a/crates/tkbool/examples/numeric_probe.rs b/crates/tkbool/examples/numeric_probe.rs
+index 6437e6188..8ecc8713c 100644
+--- a/crates/tkbool/examples/numeric_probe.rs
++++ b/crates/tkbool/examples/numeric_probe.rs
+@@ -75,6 +75,14 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
+     // TopOpeBRepDS (bl_probe/top_ope_brep_ds.rs)
+     ("ds_transition", top_ope_brep_ds::transition_case),
+     ("ds_kind", top_ope_brep_ds::kind_case),
++    (
++        "ds_curve_explorer",
++        bl_probe::curve_explorer::curve_explorer_case,
++    ),
++    (
++        "ds_curve_explorer_mutation",
++        bl_probe::curve_explorer::curve_explorer_mutation_case,
++    ),
+     // TopOpeBRepTool shape helpers (bl_probe/top_ope_brep_tool_shapes.rs)
+     ("tt_shape_tool", top_ope_brep_tool_shapes::shape_tool_case),
+     ("tt_project", top_ope_brep_tool_shapes::project_case),
+diff --git a/crates/tkbool/src/top_ope_brep_ds/data_structure/mod.rs b/crates/tkbool/src/top_ope_brep_ds/data_structure/mod.rs
+index bd9402aac..e8331f721 100644
+--- a/crates/tkbool/src/top_ope_brep_ds/data_structure/mod.rs
++++ b/crates/tkbool/src/top_ope_brep_ds/data_structure/mod.rs
+@@ -5,10 +5,13 @@
+ //! topological operation, the shapes they interfere with, the same domain relations of
+ //! the shapes and the section edges.
+ mod access;
++mod curve_explorer;
+ mod geometry;
+ mod same_domain;
+ mod shapes;
+ 
++pub use curve_explorer::TopOpeBRepDSCurveExplorer;
++
+ use super::{
+     ListOfInterference, TopOpeBRepDSCurve, TopOpeBRepDSCurveData, TopOpeBRepDSInterference,
+     TopOpeBRepDSPoint, TopOpeBRepDSPointData, TopOpeBRepDSShapeData, TopOpeBRepDSShapeWithState,
+diff --git a/crates/tkbool/src/top_ope_brep_ds/mod.rs b/crates/tkbool/src/top_ope_brep_ds/mod.rs
+index 84e09a167..077e3d36e 100644
+--- a/crates/tkbool/src/top_ope_brep_ds/mod.rs
++++ b/crates/tkbool/src/top_ope_brep_ds/mod.rs
+@@ -22,7 +22,9 @@ pub use data::{
+     TopOpeBRepDSListOfShapeOn1State, TopOpeBRepDSPointData, TopOpeBRepDSShapeData,
+     TopOpeBRepDSShapeWithState, TopOpeBRepDSSurfaceData,
+ };
+-pub use data_structure::{MapOfShapeWithState, TopOpeBRepDSDataStructure};
++pub use data_structure::{
++    MapOfShapeWithState, TopOpeBRepDSCurveExplorer, TopOpeBRepDSDataStructure,
++};
+ pub use hdata_structure::{
+     TopOpeBRepDSHDataStructure, fun_hds_facesinterfer, fun_topopebrepds_sort_on_parameter,
+ };
+diff --git a/porting/parity.json b/porting/parity.json
+index e07b9a4fb..f167125ce 100644
+--- a/porting/parity.json
++++ b/porting/parity.json
+@@ -555895,6 +555895,126 @@
+       "rust_item": "rustycad_tkexpress::expr_intrp::ExprIntrpScanner::lex",
+       "status": "implemented",
+       "notes": "ExprIntrp mapping (crates/tkexpress/src/expr_intrp/mod.rs): the flex scanner is ported from its rules, the Bison parser drives the generated tables unchanged, and the global parse state (ExprIntrp_Recept, the scanner buffer, the statics of ExprIntrp_yaccintrf.cxx) is a per-parse context; compared with OCCT by tools/verify_tkexpress_numeric.py."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "17f04adedc40bdcbd8470e48e3e2e4d1d07f19f201d8ab7b9ea76c6bee229ce1",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::NbCurve()",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "200d88bd323d9797511bd8010bc8c62d5c9d11597f92bea2c2f38d3c179ff9d9",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::nb_curve",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::Curve() const",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "27f9c8b096b728146fc73366e70dd3cebd3fd261e11fc05882730020da9e320b",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::curve",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::Index() const",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "359c1be518f2a59214f9c4949c992c0f2ee60e1b9770d98bc607ce27de71a7cd",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::index",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::IsCurveKeep(const int) const",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "54ccdb684134f7758a5bab72e5478173da6dfd4013116a1b4c7842fc34ece4b5",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::is_curve_keep",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::Curve(const int) const",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "79e772b4664b9022e79c1307bbfa762346a45457a8b00e2f058c960d9b3f371c",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::curve_at",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::More() const",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "8ba9e41a19db7df83290cbdb962896f456d5f0e2859a4b07b5c16967b094d422",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::more",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::Init(const TopOpeBRepDS_DataStructure &, const bool)",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "9aa06bf7d4fe4ad6976bff8d57046758cd96273b0f30d09472e2573dae391cff",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::init",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::Next()",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "a97d332bd6fc2372b35cae406904ff0da9bdfc288a1e79a269e348cbb66a7d2e",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::next",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::TopOpeBRepDS_CurveExplorer()",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "b095395a963e83d42e783416989ed05f2c530343ee69cd4a0d8f02f6c7235572",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::<core::default::Default>::default",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::TopOpeBRepDS_CurveExplorer(const TopOpeBRepDS_DataStructure &, const bool)",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "b422c6e52a2f9ce8c5385aad0c610055bef31ae4c3fab1bd106e775d3f138ce4",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::new",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
++    },
++    {
++      "upstream_id": "TopOpeBRepDS_CurveExplorer::IsCurve(const int) const",
++      "toolkit": "TKBool",
++      "source": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_CurveExplorer.hxx",
++      "source_sha256": "94cbd27f9d43a9a5c6d6d06feb39fc128889697112cc6187b573243a47233c34",
++      "cpp_declaration_id": "f7f15acbc744e5cf291b82fe9e63e1703aba32afa9dd5a484a1f133a66828b08",
++      "rust_item": "rustycad_tkbool::top_ope_brep_ds::TopOpeBRepDSCurveExplorer::is_curve",
++      "status": "implemented",
++      "notes": "Translated from pinned TopOpeBRepDS_CurveExplorer.cxx. Borrowed source and exclusive new_mut/source_mut preserve live edits, the initialization-time traversal limit, and NbCurve restarting/counting/exhausting with a refreshed limit. Curve(i) checks bindings independently of Keep; exhausted/indexed fallback remains separate from the mutable DataStructure fallback. Nine Rust behavior tests and ds_curve_explorer / ds_curve_explorer_mutation differential cases; no toolkit completion claim."
+     }
+   ],
+   "tests": [
+diff --git a/tools/oracle/tkbool_probe.cxx b/tools/oracle/tkbool_probe.cxx
+index 416cb1a58..100a97a5d 100644
+--- a/tools/oracle/tkbool_probe.cxx
++++ b/tools/oracle/tkbool_probe.cxx
+@@ -55,6 +55,7 @@
+ #include "tkbool_probe_brepproj.cxx"
+ #include "tkbool_probe_topopebreptool_curve_tool.cxx"
+ #include "tkbool_probe_topopebrepds.cxx"
++#include "tkbool_probe_curve_explorer.cxx"
+ #include "tkbool_probe_topopebreptool_shapes.cxx"
+ #include "tkbool_probe_topopebrepds_build.cxx"
+ #include "tkbool_probe_topopebreptool_classifier.cxx"
+@@ -106,6 +107,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
+  // TopOpeBRepDS (tkbool_probe_topopebrepds.cxx)
+  {"ds_transition", bl_ds_transition_case},
+  {"ds_kind", bl_ds_kind_case},
++ {"ds_curve_explorer", bl_curve_explorer_case},
++ {"ds_curve_explorer_mutation", bl_curve_explorer_mutation_case},
+  // TopOpeBRepTool shape helpers (tkbool_probe_topopebreptool_shapes.cxx)
+  {"tt_shape_tool", bl_tt_shape_tool_case},
+  {"tt_project", bl_tt_project_case},
+diff --git a/tools/tkbool_corpus.py b/tools/tkbool_corpus.py
+index c14dc5b59..cc9681348 100644
+--- a/tools/tkbool_corpus.py
++++ b/tools/tkbool_corpus.py
+@@ -47,6 +47,7 @@ def append_tkbool_requests(requests: list[str]) -> None:
+     __import__('tkbool_corpus_topopebreptool_curve_tool').append_curve_tool_requests(requests)
+     # TopOpeBRepDS (tkbool_corpus_topopebrepds.py)
+     __import__('tkbool_corpus_topopebrepds').append_topopebrepds_requests(requests)
++    __import__('tkbool_corpus_curve_explorer').append_curve_explorer_requests(requests)
+     # TopOpeBRepTool shape helpers (tkbool_corpus_topopebreptool_shapes.py)
+     __import__('tkbool_corpus_topopebreptool_shapes').append_topopebreptool_shapes_requests(requests)
+     # TopOpeBRepDS data structure and build tool (tkbool_corpus_topopebrepds_build.py)
+diff --git a/crates/tkbool/examples/bl_probe/curve_explorer.rs b/crates/tkbool/examples/bl_probe/curve_explorer.rs
+new file mode 100644
+index 000000000..608f3da43
+--- /dev/null
++++ b/crates/tkbool/examples/bl_probe/curve_explorer.rs
+@@ -0,0 +1,84 @@
++//! Counterpart of tools/oracle/tkbool_probe_curve_explorer.cxx.
++use super::common::{Reader, end, flag, int, real};
++use rustycad_tkbool::top_ope_brep_ds::{
++    TopOpeBRepDSCurve, TopOpeBRepDSCurveExplorer, TopOpeBRepDSDataStructure,
++};
++
++fn explorer_curve(curve: &TopOpeBRepDSCurve) {
++    int(curve.ds_index());
++    flag(curve.keep());
++    real(curve.tolerance());
++    flag(curve.curve().is_null());
++}
++
++fn explorer_walk(explorer: &mut TopOpeBRepDSCurveExplorer<'_>) {
++    while explorer.more() {
++        int(explorer.index());
++        explorer_curve(explorer.curve());
++        explorer.next();
++    }
++    int(explorer.index());
++    explorer_curve(explorer.curve());
++    int(explorer.nb_curve());
++    flag(explorer.more());
++    int(explorer.index());
++}
++
++fn explorer_source(count: i32, gap: i32, mask: i32) -> TopOpeBRepDSDataStructure {
++    let mut curves = TopOpeBRepDSDataStructure::new();
++    for slot in 0..count {
++        if slot == 1 {
++            curves.change_nb_curves(curves.nb_curves() + gap);
++        }
++        let mut curve = TopOpeBRepDSCurve::default();
++        curve.set_tolerance(0.25 * f64::from(slot + 1));
++        curve.change_keep(mask & (1 << slot) != 0);
++        curves.add_curve(&mut curve);
++    }
++    curves.change_curve(-1).set_tolerance(12.0);
++    curves
++}
++
++/// Compares filtered traversal and lookup; `curve_explorer_case(&[3., 2., 5., 1., 4.])`.
++pub fn curve_explorer_case(values: &[f64]) {
++    let mut reader = Reader::new(values);
++    let curves = explorer_source(reader.integer(), reader.integer(), reader.integer());
++    let only_kept = reader.integer() != 0;
++    let query = reader.integer();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, only_kept);
++    flag(explorer.is_curve(query));
++    flag(explorer.is_curve_keep(query));
++    explorer_curve(explorer.curve_at(query));
++    explorer_walk(&mut explorer);
++    explorer.init(&curves, !only_kept);
++    explorer_walk(&mut explorer);
++    end();
++}
++
++/// Edits the borrowed source during traversal; `curve_explorer_mutation_case(&[2.])`.
++pub fn curve_explorer_mutation_case(values: &[f64]) {
++    let gap = Reader::new(values).integer();
++    let mut curves = explorer_source(2, gap, 1);
++    let mut explorer = TopOpeBRepDSCurveExplorer::new_mut(&mut curves, true);
++    let source = explorer.source_mut().expect("exclusive explorer source");
++    source.change_keep_curve(2 + gap, true);
++    let index = source.add_curve(&mut TopOpeBRepDSCurve::default());
++    flag(explorer.is_curve(index));
++    explorer_curve(explorer.curve_at(index));
++    explorer_walk(&mut explorer);
++    explorer_clear_source(&mut curves);
++    end();
++}
++
++fn explorer_clear_source(curves: &mut TopOpeBRepDSDataStructure) {
++    let mut explorer = TopOpeBRepDSCurveExplorer::new_mut(curves, true);
++    let source = explorer.source_mut().expect("exclusive explorer source");
++    source.init();
++    source.change_curve(-1).set_tolerance(12.0);
++    flag(explorer.more());
++    explorer_curve(explorer.curve());
++    explorer_curve(explorer.curve_at(1));
++    explorer.next();
++    flag(explorer.more());
++    int(explorer.index());
++}
+diff --git a/crates/tkbool/src/top_ope_brep_ds/data_structure/curve_explorer.rs b/crates/tkbool/src/top_ope_brep_ds/data_structure/curve_explorer.rs
+new file mode 100644
+index 000000000..6fd9b1f58
+--- /dev/null
++++ b/crates/tkbool/src/top_ope_brep_ds/data_structure/curve_explorer.rs
+@@ -0,0 +1,161 @@
++// Rust translation of TopOpeBRepDS_CurveExplorer.hxx/.cxx at
++// OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
++// Copyright (c) 1995-1999 Matra Datavision
++// Copyright (c) 1999-2014 OPEN CASCADE SAS
++// Licensed under LGPL-2.1 with the OCCT exception; see licenses/.
++
++use super::{TopOpeBRepDSCurve, TopOpeBRepDSDataStructure};
++
++enum CurveExplorerSource<'a> {
++    Shared(&'a TopOpeBRepDSDataStructure),
++    Exclusive(&'a mut TopOpeBRepDSDataStructure),
++}
++
++impl CurveExplorerSource<'_> {
++    fn as_ref(&self) -> &TopOpeBRepDSDataStructure {
++        match self {
++            Self::Shared(curves) => curves,
++            Self::Exclusive(curves) => curves,
++        }
++    }
++}
++
++/// Traverses bound curve indices, optionally retaining only kept curves.
++/// The borrow keeps returned curves tied to their source; counting exhausts the cursor.
++/// `let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, true);`
++pub struct TopOpeBRepDSCurveExplorer<'a> {
++    curves: Option<CurveExplorerSource<'a>>,
++    index: i32,
++    maximum: i32,
++    found: bool,
++    find_keep: bool,
++    empty_curve: TopOpeBRepDSCurve,
++}
++
++impl Default for TopOpeBRepDSCurveExplorer<'_> {
++    fn default() -> Self {
++        Self {
++            curves: None,
++            index: 1,
++            maximum: 0,
++            found: false,
++            find_keep: false,
++            empty_curve: TopOpeBRepDSCurve::default(),
++        }
++    }
++}
++
++impl<'a> TopOpeBRepDSCurveExplorer<'a> {
++    /// Starts at the first matching bound index; `TopOpeBRepDSCurveExplorer::new(&ds, true)`.
++    pub fn new(curves: &'a TopOpeBRepDSDataStructure, find_keep: bool) -> Self {
++        let mut explorer = Self::default();
++        explorer.init(curves, find_keep);
++        explorer
++    }
++
++    /// Restarts against a source and filter; `explorer.init(&ds, false)`.
++    pub fn init(&mut self, curves: &'a TopOpeBRepDSDataStructure, find_keep: bool) {
++        self.curves = Some(CurveExplorerSource::Shared(curves));
++        self.restart(find_keep);
++    }
++
++    /// Allows source edits between steps without detached pointers; `Self::new_mut(&mut ds, true)`.
++    pub fn new_mut(curves: &'a mut TopOpeBRepDSDataStructure, find_keep: bool) -> Self {
++        let mut explorer = Self {
++            curves: Some(CurveExplorerSource::Exclusive(curves)),
++            ..Self::default()
++        };
++        explorer.restart(find_keep);
++        explorer
++    }
++
++    /// Returns editable source for an exclusive explorer; `explorer.source_mut()?.remove_curve(2)`.
++    /// Shared and unbound explorers return `None`.
++    pub fn source_mut(&mut self) -> Option<&mut TopOpeBRepDSDataStructure> {
++        match self.curves.as_mut()? {
++            CurveExplorerSource::Exclusive(curves) => Some(curves),
++            CurveExplorerSource::Shared(_) => None,
++        }
++    }
++
++    fn restart(&mut self, find_keep: bool) {
++        self.index = 1;
++        self.maximum = self
++            .source()
++            .map_or(0, TopOpeBRepDSDataStructure::nb_curves);
++        self.find_keep = find_keep;
++        self.find();
++    }
++
++    /// Reports whether a matching curve is current; `assert!(explorer.more())`.
++    pub fn more(&self) -> bool {
++        self.found
++    }
++
++    /// Advances past holes and, when requested, discarded curves; `explorer.next()`.
++    pub fn next(&mut self) {
++        self.index += 1;
++        self.find();
++    }
++
++    /// Returns the current curve or an empty curve after exhaustion; `explorer.curve()`.
++    pub fn curve(&self) -> &TopOpeBRepDSCurve {
++        if !self.found {
++            return &self.empty_curve;
++        }
++        self.source()
++            .map_or(&self.empty_curve, |curves| curves.curve(self.index))
++    }
++
++    /// Tests binding independently of Keep and the traversal limit; `explorer.is_curve(4)`.
++    pub fn is_curve(&self, index: i32) -> bool {
++        self.source()
++            .is_some_and(|curves| curves.my_curves.is_bound(&index))
++    }
++
++    /// Requires both a bound curve and its Keep flag; `explorer.is_curve_keep(4)`.
++    pub fn is_curve_keep(&self, index: i32) -> bool {
++        self.is_curve(index) && self.curve_at(index).keep()
++    }
++
++    /// Looks up a bound curve regardless of the filter; `explorer.curve_at(4)`.
++    pub fn curve_at(&self, index: i32) -> &TopOpeBRepDSCurve {
++        // The native explorer's fallback is separate from DataStructure::ChangeCurve's
++        // mutable fallback, which callers can overwrite through an unknown index.
++        self.source()
++            .and_then(|curves| curves.my_curves.seek(&index))
++            .map_or(&self.empty_curve, |entry| &entry.my_curve)
++    }
++
++    /// Recounts from index one and leaves the explorer exhausted; `explorer.nb_curve()`.
++    pub fn nb_curve(&mut self) -> i32 {
++        self.restart(self.find_keep);
++        let mut count: i32 = 0;
++        while self.more() {
++            count += 1;
++            self.next();
++        }
++        count
++    }
++
++    /// Returns the cursor index, including past-the-end indices; `explorer.index()`.
++    pub fn index(&self) -> i32 {
++        self.index
++    }
++
++    fn source(&self) -> Option<&TopOpeBRepDSDataStructure> {
++        self.curves.as_ref().map(CurveExplorerSource::as_ref)
++    }
++
++    fn find(&mut self) {
++        self.found = false;
++        while self.index <= self.maximum {
++            self.found =
++                self.is_curve(self.index) && (!self.find_keep || self.is_curve_keep(self.index));
++            if self.found {
++                return;
++            }
++            self.index += 1;
++        }
++    }
++}
+diff --git a/crates/tkbool/tests/curve_explorer.rs b/crates/tkbool/tests/curve_explorer.rs
+new file mode 100644
+index 000000000..a3d3c4d70
+--- /dev/null
++++ b/crates/tkbool/tests/curve_explorer.rs
+@@ -0,0 +1,140 @@
++//! Behavioral coverage of TopOpeBRepDS_CurveExplorer.hxx/.cxx at
++//! OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871.
++use rustycad_tkbool::top_ope_brep_ds::{
++    TopOpeBRepDSCurve, TopOpeBRepDSCurveExplorer, TopOpeBRepDSDataStructure,
++};
++
++fn sparse_curves() -> TopOpeBRepDSDataStructure {
++    let mut curves = TopOpeBRepDSDataStructure::new();
++    let mut curve = TopOpeBRepDSCurve::default();
++    curve.set_tolerance(0.25);
++    curves.add_curve(&mut curve);
++    curves.change_nb_curves(3);
++    curve.change_keep(false);
++    curves.add_curve(&mut curve);
++    curve.change_keep(true);
++    curves.add_curve(&mut curve);
++    curves
++}
++
++#[test]
++fn default_explorer_is_exhausted_with_an_empty_curve() {
++    let mut explorer = TopOpeBRepDSCurveExplorer::default();
++    assert!(!explorer.more());
++    assert_eq!(explorer.index(), 1);
++    assert!(explorer.curve().curve().is_null());
++    assert!(explorer.curve().keep());
++    explorer.next();
++    assert_eq!(explorer.index(), 2);
++    assert!(!explorer.more());
++}
++
++#[test]
++fn kept_iteration_skips_holes_and_discarded_curves() {
++    let curves = sparse_curves();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, true);
++    assert_eq!(explorer.index(), 1);
++    assert_eq!(explorer.curve().tolerance(), 0.25);
++    assert!(std::ptr::eq(explorer.curve(), curves.curve(1)));
++    explorer.next();
++    assert_eq!(explorer.index(), 5);
++    assert!(explorer.more());
++    explorer.next();
++    assert_eq!(explorer.index(), 6);
++    assert!(!explorer.more());
++    assert_eq!(explorer.curve().ds_index(), 0);
++}
++
++#[test]
++fn reinitialization_changes_filter_and_indexed_lookup_ignores_filter() {
++    let curves = sparse_curves();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, true);
++    assert!(explorer.is_curve(4));
++    assert!(!explorer.is_curve_keep(4));
++    assert_eq!(explorer.curve_at(4).ds_index(), 4);
++    assert!(!explorer.curve_at(4).keep());
++    explorer.init(&curves, false);
++    explorer.next();
++    assert_eq!(explorer.index(), 4);
++    explorer.next();
++    assert_eq!(explorer.index(), 5);
++    assert!(explorer.is_curve_keep(5));
++}
++
++#[test]
++fn unknown_indices_use_the_explorers_own_fallback() {
++    let mut curves = sparse_curves();
++    curves.change_curve(2).set_tolerance(12.0);
++    let explorer = TopOpeBRepDSCurveExplorer::new(&curves, false);
++    for index in [-1, 0, 2, 3, 6] {
++        assert!(!explorer.is_curve(index));
++        assert!(!explorer.is_curve_keep(index));
++        assert_eq!(explorer.curve_at(index).ds_index(), 0);
++        assert_ne!(explorer.curve_at(index).tolerance(), 12.0);
++    }
++}
++
++#[test]
++fn counting_restarts_and_exhausts_the_current_filter() {
++    let curves = sparse_curves();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, true);
++    explorer.next();
++    assert_eq!(explorer.nb_curve(), 2);
++    assert_eq!(explorer.index(), 6);
++    assert!(!explorer.more());
++    explorer.init(&curves, false);
++    assert_eq!(explorer.nb_curve(), 3);
++    assert_eq!(explorer.nb_curve(), 3);
++    assert!(!explorer.more());
++}
++
++#[test]
++fn empty_structure_finishes_at_one() {
++    let curves = TopOpeBRepDSDataStructure::new();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, true);
++    assert_eq!(explorer.nb_curve(), 0);
++    assert_eq!(explorer.index(), 1);
++    assert!(!explorer.more());
++}
++
++#[test]
++fn exclusive_explorer_observes_edits_but_refreshes_its_limit_only_when_counting() {
++    let mut curves = sparse_curves();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new_mut(&mut curves, true);
++    let source = explorer.source_mut().unwrap();
++    source.change_keep_curve(4, true);
++    source.add_curve(&mut TopOpeBRepDSCurve::default());
++    explorer.next();
++    assert_eq!(explorer.index(), 4);
++    explorer.next();
++    assert_eq!(explorer.index(), 5);
++    explorer.next();
++    assert!(!explorer.more());
++    assert!(explorer.is_curve(6));
++    assert_eq!(explorer.curve_at(6).ds_index(), 6);
++    assert_eq!(explorer.nb_curve(), 4);
++    assert_eq!(explorer.index(), 7);
++}
++
++#[test]
++fn shared_and_unbound_explorers_do_not_offer_mutable_access() {
++    assert!(TopOpeBRepDSCurveExplorer::default().source_mut().is_none());
++    let curves = sparse_curves();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new(&curves, true);
++    assert!(explorer.source_mut().is_none());
++}
++
++#[test]
++fn clearing_source_keeps_found_state_until_next_and_current_uses_source_fallback() {
++    let mut curves = sparse_curves();
++    let mut explorer = TopOpeBRepDSCurveExplorer::new_mut(&mut curves, true);
++    let source = explorer.source_mut().unwrap();
++    source.init();
++    source.change_curve(-1).set_tolerance(12.0);
++    assert!(explorer.more());
++    assert_eq!(explorer.curve().tolerance(), 12.0);
++    assert_ne!(explorer.curve_at(1).tolerance(), 12.0);
++    explorer.next();
++    assert!(!explorer.more());
++    assert_eq!(explorer.index(), 6);
++}
+diff --git a/tools/oracle/tkbool_probe_curve_explorer.cxx b/tools/oracle/tkbool_probe_curve_explorer.cxx
+new file mode 100644
+index 000000000..fa4a2cf42
+--- /dev/null
++++ b/tools/oracle/tkbool_probe_curve_explorer.cxx
+@@ -0,0 +1,65 @@
++// Behavioral oracle for TopOpeBRepDS_CurveExplorer at pinned OCCT 3d097a0.
++// Input: count gap keep-mask only-kept query-index. Gaps follow the first curve.
++#include <TopOpeBRepDS_CurveExplorer.hxx>
++#include <TopOpeBRepDS_DataStructure.hxx>
++#include <TopOpeBRepDS_Curve.hxx>
++
++static void bl_explorer_curve(const TopOpeBRepDS_Curve& curve) {
++  ga_int(curve.DSIndex());
++  ga_flag(curve.Keep());
++  ga_real(curve.Tolerance());
++  ga_flag(curve.Curve().IsNull());
++}
++
++static void bl_explorer_walk(TopOpeBRepDS_CurveExplorer& explorer) {
++  for (; explorer.More(); explorer.Next()) {
++    ga_int(explorer.Index());
++    bl_explorer_curve(explorer.Curve());
++  }
++  ga_int(explorer.Index());
++  bl_explorer_curve(explorer.Curve());
++  ga_int(explorer.NbCurve());
++  ga_flag(explorer.More());
++  ga_int(explorer.Index());
++}
++
++static void bl_explorer_source(TopOpeBRepDS_DataStructure& curves, int count, int gap, int mask) {
++  for (int slot = 0; slot < count; ++slot) {
++    if (slot == 1) curves.ChangeNbCurves(curves.NbCurves() + gap);
++    TopOpeBRepDS_Curve curve;
++    curve.Tolerance(0.25 * (slot + 1));
++    curve.ChangeKeep((mask & (1 << slot)) != 0);
++    curves.AddCurve(curve);
++  }
++  curves.ChangeCurve(-1).Tolerance(12.0);
++}
++
++static void bl_curve_explorer_case(std::istream& input) {
++  GaReader reader{input};
++  const int count = reader.integer(), gap = reader.integer(), mask = reader.integer();
++  const bool onlyKept = reader.integer() != 0;
++  const int query = reader.integer();
++  TopOpeBRepDS_DataStructure curves;
++  bl_explorer_source(curves, count, gap, mask);
++  TopOpeBRepDS_CurveExplorer explorer(curves, onlyKept);
++  ga_flag(explorer.IsCurve(query)); ga_flag(explorer.IsCurveKeep(query));
++  bl_explorer_curve(explorer.Curve(query)); bl_explorer_walk(explorer);
++  explorer.Init(curves, !onlyKept); bl_explorer_walk(explorer); ga_end();
++}
++
++static void bl_curve_explorer_mutation_case(std::istream& input) {
++  GaReader reader{input};
++  const int gap = reader.integer();
++  TopOpeBRepDS_DataStructure curves;
++  bl_explorer_source(curves, 2, gap, 1);
++  TopOpeBRepDS_CurveExplorer explorer(curves, true);
++  curves.ChangeKeepCurve(2 + gap, true);
++  TopOpeBRepDS_Curve added;
++  const int index = curves.AddCurve(added);
++  ga_flag(explorer.IsCurve(index)); bl_explorer_curve(explorer.Curve(index));
++  bl_explorer_walk(explorer);
++  explorer.Init(curves, true); curves.Init(); curves.ChangeCurve(-1).Tolerance(12.0);
++  ga_flag(explorer.More()); bl_explorer_curve(explorer.Curve());
++  bl_explorer_curve(explorer.Curve(1)); explorer.Next();
++  ga_flag(explorer.More()); ga_int(explorer.Index()); ga_end();
++}
+diff --git a/tools/tkbool_corpus_curve_explorer.py b/tools/tkbool_corpus_curve_explorer.py
+new file mode 100644
+index 000000000..61c77ecfc
+--- /dev/null
++++ b/tools/tkbool_corpus_curve_explorer.py
+@@ -0,0 +1,11 @@
++"""Sparse and filtered TopOpeBRepDS_CurveExplorer traversal against native OCCT."""
++from itertools import product
++
++
++def append_curve_explorer_requests(requests: list[str]) -> None:
++    """Append deterministic binding/filter cases; e.g. append_curve_explorer_requests([])."""
++    for count, gap, mask, only_kept, query in product(
++        (0, 1, 4), (0, 2), (0, 5, 15), (0, 1), (-1, 0, 1, 2, 4, 6, 7)
++    ):
++        requests.append(f'ds_curve_explorer {count} {gap} {mask} {only_kept} {query}')
++    requests.extend(f'ds_curve_explorer_mutation {gap}' for gap in (0, 2, 5))

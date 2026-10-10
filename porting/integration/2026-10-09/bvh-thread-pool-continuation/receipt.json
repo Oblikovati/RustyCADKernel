@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "continuation_branch": "porting/resume-claude",
+  "continuation_worktree": "/tmp/rustycad-resume",
+  "continuation_parent_revision": "7fac5b5bf9ca8b35f7b33b8462dfa1a7943e14d5",
+  "integrated_into_main": false,
+  "new_work_committed": false,
+  "integration_blocker": "Session filesystem policy makes .git read-only; Git cannot create the worktree index lock.",
+  "patch_sha256": "db8f8f3a302136dc667990d4df6934a4317aaf420c580dbbed563aea15f765f7",
+  "patch_reverse_check": true,
+  "inventory_refresh": "complete",
+  "continuation_snapshot": {
+    "api_declarations": 76041,
+    "api_done": 51194,
+    "api_open": 23875,
+    "api_partial": 972,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "runtime_reports": {
+    "tkv3d": {
+      "path": "porting/runtime-evidence/tkv3d-bvh-thread-pool-2026-10-10.json.gz",
+      "sha256": "51eb3a642db38ba3a21c62d4865ee141244d73245bd47b893e4e8837a19b966d",
+      "source_hashes_match": true
+    },
+    "osd_threads": {
+      "path": "porting/runtime-evidence/tkernel-bvh-thread-pool-2026-10-10.json.gz",
+      "sha256": "4ec5ea352953dc7783b6c9937c960d56f5e88e481189afee7d191f9f79adcae3",
+      "source_hashes_match": true
+    }
+  },
+  "tkv3d_rust_tests_passed": 198,
+  "tkernel_rust_tests_passed": 4936,
+  "new_behavior_tests": 18,
+  "new_numeric_cases": 180,
+  "new_api_mappings": 25,
+  "implemented_mappings": 23,
+  "prohibited_native_copy_exclusions": 2,
+  "numeric_cases_passed": 127246,
+  "native_legacy_cases_passed": 1,
+  "rust_legacy_cases_passed": 1,
+  "focused_osd_thread_cases_passed": 251,
+  "full_tkernel_runtime_gate": "Not run: requires a clean checkout; focused OSD differential and all TKernel Rust targets passed.",
+  "clippy_all_tkernel_tkv3d_targets_passed": true,
+  "format_check_passed": true,
+  "diff_check_passed": true,
+  "tool_tests_passed": 7,
+  "previous_checkpoint": "../selectable-object-set-continuation/README.md",
+  "mapping_resolutions_sha256": "093f3a5e58a3231f93ce77c8092fbebb290574abebef982f84a24f097bfa798a",
+  "unresolved_ledger_rows": 0,
+  "new_defined_apis_accounted": 21,
+  "new_boilerplate_rows_accounted": 4,
+  "main_revision": "bf6164bbd9714cddb53ccee234aa12aaff47d106",
+  "commits_not_on_main": 25
+}
