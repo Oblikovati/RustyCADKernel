@@ -1,4 +1,6 @@
 //! The AIS package: interactive objects and the interactive context.
+mod animation_camera;
+pub use animation_camera::{AisAnimationCamera, AisAnimationCameraFields};
 mod animation;
 mod animation_members;
 mod animation_playback;

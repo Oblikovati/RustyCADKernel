@@ -23,7 +23,9 @@ class LightingCaptureCasesTests(unittest.TestCase):
             }
             <= set(LIGHTING_MODES)
         )
-        with self.assertRaisesRegex(ValueError, "expected all, lighting or capping"):
+        with self.assertRaisesRegex(
+            ValueError, "expected all, lighting, capping or camera-animation"
+        ):
             capture_modes("unknown")
 
     def test_command_configuration_keeps_explicit_family(self) -> None:
