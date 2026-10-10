@@ -88,3 +88,35 @@ fn multiple_geometry_sources_share_a_live_parent() {
     assert!(scene.structure.is_visible());
     assert_eq!(scene.group.triangle_draws(&scene.camera).unwrap().len(), 2);
 }
+#[test]
+fn homogeneous_positions_require_a_finite_unit_w() {
+    let scene = GraphicScene::new();
+    let buffer = homogeneous_buffer();
+    submit(&scene, &buffer, &Handle::default());
+    assert_eq!(scene.group.triangle_draws(&scene.camera).unwrap().len(), 1);
+    for w in [0., 2., f32::NAN, f32::INFINITY] {
+        assert!(buffer.write_at(12, w));
+        assert!(
+            scene
+                .group
+                .triangle_draws(&scene.camera)
+                .unwrap_err()
+                .to_string()
+                .contains("unit homogeneous w")
+        );
+    }
+}
+
+fn homogeneous_buffer() -> Handle<Graphic3dBuffer> {
+    let buffer =
+        Handle::new(Graphic3dBuffer::new(Graphic3dBufferBase::default_allocator()).unwrap());
+    let attributes = [Graphic3dAttribute {
+        id: Graphic3dTypeOfAttribute::Pos,
+        data_type: Graphic3dTypeOfData::Vec4,
+    }];
+    assert!(buffer.init(3, &attributes).unwrap());
+    for index in 0..3 {
+        assert!(buffer.write_at(index * 16, Vec4::new(0f32, 0., 0., 1.)));
+    }
+    buffer
+}
