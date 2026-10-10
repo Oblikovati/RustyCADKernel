@@ -14,6 +14,9 @@ pub struct DetectionTrace {
     pub forced: bool,
     pub failing: i32,
     pub mask: i32,
+    pub selection_events: bool,
+    pub consume_click: bool,
+    pub append_on_highlight: Handle<dyn SelectMgrEntityOwnerSource>,
 }
 pub type DetectionEvents = Arc<SharedState<DetectionTrace>>;
 pub struct DetectionObject {
@@ -57,6 +60,12 @@ impl PrsMgrPresentableObject for DetectionObject {
             if mutation == 2 {
                 context.set_dynamic_highlight_style(&style);
             }
+            if mutation == 3 {
+                self.set_hilight_attributes(&style);
+            }
+            if mutation == 4 {
+                context.set_selection_style(&style);
+            }
         }
         accept
     }
@@ -78,6 +87,24 @@ impl SelectMgrSelectableObject for DetectionObject {
     }
     fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
         Ok(())
+    }
+    fn hilight_selected(
+        &self,
+        _: &Handle<PrsMgrPresentationManager>,
+        owners: &[Handle<dyn SelectMgrEntityOwnerSource>],
+    ) -> Result<(), Failure> {
+        let mut trace = self.trace.write();
+        trace.events.extend([700, owners.len() as i32]);
+        trace
+            .events
+            .extend(owners.iter().map(|owner| owner.priority()));
+        Ok(())
+    }
+    fn clear_selected(&self) {
+        self.trace.write().events.push(800);
+        if let Some(presentation) = self.selectable_base().fields.read().selection_prs.get() {
+            presentation.clear(true);
+        }
     }
     fn clear_dynamic_highlight(&self, manager: &Handle<PrsMgrPresentationManager>) {
         self.trace.write().events.push(300);
@@ -116,6 +143,33 @@ impl SelectMgrEntityOwnerSource for DetectionOwner {
     fn owner_base(&self) -> &SelectMgrEntityOwnerBase {
         &self.base
     }
+    fn unhilight(&self, manager: &Handle<PrsMgrPresentationManager>, _: i32) {
+        if self.trace.read().selection_events {
+            self.trace.write().events.push(600 + self.priority());
+        }
+        let selectable = self.selectable();
+        if !selectable.is_null() {
+            manager.unhighlight(&selectable.cast());
+        }
+    }
+    fn handle_mouse_click(
+        &self,
+        point: rustycad_tkernel::ncollection::Vec2<i32>,
+        button: rustycad_tkservice::aspect::AspectVKeyMouse,
+        modifiers: rustycad_tkservice::aspect::AspectVKeyFlags,
+        double: bool,
+    ) -> bool {
+        let mut trace = self.trace.write();
+        trace.events.extend([
+            900 + self.priority(),
+            point.x(),
+            point.y(),
+            button as i32,
+            modifiers as i32,
+            i32::from(double),
+        ]);
+        trace.consume_click
+    }
     fn is_forced_hilight(&self) -> bool {
         self.trace.read().forced
     }
@@ -137,6 +191,13 @@ impl SelectMgrEntityOwnerSource for DetectionOwner {
                 "Standard_Failure",
                 "failing owner; expected successful highlight",
             ));
+        }
+        let append = std::mem::take(&mut self.trace.write().append_on_highlight);
+        if !append.is_null() {
+            let object = self.selectable().cast::<dyn AisInteractiveObject>();
+            let context = object.get_context();
+            let selection = context.selection().clone();
+            selection.add_select(&append)?;
         }
         select_mgr_owner_hilight_with_color(self, manager, style, mode)
     }

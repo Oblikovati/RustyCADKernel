@@ -84,6 +84,7 @@ impl AisInteractiveContextFields {
 /// Example: `let context=AisInteractiveContext::new(&viewer)?`.
 pub struct AisInteractiveContext {
     transient: StandardTransient,
+    pub(super) this: SharedState<WeakHandle<AisInteractiveContext>>,
     /// Protected state is shared by all handles; release its guard before callbacks.
     pub fields: SharedState<AisInteractiveContextFields>,
 }
@@ -100,7 +101,9 @@ impl AisInteractiveContext {
         let context = Handle::new(Self {
             transient: StandardTransient::default(),
             fields: SharedState::new(AisInteractiveContextFields::new(viewer)?),
+            this: SharedState::default(),
         });
+        *context.this.write() = context.downgrade();
         context
             .fields
             .read()

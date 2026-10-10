@@ -1,5 +1,5 @@
 //! Dynamic drawer references follow their original slots across virtual callbacks.
-use super::{AisInteractiveContext, AisInteractiveObject};
+use super::{AisInteractiveContext, AisInteractiveObject, AisSelectedOwner};
 use crate::{
     prs_mgr::PrsMgrPresentableObjectMembers, prs3d::Prs3dDrawer, select_mgr::*, v3d::V3dViewer,
 };
@@ -14,12 +14,14 @@ pub struct AisHighlightStyle<'a> {
     context: &'a AisInteractiveContext,
     object: Handle<dyn AisInteractiveObject>,
     slot: Option<usize>,
+    selected: bool,
 }
 impl AisHighlightStyle<'_> {
     /// Read the selected slot, without reselecting it; `style.read()`.
     pub fn read(&self) -> Handle<Prs3dDrawer> {
         match self.slot {
             Some(slot) => self.context.fields.read().styles[slot].clone(),
+            None if self.selected => self.object.hilight_attributes(),
             None => self.object.dynamic_hilight_attributes(),
         }
     }
@@ -42,6 +44,27 @@ impl AisInteractiveContext {
             context: self,
             object: object.clone(),
             slot,
+            selected: false,
+        }
+    }
+    /// Select the custom or context selection drawer slot; `context.get_sel_style(&object,&owner)`.
+    pub fn get_sel_style(
+        &self,
+        object: &Handle<dyn AisInteractiveObject>,
+        owner: &AisSelectedOwner,
+    ) -> AisHighlightStyle<'_> {
+        let local = owner
+            .get()
+            .is_some_and(|owner| owner.comes_from_decomposition());
+        let slot = object
+            .hilight_attributes()
+            .is_null()
+            .then_some(if local { 3 } else { 1 });
+        AisHighlightStyle {
+            context: self,
+            object: object.clone(),
+            slot,
+            selected: true,
         }
     }
     /// Select a display mode using the native style/object/default priority; `context.get_hilight_mode(&object,&style,-1)`.
@@ -53,7 +76,7 @@ impl AisInteractiveContext {
     ) -> i32 {
         self.highlight_mode_from_slot(object, &|| style.clone(), display_mode)
     }
-    fn highlight_mode_from_slot(
+    pub(super) fn highlight_mode_from_slot(
         &self,
         object: &Handle<dyn AisInteractiveObject>,
         style: &impl Fn() -> Handle<Prs3dDrawer>,

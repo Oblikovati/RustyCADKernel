@@ -573322,6 +573322,536 @@
       "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::has_detected",
       "status": "implemented",
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::InitSelected()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "00bdd672ff540d1740883e810bba1433b068cb5080214817711cbf2936a4bb8d",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::init_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Select(const class NCollection_Array1<class opencascade::handle<class SelectMgr_EntityOwner>> &, enum AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "0d2121ec6a16ecfe27c0579021ef93f69b974f705714eb9561561e0de407cc26",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_owners",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ShiftSelect(int, int, int, int, const class opencascade::handle<class V3d_View> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "0da29d0e82605af0c742f8477cbf21fb40f50e01efa896f27f7ebd4d47be5856",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::shift_select_box",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::highlightWithSubintensity(const class opencascade::handle<class SelectMgr_EntityOwner> &, int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "10ba801c8d7ee5e384b78286a4213439b69955f9d3fcec35892c4ca068cd1806",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::highlight_owner_with_subintensity",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::highlightOwners(const class NCollection_List<class opencascade::handle<class SelectMgr_EntityOwner>> &, const class opencascade::handle<class Prs3d_Drawer> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "13af9845fa7389d4f24c3b8e93b4ff19fb7872fe546c98b5553250d00a3f3487",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::highlight_owners",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_SOP_SeveralSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfPick.hxx",
+      "source_sha256": "54cc9546abc83aa0ffccf7550a689e3d3fef70d11726382688e26d7d491282d6",
+      "cpp_declaration_id": "1565b1d231d102b72e1d7eb99430baaed7a3a8f3391f89364c207a5f40d0c408",
+      "rust_item": "rustycad_tkv3d::ais::AisStatusOfPick::SeveralSelected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::MoreSelected() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "15f2da9a19f03529d79ed97687f1df94a19fddc618fb0547abd008fe37b05a28",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::more_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::AddSelect(const class opencascade::handle<class AIS_InteractiveObject> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "1cdaa844b1a5796fbc911b23a6f21c910516e3eaaa04176ddbe608d29d108ad8",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::add_select_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HighlightStyle(const class opencascade::handle<class SelectMgr_EntityOwner> &, class opencascade::handle<class Prs3d_Drawer> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "23cf99fecc9f80aff5c0f6d4417a43052d4ec534c67eb21b3ca42ae391082745",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::owner_highlight_style",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::AddSelect(const class opencascade::handle<class SelectMgr_EntityOwner> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "24807425f4a899ce446790599f49b40d88546701c9adc24f51b8151b90d349d8",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::add_select",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectPolygon(const class NCollection_Array1<class gp_Pnt2d> &, const class opencascade::handle<class V3d_View> &, enum AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "320a084080e58de89fa67bfd32a54467cfada736627cb32fb99ac64a9045bbf2",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_polygon",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ShiftSelect(const class NCollection_Array1<class gp_Pnt2d> &, const class opencascade::handle<class V3d_View> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "33fd9ae4ead497087b2cd56d47d22aff332c1b9bbabf2079a2d3e2f5944d8873",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::shift_select_polyline",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::FirstSelectedObject() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "3972439351321c37049cec77dd9ece609351b3e7bebbc362f742ac95afb01a51",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::first_selected_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_SOP_Removed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfPick.hxx",
+      "source_sha256": "54cc9546abc83aa0ffccf7550a689e3d3fef70d11726382688e26d7d491282d6",
+      "cpp_declaration_id": "446225bdd7c7dfaa13cc076a161eb719bf3a478643d8473325592069bbb20865",
+      "rust_item": "rustycad_tkv3d::ais::AisStatusOfPick::Removed",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ShiftSelect(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "447fe386820d2f291ccedec22fa81685c12fb79e6948c03101786623714d9f54",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::shift_select",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsHilighted(const class opencascade::handle<class SelectMgr_EntityOwner> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "46002cfd95c89f7dbf60e4960f10c47b11f17493f59528a1ea3093c51afd7400",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::is_hilighted_owner",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Select(const class NCollection_Array1<class gp_Pnt2d> &, const class opencascade::handle<class V3d_View> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "4826047b949bd95c204f4e12c22b2abae0976d115c9931e6933f158177517d48",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_polyline",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::AddOrRemoveSelected(const class opencascade::handle<class SelectMgr_EntityOwner> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "4ea46438f34c19af6edb9ccacf22399d5cca979f71376361016c7a4afdae47c4",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::add_or_remove_selected_owner",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsHilighted(const class opencascade::handle<class AIS_InteractiveObject> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "4ee9443ba51b1f3bc6f3da4f8459b75f21e41b61c3efd9473e9e2036e51bb971",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::is_hilighted_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::NbSelected()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "50180697b15b835a87b2e483cbc177f2c0904855c90e24e71fc25d78c475e6c6",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::nb_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HilightSelected(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "51f5d6286cdff54cba2aa997327c790360a8ac8058d5367c9efdf46ce8c60144",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::hilight_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Unhilight(const class opencascade::handle<class AIS_InteractiveObject> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "53fd7db443ac360d2606ea3b9452ed6ef130a852aea3cc6aaa88c4bc117ea10a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::unhilight",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HighlightStyle(const class opencascade::handle<class AIS_InteractiveObject> &, class opencascade::handle<class Prs3d_Drawer> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "5a3cea0de0d2f0d6935a0b0e19953becbc1eb4f1394ffca4e47a957e2a73855b",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::object_highlight_style",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsSelected(const class opencascade::handle<class SelectMgr_EntityOwner> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "60d79abaee45d8fa3a21778e5532308c01a16fed204d5869b2159d56d0763ef3",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::is_selected_owner",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::getSelStyle(const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class SelectMgr_EntityOwner> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "66d033f6aa5f56a26ad187b004984e8f7e43babb55b587be8b822e122c8a89d0",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::get_sel_style",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::unhighlightOwners(const class NCollection_List<class opencascade::handle<class SelectMgr_EntityOwner>> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "6a5e6b4aa31207f5a9c2796f726be54db05b77d84c1df8d7268fd1723a4e297b",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::unhighlight_owners",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::highlightWithSubintensity(const class opencascade::handle<class AIS_InteractiveObject> &, int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "6abc8583551dfaed0c66040b3b786d531e8b4212e6254ceaa785b13b68adcbbc",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::highlight_object_with_subintensity",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HilightWithColor(const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class Prs3d_Drawer> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "778a82127ceaaf72b56edcab1a0774a264018f92ff1327135041e2862e72fa95",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::hilight_with_color",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Select(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "8171b79c48c01548a35002e542aa348d95334670f4ada30d6059df2e3be19a84",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectedOwner() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "86ca9c289582f716e05b675f1daee794e43587ee8c1313de853feafdd4b06dc1",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::selected_owner",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsSelected(const class opencascade::handle<class AIS_InteractiveObject> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "8a63b66f06ed3b5fa6f890054504f92ef954431734d79f12700078eaf601aab1",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::is_selected_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::NextSelected()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "8a70e531329417243607a39fda3c8502896160d4e8ff4ae4da2085717a2dda7b",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::next_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::unhighlightSelected(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "92af09b7867f6d9e6072f0e472f21b116683170bb9c39db532118395175b39af",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::unhighlight_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::isDetected(const class opencascade::handle<class AIS_InteractiveObject> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "95b98de524d00301793d85348b9ee77a213f3388d9b816195dfe0a89f77aa60c",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::is_detected_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_StatusOfPick",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfPick.hxx",
+      "source_sha256": "54cc9546abc83aa0ffccf7550a689e3d3fef70d11726382688e26d7d491282d6",
+      "cpp_declaration_id": "98261abde20f51e5b3b0a5bc2b7f10aefb40a554cf590c2b872c805c797d7295",
+      "rust_item": "rustycad_tkv3d::ais::AisStatusOfPick",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ClearSelected(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9bd9b94b36c3083821e6d84bdeb1469466ac67ee6858c6837e3ca453df75354f",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::clear_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::UnhilightSelected(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9c2f73be01a3b557978def0c84a34cd4e3eecbd14a8075666911ebf06133179e",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::unhilight_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::setContextToObject(const class opencascade::handle<class AIS_InteractiveObject> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9ecbb1a1ebe5472867a4afea372dc87478b2619d8d32e03d09c592a3dc58dd5a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_context_to_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectedInteractive() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "a01cc546151bf922b6361dab7ced5f3a85d7f7f31619bf6eb27fd1ad36bb5b61",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::selected_interactive",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetSelected(const class opencascade::handle<class AIS_InteractiveObject> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "a713b3f1f0c5987e77a9da4cd8b55ae663627cc54dc7208f892747848cf7c41a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_selected_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::unhighlightGlobal(const class opencascade::handle<class AIS_InteractiveObject> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "a873028c9548e6a7d4f906a26b0ab3f4710e282cb034e16f805760332860e0e6",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::unhighlight_global",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetSelected(const class opencascade::handle<class SelectMgr_EntityOwner> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "b0fe1450e947bf34d7f48cc8d716accf8556d29ff5e854f509cc7630ee17dd3d",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_selected_owner",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetSelectedState(const class opencascade::handle<class SelectMgr_EntityOwner> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "b27ecad1134d6e162d60748b5668fba133d50707c2c266f5acf78d913c491e8b",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_selected_state",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Select(int, int, int, int, const class opencascade::handle<class V3d_View> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "be0045bcdc6322d5eb1a7bd524eaf177c4f79d9b6bed80dad4785fe504251142",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_box",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectPoint(const class NCollection_Vec2<int> &, const class opencascade::handle<class V3d_View> &, enum AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "c6262461ff412c594f81c94d39d6f5bb39adfc402415091121733626a4328027",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_point",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::highlightGlobal(const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class Prs3d_Drawer> &, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "cde886019859df038ba98f587ee7e0f4106dfc1d0df2495a4f2a468a4ca454a7",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::highlight_global",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectDetected(enum AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "cfc591e6ea629c25350a556eacb46f40e1f73e410d71c1208aa335429e515ef8",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_detected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_SOP_Error",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfPick.hxx",
+      "source_sha256": "54cc9546abc83aa0ffccf7550a689e3d3fef70d11726382688e26d7d491282d6",
+      "cpp_declaration_id": "d0106b16b294f779832fad74e9a99e465c282e06798bd74cf6684b881c7a1a5a",
+      "rust_item": "rustycad_tkv3d::ais::AisStatusOfPick::Error",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::highlightSelected(const class opencascade::handle<class SelectMgr_EntityOwner> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "e20281be3e68afa44276b651a1e8c4017e257024cf4bcef9dea7a3238135ee76",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::highlight_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::AddOrRemoveSelected(const class opencascade::handle<class AIS_InteractiveObject> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "e5448f9deadf7330c2f00d6c3dfbbdb23d71c30ac91c845b804ec549a4b3593c",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::add_or_remove_selected_object",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_SOP_OneSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfPick.hxx",
+      "source_sha256": "54cc9546abc83aa0ffccf7550a689e3d3fef70d11726382688e26d7d491282d6",
+      "cpp_declaration_id": "e9292d67747b1d1524cfdc62b404a7d794e8422d3b04eea5d18c9e4d6f16563a",
+      "rust_item": "rustycad_tkv3d::ais::AisStatusOfPick::OneSelected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_SOP_NothingSelected",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfPick.hxx",
+      "source_sha256": "54cc9546abc83aa0ffccf7550a689e3d3fef70d11726382688e26d7d491282d6",
+      "cpp_declaration_id": "f58005d18e0a104d5c6f020c7f417d51e041317f95e14a5e903f5c956978d8af",
+      "rust_item": "rustycad_tkv3d::ais::AisStatusOfPick::NothingSelected",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectRectangle(const class NCollection_Vec2<int> &, const class NCollection_Vec2<int> &, const class opencascade::handle<class V3d_View> &, enum AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "fe0f63388ed82d965018e0f83b88aefdb1fc4f7a48424ab9d4a866c6ee729e65",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_rectangle",
+      "status": "implemented",
+      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
     }
   ],
   "tests": [
