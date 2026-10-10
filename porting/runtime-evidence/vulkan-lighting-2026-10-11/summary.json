@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "status": "partial",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "main_execution_revision": "d05a2cb5b989b0efa9c48481f7d9e28b68a3de8f",
+  "functional_gate": "failed; strict color differences retained",
+  "timing_gate": "open; both measurement orders retained",
+  "cpu_test_executions": 173,
+  "clippy": "passed -D warnings",
+  "python_tests": 39,
+  "shader_variants": 20,
+  "analytic_lighting_scenes_per_device": 15,
+  "analytic_lighting_pixels_per_device": 61440,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "native_capture_passed": 124,
+      "native_capture_total": 126,
+      "runtime_checks": "PASS: 15 lit scenes, 61440 analytic color/depth pixels; validation errors: 0",
+      "performance": [
+        "single-triangle p95_ms=0.908ms exceeds 0.885ms"
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "native_capture_passed": 64,
+      "native_capture_total": 126,
+      "runtime_checks": "PASS: 15 lit scenes, 61440 analytic color/depth pixels; validation errors: 0",
+      "performance": []
+    }
+  ],
+  "artifacts": {
+    "functional.json": {
+      "path": "porting/runtime-evidence/vulkan-lighting-2026-10-11/functional.json.gz",
+      "uncompressed_sha256": "c782ab4aa93986106dbbc5af0b3f457dc26c10618ffdf9dfdea07b9e984339d2"
+    },
+    "performance-forward.json": {
+      "path": "porting/runtime-evidence/vulkan-lighting-2026-10-11/performance-forward.json.gz",
+      "uncompressed_sha256": "7cf42c947d705eaa538571f4ea7d3df7317df8ca523c2556629ebc21057d6e4d"
+    },
+    "performance-reverse.json": {
+      "path": "porting/runtime-evidence/vulkan-lighting-2026-10-11/performance-reverse.json.gz",
+      "uncompressed_sha256": "815c5c2cbe3c7c8b2abb23adc735f562026b2e367514136e09fd27dd74e1a45f"
+    },
+    "main-clippy.log": {
+      "path": "porting/runtime-evidence/vulkan-lighting-2026-10-11/main-clippy.log.gz",
+      "uncompressed_sha256": "cd0fe85ae8f872897f9db81cde920f38b70f7682162bcca745f119d0db089e4b"
+    },
+    "main-python.log": {
+      "path": "porting/runtime-evidence/vulkan-lighting-2026-10-11/main-python.log.gz",
+      "uncompressed_sha256": "02dc26cee61f72be3aab8f8f3348f7e35c4bded91bab8db509abfbe338bebd8c"
+    },
+    "captures": {
+      "path": "porting/runtime-evidence/vulkan-lighting-2026-10-11/captures.tar.gz",
+      "sha256": "ccaca095b67c53356927f97c239e622918ec15d9dde7443ca89a28c5416f6d2d"
+    }
+  },
+  "api_completion_credit": "none; replacement family remains partial"
+}
