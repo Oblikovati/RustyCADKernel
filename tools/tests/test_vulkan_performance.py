@@ -27,10 +27,16 @@ class VulkanPerformanceTests(unittest.TestCase):
         lines = [
             "MARTENSITE_PERFORMANCE="
             + json.dumps({"workload": name, "samples_ms": [1.0, 2.0, 3.0]})
-            for name in ("single-triangle", "many-draws", "resize", "ais-display-erase")
+            for name in (
+                "single-triangle",
+                "many-draws",
+                "resize",
+                "ais-display-erase",
+                "ais-remove-display",
+            )
         ]
         rows = performance_rows("\n".join(lines))
-        self.assertEqual(len(rows), 4)
+        self.assertEqual(len(rows), 5)
         self.assertEqual(rows[0]["median_ms"], 2.0)
         with self.assertRaises(ValueError):
             performance_rows(lines[0])

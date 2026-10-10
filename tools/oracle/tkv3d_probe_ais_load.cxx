@@ -2,7 +2,26 @@
 // entry points.
 class V3LoadContext : public V3ContextFixture {
 public:
+  using AIS_InteractiveContext::ClearGlobal;
   using AIS_InteractiveContext::EraseGlobal;
+  void seedDetection(const occ::handle<SelectMgr_ViewerSelector> &selector,
+                     int current, int highlighted) {
+    mgrSelector = new SelectMgr_SelectionManager(selector);
+    myDetectedSeq.Clear();
+    for (int rank : {1, 2, 1, 3, 99, 2})
+      myDetectedSeq.Append(rank);
+    myCurDetected = current;
+    myCurHighlighted = highlighted;
+  }
+  void detectionState() {
+    ga_int(myCurDetected);
+    ga_int(myCurHighlighted);
+    ga_int(myDetectedSeq.Size());
+    for (int rank : myDetectedSeq)
+      ga_int(rank);
+    ga_flag(myLastPicked.IsNull());
+  }
+  using AIS_InteractiveContext::ClearGlobalPrs;
   using AIS_InteractiveContext::GetDefModes;
   using AIS_InteractiveContext::unselectOwners;
   void picked(const occ::handle<SelectMgr_EntityOwner> &owner) {
@@ -19,6 +38,13 @@ public:
 class V3LoadObject : public V3ContextObject {
 public:
   int accepted = -999;
+  int expectedKindReferences = -999;
+  AIS_KindOfInteractive Type() const override {
+    if (expectedKindReferences != -999)
+      const_cast<V3LoadObject *>(this)->observe(8000 + GetRefCount() -
+                                                expectedKindReferences);
+    return AIS_InteractiveObject::Type();
+  }
   bool AcceptDisplayMode(int mode) const override {
     return accepted == -999 || accepted == mode;
   }

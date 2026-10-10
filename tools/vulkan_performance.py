@@ -31,7 +31,13 @@ def performance_rows(output: str) -> list[dict[str, object]]:
         for line in output.splitlines()
         if line.startswith("MARTENSITE_PERFORMANCE=")
     ]
-    expected = {"single-triangle", "many-draws", "resize", "ais-display-erase"}
+    expected = {
+        "single-triangle",
+        "many-draws",
+        "resize",
+        "ais-display-erase",
+        "ais-remove-display",
+    }
     if len(rows) != len(expected) or {row["workload"] for row in rows} != expected:
         raise ValueError(f"received workloads {rows}; expected {expected}")
     for row in rows:

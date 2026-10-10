@@ -1,4 +1,6 @@
 //! Explicit Vulkan runtime acceptance checks, separate from device-independent workspace tests.
+#[path = "support/ais_removal_runtime.rs"]
+mod ais_removal_runtime;
 #[path = "../tests/support/view_setup.rs"]
 mod view_setup;
 use martensite_vulkan::*;
@@ -41,7 +43,8 @@ fn main() {
     vulkan_layer_depth_policies();
     viewer_runtime::check_viewer_lifecycle();
     ais_runtime::check_ais_lifecycle();
-    println!("PASS: 5 Vulkan runtime checks; validation errors: 0");
+    ais_removal_runtime::check_ais_removal();
+    println!("PASS: 6 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {

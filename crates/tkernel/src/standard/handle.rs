@@ -6,6 +6,8 @@
 use super::{RuntimeType, RuntimeTyped, Transient};
 use std::{any::TypeId, marker::PhantomData, sync::Arc};
 mod casts;
+mod observer;
+pub use observer::HandleObserver;
 mod traits;
 mod view;
 mod weak;

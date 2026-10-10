@@ -128,3 +128,51 @@ fn real_interactive_triangle_activates_and_deactivates_its_sensitive_point() {
     assert_eq!(owner, scene.object.global_sel_owner());
     assert!(scene.context.display(&Handle::default(), false).is_ok());
 }
+#[test]
+fn removal_destroys_gpu_presentations_and_redisplay_recomputes_geometry() {
+    let (scene, device) = ais_setup();
+    scene.context.update_current_viewer();
+    let previous = device.frames.read().len();
+    scene.context.remove(&scene.object.cast(), true).unwrap();
+    // ClearGlobal tests status after resetting it: native Remove(true) does not redraw by itself.
+    assert_eq!(device.frames.read().len(), previous);
+    scene.view.redraw();
+    assert!(device.last_frame().draws().is_empty());
+    scene.context.display(&scene.object.cast(), true).unwrap();
+    assert_eq!(device.last_frame().draws().len(), 1);
+    assert_eq!(scene.object.computations.load(Ordering::Relaxed), 2);
+    assert!(
+        scene
+            .context
+            .selection_manager()
+            .is_activated(&scene.object.cast(), 0)
+            .unwrap()
+    );
+}
+#[test]
+fn bulk_lifecycle_updates_once_and_clear_prs_retains_selection_activation() {
+    let (scene, device) = ais_setup();
+    let before = device.frames.read().len();
+    scene.context.erase_all(true).unwrap();
+    assert_eq!(device.frames.read().len(), before + 1);
+    assert!(device.last_frame().draws().is_empty());
+    scene.context.display_all(true).unwrap();
+    assert_eq!(device.frames.read().len(), before + 2);
+    assert_eq!(device.last_frame().draws().len(), 1);
+    scene
+        .context
+        .clear_prs(&scene.object.cast(), 0, true)
+        .unwrap();
+    assert_eq!(device.frames.read().len(), before + 3);
+    assert!(device.last_frame().draws().is_empty());
+    assert!(
+        scene
+            .context
+            .selection_manager()
+            .is_activated(&scene.object.cast(), 0)
+            .unwrap()
+    );
+    scene.context.remove_all(true).unwrap();
+    assert_eq!(device.frames.read().len(), before + 4);
+    assert!(scene.context.fields.read().objects.is_empty());
+}
