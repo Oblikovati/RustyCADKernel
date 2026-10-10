@@ -38,6 +38,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    strict text raster parity and additional display modes remain partial.
    [AIS_Axis and labeled axis presentations](ais-axis.md) now add coordinate datums,
    native selection snapshots and inherited text-aspect rendering.
+   [Plane trihedrons](ais-plane-trihedron.md) now add labeled XY frames, child-owner
+   selection, native comparisons and geometry-update performance coverage.
    Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

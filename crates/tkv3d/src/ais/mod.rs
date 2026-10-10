@@ -85,3 +85,8 @@ mod axis_appearance;
 mod axis_geometry;
 mod axis_presentations;
 pub use axis::{AisAxis, AisTypeOfAxis};
+
+mod plane_trihedron;
+mod plane_trihedron_presentations;
+mod plane_trihedron_selection;
+pub use plane_trihedron::AisPlaneTrihedron;

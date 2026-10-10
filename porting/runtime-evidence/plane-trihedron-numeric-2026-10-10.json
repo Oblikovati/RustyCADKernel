@@ -1,0 +1,10 @@
+{
+  "toolkit": "TKV3d",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "comparisons": 151706,
+  "new_plane_requests": 210,
+  "status": "passed",
+  "noexcept_clear_failures": "native and Rust both abort",
+  "command": "CARGO_TARGET_DIR=$PWD/target/vulkan-harness python3 tools/verify_tkv3d_numeric.py --source ../OCCT --native-build ../RustyCADKernel/target/occt-all-full",
+  "scope": "Plane constructors, units, live geometry, retained child selection owners, selection clearing, appearance, labels and actual presentation buffers."
+}

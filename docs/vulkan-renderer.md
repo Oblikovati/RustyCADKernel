@@ -494,3 +494,8 @@ does not claim complete native text parity.
 [AIS axes and labeled presentations](ais-axis.md) add the native axis overloads,
 unblended font coverage, fixed font cutoff regression coverage, 138 more captures
 per device and an appearance-update benchmark retaining the label.
+
+The [plane trihedron slice](ais-plane-trihedron.md) adds live plane datums with
+independent arrow/text styles, fourteen capture modes and a release performance
+workload for changing geometry and redisplaying through AIS. Strict raster parity
+and unmatched timing baselines remain open; this adds presentation capability.

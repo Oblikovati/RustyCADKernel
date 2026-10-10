@@ -13,6 +13,10 @@ type ProbeCase = fn(&[f64]);
 /// operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_xyz_axis", v3_probe::ais_axis::xyz_axis_case),
+    (
+        "v3_plane_trihedron",
+        v3_probe::ais_plane_trihedron::plane_trihedron_case,
+    ),
     ("v3_ais_axis", v3_probe::ais_axis::ais_axis_case),
     ("v3_ais_point", v3_probe::ais_point::ais_point_case),
     (
