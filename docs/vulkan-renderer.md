@@ -449,7 +449,9 @@ The strict gate still requires identical RGBA and depth error at most `1e-6`.
 Lavapipe passes all 240 captures. Native AMD has 34 failed persistence captures:
 two have one differing edge pixel; common-color depth differences reach about
 `4.1e-6`. The two edge pixels also vary between native OpenGL drivers, but the
-remaining depth errors exceed that observed native range. Their cause is unresolved.
+remaining depth errors exceed that observed native range. Their cause was unresolved at this integration; the subsequent
+[raster precision diagnosis](vulkan-raster-precision.md) identifies different
+coordinate snapping and preserves the original gate.
 These failures remain visible in the default acceptance command; camera capability
 is partial and this change is not a complete native parity pass.
 

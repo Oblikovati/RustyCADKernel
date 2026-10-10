@@ -123,7 +123,8 @@ static void run_scene(int argc, char **argv) {
   occ::handle<V3d_Viewer> viewer = new V3d_Viewer(driver);
   auto view = create_view(display, viewer, width, height);
   configure_camera(view, width, height, perspective);
-  const std::string mode = argc == 7 ? argv[6] : "default";
+  const std::string mode = argc >= 7 ? argv[6] : "default";
+  const bool rasterControl = raster_control_option(argc, argv);
   if (mode.rfind("ais-", 0) == 0) {
     MartensiteOracleAisScene scene(viewer, offset);
     scene.transition(mode, view);
@@ -139,18 +140,20 @@ static void run_scene(int argc, char **argv) {
       group->AddPrimitiveArray(surface_vertices(mode));
     }
     if (mode.rfind("pers-", 0) == 0)
-      persistence_scene(structure, view, mode);
+      persistence_scene(structure, view, mode, rasterControl);
     write_capture(view, width, height, argv[5], mode == "full");
     print_device(view);
     structure->Erase();
   }
+  if (rasterControl)
+    std::cout << "MARTENSITE_RASTER_CONTROL=8\n";
   view->Remove();
 }
 int main(int argc, char **argv) {
-  if (argc != 6 && argc != 7) {
+  if (argc != 6 && argc != 7 && argc != 8) {
     std::cerr << "received " << argc
               << " arguments; expected width height perspective offset "
-                 "output-prefix [full]\n";
+                 "output-prefix [mode] [raster8]\n";
     return 2;
   }
   try {

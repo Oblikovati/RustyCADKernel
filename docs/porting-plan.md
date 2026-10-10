@@ -21,8 +21,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    now runs through V3d views and AIS display/erase presentations. AIS lifecycle,
    bulk and selected-object transitions, removal, status queries and per-view affinity
    have native comparisons. Structure/group transform persistence is integrated as
-   partial: resolve the 34 native AMD capture differences before claiming its parity
-   or accepting the new persistence timing baseline. Then continue presentation
+   partial. The 34 native AMD capture differences are traced to rasterizer precision
+   ([controlled evidence](vulkan-raster-precision.md)); retain the raw failures and
+   separate diagnostic gate before claiming bitwise parity or accepting its timing
+   baseline. Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

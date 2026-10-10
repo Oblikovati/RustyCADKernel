@@ -1,5 +1,6 @@
 // Camera persistence reference uses actual OpenGl_Structure and group state at
 // OCCT 3d097a0.
+#include "martensite_vulkan_raster_control.cxx"
 #include <Graphic3d_TransformPers.hxx>
 #include <Graphic3d_TransformPersScaledAbove.hxx>
 static occ::handle<Graphic3d_TransformPers>
@@ -39,12 +40,15 @@ persistence_mode(const std::string &mode) {
 }
 static void persistence_scene(const occ::handle<Graphic3d_Structure> &structure,
                               const occ::handle<V3d_View> &view,
-                              const std::string &mode) {
+                              const std::string &mode, bool rasterControl) {
   view->Camera()->SetEyeAndCenter(gp_Pnt(8, 6, 20), gp_Pnt(0, 0, 0));
   view->Camera()->SetAxialScale(gp_XYZ(1.5, 0.75, 1.25));
   structure->Clear();
   auto group = structure->NewGroup();
-  group->SetGroupPrimitivesAspect(unlit_aspects());
+  auto aspects = unlit_aspects();
+  if (rasterControl)
+    aspects->SetShaderProgram(raster_control_program(view));
+  group->SetGroupPrimitivesAspect(aspects);
   auto vertices = triangle_vertices();
   if (mode.find("camera") != std::string::npos) {
     const double z = mode.find("near") != std::string::npos  ? -0.5
