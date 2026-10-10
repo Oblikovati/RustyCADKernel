@@ -2,12 +2,6 @@
 use crate::{PrimitiveDraw, RenderError, error::rejected};
 use rustycad_tkservice::{aspect::AspectTypeOfHighlightMethod, graphic3d::*};
 pub(crate) fn validate_structure(structure: &Graphic3dCStructureFields) -> Result<(), RenderError> {
-    if !structure.clip_planes.is_null() {
-        return Err(rejected(
-            "structure clipping",
-            "an unclipped structure in this renderer slice",
-        ));
-    }
     let style = &structure.highlight_style;
     if structure.highlight
         && !style.is_null()

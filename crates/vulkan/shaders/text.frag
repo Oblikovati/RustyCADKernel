@@ -1,4 +1,7 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#define MARTENSITE_FRAGMENT
+#include "clipping.glsl"
 layout(location=0) in vec4 vertexColor;
 layout(location=1) in vec2 textureUV;
 layout(location=0) out vec4 outColor;
@@ -9,6 +12,10 @@ vec4 texel(ivec2 index) {
     return sprite.pixels[clipped.y * transform.width + clipped.x];
 }
 void main() {
+#ifdef MARTENSITE_CLIPPING
+    discardClippedFragment();
+#endif
+
     // FreeType atlases follow native linear sampling; texel centers are half-integers.
     vec2 coordinate = textureUV * vec2(transform.width, transform.height) - vec2(0.5);
     ivec2 origin = ivec2(floor(coordinate));

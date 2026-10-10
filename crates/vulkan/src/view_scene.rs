@@ -19,7 +19,16 @@ pub(crate) fn frame_for_view(
         .iter()
         .filter(|layer| layer_selected(view, layer.layer_id()));
     let passes = selected
-        .map(|layer| layer_pass(layer, &camera, view.identification(), extent, &rendering))
+        .map(|layer| {
+            layer_pass(
+                layer,
+                &camera,
+                view.identification(),
+                extent,
+                &rendering,
+                &view.clip_planes(),
+            )
+        })
         .collect::<Result<_, _>>()?;
     let color = view.cview_base().fields.read().bg_color;
     let clear = [
@@ -42,6 +51,7 @@ fn layer_pass(
     view_id: i32,
     extent: [u32; 2],
     rendering: &Graphic3dRenderingParams,
+    clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
 ) -> Result<RenderLayer, RenderError> {
     let settings = layer.layer_settings();
     validate_layer(layer.layer_id(), &settings)?;
@@ -54,6 +64,7 @@ fn layer_pass(
                 view_id,
                 extent,
                 rendering,
+                clipping,
             )?);
         }
     }
@@ -70,6 +81,7 @@ fn structure_draws(
     view_id: i32,
     extent: [u32; 2],
     rendering: &Graphic3dRenderingParams,
+    clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     if structure.is_null() {
         return Ok(vec![]);
@@ -78,7 +90,7 @@ fn structure_draws(
     retained
         .get()
         .ok_or_else(|| rejected(structure.object_address(), "a Martensite driver structure"))?
-        .draws(camera, view_id, extent, rendering)
+        .draws(camera, view_id, extent, rendering, clipping)
 }
 fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     let params = view.rendering_params();
@@ -99,10 +111,10 @@ fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> 
 }
 fn validate_view(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     validate_raster_params(view)?;
-    if view.camera().is_stereo() || !view.clip_planes().is_null() || view.computed_mode() {
+    if view.camera().is_stereo() || view.computed_mode() {
         return Err(rejected(
-            "stereo, clip planes or computed rendering",
-            "ordinary unclipped camera rendering in this slice",
+            "stereo or computed rendering",
+            "ordinary camera rendering in this slice",
         ));
     }
     if view.cview_base().fields.read().background_type != Graphic3dTypeOfBackground::None {

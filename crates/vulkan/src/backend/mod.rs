@@ -98,3 +98,5 @@ impl VulkanRenderer {
         resources.capture()
     }
 }
+
+mod storage_descriptor;

@@ -14,7 +14,8 @@ pub(super) struct UploadedDraw {
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
     pub annotation: bool,
-    pub sprite: Option<super::point_sprite::UploadedSprite>,
+    pub clipping: Option<super::storage_descriptor::UploadedStorage>,
+    pub sprite: Option<super::storage_descriptor::UploadedStorage>,
 }
 pub(super) struct FrameResources {
     pub extent: vk::Extent2D,
@@ -122,6 +123,7 @@ fn upload_draw(
         draw.textured_style
             .as_ref()
             .is_some_and(|style| style.blend),
+        draw.clipping.is_some(),
     )?;
     let image = draw
         .point_style
@@ -130,7 +132,7 @@ fn upload_draw(
         .or_else(|| draw.textured_style.as_ref().map(|s| &s.image));
     let sprite = image
         .map(|image| {
-            super::point_sprite::UploadedSprite::new(
+            super::point_sprite::upload_sprite(
                 runtime,
                 pipeline
                     .sprite_layout
@@ -140,7 +142,22 @@ fn upload_draw(
             )
         })
         .transpose()?;
+    let clipping = draw
+        .clipping
+        .as_ref()
+        .map(|clipping| {
+            super::storage_descriptor::UploadedStorage::new(
+                runtime,
+                pipeline
+                    .clipping_layout
+                    .as_ref()
+                    .expect("clipping pipeline layout"),
+                &clipping.encode(),
+            )
+        })
+        .transpose()?;
     Ok(UploadedDraw {
+        clipping,
         sprite,
         annotation: draw.annotation,
         pipeline,

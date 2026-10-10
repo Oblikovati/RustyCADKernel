@@ -81,21 +81,27 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
         "text.vert",
         "text.frag",
     ):
-        source = ROOT / f"crates/vulkan/shaders/{name}"
-        output = folder / f"{name}.spv"
-        compile_shader(source, output, env)
-        if output.read_bytes() != Path(f"{source}.spv").read_bytes():
-            raise ValueError(
-                f"received stale SPIR-V for {source}; expected current GLSL compiler output"
-            )
+        for clipped in (False, True):
+            source = ROOT / f"crates/vulkan/shaders/{name}"
+            stem, stage = name.split(".")
+            suffix = f"{stem}.clipped.{stage}.spv" if clipped else f"{name}.spv"
+            output = folder / suffix
+            compile_shader(source, output, env, clipped)
+            if output.read_bytes() != (source.parent / suffix).read_bytes():
+                raise ValueError(
+                    f"received stale SPIR-V for {suffix}; expected current GLSL compiler output"
+                )
     return run(["glslangValidator", "--version"], env)
 
 
-def compile_shader(source: Path, output: Path, env: dict[str, str]) -> None:
+def compile_shader(
+    source: Path, output: Path, env: dict[str, str], clipped: bool = False
+) -> None:
     """Compile a GLSL stage for the required runtime; e.g. compile_shader(vertex, spv, env)."""
     run(
         [
             "glslangValidator",
+            *(["-DMARTENSITE_CLIPPING=1"] if clipped else []),
             "--target-env",
             "vulkan1.3",
             "-V",

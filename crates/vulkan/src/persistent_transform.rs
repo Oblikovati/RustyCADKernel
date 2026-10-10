@@ -98,7 +98,10 @@ impl PersistentView {
     }
 }
 
-fn model_transform(group: &Graphic3dDrawGroup, structure: &Graphic3dCStructureFields) -> Mat4<f64> {
+pub(crate) fn model_transform(
+    group: &Graphic3dDrawGroup,
+    structure: &Graphic3dCStructureFields,
+) -> Mat4<f64> {
     let mut model = Mat4::<f64>::identity();
     let mut local = Mat4::<f64>::identity();
     if let Some(datum) = structure.trsf.get() {
