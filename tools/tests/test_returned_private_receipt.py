@@ -6,7 +6,7 @@ import copy
 import pathlib
 import unittest
 
-from api_inventory.inputs import read_object
+from api_inventory.inputs import digest, read_object
 from verify_returned_private_reachability import (
     DEFAULT_RECEIPT,
     ROOT,
@@ -36,6 +36,19 @@ class ReturnedReceiptTests(unittest.TestCase):
         self.assertEqual(result["returned_type_edges"], 7)
         self.assertFalse(result["coverage_credit"])
         self.assertFalse(result["api_denominator_complete"])
+
+    def test_portable_header_preserves_original_source_bytes(self) -> None:
+        original = read_object(
+            ROOT / "porting/audits/returned-private-type-extractor-v1.json"
+        )
+        header = self.receipt["attested_files"][0]
+        self.assertFalse(pathlib.Path(header["path"]).is_absolute())
+        self.assertEqual(
+            digest(ROOT / header["path"]), original["attested_files"][0]["sha256"]
+        )
+        self.assertEqual(
+            self.receipt["capture_source_root"], original["capture_source_root"]
+        )
 
     def test_changed_attested_hash_is_rejected(self) -> None:
         receipt = copy.deepcopy(self.receipt)

@@ -18,7 +18,7 @@ from api_inventory.inputs import (
 from api_inventory.merge import InventoryRecords, consume_event, verify_capture_summary
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RECEIPT = "porting/audits/returned-private-type-extractor-v1.json"
+DEFAULT_RECEIPT = "porting/audits/returned-private-type-extractor-v2.json"
 
 
 def read_capture(path: Path, source: Path, header: str) -> InventoryRecords:
