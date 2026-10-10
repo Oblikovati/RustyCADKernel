@@ -1,3 +1,12 @@
+## Project identity and work selection
+
+- Name this OCCT port **Martensite** in documentation and new code references to
+  the project. Keep OCCT names when identifying upstream APIs and provenance;
+  existing `rustycad-*` package identifiers remain valid until explicitly migrated.
+- When choosing or resuming porting work, follow the current priorities in
+  [docs/porting-plan.md](docs/porting-plan.md#current-priorities): visualization
+  and the Vulkan renderer take precedence over exchange-format expansion.
+
 ## Code style
 
 - Functions: 4-20 lines. Split if longer.

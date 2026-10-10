@@ -1,14 +1,43 @@
-# OCCT → Rust porting plan
+# Martensite porting plan
 
-Execution has reached TKMath. See [TKernel progress](tkernel-progress.md) and
-[TKMath progress](tkmath-progress.md) for mapped declarations, executable oracle
-evidence, and outstanding toolkit acceptance work.
+Martensite ports the defined OCCT scope to Rust. The
+[compiler inventory](../porting/api-inventory/README.md) records measured API
+coverage; toolkit notes and runtime receipts record behavioral evidence.
+
+## Current priorities
+
+User decision, 2026-10-10: prioritize visualization and the new Vulkan renderer
+above exchange-format porting. This execution order supersedes the earlier
+base-toolkit-first scheduling in `porting/base-toolkit-priority.json` and the
+original phase order below. Dependencies still need correct implementations;
+complete the particular prerequisite that blocks a visualization or renderer slice.
+
+1. Finish and integrate the current TKV3d AIS selection/highlighting work, including
+   camera-dependent selection, native comparisons and regression tests.
+2. Start Martensite's Vulkan renderer through the existing Graphic3d interfaces.
+   Match the legacy OCCT OpenGL renderer's capabilities using Vulkan 1.3; keep
+   additional renderer features outside the current scope. Build a tested offscreen
+   rendering path before broadening unrelated porting.
+   Advance TKService/TKV3d functionality needed by this path alongside it; Vulkan
+   work does not wait for every visualization API to be ported.
+3. Expand interactive visualization, presentations and TKMeshVS, and the DRAW
+   viewer commands needed to exercise them. Add renderer capabilities through
+   tested scenes and observable viewer workflows.
+4. Continue other dependency-ready porting after these priorities. Exchange-format
+   expansion (STEP, IGES, mesh formats and exchange wrappers) is lower priority;
+   address it earlier only when a concrete prioritized workflow needs it or an
+   existing regression needs repair. Preserve unfinished exchange work.
+
+See [visualization design](visualization-design.md#6-vulkan-implementation-sequence)
+for the renderer sequence and acceptance checks. Exchange formats remain in the
+API denominator. Reprioritization changes scheduling, not scope or proof standards.
 
 ## Objective and scope
 
-Port the entire pinned OCCT API and its observable behavior to Rust. Preserve all
-seven modules, including visualization, application framework, data exchange and
-DRAW tools. Translate upstream unit and regression tests 1:1 into Rust and use the
+Port the in-scope pinned OCCT API and its observable behavior to Martensite.
+Follow [scope.json](../porting/scope.json) for toolkit replacements and exclusions
+across visualization, application framework, data exchange and DRAW tools. Translate
+upstream unit and regression tests 1:1 into Rust and use the
 pinned C++ implementation as the behavioral oracle. Third-party C/C++ libraries
 used by OCCT may remain external dependencies; port their OCCT adapters and retain
 the capabilities they enable. Linking the OCCT kernel to provide a missing Rust
@@ -199,11 +228,12 @@ building only happy-path primitives before confronting boolean and healing contr
 **Exit:** all 14 toolkits have complete mappings and regression translations;
 shape validity, topology, tolerances, failure modes and deterministic behavior match.
 
-### Phase 4 — ApplicationFramework and DataExchange
+### ApplicationFramework and DataExchange — lower scheduling priority
 
 Once their dependencies are available, port documents, attributes, transactions,
-undo/redo, persistence and XCAF; then all exchange formats and wrappers. Work can
-proceed alongside remaining algorithms only when each required dependency passes.
+undo/redo and XCAF; then in-scope exchange formats and wrappers. Native OCCT
+persistence formats excluded by `scope.json` remain excluded. Schedule new exchange
+work according to the current priorities above, with verified dependencies.
 Cover assemblies, references, names, layers, materials, colors, units, versioning,
 malformed files and round trips in both directions.
 
@@ -211,19 +241,21 @@ malformed files and round trips in both directions.
 with the pinned OCCT readers and writers. Byte equality is required where contractual;
 otherwise use a documented semantic comparator without discarding meaningful data.
 
-### Phase 5 — Visualization and DRAW
+### Visualization, Vulkan and DRAW — current scheduling priority
 
-Start required test-facing commands early, then finish all services, display,
-selection and graphics backends. Reuse native OpenGL/GLES, FreeType, Tcl/Tk, VTK,
-platform and other external libraries where needed. Port OCCT integration behavior
-and all DRAW commands; a Rust test translation alone does not replace the DRAW API.
+Advance services, display, selection and the new Vulkan 1.3 renderer in bounded
+slices. Vulkan replaces the OCCT OpenGL/GLES drivers under the approved scope
+decision. Follow `scope.json` for other backend decisions, including undecided VTK
+integration. Use FreeType, Tcl/Tk and platform libraries behind project-owned
+interfaces where needed. Port in-scope OCCT integration behavior and DRAW commands;
+a Rust test translation alone does not replace the DRAW API.
 
 Use controlled rendering scenes and fixed camera, viewport, font, graphics driver
 and framebuffer settings. Compare selection and scene state exactly where possible;
 use explicitly reviewed image tolerances for raster variation. Cover headless and
 interactive/platform behavior in suitable environments.
 
-**Exit:** every backend/profile, public command and corresponding regression case
+**Exit:** every in-scope backend/profile, public command and corresponding regression case
 has passing evidence; no permanent graphics skips are hidden in completion totals.
 
 ### Phase 6 — full parity audit and release readiness
@@ -305,7 +337,7 @@ code and adding native dependencies. Translated TKernel implementation and test 
 the accompanying upstream license texts are under `licenses/`. The inventory also
 records paths and discovery metadata.
 
-Decisions fixed now: frozen upstream commit; all modules in scope; Rust 2024;
+Decisions fixed now: frozen upstream commit; toolkit scope in `scope.json`; Rust 2024;
 pinned stable tools; native third-party libraries may remain; no production OCCT
 fallback; API/test coverage distinct from line coverage; no premature math dependency.
 Representation choices, platform profile details and numeric substitutions are made

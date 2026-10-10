@@ -1,9 +1,17 @@
-# RustyCADKernel
+# Martensite
 
-A planned Rust port of **all OCCT modules**, preserving their API capabilities,
-functionality, and observable behavior. The OCCT source and its tests are the oracle.
+Martensite is a Rust port of OCCT, preserving the API capabilities, functionality,
+and observable behavior of the [defined scope](porting/scope.json). The OCCT source
+and its tests are the oracle.
 Third-party native libraries used by OCCT may remain dependencies; their implementations
-are outside the current port. OCCT's own functionality remains in scope.
+are outside the current port. Scope decisions identify replaced and excluded toolkits.
+
+The repository directory and existing `rustycad-*` Cargo package identifiers retain
+their current names; documentation and new code references call the port **Martensite**.
+
+**Current focus:** visualization and a Vulkan 1.3 renderer matching the legacy
+OCCT OpenGL renderer's capabilities. Exchange-format porting remains in scope at
+lower priority; see the [current priorities](docs/porting-plan.md#current-priorities).
 
 **Status:** Porting is in progress. The [compiler API inventory](porting/api-inventory/README.md)
 records C++ declarations, Rust API paths, exact mapping claims, configuration gaps,
@@ -69,12 +77,13 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tcl` | Project-owned thin binding to the Tcl/Tk 8.6 C API used by DRAW (hand-written declarations checked against the system headers, safe wrapper) |
 | `crates/tkdraw` | TKDraw, the DRAW test harness (Draw interpreter, variables, drawables, command groups; DBRep and DrawTrSurf), in progress |
 | `crates/tkservice` | TKService visualization services (Aspect, Image, Font, Graphic3d data model and driver interfaces, Media, Xw), in progress |
+| `crates/tkv3d` | Interactive visualization, presentations, cameras, selection and viewer APIs, in progress |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |
 | `.github/workflows/ci.yml` | Formatting, linting, tests, docs, coverage, dependency and inventory checks |
 
-Completion requires **100% OCCT API coverage and 1:1 upstream test translation**,
+Completion requires **100% of in-scope OCCT API coverage and 1:1 upstream test translation**,
 plus passing behavioral comparisons. Rust line coverage is a separate metric.
 The compiler inventory retains unresolved platform and declaration gaps. Runtime
 expansions and DRAW coverage must also be reconciled before declaring completion.

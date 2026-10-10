@@ -1,6 +1,6 @@
-# TKV3d design notes
+# Martensite TKV3d design notes
 
-This note fixes how the OCCT toolkit TKV3d maps to Rust (`crates/tkv3d`, `rustycad-tkv3d`:
+This note fixes how the OCCT toolkit TKV3d maps to Martensite (`crates/tkv3d`, `rustycad-tkv3d`:
 packages BRepFont, Select3D, SelectBasics, SelectMgr, Prs3d, StdPrs, StdSelect, DsgPrs, PrsDim,
 PrsMgr, AIS and V3d). The rules of [geom-design.md](geom-design.md) sections 1 to 4,
 [ocaf-design.md](ocaf-design.md) section 1 and [visualization-design.md](visualization-design.md)
@@ -15,8 +15,9 @@ name. Code comments and ledger notes cite this note as "v3d-design.md section N"
 `Handle<dyn Graphic3dStructureSource>`. Nothing in TKV3d talks to OpenGL: V3d and PrsMgr reach the
 graphic driver only through the TKService traits (`Graphic3dGraphicDriver`, `Graphic3dCView`,
 `Graphic3dCStructure`, `Graphic3dGroup`). The tests run on the TKService null driver
-(`rustycad_tkservice::null_driver::NullGraphicDriver`); the Vulkan 1.3 driver plugs in later
-behind the same traits.
+(`rustycad_tkservice::null_driver::NullGraphicDriver`); Martensite's new Vulkan 1.3 driver uses
+the same traits. Its [implementation sequence](visualization-design.md#6-vulkan-implementation-sequence)
+is active work under the current porting priorities.
 
 ## 2. Selecting volumes
 

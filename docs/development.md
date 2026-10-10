@@ -1,4 +1,9 @@
-# Development and testing
+# Martensite development and testing
+
+Use **Martensite** when naming this port in documentation, comments and new
+project-owned code references. Preserve OCCT identifiers for upstream traceability
+and existing `rustycad-*` package/module identifiers for working imports and commands.
+Choose new porting slices using the [current priorities](porting-plan.md#current-priorities).
 
 ## Reproducible environment
 

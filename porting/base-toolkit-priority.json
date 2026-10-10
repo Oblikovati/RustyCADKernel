@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
-  "priority": "Complete base toolkits in dependency order before new higher-level expansion. Finish bounded correctness fixes already in flight; preserve other experiments. Permit higher-toolkit work when it is a demonstrated prerequisite of an unmapped base-toolkit legacy test; do not weaken that test to avoid the dependency.",
+  "priority": "Historical base-toolkit ordering; current scheduling is defined by docs/porting-plan.md#current-priorities (user decision 2026-10-10). Prioritize visualization and the new Martensite Vulkan renderer over exchange-format expansion. Use this dependency list to resolve concrete prerequisites, not as a gate requiring all base toolkits to be complete first.",
   "ordered_toolkits": [
     {
       "toolkit": "TKernel",
@@ -139,5 +139,6 @@
       "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
       "gap": "A Rust trait adapter now dispatches Init and all native stream hooks over shared state, with a derived-class oracle. C++ ABI/vtable parity, platform-native streamsize/pos_type domains, and pointer-invalid native domains remain outside the bounded adapter. See porting/audits/array-stream-override-surface.md."
     }
-  ]
+  ],
+  "snapshot_status": "Historical audit: current_work, preserved_unfinished_work and next_confirmed_gaps below describe their recorded revisions, not the current checkout or task queue."
 }

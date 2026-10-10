@@ -1,6 +1,6 @@
-# Visualization design notes (TKService)
+# Martensite visualization design notes (TKService)
 
-This note fixes how the OCCT visualization base toolkit TKService maps to Rust
+This note fixes how the OCCT visualization base toolkit TKService maps to Martensite
 (`crates/tkservice`, `rustycad-tkservice`: packages Aspect, Image, Font, Graphic3d, Media, Xw,
 plus the platform packages WNT, Cocoa, Wasm and the GLSL package Shaders). The crate depends on
 TKernel and TKMath only, as the native EXTERNLIB does. The rules of
@@ -13,12 +13,15 @@ Code comments and ledger notes cite this note as "visualization-design.md sectio
 The user decisions (porting/scope.json, 2026-10-07): the visualization API (TKService, TKV3d,
 TKMeshVS) and DRAW are ported; the OpenGL drivers (TKOpenGl, TKOpenGles) are not. A new Rust
 Vulkan 1.3 graphic driver that follows the Oblikovati renderer takes TKOpenGl's place behind the
-Graphic3d driver interfaces.
+Graphic3d driver interfaces. The current renderer scope is capability parity with
+the pinned legacy OCCT OpenGL renderer, using Vulkan 1.3 for the implementation
+(user decision, 2026-10-10). Oblikovati supplies architectural guidance; its extra
+features do not expand Martensite's renderer scope.
 
 ## 1. The driver interfaces as Rust traits
 
 TKService is the data model and the abstract driver; TKOpenGl is the only native implementation.
-The Rust port keeps that split. Each abstract class is a trait with `Transient` as supertrait,
+Martensite keeps that split. Each abstract class is a trait with `Transient` as supertrait,
 implemented by a driver crate, plus an embedded base struct that holds the native non-virtual
 state and members:
 
@@ -41,12 +44,12 @@ uploads these byte buffers unchanged as vertex, index and draw-range buffers; th
 descriptions become `VkVertexInputAttributeDescription`s. Native probes compare the byte layout,
 stride and the values that `AddVertex`, `AddEdge` and `AddBound` write.
 
-The Vulkan 1.3 driver (a later crate, not this task) follows the Oblikovati renderer
+The new Martensite Vulkan 1.3 driver follows the Oblikovati renderer
 (`Oblikovati/renderer`, `architecture/core/08-renderer-vulkan.md`): draw-call-as-data (each group
 primitive array is one draw item with its aspects resolved), dynamic rendering, a layered back end
 with a null driver that records the draw stream for tests and an offscreen software-Vulkan target
 for image oracles (ADR-0014). The window surface comes from `Aspect_Window::NativeHandle` and
-`Aspect_DisplayConnection::GetDisplayAspect` (section 2, Xw). No driver code is in this crate;
+`Aspect_DisplayConnection::GetDisplayAspect` (section 2, Xw). Implement Vulkan in a separate driver crate;
 the tests of the driver-facing data model use named fake drivers (`RecordingGraphicDriver`).
 
 ## 2. Third-party libraries: thin project-owned wrappers
@@ -109,3 +112,56 @@ driver interfaces), Media (only the `HAVE_FFMPEG`-off code), Xw. Numeric parts g
 in `tools/oracle/tkservice_probe.cxx` and its Rust twin, for example the
 `Graphic3d_Camera` projection and orientation matrices and the `Graphic3d_ArrayOfPrimitives`
 buffer layout.
+
+## 6. Vulkan implementation sequence
+
+The [current priorities](porting-plan.md#current-priorities) make visualization and
+Vulkan active work. At this planning revision, Martensite has the Graphic3d driver
+interfaces and a null driver, but no Vulkan renderer crate. The sibling
+`Oblikovati/renderer` implementation and its
+`architecture/core/08-renderer-vulkan.md` are design references, not evidence of a
+working renderer in Martensite.
+
+First inventory the legacy renderer's observable capabilities and configurations
+from the pinned `TKOpenGl` implementation, `Graphic3d_RenderingParams`, driver/view
+interfaces and viewer regression cases. Track each capability with its native
+reference, Martensite implementation, applicable profiles, test scenes and evidence.
+The inventory must cover the full baseline, including capabilities beyond ordinary
+rasterization: legacy PBR/environment lighting, transparency modes, ray/path tracing,
+stereo, clipping, text/markers, custom shader behavior, offscreen capture and viewer
+lifecycle. This is a starting checklist, not a substitute for source enumeration.
+Vulkan 1.3 alone does not guarantee every required device feature; track capability
+checks and required fallbacks without silently dropping baseline functionality.
+
+Build these bounded slices, integrating each into `main` after its checks pass:
+
+1. **Graphic3d draw extraction.** Adapt structures, groups, primitive buffers,
+   aspects and camera state into a deterministic draw stream behind a
+   project-owned backend interface. Test actual Graphic3d submissions with a named
+   recording backend, including indexed bounds, transforms and visibility.
+2. **Offscreen Vulkan rendering.** Add a `martensite-vulkan` driver crate and a thin
+   wrapper around the chosen Vulkan binding. Query capabilities, create an
+   offscreen target, upload a Graphic3d triangle and draw with dynamic rendering.
+   Read back color and depth on software Vulkan; assert expected coverage, depth,
+   camera orientation and resource cleanup. Report missing runtime capabilities
+   explicitly; a recording-backend test does not establish rendering success.
+3. **Viewer integration.** Connect the driver to V3d view creation, redraw,
+   invalidation, resize and camera updates. Exercise AIS presentation and selection
+   highlighting through the same interfaces. Test visible state changes and
+   selection behavior separately so a rendered image cannot hide a picking error.
+4. **Interactive surfaces and CAD rendering.** Add window presentation, edges,
+   materials, lights, clipping, transparency and other required passes in tested
+   increments. Keep offscreen captures available for each pass and check platform
+   capability fallbacks with explicit evidence.
+5. **Close the legacy capability inventory.** Implement and verify remaining
+   baseline modes and configurations. The earlier slices are milestones, not a
+   reduced completion target. Additional features from Oblikovati or other
+   renderers remain outside the current scope.
+
+Keep Martensite's OCCT API parity evidence separate from acceptance evidence for
+this replacement renderer. Native comparisons validate scene, camera and selection
+contracts. Compare controlled legacy OpenGL and Vulkan renders for corresponding
+capabilities, using explicit image/depth tolerances for raster differences; combine
+these with deterministic draw-stream assertions and analytic checks. Record
+device/driver details with captures. Preserve user-visible capability and behavior
+through the Graphic3d interfaces while replacing OpenGL implementation internals. New renderer progress does not turn excluded OpenGL APIs into mapped APIs.
