@@ -1,4 +1,9 @@
 //! OCCT mathematical foundation types. Toolkit API and legacy-test acceptance remain in progress.
+/// Whether out-of-line OCCT matrix checks are enabled in this TKMath build.
+/// Consumers must read the dependency's profile because Cargo unifies features.
+/// Example: `let checked_matrices = rustycad_tkmath::OCCT_DEBUG_CHECKS;`.
+pub const OCCT_DEBUG_CHECKS: bool = cfg!(feature = "occt-debug-checks");
+
 pub mod bnd;
 pub mod bvh;
 pub mod cslib;
