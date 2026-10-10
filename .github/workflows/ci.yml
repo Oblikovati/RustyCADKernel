@@ -32,6 +32,19 @@ jobs:
           path: |
             target/lcov.info
             target/nextest/ci/junit.xml
+  vulkan-runtime:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers glslang-tools spirv-tools
+      - run: cargo test -p martensite-vulkan --all-targets --locked
+      - name: Select the installed software Vulkan ICD
+        run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+      - run: cargo run -p martensite-vulkan --example offscreen_acceptance --locked
+      - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.vert -o /tmp/unlit.vert.spv
+      - run: spirv-val --target-env vulkan1.3 crates/vulkan/shaders/unlit.vert.spv
+      - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.frag -o /tmp/unlit.frag.spv
+      - run: spirv-val --target-env vulkan1.3 crates/vulkan/shaders/unlit.frag.spv
   dependencies:
     runs-on: ubuntu-latest
     steps:

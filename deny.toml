@@ -7,6 +7,8 @@ yanked = "deny"
 [licenses]
 allow = ["MIT", "Apache-2.0 WITH LLVM-exception", "GPL-2.0-only"]
 confidence-threshold = 0.93
+# Ash loads the Vulkan driver through libloading; retain its ISC notice on distribution.
+exceptions = [{ name = "libloading", version = "0.8.9", allow = ["ISC"] }]
 
 [bans]
 multiple-versions = "warn"

@@ -12,12 +12,13 @@ base-toolkit-first scheduling in `porting/base-toolkit-priority.json` and the
 original phase order below. Dependencies still need correct implementations;
 complete the particular prerequisite that blocks a visualization or renderer slice.
 
-1. Finish and integrate the current TKV3d AIS selection/highlighting work, including
+1. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
    camera-dependent selection, native comparisons and regression tests.
-2. Start Martensite's Vulkan renderer through the existing Graphic3d interfaces.
+2. Continue Martensite's Vulkan renderer through the existing Graphic3d interfaces.
    Match the legacy OCCT OpenGL renderer's capabilities using Vulkan 1.3; keep
    additional renderer features outside the current scope. Build a tested offscreen
-   rendering path before broadening unrelated porting.
+   rendering path before broadening unrelated porting. The initial offscreen path
+   is implemented; connect it to V3d views next (see [current evidence](vulkan-renderer.md)).
    Advance TKService/TKV3d functionality needed by this path alongside it; Vulkan
    work does not wait for every visualization API to be ported.
 3. Expand interactive visualization, presentations and TKMeshVS, and the DRAW

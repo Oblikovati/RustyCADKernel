@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "completion": false,
+  "capabilities": [
+    {
+      "id": "opaque-triangles",
+      "status": "partial",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_PrimitiveArray.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Indexed/unindexed triangle buffers, live aspects, ordinary transforms; only unlit opaque solid styles. Six native camera captures plus CPU submission tests.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "camera",
+      "status": "partial",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Orthographic and perspective snapshots checked. Stereo, tiled/large-coordinate and persistent transforms remain pending.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "offscreen",
+      "status": "partial",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.cxx"
+      ],
+      "current_evidence_or_remaining_work": "RGBA8 and D32 readback, clear and LEQUAL depth tested. MSAA, HDR, tiled capture, sRGB, alternate formats remain pending.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "viewer-lifecycle",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_GraphicDriver.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Graphic3d driver factory, V3d redraw/resize/invalidation, AIS presentations and highlighting.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "surfaces",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Window.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Native window swapchains, platform lifetime, presentation and device/surface loss.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "primitives",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_PrimitiveArray.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Lines, points, strips, fans, normals, bound colors, edges, silhouettes, culling, polygon offsets and stencil.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "lighting-materials",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_ShaderManager.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Flat/Gouraud/Phong/PBR, light sets, materials and shadows.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "environment",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_PBREnvironment.cxx"
+      ],
+      "current_evidence_or_remaining_work": "PBR IBL, cubemaps, environment backgrounds and baking.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "textures-shaders",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_AspectsProgram.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Texture formats, samplers, UV transforms and custom shader contract.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "transparency",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_DepthPeeling.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Alpha mask/blend, sorted transparency, weighted OIT and depth peeling.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "clipping",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Clipping.cxx"
+      ],
+      "current_evidence_or_remaining_work": "View/structure clipping and capping, clip chains, section materials.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "text-markers",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Fonts, text placement/orientation, marker sprites and billboard behavior.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "layers-backgrounds",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_LayerList.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Z layers, priorities, depth clear/test/write policies, immediate passes and backgrounds.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "ray-path-tracing",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_View_Raytrace.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Legacy ray tracing, path tracing, GI, sampling, DOF and tone mapping.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "stereo-vr",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Stereo modes, anaglyph/interlaced output, external composer and HMD paths.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "statistics",
+      "status": "pending",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameStats.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Performance counters, HUD/chart, diagnostics and GPU memory reports.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    },
+    {
+      "id": "resource-lifecycle",
+      "status": "partial",
+      "upstream": [
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Resource.cxx"
+      ],
+      "current_evidence_or_remaining_work": "Owned Vulkan buffers/images/pipelines, repeated frame resize and invalid device tested; caching, sharing and context/device loss remain pending.",
+      "profiles": [
+        "baseline-supported configurations; cross-platform audit pending"
+      ]
+    }
+  ]
+}
