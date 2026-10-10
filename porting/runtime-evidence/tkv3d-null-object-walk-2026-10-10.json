@@ -1,0 +1,31 @@
+{
+  "scope": "Preserve a protected null object-map key during unfiltered ObjectsInside traversal; ClearPrs/ClearGlobalPrs(null) return before lookup even when the null key is registered.",
+  "native": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKV3d",
+    "cases_passed": 142542,
+    "input_sha256": "d714e917a19bd0afc26e1f1f2836c4f38ed491a98fb72beec76fec5b54eec4c0",
+    "output_sha256": "7a81c10228020f97382c150a444b261eedc31f02ba02a869b5b94ce7fb1a20b1",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0,
+    "shutdown_failure": {
+      "request": "v3_ais_context_shutdown 1 1 2",
+      "return_codes": {
+        "native": -6,
+        "rust": -6
+      }
+    }
+  },
+  "tkservice_tkv3d_tests_passed": 576,
+  "new_null_regression_tests": 2,
+  "clippy": "TKV3d all targets, -D warnings passed",
+  "source_sha256": {
+    "crates/tkv3d/src/ais/context_clear_prs.rs": "66ec37668e249af59e5e2e0d79c14590514edd7d4e63aac6670d3dea4907771c",
+    "crates/tkv3d/src/ais/context_object_walk.rs": "f7a8c51e7f893cfd5927dfa1fcb2f18250ea2e6e1cb7a26ded42787cc49389c0",
+    "crates/tkv3d/tests/ais_context_null_registration.rs": "45981ce91df0f7fc174b6c4798e68292d196ae1531ab7074f9c28a277223ae85",
+    "crates/tkv3d/examples/v3_probe/ais_lifecycle.rs": "5064919b01613b835ce5d7d02696fc5bc0ad8e0006acb0a6c09028faebd79a20",
+    "tools/oracle/tkv3d_probe_ais_lifecycle.cxx": "29b65642c90fda295db682b19b0f4cccc86819c4db923efb502f84be69195fde",
+    "tools/oracle/tkv3d_probe_ais_load.cxx": "0ed6a48dde96a4a52bb5324f729769b32969557fd1f52db4d370986fb2b5f8d6",
+    "tools/tkv3d_corpus_ais_lifecycle.py": "28955f43d4a83382479259d421d8ee9a393c091ffb2f4ba9951bac491158913b"
+  }
+}

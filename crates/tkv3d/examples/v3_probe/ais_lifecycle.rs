@@ -53,6 +53,7 @@ fn lifecycle_operation(
             index.is_multiple_of(2),
             display_state(d),
         )?,
+        62 => query_null_registration(scene)?,
         61 => scene.objects[index].expected_kind_references.store(
             object.transient_base().ref_count(),
             std::sync::atomic::Ordering::Relaxed,
@@ -125,4 +126,20 @@ fn align_object_order(scene: &mut LoadScene) -> Result<(), Failure> {
         .collect();
     scene.objects[..3].clone_from_slice(&ordered);
     Ok(())
+}
+
+fn query_null_registration(scene: &LoadScene) -> Result<(), Failure> {
+    scene
+        .ctx
+        .fields
+        .write()
+        .objects
+        .bind(Handle::default(), Handle::new(AisGlobalStatus::new()));
+    let result = (|| {
+        scene.ctx.clear_global_prs(&Handle::default(), 0, true)?;
+        scene.ctx.clear_prs(&Handle::default(), 0, true)?;
+        query_objects(scene, 56, [0, -1, 2, 0])
+    })();
+    scene.ctx.fields.write().objects.unbind(&Handle::default());
+    result
 }
