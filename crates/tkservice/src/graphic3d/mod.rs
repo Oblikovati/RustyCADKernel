@@ -299,3 +299,6 @@ pub use transform_pers_scaled::Graphic3dTransformPersScaledAbove;
 pub use transform_utils::Graphic3dTransformScalar;
 pub use view_affinity::Graphic3dViewAffinity;
 pub use z_layer_settings::Graphic3dZLayerSettings;
+
+mod retained_view;
+pub use retained_view::Graphic3dRetainedView;

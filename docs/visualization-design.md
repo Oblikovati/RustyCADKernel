@@ -119,7 +119,8 @@ The [current priorities](porting-plan.md#current-priorities) make visualization 
 Vulkan active work. Martensite now has the `martensite-vulkan` crate with tested
 Graphic3d triangle extraction and Vulkan 1.3 offscreen rendering. The
 [renderer implementation note](vulkan-renderer.md) records its current limits and
-reproducible acceptance checks. V3d driver/view integration remains the next slice. The sibling
+reproducible acceptance checks. V3d creation, redraw, resize and offscreen capture
+now use the driver; AIS rendering and native presentation are next. The sibling
 `Oblikovati/renderer` implementation and its
 `architecture/core/08-renderer-vulkan.md` are design references, not evidence of a
 working renderer in Martensite.

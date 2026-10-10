@@ -53,8 +53,12 @@ impl PipelineState {
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: depth_state(),
             blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(&BLEND),
-            dynamic: vk::PipelineDynamicStateCreateInfo::default()
-                .dynamic_states(&[vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR]),
+            dynamic: vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&[
+                vk::DynamicState::VIEWPORT,
+                vk::DynamicState::SCISSOR,
+                vk::DynamicState::DEPTH_TEST_ENABLE,
+                vk::DynamicState::DEPTH_WRITE_ENABLE,
+            ]),
         }
     }
     pub fn description<'a>(

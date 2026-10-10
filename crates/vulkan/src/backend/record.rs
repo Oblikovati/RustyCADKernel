@@ -9,9 +9,9 @@ pub(super) fn record_frame(
     frame: &RenderFrame,
 ) {
     transition_targets(runtime, command, resources, false);
-    begin_rendering(runtime, command, resources, frame.clear_color);
-    record_draws(runtime, command, resources);
-    unsafe { runtime.device().cmd_end_rendering(command) };
+    for (index, layer) in frame.layers.iter().enumerate() {
+        record_layer(runtime, command, resources, frame.clear_color, index, layer);
+    }
     transition_targets(runtime, command, resources, true);
     read_attachments(runtime, command, resources);
 }
@@ -80,9 +80,15 @@ fn begin_rendering(
     command: vk::CommandBuffer,
     resources: &FrameResources,
     clear: [f32; 4],
+    first: bool,
+    clear_depth: bool,
 ) {
-    let color = [render_attachment(resources.color.view, color_clear(clear))];
-    let depth = render_attachment(resources.depth.view, depth_clear());
+    let color = [render_attachment(
+        resources.color.view,
+        color_clear(clear),
+        first,
+    )];
+    let depth = render_attachment(resources.depth.view, depth_clear(), first || clear_depth);
     let area = vk::Rect2D {
         offset: vk::Offset2D::default(),
         extent: resources.extent,
@@ -114,7 +120,12 @@ fn set_viewport(runtime: &VulkanRuntime, command: vk::CommandBuffer, extent: vk:
         runtime.device().cmd_set_scissor(command, 0, &[area]);
     }
 }
-fn record_draws(runtime: &VulkanRuntime, command: vk::CommandBuffer, resources: &FrameResources) {
+fn record_draws(
+    runtime: &VulkanRuntime,
+    command: vk::CommandBuffer,
+    resources: &FrameResources,
+    range: std::ops::Range<usize>,
+) {
     let device = runtime.device();
     unsafe {
         device.cmd_bind_pipeline(
@@ -123,7 +134,7 @@ fn record_draws(runtime: &VulkanRuntime, command: vk::CommandBuffer, resources: 
             resources.pipeline.handle,
         )
     };
-    for draw in &resources.draws {
+    for draw in &resources.draws[range] {
         record_draw(runtime, command, resources.pipeline.layout, draw);
     }
 }
@@ -210,11 +221,16 @@ fn transition_targets(
 fn render_attachment(
     view: vk::ImageView,
     clear: vk::ClearValue,
+    reset: bool,
 ) -> vk::RenderingAttachmentInfo<'static> {
     vk::RenderingAttachmentInfo::default()
         .image_view(view)
         .image_layout(vk::ImageLayout::ATTACHMENT_OPTIMAL)
-        .load_op(vk::AttachmentLoadOp::CLEAR)
+        .load_op(if reset {
+            vk::AttachmentLoadOp::CLEAR
+        } else {
+            vk::AttachmentLoadOp::LOAD
+        })
         .store_op(vk::AttachmentStoreOp::STORE)
         .clear_value(clear)
 }
@@ -230,5 +246,61 @@ fn depth_clear() -> vk::ClearValue {
             depth: 1.,
             stencil: 0,
         },
+    }
+}
+
+fn record_layer(
+    runtime: &VulkanRuntime,
+    command: vk::CommandBuffer,
+    resources: &FrameResources,
+    clear: [f32; 4],
+    index: usize,
+    layer: &crate::RenderLayerSpan,
+) {
+    if index > 0 {
+        layer_dependency(runtime, command);
+    }
+    begin_rendering(
+        runtime,
+        command,
+        resources,
+        clear,
+        index == 0,
+        layer.clear_depth,
+    );
+    set_depth_policy(runtime, command, layer);
+    record_draws(runtime, command, resources, layer.draw_range.clone());
+    unsafe { runtime.device().cmd_end_rendering(command) };
+}
+fn layer_dependency(runtime: &VulkanRuntime, command: vk::CommandBuffer) {
+    let access =
+        vk::AccessFlags2::COLOR_ATTACHMENT_WRITE | vk::AccessFlags2::DEPTH_STENCIL_ATTACHMENT_WRITE;
+    let reads =
+        vk::AccessFlags2::COLOR_ATTACHMENT_READ | vk::AccessFlags2::DEPTH_STENCIL_ATTACHMENT_READ;
+    let barriers = [vk::MemoryBarrier2::default()
+        .src_stage_mask(vk::PipelineStageFlags2::ALL_GRAPHICS)
+        .src_access_mask(access)
+        .dst_stage_mask(vk::PipelineStageFlags2::ALL_GRAPHICS)
+        .dst_access_mask(access | reads)];
+    unsafe {
+        runtime.device().cmd_pipeline_barrier2(
+            command,
+            &vk::DependencyInfo::default().memory_barriers(&barriers),
+        )
+    };
+}
+
+fn set_depth_policy(
+    runtime: &VulkanRuntime,
+    command: vk::CommandBuffer,
+    layer: &crate::RenderLayerSpan,
+) {
+    unsafe {
+        runtime
+            .device()
+            .cmd_set_depth_test_enable(command, layer.depth_test);
+        runtime
+            .device()
+            .cmd_set_depth_write_enable(command, layer.depth_write);
     }
 }

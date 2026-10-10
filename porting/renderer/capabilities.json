@@ -9,7 +9,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_PrimitiveArray.cxx"
       ],
-      "current_evidence_or_remaining_work": "Indexed/unindexed triangle buffers, live aspects, ordinary transforms; only unlit opaque solid styles. Six native camera captures plus CPU submission tests.",
+      "current_evidence_or_remaining_work": "Indexed/unindexed triangle buffers, live aspects and ordinary transforms through Graphic3d factories; only unlit opaque solid styles. Twelve native viewer captures plus CPU submission and live Vulkan mutation tests. Both lavapipe and native RADV profiles retain PNG/depth captures and explicit device identity.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
@@ -31,18 +31,18 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.cxx"
       ],
-      "current_evidence_or_remaining_work": "RGBA8 and D32 readback, clear and LEQUAL depth tested. MSAA, HDR, tiled capture, sRGB, alternate formats remain pending.",
+      "current_evidence_or_remaining_work": "V3d ToPixMap reaches Vulkan through framebuffer targets; RGBA8 and D32 readback, RGB/red conversion and padded/bottom-up rows tested. MSAA, HDR, tiled capture, sRGB and alternate formats remain pending.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
     },
     {
       "id": "viewer-lifecycle",
-      "status": "pending",
+      "status": "partial",
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_GraphicDriver.cxx"
       ],
-      "current_evidence_or_remaining_work": "Graphic3d driver factory, V3d redraw/resize/invalidation, AIS presentations and highlighting.",
+      "current_evidence_or_remaining_work": "Graphic3d factories, V3d creation/redraw/resize, camera and geometry updates, visibility, erase, capture failure and removal tested. AIS rendering/highlighting, connected/shadow structures, subviews, cached immediate redraw and native presentation remain open.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
@@ -137,11 +137,11 @@
     },
     {
       "id": "layers-backgrounds",
-      "status": "pending",
+      "status": "partial",
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_LayerList.cxx"
       ],
-      "current_evidence_or_remaining_work": "Z layers, priorities, depth clear/test/write policies, immediate passes and backgrounds.",
+      "current_evidence_or_remaining_work": "Ordered normal/immediate layers, priorities and depth clear/test/write submitted to Vulkan; solid background, default/full native captures and custom depth-policy runtime assertions. Layer removal preserves structures. Gradient/image backgrounds, origin/culling and complete immediate-pass behavior remain open.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
@@ -185,7 +185,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_Resource.cxx"
       ],
-      "current_evidence_or_remaining_work": "Owned Vulkan buffers/images/pipelines, repeated frame resize and invalid device tested; caching, sharing and context/device loss remain pending.",
+      "current_evidence_or_remaining_work": "Owned Vulkan buffers/images/pipelines, repeated frame resize and invalid device tested; caching, sharing and context/device loss remain pending. Release benchmarks cover redraw, 256 draws and resize on software/native devices with compatible-baseline regression budgets; allocation caching and GPU-only timing remain open.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]

@@ -1,16 +1,14 @@
 //! Explicit Vulkan runtime acceptance checks, separate from device-independent workspace tests.
 use martensite_vulkan::*;
+#[path = "support/viewer_runtime.rs"]
+mod viewer_runtime;
 fn triangle(depth: f32, color: [f32; 4]) -> TriangleDraw {
     let vertices = [[-0.8, -0.8, depth], [0.8, -0.8, depth], [0., 0.8, depth]]
         .map(|p| RenderVertex::new(p, color));
     TriangleDraw::new(vertices.to_vec(), vec![0, 1, 2], identity_clip()).unwrap()
 }
 fn vulkan_offscreen_depth_orientation_and_repeated_resize() {
-    let mut renderer = VulkanRenderer::new(VulkanOptions {
-        validation: true,
-        ..Default::default()
-    })
-    .unwrap();
+    let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
     let front = triangle(-0.5, [1., 0., 0., 1.]);
     let back = triangle(0.5, [0., 1., 0., 1.]);
     for (width, height) in [(64, 64), (96, 48), (64, 64)] {
@@ -36,7 +34,9 @@ fn vulkan_rejects_unavailable_device() {
 fn main() {
     vulkan_offscreen_depth_orientation_and_repeated_resize();
     vulkan_rejects_unavailable_device();
-    println!("PASS: 2 Vulkan runtime checks; validation errors: 0");
+    vulkan_layer_depth_policies();
+    viewer_runtime::check_viewer_lifecycle();
+    println!("PASS: 4 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -53,9 +53,50 @@ fn check_capture(capture: &FrameCapture) {
 }
 
 fn check_validation(renderer: &VulkanRenderer) {
+    println!("MARTENSITE_DEVICE={}", renderer.device_name());
     assert!(
         renderer.validation_errors().is_empty(),
         "{:?}",
         renderer.validation_errors()
     );
 }
+
+fn vulkan_layer_depth_policies() {
+    let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
+    for (test, write, clear, color, depth) in [
+        (true, true, false, [255, 0, 0, 255], 0.25),
+        (false, true, false, [0, 255, 0, 255], 0.25),
+        (true, false, false, [0, 255, 0, 255], 0.75),
+        (true, true, true, [0, 255, 0, 255], 0.75),
+    ] {
+        let layers = vec![
+            RenderLayer::new(vec![triangle(-0.5, [1., 0., 0., 1.])], true, write, false),
+            RenderLayer::new(vec![triangle(0.5, [0., 1., 0., 1.])], test, true, clear),
+        ];
+        check_layer_capture(&mut renderer, layers, color, depth);
+    }
+    check_empty_depth_clear(&mut renderer);
+    check_validation(&renderer);
+}
+fn check_layer_capture(
+    renderer: &mut VulkanRenderer,
+    layers: Vec<RenderLayer>,
+    color: [u8; 4],
+    depth: f32,
+) {
+    let frame = RenderFrame::with_layers(64, 64, [0., 0., 1., 1.], layers).unwrap();
+    let capture = renderer.render(&frame).unwrap();
+    assert_eq!(capture.pixel(32, 32), Some(color));
+    assert!((capture.depth[32 * 64 + 32] - depth).abs() < 1e-6);
+}
+
+fn check_empty_depth_clear(renderer: &mut VulkanRenderer) {
+    let layers = vec![
+        RenderLayer::new(vec![triangle(-0.5, [1., 0., 0., 1.])], true, true, false),
+        RenderLayer::new(vec![], true, true, true),
+    ];
+    check_layer_capture(renderer, layers, [255, 0, 0, 255], 1.);
+}
+
+#[path = "support/device_options.rs"]
+mod device_options;
