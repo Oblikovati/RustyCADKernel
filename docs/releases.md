@@ -76,3 +76,45 @@ Creating these tools does not certify all kernel capabilities or publish a
 release. The application pin remains empty until the owner release passes.
 Track this work in
 [issue #3](https://github.com/Oblikovati/RustyCADKernel/issues/3).
+
+## Hosted runner prerequisites
+
+The formatting check uses `tools/check_rust_format.py` to check every workspace
+target with edition-specific, bounded rustfmt commands. Windows could not launch
+the original aggregate formatter command at `v0.1.0` (`os error 206`); batching
+preserves the full check while staying below the process argument limit.
+The Vulkan runtime and performance checks run under Xvfb with the lavapipe ICD,
+so native-window tests have an actual X server even on headless hosted runners.
+Neither workaround skips a test or relaxes a renderer comparison.
+
+The Linux workspace and coverage jobs install the Tcl/Tk and visualization
+development libraries explicitly. macOS uses Homebrew `tcl-tk@8` with local
+versioned pkg-config aliases, alongside FreeType and Fontconfig. This repairs the
+missing `tcl8.6` prerequisite observed in Dependabot run `38073783006`; it does not
+accept or merge the dependency update. Hosted verification of these fixes is pending.
+
+The oracle tool tests now use portable bounded evidence. The private-return
+receipt v2 replays the same compiler captures and an exact, hash-checked copy of
+the pinned upstream header, so CI does not require the capture host's absolute
+checkout path. The OSD interface receipt v2 uses the verified current TKernel
+rustdoc capture after an unrelated re-export changed its containing source file.
+The v1 receipts and all identity, visibility, and source-hash checks remain intact;
+these updates grant no additional API coverage.
+
+X11 window APIs, examples, and their tests are Linux-specific, matching the
+existing Xlib dependency and display implementation. Other window and offscreen
+checks remain enabled on macOS and Windows. The matrix completes every platform
+even when another fails, so a macOS failure no longer cancels Windows diagnostics.
+
+Windows Tcl/Tk prerequisites are built with MSVC from the pinned upstream 8.6.18
+commits in the workflow. The installer supplies matching import-library metadata
+and runtime DLL/library paths. The Tcl build script preserves native path-list
+separators, and header checks use Clang on Windows while retaining the positive
+and negative ABI checks. Tcl header tests pass locally; hosted Windows linking
+and execution remain a required release gate.
+
+The Windows cross-check also exposed C `long`/wide-character assumptions:
+FreeType point sizes now reject overflow before conversion, glyph comparisons
+preserve the native width, and Vulkan rejects an XID that cannot fit its ABI.
+Test fixtures encode Windows wide characters as UTF-16 and apply their existing
+platform guards consistently. No renderer parity threshold was relaxed.

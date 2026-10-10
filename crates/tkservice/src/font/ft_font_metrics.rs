@@ -210,6 +210,8 @@ impl FontFTFont {
         let Some(face) = face_rec(self.state.read().face) else {
             return 0;
         };
+        // FreeType uses C long, which is 32-bit on Windows and 64-bit on LP64 hosts.
+        #[allow(clippy::unnecessary_cast)]
         let own = face.num_glyphs as i32;
         if !include_fallback {
             return own;

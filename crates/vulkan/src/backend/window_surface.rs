@@ -44,9 +44,13 @@ impl WindowPresenter {
         drop(displays);
         let display = window.display_connection();
         let xlib = ash::khr::xlib_surface::Instance::new(&runtime.entry, &runtime.instance);
+        // Vulkan XIDs use C unsigned long; reject narrowing on LLP64 hosts.
+        #[allow(clippy::useless_conversion)]
+        let native_window = vk::Window::try_from(window.native_handle())
+            .map_err(|_| rejected(window.native_handle(), "an XID fitting C unsigned long"))?;
         let info = vk::XlibSurfaceCreateInfoKHR::default()
             .dpy(display.get_display_aspect() as *mut vk::Display)
-            .window(window.native_handle());
+            .window(native_window);
         let handle = unsafe { xlib.create_xlib_surface(&info, None) }
             .map_err(|e| vk_error("create Xlib Vulkan surface", e))?;
         let mut presenter = Self {

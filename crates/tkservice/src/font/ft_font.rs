@@ -267,7 +267,9 @@ fn configure_face(face: usize, path: &AsciiString, params: &FontFTFontParams) ->
         ]);
         return false;
     }
-    let point_size = FtLong::from(params.point_size) * 64;
+    let Some(point_size) = freetype_point_size(params.point_size) else {
+        return false;
+    };
     // SAFETY: an open face; FT_Set_Char_Size only reads the arguments.
     let error =
         unsafe { (api.FT_Set_Char_Size)(raw, 0, point_size, params.resolution, params.resolution) };
@@ -341,5 +343,25 @@ impl FontFTFont {
         state.load_flags = load_flags(params.font_hinting);
         state.face = face.take();
         true
+    }
+}
+
+// OCCT Font_FTFont::toFTPoints checks the platform FT_F26Dot6 range before scaling.
+fn freetype_point_size(point_size: u32) -> Option<FtLong> {
+    FtLong::try_from(u64::from(point_size) * 64).ok()
+}
+
+#[cfg(test)]
+mod point_size_tests {
+    use super::{FtLong, freetype_point_size};
+
+    #[test]
+    fn point_scale_respects_native_long_width() {
+        assert_eq!(freetype_point_size(12), Some(768));
+        let limit = ((FtLong::MAX as u64) / 64).min(u64::from(u32::MAX)) as u32;
+        assert!(freetype_point_size(limit).is_some());
+        if limit < u32::MAX {
+            assert_eq!(freetype_point_size(limit + 1), None);
+        }
     }
 }

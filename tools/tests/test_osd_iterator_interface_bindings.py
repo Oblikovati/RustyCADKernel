@@ -12,7 +12,7 @@ from verify_osd_iterator_interface import verify_binding, verify_rust_shape
 
 ROOT = Path(__file__).resolve().parents[2]
 # The original non-null contract receipt remains a historical snapshot.
-RECEIPT = "porting/audits/osd-universal-interface-bindings-v1.json"
+RECEIPT = "porting/audits/osd-universal-interface-bindings-v2.json"
 
 
 class OsdIteratorInterfaceBindingTests(unittest.TestCase):
@@ -77,9 +77,9 @@ class OsdIteratorInterfaceBindingTests(unittest.TestCase):
 
     def test_comparison_extension_cannot_claim_native_clone(self) -> None:
         binding = copy.deepcopy(self.bindings[4])
-        binding["rust"]["path"] = (
-            "rustycad_tkernel::osd::ParallelIteratorInterface::comparison_value"
-        )
+        binding["rust"][
+            "path"
+        ] = "rustycad_tkernel::osd::ParallelIteratorInterface::comparison_value"
         with self.assertRaisesRegex(ValueError, "scoped binding"):
             self.replay_one(binding)
 

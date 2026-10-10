@@ -299,7 +299,7 @@ impl FontFTFont {
         let font = self.font_for_glyph(glyph)?;
         let face = font.face(self);
         let record = face_rec(face).filter(|f| f.units_per_em != 0)?;
-        if i64::from(glyph.index()) >= record.num_glyphs {
+        if i128::from(glyph.index()) >= i128::from(record.num_glyphs) {
             return None;
         }
         decompose(face, glyph.index(), font.outline_flags(self), width_scale)

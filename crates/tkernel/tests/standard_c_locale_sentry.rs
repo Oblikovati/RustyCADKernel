@@ -1,6 +1,6 @@
+//! Runs locale mutation in a child process because `setlocale` changes process state.
 #![cfg(all(unix, not(target_os = "android")))]
 #![allow(unsafe_code)]
-//! Runs locale mutation in a child process because `setlocale` changes process state.
 
 use rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry;
 use rustycad_tkernel::standard::character::{is_alphabetic, upper_case};

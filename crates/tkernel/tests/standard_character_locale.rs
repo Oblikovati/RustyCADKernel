@@ -1,6 +1,6 @@
+//! Checks locale-sensitive parity in a child process so global `LC_CTYPE` changes cannot race.
 #![allow(unsafe_code)]
 #![cfg(unix)]
-//! Checks locale-sensitive parity in a child process so global `LC_CTYPE` changes cannot race.
 
 use rustycad_tkernel::standard::character::{
     is_alphabetic, is_alphanumeric, is_lower_case, is_printable, upper_case,

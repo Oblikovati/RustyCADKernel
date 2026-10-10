@@ -15,13 +15,50 @@ env:
 jobs:
   rust:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7.0.1
+      - name: Install Linux native prerequisites
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev
+      - name: Install macOS native prerequisites
+        if: runner.os == 'macOS'
+        run: |
+          brew install pkgconf tcl-tk@8 freetype fontconfig
+          tcl_prefix="$(brew --prefix tcl-tk@8)"
+          shim_dir="$RUNNER_TEMP/martensite-pkgconfig"
+          mkdir -p "$shim_dir"
+          for module in tcl tk; do
+            pc_file="$tcl_prefix/lib/pkgconfig/$module.pc"
+            if [ ! -f "$pc_file" ]; then pc_file="$tcl_prefix/lib/pkgconfig/${module}8.6.pc"; fi
+            cp "$pc_file" "$shim_dir/${module}8.6.pc"
+          done
+          echo "PKG_CONFIG_PATH=$shim_dir:$tcl_prefix/lib/pkgconfig" >> "$GITHUB_ENV"
+          echo "DYLD_LIBRARY_PATH=$tcl_prefix/lib:$(brew --prefix freetype)/lib:$(brew --prefix fontconfig)/lib" >> "$GITHUB_ENV"
+          PKG_CONFIG_PATH="$shim_dir:$tcl_prefix/lib/pkgconfig" pkg-config --modversion tcl8.6 tk8.6
+      - uses: actions/checkout@v7.0.1
+        if: runner.os == 'Windows'
+        with:
+          repository: tcltk/tcl
+          ref: 515167c897a7c8066abfbd71e8fe7bd8bf3569de # Tcl 8.6.18
+          path: target/tcl-source
+      - uses: actions/checkout@v7.0.1
+        if: runner.os == 'Windows'
+        with:
+          repository: tcltk/tk
+          ref: 6dbe68819aac4a22f6f7a143133ce26c5e8d2b05 # Tk 8.6.18
+          path: target/tk-source
+      - name: Install Windows Tcl/Tk prerequisites
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: tools/ci/install_windows_tcl.ps1
       - run: rustup show
-      - run: cargo fmt --all -- --check
+      - run: python3 tools/check_rust_format.py
       - run: cargo lint
       - run: cargo test-all
       - run: cargo doc --workspace --all-features --no-deps --locked
@@ -31,6 +68,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
+      - name: Install native coverage prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev
       - run: rustup show
       - run: cargo install cargo-nextest --version 0.9.146 --locked
       - run: cargo install cargo-llvm-cov --version 0.9.1 --locked
@@ -46,13 +87,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.1
-      - run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers glslang-tools spirv-tools
+      - run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers glslang-tools spirv-tools xvfb xauth
       - run: cargo test -p martensite-vulkan --all-targets --locked
       - name: Select the installed software Vulkan ICD
         run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
-      - run: cargo run -p martensite-vulkan --example offscreen_acceptance --locked
+      - run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example offscreen_acceptance --locked
       - name: Measure release renderer performance on lavapipe
-        run: cargo run -p martensite-vulkan --release --example renderer_performance --locked > target/renderer-performance.log
+        run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --release --example renderer_performance --locked > target/renderer-performance.log
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

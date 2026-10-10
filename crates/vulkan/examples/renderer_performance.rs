@@ -40,6 +40,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     text_performance::benchmark(&driver, warmup, samples);
     ais_axis_performance::benchmark(&driver, warmup, samples);
     plane_trihedron_performance::benchmark(&driver, warmup, samples);
+    #[cfg(target_os = "linux")]
     window_performance::benchmark(&driver, warmup, samples);
     ais_circle_performance::benchmark(&driver, warmup, samples);
     Ok(())
@@ -140,13 +141,17 @@ mod plane_scene;
 #[path = "support/plane_trihedron_performance.rs"]
 mod plane_trihedron_performance;
 
+#[cfg(target_os = "linux")]
 #[path = "support/native_window.rs"]
 mod native_window;
+#[cfg(target_os = "linux")]
 #[path = "support/window_performance.rs"]
 mod window_performance;
+#[cfg(target_os = "linux")]
 #[path = "support/window_scene.rs"]
 mod window_scene;
 
+#[cfg(target_os = "linux")]
 use ais_performance::ais_scene;
 
 #[path = "support/ais_circle_performance.rs"]

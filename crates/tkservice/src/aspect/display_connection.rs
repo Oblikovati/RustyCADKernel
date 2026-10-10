@@ -5,6 +5,7 @@
 //! named by `DISPLAY` (or the given name) through the Xlib wrapper and interns the
 //! `WM_DELETE_WINDOW` atom. On the other platforms the native `#else` branch only stores
 //! the given display address.
+#[cfg(target_os = "linux")]
 use super::exceptions::display_connection_definition_error;
 use super::{AspectFbConfig, AspectXAtom};
 use rustycad_tkernel::standard::{Failure, SharedState, StandardTransient};
