@@ -1,0 +1,60 @@
+{
+  "source_revision": "a7d62b154d1313ed5249160c4a7c799a8f698fe2",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "implementation_commit": "efb63a70d",
+  "merge_commit": "a7d62b154",
+  "api_declarations_added": 22,
+  "checks": {
+    "rust_tests_passed": 286,
+    "rust_test_targets": 33,
+    "clippy_warnings_denied": true,
+    "cargo_fmt": true,
+    "tool_tests_passed": 7,
+    "numeric_cases_passed": 135069,
+    "new_numeric_cases": 2254,
+    "legacy_native_passed": 1,
+    "legacy_rust_passed": 1
+  },
+  "native_report_sha256": "763a24998343ca31b1fdcd3f8fffb4ee03793bf1788552a0fdc383ce6bb295f4",
+  "verified_source_hash_count": 12594,
+  "numeric_report": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKV3d",
+    "cases_passed": 135069,
+    "input_sha256": "6f49478d13def7f0c58b09b7d3cf1dbf4e94b63989561641d9c4508c45d1bdf4",
+    "output_sha256": "31d6a3b004dc0bd0d109a72e6e113c263d63515a82aa95bcd68f9a86253929b3",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0,
+    "shutdown_failure": {
+      "request": "v3_ais_context_shutdown 1 1 2",
+      "return_codes": {
+        "native": -6,
+        "rust": -6
+      }
+    }
+  },
+  "removed_worktree": "/tmp/rustycad-selection-image",
+  "removed_branch": "porting/selection-image",
+  "removed_generated_artifacts": true,
+  "unfinished_worktree": "/tmp/rustycad-linked-slot-recovery",
+  "unfinished_branch": "porting/linked-slot-recovery",
+  "unfinished_compile_errors": 39,
+  "full_port_complete": false,
+  "scope_note": "All nine selection-image modes and ToPixMap; DisplaySensitive remains open. Source-bound native gate rerun on main; full workspace tests were not repeated for this TKV3d-only change.",
+  "inventory": {
+    "api_declarations": 76041,
+    "api_done": 51434,
+    "api_open": 23632,
+    "api_partial": 975,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "unresolved_ledger_rows": 0,
+  "inventory_snapshot_sha256": {
+    "porting/api-inventory/rust-api.json.gz": "5df3bb5f447ddd2b20dc97f4b29ce5abfd034681e783bc20ffd57c054206081e",
+    "porting/api-inventory/api-crosswalk.json.gz": "46fb09754c7dbeea9faed0366c5d65a8994343d7c20894d95d7aaf247e2609ed",
+    "porting/api-inventory/metrics.json": "719a2220ea7fed74552bf090501d3bd4c11733bec08334c205dae568c50a721b"
+  }
+}
