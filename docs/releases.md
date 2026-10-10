@@ -38,7 +38,8 @@ The command derives the package inventory from Cargo metadata. Cargo creates
 normalized archives. The command extracts them into a new temporary workspace,
 restores the packaged test support, adds local registry patches for the full
 package set, and runs all-target tests plus doctests with the owner lockfile
-in both default and all-feature configurations. No original crate path is used by that test workspace. Output appears
+in both default and all-feature configurations. No original crate path is used
+by that test workspace. Output appears
 under `target/releases/vX.Y.Z` only after those tests pass.
 
 Cargo packaging uses `--no-verify --exclude-lockfile` because the kernel's
@@ -46,7 +47,8 @@ sibling packages are not on crates.io. This does not omit verification: the
 separate extracted-workspace test is mandatory and uses the delivered owner
 lockfile. Test workspaces omit debug symbols to fit hosted-runner disk limits;
 debug assertions and optimization levels are unchanged. Incremental caches are
-disabled, and each feature profile clears only its private target directory. An individual crate archive is not a standalone installation of the
+disabled, and each feature profile clears only its private target directory. An
+individual crate archive is not a standalone installation of the
 full kernel or its oracle corpus.
 
 Run tool tests with:
@@ -56,7 +58,8 @@ python3 tools/run_tool_tests.py --jobs 2 --pattern 'test_release_*.py'
 ```
 
 Python 3.12 or later is required. Linux native prerequisites include pkg-config,
-Tcl/Tk 8.6 development files, FreeType, Fontconfig, X11, and the Vulkan loader and
+Tcl/Tk 8.6 development files, FreeType, Fontconfig, X11, and the Vulkan loader
+and
 software driver. The workflow installs them before the archive tests.
 
 ## Publication
@@ -65,9 +68,11 @@ software driver. The workflow installs them before the archive tests.
 It requires the complete reusable kernel CI workflow first, then packages and
 tests the extracted files. Only the final publication job has write permission.
 It verifies checksums, creates a draft with all assets, and publishes the draft
-as a stable release. An existing release causes an error; assets are not replaced.
+as a stable release. An existing release causes an error; assets are not
+replaced.
 A failed native, oracle, package, or documentation check prevents publication.
 
 Creating these tools does not certify all kernel capabilities or publish a
 release. The application pin remains empty until the owner release passes.
-Track this work in [issue #3](https://github.com/Oblikovati/RustyCADKernel/issues/3).
+Track this work in
+[issue #3](https://github.com/Oblikovati/RustyCADKernel/issues/3).
