@@ -3,7 +3,7 @@ import fcntl
 import tempfile
 import unittest
 from pathlib import Path
-from native_build import lock_path, locked_cmake
+from native_build import lock_path, locked_cmake, NATIVE_BUILD_TIMEOUT_SECONDS
 
 
 class RecordingCmakeRunner:
@@ -12,9 +12,11 @@ class RecordingCmakeRunner:
     def __init__(self, build: Path):
         self.lock = lock_path(build)
         self.calls: list[tuple[list[str], bool]] = []
+        self.timeouts: list[int | None] = []
 
-    def __call__(self, args, log, *, env=None):
+    def __call__(self, args, log, *, env=None, timeout=None):
         self.calls.append(([str(a) for a in args], self.lock_is_held()))
+        self.timeouts.append(timeout)
         return ''
 
     def lock_is_held(self) -> bool:
@@ -43,6 +45,8 @@ class LockedCmakeTests(unittest.TestCase):
             self.assertEqual(configure, (['cmake', '-S', str(root/'src'), '-B', str(real), '-DX=1'], True))
             self.assertEqual(build, (['cmake', '--build', str(real), '--target', 'TKernel', 'gtest_main', '--parallel', '4'], True))
             self.assertFalse(runner.lock_is_held())
+            self.assertEqual(runner.timeouts, [None, NATIVE_BUILD_TIMEOUT_SECONDS])
+            self.assertGreater(NATIVE_BUILD_TIMEOUT_SECONDS, 900)
 
     def test_lock_file_sits_beside_the_build(self):
         self.assertEqual(lock_path(Path('/b/occt-tkernel-full')), Path('/b/.occt-tkernel-full.lock'))

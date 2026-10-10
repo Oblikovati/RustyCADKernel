@@ -19,6 +19,10 @@ from typing import Callable
 
 Runner = Callable[..., str]
 
+# The clean geometry closure exceeded 900s on the two-core hosted runner in
+# Actions run 38077155403. This build guard is separate from test process limits.
+NATIVE_BUILD_TIMEOUT_SECONDS = 3600
+
 # Toolkits the shared oracle closure builds beyond FoundationClasses (with their
 # dependencies). TKPrim is here because unchanged TKBRep suites (TopExp_Test) build their
 # shapes with BRepPrimAPI_MakeBox; TKHelix and TKShHealing for their own suites and
@@ -138,5 +142,5 @@ def locked_cmake(source: Path, build: Path, flags: list[str], targets: list[str]
         fcntl.flock(lock, fcntl.LOCK_EX)
         run(['cmake', '-S', source, '-B', canonical, *flags], configure_log, env=env)
         run(['cmake', '--build', canonical, '--target', *targets, '--parallel', jobs],
-            build_log, env=env)
+            build_log, env=env, timeout=NATIVE_BUILD_TIMEOUT_SECONDS)
     return canonical
