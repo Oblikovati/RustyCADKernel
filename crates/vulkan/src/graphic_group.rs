@@ -7,10 +7,12 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::Axis2;
 use rustycad_tkservice::graphic3d::*;
+use std::sync::Arc;
 #[derive(Clone)]
 enum GroupCommand {
     Aspects(Handle<dyn Graphic3dAspectsSource>),
     Primitives(PrimitiveSubmission),
+    Text(Handle<Graphic3dText>),
 }
 #[derive(Default)]
 struct GroupSubmissionState {
@@ -23,15 +25,24 @@ pub struct Graphic3dDrawGroup {
     transient: StandardTransient,
     base: Graphic3dGroupBase,
     submissions: SharedState<GroupSubmissionState>,
+    text_source: Arc<dyn crate::TextLayoutSource>,
 }
 rustycad_tkernel::impl_transient!(Graphic3dDrawGroup,"Martensite_Graphic3dDrawGroup",StandardTransient,transient,interfaces:[dyn Graphic3dGroup]);
 impl Graphic3dDrawGroup {
     /// Attach to a live Graphic3d structure; `Graphic3dDrawGroup::new(&structure)`.
     pub fn new(structure: &Handle<dyn Graphic3dStructureSource>) -> Handle<Self> {
+        Self::with_text_source(structure, Arc::new(crate::FreeTypeTextSource::default()))
+    }
+    /// Inject font I/O and layout; `Graphic3dDrawGroup::with_text_source(&structure, fonts)`.
+    pub fn with_text_source(
+        structure: &Handle<dyn Graphic3dStructureSource>,
+        text_source: Arc<dyn crate::TextLayoutSource>,
+    ) -> Handle<Self> {
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dGroupBase::new(structure),
             submissions: SharedState::default(),
+            text_source,
         })
     }
     /// Extract visible primitives using current styles, buffers and camera; `group.primitive_draws(&camera)?`.
@@ -51,6 +62,7 @@ impl Graphic3dDrawGroup {
                 .cstructure_base()
                 .fields
                 .read(),
+            &Graphic3dRenderingParams::new().expect("default rendering parameters"),
         )
     }
     /// Extract using the actual pixel viewport, including persistence; `group.primitive_draws_for_view(&camera, [800, 600])?`.
@@ -71,6 +83,7 @@ impl Graphic3dDrawGroup {
                 .cstructure_base()
                 .fields
                 .read(),
+            &Graphic3dRenderingParams::new().expect("default rendering parameters"),
         )
     }
     /// Compatibility extraction name; `group.triangle_draws(&camera)?` also supports line primitives.
@@ -93,11 +106,20 @@ impl Graphic3dDrawGroup {
         camera: &Graphic3dCamera,
         extent: Option<[u32; 2]>,
         structure: &Graphic3dCStructureFields,
+        rendering: &Graphic3dRenderingParams,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         crate::highlight_style::validate_structure(structure)?;
         let (matrix, depth_clamp) =
             crate::persistent_transform::group_clip_transform(self, camera, extent, structure)?;
-        let mut draws = self.extract_commands(matrix, structure.highlight)?;
+        let context = crate::text_submission::TextSceneContext {
+            group: self,
+            camera,
+            extent,
+            structure,
+            rendering,
+            fonts: self.text_source.as_ref(),
+        };
+        let mut draws = self.extract_commands(matrix, structure.highlight, &context)?;
         for draw in &mut draws {
             draw.depth_clamp = depth_clamp;
             crate::highlight_style::apply_highlight(draw, structure)?;
@@ -108,12 +130,14 @@ impl Graphic3dDrawGroup {
         &self,
         matrix: [f32; 16],
         highlighted: bool,
+        context: &crate::text_submission::TextSceneContext<'_>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         let (mut aspects, commands) = self.retained_commands()?;
         let mut draws = Vec::new();
         for command in commands {
             match command {
                 GroupCommand::Aspects(style) => aspects = style,
+                GroupCommand::Text(text) => draws.extend(context.draws(&text, &aspects)?),
                 GroupCommand::Primitives(primitive) => draws.extend(lower_styled_primitive(
                     &primitive,
                     &aspects,
@@ -216,8 +240,19 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
             evaluate_bounds,
         );
     }
-    fn add_text(&self, _: &Handle<Graphic3dText>, _: bool) {
-        self.submissions.write().unsupported = Some("text");
+    fn add_text(&self, text: &Handle<Graphic3dText>, evaluate_bounds: bool) {
+        if self.is_deleted() || text.is_null() {
+            return;
+        }
+        // OpenGl_Group::AddText mutates undersized text to the driver's default height.
+        if text.height() < 2. {
+            text.set_height(16.);
+        }
+        self.submissions
+            .write()
+            .commands
+            .push(GroupCommand::Text(text.clone()));
+        self.record_text_bounds(text, evaluate_bounds);
     }
     fn set_stencil_test_options(&self, enabled: bool) {
         if enabled {

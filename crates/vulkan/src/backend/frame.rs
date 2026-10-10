@@ -13,6 +13,7 @@ pub(super) struct UploadedDraw {
     pub transform: Vec<u8>,
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
+    pub annotation: bool,
     pub sprite: Option<super::point_sprite::UploadedSprite>,
 }
 pub(super) struct FrameResources {
@@ -100,6 +101,13 @@ fn upload_draw(
             .lines
             .validate(line, runtime.limits.line_width_range)?;
     }
+    if let Some(style) = &draw.point_style {
+        super::point_sprite::validate_point_size(
+            style.size,
+            runtime.large_points,
+            runtime.limits.point_size_range,
+        )?;
+    }
     let vertices = encode_vertices(draw);
     let indices: Vec<u8> = draw.indices.iter().flat_map(|i| i.to_ne_bytes()).collect();
     let vertex_buffer = upload_bytes(runtime, &vertices, vk::BufferUsageFlags::VERTEX_BUFFER)?;
@@ -110,23 +118,28 @@ fn upload_draw(
         draw.depth_clamp,
         draw.line_style.is_some(),
         draw.point_style.is_some(),
+        draw.textured_style.is_some(),
     )?;
-    let sprite = draw
+    let image = draw
         .point_style
         .as_ref()
-        .map(|style| {
+        .map(|s| &s.image)
+        .or_else(|| draw.textured_style.as_ref().map(|s| &s.image));
+    let sprite = image
+        .map(|image| {
             super::point_sprite::UploadedSprite::new(
                 runtime,
                 pipeline
                     .sprite_layout
                     .as_ref()
-                    .expect("point pipeline layout"),
-                style,
+                    .expect("sprite pipeline layout"),
+                image,
             )
         })
         .transpose()?;
     Ok(UploadedDraw {
         sprite,
+        annotation: draw.annotation,
         pipeline,
         vertices: vertex_buffer,
         indices: index_buffer,
@@ -147,11 +160,20 @@ fn upload_bytes(
 }
 
 fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
-    draw.vertices
-        .iter()
-        .flat_map(|v| v.position.iter().chain(&v.color))
-        .flat_map(|value| value.to_ne_bytes())
-        .collect()
+    let mut bytes = Vec::new();
+    for (index, vertex) in draw.vertices.iter().enumerate() {
+        bytes.extend(
+            vertex
+                .position
+                .iter()
+                .chain(&vertex.color)
+                .flat_map(|v| v.to_ne_bytes()),
+        );
+        if let Some(style) = &draw.textured_style {
+            bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
+        }
+    }
+    bytes
 }
 
 fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
@@ -171,7 +193,12 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
     }
     if let Some(style) = &draw.point_style {
         bytes.extend(style.size.to_ne_bytes());
-        bytes.extend(style.extent.into_iter().flat_map(|v| v.to_ne_bytes()));
+        bytes.extend(style.image.extent.into_iter().flat_map(|v| v.to_ne_bytes()));
+        bytes.extend(0u32.to_ne_bytes());
+    }
+    if let Some(style) = &draw.textured_style {
+        bytes.extend(style.image.extent.iter().flat_map(|v| v.to_ne_bytes()));
+        bytes.extend(style.alpha_cutoff.to_ne_bytes());
         bytes.extend(0u32.to_ne_bytes());
     }
     bytes

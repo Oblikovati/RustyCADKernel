@@ -124,10 +124,11 @@ fn record_draws(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     resources: &FrameResources,
-    range: std::ops::Range<usize>,
+    layer: &crate::RenderLayerSpan,
 ) {
     let mut state = super::draw_state::DrawState::default();
-    for draw in &resources.draws[range] {
+    let mut annotation = false;
+    for draw in &resources.draws[layer.draw_range.clone()] {
         let (bind, push) = state.advance(draw.pipeline.handle, &draw.transform);
         if bind {
             unsafe {
@@ -137,6 +138,14 @@ fn record_draws(
                     draw.pipeline.handle,
                 )
             };
+        }
+        if annotation != draw.annotation {
+            annotation = draw.annotation;
+            unsafe {
+                runtime
+                    .device()
+                    .cmd_set_depth_test_enable(command, layer.depth_test && !annotation);
+            }
         }
         record_draw(runtime, command, draw, push);
     }
@@ -281,7 +290,7 @@ fn record_layer(
         layer.clear_depth,
     );
     set_depth_policy(runtime, command, layer);
-    record_draws(runtime, command, resources, layer.draw_range.clone());
+    record_draws(runtime, command, resources, layer);
     unsafe { runtime.device().cmd_end_rendering(command) };
 }
 fn layer_dependency(runtime: &VulkanRuntime, command: vk::CommandBuffer) {

@@ -485,3 +485,8 @@ Built-in [AIS point datums and sprites](ais-point.md) add standard/user markers,
 selection, detection and one-draw batching of 1,024 points. The 582-case matrix
 retains point raster/color differences as failures. The new `point-sprites`
 release benchmark accompanies the functional fixtures on both devices.
+
+[Retained Vulkan text](vulkan-text.md) adds FreeType glyph atlases, billboard and
+oriented labels, annotation depth policy, 108 captures per device and a 1,024-glyph
+performance workload. Strict text capture differences remain visible; this slice
+does not claim complete native text parity.

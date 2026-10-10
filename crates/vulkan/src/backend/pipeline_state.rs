@@ -5,7 +5,7 @@ const BINDINGS: [vk::VertexInputBindingDescription; 1] = [vk::VertexInputBinding
     stride: 28,
     input_rate: vk::VertexInputRate::VERTEX,
 }];
-const ATTRIBUTES: [vk::VertexInputAttributeDescription; 2] = [
+const ATTRIBUTES: [vk::VertexInputAttributeDescription; 3] = [
     vk::VertexInputAttributeDescription {
         location: 0,
         binding: 0,
@@ -17,6 +17,12 @@ const ATTRIBUTES: [vk::VertexInputAttributeDescription; 2] = [
         binding: 0,
         format: vk::Format::R32G32B32A32_SFLOAT,
         offset: 12,
+    },
+    vk::VertexInputAttributeDescription {
+        location: 2,
+        binding: 0,
+        format: vk::Format::R32G32_SFLOAT,
+        offset: 28,
     },
 ];
 const BLEND: [vk::PipelineColorBlendAttachmentState; 1] = [vk::PipelineColorBlendAttachmentState {
@@ -51,9 +57,9 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
-    pub fn new(depth_clamp: bool, line: bool, point: bool) -> Self {
+    pub fn new(depth_clamp: bool, line: bool, point: bool, text: bool) -> Self {
         Self {
-            vertex: vertex_state(),
+            vertex: vertex_state(text),
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
                 vk::PrimitiveTopology::POINT_LIST
             } else if line {
@@ -68,7 +74,7 @@ impl PipelineState {
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: depth_state(),
-            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(if point {
+            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(if point || text {
                 &POINT_BLEND
             } else {
                 &BLEND
@@ -95,10 +101,16 @@ impl PipelineState {
             .layout(layout)
     }
 }
-fn vertex_state() -> vk::PipelineVertexInputStateCreateInfo<'static> {
+fn vertex_state(text: bool) -> vk::PipelineVertexInputStateCreateInfo<'static> {
+    const TEXT_BINDING: [vk::VertexInputBindingDescription; 1] =
+        [vk::VertexInputBindingDescription {
+            binding: 0,
+            stride: 36,
+            input_rate: vk::VertexInputRate::VERTEX,
+        }];
     vk::PipelineVertexInputStateCreateInfo::default()
-        .vertex_binding_descriptions(&BINDINGS)
-        .vertex_attribute_descriptions(&ATTRIBUTES)
+        .vertex_binding_descriptions(if text { &TEXT_BINDING } else { &BINDINGS })
+        .vertex_attribute_descriptions(&ATTRIBUTES[..if text { 3 } else { 2 }])
 }
 pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
     vk::PipelineRasterizationStateCreateInfo::default()

@@ -19,13 +19,44 @@ pub(crate) fn group_clip_transform(
     if parent.is_null() && local.is_null() {
         return Ok((ordinary_clip(camera, model), false));
     }
+    let transform = persistent_view(camera, model, parent, &local, extent)?;
+    let clamp = !parent.is_null() && parent.mode() == Graphic3dTransModeFlags::CAMERA_PERS;
+    Ok((transform.clip_matrix(), clamp))
+}
+fn persistent_view(
+    camera: &Graphic3dCamera,
+    model: Mat4<f64>,
+    parent: &Handle<dyn Graphic3dTransformPersSource>,
+    local: &Handle<dyn Graphic3dTransformPersSource>,
+    extent: Option<[u32; 2]>,
+) -> Result<PersistentView, RenderError> {
     let mut transform = PersistentView::new(camera, model);
     let extent = viewport_size(extent)?;
     transform.apply(parent, extent, None)?;
-    let anchor = local_anchor(&local, &mut transform.model)?;
-    transform.apply(&local, extent, anchor.as_ref())?;
-    let clamp = !parent.is_null() && parent.mode() == Graphic3dTransModeFlags::CAMERA_PERS;
-    Ok((transform.clip_matrix(), clamp))
+    let anchor = local_anchor(local, &mut transform.model)?;
+    transform.apply(local, extent, anchor.as_ref())?;
+    Ok(transform)
+}
+pub(crate) fn text_matrices(
+    group: &Graphic3dDrawGroup,
+    camera: &Graphic3dCamera,
+    extent: [u32; 2],
+    structure: &Graphic3dCStructureFields,
+) -> Result<(Mat4<f64>, Mat4<f64>), RenderError> {
+    let model = model_transform(group, structure);
+    let parent = &structure.trsf_pers;
+    let local = group.transform_persistence();
+    if parent.is_null() && local.is_null() {
+        return Ok((
+            camera.projection_matrix(),
+            camera.orientation_matrix() * model,
+        ));
+    }
+    let transform = persistent_view(camera, model, parent, &local, Some(extent))?;
+    Ok((
+        Mat4::from_other(&transform.projection),
+        Mat4::from_other(&(transform.world_view * transform.model)),
+    ))
 }
 struct PersistentView {
     camera: Handle<Graphic3dCamera>,

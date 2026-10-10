@@ -2,38 +2,30 @@
 use crate::{RenderError, error::rejected};
 use rustycad_tkernel::{ncollection::Vec4, standard::Handle};
 use rustycad_tkservice::{aspect::AspectTypeOfMarker, graphic3d::*, image::ImagePixMap};
-use std::sync::Arc;
 /// Immutable nearest-sampled marker pixels; `PointStyle::new(3., [1,1], vec![[1.;4]])?`.
 #[derive(Clone, Debug, PartialEq)]
 pub struct PointStyle {
     pub(crate) size: f32,
-    pub(crate) extent: [u32; 2],
-    pub(crate) pixels: Arc<Vec<[f32; 4]>>,
+    pub(crate) image: crate::RasterImage,
 }
 impl PointStyle {
     /// Validate size and RGBA sprite shape before GPU work; `PointStyle::new(1., [1,1], vec![[1.;4]])?`.
     pub fn new(size: f32, extent: [u32; 2], pixels: Vec<[f32; 4]>) -> Result<Self, RenderError> {
-        let count = u64::from(extent[0]) * u64::from(extent[1]);
-        if !size.is_finite() || size <= 0. || extent.contains(&0) || count != pixels.len() as u64 {
-            return Err(rejected(
-                (size, extent, pixels.len()),
-                "a positive finite point size and width*height RGBA pixels",
-            ));
+        if !size.is_finite() || size <= 0. {
+            return Err(rejected(size, "a positive finite point size"));
         }
-        validate_sprite_pixels(&pixels)?;
         Ok(Self {
             size,
-            extent,
-            pixels: Arc::new(pixels),
+            image: crate::RasterImage::new(extent, pixels)?,
         })
     }
     /// Inspect `(size, dimensions)`; `style.parameters()`.
     pub fn parameters(&self) -> (f32, [u32; 2]) {
-        (self.size, self.extent)
+        (self.size, self.image.extent)
     }
     /// Read top-down linear RGBA pixels; `style.pixels()`.
     pub fn pixels(&self) -> &[[f32; 4]] {
-        &self.pixels
+        self.image.pixels()
     }
 }
 pub(crate) fn marker_style(
@@ -55,16 +47,6 @@ pub(crate) fn marker_style(
         normal
     };
     image_style(&image, !marker.is_colored_image() || highlighted)
-}
-fn validate_sprite_pixels(pixels: &[[f32; 4]]) -> Result<(), RenderError> {
-    if pixels
-        .iter()
-        .flatten()
-        .any(|v| !v.is_finite() || !(0. ..=1.).contains(v))
-    {
-        return Err(rejected(pixels, "finite sprite components in 0..=1"));
-    }
-    Ok(())
 }
 fn resolve_marker_image(
     aspect: &dyn Graphic3dAspectsSource,
@@ -103,11 +85,7 @@ fn sprite_pixel(image: &ImagePixMap, x: u32, y: u32, alpha: bool) -> Result<[f32
         .pixel_color(x as i32, y as i32, false)
         .map_err(|e| rejected(e, "a valid sprite pixel"))?;
     if alpha {
-        let opacity = if image.format() == rustycad_tkservice::image::ImageFormat::Gray {
-            color.rgb().red() as f32
-        } else {
-            color.alpha()
-        };
+        let opacity = crate::raster_image::coverage_pixel(image, x, y)?;
         return Ok([1., 1., 1., opacity]);
     }
     let rgb = color.rgb();

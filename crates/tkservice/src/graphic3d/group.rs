@@ -94,6 +94,10 @@ pub trait Graphic3dGroup: Transient {
     /// `AddText`: adds the text position to the bounds (when asked) and marks a text without
     /// plane as 2D text; `group.add_text(&text, true)`.
     fn add_text(&self, text: &Handle<Graphic3dText>, to_eval_min_max: bool) {
+        self.record_text_bounds(text, to_eval_min_max);
+    }
+    /// Apply the native base AddText bookkeeping from a driver override; `group.record_text_bounds(&text, true)`.
+    fn record_text_bounds(&self, text: &Handle<Graphic3dText>, to_eval_min_max: bool) {
         group_add_text(self, text, to_eval_min_max);
     }
     /// `AddPrimitiveArray(type, indices, attribs, bounds, toEvalMinMax)`: adds the vertex

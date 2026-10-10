@@ -51,7 +51,8 @@ fn main() {
     stdprs_runtime::check_curve_lifecycle();
     ais_line_runtime::check_line_datums();
     ais_point_runtime::check_point_datums();
-    println!("PASS: 13 Vulkan runtime checks; validation errors: 0");
+    text_runtime::check_text_lifecycle();
+    println!("PASS: 14 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -141,3 +142,9 @@ mod ais_line_runtime;
 mod ais_point_runtime;
 #[path = "../tests/support/ais_point_scene.rs"]
 mod point_scene;
+
+use viewer_runtime::scene;
+#[path = "support/text_runtime.rs"]
+mod text_runtime;
+#[path = "../tests/support/text_scene.rs"]
+mod text_scene;

@@ -18,6 +18,7 @@ from vulkan_line_cases import LINE_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_ais_line_cases import AIS_LINE_MODES
 from vulkan_ais_point_cases import AIS_POINT_MODES
+from vulkan_text_cases import TEXT_MODES
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
@@ -72,6 +73,8 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
         "line.frag",
         "point.vert",
         "point.frag",
+        "text.vert",
+        "text.frag",
     ):
         source = ROOT / f"crates/vulkan/shaders/{name}"
         output = folder / f"{name}.spv"
@@ -164,6 +167,8 @@ def capture_case(
     executable = rust.with_name("ais_capture") if mode.startswith("ais-") else rust
     if mode.startswith("datum-"):
         executable = rust.with_name("ais_line_capture")
+    if mode.startswith("text-"):
+        executable = rust.with_name("text_capture")
     if mode.startswith("point-"):
         executable = rust.with_name("ais_point_capture")
     output = run([str(executable), *args, str(vk), mode], profile.environment)
@@ -214,6 +219,7 @@ def capture_cases(
             *STDPRS_MODES,
             *AIS_LINE_MODES,
             *AIS_POINT_MODES,
+            *TEXT_MODES,
         )
     ]:
         try:
@@ -244,6 +250,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_stdprs.cxx",
             "tools/oracle/martensite_vulkan_ais_line.cxx",
             "tools/oracle/martensite_vulkan_ais_point.cxx",
+            "tools/oracle/martensite_vulkan_text.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )

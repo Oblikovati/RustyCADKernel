@@ -4,7 +4,7 @@ use super::{
     memory_selection::HostBufferAccess,
     runtime::{VulkanRuntime, vk_error},
 };
-use crate::{PointStyle, RenderError, error::rejected};
+use crate::{RasterImage, RenderError, error::rejected};
 use ash::vk;
 use std::sync::Arc;
 pub(super) struct SpriteLayout {
@@ -50,14 +50,9 @@ impl UploadedSprite {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
         layout: &SpriteLayout,
-        style: &PointStyle,
+        image: &RasterImage,
     ) -> Result<Self, RenderError> {
-        validate_point_size(
-            style.size,
-            runtime.large_points,
-            runtime.limits.point_size_range,
-        )?;
-        let (pixels, bytes) = upload_sprite_pixels(runtime, style)?;
+        let (pixels, bytes) = upload_sprite_pixels(runtime, image)?;
         let pool = create_sprite_pool(runtime)?;
         let mut sprite = Self {
             runtime: runtime.clone(),
@@ -93,9 +88,9 @@ impl Drop for UploadedSprite {
 }
 fn upload_sprite_pixels(
     runtime: &Arc<VulkanRuntime>,
-    style: &PointStyle,
+    image: &RasterImage,
 ) -> Result<(DeviceBuffer, u64), RenderError> {
-    let bytes: Vec<u8> = style
+    let bytes: Vec<u8> = image
         .pixels
         .iter()
         .flatten()
@@ -145,7 +140,11 @@ fn allocate_sprite_set(
     .map(|sets| sets[0])
     .map_err(|e| vk_error("allocate sprite descriptor", e))
 }
-fn validate_point_size(size: f32, large: bool, range: [f32; 2]) -> Result<(), RenderError> {
+pub(super) fn validate_point_size(
+    size: f32,
+    large: bool,
+    range: [f32; 2],
+) -> Result<(), RenderError> {
     if (!large && size != 1.) || !(range[0]..=range[1]).contains(&size) {
         return Err(rejected(
             (size, large, range),

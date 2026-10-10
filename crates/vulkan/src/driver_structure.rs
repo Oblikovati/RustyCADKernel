@@ -9,15 +9,20 @@ pub(crate) struct RenderStructure {
     connections: SharedState<BTreeSet<i32>>,
     this: SharedState<WeakHandle<Self>>,
     parent: Option<Handle<Self>>,
+    text_source: std::sync::Arc<dyn crate::TextLayoutSource>,
 }
 rustycad_tkernel::impl_transient!(RenderStructure, "Martensite_RenderStructure", StandardTransient, transient, interfaces:[dyn Graphic3dCStructure]);
 impl RenderStructure {
-    pub fn new(manager: &Handle<Graphic3dStructureManager>) -> Result<Handle<Self>, Failure> {
-        Self::with_parent(manager, None)
+    pub fn new(
+        manager: &Handle<Graphic3dStructureManager>,
+        text_source: std::sync::Arc<dyn crate::TextLayoutSource>,
+    ) -> Result<Handle<Self>, Failure> {
+        Self::with_parent(manager, None, text_source)
     }
     fn with_parent(
         manager: &Handle<Graphic3dStructureManager>,
         parent: Option<Handle<Self>>,
+        text_source: std::sync::Arc<dyn crate::TextLayoutSource>,
     ) -> Result<Handle<Self>, Failure> {
         let object = Handle::new(Self {
             transient: StandardTransient::default(),
@@ -25,6 +30,7 @@ impl RenderStructure {
             connections: SharedState::default(),
             this: SharedState::default(),
             parent,
+            text_source,
         });
         *object.this.write() = object.downgrade();
         object.inherit_shadow_state();
@@ -60,6 +66,7 @@ impl RenderStructure {
         camera: &Graphic3dCamera,
         view_id: i32,
         extent: [u32; 2],
+        rendering: &Graphic3dRenderingParams,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         if !self.is_visible_in_view(view_id) {
             return Ok(vec![]);
@@ -72,7 +79,7 @@ impl RenderStructure {
                 retained
                     .get()
                     .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?
-                    .draws_in_structure(camera, Some(extent), &fields)
+                    .draws_in_structure(camera, Some(extent), &fields, rendering)
             })
             .collect::<Result<Vec<_>, _>>()
             .map(|groups| groups.into_iter().flatten().collect())
@@ -117,13 +124,14 @@ impl Graphic3dCStructure for RenderStructure {
             .parent
             .clone()
             .unwrap_or_else(|| self.this.read().upgrade());
-        Ok(Self::with_parent(manager, Some(parent))?.cast())
+        Ok(Self::with_parent(manager, Some(parent), self.text_source.clone())?.cast())
     }
     fn new_group(
         &self,
         structure: &Handle<dyn Graphic3dStructureSource>,
     ) -> Result<Handle<dyn Graphic3dGroup>, Failure> {
-        let group: Handle<dyn Graphic3dGroup> = Graphic3dDrawGroup::new(structure).cast();
+        let group: Handle<dyn Graphic3dGroup> =
+            Graphic3dDrawGroup::with_text_source(structure, self.text_source.clone()).cast();
         self.base.fields.write().groups.push(group.clone());
         Ok(group)
     }

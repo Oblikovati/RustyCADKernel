@@ -44,7 +44,9 @@ pub struct PrimitiveDraw {
     pub(crate) indices: Vec<u32>,
     pub(crate) clip_transform: [f32; 16],
     pub(crate) depth_clamp: bool,
+    pub(crate) annotation: bool,
     pub(crate) line_style: Option<LineStyle>,
+    pub(crate) textured_style: Option<crate::TexturedStyle>,
     pub(crate) point_style: Option<crate::PointStyle>,
 }
 /// Compatibility name for the original submission type; `TriangleDraw::new(vertices, indices, matrix)?`.
@@ -83,7 +85,9 @@ impl PrimitiveDraw {
             indices,
             clip_transform,
             depth_clamp: false,
+            annotation: false,
             line_style: None,
+            textured_style: None,
             point_style: Some(style),
         })
     }
@@ -104,7 +108,9 @@ impl PrimitiveDraw {
             indices,
             clip_transform,
             depth_clamp: false,
+            annotation: false,
             line_style,
+            textured_style: None,
             point_style: None,
         })
     }
