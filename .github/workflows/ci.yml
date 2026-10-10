@@ -18,6 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        shard: [0, 1, 2, 3, 4, 5]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7.0.1
@@ -59,12 +60,20 @@ jobs:
         run: tools/ci/install_windows_tcl.ps1
       - run: rustup show
       - run: python3 tools/check_rust_format.py
+        if: matrix.shard == 0
       - run: cargo lint
-      - run: cargo test-all
+        if: matrix.shard == 0
+      - name: Test workspace partition (including doctests)
+        run: python3 tools/ci_test_shards.py --shard ${{ matrix.shard }} --count 6 --runner test
       - run: cargo doc --workspace --all-features --no-deps --locked
+        if: matrix.shard == 0
         env:
           RUSTDOCFLAGS: -D warnings
   coverage:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -75,11 +84,13 @@ jobs:
       - run: rustup show
       - run: cargo install cargo-nextest --version 0.9.146 --locked
       - run: cargo install cargo-llvm-cov --version 0.9.1 --locked
-      - run: cargo nextest run --workspace --all-features --locked --profile ci
-      - run: cargo coverage
+      - run: python3 tools/ci_test_shards.py --shard ${{ matrix.shard }} --count 6 --runner nextest
+      # Keep nextest's XML, but release its binaries before the instrumented build.
+      - run: cargo clean --profile dev
+      - run: python3 tools/ci_test_shards.py --shard ${{ matrix.shard }} --count 6 --runner coverage
       - uses: actions/upload-artifact@v7.0.1
         with:
-          name: coverage-and-tests
+          name: coverage-and-tests-${{ matrix.shard }}
           path: |
             target/lcov.info
             target/nextest/ci/junit.xml

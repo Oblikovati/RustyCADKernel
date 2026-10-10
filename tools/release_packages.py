@@ -28,18 +28,24 @@ def test_archives(
 ) -> None:
     """Compile and test extracted packages without original source paths; example: ``test_archives(root, stage, runner, crates)``."""
     stage_workspace(root / "target/package", stage, crates, root / "Cargo.lock")
-    for features in ([], ["--all-features"]):
-        test_profile(stage, commands, features)
-        commands.run(["cargo", "clean", "--target-dir", str(stage / "target")], stage)
+    for crate in crates:
+        for features in ([], ["--all-features"]):
+            test_profile(stage, commands, features, crate.name)
+            commands.run(
+                ["cargo", "clean", "--target-dir", str(stage / "target")], stage
+            )
 
 
-def test_profile(stage: Path, commands: Commands, features: list[str]) -> None:
-    """Test all targets and documentation for one feature profile; example: ``test_profile(stage, runner, [])``."""
+def test_profile(
+    stage: Path, commands: Commands, features: list[str], package: str
+) -> None:
+    """Test all targets and documentation for one feature profile; example: ``test_profile(stage, runner, [], 'rustycad-kernel')``."""
     for targets in (["--all-targets"], ["--doc"]):
         arguments = [
             "cargo",
             "test",
-            "--workspace",
+            "--package",
+            package,
             "--locked",
             "--target-dir",
             str(stage / "target"),

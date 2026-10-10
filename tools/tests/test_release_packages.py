@@ -20,7 +20,12 @@ from release_inventory import (
     release_revision,
     validate_inventory,
 )
-from release_packages import build_release, package_test_support, release_metadata
+from release_packages import (
+    build_release,
+    package_test_support,
+    release_metadata,
+    test_archives,
+)
 
 REVISION = "a" * 40
 CRATE = ReleaseCrate("rustycad-kernel", "0.1.0", "crates/kernel")
@@ -40,10 +45,13 @@ class ReleaseFixture:
         self.archive = root / "target/package" / CRATE.archive
         self.write_archive(f"{CRATE.name}-{CRATE.version}/Cargo.toml")
 
-    def write_archive(self, name: str, symlink: bool = False) -> None:
-        with tarfile.open(self.archive, "w:gz") as stream:
+    def write_archive(
+        self, name: str, symlink: bool = False, crate: ReleaseCrate = CRATE
+    ) -> None:
+        archive = self.root / "target/package" / crate.archive
+        with tarfile.open(archive, "w:gz") as stream:
             member = tarfile.TarInfo(name)
-            content = b'[package]\nname = "rustycad-kernel"\nversion = "0.1.0"\n'
+            content = f'[package]\nname = "{crate.name}"\nversion = "{crate.version}"\n'.encode()
             member.size = len(content)
             if symlink:
                 member.type = tarfile.SYMTYPE
@@ -179,9 +187,35 @@ class ReleasePackageTests(unittest.TestCase):
             [call[1] for call in cargo_calls],
             ["test", "test", "clean", "test", "test", "clean"],
         )
+        for call in cargo_calls:
+            if call[1] == "test":
+                self.assertNotIn("--workspace", call)
+                self.assertEqual(call[call.index("--package") + 1], CRATE.name)
         targets = {call[call.index("--target-dir") + 1] for call in cargo_calls}
         self.assertEqual(len(targets), 1)
         self.assertTrue(next(iter(targets)).endswith("workspace/target"))
+
+    def test_release_cleans_between_packages_before_their_binaries_accumulate(
+        self,
+    ) -> None:
+        second = ReleaseCrate("rustycad-cmath", "0.1.0", "crates/cmath")
+        self.fixture.write_archive(
+            f"{second.name}-{second.version}/Cargo.toml", crate=second
+        )
+        package_test_support(self.fixture.root, self.runner)
+        test_archives(
+            self.fixture.root, self.fixture.root / "stage", self.runner, [CRATE, second]
+        )
+        calls = [call for call in self.runner.calls if call[0] == "cargo"]
+        self.assertEqual([call[1] for call in calls], ["test", "test", "clean"] * 4)
+        for index, package in enumerate([CRATE, CRATE, second, second]):
+            pair = calls[index * 3 : index * 3 + 2]
+            self.assertEqual(
+                [call[call.index("--package") + 1] for call in pair], [package.name] * 2
+            )
+            self.assertIn("--all-targets", pair[0])
+            self.assertIn("--doc", pair[1])
+            self.assertEqual("--all-features" in pair[0], index % 2 == 1)
 
     def test_archive_rejects_wrong_root_traversal_and_links(self) -> None:
         for name, symlink in [

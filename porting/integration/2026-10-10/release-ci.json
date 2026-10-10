@@ -1,0 +1,143 @@
+{
+  "scope": "Release CI prerequisites, evidence replay and cross-platform ABI fixes; no API coverage credit added. Hosted release validation remains pending.",
+  "merged_branch": "porting/martensite-release-ci",
+  "branch_tip": "1873bb796213d556d98938047901aed76dbb8550",
+  "main_revision": "729f4597ea25d42aed9fe5b8f61c1a685bebbf88",
+  "hosted_run": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38075760896",
+  "local_validation": {
+    "python_test_modules": 175,
+    "integrated_main_targeted_tests": 377,
+    "kernel_regressions": 24,
+    "osd_tests": 14,
+    "tcl_tests": 39,
+    "clang_header_checks": 9,
+    "runtime_checks_per_profile": 18,
+    "profiles": [
+      "lavapipe",
+      "AMD Radeon 8060S"
+    ],
+    "validation_errors": 0,
+    "full_workspace_cross_clippy": [
+      "aarch64-apple-darwin",
+      "x86_64-pc-windows-gnu"
+    ],
+    "font_diagnostic_followup": "Integrated and retested after the full main check; see ci-main-font.log."
+  },
+  "logs": [
+    {
+      "path": "target/release-ci-evidence/martensite-release-ci-tool-tests-final.log",
+      "sha256": "8c2613a68925e43a975739f042f43c2e86a0b170f0be8f1b7e603ce70e52bafb"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-main-tests.log",
+      "sha256": "f9d0d3bb06c7842072ce42f213ddfc5788be3de164042fc37ce2736de45e9465"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-kernel-regressions.log",
+      "sha256": "c4807410ce766deeed733dde1bee132197a552026a11972a07fd9aef4b934aa7"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-osd-tests.log",
+      "sha256": "c5f1b1099f5e1345428573fe00c6649bcf7e53d9c29e18ed1b9d3fefe6b54aef"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-cross-windows-workspace.log",
+      "sha256": "c9acd48b47056708246202f1a09b516c0ae3d73a4b26d77a68ebd3d16cd59f4e"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-cross-macos-workspace.log",
+      "sha256": "71673e7ecc024a5003e61bd9ad24ec91d3c9a59cf61de665910d44627d678f01"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-final-cross-windows.log",
+      "sha256": "86fe0ca5614d9a08d546173a0555f9ba2b6efcdaedf5f870431c77cd51c9204b"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-final-cross-macos.log",
+      "sha256": "c8321db5947f95a949670aeac5f94b18f6f512925835ca4656caaacda83db1e1"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-linux-clippy.log",
+      "sha256": "37e6f9f27776e3ea79336a46596e0cafc74e1d6316dfdbadf849f81359520660"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-pkgconfig-tests.log",
+      "sha256": "5301289d941f189f7d25ff518d123ec649d78fb8955f71a9fee3490b419eff19"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-tcl-tests.log",
+      "sha256": "a474f7e0594f42c4ad980f61f068fbd5213ed34bb4bdaefae143d6d407e57978"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-clang-header-tests.log",
+      "sha256": "6a7d65d8d98380fc5288b8a02b2be6f19d07f5b14505fda7e1b016b03c153e57"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-release-ci-lavapipe.log",
+      "sha256": "2efeda968cee963f8a68a7ce4be21233829d62738b6c564715c0c21547ef472d"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-release-ci-amd.log",
+      "sha256": "f9b229b5e3ad8e7b36ffbfa2e07380335bc36f7b86c5d7a06fbecb7633d23906"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-main-font.log",
+      "sha256": "57a787461980ac9b06e4e26c032be7736a80f1eabf3b300ba4b45bd0cdcb799c"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-shard0.log",
+      "sha256": "1860dab311898df51630d93d3bedaa869a3c4b708911bf9a1824ff26e530722c"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-shard0-nextest.log",
+      "sha256": "250bfdb3a2ef5c1215fdd09707d3bff6b97d8f28a6aae5d941e795382413736d"
+    },
+    {
+      "path": "target/release-ci-evidence/martensite-ci-shard0-coverage.log",
+      "sha256": "1002a4959e6fe1446a7f559e90192b180d8f34888adf17d16da46bfbb3bc201c"
+    }
+  ],
+  "cleanup": {
+    "worktree": "/home/vmiguel/git/oblikovati-workspace/Martensite-release-ci",
+    "bytes_before_deletion": 23160672797,
+    "tracked_changes": false,
+    "process_references": [],
+    "all_commits_on_main": true,
+    "archive_created": false,
+    "remote_branch": "Merged ancestry verified; delete after publishing main and superseding the old CI run.",
+    "deleted": true
+  },
+  "hosted_results": {
+    "inventory": "passed",
+    "dependencies": "passed",
+    "vulkan_runtime_and_performance": "passed",
+    "ubuntu_workspace": "failed: disk exhausted while linking tests",
+    "coverage": "failed: runner had 5 MB free",
+    "macos": "pending",
+    "windows": "pending",
+    "oracle": "pending"
+  },
+  "disk_followup": {
+    "upstream_run": "38075760896",
+    "strategy": "Six complete package partitions; remove ordinary build before coverage; extracted release packages tested and cleaned individually",
+    "shard_regression_tests": 8,
+    "largest_partition": {
+      "targets": 429,
+      "cargo_test_and_doctest_passes": 5230,
+      "nextest_passes": 4941,
+      "skipped": 0,
+      "ordinary_build_bytes": 1290962716,
+      "junit_preserved_after_cleanup": true,
+      "coverage": "passed",
+      "instrumented_build_bytes": 2153231158,
+      "coverage_test_passes": 4941
+    }
+  },
+  "inventory_refresh": {
+    "source_revision": "729f4597ea25d42aed9fe5b8f61c1a685bebbf88",
+    "compiler_crates": 31,
+    "resolved_implementation_claims": 51490,
+    "unresolved": 0,
+    "api_credit_added": 0
+  }
+}

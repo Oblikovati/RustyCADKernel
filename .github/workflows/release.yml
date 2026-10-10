@@ -5,6 +5,11 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+# Match CI's bounded test artifact profile for the extracted archive checks.
+env:
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  CARGO_INCREMENTAL: '0'
 concurrency:
   group: martensite-release-${{ github.ref }}
   cancel-in-progress: false

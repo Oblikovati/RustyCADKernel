@@ -118,3 +118,24 @@ FreeType point sizes now reject overflow before conversion, glyph comparisons
 preserve the native width, and Vulkan rejects an XID that cannot fit its ABI.
 Test fixtures encode Windows wide characters as UTF-16 and apply their existing
 platform guards consistently. No renderer parity threshold was relaxed.
+
+
+Workspace tests and coverage are split into six deterministic package groups on
+hosted runners. Run `python3 tools/ci_test_shards.py --shard 0 --count 6 --runner
+test` to reproduce one group (indices 0–5). Cargo metadata discovers every member;
+target counts balance the groups without excluding any crate, feature, or doctest.
+Formatting, full-workspace Clippy, and documentation checks run once per platform.
+Run `cargo test-all` locally for the original whole-workspace invocation.
+
+Run `38075760896` exhausted Ubuntu disk while linking the workspace tests; its
+coverage runner also reached only 5 MB free. Debug symbols and incremental builds
+were already disabled. Each coverage group now deletes its ordinary build before
+instrumentation, retaining nextest XML and uploading its LCOV report as
+`coverage-and-tests-<index>`. All six reports constitute the workspace coverage
+set; no individual group's percentage represents the entire workspace.
+
+Extracted release archives are checked one package at a time, with both default
+and all features, including all targets and doctests. The temporary build is
+deleted after each package/profile pair, and release builds use the same disabled
+debug-symbol/incremental settings as CI. Package contents and test coverage are
+unchanged.
