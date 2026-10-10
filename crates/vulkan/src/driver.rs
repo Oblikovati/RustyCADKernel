@@ -20,7 +20,7 @@ pub struct Graphic3dRenderDriver {
     text_source: Arc<dyn crate::TextLayoutSource>,
     views: SharedState<Vec<WeakHandle<dyn Graphic3dCView>>>,
     limit: u32,
-    vertical_sync: SharedState<bool>,
+    vertical_sync: Arc<SharedState<bool>>,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRenderDriver, "Martensite_RenderDriver", StandardTransient, transient, interfaces:[dyn Graphic3dGraphicDriver]);
 impl Graphic3dRenderDriver {
@@ -72,7 +72,7 @@ impl Graphic3dRenderDriver {
             text_source,
             views: SharedState::default(),
             limit,
-            vertical_sync: SharedState::new(false),
+            vertical_sync: Arc::new(SharedState::new(false)),
         })
     }
     /// Inspect Vulkan validation failures; `driver.validation_errors()`.
@@ -121,9 +121,14 @@ impl Graphic3dGraphicDriver for Graphic3dRenderDriver {
         &self,
         manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCView>, Failure> {
-        let view: Handle<dyn Graphic3dCView> =
-            Graphic3dRenderView::create(manager, &self.layers(), self.device.clone(), self.limit)?
-                .cast();
+        let view: Handle<dyn Graphic3dCView> = Graphic3dRenderView::create(
+            manager,
+            &self.layers(),
+            self.device.clone(),
+            self.limit,
+            self.vertical_sync.clone(),
+        )?
+        .cast();
         self.views.write().push(view.downgrade());
         Ok(view)
     }

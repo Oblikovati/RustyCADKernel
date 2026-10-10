@@ -4,7 +4,7 @@ use crate::{
     error::rejected,
 };
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkservice::{aspect::AspectWindowMembers, graphic3d::*};
+use rustycad_tkservice::graphic3d::*;
 pub(crate) fn frame_for_view(
     view: &dyn Graphic3dCView,
     extent: [u32; 2],
@@ -109,12 +109,6 @@ fn validate_view(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
         return Err(rejected(
             view.cview_base().fields.read().background_type,
             "a solid background in this renderer slice",
-        ));
-    }
-    if view.fbo().is_null() && !view.window().is_virtual() {
-        return Err(rejected(
-            "onscreen window",
-            "a virtual window until Vulkan presentation is implemented",
         ));
     }
     Ok(())

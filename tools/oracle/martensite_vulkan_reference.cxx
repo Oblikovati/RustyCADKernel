@@ -119,18 +119,23 @@ create_view(const occ::handle<Aspect_DisplayConnection> &display,
   view->SetWindow(window);
   return view;
 }
+#include "martensite_vulkan_window.cxx"
 static void run_scene(int argc, char **argv) {
   const int width = std::stoi(argv[1]), height = std::stoi(argv[2]),
             perspective = std::stoi(argv[3]);
   const double offset = std::stod(argv[4]);
+  const std::string mode = argc >= 7 ? argv[6] : "default";
   occ::handle<Aspect_DisplayConnection> display =
       new Aspect_DisplayConnection();
   occ::handle<OpenGl_GraphicDriver> driver = new OpenGl_GraphicDriver(display);
-  driver->ChangeOptions().buffersNoSwap = true;
+  driver->ChangeOptions().buffersNoSwap = mode.rfind("window-",0)!=0;
   occ::handle<V3d_Viewer> viewer = new V3d_Viewer(driver);
   auto view = create_view(display, viewer, width, height);
   configure_camera(view, width, height, perspective);
-  const std::string mode = argc >= 7 ? argv[6] : "default";
+  if (mode.rfind("window-",0)==0) {
+    run_window_scene(display,driver,viewer,view,width,height,offset,mode,argv[5]);
+    return;
+  }
   const bool rasterControl = raster_control_option(argc, argv);
   if (mode.rfind("text-", 0) == 0) {
     MartensiteOracleTextScene scene(viewer, offset);

@@ -27,3 +27,32 @@ impl DriverBackend {
         }
     }
 }
+
+impl DriverBackend {
+    pub fn window_presenter(
+        &self,
+        window: &rustycad_tkernel::standard::Handle<dyn rustycad_tkservice::aspect::AspectWindow>,
+    ) -> Result<crate::backend::WindowPresenter, RenderError> {
+        match self {
+            Self::Vulkan(device) => device.window_presenter(window),
+            Self::Injected(_) => Err(crate::error::rejected(
+                "injected backend",
+                "a Vulkan device for native window presentation",
+            )),
+        }
+    }
+    pub fn render_window(
+        &mut self,
+        frame: &RenderFrame,
+        target: &mut crate::backend::WindowPresenter,
+        vsync: bool,
+    ) -> Result<FrameCapture, RenderError> {
+        match self {
+            Self::Vulkan(device) => device.render_window(frame, target, vsync),
+            Self::Injected(_) => Err(crate::error::rejected(
+                "injected backend",
+                "a Vulkan window presenter",
+            )),
+        }
+    }
+}

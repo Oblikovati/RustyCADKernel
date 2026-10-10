@@ -40,6 +40,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     text_performance::benchmark(&driver, warmup, samples);
     ais_axis_performance::benchmark(&driver, warmup, samples);
     plane_trihedron_performance::benchmark(&driver, warmup, samples);
+    window_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -137,3 +138,10 @@ mod axis_scene;
 mod plane_scene;
 #[path = "support/plane_trihedron_performance.rs"]
 mod plane_trihedron_performance;
+
+#[path = "support/native_window.rs"]
+mod native_window;
+#[path = "support/window_performance.rs"]
+mod window_performance;
+#[path = "support/window_scene.rs"]
+mod window_scene;

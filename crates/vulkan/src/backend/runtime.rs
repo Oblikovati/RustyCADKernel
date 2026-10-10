@@ -12,7 +12,14 @@ pub struct VulkanOptions {
     pub device_index: Option<usize>,
 }
 pub(super) struct VulkanRuntime {
-    entry: Entry,
+    pub(super) entry: Entry,
+    pub window_support: bool,
+    pub displays: rustycad_tkernel::standard::SharedState<
+        Vec<
+            rustycad_tkernel::standard::Handle<rustycad_tkservice::aspect::AspectDisplayConnection>,
+        >,
+    >,
+    pub queues: Vec<vk::Queue>,
     pub instance: Instance,
     messenger: Option<ValidationMessenger>,
     device: Option<Device>,
@@ -42,9 +49,13 @@ impl VulkanRuntime {
     fn load(enable_validation: bool) -> Result<Self, RenderError> {
         let entry =
             unsafe { Entry::load() }.map_err(|e| rejected(e, "a loadable Vulkan 1.3 runtime"))?;
+        let window_support = !super::window_support::instance_extensions(&entry)?.is_empty();
         let instance = create_instance(&entry, enable_validation)?;
         Ok(Self {
             entry,
+            window_support,
+            queues: vec![],
+            displays: Default::default(),
             instance,
             messenger: None,
             device: None,
@@ -80,15 +91,23 @@ impl VulkanRuntime {
             self.instance
                 .get_physical_device_memory_properties(physical)
         };
+        self.window_support &= super::window_support::device_supported(&self.instance, physical)?;
         self.device = Some(create_device(
             &self.instance,
             physical,
-            family,
+            self.window_support,
             self.depth_clamp,
             self.large_points,
             self.lines,
         )?);
-        self.queue = unsafe { self.device().get_device_queue(family, 0) };
+        let families = unsafe {
+            self.instance
+                .get_physical_device_queue_family_properties(physical)
+        };
+        self.queues = (0..families.len())
+            .map(|i| unsafe { self.device().get_device_queue(i as u32, 0) })
+            .collect();
+        self.queue = self.queues[family as usize];
         self.physical = physical;
         self.queue_family = family;
         Ok(())
@@ -121,10 +140,14 @@ fn create_instance(entry: &Entry, validation: bool) -> Result<Instance, RenderEr
         .api_version(vk::API_VERSION_1_3);
     let mut info = vk::InstanceCreateInfo::default().application_info(&app);
     let layers = [c"VK_LAYER_KHRONOS_validation".as_ptr()];
-    let extensions = [
-        ash::ext::debug_utils::NAME.as_ptr(),
-        ash::ext::validation_features::NAME.as_ptr(),
-    ];
+    let mut extensions = super::window_support::instance_extensions(entry)?;
+    if validation {
+        extensions.extend([
+            ash::ext::debug_utils::NAME.as_ptr(),
+            ash::ext::validation_features::NAME.as_ptr(),
+        ]);
+    }
+    info = info.enabled_extension_names(&extensions);
     let mut features = vk::ValidationFeaturesEXT::default()
         .enabled_validation_features(&[vk::ValidationFeatureEnableEXT::SYNCHRONIZATION_VALIDATION]);
     if validation {
@@ -180,14 +203,19 @@ pub(super) fn vk_error(operation: &str, error: vk::Result) -> RenderError {
 fn create_device(
     instance: &Instance,
     physical: vk::PhysicalDevice,
-    family: u32,
+    windows: bool,
     depth_clamp: bool,
     large_points: bool,
     lines: super::line_device::LineCapabilities,
 ) -> Result<Device, RenderError> {
-    let queues = [vk::DeviceQueueCreateInfo::default()
-        .queue_family_index(family)
-        .queue_priorities(&[1.0])];
+    let families = unsafe { instance.get_physical_device_queue_family_properties(physical) };
+    let queues: Vec<_> = (0..families.len())
+        .map(|i| {
+            vk::DeviceQueueCreateInfo::default()
+                .queue_family_index(i as u32)
+                .queue_priorities(&[1.0])
+        })
+        .collect();
     let mut features = vk::PhysicalDeviceVulkan13Features::default()
         .dynamic_rendering(true)
         .synchronization2(true);
@@ -199,7 +227,20 @@ fn create_device(
         .enabled_features(&core_features)
         .queue_create_infos(&queues)
         .push_next(&mut features);
-    let extensions = [ash::ext::line_rasterization::NAME.as_ptr()];
+    let mut extensions = vec![];
+    if lines.bresenham {
+        extensions.push(ash::ext::line_rasterization::NAME.as_ptr());
+    }
+    let mut maintenance = vk::PhysicalDeviceSwapchainMaintenance1FeaturesEXT::default()
+        .swapchain_maintenance1(windows);
+    if windows {
+        extensions.extend([
+            ash::khr::swapchain::NAME.as_ptr(),
+            ash::ext::swapchain_maintenance1::NAME.as_ptr(),
+        ]);
+        info = info.push_next(&mut maintenance);
+    }
+    info = info.enabled_extension_names(&extensions);
     let mut line_features =
         vk::PhysicalDeviceLineRasterizationFeaturesEXT::default().bresenham_lines(lines.bresenham);
     if lines.bresenham {

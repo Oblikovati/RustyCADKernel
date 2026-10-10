@@ -52,11 +52,21 @@ impl CommandSubmission {
         Ok(())
     }
     pub fn finish(&self) -> Result<(), RenderError> {
+        self.finish_synced(&[], &[])
+    }
+    pub fn finish_synced(
+        &self,
+        waits: &[vk::SemaphoreSubmitInfo<'_>],
+        signals: &[vk::SemaphoreSubmitInfo<'_>],
+    ) -> Result<(), RenderError> {
         let device = self.runtime.device();
         unsafe { device.end_command_buffer(self.command) }
             .map_err(|e| vk_error("end command buffer", e))?;
         let commands = [vk::CommandBufferSubmitInfo::default().command_buffer(self.command)];
-        let submits = [vk::SubmitInfo2::default().command_buffer_infos(&commands)];
+        let submits = [vk::SubmitInfo2::default()
+            .command_buffer_infos(&commands)
+            .wait_semaphore_infos(waits)
+            .signal_semaphore_infos(signals)];
         unsafe { device.queue_submit2(self.runtime.queue, &submits, self.fence) }
             .map_err(|e| vk_error("submit frame", e))?;
         unsafe { device.wait_for_fences(&[self.fence], true, u64::MAX) }

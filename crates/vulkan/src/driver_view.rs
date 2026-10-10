@@ -17,6 +17,8 @@ pub struct Graphic3dRenderView {
     retained: Graphic3dRetainedView,
     device: SharedRenderDevice,
     limit: u32,
+    vertical_sync: std::sync::Arc<SharedState<bool>>,
+    presenter: SharedState<Option<crate::backend::WindowPresenter>>,
     window_error: SharedState<Option<RenderError>>,
     outcome: SharedState<Option<Result<FrameCapture, RenderError>>>,
 }
@@ -27,12 +29,15 @@ impl Graphic3dRenderView {
         layers: &[Handle<Graphic3dLayer>],
         device: SharedRenderDevice,
         limit: u32,
+        vertical_sync: std::sync::Arc<SharedState<bool>>,
     ) -> Result<Handle<Self>, Failure> {
         let view = Handle::new(Self {
             transient: StandardTransient::default(),
             retained: Graphic3dRetainedView::new(manager, layers)?,
             device,
             limit,
+            vertical_sync,
+            presenter: SharedState::default(),
             window_error: SharedState::default(),
             outcome: SharedState::default(),
         });
@@ -70,13 +75,57 @@ impl Graphic3dRenderView {
         }
         let extent = capture_extent(self, self.limit)?;
         let frame = frame_for_view(self, extent)?;
-        self.device.write().render(&frame)
+        self.render_target(&frame)
+    }
+}
+impl Graphic3dRenderView {
+    fn render_target(&self, frame: &crate::RenderFrame) -> Result<FrameCapture, RenderError> {
+        let window = self.window();
+        let mut device = self.device.write();
+        if !self.fbo().is_null() || window.is_virtual() {
+            return device.render(frame);
+        }
+        if window.native_handle() == 0 {
+            return Err(rejected(
+                0,
+                "a nonzero native window handle or a virtual window",
+            ));
+        }
+        if !window.is_mapped() {
+            return device.render(frame);
+        }
+        let mut presenter = self.presenter.write();
+        if presenter.is_none() {
+            *presenter = Some(device.window_presenter(&window)?);
+        }
+        let result = device.render_window(
+            frame,
+            presenter.as_mut().unwrap(),
+            *self.vertical_sync.read(),
+        );
+        if result.is_err() {
+            presenter.take();
+        }
+        result
+    }
+    fn release_presenter(&self) {
+        let _device = self.device.write();
+        self.presenter.write().take();
+    }
+}
+impl Drop for Graphic3dRenderView {
+    fn drop(&mut self) {
+        self.release_presenter();
     }
 }
 impl Graphic3dCView for Graphic3dRenderView {
     retained_view_methods!();
     fn cview_base(&self) -> &Graphic3dCViewBase {
         self.retained.cview_base()
+    }
+    fn remove(&self) {
+        self.release_presenter();
+        graphic3d_cview_remove(self);
     }
     fn redraw(&self) {
         let _ = self.try_redraw();
@@ -94,6 +143,7 @@ impl Graphic3dCView for Graphic3dRenderView {
         window: &Handle<dyn AspectWindow>,
         context: AspectRenderingContext,
     ) {
+        self.release_presenter();
         *self.window_error.write() = (!parent.is_null() || context != 0).then(|| {
             rejected(
                 (parent.object_address(), context),
