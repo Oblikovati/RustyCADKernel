@@ -76,6 +76,12 @@ jobs:
         shard: [0, 1, 2, 3, 4, 5]
     runs-on: ubuntu-latest
     steps:
+      # LLVM instrumentation can exceed the six-way partition's ordinary binary size.
+      # These preinstalled SDKs are unused by Martensite and consume runner disk.
+      - name: Free unused hosted SDKs for instrumented tests
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup
+          df -h /
       - uses: actions/checkout@v7.0.1
       - name: Install native coverage prerequisites
         run: |

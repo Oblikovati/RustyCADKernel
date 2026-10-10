@@ -45,6 +45,16 @@ class FakeOracleProcesses:
 
 
 class PlatformOracleCaptureTests(unittest.TestCase):
+    def test_contraction_policy_is_explicit_and_validated(self) -> None:
+        with patch.dict(capture.os.environ, {}, clear=True):
+            self.assertEqual(capture.contraction_flags(), [])
+        for policy in ("off", "on", "fast"):
+            with patch.dict(capture.os.environ, {"MARTENSITE_FP_CONTRACT": policy}):
+                self.assertEqual(capture.contraction_flags(), [f"-ffp-contract={policy}"])
+        with patch.dict(capture.os.environ, {"MARTENSITE_FP_CONTRACT": "invalid"}):
+            with self.assertRaisesRegex(ValueError, "invalid.*expected off"):
+                capture.contraction_flags()
+
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)

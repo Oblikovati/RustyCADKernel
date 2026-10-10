@@ -7,6 +7,7 @@ Example: python3 tools/ci/capture_platform_torus.py
 from pathlib import Path
 import hashlib
 import json
+import os
 import platform
 import subprocess
 
@@ -21,6 +22,7 @@ def capture_native(root: Path, output: Path) -> Path:
         "c++",
         "-std=c++17",
         "-O2",
+        *contraction_flags(),
         f"-I{build / 'include/opencascade'}",
         str(root / "tools/oracle/tkbo_bop_torus.cxx"),
         *[str(libraries / f"lib{name}.dylib") for name in names],
@@ -32,6 +34,16 @@ def capture_native(root: Path, output: Path) -> Path:
     rows = subprocess.check_output([str(executable)], cwd=root)
     (output / "native.expected").write_bytes(rows)
     return executable
+
+
+def contraction_flags() -> list[str]:
+    """Match the native library's diagnostic FP policy; contraction_flags()."""
+    policy = os.environ.get("MARTENSITE_FP_CONTRACT")
+    if policy is None:
+        return []
+    if policy not in ("off", "on", "fast"):
+        raise ValueError(f"FP contraction {policy!r}: expected off, on, or fast")
+    return [f"-ffp-contract={policy}"]
 
 
 def capture_rust(root: Path, output: Path) -> int:
@@ -83,6 +95,7 @@ def main() -> None:
     receipt = {
         "platform": platform.platform(),
         "machine": platform.machine(),
+        "probe_fp_flags": contraction_flags(),
         "rust_test_exit": status,
         "native_sha256": hashlib.sha256(
             (output / "native.expected").read_bytes()
