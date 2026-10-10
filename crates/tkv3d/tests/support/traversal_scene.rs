@@ -3,7 +3,7 @@
 pub mod volume;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
 use rustycad_tkmath::{bnd::BoundingBox3, gp::*};
-use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
+use rustycad_tkservice::graphic3d::{Graphic3dCameraProjection, Graphic3dStructureSource};
 use rustycad_tkv3d::{prs_mgr::*, select_basics::*, select_mgr::*, select3d::*};
 use std::sync::{
     Arc,
@@ -127,17 +127,7 @@ impl Select3DSensitiveEntity for TraversalPoint {
         if let Some(selector) = self.selector.upgrade().get() {
             let _ = selector.nb_picked();
             if self.camera_edit.load(Ordering::Acquire) == 1 {
-                let original = selector
-                    .viewer_selector_base()
-                    .selecting_volume
-                    .read()
-                    .clone();
-                let camera = Handle::new(original.camera().copy_members());
-                camera.set_scale(8.);
-                camera.set_projection_type(
-                    rustycad_tkservice::graphic3d::Graphic3dCameraProjection::Perspective,
-                );
-                original.set_camera(&camera)?;
+                replace_traversal_camera(selector)?;
             }
         }
         if self.fail.load(Ordering::Acquire) != 0 {
@@ -157,6 +147,17 @@ impl Select3DSensitiveEntity for TraversalPoint {
     fn center_of_geometry(&self) -> Point3 {
         self.point.center_of_geometry()
     }
+}
+fn replace_traversal_camera(selector: &dyn SelectMgrViewerSelectorSource) -> Result<(), Failure> {
+    let original = selector
+        .viewer_selector_base()
+        .selecting_volume
+        .read()
+        .clone();
+    let camera = Handle::new(original.camera().copy_members());
+    camera.set_scale(8.);
+    camera.set_projection_type(Graphic3dCameraProjection::Perspective);
+    original.set_camera(&camera)
 }
 pub struct TraversalScene {
     pub selector: Handle<TraversalSelector>,
