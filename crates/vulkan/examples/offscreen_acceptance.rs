@@ -168,3 +168,5 @@ mod native_window;
 mod window_runtime;
 #[path = "support/window_scene.rs"]
 mod window_scene;
+
+use ais_runtime::scene as ais_scene;

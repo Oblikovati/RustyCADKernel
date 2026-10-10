@@ -12,3 +12,7 @@ mod window_scene;
 fn main() {
     window_runtime::check_windows();
 }
+
+#[allow(dead_code)]
+#[path = "../tests/support/ais_scene.rs"]
+mod ais_scene;

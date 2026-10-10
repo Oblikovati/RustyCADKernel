@@ -145,3 +145,5 @@ mod native_window;
 mod window_performance;
 #[path = "support/window_scene.rs"]
 mod window_scene;
+
+use ais_performance::ais_scene;

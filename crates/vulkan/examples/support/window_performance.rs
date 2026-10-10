@@ -35,7 +35,7 @@ fn benchmark_window(
 fn timed_present(window: &window_scene::WindowScene, index: usize, resize: bool) -> f64 {
     let start = Instant::now();
     if resize {
-        let side = if index % 2 == 0 { 256 } else { 128 };
+        let side = if index.is_multiple_of(2) { 256 } else { 128 };
         window.resize(side, side);
     }
     window.redraw();

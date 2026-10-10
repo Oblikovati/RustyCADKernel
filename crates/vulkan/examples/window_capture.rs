@@ -56,3 +56,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
     Ok(())
 }
+
+#[path = "../tests/support/ais_scene.rs"]
+mod ais_scene;

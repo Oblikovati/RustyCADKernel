@@ -160,7 +160,7 @@ fn framebuffer_dimensions_limits_and_release_follow_the_dump_lifecycle() {
 }
 #[test]
 fn unsupported_window_and_removed_view_fail_explicitly() {
-    use rustycad_tkservice::aspect::{AspectWindow, AspectWindowMembers};
+    use rustycad_tkservice::aspect::AspectWindowMembers;
     let (_, scene, _) = setup();
     scene.window.set_virtual(false);
     assert!(scene.render_view().try_redraw().is_err());
