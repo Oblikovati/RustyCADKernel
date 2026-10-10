@@ -1,12 +1,11 @@
 //! Native aspect replacement keeps existing groups live and preserves width/color quirks.
-use super::AisLine;
 use crate::{prs_mgr::*, prs3d::Prs3dLineAspect};
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
     standard::{Failure, Handle},
 };
 use rustycad_tkservice::{aspect::AspectTypeOfLine, graphic3d::*};
-impl AisLine {
+pub(super) trait LineDatumAppearance: PrsMgrPresentableObject {
     fn replace_line_aspect(&self, aspect: Handle<Prs3dLineAspect>) {
         let drawer = self.attributes();
         if !drawer.has_link() {
@@ -58,12 +57,12 @@ impl AisLine {
         }
         Color::named(NamedColor::YELLOW)
     }
-    pub(super) fn set_line_color(&self, color: Color) -> Result<(), Failure> {
-        self.base.presentable.fields.write().has_own_color = true;
+    fn set_line_color(&self, color: Color) -> Result<(), Failure> {
+        self.presentable_base().fields.write().has_own_color = true;
         let drawer = self.attributes();
         drawer.set_color(color);
         let width = if self.has_width() {
-            f64::from(self.base.presentable.fields.read().own_width)
+            f64::from(self.presentable_base().fields.read().own_width)
         } else {
             self.inherited_line_width()
         };
@@ -75,8 +74,8 @@ impl AisLine {
         }
         Ok(())
     }
-    pub(super) fn unset_line_color(&self) -> Result<(), Failure> {
-        self.base.presentable.fields.write().has_own_color = false;
+    fn unset_line_color(&self) -> Result<(), Failure> {
+        self.presentable_base().fields.write().has_own_color = false;
         if !self.has_width() {
             self.replace_line_aspect(Handle::default());
             return Ok(());
@@ -88,9 +87,9 @@ impl AisLine {
         self.synchronize_aspects();
         Ok(())
     }
-    pub(super) fn set_line_width(&self, width: f64) -> Result<(), Failure> {
+    fn set_line_width(&self, width: f64) -> Result<(), Failure> {
         // Native assigns the narrowed own width before a failing aspect constructor/setter.
-        self.base.presentable.fields.write().own_width = width as f32;
+        self.presentable_base().fields.write().own_width = width as f32;
         let drawer = self.attributes();
         if !drawer.has_own_line_aspect() {
             self.install_line_aspect(self.effective_line_color(), width)?;
@@ -100,7 +99,7 @@ impl AisLine {
         }
         Ok(())
     }
-    pub(super) fn unset_line_width(&self) -> Result<(), Failure> {
+    fn unset_line_width(&self, synchronize: bool) -> Result<(), Failure> {
         // OCCT 3d097a0 does not reset own_width in the no-color branch.
         if !self.has_color() {
             self.replace_line_aspect(Handle::default());
@@ -110,8 +109,13 @@ impl AisLine {
         self.attributes()
             .line_aspect()
             .set_width(f64::from(width))?;
-        self.base.presentable.fields.write().own_width = width;
-        self.synchronize_aspects();
+        self.presentable_base().fields.write().own_width = width;
+        // AIS_Circle omits this notification, unlike AIS_Line at OCCT 3d097a0.
+        if synchronize {
+            self.synchronize_aspects();
+        }
         Ok(())
     }
 }
+
+impl<T: PrsMgrPresentableObject + ?Sized> LineDatumAppearance for T {}

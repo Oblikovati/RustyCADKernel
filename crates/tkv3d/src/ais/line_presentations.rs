@@ -1,5 +1,5 @@
 //! Native presentation and sensitive-segment construction; units are read for every selection.
-use super::AisLine;
+use super::{AisLine, line_appearance::LineDatumAppearance};
 use crate::{prs_mgr::*, select_mgr::*, select3d::Select3DSensitiveSegment, std_prs::StdPrsCurve};
 use rustycad_tkernel::{
     quantity::Color,
@@ -65,7 +65,7 @@ impl PrsMgrPresentableObject for AisLine {
         self.set_line_width(width)
     }
     fn unset_width(&self) -> Result<(), Failure> {
-        self.unset_line_width()
+        self.unset_line_width(true)
     }
     crate::ais_presentable_overrides!();
 }

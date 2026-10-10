@@ -23,7 +23,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "v3_standard_point",
         v3_probe::ais_point::standard_point_case,
     ),
+    ("v3_ais_circle", v3_probe::ais_circle::circle_case),
     ("v3_ais_line", v3_probe::ais_line::ais_line_case),
+    ("v3_deflection_add", v3_probe::deflection_curve::add_case),
+    (
+        "v3_deflection_match",
+        v3_probe::deflection_curve::match_case,
+    ),
     ("v3_stdprs_add", v3_probe::stdprs_curve::curve_add_case),
     ("v3_stdprs_match", v3_probe::stdprs_curve::curve_match_case),
     (

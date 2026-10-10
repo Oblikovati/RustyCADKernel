@@ -61,16 +61,21 @@
 #include "tkv3d_probe_ais_detection.cxx"
 #include "tkv3d_probe_ais_selection_actions.cxx"
 #include "tkv3d_probe_stdprs_curve.cxx"
+#include "tkv3d_probe_deflection_curve.cxx"
 #include "tkv3d_probe_ais_line.cxx"
+#include "tkv3d_probe_ais_circle.cxx"
 #include "tkv3d_probe_ais_point.cxx"
 #include "tkv3d_probe_ais_axis.cxx"
 #include "tkv3d_probe_ais_plane_trihedron.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_xyz_axis", v3_xyz_axis},
+ {"v3_deflection_add", v3_deflection_add},
+ {"v3_deflection_match", v3_deflection_match},
  {"v3_plane_trihedron", v3_plane_trihedron},
  {"v3_ais_axis", v3_ais_axis},
  {"v3_ais_point", v3_ais_point},
  {"v3_standard_point", v3_standard_point},
+ {"v3_ais_circle", v3_ais_circle},
  {"v3_ais_line", v3_ais_line},
     {"v3_stdprs_add",v3_stdprs_add},
  {"v3_stdprs_match",v3_stdprs_match},

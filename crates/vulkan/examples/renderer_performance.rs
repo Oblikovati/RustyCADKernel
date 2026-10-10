@@ -41,6 +41,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_axis_performance::benchmark(&driver, warmup, samples);
     plane_trihedron_performance::benchmark(&driver, warmup, samples);
     window_performance::benchmark(&driver, warmup, samples);
+    ais_circle_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -147,3 +148,8 @@ mod window_performance;
 mod window_scene;
 
 use ais_performance::ais_scene;
+
+#[path = "support/ais_circle_performance.rs"]
+mod ais_circle_performance;
+#[path = "../tests/support/ais_circle_scene.rs"]
+mod circle_scene;

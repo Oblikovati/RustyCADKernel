@@ -117,7 +117,7 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures 948 scenes spanning orthographic/perspective cameras,
+Each profile captures 1,062 scenes spanning orthographic/perspective cameras,
 three aspect ratios, translations, default/full-layer rendering and thirteen AIS
 lifecycle states: ordinary display/erase, mode/affinity changes, presentation
 clearing, permanent removal/recreation, bulk and selected-object transitions. Six
@@ -161,7 +161,7 @@ is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
 Eight workloads now have accepted baselines: the original six and two native-window
-workloads. Eight newer presentation workloads retain collected timings but no
+workloads. Nine newer presentation workloads retain collected timings but no
 accepted baseline while strict capture parity remains unresolved. The timing gate
 explicitly reports each unmatched workload.
 Run functional and timing regression checks together:
@@ -502,3 +502,8 @@ The [plane trihedron slice](ais-plane-trihedron.md) adds live plane datums with
 independent arrow/text styles, fourteen capture modes and a release performance
 workload for changing geometry and redisplaying through AIS. Strict raster parity
 and unmatched timing baselines remain open; this adds presentation capability.
+
+[AIS circle and arc datums](ais-circle.md) add adaptive chordal-deviation
+presentations, filled/boundary selection, live geometry and appearance updates,
+114 captures per device and a radius-update performance workload. The complete
+harness collects 17 timing workloads; eight have accepted baselines.

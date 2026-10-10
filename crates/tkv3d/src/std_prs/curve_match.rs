@@ -56,10 +56,10 @@ fn match_samples(
     }
     Ok(false)
 }
-fn near_point(query: Point3, point: Point3, distance: f64) -> bool {
+pub(super) fn near_point(query: Point3, point: Point3, distance: f64) -> bool {
     let delta = query.xyz() - point.xyz();
     delta.x().abs() + delta.y().abs() + delta.z().abs() <= distance
 }
-fn near_segment(query: Point3, first: Point3, last: Point3, distance: f64) -> bool {
+pub(super) fn near_segment(query: Point3, first: Point3, last: Point3, distance: f64) -> bool {
     Prs3d::match_segment(query.x(), query.y(), query.z(), distance, &first, &last).0
 }
