@@ -614,3 +614,28 @@ window exceeded camera/resize p95 and AIS remove/display limits; two subsequent
 identical host repetitions passed all 23 comparisons. The failed window and raw
 repetitions are retained. These measurements do not establish an accepted baseline
 for the entire renderer, whose other capability and parity gaps remain open.
+
+## AIS context location
+
+Martensite ports `AIS_InteractiveContext::SetLocation`, `ResetLocation`,
+`HasLocation` and `Location` from OCCT `3d097a0`. For example, call
+`context.set_location(&object, &Location::new(transform))?` before rendering.
+Placement replaces the local transform, applies pending selection updates and
+refreshes the last dynamically highlighted owner's transform. Context locks are
+released before virtual callbacks. These calls do not redraw or invalidate views.
+
+An empty identity location resets an effective transform and skips highlight
+refresh. A location containing an identity matrix is a nonempty datum and follows
+the regular update path. Queries include inherited parent transforms; resetting
+local placement leaves parent placement effective. `Location` returns a fresh
+datum even when the effective matrix is identity. Null update handles are no-ops;
+a null query returns `Standard_NullObject` where native dereference is undefined.
+
+`python3 tools/verify_context_location.py --source ../OCCT --native-build BUILD`
+compares 1,152 independent native cases across initial/final placements, display,
+erase, inherited transforms, identity-chain variants and dynamic highlights.
+Nine focused tests cover nulls, datum identity, parent placement, transform replacement,
+active selection updates without geometry recomputation, failure ordering and reentrant
+highlight callbacks.
+This supplies the context prerequisite for object animation; the object animation
+classes and their GPU/performance fixtures remain open.

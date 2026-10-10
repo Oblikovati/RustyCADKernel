@@ -69,7 +69,9 @@
 #include "tkv3d_probe_ais_plane_trihedron.cxx"
 #include "tkv3d_probe_ais_animation.cxx"
 #include "tkv3d_probe_animation_camera.cxx"
+#include "tkv3d_probe_context_location.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"v3_context_location", v3_context_location},
  {"v3_ais_animation_edits", v3_ais_animation_edits},
  {"v3_animation_camera", v3_animation_camera},
  {"v3_ais_animation", v3_ais_animation},
