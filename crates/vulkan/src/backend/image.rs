@@ -118,8 +118,9 @@ fn attachment_properties(depth: bool) -> (vk::Format, vk::ImageUsageFlags, vk::I
             vk::ImageAspectFlags::DEPTH,
         );
     }
+    // OCCT 3d097a0 OpenGl_View uses GL_SRGB8_ALPHA8: inputs stay linear, captures encode sRGB.
     (
-        vk::Format::R8G8B8A8_UNORM,
+        vk::Format::R8G8B8A8_SRGB,
         vk::ImageUsageFlags::COLOR_ATTACHMENT,
         vk::ImageAspectFlags::COLOR,
     )

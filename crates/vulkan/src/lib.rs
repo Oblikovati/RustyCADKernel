@@ -5,9 +5,7 @@ mod error;
 mod scene;
 pub use backend::{VulkanOptions, VulkanRenderer};
 pub use error::RenderError;
-pub use scene::{
-    FrameCapture, RenderBackend, RenderFrame, RenderVertex, TriangleDraw, identity_clip,
-};
+pub use scene::{FrameCapture, RenderBackend, RenderFrame, RenderVertex, identity_clip};
 mod graphic_group;
 mod primitive;
 mod primitive_ranges;
@@ -32,3 +30,8 @@ pub use driver::Graphic3dRenderDriver;
 pub use driver_view::Graphic3dRenderView;
 
 mod persistent_transform;
+
+mod draw;
+pub use draw::{LineStyle, PrimitiveDraw, PrimitiveTopology, TriangleDraw};
+
+mod line_style;

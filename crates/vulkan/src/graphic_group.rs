@@ -1,6 +1,6 @@
 //! Retained Graphic3d commands distinguish the group style from later primitive styles.
-use crate::style::unlit_color;
-use crate::{RenderError, TriangleDraw, error::rejected, primitive::PrimitiveSubmission};
+use crate::line_style::primitive_style;
+use crate::{PrimitiveDraw, RenderError, error::rejected, primitive::PrimitiveSubmission};
 use rustycad_tkernel::{
     ncollection::Vec4,
     standard::{Handle, SharedState, StandardTransient},
@@ -34,32 +34,47 @@ impl Graphic3dDrawGroup {
             submissions: SharedState::default(),
         })
     }
-    /// Extract visible triangles using current styles, buffers and camera; `group.triangle_draws(&camera)?`.
-    pub fn triangle_draws(
+    /// Extract visible primitives using current styles, buffers and camera; `group.primitive_draws(&camera)?`.
+    pub fn primitive_draws(
         &self,
         camera: &Graphic3dCamera,
-    ) -> Result<Vec<TriangleDraw>, RenderError> {
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         if self.is_deleted() || !self.structure().is_visible() {
             return Ok(vec![]);
         }
         self.extract_draws(camera, None)
     }
-    /// Extract using the actual pixel viewport, including persistence; `group.triangle_draws_for_view(&camera, [800, 600])?`.
-    pub fn triangle_draws_for_view(
+    /// Extract using the actual pixel viewport, including persistence; `group.primitive_draws_for_view(&camera, [800, 600])?`.
+    pub fn primitive_draws_for_view(
         &self,
         camera: &Graphic3dCamera,
         extent: [u32; 2],
-    ) -> Result<Vec<TriangleDraw>, RenderError> {
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         if self.is_deleted() || !self.structure().is_visible() {
             return Ok(vec![]);
         }
         self.extract_draws(camera, Some(extent))
     }
+    /// Compatibility extraction name; `group.triangle_draws(&camera)?` also supports line primitives.
+    pub fn triangle_draws(
+        &self,
+        camera: &Graphic3dCamera,
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
+        self.primitive_draws(camera)
+    }
+    /// Compatibility viewport extraction name; `group.triangle_draws_for_view(&camera, [64,64])?`.
+    pub fn triangle_draws_for_view(
+        &self,
+        camera: &Graphic3dCamera,
+        extent: [u32; 2],
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
+        self.primitive_draws_for_view(camera, extent)
+    }
     fn extract_draws(
         &self,
         camera: &Graphic3dCamera,
         extent: Option<[u32; 2]>,
-    ) -> Result<Vec<TriangleDraw>, RenderError> {
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         self.validate_structure()?;
         let (matrix, depth_clamp) =
             crate::persistent_transform::group_clip_transform(self, camera, extent)?;
@@ -69,7 +84,9 @@ impl Graphic3dDrawGroup {
             match command {
                 GroupCommand::Aspects(style) => aspects = style,
                 GroupCommand::Primitives(primitive) => {
-                    draws.extend(primitive.draws(unlit_color(&aspects, self.is_closed())?, matrix)?)
+                    let (color, line) =
+                        primitive_style(primitive.kind, &aspects, self.is_closed())?;
+                    draws.extend(primitive.draws(color, matrix, line)?)
                 }
             }
         }

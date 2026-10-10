@@ -40,11 +40,14 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
-    pub fn new(depth_clamp: bool) -> Self {
+    pub fn new(depth_clamp: bool, line: bool) -> Self {
         Self {
             vertex: vertex_state(),
-            assembly: vk::PipelineInputAssemblyStateCreateInfo::default()
-                .topology(vk::PrimitiveTopology::TRIANGLE_LIST),
+            assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if line {
+                vk::PrimitiveTopology::LINE_LIST
+            } else {
+                vk::PrimitiveTopology::TRIANGLE_LIST
+            }),
             viewport: vk::PipelineViewportStateCreateInfo::default()
                 .viewport_count(1)
                 .scissor_count(1),
@@ -53,12 +56,8 @@ impl PipelineState {
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: depth_state(),
             blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(&BLEND),
-            dynamic: vk::PipelineDynamicStateCreateInfo::default().dynamic_states(&[
-                vk::DynamicState::VIEWPORT,
-                vk::DynamicState::SCISSOR,
-                vk::DynamicState::DEPTH_TEST_ENABLE,
-                vk::DynamicState::DEPTH_WRITE_ENABLE,
-            ]),
+            dynamic: vk::PipelineDynamicStateCreateInfo::default()
+                .dynamic_states(dynamic_states(line)),
         }
     }
     pub fn description<'a>(
@@ -84,7 +83,7 @@ fn vertex_state() -> vk::PipelineVertexInputStateCreateInfo<'static> {
         .vertex_binding_descriptions(&BINDINGS)
         .vertex_attribute_descriptions(&ATTRIBUTES)
 }
-fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
+pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
     vk::PipelineRasterizationStateCreateInfo::default()
         .depth_clamp_enable(depth_clamp)
         .polygon_mode(vk::PolygonMode::FILL)
@@ -96,4 +95,26 @@ fn depth_state() -> vk::PipelineDepthStencilStateCreateInfo<'static> {
         .depth_test_enable(true)
         .depth_write_enable(true)
         .depth_compare_op(vk::CompareOp::LESS_OR_EQUAL)
+}
+
+fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
+    const STATES: [vk::DynamicState; 5] = [
+        vk::DynamicState::VIEWPORT,
+        vk::DynamicState::SCISSOR,
+        vk::DynamicState::DEPTH_TEST_ENABLE,
+        vk::DynamicState::DEPTH_WRITE_ENABLE,
+        vk::DynamicState::LINE_WIDTH,
+    ];
+    &STATES[..if line { 5 } else { 4 }]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn triangle_pipelines_do_not_require_dynamic_line_width() {
+        assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));
+        assert!(dynamic_states(true).contains(&vk::DynamicState::LINE_WIDTH));
+        assert_eq!(&dynamic_states(true)[..4], dynamic_states(false));
+    }
 }

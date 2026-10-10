@@ -46,7 +46,9 @@ fn main() {
     ais_removal_runtime::check_ais_removal();
     surface_runtime::check_surface_lifecycle();
     persistence_runtime::check_persistence_lifecycle();
-    println!("PASS: 8 Vulkan runtime checks; validation errors: 0");
+    line_runtime::check_line_lifecycle();
+    color_runtime::check_linear_to_srgb_capture();
+    println!("PASS: 10 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -116,3 +118,9 @@ mod surface_runtime;
 
 #[path = "support/persistence_runtime.rs"]
 mod persistence_runtime;
+
+#[path = "support/line_runtime.rs"]
+mod line_runtime;
+
+#[path = "support/color_runtime.rs"]
+mod color_runtime;

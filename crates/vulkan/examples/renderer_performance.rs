@@ -31,7 +31,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         benchmark(&driver, name, draws, resize, warmup, samples);
     }
     ais_performance::benchmark(&driver, warmup, samples)?;
-    surface_performance::benchmark(&driver, warmup, samples);
+    bound_performance::benchmark(&driver, warmup, samples, false);
+    bound_performance::benchmark(&driver, warmup, samples, true);
     persistence_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
@@ -87,12 +88,15 @@ fn timed_redraw(scene: &scene::ViewerScene, index: usize, resize: bool) -> f64 {
     start.elapsed().as_secs_f64() * 1000.
 }
 
+#[path = "support/bound_performance.rs"]
+mod bound_performance;
 #[path = "../tests/support/surface_arrays.rs"]
 mod surface_arrays;
-#[path = "support/surface_performance.rs"]
-mod surface_performance;
 
 #[path = "support/persistence_performance.rs"]
 mod persistence_performance;
 #[path = "../tests/support/persistence_scene.rs"]
 mod persistence_scene;
+
+#[path = "../tests/support/line_arrays.rs"]
+mod line_arrays;

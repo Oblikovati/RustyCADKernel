@@ -1,6 +1,6 @@
 //! Resolve visible Graphic3d layers into the same immutable submissions used by offscreen tests.
 use crate::{
-    RenderError, RenderFrame, RenderLayer, TriangleDraw, driver_structure::RenderStructure,
+    PrimitiveDraw, RenderError, RenderFrame, RenderLayer, driver_structure::RenderStructure,
     error::rejected,
 };
 use rustycad_tkernel::standard::Handle;
@@ -61,7 +61,7 @@ fn structure_draws(
     camera: &Graphic3dCamera,
     view_id: i32,
     extent: [u32; 2],
-) -> Result<Vec<TriangleDraw>, RenderError> {
+) -> Result<Vec<PrimitiveDraw>, RenderError> {
     if structure.is_null() {
         return Ok(vec![]);
     }

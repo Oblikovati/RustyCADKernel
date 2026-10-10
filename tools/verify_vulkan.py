@@ -14,6 +14,7 @@ import tempfile
 
 from dataclasses import asdict, dataclass
 from vulkan_build import build_vulkan_examples
+from vulkan_line_cases import LINE_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_performance import (
@@ -104,9 +105,9 @@ def check_reference(source: Path, build: Path, env: dict[str, str]) -> None:
 
 def check_shaders(folder: Path, env: dict[str, str]) -> str:
     """Recompile checked-in GLSL for Vulkan 1.3 and compare SPIR-V; e.g. check_shaders(tmp, env)."""
-    for stage in ("vert", "frag"):
-        source = ROOT / f"crates/vulkan/shaders/unlit.{stage}"
-        output = folder / f"unlit.{stage}.spv"
+    for name in ("unlit.vert", "unlit.frag", "line.vert", "line.frag"):
+        source = ROOT / f"crates/vulkan/shaders/{name}"
+        output = folder / f"{name}.spv"
         compile_shader(source, output, env)
         if output.read_bytes() != Path(f"{source}.spv").read_bytes():
             raise ValueError(
@@ -232,7 +233,14 @@ def capture_cases(
     for case, mode in [
         (case, mode)
         for case in CASES
-        for mode in ("default", "full", *AIS_MODES, *SURFACE_MODES, *PERSISTENCE_MODES)
+        for mode in (
+            "default",
+            "full",
+            *AIS_MODES,
+            *SURFACE_MODES,
+            *PERSISTENCE_MODES,
+            *LINE_MODES,
+        )
     ]:
         try:
             results.append(capture_case(native, rust, folder, profile, case, mode))
@@ -256,6 +264,8 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_reference.cxx",
             "tools/oracle/martensite_vulkan_ais.cxx",
             "tools/oracle/martensite_vulkan_surfaces.cxx",
+            "tools/oracle/martensite_vulkan_bound_array.hxx",
+            "tools/oracle/martensite_vulkan_lines.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )
@@ -405,7 +415,7 @@ def receipt(
             "median_ratio": config.median_ratio,
             "p95_ratio": config.p95_ratio,
         },
-        "scope": "opaque unlit triangles through V3d/Graphic3d/AIS; default/full-layer and AIS lifecycle captures; end-to-end frame benchmarks",
+        "scope": "opaque unlit surfaces and lines through V3d/Graphic3d/AIS; default/full-layer and AIS lifecycle captures; end-to-end frame benchmarks",
     }
 
 

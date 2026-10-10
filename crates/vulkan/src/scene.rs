@@ -1,6 +1,6 @@
 //! Immutable submissions separate geometry validation from device operations.
 use crate::error::{RenderError, rejected};
-use crate::{RenderLayer, RenderLayerSpan, render_layers::flatten_layers};
+use crate::{PrimitiveDraw, RenderLayer, RenderLayerSpan, render_layers::flatten_layers};
 /// Position and linear RGBA color; `RenderVertex::new([0.,0.,0.],[1.,0.,0.,1.])`.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct RenderVertex {
@@ -15,47 +15,6 @@ impl RenderVertex {
         Self { position, color }
     }
 }
-/// One indexed triangle draw and its column-major OpenGL clip transform.
-/// Example: `TriangleDraw::new(vertices, vec![0,1,2], identity_clip())?`.
-#[derive(Clone, Debug, PartialEq)]
-pub struct TriangleDraw {
-    pub(crate) vertices: Vec<RenderVertex>,
-    pub(crate) indices: Vec<u32>,
-    pub(crate) clip_transform: [f32; 16],
-    pub(crate) depth_clamp: bool,
-}
-impl TriangleDraw {
-    /// Validate geometry and transforms before any GPU work; `TriangleDraw::new(vertices,indices,matrix)?`.
-    pub fn new(
-        vertices: Vec<RenderVertex>,
-        indices: Vec<u32>,
-        clip_transform: [f32; 16],
-    ) -> Result<Self, RenderError> {
-        validate_triangles(&vertices, &indices, &clip_transform)?;
-        Ok(Self {
-            vertices,
-            indices,
-            clip_transform,
-            depth_clamp: false,
-        })
-    }
-    /// Whether camera persistence clamps depth; `draw.depth_clamp()`.
-    pub fn depth_clamp(&self) -> bool {
-        self.depth_clamp
-    }
-    /// Read the column-major transform; `draw.clip_transform()`.
-    pub fn clip_transform(&self) -> &[f32; 16] {
-        &self.clip_transform
-    }
-    /// Read retained vertices; `draw.vertices().len()`.
-    pub fn vertices(&self) -> &[RenderVertex] {
-        &self.vertices
-    }
-    /// Read zero-based triangle indices; `draw.indices().len()`.
-    pub fn indices(&self) -> &[u32] {
-        &self.indices
-    }
-}
 /// OpenGL clip identity; `let transform = identity_clip()`.
 pub fn identity_clip() -> [f32; 16] {
     [
@@ -68,7 +27,7 @@ pub struct RenderFrame {
     pub(crate) width: u32,
     pub(crate) height: u32,
     pub(crate) clear_color: [f32; 4],
-    pub(crate) draws: Vec<TriangleDraw>,
+    pub(crate) draws: Vec<PrimitiveDraw>,
     pub(crate) layers: Vec<RenderLayerSpan>,
 }
 impl RenderFrame {
@@ -81,7 +40,7 @@ impl RenderFrame {
         self.clear_color
     }
     /// Read validated draws for an injected backend; `frame.draws()`.
-    pub fn draws(&self) -> &[TriangleDraw] {
+    pub fn draws(&self) -> &[PrimitiveDraw] {
         &self.draws
     }
     /// Validate extent and clear color; `RenderFrame::new(64,64,[0.;4],vec![])?`.
@@ -89,7 +48,7 @@ impl RenderFrame {
         width: u32,
         height: u32,
         clear_color: [f32; 4],
-        draws: Vec<TriangleDraw>,
+        draws: Vec<PrimitiveDraw>,
     ) -> Result<Self, RenderError> {
         Self::with_layers(
             width,
@@ -134,7 +93,7 @@ pub struct FrameCapture {
     pub width: u32,
     /// Height in pixels.
     pub height: u32,
-    /// Tightly packed linear RGBA8 pixels, row-major from top left.
+    /// Tightly packed sRGB color and linear alpha bytes, row-major from top left.
     pub rgba: Vec<u8>,
     /// Vulkan depth values in `[0,1]`, same pixel order as color.
     pub depth: Vec<f32>,
@@ -155,20 +114,7 @@ pub trait RenderBackend {
     fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError>;
 }
 
-fn validate_triangles(
-    vertices: &[RenderVertex],
-    indices: &[u32],
-    clip_transform: &[f32; 16],
-) -> Result<(), RenderError> {
-    if !indices.len().is_multiple_of(3) || indices.iter().any(|&i| i as usize >= vertices.len()) {
-        return Err(rejected(
-            indices,
-            "triangle index triples within the vertex array",
-        ));
-    }
-    validate_components(vertices, clip_transform)
-}
-fn validate_components(
+pub(crate) fn validate_components(
     vertices: &[RenderVertex],
     clip_transform: &[f32; 16],
 ) -> Result<(), RenderError> {

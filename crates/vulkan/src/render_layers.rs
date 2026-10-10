@@ -1,10 +1,10 @@
 //! Layer ordering and depth policy stay explicit in immutable frame submissions.
-use crate::TriangleDraw;
+use crate::PrimitiveDraw;
 use std::ops::Range;
 /// One ordered pass; `RenderLayer::new(draws, true, true, false)`.
 #[derive(Clone, Debug)]
 pub struct RenderLayer {
-    pub(crate) draws: Vec<TriangleDraw>,
+    pub(crate) draws: Vec<PrimitiveDraw>,
     pub(crate) depth_test: bool,
     pub(crate) depth_write: bool,
     pub(crate) clear_depth: bool,
@@ -12,7 +12,7 @@ pub struct RenderLayer {
 impl RenderLayer {
     /// Retain a layer's draws and depth policy; `RenderLayer::new(draws, true, true, false)`.
     pub fn new(
-        draws: Vec<TriangleDraw>,
+        draws: Vec<PrimitiveDraw>,
         depth_test: bool,
         depth_write: bool,
         clear_depth: bool,
@@ -45,7 +45,7 @@ impl RenderLayerSpan {
 }
 pub(crate) fn flatten_layers(
     layers: Vec<RenderLayer>,
-) -> (Vec<TriangleDraw>, Vec<RenderLayerSpan>) {
+) -> (Vec<PrimitiveDraw>, Vec<RenderLayerSpan>) {
     let mut draws = Vec::new();
     let mut spans = Vec::new();
     for layer in layers {

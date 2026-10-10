@@ -1,5 +1,5 @@
 //! Graphic3d buffers are read at frame extraction so shared buffer mutations stay visible.
-use crate::{RenderError, RenderVertex, TriangleDraw, error::rejected};
+use crate::{PrimitiveDraw, RenderError, RenderVertex, error::rejected};
 use rustycad_tkernel::{ncollection::Vec4, standard::Handle};
 use rustycad_tkservice::graphic3d::*;
 #[derive(Clone)]
@@ -35,7 +35,8 @@ impl PrimitiveSubmission {
         &self,
         color: [f32; 4],
         matrix: [f32; 16],
-    ) -> Result<Vec<TriangleDraw>, RenderError> {
+        line: Option<crate::LineStyle>,
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         let positions = self.positions()?;
         let indices = self.read_indices(positions.len())?;
         let vertices = positions
@@ -45,7 +46,7 @@ impl PrimitiveSubmission {
             .collect::<Result<Vec<_>, _>>()?;
         crate::primitive_ranges::primitive_ranges(&self.bounds, &indices, color)?
             .into_iter()
-            .map(|range| self.range_draw(range, &vertices, matrix))
+            .map(|range| self.range_draw(range, &vertices, matrix, line))
             .collect()
     }
     fn range_draw(
@@ -53,17 +54,22 @@ impl PrimitiveSubmission {
         range: crate::primitive_ranges::PrimitiveRange,
         vertices: &[RenderVertex],
         matrix: [f32; 16],
-    ) -> Result<TriangleDraw, RenderError> {
-        let indices = crate::primitive_topology::triangle_indices(self.kind, &range.indices)?;
+        line: Option<crate::LineStyle>,
+    ) -> Result<PrimitiveDraw, RenderError> {
+        let indices = if line.is_some() {
+            crate::primitive_topology::line_indices(self.kind, &range.indices)?
+        } else {
+            crate::primitive_topology::triangle_indices(self.kind, &range.indices)?
+        };
         let colored = self
             .attributes
             .attribute_data(Graphic3dTypeOfAttribute::Color)
             .is_some();
-        TriangleDraw::new(
-            range_vertices(vertices, range.color, colored),
-            indices,
-            matrix,
-        )
+        let vertices = range_vertices(vertices, range.color, colored);
+        match line {
+            Some(style) => PrimitiveDraw::segments(vertices, indices, matrix, style),
+            None => PrimitiveDraw::new(vertices, indices, matrix),
+        }
     }
     fn vertex(
         &self,

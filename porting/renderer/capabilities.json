@@ -32,7 +32,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.cxx"
       ],
-      "current_evidence_or_remaining_work": "V3d ToPixMap reaches Vulkan through framebuffer targets; RGBA8 and D32 readback, RGB/red conversion and padded/bottom-up rows tested. MSAA, HDR, tiled capture, sRGB and alternate formats remain pending.",
+      "current_evidence_or_remaining_work": "V3d ToPixMap reaches Vulkan through framebuffer targets; RGBA8 and D32 readback, RGB/red conversion and padded/bottom-up rows tested. sRGB attachments now match native default color encoding, with a midtone GPU regression. MSAA, HDR, tiled capture, configurable color spaces and alternate formats remain pending.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
@@ -65,7 +65,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_PrimitiveArray.cxx"
       ],
-      "current_evidence_or_remaining_work": "Graphic3d triangle strips/fans are lowered to triangle lists with per-bound assembly and colors; vertex colors take precedence. CPU buffer tests and native capture scenarios cover indexed/unindexed arrays. Lines, points, quads/polygons, normals, edges, silhouettes, culling, polygon offsets and stencil remain open.",
+      "current_evidence_or_remaining_work": "Graphic3d triangle strips/fans are lowered to triangle lists with per-bound assembly and colors; vertex colors take precedence. CPU buffer tests and native capture scenarios cover indexed/unindexed arrays. Segments/polylines, widths and shader line patterns now reach Vulkan; varying-color/depth fixtures retain strict differences documented in docs/vulkan-lines.md. Points, quads/polygons, normals, edges, silhouettes, culling, polygon offsets and stencil remain open.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
