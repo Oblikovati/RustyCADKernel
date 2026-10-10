@@ -17,6 +17,7 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__("tkv3d_corpus_selector_geometry").append_selector_geometry_requests(requests)
     __import__("tkv3d_corpus_selector_overlap").append_selector_overlap_requests(requests)
     __import__("tkv3d_corpus_selector_traversal").append_selector_traversal_requests(requests)
+    __import__("tkv3d_corpus_selection_image").append_selection_image_requests(requests)
     __import__("tkv3d_corpus_selector_pick").append_selector_pick_requests(requests)
     # Prs3d tools, arrows, deflection and boxes (tkv3d_corpus_prs3d.py)
     __import__('tkv3d_corpus_prs3d').append_prs3d_requests(requests)

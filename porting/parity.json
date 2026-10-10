@@ -570691,7 +570691,7 @@
       "cpp_declaration_id": "3c1d63a3cdac0c68228a8cef9b718dc786a3c195aa9129d0d43f4f1531965ba7",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelector",
       "status": "partial",
-      "notes": "Partial: state, lifecycle, ranking, layer grouping and debug cleanup are implemented and validated. Private picked-point/depth-tolerance and per-entity scale/transform/cache helpers are translated and compared against native functions. Missing four Pick overloads, TraverseSensitives/traverseObject/checkOverlap, ToPixMap and DisplaySensitive. See docs/v3d-design.md."
+      "notes": "Partial: state, lifecycle, ranking, layer grouping, debug cleanup, all four Pick overloads, two-level camera/persistence traversal and all nine ToPixMap selection-image modes are implemented and native-compared. DisplaySensitive overloads remain missing. See docs/viewer-selector-traversal.md and docs/selection-images.md."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Contains(const class opencascade::handle<class SelectMgr_SelectableObject> &) const",
@@ -572721,7 +572721,7 @@
       "cpp_declaration_id": "0563bed120c918166d387006e6929f0d8fd7f3afb906cde7470998c836ab02bd",
       "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_check_overlap",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(const class gp_Ax1 &, const class opencascade::handle<class V3d_View> &)",
@@ -572731,7 +572731,7 @@
       "cpp_declaration_id": "1d77398259ef8b2967b16ee0a031fe9950105cfe2e017797c9607de9043cbcbe",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_axis",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::TraverseSensitives(int)",
@@ -572741,7 +572741,7 @@
       "cpp_declaration_id": "3af444521899e3748c8ae1c57d680c29f3e72d09d65a227245731e4617fcf6f7",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorTraversalMembers::traverse_sensitives",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(int, int, const class opencascade::handle<class V3d_View> &)",
@@ -572751,7 +572751,7 @@
       "cpp_declaration_id": "80e526e505a2117ee8befdb20ea08c1808acd7028352b752ac244e611c2b56ea",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_point",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(int, int, int, int, const class opencascade::handle<class V3d_View> &)",
@@ -572761,7 +572761,7 @@
       "cpp_declaration_id": "d6b39ac1606ca5f03d02ba827385eb4e480c498213af5e2857f9c658f2098179",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_box",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(const class NCollection_Array1<class gp_Pnt2d> &, const class opencascade::handle<class V3d_View> &)",
@@ -572771,7 +572771,7 @@
       "cpp_declaration_id": "d81645c456f46662410651690b0f63d56ce2c8c0e56536941249b505f3877ad8",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_polyline",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::traverseObject(const class opencascade::handle<class SelectMgr_SelectableObject> &, const class SelectMgr_SelectingVolumeManager &, const class opencascade::handle<class Graphic3d_Camera> &, const class NCollection_Mat4<double> &, const class NCollection_Mat4<double> &, const class NCollection_Vec2<int> &)",
@@ -572781,7 +572781,227 @@
       "cpp_declaration_id": "f6158f121db6c21e95e53310a31542afa5542b3dcf9743f809b6eee1e4fdfc8c",
       "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_traverse_object",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive and ToPixMap."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_ColoredEntity",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "205e5196ed8ebe2482d1d405b5e633fe06a52d4a26a7cd40a0a1507549649542",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::COLORED_ENTITY",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_UnnormalizedDepth",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "2ae47e9456dfd232218de52288e5ebb3b0ea4b9482a576ba555bd1871c3f83ed",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::UNNORMALIZED_DEPTH",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::myUniqueColors",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "2c266729cdaa99c7cfee6102c523d5bc11e460e55aca2df91e2856c5ae63a931",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::unique_colors",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::randomPastelColor(class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "2d7290a6cdd977011cedaf8551ccfd2abe2cc98ac50b8e5bddf9c518359abd6c",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::random_pastel_color",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::SelectMgr_SelectionImageFiller(class Image_PixMap &, class SelectMgr_ViewerSelector *)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "33f37313d06c7ab6211cedd9cfe33c3975f85dfffe126ad998a5cfe4441397e9",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::new",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_NormalizedDepth",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "352abadaf601a320ab3d3f0f08bb03a794c9e95aff3bc714df61bfa4fa3009a4",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::NORMALIZED_DEPTH",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_SurfaceNormal",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "62f2493b89d4ef71f47aee0d3de607fca215651447789511168a2be666351693",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::SURFACE_NORMAL",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_ColoredDetectedObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "78d5442ad13edde22a3a73f5c84fc3e13a8d91c1e97f79dadf89015ba941c234",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::COLORED_DETECTED_OBJECT",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::nextRandomPastelColor(class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "97a4fb24c4c3bde89d9b6ae0171c81d9cd738e39ab4fb1082f0d60b5bc1e0846",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::next_random_pastel_color",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_NormalizedDepthInverted",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "9ce70200a6341e96d1fa9b6aea71d9ab09834ae2136bdbf80c0d975c640d9510",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::NORMALIZED_DEPTH_INVERTED",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_ColoredOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "9f34311215519698c2d1ac796856ce9237291db1e5b25b5c3dcab2bd9ce968f4",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::COLORED_OWNER",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_ColoredSelectionMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "9f9dc4b6c318220ca16b0db980100bf10bcea9600017f30be374b4885fe72922",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::COLORED_SELECTION_MODE",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::myBullardGenerator",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "a76ff191d55ec6d73acb36abdab4b81a835c3af2a819a500b19498c8edf0f0fc",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::generator",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::CreateFiller(class Image_PixMap &, class SelectMgr_ViewerSelector *, enum StdSelect_TypeOfSelectionImage)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "ab88cbddc654091a86b8f36c7412ad2e5266f23a20a98d64453265e58968c7d0",
+      "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_create_selection_image_filler",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::myImage",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "b2c343df10461eeb0ee43b40e9e7192602c983dd45ea3012f7b73264aacafa3f",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::image",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector::ToPixMap(class Image_PixMap &, const class opencascade::handle<class V3d_View> &, const enum StdSelect_TypeOfSelectionImage, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+      "source_sha256": "5422976f30a0463a5334e6cfcc902f1d916e5e8cf950e63cbad6fe451f0bbf15",
+      "cpp_declaration_id": "b58ceb1c000e76c4a4cf2f0eb2d9139af7ec615de93b4e5c3c182602d0bc19f8",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorImageMembers::to_pix_map",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::myMainSel",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "c0d7f8283ecef0e7c8f5acab9a93e2350012232d38664fe1430aa2d9d39216b4",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFillerBase::selector",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::Fill(const int, const int, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "cfc2abef01fb6d0bd73dced8697bef3d828e60291bb90548fb316d13efdc70bb",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFiller::fill",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "d13513e660873999772b630aa3bc012d3dc6559bd5d819ec46ede17b33880760",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFiller",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage_ColoredEntityType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "e5bd3ddb5aa8345a297cde245cab291c1355902687aa8db69cbc69f35170e1ba",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage::COLORED_ENTITY_TYPE",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "StdSelect_TypeOfSelectionImage",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdSelect/StdSelect_TypeOfSelectionImage.hxx",
+      "source_sha256": "7ec604fbe86012e996f7dd8a5ce1c0805cbc9b8af3c95189b0aa99431f8985b3",
+      "cpp_declaration_id": "e70ab6cc3babb22782adb3f4038c7ff47ac4bde49e36f73e57bd9bdf8143af73",
+      "rust_item": "rustycad_tkv3d::std_select::StdSelectTypeOfSelectionImage",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::Flush()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionImageFiller.hxx",
+      "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
+      "cpp_declaration_id": "f551967c8f4623aa7b9a498f7e352c4052990849d362186488754b6ff5f13ff2",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFiller::flush",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
     }
   ],
   "tests": [

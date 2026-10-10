@@ -76,3 +76,5 @@ pub mod selector_overlap;
 pub mod selector_traversal;
 
 pub mod selector_pick;
+
+pub mod selection_image;
