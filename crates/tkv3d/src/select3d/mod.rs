@@ -46,3 +46,6 @@ pub use sensitive_sphere::{Select3DSensitiveCylinder, Select3DSensitiveSphere};
 pub use sensitive_triangle::{Select3DSensitiveTriangle, Select3DTypeOfSensitivity};
 pub use sensitive_triangulation::Select3DSensitiveTriangulation;
 pub use sensitive_wire::Select3DSensitiveWire;
+
+mod sensitive_poly_source;
+pub use sensitive_poly_source::Select3DSensitivePolySource;

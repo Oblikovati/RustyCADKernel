@@ -36,4 +36,4 @@ would make the fixture invalid.
 
 Run `cargo test -p rustycad-tkv3d --all-targets` and
 `python3 tools/verify_tkv3d_numeric.py --source ../OCCT --native-build target/occt-all-full`.
-`DisplaySensitive` remains an open ViewerSelector obligation.
+Both `DisplaySensitive` overloads are now mapped; see [sensitive display](sensitive-display.md).

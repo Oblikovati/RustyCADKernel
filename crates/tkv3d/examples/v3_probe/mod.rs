@@ -78,3 +78,5 @@ pub mod selector_traversal;
 pub mod selector_pick;
 
 pub mod selection_image;
+
+pub mod sensitive_display;

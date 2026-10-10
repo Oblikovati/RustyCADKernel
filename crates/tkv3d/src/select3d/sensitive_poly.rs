@@ -402,6 +402,11 @@ impl Select3DSensitivePolyCore {
 #[macro_export]
 macro_rules! impl_select3d_poly {
     ($type:ty, $connected:expr) => {
+        impl $crate::select3d::Select3DSensitivePolySource for $type {
+            fn sensitive_poly_core(&self) -> &$crate::select3d::Select3DSensitivePolyCore {
+                &self.core
+            }
+        }
         impl $crate::select3d::Select3DSensitiveEntity for $type {
             fn sensitive_base(&self) -> &$crate::select3d::Select3DSensitiveEntityBase {
                 &self.core.entity
@@ -503,7 +508,7 @@ pub struct Select3DSensitivePoly {
     pub core: Select3DSensitivePolyCore,
 }
 rustycad_tkernel::impl_transient!(Select3DSensitivePoly, "Select3D_SensitivePoly", dyn Select3DSensitiveSet, transient,
-    interfaces: [dyn super::Select3DSensitiveEntity, dyn Select3DSensitiveSet]);
+    interfaces: [dyn super::Select3DSensitiveEntity, dyn Select3DSensitiveSet, dyn super::Select3DSensitivePolySource]);
 impl_select3d_poly!(Select3DSensitivePoly, |_: &Select3DSensitivePoly| Ok(
     Handle::default()
 ));

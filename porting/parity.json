@@ -570690,8 +570690,8 @@
       "source_sha256": "b104d0059e8267a3d6401c26979059ca86f91861e22e430377b3c57265fad9ab",
       "cpp_declaration_id": "3c1d63a3cdac0c68228a8cef9b718dc786a3c195aa9129d0d43f4f1531965ba7",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelector",
-      "status": "partial",
-      "notes": "Partial: state, lifecycle, ranking, layer grouping, debug cleanup, all four Pick overloads, two-level camera/persistence traversal and all nine ToPixMap selection-image modes are implemented and native-compared. DisplaySensitive overloads remain missing. See docs/viewer-selector-traversal.md and docs/selection-images.md."
+      "status": "implemented",
+      "notes": "ViewerSelector declared non-boilerplate surface is mapped: configuration, lifecycle, ranking, all four Pick overloads, two-level camera/persistence traversal, all nine ToPixMap modes, both DisplaySensitive overloads and cleanup. Source-bound native comparisons cover each implemented slice; this is an implementation accounting claim, not complete toolkit parity. See docs/viewer-selector-traversal.md, docs/selection-images.md and docs/sensitive-display.md."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Contains(const class opencascade::handle<class SelectMgr_SelectableObject> &) const",
@@ -572721,7 +572721,7 @@
       "cpp_declaration_id": "0563bed120c918166d387006e6929f0d8fd7f3afb906cde7470998c836ab02bd",
       "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_check_overlap",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(const class gp_Ax1 &, const class opencascade::handle<class V3d_View> &)",
@@ -572731,7 +572731,7 @@
       "cpp_declaration_id": "1d77398259ef8b2967b16ee0a031fe9950105cfe2e017797c9607de9043cbcbe",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_axis",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::TraverseSensitives(int)",
@@ -572741,7 +572741,7 @@
       "cpp_declaration_id": "3af444521899e3748c8ae1c57d680c29f3e72d09d65a227245731e4617fcf6f7",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorTraversalMembers::traverse_sensitives",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(int, int, const class opencascade::handle<class V3d_View> &)",
@@ -572751,7 +572751,7 @@
       "cpp_declaration_id": "80e526e505a2117ee8befdb20ea08c1808acd7028352b752ac244e611c2b56ea",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_point",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(int, int, int, int, const class opencascade::handle<class V3d_View> &)",
@@ -572761,7 +572761,7 @@
       "cpp_declaration_id": "d6b39ac1606ca5f03d02ba827385eb4e480c498213af5e2857f9c658f2098179",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_box",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::Pick(const class NCollection_Array1<class gp_Pnt2d> &, const class opencascade::handle<class V3d_View> &)",
@@ -572771,7 +572771,7 @@
       "cpp_declaration_id": "d81645c456f46662410651690b0f63d56ce2c8c0e56536941249b505f3877ad8",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorPickMembers::pick_polyline",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "SelectMgr_ViewerSelector::traverseObject(const class opencascade::handle<class SelectMgr_SelectableObject> &, const class SelectMgr_SelectingVolumeManager &, const class opencascade::handle<class Graphic3d_Camera> &, const class NCollection_Mat4<double> &, const class NCollection_Mat4<double> &, const class NCollection_Vec2<int> &)",
@@ -572781,7 +572781,7 @@
       "cpp_declaration_id": "f6158f121db6c21e95e53310a31542afa5542b3dcf9743f809b6eee1e4fdfc8c",
       "rust_item": "rustycad_tkv3d::select_mgr::select_mgr_traverse_object",
       "status": "implemented",
-      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ViewerSelector remains partial for DisplaySensitive; ToPixMap is now separately mapped."
+      "notes": "Native viewer selection at OCCT 3d097a0: real two-level BVH traversal across all five persistence subsets, camera-matrix ordering, object/entity persistence, flipping, clipping, owner-slot mutation, active/view-visible filtering, owner-complete containment, derived sorting and failure recovery under the BVH-pool sentry. All four public Pick overloads preserve initialization and reuse order. Fourteen direct tests and 1408 new native comparison cases. See docs/viewer-selector-traversal.md. ToPixMap and both DisplaySensitive overloads are now separately mapped; ViewerSelector implementation accounting is complete."
     },
     {
       "upstream_id": "StdSelect_TypeOfSelectionImage_ColoredEntity",
@@ -573002,6 +573002,46 @@
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFiller::flush",
       "status": "implemented",
       "notes": "OCCT 3d097a0 selection images: all nine native modes, row-major public camera picking, double extrema with float pixel/bound rounding, deferred flush, partial failures, retained entity/owner palettes, runtime type identity, last selection membership and pinned GCC Bullard color order. Borrowed Rust filler trait/base and Box preserve non-owning image/selector lifetimes; custom fillers retain Fill/Flush and protected state access. Eleven direct tests and 2254 native byte-exact image/pick traces. See docs/selection-images.md."
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector::DisplaySensitive(const class opencascade::handle<class V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+      "source_sha256": "5422976f30a0463a5334e6cfcc902f1d916e5e8cf950e63cbad6fe451f0bbf15",
+      "cpp_declaration_id": "0fe07ad72b6ad1c2b3c6d438457eeca0f9cd011fcb1c21af4f692088a8d159f9",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorDisplayMembers::display_sensitive",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 sensitive debug presentations: real primitive buffers with native box, cylinder, circle, face, inherited poly/curve, wire, point, segment, triangle and triangulation/free-edge order; retained groups, flipping and persistence, active-selection filtering, live selection append callbacks, Topmost redisplay, optional ClearSensitive and partial failures. Six direct tests and 4320 native callback/buffer comparisons. See docs/sensitive-display.md."
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector::DisplaySensitive(const class opencascade::handle<class SelectMgr_Selection> &, const class gp_Trsf &, const class opencascade::handle<class V3d_View> &, const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.hxx",
+      "source_sha256": "5422976f30a0463a5334e6cfcc902f1d916e5e8cf950e63cbad6fe451f0bbf15",
+      "cpp_declaration_id": "58cae9d46e78de165fd9ab3cf5ca7c0a6152e644030707637e0d5f424e84d219",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrViewerSelectorDisplayMembers::display_sensitive_selection",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 sensitive debug presentations: real primitive buffers with native box, cylinder, circle, face, inherited poly/curve, wire, point, segment, triangle and triangulation/free-edge order; retained groups, flipping and persistence, active-selection filtering, live selection append callbacks, Topmost redisplay, optional ClearSensitive and partial failures. Six direct tests and 4320 native callback/buffer comparisons. See docs/sensitive-display.md."
+    },
+    {
+      "upstream_id": "SelectMgr::ComputeSensitivePrs(const class opencascade::handle<class Graphic3d_Structure> &, const class opencascade::handle<class SelectMgr_Selection> &, const class gp_Trsf &, const class opencascade::handle<class Graphic3d_TransformPers> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr.hxx",
+      "source_sha256": "f37173dc96398469eba2ff2e196f91c2ef983800a3f0620c52ffbcff0afa2afb",
+      "cpp_declaration_id": "7072eff293eba164657e87b9d5303ea9c5580a09062165b31296ceb5dbad80df",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgr::compute_sensitive_prs",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 sensitive debug presentations: real primitive buffers with native box, cylinder, circle, face, inherited poly/curve, wire, point, segment, triangle and triangulation/free-edge order; retained groups, flipping and persistence, active-selection filtering, live selection append callbacks, Topmost redisplay, optional ClearSensitive and partial failures. Six direct tests and 4320 native callback/buffer comparisons. See docs/sensitive-display.md."
+    },
+    {
+      "upstream_id": "SelectMgr",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr.hxx",
+      "source_sha256": "f37173dc96398469eba2ff2e196f91c2ef983800a3f0620c52ffbcff0afa2afb",
+      "cpp_declaration_id": "a874d3630deceb8b2b259064eb0f81ee5b9dd0be1fd9259bbf294f112ad8bcce",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgr",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 sensitive debug presentations: real primitive buffers with native box, cylinder, circle, face, inherited poly/curve, wire, point, segment, triangle and triangulation/free-edge order; retained groups, flipping and persistence, active-selection filtering, live selection append callbacks, Topmost redisplay, optional ClearSensitive and partial failures. Six direct tests and 4320 native callback/buffer comparisons. See docs/sensitive-display.md."
     }
   ],
   "tests": [
