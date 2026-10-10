@@ -1,14 +1,18 @@
 //! Wasm_Window and Xw_Window: the event translations into a window input listener.
 use rustycad_tkernel::ncollection::Vec2;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::Failure;
+#[cfg(target_os = "linux")]
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkservice::aspect::{
-    ASPECT_VKEY_MOUSE_LEFT_BUTTON, AspectDisplayConnection, AspectScrollDelta, AspectVKey,
-    AspectVKeyBasic, AspectVKeyFlags, AspectVKeyMouse, AspectWindow, AspectWindowInputListener,
-    AspectWindowInputListenerBase, AspectWindowMembers,
+    ASPECT_VKEY_MOUSE_LEFT_BUTTON, AspectScrollDelta, AspectVKey, AspectVKeyFlags, AspectVKeyMouse,
+    AspectWindow, AspectWindowInputListener, AspectWindowInputListenerBase, AspectWindowMembers,
 };
+#[cfg(target_os = "linux")]
+use rustycad_tkservice::aspect::{AspectDisplayConnection, AspectVKeyBasic};
 use rustycad_tkservice::wasm::WasmWindow;
 use rustycad_tkservice::wnt::WntHidSpaceMouse;
+#[cfg(target_os = "linux")]
 use rustycad_tkservice::xw::{XwWindow, XwXEvent};
 
 /// A listener that records the window notifications it receives.
@@ -110,6 +114,7 @@ fn canvas_window_events_without_emscripten() {
 }
 
 /// A button event of the C `XEvent` layout (64-bit Linux): type, window, x, y, state, button.
+#[cfg(target_os = "linux")]
 fn button_event(event_type: i32, window: u64, xy: [i32; 2], button: u32) -> XwXEvent {
     let mut bytes = [0u8; XwXEvent::SIZE];
     bytes[0..4].copy_from_slice(&event_type.to_ne_bytes());
@@ -120,6 +125,7 @@ fn button_event(event_type: i32, window: u64, xy: [i32; 2], button: u32) -> XwXE
     XwXEvent::from_bytes(&bytes)
 }
 
+#[cfg(target_os = "linux")]
 #[test]
 fn x_window_keys_constructors_and_events() {
     assert_eq!(

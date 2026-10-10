@@ -92,3 +92,16 @@ development libraries explicitly. macOS uses Homebrew `tcl-tk@8` with local
 versioned pkg-config aliases, alongside FreeType and Fontconfig. This repairs the
 missing `tcl8.6` prerequisite observed in Dependabot run `38073783006`; it does not
 accept or merge the dependency update. Hosted verification of these fixes is pending.
+
+The oracle tool tests now use portable bounded evidence. The private-return
+receipt v2 replays the same compiler captures and an exact, hash-checked copy of
+the pinned upstream header, so CI does not require the capture host's absolute
+checkout path. The OSD interface receipt v2 uses the verified current TKernel
+rustdoc capture after an unrelated re-export changed its containing source file.
+The v1 receipts and all identity, visibility, and source-hash checks remain intact;
+these updates grant no additional API coverage.
+
+X11 window APIs, examples, and their tests are Linux-specific, matching the
+existing Xlib dependency and display implementation. Other window and offscreen
+checks remain enabled on macOS and Windows. The matrix completes every platform
+even when another fails, so a macOS failure no longer cancels Windows diagnostics.

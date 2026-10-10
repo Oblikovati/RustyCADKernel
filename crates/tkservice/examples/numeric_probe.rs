@@ -2,9 +2,11 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod sv_probe;
+#[cfg(target_os = "linux")]
+use sv_probe::window;
 use sv_probe::{
     array, aspects, camera, clip_plane, culling, driver, font, grid, hid, light, marker, material,
-    media, mtex, params, pbr, pixel, shader, stats, texture, tpers, window,
+    media, mtex, params, pbr, pixel, shader, stats, texture, tpers,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -72,6 +74,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // Graphic3d_MediaTexture and Graphic3d_MediaTextureSet (sv_probe/mtex.rs)
     ("sv_mtex", mtex::mtex_case),
     // Wasm_Window and Xw_Window (sv_probe/window.rs)
+    #[cfg(target_os = "linux")]
     ("sv_window", window::window_case),
 ];
 

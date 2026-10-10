@@ -20,6 +20,7 @@ pub mod shader;
 pub mod stats;
 pub mod texture;
 pub mod tpers;
+#[cfg(target_os = "linux")]
 pub mod window;
 // The reader and bit printers of the TKGeomAlgo probe, shared so that every toolkit
 // prints the same token stream (tools/oracle/tkservice_probe.cxx includes

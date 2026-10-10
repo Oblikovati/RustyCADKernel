@@ -54,9 +54,11 @@ fn main() {
     text_runtime::check_text_lifecycle();
     ais_axis_runtime::check_axis_datums();
     plane_trihedron_runtime::check_plane_datums();
+    #[cfg(target_os = "linux")]
     window_runtime::check_windows();
     ais_circle_runtime::check_circle_datums();
-    println!("PASS: 18 Vulkan runtime checks; validation errors: 0");
+    let checks = if cfg!(target_os = "linux") { 18 } else { 17 };
+    println!("PASS: {checks} Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -163,13 +165,17 @@ mod plane_scene;
 #[path = "support/plane_trihedron_runtime.rs"]
 mod plane_trihedron_runtime;
 
+#[cfg(target_os = "linux")]
 #[path = "support/native_window.rs"]
 mod native_window;
+#[cfg(target_os = "linux")]
 #[path = "support/window_runtime.rs"]
 mod window_runtime;
+#[cfg(target_os = "linux")]
 #[path = "support/window_scene.rs"]
 mod window_scene;
 
+#[cfg(target_os = "linux")]
 use ais_runtime::scene as ais_scene;
 
 #[path = "support/ais_circle_runtime.rs"]
