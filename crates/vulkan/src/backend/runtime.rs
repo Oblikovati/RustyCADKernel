@@ -79,13 +79,7 @@ impl VulkanRuntime {
         bits: u32,
         flags: vk::MemoryPropertyFlags,
     ) -> Result<u32, RenderError> {
-        (0..self.memory.memory_type_count)
-            .find(|&i| {
-                bits & (1 << i) != 0
-                    && self.memory.memory_types[i as usize]
-                        .property_flags
-                        .contains(flags)
-            })
+        super::memory_selection::compatible_memory_type(&self.memory, bits, flags)
             .ok_or_else(|| rejected((bits, flags), "a compatible Vulkan memory type"))
     }
 }

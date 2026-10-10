@@ -36,6 +36,7 @@ impl VulkanRenderer {
 mod buffer;
 mod frame;
 mod image;
+mod memory_selection;
 mod pipeline;
 mod pipeline_state;
 mod record;

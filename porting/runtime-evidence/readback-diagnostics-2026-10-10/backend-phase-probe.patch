@@ -1,0 +1,40 @@
+diff --git a/crates/vulkan/src/backend/buffer.rs b/crates/vulkan/src/backend/buffer.rs
+index b3cceb233..476a388d1 100644
+--- a/crates/vulkan/src/backend/buffer.rs
++++ b/crates/vulkan/src/backend/buffer.rs
+@@ -40,6 +40,7 @@ impl DeviceBuffer {
+         let index = self
+             .runtime
+             .memory_type(requirements.memory_type_bits, flags)?;
++        println!("{{\"diagnostic\":\"DEBUG-martensite-memory-selection\",\"index\":{index},\"allowed\":{},\"flags\":{}}}", requirements.memory_type_bits, self.runtime.memory.memory_types[index as usize].property_flags.as_raw());
+         let info = vk::MemoryAllocateInfo::default()
+             .allocation_size(requirements.size)
+             .memory_type_index(index);
+diff --git a/crates/vulkan/src/backend/mod.rs b/crates/vulkan/src/backend/mod.rs
+index 9aaba8ed3..a98951f4d 100644
+--- a/crates/vulkan/src/backend/mod.rs
++++ b/crates/vulkan/src/backend/mod.rs
+@@ -42,10 +42,22 @@ mod record;
+ mod submission;
+ impl RenderBackend for VulkanRenderer {
+     fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
++        let start = std::time::Instant::now();
+         let resources = frame::FrameResources::new(&self.runtime, frame, &self.pipeline)?;
++        let allocated = start.elapsed();
+         let commands = submission::CommandSubmission::new(&self.runtime)?;
+         record::record_frame(&self.runtime, commands.command, &resources, frame);
++        let recorded = start.elapsed();
+         commands.finish()?;
+-        resources.capture()
++        let submitted = start.elapsed();
++        let result = resources.capture();
++        let captured = start.elapsed();
++        drop(commands);
++        drop(resources);
++        let ended = start.elapsed();
++        let phases = [allocated, recorded-allocated, submitted-recorded, captured-submitted, ended-captured]
++            .map(|duration| duration.as_secs_f64()*1000.);
++        println!("{{\"diagnostic\":\"DEBUG-martensite-backend-phases\",\"phases_ms\":{phases:?}}}");
++        result
+     }
+ }
