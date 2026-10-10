@@ -69,6 +69,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 }
 #include "martensite_vulkan_ais.cxx"
 #include "martensite_vulkan_ais_line.cxx"
+#include "martensite_vulkan_ais_point.cxx"
 #include "martensite_vulkan_lines.cxx"
 #include "martensite_vulkan_persistence.cxx"
 #include "martensite_vulkan_stdprs.cxx"
@@ -128,7 +129,13 @@ static void run_scene(int argc, char **argv) {
   configure_camera(view, width, height, perspective);
   const std::string mode = argc >= 7 ? argv[6] : "default";
   const bool rasterControl = raster_control_option(argc, argv);
-  if (mode.rfind("datum-", 0) == 0) {
+  if (mode.rfind("point-", 0) == 0) {
+    MartensiteOraclePointScene scene(viewer, offset);
+    scene.transition(mode, view);
+    write_capture(view, width, height, argv[5], mode == "point-detected");
+    print_device(view);
+    scene.context->Remove(scene.point, false);
+  } else if (mode.rfind("datum-", 0) == 0) {
     MartensiteOracleLineScene scene(viewer, offset, mode == "datum-infinite");
     scene.transition(mode, view);
     write_capture(view, width, height, argv[5], mode == "datum-detected");

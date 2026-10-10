@@ -36,6 +36,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     persistence_performance::benchmark(&driver, warmup, samples);
     curve_performance::benchmark(&driver, warmup, samples);
     ais_line_performance::benchmark(&driver, warmup, samples);
+    ais_point_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -113,3 +114,8 @@ mod line_scene;
 
 #[path = "support/ais_line_performance.rs"]
 mod ais_line_performance;
+
+#[path = "support/ais_point_performance.rs"]
+mod ais_point_performance;
+#[path = "../tests/support/ais_point_scene.rs"]
+mod point_scene;

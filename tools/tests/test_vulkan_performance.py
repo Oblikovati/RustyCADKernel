@@ -38,10 +38,11 @@ class VulkanPerformanceTests(unittest.TestCase):
                 "line-bounds",
                 "curve-presentations",
                 "ais-line-appearance",
+                "point-sprites",
             )
         ]
         rows = performance_rows("\n".join(lines))
-        self.assertEqual(len(rows), 10)
+        self.assertEqual(len(rows), 11)
         self.assertEqual(rows[0]["median_ms"], 2.0)
         with self.assertRaises(ValueError):
             performance_rows(lines[0])

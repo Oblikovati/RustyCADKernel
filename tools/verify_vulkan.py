@@ -17,6 +17,8 @@ from vulkan_build import build_vulkan_examples
 from vulkan_line_cases import LINE_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_ais_line_cases import AIS_LINE_MODES
+from vulkan_ais_point_cases import AIS_POINT_MODES
+from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_performance import (
@@ -35,50 +37,6 @@ CASES = [
     (96, 48, 1, 2),
     (48, 96, 1, -3),
 ]
-SURFACE_MODES = (
-    "surface-strip",
-    "surface-strip-indexed",
-    "surface-fan",
-    "surface-fan-indexed",
-    "surface-bound-colors",
-    "surface-vertex-colors",
-)
-PERSISTENCE_MODES = (
-    "pers-zoom",
-    "pers-rotate",
-    "pers-zoom-rotate",
-    "pers-axial",
-    "pers-zoom-axial",
-    "pers-2d",
-    "pers-triedron",
-    "pers-ortho",
-    "pers-2d-ortho",
-    "pers-triedron-ortho",
-    "pers-camera",
-    "pers-camera-near",
-    "pers-camera-far",
-    "pers-group-zoom",
-    "pers-group-rotate",
-    "pers-group-2d",
-    "pers-nested",
-    "pers-scaled-above",
-    "pers-group-camera-near",
-)
-AIS_MODES = (
-    "ais-displayed",
-    "ais-erased",
-    "ais-redisplayed",
-    "ais-mode1",
-    "ais-affinity-off",
-    "ais-cleared",
-    "ais-removed",
-    "ais-recreated",
-    "ais-erased-all",
-    "ais-displayed-all",
-    "ais-removed-all",
-    "ais-erased-selected",
-    "ais-displayed-selected",
-)
 
 
 def run(command: list[str], env: dict[str, str]) -> str:
@@ -107,7 +65,14 @@ def check_reference(source: Path, build: Path, env: dict[str, str]) -> None:
 
 def check_shaders(folder: Path, env: dict[str, str]) -> str:
     """Recompile checked-in GLSL for Vulkan 1.3 and compare SPIR-V; e.g. check_shaders(tmp, env)."""
-    for name in ("unlit.vert", "unlit.frag", "line.vert", "line.frag"):
+    for name in (
+        "unlit.vert",
+        "unlit.frag",
+        "line.vert",
+        "line.frag",
+        "point.vert",
+        "point.frag",
+    ):
         source = ROOT / f"crates/vulkan/shaders/{name}"
         output = folder / f"{name}.spv"
         compile_shader(source, output, env)
@@ -199,6 +164,8 @@ def capture_case(
     executable = rust.with_name("ais_capture") if mode.startswith("ais-") else rust
     if mode.startswith("datum-"):
         executable = rust.with_name("ais_line_capture")
+    if mode.startswith("point-"):
+        executable = rust.with_name("ais_point_capture")
     output = run([str(executable), *args, str(vk), mode], profile.environment)
     confirm_device(output, profile.device)
     software_gl = any(
@@ -246,6 +213,7 @@ def capture_cases(
             *LINE_MODES,
             *STDPRS_MODES,
             *AIS_LINE_MODES,
+            *AIS_POINT_MODES,
         )
     ]:
         try:
@@ -275,6 +243,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_stdprs_geometry.hxx",
             "tools/oracle/martensite_vulkan_stdprs.cxx",
             "tools/oracle/martensite_vulkan_ais_line.cxx",
+            "tools/oracle/martensite_vulkan_ais_point.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )

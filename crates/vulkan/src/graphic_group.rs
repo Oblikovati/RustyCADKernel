@@ -97,21 +97,31 @@ impl Graphic3dDrawGroup {
         crate::highlight_style::validate_structure(structure)?;
         let (matrix, depth_clamp) =
             crate::persistent_transform::group_clip_transform(self, camera, extent, structure)?;
+        let mut draws = self.extract_commands(matrix, structure.highlight)?;
+        for draw in &mut draws {
+            draw.depth_clamp = depth_clamp;
+            crate::highlight_style::apply_highlight(draw, structure)?;
+        }
+        Ok(draws)
+    }
+    fn extract_commands(
+        &self,
+        matrix: [f32; 16],
+        highlighted: bool,
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         let (mut aspects, commands) = self.retained_commands()?;
         let mut draws = Vec::new();
         for command in commands {
             match command {
                 GroupCommand::Aspects(style) => aspects = style,
-                GroupCommand::Primitives(primitive) => {
-                    let (color, line) =
-                        primitive_style(primitive.kind, &aspects, self.is_closed())?;
-                    draws.extend(primitive.draws(color, matrix, line)?)
-                }
+                GroupCommand::Primitives(primitive) => draws.extend(lower_styled_primitive(
+                    &primitive,
+                    &aspects,
+                    self.is_closed(),
+                    matrix,
+                    highlighted,
+                )?),
             }
-        }
-        for draw in &mut draws {
-            draw.depth_clamp = depth_clamp;
-            crate::highlight_style::apply_highlight(draw, structure)?;
         }
         Ok(draws)
     }
@@ -224,4 +234,22 @@ fn replace_style(style: &mut Handle<dyn Graphic3dAspectsSource>, map: &Graphic3d
     if let Some((_, replacement)) = map.get(&(style.object_address() as usize)) {
         *style = replacement.clone();
     }
+}
+
+fn lower_styled_primitive(
+    primitive: &PrimitiveSubmission,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    closed: bool,
+    matrix: [f32; 16],
+    highlighted: bool,
+) -> Result<Vec<PrimitiveDraw>, RenderError> {
+    let (color, line) = primitive_style(primitive.kind, aspects, closed)?;
+    if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
+        return primitive.draws(color, matrix, line, None);
+    }
+    if aspects.marker_type() == rustycad_tkservice::aspect::AspectTypeOfMarker::Empty {
+        return Ok(vec![]);
+    }
+    let sprite = crate::point_style::marker_style(&**aspects, highlighted)?;
+    primitive.draws(color, matrix, line, Some(sprite))
 }

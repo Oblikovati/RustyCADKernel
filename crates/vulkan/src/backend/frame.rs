@@ -13,6 +13,7 @@ pub(super) struct UploadedDraw {
     pub transform: Vec<u8>,
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
+    pub sprite: Option<super::point_sprite::UploadedSprite>,
 }
 pub(super) struct FrameResources {
     pub extent: vk::Extent2D,
@@ -105,8 +106,27 @@ fn upload_draw(
     let index_buffer = upload_bytes(runtime, &indices, vk::BufferUsageFlags::INDEX_BUFFER)?;
     let count = u32::try_from(draw.indices.len())
         .map_err(|_| rejected(draw.indices.len(), "a 32-bit index count"))?;
-    let pipeline = pipelines.select(draw.depth_clamp, draw.line_style.is_some())?;
+    let pipeline = pipelines.select(
+        draw.depth_clamp,
+        draw.line_style.is_some(),
+        draw.point_style.is_some(),
+    )?;
+    let sprite = draw
+        .point_style
+        .as_ref()
+        .map(|style| {
+            super::point_sprite::UploadedSprite::new(
+                runtime,
+                pipeline
+                    .sprite_layout
+                    .as_ref()
+                    .expect("point pipeline layout"),
+                style,
+            )
+        })
+        .transpose()?;
     Ok(UploadedDraw {
+        sprite,
         pipeline,
         vertices: vertex_buffer,
         indices: index_buffer,
@@ -148,6 +168,11 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         );
         bytes.extend(u32::from(style.pattern).to_ne_bytes());
         bytes.extend(u32::from(style.factor).to_ne_bytes());
+    }
+    if let Some(style) = &draw.point_style {
+        bytes.extend(style.size.to_ne_bytes());
+        bytes.extend(style.extent.into_iter().flat_map(|v| v.to_ne_bytes()));
+        bytes.extend(0u32.to_ne_bytes());
     }
     bytes
 }

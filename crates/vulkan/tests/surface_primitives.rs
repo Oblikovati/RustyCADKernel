@@ -131,7 +131,7 @@ fn unsupported_topology_and_invalid_used_index_fail() {
     array.indices().set_index(2, 99);
     assert!(scene.group.triangle_draws(&scene.camera).is_err());
     scene.group.add_primitive_array_buffers(
-        Graphic3dTypeOfPrimitiveArray::Points,
+        Graphic3dTypeOfPrimitiveArray::TrianglesAdjacency,
         &Handle::default(),
         &array.attributes(),
         &Handle::default(),

@@ -1,0 +1,28 @@
+"""Native point sprites, retained datums and interaction capture cases."""
+
+AIS_POINT_MODES = (
+    "point-plus",
+    "point-dot",
+    "point-star",
+    "point-x",
+    "point-o",
+    "point-o-dot",
+    "point-o-plus",
+    "point-o-star",
+    "point-o-x",
+    "point-ring1",
+    "point-ring2",
+    "point-ring3",
+    "point-ball",
+    "point-empty",
+    "point-user",
+    "point-color",
+    "point-scale",
+    "point-unset",
+    "point-moved",
+    "point-erased",
+    "point-redisplayed",
+    "point-selected",
+    "point-detected",
+    "point-batch",
+)

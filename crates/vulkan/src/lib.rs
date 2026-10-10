@@ -37,3 +37,6 @@ pub use draw::{LineStyle, PrimitiveDraw, PrimitiveTopology, TriangleDraw};
 mod line_style;
 
 mod highlight_style;
+
+mod point_style;
+pub use point_style::PointStyle;

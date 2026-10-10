@@ -9,27 +9,39 @@ pub(super) struct DrawPipeline {
     pub layout: vk::PipelineLayout,
     pub push_stages: vk::ShaderStageFlags,
     shaders: Vec<vk::ShaderModule>,
+    pub sprite_layout: Option<super::point_sprite::SpriteLayout>,
 }
 impl DrawPipeline {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
         depth_clamp: bool,
         line: bool,
+        point: bool,
     ) -> Result<Self, RenderError> {
         let mut pipeline = Self {
             runtime: runtime.clone(),
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
-            push_stages: push_range(line).stage_flags,
+            push_stages: push_range(line || point).stage_flags,
             shaders: vec![],
+            sprite_layout: if point {
+                Some(super::point_sprite::SpriteLayout::new(runtime)?)
+            } else {
+                None
+            },
         };
-        pipeline.load_shaders(line)?;
-        pipeline.layout = create_layout(runtime, line)?;
-        pipeline.create(depth_clamp, line)?;
+        pipeline.load_shaders(line, point)?;
+        pipeline.layout = create_layout(runtime, line || point, pipeline.sprite_layout.as_ref())?;
+        pipeline.create(depth_clamp, line, point)?;
         Ok(pipeline)
     }
-    fn load_shaders(&mut self, line: bool) -> Result<(), RenderError> {
-        let shaders: [&[u8]; 2] = if line {
+    fn load_shaders(&mut self, line: bool, point: bool) -> Result<(), RenderError> {
+        let shaders: [&[u8]; 2] = if point {
+            [
+                include_bytes!("../../shaders/point.vert.spv"),
+                include_bytes!("../../shaders/point.frag.spv"),
+            ]
+        } else if line {
             [
                 include_bytes!("../../shaders/line.vert.spv"),
                 include_bytes!("../../shaders/line.frag.spv"),
@@ -45,9 +57,9 @@ impl DrawPipeline {
         }
         Ok(())
     }
-    fn create(&mut self, depth_clamp: bool, line: bool) -> Result<(), RenderError> {
+    fn create(&mut self, depth_clamp: bool, line: bool, point: bool) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state = super::pipeline_state::PipelineState::new(depth_clamp, line);
+        let state = super::pipeline_state::PipelineState::new(depth_clamp, line, point);
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&[vk::Format::R8G8B8A8_SRGB])
             .depth_attachment_format(vk::Format::D32_SFLOAT);
@@ -129,10 +141,17 @@ fn create_pipeline(
     }
 }
 
-fn create_layout(runtime: &VulkanRuntime, line: bool) -> Result<vk::PipelineLayout, RenderError> {
+fn create_layout(
+    runtime: &VulkanRuntime,
+    line: bool,
+    sprite: Option<&super::point_sprite::SpriteLayout>,
+) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
     let ranges = [push_range(line)];
-    let info = vk::PipelineLayoutCreateInfo::default().push_constant_ranges(&ranges);
+    let layouts: Vec<_> = sprite.iter().map(|s| s.handle).collect();
+    let info = vk::PipelineLayoutCreateInfo::default()
+        .push_constant_ranges(&ranges)
+        .set_layouts(&layouts);
     let layout = unsafe { runtime.device().create_pipeline_layout(&info, None) }
         .map_err(|e| vk_error("create pipeline layout", e))?;
     Ok(layout)

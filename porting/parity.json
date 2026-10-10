@@ -574402,6 +574402,176 @@
       "rust_item": "rustycad_tkv3d::ais::AisLine::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
       "status": "implemented",
       "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Point",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_PlaneTrihedron.hxx",
+      "source_sha256": "17cc97d8a324752dc81b6b67830649dd23a8eda1306727a000177701b0f7fdff",
+      "cpp_declaration_id": "3228634fad9d850b9cee6e8e88fe4d4eeddc259aeb9cf246a8daf0d0eae16dbb",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::HasMarker()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "3253618ab594d282a7961a954765a7e4f3ea5bd1b5c6a5f7222c455e5323d9b3",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::has_marker",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::Type()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "44d6b895a8326a9e829a7df3892d23cf8adeb7f6c00827cbafba00605accdd97",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::AIS_Point(const class opencascade::handle<class Geom_Point> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "4d580ff8d30a101c58cb752d685361002999999651bdef486057933076b98616",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::new",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::UnsetMarker()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "5185426cd4596b68f1666e73b03d71a9181298d02f6a69b3cbf4facc584980a7",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::unset_marker",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::SetComponent(const class opencascade::handle<class Geom_Point> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "7ef577333b65bfa9999764cc26d68bef78e8ecc48349e6589a24643529a29952",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::set_component",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::Component()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "969124051bb040f13409270b99221c2443ac60aeb7aef3e6575d4552305be438",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::component",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "StdPrs_Point",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Point.hxx",
+      "source_sha256": "1d58c4696b5cdc7a53e0a5ca71612c1c31790cfd24c3f896c5748a25fff63786",
+      "cpp_declaration_id": "9e0d2f8addc5cada3d2ecbc9209d5e7fd1045e4ba943ae37fbe6381972c77b79",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPoint",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::Vertex()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "afffd8b9c246b8960bc1f71160b866026c1f8ee2549a0923862be65825d8e569",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::vertex",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "StdPrs_ToolPoint",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolPoint.hxx",
+      "source_sha256": "55d77ebefb79d0f2323c524c926116f4bc2f8b5e099cf5528ac89f2899f4310c",
+      "cpp_declaration_id": "b059568927e255d1aa4740e0f62c16ee61d7cd65c37933c1740c4b39b431b0cf",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolPoint",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::AcceptDisplayMode(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "d4b500c8020c520c564e25e28017348883a8d9ab30b06874acb0299f289441ab",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::SetMarker(const enum Aspect_TypeOfMarker)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "dd0feff58530c1dc91bdc15ddedaad72667f9888df7f504590a365a6e7d63413",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::set_marker",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "StdPrs_ToolPoint::Coord(const class opencascade::handle<class Geom_Point> &,double &,double &,double &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolPoint.hxx",
+      "source_sha256": "55d77ebefb79d0f2323c524c926116f4bc2f8b5e099cf5528ac89f2899f4310c",
+      "cpp_declaration_id": "e532878455fb74afc03d51bc359a4cc6e1ce5a85c5f26500b904901b184d11b6",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolPoint::coord",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::Signature()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "ead3d13a30896183e451a47ba9c5b55f867340d08b649eb771349d27cdec83fc",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::ais::AisInteractiveObject>::signature",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::SetColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "fb8bfc3bfcb4a4937dfc7b70785d712187d456e84b18c5e36b964d001f3982b8",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Point.hxx",
+      "source_sha256": "1e033d656576ab91811c622e767f65dc92029ecf696bd288ff9a0c1baf81cc50",
+      "cpp_declaration_id": "fcc112cd947f7be20685d30b9bc5fc7a755205520bb3958f32c1aaafd1ee7a97",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Point::Compute(const class opencascade::handle<class PrsMgr_PresentationManager> &,const class opencascade::handle<class Graphic3d_Structure> &,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_PlaneTrihedron.hxx",
+      "source_sha256": "17cc97d8a324752dc81b6b67830649dd23a8eda1306727a000177701b0f7fdff",
+      "cpp_declaration_id": "281deb9dee058ea28663c0212cf00d2f2cb260ffbf9c1c1ad3a80817733a64fb",
+      "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "status": "implemented",
+      "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
     }
   ],
   "tests": [

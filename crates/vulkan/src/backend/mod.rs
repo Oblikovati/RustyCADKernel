@@ -55,3 +55,5 @@ impl RenderBackend for VulkanRenderer {
 mod line_device;
 
 mod draw_state;
+
+mod point_sprite;
