@@ -98,3 +98,5 @@ pub mod stdprs_curve;
 pub mod ais_line;
 
 pub mod ais_point;
+
+pub mod ais_axis;

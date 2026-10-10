@@ -22,3 +22,6 @@ pub mod v3d;
 
 /// Standard curve presentation algorithms.
 pub mod std_prs;
+
+/// Dimension and datum presentation algorithms.
+pub mod dsg_prs;

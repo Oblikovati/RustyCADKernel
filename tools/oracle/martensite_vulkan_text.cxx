@@ -21,6 +21,16 @@ struct MartensiteOracleTextScene {
     structure->Display();
   }
   void apply(const std::string &mode, const occ::handle<V3d_View> &view) {
+    if (mode == "text-opaque")
+      style->SetAlphaMode(Graphic3d_AlphaMode_Opaque, 0.99f);
+    if (mode == "text-mask")
+      style->SetAlphaMode(Graphic3d_AlphaMode_Mask, 0.99f);
+    if (mode == "text-auto")
+      style->SetAlphaMode(Graphic3d_AlphaMode_BlendAuto, 0.99f);
+    if (mode == "text-blend")
+      style->SetAlphaMode(Graphic3d_AlphaMode_Blend, 0.99f);
+    if (mode == "text-cutoff")
+      style->SetAlphaMode(Graphic3d_AlphaMode_MaskBlend, 0.99f);
     if (mode == "text-unicode")
       text->SetText("AΩБ");
     if (mode == "text-multiline")

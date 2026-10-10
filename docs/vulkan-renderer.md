@@ -490,3 +490,7 @@ release benchmark accompanies the functional fixtures on both devices.
 oriented labels, annotation depth policy, 108 captures per device and a 1,024-glyph
 performance workload. Strict text capture differences remain visible; this slice
 does not claim complete native text parity.
+
+[AIS axes and labeled presentations](ais-axis.md) add the native axis overloads,
+unblended font coverage, fixed font cutoff regression coverage, 138 more captures
+per device and an appearance-update benchmark retaining the label.

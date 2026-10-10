@@ -119,6 +119,9 @@ fn upload_draw(
         draw.line_style.is_some(),
         draw.point_style.is_some(),
         draw.textured_style.is_some(),
+        draw.textured_style
+            .as_ref()
+            .is_some_and(|style| style.blend),
     )?;
     let image = draw
         .point_style

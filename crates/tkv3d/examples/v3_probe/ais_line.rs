@@ -4,7 +4,7 @@ use super::{
     sensitive_display::display_driver,
 };
 #[path = "../../tests/support/ais_line_fixture.rs"]
-mod fixture;
+pub(super) mod fixture;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
     standard::{Failure, Handle},

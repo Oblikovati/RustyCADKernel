@@ -6,6 +6,7 @@ pub struct TexturedStyle {
     pub(crate) image: RasterImage,
     pub(crate) uv: Vec<[f32; 2]>,
     pub(crate) alpha_cutoff: f32,
+    pub(crate) blend: bool,
 }
 impl TexturedStyle {
     /// Validate UVs and the native alpha-mask threshold; `TexturedStyle::new(image, uv, 0.1)?`.
@@ -24,7 +25,13 @@ impl TexturedStyle {
             image,
             uv,
             alpha_cutoff,
+            blend: true,
         })
+    }
+    /// Select native coverage blending; `style.with_alpha_blending(false)` writes unblended glyphs.
+    pub fn with_alpha_blending(mut self, enabled: bool) -> Self {
+        self.blend = enabled;
+        self
     }
     /// Inspect the atlas; `style.image()`.
     pub fn image(&self) -> &RasterImage {

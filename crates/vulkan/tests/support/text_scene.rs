@@ -8,7 +8,7 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
 use rustycad_tkservice::{aspect::*, graphic3d::*};
-pub const MODES: [&str; 18] = [
+pub const MODES: [&str; 23] = [
     "text-basic",
     "text-unicode",
     "text-centered",
@@ -27,6 +27,11 @@ pub const MODES: [&str; 18] = [
     "text-annotation",
     "text-resolution",
     "text-highlight",
+    "text-opaque",
+    "text-mask",
+    "text-auto",
+    "text-blend",
+    "text-cutoff",
 ];
 pub struct TextScene {
     pub scene: ViewerScene,
@@ -52,6 +57,15 @@ impl TextScene {
     }
     pub fn apply(&self, mode: &str) {
         match mode {
+            "text-opaque" => self.style.set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.99),
+            "text-mask" => self.style.set_alpha_mode(Graphic3dAlphaMode::Mask, 0.99),
+            "text-auto" => self
+                .style
+                .set_alpha_mode(Graphic3dAlphaMode::BlendAuto, 0.99),
+            "text-blend" => self.style.set_alpha_mode(Graphic3dAlphaMode::Blend, 0.99),
+            "text-cutoff" => self
+                .style
+                .set_alpha_mode(Graphic3dAlphaMode::MaskBlend, 0.99),
             "text-unicode" => self.text.set_text_str("AΩБ"),
             "text-multiline" => self.text.set_text_str("A\nV"),
             "text-tabs" => self.text.set_text_str("A\tV"),

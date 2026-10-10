@@ -57,7 +57,7 @@ pub(super) struct PipelineState {
     dynamic: vk::PipelineDynamicStateCreateInfo<'static>,
 }
 impl PipelineState {
-    pub fn new(depth_clamp: bool, line: bool, point: bool, text: bool) -> Self {
+    pub fn new(depth_clamp: bool, line: bool, point: bool, text: bool, text_blend: bool) -> Self {
         Self {
             vertex: vertex_state(text),
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
@@ -74,11 +74,13 @@ impl PipelineState {
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: depth_state(),
-            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(if point || text {
-                &POINT_BLEND
-            } else {
-                &BLEND
-            }),
+            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(
+                if point || (text && text_blend) {
+                    &POINT_BLEND
+                } else {
+                    &BLEND
+                },
+            ),
             dynamic: vk::PipelineDynamicStateCreateInfo::default()
                 .dynamic_states(dynamic_states(line)),
         }

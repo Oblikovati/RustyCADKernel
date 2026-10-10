@@ -1,0 +1,10 @@
+{
+  "toolkit": "TKV3d",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "comparisons": 151496,
+  "new_axis_requests": 610,
+  "status": "passed",
+  "noexcept_clear_failures": "native and Rust both abort",
+  "command": "CARGO_TARGET_DIR=$PWD/target/vulkan-harness python3 tools/verify_tkv3d_numeric.py --source ../OCCT --native-build ../RustyCADKernel/target/occt-all-full",
+  "scope": "Four AIS_Axis constructors, axis transitions, SI/MDTV cached selection, appearance mutation and exceptions, real presentation buffers and labels, both DsgPrs_XYZAxisPresentation overloads."
+}

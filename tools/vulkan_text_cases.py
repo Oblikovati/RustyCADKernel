@@ -19,4 +19,9 @@ TEXT_MODES = (
     "text-annotation",
     "text-resolution",
     "text-highlight",
+    "text-opaque",
+    "text-mask",
+    "text-auto",
+    "text-blend",
+    "text-cutoff",
 )

@@ -14,7 +14,8 @@ below two to the native driver's default of 16.
 
 Unique glyphs are packed with transparent gutters. Indexed textured triangles
 share one atlas per text command. The Vulkan shader uses bilinear coverage,
-the aspect's alpha threshold and native mask blending. Monochrome Gray and
+the native standard font cutoff and selected blending mode (see the later
+[axis/text extension](ais-axis.md)). Monochrome Gray and
 antialiased Alpha font images both supply coverage. Ordinary primitives retain
 their existing vertex format and point sprites retain nearest sampling.
 
@@ -51,8 +52,9 @@ strict failures and are distinct from the two previously deferred AMD AIS line
 pixel-row cases. User instruction prioritizes feature work over further pixel-row
 diagnosis; thresholds and expected results have not been relaxed.
 
-Subtitle, shadow, decal/dimension/XOR display modes, custom text shaders and
-non-mask-blended text are explicitly rejected. Transparent vertex colors,
+Subtitle, shadow, decal/dimension/XOR display modes and custom text shaders
+remain explicitly rejected. Unblended font coverage was subsequently added by
+the [axis/text extension](ais-axis.md). Transparent vertex colors,
 additional font/platform configurations and complete text raster parity remain
 open. No new OCCT API mapping is claimed for this renderer slice.
 
