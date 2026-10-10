@@ -1,6 +1,6 @@
 # Inventory refresh and Claude continuation
 
-Latest continuation: [Viewer selector traversal and public picking with fresh inventory](selector-pick-continuation/README.md).
+Latest integration: [Completed Claude work merged into main, cleanup and fresh inventory](../2026-10-10/README.md).
 
 This is the initial checkpoint. The [evolved continuation](evolved-continuation/README.md)
 records subsequent implementation, recovery and validation work.

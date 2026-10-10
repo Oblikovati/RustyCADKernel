@@ -94,8 +94,8 @@ Regenerate after each snapshot publication with `python3 tools/api_metrics_repor
 ## Legacy test obligations
 
 `legacy-test-summary.json` and `legacy-tests.jsonl.gz` independently account for
-all 8,648 GoogleTest declaration candidates: 7,965 have exact Rust mappings,
-37 await dependencies, 2 concern C++-only properties, and 644 remain unmapped.
+all 8,648 GoogleTest declaration candidates: 7,969 have exact Rust mappings,
+37 await dependencies, 2 concern C++-only properties, and 640 remain unmapped.
 There are no duplicate or unknown mappings in this
 snapshot. All 16,698 DRAW candidates and 18,309 regression/support files are
 listed as discovered obligations.
@@ -120,6 +120,13 @@ checkout. Aggregate reports remain `aggregate_only` even when their inputs match
 individual declaration results require an explicit runtime-instance join. The
 assessor never grants runtime proof. New TKernel reports also fingerprint the
 verifier's local helper modules.
+
+## Current main integration
+
+The [2026-10-10 integration receipt](../integration/2026-10-10/README.md) records
+the current source-bound workspace test run, TKernel/TKV3d native evidence,
+fresh compiler inventory and completed worktree cleanup. Older receipts below
+retain their original execution revisions. Full port completion remains false.
 
 ## Paired runtime evidence
 
