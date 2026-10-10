@@ -63,6 +63,7 @@ fn check_reinitialized_indices(scene: &GraphicScene, indices: &Graphic3dIndexBuf
     let draw = scene.group.triangle_draws(&scene.camera).unwrap().remove(0);
     assert_eq!(draw.indices(), [0, 1, 2]);
     assert_eq!(draw.vertices()[2].position, [2., 0.5, 0.]);
+    assert_eq!(draw.vertices()[2].weight, 1.);
     assert_eq!(draw.vertices()[0].color, [0., 1., 0., 1.]);
 }
 #[test]
@@ -89,21 +90,27 @@ fn multiple_geometry_sources_share_a_live_parent() {
     assert_eq!(scene.group.triangle_draws(&scene.camera).unwrap().len(), 2);
 }
 #[test]
-fn homogeneous_positions_require_a_finite_unit_w() {
+fn homogeneous_positions_preserve_finite_weights() {
     let scene = GraphicScene::new();
     let buffer = homogeneous_buffer();
     submit(&scene, &buffer, &Handle::default());
-    assert_eq!(scene.group.triangle_draws(&scene.camera).unwrap().len(), 1);
-    for w in [0., 2., f32::NAN, f32::INFINITY] {
-        assert!(buffer.write_at(12, w));
-        assert!(
-            scene
-                .group
-                .triangle_draws(&scene.camera)
-                .unwrap_err()
-                .to_string()
-                .contains("unit homogeneous w")
-        );
+    for weight in [0., 2., -1., 0.5] {
+        assert!(buffer.write_at(12, weight));
+        let draws = scene.group.triangle_draws(&scene.camera).unwrap();
+        assert_eq!(draws.len(), 1);
+        assert_eq!(draws[0].vertices()[0].position, [0.; 3]);
+        assert_eq!(draws[0].vertices()[0].weight, weight);
+    }
+}
+
+#[test]
+fn homogeneous_positions_reject_nonfinite_weights() {
+    let scene = GraphicScene::new();
+    let buffer = homogeneous_buffer();
+    submit(&scene, &buffer, &Handle::default());
+    for weight in [f32::NAN, f32::INFINITY, f32::NEG_INFINITY] {
+        assert!(buffer.write_at(12, weight));
+        assert!(scene.group.triangle_draws(&scene.camera).is_err());
     }
 }
 

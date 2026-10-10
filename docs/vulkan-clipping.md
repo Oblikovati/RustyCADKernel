@@ -89,12 +89,13 @@ the eight unmatched workloads remain explicit failures of the broader timing gat
 Capping remains part of the renderer completion scope. No capability family is
 marked complete by this slice, and no OCCT API inventory credit is added.
 
-The next capping step needs homogeneous vertex input: pinned
+[Homogeneous vertex input](vulkan-homogeneous-vertices.md) now preserves the
+position weights required by capping: pinned
 `OpenGl_CappingPlaneResource.cxx` uses twelve plane vertices, with `w=1` at the
-origin and `w=0` for directions at infinity. Martensite currently rejects non-unit
-position weights. Preserve the full weight through GPU transformation; native
+origin and `w=0` for directions at infinity. Martensite preserves the full weight
+through GPU transformation; native
 `Graphic3d_Group::AddPrimitiveArray` deliberately uses raw xyz with `w=1` only
 for its bounds. `OpenGl_CappingAlgo.cxx` then builds an odd/even stencil mask from
 closed groups using the selected plane, draws the cap through the remaining
 planes, and applies plane or object aspects. Stencil targets, chain filtering,
-section appearance and those vertex semantics all remain in scope.
+section appearance and strict clipping-boundary parity remain open.

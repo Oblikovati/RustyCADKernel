@@ -6,13 +6,28 @@ use crate::{PrimitiveDraw, RenderLayer, RenderLayerSpan, render_layers::flatten_
 pub struct RenderVertex {
     /// Object-space coordinates.
     pub position: [f32; 3],
+    /// Homogeneous weight; zero represents a direction at infinity.
+    pub weight: f32,
     /// Linear, unpremultiplied RGBA.
     pub color: [f32; 4],
 }
 impl RenderVertex {
     /// Construct a vertex; validation occurs at submission, e.g. `RenderVertex::new([0.;3],[1.;4])`.
     pub fn new(position: [f32; 3], color: [f32; 4]) -> Self {
-        Self { position, color }
+        Self {
+            position,
+            weight: 1.,
+            color,
+        }
+    }
+    /// Preserve a full object-space position, e.g. `RenderVertex::homogeneous([1.,0.,0.,0.],[1.;4])`.
+    pub fn homogeneous(position: [f32; 4], color: [f32; 4]) -> Self {
+        let [x, y, z, weight] = position;
+        Self {
+            position: [x, y, z],
+            weight,
+            color,
+        }
     }
 }
 /// OpenGL clip identity; `let transform = identity_clip()`.
@@ -122,6 +137,7 @@ pub(crate) fn validate_components(
         || vertices.iter().any(|v| {
             !v.position
                 .iter()
+                .chain(std::iter::once(&v.weight))
                 .chain(v.color.iter())
                 .all(|c| c.is_finite())
         })

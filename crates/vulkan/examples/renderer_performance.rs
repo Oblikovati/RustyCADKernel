@@ -44,6 +44,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     window_performance::benchmark(&driver, warmup, samples);
     ais_circle_performance::benchmark(&driver, warmup, samples);
     clipping_performance::benchmark(&driver, warmup, samples);
+    homogeneous_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -162,3 +163,8 @@ mod circle_scene;
 
 #[path = "support/clipping_performance.rs"]
 mod clipping_performance;
+
+#[path = "../tests/support/homogeneous_arrays.rs"]
+mod homogeneous_arrays;
+#[path = "support/homogeneous_performance.rs"]
+mod homogeneous_performance;

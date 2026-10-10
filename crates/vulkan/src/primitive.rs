@@ -10,7 +10,7 @@ pub(crate) struct PrimitiveSubmission {
     pub bounds: Handle<Graphic3dBoundBuffer>,
 }
 impl PrimitiveSubmission {
-    pub fn positions(&self) -> Result<Vec<[f32; 3]>, RenderError> {
+    pub fn positions(&self) -> Result<Vec<[f32; 4]>, RenderError> {
         let Some(buffer) = self.attributes.get() else {
             return Err(rejected("null attributes", "a Graphic3d vertex buffer"));
         };
@@ -81,14 +81,14 @@ impl PrimitiveSubmission {
     fn vertex(
         &self,
         index: usize,
-        position: [f32; 3],
+        position: [f32; 4],
         fallback: [f32; 4],
     ) -> Result<RenderVertex, RenderError> {
         let buffer = &*self.attributes;
         let Some((attribute, offset, stride)) =
             buffer.attribute_data(Graphic3dTypeOfAttribute::Color)
         else {
-            return Ok(RenderVertex::new(position, fallback));
+            return Ok(RenderVertex::homogeneous(position, fallback));
         };
         let kind = buffer
             .attribute(attribute)
@@ -103,7 +103,7 @@ impl PrimitiveSubmission {
             _ => return Err(rejected(kind, "Vec4ub or Vec4 vertex colors")),
         }
         .ok_or_else(|| rejected(at, "allocated color bytes"))?;
-        Ok(RenderVertex::new(position, color))
+        Ok(RenderVertex::homogeneous(position, color))
     }
     fn read_indices(&self, count: usize) -> Result<Vec<u32>, RenderError> {
         if self.indices.is_null() {
@@ -130,14 +130,16 @@ fn read_position(
     buffer: &dyn Graphic3dBufferSource,
     kind: Graphic3dTypeOfData,
     offset: usize,
-) -> Result<[f32; 3], RenderError> {
-    validate_homogeneous_position(buffer, kind, offset)?;
+) -> Result<[f32; 4], RenderError> {
     let dimensions = match kind {
         Graphic3dTypeOfData::Vec2 => 2,
-        Graphic3dTypeOfData::Vec3 | Graphic3dTypeOfData::Vec4 => 3,
+        Graphic3dTypeOfData::Vec3 => 3,
+        Graphic3dTypeOfData::Vec4 => 4,
         _ => return Err(rejected(kind, "Vec2, Vec3 or Vec4 positions")),
     };
-    let mut position = [0.; 3];
+    // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871 multiplies the full occVertex
+    // in Graphic3d_ShaderManager.cxx; dropping a non-unit w changes clip coordinates.
+    let mut position = [0., 0., 0., 1.];
     for (i, value) in position.iter_mut().enumerate().take(dimensions) {
         *value = buffer
             .read_at::<f32>(offset + i * 4)
@@ -149,26 +151,6 @@ fn read_position(
 fn validate_count(count: i32) -> Result<(), RenderError> {
     if count < 0 {
         return Err(rejected(count, "a nonnegative buffer element count"));
-    }
-    Ok(())
-}
-
-fn validate_homogeneous_position(
-    buffer: &dyn Graphic3dBufferSource,
-    kind: Graphic3dTypeOfData,
-    offset: usize,
-) -> Result<(), RenderError> {
-    if kind != Graphic3dTypeOfData::Vec4 {
-        return Ok(());
-    }
-    // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871 multiplies the full occVertex
-    // in Graphic3d_ShaderManager.cxx; dropping a non-unit w changes clip coordinates.
-    let w = buffer.read_at::<f32>(offset + 12);
-    if w != Some(1.0) {
-        return Err(rejected(
-            w,
-            "unit homogeneous w in the current renderer slice",
-        ));
     }
     Ok(())
 }
