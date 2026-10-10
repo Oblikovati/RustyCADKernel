@@ -86,7 +86,7 @@ impl Graphic3dGraphicDriver for Graphic3dRenderDriver {
         &self,
         manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCStructure>, Failure> {
-        Ok(Handle::new(RenderStructure::new(manager)?).cast())
+        Ok(RenderStructure::new(manager)?.cast())
     }
     fn remove_structure(&self, structure: &mut Handle<dyn Graphic3dCStructure>) {
         if let Some(value) = structure.get() {

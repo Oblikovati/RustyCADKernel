@@ -35,3 +35,5 @@ mod draw;
 pub use draw::{LineStyle, PrimitiveDraw, PrimitiveTopology, TriangleDraw};
 
 mod line_style;
+
+mod highlight_style;

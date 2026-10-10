@@ -94,3 +94,5 @@ pub mod ais_lifecycle;
 mod ais_lifecycle_detection;
 
 pub mod stdprs_curve;
+
+pub mod ais_line;

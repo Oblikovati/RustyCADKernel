@@ -123,7 +123,7 @@ pub fn prs_mgr_unset_material<O: PrsMgrPresentableObject + ?Sized>(
         );
     }
     if has_color {
-        object.set_color(drawer.color());
+        object.set_color(drawer.color())?;
     }
     // The native code asks IsTransparent() again after the (virtual) SetColor.
     if color_and_transparency(object).1 {

@@ -294,23 +294,27 @@ pub trait PrsMgrPresentableObject: Transient {
     fn color(&self) -> Color {
         self.presentable_base().read().drawer.color()
     }
-    /// `SetColor`: the drawer color, now own; `object.set_color(red)`.
-    fn set_color(&self, color: Color) {
+    /// `SetColor`: the drawer color, now own; `object.set_color(red)?`.
+    fn set_color(&self, color: Color) -> Result<(), Failure> {
         let drawer = self.presentable_base().read().drawer;
         drawer.set_color(color);
         self.presentable_base().fields.write().has_own_color = true;
+        Ok(())
     }
-    /// `UnsetColor`; `object.unset_color()`.
-    fn unset_color(&self) {
+    /// `UnsetColor`; `object.unset_color()?`.
+    fn unset_color(&self) -> Result<(), Failure> {
         self.presentable_base().fields.write().has_own_color = false;
+        Ok(())
     }
-    /// `SetWidth`: the own width (stored as a float); `object.set_width(2.0)`.
-    fn set_width(&self, width: f64) {
+    /// `SetWidth`: the own width (stored as a float); `object.set_width(2.0)?`.
+    fn set_width(&self, width: f64) -> Result<(), Failure> {
         self.presentable_base().fields.write().own_width = width as f32;
+        Ok(())
     }
-    /// `UnsetWidth`; `object.unset_width()`.
-    fn unset_width(&self) {
+    /// `UnsetWidth`; `object.unset_width()?`.
+    fn unset_width(&self) -> Result<(), Failure> {
         self.presentable_base().fields.write().own_width = 0.0;
+        Ok(())
     }
     /// `Material`: the name of the front shading material; `object.material()`.
     fn material(&self) -> Graphic3dNameOfMaterial {

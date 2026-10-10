@@ -69,3 +69,8 @@ mod context_clear_prs;
 mod context_object_queries;
 mod context_object_walk;
 mod context_remove;
+
+mod line;
+mod line_appearance;
+mod line_presentations;
+pub use line::AisLine;

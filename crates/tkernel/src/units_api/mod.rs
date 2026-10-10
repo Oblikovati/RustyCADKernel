@@ -5,10 +5,10 @@
 //! selected systems) are fields of an injected [`UnitsApi`] context; the resource
 //! files are read through the injected `ResourceIo`/`ResourceEnvironment`.
 use crate::resource::{ResourceHost, ResourceManager};
-use crate::standard::{Failure, Handle};
+use crate::standard::{Failure, Handle, SharedState};
 use crate::tcollection::AsciiString;
 use crate::units::{Dimensions, Units, UnitsSystem};
-use std::{cell::RefCell, rc::Rc, sync::Arc};
+use std::sync::Arc;
 
 mod conversion;
 mod current;
@@ -25,7 +25,8 @@ pub enum SystemUnits {
     Mdtv,
 }
 
-type Catalog = Rc<RefCell<ResourceManager>>;
+// Shared catalogs preserve SI/MDTV aliasing while allowing an injected viewer context.
+type Catalog = Arc<SharedState<ResourceManager>>;
 
 /// An isolated `UnitsAPI` context; `UnitsApi::new(Arc::new(Units::new()), io, environment)`.
 pub struct UnitsApi {
@@ -65,7 +66,7 @@ impl UnitsApi {
     }
     fn catalog(&self, name: &str) -> Result<Catalog, Failure> {
         let manager = ResourceManager::new(name, false, self.host.clone())?;
-        Ok(Rc::new(RefCell::new(manager)))
+        Ok(Arc::new(SharedState::new(manager)))
     }
     /// `CheckLoading`: switches the current resources and local units system,
     /// loading them on first use (the MDTV system is specified once).
@@ -182,7 +183,7 @@ fn c_name(bytes: &[u8]) -> &[u8] {
 
 /// The current unit of `quantity` when the current resources define one.
 fn current_value(catalog: &Catalog, quantity: &[u8]) -> Option<AsciiString> {
-    let catalog = catalog.borrow();
+    let catalog = catalog.read();
     let name = key(quantity);
     if !catalog.find(&name) {
         return None;
