@@ -31,8 +31,20 @@ fn empty_search_path_keeps_the_shim() {
 }
 
 #[test]
-fn invalid_path_separator_is_rejected() {
-    let separator = if cfg!(windows) { ";" } else { ":" };
+fn unrepresentable_path_list_entry_is_rejected() {
+    // Windows quotes semicolons, but cannot escape a literal quote in a path list.
+    let separator = if cfg!(windows) { "\"" } else { ":" };
     let directory = format!("invalid{separator}directory");
     assert!(pkg_config_path::prepend(Path::new(&directory), OsStr::new("")).is_err());
+}
+
+#[cfg(windows)]
+#[test]
+fn windows_semicolon_directory_round_trips_with_native_quoting() {
+    let directory = Path::new("C:/native;directory");
+    let joined = pkg_config_path::prepend(directory, OsStr::new("")).unwrap();
+    assert_eq!(
+        std::env::split_paths(&joined).collect::<Vec<_>>(),
+        vec![directory.to_path_buf()]
+    );
 }

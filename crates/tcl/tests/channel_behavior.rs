@@ -141,3 +141,29 @@ fn event_loop_initializes_each_foreign_thread_before_waiting() {
         .unwrap();
     }
 }
+
+#[test]
+fn recycled_foreign_threads_keep_file_notifiers_ready() {
+    rustycad_tcl::initialize_library();
+    for _ in 0..32 {
+        std::thread::spawn(|| {
+            let (reader, mut writer) = UnixStream::pair().unwrap();
+            let ready = Rc::new(Cell::new(0));
+            let seen = Rc::clone(&ready);
+            let _registration = FileHandler::new(
+                reader.as_raw_fd(),
+                sys::TCL_READABLE,
+                Box::new(move |mask| seen.set(mask)),
+            );
+            writer.write_all(b"x").unwrap();
+            let deadline = std::time::Instant::now() + std::time::Duration::from_secs(1);
+            while ready.get() == 0 && std::time::Instant::now() < deadline {
+                do_one_event(sys::TCL_FILE_EVENTS | sys::TCL_DONT_WAIT);
+                std::thread::yield_now();
+            }
+            assert_eq!(ready.get(), sys::TCL_READABLE);
+        })
+        .join()
+        .unwrap();
+    }
+}

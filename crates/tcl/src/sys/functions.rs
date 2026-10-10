@@ -42,6 +42,8 @@ foreign_functions! {
     TCL_SIGNATURES;
     fn Tcl_FindExecutable(argv0: *const c_char) -> ();
     fn Tcl_CreateInterp() -> *mut Tcl_Interp;
+    /// Release the calling thread's Tcl notifier and thread-local resources.
+    fn Tcl_FinalizeThread() -> ();
     fn Tcl_DeleteInterp(interp: *mut Tcl_Interp) -> ();
     fn Tcl_Init(interp: *mut Tcl_Interp) -> c_int;
     fn Tcl_Exit(status: c_int) -> !;

@@ -35,16 +35,28 @@ fn initialize_thread() {
     thread_local! {
         // Tcl 8.6 TclInitNotifier is reached by Tcl_CreateInterp on each foreign thread.
         // FindExecutable's process-wide initialization alone leaves macOS CFRunLoop unset.
-        static NOTIFIER_READY: () = {
+        static NOTIFIER_READY: ThreadNotifier = {
             // SAFETY: this temporary interpreter never escapes its owning thread. Its
             // deletion leaves the thread's notifier ready for interpreter-free events.
             unsafe {
                 let interpreter = sys::Tcl_CreateInterp();
                 sys::Tcl_DeleteInterp(interpreter);
             }
+            ThreadNotifier
         };
     }
-    NOTIFIER_READY.with(|()| ());
+    NOTIFIER_READY.with(|_| ());
+}
+
+// CI job 114319433734: an exited Rust thread leaves Tcl's global notifier entry
+// behind unless finalized. A reused pthread ID skips initialization on macOS.
+struct ThreadNotifier;
+impl Drop for ThreadNotifier {
+    fn drop(&mut self) {
+        // SAFETY: Rust drops this TLS guard on its owning thread, after interpreters
+        // created following initialize_library() have been destroyed.
+        unsafe { sys::Tcl_FinalizeThread() };
+    }
 }
 
 /// A non-owning reference to a live interpreter, valid for the borrow it is reached by.
