@@ -324,8 +324,9 @@ colors supply the uniform fallback; vertex colors take precedence. Geometry,
 indices and bound colors are read again for each frame so shared buffer updates
 remain visible. Bound counts and accesses are checked before submission.
 
-The replacement still supports opaque unlit surfaces only. Quads, polygons, lines,
-points, lighting, edge rendering and full highlight rendering remain open. No complete
+The replacement now supports unlit and opaque Phong-family surfaces, lines and
+point sprites. Quads, polygons, edge rendering, broader lighting and full highlight
+rendering remain open. No complete
 legacy primitive capability family is claimed. The `surface-bounds` workload
 times extraction, submission and readback of 256 colored strip bounds in one
 Graphic3d array; the previous five workloads retain their original baselines.
@@ -513,7 +514,8 @@ and unmatched timing baselines remain open; this adds presentation capability.
 [AIS circle and arc datums](ais-circle.md) add adaptive chordal-deviation
 presentations, filled/boundary selection, live geometry and appearance updates,
 114 captures per device and a radius-update performance workload. The complete
-harness collects 17 timing workloads; nine have accepted baselines.
+harness now collects 21 timing workloads. New lighting timings remain unaccepted
+while the native capture and timing gates are open.
 
 ## Shader material preparation
 
