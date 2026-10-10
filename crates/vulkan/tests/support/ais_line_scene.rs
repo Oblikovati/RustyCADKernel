@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 //! Built-in line datums through AIS display, live aspects, geometry updates and selection.
 #[path = "../../../tkv3d/tests/support/ais_line_fixture.rs"]
-mod fixture;
+pub(crate) mod fixture;
 use crate::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{

@@ -79,3 +79,9 @@ mod point;
 mod point_appearance;
 mod point_presentations;
 pub use point::AisPoint;
+
+mod axis;
+mod axis_appearance;
+mod axis_geometry;
+mod axis_presentations;
+pub use axis::{AisAxis, AisTypeOfAxis};

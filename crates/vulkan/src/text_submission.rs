@@ -40,7 +40,9 @@ impl TextSceneContext<'_> {
             .iter()
             .map(|p| RenderVertex::new([p[0], p[1], 0.], rgba))
             .collect();
-        let style = TexturedStyle::new(layout.atlas, layout.uv, aspect.alpha_cutoff())?;
+        // Graphic3d_ShaderManager::getStdProgramFont at 3d097a0 hard-codes this cutoff.
+        let style = TexturedStyle::new(layout.atlas, layout.uv, 0.285)?
+            .with_alpha_blending(aspect.alpha_mode() == Graphic3dAlphaMode::MaskBlend);
         let mut draw = PrimitiveDraw::textured(vertices, layout.indices, clip, style)?;
         draw.annotation = aspect.text_style() == AspectTypeOfStyleText::Annotation;
         Ok(vec![draw])
@@ -75,12 +77,6 @@ fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), Render
                 aspect.shader_program().object_address(),
             ),
             "normal text display without a custom shader in this slice",
-        ));
-    }
-    if aspect.alpha_mode() != Graphic3dAlphaMode::MaskBlend {
-        return Err(rejected(
-            aspect.alpha_mode(),
-            "native mask-blended glyph rendering in this slice",
         ));
     }
     Ok(())

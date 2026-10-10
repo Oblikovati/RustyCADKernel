@@ -38,6 +38,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_line_performance::benchmark(&driver, warmup, samples);
     ais_point_performance::benchmark(&driver, warmup, samples);
     text_performance::benchmark(&driver, warmup, samples);
+    ais_axis_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -125,3 +126,8 @@ mod point_scene;
 mod text_performance;
 #[path = "../tests/support/text_scene.rs"]
 mod text_scene;
+
+#[path = "support/ais_axis_performance.rs"]
+mod ais_axis_performance;
+#[path = "../tests/support/ais_axis_scene.rs"]
+mod axis_scene;

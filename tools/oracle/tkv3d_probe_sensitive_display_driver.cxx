@@ -1,11 +1,13 @@
 // A named recording driver captures real native buffer callbacks without rendering.
 #include <Graphic3d_Buffer.hxx>
+#include <Graphic3d_Text.hxx>
 #include <Graphic3d_IndexBuffer.hxx>
-struct V3DisplayTrace { std::vector<double> events; int fail=-1,groups=0; occ::handle<SelectMgr_Selection> appendSelection; occ::handle<SelectMgr_SelectableObject> appendObject; };
+struct V3DisplayTrace { std::vector<double> events; std::vector<occ::handle<Graphic3d_Text>> texts; int fail=-1,groups=0; occ::handle<SelectMgr_Selection> appendSelection; occ::handle<SelectMgr_SelectableObject> appendObject; };
 class V3DisplayGroup: public SvGroup {
   V3DisplayTrace& trace;
 public:
   V3DisplayGroup(const occ::handle<Graphic3d_Structure>& prs,V3DisplayTrace& log):SvGroup(prs),trace(log){}
+  void AddText(const occ::handle<Graphic3d_Text>& text, const bool evaluate=true) override {trace.texts.push_back(text); SvGroup::AddText(text,evaluate);}
   void aspect(const occ::handle<Graphic3d_Aspects>& value){
     auto c=value->InteriorColor();trace.events.insert(trace.events.end(),{3.,c.Red(),c.Green(),c.Blue(),double(value->LineType()),double(value->LineWidth()),double(value->MarkerType()),double(value->MarkerScale())});
   }

@@ -10,6 +10,7 @@ use recording_group::SensitiveDisplayGroup;
 #[derive(Default)]
 pub struct SensitiveDisplayTrace {
     pub events: Vec<f64>,
+    pub texts: Vec<Handle<Graphic3dText>>,
     pub fail_group: i32,
     pub groups: i32,
     pub append_selection: Handle<rustycad_tkv3d::select_mgr::SelectMgrSelection>,

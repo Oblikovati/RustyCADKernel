@@ -47,6 +47,8 @@ fn check_annotation(driver: &Handle<Graphic3dRenderDriver>) {
     let annotation = capture_mode(driver, "text-annotation");
     assert_ne!(occluded.rgba, annotation.rgba);
     let plain = capture_mode(driver, "text-basic");
+    assert_eq!(plain.rgba, capture_mode(driver, "text-cutoff").rgba);
+    assert_ne!(plain.rgba, capture_mode(driver, "text-opaque").rgba);
     let covered = plain.depth.iter().filter(|z| **z < 1.).count();
     assert!(
         (20..250).contains(&covered),

@@ -18,6 +18,7 @@ impl DrawPipeline {
         line: bool,
         point: bool,
         text: bool,
+        text_blend: bool,
     ) -> Result<Self, RenderError> {
         let mut pipeline = Self {
             runtime: runtime.clone(),
@@ -37,7 +38,7 @@ impl DrawPipeline {
             line || point || text,
             pipeline.sprite_layout.as_ref(),
         )?;
-        pipeline.create(depth_clamp, line, point, text)?;
+        pipeline.create(depth_clamp, line, point, text, text_blend)?;
         Ok(pipeline)
     }
     fn load_shaders(&mut self, line: bool, point: bool, text: bool) -> Result<(), RenderError> {
@@ -73,9 +74,11 @@ impl DrawPipeline {
         line: bool,
         point: bool,
         text: bool,
+        text_blend: bool,
     ) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
-        let state = super::pipeline_state::PipelineState::new(depth_clamp, line, point, text);
+        let state =
+            super::pipeline_state::PipelineState::new(depth_clamp, line, point, text, text_blend);
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&[vk::Format::R8G8B8A8_SRGB])
             .depth_attachment_format(vk::Format::D32_SFLOAT);

@@ -180,3 +180,31 @@ fn text_bookkeeping_and_ordered_live_styles_match_group_contract() {
     assert!(fixture.scene.group.is_empty());
     assert!(fixture.redraw().draws().is_empty());
 }
+
+#[test]
+fn font_cutoff_is_fixed_and_only_mask_blend_enables_coverage_blending() {
+    let fixture = TextFixture::new();
+    let initial = fixture.redraw().draws()[0]
+        .textured_style()
+        .unwrap()
+        .clone();
+    fixture
+        .style
+        .set_alpha_mode(Graphic3dAlphaMode::MaskBlend, 0.99);
+    assert_eq!(
+        fixture.redraw().draws()[0].textured_style().unwrap(),
+        &initial
+    );
+    for mode in [
+        Graphic3dAlphaMode::Opaque,
+        Graphic3dAlphaMode::Mask,
+        Graphic3dAlphaMode::BlendAuto,
+        Graphic3dAlphaMode::Blend,
+    ] {
+        fixture.style.set_alpha_mode(mode, 0.01);
+        assert_eq!(
+            fixture.redraw().draws()[0].textured_style().unwrap(),
+            &initial.clone().with_alpha_blending(false)
+        );
+    }
+}

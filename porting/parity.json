@@ -574572,6 +574572,296 @@
       "rust_item": "rustycad_tkv3d::ais::AisPoint::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
       "status": "implemented",
       "notes": "Native point geometry, fresh topological vertex, datum identity, linked appearance precedence and failure order; static/dynamic presentations and sensitive selection. Exact numeric oracle and CPU regressions; Vulkan point-sprite raster/color differences remain partial and separate. See docs/ais-point.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::Type()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "0d36b387a900a91ae6de1b830d31134c916586aaede3fdc8e5130eae61dcdb59",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetAxis1Placement(const class opencascade::handle<class Geom_Axis1Placement> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "191d8b8cd20ec99ff68be5536247318bfbc4e54b32523d57a1c6e00e20113698",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::set_axis1_placement",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_TOAX_ZAxis",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfAxis.hxx",
+      "source_sha256": "6aeb8ce53ee530bc5d12f839ac51d0ec6b021f0b92e4ad49024d77a2edd5fda9",
+      "cpp_declaration_id": "21a0afc29d42d6575c691cfe4c2acc9b2ba9ea1e0169dc05725329c719b1c0d3",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfAxis::ZAxis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::IsXYZAxis()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "2ce1d6935de2c6ef9df6ba47a26323f118d857e28f702709988d0f9af2bf7177",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::is_xyz_axis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetDisplayAspect(const class opencascade::handle<class Prs3d_LineAspect> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "32316590a2a673256d80bb42d21d848c7eb71bc3a732a38919846bbe8d95c261",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::set_display_aspect",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "3dcb1a9f9d600d3e8fb4b327e97990811f51fa03f3d6df63b03c3e565a8d8782",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::AIS_Axis(const class opencascade::handle<class Geom_Axis2Placement> &, const enum AIS_TypeOfAxis)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "495c14f68b647186f63df449008c4abf9f241f8be41726ed3aa3246eba09fd33",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::from_axis2",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetAxis2Placement(const class opencascade::handle<class Geom_Axis2Placement> &, const enum AIS_TypeOfAxis)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "4bca2bb21bfa7c40713d4a2a67a11e8effb6743867a854eb68bdd703b8a3e679",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::set_axis2_placement",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetComponent(const class opencascade::handle<class Geom_Line> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "54e4074e8df066a1b6fe8bfde1ce36cec37353f1408cc32e9d2936f85cd439b3",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::set_component",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::Axis2Placement()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "5b76842019d0ea971820fffae915f9e37444b90f6eed86ec0b99c9873ac957b4",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::axis2_placement",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_TOAX_Unknown",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfAxis.hxx",
+      "source_sha256": "6aeb8ce53ee530bc5d12f839ac51d0ec6b021f0b92e4ad49024d77a2edd5fda9",
+      "cpp_declaration_id": "5d6c8b83c7d7e4a316c584533c90bc5d13d1f0efe2d34e406730f23acdba14be",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfAxis::Unknown",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::AIS_Axis(const class opencascade::handle<class Geom_Axis1Placement> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "6bfff32f136a7916d2f09d5d37f3c231f1ae4b967dcbec64778b94bd7489c393",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::from_axis1",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "7a40feeb0a9ccf261926452531b576eb3b5a0bac97a06470445781ff9a25b97f",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_TypeOfAxis",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfAxis.hxx",
+      "source_sha256": "6aeb8ce53ee530bc5d12f839ac51d0ec6b021f0b92e4ad49024d77a2edd5fda9",
+      "cpp_declaration_id": "86bac25d0e6d956ff112984bad56aefe6806413e2ae8d12a88cbc920668e68c9",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfAxis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "DsgPrs_XYZAxisPresentation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/DsgPrs/DsgPrs_XYZAxisPresentation.hxx",
+      "source_sha256": "bb22b85e3e132243da58195d5347a612b6dafa2740f0c3b6bc56339d1e23c20b",
+      "cpp_declaration_id": "88fcb62db0d6b2798d91b21b0b6bea147d5262362ca2cb6b17f6b4a1797a220d",
+      "rust_item": "rustycad_tkv3d::dsg_prs::DsgPrsXYZAxisPresentation",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::AcceptDisplayMode(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "92328c0b6d69bdb06dbef164c6031b961a81e2da4ef54895640023aedc477ee8",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetWidth(const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "976bb1fbb3c9bffcc9864ccadcc3dac5596aba69e546ffac3b32bcf685a41ef5",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_width",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::UnsetWidth()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "a0029fe5321cbdfd4dd849400a74b1d36cd3946cebf1e4393e01ebba2f61b2e3",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_width",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::AIS_Axis(const class opencascade::handle<class Geom_Line> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "a8e2ae1fe25fc417375b27db53aa38b78d69170db7bdf5f12ff0a364a5237b70",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::new",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_TOAX_XAxis",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfAxis.hxx",
+      "source_sha256": "6aeb8ce53ee530bc5d12f839ac51d0ec6b021f0b92e4ad49024d77a2edd5fda9",
+      "cpp_declaration_id": "b343a8a33d799e84dfbafb253024f470923ec7d956bdd5d41802f792994b5ee4",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfAxis::XAxis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::Component()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "b3a178312862aa986e8f3ef4de5b71f0d2a8e13401a6f52a82b641f32c454428",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::component",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::Signature()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "bbc2ebd850277b12462623e766b30d08f38d8b9652d5c5f5f6973460db9496ea",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::ais::AisInteractiveObject>::signature",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::TypeOfAxis()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "be442cf5f0bc1fdcbbb44fe6782cbb7bdbda2b98006e08ae291fa5747574fe1c",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::type_of_axis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetTypeOfAxis(const enum AIS_TypeOfAxis)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "c428fa2f5a56db4d57d4e28022e9a20236a8cdf76df56f0107c3e7e8ef299fc2",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::set_type_of_axis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "DsgPrs_XYZAxisPresentation::Add(const class opencascade::handle<class Graphic3d_Structure> &, const class opencascade::handle<class Prs3d_LineAspect> &, const class opencascade::handle<class Prs3d_ArrowAspect> &, const class opencascade::handle<class Prs3d_TextAspect> &, const class gp_Dir &, const double, const char *const, const class gp_Pnt &, const class gp_Pnt &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/DsgPrs/DsgPrs_XYZAxisPresentation.hxx",
+      "source_sha256": "bb22b85e3e132243da58195d5347a612b6dafa2740f0c3b6bc56339d1e23c20b",
+      "cpp_declaration_id": "e2c0b63f98872e91011c67a79ccbe2610a5c42d00d57aedc60f2bc9902f27cb2",
+      "rust_item": "rustycad_tkv3d::dsg_prs::DsgPrsXYZAxisPresentation::add_with_aspects",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_TOAX_YAxis",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfAxis.hxx",
+      "source_sha256": "6aeb8ce53ee530bc5d12f839ac51d0ec6b021f0b92e4ad49024d77a2edd5fda9",
+      "cpp_declaration_id": "e946bb8bc9ecb182f1e397800882a34e21b882d068f0302baabf932c8e926c07",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfAxis::YAxis",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::AIS_Axis(const class gp_Ax1 &, const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "ef81ef30e9f0de0abecb9413132cf47061e46b1ace336873e91d631e68d27e91",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::from_ray",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "DsgPrs_XYZAxisPresentation::Add(const class opencascade::handle<class Graphic3d_Structure> &, const class opencascade::handle<class Prs3d_LineAspect> &, const class gp_Dir &, const double, const char *const, const class gp_Pnt &, const class gp_Pnt &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/DsgPrs/DsgPrs_XYZAxisPresentation.hxx",
+      "source_sha256": "bb22b85e3e132243da58195d5347a612b6dafa2740f0c3b6bc56339d1e23c20b",
+      "cpp_declaration_id": "f438b54aab3d83c4a106bb2f4741041a83099b2f5a1380f3ec6e5affbfc36dd0",
+      "rust_item": "rustycad_tkv3d::dsg_prs::DsgPrsXYZAxisPresentation::add",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
+    },
+    {
+      "upstream_id": "AIS_Axis::SetColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Axis.hxx",
+      "source_sha256": "64e536e2b24584a8aba86ab955b2380e3bc5f02939aef248451e833032cf20ba",
+      "cpp_declaration_id": "f97347e41e1aff3b3ae8b3c5763d7d0830e9b93a98da732ff421bd742aa87a64",
+      "rust_item": "rustycad_tkv3d::ais::AisAxis::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "status": "implemented",
+      "notes": "AIS axis constructors, cached selection, native appearance mutation order and labeled presentation overloads. 610 new exact native requests plus CPU tests; Vulkan raster parity tracked separately. See docs/ais-axis.md."
     }
   ],
   "tests": [

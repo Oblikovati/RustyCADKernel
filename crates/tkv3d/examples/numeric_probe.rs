@@ -12,6 +12,8 @@ type ProbeCase = fn(&[f64]);
 /// The dispatch table of tools/oracle/tkv3d_probe.cxx (`probe_cases`); each package adds its
 /// operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
+    ("v3_xyz_axis", v3_probe::ais_axis::xyz_axis_case),
+    ("v3_ais_axis", v3_probe::ais_axis::ais_axis_case),
     ("v3_ais_point", v3_probe::ais_point::ais_point_case),
     (
         "v3_standard_point",

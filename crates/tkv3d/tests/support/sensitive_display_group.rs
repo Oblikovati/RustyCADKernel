@@ -56,6 +56,10 @@ impl Graphic3dGroup for SensitiveDisplayGroup {
     fn group_base(&self) -> &Graphic3dGroupBase {
         self.inner.group_base()
     }
+    fn add_text(&self, text: &Handle<Graphic3dText>, evaluate: bool) {
+        self.trace.write().texts.push(text.clone());
+        self.inner.add_text(text, evaluate);
+    }
     fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource> {
         self.inner.aspects()
     }

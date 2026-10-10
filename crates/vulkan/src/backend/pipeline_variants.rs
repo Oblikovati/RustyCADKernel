@@ -3,11 +3,11 @@ use super::{pipeline::DrawPipeline, runtime::VulkanRuntime};
 use crate::{RenderError, error::rejected};
 use std::sync::Arc;
 pub(super) struct RasterPipelines {
-    variants: [Option<Arc<DrawPipeline>>; 8],
+    variants: [Option<Arc<DrawPipeline>>; 10],
 }
 impl RasterPipelines {
     pub fn new(runtime: &Arc<VulkanRuntime>) -> Result<Self, RenderError> {
-        let mut variants = [None, None, None, None, None, None, None, None];
+        let mut variants = std::array::from_fn(|_| None);
         for (index, slot) in variants.iter_mut().enumerate() {
             let (clamp, line, point) = (index & 1 != 0, index / 2 == 1, index / 2 == 2);
             if (clamp && !runtime.depth_clamp) || (line && !runtime.lines.bresenham) {
@@ -18,6 +18,7 @@ impl RasterPipelines {
                 clamp,
                 line,
                 point,
+                index / 2 >= 3,
                 index / 2 == 3,
             )?));
         }
@@ -29,11 +30,16 @@ impl RasterPipelines {
         line: bool,
         point: bool,
         text: bool,
+        text_blend: bool,
     ) -> Result<Arc<DrawPipeline>, RenderError> {
         let index = usize::from(depth_clamp)
             + 2 * usize::from(line)
             + 4 * usize::from(point)
-            + 6 * usize::from(text);
+            + if text {
+                if text_blend { 6 } else { 8 }
+            } else {
+                0
+            };
         self.variants[index].clone().ok_or_else(|| {
             rejected(
                 (depth_clamp, line),
