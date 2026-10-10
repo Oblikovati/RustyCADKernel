@@ -15,7 +15,11 @@ import tempfile
 from dataclasses import asdict, dataclass
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
-from vulkan_performance import performance_rows, regression_failures
+from vulkan_performance import (
+    performance_rows,
+    regression_failures,
+    startup_milliseconds,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 PIN = "3d097a0328e71b826377d4814ab05ec3c3d23871"
@@ -271,6 +275,7 @@ def profile_result(
         "runtime_checks": runtime,
         "cases": cases,
         "performance": performance_rows(output),
+        "startup_ms": startup_milliseconds(output),
         "timing_scope": "release V3d redraw, scene extraction, Vulkan allocation/submission, fence wait and color/depth readback; validation disabled",
     }
 

@@ -28,7 +28,8 @@ contexts are explicitly unsupported by this implementation slice.
 
 The backend requires a Vulkan 1.3 graphics device with dynamic rendering and
 synchronization2. It uses owned buffers, images, shader modules, pipelines, command
-pools and fences. Submissions finish before resources are released. A negative
+pools and fences. The fixed unlit pipeline is shared across frames and resizes;
+viewport and layer depth policy remain dynamic. Submissions finish before resources are released. A negative
 viewport height and shader depth conversion preserve the camera's OpenGL clip
 convention in Vulkan's depth range. GLSL and its generated SPIR-V are checked in.
 The binding is pinned to [Ash 0.38](https://docs.rs/ash/0.38.0+1.3.281/ash/).
@@ -127,7 +128,9 @@ at 256×256, 256 triangle submissions at 256×256, and repeated 128/256×256 res
 Timings cover V3d scene extraction, current per-frame Vulkan resource allocation,
 submission, fence completion and color/depth readback. They are end-to-end latency,
 not GPU timestamp measurements. Validation is disabled for timing and required by
-the separate functional gate. Raw samples, median, mean, p95 and p99 are retained.
+the separate functional gate. Raw samples, median, mean, p95 and p99 are retained. Device/pipeline creation
+is measured separately as `startup_ms`, so moving fixed setup out of the frame
+loop does not conceal its cost.
 
 The first run collects a baseline. To make timing regressions fail the gate:
 
@@ -139,7 +142,15 @@ python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-all-full \
 
 Comparisons require identical device/driver identity and workload configuration.
 Default limits are 1.25× baseline median and 1.5× baseline p95, configurable with
-`--median-ratio` and `--p95-ratio`. Missing or incompatible baselines fail. CI
+`--median-ratio` and `--p95-ratio`. Missing or incompatible baselines fail. There are no automatic retries or budget
+relaxations. The [initial native timing failure](../porting/runtime-evidence/vulkan-pre-cache-timing-failure-2026-10-10.json)
+is retained: repeated runs of the unchanged binary varied enough to cross the
+resize median limit, and increasing the sample count did not stabilize it. The
+host rebooted during that investigation, so the pipeline-reuse comparison uses a
+fresh pre-change baseline from the same boot. Reusing the fixed pipeline improved
+lavapipe frame latency; it did not establish a cause or cure for native timing
+variation. Compare runs under similar host load and treat a failed timing gate as
+evidence to investigate, not permission to silently replace its baseline. CI
 collects the lavapipe release timings as an artifact; native GPU comparisons run
 on a graphical host with its matching baseline. The controlled unlit scenes do
 not yet measure a complete CAD presentation, lighting, swapchain pacing or GPU-only

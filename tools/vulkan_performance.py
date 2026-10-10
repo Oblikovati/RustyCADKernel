@@ -95,3 +95,17 @@ def same_workload(
         current[key] == previous[key]
         for key in ("draws", "warmup", "validation", "samples")
     )
+
+
+def startup_milliseconds(output: str) -> float:
+    """Report device/pipeline creation separately from steady frames; e.g. startup_milliseconds(stdout)."""
+    samples = [
+        float(line.split("=", 1)[1])
+        for line in output.splitlines()
+        if line.startswith("MARTENSITE_STARTUP_MS=")
+    ]
+    if len(samples) != 1 or not math.isfinite(samples[0]) or samples[0] <= 0:
+        raise ValueError(
+            f"received startup samples {samples}; expected one positive finite duration"
+        )
+    return samples[0]

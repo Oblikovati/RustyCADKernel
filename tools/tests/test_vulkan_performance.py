@@ -4,7 +4,12 @@ import json
 import unittest
 from pathlib import Path
 from verify_vulkan import HarnessConfig, check_baseline, parse_arguments, configuration
-from vulkan_performance import summarize_samples, performance_rows, regression_failures
+from vulkan_performance import (
+    startup_milliseconds,
+    summarize_samples,
+    performance_rows,
+    regression_failures,
+)
 
 
 class VulkanPerformanceTests(unittest.TestCase):
@@ -76,3 +81,9 @@ class VulkanPerformanceTests(unittest.TestCase):
         config = configuration(args)
         self.assertEqual((config.samples, config.warmup), (100, 20))
         self.assertEqual(config.profiles, ("lavapipe", "host"))
+
+    def test_startup_cost_is_recorded_separately_and_must_be_valid(self) -> None:
+        self.assertEqual(startup_milliseconds("MARTENSITE_STARTUP_MS=3.5"), 3.5)
+        for output in ("", "MARTENSITE_STARTUP_MS=nan", "MARTENSITE_STARTUP_MS=-1"):
+            with self.assertRaises(ValueError):
+                startup_milliseconds(output)
