@@ -1,0 +1,91 @@
+{
+  "scope": "AIS_Circle and every StdPrs_DeflectionCurve Add/Match overload, native comparisons, circle/arc Vulkan captures and geometry-update performance",
+  "implementation_commits": [
+    "4d447cf92",
+    "83d6013b3"
+  ],
+  "main_verified": "f6703acdfd3bdbffe56d8a87738a771c1a4e08b6",
+  "rust_all_target_tests": 487,
+  "python_harness_tests": 31,
+  "clippy": "passed all targets -D warnings",
+  "native_numeric_comparisons": 154984,
+  "native_noexcept_abort_parity": "passed",
+  "new_api_mappings": 26,
+  "api_inventory": {
+    "api_declarations": 76041,
+    "api_done": 51662,
+    "api_open": 23405,
+    "api_partial": 974,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "unresolved_ledger_rows": 0,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "full_strict_passed": 688,
+      "full_strict_total": 1062,
+      "circle_passed": 114,
+      "circle_total": 114,
+      "prior_capture_status_changes": [],
+      "runtime": "PASS: 18 Vulkan runtime checks; validation errors: 0",
+      "performance_gate": {
+        "profile": "lavapipe",
+        "accepted_workloads": 9,
+        "accepted_budget_failures": [],
+        "unmatched_workloads": [
+          "received unmatched workload line-bounds; expected matching baseline configuration",
+          "received unmatched workload persistence-groups; expected matching baseline configuration",
+          "received unmatched workload curve-presentations; expected matching baseline configuration",
+          "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+          "received unmatched workload point-sprites; expected matching baseline configuration",
+          "received unmatched workload text-glyphs; expected matching baseline configuration",
+          "received unmatched workload ais-axis-appearance; expected matching baseline configuration",
+          "received unmatched workload plane-trihedron-updates; expected matching baseline configuration"
+        ]
+      }
+    },
+    {
+      "profile": "host",
+      "full_strict_passed": 608,
+      "full_strict_total": 1062,
+      "circle_passed": 114,
+      "circle_total": 114,
+      "prior_capture_status_changes": [],
+      "runtime": "PASS: 18 Vulkan runtime checks; validation errors: 0",
+      "performance_gate": {
+        "profile": "host",
+        "accepted_workloads": 9,
+        "accepted_budget_failures": [],
+        "unmatched_workloads": [
+          "received unmatched workload line-bounds; expected matching baseline configuration",
+          "received unmatched workload persistence-groups; expected matching baseline configuration",
+          "received unmatched workload curve-presentations; expected matching baseline configuration",
+          "received unmatched workload ais-line-appearance; expected matching baseline configuration",
+          "received unmatched workload point-sprites; expected matching baseline configuration",
+          "received unmatched workload text-glyphs; expected matching baseline configuration",
+          "received unmatched workload ais-axis-appearance; expected matching baseline configuration",
+          "received unmatched workload plane-trihedron-updates; expected matching baseline configuration"
+        ]
+      }
+    }
+  ],
+  "raw_buffer_proof": {
+    "prior": 7728,
+    "new": 912,
+    "identical": 8640
+  },
+  "remaining_work": [
+    "Broader legacy OpenGL capabilities",
+    "Known raster differences remain partial; two AMD infinite-line pixel-row cases remain deferred",
+    "Eight performance workloads lack accepted baselines"
+  ],
+  "unfinished_release_work": {
+    "branch": "porting/martensite-release-ci",
+    "worktree": "/home/vmiguel/git/oblikovati-workspace/Martensite-release-ci",
+    "remaining": "Validate and integrate CI runner fixes; immutable v0.1.0 release is blocked by Windows formatter command length and missing X server. Dependabot additionally exposed missing macOS Tcl/Tk 8.6."
+  },
+  "prior_unfinished_failure_note": "22 earlier unfinished branches preserved; linked-slot-recovery previously reported 39 compile errors, not rechecked in this slice."
+}

@@ -45,7 +45,7 @@ python3 tools/verify_tkv3d_numeric.py --source ../OCCT --native-build target/occ
 DISPLAY=:1 python3 tools/verify_vulkan.py --source ../OCCT \
   --build target/occt-all-full --output target/vulkan-circle.json \
   --captures target/vulkan-circle-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-window-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-circle-baseline-2026-10-10.json
 ```
 
 Nineteen AIS modes span circles/arcs, filled selection, reversed full-turn
@@ -73,3 +73,24 @@ The complete TKV3d native oracle passes 154,984 numeric comparisons plus the
 noexcept-abort check. TKV3d and Vulkan all-target tests pass (487 tests combined),
 as do all-target Clippy and 31 Python harness tests. This evidence precedes main
 integration and does not claim complete renderer parity.
+
+## Main integration
+
+The [main receipt](../porting/runtime-evidence/vulkan-circle-main-2026-10-10.json)
+independently passes all 114 circle captures and 18 runtime checks per profile.
+All 8,640 raw buffers match retained main artifacts: 7,728 from previous slices
+and 912 new circle color/depth buffers. The complete native oracle, 487 Rust
+tests, 31 Python tests and Clippy also pass on main.
+
+Six initially unresolved mappings required the compiler inventory’s explicit
+trait-qualified method paths. After correcting them, the fresh inventory resolves
+all 26 new declarations, with 51,662 done, 974 partial, 23,405 open and zero
+unresolved ledger rows. This remains incomplete coverage of the 76,041-API scope.
+
+The initial main timing run exceeded AMD window/circle budgets while a corrected
+inventory job was running. Those failures remain in its receipt. A single
+[repeat after inventory completed](../porting/runtime-evidence/vulkan-circle-repeat-performance-2026-10-10.json)
+passes all nine accepted workload budgets on both profiles, including the new
+circle baseline. Eight other workloads remain unmatched. The completed circle
+worktree and its build cache are deleted, never archived; the integration cleanup
+receipt records ancestry, local-change, artifact and process checks.

@@ -106,7 +106,7 @@ python3 tools/verify_vulkan.py \
   --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-acceptance.json \
   --captures target/vulkan-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-window-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-circle-baseline-2026-10-10.json
 ```
 
 The default matrix requires both `lavapipe` and `host`. It clears inherited
@@ -160,8 +160,8 @@ the separate functional gate. Raw samples, median, mean, p95 and p99 are retaine
 is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
-Eight workloads now have accepted baselines: the original six and two native-window
-workloads. Nine newer presentation workloads retain collected timings but no
+Nine workloads now have accepted baselines: the original six, two native-window
+workloads and circle updates. Eight newer presentation workloads retain collected timings but no
 accepted baseline while strict capture parity remains unresolved. The timing gate
 explicitly reports each unmatched workload.
 Run functional and timing regression checks together:
@@ -169,7 +169,7 @@ Run functional and timing regression checks together:
 ```sh
 python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-followup.json --captures target/vulkan-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-window-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-circle-baseline-2026-10-10.json
 ```
 
 For a new device/driver profile, omit `--performance-baseline` to collect its first
@@ -330,7 +330,7 @@ is preserved: the native factory discards strip index capacity and triangle boun
 capacity, so the corrected oracle uses a subclass exposing the protected base
 constructor, matching the Rust fixture.
 
-Initial collection is not a regression pass. The [composite baseline](../porting/runtime-evidence/vulkan-window-baseline-2026-10-10.json)
+Initial collection is not a regression pass. The [composite baseline](../porting/runtime-evidence/vulkan-circle-baseline-2026-10-10.json)
 initializes only the new workload; all five prior distributions and limits remain
 unchanged. The new workload's initial median/p95 is 3.437/3.816 ms on lavapipe and
 8.880/10.128 ms on the host. The final CPU suite passes 48 tests, including eight
@@ -506,4 +506,4 @@ and unmatched timing baselines remain open; this adds presentation capability.
 [AIS circle and arc datums](ais-circle.md) add adaptive chordal-deviation
 presentations, filled/boundary selection, live geometry and appearance updates,
 114 captures per device and a radius-update performance workload. The complete
-harness collects 17 timing workloads; eight have accepted baselines.
+harness collects 17 timing workloads; nine have accepted baselines.
