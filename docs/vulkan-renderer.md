@@ -172,6 +172,13 @@ build). Longer samples were similar between builds. These measurements do not
 establish an AIS-related slowdown or isolate the cause of timing variability;
 the original matrix remains failed, with its baseline and limits unchanged.
 
+The [isolated-build rerun](../porting/runtime-evidence/vulkan-isolated-build-2026-10-10.json)
+is the authoritative current-code receipt after fixing Cargo cache contamination.
+It passed all functional and host timing checks; lavapipe resize median was
+0.611 ms against 0.482 ms, and p95 was 1.362 ms against 0.948 ms, so the matrix
+remains failed. Earlier diagnostic binary hashes remain available, but their
+shared-cache source provenance was not guaranteed.
+
 Both renderers explicitly disable polygon offsets for these scenes. Default-layer
 captures isolate geometry depth. Full-view captures also check OCCT's later Topmost
 layer depth clear, which leaves the color intact. Custom depth policies additionally

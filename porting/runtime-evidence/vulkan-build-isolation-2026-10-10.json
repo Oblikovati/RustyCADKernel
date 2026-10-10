@@ -1,0 +1,53 @@
+{
+  "bug": "Cargo fresh builds can retain another checkout's unhashed example alias when CARGO_TARGET_DIR is shared.",
+  "reproduction": {
+    "control_commit": "4f9edb29ddee22f65491f2454798e3d06b8acd56",
+    "current_ais_commit": "e3fe31e69b52a5ae6116a1728718c3f1ee9a0f78",
+    "control_binary_sha256": "ca2fcde7cc477258c6a0bf7b0c93a0020149fdfb984980be84de9c11022f4a9f",
+    "current_binary_sha256": "5ecaebacfa18480d8b05c1d224ca0247e6fb47ca27436372a82a8d7dabfa11c8",
+    "main_cargo_fresh_artifact": {
+      "reason": "compiler-artifact",
+      "package_id": "path+file:///home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/vulkan#martensite-vulkan@0.1.0",
+      "manifest_path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/vulkan/Cargo.toml",
+      "target": {
+        "kind": [
+          "example"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "renderer_performance",
+        "src_path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/vulkan/examples/renderer_performance.rs",
+        "edition": "2024",
+        "doc": false,
+        "doctest": false,
+        "test": false
+      },
+      "profile": {
+        "opt_level": "3",
+        "debuginfo": "line-tables-only",
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": false
+      },
+      "features": [],
+      "filenames": [
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/release/examples/renderer_performance"
+      ],
+      "executable": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/release/examples/renderer_performance",
+      "fresh": true
+    },
+    "red_regression_test": "F\n======================================================================\nFAIL: test_inherited_shared_target_cannot_choose_a_foreign_worktree_binary (tools.tests.test_vulkan_build.VulkanBuildTests.test_inherited_shared_target_cannot_choose_a_foreign_worktree_binary)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-build/tools/tests/test_vulkan_build.py\", line 29, in test_inherited_shared_target_cannot_choose_a_foreign_worktree_binary\n    self.assertEqual(target, expected)\nAssertionError: PosixPath('/shared/target') != PosixPath('/workspace/Martensite/target/vulkan-harness')\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n"
+  },
+  "fix_commit": "c551ee89c",
+  "integration_commit": "2700a7b7273ca821cfca7d13ac72fc57b9337224",
+  "harness_tests_passed": 21,
+  "isolated_target": "target/vulkan-harness",
+  "isolated_benchmark_sha256": "c4fcc18320b2e803f54eab03148d2efe3a1c46059ddfa8ceb2d1d5cd293fc5de",
+  "runtime_receipt": "porting/runtime-evidence/vulkan-isolated-build-2026-10-10.json",
+  "functional_status": "passed on lavapipe and host; 24 image comparisons and 8 runtime checks; zero validation errors",
+  "performance_status": "host passed; lavapipe resize median and p95 failed the unchanged baseline limits",
+  "concurrent_load_observation": "cargo-llvm-cov and rustc processes were observed immediately after the final matrix. Scheduling/power-state causality remains unisolated.",
+  "main_shared_cache_rebuilt_sha256": "4c9ed77b56c9f7f27e9480cc80fa81e4eb24f3442acf4b43f9f95d7f87107213",
+  "main_ais_tests_after_cache_rebuild": 7
+}
