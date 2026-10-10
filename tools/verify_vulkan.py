@@ -15,6 +15,7 @@ import tempfile
 from dataclasses import asdict, dataclass
 from vulkan_build import build_vulkan_examples
 from vulkan_line_cases import LINE_MODES
+from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_performance import (
@@ -240,6 +241,7 @@ def capture_cases(
             *SURFACE_MODES,
             *PERSISTENCE_MODES,
             *LINE_MODES,
+            *STDPRS_MODES,
         )
     ]:
         try:
@@ -266,6 +268,8 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_surfaces.cxx",
             "tools/oracle/martensite_vulkan_bound_array.hxx",
             "tools/oracle/martensite_vulkan_lines.cxx",
+            "tools/oracle/martensite_stdprs_geometry.hxx",
+            "tools/oracle/martensite_vulkan_stdprs.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )

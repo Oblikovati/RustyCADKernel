@@ -466,3 +466,7 @@ deleted after an ancestry, local-change and process-reference audit; none was ar
 
 Line primitives, sRGB encoding, their regression tests and remaining strict capture
 failures are documented in [Martensite line primitives](vulkan-lines.md).
+
+Standard curves now exercise the ported `StdPrs_Curve` overload family through
+real Graphic3d groups. See [curve evidence](stdprs-curve.md) for the seven new
+scene modes, presentation-rebuild workload and retained native AMD failures.

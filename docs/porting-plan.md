@@ -26,7 +26,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    separate diagnostic gate before claiming bitwise parity or accepting its timing
    baseline. Segments/polylines, widths and shader patterns now reach Vulkan;
    [line evidence](vulkan-lines.md) records remaining gradient/depth parity gaps
-   and the new performance workload. Continue presentation
+   and the new performance workload. The [standard curve presentation family](stdprs-curve.md)
+   now supplies all eight Add/Match overloads, native numeric comparisons and
+   GPU/performance fixtures; `AIS_Line` is the next consumer. Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.
