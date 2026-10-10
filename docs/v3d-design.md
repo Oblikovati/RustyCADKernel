@@ -386,11 +386,11 @@ native field order, live object counts and depth-limited children. Eleven Rust t
 and 170 native traces cover this slice, including retained permutation storage and
 exact status/dump text (only process-local pointer values are canonicalized).
 
-This class remains partial. Pick overloads, BVH traversal and overlap collection,
-view-dependent layer updates, selection images, sensitive debug presentations are not yet ported. SelectionManager friend activation
-orchestration is implemented in the following section. The inventory
-maps only implemented state, lifecycle and ranking APIs; it does not infer working
-picking from their presence.
+Subsequent integrations completed Pick overloads, BVH traversal and overlap
+collection, view-dependent layer updates, selection images and sensitive debug
+presentations. See `viewer-selector-traversal.md`, `selection-images.md` and
+`sensitive-display.md` for their behavior and native evidence. SelectionManager
+friend activation orchestration is implemented in the following section.
 
 ### Selection orchestration and prebuilding
 
@@ -489,8 +489,8 @@ location composes on the left of the object inverse. Only scaled volumes without
 transform enter the integer-scale cache. Cached active-volume identity is shared; each
 result receives object clipping after cache lookup/construction, without modifying the
 cached clipping state. A request with neither scaling nor transformation copies the
-object manager. These helpers do not complete two-level traversal or AIS presentation
-lookup; ViewerSelector remains partial.
+object manager. Two-level traversal and presentation lookup were completed in the subsequent
+viewer-selector traversal integration; see `viewer-selector-traversal.md`.
 
 Ten direct tests and 2,656 native cases were added: 720 point cases, 912 frustum/cleanup
 cases and 1,024 layer patterns. The oracle calls the actual linked private OCCT methods
@@ -541,8 +541,9 @@ Fourteen direct tests and 570 native comparisons cover constructor style graphs 
 object update/exception/aspect/dump/view traces (417), and selection replacement/context
 shutdown (8). Only process-local pointer text is normalized in DumpJson; identities are
 checked separately. AIS_InteractiveObject's own declarations are complete, while
-AIS_InteractiveContext remains partial: display/erase/remove, selection interaction,
-picking, advanced attribute methods and its full dump are not yet implemented.
+AIS_InteractiveContext remains partial: display/erase/remove, selection actions,
+advanced attribute methods and its full dump are not yet implemented. Mouse/axis
+detection and dynamic highlighting are now ported; see `ais-detection.md`.
 
 A failing virtual Clear callback during context destruction now aborts, matching the
 pinned native noexcept destructor. An isolated Rust regression test and a separate native/

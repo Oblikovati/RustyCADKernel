@@ -31,3 +31,11 @@ mod interactive_object_members;
 pub use interactive_object_members::{
     AisApplicationOwner, AisInteractiveObjectMembers, ais_interactive_object_dump_json,
 };
+
+mod context_detection_cursor;
+mod context_detection_cycle;
+mod context_highlight;
+mod context_move_to;
+mod detection_status;
+pub use context_highlight::AisHighlightStyle;
+pub use detection_status::AisStatusOfDetection;
