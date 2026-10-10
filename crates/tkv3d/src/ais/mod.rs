@@ -67,6 +67,7 @@ mod context_set_selected;
 mod context_toggle_selected;
 
 mod context_load;
+mod context_location;
 mod context_object_status;
 mod context_view_affinity;
 

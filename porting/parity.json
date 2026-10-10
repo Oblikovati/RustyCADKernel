@@ -575852,6 +575852,46 @@
       "rust_item": "rustycad_tkv3d::ais::AisAnimationCameraFields::camera_start",
       "status": "implemented",
       "notes": "Martensite AIS camera animation retains endpoint/live camera identities, native interpolation and missing-endpoint guards, restores immediate-update mode and invalidates the view. Native numeric cases and retained-stream tests; GPU capture/performance receipts preserve strict results. Getter target_view avoids collision with Handle::view. See docs/v3d-design.md."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ResetLocation(const class opencascade::handle<class AIS_InteractiveObject> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "0c954d8b90b14d7a3910c1a748abcc8d2521fe2ac8121c897edd3a0afcb0207b",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::reset_location",
+      "status": "implemented",
+      "notes": "Martensite context placement preserves empty identity versus identity datum policy, absolute parent queries, selection update order and dynamic highlight callbacks without holding context locks. 1152 exact native comparisons and focused regression tests. Native null Location dereference is undefined; Rust returns Standard_NullObject. See docs/v3d-design.md#ais-context-location."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Location(const class opencascade::handle<class AIS_InteractiveObject> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "59df3fe1ee38709a8138777c1b937c54623ed9665379b8624ff8553e79b647e7",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::location",
+      "status": "implemented",
+      "notes": "Martensite context placement preserves empty identity versus identity datum policy, absolute parent queries, selection update order and dynamic highlight callbacks without holding context locks. 1152 exact native comparisons and focused regression tests. Native null Location dereference is undefined; Rust returns Standard_NullObject. See docs/v3d-design.md#ais-context-location."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HasLocation(const class opencascade::handle<class AIS_InteractiveObject> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "66fc1bc08511b8f7352488849e49dbebdcba88da4625e5d82fe43474b79a9640",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::has_location",
+      "status": "implemented",
+      "notes": "Martensite context placement preserves empty identity versus identity datum policy, absolute parent queries, selection update order and dynamic highlight callbacks without holding context locks. 1152 exact native comparisons and focused regression tests. Native null Location dereference is undefined; Rust returns Standard_NullObject. See docs/v3d-design.md#ais-context-location."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetLocation(const class opencascade::handle<class AIS_InteractiveObject> &, const class TopLoc_Location &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "7daa43fe29ee789d2f714ffd2fa4cdd14094fd00ef095f46046f39e6192406f2",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_location",
+      "status": "implemented",
+      "notes": "Martensite context placement preserves empty identity versus identity datum policy, absolute parent queries, selection update order and dynamic highlight callbacks without holding context locks. 1152 exact native comparisons and focused regression tests. Native null Location dereference is undefined; Rust returns Standard_NullObject. See docs/v3d-design.md#ais-context-location."
     }
   ],
   "tests": [

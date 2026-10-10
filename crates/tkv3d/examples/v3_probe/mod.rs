@@ -110,3 +110,4 @@ pub mod ais_circle;
 pub mod ais_animation;
 
 pub mod animation_camera;
+pub mod context_location;
