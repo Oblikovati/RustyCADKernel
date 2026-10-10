@@ -74,3 +74,6 @@ mod material;
 mod material_components;
 pub use material::{RenderMaterial, RenderMaterialColorSpace};
 pub use material_components::{RenderMaterialCommon, RenderMaterialPbr};
+
+mod light_snapshot;
+pub use light_snapshot::RenderLightSet;
