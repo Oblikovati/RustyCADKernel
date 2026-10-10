@@ -2,8 +2,8 @@
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo,
-       TKPrim, TKHelix, TKShHealing, TKBO, TKFillet, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase,
-       TKService, TKExpress)
+       TKPrim, TKHelix, TKShHealing, TKBO, TKBool, TKFillet, TKCDF, TKLCAF, TKCAF, TKDE, TKXSBase,
+       TKService, TKExpress, TKV3d)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -27,7 +27,8 @@ from native_build import (CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS
                           EXCHANGE_LINKED_TOOLKITS, EXCHANGE_TOOLKITS, LINKED_TOOLKITS,
                           OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
                           VISUALIZATION_CLOSURE_TARGETS, VISUALIZATION_LINKED_TOOLKITS,
-                          VISUALIZATION_TOOLKITS, closure_flags, locked_cmake)
+                          VISUALIZATION_TOOLKITS, V3D_CLOSURE_TARGETS, V3D_LINKED_TOOLKITS,
+                          V3D_TOOLKITS, closure_flags, locked_cmake)
 from toolkit_source_disabled import (SourceDisabledCase, source_disabled_rows,
                                      active_native_cases, forced_disabled_observations)
 from legacy_pending_dependency import (PendingDependencyCase, implemented_classes, pending_dependency_rows,
@@ -57,6 +58,8 @@ NUMERIC_VERIFIERS = {
     'TKFillet': ('tools/verify_tkfillet_numeric.py', 'target/oracle-tkfillet/numeric'),
     'TKService': ('tools/verify_tkservice_numeric.py', 'target/oracle-tkservice/numeric'),
     'TKExpress': ('tools/verify_tkexpress_numeric.py', 'target/oracle-tkexpress/numeric'),
+    'TKBool': ('tools/verify_tkbool_numeric.py', 'target/oracle-tkbool/numeric'),
+    'TKV3d': ('tools/verify_tkv3d_numeric.py', 'target/oracle-tkv3d/numeric'),
 }
 
 
@@ -83,6 +86,8 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
     'TKService': (VISUALIZATION_TOOLKITS, VISUALIZATION_CLOSURE_TARGETS, 'target/occt-visualization-full'),
     # TKExpress sits on TKernel only; its closure builds no geometry toolkit.
     'TKExpress': (EXPRESS_TOOLKITS, EXPRESS_CLOSURE_TARGETS, 'target/occt-express-full'),
+    # TKV3d adds the modeling toolkits of its EXTERNLIB to the visualization base.
+    'TKV3d': (V3D_TOOLKITS, V3D_CLOSURE_TARGETS, 'target/occt-v3d-full'),
 }
 
 
@@ -90,6 +95,7 @@ PROFILE_CLOSURES: dict[str, tuple[tuple[str, ...], list[str], str]] = {
 OWN_CLOSURE_PROFILES: dict[str, tuple[str, ...]] = {
     'TKService': VISUALIZATION_LINKED_TOOLKITS,
     'TKExpress': EXPRESS_LINKED_TOOLKITS,
+    'TKV3d': V3D_LINKED_TOOLKITS,
 }
 
 

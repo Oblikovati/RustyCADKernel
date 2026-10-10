@@ -65,7 +65,7 @@ fn detached_cursor_rejects_erasure_foreign_owner_and_recycled_identity_slot() {
     cursor.initialize(&map);
     let other = OrderedDataMap::<i32, i32>::default();
     assert!(cursor.value(&other).is_err());
-    cursor.reset(&map);
+    cursor.reset(&map).unwrap();
     assert_eq!(cursor.value(&map), Ok(&20));
     drop(map);
     assert!(arena.reset(false).is_ok());

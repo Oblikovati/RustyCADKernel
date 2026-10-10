@@ -108,7 +108,7 @@ fn prebuild<V: BvhFieldVector>(geometry: &mut BvhGeometry<V>) {
             .unwrap()
             .triangulation_mut()
         {
-            mesh.bvh().unwrap();
+            drop(mesh.bvh().unwrap());
         }
     }
 }

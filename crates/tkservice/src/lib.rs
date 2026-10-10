@@ -21,6 +21,6 @@ pub mod xw;
 
 mod cast;
 mod dynlib;
-mod json_dump;
+pub mod json_dump;
 #[cfg(target_os = "linux")]
 mod xlib;

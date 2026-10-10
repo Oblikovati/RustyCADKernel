@@ -3,54 +3,62 @@
 
 /// Sorts the whole slice with `__heap_select` + `__sort_heap` (`__partial_sort`
 /// with middle == last, as `__introsort_loop` calls it).
-pub(super) fn partial_sort<E: Copy>(values: &mut [E], less: &mut impl FnMut(&E, &E) -> bool) {
-    make_heap(values, less);
+pub(super) fn partial_sort<E: Copy, SortError>(
+    values: &mut [E],
+    less: &mut impl FnMut(&E, &E) -> Result<bool, SortError>,
+) -> Result<(), SortError> {
+    make_heap(values, less)?;
     let mut last = values.len();
     while last > 1 {
         last -= 1;
-        pop_heap(values, last, last, less);
+        pop_heap(values, last, last, less)?;
     }
+    Ok(())
 }
 
-fn make_heap<E: Copy>(values: &mut [E], less: &mut impl FnMut(&E, &E) -> bool) {
+fn make_heap<E: Copy, SortError>(
+    values: &mut [E],
+    less: &mut impl FnMut(&E, &E) -> Result<bool, SortError>,
+) -> Result<(), SortError> {
     let length = values.len() as isize;
     if length < 2 {
-        return;
+        return Ok(());
     }
     let mut parent = (length - 2) / 2;
     loop {
         let value = values[parent as usize];
-        adjust_heap(values, parent, length, value, less);
+        adjust_heap(values, parent, length, value, less)?;
         if parent == 0 {
-            return;
+            return Ok(());
         }
         parent -= 1;
     }
 }
 
-fn pop_heap<E: Copy>(
+fn pop_heap<E: Copy, SortError>(
     values: &mut [E],
     last: usize,
     result: usize,
-    less: &mut impl FnMut(&E, &E) -> bool,
-) {
+    less: &mut impl FnMut(&E, &E) -> Result<bool, SortError>,
+) -> Result<(), SortError> {
     let value = values[result];
     values[result] = values[0];
-    adjust_heap(values, 0, last as isize, value, less);
+    adjust_heap(values, 0, last as isize, value, less)?;
+    Ok(())
 }
 
-fn adjust_heap<E: Copy>(
+fn adjust_heap<E: Copy, SortError>(
     values: &mut [E],
     mut hole: isize,
     length: isize,
     value: E,
-    less: &mut impl FnMut(&E, &E) -> bool,
-) {
+    less: &mut impl FnMut(&E, &E) -> Result<bool, SortError>,
+) -> Result<(), SortError> {
     let top = hole;
     let mut child = hole;
     while child < (length - 1) / 2 {
         child = 2 * (child + 1);
-        if less(&values[child as usize], &values[child as usize - 1]) {
+        if less(&values[child as usize], &values[child as usize - 1])? {
             child -= 1;
         }
         values[hole as usize] = values[child as usize];
@@ -61,21 +69,23 @@ fn adjust_heap<E: Copy>(
         values[hole as usize] = values[child as usize - 1];
         hole = child - 1;
     }
-    push_heap(values, hole, top, value, less);
+    push_heap(values, hole, top, value, less)?;
+    Ok(())
 }
 
-fn push_heap<E: Copy>(
+fn push_heap<E: Copy, SortError>(
     values: &mut [E],
     mut hole: isize,
     top: isize,
     value: E,
-    less: &mut impl FnMut(&E, &E) -> bool,
-) {
+    less: &mut impl FnMut(&E, &E) -> Result<bool, SortError>,
+) -> Result<(), SortError> {
     let mut parent = (hole - 1) / 2;
-    while hole > top && less(&values[parent as usize], &value) {
+    while hole > top && less(&values[parent as usize], &value)? {
         values[hole as usize] = values[parent as usize];
         hole = parent;
         parent = (hole - 1) / 2;
     }
     values[hole as usize] = value;
+    Ok(())
 }

@@ -98,7 +98,7 @@ fn pairs_summary(map: &Pairs, out: &mut String) {
     if cursor.more() {
         cursor.advance(map);
     }
-    cursor.reset(map);
+    cursor.reset(map).expect("cursor reset to its original map");
     write!(out, " reset {}", cursor.key(map).map_or(-1, |key| *key)).unwrap();
     guarded(out, " first ", map.first());
     guarded(out, " last ", map.last());

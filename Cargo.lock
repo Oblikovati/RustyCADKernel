@@ -119,10 +119,16 @@ dependencies = [
 name = "rustycad-tkbool"
 version = "0.1.0"
 dependencies = [
+ "rustycad-tkbo",
  "rustycad-tkbrep",
  "rustycad-tkernel",
+ "rustycad-tkg2d",
  "rustycad-tkg3d",
+ "rustycad-tkgeomalgo",
+ "rustycad-tkgeombase",
  "rustycad-tkmath",
+ "rustycad-tkprim",
+ "rustycad-tkshhealing",
  "rustycad-tktopalgo",
 ]
 
@@ -418,6 +424,18 @@ dependencies = [
  "rustycad-tkgeombase",
  "rustycad-tkmath",
  "rustycad-tkprim",
+]
+
+[[package]]
+name = "rustycad-tkv3d"
+version = "0.1.0"
+dependencies = [
+ "rustycad-tkernel",
+ "rustycad-tkg3d",
+ "rustycad-tkgeomalgo",
+ "rustycad-tkmath",
+ "rustycad-tkmesh",
+ "rustycad-tkservice",
 ]
 
 [[package]]

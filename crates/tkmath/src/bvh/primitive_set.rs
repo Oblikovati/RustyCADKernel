@@ -8,10 +8,11 @@ use super::constants::{LEAF_NODE_SIZE_DEFAULT, MAX_TREE_DEPTH, NB_BINS_BEST};
 use super::object::BvhObjectTransient;
 use super::set::{BvhSet, combined_element_boxes};
 use super::tree::BvhTree;
+use super::tree_handle::BvhTreeHandle;
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 use std::cell::Cell;
-use std::sync::Arc;
+use std::sync::{Arc, RwLockReadGuard};
 
 /// Shared handle of a BVH builder; `None` is a null handle.
 pub type BvhBuilderHandle<V> = Option<Arc<dyn BvhBuilder<V>>>;
@@ -25,7 +26,7 @@ pub type BvhPrimitiveSet3d = BvhPrimitiveSet<crate::bvh::BvhVec3d>;
 #[derive(Debug)]
 pub struct BvhPrimitiveSet<V: BvhVector> {
     object: BvhObjectTransient,
-    bvh: BvhTree<V>,
+    bvh: BvhTreeHandle<V>,
     builder: BvhBuilderHandle<V>,
     cached_box: Cell<BvhBox<V>>,
 }
@@ -49,7 +50,7 @@ impl<V: BvhVector> BvhPrimitiveSet<V> {
     pub fn new(builder: BvhBuilderHandle<V>) -> Self {
         Self {
             object: BvhObjectTransient::default(),
-            bvh: BvhTree::default(),
+            bvh: BvhTreeHandle::default(),
             builder,
             cached_box: Cell::new(BvhBox::default()),
         }
@@ -85,14 +86,22 @@ pub trait BvhPrimitiveSetAccess<V: BvhVector>: BvhSet<V> {
         Ok(state.cached_box.get())
     }
     /// Returns the BVH tree, building it first while dirty; `set.bvh()?.length()`.
-    fn bvh(&mut self) -> Result<&BvhTree<V>, Failure>
+    fn bvh(&mut self) -> Result<RwLockReadGuard<'_, BvhTree<V>>, Failure>
     where
         Self: Sized,
     {
         if self.primitive_set().object.is_dirty {
             self.update()?;
         }
-        Ok(&self.primitive_set().bvh)
+        Ok(self.primitive_set().bvh.read())
+    }
+    /// Retain the live tree independently of the set borrow; `set.bvh_handle()?`.
+    fn bvh_handle(&mut self) -> Result<BvhTreeHandle<V>, Failure>
+    where
+        Self: Sized,
+    {
+        self.update()?;
+        Ok(self.primitive_set().bvh.clone())
     }
     /// Returns the method (builder) used to construct BVH; `set.builder()`.
     fn builder(&self) -> &BvhBuilderHandle<V> {
@@ -119,27 +128,25 @@ pub trait BvhPrimitiveSetAccess<V: BvhVector>: BvhSet<V> {
             )
         })?;
         let bounding = self.cached_box()?;
-        // The builder needs the set and the tree mutably at once: move the tree out.
-        let mut bvh = std::mem::take(&mut self.primitive_set_mut().bvh);
-        let built = builder.build(self, &mut bvh, &bounding);
-        self.primitive_set_mut().bvh = bvh;
-        built?;
+        // Retained native tree handles observe this rebuild, including partial failures.
+        let bvh = self.primitive_set().bvh.clone();
+        builder.build(self, &mut bvh.write(), &bounding)?;
         self.primitive_set_mut().object.is_dirty = false;
         Ok(())
     }
-    /// `BVH()` for traversals: updates the tree while dirty, then moves it out;
-    /// the body of every primitive set's `BvhTreeOwner::take_built_bvh`.
+    /// Legacy traversal borrow adapter: copy the tree without emptying retained handles.
+    /// The matching restore writes back into the same shared tree object.
     /// Example: `let tree = set.take_primitive_bvh()?;`.
     fn take_primitive_bvh(&mut self) -> Result<BvhTree<V>, Failure>
     where
         Self: Sized,
     {
         self.update()?;
-        Ok(std::mem::take(&mut self.primitive_set_mut().bvh))
+        Ok(self.primitive_set().bvh.read().clone())
     }
     /// Moves a tree taken by `take_primitive_bvh` back; `set.restore_primitive_bvh(tree)`.
     fn restore_primitive_bvh(&mut self, bvh: BvhTree<V>) {
-        self.primitive_set_mut().bvh = bvh;
+        *self.primitive_set().bvh.write() = bvh;
     }
 }
 

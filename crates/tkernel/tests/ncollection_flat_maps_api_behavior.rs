@@ -137,10 +137,10 @@ fn ordered_cursors_reset_to_the_head_or_stay_exhausted() {
     let mut detached = data.cursor();
     detached.advance(&data);
     assert!(detached != data.cursor());
-    detached.reset(&data);
+    detached.reset(&data).unwrap();
     assert!(detached == data.cursor());
     let mut unbound = OrderedDataCursor::default();
-    unbound.reset(&data);
+    assert_eq!(unbound.reset(&data), Ok(()));
     assert!(!unbound.more());
     unbound.initialize(&data);
     assert_eq!(unbound.key(&data).unwrap(), &1);

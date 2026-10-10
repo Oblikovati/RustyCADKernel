@@ -89,3 +89,8 @@ pub use vector::{
     BvhVec3i, BvhVec4d, BvhVec4f, BvhVec4i, BvhVecNt, BvhVector, Dimension, VectorType,
     to_bnd_box_scalar,
 };
+
+mod object_source;
+mod tree_handle;
+pub use object_source::BvhObjectTransientSource;
+pub use tree_handle::BvhTreeHandle;

@@ -8,9 +8,10 @@ use super::{
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 
-/// The native `clear()`: clears the groups, resets the group flags, clears the computed
-/// structures of the views and updates the structure layer.
-pub(crate) fn structure_clear<S: Graphic3dStructureSource + ?Sized>(
+/// The native protected `clear()`, for the subclasses that call it: clears the groups,
+/// resets the group flags, clears the computed structures of the views and updates the
+/// structure layer. Example: `graphic3d_structure_clear(&*prs, true)`.
+pub fn graphic3d_structure_clear<S: Graphic3dStructureSource + ?Sized>(
     structure: &S,
     with_destruction: bool,
 ) {
@@ -29,8 +30,9 @@ pub(crate) fn structure_clear<S: Graphic3dStructureSource + ?Sized>(
     structure.update(true);
 }
 
-/// The native `Display()`.
-pub(crate) fn structure_display<S: Graphic3dStructureSource + ?Sized>(structure: &S) {
+/// The native `Graphic3d_Structure::Display()` body, for the subclasses that override it.
+/// Example: `graphic3d_structure_display(&*prs)`.
+pub fn graphic3d_structure_display<S: Graphic3dStructureSource + ?Sized>(structure: &S) {
     let cstructure = structure.cstructure();
     let Some(cstructure) = cstructure.get() else {
         return;
@@ -47,8 +49,9 @@ pub(crate) fn structure_display<S: Graphic3dStructureSource + ?Sized>(structure:
     }
 }
 
-/// The native `erase()`.
-pub(crate) fn structure_erase<S: Graphic3dStructureSource + ?Sized>(structure: &S) {
+/// The native protected `erase()`, for the subclasses that call it.
+/// Example: `graphic3d_structure_erase(&*prs)`.
+pub fn graphic3d_structure_erase<S: Graphic3dStructureSource + ?Sized>(structure: &S) {
     let cstructure = structure.cstructure();
     let Some(cstructure) = cstructure.get() else {
         return;
@@ -74,7 +77,7 @@ pub(crate) fn structure_set_visual<S: Graphic3dStructureSource + ?Sized>(
         .get()
         .is_some_and(|c| c.cstructure_base().fields.read().stick);
     if stuck {
-        structure_erase(structure);
+        graphic3d_structure_erase(structure);
     }
     structure.structure_base().fields.write().visual = visual;
     structure.set_compute_visual(visual);

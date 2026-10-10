@@ -421,13 +421,15 @@ fn ready_triangle_geometry() -> BvhGeometry<BvhVec3d> {
     geometry.mark_dirty();
     let _ = geometry.bvh().unwrap();
     let object = geometry.objects_mut().change_value(0).unwrap();
-    object
-        .as_deref_mut()
-        .unwrap()
-        .triangulation_mut()
-        .unwrap()
-        .bvh()
-        .unwrap();
+    drop(
+        object
+            .as_deref_mut()
+            .unwrap()
+            .triangulation_mut()
+            .unwrap()
+            .bvh()
+            .unwrap(),
+    );
     geometry
 }
 

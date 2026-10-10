@@ -133,7 +133,9 @@ impl<'a> IntPatchPolyhedronBVH<'a> {
     }
 
     /// `BVH()`: the tree, built first while dirty. `set.built_bvh()?.length()`.
-    pub fn built_bvh(&mut self) -> Result<&BvhTree<BvhVec3d>, Failure> {
+    pub fn built_bvh(
+        &mut self,
+    ) -> Result<std::sync::RwLockReadGuard<'_, BvhTree<BvhVec3d>>, Failure> {
         BvhPrimitiveSetAccess::bvh(self)
     }
 

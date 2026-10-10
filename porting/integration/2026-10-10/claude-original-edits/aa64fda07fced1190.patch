@@ -1,0 +1,590 @@
+diff --git a/crates/tkv3d/src/select_mgr/base_intersector.rs b/crates/tkv3d/src/select_mgr/base_intersector.rs
+new file mode 100644
+index 000000000..ba9f7ab6c
+--- /dev/null
++++ b/crates/tkv3d/src/select_mgr/base_intersector.rs
+@@ -0,0 +1,290 @@
++//! `SelectMgr_BaseIntersector`: the abstract selecting volume (frustum, frustum set or axis)
++//! with its camera and selection type, and the ray intersections with the quadrics shared by
++//! the volumes (v3d-design.md section 6).
++use super::{SelectMgrFrustumBuilder, SelectMgrSelectionType, SelectMgrViewClipRange};
++use crate::select_basics::SelectBasicsPickResult;
++use rustycad_tkernel::ncollection::{DynamicArray, Vec3, Vec4};
++use rustycad_tkernel::precision::confusion;
++use rustycad_tkernel::standard::dump::DumpStream;
++use rustycad_tkernel::standard::real::real_last;
++use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, Transient};
++use rustycad_tkmath::bvh::{std_max, std_min};
++use rustycad_tkmath::gp::{Axis3, Direction3, GeneralTransform3, Point2, Point3, StandardDirection3, Transform3, Xy};
++use rustycad_tkservice::graphic3d::Graphic3dCamera;
++use rustycad_tkservice::json_dump::{class_begin, field_integer, field_pointer};
++use std::io;
++
++/// The camera and selection type of every intersector.
++pub struct SelectMgrBaseIntersectorBase {
++    /// `myCamera`.
++    pub camera: SharedState<Handle<Graphic3dCamera>>,
++    /// `mySelectionType`.
++    pub selection_type: SharedState<SelectMgrSelectionType>,
++}
++
++impl Default for SelectMgrBaseIntersectorBase {
++    /// No camera, unknown selection type.
++    fn default() -> Self {
++        Self { camera: SharedState::new(Handle::default()), selection_type: SharedState::new(SelectMgrSelectionType::Unknown) }
++    }
++}
++
++/// The time interval of a ray crossing a quadric.
++pub type SelectMgrRayTimes = (f64, f64);
++
++/// A selecting volume; the default bodies are the native ones.
++pub trait SelectMgrBaseIntersector: Transient {
++    /// The embedded base; `volume.intersector_base()`.
++    fn intersector_base(&self) -> &SelectMgrBaseIntersectorBase;
++    /// `Build` (pure virtual): builds the volume after its initialization; `volume.build()?`.
++    fn build(&self) -> Result<(), Failure>;
++    /// `IsScalable` (pure virtual); `volume.is_scalable()`.
++    fn is_scalable(&self) -> bool;
++    /// `SetPixelTolerance`: nothing by default; `volume.set_pixel_tolerance(2)`.
++    fn set_pixel_tolerance(&self, tol: i32) {
++        let _ = tol;
++    }
++    /// `ScaleAndTransform` (pure virtual): a volume scaled by a pixel tolerance and transformed.
++    /// Example: `volume.scale_and_transform(4, &trsf, &builder)?`.
++    fn scale_and_transform(&self, scale_factor: i32, trsf: &GeneralTransform3, builder: &Handle<SelectMgrFrustumBuilder>) -> Result<Handle<dyn SelectMgrBaseIntersector>, Failure>;
++    /// `CopyWithBuilder` (pure virtual); `volume.copy_with_builder(&builder)?`.
++    fn copy_with_builder(&self, builder: &Handle<SelectMgrFrustumBuilder>) -> Result<Handle<dyn SelectMgrBaseIntersector>, Failure>;
++    /// `SetCamera`; `volume.set_camera(&camera)`.
++    fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
++        *self.intersector_base().camera.write() = camera.clone();
++    }
++    /// `WindowSize`: None by default (natively the out arguments are untouched).
++    /// Example: `volume.window_size()`.
++    fn window_size(&self) -> Option<(i32, i32)> {
++        None
++    }
++    /// `SetWindowSize`: nothing by default; `volume.set_window_size(400, 300)`.
++    fn set_window_size(&self, width: i32, height: i32) {
++        let _ = (width, height);
++    }
++    /// `SetViewport`: nothing by default; `volume.set_viewport(0.0, 0.0, 1.0, 1.0)`.
++    fn set_viewport(&self, x: f64, y: f64, width: f64, height: f64) {
++        let _ = (x, y, width, height);
++    }
++    /// `GetNearPnt`: the origin by default; `volume.get_near_pnt()`.
++    fn get_near_pnt(&self) -> Point3 {
++        Point3::default()
++    }
++    /// `GetFarPnt`: RealLast by default; `volume.get_far_pnt()`.
++    fn get_far_pnt(&self) -> Point3 {
++        Point3::new(real_last(), real_last(), real_last())
++    }
++    /// `GetViewRayDirection`: `gp_Dir()` (Z) by default; `volume.get_view_ray_direction()`.
++    fn get_view_ray_direction(&self) -> Direction3 {
++        Direction3::from_standard(StandardDirection3::Z)
++    }
++    /// `GetMousePosition`: RealLast by default; `volume.get_mouse_position()`.
++    fn get_mouse_position(&self) -> Point2 {
++        Point2::from(Xy::new(real_last(), real_last()))
++    }
++    /// `GetPlanes`: none by default; `volume.get_planes(&mut planes)`.
++    fn get_planes(&self, planes: &mut DynamicArray<Vec4<f64>>) {
++        planes.clear();
++    }
++    /// `OverlapsBox` with depth (pure virtual).
++    /// Example: `volume.overlaps_box_pick(&min, &max, &clip, &mut pick)?`.
++    fn overlaps_box_pick(&self, min: &Vec3<f64>, max: &Vec3<f64>, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsBox` with the full-inside flag (pure virtual); `volume.overlaps_box(&min, &max, None)?`.
++    fn overlaps_box(&self, min: &Vec3<f64>, max: &Vec3<f64>, inside: Option<&mut bool>) -> Result<bool, Failure>;
++    /// `OverlapsPoint` with depth (pure virtual); `volume.overlaps_point_pick(&p, &clip, &mut pick)?`.
++    fn overlaps_point_pick(&self, point: &Point3, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsPoint` (pure virtual); `volume.overlaps_point(&p)?`.
++    fn overlaps_point(&self, point: &Point3) -> Result<bool, Failure>;
++    /// `OverlapsPolygon` (pure virtual); `volume.overlaps_polygon(&points, 0, &clip, &mut pick)?`.
++    fn overlaps_polygon(&self, points: &[Point3], sens_type: i32, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsSegment` (pure virtual); `volume.overlaps_segment(&a, &b, &clip, &mut pick)?`.
++    fn overlaps_segment(&self, p1: &Point3, p2: &Point3, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsTriangle` (pure virtual); `volume.overlaps_triangle(&a, &b, &c, 0, &clip, &mut pick)?`.
++    fn overlaps_triangle(&self, p1: &Point3, p2: &Point3, p3: &Point3, sens_type: i32, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsSphere` with the full-inside flag (pure virtual); `volume.overlaps_sphere(&c, 1.0, None)?`.
++    fn overlaps_sphere(&self, center: &Point3, radius: f64, inside: Option<&mut bool>) -> Result<bool, Failure>;
++    /// `OverlapsSphere` with depth (pure virtual); `volume.overlaps_sphere_pick(&c, 1.0, &clip, &mut pick)?`.
++    fn overlaps_sphere_pick(&self, center: &Point3, radius: f64, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsCylinder` with depth (pure virtual).
++    /// Example: `volume.overlaps_cylinder_pick(1.0, 1.0, 2.0, &trsf, false, &clip, &mut pick)?`.
++    #[allow(clippy::too_many_arguments)]
++    fn overlaps_cylinder_pick(&self, bottom_rad: f64, top_rad: f64, height: f64, trsf: &Transform3, is_hollow: bool, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsCylinder` with the full-inside flag (pure virtual).
++    /// Example: `volume.overlaps_cylinder(1.0, 1.0, 2.0, &trsf, false, None)?`.
++    fn overlaps_cylinder(&self, bottom_rad: f64, top_rad: f64, height: f64, trsf: &Transform3, is_hollow: bool, inside: Option<&mut bool>) -> Result<bool, Failure>;
++    /// `OverlapsCircle` with depth (pure virtual).
++    /// Example: `volume.overlaps_circle_pick(1.0, &trsf, true, &clip, &mut pick)?`.
++    fn overlaps_circle_pick(&self, radius: f64, trsf: &Transform3, is_filled: bool, clip: &SelectMgrViewClipRange, pick: &mut SelectBasicsPickResult) -> Result<bool, Failure>;
++    /// `OverlapsCircle` with the full-inside flag (pure virtual).
++    /// Example: `volume.overlaps_circle(1.0, &trsf, true, None)?`.
++    fn overlaps_circle(&self, radius: f64, trsf: &Transform3, is_filled: bool, inside: Option<&mut bool>) -> Result<bool, Failure>;
++    /// `DistToGeometryCenter`: RealLast by default; `volume.dist_to_geometry_center(&cog)?`.
++    fn dist_to_geometry_center(&self, cog: &Point3) -> Result<f64, Failure> {
++        let _ = cog;
++        Ok(real_last())
++    }
++    /// `DetectedPoint`: RealLast by default; `volume.detected_point(1.0)?`.
++    fn detected_point(&self, depth: f64) -> Result<Point3, Failure> {
++        let _ = depth;
++        Ok(Point3::new(real_last(), real_last(), real_last()))
++    }
++    /// `DumpJson`; `volume.dump_json(&mut stream, -1)?`.
++    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
++        let _ = depth;
++        select_mgr_base_intersector_dump_json(self.intersector_base(), stream)
++    }
++    /// `RaySphereIntersection`; `volume.ray_sphere_intersection(&c, 1.0, &loc, &dir)`.
++    fn ray_sphere_intersection(&self, center: &Point3, radius: f64, loc: &Point3, ray_dir: &Direction3) -> Option<SelectMgrRayTimes> {
++        select_mgr_ray_sphere_intersection(center, radius, loc, ray_dir)
++    }
++    /// `RayCylinderIntersection`; `volume.ray_cylinder_intersection(1.0, 1.0, 2.0, &loc, &dir, false)?`.
++    fn ray_cylinder_intersection(&self, bottom_radius: f64, top_radius: f64, height: f64, loc: &Point3, ray_dir: &Direction3, is_hollow: bool) -> Result<Option<(f64, Option<f64>)>, Failure> {
++        select_mgr_ray_cylinder_intersection(bottom_radius, top_radius, height, loc, ray_dir, is_hollow)
++    }
++    /// `RayCircleIntersection`; `volume.ray_circle_intersection(1.0, &loc, &dir, true)`.
++    fn ray_circle_intersection(&self, radius: f64, loc: &Point3, ray_dir: &Direction3, is_filled: bool) -> Option<f64> {
++        select_mgr_ray_circle_intersection(radius, loc, ray_dir, is_filled)
++    }
++}
++rustycad_tkernel::impl_transient_interface!(dyn SelectMgrBaseIntersector, "SelectMgr_BaseIntersector", StandardTransient);
++
++/// The members of every intersector.
++pub trait SelectMgrBaseIntersectorMembers: SelectMgrBaseIntersector {
++    /// `GetSelectionType`; `volume.get_selection_type()`.
++    fn get_selection_type(&self) -> SelectMgrSelectionType {
++        *self.intersector_base().selection_type.read()
++    }
++    /// `Camera`; `volume.camera()`.
++    fn camera(&self) -> Handle<Graphic3dCamera> {
++        self.intersector_base().camera.read().clone()
++    }
++    /// Whether the camera is orthographic (false without camera, natively a null dereference).
++    fn is_orthographic(&self) -> bool {
++        self.camera().get().is_some_and(Graphic3dCamera::is_orthographic)
++    }
++}
++impl<T: SelectMgrBaseIntersector + ?Sized> SelectMgrBaseIntersectorMembers for T {}
++
++/// The native `SelectMgr_BaseIntersector::DumpJson` body.
++/// Example: `select_mgr_base_intersector_dump_json(volume.intersector_base(), &mut stream)?`.
++pub fn select_mgr_base_intersector_dump_json(base: &SelectMgrBaseIntersectorBase, stream: &mut DumpStream) -> io::Result<()> {
++    class_begin(stream, "SelectMgr_BaseIntersector")?;
++    field_integer(stream, "mySelectionType", *base.selection_type.read() as i32)?;
++    field_pointer(stream, "myCamera", base.camera.read().object_address() as usize)
++}
++
++/// `RaySphereIntersection`: the entry and exit times of a ray, the one of smaller magnitude
++/// first. Example: `select_mgr_ray_sphere_intersection(&c, 1.0, &loc, &dir)`.
++pub fn select_mgr_ray_sphere_intersection(center: &Point3, radius: f64, loc: &Point3, ray_dir: &Direction3) -> Option<SelectMgrRayTimes> {
++    let a = ray_dir.dot(*ray_dir);
++    let k = ray_dir.x() * (loc.x() - center.x()) + ray_dir.y() * (loc.y() - center.y()) + ray_dir.z() * (loc.z() - center.z());
++    let c = loc.distance(center) * loc.distance(center) - radius * radius;
++    let discr = k * k - a * c;
++    if discr < 0.0 {
++        return None;
++    }
++    let (t1, t2) = ((-k - discr.sqrt()) / a, (-k + discr.sqrt()) / a);
++    Some(if t1.abs() < t2.abs() { (t1, t2) } else { (t2, t1) })
++}
++
++/// The ray times through the end disks of a solid cylinder (bottom at z = 0, top at the height).
++fn end_disk_times(bottom_radius: f64, top_radius: f64, height: f64, loc: &Point3, dir: &Direction3, times: &mut Vec<f64>) {
++    let at = |z: f64| {
++        let t = (z - loc.z()) / dir.z();
++        (t, loc.x() + dir.x() * t, loc.y() + dir.y() * t)
++    };
++    let (t1, x1, y1) = at(0.0);
++    if x1 * x1 + y1 * y1 <= bottom_radius * bottom_radius {
++        times.push(t1);
++    }
++    let (t2, x2, y2) = at(height);
++    if x2 * x2 + y2 * y2 <= top_radius * top_radius {
++        times.push(t2);
++    }
++}
++
++/// The ray times through the side of a cone frustum (the radii differ).
++fn cone_times(bottom_radius: f64, top_radius: f64, height: f64, loc: &Point3, ray_dir: &Direction3, times: &mut Vec<f64>) -> Result<(), Failure> {
++    let triangle_height = std_min(bottom_radius, top_radius) * height / (bottom_radius - top_radius).abs();
++    let mut system = Axis3::default();
++    if bottom_radius > top_radius {
++        system.set_location(Point3::new(0.0, 0.0, height + triangle_height));
++        system.set_direction(-Direction3::from_standard(StandardDirection3::Z))?;
++    } else {
++        system.set_location(Point3::new(0.0, 0.0, -triangle_height));
++        system.set_direction(Direction3::from_standard(StandardDirection3::Z))?;
++    }
++    let mut trsf_cone = Transform3::default();
++    trsf_cone.set_transformation_between(Axis3::default(), system);
++    let (p, d) = (loc.transformed(trsf_cone), ray_dir.transformed(trsf_cone));
++    let max_rad = std_max(bottom_radius, top_radius);
++    let cone_height = height + triangle_height;
++    let (r2, h2) = (max_rad * max_rad, cone_height * cone_height);
++    let a = d.x() * d.x() / r2 + d.y() * d.y() / r2 - d.z() * d.z() / h2;
++    let k = d.x() * p.x() / r2 + d.y() * p.y() / r2 - d.z() * p.z() / h2;
++    let c = p.x() * p.x() / r2 + p.y() * p.y() / r2 - p.z() * p.z() / h2;
++    let discr = k * k - a * c;
++    if discr > 0.0 {
++        let (enter, leave) = ((-k - discr.sqrt()) / a, (-k + discr.sqrt()) / a);
++        for t in [enter, leave] {
++            let z = p.z() + t * d.z();
++            if z > triangle_height && z < cone_height {
++                times.push(t);
++            }
++        }
++    }
++    Ok(())
++}
++
++/// The ray times through the side of a cylinder (equal radii).
++fn cylinder_side_times(radius: f64, height: f64, loc: &Point3, ray_dir: &Direction3, times: &mut Vec<f64>) {
++    let (lx, ly, dx, dy) = (loc.x(), loc.y(), ray_dir.x(), ray_dir.y());
++    let a = dx * dx + dy * dy;
++    let k = lx * dx + ly * dy;
++    let c = lx * lx + ly * ly - radius * radius;
++    let discr = k * k - a * c;
++    if discr > 0.0 {
++        let (root1, root2) = ((-k + discr.sqrt()) / a, (-k - discr.sqrt()) / a);
++        for root in [root1, root2] {
++            let z = loc.z() + root * ray_dir.z();
++            if z > 0.0 && z < height {
++                times.push(root);
++            }
++        }
++    }
++}
++
++/// `RayCylinderIntersection`: the two nearest ray times through a cylinder or cone frustum
++/// (the end disks of a solid one included), the leave time None for a single crossing (the
++/// native output argument is left untouched then).
++/// Example: `select_mgr_ray_cylinder_intersection(1.0, 1.0, 2.0, &loc, &dir, false)?`.
++pub fn select_mgr_ray_cylinder_intersection(bottom_radius: f64, top_radius: f64, height: f64, loc: &Point3, ray_dir: &Direction3, is_hollow: bool) -> Result<Option<(f64, Option<f64>)>, Failure> {
++    let mut times = Vec::with_capacity(4);
++    if !is_hollow && ray_dir.z() != 0.0 {
++        end_disk_times(bottom_radius, top_radius, height, loc, ray_dir, &mut times);
++    }
++    if top_radius != bottom_radius {
++        cone_times(bottom_radius, top_radius, height, loc, ray_dir, &mut times)?;
++    } else {
++        cylinder_side_times(top_radius, height, loc, ray_dir, &mut times);
++    }
++    if times.is_empty() {
++        return Ok(None);
++    }
++    // std::sort with operator< on at most four values: a stable comparison sort.
++    times.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
++    Ok(Some((times[0], times.get(1).copied())))
++}
++
++/// `RayCircleIntersection`: the ray time on the circle plane, inside a filled circle or on
++/// the circle within `Precision::Confusion`. Example: `select_mgr_ray_circle_intersection(1.0, &loc, &dir, true)`.
++pub fn select_mgr_ray_circle_intersection(radius: f64, loc: &Point3, ray_dir: &Direction3, is_filled: bool) -> Option<f64> {
++    if ray_dir.z() == 0.0 {
++        return None;
++    }
++    let time = (0.0 - loc.z()) / ray_dir.z();
++    let (x, y) = (loc.x() + ray_dir.x() * time, loc.y() + ray_dir.y() * time);
++    let k = x * x + y * y;
++    let on = if is_filled { k <= radius * radius } else { (k.sqrt() - radius).abs() <= confusion() };
++    on.then_some(time)
++}
+diff --git a/crates/tkv3d/src/select_mgr/frustum.rs b/crates/tkv3d/src/select_mgr/frustum.rs
+new file mode 100644
+index 000000000..32ac4d730
+--- /dev/null
++++ b/crates/tkv3d/src/select_mgr/frustum.rs
+@@ -0,0 +1,288 @@
++//! `SelectMgr_Frustum<N>`: the separating axis tests of a frustum of `N` side planes (4 for the
++//! rectangular frustum, 3 for the triangular one) against boxes, points, segments, polygons
++//! and triangles. The quadric tests are in frustum_quadrics.rs.
++use rustycad_tkernel::ncollection::Vec3;
++use rustycad_tkernel::precision::confusion;
++use rustycad_tkernel::standard::exceptions::program_error;
++use rustycad_tkernel::standard::real::{real_first, real_last};
++use rustycad_tkernel::standard::Failure;
++use rustycad_tkmath::bvh::{std_max, std_min};
++use rustycad_tkmath::gp::{Point3, Xyz};
++
++/// The planes, vertices, cached projections and edge directions of a frustum.
++#[derive(Clone, Debug)]
++pub struct SelectMgrFrustumCore {
++    /// `N`: the number of side planes.
++    pub n: usize,
++    /// `myPlanes` (`N + 2` unnormalized normals).
++    pub planes: Vec<Xyz>,
++    /// `myVertices` (`2 N` points).
++    pub vertices: Vec<Point3>,
++    /// `myMaxVertsProjections`.
++    pub max_verts_projections: Vec<f64>,
++    /// `myMinVertsProjections`.
++    pub min_verts_projections: Vec<f64>,
++    /// `myMaxOrthoVertsProjections`.
++    pub max_ortho_verts_projections: [f64; 3],
++    /// `myMinOrthoVertsProjections`.
++    pub min_ortho_verts_projections: [f64; 3],
++    /// `myEdgeDirs`.
++    pub edge_dirs: [Xyz; 6],
++}
++
++/// The coordinate of a vector along an axis index.
++pub(crate) fn axis_of(v: &Vec3<f64>, axis: usize) -> f64 {
++    match axis {
++        0 => v.x,
++        1 => v.y,
++        _ => v.z,
++    }
++}
++
++/// The `Standard_ProgramError` of a box projection whose maximum is below its minimum (NaN).
++fn projection_error() -> Failure {
++    program_error("Error! Failed to project box; expected finite box corners")
++}
++
++/// The projections of a box on a direction: the minimum and maximum corners chosen by sign.
++fn box_projection(dir: &Xyz, min: &Vec3<f64>, max: &Vec3<f64>, bound: f64) -> (f64, f64) {
++    let pick = |d: f64, lo: f64, hi: f64| if d < bound { hi } else { lo };
++    let proj_min = dir.x() * pick(dir.x(), min.x, max.x) + dir.y() * pick(dir.y(), min.y, max.y) + dir.z() * pick(dir.z(), min.z, max.z);
++    let proj_max = dir.x() * pick(dir.x(), max.x, min.x) + dir.y() * pick(dir.y(), max.y, min.y) + dir.z() * pick(dir.z(), max.z, min.z);
++    (proj_min, proj_max)
++}
++
++impl SelectMgrFrustumCore {
++    /// A zeroed frustum of `n` side planes (the native constructor clears the projections).
++    /// Example: `SelectMgrFrustumCore::new(4)`.
++    pub fn new(n: usize) -> Self {
++        Self {
++            n,
++            planes: vec![Xyz::new(0.0, 0.0, 0.0); n + 2],
++            vertices: vec![Point3::default(); 2 * n],
++            max_verts_projections: vec![0.0; n + 2],
++            min_verts_projections: vec![0.0; n + 2],
++            max_ortho_verts_projections: [0.0; 3],
++            min_ortho_verts_projections: [0.0; 3],
++            edge_dirs: [Xyz::new(0.0, 0.0, 0.0); 6],
++        }
++    }
++    /// The plane step: the opposite planes of an orthographic rectangular frustum are skipped.
++    fn inc_factor(&self, is_ortho: bool) -> usize {
++        if is_ortho && self.n == 4 { 2 } else { 1 }
++    }
++    /// The number of edge directions tested (4 for an orthographic camera).
++    fn directions_nb(is_ortho: bool) -> usize {
++        if is_ortho { 4 } else { 6 }
++    }
++    /// `isSeparated(box, direction, inside)`: the box and the frustum projections on a
++    /// direction do not overlap; refines the full-inside flag.
++    fn is_separated_box(&self, min: &Vec3<f64>, max: &Vec3<f64>, direct: &Xyz, inside: &mut Option<&mut bool>) -> Result<bool, Failure> {
++        let (min_b, max_b) = box_projection(direct, min, max, 0.0);
++        if !(max_b >= min_b) {
++            return Err(projection_error());
++        }
++        let (mut min_f, mut max_f) = (f64::MAX, -f64::MAX);
++        for vertex in &self.vertices {
++            let proj = vertex.xyz().dot(*direct);
++            min_f = std_min(min_f, proj);
++            max_f = std_max(max_f, proj);
++            if min_f <= max_b && max_f >= min_b && inside.as_ref().is_none_or(|flag| !**flag) {
++                return Ok(false);
++            }
++        }
++        if min_f > max_b || max_f < min_b {
++            return Ok(true);
++        }
++        if let Some(flag) = inside.as_mut() {
++            **flag &= min_b >= min_f && max_b <= max_f;
++        }
++        Ok(false)
++    }
++    /// `isSeparated(triangle, axis)`: the triangle and frustum projections do not overlap.
++    pub(crate) fn is_separated_triangle(&self, p1: &Point3, p2: &Point3, p3: &Point3, axis: &Xyz) -> bool {
++        let (mut min_f, mut max_f) = (real_last(), real_first());
++        let (mut min_tr, mut max_tr) = (real_last(), real_first());
++        for p in [p1, p2, p3] {
++            let proj = axis.dot(p.xyz());
++            min_tr = std_min(min_tr, proj);
++            max_tr = std_max(max_tr, proj);
++        }
++        for vertex in &self.vertices {
++            let proj = vertex.xyz().dot(*axis);
++            min_f = std_min(min_f, proj);
++            max_f = std_max(max_f, proj);
++            if min_f <= max_tr && max_f >= min_tr {
++                return false;
++            }
++        }
++        min_f > max_tr || max_f < min_tr
++    }
++    /// The axis-aligned test of `hasBoxOverlap`; false when separated.
++    fn box_ortho_overlap(&self, min: &Vec3<f64>, max: &Vec3<f64>, inside: &mut Option<&mut bool>) -> bool {
++        for axis in 0..3 {
++            let (lo, hi) = (axis_of(min, axis), axis_of(max, axis));
++            if lo > self.max_ortho_verts_projections[axis] || hi < self.min_ortho_verts_projections[axis] {
++                return false;
++            }
++            if let Some(flag) = inside.as_mut() {
++                **flag &= lo >= self.min_ortho_verts_projections[axis] && hi <= self.max_ortho_verts_projections[axis];
++            }
++        }
++        true
++    }
++    /// The frustum plane test of `hasBoxOverlap`; false when separated.
++    fn box_planes_overlap(&self, min: &Vec3<f64>, max: &Vec3<f64>, is_ortho: bool, inside: &mut Option<&mut bool>) -> Result<bool, Failure> {
++        for plane_idx in (0..self.n + 1).step_by(self.inc_factor(is_ortho)) {
++            // The native comparison is against `0.f`.
++            let (proj_min, proj_max) = box_projection(&self.planes[plane_idx], min, max, 0.0);
++            if !(proj_max >= proj_min) {
++                return Err(projection_error());
++            }
++            if proj_min > self.max_verts_projections[plane_idx] || proj_max < self.min_verts_projections[plane_idx] {
++                return Ok(false);
++            }
++            if let Some(flag) = inside.as_mut() {
++                **flag &= proj_min >= self.min_verts_projections[plane_idx] && proj_max <= self.max_verts_projections[plane_idx];
++            }
++        }
++        Ok(true)
++    }
++    /// `hasBoxOverlap`: the separating axis test of a box (refining the full-inside flag); a
++    /// NaN box raises the `Standard_ProgramError` of the projection assert.
++    /// Example: `core.has_box_overlap(&min, &max, false, None)?`.
++    pub fn has_box_overlap(&self, min: &Vec3<f64>, max: &Vec3<f64>, is_ortho: bool, inside: Option<&mut bool>) -> Result<bool, Failure> {
++        let mut inside = inside;
++        if !self.box_ortho_overlap(min, max, &mut inside) || !self.box_planes_overlap(min, max, is_ortho, &mut inside)? {
++            return Ok(false);
++        }
++        for dim in 0..3 {
++            let (next, next_next) = ((dim + 1) % 3, (dim + 2) % 3);
++            for vol_dir in 0..Self::directions_nb(is_ortho) {
++                let edge = self.edge_dirs[vol_dir];
++                let mut direction = [f64::MAX; 3];
++                direction[dim] = 0.0;
++                direction[next] = -edge.coordinates()[next_next];
++                direction[next_next] = edge.coordinates()[next];
++                let direction = Xyz::new(direction[0], direction[1], direction[2]);
++                if self.is_separated_box(min, max, &direction, &mut inside)? {
++                    return Ok(false);
++                }
++            }
++        }
++        Ok(true)
++    }
++    /// `hasPointOverlap`: the point is between every pair of frustum planes.
++    /// Example: `core.has_point_overlap(&p, false)`.
++    pub fn has_point_overlap(&self, point: &Point3, is_ortho: bool) -> bool {
++        (0..self.n + 1).step_by(self.inc_factor(is_ortho)).all(|plane_idx| {
++            let proj = self.planes[plane_idx].dot(point.xyz());
++            !(proj > self.max_verts_projections[plane_idx] || proj < self.min_verts_projections[plane_idx])
++        })
++    }
++    /// The min and max projections of the frustum vertices on a direction.
++    fn vertex_range(&self, dir: &Xyz, init: (f64, f64)) -> (f64, f64) {
++        self.vertices.iter().fold(init, |(lo, hi), v| {
++            let proj = dir.dot(v.xyz());
++            (std_min(lo, proj), std_max(hi, proj))
++        })
++    }
++    /// `hasSegmentOverlap`: the separating axis test of a segment (a degenerate segment overlaps).
++    /// Example: `core.has_segment_overlap(&a, &b, false)`.
++    pub fn has_segment_overlap(&self, start: &Point3, end: &Point3, is_ortho: bool) -> bool {
++        let dir = end.xyz() - start.xyz();
++        if dir.modulus() < confusion() {
++            return true;
++        }
++        for plane_idx in (0..self.n + 1).step_by(self.inc_factor(is_ortho)) {
++            let plane = self.planes[plane_idx];
++            let (p1, p2) = (plane.dot(start.xyz()), plane.dot(end.xyz()));
++            if std_min(p1, p2) > self.max_verts_projections[plane_idx] || std_max(p1, p2) < self.min_verts_projections[plane_idx] {
++                return false;
++            }
++        }
++        let (min2, max2) = self.vertex_range(&dir, (f64::MAX, -f64::MAX));
++        let (p1, p2) = (dir.dot(start.xyz()), dir.dot(end.xyz()));
++        if std_min(p1, p2) > max2 || std_max(p1, p2) < min2 {
++            return false;
++        }
++        for edge_idx in 0..Self::directions_nb(is_ortho) {
++            let test_dir = dir.crossed(self.edge_dirs[edge_idx]);
++            let (p1, p2) = (test_dir.dot(start.xyz()), test_dir.dot(end.xyz()));
++            let (min_f, max_f) = self.vertex_range(&test_dir, (f64::MAX, -f64::MAX));
++            if std_min(p1, p2) > max_f || std_max(p1, p2) < min_f {
++                return false;
++            }
++        }
++        true
++    }
++    /// The min and max projections of points on a direction (starting at RealLast/RealFirst).
++    fn points_range(points: &[Point3], dir: &Xyz) -> (f64, f64) {
++        points.iter().fold((real_last(), real_first()), |(lo, hi), p| {
++            let proj = dir.dot(p.xyz());
++            (std_min(lo, proj), std_max(hi, proj))
++        })
++    }
++    /// `hasPolygonOverlap`: the separating axis test of a polygon, with its normal from the
++    /// first three points. Example: `core.has_polygon_overlap(&points, false)`.
++    pub fn has_polygon_overlap(&self, points: &[Point3], is_ortho: bool) -> (bool, Xyz) {
++        let (p1, p2, p3) = (points[0].xyz(), points[1].xyz(), points[2].xyz());
++        let normal = (p3 - p2).crossed(p1 - p2);
++        let polyg_proj = normal.dot(p1);
++        let (min, max) = self.vertex_range(&normal, (real_last(), real_first()));
++        if polyg_proj > max || polyg_proj < min {
++            return (false, normal);
++        }
++        for plane_idx in (0..self.n + 1).step_by(self.inc_factor(is_ortho)) {
++            let (min_polyg, max_polyg) = Self::points_range(points, &self.planes[plane_idx]);
++            if min_polyg > self.max_verts_projections[plane_idx] || max_polyg < self.min_verts_projections[plane_idx] {
++                return (false, normal);
++            }
++        }
++        let len = points.len();
++        for iter in 0..len {
++            let segm_dir = points[(iter + 1) % len].xyz() - points[iter].xyz();
++            for vol_dir in 0..Self::directions_nb(is_ortho) {
++                let test_dir = segm_dir.crossed(self.edge_dirs[vol_dir]);
++                let (min_polyg, max_polyg) = Self::points_range(points, &test_dir);
++                let (min_f, max_f) = self.vertex_range(&test_dir, (real_last(), real_first()));
++                if min_polyg > max_f || max_polyg < min_f {
++                    return (false, normal);
++                }
++            }
++        }
++        (true, normal)
++    }
++    /// `hasTriangleOverlap`: the separating axis test of a triangle, with its normal.
++    /// Example: `core.has_triangle_overlap(&a, &b, &c, false)`.
++    pub fn has_triangle_overlap(&self, p1: &Point3, p2: &Point3, p3: &Point3, is_ortho: bool) -> (bool, Xyz) {
++        let edges = [p2.xyz() - p1.xyz(), p3.xyz() - p2.xyz(), p1.xyz() - p3.xyz()];
++        let unset = Xyz::new(real_last(), real_last(), real_last());
++        for plane_idx in (0..self.n + 1).step_by(self.inc_factor(is_ortho)) {
++            let plane = self.planes[plane_idx];
++            let proj = plane.dot(p1.xyz());
++            let (mut lo, mut hi) = (proj, proj);
++            for p in [p2, p3] {
++                let proj = plane.dot(p.xyz());
++                lo = std_min(lo, proj);
++                hi = std_max(hi, proj);
++            }
++            if lo > self.max_verts_projections[plane_idx] || hi < self.min_verts_projections[plane_idx] {
++                return (false, unset);
++            }
++        }
++        let normal = edges[2].crossed(edges[0]);
++        if self.is_separated_triangle(p1, p2, p3, &normal) {
++            return (false, normal);
++        }
++        for edge in &edges {
++            for vol_dir in 0..Self::directions_nb(is_ortho) {
++                let test = self.edge_dirs[vol_dir].crossed(*edge);
++                if self.is_separated_triangle(p1, p2, p3, &test) {
++                    return (false, normal);
++                }
++            }
++        }
++        (true, normal)
++    }
++}

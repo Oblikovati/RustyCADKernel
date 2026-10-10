@@ -246,7 +246,7 @@ fn wait_text(thread: &mut OsdThread) -> String {
 
 fn thread_probe(input: &mut SplitWhitespace<'_>) -> String {
     let value: usize = integer(input) as usize;
-    let mut empty: OsdThread = OsdThread::new();
+    let empty: OsdThread = OsdThread::new();
     let mut out: String = format!("{} {}", bit(empty.run(value, 0)), bit(empty.wait()));
     let timed: Option<usize> = empty.wait_for(5);
     out += &format!(" {} {}", bit(timed.is_some()), timed.unwrap_or(0));
@@ -262,7 +262,7 @@ fn thread_probe(input: &mut SplitWhitespace<'_>) -> String {
 fn thread_timed_probe(input: &mut SplitWhitespace<'_>) -> String {
     let time: i32 = int(input);
     SPIN_RELEASED.store(false, Ordering::SeqCst);
-    let mut thread: OsdThread = OsdThread::with_function(spin);
+    let thread: OsdThread = OsdThread::with_function(spin);
     let mut out: String = bit(thread.run(41, 0)).to_string();
     let id: usize = thread.id();
     let early: Option<usize> = thread.wait_for(time);

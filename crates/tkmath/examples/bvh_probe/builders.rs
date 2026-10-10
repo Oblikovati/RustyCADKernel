@@ -103,7 +103,7 @@ fn builders_on<V: BvhVector, S: ProbeSet<V>>(
     builder.build(&mut empty, &mut tree, &bounding).unwrap();
     print!("{} {} ", tree.length(), tree.depth());
     set.mark_dirty();
-    nodes_out(set.bvh().unwrap());
+    nodes_out(&set.bvh().unwrap());
     set.order_print();
     println!();
 }
