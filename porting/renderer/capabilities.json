@@ -72,11 +72,11 @@
     },
     {
       "id": "lighting-materials",
-      "status": "pending",
+      "status": "partial",
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_ShaderManager.cxx"
       ],
-      "current_evidence_or_remaining_work": "Flat/Gouraud/Phong/PBR, light sets, materials and shadows.",
+      "current_evidence_or_remaining_work": "Native material coefficient packing is implemented with 417 exact differential records (23,352 float patterns); see docs/vulkan-materials.md. GPU lighting remains unimplemented: normal extraction, light snapshots, Flat/Gouraud/Phong/PBR shaders, lit capping and shadows need rendering and performance evidence.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]

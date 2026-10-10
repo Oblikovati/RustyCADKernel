@@ -51,6 +51,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    [Stencil capping](vulkan-capping.md) now builds closed-group masks and infinite
    section surfaces, including native chain, instance and persistence policy.
    Broader section materials and strict clipping-boundary parity remain open.
+   [Shader material records](vulkan-materials.md) now match native coefficient
+   packing; normal/light submission and GPU lighting remain the next steps.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

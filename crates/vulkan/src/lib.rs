@@ -69,3 +69,8 @@ mod capping_geometry;
 mod capping_planes;
 mod capping_style;
 mod retained_capping;
+
+mod material;
+mod material_components;
+pub use material::{RenderMaterial, RenderMaterialColorSpace};
+pub use material_components::{RenderMaterialCommon, RenderMaterialPbr};
