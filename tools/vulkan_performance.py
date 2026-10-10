@@ -45,6 +45,7 @@ def performance_rows(output: str) -> list[dict[str, object]]:
         "point-sprites",
         "text-glyphs",
         "ais-axis-appearance",
+        "plane-trihedron-updates",
     }
     if len(rows) != len(expected) or {row["workload"] for row in rows} != expected:
         raise ValueError(f"received workloads {rows}; expected {expected}")

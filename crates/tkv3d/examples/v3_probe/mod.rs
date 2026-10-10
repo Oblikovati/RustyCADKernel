@@ -100,3 +100,5 @@ pub mod ais_line;
 pub mod ais_point;
 
 pub mod ais_axis;
+
+pub mod ais_plane_trihedron;

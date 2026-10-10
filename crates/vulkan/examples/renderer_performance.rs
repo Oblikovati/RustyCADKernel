@@ -39,6 +39,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_point_performance::benchmark(&driver, warmup, samples);
     text_performance::benchmark(&driver, warmup, samples);
     ais_axis_performance::benchmark(&driver, warmup, samples);
+    plane_trihedron_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -131,3 +132,8 @@ mod text_scene;
 mod ais_axis_performance;
 #[path = "../tests/support/ais_axis_scene.rs"]
 mod axis_scene;
+
+#[path = "../tests/support/plane_trihedron_scene.rs"]
+mod plane_scene;
+#[path = "support/plane_trihedron_performance.rs"]
+mod plane_trihedron_performance;

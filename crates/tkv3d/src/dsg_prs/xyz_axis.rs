@@ -1,6 +1,9 @@
 //! `DsgPrs_XYZAxisPresentation` at OCCT 3d097a0 retains ordered line, arrow and label aspects.
 use crate::prs3d::{Prs3dArrow, Prs3dArrowAspect, Prs3dLineAspect, Prs3dTextAspect};
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::{
+    standard::{Failure, Handle},
+    tcollection::AsciiString,
+};
 use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkservice::graphic3d::*;
 /// Native axis presentation overloads; `DsgPrsXYZAxisPresentation::add(&prs, &line, &dir, length, "X", &start, &end)?`.
@@ -12,7 +15,7 @@ impl DsgPrsXYZAxisPresentation {
         line: &Handle<Prs3dLineAspect>,
         direction: &Direction3,
         length: f64,
-        label: &str,
+        label: impl AsRef<[u8]>,
         first: &Point3,
         last: &Point3,
     ) -> Result<(), Failure> {
@@ -24,7 +27,7 @@ impl DsgPrsXYZAxisPresentation {
             std::f64::consts::PI / 180. * 10.,
             length / 10.,
         )?;
-        axis_label(&group, label, last);
+        axis_label(&group, label.as_ref(), last);
         Ok(())
     }
     /// Use independent arrow and text aspects; `Self::add_with_aspects(&prs, &line, &arrow, &text, &dir, 10., "X", &a, &b)?`.
@@ -36,7 +39,7 @@ impl DsgPrsXYZAxisPresentation {
         text: &Handle<Prs3dTextAspect>,
         direction: &Direction3,
         length: f64,
-        label: &str,
+        label: impl AsRef<[u8]>,
         first: &Point3,
         last: &Point3,
     ) -> Result<(), Failure> {
@@ -44,7 +47,7 @@ impl DsgPrsXYZAxisPresentation {
         group.set_primitives_aspect(&arrow.aspect().cast());
         Prs3dArrow::draw(&group, last, direction, arrow.angle(), length / 10.)?;
         group.set_primitives_aspect(&text.aspect().cast());
-        axis_label(&group, label, last);
+        axis_label(&group, label.as_ref(), last);
         Ok(())
     }
 }
@@ -62,13 +65,13 @@ fn axis_segment(
     group.add_primitive_array(&vertices.cast(), true);
     Ok(group)
 }
-fn axis_label(group: &Handle<dyn Graphic3dGroup>, label: &str, position: &Point3) {
-    let label = label.split('\0').next().unwrap_or_default();
+fn axis_label(group: &Handle<dyn Graphic3dGroup>, label: &[u8], position: &Point3) {
+    let label = label.split(|byte| *byte == 0).next().unwrap_or_default();
     if label.is_empty() {
         return;
     }
     let text = Handle::new(Graphic3dText::new(1. / 81.));
-    text.set_text_str(label);
+    text.set_text_ascii(&AsciiString::from_bytes(label));
     text.set_position(position);
     group.add_text(&text, true);
 }
