@@ -53,8 +53,11 @@
 #include "tkv3d_probe_selector_overlap.cxx"
 #include "tkv3d_probe_selector_traversal.cxx"
 #include "tkv3d_probe_selector_pick.cxx"
+#include "tkv3d_probe_selection_image.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_selector_pick",v3_selector_pick},
+ {"v3_selection_image",v3_selection_image},
+ {"v3_selector_pixmap",v3_selector_pixmap},
  {"v3_selector_traversal",v3_selector_traversal},
  {"v3_selector_overlap",v3_selector_overlap},
  {"v3_ais_object",v3_ais_object},

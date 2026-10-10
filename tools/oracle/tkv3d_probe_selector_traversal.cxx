@@ -48,6 +48,9 @@ public:
   void volume(const SelectMgr_SelectingVolumeManager& value){mySelectingVolumeMgr=value;myTolerances.Add(3);}
   const SelectMgr_SelectingVolumeManager& volume(){return mySelectingVolumeMgr;}
   int layerCount() const {return myZLayerOrderMap.Extent();}
+  void imageSeed(const occ::handle<Select3D_SensitiveEntity>& entity,const occ::handle<SelectMgr_EntityOwner>& owner,double depth,const NCollection_Vec3<float>& normal){
+    mystored.Clear();myIsSorted=false;SelectMgr_SortCriterion criterion;criterion.Entity=entity;criterion.Depth=depth;criterion.Normal=normal;mystored.Add(owner,criterion);
+  }
   void state(const std::vector<occ::handle<SelectMgr_EntityOwner>>& owners){
     ga_int(sorts);ga_flag(myIsSorted);ga_pnt(myCameraEye);ga_dir(myCameraDir);ga_real(myCameraScale);ga_int(mystored.Size());
     for(int i=1;i<=mystored.Size();++i){for(int j=0;j<int(owners.size());++j)if(mystored.FindKey(i)==owners[j])ga_int(j);

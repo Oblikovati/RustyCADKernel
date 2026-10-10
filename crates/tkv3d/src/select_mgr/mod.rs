@@ -172,3 +172,14 @@ pub use viewer_selector_results::select_mgr_sort_selector_results;
 
 mod viewer_selector_pick;
 pub use viewer_selector_pick::SelectMgrViewerSelectorPickMembers;
+
+mod selection_image;
+mod selection_image_colors;
+mod selection_image_depth;
+mod selection_image_pixels;
+mod viewer_selector_image;
+pub use selection_image::{
+    SelectMgrSelectionImageFiller, SelectMgrSelectionImageFillerBase,
+    select_mgr_create_selection_image_filler,
+};
+pub use viewer_selector_image::SelectMgrViewerSelectorImageMembers;

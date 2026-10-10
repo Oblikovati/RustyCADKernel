@@ -4,7 +4,7 @@ use super::{
     selector_traversal::{traversal_scene, traversal_scene_state},
 };
 #[path = "../../tests/support/pick_scene.rs"]
-mod pick_scene;
+pub(super) mod pick_scene;
 use pick_scene::{pick_view, run_public_pick};
 use rustycad_tkv3d::{select_basics::SelectBasicsSelectingVolumeManager, select_mgr::*};
 use traversal_scene::{TraversalScene, volume::TraversalConfig};
