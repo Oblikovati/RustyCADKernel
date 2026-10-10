@@ -23,7 +23,8 @@ Ash's dynamic loader dependency `libloading` 0.8.9 has a narrow ISC license exce
 in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
-triangle primitives, opaque vertex/interior colors, unlit solid shading,
+triangle primitives, unit homogeneous `w` for Vec4 positions, opaque
+vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
 transform persistence, structure clipping/highlighting, textures and custom shaders
 are not implemented. The [capability ledger](../porting/renderer/capabilities.json)
@@ -37,6 +38,14 @@ candidates, not 1,046 capabilities or a semantic completeness claim. Continue th
 source/configuration audit, associate upstream viewer cases and split ledger rows
 as implementations and evidence become more specific. Renderer replacements do
 not inflate the mapped OCCT API count.
+
+## Integrated evidence
+
+The [main acceptance receipt](../porting/runtime-evidence/vulkan-offscreen-b7e4abc9b.json)
+records 16 Rust tests, two runtime checks and six native comparison scenes.
+All color pixels matched exactly; maximum depth difference was about `1.05e-7`.
+The software Vulkan run reported zero errors with synchronization validation enabled.
+Formatting, Clippy, rustdoc, five comparison-tool tests and dependency checks passed.
 
 ## Reproduce the checks
 

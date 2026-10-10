@@ -78,6 +78,7 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/tkdraw` | TKDraw, the DRAW test harness (Draw interpreter, variables, drawables, command groups; DBRep and DrawTrSurf), in progress |
 | `crates/tkservice` | TKService visualization services (Aspect, Image, Font, Graphic3d data model and driver interfaces, Media, Xw), in progress |
 | `crates/tkv3d` | Interactive visualization, presentations, cameras, selection and viewer APIs, in progress |
+| `crates/vulkan` | Martensite Vulkan 1.3 offscreen renderer; [current evidence and remaining legacy scope](docs/vulkan-renderer.md) |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |
