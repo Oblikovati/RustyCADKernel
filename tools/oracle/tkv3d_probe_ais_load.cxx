@@ -3,6 +3,11 @@
 class V3LoadContext : public V3ContextFixture {
 public:
   using AIS_InteractiveContext::ClearGlobal;
+  void bindNull() {
+    myObjects.Bind(occ::handle<AIS_InteractiveObject>(),
+                   new AIS_GlobalStatus());
+  }
+  void unbindNull() { myObjects.UnBind(occ::handle<AIS_InteractiveObject>()); }
   using AIS_InteractiveContext::EraseGlobal;
   void seedDetection(const occ::handle<SelectMgr_ViewerSelector> &selector,
                      int current, int highlighted) {

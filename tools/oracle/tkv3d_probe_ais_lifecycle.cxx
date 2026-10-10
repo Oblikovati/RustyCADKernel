@@ -59,6 +59,13 @@ static void v3_lifecycle_operate(V3LoadScene &scene, int op, int index, int a,
                                  int b, int c, int d) {
   auto object = scene.objects[index];
   switch (op) {
+  case 62:
+    scene.ctx->bindNull();
+    scene.ctx->ClearGlobalPrs(occ::handle<AIS_InteractiveObject>(), 0, true);
+    scene.ctx->ClearPrs(occ::handle<AIS_InteractiveObject>(), 0, true);
+    v3_lifecycle_query(scene, 56, 0, -1, 2);
+    scene.ctx->unbindNull();
+    break;
   case 61:
     object->expectedKindReferences = object->GetRefCount();
     break;

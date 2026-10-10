@@ -51,6 +51,8 @@ def append_ais_lifecycle_requests(requests: list[str]) -> None:
             (56, 0, 0, 0),
         ],
     )
+    _lifecycle_trace(requests, [(0, 0), (0, 1), (62,)])
+    _lifecycle_trace(requests, [(62,)])
     _detection_traces(requests)
     _bulk_traces(requests)
     _query_traces(requests)

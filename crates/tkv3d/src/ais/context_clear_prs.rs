@@ -20,6 +20,9 @@ impl AisInteractiveContext {
         mode: i32,
         update: bool,
     ) -> Result<(), Failure> {
+        if object.is_null() {
+            return Ok(());
+        }
         let status = self.fields.read().objects.seek(object).map(Handle::observe);
         let Some(status) = status else {
             return Ok(());
