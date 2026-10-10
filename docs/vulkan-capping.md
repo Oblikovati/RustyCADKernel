@@ -70,7 +70,7 @@ These observations do not prove a single cause for every remaining difference.
 
 The complete regression replay compares 2,700 previously integrated captures
 and all 300 cap captures against their retained buffers. All 3,000 color/depth
-buffers, plus the applicable native-window buffers, are unchanged after final
+buffer pairs, plus the applicable native-window buffers, are unchanged after final
 source cleanup. All sixteen shader variants pass regeneration/validation.
 The renderer has 144 passing Rust test executions and 37 passing Python harness
 tests; Clippy with warnings denied and repository Rust formatting pass.
@@ -112,3 +112,9 @@ parity and other platform configurations remain required. General group stencil
 commands are distinct from the internal cap mask and remain unsupported.
 No renderer capability family is complete, and this work adds no OCCT API
 inventory credit for renderer replacement internals.
+
+The [main integration receipt](../porting/runtime-evidence/vulkan-capping-main-2026-10-10.json)
+confirms all 10,857 verification input fingerprints match, all 144 renderer test
+executions pass, and both devices pass the nineteen runtime checks plus fifteen
+analytic clipping scenes with zero validation errors. The completed capping
+worktree and branch were deleted, reclaiming approximately 14 GiB of build cache.
