@@ -14,12 +14,22 @@ pub(crate) fn frame_for_view(
     let mut layers = view.layers();
     // OpenGl_FilteredIndexedLayerIterator at the pinned baseline renders normal layers before immediate ones.
     layers.sort_by_key(|layer| layer.is_immediate());
+    update_view_culling(view, &layers, extent)?;
     let rendering = view.rendering_params();
     let selected = layers
         .iter()
         .filter(|layer| layer_selected(view, layer.layer_id()));
     let passes = selected
-        .map(|layer| layer_pass(layer, &camera, view.identification(), extent, &rendering))
+        .map(|layer| {
+            layer_pass(
+                layer,
+                &camera,
+                view.identification(),
+                extent,
+                &rendering,
+                &view.clip_planes(),
+            )
+        })
         .collect::<Result<_, _>>()?;
     let color = view.cview_base().fields.read().bg_color;
     let clear = [
@@ -29,6 +39,38 @@ pub(crate) fn frame_for_view(
         color.alpha(),
     ];
     RenderFrame::with_layers(extent[0], extent[1], clear, passes)
+}
+fn update_view_culling(
+    view: &dyn Graphic3dCView,
+    layers: &[Handle<Graphic3dLayer>],
+    extent: [u32; 2],
+) -> Result<(), RenderError> {
+    let params = view.rendering_params();
+    let selector = view_culling_selector(view, extent);
+    for layer in layers {
+        layer
+            .update_culling(
+                view.identification(),
+                &selector,
+                params.ray_tracing.frustum_culling_state,
+            )
+            .map_err(|error| rejected(error, "a valid native layer culling traversal"))?;
+    }
+    Ok(())
+}
+fn view_culling_selector(view: &dyn Graphic3dCView, extent: [u32; 2]) -> Graphic3dCullingTool {
+    let mut selector = Graphic3dCullingTool::default();
+    selector.set_view_volume(
+        &view.camera(),
+        &rustycad_tkernel::ncollection::Mat4::identity(),
+    );
+    selector.set_viewport_size(
+        extent[0] as i32,
+        extent[1] as i32,
+        f64::from(view.rendering_params().resolution_ratio()),
+    );
+    selector.cache_clip_pts_projections();
+    selector
 }
 fn layer_selected(view: &dyn Graphic3dCView, id: Graphic3dZLayerId) -> bool {
     if view.z_layer_redraw_mode() {
@@ -42,6 +84,7 @@ fn layer_pass(
     view_id: i32,
     extent: [u32; 2],
     rendering: &Graphic3dRenderingParams,
+    clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
 ) -> Result<RenderLayer, RenderError> {
     let settings = layer.layer_settings();
     validate_layer(layer.layer_id(), &settings)?;
@@ -54,6 +97,7 @@ fn layer_pass(
                 view_id,
                 extent,
                 rendering,
+                clipping,
             )?);
         }
     }
@@ -70,6 +114,7 @@ fn structure_draws(
     view_id: i32,
     extent: [u32; 2],
     rendering: &Graphic3dRenderingParams,
+    clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     if structure.is_null() {
         return Ok(vec![]);
@@ -78,7 +123,7 @@ fn structure_draws(
     retained
         .get()
         .ok_or_else(|| rejected(structure.object_address(), "a Martensite driver structure"))?
-        .draws(camera, view_id, extent, rendering)
+        .draws(camera, view_id, extent, rendering, clipping)
 }
 fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     let params = view.rendering_params();
@@ -99,10 +144,10 @@ fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> 
 }
 fn validate_view(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     validate_raster_params(view)?;
-    if view.camera().is_stereo() || !view.clip_planes().is_null() || view.computed_mode() {
+    if view.camera().is_stereo() || view.computed_mode() {
         return Err(rejected(
-            "stereo, clip planes or computed rendering",
-            "ordinary unclipped camera rendering in this slice",
+            "stereo or computed rendering",
+            "ordinary camera rendering in this slice",
         ));
     }
     if view.cview_base().fields.read().background_type != Graphic3dTypeOfBackground::None {

@@ -31,6 +31,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     scene
         .structure
         .set_transformation(&Handle::new(Datum3::new(transform)));
+    if request.mode.starts_with("clip-") {
+        clipping_scene::configure_clipping(&scene, &request.mode);
+    }
     if request.mode.starts_with("pers-") {
         persistence_scene::configure_persistence(
             &scene.structure,
@@ -81,3 +84,6 @@ mod line_arrays;
 
 #[path = "../tests/support/stdprs_scene.rs"]
 mod stdprs_scene;
+
+#[path = "../tests/support/clipping_scene.rs"]
+mod clipping_scene;

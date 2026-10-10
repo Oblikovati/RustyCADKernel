@@ -63,6 +63,7 @@ impl Graphic3dDrawGroup {
                 .fields
                 .read(),
             &Graphic3dRenderingParams::new().expect("default rendering parameters"),
+            &Handle::default(),
         )
     }
     /// Extract using the actual pixel viewport, including persistence; `group.primitive_draws_for_view(&camera, [800, 600])?`.
@@ -84,6 +85,7 @@ impl Graphic3dDrawGroup {
                 .fields
                 .read(),
             &Graphic3dRenderingParams::new().expect("default rendering parameters"),
+            &Handle::default(),
         )
     }
     /// Compatibility extraction name; `group.triangle_draws(&camera)?` also supports line primitives.
@@ -107,6 +109,7 @@ impl Graphic3dDrawGroup {
         extent: Option<[u32; 2]>,
         structure: &Graphic3dCStructureFields,
         rendering: &Graphic3dRenderingParams,
+        global_clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         crate::highlight_style::validate_structure(structure)?;
         let (matrix, depth_clamp) =
@@ -119,8 +122,15 @@ impl Graphic3dDrawGroup {
             rendering,
             fonts: self.text_source.as_ref(),
         };
+        let model = crate::persistent_transform::clipping_model(self, structure)?;
+        let clipping =
+            crate::retained_clipping::structure_clipping(global_clipping, structure, model)?;
         let mut draws = self.extract_commands(matrix, structure.highlight, &context)?;
         for draw in &mut draws {
+            // OCCT's standard font shader advertises zero clipping planes (3d097a0).
+            if draw.textured_style.is_none() {
+                draw.clipping = clipping.clone();
+            }
             draw.depth_clamp = depth_clamp;
             crate::highlight_style::apply_highlight(draw, structure)?;
         }

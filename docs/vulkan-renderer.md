@@ -47,7 +47,9 @@ Unsupported styles and commands return errors. Current restrictions include
 triangle lists/strips/fans, segments/polylines and point sprites, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Stencil, flipping,
-structure clipping, bounding-box highlighting, textures and custom shaders are not implemented.
+capping, bounding-box highlighting, textures and custom shaders are not implemented.
+[Retained clipping](vulkan-clipping.md) covers live plane chains, persistent anchors,
+local overrides, native bounding-box policy and view frustum culling.
 Transform persistence is partial, with native-host capture differences recorded below. The [capability ledger](../porting/renderer/capabilities.json)
 retains all those features, plus materials/lights/PBR, transparency/OIT, ray/path
 tracing, stereo/VR, layers, backgrounds, statistics and native window presentation.
@@ -106,7 +108,7 @@ python3 tools/verify_vulkan.py \
   --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-acceptance.json \
   --captures target/vulkan-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-circle-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-clipping-baseline-2026-10-10.json
 ```
 
 The default matrix requires both `lavapipe` and `host`. It clears inherited
@@ -160,8 +162,8 @@ the separate functional gate. Raw samples, median, mean, p95 and p99 are retaine
 is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
-Nine workloads now have accepted baselines: the original six, two native-window
-workloads and circle updates. Eight newer presentation workloads retain collected timings but no
+Ten workloads now have accepted baselines: the original six, two native-window
+workloads, circle updates and clipping-plane updates. Eight newer presentation workloads retain collected timings but no
 accepted baseline while strict capture parity remains unresolved. The timing gate
 explicitly reports each unmatched workload.
 Run functional and timing regression checks together:
@@ -169,7 +171,7 @@ Run functional and timing regression checks together:
 ```sh
 python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-all-full \
   --output target/vulkan-followup.json --captures target/vulkan-captures \
-  --performance-baseline porting/runtime-evidence/vulkan-circle-baseline-2026-10-10.json
+  --performance-baseline porting/runtime-evidence/vulkan-clipping-baseline-2026-10-10.json
 ```
 
 For a new device/driver profile, omit `--performance-baseline` to collect its first

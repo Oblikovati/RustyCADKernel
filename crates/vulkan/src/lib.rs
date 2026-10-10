@@ -53,3 +53,8 @@ mod text_atlas;
 
 mod text_submission;
 mod text_transform;
+
+mod clipping;
+pub use clipping::RenderClipping;
+
+mod retained_clipping;

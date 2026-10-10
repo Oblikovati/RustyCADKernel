@@ -23,6 +23,7 @@ from vulkan_ais_axis_cases import AIS_AXIS_MODES
 from vulkan_plane_trihedron_cases import PLANE_TRIHEDRON_MODES
 from vulkan_window_cases import WINDOW_MODES, compare_window_pixels
 from vulkan_circle_cases import CIRCLE_MODES
+from vulkan_clipping_cases import CLIPPING_MODES
 from vulkan_case_dispatch import capture_executable
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
@@ -81,21 +82,27 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
         "text.vert",
         "text.frag",
     ):
-        source = ROOT / f"crates/vulkan/shaders/{name}"
-        output = folder / f"{name}.spv"
-        compile_shader(source, output, env)
-        if output.read_bytes() != Path(f"{source}.spv").read_bytes():
-            raise ValueError(
-                f"received stale SPIR-V for {source}; expected current GLSL compiler output"
-            )
+        for clipped in (False, True):
+            source = ROOT / f"crates/vulkan/shaders/{name}"
+            stem, stage = name.split(".")
+            suffix = f"{stem}.clipped.{stage}.spv" if clipped else f"{name}.spv"
+            output = folder / suffix
+            compile_shader(source, output, env, clipped)
+            if output.read_bytes() != (source.parent / suffix).read_bytes():
+                raise ValueError(
+                    f"received stale SPIR-V for {suffix}; expected current GLSL compiler output"
+                )
     return run(["glslangValidator", "--version"], env)
 
 
-def compile_shader(source: Path, output: Path, env: dict[str, str]) -> None:
+def compile_shader(
+    source: Path, output: Path, env: dict[str, str], clipped: bool = False
+) -> None:
     """Compile a GLSL stage for the required runtime; e.g. compile_shader(vertex, spv, env)."""
     run(
         [
             "glslangValidator",
+            *(["-DMARTENSITE_CLIPPING=1"] if clipped else []),
             "--target-env",
             "vulkan1.3",
             "-V",
@@ -231,6 +238,7 @@ def capture_cases(
             *PLANE_TRIHEDRON_MODES,
             *WINDOW_MODES,
             *CIRCLE_MODES,
+            *CLIPPING_MODES,
         )
     ]:
         try:
@@ -267,6 +275,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
             "tools/oracle/martensite_vulkan_window.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
+            "tools/oracle/martensite_vulkan_clipping.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )
     )

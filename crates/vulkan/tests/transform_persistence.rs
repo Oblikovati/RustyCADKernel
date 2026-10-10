@@ -52,6 +52,11 @@ fn all_persistence_modes_reach_the_viewer_and_select_native_depth_policy() {
 #[test]
 fn local_anchor_includes_model_translation_once() {
     let (scene, device) = setup();
+    // Recalculated group-only persistence bounds are void in native OCCT;
+    // inspect its model matrix with frustum culling explicitly disabled.
+    scene.view.change_rendering_params(&mut |params| {
+        params.ray_tracing.frustum_culling_state = Graphic3dRenderingParamsFrustumCulling::Off;
+    });
     let camera = scene.view.camera();
     let persistence = Handle::new(
         Graphic3dTransformPers::with_point(

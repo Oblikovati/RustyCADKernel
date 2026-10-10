@@ -9,7 +9,8 @@ pub(super) struct DrawPipeline {
     pub layout: vk::PipelineLayout,
     pub push_stages: vk::ShaderStageFlags,
     shaders: Vec<vk::ShaderModule>,
-    pub sprite_layout: Option<super::point_sprite::SpriteLayout>,
+    pub clipping_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
+    pub sprite_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
 }
 impl DrawPipeline {
     pub fn new(
@@ -19,6 +20,7 @@ impl DrawPipeline {
         point: bool,
         text: bool,
         text_blend: bool,
+        clipped: bool,
     ) -> Result<Self, RenderError> {
         let mut pipeline = Self {
             runtime: runtime.clone(),
@@ -26,23 +28,43 @@ impl DrawPipeline {
             layout: vk::PipelineLayout::null(),
             push_stages: push_range(line || point || text).stage_flags,
             shaders: vec![],
+            clipping_layout: if clipped {
+                Some(super::storage_descriptor::StorageDescriptorLayout::new(
+                    runtime,
+                    vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT,
+                )?)
+            } else {
+                None
+            },
             sprite_layout: if point || text {
-                Some(super::point_sprite::SpriteLayout::new(runtime)?)
+                Some(super::storage_descriptor::StorageDescriptorLayout::new(
+                    runtime,
+                    vk::ShaderStageFlags::FRAGMENT,
+                )?)
             } else {
                 None
             },
         };
-        pipeline.load_shaders(line, point, text)?;
+        pipeline.load_shaders(line, point, text, clipped)?;
         pipeline.layout = create_layout(
             runtime,
             line || point || text,
             pipeline.sprite_layout.as_ref(),
+            pipeline.clipping_layout.as_ref(),
         )?;
         pipeline.create(depth_clamp, line, point, text, text_blend)?;
         Ok(pipeline)
     }
-    fn load_shaders(&mut self, line: bool, point: bool, text: bool) -> Result<(), RenderError> {
-        let shaders: [&[u8]; 2] = if text {
+    fn load_shaders(
+        &mut self,
+        line: bool,
+        point: bool,
+        text: bool,
+        clipped: bool,
+    ) -> Result<(), RenderError> {
+        let shaders: [&[u8]; 2] = if clipped {
+            clipping_shaders(line, point, text)
+        } else if text {
             [
                 include_bytes!("../../shaders/text.vert.spv"),
                 include_bytes!("../../shaders/text.frag.spv"),
@@ -163,11 +185,13 @@ fn create_pipeline(
 fn create_layout(
     runtime: &VulkanRuntime,
     line: bool,
-    sprite: Option<&super::point_sprite::SpriteLayout>,
+    sprite: Option<&super::storage_descriptor::StorageDescriptorLayout>,
+    clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
 ) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
     let ranges = [push_range(line)];
-    let layouts: Vec<_> = sprite.iter().map(|s| s.handle).collect();
+    let mut layouts: Vec<_> = sprite.or(clipping).iter().map(|s| s.handle).collect();
+    layouts.extend(clipping.iter().map(|s| s.handle));
     let info = vk::PipelineLayoutCreateInfo::default()
         .push_constant_ranges(&ranges)
         .set_layouts(&layouts);
@@ -185,6 +209,31 @@ fn push_range(line: bool) -> vk::PushConstantRange {
     vk::PushConstantRange::default()
         .stage_flags(stages)
         .size(if line { 80 } else { 64 })
+}
+
+fn clipping_shaders(line: bool, point: bool, text: bool) -> [&'static [u8]; 2] {
+    if text {
+        return [
+            include_bytes!("../../shaders/text.clipped.vert.spv"),
+            include_bytes!("../../shaders/text.clipped.frag.spv"),
+        ];
+    }
+    if point {
+        return [
+            include_bytes!("../../shaders/point.clipped.vert.spv"),
+            include_bytes!("../../shaders/point.clipped.frag.spv"),
+        ];
+    }
+    if line {
+        return [
+            include_bytes!("../../shaders/line.clipped.vert.spv"),
+            include_bytes!("../../shaders/line.clipped.frag.spv"),
+        ];
+    }
+    [
+        include_bytes!("../../shaders/unlit.clipped.vert.spv"),
+        include_bytes!("../../shaders/unlit.clipped.frag.spv"),
+    ]
 }
 
 #[cfg(test)]

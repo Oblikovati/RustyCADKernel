@@ -44,6 +44,7 @@ pub struct PrimitiveDraw {
     pub(crate) indices: Vec<u32>,
     pub(crate) clip_transform: [f32; 16],
     pub(crate) depth_clamp: bool,
+    pub(crate) clipping: Option<crate::RenderClipping>,
     pub(crate) annotation: bool,
     pub(crate) line_style: Option<LineStyle>,
     pub(crate) textured_style: Option<crate::TexturedStyle>,
@@ -85,11 +86,21 @@ impl PrimitiveDraw {
             indices,
             clip_transform,
             depth_clamp: false,
+            clipping: None,
             annotation: false,
             line_style: None,
             textured_style: None,
             point_style: Some(style),
         })
+    }
+    /// Attach validated world-space clipping; `draw.with_clipping(clipping)`.
+    pub fn with_clipping(mut self, clipping: crate::RenderClipping) -> Self {
+        self.clipping = (!clipping.chains().is_empty()).then_some(clipping);
+        self
+    }
+    /// Read the clipping snapshot; `draw.clipping()`.
+    pub fn clipping(&self) -> Option<&crate::RenderClipping> {
+        self.clipping.as_ref()
     }
     /// Read the marker sprite when this is a point draw; `draw.point_style()`.
     pub fn point_style(&self) -> Option<&crate::PointStyle> {
@@ -108,6 +119,7 @@ impl PrimitiveDraw {
             indices,
             clip_transform,
             depth_clamp: false,
+            clipping: None,
             annotation: false,
             line_style,
             textured_style: None,

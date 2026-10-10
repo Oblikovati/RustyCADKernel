@@ -67,11 +67,15 @@ impl RenderStructure {
         view_id: i32,
         extent: [u32; 2],
         rendering: &Graphic3dRenderingParams,
+        clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-        if !self.is_visible_in_view(view_id) {
+        if !self.is_visible_in_view(view_id) || self.is_culled() {
             return Ok(vec![]);
         }
         let fields = self.base.fields.read().clone();
+        if crate::retained_clipping::structure_is_clipped(clipping, &fields)? {
+            return Ok(vec![]);
+        }
         self.geometry_groups()?
             .iter()
             .map(|group| {
@@ -79,7 +83,7 @@ impl RenderStructure {
                 retained
                     .get()
                     .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?
-                    .draws_in_structure(camera, Some(extent), &fields, rendering)
+                    .draws_in_structure(camera, Some(extent), &fields, rendering, clipping)
             })
             .collect::<Result<Vec<_>, _>>()
             .map(|groups| groups.into_iter().flatten().collect())

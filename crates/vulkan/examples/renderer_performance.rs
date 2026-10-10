@@ -43,6 +43,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(target_os = "linux")]
     window_performance::benchmark(&driver, warmup, samples);
     ais_circle_performance::benchmark(&driver, warmup, samples);
+    clipping_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -158,3 +159,6 @@ use ais_performance::ais_scene;
 mod ais_circle_performance;
 #[path = "../tests/support/ais_circle_scene.rs"]
 mod circle_scene;
+
+#[path = "support/clipping_performance.rs"]
+mod clipping_performance;

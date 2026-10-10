@@ -78,6 +78,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_persistence.cxx"
 #include "martensite_vulkan_stdprs.cxx"
 #include "martensite_vulkan_surfaces.cxx"
+#include "martensite_vulkan_clipping.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
   // The default-layer capture isolates geometry depth. The later native Topmost
@@ -200,6 +201,8 @@ static void run_scene(int argc, char **argv) {
       line_scene(structure, mode);
     if (mode.rfind("stdprs-", 0) == 0)
       stdprs_scene(structure, mode);
+    if (mode.rfind("clip-", 0) == 0)
+      clipping_scene(structure, view, mode);
     if (mode.rfind("pers-", 0) == 0)
       persistence_scene(structure, view, mode, rasterControl);
     write_capture(view, width, height, argv[5], mode == "full");

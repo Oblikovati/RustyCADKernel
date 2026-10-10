@@ -171,6 +171,16 @@ fn record_draw(
                 &[],
             );
         }
+        if let Some(clipping) = &draw.clipping {
+            device.cmd_bind_descriptor_sets(
+                command,
+                vk::PipelineBindPoint::GRAPHICS,
+                draw.pipeline.layout,
+                1,
+                &[clipping.set],
+                &[],
+            );
+        }
         device.cmd_bind_vertex_buffers(command, 0, &[draw.vertices.handle], &[0]);
         device.cmd_bind_index_buffer(command, draw.indices.handle, 0, vk::IndexType::UINT32);
         if push {
