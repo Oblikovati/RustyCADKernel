@@ -181,15 +181,15 @@ fn shared_library_empty_c_string_prefix_stays_empty() {
 fn shared_library_preserves_non_utf8_names_symbols_and_loader_errors() {
     use std::os::unix::ffi::OsStrExt;
 
-    let (directory, link, target) = non_utf8_libm_link();
+    let (directory, link) = non_utf8_libm_copy();
     let path_bytes = link.as_os_str().as_bytes();
     let mut library = SharedLibrary::named_bytes(Some(path_bytes));
     assert_eq!(library.name_bytes(), Some(path_bytes));
     assert_eq!(library.name(), None, "invalid UTF-8 has no str view");
     assert!(library.dl_open(LoadMode::RtldNow));
-    assert_non_utf8_symbol_error(&library, target.as_os_str().as_bytes());
+    assert_non_utf8_symbol_error(&library, path_bytes);
     library.dl_close();
-    std::fs::remove_file(link).expect("remove symlink");
+    std::fs::remove_file(link).expect("remove isolated library");
     std::fs::remove_dir(directory).expect("remove temporary directory");
 }
 
@@ -224,8 +224,8 @@ fn shared_library_byte_setter_keeps_first_nul_prefix_and_null_is_noop() {
 }
 
 #[cfg(target_os = "linux")]
-fn non_utf8_libm_link() -> (std::path::PathBuf, std::path::PathBuf, std::path::PathBuf) {
-    use std::{ffi::OsString, os::unix::ffi::OsStringExt, os::unix::fs::symlink};
+fn non_utf8_libm_copy() -> (std::path::PathBuf, std::path::PathBuf) {
+    use std::{ffi::OsString, os::unix::ffi::OsStringExt};
 
     let target = [
         "/lib/x86_64-linux-gnu/libm.so.6",
@@ -243,8 +243,10 @@ fn non_utf8_libm_link() -> (std::path::PathBuf, std::path::PathBuf, std::path::P
     let directory = std::env::temp_dir().join(format!("rustycad-shlib-{nonce}"));
     std::fs::create_dir(&directory).expect("unique temporary directory");
     let link = directory.join(OsString::from_vec(b"libm-\xff.so".to_vec()));
-    symlink(&target, &link).expect("temporary non-UTF8 symlink");
-    (directory, link, target)
+    // Run 38077155403: dlopen reuses an existing inode and its first-loaded alias.
+    // A private copy makes the exact diagnostic path independent of test load order.
+    std::fs::copy(&target, &link).expect("isolated non-UTF8 library copy");
+    (directory, link)
 }
 
 /// Fixed memory figures standing for mallinfo2, procfs and task_info.
