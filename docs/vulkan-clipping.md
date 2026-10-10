@@ -80,5 +80,21 @@ preserves all nine previous rows and adds only `clipping-plane-updates`. Eight
 other workloads still lack accepted baselines. The raw failures and budgets have
 not been replaced or relaxed.
 
+The [post-merge main receipt](../porting/runtime-evidence/vulkan-clipping-main-2026-10-10.json)
+confirms identical capture-source fingerprints, all renderer CPU tests, all sixteen
+shader variants, eighteen runtime checks and fifteen analytic clipping scenes on
+both devices. Its optimized measurements pass all ten accepted workload budgets;
+the eight unmatched workloads remain explicit failures of the broader timing gate.
+
 Capping remains part of the renderer completion scope. No capability family is
 marked complete by this slice, and no OCCT API inventory credit is added.
+
+The next capping step needs homogeneous vertex input: pinned
+`OpenGl_CappingPlaneResource.cxx` uses twelve plane vertices, with `w=1` at the
+origin and `w=0` for directions at infinity. Martensite currently rejects non-unit
+position weights. Preserve the full weight through GPU transformation; native
+`Graphic3d_Group::AddPrimitiveArray` deliberately uses raw xyz with `w=1` only
+for its bounds. `OpenGl_CappingAlgo.cxx` then builds an odd/even stencil mask from
+closed groups using the selected plane, draws the cap through the remaining
+planes, and applies plane or object aspects. Stencil targets, chain filtering,
+section appearance and those vertex semantics all remain in scope.
