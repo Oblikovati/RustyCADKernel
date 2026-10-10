@@ -1,0 +1,52 @@
+{
+  "head_sha": "5e0effbe6cff50d4f549a778d315df201b0dc89b",
+  "run": 38091956382,
+  "vulkan_runtime": "passed",
+  "observed_failures": [
+    {
+      "job": 114330023666,
+      "name": "rust (windows-latest, 2)",
+      "symptom": "cylinder_seam_copy_matches_pinned_native_order: fingerprint 9246381668650853467 != 8261614461542172911",
+      "status": "open",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38091956382/job/114330023666"
+    },
+    {
+      "job": 114330023733,
+      "name": "rust (macos-latest, 0)",
+      "symptom": "callback_can_replace_itself_without_a_held_global_lock: missing native row replace 2 1:40:40,0:40:0",
+      "status": "open",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38091956382/job/114330023733"
+    },
+    {
+      "job": 114330023771,
+      "name": "rust (windows-latest, 1)",
+      "symptom": "Draw ANSI error output and drawexe native transcript comparisons fail",
+      "status": "open",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38091956382/job/114330023771"
+    },
+    {
+      "job": 114330023751,
+      "name": "rust (windows-latest, 0)",
+      "symptom": "Message UTF BOM catalog and console escape tests fail",
+      "status": "open",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38091956382/job/114330023751"
+    },
+    {
+      "job": 114330023780,
+      "name": "rust (windows-latest, 4)",
+      "symptom": "Windows system-date tests pass, but work-session root_name returns full Windows path instead of name",
+      "status": "open",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38091956382/job/114330023780",
+      "diagnosis": "OCCT OSD_Path.cxx Analyse_DOS rejects colon in IsValid. IFSelect_WorkSession::GiveFileRoot therefore returns a drive-qualified path unchanged. The current test expects a stem for this invalid-name case and needs a native-contract regression correction.",
+      "upstream_reference": "src/FoundationClasses/TKernel/OSD/OSD_Path.cxx:1570; src/DataExchange/TKXSBase/IFSelect/IFSelect_WorkSession.cxx:2138"
+    },
+    {
+      "job": 114330023815,
+      "name": "rust (macos-latest, 3)",
+      "symptom": "box_torus_fuse_matches_native_oracle: first numeric difference at line 21",
+      "status": "open",
+      "url": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38091956382/job/114330023815"
+    }
+  ],
+  "configuration_audit_complete": false
+}
