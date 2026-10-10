@@ -8,7 +8,7 @@ and infinite components fail submission validation.
 
 This is a prerequisite for the infinite capping geometry in pinned OCCT
 `OpenGl_CappingPlaneResource.cxx`, whose four triangles use a finite center and
-axis directions with zero weight. It does not implement the stencil capping pass.
+axis directions with zero weight. The subsequent [stencil capping implementation](vulkan-capping.md) consumes this input.
 The complete legacy renderer scope remains unchanged.
 
 `Graphic3d_Group.cxx` at `3d097a0328e71b826377d4814ab05ec3c3d23871`
@@ -39,8 +39,8 @@ PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_vulkan*.py
 The full `tools/verify_vulkan.py` harness includes the homogeneous modes and
 performance workload; use the source/build/profile options in
 [the renderer harness documentation](vulkan-renderer.md#reproduce-the-checks).
-Capping, strict raster parity at clip-weight boundaries and section appearance
-remain open until their own native evidence passes.
+The subsequent capping work has separate native evidence. Strict raster parity
+at clip-weight boundaries and broader section appearance remain open.
 
 ## Runtime evidence
 
@@ -80,7 +80,8 @@ still lack accepted baselines in the broader gate.
 
 This integration adds no OCCT API inventory claims and marks no renderer family
 complete. Stencil attachments, closed-group odd/even masks, remaining-plane cap
-clipping and plane/object section appearance are the next capping work.
+clipping and plane/object section appearance are now implemented for opaque
+unlit sections; see [capping evidence](vulkan-capping.md).
 
 The [main integration receipt](../porting/runtime-evidence/vulkan-homogeneous-main-2026-10-10.json)
 confirms all 10,840 final capture-source fingerprints match merged `main`, the

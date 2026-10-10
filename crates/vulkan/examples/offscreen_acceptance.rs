@@ -41,6 +41,7 @@ fn main() {
     vulkan_offscreen_depth_orientation_and_repeated_resize();
     vulkan_rejects_unavailable_device();
     vulkan_layer_depth_policies();
+    capping_runtime::check_capping();
     viewer_runtime::check_viewer_lifecycle();
     ais_runtime::check_ais_lifecycle();
     ais_removal_runtime::check_ais_removal();
@@ -57,7 +58,7 @@ fn main() {
     #[cfg(target_os = "linux")]
     window_runtime::check_windows();
     ais_circle_runtime::check_circle_datums();
-    let checks = if cfg!(target_os = "linux") { 18 } else { 17 };
+    let checks = if cfg!(target_os = "linux") { 19 } else { 18 };
     println!("PASS: {checks} Vulkan runtime checks; validation errors: 0");
 }
 
@@ -182,3 +183,6 @@ use ais_runtime::scene as ais_scene;
 mod ais_circle_runtime;
 #[path = "../tests/support/ais_circle_scene.rs"]
 mod circle_scene;
+
+#[path = "support/capping_runtime.rs"]
+mod capping_runtime;

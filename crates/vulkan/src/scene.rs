@@ -87,6 +87,9 @@ impl RenderFrame {
         if layers.is_empty() {
             layers.push(RenderLayer::new(vec![], true, true, true));
         }
+        for layer in &layers {
+            crate::capping_pass::validate_capping_sequence(&layer.draws)?;
+        }
         let (draws, layers) = flatten_layers(layers);
         validate_extent(width, height)?;
         if !clear_color.iter().all(|v| v.is_finite()) {

@@ -93,11 +93,19 @@ fn begin_rendering(
         offset: vk::Offset2D::default(),
         extent: resources.extent,
     };
-    let info = vk::RenderingInfo::default()
+    let mut info = vk::RenderingInfo::default()
         .render_area(area)
         .layer_count(1)
         .color_attachments(&color)
         .depth_attachment(&depth);
+    let stencil = render_attachment(resources.depth.view, depth_clear(), first);
+    if resources
+        .depth
+        .aspect
+        .contains(vk::ImageAspectFlags::STENCIL)
+    {
+        info = info.stencil_attachment(&stencil);
+    }
     unsafe { runtime.device().cmd_begin_rendering(command, &info) };
     set_viewport(runtime, command, resources.extent);
 }
@@ -127,7 +135,9 @@ fn record_draws(
     layer: &crate::RenderLayerSpan,
 ) {
     let mut state = super::draw_state::DrawState::default();
-    let mut annotation = false;
+    let mut depth_policy = (layer.depth_test, layer.depth_write);
+    let mut culling = (crate::RenderFaceCulling::None, false);
+    super::capping_record::set_culling(runtime, command, culling);
     for draw in &resources.draws[layer.draw_range.clone()] {
         let (bind, push) = state.advance(draw.pipeline.handle, &draw.transform);
         if bind {
@@ -139,13 +149,17 @@ fn record_draws(
                 )
             };
         }
-        if annotation != draw.annotation {
-            annotation = draw.annotation;
-            unsafe {
-                runtime
-                    .device()
-                    .cmd_set_depth_test_enable(command, layer.depth_test && !annotation);
-            }
+        if draw.capping == crate::RenderCappingPass::MaskStart {
+            super::capping_record::clear_stencil(runtime, command, resources.extent);
+        }
+        let policy = super::capping_record::depth_policy(draw, layer);
+        if policy != depth_policy {
+            depth_policy = policy;
+            super::capping_record::set_depth_policy(runtime, command, policy);
+        }
+        if culling != (draw.face_culling, draw.mirrored) {
+            culling = (draw.face_culling, draw.mirrored);
+            super::capping_record::set_culling(runtime, command, culling);
         }
         record_draw(runtime, command, draw, push);
     }
@@ -198,7 +212,7 @@ fn copy_attachment(
     extent: vk::Extent2D,
 ) {
     let layers = vk::ImageSubresourceLayers::default()
-        .aspect_mask(image.aspect)
+        .aspect_mask(image.aspect & !vk::ImageAspectFlags::STENCIL)
         .layer_count(1);
     let region = vk::BufferImageCopy::default()
         .image_subresource(layers)

@@ -45,6 +45,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_circle_performance::benchmark(&driver, warmup, samples);
     clipping_performance::benchmark(&driver, warmup, samples);
     homogeneous_performance::benchmark(&driver, warmup, samples);
+    capping_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -168,3 +169,8 @@ mod clipping_performance;
 mod homogeneous_arrays;
 #[path = "support/homogeneous_performance.rs"]
 mod homogeneous_performance;
+
+#[path = "support/capping_performance.rs"]
+mod capping_performance;
+#[path = "../tests/support/capping_scene.rs"]
+mod capping_scene;

@@ -14,6 +14,9 @@ pub(super) struct UploadedDraw {
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
     pub annotation: bool,
+    pub capping: crate::RenderCappingPass,
+    pub mirrored: bool,
+    pub face_culling: crate::RenderFaceCulling,
     pub clipping: Option<super::storage_descriptor::UploadedStorage>,
     pub sprite: Option<super::storage_descriptor::UploadedStorage>,
 }
@@ -39,8 +42,8 @@ impl FrameResources {
         let bytes = u64::from(frame.width) * u64::from(frame.height) * 4;
         Ok(Self {
             extent,
-            color: TargetImage::new(runtime, extent, false)?,
-            depth: TargetImage::new(runtime, extent, true)?,
+            color: TargetImage::new(runtime, extent, false, false)?,
+            depth: TargetImage::new(runtime, extent, true, pipeline.stencil)?,
             color_read: DeviceBuffer::new(
                 runtime,
                 bytes,
@@ -115,16 +118,7 @@ fn upload_draw(
     let index_buffer = upload_bytes(runtime, &indices, vk::BufferUsageFlags::INDEX_BUFFER)?;
     let count = u32::try_from(draw.indices.len())
         .map_err(|_| rejected(draw.indices.len(), "a 32-bit index count"))?;
-    let pipeline = pipelines.select(
-        draw.depth_clamp,
-        draw.line_style.is_some(),
-        draw.point_style.is_some(),
-        draw.textured_style.is_some(),
-        draw.textured_style
-            .as_ref()
-            .is_some_and(|style| style.blend),
-        draw.clipping.is_some(),
-    )?;
+    let pipeline = pipelines.select(draw)?;
     let image = draw
         .point_style
         .as_ref()
@@ -160,6 +154,9 @@ fn upload_draw(
         clipping,
         sprite,
         annotation: draw.annotation,
+        capping: draw.capping_pass,
+        face_culling: draw.face_culling,
+        mirrored: draw.mirrored,
         pipeline,
         vertices: vertex_buffer,
         indices: index_buffer,

@@ -112,6 +112,7 @@ fn invalid_or_unsupported_planes_fail_redraw_and_cannot_return_stale_capture() {
     assert!(scene.render_view().capture().is_err());
     let cap = plane([1., 0., 0., 0.]);
     cap.set_capping(true);
+    scene.group.set_closed(true);
     scene.cview().set_clip_planes(&sequence(&cap));
     assert!(scene.render_view().try_redraw().is_err());
     cap.set_on(false).unwrap();

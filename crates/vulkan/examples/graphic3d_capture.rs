@@ -34,6 +34,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if request.mode.starts_with("hom-") {
         configure_homogeneous(&scene, &request.mode);
     }
+    if request.mode.starts_with("cap-") {
+        capping_scene::configure_capping(&scene, &request.mode);
+    }
     if request.mode.starts_with("clip-") {
         clipping_scene::configure_clipping(&scene, &request.mode);
     }
@@ -46,6 +49,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             &request.mode,
         );
     }
+    let _shadow = (request.mode == "cap-shadow").then(|| capping_scene::cap_shadow(&scene));
     view_capture::capture_view(
         &scene.view,
         request.width,
@@ -105,3 +109,6 @@ fn configure_homogeneous(scene: &scene::ViewerScene, mode: &str) {
     }
     scene.structure.calculate_bound_box();
 }
+
+#[path = "../tests/support/capping_scene.rs"]
+mod capping_scene;

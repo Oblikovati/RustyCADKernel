@@ -4,13 +4,13 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{aspect::AspectInteriorStyle, graphic3d::*};
 pub(crate) fn unlit_color(
     style: &Handle<dyn Graphic3dAspectsSource>,
-    closed: bool,
+    _closed: bool,
 ) -> Result<[f32; 4], RenderError> {
     let Some(style) = style.get() else {
         return Err(rejected("null aspects", "explicit unlit solid aspects"));
     };
     validate_shading(style)?;
-    validate_raster_style(style, closed)?;
+    validate_alpha_offset(style)?;
     let color = style.interior_color_rgba();
     if color.alpha() != 1.0 || style.front_material().transparency() != 0.0 {
         return Err(rejected(
@@ -52,19 +52,6 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
         ));
     }
     Ok(())
-}
-fn validate_raster_style(
-    style: &dyn Graphic3dAspectsSource,
-    closed: bool,
-) -> Result<(), RenderError> {
-    use Graphic3dTypeOfBackfacingModel::{Auto, DoubleSided};
-    if style.face_culling() != DoubleSided && !(style.face_culling() == Auto && !closed) {
-        return Err(rejected(
-            (style.face_culling(), closed),
-            "double-sided rasterization",
-        ));
-    }
-    validate_alpha_offset(style)
 }
 fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
     if !matches!(

@@ -125,13 +125,18 @@ impl Graphic3dDrawGroup {
         let model = crate::persistent_transform::clipping_model(self, structure)?;
         let clipping =
             crate::retained_clipping::structure_clipping(global_clipping, structure, model)?;
-        let mut draws = self.extract_commands(matrix, structure.highlight, &context)?;
+        let mut draws =
+            self.extract_commands(matrix, structure.highlight, clipping.is_none(), &context)?;
         for draw in &mut draws {
             // OCCT's standard font shader advertises zero clipping planes (3d097a0).
             if draw.textured_style.is_none() {
                 draw.clipping = clipping.clone();
             }
             draw.depth_clamp = depth_clamp;
+            draw.mirrored = structure
+                .trsf
+                .get()
+                .is_some_and(|datum| datum.transformation().is_negative());
             crate::highlight_style::apply_highlight(draw, structure)?;
         }
         Ok(draws)
@@ -140,6 +145,7 @@ impl Graphic3dDrawGroup {
         &self,
         matrix: [f32; 16],
         highlighted: bool,
+        allow_culling: bool,
         context: &crate::text_submission::TextSceneContext<'_>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         let (mut aspects, commands) = self.retained_commands()?;
@@ -151,7 +157,7 @@ impl Graphic3dDrawGroup {
                 GroupCommand::Primitives(primitive) => draws.extend(lower_styled_primitive(
                     &primitive,
                     &aspects,
-                    self.is_closed(),
+                    self.is_closed() && allow_culling,
                     matrix,
                     highlighted,
                 )?),
@@ -291,7 +297,13 @@ fn lower_styled_primitive(
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     let (color, line) = primitive_style(primitive.kind, aspects, closed)?;
     if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
-        return primitive.draws(color, matrix, line, None);
+        let culling = crate::face_culling::resolve_culling(aspects.face_culling(), closed);
+        return primitive.draws(color, matrix, line, None).map(|draws| {
+            draws
+                .into_iter()
+                .map(|draw| draw.with_face_culling(culling))
+                .collect()
+        });
     }
     if aspects.marker_type() == rustycad_tkservice::aspect::AspectTypeOfMarker::Empty {
         return Ok(vec![]);

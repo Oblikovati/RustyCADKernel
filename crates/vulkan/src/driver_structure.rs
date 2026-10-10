@@ -47,18 +47,17 @@ impl RenderStructure {
         target.trsf = source.trsf.clone();
         target.trsf_pers = source.trsf_pers.clone();
     }
-    fn geometry_groups(&self) -> Result<Vec<Handle<dyn Graphic3dGroup>>, RenderError> {
+    fn geometry_batches(&self) -> Result<Vec<Vec<Handle<dyn Graphic3dGroup>>>, RenderError> {
         if !self.connections.read().is_empty() {
             return Err(rejected(
                 self.connections.read().clone(),
                 "independent or shadow structures until connected rendering is implemented",
             ));
         }
-        let mut groups = match &self.parent {
-            Some(parent) => parent.geometry_groups()?,
-            None => Vec::new(),
-        };
-        groups.extend(self.groups());
+        let mut groups = vec![self.groups()];
+        if let Some(parent) = &self.parent {
+            groups.extend(parent.geometry_batches()?);
+        }
         Ok(groups)
     }
     pub fn draws(
@@ -76,17 +75,14 @@ impl RenderStructure {
         if crate::retained_clipping::structure_is_clipped(clipping, &fields)? {
             return Ok(vec![]);
         }
-        self.geometry_groups()?
-            .iter()
-            .map(|group| {
-                let retained = group.cast::<Graphic3dDrawGroup>();
-                retained
-                    .get()
-                    .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?
-                    .draws_in_structure(camera, Some(extent), &fields, rendering, clipping)
-            })
-            .collect::<Result<Vec<_>, _>>()
-            .map(|groups| groups.into_iter().flatten().collect())
+        crate::retained_capping::CappingScene {
+            camera,
+            extent,
+            fields: &fields,
+            rendering,
+            clipping,
+        }
+        .draws(self.geometry_batches()?)
     }
 }
 impl Graphic3dCStructure for RenderStructure {

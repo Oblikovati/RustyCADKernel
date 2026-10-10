@@ -8,14 +8,19 @@ use runtime::VulkanRuntime;
 pub struct VulkanRenderer {
     runtime: std::sync::Arc<VulkanRuntime>,
     pipeline: pipeline_variants::RasterPipelines,
+    capping_pipeline: Option<pipeline_variants::RasterPipelines>,
 }
 impl VulkanRenderer {
     /// Load Vulkan and select a capable graphics device; `VulkanRenderer::new(options)?`.
     pub fn new(options: VulkanOptions) -> Result<Self, RenderError> {
         let runtime = VulkanRuntime::create(options)?;
         // Formats and topology are fixed; viewport and layer depth policies are dynamic.
-        let pipeline = pipeline_variants::RasterPipelines::new(&runtime)?;
-        Ok(Self { runtime, pipeline })
+        let pipeline = pipeline_variants::RasterPipelines::new(&runtime, false)?;
+        Ok(Self {
+            runtime,
+            pipeline,
+            capping_pipeline: None,
+        })
     }
     pub(crate) fn capture_limit(&self) -> u32 {
         let limits = &self.runtime.limits;
@@ -44,7 +49,7 @@ mod record;
 mod submission;
 impl RenderBackend for VulkanRenderer {
     fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
-        let resources = frame::FrameResources::new(&self.runtime, frame, &self.pipeline)?;
+        let resources = self.frame_resources(frame)?;
         let commands = submission::CommandSubmission::new(&self.runtime)?;
         record::record_frame(&self.runtime, commands.command, &resources, frame);
         commands.finish()?;
@@ -78,7 +83,7 @@ impl VulkanRenderer {
         presenter: &mut WindowPresenter,
         vsync: bool,
     ) -> Result<FrameCapture, RenderError> {
-        let resources = frame::FrameResources::new(&self.runtime, frame, &self.pipeline)?;
+        let resources = self.frame_resources(frame)?;
         let commands = submission::CommandSubmission::new(&self.runtime)?;
         let index = presenter.acquire([frame.width, frame.height], vsync)?;
         let chain = presenter.chain.as_mut().expect("acquired swapchain");
@@ -100,3 +105,32 @@ impl VulkanRenderer {
 }
 
 mod storage_descriptor;
+
+mod capping_state;
+impl VulkanRenderer {
+    fn frame_resources(
+        &mut self,
+        frame: &RenderFrame,
+    ) -> Result<frame::FrameResources, RenderError> {
+        let capped = frame
+            .draws
+            .iter()
+            .any(|draw| draw.capping_pass != crate::RenderCappingPass::None);
+        if capped && self.capping_pipeline.is_none() {
+            self.capping_pipeline = Some(pipeline_variants::RasterPipelines::new(
+                &self.runtime,
+                true,
+            )?);
+        }
+        let pipeline = if capped {
+            self.capping_pipeline
+                .as_ref()
+                .expect("created stencil pipelines")
+        } else {
+            &self.pipeline
+        };
+        frame::FrameResources::new(&self.runtime, frame, pipeline)
+    }
+}
+
+mod capping_record;

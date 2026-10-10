@@ -19,7 +19,7 @@ pub(crate) fn frame_for_view(
     let selected = layers
         .iter()
         .filter(|layer| layer_selected(view, layer.layer_id()));
-    let passes = selected
+    let mut passes: Vec<RenderLayer> = selected
         .map(|layer| {
             layer_pass(
                 layer,
@@ -31,6 +31,7 @@ pub(crate) fn frame_for_view(
             )
         })
         .collect::<Result<_, _>>()?;
+    apply_view_culling(&mut passes, view.backfacing_model());
     let color = view.cview_base().fields.read().bg_color;
     let clear = [
         color.rgb().red() as f32,
@@ -173,4 +174,13 @@ fn validate_layer(
         ));
     }
     Ok(())
+}
+
+fn apply_view_culling(layers: &mut [RenderLayer], mode: Graphic3dTypeOfBackfacingModel) {
+    if mode == Graphic3dTypeOfBackfacingModel::Auto {
+        return;
+    }
+    for draw in layers.iter_mut().flat_map(|layer| &mut layer.draws) {
+        draw.face_culling = crate::face_culling::resolve_culling(mode, false);
+    }
 }
