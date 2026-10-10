@@ -410,3 +410,10 @@ The native AIS erase/display median/p95 is 0.478/0.710 ms. All 54 Rust tests
 (including example targets), 22 Python harness tests and Clippy with warnings denied
 pass. The six-workload baseline is unchanged. Renderer capability families remain
 partial: this allocation improvement adds no OCCT API completion credit.
+
+The [main integration matrix](../porting/runtime-evidence/vulkan-readback-main-2026-10-10.json)
+at `6afdb891e` also passes the full functional and performance gates. Native AIS
+erase/display median/p95 is 0.488/0.747 ms; lavapipe is 0.787/1.072 ms. The completed
+`Martensite-readback-perf` worktree, branch and build cache were deleted after checks
+and a process-reference audit. Only the main checkout remains. The original failed
+surface acceptance receipt is retained as historical evidence.
