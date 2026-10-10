@@ -257,6 +257,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_ais.cxx",
             "tools/oracle/martensite_vulkan_surfaces.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
+            "tools/oracle/martensite_vulkan_raster_control.cxx",
         )
     )
     paths.extend(ROOT.glob("tools/vulkan_*.py"))
