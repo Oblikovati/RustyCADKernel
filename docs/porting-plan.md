@@ -18,9 +18,11 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    Match the legacy OCCT OpenGL renderer's capabilities using Vulkan 1.3; keep
    additional renderer features outside the current scope. Build a tested offscreen
    rendering path before broadening unrelated porting. The initial offscreen path
-   now runs through V3d views. AIS object loading, status queries and per-view affinity
-   are ported with native comparisons; extend AIS display/erase rendering and native
-   presentation next (see [current evidence](vulkan-renderer.md)).
+   now runs through V3d views and AIS display/erase presentations. AIS lifecycle,
+   status queries and per-view affinity have native comparisons; continue presentation
+   capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
+   Keep functional captures and performance regression workloads together on both
+   lavapipe and the native host GPU.
    Advance TKService/TKV3d functionality needed by this path alongside it; Vulkan
    work does not wait for every visualization API to be ported.
 3. Expand interactive visualization, presentations and TKMeshVS, and the DRAW

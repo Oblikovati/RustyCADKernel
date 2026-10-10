@@ -1,5 +1,9 @@
 //! Explicit Vulkan runtime acceptance checks, separate from device-independent workspace tests.
+#[path = "../tests/support/view_setup.rs"]
+mod view_setup;
 use martensite_vulkan::*;
+#[path = "support/ais_runtime.rs"]
+mod ais_runtime;
 #[path = "support/viewer_runtime.rs"]
 mod viewer_runtime;
 fn triangle(depth: f32, color: [f32; 4]) -> TriangleDraw {
@@ -36,7 +40,8 @@ fn main() {
     vulkan_rejects_unavailable_device();
     vulkan_layer_depth_policies();
     viewer_runtime::check_viewer_lifecycle();
-    println!("PASS: 4 Vulkan runtime checks; validation errors: 0");
+    ais_runtime::check_ais_lifecycle();
+    println!("PASS: 5 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {

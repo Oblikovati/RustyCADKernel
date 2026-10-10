@@ -1,8 +1,12 @@
 //! Release-mode end-to-end V3d redraw/readback timings; validation is tested separately.
+#[path = "support/ais_performance.rs"]
+mod ais_performance;
 #[path = "support/device_options.rs"]
 mod device_options;
 #[path = "../tests/support/viewer_scene.rs"]
 mod scene;
+#[path = "../tests/support/view_setup.rs"]
+mod view_setup;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkservice::graphic3d::*;
 use std::time::Instant;
@@ -26,6 +30,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ] {
         benchmark(&driver, name, draws, resize, warmup, samples);
     }
+    ais_performance::benchmark(&driver, warmup, samples)?;
     Ok(())
 }
 fn count_argument(

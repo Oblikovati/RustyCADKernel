@@ -16,6 +16,7 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__("tkv3d_corpus_ais_selection_actions").append_ais_selection_actions_requests(requests)
     __import__("tkv3d_corpus_ais_context").append_ais_context_requests(requests)
     __import__("tkv3d_corpus_ais_load").append_ais_load_requests(requests)
+    __import__("tkv3d_corpus_ais_display").append_ais_display_requests(requests)
     __import__("tkv3d_corpus_ais_context").append_ais_object_requests(requests)
     __import__("tkv3d_corpus_selector_geometry").append_selector_geometry_requests(requests)
     __import__("tkv3d_corpus_selector_overlap").append_selector_overlap_requests(requests)

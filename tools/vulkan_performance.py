@@ -31,8 +31,8 @@ def performance_rows(output: str) -> list[dict[str, object]]:
         for line in output.splitlines()
         if line.startswith("MARTENSITE_PERFORMANCE=")
     ]
-    expected = {"single-triangle", "many-draws", "resize"}
-    if len(rows) != 3 or {row["workload"] for row in rows} != expected:
+    expected = {"single-triangle", "many-draws", "resize", "ais-display-erase"}
+    if len(rows) != len(expected) or {row["workload"] for row in rows} != expected:
         raise ValueError(f"received workloads {rows}; expected {expected}")
     for row in rows:
         row.update(summarize_samples(row["samples_ms"]), samples=len(row["samples_ms"]))
@@ -91,9 +91,13 @@ def same_workload(
     current: dict[str, object], previous: dict[str, object] | None
 ) -> bool:
     """Require equivalent timing configuration; e.g. same_workload(now, baseline)."""
-    return previous is not None and all(
-        current[key] == previous[key]
-        for key in ("draws", "warmup", "validation", "samples")
+    return (
+        previous is not None
+        and current.get("frames_per_sample", 1) == previous.get("frames_per_sample", 1)
+        and all(
+            current[key] == previous[key]
+            for key in ("draws", "warmup", "validation", "samples")
+        )
     )
 
 

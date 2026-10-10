@@ -65,6 +65,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
   structure->Display();
   return structure;
 }
+#include "martensite_vulkan_ais.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
   // The default-layer capture isolates geometry depth. The later native Topmost
@@ -118,11 +119,19 @@ static void run_scene(int argc, char **argv) {
   occ::handle<V3d_Viewer> viewer = new V3d_Viewer(driver);
   auto view = create_view(display, viewer, width, height);
   configure_camera(view, width, height, perspective);
-  auto structure = triangle_scene(viewer, offset);
-  write_capture(view, width, height, argv[5],
-                argc == 7 && std::string(argv[6]) == "full");
-  print_device(view);
-  structure->Erase();
+  const std::string mode = argc == 7 ? argv[6] : "default";
+  if (mode.rfind("ais-", 0) == 0) {
+    MartensiteOracleAisScene scene(viewer, offset);
+    scene.transition(mode, view);
+    write_capture(view, width, height, argv[5], false);
+    print_device(view);
+    scene.context->Erase(scene.object, false);
+  } else {
+    auto structure = triangle_scene(viewer, offset);
+    write_capture(view, width, height, argv[5], mode == "full");
+    print_device(view);
+    structure->Erase();
+  }
   view->Remove();
 }
 int main(int argc, char **argv) {
