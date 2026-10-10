@@ -1,5 +1,6 @@
 // Exercise the real AIS detection algorithms with named observable virtual callbacks.
 #include <SelectMgr_Filter.hxx>
+#include <functional>
 // The ordinary probe driver discards invalidation. This fixture retains the same
 // invalidation state as Rust's null driver so AIS exercises its full redraw branch.
 class V3DetectionView : public SvView {
@@ -16,6 +17,7 @@ public:
 };
 struct V3DetectionTrace {
   std::vector<int> events;bool accept=true,forced=false;int mutation=0,failing=0,mask=7;
+  bool selectionEvents=false,consumeClick=false;std::function<void()> appendOnHighlight;
 };
 class V3DetectionObject : public AIS_InteractiveObject {
 public:
@@ -25,9 +27,16 @@ public:
     trace.events.push_back(100+mode);(void)GetContext()->HasDetected();
     if(trace.mutation){occ::handle<Prs3d_Drawer> style=new Prs3d_Drawer();style->SetDisplayMode(9);
       if(trace.mutation==1)const_cast<V3DetectionObject*>(this)->SetDynamicHilightAttributes(style);
-      if(trace.mutation==2)GetContext()->SetHighlightStyle(style);}
+      if(trace.mutation==2)GetContext()->SetHighlightStyle(style);
+      if(trace.mutation==3)const_cast<V3DetectionObject*>(this)->SetHilightAttributes(style);
+      if(trace.mutation==4)GetContext()->SetSelectionStyle(style);}
     return trace.accept;
   }
+  void displayStatus(PrsMgr_DisplayStatus status){SetDisplayStatus(status);}
+  void HilightSelected(const occ::handle<PrsMgr_PresentationManager>&,const NCollection_Sequence<occ::handle<SelectMgr_EntityOwner>>& owners) override {
+    trace.events.push_back(700);trace.events.push_back(owners.Size());for(const auto& owner:owners)trace.events.push_back(owner->Priority());
+  }
+  void ClearSelected() override {trace.events.push_back(800);SelectMgr_SelectableObject::ClearSelected();}
   void BoundingBox(Bnd_Box& bounds) override {bounds.Update(-1.,-1.,-3.,1.,1.,1.);}
   void ClearDynamicHighlight(const occ::handle<PrsMgr_PresentationManager>& pm) override {
     trace.events.push_back(300);(void)GetContext()->HasDetected();pm->ClearImmediateDraw();
@@ -41,10 +50,17 @@ public:
   V3DetectionTrace& trace;
   V3DetectionOwner(const occ::handle<SelectMgr_SelectableObject>& object,int id,V3DetectionTrace& t):SelectMgr_EntityOwner(object,id),trace(t){}
   void decomposition(bool value){myFromDecomposition=value;}
+  void Unhilight(const occ::handle<PrsMgr_PresentationManager>& pm,int mode=0) override {
+    if(trace.selectionEvents)trace.events.push_back(600+Priority());SelectMgr_EntityOwner::Unhilight(pm,mode);
+  }
+  bool HandleMouseClick(const NCollection_Vec2<int>& point,Aspect_VKeyMouse button,Aspect_VKeyFlags modifiers,bool twice) override {
+    for(int value:{900+Priority(),point.x(),point.y(),int(button),int(modifiers),int(twice)})trace.events.push_back(value);return trace.consumeClick;
+  }
   bool IsForcedHilight() const override {return trace.forced;}
   void HilightWithColor(const occ::handle<PrsMgr_PresentationManager>& pm,const occ::handle<Prs3d_Drawer>& style,int mode) override {
     for(int value:{200+Priority(),mode,style->DisplayMode(),style->ZLayer(),int(pm->IsImmediateModeOn())})trace.events.push_back(value);
     if(trace.failing==Priority()+1)throw Standard_Failure("failing owner");
+    if(trace.appendOnHighlight){auto append=std::move(trace.appendOnHighlight);trace.appendOnHighlight=nullptr;append();}
     SelectMgr_EntityOwner::HilightWithColor(pm,style,mode);
   }
 };
@@ -71,6 +87,18 @@ public:
   V3DetectionContext(const occ::handle<V3d_Viewer>& viewer,const occ::handle<V3DetectionSelector>& selector):AIS_InteractiveContext(viewer){
     mgrSelector=new SelectMgr_SelectionManager(selector);myLastActiveView=nullptr;
   }
+  using AIS_InteractiveContext::highlightOwners;
+  using AIS_InteractiveContext::unhighlightOwners;
+  using AIS_InteractiveContext::highlightSelected;
+  using AIS_InteractiveContext::unhighlightSelected;
+  using AIS_InteractiveContext::highlightGlobal;
+  using AIS_InteractiveContext::unhighlightGlobal;
+  using AIS_InteractiveContext::highlightWithSubintensity;
+  using AIS_InteractiveContext::getSelStyle;
+  using AIS_InteractiveContext::isDetected;
+  using AIS_InteractiveContext::setContextToObject;
+  void registerObject(const occ::handle<AIS_InteractiveObject>& object,const occ::handle<AIS_GlobalStatus>& status){myObjects.Bind(object,status);}
+  void pickedOwner(const occ::handle<SelectMgr_EntityOwner>& owner){myLastPicked=owner;}
   using AIS_InteractiveContext::moveTo;
   using AIS_InteractiveContext::getHilightMode;
   using AIS_InteractiveContext::isSlowHiStyle;

@@ -56,6 +56,7 @@
 #include "tkv3d_probe_selection_image.cxx"
 #include "tkv3d_probe_sensitive_display.cxx"
 #include "tkv3d_probe_ais_detection.cxx"
+#include "tkv3d_probe_ais_selection_actions.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_selector_pick",v3_selector_pick},
  {"v3_sensitive_display",v3_sensitive_display},
@@ -68,6 +69,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"v3_ais_context_shutdown",v3_ais_context_shutdown},
  {"v3_ais_context",v3_ais_context},
  {"v3_ais_detection",v3_ais_detection},
+ {"v3_ais_selection_actions",v3_ais_selection_actions},
  {"v3_selector_clear",v3_selector_clear},
  {"v3_selector_point",v3_selector_point},
  {"v3_selector_frustum",v3_selector_frustum},

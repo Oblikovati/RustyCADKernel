@@ -550,3 +550,10 @@ A failing virtual Clear callback during context destruction now aborts, matching
 pinned native noexcept destructor. An isolated Rust regression test and a separate native/
 Rust probe process check require SIGABRT. Core dumps are disabled in the native verifier;
 this fatal request is kept outside the ordinary line-oriented corpus.
+
+## AIS selection actions
+
+The [Martensite selection action notes](ais-selection-actions.md) describe owner and
+object selection, camera picks, grouped highlighting, style-slot replacement,
+callback traversal and the associated native evidence. The null-driver tests
+remain separate from Vulkan rendering acceptance.

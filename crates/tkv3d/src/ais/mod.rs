@@ -39,3 +39,19 @@ mod context_move_to;
 mod detection_status;
 pub use context_highlight::AisHighlightStyle;
 pub use detection_status::AisStatusOfDetection;
+
+mod context_highlight_owners;
+mod context_owner_walk;
+mod context_selected_members;
+mod context_selection_actions;
+mod context_unhighlight_owners;
+mod pick_status;
+pub use pick_status::AisStatusOfPick;
+
+mod context_global_highlight;
+mod context_object_highlight;
+mod context_select_pick;
+
+mod context_select_legacy;
+mod context_set_selected;
+mod context_toggle_selected;
