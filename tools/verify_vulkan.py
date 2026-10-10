@@ -13,6 +13,7 @@ import subprocess
 import tempfile
 
 from dataclasses import asdict, dataclass
+from vulkan_build import build_vulkan_examples
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_performance import (
@@ -319,7 +320,7 @@ def verify(
 ) -> dict[str, object]:
     """Run the functional/performance matrix and keep captures; e.g. verify(src, build, env, config)."""
     check_reference(source, build, env)
-    target, tests = build_renderer(env)
+    target, tests = build_vulkan_examples(ROOT, env, run)
     with tempfile.TemporaryDirectory(prefix="martensite-renderer-build-") as directory:
         folder = Path(directory)
         compiler = check_shaders(folder, env)
@@ -353,38 +354,6 @@ def receipt(
         },
         "scope": "opaque unlit triangles through V3d/Graphic3d factories; default/full-layer captures; end-to-end frame benchmarks",
     }
-
-
-def build_renderer(env: dict[str, str]) -> tuple[Path, str]:
-    """Build functional examples and an optimized benchmark; e.g. build_renderer(env)."""
-    target = Path(
-        json.loads(run(["cargo", "metadata", "--no-deps", "--format-version=1"], env))[
-            "target_directory"
-        ]
-    )
-    tests = run(
-        ["cargo", "test", "-p", "martensite-vulkan", "--all-targets", "--locked"], env
-    )
-    run(["cargo", "build", "-p", "martensite-vulkan", "--examples", "--locked"], env)
-    build_performance(env)
-    return target, tests
-
-
-def build_performance(env: dict[str, str]) -> None:
-    """Compile the benchmark with production optimization; e.g. build_performance(env)."""
-    run(
-        [
-            "cargo",
-            "build",
-            "-p",
-            "martensite-vulkan",
-            "--release",
-            "--example",
-            "renderer_performance",
-            "--locked",
-        ],
-        env,
-    )
 
 
 def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
