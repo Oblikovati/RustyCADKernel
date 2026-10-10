@@ -1,22 +1,59 @@
 //! Renderer-created groups make ordinary Graphic3d submissions reach the draw stream.
 use crate::{Graphic3dDrawGroup, PrimitiveDraw, RenderError, error::rejected};
-use rustycad_tkernel::standard::exceptions::program_error;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
 use rustycad_tkservice::graphic3d::*;
 use std::collections::BTreeSet;
 pub(crate) struct RenderStructure {
     transient: StandardTransient,
     base: Graphic3dCStructureBase,
     connections: SharedState<BTreeSet<i32>>,
+    this: SharedState<WeakHandle<Self>>,
+    parent: Option<Handle<Self>>,
 }
 rustycad_tkernel::impl_transient!(RenderStructure, "Martensite_RenderStructure", StandardTransient, transient, interfaces:[dyn Graphic3dCStructure]);
 impl RenderStructure {
-    pub fn new(manager: &Handle<Graphic3dStructureManager>) -> Result<Self, Failure> {
-        Ok(Self {
+    pub fn new(manager: &Handle<Graphic3dStructureManager>) -> Result<Handle<Self>, Failure> {
+        Self::with_parent(manager, None)
+    }
+    fn with_parent(
+        manager: &Handle<Graphic3dStructureManager>,
+        parent: Option<Handle<Self>>,
+    ) -> Result<Handle<Self>, Failure> {
+        let object = Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dCStructureBase::new(manager)?,
             connections: SharedState::default(),
-        })
+            this: SharedState::default(),
+            parent,
+        });
+        *object.this.write() = object.downgrade();
+        object.inherit_shadow_state();
+        Ok(object)
+    }
+    fn inherit_shadow_state(&self) {
+        let Some(parent) = &self.parent else {
+            return;
+        };
+        let source = parent.base.fields.read();
+        let mut target = self.base.fields.write();
+        target.is_infinite = source.is_infinite;
+        target.bnd_box = source.bnd_box;
+        target.trsf = source.trsf.clone();
+        target.trsf_pers = source.trsf_pers.clone();
+    }
+    fn geometry_groups(&self) -> Result<Vec<Handle<dyn Graphic3dGroup>>, RenderError> {
+        if !self.connections.read().is_empty() {
+            return Err(rejected(
+                self.connections.read().clone(),
+                "independent or shadow structures until connected rendering is implemented",
+            ));
+        }
+        let mut groups = match &self.parent {
+            Some(parent) => parent.geometry_groups()?,
+            None => Vec::new(),
+        };
+        groups.extend(self.groups());
+        Ok(groups)
     }
     pub fn draws(
         &self,
@@ -27,20 +64,15 @@ impl RenderStructure {
         if !self.is_visible_in_view(view_id) {
             return Ok(vec![]);
         }
-        if !self.connections.read().is_empty() {
-            return Err(rejected(
-                self.connections.read().clone(),
-                "independent structures until connected rendering is implemented",
-            ));
-        }
-        self.groups()
+        let fields = self.base.fields.read().clone();
+        self.geometry_groups()?
             .iter()
             .map(|group| {
                 let retained = group.cast::<Graphic3dDrawGroup>();
                 retained
                     .get()
                     .ok_or_else(|| rejected(group.object_address(), "a Martensite draw group"))?
-                    .primitive_draws_for_view(camera, extent)
+                    .draws_in_structure(camera, Some(extent), &fields)
             })
             .collect::<Result<Vec<_>, _>>()
             .map(|groups| groups.into_iter().flatten().collect())
@@ -78,11 +110,14 @@ impl Graphic3dCStructure for RenderStructure {
     }
     fn shadow_link(
         &self,
-        _: &Handle<Graphic3dStructureManager>,
+        manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCStructure>, Failure> {
-        Err(program_error(
-            "received shadow structure request; expected implemented Martensite shadow rendering",
-        ))
+        // OpenGl_StructureShadow at 3d097a0 flattens a shadow of a shadow to the original parent.
+        let parent = self
+            .parent
+            .clone()
+            .unwrap_or_else(|| self.this.read().upgrade());
+        Ok(Self::with_parent(manager, Some(parent))?.cast())
     }
     fn new_group(
         &self,

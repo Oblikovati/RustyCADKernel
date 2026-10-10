@@ -46,7 +46,7 @@ Unsupported styles and commands return errors. Current restrictions include
 triangle lists/strips/fans and segments/polylines, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
-structure clipping/highlighting, textures and custom shaders are not implemented.
+structure clipping, bounding-box highlighting, textures and custom shaders are not implemented.
 Transform persistence is partial, with native-host capture differences recorded below. The [capability ledger](../porting/renderer/capabilities.json)
 retains all those features, plus materials/lights/PBR, transparency/OIT, ray/path
 tracing, stereo/VR, layers, backgrounds, statistics and native window presentation.
@@ -267,7 +267,7 @@ Its collected timings initialize only `ais-remove-display`; the other four rows 
 the [five-workload baseline](../porting/runtime-evidence/vulkan-removal-baseline-2026-10-10.json)
 retain their previous distributions and limits. The final status-handle lifetime
 adjustment is checked by the integrated main run against this initial collection.
-The wider AIS presentation catalog, highlighting and native window presentation
+The wider AIS presentation catalog, full highlighting and native window presentation
 remain open; no full legacy renderer capability family is marked complete.
 
 The [integrated removal receipt](../porting/runtime-evidence/vulkan-removal-main-2026-10-10.json)
@@ -314,7 +314,7 @@ indices and bound colors are read again for each frame so shared buffer updates
 remain visible. Bound counts and accesses are checked before submission.
 
 The replacement still supports opaque unlit surfaces only. Quads, polygons, lines,
-points, lighting, edge rendering and highlight rendering remain open. No complete
+points, lighting, edge rendering and full highlight rendering remain open. No complete
 legacy primitive capability family is claimed. The `surface-bounds` workload
 times extraction, submission and readback of 256 colored strip bounds in one
 Graphic3d array; the previous five workloads retain their original baselines.
@@ -470,3 +470,12 @@ failures are documented in [Martensite line primitives](vulkan-lines.md).
 Standard curves now exercise the ported `StdPrs_Curve` overload family through
 real Graphic3d groups. See [curve evidence](stdprs-curve.md) for the seven new
 scene modes, presentation-rebuild workload and retained native AMD failures.
+
+Built-in [AIS line datums](ais-line.md) now exercise live appearance, geometry,
+selection and erase/redisplay, with a dedicated appearance-update benchmark.
+
+AIS line selection now exercises live shadow presentation instances and opaque
+color highlights. Nested shadows share the original geometry while retaining
+independent transforms and visibility. See [AIS line datums](ais-line.md) for
+the 438-case device matrix, remaining rasterization differences and benchmark
+coverage. Bounding-box and transparent highlights are still open.

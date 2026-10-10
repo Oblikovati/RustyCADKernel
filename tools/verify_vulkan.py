@@ -16,6 +16,7 @@ from dataclasses import asdict, dataclass
 from vulkan_build import build_vulkan_examples
 from vulkan_line_cases import LINE_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
+from vulkan_ais_line_cases import AIS_LINE_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_performance import (
@@ -196,6 +197,8 @@ def capture_case(
     args = list(map(str, case))
     native_output = run([str(native), *args, str(gl), mode], profile.environment)
     executable = rust.with_name("ais_capture") if mode.startswith("ais-") else rust
+    if mode.startswith("datum-"):
+        executable = rust.with_name("ais_line_capture")
     output = run([str(executable), *args, str(vk), mode], profile.environment)
     confirm_device(output, profile.device)
     software_gl = any(
@@ -242,6 +245,7 @@ def capture_cases(
             *PERSISTENCE_MODES,
             *LINE_MODES,
             *STDPRS_MODES,
+            *AIS_LINE_MODES,
         )
     ]:
         try:
@@ -270,6 +274,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_lines.cxx",
             "tools/oracle/martensite_stdprs_geometry.hxx",
             "tools/oracle/martensite_vulkan_stdprs.cxx",
+            "tools/oracle/martensite_vulkan_ais_line.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )

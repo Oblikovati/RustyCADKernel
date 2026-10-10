@@ -11,17 +11,17 @@ pub(crate) fn group_clip_transform(
     group: &Graphic3dDrawGroup,
     camera: &Graphic3dCamera,
     extent: Option<[u32; 2]>,
+    structure: &Graphic3dCStructureFields,
 ) -> Result<([f32; 16], bool), RenderError> {
-    let structure = group.structure();
-    let parent = structure.transform_persistence();
+    let parent = &structure.trsf_pers;
     let local = group.transform_persistence();
-    let model = model_transform(group);
+    let model = model_transform(group, structure);
     if parent.is_null() && local.is_null() {
         return Ok((ordinary_clip(camera, model), false));
     }
     let mut transform = PersistentView::new(camera, model);
     let extent = viewport_size(extent)?;
-    transform.apply(&parent, extent, None)?;
+    transform.apply(parent, extent, None)?;
     let anchor = local_anchor(&local, &mut transform.model)?;
     transform.apply(&local, extent, anchor.as_ref())?;
     let clamp = !parent.is_null() && parent.mode() == Graphic3dTransModeFlags::CAMERA_PERS;
@@ -67,10 +67,10 @@ impl PersistentView {
     }
 }
 
-fn model_transform(group: &Graphic3dDrawGroup) -> Mat4<f64> {
+fn model_transform(group: &Graphic3dDrawGroup, structure: &Graphic3dCStructureFields) -> Mat4<f64> {
     let mut model = Mat4::<f64>::identity();
     let mut local = Mat4::<f64>::identity();
-    if let Some(datum) = group.structure().transformation().get() {
+    if let Some(datum) = structure.trsf.get() {
         datum.transformation().get_mat4(&mut model);
     }
     group.transformation().get_mat4(&mut local);

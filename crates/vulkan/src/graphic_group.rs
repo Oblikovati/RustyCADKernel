@@ -42,7 +42,16 @@ impl Graphic3dDrawGroup {
         if self.is_deleted() || !self.structure().is_visible() {
             return Ok(vec![]);
         }
-        self.extract_draws(camera, None)
+        self.draws_in_structure(
+            camera,
+            None,
+            &self
+                .structure()
+                .cstructure()
+                .cstructure_base()
+                .fields
+                .read(),
+        )
     }
     /// Extract using the actual pixel viewport, including persistence; `group.primitive_draws_for_view(&camera, [800, 600])?`.
     pub fn primitive_draws_for_view(
@@ -53,7 +62,16 @@ impl Graphic3dDrawGroup {
         if self.is_deleted() || !self.structure().is_visible() {
             return Ok(vec![]);
         }
-        self.extract_draws(camera, Some(extent))
+        self.draws_in_structure(
+            camera,
+            Some(extent),
+            &self
+                .structure()
+                .cstructure()
+                .cstructure_base()
+                .fields
+                .read(),
+        )
     }
     /// Compatibility extraction name; `group.triangle_draws(&camera)?` also supports line primitives.
     pub fn triangle_draws(
@@ -70,14 +88,15 @@ impl Graphic3dDrawGroup {
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         self.primitive_draws_for_view(camera, extent)
     }
-    fn extract_draws(
+    pub(crate) fn draws_in_structure(
         &self,
         camera: &Graphic3dCamera,
         extent: Option<[u32; 2]>,
+        structure: &Graphic3dCStructureFields,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-        self.validate_structure()?;
+        crate::highlight_style::validate_structure(structure)?;
         let (matrix, depth_clamp) =
-            crate::persistent_transform::group_clip_transform(self, camera, extent)?;
+            crate::persistent_transform::group_clip_transform(self, camera, extent, structure)?;
         let (mut aspects, commands) = self.retained_commands()?;
         let mut draws = Vec::new();
         for command in commands {
@@ -92,6 +111,7 @@ impl Graphic3dDrawGroup {
         }
         for draw in &mut draws {
             draw.depth_clamp = depth_clamp;
+            crate::highlight_style::apply_highlight(draw, structure)?;
         }
         Ok(draws)
     }
@@ -103,16 +123,6 @@ impl Graphic3dDrawGroup {
             return Err(rejected(feature, "an implemented group rendering feature"));
         }
         Ok((state.aspects.clone(), state.commands.clone()))
-    }
-    fn validate_structure(&self) -> Result<(), RenderError> {
-        let parent = self.structure();
-        if !parent.clip_planes().is_null() || parent.is_highlighted() {
-            return Err(rejected(
-                "structure clipping or highlighting",
-                "unclipped ordinary structure in this renderer slice",
-            ));
-        }
-        Ok(())
     }
     fn retain_primitive(&self, primitive: PrimitiveSubmission, evaluate_bounds: bool) {
         if self.is_deleted() {

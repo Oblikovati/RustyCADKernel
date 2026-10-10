@@ -99,7 +99,7 @@ impl UnitsApi {
         self.check_loading(self.local_system)?;
         if let Some(catalog) = &self.current_units {
             catalog
-                .borrow_mut()
+                .write()
                 .set_resource(&key(quantity), super::c_name(unit));
         }
         Ok(())
@@ -112,7 +112,7 @@ impl UnitsApi {
             .current_units
             .as_ref()
             .expect("check_loading loads the current units");
-        Ok(catalog.borrow().value(&key(quantity))?.clone())
+        Ok(catalog.read().value(&key(quantity))?.clone())
     }
     /// Saves the current-unit overrides into the user resource directory; the native
     /// call ignores the outcome, which is returned here; `api.save()?`.
@@ -121,7 +121,7 @@ impl UnitsApi {
         Ok(self
             .current_units
             .as_ref()
-            .is_some_and(|catalog| catalog.borrow().save()))
+            .is_some_and(|catalog| catalog.read().save()))
     }
     /// Always false: the native check body is commented out after loading the
     /// defaults; `api.check(b"LENGTH", b"mm")?`.

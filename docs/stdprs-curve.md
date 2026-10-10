@@ -53,8 +53,8 @@ retains measurements and failures. Final integration evidence is recorded in
 `porting/integration/2026-10-10/stdprs-curve.json`.
 
 This completes the standard curve overload family, not the StdPrs package or
-renderer capability family. `AIS_Line` can now use this prerequisite; its object
-API and selection integration remain to be ported. Point primitives, additional
+renderer capability family. [`AIS_Line`](ais-line.md) now uses this prerequisite; its object
+API and selection integration have dedicated checks. Point primitives, additional
 presentations and native window rendering also remain priorities.
 
 ## Integrated result

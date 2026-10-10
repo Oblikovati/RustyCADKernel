@@ -574252,6 +574252,156 @@
       "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::add",
       "status": "implemented",
       "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "AIS_Line::Points(class opencascade::handle<class Geom_Point> &,class opencascade::handle<class Geom_Point> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "1025206ffea2ba4e184e0e1de11ac21c7389026bf3cf6c63b5103cf4d551af39",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::points",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::AIS_Line(const class opencascade::handle<class Geom_Line> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "112a6ef83e08715e383ea2520f4870628b9a2f73bceb0472651fb246f5c28c3f",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::new",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::SetPoints(const class opencascade::handle<class Geom_Point> &,const class opencascade::handle<class Geom_Point> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "1fb73be4ea32376cbdd127c19b3e3f1c2445a297584ac19ff8874611ac88eadf",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::set_points",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "2b15092b13a796354ada78eff4538ae1f916c4a148d6ad12f2f9c22789c66559",
+      "rust_item": "rustycad_tkv3d::ais::AisLine",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::EndPoint()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "2df32daf9063f21e4115eb934955b4db40398896b68a00dda46aeb6beade3e62",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::end_point",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::Line()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "457c9c7fdf79cd03608e4a6e70b3639e6b7870c97d130b9bc05c5bf1b995d91a",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::line",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::AIS_Line(const class opencascade::handle<class Geom_Point> &,const class opencascade::handle<class Geom_Point> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "54686a0cc4ee3baddb398835888f530f2d578ab92d99055a2d9c21a0a3e4d14f",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::from_points",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::StartPoint()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "7b1e83e505b18cb1f471a0dfc5367dc39c4fc66d6f4ee88594a7d3fd91696d8c",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::start_point",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::Type()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "7c69d9ae076915d5369dcaaae86682af585f5d44bc17df09734fd482d192f09b",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::kind_of_interactive",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::UnsetWidth()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "901de1eb48f1e8130c8779c93d38c77c4ca9e4edfeb3d873e0080fdd21d5c1a3",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::unset_width",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "9bff5dabe0136a91f3b07d8beb32e7d6d5ef52f0a6a0fbff39a4c7f3d9876f02",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::unset_color",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::SetWidth(const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "b7eb573f4bde9900a3421d443f52b7cd7478d5aa87892f080d2cc28b9cda6ef7",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::set_width",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::SetLine(const class opencascade::handle<class Geom_Line> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "e6b5affa9d541c5eb1b340fe432ae0b1df566ca805b57b6cb660e14860ecd516",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::set_line",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::Signature()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "ed060929855d0f662cb08e2f70a7a44adeb3aa2ac296bdea89c2ffc3242ce0b6",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::signature",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
+    },
+    {
+      "upstream_id": "AIS_Line::SetColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "source_sha256": "576057a41de393eaa57e369f2ac1dd05603c1176446b4aa7668c81b4c63efb78",
+      "cpp_declaration_id": "f6a2ad989675f1f5f11a44eda666f097830ccf74ed5adbec7b15490075a63ec3",
+      "rust_item": "rustycad_tkv3d::ais::AisLine::set_color",
+      "status": "implemented",
+      "notes": "Finite/infinite datum with retained geometry, native presentation and sensitive segment selection, injected live UnitsApi, aspect replacement and native width/color state including failure order. Result propagates virtual appearance failures. Native oracle retains old aspect wrapper across OCCT 3d097a0 dangling-reference bug. See docs/ais-line.md."
     }
   ],
   "tests": [

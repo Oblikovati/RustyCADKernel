@@ -28,7 +28,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    [line evidence](vulkan-lines.md) records remaining gradient/depth parity gaps
    and the new performance workload. The [standard curve presentation family](stdprs-curve.md)
    now supplies all eight Add/Match overloads, native numeric comparisons and
-   GPU/performance fixtures; `AIS_Line` is the next consumer. Continue presentation
+   GPU/performance fixtures. [AIS_Line](ais-line.md) now consumes this path, with
+   live appearance, unit-aware selection and GPU/performance coverage. Continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

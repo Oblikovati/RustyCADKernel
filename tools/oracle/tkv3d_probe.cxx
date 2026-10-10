@@ -61,8 +61,10 @@
 #include "tkv3d_probe_ais_detection.cxx"
 #include "tkv3d_probe_ais_selection_actions.cxx"
 #include "tkv3d_probe_stdprs_curve.cxx"
+#include "tkv3d_probe_ais_line.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
- {"v3_stdprs_add",v3_stdprs_add},
+ {"v3_ais_line", v3_ais_line},
+    {"v3_stdprs_add",v3_stdprs_add},
  {"v3_stdprs_match",v3_stdprs_match},
  {"v3_selector_pick",v3_selector_pick},
  {"v3_sensitive_display",v3_sensitive_display},
