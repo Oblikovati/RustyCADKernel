@@ -159,6 +159,14 @@ on a graphical host with its matching baseline. The controlled unlit scenes do
 not yet measure a complete CAD presentation, lighting, swapchain pacing or GPU-only
 execution; those workloads join the harness as their renderer features land.
 
+The [AIS loading integration run](../porting/runtime-evidence/vulkan-ais-load-2026-10-10.json)
+passed all functional checks and host timing budgets, but lavapipe resize p95 was
+1.268 ms against a 0.948 ms limit. In [paired diagnostic measurements](../porting/runtime-evidence/vulkan-ais-load-timing-2026-10-10.json),
+the previous build also crossed that limit (4/6 runs versus 2/6 for the current
+build). Longer samples were similar between builds. These measurements do not
+establish an AIS-related slowdown or isolate the cause of timing variability;
+the original matrix remains failed, with its baseline and limits unchanged.
+
 Both renderers explicitly disable polygon offsets for these scenes. Default-layer
 captures isolate geometry depth. Full-view captures also check OCCT's later Topmost
 layer depth clear, which leaves the color intact. Custom depth policies additionally
