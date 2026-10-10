@@ -14,6 +14,7 @@ pub(crate) fn frame_for_view(
     let mut layers = view.layers();
     // OpenGl_FilteredIndexedLayerIterator at the pinned baseline renders normal layers before immediate ones.
     layers.sort_by_key(|layer| layer.is_immediate());
+    update_view_culling(view, &layers, extent)?;
     let rendering = view.rendering_params();
     let selected = layers
         .iter()
@@ -38,6 +39,38 @@ pub(crate) fn frame_for_view(
         color.alpha(),
     ];
     RenderFrame::with_layers(extent[0], extent[1], clear, passes)
+}
+fn update_view_culling(
+    view: &dyn Graphic3dCView,
+    layers: &[Handle<Graphic3dLayer>],
+    extent: [u32; 2],
+) -> Result<(), RenderError> {
+    let params = view.rendering_params();
+    let selector = view_culling_selector(view, extent);
+    for layer in layers {
+        layer
+            .update_culling(
+                view.identification(),
+                &selector,
+                params.ray_tracing.frustum_culling_state,
+            )
+            .map_err(|error| rejected(error, "a valid native layer culling traversal"))?;
+    }
+    Ok(())
+}
+fn view_culling_selector(view: &dyn Graphic3dCView, extent: [u32; 2]) -> Graphic3dCullingTool {
+    let mut selector = Graphic3dCullingTool::default();
+    selector.set_view_volume(
+        &view.camera(),
+        &rustycad_tkernel::ncollection::Mat4::identity(),
+    );
+    selector.set_viewport_size(
+        extent[0] as i32,
+        extent[1] as i32,
+        f64::from(view.rendering_params().resolution_ratio()),
+    );
+    selector.cache_clip_pts_projections();
+    selector
 }
 fn layer_selected(view: &dyn Graphic3dCView, id: Graphic3dZLayerId) -> bool {
     if view.z_layer_redraw_mode() {

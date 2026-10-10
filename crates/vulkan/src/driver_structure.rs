@@ -69,10 +69,13 @@ impl RenderStructure {
         rendering: &Graphic3dRenderingParams,
         clipping: &Handle<Graphic3dSequenceOfHClipPlane>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-        if !self.is_visible_in_view(view_id) {
+        if !self.is_visible_in_view(view_id) || self.is_culled() {
             return Ok(vec![]);
         }
         let fields = self.base.fields.read().clone();
+        if crate::retained_clipping::structure_is_clipped(clipping, &fields)? {
+            return Ok(vec![]);
+        }
         self.geometry_groups()?
             .iter()
             .map(|group| {

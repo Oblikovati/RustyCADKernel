@@ -23,6 +23,7 @@ from vulkan_ais_axis_cases import AIS_AXIS_MODES
 from vulkan_plane_trihedron_cases import PLANE_TRIHEDRON_MODES
 from vulkan_window_cases import WINDOW_MODES, compare_window_pixels
 from vulkan_circle_cases import CIRCLE_MODES
+from vulkan_clipping_cases import CLIPPING_MODES
 from vulkan_case_dispatch import capture_executable
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
@@ -237,6 +238,7 @@ def capture_cases(
             *PLANE_TRIHEDRON_MODES,
             *WINDOW_MODES,
             *CIRCLE_MODES,
+            *CLIPPING_MODES,
         )
     ]:
         try:

@@ -20,7 +20,13 @@ use rustycad_tkservice::{aspect::AspectTypeOfHighlightMethod, graphic3d::*};
 fn setup() -> (scene::ViewerScene, RecordingDevice) {
     let device = RecordingDevice::default();
     let driver = Graphic3dRenderDriver::with_backend(device.clone(), 128).unwrap();
-    (scene::ViewerScene::new(&driver), device)
+    let scene = scene::ViewerScene::new(&driver);
+    // Shadow geometry has no own group bounds: native OCCT culls it by default.
+    // These submission tests isolate live geometry and state from that culling.
+    scene.view.change_rendering_params(&mut |params| {
+        params.ray_tracing.frustum_culling_state = Graphic3dRenderingParamsFrustumCulling::Off;
+    });
+    (scene, device)
 }
 fn transform(x: f64) -> Handle<Datum3> {
     Handle::new(Datum3::new(Transform3::translation_vector(Vector3::new(
@@ -133,4 +139,25 @@ fn shadow_keeps_persistence_handle_when_source_replaces_its_state() {
         .unwrap();
     scene.render_view().try_redraw().unwrap();
     assert_ne!(*device.last_frame().draws()[0].clip_transform(), original);
+}
+
+#[test]
+fn native_empty_shadow_bounds_are_hidden_when_frustum_culling_is_enabled() {
+    let (scene, device) = setup();
+    let shadow =
+        Graphic3dStructure::new(&scene.viewer.structure_manager(), &scene.structure.cast())
+            .unwrap();
+    scene.structure.erase();
+    shadow.display();
+    assert!(!shadow.cstructure().bounding_box().is_valid());
+    for (state, count) in [
+        (Graphic3dRenderingParamsFrustumCulling::On, 0),
+        (Graphic3dRenderingParamsFrustumCulling::Off, 1),
+    ] {
+        scene.view.change_rendering_params(&mut |params| {
+            params.ray_tracing.frustum_culling_state = state;
+        });
+        scene.render_view().try_redraw().unwrap();
+        assert_eq!(device.last_frame().draws().len(), count);
+    }
 }

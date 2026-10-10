@@ -122,17 +122,9 @@ impl Graphic3dDrawGroup {
             rendering,
             fonts: self.text_source.as_ref(),
         };
-        let model = crate::persistent_transform::model_transform(self, structure)
-            .data()
-            .map(|v| v as f32);
+        let model = crate::persistent_transform::clipping_model(self, structure)?;
         let clipping =
             crate::retained_clipping::structure_clipping(global_clipping, structure, model)?;
-        if clipping.is_some() && !self.transform_persistence().is_null() {
-            return Err(rejected(
-                self.transform_persistence().mode(),
-                "ordinary group transforms until persistent clipping is verified",
-            ));
-        }
         let mut draws = self.extract_commands(matrix, structure.highlight, &context)?;
         for draw in &mut draws {
             // OCCT's standard font shader advertises zero clipping planes (3d097a0).

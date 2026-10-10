@@ -110,6 +110,17 @@ pub(crate) fn model_transform(
     group.transformation().get_mat4(&mut local);
     model * local
 }
+pub(crate) fn clipping_model(
+    group: &Graphic3dDrawGroup,
+    structure: &Graphic3dCStructureFields,
+) -> Result<[f32; 16], RenderError> {
+    let mut model = Mat4::<f32>::from_other(&model_transform(group, structure));
+    // Local zoom/rotate persistence resets the native ModelWorld translation,
+    // so fragment planes must see that same model, not the pre-persistence one.
+    local_anchor(&group.transform_persistence(), &mut model)?;
+    Ok(model.data())
+}
+
 fn viewport_size(extent: Option<[u32; 2]>) -> Result<[i32; 2], RenderError> {
     let Some([width, height]) = extent else {
         return Err(rejected(
