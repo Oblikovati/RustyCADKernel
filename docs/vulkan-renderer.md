@@ -22,15 +22,16 @@ Vulkan. A custom interactive triangle exercises display, erase, redisplay, displ
 mode changes and per-view affinity. Opaque color highlights and built-in AIS line/point
 presentations are implemented; broader highlighting and the presentation catalog remain open.
 
-Views currently render to virtual windows or offscreen framebuffer targets. RGB,
+Views render to virtual windows, offscreen framebuffer targets and native X11
+windows through the [Vulkan presentation path](vulkan-window-presentation.md). RGB,
 RGBA, red-channel and depth dumps honor image row orientation and padding. Ordered
 layers carry depth test/write/clear policies; removing a custom layer preserves its
 structures in the default layer. Immediate redraw currently redraws the entire frame.
 Because the existing Graphic3d redraw callback returns no result, callers can inspect
 `Graphic3dRenderView::try_redraw()` or `capture()` for errors. A failed redraw marks
 the view invalid and replaces its previous capture, so a dump cannot report stale
-success. Removed views reject capture. Native window presentation and external GL
-contexts are explicitly unsupported by this implementation slice.
+success. Removed views reject capture. External GL contexts remain unsupported;
+native presentation currently requires Xlib and swapchain-maintenance extensions.
 
 The backend requires a Vulkan 1.3 graphics device with dynamic rendering and
 synchronization2. It uses owned buffers, images, shader modules, pipelines, command
@@ -45,7 +46,7 @@ in `deny.toml`; its copyright and license notice must accompany distributions.
 Unsupported styles and commands return errors. Current restrictions include
 triangle lists/strips/fans, segments/polylines and point sprites, unit homogeneous `w` for Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
-double-sided rendering and disabled polygon offsets. Text, stencil, flipping,
+double-sided rendering and disabled polygon offsets. Stencil, flipping,
 structure clipping, bounding-box highlighting, textures and custom shaders are not implemented.
 Transform persistence is partial, with native-host capture differences recorded below. The [capability ledger](../porting/renderer/capabilities.json)
 retains all those features, plus materials/lights/PBR, transparency/OIT, ray/path
@@ -116,7 +117,7 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures 582 scenes spanning orthographic/perspective cameras,
+Each profile captures 948 scenes spanning orthographic/perspective cameras,
 three aspect ratios, translations, default/full-layer rendering and thirteen AIS
 lifecycle states: ordinary display/erase, mode/affinity changes, presentation
 clearing, permanent removal/recreation, bulk and selected-object transitions. Six
@@ -134,7 +135,8 @@ only their generated case files; temporary oracle executables are deleted.
 `V3dView::to_pix_map()` drives a fresh capture with explicit image options. The
 harness uses these actual view paths. This follows Oblikovati's `viewport.capture`
 approach: capture completed rendering with a fixed camera and make the resulting
-image inspectable. It does not yet capture a presented swapchain or application UI.
+image inspectable. The window cases additionally read the mapped X11 drawable independently of GPU
+readback, require exact equality, and export screen captures and differences.
 
 ## Rendering performance
 

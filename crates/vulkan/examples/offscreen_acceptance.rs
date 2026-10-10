@@ -54,7 +54,8 @@ fn main() {
     text_runtime::check_text_lifecycle();
     ais_axis_runtime::check_axis_datums();
     plane_trihedron_runtime::check_plane_datums();
-    println!("PASS: 16 Vulkan runtime checks; validation errors: 0");
+    window_runtime::check_windows();
+    println!("PASS: 17 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -160,3 +161,12 @@ mod axis_scene;
 mod plane_scene;
 #[path = "support/plane_trihedron_runtime.rs"]
 mod plane_trihedron_runtime;
+
+#[path = "support/native_window.rs"]
+mod native_window;
+#[path = "support/window_runtime.rs"]
+mod window_runtime;
+#[path = "support/window_scene.rs"]
+mod window_scene;
+
+use ais_runtime::scene as ais_scene;

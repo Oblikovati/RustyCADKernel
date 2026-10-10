@@ -21,6 +21,7 @@ from vulkan_ais_point_cases import AIS_POINT_MODES
 from vulkan_text_cases import TEXT_MODES
 from vulkan_ais_axis_cases import AIS_AXIS_MODES
 from vulkan_plane_trihedron_cases import PLANE_TRIHEDRON_MODES
+from vulkan_window_cases import WINDOW_MODES, compare_window_pixels
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
@@ -118,6 +119,7 @@ def build_reference(build: Path, folder: Path, env: dict[str, str]) -> Path:
             str(ROOT / "tools/oracle/martensite_vulkan_reference.cxx"),
             *[str(library / f"lib{name}.so") for name in names],
             f"-Wl,-rpath,{library}",
+            "-lX11",
             "-o",
             str(output),
         ],
@@ -175,6 +177,8 @@ def capture_case(
         executable = rust.with_name("plane_trihedron_capture")
     if mode.startswith("axis-"):
         executable = rust.with_name("ais_axis_capture")
+    if mode.startswith("window-"):
+        executable = rust.with_name("window_capture")
     if mode.startswith("point-"):
         executable = rust.with_name("ais_point_capture")
     output = run([str(executable), *args, str(vk), mode], profile.environment)
@@ -188,6 +192,10 @@ def capture_case(
             f"received OpenGL device {native_output}; expected {profile.name} graphics"
         )
     row = export_comparison(label, width, height, gl, vk, FileCaptureStore())
+    if mode.startswith("window-"):
+        row["window"] = compare_window_pixels(width, height, gl, vk, FileCaptureStore())
+        if row["window"]["status"] != "passed":
+            row["status"] = "failed"
     row.update(runtime_output=output, opengl_runtime=native_output)
     return row
 
@@ -196,6 +204,9 @@ def clear_previous_case(native: Path, ported: Path) -> None:
     """Remove only this generated case's stale artifacts; e.g. clear_previous_case(gl, vk)."""
     for prefix in (native, ported):
         for suffix in (
+            "window.rgba",
+            "window.png",
+            "window.diff.png",
             "rgba",
             "depth",
             "png",
@@ -228,6 +239,7 @@ def capture_cases(
             *TEXT_MODES,
             *AIS_AXIS_MODES,
             *PLANE_TRIHEDRON_MODES,
+            *WINDOW_MODES,
         )
     ]:
         try:
@@ -261,6 +273,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_text.cxx",
             "tools/oracle/martensite_vulkan_ais_axis.cxx",
             "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
+            "tools/oracle/martensite_vulkan_window.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )

@@ -50,11 +50,11 @@
     },
     {
       "id": "surfaces",
-      "status": "pending",
+      "status": "partial",
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_Window.cxx"
       ],
-      "current_evidence_or_remaining_work": "Native window swapchains, platform lifetime, presentation and device/surface loss.",
+      "current_evidence_or_remaining_work": "Native Xlib swapchains, GPU blits, FIFO/unsynchronized modes, resize, rebind, remap, multiple windows, actual drawable captures and release presentation timings; see docs/vulkan-window-presentation.md. Requires swapchain-maintenance1 presentation fences. Other platforms, broader surface formats and device/surface-loss recovery remain open.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]

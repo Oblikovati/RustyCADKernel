@@ -1,6 +1,6 @@
 //! Each timed AIS cycle includes selection lifecycle and two completed GPU readbacks.
 #[path = "../../tests/support/ais_scene.rs"]
-mod ais_scene;
+pub(super) mod ais_scene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkv3d::ais::AisInteractiveObjectMembers;

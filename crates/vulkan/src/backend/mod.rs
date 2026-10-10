@@ -57,3 +57,44 @@ mod line_device;
 mod draw_state;
 
 mod point_sprite;
+
+mod window_blit;
+mod window_chain;
+mod window_support;
+mod window_surface;
+mod window_sync;
+pub(crate) use window_surface::WindowPresenter;
+
+impl VulkanRenderer {
+    pub(crate) fn window_presenter(
+        &self,
+        window: &rustycad_tkernel::standard::Handle<dyn rustycad_tkservice::aspect::AspectWindow>,
+    ) -> Result<WindowPresenter, RenderError> {
+        WindowPresenter::new(&self.runtime, window)
+    }
+    pub(crate) fn render_window(
+        &mut self,
+        frame: &RenderFrame,
+        presenter: &mut WindowPresenter,
+        vsync: bool,
+    ) -> Result<FrameCapture, RenderError> {
+        let resources = frame::FrameResources::new(&self.runtime, frame, &self.pipeline)?;
+        let commands = submission::CommandSubmission::new(&self.runtime)?;
+        let index = presenter.acquire([frame.width, frame.height], vsync)?;
+        let chain = presenter.chain.as_mut().expect("acquired swapchain");
+        record::record_frame(&self.runtime, commands.command, &resources, frame);
+        window_blit::record(&self.runtime, commands.command, &resources, chain, index);
+        let waits = [ash::vk::SemaphoreSubmitInfo::default()
+            .semaphore(chain.sync.acquired)
+            .stage_mask(ash::vk::PipelineStageFlags2::TRANSFER)];
+        let signals = [ash::vk::SemaphoreSubmitInfo::default()
+            .semaphore(chain.sync.rendered)
+            .stage_mask(ash::vk::PipelineStageFlags2::ALL_COMMANDS)];
+        commands.finish_synced(&waits, &signals)?;
+        chain.present(
+            self.runtime.queues[presenter.present_family as usize],
+            index,
+        )?;
+        resources.capture()
+    }
+}

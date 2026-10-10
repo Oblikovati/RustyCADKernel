@@ -177,7 +177,7 @@ pub use cview_structures::Graphic3dCViewStructures;
 pub use cview_subviews::Graphic3dCViewSubviews;
 pub use cview_virtuals::{
     diagnostic_information as graphic3d_cview_diagnostic_information,
-    resized as graphic3d_cview_resized,
+    remove as graphic3d_cview_remove, resized as graphic3d_cview_resized,
 };
 pub use cview_xr::Graphic3dCViewXr;
 pub use exceptions::{

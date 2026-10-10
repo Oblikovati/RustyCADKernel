@@ -40,8 +40,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    native selection snapshots and inherited text-aspect rendering.
    [Plane trihedrons](ais-plane-trihedron.md) now add labeled XY frames, child-owner
    selection, native comparisons and geometry-update performance coverage.
-   Continue presentation
-   capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
+   [Native X11 presentation](vulkan-window-presentation.md) now adds swapchains,
+   resize/rebind/remap checks, actual window captures and presentation timings.
+   Continue the remaining presentation and legacy renderer capabilities
+   (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.
    Advance TKService/TKV3d functionality needed by this path alongside it; Vulkan

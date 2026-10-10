@@ -251,3 +251,34 @@ fn assert_redraw_error(scene: &scene::ViewerScene, expected: &str) {
     let error = scene.render_view().try_redraw().unwrap_err();
     assert!(error.to_string().contains(expected), "{error}");
 }
+
+#[test]
+fn native_windows_reject_fake_devices_and_virtual_dump_remains_available() {
+    use rustycad_tkservice::aspect::{AspectWindow, AspectWindowMembers};
+    let (_, scene, _) = setup();
+    scene.window.set_virtual(false);
+    assert!(
+        scene
+            .render_view()
+            .try_redraw()
+            .unwrap_err()
+            .to_string()
+            .contains("nonzero native window")
+    );
+    scene.window.set_native_handle(42);
+    scene.window.map();
+    assert!(
+        scene
+            .render_view()
+            .try_redraw()
+            .unwrap_err()
+            .to_string()
+            .contains("injected backend")
+    );
+    let target = scene.cview().fbo_create(32, 32);
+    scene.cview().set_fbo(&target);
+    scene.render_view().try_redraw().unwrap();
+    assert_eq!(scene.render_view().capture().unwrap().width, 32);
+    scene.view.remove();
+    assert!(scene.viewer.active_views().is_empty());
+}

@@ -64,8 +64,8 @@ pub(crate) fn deactivate<V: Graphic3dCView + ?Sized>(view: &V) {
     view.cview_base().fields.write().is_active = false;
 }
 
-/// The native `Remove`.
-pub(crate) fn remove<V: Graphic3dCView + ?Sized>(view: &V) {
+/// The native `Remove`, retaining the outer driver view identity; `graphic3d_cview_remove(view)`.
+pub fn remove<V: Graphic3dCView + ?Sized>(view: &V) {
     if view.is_removed() {
         return;
     }
