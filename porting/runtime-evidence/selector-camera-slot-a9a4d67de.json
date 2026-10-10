@@ -1,0 +1,64 @@
+{
+  "source_revision": "a9a4d67de8a80565da364f34ca4dde7466ae3f5e",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "fix_commits": [
+    "e1699ec6f",
+    "3891308b9"
+  ],
+  "merge_commits": [
+    "6e1e3ad06",
+    "a9a4d67de"
+  ],
+  "regression": {
+    "request": "v3_selector_traversal 1 1 0 1 0 0 1 16 -1 6 1 -1",
+    "native_picked_owners": 1,
+    "rust_before_fix_picked_owners": 2,
+    "rust_after_fix_picked_owners": 1,
+    "camera_replacement_cases": 108
+  },
+  "checks": {
+    "cargo_test_command": "cargo test -p rustycad-tkv3d --all-targets -j 2",
+    "rust_tests_passed": 275,
+    "rust_test_targets": 32,
+    "clippy_warnings_denied": true,
+    "cargo_fmt": true,
+    "tool_tests_passed": 7,
+    "numeric_cases_passed": 132815,
+    "legacy_native_passed": 1,
+    "legacy_rust_passed": 1
+  },
+  "native_report_sha256": "9aef1d6974bdc759ba8b820b56ce456b1b2c297a26b7f1b7869351a9eee3beb4",
+  "verified_source_hash_count": 12583,
+  "source_manifest_sha256": "438768a3873387c6dc434d230ac134c54b1d7bd729b906a45fe862e8dea908fe",
+  "numeric_report": {
+    "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "toolkit": "TKV3d",
+    "cases_passed": 132815,
+    "input_sha256": "aaa78c83147c1ee763312a951dd6fa778490fed96ce0734d5dca6b4b6fe3a1bc",
+    "output_sha256": "abbb742be94385f1be8885840ba6c202c87a7e1a6f6eb392ec7e6fac91e88fc6",
+    "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+    "nan_representation_difference_cases": 0,
+    "shutdown_failure": {
+      "request": "v3_ais_context_shutdown 1 1 2",
+      "return_codes": {
+        "native": -6,
+        "rust": -6
+      }
+    }
+  },
+  "inventory": {
+    "api_declarations": 76041,
+    "api_done": 51412,
+    "api_open": 23654,
+    "api_partial": 975,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "unresolved_ledger_rows": 0,
+  "removed_worktree": "/tmp/rustycad-selector-camera-slot",
+  "removed_branch": "porting/selector-camera-slot",
+  "full_port_complete": false,
+  "scope_note": "Existing selector mappings corrected; this does not add API declarations or rerun the whole workspace. Native null-camera dereference during a rebuilding traversal is not claimed as defined behavior."
+}

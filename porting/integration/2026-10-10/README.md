@@ -1,5 +1,11 @@
 # Main integration and fresh inventory
 
+Follow-up: the [selector camera-slot correction](../../../docs/viewer-selector-traversal.md)
+is integrated at `a9a4d67de`, with 275 TKV3d tests and 132,815 native comparisons
+passing. Its branch and worktree were deleted. The [compact receipt](../../runtime-evidence/selector-camera-slot-a9a4d67de.json)
+records the source revision and refreshed inventory. The combined workspace
+integration results below retain their original tested revision.
+
 The restarted session permits Git writes. Completed Claude branches and the validated
 continuation are integrated directly into `main`. The tested source revision is
 `9cb1b33fa94c5b2ab618528ab04582cbd22c4858`; the later evidence commit changes only inventory and documentation.
