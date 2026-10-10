@@ -12,7 +12,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let warmup = count_argument(&arguments, 2, 20)?;
     let mut options = device_options::validation_options();
     options.validation = false;
+    let startup = Instant::now();
     let driver = Graphic3dRenderDriver::new(options)?;
+    println!(
+        "MARTENSITE_STARTUP_MS={}",
+        startup.elapsed().as_secs_f64() * 1000.
+    );
     println!("MARTENSITE_DEVICE={}", driver.device_name());
     for (name, draws, resize) in [
         ("single-triangle", 1, false),

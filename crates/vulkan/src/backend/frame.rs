@@ -17,11 +17,15 @@ pub(super) struct FrameResources {
     pub depth: TargetImage,
     pub color_read: DeviceBuffer,
     pub depth_read: DeviceBuffer,
-    pub pipeline: TrianglePipeline,
+    pub pipeline: Arc<TrianglePipeline>,
     pub draws: Vec<UploadedDraw>,
 }
 impl FrameResources {
-    pub fn new(runtime: &Arc<VulkanRuntime>, frame: &RenderFrame) -> Result<Self, RenderError> {
+    pub fn new(
+        runtime: &Arc<VulkanRuntime>,
+        frame: &RenderFrame,
+        pipeline: &Arc<TrianglePipeline>,
+    ) -> Result<Self, RenderError> {
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
             width: frame.width,
@@ -34,7 +38,7 @@ impl FrameResources {
             depth: TargetImage::new(runtime, extent, true)?,
             color_read: DeviceBuffer::new(runtime, bytes, vk::BufferUsageFlags::TRANSFER_DST)?,
             depth_read: DeviceBuffer::new(runtime, bytes, vk::BufferUsageFlags::TRANSFER_DST)?,
-            pipeline: TrianglePipeline::new(runtime)?,
+            pipeline: pipeline.clone(),
             draws: frame
                 .draws
                 .iter()
