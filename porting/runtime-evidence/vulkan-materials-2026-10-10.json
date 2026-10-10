@@ -77,5 +77,56 @@
       "log": "porting/runtime-evidence/vulkan-materials-2026-10-10/runtime-host.log.gz",
       "uncompressed_sha256": "378d47d1f786c137a6da4b7f803e9ef6cd80d305c759837b4596e2123c821278"
     }
+  },
+  "integration": {
+    "main_revision": "1e0659d648ba468a63bc3f2c1ebd5941439d7cb7",
+    "source_fingerprints_match": true,
+    "main_rust_test_executions": 153,
+    "main_material_comparison": {
+      "cases": 417,
+      "float_patterns": 23352,
+      "failures": [],
+      "sha256": {
+        "native.jsonl": "f92b1b7ec6b99edb58d41140e44f50d33937329ad307e8ad79f1e9678a702636",
+        "rust.jsonl": "0b12fd232b35523195fc83179c4dc8054a1eb80c3432626d9634abc1d8ecf125"
+      }
+    },
+    "main_logs": {
+      "tests": "porting/runtime-evidence/vulkan-materials-2026-10-10/main-tests.log.gz",
+      "proof": "porting/runtime-evidence/vulkan-materials-2026-10-10/main-proof.log.gz"
+    },
+    "worktree_deleted": "/home/vmiguel/git/oblikovati-workspace/Martensite-lighting",
+    "branch_deleted": "porting/martensite-lighting",
+    "build_cache_removed_approx_gib": 9.1,
+    "archive_created": false,
+    "process_reference_audit": "No cwd, executable or open file references before deletion."
+  },
+  "configuration": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "cxx": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "native_flags": [
+      "-std=c++17",
+      "-O2"
+    ],
+    "native_library_sha256": {
+      "TKOpenGl": "9a6beea3fdf0d7b7b9a88a96d1313e06bb177788da56eabb09561f9e06d38932",
+      "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+      "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+    }
+  },
+  "inventory": {
+    "rust_capture_revision": "1e0659d648ba468a63bc3f2c1ebd5941439d7cb7",
+    "rust_crates": 31,
+    "rust_public_paths": 94154,
+    "observed_cpp_api_declarations": 108622,
+    "matched_declared_mappings": 51490,
+    "cpp_declarations_with_resolved_implemented_claim": 51466,
+    "unclaimed_cpp_count": 42483,
+    "unresolved_row_count": 0,
+    "declaration_crosswalk_proof": false,
+    "behavioral_equivalence_proven": false,
+    "configuration_matrix_complete": false
   }
 }
