@@ -1,6 +1,6 @@
 //! `Standard::StackTrace`: appends the caller's backtrace to a bounded text buffer.
 //!
-//! The glibc branch of Standard_StackTrace.cxx is ported with the same `backtrace()` and
+//! The execinfo branch of Standard_StackTrace.cxx is ported with the same `backtrace()` and
 //! `backtrace_symbols()` calls, so the text has the native shape
 //! (`binary(symbol+0xoffset) [0xaddress]` per frame). The frames themselves are Rust
 //! frames, so their count and names differ from a C++ caller's.
@@ -16,7 +16,7 @@ const BACKTRACE_FOOTER: &str = "\n=============";
 /// frames of this function and `nb_top_skip` more are skipped. Returns false, leaving
 /// `buffer` unchanged, for `buffer_size < 1`, `nb_traces < 1`, `nb_top_skip < 0`, a
 /// buffer already at least `buffer_size` bytes long (C++ would overflow it), a stack
-/// shallower than the skipped frames, or a platform without glibc's `backtrace`.
+/// shallower than the skipped frames, or a platform without the implemented execinfo backend.
 /// The C++ `theContext` argument is ignored on this platform, so it has no Rust parameter.
 /// `stack_trace(&mut text, 2048, 10, 0)`.
 pub fn stack_trace(
@@ -57,7 +57,7 @@ fn append_frames(buffer: &mut String, mut limit: usize, frames: &[String]) {
     }
 }
 /// Symbolized frames below the `top_skip` innermost ones, or `None` as the C++ returns false.
-#[cfg(all(target_os = "linux", target_env = "gnu"))]
+#[cfg(any(all(target_os = "linux", target_env = "gnu"), target_os = "macos"))]
 #[inline(never)]
 fn native_frames(nb_traces: i32, top_skip: i32) -> Option<Vec<String>> {
     let capacity: i32 = nb_traces.checked_add(top_skip)?;
@@ -75,7 +75,7 @@ fn native_frames(nb_traces: i32, top_skip: i32) -> Option<Vec<String>> {
     symbolize(&addresses[top_skip as usize..], count)
 }
 /// `backtrace_symbols` of the first `count` addresses, copied out and freed.
-#[cfg(all(target_os = "linux", target_env = "gnu"))]
+#[cfg(any(all(target_os = "linux", target_env = "gnu"), target_os = "macos"))]
 fn symbolize(addresses: &[*mut libc::c_void], count: i32) -> Option<Vec<String>> {
     // SAFETY: `addresses` holds at least `count` captured return addresses.
     let symbols: *mut *mut libc::c_char =
@@ -94,8 +94,8 @@ fn symbolize(addresses: &[*mut libc::c_void], count: i32) -> Option<Vec<String>>
     unsafe { libc::free(symbols.cast()) };
     Some(lines)
 }
-/// Platforms without glibc's `backtrace`: no trace, as the C++ unsupported-platform branches.
-#[cfg(not(all(target_os = "linux", target_env = "gnu")))]
+/// Other backends remain unimplemented here; Windows native DbgHelp is still pending.
+#[cfg(not(any(all(target_os = "linux", target_env = "gnu"), target_os = "macos")))]
 fn native_frames(_nb_traces: i32, _top_skip: i32) -> Option<Vec<String>> {
     None
 }

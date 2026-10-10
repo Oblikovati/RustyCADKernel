@@ -129,3 +129,15 @@ fn standard_output_accepts_writes() {
     assert_eq!(output.write(b"").unwrap(), 0);
     output.flush().unwrap();
 }
+
+#[test]
+fn event_loop_initializes_each_foreign_thread_before_waiting() {
+    rustycad_tcl::initialize_library();
+    for _ in 0..3 {
+        std::thread::spawn(|| {
+            assert!(!do_one_event(sys::TCL_ALL_EVENTS | sys::TCL_DONT_WAIT));
+        })
+        .join()
+        .unwrap();
+    }
+}

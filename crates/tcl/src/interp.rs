@@ -15,7 +15,8 @@ use std::ptr::NonNull;
 use std::sync::Once;
 
 /// Calls `Tcl_FindExecutable` once per process, which initializes the encoding system
-/// and the library path search; Tcl requires it before the first interpreter.
+/// and the library path search, then initializes the calling thread’s notifier.
+/// Call `initialize_library()` before using interpreter-free Tcl events.
 pub fn initialize_library() {
     static INITIALIZED: Once = Once::new();
     INITIALIZED.call_once(|| {
@@ -27,6 +28,23 @@ pub fn initialize_library() {
         // SAFETY: `pointer` is null (allowed) or a live C string; Tcl copies it.
         unsafe { sys::Tcl_FindExecutable(pointer) };
     });
+    initialize_thread();
+}
+
+fn initialize_thread() {
+    thread_local! {
+        // Tcl 8.6 TclInitNotifier is reached by Tcl_CreateInterp on each foreign thread.
+        // FindExecutable's process-wide initialization alone leaves macOS CFRunLoop unset.
+        static NOTIFIER_READY: () = {
+            // SAFETY: this temporary interpreter never escapes its owning thread. Its
+            // deletion leaves the thread's notifier ready for interpreter-free events.
+            unsafe {
+                let interpreter = sys::Tcl_CreateInterp();
+                sys::Tcl_DeleteInterp(interpreter);
+            }
+        };
+    }
+    NOTIFIER_READY.with(|()| ());
 }
 
 /// A non-owning reference to a live interpreter, valid for the borrow it is reached by.
