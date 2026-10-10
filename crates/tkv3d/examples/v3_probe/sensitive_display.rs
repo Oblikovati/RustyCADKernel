@@ -2,7 +2,7 @@
 use super::common::{Reader, attempt, end, flag, int, real};
 #[allow(dead_code)]
 #[path = "../../tests/support/sensitive_display_driver.rs"]
-mod display_driver;
+pub(super) mod display_driver;
 #[allow(dead_code)]
 #[path = "../../tests/support/sensitive_display_scene.rs"]
 mod display_scene;

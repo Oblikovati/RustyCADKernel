@@ -24,6 +24,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if request.mode.starts_with("line-") {
         line_arrays::replace_lines(&*scene.group, &request.mode, 1);
     }
+    if request.mode.starts_with("stdprs-") {
+        stdprs_scene::replace_curve(&scene.structure, &request.mode, 1);
+    }
     let transform = Transform3::translation_vector(Vector3::new(request.offset, 0., 0.));
     scene
         .structure
@@ -75,3 +78,6 @@ mod persistence_scene;
 
 #[path = "../tests/support/line_arrays.rs"]
 mod line_arrays;
+
+#[path = "../tests/support/stdprs_scene.rs"]
+mod stdprs_scene;

@@ -34,6 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     bound_performance::benchmark(&driver, warmup, samples, false);
     bound_performance::benchmark(&driver, warmup, samples, true);
     persistence_performance::benchmark(&driver, warmup, samples);
+    curve_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -100,3 +101,8 @@ mod persistence_scene;
 
 #[path = "../tests/support/line_arrays.rs"]
 mod line_arrays;
+
+#[path = "support/curve_performance.rs"]
+mod curve_performance;
+#[path = "../tests/support/stdprs_scene.rs"]
+mod stdprs_scene;

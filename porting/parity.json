@@ -574162,6 +574162,96 @@
       "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::displayed_objects_by_kind",
       "status": "implemented",
       "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const class opencascade::handle<class Prs3d_Drawer> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "15693c107747ba80ca49794426a7eacaad225924c18b92ac823d079c51ed309f",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::matches",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const double,const double,const class opencascade::handle<class Prs3d_Drawer> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "244ae9358b78daecf6925fceccf035abab1c9c782e89ba11c206322e7d59d59c",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::matches_range",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Add(const class opencascade::handle<class Graphic3d_Structure> &,const class Adaptor3d_Curve &,const class opencascade::handle<class Prs3d_Drawer> &,class NCollection_Sequence<class gp_Pnt> &,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "2c7c3079e502ff2e5b9b7bebb52797a15acd21eba5f3772248f1344b450de182",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::add_points",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Add(const class opencascade::handle<class Graphic3d_Structure> &,const class Adaptor3d_Curve &,const double,const double,class NCollection_Sequence<class gp_Pnt> &,const int,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "39dd8deb1e75036b0301a6682195494d7ac9c65d431aa8714431e3abecbf1d73",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::add_range_points",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const double,const double,const double,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "3c4b24eb8f35ce1974bb0303693a30b505ba4e133a5ae27fe4ff94b19ca2468d",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::matches_range_with_sampling",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Match(const double,const double,const double,const double,const class Adaptor3d_Curve &,const double,const double,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "3e86b88462121ca0ea2b14c773fd6e91e5d0ec184766cd2eff87728f1cc51217",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::matches_with_sampling",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "883bf098bc30b2cf3a571d3e82a231af264da2d58bb9f04c0116769562631750",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Add(const class opencascade::handle<class Graphic3d_Structure> &,const class Adaptor3d_Curve &,const double,const double,const class opencascade::handle<class Prs3d_Drawer> &,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "8febb8624c368e7698ca27aa559e33adbaaa9658040ab5ca37da1ba38adb4de7",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::add_range",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
+    },
+    {
+      "upstream_id": "StdPrs_Curve::Add(const class opencascade::handle<class Graphic3d_Structure> &,const class Adaptor3d_Curve &,const class opencascade::handle<class Prs3d_Drawer> &,const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Curve.hxx",
+      "source_sha256": "a6c8794247054b4d4ebcaed6f85cc94411d7443d12a9ce4d44f74af8df063106",
+      "cpp_declaration_id": "c2ac4b920ff1a9a515d59ade2336beb782228d0bc8a3c5439bdd940cf2f5ac3a",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsCurve::add",
+      "status": "implemented",
+      "notes": "Pinned StdPrs_Curve overload family: native automatic/explicit limits, line endpoints, B-spline knot-scaled discretisation, append order, aspect/arrow distinctions and matching metric/circle overshoot. Point3 groups X/Y/Z. Native exact point and Graphic3d callback corpus plus GPU capture and performance evidence; see docs/stdprs-curve.md."
     }
   ],
   "tests": [

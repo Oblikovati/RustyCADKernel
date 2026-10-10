@@ -48,7 +48,8 @@ fn main() {
     persistence_runtime::check_persistence_lifecycle();
     line_runtime::check_line_lifecycle();
     color_runtime::check_linear_to_srgb_capture();
-    println!("PASS: 10 Vulkan runtime checks; validation errors: 0");
+    stdprs_runtime::check_curve_lifecycle();
+    println!("PASS: 11 Vulkan runtime checks; validation errors: 0");
 }
 
 fn check_capture(capture: &FrameCapture) {
@@ -124,3 +125,6 @@ mod line_runtime;
 
 #[path = "support/color_runtime.rs"]
 mod color_runtime;
+
+#[path = "support/stdprs_runtime.rs"]
+mod stdprs_runtime;

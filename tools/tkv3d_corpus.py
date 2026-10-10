@@ -11,6 +11,7 @@ from __future__ import annotations
 
 def append_tkv3d_requests(requests: list[str]) -> None:
     """Append every TKV3d request family in a fixed order."""
+    __import__("tkv3d_corpus_stdprs_curve").append_stdprs_curve_requests(requests)
     __import__("tkv3d_corpus_ais").append_ais_requests(requests)
     __import__("tkv3d_corpus_ais_detection").append_ais_detection_requests(requests)
     __import__("tkv3d_corpus_ais_selection_actions").append_ais_selection_actions_requests(requests)
