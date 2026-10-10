@@ -28,12 +28,26 @@ def test_archives(
 ) -> None:
     """Compile and test extracted packages without original source paths; example: ``test_archives(root, stage, runner, crates)``."""
     stage_workspace(root / "target/package", stage, crates, root / "Cargo.lock")
+    for features in ([], ["--all-features"]):
+        test_profile(stage, commands, features)
+        commands.run(["cargo", "clean", "--target-dir", str(stage / "target")], stage)
+
+
+def test_profile(stage: Path, commands: Commands, features: list[str]) -> None:
+    """Test all targets and documentation for one feature profile; example: ``test_profile(stage, runner, [])``."""
     for targets in (["--all-targets"], ["--doc"]):
-        output = commands.run(
-            ["cargo", "test", "--workspace", "--all-features", "--locked", *targets],
-            stage,
-        )
-        print(output, end="", flush=True)
+        arguments = [
+            "cargo",
+            "test",
+            "--workspace",
+            "--locked",
+            "--target-dir",
+            str(stage / "target"),
+            *features,
+            *targets,
+        ]
+        print("+ " + " ".join(arguments), flush=True)
+        print(commands.run(arguments, stage), end="", flush=True)
 
 
 def build_release(root: Path, tag: str, commands: Commands) -> Path:

@@ -157,7 +157,7 @@ class ReleasePackageTests(unittest.TestCase):
         )
         self.assertEqual(
             len([call for call in self.runner.calls if call[:2] == ["cargo", "test"]]),
-            2,
+            4,
         )
         for line in (output / "SHA256SUMS").read_text().splitlines():
             digest, name = line.split("  ")
@@ -167,6 +167,21 @@ class ReleasePackageTests(unittest.TestCase):
             self.assertEqual(digest, file_sha256(output / name))
         with self.assertRaisesRegex(ValueError, "new directory"):
             build_release(self.fixture.root, "v0.1.0", self.runner)
+
+    def test_each_profile_uses_and_cleans_its_own_target_directory(self) -> None:
+        build_release(self.fixture.root, "v0.1.0", self.runner)
+        cargo_calls = [
+            call
+            for call in self.runner.calls
+            if call[:2] in (["cargo", "test"], ["cargo", "clean"])
+        ]
+        self.assertEqual(
+            [call[1] for call in cargo_calls],
+            ["test", "test", "clean", "test", "test", "clean"],
+        )
+        targets = {call[call.index("--target-dir") + 1] for call in cargo_calls}
+        self.assertEqual(len(targets), 1)
+        self.assertTrue(next(iter(targets)).endswith("workspace/target"))
 
     def test_archive_rejects_wrong_root_traversal_and_links(self) -> None:
         for name, symlink in [

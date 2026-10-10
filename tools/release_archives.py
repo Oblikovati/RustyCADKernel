@@ -54,6 +54,8 @@ def write_workspace(stage: Path, crates: list[ReleaseCrate], lockfile: Path) -> 
     members = [crate.directory for crate in crates]
     patches = [f'{crate.name} = {{ path = "{crate.directory}" }}' for crate in crates]
     manifest = '[workspace]\nresolver = "3"\nmembers = ' + json.dumps(members)
+    manifest += "\n[profile.dev]\ndebug = 0\nincremental = false\n"
+    manifest += "\n[profile.test]\ndebug = 0\nincremental = false\n"
     manifest += "\n[patch.crates-io]\n" + "\n".join(patches) + "\n"
     (stage / "Cargo.toml").write_text(manifest, encoding="utf-8")
     shutil.copyfile(lockfile, stage / "Cargo.lock")

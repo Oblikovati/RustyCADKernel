@@ -37,14 +37,16 @@ python3 tools/release_packages.py --tag v0.1.0
 The command derives the package inventory from Cargo metadata. Cargo creates
 normalized archives. The command extracts them into a new temporary workspace,
 restores the packaged test support, adds local registry patches for the full
-package set, and runs all-target/all-feature tests plus doctests with the owner
-lockfile. No original crate path is used by that test workspace. Output appears
+package set, and runs all-target tests plus doctests with the owner lockfile
+in both default and all-feature configurations. No original crate path is used by that test workspace. Output appears
 under `target/releases/vX.Y.Z` only after those tests pass.
 
 Cargo packaging uses `--no-verify --exclude-lockfile` because the kernel's
 sibling packages are not on crates.io. This does not omit verification: the
 separate extracted-workspace test is mandatory and uses the delivered owner
-lockfile. An individual crate archive is not a standalone installation of the
+lockfile. Test workspaces omit debug symbols to fit hosted-runner disk limits;
+debug assertions and optimization levels are unchanged. Incremental caches are
+disabled, and each feature profile clears only its private target directory. An individual crate archive is not a standalone installation of the
 full kernel or its oracle corpus.
 
 Run tool tests with:
