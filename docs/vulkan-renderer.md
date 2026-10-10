@@ -44,12 +44,14 @@ Ash's dynamic loader dependency `libloading` 0.8.9 has a narrow ISC license exce
 in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
-triangle lists/strips/fans, segments/polylines and point sprites, unit homogeneous `w` for Vec4 positions, opaque
+triangle lists/strips/fans, segments/polylines and point sprites, full homogeneous Vec4 positions, opaque
 vertex/interior colors, unlit solid shading,
 double-sided rendering and disabled polygon offsets. Stencil, flipping,
 capping, bounding-box highlighting, textures and custom shaders are not implemented.
 [Retained clipping](vulkan-clipping.md) covers live plane chains, persistent anchors,
 local overrides, native bounding-box policy and view frustum culling.
+[Homogeneous input](vulkan-homogeneous-vertices.md) preserves finite position weights,
+including directions at infinity; strict clipping-boundary parity remains partial.
 Transform persistence is partial, with native-host capture differences recorded below. The [capability ledger](../porting/renderer/capabilities.json)
 retains all those features, plus materials/lights/PBR, transparency/OIT, ray/path
 tracing, stereo/VR, layers, backgrounds, statistics and native window presentation.
@@ -163,7 +165,7 @@ is measured separately as `startup_ms`, so moving fixed setup out of the frame
 loop does not conceal its cost.
 
 Ten workloads now have accepted baselines: the original six, two native-window
-workloads, circle updates and clipping-plane updates. Eight newer presentation workloads retain collected timings but no
+workloads, circle updates and clipping-plane updates. Nine newer presentation/input workloads retain collected timings but no
 accepted baseline while strict capture parity remains unresolved. The timing gate
 explicitly reports each unmatched workload.
 Run functional and timing regression checks together:

@@ -2,27 +2,27 @@
 use ash::vk;
 const BINDINGS: [vk::VertexInputBindingDescription; 1] = [vk::VertexInputBindingDescription {
     binding: 0,
-    stride: 28,
+    stride: 32,
     input_rate: vk::VertexInputRate::VERTEX,
 }];
 const ATTRIBUTES: [vk::VertexInputAttributeDescription; 3] = [
     vk::VertexInputAttributeDescription {
         location: 0,
         binding: 0,
-        format: vk::Format::R32G32B32_SFLOAT,
+        format: vk::Format::R32G32B32A32_SFLOAT,
         offset: 0,
     },
     vk::VertexInputAttributeDescription {
         location: 1,
         binding: 0,
         format: vk::Format::R32G32B32A32_SFLOAT,
-        offset: 12,
+        offset: 16,
     },
     vk::VertexInputAttributeDescription {
         location: 2,
         binding: 0,
         format: vk::Format::R32G32_SFLOAT,
-        offset: 28,
+        offset: 32,
     },
 ];
 const BLEND: [vk::PipelineColorBlendAttachmentState; 1] = [vk::PipelineColorBlendAttachmentState {
@@ -107,7 +107,7 @@ fn vertex_state(text: bool) -> vk::PipelineVertexInputStateCreateInfo<'static> {
     const TEXT_BINDING: [vk::VertexInputBindingDescription; 1] =
         [vk::VertexInputBindingDescription {
             binding: 0,
-            stride: 36,
+            stride: 40,
             input_rate: vk::VertexInputRate::VERTEX,
         }];
     vk::PipelineVertexInputStateCreateInfo::default()

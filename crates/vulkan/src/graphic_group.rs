@@ -174,7 +174,8 @@ impl Graphic3dDrawGroup {
         }
         if evaluate_bounds && let Ok(positions) = primitive.positions() {
             let mut fields = self.base.fields.write();
-            for [x, y, z] in positions {
+            // Graphic3d_Group.cxx at 3d097a0 bounds Vec4 inputs by raw xyz, ignoring w.
+            for [x, y, z, _] in positions {
                 fields.bounds.add(&Vec4::new(x, y, z, 1.));
             }
         }

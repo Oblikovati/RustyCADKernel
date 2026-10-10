@@ -186,6 +186,7 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
             vertex
                 .position
                 .iter()
+                .chain(std::iter::once(&vertex.weight))
                 .chain(&vertex.color)
                 .flat_map(|v| v.to_ne_bytes()),
         );

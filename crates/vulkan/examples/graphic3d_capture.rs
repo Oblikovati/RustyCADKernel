@@ -31,6 +31,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     scene
         .structure
         .set_transformation(&Handle::new(Datum3::new(transform)));
+    if request.mode.starts_with("hom-") {
+        configure_homogeneous(&scene, &request.mode);
+    }
     if request.mode.starts_with("clip-") {
         clipping_scene::configure_clipping(&scene, &request.mode);
     }
@@ -87,3 +90,18 @@ mod stdprs_scene;
 
 #[path = "../tests/support/clipping_scene.rs"]
 mod clipping_scene;
+
+#[path = "../tests/support/homogeneous_arrays.rs"]
+mod homogeneous_arrays;
+fn configure_homogeneous(scene: &scene::ViewerScene, mode: &str) {
+    homogeneous_arrays::replace_homogeneous(&*scene.group, mode);
+    if mode.ends_with("clipped") {
+        let planes = Handle::new(Graphic3dSequenceOfHClipPlane::default());
+        let equation = rustycad_tkernel::ncollection::Vec4::new(1., 0., 0., -1.);
+        planes.append(Handle::new(
+            Graphic3dClipPlane::from_equation(equation).unwrap(),
+        ));
+        scene.view.set_clip_planes(&planes);
+    }
+    scene.structure.calculate_bound_box();
+}
