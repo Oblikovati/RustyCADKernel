@@ -275,6 +275,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
             "tools/oracle/martensite_vulkan_window.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
+            "tools/oracle/martensite_vulkan_clipping.cxx",
             "tools/oracle/martensite_vulkan_raster_control.cxx",
         )
     )
