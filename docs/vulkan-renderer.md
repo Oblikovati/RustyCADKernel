@@ -61,8 +61,8 @@ not inflate the mapped OCCT API count.
 
 ## Integrated evidence
 
-The latest [AIS integration receipt](../porting/runtime-evidence/vulkan-ais-main-2026-10-10.json)
-passes the functional and performance gates on both devices; details appear below.
+The AIS display integration and subsequent bulk/removal integration receipts are
+recorded below, with functional and performance outcomes kept separate.
 
 The [main acceptance receipt](../porting/runtime-evidence/vulkan-offscreen-b7e4abc9b.json)
 records the original offscreen slice. The first viewer acceptance receipt is
@@ -115,9 +115,10 @@ isolate a particular native ICD. On machines without a GPU, request
 `--profiles lavapipe` explicitly; missing requested hardware fails instead of skipping.
 
 The tool checks the pinned upstream build, shader freshness and both runtimes.
-Each profile captures 42 scenes spanning orthographic/perspective cameras,
-three aspect ratios, translations, default/full-layer rendering and five AIS
-lifecycle states (displayed, erased, redisplayed, mode 1 and affinity hidden). It requires
+Each profile captures 90 scenes spanning orthographic/perspective cameras,
+three aspect ratios, translations, default/full-layer rendering and thirteen AIS
+lifecycle states: ordinary display/erase, mode/affinity changes, presentation
+clearing, permanent removal/recreation, bulk and selected-object transitions. It requires
 byte-identical RGBA and finite depth with maximum error `1e-6`.
 Color/depth PNGs, raw buffers and color/depth error masks remain in the capture
 directory even when comparisons fail. The JSON report records error bounds,
@@ -140,9 +141,10 @@ example alias. Removing the checkout also removes this cache.
 The same matrix builds `renderer_performance` in **release** mode, warms each
 workload for 20 samples and records 100 measured samples. Workloads are one triangle
 at 256×256, 256 triangle submissions at 256×256, repeated 128/256×256 resize,
-and AIS display/erase at 256×256. The AIS sample includes two completed frames
+AIS display/erase and AIS remove/recreate at 256×256. Each AIS sample includes two completed frames
 and selection deactivation/reactivation; other samples contain one frame. Every
-redraw must succeed, and the AIS presentation must be reused without recomputation.
+redraw must succeed. Erase reuses the presentation; removal must destroy it and
+force one new computation per redisplay.
 Timings cover V3d scene extraction, current per-frame Vulkan resource allocation,
 submission, fence completion and color/depth readback. They are end-to-end latency,
 not GPU timestamp measurements. Validation is disabled for timing and required by
@@ -229,3 +231,29 @@ and the Python harness passes 22. Native captures remain in
 on lavapipe and 5.118/5.790 ms on the host. Earlier failed timing receipts remain
 valid historical observations; this passing run does not establish a cure for
 previous timing variation.
+
+## Bulk AIS lifecycle and removal
+
+Martensite now implements bulk display/erase, selected-object transitions, permanent
+removal, presentation-only clearing, the legacy Display overload and object queries
+by status, kind/signature and view affinity. These add 18 explicit OCCT mappings.
+Live bucket traversal releases state guards before callbacks and uses const-handle
+observers to preserve the native reference count. RemoveAll snapshots registrations,
+so objects registered by a removal callback are retained for later operations.
+
+The native behavior is intentional: ClearPrs leaves selection active, while
+Remove detaches the context and releases presentations and selection membership.
+Remove(true) checks status after clearing it and ordinarily does not trigger redraw;
+use UpdateCurrentViewer or RemoveAll(true) for an immediate full-view update.
+ObjectsForView appends objects outside a requested status before testing affinity.
+The protected ClearGlobal(null) path dereferences null upstream; Martensite returns
+NullObject. That undefined native input is excluded from successful trace comparisons.
+
+The [initial removal matrix](../porting/runtime-evidence/vulkan-removal-initial-2026-10-10.json)
+passed 180 native color/depth comparisons and twelve validated runtime checks.
+Its collected timings initialize only `ais-remove-display`; the other four rows in
+the [five-workload baseline](../porting/runtime-evidence/vulkan-removal-baseline-2026-10-10.json)
+retain their previous distributions and limits. The final status-handle lifetime
+adjustment is checked by the integrated main run against this initial collection.
+The wider AIS presentation catalog, highlighting and native window presentation
+remain open; no full legacy renderer capability family is marked complete.

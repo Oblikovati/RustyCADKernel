@@ -7,7 +7,12 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
 use rustycad_tkv3d::{ais::*, prs_mgr::*, select_mgr::*};
 use std::sync::atomic::Ordering;
-fn operate(scene: &LoadScene, op: i32, index: usize, values: [i32; 4]) -> Result<(), Failure> {
+pub(super) fn operate(
+    scene: &LoadScene,
+    op: i32,
+    index: usize,
+    values: [i32; 4],
+) -> Result<(), Failure> {
     let [a, b, c, d] = values;
     let object = scene.objects[index].cast();
     match op {
@@ -112,7 +117,7 @@ fn selection_state(scene: &LoadScene, object: &Handle<dyn AisInteractiveObject>)
     }
     flag(scene.ctx.is_hilighted_object(object));
 }
-fn display_state_rows(scene: &LoadScene) {
+pub(super) fn display_state_rows(scene: &LoadScene) {
     int(scene.ctx.nb_selected());
     for owner in scene.ctx.selection().objects().iter() {
         int(scene

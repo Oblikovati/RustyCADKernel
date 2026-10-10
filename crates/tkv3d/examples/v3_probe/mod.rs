@@ -88,3 +88,7 @@ pub mod ais_selection_actions;
 pub mod ais_load;
 
 pub mod ais_display;
+
+pub mod ais_lifecycle;
+
+mod ais_lifecycle_detection;

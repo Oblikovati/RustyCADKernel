@@ -38,6 +38,14 @@ AIS_MODES = (
     "ais-redisplayed",
     "ais-mode1",
     "ais-affinity-off",
+    "ais-cleared",
+    "ais-removed",
+    "ais-recreated",
+    "ais-erased-all",
+    "ais-displayed-all",
+    "ais-removed-all",
+    "ais-erased-selected",
+    "ais-displayed-selected",
 )
 
 

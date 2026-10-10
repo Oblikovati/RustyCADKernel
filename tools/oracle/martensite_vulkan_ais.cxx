@@ -65,6 +65,43 @@ struct MartensiteOracleAisScene {
       context->SetViewAffinity(object, view, false);
       return;
     }
+    if (mode == "ais-cleared") {
+      context->ClearPrs(object, 0, false);
+      return;
+    }
+    if (mode == "ais-removed") {
+      context->Remove(object, false);
+      return;
+    }
+    if (mode == "ais-recreated") {
+      context->Remove(object, false);
+      context->Display(object, false);
+      return;
+    }
+    if (mode == "ais-erased-all") {
+      context->EraseAll(false);
+      return;
+    }
+    if (mode == "ais-displayed-all") {
+      context->EraseAll(false);
+      context->DisplayAll(false);
+      return;
+    }
+    if (mode == "ais-removed-all") {
+      context->RemoveAll(false);
+      return;
+    }
+    if (mode == "ais-erased-selected" || mode == "ais-displayed-selected") {
+      context->SetAutomaticHilight(false);
+      if (mode == "ais-displayed-selected")
+        context->Erase(object, false);
+      context->AddSelect(object);
+      if (mode == "ais-displayed-selected")
+        context->DisplaySelected(false);
+      else
+        context->EraseSelected(false);
+      return;
+    }
     throw std::runtime_error("received AIS transition " + mode +
                              "; expected a supported ais-* capture mode");
   }

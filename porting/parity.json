@@ -573982,6 +573982,186 @@
       "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::erase_global",
       "status": "implemented",
       "notes": "Martensite AIS Display/Erase lifecycle, presentation reuse, selection activation/deactivation and native callback/failure ordering. Nine ais_context_display tests and 387 new v3_ais_display traces; native numeric gate passes 141997 cases. Vulkan AIS rendering has separate device/capture evidence and remains limited to supported opaque unlit triangles."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Display(const class opencascade::handle<class AIS_InteractiveObject> &, int, int, bool, bool, enum PrsMgr_DisplayStatus)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "0d8f7ee364bc3091b0a6430a8d726200193825df93ad93740d92245450f232e5",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::display_legacy",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DisplayedObjects(class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "34d7898a36066ee1f4afa5b1f21ca31d6621af975805b18130830fc594eb7555",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::displayed_objects",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::RemoveAll(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "4b521aff5c54833fad310f948c8d1ca850559edb61e94f6546efca75d182de39",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::remove_all",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ObjectsByDisplayStatus(enum AIS_KindOfInteractive, int, enum PrsMgr_DisplayStatus, class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "4caf29e15d2cd25ccd41f331229513d26ad9ae0b4647d46820c5b8b408c897c6",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::objects_by_display_status_and_kind",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::EraseAll(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "6999a493d15df93df63ad179a4ae699a1a2adc8f2a6e84283d6f01fb8d5ddfe1",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::erase_all",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ClearPrs(const class opencascade::handle<class AIS_InteractiveObject> &, int, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "6f6556099f628af98ec96bdf856adf7fc9a45e878691ab894bb1c2f6d63d4d0e",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::clear_prs",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Remove(const class opencascade::handle<class AIS_InteractiveObject> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "7e073a938efebbe80b196785741cb287d1c7c21e8f2e469bdbbd87f9ac2502c1",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::remove",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ObjectsForView(class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &, const class opencascade::handle<class V3d_View> &, bool, enum PrsMgr_DisplayStatus) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "8263f051d4de553d0c8a33bbaf978c8f19e3c3d2af4a7620c48b46f7a02e1589",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::objects_for_view",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ObjectsInside(class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &, enum AIS_KindOfInteractive, int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "87a052adab29465d98e3a8cd2c94cfa3af3c7d493e0362537192665e4b143b42",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::objects_inside",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ErasedObjects(class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "91207471df11432db58ee5002b54216e3e8abad8b1161b976bda88a25b6acea2",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::erased_objects",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DisplayAll(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "93cc2bb490e7ea3da0f6b1a15151f5a6c917fadf2b8f013449a0499be7de40ca",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::display_all",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ClearGlobal(const class opencascade::handle<class AIS_InteractiveObject> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9fe0eecba464c048acd0bb20add89a1914598caa00fabc045d91f536c12461ef",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::clear_global",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ClearGlobalPrs(const class opencascade::handle<class AIS_InteractiveObject> &, int, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "a9abf275e91878346d209874f8549d816d738f3ff4ddc7f0c70d4a2adf2d4be9",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::clear_global_prs",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DisplaySelected(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "b90e6e6efd465c3f239ffbbf29495fb65cbd200fc3e9a183f6a41a10edb7326f",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::display_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ObjectsByDisplayStatus(enum PrsMgr_DisplayStatus, class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "c07dbb8cd3b09400b1ddd4054a06e80fac6b4003654ad2004f79626eedd89159",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::objects_by_display_status",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ErasedObjects(enum AIS_KindOfInteractive, int, class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "cadd52f9da22c8ec3e3d9d1cc7f58664c1ac621e2dd2cbd5d68aa6aebb47479f",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::erased_objects_by_kind",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::EraseSelected(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "e823c5b0942df7c07638ee5237bf710500eaa8cb866f91246e15527c353709f1",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::erase_selected",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DisplayedObjects(enum AIS_KindOfInteractive, int, class NCollection_List<class opencascade::handle<class AIS_InteractiveObject>> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "edc691b0b98cf2cb6bc96cb6604060a06ae55642f600d44b4fef72acf6094aee",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::displayed_objects_by_kind",
+      "status": "implemented",
+      "notes": "Martensite AIS bulk display/erase, permanent removal, presentation clearing, legacy Display and append-only object queries. Native comparison corpus adds 543 lifecycle traces (including detected-rank cleanup and query reference-count deltas); Rust removal tests cover reentrant live bucket traversal and snapshot RemoveAll. Protected ClearGlobal(null) is undefined upstream (null dereference); Rust reports NullObject. Full built-in AIS presentation and renderer capability parity remains open."
     }
   ],
   "tests": [

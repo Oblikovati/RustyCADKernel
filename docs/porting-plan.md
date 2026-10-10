@@ -19,7 +19,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    additional renderer features outside the current scope. Build a tested offscreen
    rendering path before broadening unrelated porting. The initial offscreen path
    now runs through V3d views and AIS display/erase presentations. AIS lifecycle,
-   status queries and per-view affinity have native comparisons; continue presentation
+   bulk and selected-object transitions, removal, status queries and per-view affinity
+   have native comparisons; continue presentation
    capabilities and native window presentation (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

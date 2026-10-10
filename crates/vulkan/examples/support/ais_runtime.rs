@@ -1,8 +1,8 @@
 //! Native-style AIS mutations run against the selected Vulkan device, with validation enabled.
 #[path = "ais_lifecycle.rs"]
-mod ais_lifecycle;
+pub(super) mod ais_lifecycle;
 #[path = "../../tests/support/ais_scene.rs"]
-mod scene;
+pub(super) mod scene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkv3d::prs_mgr::PrsMgrDisplayStatus;
 use std::sync::atomic::Ordering;

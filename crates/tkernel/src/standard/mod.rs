@@ -28,7 +28,7 @@ mod handle;
 mod runtime_type;
 mod shared_state;
 mod transient;
-pub use handle::{Handle, HandleView, WeakHandle};
+pub use handle::{Handle, HandleObserver, HandleView, WeakHandle};
 pub(crate) use runtime_type::c_prefix;
 pub use runtime_type::{
     InterfaceCaster, InterfaceEntry, RuntimeType, RuntimeTyped, project_concrete, project_interface,
