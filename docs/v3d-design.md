@@ -557,3 +557,28 @@ The [Martensite selection action notes](ais-selection-actions.md) describe owner
 object selection, camera picks, grouped highlighting, style-slot replacement,
 callback traversal and the associated native evidence. The null-driver tests
 remain separate from Vulkan rendering acceptance.
+
+## AIS animation timelines
+
+Martensite ports the `AIS_Animation` timeline, progress record, protected state and
+`AIS_AnimationTimer` alias from OCCT `3d097a0`. `AisAnimationSource` supplies virtual
+lifecycle and frame hooks; derived atoms embed `AisAnimationBase` and can delegate
+an override to the exported `ais_animation_*` base bodies. `AisAnimationMembers`
+supplies the nonvirtual queries and child edits. For example, add a child handle,
+set its start and own duration, start the parent, then call `update(pts)` before
+rendering a frame. The timer is injectable and does not schedule redraws itself.
+
+Children execute before the parent's own callback. The final callback executes
+with stopped state, and pausing the parent stops its children. Child sequence
+traversal follows live stable links without holding locks across virtual calls,
+so a callback can append an already-started child for the same frame. Release
+`children()`'s read guard before editing the list. Native cached-duration quirks
+are retained: child edits refresh the parent, child time setters do not, `clear`
+retains the old child-duration cache, and self-copy empties the child list.
+
+`python3 tools/verify_ais_animation.py --source ../OCCT --native-build BUILD`
+compares 319 independent native timeline, identity-edit and frozen-timer cases.
+Eleven Rust tests cover reentrant callbacks, RTTI, signed zero/NaN and deterministic
+running timers. These timeline checks do not claim camera/object subclasses or
+renderer coverage; those remain visualization work to port and exercise with
+functional captures and performance measurements.

@@ -106,3 +106,5 @@ pub mod ais_plane_trihedron;
 pub mod deflection_curve;
 
 pub mod ais_circle;
+
+pub mod ais_animation;

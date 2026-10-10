@@ -1,0 +1,22 @@
+{
+  "revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "toolkit": "TKV3d-Animation",
+  "cases_passed": 319,
+  "input_sha256": "3ef1fa29eeb58eff60f3c0f7fcb8a3cae18642a88117892e290802a2a81785a4",
+  "output_sha256": "975cb6306a813f927e0bfd4a4ca932fdd6fdf700a07cef5c800ed5e4b87f42f5",
+  "comparator": "finite, infinity and signed-zero bits exact; NaN classification; exception types; DumpJson text",
+  "nan_representation_difference_cases": 0,
+  "scope": "AIS timeline foundation only; not entire TKV3d or camera/object subclasses",
+  "source_sha256": {
+    "crates/tkv3d/src/ais/animation_playback.rs": "f9f6d038030b548cbb9dcc16483dbffc3fa0c7c1303747f84cdf7858db7bcc28",
+    "crates/tkv3d/src/ais/animation_members.rs": "a1b2e741fadffd7d1fef700454ee557c91855744fb45486899f43f2165a70dc5",
+    "crates/tkv3d/src/ais/animation.rs": "0be23af7c4dbd816ac669b6cbcae7ddba6a1de868f4bb588905fbd31913d7118",
+    "tools/oracle/tkv3d_probe_ais_animation.cxx": "45fe6e810cd2c0215145dee15679c6b2b49d06d31fc0d8b7979c7de55c59b3e4"
+  },
+  "functional_tests": 11,
+  "python_tests": 2,
+  "full_tkv3d_suite": "passed",
+  "tkxsbase_suite": "passed",
+  "clippy": "all targets, warnings denied: passed",
+  "windows_validation": "cross-compiled tests; execution remains CI responsibility"
+}
