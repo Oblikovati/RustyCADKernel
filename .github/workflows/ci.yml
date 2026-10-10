@@ -109,6 +109,13 @@ jobs:
       - name: Select the installed software Vulkan ICD
         run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
       - run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example offscreen_acceptance --locked
+      - name: Validate opaque lighting and clipped lighting on lavapipe
+        run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example lighting_acceptance --locked
+      - name: Validate every checked-in Vulkan shader variant
+        run: |
+          for shader in crates/vulkan/shaders/*.spv; do
+            spirv-val --target-env vulkan1.3 "$shader"
+          done
       - name: Measure release renderer performance on lavapipe
         run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --release --example renderer_performance --locked > target/renderer-performance.log
       - uses: actions/upload-artifact@v7.0.1
