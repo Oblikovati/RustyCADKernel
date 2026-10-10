@@ -42,15 +42,30 @@ Validated locally on 2026-10-10:
   one hundred samples per device. These are collected timings, not an accepted
   regression baseline. All existing workloads remain present.
 
-The paired native oracle now contains 27 clipping modes across six camera,
-viewport and structure-offset cases on both devices. The focused 26-mode run
-passed 288/312 comparisons: exact RGBA and depth within the unchanged 1e-6
-threshold. The 24 failures are visible-text cases; a new unclipped text control
-separates glyph policy from the existing font raster differences. Those failures
-remain strict failures. A full 2,448-case matrix and release timings are pending
-against the final native-compatible culling policy.
+The paired native oracle contains 27 clipping modes across six camera, viewport
+and structure-offset cases on both devices. The full 2,448-case run passed 844/1,224
+on lavapipe and 764/1,224 on AMD. Clipping passed 144/162 per device: exact RGBA and
+depth within the unchanged 1e-6 threshold. The 18 clipping failures per device are
+visible-text raster differences, including the unclipped control. All 24 glyph
+policy controls pass: fragment planes preserve glyph coverage, while whole-structure
+culling removes it. The raw strict failures remain in the
+[full receipt](../porting/runtime-evidence/vulkan-clipping-full-2026-10-10.json).
 
-Before integration: finish the full matrix, inspect the corrected captures,
-verify the text control, compare the existing accepted performance budgets and
-independently repeat the new workload; record final source/device receipts. Capping remains part of the renderer completion scope. No capability
-family is marked complete by this checkpoint.
+The [buffer audit](../porting/runtime-evidence/vulkan-clipping-buffer-audit-2026-10-10.json)
+compares all 1,062 previous cases per device byte for byte. Every native buffer is
+unchanged; Martensite differs only in twelve text-plane cases per device, all now
+passing. No previously passing comparison regressed. All eighteen runtime checks
+and fifteen analytic clipping scenes (61,440 pixels) pass on each device without
+validation errors. All renderer CPU tests, Clippy and 35 Python harness tests pass.
+
+The full run passes all nine established performance budgets. The
+[independent repeat](../porting/runtime-evidence/vulkan-clipping-repeat-2026-10-10.json)
+retains timing failures: lavapipe AIS removal median/p95 and circle-update p95
+exceeded existing limits. Its host profile used an explicit Radeon ICD rather
+than the full run's default enumeration, so exact profile comparison is rejected;
+the selected hardware is identical, but these records are not treated as a pass.
+The new clipping workload has no accepted baseline yet. A controlled main/branch
+comparison with matching profile configuration is pending before integration.
+
+Capping remains part of the renderer completion scope. No capability family is
+marked complete by this checkpoint, and no OCCT API inventory credit is added.

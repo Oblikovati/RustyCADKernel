@@ -116,11 +116,13 @@
     },
     {
       "id": "clipping",
-      "status": "pending",
+      "status": "partial",
       "upstream": [
-        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Clipping.cxx"
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Clipping.cxx",
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_Structure.cxx",
+        "src/Visualization/TKOpenGl/OpenGl/OpenGl_CappingAlgo.cxx"
       ],
-      "current_evidence_or_remaining_work": "View/structure clipping and capping, clip chains, section materials.",
+      "current_evidence_or_remaining_work": "Live view/structure planes, local overrides, unions within chains and intersections across chains reach immutable Vulkan fragment submissions. Persistent anchors, local model coordinates, bounding-box rejection and font zero-plane policy have paired native scenes. See docs/vulkan-clipping.md for capture and performance evidence. Capping, section materials and remaining legacy combinations are unfinished; no renderer family is complete.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
@@ -142,7 +144,7 @@
       "upstream": [
         "src/Visualization/TKOpenGl/OpenGl/OpenGl_LayerList.cxx"
       ],
-      "current_evidence_or_remaining_work": "Ordered normal/immediate layers, priorities and depth clear/test/write submitted to Vulkan; solid background, default/full native captures and custom depth-policy runtime assertions. Layer removal preserves structures. Gradient/image backgrounds, origin/culling and complete immediate-pass behavior remain open.",
+      "current_evidence_or_remaining_work": "Ordered normal/immediate layers, priorities and depth clear/test/write submitted to Vulkan; solid background, default/full native captures and custom depth-policy runtime assertions. Layer removal preserves structures. View frustum culling now uses the ported Graphic3d traversal and native BVH invalidation, including On/Off/NoUpdate state. Gradient/image backgrounds, layer origin, distance/size culling and complete immediate-pass behavior remain open.",
       "profiles": [
         "baseline-supported configurations; cross-platform audit pending"
       ]
