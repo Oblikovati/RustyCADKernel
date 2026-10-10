@@ -3,7 +3,8 @@
 //! The execinfo branch of Standard_StackTrace.cxx is ported with the same `backtrace()` and
 //! `backtrace_symbols()` calls, so the text has the native shape
 //! (`binary(symbol+0xoffset) [0xaddress]` per frame). The frames themselves are Rust
-//! frames, so their count and names differ from a C++ caller's.
+//! frames, so their count and names differ from a C++ caller's. Win64 uses the native
+//! DbgHelp stack walker and `module(symbol)` representation.
 #![allow(unsafe_code)]
 
 /// Header line the trace starts with (14 bytes).
@@ -11,13 +12,19 @@ const BACKTRACE_HEADER: &str = "\n==Backtrace==";
 /// Footer line the trace ends with when room remains (14 bytes).
 const BACKTRACE_FOOTER: &str = "\n=============";
 
+#[cfg(all(windows, target_arch = "x86_64"))]
+#[path = "stack_trace_windows.rs"]
+mod windows;
+#[cfg(all(windows, target_arch = "x86_64"))]
+use windows::native_frames;
+
 /// Appends up to `nb_traces` frames of the calling thread's stack to `buffer`, keeping
 /// its byte length below `buffer_size` (a C buffer of that size, with its NUL); the
 /// frames of this function and `nb_top_skip` more are skipped. Returns false, leaving
 /// `buffer` unchanged, for `buffer_size < 1`, `nb_traces < 1`, `nb_top_skip < 0`, a
 /// buffer already at least `buffer_size` bytes long (C++ would overflow it), a stack
-/// shallower than the skipped frames, or a platform without the implemented execinfo backend.
-/// The C++ `theContext` argument is ignored on this platform, so it has no Rust parameter.
+/// shallower than the skipped frames, or a platform without an implemented native backend.
+/// Captures the current thread; an externally supplied C++ `theContext` is not yet exposed.
 /// `stack_trace(&mut text, 2048, 10, 0)`.
 pub fn stack_trace(
     buffer: &mut String,
@@ -94,8 +101,12 @@ fn symbolize(addresses: &[*mut libc::c_void], count: i32) -> Option<Vec<String>>
     unsafe { libc::free(symbols.cast()) };
     Some(lines)
 }
-/// Other backends remain unimplemented here; Windows native DbgHelp is still pending.
-#[cfg(not(any(all(target_os = "linux", target_env = "gnu"), target_os = "macos")))]
+/// Native OCCT also leaves non-x64 Windows and other non-execinfo targets unsupported.
+#[cfg(not(any(
+    all(target_os = "linux", target_env = "gnu"),
+    target_os = "macos",
+    all(windows, target_arch = "x86_64")
+)))]
 fn native_frames(_nb_traces: i32, _top_skip: i32) -> Option<Vec<String>> {
     None
 }

@@ -7,6 +7,23 @@ use std::sync::{Mutex, MutexGuard, PoisonError};
 
 static STACK_LENGTH: Mutex<()> = Mutex::new(());
 
+#[test]
+fn concurrent_native_stack_captures_keep_independent_frames() {
+    let workers: Vec<_> = (0..4)
+        .map(|_| {
+            std::thread::spawn(|| {
+                let mut trace = String::new();
+                assert!(stack_trace(&mut trace, 4096, 3, 0));
+                assert!(trace.starts_with("\n==Backtrace==\n"), "{trace}");
+                assert!(trace.ends_with("\n============="), "{trace}");
+            })
+        })
+        .collect();
+    for worker in workers {
+        worker.join().unwrap();
+    }
+}
+
 /// Holds the lock while the default length is `length`, and resets it to 0 on drop.
 struct StackLengthGuard {
     _lock: MutexGuard<'static, ()>,
