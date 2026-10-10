@@ -573044,7 +573044,7 @@
       "notes": "OCCT 3d097a0 sensitive debug presentations: real primitive buffers with native box, cylinder, circle, face, inherited poly/curve, wire, point, segment, triangle and triangulation/free-edge order; retained groups, flipping and persistence, active-selection filtering, live selection append callbacks, Topmost redisplay, optional ClearSensitive and partial failures. Six direct tests and 4320 native callback/buffer comparisons. See docs/sensitive-display.md."
     },
     {
-      "upstream_id": "AIS_SOD_Selected enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_Selected",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573054,7 +573054,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::clearDynamicHighlight void () const",
+      "upstream_id": "AIS_InteractiveContext::clearDynamicHighlight() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573064,7 +573064,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::getHilightMode int (const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class Prs3d_Drawer> &, int) const",
+      "upstream_id": "AIS_InteractiveContext::getHilightMode(const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class Prs3d_Drawer> &, int) const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573074,7 +573074,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::DetectedCurrentObject class opencascade::handle<class AIS_InteractiveObject> () const",
+      "upstream_id": "AIS_InteractiveContext::DetectedCurrentObject() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573084,7 +573084,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::MoveTo enum AIS_StatusOfDetection (const class gp_Ax1 &, const class opencascade::handle<class V3d_View> &, bool)",
+      "upstream_id": "AIS_InteractiveContext::MoveTo(const class gp_Ax1 &, const class opencascade::handle<class V3d_View> &, bool)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573094,7 +573094,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::DetectedInteractive class opencascade::handle<class AIS_InteractiveObject> () const",
+      "upstream_id": "AIS_InteractiveContext::DetectedInteractive() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573104,7 +573104,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::HasNextDetected bool () const",
+      "upstream_id": "AIS_InteractiveContext::HasNextDetected() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573114,7 +573114,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::NextDetected void ()",
+      "upstream_id": "AIS_InteractiveContext::NextDetected()",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573124,7 +573124,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::getHiStyle const class opencascade::handle<class Prs3d_Drawer> &(const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class SelectMgr_EntityOwner> &) const",
+      "upstream_id": "AIS_InteractiveContext::getHiStyle(const class opencascade::handle<class AIS_InteractiveObject> &, const class opencascade::handle<class SelectMgr_EntityOwner> &) const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573134,7 +573134,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_SOD_OnlyOneGood enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_OnlyOneGood",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573144,7 +573144,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::InitDetected void ()",
+      "upstream_id": "AIS_InteractiveContext::InitDetected()",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573154,7 +573154,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::HilightPreviousDetected int (const class opencascade::handle<class V3d_View> &, bool)",
+      "upstream_id": "AIS_InteractiveContext::HilightPreviousDetected(const class opencascade::handle<class V3d_View> &, bool)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573164,7 +573164,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::MoveTo enum AIS_StatusOfDetection (int, int, const class opencascade::handle<class V3d_View> &, bool)",
+      "upstream_id": "AIS_InteractiveContext::MoveTo(int, int, const class opencascade::handle<class V3d_View> &, bool)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573174,7 +573174,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::ClearDetected bool (bool)",
+      "upstream_id": "AIS_InteractiveContext::ClearDetected(bool)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573184,7 +573184,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::DetectedCurrentOwner class opencascade::handle<class SelectMgr_EntityOwner> () const",
+      "upstream_id": "AIS_InteractiveContext::DetectedCurrentOwner() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573194,7 +573194,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_SOD_AllBad enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_AllBad",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573204,7 +573204,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::moveTo enum AIS_StatusOfDetection (const class opencascade::handle<class V3d_View> &, bool)",
+      "upstream_id": "AIS_InteractiveContext::moveTo(const class opencascade::handle<class V3d_View> &, bool)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573214,7 +573214,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::DetectedOwner const class opencascade::handle<class SelectMgr_EntityOwner> &() const",
+      "upstream_id": "AIS_InteractiveContext::DetectedOwner() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573234,7 +573234,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::HilightNextDetected int (const class opencascade::handle<class V3d_View> &, bool)",
+      "upstream_id": "AIS_InteractiveContext::HilightNextDetected(const class opencascade::handle<class V3d_View> &, bool)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573244,7 +573244,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::highlightWithColor void (const class opencascade::handle<class SelectMgr_EntityOwner> &, const class opencascade::handle<class V3d_Viewer> &)",
+      "upstream_id": "AIS_InteractiveContext::highlightWithColor(const class opencascade::handle<class SelectMgr_EntityOwner> &, const class opencascade::handle<class V3d_Viewer> &)",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573254,7 +573254,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_SOD_Error enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_Error",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573264,7 +573264,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::isSlowHiStyle bool (const class opencascade::handle<class SelectMgr_EntityOwner> &, const class opencascade::handle<class V3d_Viewer> &) const",
+      "upstream_id": "AIS_InteractiveContext::isSlowHiStyle(const class opencascade::handle<class SelectMgr_EntityOwner> &, const class opencascade::handle<class V3d_Viewer> &) const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573274,7 +573274,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_SOD_SeveralGood enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_SeveralGood",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573284,7 +573284,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_SOD_OnlyOneDetected enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_OnlyOneDetected",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573294,7 +573294,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_SOD_Nothing enum AIS_StatusOfDetection",
+      "upstream_id": "AIS_SOD_Nothing",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_StatusOfDetection.hxx",
       "source_sha256": "2b368645308b9f37e7226a87a4101f3e3570a97cc1e25d84669b248f9185ab76",
@@ -573304,7 +573304,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::MoreDetected bool () const",
+      "upstream_id": "AIS_InteractiveContext::MoreDetected() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
@@ -573314,7 +573314,7 @@
       "notes": "Native AIS detection, independent cursors, dynamic highlighting and callback slot timing; tests/ais_detection_test.rs and v3_ais_detection compare real OCCT calls, failures and public camera picks. Context as a whole remains partial."
     },
     {
-      "upstream_id": "AIS_InteractiveContext::HasDetected bool () const",
+      "upstream_id": "AIS_InteractiveContext::HasDetected() const",
       "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
