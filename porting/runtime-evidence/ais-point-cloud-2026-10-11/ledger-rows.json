@@ -1,0 +1,382 @@
+[
+  {
+    "upstream_id": "AIS_PointCloud::DM_BndBox",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "00108d1f9b97c2d3d04f5a01fa22c0745a2cdf92d237d2f446c871d6b017face",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudDisplayMode::BndBox",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::get_type_descriptor()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "014b1ed648981a672378275838f85f6f25a150976c7985233467b636fd861bc6",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SetPoints(const class opencascade::handle<class NCollection_HArray1<class gp_Pnt>> &, const class opencascade::handle<class NCollection_HArray1<class Quantity_Color>> &, const class opencascade::handle<class NCollection_HArray1<class gp_Dir>> &)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "068853a62eaa1d1fe335908da5540939b0e808fcc3b49b3938fe112cd48dbd80",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSource::set_points_arrays",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::mySelPoints",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "1b04cacfd4d68a01eeaf7c323ac0cf83b9bce6557a7bf1493c1bcd7a21fbe843",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwnerFields::selected",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::myDetPoints",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "1e219181c16a485ad02aad53b8f69e58b75e75b6f9316d4e2b9235ec50c90133",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwnerFields::detected",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::base_type",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "25e8b60dd73d82fdae67b7d7c1e77f2f1400215381aa946b44e6d3f866318b63",
+    "rust_item": null,
+    "status": "excluded",
+    "notes": "Excluded: native RTTI base_type typedef is descriptor wiring; Rust impl_transient registers the same parent without a callable alias."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SetMaterial(const class Graphic3d_MaterialAspect &)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "293291357a7235780943acede018f790293828001ad37142472dbe2273bbbd0f",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_material",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::DM_Points",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "3770ea442dea56a84f40a5a8980dcb4143a48f006594cbaa5850c838abe5a670",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudDisplayMode::Points",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::Compute(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Graphic3d_Structure> &, int)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "3918c10e96672ce3687cf17203f8b506a8610478b1c8f8db35e39b17544261b3",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::DynamicType() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "3ab24852f4f2414e1dc4f14c3b5f481e5b9b37542f4d2595e0be214fc3f416b9",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkernel::standard::Transient>::dynamic_type",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::UnsetMaterial()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "40e66e85dd67d485736d419083c11a870b24c92781de87c318d905e288f8efa4",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_material",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::Clear(const class opencascade::handle<class PrsMgr_PresentationManager> &, int)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "4452abea48f9c963fec640070aa986e1c84b40a7133410227c1f81c8e8327397",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::clear",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::get_type_descriptor()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "4c527b5e83657cb2c31844cb5611a3e98e7b86e6f7094e6eb65888de231e0fba",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SetPoints(const class opencascade::handle<class Graphic3d_ArrayOfPoints> &)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "5ba1cd30b3119e93ab2ca8b3f3f97c99704215f7c1387a268e1ceceac490afb5",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSource::set_points",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::~AIS_PointCloudOwner() noexcept",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "66005f3fc3baa94309bdac0674b16576daf575f9cace03eb657a9173796d70d6",
+    "rust_item": null,
+    "status": "excluded",
+    "notes": "Excluded: AIS_PointCloudOwner destructor is defaulted in pinned OCCT 3d097a0; Rust drop glue releases both maps and inherited owner fields. No separate callable destructor is needed."
+  },
+  {
+    "upstream_id": "AIS_PointCloud",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "6736c7dfbd11c79a53c2b016389afcbe57de094a2ca0d1843c53f466808a300a",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::GetPoints() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "6e0525ca7dbe000c55471f746bd63fa46e9ca8baaced921a9466719071db9924",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSource::get_points",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::Unhilight(const class opencascade::handle<class PrsMgr_PresentationManager> &, int)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "72a47182c0f0cb69eb3a12d3680075a7dd40f82a67cbc11fc468a7f17bd93d34",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::unhilight",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::UnsetColor()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "731db9dd8d013911bd54039ea499ea159f00056d82c57a4c802ecc4563c24c29",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "7ce8c251449f072ca61975e538aa35968905da4f1b6f9ac9cbb6e7dcce795ec1",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::IsForcedHilight() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "88cc0ae70c956f27b90602b554e88bc7dd1dec42162a23e14dd555b79282c906",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::is_forced_hilight",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::get_type_name()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "8de66630f1048ec01a80810c07afbd6680316fef57de6c3291704bb4c85f2f80",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::base_type",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "90ecca9518cbb7914265a481f1960f33a1cb6f857c74c4f8e85b6c4f535b95d4",
+    "rust_item": null,
+    "status": "excluded",
+    "notes": "Excluded: native RTTI base_type typedef is descriptor wiring; Rust impl_transient registers the same parent without a callable alias."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::AIS_PointCloud()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "93eb789e6edb30a198c87536ff3b9ca87ada1a61532d715932e623090277a401",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::new",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::DetectedPoints() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "9a2be06400fd53e018f3a57a228c3eadf12b1cd2f7867583a6a3ee8ad4b50788",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwnerSource::detected_points",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SetColor(const class Quantity_Color &)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "a02329771cc04bdd37fa703019f6ddd39d602b2d596488f23f8e98811fc88e9f",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SM_SubsetOfPoints",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "a291e0d9cea9f0c474604267b280634cd458be7cae85879c67d151a2b4e87aef",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSelectionMode::SubsetOfPoints",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SelectionMode",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "b0ccc7b37f4ce9dd21e8bb8edd43b713265408abdde9427d8c55f7b7e441b16a",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSelectionMode",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::HilightWithColor(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Prs3d_Drawer> &, int)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "b220655da29d993d4b56a1237d6f48ddd66920490a96ee123e1d589c5b4dc84d",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::hilight_with_color",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::SelectedPoints() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "b53a99acaebf392aa461e69a25da5ab533f2cf3df4d49e85e51c023743b26695",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwnerSource::selected_points",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::get_type_name()",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "b64065f47431129ef443b4f17d59421c27b14680f45634a10781c7e92252049a",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SM_Points",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "b9fa6d0dcfb6426672b5d2904270d7c944345d3cf04d0fbcbef5c8ab04948c0c",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSelectionMode::Points",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::DynamicType() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "bba7764794f4969e81536b1703db6adf0a177f5ca1577ab927ef064fcbd8e9e4",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkernel::standard::Transient>::dynamic_type",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::DisplayMode",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "da4ee9b9f8d8f1a397d0648e1fbacab8f979f208fa44d4d0bebe394525c8fb15",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudDisplayMode",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloudOwner::AIS_PointCloudOwner(const class opencascade::handle<class AIS_PointCloud> &)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "e02de8d906bc5de07b5303afa3436f38da6f5f112ca575f1d3d64c01cd2ee604",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudOwner::new",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::ComputeSelection(const class opencascade::handle<class SelectMgr_Selection> &, int)",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "e13aead8e9741817a6193330e523703d7fb03ed435afda348f84c6a4aae088e3",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloud::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::GetBoundingBox() const",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "e33449797021d658e4659561773e7865a99c3b61044f6fb2676deedeaa1f6160",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSource::get_bounding_box",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  },
+  {
+    "upstream_id": "AIS_PointCloud::SM_BndBox",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_PointCloud.hxx",
+    "source_sha256": "47a7bb97f527b472551a84bf0e0c829a437f74f69b7fb030941557dd06583b93",
+    "cpp_declaration_id": "f7b63ad9cc8201f6b6ad2972633e6be280c0f9d256c3f7afda6d61c13b5c92b5",
+    "rust_item": "rustycad_tkv3d::ais::AisPointCloudSelectionMode::BndBox",
+    "status": "implemented",
+    "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; lit point-normal rendering and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+  }
+]

@@ -66,6 +66,7 @@
 #include "tkv3d_probe_ais_line.cxx"
 #include "tkv3d_probe_ais_circle.cxx"
 #include "tkv3d_probe_ais_point.cxx"
+#include "tkv3d_probe_ais_point_cloud.cxx"
 #include "tkv3d_probe_ais_axis.cxx"
 #include "tkv3d_probe_ais_plane_trihedron.cxx"
 #include "tkv3d_probe_ais_plane.cxx"
@@ -74,6 +75,9 @@
 #include "tkv3d_probe_context_location.cxx"
 #include "tkv3d_probe_animation_object.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"v3_ais_point_cloud", v3_ais_point_cloud},
+ {"v3_point_cloud_alias", v3_point_cloud_alias},
+ {"v3_point_cloud_owner", v3_point_cloud_owner},
  {"v3_animation_object", v3_animation_object},
  {"v3_base_animation_object", v3_base_animation_object},
  {"v3_context_location", v3_context_location},

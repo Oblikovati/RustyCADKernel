@@ -1,0 +1,94 @@
+{
+  "source_revision": "aae653c7ddb5779439d808b5f3313cd53d95da39",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_exact": {
+    "cases_passed": 77,
+    "comparator": "exact numeric bits, exception types and text",
+    "input_sha256": "a088d20b3c0a4208a233e850ac0dfa5228ef193c27eee7120e260b0f27dd7b8a",
+    "output_sha256": "e84c92ef645156768c7041fb7d41912157e3a558e7837f72e1018879a80f589e"
+  },
+  "renderer_parity_complete": false,
+  "accepted_overall_performance_baseline": false,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "capture_passed": 32,
+      "capture_failed": 34,
+      "role_checks_passed": 132,
+      "role_checks_total": 132,
+      "performance_workloads": 30,
+      "repeat_failures": [],
+      "point_cloud_update": {
+        "workload": "ais-point-cloud-updates",
+        "draws": 1,
+        "points": 1024,
+        "warmup": 20,
+        "validation": false,
+        "median_ms": 1.6081239999999999,
+        "mean_ms": 1.62211685,
+        "p95_ms": 1.731743,
+        "p99_ms": 2.001361,
+        "minimum_ms": 1.502839,
+        "maximum_ms": 2.030115,
+        "samples": 100
+      }
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "capture_passed": 12,
+      "capture_failed": 54,
+      "role_checks_passed": 132,
+      "role_checks_total": 132,
+      "performance_workloads": 30,
+      "repeat_failures": [
+        "text-glyphs median_ms=1.472ms exceeds 0.959ms",
+        "text-glyphs p95_ms=1.828ms exceeds 1.433ms"
+      ],
+      "point_cloud_update": {
+        "workload": "ais-point-cloud-updates",
+        "draws": 1,
+        "points": 1024,
+        "warmup": 20,
+        "validation": false,
+        "median_ms": 1.379947,
+        "mean_ms": 1.40389814,
+        "p95_ms": 1.517196,
+        "p99_ms": 1.76267,
+        "minimum_ms": 1.343475,
+        "maximum_ms": 1.830576,
+        "samples": 100
+      }
+    }
+  ],
+  "ledger_rows": 38,
+  "artifacts": {
+    "target-point-cloud-tests.log.gz": "5a77d07e7b27bd6473f7c480c8cb96fc29a5f524b6e5ea2b5333181862262426",
+    "rust-build.log.gz": "066de2f46d0347c53a3389ac6995af1fc686027f2fe69082824a54728217f268",
+    "point-cloud-lib-tests.log.gz": "d12f7cd4857d46ab15aa2d3100fbbbb23e1845c0dab5e3d5b66f19291b2428a9",
+    "ledger-rows.json": "670bf6cdd886dc9b3d8eb0b316d17b02cb2f61ed0be5b99eb9862e2d8677f806",
+    "point-cloud-performance-repeat.json.gz": "0da008d13719b72afa339c7c04cb5c3b7562ebc1d40c1db62a81deb105585610",
+    "captures.tar.gz": "b4cc525252da5619d312f46160161db25867cf6d54181ee3ab43d7bf62156303",
+    "point-cloud-renderer-integration.json.gz": "181eab93b8659ddd5b622e550565ef83b4eb1a901a7271151560413f61bf6c40",
+    "target-point-cloud-gpu-integration.log.gz": "bdb33fba867e0f6cb5b72b5884ac4991fab0fa505b549bc99a996d2a7bce75ef",
+    "native.txt.gz": "a16d22c09cbb2dd3346b37589ebdc215d0c758a5083e58a918fcfc9d07094f4d",
+    "target-cloud-python-tests.log.gz": "3a5cc3d4fa733b2937cd6d7a20a0c8341c0e98308801e2536bc28d84c2faf3d4",
+    "rust.txt.gz": "28655f54478f35f5bacdd80eaf4df9b9d47047e9828df4e719495955478fa9cf",
+    "target-point-cloud-clippy.log.gz": "c47f76bcd86cb85a571bf5b4aa0671586826623eb3e86c88eec470389099148a",
+    "report.json.gz": "0002ff4232d3bbba6592a42a342f657f30c2375fbb05851c2d3decc75d5c0b65",
+    "inputs.txt.gz": "21448411154abed4407d4cd52dbc0443fc2d804c64b9db23dc34f31cdc9df927"
+  }
+}

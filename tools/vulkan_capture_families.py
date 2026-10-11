@@ -23,7 +23,10 @@ from vulkan_plane_presentation_cases import PLANE_PRESENTATION_MODES
 
 from vulkan_ais_plane_cases import AIS_PLANE_MODES, QUAD_MODES
 
+from vulkan_point_cloud_cases import POINT_CLOUD_MODES
+
 ALL_CAPTURE_MODES = (
+    *POINT_CLOUD_MODES,
     *AIS_PLANE_MODES,
     *QUAD_MODES,
     *PLANE_PRESENTATION_MODES,
@@ -52,6 +55,7 @@ ALL_CAPTURE_MODES = (
 )
 
 FAMILY_CAPTURE_MODES = {
+    "point-cloud": POINT_CLOUD_MODES,
     "ais-plane": (*AIS_PLANE_MODES, *QUAD_MODES),
     "plane-presentations": PLANE_PRESENTATION_MODES,
     "text-label": AIS_TEXT_LABEL_MODES,
@@ -70,5 +74,5 @@ def capture_modes(case_family: str) -> tuple[str, ...]:
     if case_family in FAMILY_CAPTURE_MODES:
         return FAMILY_CAPTURE_MODES[case_family]
     raise ValueError(
-        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations or ais-plane"
+        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations or ais-plane or point-cloud"
     )

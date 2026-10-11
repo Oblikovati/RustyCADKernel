@@ -4,6 +4,7 @@ mod enums;
 mod presentable_defaults;
 mod presentable_dump;
 mod presentable_members;
+pub(crate) use presentable_members::prs_mgr_initialize_hilight_mode;
 mod presentable_object;
 mod presentable_style;
 mod presentable_updates;

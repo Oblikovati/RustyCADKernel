@@ -71,6 +71,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    brackets, live orientation, lighting/clipping transforms and native cap filtering.
    [AIS text labels](ais-text-label.md) add native font-measured annotation placement,
    sensitive rectangles, retained aspect changes and viewer persistence transitions.
+   [Point clouds](ais-point-cloud.md) now preserve aliased/copied buffers, cached
+   bounds, application geometry callbacks and forced subset-owner highlighting,
+   with native comparisons and both GPU profiles. Continue lit point-normal
+   rendering and retain the strict point/line raster gates alongside update timings.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

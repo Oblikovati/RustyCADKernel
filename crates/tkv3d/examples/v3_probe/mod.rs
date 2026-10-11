@@ -116,3 +116,5 @@ pub mod context_location;
 pub mod plane_presentations;
 
 pub mod ais_plane;
+
+pub mod ais_point_cloud;

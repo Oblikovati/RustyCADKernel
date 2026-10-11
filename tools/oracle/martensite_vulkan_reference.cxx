@@ -87,6 +87,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_ais_text_label.cxx"
 #include "martensite_vulkan_plane_presentations.cxx"
 #include "martensite_vulkan_ais_plane.cxx"
+#include "martensite_vulkan_point_cloud.cxx"
 #include "martensite_vulkan_quadrangles.cxx"
 #include "martensite_vulkan_lighting.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
@@ -149,6 +150,11 @@ static void run_scene(int argc, char **argv) {
     return;
   }
   const bool rasterControl = raster_control_option(argc, argv);
+  if(mode.rfind("cloud-",0)==0) {
+    MartensiteOraclePointCloudScene scene(viewer,mode,offset);
+    if(mode.find("subset")!=std::string::npos)scene.detect(view,mode=="cloud-subset-selected");
+    write_capture(view,width,height,argv[5],mode=="cloud-subset-detected");print_device(view);view->Remove();return;
+  }
   if(mode.rfind("aisplane-",0)==0) {
     MartensiteOracleAisPlaneScene scene(viewer,mode,offset);
     if(mode=="aisplane-detected")scene.detect(view);

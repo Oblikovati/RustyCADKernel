@@ -20,6 +20,7 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__("tkv3d_corpus_plane_trihedron").append_plane_trihedron_requests(requests)
     __import__("tkv3d_corpus_ais_axis").append_ais_axis_requests(requests)
     __import__("tkv3d_corpus_ais_point").append_ais_point_requests(requests)
+    __import__("tkv3d_corpus_ais_point_cloud").append_point_cloud_requests(requests)
     __import__("tkv3d_corpus_plane_presentations").append_plane_presentation_requests(requests)
     __import__("tkv3d_corpus_ais_plane").append_ais_plane_requests(requests)
     __import__("tkv3d_corpus_ais_line").append_ais_line_requests(requests)

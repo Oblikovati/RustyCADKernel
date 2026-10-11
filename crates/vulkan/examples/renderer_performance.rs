@@ -53,6 +53,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_text_label_performance::benchmark(&driver, warmup, samples);
     plane_presentation_performance::benchmark(&driver, warmup, samples);
     ais_plane_performance::benchmark(&driver, warmup, samples);
+    ais_point_cloud_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -215,3 +216,8 @@ mod plane_presentation_scene;
 mod ais_plane_performance;
 #[path = "../tests/support/ais_plane_scene.rs"]
 mod ais_plane_scene;
+
+#[path = "support/ais_point_cloud_performance.rs"]
+mod ais_point_cloud_performance;
+#[path = "../tests/support/ais_point_cloud_scene.rs"]
+mod cloud_scene;
