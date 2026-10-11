@@ -1,0 +1,77 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "host": "Linux x86_64",
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "build_command": "c++ -std=c++17 -I ../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/martensite_view_cube_interaction.cxx -L ../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKV3d -lTKService -lTKMath -lTKernel -o target/oracle/view-cube-interaction",
+  "runs": 2,
+  "byte_identical": true,
+  "record_count": 1808,
+  "native_output_sha256": "2f7dbc324d13934d10e6bbbdd43cda9487c93b1ba02efa726e0bedf5c8817c6a",
+  "generator": {
+    "path": "tools/oracle/martensite_view_cube_interaction.cxx",
+    "sha256": "f20331bb5f9b7f96fc9ee4351dc6d27ff3e71d5c4e5d6e29a9c6b38301d42f19"
+  },
+  "named_null_driver": {
+    "path": "tools/oracle/tkservice_probe_null_driver.cxx",
+    "sha256": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5"
+  },
+  "header": {
+    "path": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+    "sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8"
+  },
+  "assets": [
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-interaction-camera-targets.txt",
+      "records": 468,
+      "sha256": "2ed28c1b785abf4dd0667ec8ce648e6dc0fa428430f5b0105e67a97f4a8ec918"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-interaction-frames-orthographic.txt",
+      "records": 312,
+      "sha256": "9cc25dc0ecfc2a93398439015261b69d86ba1324a910be379a9ad05c29d2696f"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-interaction-frames-perspective.txt",
+      "records": 312,
+      "sha256": "c516371261665592b027ef4f52e274b815eb6424cb2ee9abb225ab32b24609a9"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-interaction-selection-state.txt",
+      "records": 92,
+      "sha256": "deaead52afd85f1c2dfb72779b5a166fb87cd2d093657a2adc4a00166924f5c1"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-interaction-steps-orthographic.txt",
+      "records": 312,
+      "sha256": "9da86577781463b6bfa31445239fb642b5ac55e27cbddd174eb5eea296671823"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-interaction-steps-perspective.txt",
+      "records": 312,
+      "sha256": "09bc398f3ee0659e343c40eabb556bc85257c000991a899630d10c7b3186ab0d"
+    }
+  ],
+  "native_calls": [
+    "AIS_ViewCube constructor/default attributes/dynamic highlight",
+    "ComputeSelection / actual AIS_ViewCubeOwner and AIS_ViewCubeSensitive",
+    "AIS_ViewCubeSensitive::isValidRay and Matches with SelectMgr_AxisIntersector",
+    "HilightOwnerWithColor / actual Graphic3d groups and indexed buffers",
+    "StartAnimation / viewFitAll / real camera fit and quarter-turn orientation",
+    "UpdateAnimation / native timer seek and camera interpolation",
+    "Owner HandleMouseClick / disabled, manual and fixed-loop policies"
+  ],
+  "determinism": "Named SeekAnimation subclass stops/seeks Media_Timer then calls native AIS_AnimationCamera::UpdateTimer; no interpolation replacement. Context subclass exposes protected last-active-view assignment; real default drawer linkage. Rust injects a named clock into the existing MediaTimer.",
+  "limits": [
+    "Linux CPU proof only; no device/raster/performance claim",
+    "No successful claim for bare-drawer null native crashes",
+    "Three whole-class records remain partial; generated type-alias/RTTI entry points and remaining ViewCube appearance management are not exhaustively mapped",
+    "Native undefined null dereferences become typed Martensite errors; these error regressions are Rust-only"
+  ]
+}

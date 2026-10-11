@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "AIS_ViewCubeOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "97afb992d5676c6d48f7c7f579dd84ba41c452f3b2fbac2dec47b0bec32b816b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner",
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+    },
+    {
+      "upstream_id": "AIS_ViewCubeOwner::AIS_ViewCubeOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "d7e441c0b27fde0835d180a2fb06d7d695361de230a7d7cd18ccbbc03e243af2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::new",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeOwner::new",
+          "declaration_sha256": "82a1783e2f5bec0b40ab550cf4d5c1ff40bb36b0bb8a219718e49def7c0a5cb9",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeOwner::MainOrientation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "9c3a619b7e3454f53b5e5d01cf64ecad546b7b3a12782aa61a34f41f4c50bf22",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::main_orientation",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeOwner::main_orientation",
+          "declaration_sha256": "9960fd9fefa4e2fc1e6d97ac186bdb23523d12ac5c2049bd7f4b74c916c8964f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeOwner::IsForcedHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "d048090d02c2bfc43716c55767eb6d8363a1a0e0b9c09a7f47df974480e34fdf",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource>::is_forced_hilight",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource>::is_forced_hilight",
+          "declaration_sha256": "14b1e3b713c041445c2a9636d93455c904d21f9c54c82fc1430b802ed7b1976b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "SelectMgrEntityOwnerSource",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource",
+              "args": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeOwner::HandleMouseClick",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "e470da8c2c35f8bc82613990c58c28b15f6933382eecdc39a085361faf9b4406",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource>::handle_mouse_click",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource>::handle_mouse_click",
+          "declaration_sha256": "ab35d1bd61fc9ff94673050db6573c7f7dc1d923820260a4c89248a9ca32cea0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "SelectMgrEntityOwnerSource",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource",
+              "args": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeOwner::myMainOrient",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "f1ce3214dcc820834ab1b9099aa715ffcbb607577a547c41bb6399a65f635fdc",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::orientation",
+      "rust_kind": "struct_field",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+    },
+    {
+      "upstream_id": "AIS_ViewCubeSensitive",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "968a5c423c41e5e8e1ddf358b5282e516640fc2eb9d846cf2a261bfda49b535a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeSensitive",
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+    },
+    {
+      "upstream_id": "AIS_ViewCubeSensitive::AIS_ViewCubeSensitive",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "a2c1d0fff0f44b913545dab2a79a944237df562f854d70b5168c27229553d1eb",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeSensitive::new",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeSensitive::new",
+          "declaration_sha256": "60b85bf8c830949b64cf7f0fe2ab5fd7143fffb317c3bbfc8cebfbf2cf25b377",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeSensitive",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_sensitive::AisViewCubeSensitive",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeSensitive::Matches",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "4d641ec1c8b27dcd723666dc5a903af879dc512b67e0ba447ed9996f01759000",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeSensitive::<rustycad_tkv3d::select3d::sensitive_entity::Select3DSensitiveEntity>::matches",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeSensitive::<rustycad_tkv3d::select3d::sensitive_entity::Select3DSensitiveEntity>::matches",
+          "declaration_sha256": "83bc5ebffe1f29dd99eefb1ca0e59ed8f820d7f888e3ff40c4e573de7fe52d23",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeSensitive",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_sensitive::AisViewCubeSensitive",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "Select3DSensitiveEntity",
+              "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_entity::Select3DSensitiveEntity",
+              "args": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeSensitive::isValidRay",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "353e917ae108fc1a2097572e00a8641e3cf72a1584098350fadc730b8ffeb0a3",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeSensitive::is_valid_ray",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeSensitive::is_valid_ray",
+          "declaration_sha256": "a1354b2fe8bdec4f737eb3cfdecef23416f84987342f4571fc0216abc01d33dc",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeSensitive",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_sensitive::AisViewCubeSensitive",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    }
+  ]
+}
