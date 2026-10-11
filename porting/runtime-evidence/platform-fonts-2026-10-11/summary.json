@@ -1,0 +1,107 @@
+{
+  "pinned_occt": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "external_freetype": "42608f77f20749dd6ddc9e0536788eaad70ea4b5",
+  "windows_execution": "Windows GNU target under Wine; not native MSVC runner",
+  "windows_strict_runtime_tests": 2,
+  "windows_library_tests": 82,
+  "windows_group_flipping_tests": 4,
+  "host_tkservice_tests": 237,
+  "native_windows_ci": "pending push and execution",
+  "native_macos_runtime": "pending real runner",
+  "inventory_api_done_last_verified": 52037,
+  "inventory_api_scope": 76041,
+  "configuration_matrix_complete": false,
+  "artifacts": {
+    "README.md": "81a8d5e94a93b80552b4cb5ce4c9efc8ad3beabe99aa9aeb5d43d1179ddd1a04",
+    "all-host-tests.log.gz": "cc24a572a7216f6b871d4c3104410a6de090c1e95699dfe511efc2dc56559f7f",
+    "captures.tar.gz": "aa586fea1793d05851aad08ca01da18d21859f27b45d7d477020db7add6ba3f7",
+    "compiler-capture.log.gz": "71a50bb10ace62287406af4d704ce0ecb024ff5b3e2ffb45c7d4e352ad3752a9",
+    "cross-clippy-final.log.gz": "04335723e94b55ce6c027ca426c6ee0a7dfda62ece65c88565cbce131c2790fd",
+    "freetype-build.log.gz": "fdd43f09feea1a62f6644098ec15c50bf929c8533d8491366a1297151cdd0968",
+    "gpu.log.gz": "6e438c78bca0b5c76d8431b8cd46627f8c3d3053bbcfac95008639ca8d763beb",
+    "host-clippy-final.log.gz": "0072c4329b963836699be81884783dbd4ee4d8f61b4780ecafe910d49c998bc4",
+    "inventory-coverage.log.gz": "e301fb1df4ec9f65946d3ea8e3cadcfe78635161c9068ae0de20e948c25d613f",
+    "inventory-normalize.log.gz": "bd99562db83217eed4186966b825097c0f26ebd0b0f20173fcf719a2225cc345",
+    "macos-check.log.gz": "c8ec49e9d8715086976f8c75ec5e1a81db62a626fe3e91e8615c349b8b723b8c",
+    "numeric.log.gz": "61cef5ef4b1e94e00375b7990493288be0602310cdfd678ffc563de4316c3547",
+    "performance-repeat.json.gz": "2bb36599bc412e53ff3a3a4de00eb9891f13f5b59a480cb57ec68820ab21ca13",
+    "renderer.json.gz": "4fd29b15dfcf8d5cc94cf00ec873f892474bfa5ea3c375f09545a92dd430d9f2",
+    "windows-flipping.log.gz": "d7bd1acf1ca575dd94a69b294bfc23cf9cae0724f9d455b145843850ebad779c",
+    "windows-green.log.gz": "cf79161fa1dae0f7af299834cf7b63a1e412fda9ef9eede4879cbae35dff89ac",
+    "windows-red.log.gz": "7351cd48402c9e87ed29f657a830bceafc1ee0b7897d33faed7e263fdcaf4327",
+    "windows-units.log.gz": "35fa9dcda116dcdf3414470a2f37c400917bec8c1a33e51379f6bb6260f23fbd"
+  },
+  "source_revision": "c28965c2cb842f3f5f9a34733f67e2e9bab0f086",
+  "numeric_comparisons": 3142,
+  "strict_renderer_parity": false,
+  "accepted_overall_performance_baseline": false,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "strict_passed": 50,
+      "strict_total": 54,
+      "runtime_checks": 20,
+      "analytic_lighting_pixels": 61440,
+      "performance_workloads": 32,
+      "text_workload": [
+        {
+          "workload": "text-glyphs",
+          "draws": 1,
+          "glyphs": 1024,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 1.9586230000000002,
+          "mean_ms": 2.05776144,
+          "p95_ms": 2.548695,
+          "p99_ms": 3.528447,
+          "minimum_ms": 1.7203220000000001,
+          "maximum_ms": 3.7391870000000003,
+          "samples": 100
+        }
+      ],
+      "repeat_failures": [
+        "window-resize-present median_ms=7.228ms exceeds 2.078ms"
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "strict_passed": 51,
+      "strict_total": 54,
+      "runtime_checks": 20,
+      "analytic_lighting_pixels": 61440,
+      "performance_workloads": 32,
+      "text_workload": [
+        {
+          "workload": "text-glyphs",
+          "draws": 1,
+          "glyphs": 1024,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 0.7591589999999999,
+          "mean_ms": 0.78603239,
+          "p95_ms": 0.885408,
+          "p99_ms": 1.1548559999999999,
+          "minimum_ms": 0.7363120000000001,
+          "maximum_ms": 1.2787359999999999,
+          "samples": 100
+        }
+      ],
+      "repeat_failures": []
+    }
+  ],
+  "unresolved_parity_rows": 0
+}

@@ -58,6 +58,16 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: tools/ci/install_windows_tcl.ps1
+      - uses: actions/checkout@v7.0.1
+        if: runner.os == 'Windows'
+        with:
+          repository: freetype/freetype
+          ref: 42608f77f20749dd6ddc9e0536788eaad70ea4b5 # FreeType 2.13.3
+          path: target/freetype-source
+      - name: Install Windows FreeType prerequisite
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: tools/ci/install_windows_freetype.ps1
       - run: rustup show
       - run: python3 tools/check_rust_format.py
         if: matrix.shard == 0

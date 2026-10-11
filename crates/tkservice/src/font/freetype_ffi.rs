@@ -260,7 +260,15 @@ pub(crate) fn freetype() -> Option<&'static FreeTypeApi> {
 }
 
 fn load() -> Option<FreeTypeApi> {
-    let lib = DynamicLibrary::open(&["libfreetype.so.6", "libfreetype.so", "libfreetype.6.dylib"])?;
+    let lib = DynamicLibrary::open(&[
+        "libfreetype.so.6",
+        "libfreetype.so",
+        "libfreetype.6.dylib",
+        "freetype.dll",
+        "libfreetype.dll",
+        "freetype6.dll",
+        "libfreetype-6.dll",
+    ])?;
     bind_symbols!(
         &lib,
         FreeTypeApi {
