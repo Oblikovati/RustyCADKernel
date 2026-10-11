@@ -86,7 +86,14 @@ fn locale_conversions_follow_the_c_locale() {
     text.from_locale(b"abc", -1);
     assert_eq!(text, utf8("a")); // mblen measures the first character only
     text.from_locale(&[0xC3, 0xA9], -1);
-    assert!(text.is_empty() && text.length() == 0);
+    // Apple Libc 71bbe350 maps the first C-locale byte directly to a wide value.
+    let expected = if cfg!(target_os = "macos") {
+        utf8("\u{c3}")
+    } else {
+        String8::new()
+    };
+    assert_eq!(text.length(), expected.length());
+    assert_eq!(text, expected);
     text.from_locale(b"", -1);
     assert!(text.is_empty());
 }
@@ -98,7 +105,7 @@ fn to_locale_mirrors_wcstombs_results() {
     assert!(utf8("abcdef").to_locale(&mut buffer));
     assert_eq!(buffer, *b"abcd"); // a full buffer gets no terminator
     let mut buffer = [0x55u8; 4];
-    assert!(utf8("a\u{e9}").to_locale(&mut buffer)); // error still reports true
+    assert!(utf8("a\u{20ac}").to_locale(&mut buffer)); // error still reports true
     assert_eq!(buffer, [b'a', 0x55, 0x55, 0x55]);
     let mut buffer = [0x55u8; 2];
     assert!(!String8::new().to_locale(&mut buffer));
