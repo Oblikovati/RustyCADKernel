@@ -185,3 +185,16 @@ pub use rubber_band::{
 };
 pub use rubber_band_presentations::ais_rubber_band_compute;
 pub use rubber_band_triangles::ais_rubber_band_fill_triangles;
+
+mod view_input_buffer;
+mod view_input_motion;
+mod view_input_types;
+pub use view_input_buffer::AisViewInputBuffer;
+pub use view_input_motion::{
+    AisViewInputDragging, AisViewInputOrbitRotation, AisViewInputPanning, AisViewInputRotation,
+    AisViewInputZRotation,
+};
+pub use view_input_types::{
+    AisViewInputBufferType, AisViewInputHighlighting, AisViewInputOrientation,
+    AisViewInputSelection, AisViewSelectionTool,
+};

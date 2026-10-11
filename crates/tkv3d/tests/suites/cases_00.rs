@@ -119,3 +119,5 @@ pub mod viewer_selector_pick;
 pub mod viewer_selector_state;
 #[path = "../viewer_selector_traversal.rs"]
 pub mod viewer_selector_traversal;
+#[path = "../ais_view_input_buffer.rs"]
+pub mod ais_view_input_buffer;

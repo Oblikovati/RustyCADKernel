@@ -91,7 +91,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    [Rubber-band overlays](ais-rubber-band.md) now preserve live screen-point sequences,
    frontier-constrained polygon filling, reusable geometry and application subclass hooks,
    with paired native captures and polygon-update timings.
-   Continue the remaining presentation and legacy renderer capabilities
+   [AIS view input buffers](ais-view-input-buffer.md) now preserve all public gesture
+   records, native defaults and reset/copy semantics through committed oracle assets.
+   Continue the dependent AIS view controller alongside the remaining presentation
+   and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
    lavapipe and the native host GPU.

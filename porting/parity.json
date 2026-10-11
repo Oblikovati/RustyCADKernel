@@ -589332,6 +589332,686 @@
       "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_rectangle",
       "status": "implemented",
       "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::OrbitRotation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "04be4a0f99789bc471fc128ac65d064c96315c352022acc03a0246225600b588",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::orbit_rotation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBufferType_GL",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "0ee2dea058f0e0688bd6d066f9d817a8cbaf70d795c689f23dc4c03d06cda9eb",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBufferType::Gl",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_panningParams::ToStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "0f94f490a79a5741981971c17852023f75f01b74f8e79055ceac84ea01da373d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputPanning::to_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::ToConfirm",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "10efa82e84d59dff92b2cc892f85f86af42f51c81c498b065e1c5d28d4ecc427",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::to_confirm",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_viewRotation::ToRotate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "1428e8745ebcc0b004fe258d86e4fd0d1fd8845777943fa7ed82be7e733562ed",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputRotation::to_rotate",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::PointStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "1483ed9f72e6df4e52b78264e168a940ad1689dd78f6dbfc3fcf6cb5a33f9399",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::point_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::ToMove",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "14a4aa43835101fae793e5605d57bd3adb74233b1173b978e00b2739cb587593",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::to_move",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_selection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "158c20ac019cecdf9022dd51cd140dda5f36dbcf3ab4ca4f8f0feffebac3f87f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputSelection",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_selection::Tool",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "184ad9a13325ca5959cd02b4e726123d0daa4245a37395a239b3633dba08b363",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputSelection::tool",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_viewRotation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "1928308ef7c00d44d87a9e6808e253b8fde5d89c5084e3c6a2e9ae56ef8f1b1a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputRotation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::AIS_ViewInputBuffer()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "250a54741066a90c1d64afe82f0c08374d80ba6b5a6c6e80b5af1b858299210b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::new",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::IsNewGesture",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "2b05d686c0aff2f71779527776102ca44c31500ca50f677570f6030a0c368ef2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::is_new_gesture",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::Panning",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "352ae6477f64debcaa8e27320b4affe66da04d795627b1d1342436311fab3842",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::panning",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewSelectionTool_Polygon",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "37e2b338a1a7401f891c4eea10330ca2f97b08cd25b8b9f0897d4d6668ae2ef5",
+      "rust_item": "rustycad_tkv3d::ais::AisViewSelectionTool::Polygon",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_viewRotation::PointTo",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "38c6ea878b3e47d8363b934b6d085c2b6b88bcac872a6f357df982533b85269c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputRotation::point_to",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::Dragging",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "39217787bfec10918d2bf2c665bf78feeed85144440f8dbafbbc88081f3b9bad",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::dragging",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::ZoomActions",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "3a6b0a92b68aed67a96096072bc1e0c2dd633ed1f5098bd65688e3a29b465105",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::zoom_actions",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_zrotateParams::Angle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "3b7ece0b49172bfb2f72900f5368bc4cd1b7a7a7f294c231dee1c7358655f7bd",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputZRotation::angle",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::Reset()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "3e70c57647d5978566526957bde4d77f9bf5e47a6fb51f7d8889a7dccdf0e7c2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::reset",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewSelectionTool",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "3f0ea39e7d89721b970958e32e9869a9216aa4d728fa33fcca61ce7e39020fa7",
+      "rust_item": "rustycad_tkv3d::ais::AisViewSelectionTool",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::PointTo",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "40eaa2a2d81b18ad01bed4f0327d816b4a73065b710441c5b6102ed669992729",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::point_to",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::Orientation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "411122bc8854ac4bad73e1d8fccdf60bab8ea3e1fd8d4513fae7f7daa7bdf7f9",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::orientation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orbitRotation::ToRotate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "4353110b7fe82b5abfddd7e4cd88144ee69f5ddff7bfbe35a8792368e880b8d9",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrbitRotation::to_rotate",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_highlighting::Point",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "453616c0f05b93f078953971826134cf89f996d7b1c5d0529ffafd5e9cf8903e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputHighlighting::point",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_zrotateParams::Point",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "49be8f119e2d5842fc04c81437a95eac6f0358a50d05ff6c921d0671cae9c52e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputZRotation::point",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "4e1c1c6f695a4f8659e44fa21c47843e1abd70eb8df3e7a82ad33750682c3311",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_viewRotation::ToStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "526b941fca81cd98d8b4214545b05a3bc62e5ab43d522ab09187b4c582678ef7",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputRotation::to_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::Selection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "5296de7c672d8daccba034487610c4ab6f73a81ff78d4e183da9257b2c81ce60",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::selection",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orientation::_orientation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "52d62be6601b4645c6037156d2e8596e6288f1a57bc5bf9b71641bca5d4d8a1f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrientation::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "587f49a0467f2f7cf38636472b239bf8bd26b3ae8a0cc261c77f3f3be712e8e2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::ZRotate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "5a7ab84608f69b7cb1c49f2f5d6824e591b0c9856a17ba8885aeaa2458f239f0",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::z_rotate",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_zrotateParams::_zrotateParams()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "5b3a925949e7c871b5976cff51db7f213e1b073958c316ed7bfd3c8d90ce5822",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputZRotation::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::ViewRotation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "5bc86637ce93224460c4529eaeaceb8e1fa3eb89fa60bb601c0c77e486d3dc55",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::view_rotation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_highlighting::_highlighting()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "5ca952bf183f3f4836215c343be9fed8a1369a088430d8c08245fd45a787a896",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputHighlighting::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orientation::ViewOrient",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "628e881ea11bbb59d491d3f0499c70710d33f6b7be505cc99eeb9ffa584917e0",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrientation::view_orient",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_highlighting",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "6c90632b9b36130fa366b9f17e1620c4f03e154375f03fafddecdc9c6e68751c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputHighlighting",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_panningParams::ToPan",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "6cce212058409ef1841a4fc86a6b397053df8052dc6f005e8baa5513cbbcdd33",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputPanning::to_pan",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_zrotateParams::ToRotate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "6daa3bb9ecdb93164245c8fc22f335257cb95a333105f477ecc6b34106ee7454",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputZRotation::to_rotate",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_panningParams::Delta",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "7044b1a75ac707292483fe151f12b1ff64d86a86f20cc3e43ceda008ee46c1a5",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputPanning::delta",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_selection::Scheme",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "7315285f5c7b9630c09eaacaca9a008e8aa49ff1da04a59868af9255dde21436",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputSelection::scheme",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orientation::ToFitAll",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "7bdaf90f8571dc2e03b56467254d2c470eed55e01efbb995a479325e59e10e5c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrientation::to_fit_all",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::_draggingParams()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "7c1357f8ac2274415067623c52e6bd021ed7e38bc20928de6cd4d117306f0246",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orbitRotation::ToStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "8ae97aa2e866270b8eefadb3b30e694104dc12d584a8b44f61e96e7474b6a66d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrbitRotation::to_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewSelectionTool_ZoomWindow",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "8b5e61964560b979cf79386c7166c5bb5ca23d3eb677e949de74ae01e9428df8",
+      "rust_item": "rustycad_tkv3d::ais::AisViewSelectionTool::ZoomWindow",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orbitRotation::_orbitRotation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "92c991804a4c63ecfd0875eb825b3d315eac678f2888df984fa0265fe6eff4f5",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrbitRotation::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::MoveTo",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "937cbb986088c3b17871e6241cc8a1321f1b005c2f930fc6e0cb79baea2712cb",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBuffer::move_to",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::ToStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "9800a5ccda9ce304a6e991ecbc2176878e7523c868f5a1c0a5189d458af1da36",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::to_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::ToAbort",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "98a30327a6a0b513415d3346fc162baf17637e7c98a7843ae837d0d541ae052f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::to_abort",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_zrotateParams",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "9afe035e1665e25d28f3704a6db8f0921fffb0ef2cf86c8796e09c2815a17ba6",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputZRotation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBufferType_UI",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "9f216848967ec7941ef38ce9d7f1b700ec46e2c1d0a101f610d0a7ef678efe8a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBufferType::Ui",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_panningParams",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "a29c5af8666173dd3c616ab58f2a53641b58f8d49afe97e81f27db58a4205adc",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputPanning",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_selection::_selection()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "a8998f871fb3cd83bb2b93bfffa082af3d56e8e0f182c2d483f2ec2244271ba9",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputSelection::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewSelectionTool_Picking",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "a8b09ad251132390f6326934f1119f742a579f99adc2f662c339ca1b22f8087a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewSelectionTool::Picking",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orientation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "a8ba33c026f7b15e1b1ad58854dbeeb6b654c11a1c10394fcbdd1d76fa1be31b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrientation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_selection::Points",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "a9cf85f4ca80fe86faa2b242c522bd9e1eea890da3129a2c78a6381825ae1217",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputSelection::points",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_selection::ToApplyTool",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "a9eb83bb6ed528b94ca067c35ba45cba0b599f70da8f8132b1affc489aef63e6",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputSelection::to_apply_tool",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orbitRotation::PointStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "b0a8dedb193677c1e25c7c84889c851a94b35ff22848951715c6263b032f0faf",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrbitRotation::point_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_viewRotation::PointStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "bc386bdd795441e1c8ab6eeab4a0b9347da35e3abb79947d4a494e349e80e7e4",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputRotation::point_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_panningParams::PointStart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "bd23b4a69a43345fbf365d1aba9de54dbd63ea77632325478b99771811617964",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputPanning::point_start",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orbitRotation::PointTo",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "c055425ff216a3c0b21db0a4e221017788d2cff56e06b70a94d89efbe663572d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrbitRotation::point_to",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orbitRotation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "c87b145deb0e484ee4c2ad4d3ecb231be37272c55aa56afe82042ac4b1d91716",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrbitRotation",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_panningParams::_panningParams()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "cb8939fe32c85eb7863c6c7055b132a95a042119ce3eae17e6b8a8bf3a3209c9",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputPanning::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewSelectionTool_RubberBand",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "d758a89825cf9871dc0baa6a8e0b46fff08b05f7ea910c19136086bca62b1faf",
+      "rust_item": "rustycad_tkv3d::ais::AisViewSelectionTool::RubberBand",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_draggingParams::ToStop",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "d8d2e05d4f6d8e1bbed960fb87c8caeed48966735c568cbc3287c1e95ee647ef",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputDragging::to_stop",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBufferType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "dcda6d232e49b0aa8fcec03e273e5cae5dc0e1e7dbdf49c28194a2b43ab2149e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputBufferType",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_viewRotation::_viewRotation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "e065df9c24cea08dae569e06ec5833e6b7993658fa2f9cb448c353f8b066dd58",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputRotation::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_orientation::ToSetViewOrient",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "f5d085d65aeb3998746d9331e1bcc12ed1c55538352998f381e478b04472a69e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputOrientation::to_set_view_orient",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewInputBuffer::_highlighting::ToHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewInputBuffer.hxx",
+      "source_sha256": "ceeb989395a9e3ad29696d2eeea887a775c8eae3ed232b3d6767cc9d7108f857",
+      "cpp_declaration_id": "f78d49d58e3cb0caaff0899272b2277215044b41e59c01c4a03f5b91a338a4d8",
+      "rust_item": "rustycad_tkv3d::ais::AisViewInputHighlighting::to_hilight",
+      "status": "implemented",
+      "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
     }
   ],
   "tests": [
