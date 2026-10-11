@@ -147,45 +147,8 @@ jobs:
           path: target/occt-source
       - run: python3 tools/porting.py check --source target/occt-source
       - run: python3 tools/porting.py status
-  tkernel-oracle:
+  tools:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: actions/checkout@v7.0.1
-        with:
-          repository: Open-Cascade-SAS/OCCT
-          ref: 3d097a0328e71b826377d4814ab05ec3c3d23871
-          path: target/occt-source
-      - run: rustup show
       - run: python3 tools/run_tool_tests.py --jobs 2
-      # OCCT embeds git rev-parse --short; match the pinned ten-digit version literal.
-      - run: git -C target/occt-source config core.abbrev 10
-      - run: python3 tools/verify_tkernel.py --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKMath --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKG2d --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKGeomBase --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKBRep --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKGeomAlgo --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKTopAlgo --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKHelix --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKShHealing --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKPrim --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKHLR --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKFillet --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKBool --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKCDF --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKLCAF --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKCAF --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKDE --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKXSBase --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKExpress --source target/occt-source --jobs 2
-      - run: sudo apt-get install -y libfreetype-dev libfontconfig-dev libx11-dev
-      - run: python3 tools/verify_toolkit.py TKService --source target/occt-source --jobs 2
-      - run: python3 tools/verify_toolkit.py TKV3d --source target/occt-source --jobs 2
-      - uses: actions/upload-artifact@v7.0.2
-        if: always()
-        with:
-          name: tkernel-oracle-evidence
-          path: |
-            target/oracle-tkernel/
-            target/oracle-tkmath/

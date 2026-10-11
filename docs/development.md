@@ -115,7 +115,19 @@ are Phase 0 work, not implemented by the status command.
 The working focused oracle is `python3 tools/verify_tkernel.py`. It compiles the
 unchanged mapped C++ suites and compares their Rust translations. Run
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for mapped TKMath suites and
-their numeric corpus. Both verifiers are required by the Linux oracle CI job.
+their numeric corpus. Native OCCT comparisons run locally during porting; they
+are not CI or release gates. Keep their provenance and captured fixtures so
+ordinary Martensite Rust tests remain independent of the oracle. For a pinned
+local source checkout, run:
+
+```sh
+git -C ../OCCT config core.abbrev 10
+python3 tools/verify_tkernel.py --source ../OCCT --jobs 2
+python3 tools/verify_toolkit.py TKMath --source ../OCCT --jobs 2
+```
+
+Select the affected toolkit for other ports instead of rebuilding every native
+suite on every push. The source revision must match `porting/baseline.json`.
 
 Use a separate CMake build for the pinned source. OCCT's actual option is
 `BUILD_GTEST=ON`; its test executable target is `OpenCascadeGTest`. The current
@@ -147,12 +159,13 @@ reproducible build profiles and runtime manifests for those configurations.
 ## CI boundaries
 
 The checked-in CI validates Rust on Linux, macOS and Windows; Linux jobs also run
-nextest, coverage, dependency policy and source inventory consistency. A separate
-Linux job compiles the focused OCCT oracle and verifies all 1316 mapped TKernel declarations (1521 native passes, one explicitly
-recorded upstream skip, and 1522 passing Rust runtime cases)
-plus deterministic differential cases. Full OCCT test coverage remains pending.
-GPU/backend and native dependency profiles must
-be tested on suitable runners before their capabilities can count as verified.
+nextest, coverage, dependency policy, tooling tests and source inventory
+consistency. Vulkan functional and performance tests run on lavapipe. Release
+owner checks reuse these jobs, followed by tests of the extracted package archives.
+Native OCCT compilation and differential verification run only locally. Committed
+oracle snapshots continue to be checked by Rust tests on all three platforms.
+Full OCCT test coverage remains pending. GPU/backend and native dependency profiles
+must be tested on suitable hosts before their capabilities can count as verified.
 
 Numeric probe examples use unique Cargo target names, for example
 `cargo build -p rustycad-tkshhealing --example rustycad-tkshhealing-numeric-probe`.
