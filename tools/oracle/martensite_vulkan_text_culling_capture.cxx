@@ -1,5 +1,7 @@
 // Real native glyph culling capture for Martensite; OCCT 3d097a0.
 #include "martensite_text_culling_probe.hxx"
+#include "martensite_text_capture_camera.hxx"
+#include "martensite_text_capture_image.hxx"
 #include <Graphic3d_Group.hxx>
 #include <Graphic3d_ArrayOfTriangles.hxx>
 #include <Graphic3d_AspectFillArea3d.hxx>
@@ -9,16 +11,6 @@
 #include <TopLoc_Datum3D.hxx>
 #include <fstream>
 #include <string>
-static void culling_camera(const occ::handle<V3d_View>& view) {
-  const auto camera = view->Camera();
-  camera->SetEye(gp_Pnt(0, 0, 20)); camera->SetCenter(gp_Pnt(0, 0, 0));
-  camera->SetUp(gp_Dir(0, 1, 0)); camera->SetScale(20);
-  camera->SetProjectionType(Graphic3d_Camera::Projection_Orthographic);
-  camera->SetAspect(1); camera->SetZRange(1, 100);
-  view->SetAutoZFitMode(false);
-  view->SetBackgroundColor(Quantity_Color(0, 0, 1, Quantity_TOC_RGB));
-  view->ChangeRenderingParams().NbMsaaSamples = 0;
-}
 static void culling_orientation(const occ::handle<Graphic3d_Text>& text, const std::string& mode) {
   if (mode.rfind("billboard", 0) == 0) return;
   const bool back = mode.rfind("back", 0) == 0 || mode.find("-back-") != std::string::npos
@@ -70,25 +62,15 @@ static occ::handle<Graphic3d_Structure> culling_scene(const occ::handle<V3d_View
   if (!liveBefore) structure->Display();
   return structure;
 }
-static void culling_capture(const occ::handle<V3d_View>& view, const std::string& prefix) {
-  for (const auto kind : {Graphic3d_BT_RGBA, Graphic3d_BT_Depth}) {
-    Image_PixMap pixels;
-    if (!view->ToPixMap(pixels, 128, 128, kind, false, Graphic3d_ZLayerId_Default, true))
-      throw Standard_Failure("native text culling capture failed; expected 128x128 color/depth");
-    std::ofstream output(prefix + (kind == Graphic3d_BT_RGBA ? ".rgba" : ".depth"), std::ios::binary);
-    for (int y = 0; y < 128; ++y) output.write(reinterpret_cast<const char*>(pixels.Row(y)), 128 * 4);
-    if (!output) throw Standard_Failure("native culling output failed; expected writable capture prefix");
-  }
-}
 int main(int argc, char** argv) {
   if (argc != 3) throw Standard_Failure("native culling arguments; expected mode prefix");
   auto probe = create_policy_probe();
-  culling_camera(probe.view);
+  prepare_native_text_capture_view(probe.view);
   const std::string mode = argv[1];
   if (mode == "view-double-back") probe.view->SetBackFacingModel(Graphic3d_TypeOfBackfacingModel_DoubleSided);
   if (mode == "view-back-double") probe.view->SetBackFacingModel(Graphic3d_TypeOfBackfacingModel_BackCulled);
   if (mode == "view-front-double") probe.view->SetBackFacingModel(Graphic3d_TypeOfBackfacingModel_FrontCulled);
   const auto structure = culling_scene(probe.view, mode);
-  culling_capture(probe.view, argv[2]);
+  capture_native_text_view(probe.view, argv[2]);
   probe.view->Remove();
 }

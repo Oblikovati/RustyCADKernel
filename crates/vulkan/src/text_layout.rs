@@ -14,6 +14,8 @@ pub struct GlyphLayout {
     pub indices: Vec<u32>,
     /// White RGBA texels with glyph coverage in alpha.
     pub atlas: RasterImage,
+    /// Native formatter bounds, including alignment and whitespace; `layout.formatter_bounds`.
+    pub formatter_bounds: rustycad_tkservice::font::FontRect,
     /// Native font point size, before view-resolution scaling.
     pub point_size: u32,
 }

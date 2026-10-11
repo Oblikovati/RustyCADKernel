@@ -1,4 +1,4 @@
-//! Shadow shares the glyph atlas and precedes the foreground, as OpenGl_Text at 3d097a0.
+//! Native text decorations precede the foreground, as OpenGl_Text at 3d097a0.
 use crate::text_transform::TextTransform;
 use crate::{GlyphLayout, PrimitiveDraw, RenderError, RenderVertex, TexturedStyle};
 use rustycad_tkernel::quantity::ColorRgba;
@@ -9,13 +9,7 @@ pub(crate) fn lower_text_draws(
     layout: &GlyphLayout,
     transform: &TextTransform,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-    let mut draws = Vec::new();
-    if aspect.text_display_type() == AspectTypeOfDisplayText::Shadow {
-        let clip = transform.clip_offset(text, aspect, layout.point_size, [1., -1.])?;
-        let mut shadow = glyph_draw(layout, aspect, clip, aspect.edge_color_rgba())?;
-        shadow.text_shadow_bias = !shadow.annotation;
-        draws.push(shadow);
-    }
+    let mut draws = text_decoration_draws(text, aspect, layout, transform)?;
     let clip = transform.clip(text, aspect, layout.point_size)?;
     draws.push(glyph_draw(
         layout,
@@ -24,6 +18,33 @@ pub(crate) fn lower_text_draws(
         aspect.interior_color_rgba(),
     )?);
     Ok(draws)
+}
+fn text_decoration_draws(
+    text: &Graphic3dText,
+    aspect: &dyn Graphic3dAspectsSource,
+    layout: &GlyphLayout,
+    transform: &TextTransform,
+) -> Result<Vec<PrimitiveDraw>, RenderError> {
+    match aspect.text_display_type() {
+        AspectTypeOfDisplayText::Subtitle => Ok(vec![crate::text_background::subtitle_rectangle(
+            text, aspect, layout, transform,
+        )?]),
+        AspectTypeOfDisplayText::Shadow => {
+            Ok(vec![shadow_glyph_draw(text, aspect, layout, transform)?])
+        }
+        _ => Ok(vec![]),
+    }
+}
+fn shadow_glyph_draw(
+    text: &Graphic3dText,
+    aspect: &dyn Graphic3dAspectsSource,
+    layout: &GlyphLayout,
+    transform: &TextTransform,
+) -> Result<PrimitiveDraw, RenderError> {
+    let clip = transform.clip_offset(text, aspect, layout.point_size, [1., -1.])?;
+    let mut shadow = glyph_draw(layout, aspect, clip, aspect.edge_color_rgba())?;
+    shadow.text_shadow_bias = !shadow.annotation;
+    Ok(shadow)
 }
 fn glyph_draw(
     layout: &GlyphLayout,
@@ -43,18 +64,22 @@ fn glyph_draw(
 }
 
 fn glyph_vertices(layout: &GlyphLayout, color: ColorRgba) -> Vec<RenderVertex> {
-    let rgb = color.rgb();
-    let rgba = [
-        rgb.red() as f32,
-        rgb.green() as f32,
-        rgb.blue() as f32,
-        color.alpha(),
-    ];
+    let rgba = text_vertex_rgba(color);
     layout
         .positions
         .iter()
         .map(|p| RenderVertex::new([p[0], p[1], 0.], rgba))
         .collect()
+}
+/// Retain linear RGB and independent alpha; `text_vertex_rgba(ColorRgba::default())` feeds native text colors.
+pub(crate) fn text_vertex_rgba(color: ColorRgba) -> [f32; 4] {
+    let rgb = color.rgb();
+    [
+        rgb.red() as f32,
+        rgb.green() as f32,
+        rgb.blue() as f32,
+        color.alpha(),
+    ]
 }
 #[cfg(test)]
 mod tests {
@@ -87,6 +112,7 @@ mod tests {
             uv: vec![[0.; 2]; 3],
             indices: vec![0, 1, 2],
             atlas: crate::RasterImage::new([1, 1], vec![[1.; 4]]).unwrap(),
+            formatter_bounds: rustycad_tkservice::font::FontRect::default(),
             point_size: 16,
         }
     }

@@ -122,6 +122,7 @@ impl RasterPipelines {
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
         if draw.lighting.is_some()
             || draw.surface_blend
+            || draw.text_background_blend
             || draw.line_style.is_some_and(|s| s.alpha_blend)
             || draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend)
         {
@@ -179,7 +180,7 @@ fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
     if draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend) {
         return Some(36 + flags);
     }
-    draw.surface_blend.then_some(28 + flags)
+    (draw.surface_blend || draw.text_background_blend).then_some(28 + flags)
 }
 
 #[cfg(test)]
@@ -280,5 +281,21 @@ mod forced_line_tests {
                 .unwrap()
         });
         draw
+    }
+}
+
+#[cfg(test)]
+mod subtitle_pipeline_tests {
+    use super::*;
+    #[test]
+    fn ordered_subtitle_alpha_uses_existing_blended_untextured_raster_variant() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        draw.text_background_blend = true;
+        assert!(!draw.surface_blend);
+        assert_eq!(variant_index(&draw), 28);
+        let kind = PipelineVariant::from_index(variant_index(&draw), false);
+        assert!(kind.surface_blend && !kind.text && !kind.line);
+        draw.text_background_blend = false;
+        assert_eq!(variant_index(&draw), 0);
     }
 }

@@ -12,7 +12,8 @@ mod text_scene;
 mod view_setup;
 use martensite_vulkan::Graphic3dRenderDriver;
 
-use std::time::Instant;
+#[path = "support/retained_text_performance.rs"]
+mod retained_text_performance;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut options = device_options::validation_options();
     options.validation = false;
@@ -30,17 +31,6 @@ fn benchmark_culling_case(
     let fixture = text_culling_scene::TextCullingScene::new(driver, mode);
     fixture.text.scene.window.set_size(128, 128);
     fixture.text.scene.view.must_be_resized();
-    for _ in 0..20 {
-        timed_culling_redraw(&fixture);
-    }
-    let samples: Vec<f64> = (0..100).map(|_| timed_culling_redraw(&fixture)).collect();
-    println!(
-        "MARTENSITE_PERFORMANCE={{\"workload\":\"{mode}\",\"glyphs\":2,\"warmup\":20,\"validation\":false,\"samples_ms\":{samples:?}}}"
-    );
+    retained_text_performance::measure_text_view(&fixture.text.scene.render_view(), mode);
     fixture.text.scene.view.remove();
-}
-fn timed_culling_redraw(fixture: &text_culling_scene::TextCullingScene) -> f64 {
-    let start = Instant::now();
-    fixture.text.scene.render_view().try_redraw().unwrap();
-    start.elapsed().as_secs_f64() * 1000.
 }
