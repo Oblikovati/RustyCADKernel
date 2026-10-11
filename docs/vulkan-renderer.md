@@ -91,8 +91,9 @@ and [Subtitle](vulkan-subtitle-text.md) slices are integrated. They retain nativ
 CPU fixtures, Rust-only GPU replay, both-device functional captures and optimized
 performance distributions. Their receipts identify the exact checked source
 revisions. Strict raster/color differences remain recorded; these slices do not
-complete the text capability family. Standard surface textures and Decal text
-are active work outside the current integrated implementation.
+complete the text capability family. [Decal text](vulkan-decal-text.md) now adds
+four ordered outline passes and corrects shared local-plane state and glyph Fill
+offsets. Standard surface textures and Blend/XOR remain unfinished.
 
 ## Reproduce the checks
 

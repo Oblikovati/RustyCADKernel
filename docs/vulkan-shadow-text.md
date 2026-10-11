@@ -7,7 +7,7 @@ The implementation follows OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`, `Ope
 - The shadow anchor moves by `(1, -1)` window pixels before floor alignment and unprojection. A plane without its own anchor ignores that displacement upstream; Martensite preserves this distinction.
 - Depth-tested shadows temporarily force Fill offset, retain the current slope factor, and add one depth unit. This temporary bias does not change the ordered polygon-offset state. Annotation shadows skip the bias.
 - Both passes share the layout, glyph coverage, fixed `0.285` font discard cutoff, and native `MaskBlend` selection. Subtitle RGBA is retained; fractional glyph colors preserve text ordering and depth writes.
-- Normal text, surface, line, and point policies remain separate. [Subtitle rectangles](vulkan-subtitle-text.md) are integrated in subsequent work. Decal, XOR/Blend display, and custom text shaders remain explicitly rejected on current `main`.
+- Normal text, surface, line, and point policies remain separate. [Subtitle rectangles](vulkan-subtitle-text.md) are integrated in subsequent work. [Decal text](vulkan-decal-text.md) and native shared local-plane pass sequencing are integrated as well. XOR/Blend display and custom text shaders remain explicitly rejected on current `main`.
 
 ## Local validation
 

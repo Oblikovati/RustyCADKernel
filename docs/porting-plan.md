@@ -48,9 +48,10 @@ serializes local `main` integration, checks and deletion of completed worktrees.
    with functional and performance coverage. Point raster/color parity remains partial.
    [Vulkan text](vulkan-text.md) now renders retained font glyphs and oriented labels;
    [Shadow text](vulkan-shadow-text.md), [retained text face culling](vulkan-text-culling.md),
-   and [Subtitle backgrounds](vulkan-subtitle-text.md) are integrated with native
+   [Subtitle backgrounds](vulkan-subtitle-text.md), and [Decal outlines](vulkan-decal-text.md)
+   are integrated with native
    fixtures, both-device captures and optimized workloads. Strict text raster
-   parity, Decal, Blend/XOR and broader text capabilities remain partial.
+   parity, Blend/XOR and broader text capabilities remain partial.
    [AIS_Axis and labeled axis presentations](ais-axis.md) now add coordinate datums,
    native selection snapshots and inherited text-aspect rendering.
    [Plane presentation builders](plane-presentations.md) now preserve native edges,

@@ -1,0 +1,93 @@
+{
+  "project": "Martensite",
+  "feature_commit": "f1434d35bba37fe7237ab41bd8866263a755f5e9",
+  "checked_main_revision": "77f24c1578a072fe843bdd681adb3781bf6d0f77",
+  "all_commits_integrated": true,
+  "vulkan_all_targets_passed": 300,
+  "clippy": "passed",
+  "global_format": "passed",
+  "canonical_discovery": "passed",
+  "generator_tests": 13,
+  "bounded_vulkan_python_modules": 24,
+  "main_runtime": [
+    {
+      "profile": "lavapipe",
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "program": "decal_functional",
+      "binary_sha256": "39386f7218c22a28e7a06e5d62f1d9ea971d338134cade6ca90e94e73e1badf3",
+      "exit_code": 0,
+      "log": "/tmp/martensite-decal-main-lavapipe-decal_functional.log"
+    },
+    {
+      "profile": "lavapipe",
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "program": "subtitle_functional",
+      "binary_sha256": "bb0773d98dd401551ff2a8a443b5c11cf4dce906d3c378fe387750fda18a9a7b",
+      "exit_code": 0,
+      "log": "/tmp/martensite-decal-main-lavapipe-subtitle_functional.log"
+    },
+    {
+      "profile": "lavapipe",
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "program": "offscreen_acceptance",
+      "binary_sha256": "5f1bb817c0523a021752cba5c2f9da8b83c3aac7cb588165d1e5aa381369122c",
+      "exit_code": 0,
+      "log": "/tmp/martensite-decal-main-lavapipe-offscreen_acceptance.log"
+    },
+    {
+      "profile": "host",
+      "icd": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "program": "decal_functional",
+      "binary_sha256": "39386f7218c22a28e7a06e5d62f1d9ea971d338134cade6ca90e94e73e1badf3",
+      "exit_code": 0,
+      "log": "/tmp/martensite-decal-main-host-decal_functional.log"
+    },
+    {
+      "profile": "host",
+      "icd": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "program": "subtitle_functional",
+      "binary_sha256": "bb0773d98dd401551ff2a8a443b5c11cf4dce906d3c378fe387750fda18a9a7b",
+      "exit_code": 0,
+      "log": "/tmp/martensite-decal-main-host-subtitle_functional.log"
+    },
+    {
+      "profile": "host",
+      "icd": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "program": "offscreen_acceptance",
+      "binary_sha256": "5f1bb817c0523a021752cba5c2f9da8b83c3aac7cb588165d1e5aa381369122c",
+      "exit_code": 0,
+      "log": "/tmp/martensite-decal-main-host-offscreen_acceptance.log"
+    }
+  ],
+  "root_audit": {
+    "source_files_verified": 28,
+    "binaries_verified_before_cleanup": 5,
+    "performance_workloads": {
+      "lavapipe": 31,
+      "host": 31
+    },
+    "warmup": 20,
+    "samples": 100,
+    "validation": false,
+    "final_style_delta": [
+      "crates/vulkan/examples/support/decorated_text_capture.rs",
+      "crates/vulkan/tests/text_primitives.rs"
+    ],
+    "shared_host_continuous_isolation_proven": false
+  },
+  "cleanup": {
+    "logical_bytes_deleted": 4832462082,
+    "process_references": []
+  },
+  "worktree_deleted": true,
+  "branch_deleted": true,
+  "no_pending_checkout_dependencies": true,
+  "archived": false,
+  "new_api_claims": 0,
+  "local_only": true,
+  "limitations": [
+    "Strict raster/depth comparisons remain partial and retained.",
+    "Performance distributions have no accepted baseline; unidentified sharedhost CPU activity occurred.",
+    "No whole text renderer capability completion."
+  ]
+}
