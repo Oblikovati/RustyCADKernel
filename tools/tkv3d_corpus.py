@@ -10,6 +10,7 @@ from __future__ import annotations
 
 
 def append_tkv3d_requests(requests: list[str]) -> None:
+    __import__("tkv3d_corpus_animation_object").append_object_requests(requests)
     __import__('tkv3d_corpus_context_location').append_location_requests(requests)
     __import__('tkv3d_corpus_animation_camera').append_camera_requests(requests)
     __import__('tkv3d_corpus_ais_animation').append_animation_requests(requests)

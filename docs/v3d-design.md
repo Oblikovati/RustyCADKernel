@@ -580,7 +580,7 @@ retains the old child-duration cache, and self-copy empties the child list.
 compares 319 independent native timeline, identity-edit and frozen-timer cases.
 Eleven Rust tests cover reentrant callbacks, RTTI, signed zero/NaN and deterministic
 running timers. These timeline checks cover the base timeline. Camera animation is tracked below;
-object animation remains open visualization work.
+object animation is tracked below.
 
 
 ## AIS camera animation
@@ -637,5 +637,57 @@ erase, inherited transforms, identity-chain variants and dynamic highlights.
 Nine focused tests cover nulls, datum identity, parent placement, transform replacement,
 active selection updates without geometry recomputation, failure ordering and reentrant
 highlight callbacks.
-This supplies the context prerequisite for object animation; the object animation
-classes and their GPU/performance fixtures remain open.
+This supplies the context prerequisite for the object animation classes and
+GPU/performance fixtures described below.
+
+## AIS object animation
+
+Martensite ports `AIS_BaseAnimationObject` and `AIS_AnimationObject` from OCCT
+`3d097a0`. Object atoms copy exact local start/end transforms and retain context
+and target object handles. For example, construct
+`AisAnimationObject::new("move", &context, &object, start, end)`, set own duration,
+start the timeline, then call `update(pts)` before rendering. The transform
+interpolator blends translation, quaternion rotation and scale independently;
+start/end placement replaces the previous local transform. Unlike camera
+animation, an object atom without positive own duration applies the start transform.
+
+`AisBaseAnimationObjectSource` exposes protected handles and inherited timeline
+storage for derived atoms. The exported nonvirtual
+`ais_base_animation_object_update_transform` body applies context placement and
+selection/highlight updates when a context exists; detached objects receive the
+local transform directly. The base class inherits the no-op frame hook. A null
+object makes the object atom skip interpolation, including zero-scale crossings.
+Interpolation failure leaves the existing object placement unchanged.
+
+Context-backed atoms reread protected handles after placement callbacks, then
+invalidate every defined view for ordinary layers. Immediate-layer atoms query
+both finite model and auxiliary graphic bounds and invalidate a view only when
+the fitted Z range escapes its current camera range. This query does not mutate
+camera Z planes, does not skip defined inactive views and does not redraw.
+
+`python3 tools/verify_animation_object.py --source ../OCCT --native-build BUILD`
+compares independent exact native transforms, timeline state, active-selection
+updates, recorded view invalidation and camera Z ranges. The native recording
+view inherits the same retained scene driver and implements only redraw and
+invalidation state; it does not substitute the animation behavior under test.
+
+The renderer harness's `--case-family object-animation` includes ten modes across
+every size, projection and translation case on lavapipe and the native host.
+Modes cover start/middle/end, zero duration, nested/paused timelines, detached and
+erased targets, and immediate layers inside/outside the Z range. The
+`object-animation-updates` release workload measures placement, active selection
+updating, invalidation and completed GPU redraw/readback together. It uses 20
+warmup frames and 100 measured samples. Strict capture and timing results are
+recorded separately from API implementation and from renderer-wide parity claims.
+
+The [2026-10-11 object animation receipt](../porting/runtime-evidence/object-animation-2026-10-11/summary.json)
+records 2,068 exact native numeric cases, eight object tests, four retained-render
+checks, the full TKV3d/Vulkan suites, 44 Python harness tests and Clippy. Both
+lavapipe and the native AMD host passed all 60 capture cases with identical RGBA;
+lavapipe's maximum depth difference was `5.960464477539063e-8`, below the existing
+`1e-6` limit, while host depth matched exactly. Both passed all 24 workload timing
+comparisons. Object frame median/p95 times were 0.363/0.575 ms on lavapipe and
+0.282/0.455 ms on the host (20 warmups, 100 measured samples). Raw distributions,
+color/depth captures and comparisons are retained. This verifies the object
+animation slice and does not establish renderer-wide parity or an accepted global
+performance baseline.

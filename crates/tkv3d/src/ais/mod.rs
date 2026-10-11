@@ -1,4 +1,13 @@
 //! The AIS package: interactive objects and the interactive context.
+mod animation_object;
+mod base_animation_object;
+mod object_animation_transform;
+pub use animation_object::AisAnimationObject;
+pub use base_animation_object::{
+    AisBaseAnimationObject, AisBaseAnimationObjectBase, AisBaseAnimationObjectFields,
+    AisBaseAnimationObjectSource,
+};
+pub use object_animation_transform::ais_base_animation_object_update_transform;
 mod animation_camera;
 pub use animation_camera::{AisAnimationCamera, AisAnimationCameraFields};
 mod animation;

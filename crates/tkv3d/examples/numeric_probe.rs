@@ -13,6 +13,14 @@ type ProbeCase = fn(&[f64]);
 /// operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     (
+        "v3_animation_object",
+        v3_probe::animation_object::object_case,
+    ),
+    (
+        "v3_base_animation_object",
+        v3_probe::animation_object::base_case,
+    ),
+    (
         "v3_context_location",
         v3_probe::context_location::location_case,
     ),

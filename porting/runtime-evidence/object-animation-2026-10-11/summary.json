@@ -1,0 +1,49 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_cases_passed": 2068,
+  "object_tests_passed": 8,
+  "retained_tests_passed": 4,
+  "python_tests_passed": 44,
+  "full_tkv3d_suite_passed": true,
+  "full_vulkan_all_target_tests_passed": true,
+  "clippy_all_targets_passed": true,
+  "candidate_final_source_hashes_match": true,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": "llvmpipe (LLVM 20.1.2, 256 bits)",
+      "captures_passed": 60,
+      "captures_total": 60,
+      "rgba_mismatch_pixels": 0,
+      "maximum_depth_delta": 5.960464477539063e-08,
+      "depth_limit": 1e-06,
+      "timing_workloads_passed": 24,
+      "timing_failures": [],
+      "object_animation_median_ms": 0.36304650000000005,
+      "object_animation_p95_ms": 0.575124,
+      "samples": 100,
+      "warmup": 20
+    },
+    {
+      "profile": "host",
+      "device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+      "captures_passed": 60,
+      "captures_total": 60,
+      "rgba_mismatch_pixels": 0,
+      "maximum_depth_delta": 0.0,
+      "depth_limit": 1e-06,
+      "timing_workloads_passed": 24,
+      "timing_failures": [],
+      "object_animation_median_ms": 0.281501,
+      "object_animation_p95_ms": 0.454521,
+      "samples": 100,
+      "warmup": 20
+    }
+  ],
+  "renderer_wide_parity_complete": false,
+  "global_performance_baseline_accepted": false,
+  "compiler_unresolved_rows": 0,
+  "compiled_object_declarations": 16,
+  "macro_tests_passed": 32,
+  "existing_graphic3d_structure_rtti_parent_proof": "partial"
+}
