@@ -91,7 +91,7 @@ fn navigation_view(view: &Handle<V3dView>) -> Result<&V3dView, Failure> {
         null_object("navigation view=null; expected V3dView for camera motion or jumping")
     })
 }
-fn navigation_camera(
+pub(super) fn navigation_camera(
     view: &V3dView,
 ) -> Result<Handle<rustycad_tkservice::graphic3d::Graphic3dCamera>, Failure> {
     let camera = if view.view().is_active_xr() {

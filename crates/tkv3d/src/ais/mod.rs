@@ -388,3 +388,13 @@ mod view_controller_navigation_motion_fixture;
 mod view_controller_navigation_motion_tests;
 #[cfg(test)]
 mod view_controller_navigation_xr_fixture;
+
+mod view_controller_orbit_rotation;
+mod view_controller_rotation_math;
+mod view_controller_rotation_state;
+mod view_controller_view_rotation;
+
+#[cfg(test)]
+mod view_controller_rotation_fixture;
+#[cfg(test)]
+mod view_controller_rotation_tests;

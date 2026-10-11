@@ -3,6 +3,7 @@ use super::view_controller_clicks::ViewControllerClickDispatch;
 use super::view_controller_input_state::{ViewControllerClickState, ViewControllerNavigationState};
 use super::view_controller_mouse_state::ViewControllerMouseDispatch;
 use super::view_controller_parameters::ViewControllerParameters;
+use super::view_controller_rotation_state::ViewControllerRotationState;
 use super::view_controller_touch::ViewControllerTouchDispatch;
 use super::{AisNavigationMode, AisViewInputBuffer, AisViewInputBufferType};
 use rustycad_tkernel::{ncollection::Vec2, osd::Timer};
@@ -15,6 +16,7 @@ pub struct AisViewController {
     pub(super) render_input: AisViewInputBuffer,
     pub(super) parameters: ViewControllerParameters,
     pub(super) panning_anchor: Point3,
+    pub(super) rotation_state: ViewControllerRotationState,
     pub(super) navigation_mode: AisNavigationMode,
     pub(super) previous_move_to: Vec2<i32>,
     pub(super) input_base: AspectWindowInputListenerBase,
@@ -43,6 +45,7 @@ impl AisViewController {
             render_input: AisViewInputBuffer::new(),
             parameters: ViewControllerParameters::default(),
             navigation_mode: AisNavigationMode::Orbit,
+            rotation_state: ViewControllerRotationState::default(),
             panning_anchor: Point3::new(rustycad_tkernel::precision::infinite(), 0.0, 0.0),
             previous_move_to: Vec2::new(-1, -1),
             input_base: AspectWindowInputListenerBase::with_timer(event_timer),
