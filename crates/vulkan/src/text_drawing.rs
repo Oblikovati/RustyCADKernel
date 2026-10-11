@@ -3,48 +3,51 @@ use crate::text_transform::TextTransform;
 use crate::{GlyphLayout, PrimitiveDraw, RenderError, RenderVertex, TexturedStyle};
 use rustycad_tkernel::quantity::ColorRgba;
 use rustycad_tkservice::{aspect::*, graphic3d::*};
+/// Lower native decoration order using per-pass state; `lower_text_draws(text, aspect, layout, transform)` shares one atlas.
 pub(crate) fn lower_text_draws(
     text: &Graphic3dText,
     aspect: &dyn Graphic3dAspectsSource,
     layout: &GlyphLayout,
     transform: &TextTransform,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-    let mut draws = text_decoration_draws(text, aspect, layout, transform)?;
-    let clip = transform.clip(text, aspect, layout.point_size)?;
-    draws.push(glyph_draw(
-        layout,
-        aspect,
-        clip,
-        aspect.interior_color_rgba(),
-    )?);
-    Ok(draws)
+    let offsets = native_text_offsets(aspect.text_display_type());
+    let clips = transform.pass_clips(text, aspect, layout.point_size, offsets)?;
+    let last = clips.len() - 1;
+    clips
+        .into_iter()
+        .enumerate()
+        .map(|(pass, clip)| native_text_pass(layout, aspect, clip, pass, last))
+        .collect()
 }
-fn text_decoration_draws(
-    text: &Graphic3dText,
-    aspect: &dyn Graphic3dAspectsSource,
-    layout: &GlyphLayout,
-    transform: &TextTransform,
-) -> Result<Vec<PrimitiveDraw>, RenderError> {
-    match aspect.text_display_type() {
-        AspectTypeOfDisplayText::Subtitle => Ok(vec![crate::text_background::subtitle_rectangle(
-            text, aspect, layout, transform,
-        )?]),
-        AspectTypeOfDisplayText::Shadow => {
-            Ok(vec![shadow_glyph_draw(text, aspect, layout, transform)?])
-        }
-        _ => Ok(vec![]),
+// OpenGl_Text::render at 3d097a0 preserves this exact outline order before the foreground.
+#[cfg(test)]
+const DECAL_PIXEL_OFFSETS: [[f64; 2]; 4] = [[1., 1.], [-1., -1.], [-1., 1.], [1., -1.]];
+fn native_text_offsets(display: AspectTypeOfDisplayText) -> &'static [[f64; 2]] {
+    match display {
+        AspectTypeOfDisplayText::Dekale => &[[1., 1.], [-1., -1.], [-1., 1.], [1., -1.], [0., 0.]],
+        AspectTypeOfDisplayText::Shadow => &[[1., -1.], [0., 0.]],
+        AspectTypeOfDisplayText::Subtitle => &[[0., 0.], [0., 0.]],
+        _ => &[[0., 0.]],
     }
 }
-fn shadow_glyph_draw(
-    text: &Graphic3dText,
-    aspect: &dyn Graphic3dAspectsSource,
+fn native_text_pass(
     layout: &GlyphLayout,
-    transform: &TextTransform,
+    aspect: &dyn Graphic3dAspectsSource,
+    clip: [f32; 16],
+    pass: usize,
+    last: usize,
 ) -> Result<PrimitiveDraw, RenderError> {
-    let clip = transform.clip_offset(text, aspect, layout.point_size, [1., -1.])?;
-    let mut shadow = glyph_draw(layout, aspect, clip, aspect.edge_color_rgba())?;
-    shadow.text_shadow_bias = !shadow.annotation;
-    Ok(shadow)
+    if aspect.text_display_type() == AspectTypeOfDisplayText::Subtitle && pass == 0 {
+        return crate::text_background::subtitle_rectangle(aspect, layout, clip);
+    }
+    let color = if pass == last {
+        aspect.interior_color_rgba()
+    } else {
+        aspect.edge_color_rgba()
+    };
+    let mut draw = glyph_draw(layout, aspect, clip, color)?;
+    draw.text_shadow_bias = pass != last && !draw.annotation;
+    Ok(draw)
 }
 fn glyph_draw(
     layout: &GlyphLayout,
@@ -106,7 +109,7 @@ mod tests {
         assert!(draws[0].text_shadow_bias);
         assert!(!draws[1].text_shadow_bias);
     }
-    fn minimal_glyph_layout() -> GlyphLayout {
+    pub(super) fn minimal_glyph_layout() -> GlyphLayout {
         GlyphLayout {
             positions: vec![[0.; 2]; 3],
             uv: vec![[0.; 2]; 3],
@@ -116,12 +119,17 @@ mod tests {
             point_size: 16,
         }
     }
-    fn identity_text_transform() -> TextTransform {
+    pub(super) fn identity_text_transform() -> TextTransform {
         TextTransform {
             projection: Mat4::identity(),
             model_view: Mat4::identity(),
+            model_world: Mat4::identity(),
             camera_rotation: Mat4::identity(),
             viewport: [0, 0, 64, 64],
         }
     }
 }
+
+#[cfg(test)]
+#[path = "text_decal_tests.rs"]
+mod decal_tests;

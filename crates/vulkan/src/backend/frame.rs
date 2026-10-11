@@ -195,8 +195,8 @@ fn upload_draw(
         annotation: draw.annotation,
         text_shadow_bias: draw.text_shadow_bias,
         polygon_offset: draw.polygon_offset,
-        polygon: draw.topology() == crate::PrimitiveTopology::Triangles
-            && draw.textured_style.is_none(),
+        // Native font glyph triangles retain ordinary Fill slope/units; OpenGl_Text at 3d097a0.
+        polygon: draw.topology() == crate::PrimitiveTopology::Triangles,
         surface_blend: draw.surface_blend,
         capping: draw.capping_pass,
         face_culling: draw.face_culling,

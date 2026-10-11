@@ -116,3 +116,49 @@ mod sphere_detection_reference;
 pub use sphere_detection_reference::Select3DSphereDetectionRef;
 #[cfg(test)]
 mod quadric_reference_tests;
+
+mod group_entity;
+mod group_membership;
+mod group_mutation;
+mod group_primitives;
+mod group_references;
+mod group_selection;
+pub use group_references::{Select3DGroupEntitiesRef, Select3DGroupSubEntityRef};
+
+mod group_dump;
+
+#[cfg(test)]
+mod group_oracle_geometry;
+
+#[cfg(test)]
+mod group_oracle_snapshot;
+
+#[cfg(test)]
+mod group_oracle_fixtures;
+
+#[cfg(test)]
+mod group_oracle_tests;
+
+#[cfg(test)]
+mod group_fault_child_fake;
+
+#[cfg(test)]
+mod group_reference_tests;
+
+#[cfg(test)]
+mod group_lifecycle_tests;
+
+#[cfg(test)]
+mod group_fault_tests;
+
+#[cfg(test)]
+mod group_policy_volume_fake;
+
+#[cfg(test)]
+mod group_policy_tests;
+
+#[cfg(test)]
+mod group_policy_fixtures;
+
+#[cfg(test)]
+mod group_primitive_tests;

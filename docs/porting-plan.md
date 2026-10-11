@@ -47,7 +47,11 @@ serializes local `main` integration, checks and deletion of completed worktrees.
    now adds live point datums, native selection and a batched Vulkan sprite path
    with functional and performance coverage. Point raster/color parity remains partial.
    [Vulkan text](vulkan-text.md) now renders retained font glyphs and oriented labels;
-   strict text raster parity and additional display modes remain partial.
+   [Shadow text](vulkan-shadow-text.md), [retained text face culling](vulkan-text-culling.md),
+   [Subtitle backgrounds](vulkan-subtitle-text.md), and [Decal outlines](vulkan-decal-text.md)
+   are integrated with native
+   fixtures, both-device captures and optimized workloads. Strict text raster
+   parity, Blend/XOR and broader text capabilities remain partial.
    [AIS_Axis and labeled axis presentations](ais-axis.md) now add coordinate datums,
    native selection snapshots and inherited text-aspect rendering.
    [Plane presentation builders](plane-presentations.md) now preserve native edges,
@@ -124,7 +128,8 @@ serializes local `main` integration, checks and deletion of completed worktrees.
    transforms. [Light presentations](ais-light-source-presentation.md) now add
    concrete construction, geometry, selection, directional highlighting and dragging,
    with native fixtures and both-device captures and optimized timings. Classes remain
-   partial; Vulkan Shadow-style light labels remain open.
+   partial. Vulkan Shadow-style light labels now render; strict named-light capture
+   differences and native-default-layer parity remain open.
    [Color scales](ais-color-scale.md) now preserve native palette policies, labels,
    layout and real presentation submissions. [Controller picking](ais-controller-picking.md)
    and [selection-aware fitting](ais-view-controller-fit.md) now use real retained

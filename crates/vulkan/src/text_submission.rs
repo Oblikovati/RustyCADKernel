@@ -42,6 +42,12 @@ impl TextSceneContext<'_> {
         Ok(crate::text_transform::TextTransform {
             projection,
             model_view,
+            model_world: self
+                .model_override
+                .map(|m| Mat4::from_other(&m))
+                .unwrap_or_else(|| {
+                    crate::persistent_transform::model_transform(self.group, self.structure)
+                }),
             camera_rotation,
             viewport: [0, 0, extent[0] as i32, extent[1] as i32],
         })
@@ -69,6 +75,7 @@ fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), Render
         AspectTypeOfDisplayText::Normal
             | AspectTypeOfDisplayText::Shadow
             | AspectTypeOfDisplayText::Subtitle
+            | AspectTypeOfDisplayText::Dekale
     ) || !aspect.shader_program().is_null()
     {
         return Err(rejected(
@@ -76,7 +83,7 @@ fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), Render
                 aspect.text_display_type(),
                 aspect.shader_program().object_address(),
             ),
-            "Normal, Shadow or Subtitle text display without a custom shader",
+            "Normal, Shadow, Subtitle or Dekale text display without a custom shader",
         ));
     }
     Ok(())

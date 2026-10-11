@@ -5,6 +5,7 @@ use rustycad_tkservice::graphic3d::{transform_utils as tr, *};
 pub(crate) struct TextTransform {
     pub projection: Mat4<f64>,
     pub model_view: Mat4<f64>,
+    pub model_world: Mat4<f64>,
     pub camera_rotation: Mat4<f64>,
     pub viewport: [i32; 4],
 }
@@ -108,3 +109,6 @@ fn plane_model(text: &Graphic3dText, anchor: [f64; 3]) -> Mat4<f64> {
     model.set_column3(3, Vec3::new(anchor[0], anchor[1], anchor[2]));
     model
 }
+
+#[path = "text_pass_transform.rs"]
+mod pass_transform;

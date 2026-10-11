@@ -1,0 +1,164 @@
+{
+  "project": "Martensite",
+  "source_revision": "fe3b6cd7fb2df1cd913720399261d13e15e72170",
+  "pipeline": [
+    {
+      "stage": 0,
+      "command": [
+        "python3",
+        "tools/capture_rustdoc_json.py",
+        "capture"
+      ],
+      "exit_code": 0,
+      "seconds": 121.2375998259813,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-0.log"
+    },
+    {
+      "stage": 1,
+      "command": [
+        "python3",
+        "tools/normalize_rustdoc_inventory.py"
+      ],
+      "exit_code": 0,
+      "seconds": 82.68218275601976,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-1.log"
+    },
+    {
+      "stage": 2,
+      "command": [
+        "python3",
+        "tools/api_coverage_report.py"
+      ],
+      "exit_code": 0,
+      "seconds": 165.96960284700617,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-2.log"
+    },
+    {
+      "stage": 3,
+      "command": [
+        "python3",
+        "tools/publish_api_snapshot.py"
+      ],
+      "exit_code": 0,
+      "seconds": 12.092251875990769,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-3.log"
+    },
+    {
+      "stage": 4,
+      "command": [
+        "python3",
+        "tools/api_metrics_report.py"
+      ],
+      "exit_code": 0,
+      "seconds": 12.78251637800713,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-4.log"
+    },
+    {
+      "stage": 5,
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.36712986399652436,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-5.log"
+    },
+    {
+      "stage": 6,
+      "command": [
+        "python3",
+        "tools/capture_rustdoc_json.py",
+        "verify"
+      ],
+      "exit_code": 0,
+      "seconds": 19.608711685985327,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-6.log"
+    },
+    {
+      "stage": 7,
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "status"
+      ],
+      "exit_code": 0,
+      "seconds": 0.969403158989735,
+      "log": "/tmp/martensite-integrated-inventory-fe3b6cd7f-7.log"
+    }
+  ],
+  "compiler_claims_audited": 67,
+  "implemented_claims": 63,
+  "partial_claims": 4,
+  "cpp_and_rust_unique_bindings": 67,
+  "defined_scope_visibility_and_upstream_source_hashes_verified": true,
+  "rust_source_hashes_verified": true,
+  "unresolved_ledger_rows": 0,
+  "corrected_stale_trait_selectors": 8,
+  "selector_correction": "Fresh main compiler canonical public trait paths/hashes replace eight internal-path selectors. Five other selectors reselected unchanged semantically. Coverage/publish/metrics rerun without changing Rust source. Initial audit rejected eight unresolved claims; final scoped audit passes.",
+  "port_metrics": {
+    "api_declarations": 76041,
+    "api_done": 52561,
+    "api_open": 22495,
+    "api_partial": 985,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "tkv3d": {
+    "api": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 165,
+        "partial": 10,
+        "unclaimed": 2220,
+        "upstream_unimplemented": 0,
+        "verified": 2777
+      },
+      "declarations": 5172,
+      "done": 2942,
+      "done_percent": 56.9
+    },
+    "boilerplate": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 404,
+        "partial": 21,
+        "unclaimed": 265,
+        "upstream_unimplemented": 0,
+        "verified": 233
+      },
+      "declarations": 923,
+      "done": 637,
+      "done_percent": 69.0
+    },
+    "gtests": {
+      "mapped": 1,
+      "not_applicable": 0,
+      "unmapped": 72
+    },
+    "ledger_defects": {},
+    "open_boilerplate_by_category": {
+      "rtti-macro": 242,
+      "special-member": 23
+    },
+    "open_gap_by_category": {
+      "alias": 22,
+      "enum-constant": 165,
+      "field": 349,
+      "member": 1353,
+      "protected-member": 150,
+      "record": 181
+    },
+    "scope": "port",
+    "scope_reason": ""
+  },
+  "limitations": [
+    "Whole-class ViewCube/owner/sensitive records remain partial.",
+    "ViewAnimation getter remains partial in this snapshot; live-reference implementation awaits integration.",
+    "Behavioral/configuration/declaration full proof remains false.",
+    "GPU evidence remains bound to its recorded source revisions."
+  ],
+  "fresh_compiler_source_verify_exit_code": 0
+}
