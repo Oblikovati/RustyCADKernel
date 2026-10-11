@@ -20,6 +20,7 @@ mod view_dump;
 mod view_grid;
 mod view_interact;
 mod view_mapping;
+pub(crate) use view_mapping::limited_zoom_coef;
 mod view_redraw;
 mod view_render;
 mod view_subviews;

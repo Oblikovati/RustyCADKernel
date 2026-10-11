@@ -6,6 +6,7 @@ use super::view_controller_parameters::ViewControllerParameters;
 use super::view_controller_touch::ViewControllerTouchDispatch;
 use super::{AisNavigationMode, AisViewInputBuffer, AisViewInputBufferType};
 use rustycad_tkernel::{ncollection::Vec2, osd::Timer};
+use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::aspect::AspectWindowInputListenerBase;
 /// Queues native viewer gestures; `AisViewController::new().update_z_rotation(0.1)`.
 /// Full camera/redraw dispatch and XR remain unported; window input and picking are available.
@@ -13,6 +14,7 @@ pub struct AisViewController {
     pub(super) ui_input: AisViewInputBuffer,
     pub(super) render_input: AisViewInputBuffer,
     pub(super) parameters: ViewControllerParameters,
+    pub(super) panning_anchor: Point3,
     pub(super) navigation_mode: AisNavigationMode,
     pub(super) previous_move_to: Vec2<i32>,
     pub(super) input_base: AspectWindowInputListenerBase,
@@ -41,6 +43,7 @@ impl AisViewController {
             render_input: AisViewInputBuffer::new(),
             parameters: ViewControllerParameters::default(),
             navigation_mode: AisNavigationMode::Orbit,
+            panning_anchor: Point3::new(rustycad_tkernel::precision::infinite(), 0.0, 0.0),
             previous_move_to: Vec2::new(-1, -1),
             input_base: AspectWindowInputListenerBase::with_timer(event_timer),
             click_state,

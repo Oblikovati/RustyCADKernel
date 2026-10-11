@@ -1,0 +1,62 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "54382fc12",
+  "native_fixture_rows": 4302,
+  "native_fixture_columns": 166,
+  "generations": {
+    "main": {
+      "rows": 4140,
+      "first_sha256": "20cabdf9bf8296ae574275ef790f644fb3839a893bfb05ebdf606c9a3155e139",
+      "second_sha256": "20cabdf9bf8296ae574275ef790f644fb3839a893bfb05ebdf606c9a3155e139",
+      "byte_identical": true
+    },
+    "limits": {
+      "rows": 150,
+      "first_sha256": "67f85a050b6a1aba9a9411c8356944c0135529ffcd9fd818dbadebe538bf32bc",
+      "second_sha256": "67f85a050b6a1aba9a9411c8356944c0135529ffcd9fd818dbadebe538bf32bc",
+      "byte_identical": true
+    },
+    "failure": {
+      "rows": 12,
+      "first_sha256": "b3d81ef5d8ab17d1bc9ee03eba7289f30356c6cbc84b85e0ee2993fe29e4ed01",
+      "second_sha256": "b3d81ef5d8ab17d1bc9ee03eba7289f30356c6cbc84b85e0ee2993fe29e4ed01",
+      "byte_identical": true
+    }
+  },
+  "files": {
+    "tools/oracle/martensite_controller_camera_primitives.cxx": "dbf9f6ffb2512b14f4cc24d4652d174d9951150c693c9c200a7423be651f4e1a",
+    "tools/oracle/martensite_view_controller_transfer.cxx": "343128301ebcac151850c0997fae7d9ed644464b1b5912ec890f3ed26a2aea13",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-0-native.txt": "ba982fea1fb75737bea2305b1352721de85a698bd14497e79b2a799b4117b46a",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-1-native.txt": "13ba178225cc60d16e8c5e7e00ef16c99539c2dae82ff107f47c78b9b6a9bf1d",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-2-native.txt": "28564523ff32240c3b34d52ac7c679d7493391aad3ece5811299c3cb54138e62",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-3-native.txt": "8db30f8d5d3e47509651ec3c491222d785bdd40b929fe0c8b9bbb7f378b96e8a",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-4-native.txt": "a73bc3e9b8ec2f4bab808a29d8d575d1c4a954db6e34671279225045e49008e0",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-5-native.txt": "9f2f261bfd2967535e1039320987033541ecb57997d7bce50379cf8fd7af82d4",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-6-native.txt": "c7db11c2ba5c168442d14fe5bbfc5109dad918be8ef0caeaba006f7e1591c397",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-7-native.txt": "748537a731fd73ddccc81f9e75b7ad75baf894051202c8dd178c1202b307ca05",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-8-native.txt": "537d477cbc700aa2edff9910915a30ec0639cd8e61983420c383567a2bf6e33a",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-failure-native.txt": "b3d81ef5d8ab17d1bc9ee03eba7289f30356c6cbc84b85e0ee2993fe29e4ed01",
+    "crates/tkv3d/tests/fixtures/controller-camera-primitives-limits-native.txt": "67f85a050b6a1aba9a9411c8356944c0135529ffcd9fd818dbadebe538bf32bc"
+  },
+  "upstream_sources": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.cxx": "6d8efaacccf41a662def60e2350d4692ffac7b767b429014c9d725e8a8b841a3",
+    "src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_CView.cxx": "adbbbb8c6453611932ce4bdca56ed74882d6fa2133fc82f52e96471168c01888",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_Camera.cxx": "7f7afa52feaad5949e75b6ec40575b607a1be67cf0575e6e8a9e5f3ff49847f0"
+  },
+  "seed": "Within four2400-case operation blocks: index%5 projection; (index/5)%5 scroll/angle; (index/25)%2 cursor and ToPan; (index/50)%2 world anchor/hit and ToRotate; (index/100)%2 gates; (index/200)%2 min distance1/250; (index/400)%3 focus.25/1/1.95 (middle absolute, others relative); (index/1200)%2 XR. Operation-specific unused dimensions filtered by meaningful_case to1380 unique scenes. Complete transfer buffer seeding reused; PanDelta(17,-9), ZAngle((index/5)%5-2)*.07; scroll[-100,0,.25,40,500], cursor(-1,-1)/(137,91), anchor/hit(7,-3,20). Camera eye(0,0,200),center0,scale200,aspect4/3,viewport640x480.",
+  "frames": "initial running camera animation with view attached; two immediate operation calls with invalidation reset before each. Limit cases seed4825..4849 for each scale1e-9/1e14, metadata caseID10000/20000+seed. Failure cases seed1,2401,4801,7202, before/after actual rejected child stop; focus does not stop. Failure cases also retry after partial parent stop; stopped parents retain attached view and skip child stop on retry.",
+  "schema": "case,frame,invalidated,animation_stopped,animation_view_null,has_anchor,anchorXYZ; camera centerXYZ,eyeXYZ,upXYZ,directionXYZ,scale,distance,zfocus,zfocus_type,aspect,projection,znear,zfar,fovy; baseXRpresent plus same21camera values paddedzeros whenabsent; UI57fields+GL57fields, complete pinned transfer schema.",
+  "xr_fixture": "Actual retained CView base/posed cameras and closed OpenVR session; head pose translation(1.25,-2.5,.75), SetupXRPosedCamera; actual SynchronizeXRPosedToBaseCamera invoked after camera mutation. No headset/GPU calls.",
+  "native_build_command": "g++ -std=c++17 -I ../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/martensite_controller_camera_primitives.cxx -L ../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKV3d -lTKService -lTKMath -lTKernel -o target/oracle/controller-camera-primitives",
+  "limitations": [
+    "Local native generation only; Rust tests do not load OCCT.",
+    "Native null window dereference becomes typed Failure; completed earlier state mutations retained.",
+    "Orbit/view rotation, navigation keys, animation orientation and frame dispatch remain open; constructor/class partial.",
+    "Windows/macOS testing deferred."
+  ]
+}
