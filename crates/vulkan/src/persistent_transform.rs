@@ -205,12 +205,18 @@ pub(crate) fn lighting_matrices(
     let local = context.group.transform_persistence();
     if parent.is_null() && local.is_null() {
         return Ok((
-            Mat4::<f32>::from_other(&model).data(),
+            context
+                .model_override
+                .unwrap_or_else(|| Mat4::<f32>::from_other(&model))
+                .data(),
             Mat4::<f32>::from_other(&context.camera.orientation_matrix()).data(),
         ));
     }
     let transform = persistent_view(context.camera, model, parent, &local, context.extent)?;
-    Ok((transform.model.data(), transform.world_view.data()))
+    Ok((
+        context.model_override.unwrap_or(transform.model).data(),
+        transform.world_view.data(),
+    ))
 }
 
 // Capping replaces ModelWorld with the plane orientation (OCCT 3d097a0).

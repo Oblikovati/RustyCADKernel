@@ -1,0 +1,160 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_hashes_verified": true,
+  "global_completion_proven": false,
+  "renderer_capability_completion": false,
+  "functional_baseline_accepted": false,
+  "performance_comparison_baseline": "integrable.json.gz",
+  "median_ratio": 1.25,
+  "p95_ratio": 1.5,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "passed_cases": 50,
+      "total_cases": 54,
+      "failed_cases": [
+        {
+          "case": "96-48-0-2-flip-text",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-flip-text', pixels=4608, color_mismatch_pixels=14, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            12,
+            25,
+            24,
+            34
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/gl-96-48-0-2-flip-text",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/vk-96-48-0-2-flip-text",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-flip-text",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-flip-text', pixels=4608, color_mismatch_pixels=14, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            0,
+            49,
+            12,
+            58
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/gl-48-96-0--3-flip-text",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/vk-48-96-0--3-flip-text",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-flip-text",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-flip-text', pixels=4608, color_mismatch_pixels=14, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            12,
+            25,
+            24,
+            34
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/gl-96-48-1-2-flip-text",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/vk-96-48-1-2-flip-text",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-flip-text",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-flip-text', pixels=4608, color_mismatch_pixels=14, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            0,
+            49,
+            12,
+            58
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/gl-48-96-1--3-flip-text",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/lavapipe/vk-48-96-1--3-flip-text",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        }
+      ],
+      "workloads": 25,
+      "independent_performance_failures": [
+        "resize p95_ms=1.047ms exceeds 0.668ms",
+        "ais-display-erase p95_ms=1.430ms exceeds 1.220ms",
+        "ais-remove-display p95_ms=1.679ms exceeds 1.267ms",
+        "persistence-groups median_ms=1.391ms exceeds 1.204ms",
+        "persistence-groups p95_ms=2.303ms exceeds 1.703ms",
+        "ais-line-appearance p95_ms=1.010ms exceeds 0.687ms",
+        "point-sprites p95_ms=1.777ms exceeds 1.377ms",
+        "ais-axis-appearance median_ms=0.546ms exceeds 0.520ms",
+        "ais-axis-appearance p95_ms=3.060ms exceeds 0.771ms",
+        "plane-trihedron-updates p95_ms=1.304ms exceeds 0.992ms",
+        "window-present p95_ms=1.577ms exceeds 1.100ms",
+        "clipping-plane-updates median_ms=0.501ms exceeds 0.496ms",
+        "clipping-plane-updates p95_ms=1.208ms exceeds 0.780ms",
+        "capping-plane-updates p95_ms=1.623ms exceeds 1.328ms",
+        "lit-capping-plane-updates p95_ms=1.502ms exceeds 1.470ms",
+        "camera-animation-updates median_ms=0.459ms exceeds 0.441ms"
+      ]
+    },
+    {
+      "profile": "host",
+      "passed_cases": 51,
+      "total_cases": 54,
+      "failed_cases": [
+        {
+          "case": "64-64-1-0-flip-cap",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-flip-cap', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=5.185604095458984e-06); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            0,
+            19,
+            28,
+            53
+          ],
+          "color_error_bounds": null,
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/host/gl-64-64-1-0-flip-cap",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/host/vk-64-64-1-0-flip-cap",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-flip-cap",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-flip-cap', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=1.6689300537109375e-06); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            41,
+            38,
+            41,
+            40
+          ],
+          "color_error_bounds": null,
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/host/gl-96-48-1-2-flip-cap",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/host/vk-96-48-1-2-flip-cap",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-flip-cap",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-flip-cap', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=2.8014183044433594e-06); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            28,
+            62,
+            28,
+            65
+          ],
+          "color_error_bounds": null,
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/host/gl-48-96-1--3-flip-cap",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/target/flipping-verified-captures/host/vk-48-96-1--3-flip-cap",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        }
+      ],
+      "workloads": 25,
+      "independent_performance_failures": []
+    }
+  ],
+  "completed_worktree_deleted": false
+}

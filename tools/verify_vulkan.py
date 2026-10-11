@@ -33,6 +33,7 @@ from vulkan_capture_artifacts import FileCaptureStore, export_comparison
 from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_camera_animation_cases import CAMERA_ANIMATION_MODES
 from vulkan_object_animation_cases import OBJECT_ANIMATION_MODES
+from vulkan_group_flipping_cases import GROUP_FLIPPING_MODES
 from vulkan_performance import (
     performance_rows,
     regression_failures,
@@ -246,6 +247,8 @@ def capture_cases(
 
 def capture_modes(case_family: str) -> tuple[str, ...]:
     """Select an explicit fixture family without changing parity gates; capture_modes('lighting')."""
+    if case_family == "group-flipping":
+        return GROUP_FLIPPING_MODES
     if case_family == "object-animation":
         return OBJECT_ANIMATION_MODES
     if case_family == "camera-animation":
@@ -256,7 +259,7 @@ def capture_modes(case_family: str) -> tuple[str, ...]:
         return LIGHTING_MODES
     if case_family != "all":
         raise ValueError(
-            f"received case family {case_family!r}; expected all, lighting, capping, camera-animation or object-animation"
+            f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping"
         )
     return (
         "default",
@@ -264,6 +267,7 @@ def capture_modes(case_family: str) -> tuple[str, ...]:
         *AIS_MODES,
         *CAMERA_ANIMATION_MODES,
         *OBJECT_ANIMATION_MODES,
+        *GROUP_FLIPPING_MODES,
         *SURFACE_MODES,
         *PERSISTENCE_MODES,
         *LINE_MODES,
@@ -310,6 +314,7 @@ def source_hashes() -> dict[str, str]:
             "tools/oracle/martensite_vulkan_ais_circle.cxx",
             "tools/oracle/martensite_vulkan_camera_animation.cxx",
             "tools/oracle/martensite_vulkan_object_animation.cxx",
+            "tools/oracle/martensite_vulkan_group_flipping.cxx",
             "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
             "tools/oracle/martensite_vulkan_window.cxx",
             "tools/oracle/martensite_vulkan_persistence.cxx",
@@ -493,7 +498,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--host-icd", type=Path)
     parser.add_argument(
         "--case-family",
-        choices=("all", "lighting", "capping", "camera-animation", "object-animation"),
+        choices=("all", "lighting", "capping", "camera-animation", "object-animation", "group-flipping"),
         default="all",
     )
     performance_arguments(parser)

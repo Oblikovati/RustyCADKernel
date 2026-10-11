@@ -1,0 +1,22 @@
+   Compiling martensite-vulkan v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-group-flipping/crates/vulkan)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.16s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-066d8a0ffbf1629f)
+
+running 1 test
+test backend::pipeline_state::tests::default_opaque_buffer_preserves_alpha_during_annotation_blending ... FAILED
+
+failures:
+
+---- backend::pipeline_state::tests::default_opaque_buffer_preserves_alpha_during_annotation_blending stdout ----
+
+thread 'backend::pipeline_state::tests::default_opaque_buffer_preserves_alpha_during_annotation_blending' (1926898) panicked at crates/vulkan/src/backend/pipeline_state.rs:180:9:
+assertion failed: !POINT_BLEND[0].color_write_mask.contains(vk::ColorComponentFlags::A)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    backend::pipeline_state::tests::default_opaque_buffer_preserves_alpha_during_annotation_blending
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 52 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p martensite-vulkan --lib`

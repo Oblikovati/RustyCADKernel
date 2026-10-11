@@ -44,7 +44,8 @@ const POINT_BLEND: [vk::PipelineColorBlendAttachmentState; 1] =
         src_alpha_blend_factor: vk::BlendFactor::SRC_ALPHA,
         dst_alpha_blend_factor: vk::BlendFactor::ONE_MINUS_SRC_ALPHA,
         alpha_blend_op: vk::BlendOp::ADD,
-        color_write_mask: vk::ColorComponentFlags::RGBA,
+        // OpenGl_Context::SetColorMask at 3d097a0 honors buffersOpaqueAlpha=true.
+        color_write_mask: vk::ColorComponentFlags::from_raw(0x7),
     }];
 pub(super) struct PipelineState {
     vertex: vk::PipelineVertexInputStateCreateInfo<'static>,
@@ -175,6 +176,23 @@ fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn default_opaque_buffer_preserves_alpha_during_annotation_blending() {
+        assert!(
+            !POINT_BLEND[0]
+                .color_write_mask
+                .contains(vk::ColorComponentFlags::A)
+        );
+        assert!(
+            POINT_BLEND[0]
+                .color_write_mask
+                .contains(vk::ColorComponentFlags::R)
+        );
+        assert_eq!(
+            POINT_BLEND[0].src_color_blend_factor,
+            vk::BlendFactor::SRC_ALPHA
+        );
+    }
     #[test]
     fn triangle_pipelines_do_not_require_dynamic_line_width() {
         assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));

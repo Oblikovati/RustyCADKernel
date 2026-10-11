@@ -49,6 +49,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     lighting_performance::benchmark(&driver, warmup, samples);
     camera_animation_performance::benchmark(&driver, warmup, samples);
     object_animation_performance::benchmark(&driver, warmup, samples);
+    group_flipping_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -186,6 +187,11 @@ mod camera_animation_performance;
 #[path = "../tests/support/camera_animation_scene.rs"]
 mod camera_animation_scene;
 
+#[path = "support/group_flipping_performance.rs"]
+mod group_flipping_performance;
+#[allow(dead_code)]
+#[path = "../tests/support/group_flipping_scene.rs"]
+mod group_flipping_scene;
 #[path = "support/object_animation_performance.rs"]
 mod object_animation_performance;
 #[allow(dead_code)]

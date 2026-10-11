@@ -25,7 +25,7 @@ class LightingCaptureCasesTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(
             ValueError,
-            "expected all, lighting, capping, camera-animation or object-animation",
+            "expected all, lighting, capping, camera-animation, object-animation or group-flipping",
         ):
             capture_modes("unknown")
 

@@ -61,6 +61,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    adds live camera interpolation and deferred redraw. [Object animation](v3d-design.md#ais-object-animation)
    adds exact local transformation interpolation, context selection updates and
    immediate-layer Z-fit invalidation with native and GPU/performance fixtures.
+   [Ordered group flipping](vulkan-group-flipping.md) now preserves annotation
+   brackets, live orientation, lighting/clipping transforms and native cap filtering.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
