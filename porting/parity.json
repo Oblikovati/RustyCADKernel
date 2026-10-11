@@ -590592,6 +590592,686 @@
       "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::set_running",
       "status": "implemented",
       "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateMouseScroll(const Aspect_ScrollDelta &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "06f7fa6c00f2af0415666df2b9fff3888b94125e32d1b3edf60856f94f3aec43",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_mouse_scroll",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetOrbitAcceleration(float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "0780e3e84c7f0188581c8d9076b43839d6df5934519d8c2f7c6ece3405dc666a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_orbit_acceleration",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetNavigationMode(AIS_NavigationMode)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "07ac143496f6ec98c581504964aa2f7ef57e7f6ba1accba50d7edb09ae0da478",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_navigation_mode",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowDragging() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "0c3349d403d49f97193b8460eb8d01f0e3ec62ce81a5387c62b1c1ec374aa4d5",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_dragging",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetStickToRayOnRotation(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "11e1031d9e5f75f07d55bff9b47ddb387eb87825635ee1aef6d886fce60dcd7e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_stick_to_ray_on_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetTouchToleranceScale(float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "1465bfbf69f935a74f0358e4a69761c5b727c7dd8ffa26c935ec9e877bf0b1af",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_touch_tolerance_scale",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowTouchZRotation() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "17cafdddbee3a9cf61696ca34fd315d021dc0bd67a2f7ef2016f8237e180d73e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_touch_z_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetMinZoomDistance(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "19c4f859178ed8af1fb580a141c9d170258e640387c67be5723e091b48dfd8be",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_min_zoom_distance",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToStickToRayOnZoom() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "1b819b6ae67184ecc18bf02268fbe14a6ef9f5c0b92b45fe55d72bcc6cc7b997",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_stick_to_ray_on_zoom",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::OrbitAcceleration() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "1ea1c97c51e727890beeaf3c60c7f4638eb74d1adf93d1145b78ddaed8fc2183",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::orbit_acceleration",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToShowRotateCenter() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "21ce95d4a1a84f27140f91d8c680dcae309178190c88fb361b772ab5dcb4b6ea",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_show_rotate_center",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowHighlight(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "22e694fda071644efa11e7fed4c8572bf503a11f4cbd21423cace9f6e3281e17",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_highlight",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToPauseObjectsAnimation() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "27fdd219e9896bebb86b82046244b0c9f4f46a42982a40112112a692b3ebe10c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_pause_objects_animation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::NavigationMode() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "32c718c0afe1b4621ee5a1c56693c732a042c8ccaaa0da008ce4a7711ac828dd",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::navigation_mode",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowZFocus() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "379e8ceeaebbf965f77294fc7a69ad1ad598076fe0fdb2594952355597e96a0c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_z_focus",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetStickToRayOnZoom(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "3950905b27e645a65d5a3f35d3c7e7b1e7d8a85066fda3266f93cbaf2063a89d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_stick_to_ray_on_zoom",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowHighlight() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "427a5393d20d497e5235f9022acef13cb95340c9bf656dae75342729b3fe4c3c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_highlight",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::IsContinuousRedraw() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "4827ca4a3ce4d8cc905aae06f18a4a909a689240bf3527f8a454452b3ead55fc",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::is_continuous_redraw",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ChangeInputBuffer(AIS_ViewInputBufferType)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "4dc44fc99d3555e30429b8c4cd8580f968468313219f42b9ddd26ccd09d7d538",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::change_input_buffer",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateZRotation(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "52d2cc1b97944235883eea2f31cbafbaed901bd9345feedd3df917095281a284",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_z_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetThrustSpeed(float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "53bcba05206d1841e6cdd68a068bd8cc63147b866b9730df89bc427b15c4752b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_thrust_speed",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToInvertPitch() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "63dd6f69880ace50dded087757ff71665079c20f2abac9bcc823dd0d1e9b2f26",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_invert_pitch",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToDisplayXRAuxDevices() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "680d1f79a6b60a7d006597a0762161b3f1026c00f2434351221808b322540db7",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_display_xr_aux_devices",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowZooming() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "68ebe8ed732241823ae53f9fcd33fbdc48aa1b52e6653bdedf17b2c940e76494",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_zooming",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdatePolySelection(const NCollection_Vec2<int> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "6d1df508b3961fedec662868b03d25a0180bcce2221370f7a88af4b948bf9e74",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_poly_selection",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::MouseAcceleration() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "6e084dceaec913e53cde08b7e2b697150a36775839c0685b7e0e8c33799aa40b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::mouse_acceleration",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetRotationMode(AIS_RotationMode)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "710e11c69f4c78cf8e5fd3bfbc1f5f8335a4177cfbb1c84700e9b410dcbcaafd",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_rotation_mode",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowRotation() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "7c5951b600ee24bc44e113038ab83549f2a2095345afd6711a838386e297204f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::RotationMode() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "7e5336fecec2ee6f22192b4006e57d311928d86b4c8c9031b0cb59eb8bf962b0",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::rotation_mode",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowPanning(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "8016be86c4ad24142a51c2ca5518e2a1b5110345bf2d5eb84dc228acdde6c8e2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_panning",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetShowRotateCenter(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "81c309780949ee2d53a9ec3f66a47d6fb05979356744f13cb459e87c403ba889",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_show_rotate_center",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowDragging(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "825cb42461ca62e99c68d51431ff6560917dd758943f0fa8c79aec20a300aac1",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_dragging",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::PreviousMoveTo() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "8635c7b84cc2e7b900325805b6bdb6a25474557351b43cbe363f3d8ebae1ffca",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::previous_move_to",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetContinuousRedraw(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "89363b6d13123984324c5b5f00a7655b3df57f7fd96df276f4f19656497b7296",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_continuous_redraw",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToStickToRayOnRotation() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "8bf7c3de01ac7d639b5c27693ced0f8d2e58efd632b32926ad167e3e6dbd4c6c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_stick_to_ray_on_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::TouchToleranceScale() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "8dffbe88601ea487ac95a70a163ee3ddae46bc131c1e123515ee147c65749c0a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::touch_tolerance_scale",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToAllowPanning() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "8f8952d70b3c774f5d2cc390163470ca6ea8b3a7d302f5ad7331e83bfcc60f83",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_allow_panning",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToLockOrbitZUp() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "90d0a4d31ecf8e4cfce5808f22c2bbf8a9820158f69818dcdd341bdc61836765",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_lock_orbit_z_up",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SelectInViewer(const NCollection_Sequence<NCollection_Vec2<int>> &, const AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "91e1f1a9b45ed06133662eac8f29f88a638d143c4743eff6527325fc1bc1b37a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::select_points_in_viewer",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateRubberBand(const NCollection_Vec2<int> &, const NCollection_Vec2<int> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "949f15dbfd2a6c8c0a3638873d77af667d7f4de3bdbccafb4d16202c768b20f8",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_rubber_band",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetMouseDoubleClickInterval(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "96f49bd1820c62fccab2a47a00781aebff672700596a8bd38e10e31eb41e6a5c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_mouse_double_click_interval",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::MouseDoubleClickInterval() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "9b2bdf7cc0a4057178c1a946dfb20c79016a15c0fc2f43ec80ff2b92e9353c28",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::mouse_double_click_interval",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SelectInViewer(const NCollection_Vec2<int> &, const AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "a6a9137c7889cb461f6f4f779cb9b84561fc56e1dec6a0d50342966ad83f0ae3",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::select_in_viewer",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::AIS_ViewController()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "a831fb69fbf4c357b3cf4bd5adf80fe649bf817d9e8492321f8baf604d14c5f3",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::new",
+      "status": "partial",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::MinZoomDistance() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "a899211a9c3b15d75be6efbc03fab1098e644d34165fe673e99f8343bfb2b411",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::min_zoom_distance",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "a9c7b1d7b5955c8b2dac1003fdc53e21c8373aa1b8c4c88e495442b9691c00fc",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController",
+      "status": "partial",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetLockOrbitZUp(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ab4d393b40f865dc7ecb2325cda7edc9c22f94feb5d2ac8c6cf55e3a88f2bb67",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_lock_orbit_z_up",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ResetPreviousMoveTo()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ae327ca451dfc645650e811e70dc335b9d1c877ce5cfb97b92c16e5475e251a0",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::reset_previous_move_to",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToDisplayXRHands() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "b6aaa5e1e312a07b7aff84bc20511578f74a87d88480f14151bd8d46d14b4806",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_display_xr_hands",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetDisplayXRAuxDevices(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "b924550e03f378fce86fcc8b7f9f375e716535db2f8fc1985532a7a90cf32707",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_display_xr_aux_devices",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetWalkSpeedRelative(float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "bb3a6c3c242134eb531b87a2a267ace1b34b3db16a30c4623ede3b9c254a4b3f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_walk_speed_relative",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ToShowPanAnchorPoint() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "c9f2619840c7688dc3f8672b8e4ba561244c1cace53306b40978de391a62aa63",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_show_pan_anchor_point",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetShowPanAnchorPoint(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ca2a5b4bfcf805541fdaa8697145ccaa275804c649c3ae69cba055acc4317c0d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_show_pan_anchor_point",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::InputBuffer(AIS_ViewInputBufferType) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ce5c0e99df3ad757f3de816585d16d68de6f0c60ad6f959b264a0ffaaa714660",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::input_buffer",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::HasPreviousMoveTo() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ce641114d8c6f9969377a88fd76a2e4e6d43dc3d153be7c535a97718259d8176",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::has_previous_move_to",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowZooming(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "d0146feb4cd22ec4bc203d1ae8e4224da0f250fcbf0977f9bc9364c0f555b300",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_zooming",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetInvertPitch(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "d086b77171e2bd76d5aeed3b29fdfd9c05c585302254b217c527c0ce77d82309",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_invert_pitch",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetDisplayXRHands(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "d1e2e4804164fb8c9206a7f3cde195d41ffb4ddf3c496fe91f4c3bed5d0047d8",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_display_xr_hands",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetMouseAcceleration(float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "dbbebe7ff8dd1e4a0b5f0bb8ff54bbe1c5f93a290fc2c61a488114566fe72acf",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_mouse_acceleration",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::WalkSpeedRelative() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "e913d236ec0cedda0d1dd156174057a7df0cfd649e9e3f650cd9c6b8bd23e643",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::walk_speed_relative",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowTouchZRotation(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "e9a2cd624cf368ec2c1583e9f786bd9f4eca5f7e5e25af4b6daeb5a98caad51f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_touch_z_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateZoom(const Aspect_ScrollDelta &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ead3360ae9b0d24db8c2b930e1ae7aadef47ad6524243c9474d044e05678c7a9",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_zoom",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowZFocus(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "eb8688e93eb9022a0f7d9ea9244eb98cca6075151dbf7d5f0b0999dd09f53f8a",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_z_focus",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetAllowRotation(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "edce3801757627f2a9d7f32c5628e3057546678d4a2569d33c56807b6d901e6b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_allow_rotation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetPauseObjectsAnimation(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "efd5b0e8c4dcd33c5a9d619a36a0fb9925eac2e1c9c12514d60aab3079b9a7d7",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_pause_objects_animation",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::WalkSpeedAbsolute() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "f6a9107c97e331e0145a0ab66d78c9e8ede624b833d8806ba845ac356a3c249d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::walk_speed_absolute",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetWalkSpeedAbsolute(float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "fcae5b5cd1bd11ac6fe5d47dd440926b62fbad2fe849612081ef6fc8a216f12f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_walk_speed_absolute",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ThrustSpeed() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ff002838a0793f6c9a3734a4ad917ee966a7df25cf67d931d8b393643032888d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::thrust_speed",
+      "status": "implemented",
+      "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
     }
   ],
   "tests": [

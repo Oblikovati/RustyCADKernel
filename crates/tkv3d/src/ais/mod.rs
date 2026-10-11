@@ -205,3 +205,9 @@ pub use navigation_modes::{
     AisRotationModeBounds,
 };
 pub use walk_delta::{AisWalkDelta, AisWalkPart, AisWalkRotation, AisWalkTranslation};
+
+mod view_controller;
+mod view_controller_parameters;
+mod view_controller_selection;
+mod view_controller_zoom;
+pub use view_controller::AisViewController;

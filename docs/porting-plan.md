@@ -95,7 +95,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    records, native defaults and reset/copy semantics through committed oracle assets.
    [AIS navigation dependencies](ais-view-navigation.md) now preserve camera policies,
    mouse gestures and six-axis walking state with native boundary/flag/copy fixtures.
-   Continue the dependent AIS view controller alongside the remaining presentation
+   [AIS view controller input](ais-view-controller.md) now queues native selection,
+   zoom and Z rotation, with public policies and UI-only navigation cancellation.
+   Continue its remaining dispatch alongside the remaining presentation
    and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

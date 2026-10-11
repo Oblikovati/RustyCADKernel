@@ -1,0 +1,211 @@
+//! Every public controller parameter replays an independent native setter snapshot.
+#[path = "support/view_controller_fixture.rs"]
+mod fixture;
+use fixture::{assert_event, assert_snapshot, parameters};
+use rustycad_tkv3d::ais::*;
+macro_rules! check_parameter {
+    ($name:ident, $getter:ident, $setter:ident, $changed:expr, $row:literal) => {
+        #[test]
+        fn $name() {
+            let mut c = AisViewController::new();
+            assert_snapshot(&parameters(&c), "parameters-default");
+            let initial = c.$getter();
+            let changed = $changed;
+            c.$setter(changed);
+            assert_eq!(c.$getter(), changed);
+            assert_snapshot(&parameters(&c), $row);
+            c.$setter(initial);
+            assert_snapshot(&parameters(&c), "parameters-restored");
+        }
+    };
+}
+check_parameter!(
+    controller_parameter_to_pause_objects_animation,
+    to_pause_objects_animation,
+    set_pause_objects_animation,
+    true,
+    "parameter-0"
+);
+check_parameter!(
+    controller_parameter_is_continuous_redraw,
+    is_continuous_redraw,
+    set_continuous_redraw,
+    true,
+    "parameter-1"
+);
+check_parameter!(
+    controller_parameter_to_show_pan_anchor_point,
+    to_show_pan_anchor_point,
+    set_show_pan_anchor_point,
+    false,
+    "parameter-2"
+);
+check_parameter!(
+    controller_parameter_to_show_rotate_center,
+    to_show_rotate_center,
+    set_show_rotate_center,
+    false,
+    "parameter-3"
+);
+check_parameter!(
+    controller_parameter_to_lock_orbit_z_up,
+    to_lock_orbit_z_up,
+    set_lock_orbit_z_up,
+    true,
+    "parameter-4"
+);
+check_parameter!(
+    controller_parameter_to_allow_touch_z_rotation,
+    to_allow_touch_z_rotation,
+    set_allow_touch_z_rotation,
+    true,
+    "parameter-5"
+);
+check_parameter!(
+    controller_parameter_to_allow_rotation,
+    to_allow_rotation,
+    set_allow_rotation,
+    false,
+    "parameter-6"
+);
+check_parameter!(
+    controller_parameter_to_allow_panning,
+    to_allow_panning,
+    set_allow_panning,
+    false,
+    "parameter-7"
+);
+check_parameter!(
+    controller_parameter_to_allow_zooming,
+    to_allow_zooming,
+    set_allow_zooming,
+    false,
+    "parameter-8"
+);
+check_parameter!(
+    controller_parameter_to_allow_z_focus,
+    to_allow_z_focus,
+    set_allow_z_focus,
+    false,
+    "parameter-9"
+);
+check_parameter!(
+    controller_parameter_to_allow_highlight,
+    to_allow_highlight,
+    set_allow_highlight,
+    false,
+    "parameter-10"
+);
+check_parameter!(
+    controller_parameter_to_allow_dragging,
+    to_allow_dragging,
+    set_allow_dragging,
+    false,
+    "parameter-11"
+);
+check_parameter!(
+    controller_parameter_to_stick_to_ray_on_zoom,
+    to_stick_to_ray_on_zoom,
+    set_stick_to_ray_on_zoom,
+    false,
+    "parameter-12"
+);
+check_parameter!(
+    controller_parameter_to_stick_to_ray_on_rotation,
+    to_stick_to_ray_on_rotation,
+    set_stick_to_ray_on_rotation,
+    false,
+    "parameter-13"
+);
+check_parameter!(
+    controller_parameter_to_invert_pitch,
+    to_invert_pitch,
+    set_invert_pitch,
+    true,
+    "parameter-14"
+);
+check_parameter!(
+    controller_parameter_to_display_xr_aux_devices,
+    to_display_xr_aux_devices,
+    set_display_xr_aux_devices,
+    true,
+    "parameter-15"
+);
+check_parameter!(
+    controller_parameter_to_display_xr_hands,
+    to_display_xr_hands,
+    set_display_xr_hands,
+    false,
+    "parameter-16"
+);
+check_parameter!(
+    controller_parameter_mouse_acceleration,
+    mouse_acceleration,
+    set_mouse_acceleration,
+    -18.25,
+    "parameter-17"
+);
+check_parameter!(
+    controller_parameter_orbit_acceleration,
+    orbit_acceleration,
+    set_orbit_acceleration,
+    -19.25,
+    "parameter-18"
+);
+check_parameter!(
+    controller_parameter_walk_speed_absolute,
+    walk_speed_absolute,
+    set_walk_speed_absolute,
+    -20.25,
+    "parameter-19"
+);
+check_parameter!(
+    controller_parameter_walk_speed_relative,
+    walk_speed_relative,
+    set_walk_speed_relative,
+    -21.25,
+    "parameter-20"
+);
+check_parameter!(
+    controller_parameter_thrust_speed,
+    thrust_speed,
+    set_thrust_speed,
+    -22.25,
+    "parameter-21"
+);
+check_parameter!(
+    controller_parameter_touch_tolerance_scale,
+    touch_tolerance_scale,
+    set_touch_tolerance_scale,
+    -23.25,
+    "parameter-22"
+);
+check_parameter!(
+    controller_parameter_mouse_double_click_interval,
+    mouse_double_click_interval,
+    set_mouse_double_click_interval,
+    -24.25,
+    "parameter-23"
+);
+check_parameter!(
+    controller_parameter_min_zoom_distance,
+    min_zoom_distance,
+    set_min_zoom_distance,
+    -25.25,
+    "parameter-24"
+);
+check_parameter!(
+    controller_parameter_rotation_mode,
+    rotation_mode,
+    set_rotation_mode,
+    AisRotationMode::PickCenter,
+    "parameter-25"
+);
+#[test]
+fn controller_default_trait_matches_native_input_defaults() {
+    assert_event(&AisViewController::default(), "default-ui", -1);
+    assert_snapshot(
+        &parameters(&AisViewController::default()),
+        "parameters-default",
+    );
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "headers_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412"
+  },
+  "generator": "tools/oracle/martensite_view_controller_events.cxx",
+  "generator_sha256": "360ba611a0dd6251e536c8cf44da3dec4fc629817597a50ac842e99d28ae4e09",
+  "fixture": "crates/tkv3d/tests/fixtures/view-controller-events-native.txt",
+  "fixture_sha256": "4bdf6f97bf8d4e05c0c21769c3f019fdd37d1617571727058cd6cc0ca49b9a33",
+  "cases": 80,
+  "native_link_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "rust_test_occt_dependency": false
+}
