@@ -121,7 +121,20 @@ serializes local `main` integration, checks and deletion of completed worktrees.
    selection modes. [Primitive-array initialization](sensitive-primitive-initialization.md)
    now preserves all five overloads and native retained/failed initialization state.
    [Light-source binding](ais-light-source-binding.md) adds properties and world/local
-   transforms; concrete light drawings, construction and interactions remain open.
+   transforms. [Light presentations](ais-light-source-presentation.md) now add
+   concrete construction, geometry, selection, directional highlighting and dragging,
+   with native fixtures and both-device captures and optimized timings. Classes remain
+   partial; Vulkan Shadow-style light labels remain open.
+   [Color scales](ais-color-scale.md) now preserve native palette policies, labels,
+   layout and real presentation submissions. [Controller picking](ais-controller-picking.md)
+   and [selection-aware fitting](ais-view-controller-fit.md) now use real retained
+   geometry and cameras. [Touch synthesis](ais-view-controller-gestures.md) preserves
+   native contact-count transitions and integer pan boundaries.
+   [Primitive matching](sensitive-primitive-matching.md) now has native differential
+   and ownership/lifecycle fixtures; traversal regressions preserve callback ordering.
+   [Native point alpha](vulkan-point-alpha.md) adds native point/sprite alpha policies
+   and committed GPU oracle buffers. Exact-cutoff software differences and additional
+   sprite/material capabilities remain open.
    [Native line alpha](vulkan-line-alpha.md) now preserves forced blending in draw
    order with depth writes. Committed native buffers support Rust-only GPU replay;
    strict software endpoint parity and timing-baseline acceptance remain open.
