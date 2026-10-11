@@ -593961,6 +593961,16 @@
       "status": "implemented",
       "cpp_declaration_id": "f4819f24a6e4d1b0a7eaa2596983480a6478f376694fe77c9be1c353965590c1",
       "notes": "Martensite triangulation construction/selection: 5,196 committed pinned native snapshots exercise actual selecting volumes, boundary/interior meshes, aliased bounded edges with caller mutation and connected sharing, absolute matching vs Lower-relative Box quirk, checked odd-length/non-one-bound failures, cached-only/empty meshes, local COG, transformed bounds/detected nodes and inverse locations. Additional 54 checked fault/repair scenarios compare dirty state, detected index, retained tree, picks and exact sentinel output writes for each node failure with identity/translated locations. Faithful output adapters preserve partial writes before typed Failure; Option conveniences delegate. Native mesh handle is nonnull; private helpers excluded. See docs/sensitive-triangulation-matching.md; class-wide completion/JSON and additional getters remain unclaimed."
+    },
+    {
+      "upstream_id": "AIS_ViewController::handleNavigationKeys(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "f75d3f1aa440f0333a77e0645055839b3318bc929cb15579d597dacd81e1cf4b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_navigation_keys",
+      "status": "implemented",
+      "notes": "Martensite complete native navigation camera motion at pinned OCCT 3d097a0. Real scene bounds/units, camera motion, actual handleZoom dependency with child-stop failure ordering, active XR base selection/synchronization, fetched key/timer/next-frame and complete retained UI/GL state. 8661 native snapshots; scoped fresh rustdoc unique reachable binding in runtime-evidence/controller-navigation-motion-2026-10-11/rust-binding.json. Controller/constructor partial; orbit/navigation hotkeys/animated orientation/frame orchestration remain open."
     }
   ],
   "tests": [
