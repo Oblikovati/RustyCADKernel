@@ -53,7 +53,8 @@ the real structure's identities and captures submitted vertex/index buffers and
 text. Native execution initializes its inherited text aspect to satisfy the native
 precondition; no native GL or GPU context is needed.
 
-The task ledger fragment claims only 73 non-macro, API-visible declarations in the
+The task ledger fragments `color-scale-presentation-layout.json` and
+`color-scale-palette-properties.json` claim 73 non-macro, API-visible declarations in the
 pinned scope. Private helpers, fields and unused native SizeHint receive no credit.
 Runtime type machinery follows the existing transient macro and has a descriptor
 regression; shared generated inventory is owned by the coordinating agent.
