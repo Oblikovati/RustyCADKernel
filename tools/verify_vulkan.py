@@ -488,6 +488,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
             "all",
             "lighting",
             "lit-lines",
+            "lit-transparency",
             "capping",
             "camera-animation",
             "object-animation",

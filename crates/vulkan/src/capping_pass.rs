@@ -24,10 +24,21 @@ impl PrimitiveDraw {
         if pass != RenderCappingPass::None
             && (self.topology() != PrimitiveTopology::Triangles
                 || self.textured_style.is_some()
-                || self.surface_blend)
+                || self.surface_blend
+                || self
+                    .lighting
+                    .as_ref()
+                    .is_some_and(crate::RenderLighting::uses_translucent_material))
         {
             return Err(rejected(
-                (pass, self.topology()),
+                (
+                    pass,
+                    self.topology(),
+                    self.surface_blend,
+                    self.lighting
+                        .as_ref()
+                        .map(|state| state.material.common.map(|face| face.diffuse[3])),
+                ),
                 "opaque triangle capping geometry",
             ));
         }

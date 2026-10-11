@@ -14,7 +14,7 @@ from vulkan_circle_cases import CIRCLE_MODES
 from vulkan_clipping_cases import CLIPPING_MODES
 from vulkan_homogeneous_cases import HOMOGENEOUS_MODES
 from vulkan_capping_cases import CAPPING_MODES
-from vulkan_lighting_cases import LIGHTING_MODES, LIT_LINE_MODES
+from vulkan_lighting_cases import LIGHTING_MODES, LIT_LINE_MODES, LIT_ALPHA_MODES
 from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
 from vulkan_camera_animation_cases import CAMERA_ANIMATION_MODES
 from vulkan_object_animation_cases import OBJECT_ANIMATION_MODES
@@ -57,6 +57,7 @@ ALL_CAPTURE_MODES = (
     *CAPPING_MODES,
     *LIGHTING_MODES,
     *LIT_LINE_MODES,
+    *LIT_ALPHA_MODES,
 )
 
 FAMILY_CAPTURE_MODES = {
@@ -72,6 +73,7 @@ FAMILY_CAPTURE_MODES = {
     "capping": CAPPING_MODES,
     "lighting": LIGHTING_MODES,
     "lit-lines": LIT_LINE_MODES,
+    "lit-transparency": LIT_ALPHA_MODES,
 }
 
 
@@ -82,5 +84,5 @@ def capture_modes(case_family: str) -> tuple[str, ...]:
     if case_family in FAMILY_CAPTURE_MODES:
         return FAMILY_CAPTURE_MODES[case_family]
     raise ValueError(
-        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations or ais-plane or point-cloud or ais-trihedron or rubber-band or lit-lines"
+        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations or ais-plane or point-cloud or ais-trihedron or rubber-band or lit-lines or lit-transparency"
     )

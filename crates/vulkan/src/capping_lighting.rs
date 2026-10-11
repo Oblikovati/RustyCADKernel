@@ -13,13 +13,10 @@ pub(crate) fn apply_cap_lighting(
     if model == Graphic3dTypeOfShadingModel::Unlit {
         return crate::retained_lighting::validate_unlit_surface(&**aspects);
     }
-    draw.lighting = Some(cap_lighting_snapshot(
-        draw.vertices.len(),
-        &**aspects,
-        scene,
-        orientation,
-        model,
-    )?);
+    let lighting =
+        cap_lighting_snapshot(draw.vertices.len(), &**aspects, scene, orientation, model)?;
+    lighting.validate_opaque_annotation_or_cap()?;
+    draw.lighting = Some(lighting);
     Ok(())
 }
 fn cap_lighting_snapshot(

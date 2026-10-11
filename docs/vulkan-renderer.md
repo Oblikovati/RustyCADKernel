@@ -45,7 +45,7 @@ in `deny.toml`; its copyright and license notice must accompany distributions.
 
 Unsupported styles and commands return errors. Current restrictions include
 triangle lists/strips/fans, segments/polylines and point sprites, full homogeneous Vec4 positions, opaque
-vertex/interior colors, unlit solid shading and [opaque Phong-family surfaces](vulkan-lighting.md),
+vertex/interior colors, unlit solid shading and [Phong-family surfaces](vulkan-lighting.md),
 opaque face culling, [ordered annotation flipping](vulkan-group-flipping.md) and
 [retained polygon offsets](ais-trihedron.md). General group stencil commands,
 bounding-box highlighting, textures and custom shaders are not implemented.
@@ -544,11 +544,13 @@ Other native driver policies remain unverified.
 
 Opaque draws precede blended surfaces across layers until the next depth clear.
 The transparent pass retains submission order, tests depth and suppresses depth
-writes. Automatic blending follows front-material transparency; explicit Blend
+writes. Automatic blending follows front material and distinguished back material
+transparency; explicit Blend
 and Opaque remain distinct. Unlit uniform/vertex/bound alpha retains its native
 color semantics, while lighting uses material opacity. Opaque framebuffer alpha
-is preserved. Alpha masks, OIT, transparent caps, transparent back-face distinction
-and translucent annotation/line colors still fail explicitly.
+is preserved. [Translucent lit surfaces](vulkan-lit-transparency.md) support the
+three Phong-family algorithms, distinguished back opacity and live pass changes.
+Alpha masks, OIT, transparent caps and translucent annotation/line colors still fail explicitly.
 
 The [receipt](../porting/runtime-evidence/ais-plane-renderer-2026-10-11/summary.json)
 records 168 strict cases per device: lavapipe passes 124 and AMD passes 140.

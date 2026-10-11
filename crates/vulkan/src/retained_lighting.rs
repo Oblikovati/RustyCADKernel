@@ -58,6 +58,7 @@ fn apply_nodal_lighting(
         return validate_non_surface_lighting(model, true);
     }
     let mut lighting = surface_lighting(primitive, &**aspects, context, model, Some(&normals))?;
+    lighting.validate_opaque_annotation_or_cap()?;
     lighting.normals = normals;
     for draw in draws {
         draw.lighting = Some(lighting.clone());

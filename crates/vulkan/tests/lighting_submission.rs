@@ -71,16 +71,61 @@ fn default_and_missing_normals_resolve_using_native_surface_policy() {
     );
 }
 #[test]
-fn pbr_and_transparent_back_materials_are_rejected_without_phong_substitution() {
+fn pbr_is_rejected_without_phong_substitution() {
     let scene = scene::GraphicScene::new();
     add_normals(&scene);
     let aspect = scene.group.aspects();
     aspect.set_shading_model(Graphic3dTypeOfShadingModel::Pbr);
     assert!(scene.group.primitive_draws(&scene.camera).is_err());
+}
+
+fn opacity_aspect(scene: &scene::GraphicScene, front_alpha: f32, back_alpha: f32) {
+    let aspect = scene.group.aspects();
     aspect.set_shading_model(Graphic3dTypeOfShadingModel::Phong);
-    aspect.set_distinguish(true);
+    let mut front = aspect.front_material();
+    front.set_transparency(1. - front_alpha).unwrap();
+    aspect.set_front_material(front);
     let mut back = aspect.back_material();
-    back.set_transparency(0.5).unwrap();
+    back.set_transparency(1. - back_alpha).unwrap();
     aspect.set_back_material(back);
-    assert!(scene.group.primitive_draws(&scene.camera).is_err());
+}
+#[test]
+fn live_material_opacity_changes_passes_without_mutating_earlier_draws() {
+    let scene = scene::GraphicScene::new();
+    add_normals(&scene);
+    opacity_aspect(&scene, 1., 1.);
+    let before = scene.group.primitive_draws(&scene.camera).unwrap();
+    opacity_aspect(&scene, 0.5, 1.);
+    let after = scene.group.primitive_draws(&scene.camera).unwrap();
+    assert!(!before[0].is_surface_blended());
+    assert!(after[0].is_surface_blended());
+    opacity_aspect(&scene, 1., 1.);
+    assert!(!scene.group.primitive_draws(&scene.camera).unwrap()[0].is_surface_blended());
+    assert!(after[0].is_surface_blended());
+}
+#[test]
+fn back_face_opacity_is_automatic_only_when_materials_are_distinguished() {
+    let scene = scene::GraphicScene::new();
+    add_normals(&scene);
+    opacity_aspect(&scene, 1., 0.5);
+    assert!(!scene.group.primitive_draws(&scene.camera).unwrap()[0].is_surface_blended());
+    scene.group.aspects().set_distinguish(true);
+    assert!(scene.group.primitive_draws(&scene.camera).unwrap()[0].is_surface_blended());
+    scene
+        .group
+        .aspects()
+        .set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.5);
+    assert!(!scene.group.primitive_draws(&scene.camera).unwrap()[0].is_surface_blended());
+    assert_eq!(scene.group.aspects().back_material().transparency(), 0.5);
+}
+#[test]
+fn explicit_blend_keeps_opaque_materials_in_the_deferred_pass() {
+    let scene = scene::GraphicScene::new();
+    add_normals(&scene);
+    opacity_aspect(&scene, 1., 1.);
+    scene
+        .group
+        .aspects()
+        .set_alpha_mode(Graphic3dAlphaMode::Blend, 0.5);
+    assert!(scene.group.primitive_draws(&scene.camera).unwrap()[0].is_surface_blended());
 }

@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from vulkan_capping_cases import CAPPING_MODES
 from verify_vulkan import CASES, capture_modes, configuration, parse_arguments
-from vulkan_lighting_cases import LIGHTING_MODES, LIT_LINE_MODES
+from vulkan_lighting_cases import LIGHTING_MODES, LIT_LINE_MODES, LIT_ALPHA_MODES
 
 
 class LightingCaptureCasesTests(unittest.TestCase):
@@ -95,3 +95,13 @@ class LitLineShaderVariantTests(unittest.TestCase):
             shader_variant_name("lighting.frag", True, False, True),
             "lighting.line.clipped.frag.spv",
         )
+
+class LitOpacityFamilyTests(unittest.TestCase):
+    def test_opacity_family_keeps_material_pass_and_back_face_cases(self) -> None:
+        self.assertEqual(capture_modes("lit-transparency"), LIT_ALPHA_MODES)
+        self.assertEqual(len(LIT_ALPHA_MODES) * len(CASES), 78)
+        self.assertTrue(set(LIT_ALPHA_MODES) <= set(capture_modes("all")))
+        for suffix in ("opacity-updated", "pass-updated", "front-opaque", "forced-blend", "distinct-back"):
+            self.assertIn(f"lit-alpha-{suffix}", LIT_ALPHA_MODES)
+        config = configuration(parse_arguments(["--source", "source", "--build", "build", "--output", "result.json", "--case-family", "lit-transparency"]))
+        self.assertEqual(config.case_family, "lit-transparency")

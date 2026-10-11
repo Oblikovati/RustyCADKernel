@@ -4,8 +4,12 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::graphic3d::*;
 #[path = "support/device_options.rs"]
 mod device_options;
+#[path = "support/lighting_geometry.rs"]
+mod lighting_geometry;
 #[path = "support/line_lighting_acceptance.rs"]
 mod line_lighting_acceptance;
+#[path = "support/transparency_acceptance.rs"]
+mod transparency_acceptance;
 fn material() -> RenderMaterial {
     let mut material = RenderMaterial::default();
     for face in &mut material.common {
@@ -38,14 +42,8 @@ fn quad(
     back: bool,
     colored: bool,
 ) -> PrimitiveDraw {
-    let vertices = [[-1., -1., 0.], [1., -1., 0.], [1., 1., 0.], [-1., 1., 0.]]
-        .map(|p| RenderVertex::new(p, [0., 0., 0., 1.]));
-    let indices = if back {
-        vec![0, 2, 1, 0, 3, 2]
-    } else {
-        vec![0, 1, 2, 0, 2, 3]
-    };
-    PrimitiveDraw::new(vertices.to_vec(), indices, identity_clip())
+    let (vertices, indices) = lighting_geometry::quad_geometry(0., back, [0., 0., 0., 1.]);
+    PrimitiveDraw::new(vertices, indices, identity_clip())
         .unwrap()
         .with_lighting(quad_lighting(shading, lights, colored))
         .unwrap()
@@ -122,6 +120,7 @@ fn check_algorithm(renderer: &mut VulkanRenderer, shading: RenderShading) {
 fn main() {
     let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
     line_lighting_acceptance::check_lit_lines(&mut renderer);
+    transparency_acceptance::check_translucent_surfaces(&mut renderer);
     for shading in [
         RenderShading::PhongFacet,
         RenderShading::Gouraud,
@@ -135,5 +134,5 @@ fn main() {
         renderer.validation_errors()
     );
     println!("MARTENSITE_DEVICE={}", renderer.device_name());
-    println!("PASS: 21 lit scenes, 86016 analytic color/depth pixels; validation errors: 0");
+    println!("PASS: 42 lit scenes, 172032 analytic color/depth pixels; validation errors: 0");
 }

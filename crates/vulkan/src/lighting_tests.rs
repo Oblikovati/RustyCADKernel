@@ -141,10 +141,10 @@ fn std430_sources_keep_eighty_byte_stride_and_enabled_count() {
 }
 
 #[test]
-fn translucent_common_records_cannot_enter_the_opaque_pipeline() {
+fn out_of_range_common_opacity_cannot_enter_the_surface_pipeline() {
     for face in 0..2 {
         let mut material = RenderMaterial::default();
-        material.common[face].diffuse[3] = 0.5;
+        material.common[face].diffuse[3] = 1.5;
         let error = RenderLighting::new(
             vec![],
             material,
@@ -154,11 +154,11 @@ fn translucent_common_records_cannot_enter_the_opaque_pipeline() {
             RenderShading::Phong,
         )
         .unwrap_err();
-        assert!(error.to_string().contains("0.5"));
+        assert!(error.to_string().contains("1.5"));
         assert!(
             error
                 .to_string()
-                .contains("opaque front/back diffuse alpha")
+                .contains("finite diffuse opacity in [0,1]")
         );
     }
 }

@@ -138,12 +138,7 @@ fn validate_lighting_components(
     world: &[f32; 16],
     view: &[f32; 16],
 ) -> Result<(), RenderError> {
-    if material.common.iter().any(|face| face.diffuse[3] != 1.) {
-        return Err(rejected(
-            material.common,
-            "opaque front/back diffuse alpha equal to 1",
-        ));
-    }
+    validate_material_opacity(material)?;
     if normals
         .iter()
         .flatten()
@@ -159,18 +154,49 @@ fn validate_lighting_components(
     }
     Ok(())
 }
+fn validate_material_opacity(material: &RenderMaterial) -> Result<(), RenderError> {
+    let opacity = material.common.map(|face| face.diffuse[3]);
+    if opacity
+        .iter()
+        .any(|value| !value.is_finite() || !(0. ..=1.).contains(value))
+    {
+        return Err(rejected(
+            opacity,
+            "finite diffuse opacity in [0,1] for both material faces",
+        ));
+    }
+    Ok(())
+}
+impl RenderLighting {
+    pub(crate) fn uses_translucent_material(&self) -> bool {
+        self.material.common.iter().any(|face| face.diffuse[3] < 1.)
+    }
+    pub(crate) fn validate_opaque_annotation_or_cap(&self) -> Result<(), RenderError> {
+        if self.uses_translucent_material() {
+            return Err(rejected(
+                self.material.common.map(|face| face.diffuse[3]),
+                "opaque line, marker or cap diffuse opacity equal to 1",
+            ));
+        }
+        Ok(())
+    }
+}
 impl PrimitiveDraw {
-    /// Attach opaque surface or nodal line/marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
+    /// Attach surface or opaque nodal line/marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
     pub fn with_lighting(mut self, lighting: RenderLighting) -> Result<Self, RenderError> {
-        if lighting.normals.len() != self.vertices.len()
-            || (self.topology() != crate::PrimitiveTopology::Triangles
-                && self.point_style.is_none()
-                && self.line_style.is_none())
-            || ((self.point_style.is_some() || self.line_style.is_some())
-                && lighting.shading == RenderShading::PhongFacet)
-            || self.textured_style.is_some()
-            || self.capping_pass.is_mask()
+        self.validate_lighting_topology(&lighting)?;
+        if self.topology() != crate::PrimitiveTopology::Triangles
+            || self.capping_pass != crate::RenderCappingPass::None
         {
+            lighting.validate_opaque_annotation_or_cap()?;
+        } else {
+            self.surface_blend |= lighting.uses_translucent_material();
+        }
+        self.lighting = Some(lighting);
+        Ok(self)
+    }
+    fn validate_lighting_topology(&self, lighting: &RenderLighting) -> Result<(), RenderError> {
+        if self.rejects_lighting_topology(lighting) {
             return Err(rejected(
                 (
                     lighting.normals.len(),
@@ -182,8 +208,17 @@ impl PrimitiveDraw {
                 "one normal per untextured triangle or Gouraud/Phong line/marker vertex outside stencil masks",
             ));
         }
-        self.lighting = Some(lighting);
-        Ok(self)
+        Ok(())
+    }
+    fn rejects_lighting_topology(&self, lighting: &RenderLighting) -> bool {
+        lighting.normals.len() != self.vertices.len()
+            || (self.topology() != crate::PrimitiveTopology::Triangles
+                && self.point_style.is_none()
+                && self.line_style.is_none())
+            || ((self.point_style.is_some() || self.line_style.is_some())
+                && lighting.shading == RenderShading::PhongFacet)
+            || self.textured_style.is_some()
+            || self.capping_pass.is_mask()
     }
     /// Inspect a retained lighting snapshot; `draw.lighting()`.
     pub fn lighting(&self) -> Option<&RenderLighting> {
@@ -194,3 +229,7 @@ impl PrimitiveDraw {
 #[cfg(test)]
 #[path = "lighting_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "lighting_alpha_tests.rs"]
+mod alpha_tests;

@@ -80,6 +80,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    Gouraud/Phong segments with clipping, native solid fallback for requested patterns,
    live-normal snapshots and both-device functional/performance coverage. Strict
    endpoint and color interpolation parity remains open.
+   [Translucent surface lighting](vulkan-lit-transparency.md) now combines the three
+   Phong-family algorithms with material opacity, distinguished back faces,
+   deferred pass ordering and live opaque/translucent transitions. Keep alpha-mask,
+   OIT and transparent cap/annotation work in the remaining renderer scope.
    [AIS trihedrons](ais-trihedron.md) now provide cached wire/shaded datum parts,
    native owner selection and protected application subclass hooks. Vulkan polygon
    offsets support the shaded geometry with both-device runtime checks; strict

@@ -1,4 +1,4 @@
-# Martensite opaque surface lighting
+# Martensite surface lighting
 
 Martensite now renders retained Graphic3d triangles with the legacy PhongFacet,
 Gouraud and Phong algorithms in Vulkan 1.3. The source oracle is OCCT
@@ -24,8 +24,8 @@ and emission ordering follow native shader policy. Lit clipped shaders share the
 existing clip-chain storage at descriptor set 1. Pipelines are cached lazily so
 ordinary unlit initialization does not construct the new lighting variants.
 
-Stencil mask passes force unlit rendering. PBR models, transparent surface
-materials and shadows remain unsupported. [Nodal marker lighting](vulkan-lit-markers.md)
+Stencil mask passes force unlit rendering. [Translucent Phong-family surfaces](vulkan-lit-transparency.md)
+now use the deferred unordered blend pass. PBR models and shadows remain unsupported. [Nodal marker lighting](vulkan-lit-markers.md)
 and [nodal line lighting](vulkan-lit-lines.md) now share the opaque lighting path.
 [Retained cap surfaces](vulkan-capping.md) now use native constant normals and the
 same opaque Phong-family material/light snapshots. Requested enabled shadow casters produce an error

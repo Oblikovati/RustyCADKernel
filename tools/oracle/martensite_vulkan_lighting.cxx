@@ -63,13 +63,31 @@ static occ::handle<Graphic3d_CLight> lighting_lights(const occ::handle<V3d_View>
   view->View()->SetLights(lights);
   return light;
 }
+static void lighting_opacity_aspects(const occ::handle<Graphic3d_AspectFillArea3d>& aspect, const std::string& mode) {
+  auto front = aspect->FrontMaterial();
+  auto back = aspect->BackMaterial();
+  front.SetTransparency(mode == "lit-forced-blend" ? 0.f : .5f);
+  back.SetTransparency(.75f);
+  aspect->SetFrontMaterial(front);
+  aspect->SetBackMaterial(back);
+  if (mode == "lit-front-opaque") aspect->SetAlphaMode(Graphic3d_AlphaMode_Opaque);
+  if (mode == "lit-forced-blend") aspect->SetAlphaMode(Graphic3d_AlphaMode_Blend);
+}
+static void lighting_opacity_mutation(const occ::handle<Graphic3d_AspectFillArea3d>& aspect, const std::string& mode) {
+  if (mode != "lit-opacity-updated" && mode != "lit-pass-updated") return;
+  auto front = aspect->FrontMaterial();
+  front.SetTransparency(mode == "lit-pass-updated" ? 0.f : .25f);
+  aspect->SetFrontMaterial(front);
+}
 static void lighting_scene(const occ::handle<Graphic3d_Structure> &structure, const occ::handle<V3d_View> &view, const std::string &input_mode) {
   const bool line = input_mode.find("lit-line-") == 0;
-  const std::string mode = line ? "lit-" + input_mode.substr(9) : input_mode;
+  const bool alpha = input_mode.find("lit-alpha-") == 0;
+  const std::string mode = line ? "lit-" + input_mode.substr(9) : alpha ? "lit-" + input_mode.substr(10) : input_mode;
   structure->Clear();
   view->ChangeRenderingParams().ShadingModel = Graphic3d_TypeOfShadingModel_Phong;
   auto group = structure->NewGroup();
   auto aspect = lighting_aspects(mode);
+  if (alpha) lighting_opacity_aspects(aspect,mode);
   if (line) {
     aspect->SetLineWidth(3.f);
     if (mode == "lit-patterned") aspect->SetLineType(Aspect_TOL_DASH);
@@ -90,4 +108,5 @@ static void lighting_scene(const occ::handle<Graphic3d_Structure> &structure, co
   if (mode == "lit-material-updated") aspect->SetFrontMaterial(lighting_material(true));
   if (mode == "lit-light-updated") light->SetDirection(gp_Dir(-1,-1,-1));
   if (mode == "lit-light-off") light->SetEnabled(false);
+  if (alpha) lighting_opacity_mutation(aspect,mode);
 }

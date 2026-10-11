@@ -39,3 +39,12 @@ LIT_LINE_MODES = tuple(
         "light-updated",
     )
 )
+
+LIT_ALPHA_MODES = tuple(
+    f"lit-alpha-{suffix}"
+    for suffix in (
+        "phong", "gouraud", "facet", "colored", "clipped", "back",
+        "distinct-back", "front-opaque", "forced-blend", "opacity-updated",
+        "pass-updated", "material-updated", "light-updated",
+    )
+)

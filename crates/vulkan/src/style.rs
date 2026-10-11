@@ -56,12 +56,6 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
             "textures, shaders, edges, silhouettes, material distinction and back-color suppression disabled",
         ));
     }
-    if style.distinguish() && style.back_material().transparency() != 0.0 {
-        return Err(rejected(
-            style.back_material().transparency(),
-            "opaque back-face material",
-        ));
-    }
     Ok(())
 }
 fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
@@ -82,7 +76,8 @@ fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), Rende
 pub(crate) fn surface_uses_blending(style: &dyn Graphic3dAspectsSource) -> bool {
     style.alpha_mode() == Graphic3dAlphaMode::Blend
         || (style.alpha_mode() == Graphic3dAlphaMode::BlendAuto
-            && style.front_material().transparency() != 0.)
+            && (style.front_material().transparency() != 0.
+                || (style.distinguish() && style.back_material().transparency() != 0.)))
 }
 
 #[cfg(test)]

@@ -6,6 +6,8 @@ use rustycad_tkernel::{
     standard::Handle,
 };
 use rustycad_tkservice::graphic3d::*;
+#[path = "lighting_scene_alpha.rs"]
+mod opacity_fixture;
 pub struct LightingScene {
     pub base: ViewerScene,
     pub aspect: Handle<Graphic3dAspects>,
@@ -16,10 +18,14 @@ impl LightingScene {
     /// Build the paired native fixture; `LightingScene::new(&driver, "lit-phong")`.
     pub fn new(driver: &Handle<Graphic3dRenderDriver>, mode: &str) -> Self {
         let line = mode.starts_with("lit-line-");
+        let alpha = mode.starts_with("lit-alpha-");
         let mode = lighting_fixture_mode(mode);
         let mode = mode.as_str();
         let base = ViewerScene::new(driver);
         let (aspect, vertices) = configure_lighting_group(&base, mode, line);
+        if alpha {
+            opacity_fixture::configure(&aspect, mode);
+        }
         let light = configure_lights(&base, mode);
         configure_lighting_view(&base, mode);
         Self {
@@ -31,6 +37,9 @@ impl LightingScene {
     }
     /// Apply one live state change after the first redraw; `scene.mutate("lit-normal-updated")`.
     pub fn mutate(&self, mode: &str) {
+        if mode.starts_with("lit-alpha-") {
+            opacity_fixture::mutate(&self.aspect, mode);
+        }
         let mode = lighting_fixture_mode(mode);
         let mode = mode.as_str();
         if mode == "lit-normal-updated" {
@@ -252,5 +261,6 @@ fn configure_lighting_view(base: &ViewerScene, mode: &str) {
 
 fn lighting_fixture_mode(mode: &str) -> String {
     mode.strip_prefix("lit-line-")
+        .or_else(|| mode.strip_prefix("lit-alpha-"))
         .map_or_else(|| mode.to_owned(), |suffix| format!("lit-{suffix}"))
 }

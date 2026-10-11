@@ -214,6 +214,25 @@ fn validate_indices(indices: &[u32], vertices: usize, line: bool) -> Result<(), 
 }
 
 impl PrimitiveDraw {
+    /// Override the ordinary surface blend pass after lighting; `draw.with_lighting(state)?.with_surface_blending(false)?`.
+    pub fn with_surface_blending(mut self, enabled: bool) -> Result<Self, RenderError> {
+        if self.topology() != crate::PrimitiveTopology::Triangles
+            || self.textured_style.is_some()
+            || self.capping_pass != crate::RenderCappingPass::None
+        {
+            return Err(rejected(
+                (
+                    enabled,
+                    self.topology(),
+                    self.textured_style.is_some(),
+                    self.capping_pass,
+                ),
+                "ordinary untextured surface geometry outside capping passes",
+            ));
+        }
+        self.surface_blend = enabled;
+        Ok(self)
+    }
     /// Whether this surface belongs to the deferred unordered blend pass; `draw.is_surface_blended()`.
     pub fn is_surface_blended(&self) -> bool {
         self.surface_blend

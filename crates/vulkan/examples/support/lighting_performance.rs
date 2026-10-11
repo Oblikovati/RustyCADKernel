@@ -6,11 +6,13 @@ mod lighting_scene;
 use lighting_scene::LightingScene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
+use rustycad_tkservice::graphic3d::Graphic3dAspectsMembers;
 use std::time::Instant;
 pub fn benchmark(driver: &Handle<Graphic3dRenderDriver>, warmup: usize, count: usize) {
     for (mode, workload) in [
         ("lit-phong", "lighting-updates"),
         ("lit-line-phong", "lit-line-normal-updates"),
+        ("lit-alpha-phong", "lit-surface-opacity-updates"),
     ] {
         benchmark_configuration(driver, mode, workload, warmup, count);
     }
@@ -26,10 +28,10 @@ fn benchmark_configuration(
     scene.base.window.set_size(256, 256);
     scene.base.view.must_be_resized();
     for index in 0..warmup {
-        timed_redraw(&scene, index);
+        timed_redraw(&scene, index, mode);
     }
     let samples: Vec<f64> = (0..count)
-        .map(|index| timed_redraw(&scene, index))
+        .map(|index| timed_redraw(&scene, index, mode))
         .collect();
     check_lighting_workload(&scene);
     println!(
@@ -49,8 +51,14 @@ fn check_lighting_workload(scene: &LightingScene) {
     );
 }
 
-fn timed_redraw(scene: &LightingScene, index: usize) -> f64 {
+fn timed_redraw(scene: &LightingScene, index: usize, mode: &str) -> f64 {
     let start = Instant::now();
+    mutate_lighting_workload(scene, index, mode);
+    scene.base.render_view().try_redraw().unwrap();
+    start.elapsed().as_secs_f64() * 1000.
+}
+
+fn mutate_lighting_workload(scene: &LightingScene, index: usize, mode: &str) {
     scene
         .light
         .set_direction_coords(if index.is_multiple_of(2) { 0. } else { -1. }, 0., -1.)
@@ -59,6 +67,11 @@ fn timed_redraw(scene: &LightingScene, index: usize) -> f64 {
         .vertices
         .set_vertex_normal(2, if index.is_multiple_of(2) { 0. } else { 0.6 }, 0., 0.8)
         .unwrap();
-    scene.base.render_view().try_redraw().unwrap();
-    start.elapsed().as_secs_f64() * 1000.
+    if mode == "lit-alpha-phong" {
+        let mut material = scene.aspect.front_material();
+        material
+            .set_transparency(if index.is_multiple_of(2) { 0. } else { 0.5 })
+            .unwrap();
+        scene.aspect.set_front_material(material);
+    }
 }
