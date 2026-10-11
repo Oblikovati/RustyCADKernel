@@ -11,8 +11,49 @@ use std::sync::Arc;
 #[derive(Clone)]
 enum GroupCommand {
     Aspects(Handle<dyn Graphic3dAspectsSource>),
+    Flipping(Option<Axis2>),
+    Geometry(GroupGeometry),
+}
+#[derive(Clone)]
+enum GroupGeometry {
     Primitives(PrimitiveSubmission),
     Text(Handle<Graphic3dText>),
+}
+impl GroupCommand {
+    fn advance(
+        self,
+        aspects: &mut Handle<dyn Graphic3dAspectsSource>,
+        flips: &mut crate::group_flipping::GroupFlipStack,
+    ) -> Option<GroupGeometry> {
+        match self {
+            Self::Aspects(style) => {
+                *aspects = style;
+                None
+            }
+            Self::Flipping(plane) => {
+                flips.apply(plane);
+                None
+            }
+            Self::Geometry(geometry) => Some(geometry),
+        }
+    }
+}
+impl GroupGeometry {
+    fn lower(
+        self,
+        aspects: &Handle<dyn Graphic3dAspectsSource>,
+        closed: bool,
+        matrix: [f32; 16],
+        highlighted: bool,
+        context: &crate::text_submission::TextSceneContext<'_>,
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
+        match self {
+            Self::Text(text) => context.draws(&text, aspects),
+            Self::Primitives(primitive) => {
+                lower_group_surface(&primitive, aspects, closed, matrix, highlighted, context)
+            }
+        }
+    }
 }
 #[derive(Default)]
 struct GroupSubmissionState {
@@ -114,6 +155,9 @@ impl Graphic3dDrawGroup {
         crate::highlight_style::validate_structure(structure)?;
         let (matrix, depth_clamp) =
             crate::persistent_transform::group_clip_transform(self, camera, extent, structure)?;
+        let model = crate::persistent_transform::clipping_model(self, structure)?;
+        let clipping =
+            crate::retained_clipping::structure_clipping(global_clipping, structure, model)?;
         let context = crate::text_submission::TextSceneContext {
             group: self,
             camera,
@@ -121,17 +165,12 @@ impl Graphic3dDrawGroup {
             structure,
             rendering,
             fonts: self.text_source.as_ref(),
+            model_override: None,
+            clipping: clipping.as_ref(),
         };
-        let model = crate::persistent_transform::clipping_model(self, structure)?;
-        let clipping =
-            crate::retained_clipping::structure_clipping(global_clipping, structure, model)?;
         let mut draws =
             self.extract_commands(matrix, structure.highlight, clipping.is_none(), &context)?;
         for draw in &mut draws {
-            // OCCT's standard font shader advertises zero clipping planes (3d097a0).
-            if draw.textured_style.is_none() {
-                draw.clipping = clipping.clone();
-            }
             draw.depth_clamp = depth_clamp;
             draw.mirrored = structure
                 .trsf
@@ -150,27 +189,24 @@ impl Graphic3dDrawGroup {
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         let (mut aspects, commands) = self.retained_commands()?;
         let mut draws = Vec::new();
+        let mut flips = crate::group_flipping::GroupFlipStack::scene(context, matrix)?;
         for command in commands {
-            match command {
-                GroupCommand::Aspects(style) => aspects = style,
-                GroupCommand::Text(text) => draws.extend(context.draws(&text, &aspects)?),
-                GroupCommand::Primitives(primitive) => {
-                    let mut lowered = lower_styled_primitive(
-                        &primitive,
-                        &aspects,
-                        self.is_closed() && allow_culling,
-                        matrix,
-                        highlighted,
-                    )?;
-                    crate::retained_lighting::apply_surface_lighting(
-                        &mut lowered,
-                        &primitive,
-                        &aspects,
-                        context,
-                    )?;
-                    draws.extend(lowered);
-                }
-            }
+            let Some(geometry) = command.advance(&mut aspects, &mut flips) else {
+                continue;
+            };
+            let active = crate::text_submission::TextSceneContext {
+                model_override: flips.override_model(),
+                ..*context
+            };
+            let mut lowered = geometry.lower(
+                &aspects,
+                self.is_closed() && allow_culling,
+                flips.clip(),
+                highlighted,
+                &active,
+            )?;
+            apply_command_clipping(&mut lowered, &flips, context.clipping)?;
+            draws.extend(lowered);
         }
         Ok(draws)
     }
@@ -197,7 +233,7 @@ impl Graphic3dDrawGroup {
         self.submissions
             .write()
             .commands
-            .push(GroupCommand::Primitives(primitive));
+            .push(GroupCommand::Geometry(GroupGeometry::Primitives(primitive)));
         self.update();
     }
 }
@@ -277,7 +313,7 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         self.submissions
             .write()
             .commands
-            .push(GroupCommand::Text(text.clone()));
+            .push(GroupCommand::Geometry(GroupGeometry::Text(text.clone())));
         self.record_text_bounds(text, evaluate_bounds);
     }
     fn set_stencil_test_options(&self, enabled: bool) {
@@ -285,11 +321,45 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
             self.submissions.write().unsupported = Some("stencil test");
         }
     }
-    fn set_flipping_options(&self, enabled: bool, _: &Axis2) {
+    fn set_flipping_options(&self, enabled: bool, plane: &Axis2) {
+        if self.is_deleted() {
+            return;
+        }
+        self.submissions
+            .write()
+            .commands
+            .push(GroupCommand::Flipping(enabled.then_some(*plane)));
         if enabled {
-            self.submissions.write().unsupported = Some("flipping");
+            self.structure().cstructure().set_group_flipping(true);
+            self.base.fields.write().flipper = Handle::new(Graphic3dFlipper::new(*plane));
         }
     }
+}
+fn apply_command_clipping(
+    draws: &mut [PrimitiveDraw],
+    flips: &crate::group_flipping::GroupFlipStack,
+    clipping: Option<&crate::RenderClipping>,
+) -> Result<(), RenderError> {
+    let clipping = command_clipping(flips, clipping)?;
+    for draw in draws {
+        // OCCT's standard font shader advertises zero clipping planes (3d097a0).
+        if draw.textured_style.is_none() {
+            draw.clipping = clipping.clone();
+        }
+    }
+    Ok(())
+}
+fn command_clipping(
+    flips: &crate::group_flipping::GroupFlipStack,
+    clipping: Option<&crate::RenderClipping>,
+) -> Result<Option<crate::RenderClipping>, RenderError> {
+    let Some(clipping) = clipping else {
+        return Ok(None);
+    };
+    let Some(model) = flips.override_model() else {
+        return Ok(Some(clipping.clone()));
+    };
+    crate::RenderClipping::new(clipping.chains().to_vec(), model.data()).map(Some)
 }
 fn replace_style(style: &mut Handle<dyn Graphic3dAspectsSource>, map: &Graphic3dAspectsReplaceMap) {
     if let Some((_, replacement)) = map.get(&(style.object_address() as usize)) {
@@ -319,4 +389,17 @@ fn lower_styled_primitive(
     }
     let sprite = crate::point_style::marker_style(&**aspects, highlighted)?;
     primitive.draws(color, matrix, line, Some(sprite))
+}
+
+fn lower_group_surface(
+    primitive: &PrimitiveSubmission,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    closed: bool,
+    matrix: [f32; 16],
+    highlighted: bool,
+    context: &crate::text_submission::TextSceneContext<'_>,
+) -> Result<Vec<PrimitiveDraw>, RenderError> {
+    let mut lowered = lower_styled_primitive(primitive, aspects, closed, matrix, highlighted)?;
+    crate::retained_lighting::apply_surface_lighting(&mut lowered, primitive, aspects, context)?;
+    Ok(lowered)
 }

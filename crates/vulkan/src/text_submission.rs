@@ -3,8 +3,12 @@ use crate::{
     Graphic3dDrawGroup, PrimitiveDraw, RenderError, RenderVertex, TextLayoutSource, TexturedStyle,
     error::rejected,
 };
-use rustycad_tkernel::{ncollection::Vec3, standard::Handle};
+use rustycad_tkernel::{
+    ncollection::{Mat4, Vec3},
+    standard::Handle,
+};
 use rustycad_tkservice::{aspect::*, graphic3d::*};
+#[derive(Clone, Copy)]
 pub(crate) struct TextSceneContext<'a> {
     pub group: &'a Graphic3dDrawGroup,
     pub camera: &'a Graphic3dCamera,
@@ -12,6 +16,8 @@ pub(crate) struct TextSceneContext<'a> {
     pub structure: &'a Graphic3dCStructureFields,
     pub rendering: &'a Graphic3dRenderingParams,
     pub fonts: &'a dyn TextLayoutSource,
+    pub model_override: Option<Mat4<f32>>,
+    pub clipping: Option<&'a crate::RenderClipping>,
 }
 impl TextSceneContext<'_> {
     pub fn draws(
@@ -51,12 +57,7 @@ impl TextSceneContext<'_> {
         let extent = self
             .extent
             .ok_or_else(|| rejected(self.extent, "a viewport for text rendering"))?;
-        let (projection, model_view) = crate::persistent_transform::text_matrices(
-            self.group,
-            self.camera,
-            extent,
-            self.structure,
-        )?;
+        let (projection, model_view) = self.text_scene_matrices(extent)?;
         let mut camera_rotation = self.camera.orientation_matrix();
         camera_rotation.set_column3(3, Vec3::new(0., 0., 0.));
         Ok(crate::text_transform::TextTransform {
@@ -65,6 +66,22 @@ impl TextSceneContext<'_> {
             camera_rotation,
             viewport: [0, 0, extent[0] as i32, extent[1] as i32],
         })
+    }
+    fn text_scene_matrices(&self, extent: [u32; 2]) -> Result<(Mat4<f64>, Mat4<f64>), RenderError> {
+        let (mut projection, mut model_view) = crate::persistent_transform::text_matrices(
+            self.group,
+            self.camera,
+            extent,
+            self.structure,
+        )?;
+        if let Some(model) = self.model_override {
+            let (_, view) = crate::persistent_transform::lighting_matrices(self)?;
+            // OpenGl_Text promotes the float GL matrices before multiplying (3d097a0).
+            model_view = Mat4::<f64>::from_other(&Mat4::<f32>::from_data(view))
+                * Mat4::<f64>::from_other(&model);
+            projection = Mat4::from_other(&Mat4::<f32>::from_other(&projection));
+        }
+        Ok((projection, model_view))
     }
 }
 fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {

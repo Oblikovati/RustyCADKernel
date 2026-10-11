@@ -7,6 +7,7 @@ pub use backend::{VulkanOptions, VulkanRenderer};
 pub use error::RenderError;
 pub use scene::{FrameCapture, RenderBackend, RenderFrame, RenderVertex, identity_clip};
 mod graphic_group;
+mod group_flipping;
 mod primitive;
 mod primitive_ranges;
 mod primitive_topology;
