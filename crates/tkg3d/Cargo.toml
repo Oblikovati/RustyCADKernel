@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkg3d"
 description = "OCCT TKG3d toolkit: transient 3D geometry (Geom)"
 version.workspace = true
@@ -17,3 +18,8 @@ rustycad-tkg2d = { path = "../tkg2d", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkg3d-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

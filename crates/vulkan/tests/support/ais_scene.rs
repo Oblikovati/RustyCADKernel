@@ -1,7 +1,7 @@
 //! The AIS path uses the same virtual view and geometry as the Graphic3d oracle scene.
 #[path = "ais_triangle.rs"]
 mod ais_triangle;
-use crate::view_setup;
+use super::view_setup;
 pub use ais_triangle::AisTriangle;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::standard::Handle;

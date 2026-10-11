@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! AIS annotation fixtures retain live context, font measurement and presentation state.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{standard::Handle, tcollection::ExtendedString};
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};

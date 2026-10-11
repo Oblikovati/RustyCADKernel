@@ -1,4 +1,4 @@
-pub use crate::allocation_trace::*;
+pub use super::allocation_trace::*;
 use rustycad_tkernel::ncollection::BaseAllocator;
 /// Builds a leaf or an existing branch on an observed allocator; `populated(true)`.
 pub fn populated(branch: bool) -> (Tree, BaseAllocator) {

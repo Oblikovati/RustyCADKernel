@@ -1,4 +1,4 @@
-use crate::allocation_trace::*;
+use super::allocation_trace::*;
 use rustycad_tkernel::ncollection::{BoundingVolume, ObjBnd};
 pub trait QueuePayload: Clone + Default {
     fn item(value: i32) -> Self;

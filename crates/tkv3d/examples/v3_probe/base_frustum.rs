@@ -1,4 +1,5 @@
 //! Twin of tools/oracle/tkv3d_probe_base_frustum.cxx.
+use crate::abstract_intersector;
 #[path = "../../tests/support/frustum_defaults_fake.rs"]
 pub(super) mod frustum_defaults_fake;
 use super::common::{Reader, attempt, captured, end, flag, int, pnt};

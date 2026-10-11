@@ -17,7 +17,7 @@ This is a recorded discrepancy, not an approved skip or a successful paired rece
 ```sh
 ../RustyCADKernel/target/occt-modeling-full/lin64/gcc/bini/OpenCascadeGTest \
   --gtest_filter=ExtremaPC2d_HyperbolaTest.SingletonInvalidAndValueAccessor
-cargo test -p rustycad-tkgeombase --test extrema_pc2d_hyperbola -- \
+cargo test -p rustycad-tkgeombase --test toolkit -- extrema_pc2d_hyperbola:: \
   --exact ExtremaPC2d_HyperbolaTest__SingletonInvalidAndValueAccessor
 ```
 

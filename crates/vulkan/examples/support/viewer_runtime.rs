@@ -1,4 +1,5 @@
 //! Runtime checks cover mutations on one live view and device, beyond static oracle scenes.
+use crate::view_setup;
 #[path = "../../tests/support/viewer_scene.rs"]
 pub(super) mod scene;
 use martensite_vulkan::Graphic3dRenderDriver;

@@ -1,6 +1,6 @@
 //! The three set classes: indexing, null handles, the table text, appending reads, a
 //! wrong tag and progress interruption.
-use crate::fakes::{
+use super::fakes::{
     BreakingIndicator, RecordingConsole, circle, line, output_stream, text_stream, unread,
     written_text,
 };
@@ -83,7 +83,7 @@ fn read_appends_to_the_set_instead_of_clearing_it() {
 
 #[test]
 fn a_failed_record_is_stored_once_as_a_null_curve() {
-    let _guard = crate::fakes::handler_lock();
+    let _guard = super::fakes::handler_lock();
     let mut set = CurveSet::new();
     set.read(
         &mut text_stream("Curves 3\n42\n42\n1 0 0 0 0 0 1 \n"),

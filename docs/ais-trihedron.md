@@ -28,7 +28,7 @@ and restore current datum aspects or hidden-plane lines on clearing selection.
 Run CPU regressions with:
 
 ```sh
-cargo test -p rustycad-tkv3d --test ais_trihedron --test ais_trihedron_subclass --locked
+cargo test -p rustycad-tkv3d --test toolkit ais_trihedron --locked
 ```
 
 The numeric corpus adds 48 independent transition sequences covering aliased frame

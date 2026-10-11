@@ -28,12 +28,11 @@ def test_archives(
 ) -> None:
     """Compile and test extracted packages without original source paths; example: ``test_archives(root, stage, runner, crates)``."""
     stage_workspace(root / "target/package", stage, crates, root / "Cargo.lock")
-    for crate in crates:
-        for features in ([], ["--all-features"]):
+    for features in ([], ["--all-features"]):
+        for crate in crates:
             test_profile(stage, commands, features, crate.name)
-            commands.run(
-                ["cargo", "clean", "--target-dir", str(stage / "target")], stage
-            )
+        # Toolkit suites bound the footprint; preserve dependency builds across packages.
+        commands.run(["cargo", "clean", "--target-dir", str(stage / "target")], stage)
 
 
 def test_profile(

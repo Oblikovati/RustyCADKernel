@@ -1,6 +1,6 @@
 //! GetReal and the single-record readers: round trips, the failure-to-null contract and
 //! where a failure leaves the stream.
-use crate::fakes::{bspline, circle, output_stream, text_stream, unread, written_text};
+use super::fakes::{bspline, circle, output_stream, text_stream, unread, written_text};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::storage::state;
 use rustycad_tkg3d::geom::{GeomBSplineCurve, GeomCircle, GeomPlane};
@@ -80,7 +80,7 @@ fn a_null_direction_stops_the_record_where_it_is_read() {
 
 #[test]
 fn an_unknown_type_code_reads_nothing_more() {
-    let _guard = crate::fakes::handler_lock();
+    let _guard = super::fakes::handler_lock();
     let mut stream = text_stream("42 1 2");
     assert!(geom_tools::read_curve(&mut stream).is_null());
     assert_eq!(unread(&mut stream), " 1 2");
@@ -95,7 +95,7 @@ fn a_boolean_other_than_zero_or_one_fails_the_stream() {
 
 #[test]
 fn a_trimmed_curve_on_a_null_basis_reads_as_null() {
-    let _guard = crate::fakes::handler_lock();
+    let _guard = super::fakes::handler_lock();
     let mut stream = text_stream("8 0 1 42 5");
     assert!(geom_tools::read_curve(&mut stream).is_null());
     assert_eq!(unread(&mut stream), " 5");

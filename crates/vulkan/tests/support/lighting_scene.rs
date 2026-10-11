@@ -1,5 +1,5 @@
 //! Paired OCCT lighting fixtures use deliberately nontrivial coefficients and normals.
-use crate::scene::ViewerScene;
+use super::scene::ViewerScene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::{
     quantity::{Color, ColorSpace},

@@ -1,6 +1,6 @@
 //! Closed cube sections paired with martensite_vulkan_capping.cxx.
 #![allow(dead_code)]
-use crate::scene::ViewerScene;
+use super::scene::ViewerScene;
 use rustycad_tkernel::{
     ncollection::Vec4,
     quantity::{Color, ColorSpace},
@@ -61,7 +61,7 @@ pub fn configure_capping(scene: &ViewerScene, mode: &str) -> Handle<Graphic3dCli
     scene.group.clear(false);
     scene
         .group
-        .set_group_primitives_aspect(&crate::scene::unlit_style([1., 0., 0., 1.]));
+        .set_group_primitives_aspect(&super::scene::unlit_style([1., 0., 0., 1.]));
     cube(&*scene.group, 0.);
     scene.group.set_closed(mode != "cap-open");
     let plane = cap_plane(if mode == "cap-oblique" {
@@ -124,7 +124,7 @@ fn configure_chain(
 fn configure_groups(scene: &ViewerScene, mode: &str) {
     if mode.starts_with("cap-overlap") {
         let second = scene.structure.new_group().unwrap();
-        second.set_group_primitives_aspect(&crate::scene::unlit_style([1., 1., 0., 1.]));
+        second.set_group_primitives_aspect(&super::scene::unlit_style([1., 1., 0., 1.]));
         cube(&*second, 3.);
     }
     if mode == "cap-transformed" {
@@ -174,7 +174,7 @@ pub fn cap_shadow(scene: &ViewerScene) -> Handle<Graphic3dStructure> {
         Graphic3dStructure::new(&scene.viewer.structure_manager(), &scene.structure.cast())
             .unwrap();
     let group = shadow.new_group().unwrap();
-    group.set_group_primitives_aspect(&crate::scene::unlit_style([1., 1., 0., 1.]));
+    group.set_group_primitives_aspect(&super::scene::unlit_style([1., 1., 0., 1.]));
     cube(&*group, 3.);
     scene.structure.erase();
     shadow.calculate_bound_box();

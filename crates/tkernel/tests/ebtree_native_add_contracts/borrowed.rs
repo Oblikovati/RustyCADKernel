@@ -1,4 +1,4 @@
-use crate::allocation_trace::Payload;
+use super::allocation_trace::Payload;
 use rustycad_tkernel::ncollection::{EBTree, HashKey};
 #[derive(Clone, Default, Debug, PartialEq)]
 struct BorrowedKey<'a>(&'a str);

@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkernel"
 version.workspace = true
 edition.workspace = true
@@ -29,3 +30,98 @@ windows-sys = { version = "=0.61.2", features = ["Win32_Foundation", "Win32_Glob
 rustycad-tkmath = { path = "../tkmath", version = "0.1.1" }
 rustycad-tkbrep = { path = "../tkbrep", version = "0.1.1" }
 rustycad-tktopalgo = { path = "../tktopalgo", version = "0.1.1" }
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
+
+# Mutates process locale and reexecutes exact test names.
+[[test]]
+name = "standard_c_locale_sentry"
+path = "tests/standard_c_locale_sentry.rs"
+
+# Mutates process locale and reexecutes exact test names.
+[[test]]
+name = "standard_character_locale"
+path = "tests/standard_character_locale.rs"
+
+# Installs process signals and reexecutes exact test names.
+[[test]]
+name = "osd_sec_sleep_signal"
+path = "tests/osd_sec_sleep_signal.rs"
+
+# Fatal error checks reexecute exact test names.
+[[test]]
+name = "standard_runtime_api_behavior"
+path = "tests/standard_runtime_api_behavior/main.rs"
+
+# Mutates the process-wide failure stack length.
+[[test]]
+name = "standard_runtime_stack_api_behavior"
+path = "tests/standard_runtime_stack_api_behavior.rs"
+
+# Mutates the process-wide failure stack length.
+[[test]]
+name = "aliased_array_exception_stacks"
+path = "tests/aliased_array_exception_stacks.rs"
+
+# Mutates the process-wide failure stack length.
+[[test]]
+name = "packed_map_iterator_errors"
+path = "tests/packed_map_iterator_errors.rs"
+
+# Mutates process signal and stack settings.
+[[test]]
+name = "osd_timing_api_behavior"
+path = "tests/osd_timing_api_behavior.rs"
+
+# Replaces the process-wide default messenger printers.
+[[test]]
+name = "message_defaults_behavior"
+path = "tests/message_defaults_behavior.rs"
+
+# Replaces the process-wide default messenger printers.
+[[test]]
+name = "message_messenger"
+path = "tests/message_messenger.rs"
+
+# Mutates process-wide ResourceDebug and Unicode format.
+[[test]]
+name = "resource_api_behavior"
+path = "tests/resource_api_behavior.rs"
+
+# Replaces the process-wide allocation callback.
+[[test]]
+name = "mmgr_opt_callback_unwind"
+path = "tests/mmgr_opt_callback_unwind.rs"
+
+# Observes process-wide allocations through its own global allocator.
+[[test]]
+name = "packed_map_native_rehash"
+path = "tests/packed_map_native_rehash.rs"
+
+# Observes process-wide allocations through its own global allocator.
+[[test]]
+name = "packed_map_object_storage"
+path = "tests/packed_map_object_storage.rs"
+
+# Observes the process-wide common allocator handle count.
+[[test]]
+name = "ordered_borrowed_clear"
+path = "tests/ordered_borrowed_clear.rs"
+
+# Observes the process-wide common allocator handle count.
+[[test]]
+name = "ordered_copy_lifetimes"
+path = "tests/ordered_copy_lifetimes.rs"
+
+# Replaces the process-wide allocation callback.
+[[test]]
+name = "mmgr_opt_initialize"
+path = "tests/mmgr_opt_initialize.rs"
+
+# Replaces the process-wide allocation callback.
+[[test]]
+name = "standard_services_api_behavior"
+path = "tests/standard_services_api_behavior.rs"

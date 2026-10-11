@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Actual AIS planes retain native geometry, appearance, selection and transparency.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},

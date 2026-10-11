@@ -2,7 +2,7 @@
 use rustycad_tkernel::standard::StandardTransient;
 use rustycad_tkv3d::select_mgr::*;
 
-use crate::abstract_intersector;
+use super::abstract_intersector;
 
 #[derive(Default)]
 pub struct BaseDefaultsIntersector {

@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkv3d"
 description = "OCCT TKV3d toolkit: selection, presentation, interactive objects and the 3D viewer"
 version.workspace = true
@@ -23,3 +24,13 @@ rustycad-tktopalgo = { path = "../tktopalgo", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkv3d-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
+
+# Abort checks reexecute exact test names.
+[[test]]
+name = "ais_context_fatal"
+path = "tests/ais_context_fatal.rs"

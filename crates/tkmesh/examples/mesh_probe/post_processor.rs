@@ -1,5 +1,6 @@
 //! Native postprocessor publication oracle twin.
 use super::super::{flag, int, point3, real};
+use crate::wire_fixture;
 use rustycad_tkbrep::brep::BRepTool;
 use rustycad_tkernel::{message::ProgressRange, standard::Handle};
 use rustycad_tkmath::poly::mesh_purpose;

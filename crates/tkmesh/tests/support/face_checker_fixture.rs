@@ -8,7 +8,7 @@ use rustycad_tkmesh::{
     imesh_data::{FaceHandle, MeshModel},
 };
 pub fn checker_model(v: &[i32]) -> (Handle<dyn MeshModel>, FaceHandle) {
-    let (wire, face, ordered) = crate::wire_fixture::order_fixture(0, 0, 0);
+    let (wire, face, ordered) = super::wire_fixture::order_fixture(0, 0, 0);
     let model: Handle<dyn MeshModel> = Handle::new(DiscreteModel::new(&Shape::default())).cast();
     let face = model.add_face(&face).unwrap();
     face.set_deflection([0.0, 0.001, 0.03, 0.3][v[3] as usize]);

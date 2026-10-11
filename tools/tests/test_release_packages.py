@@ -195,27 +195,20 @@ class ReleasePackageTests(unittest.TestCase):
         self.assertEqual(len(targets), 1)
         self.assertTrue(next(iter(targets)).endswith("workspace/target"))
 
-    def test_release_cleans_between_packages_before_their_binaries_accumulate(
-        self,
-    ) -> None:
+    def test_release_reuses_dependencies_across_packages_and_cleans_after_profiles(self) -> None:
         second = ReleaseCrate("rustycad-cmath", "0.1.0", "crates/cmath")
-        self.fixture.write_archive(
-            f"{second.name}-{second.version}/Cargo.toml", crate=second
-        )
+        self.fixture.write_archive(f"{second.name}-{second.version}/Cargo.toml", crate=second)
         package_test_support(self.fixture.root, self.runner)
-        test_archives(
-            self.fixture.root, self.fixture.root / "stage", self.runner, [CRATE, second]
-        )
+        test_archives(self.fixture.root, self.fixture.root / "stage", self.runner, [CRATE, second])
         calls = [call for call in self.runner.calls if call[0] == "cargo"]
-        self.assertEqual([call[1] for call in calls], ["test", "test", "clean"] * 4)
-        for index, package in enumerate([CRATE, CRATE, second, second]):
-            pair = calls[index * 3 : index * 3 + 2]
-            self.assertEqual(
-                [call[call.index("--package") + 1] for call in pair], [package.name] * 2
-            )
+        self.assertEqual([call[1] for call in calls], ["test", "test", "test", "test", "clean"] * 2)
+        tests = [call for call in calls if call[1] == "test"]
+        for index, package in enumerate([CRATE, second, CRATE, second]):
+            pair = tests[index * 2:index * 2 + 2]
+            self.assertEqual([call[call.index("--package") + 1] for call in pair], [package.name] * 2)
             self.assertIn("--all-targets", pair[0])
             self.assertIn("--doc", pair[1])
-            self.assertEqual("--all-features" in pair[0], index % 2 == 1)
+            self.assertEqual("--all-features" in pair[0], index >= 2)
 
     def test_archive_rejects_wrong_root_traversal_and_links(self) -> None:
         for name, symlink in [

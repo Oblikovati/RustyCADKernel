@@ -1,5 +1,5 @@
 //! Real production primitive and boundary fixtures for discrete model construction.
-use crate::wire_fixture as wires;
+use super::wire_fixture as wires;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
     topods::{Compound, Shape, Vertex},

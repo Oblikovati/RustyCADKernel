@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Real AIS trihedrons exercise shaded datums and their part-owner highlights.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},

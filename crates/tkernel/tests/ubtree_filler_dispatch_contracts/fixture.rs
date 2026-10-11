@@ -1,4 +1,4 @@
-use crate::{allocation_trace::*, observed_key::Key};
+use super::{allocation_trace::*, observed_key::Key};
 use rustycad_tkernel::ncollection::{
     BaseAllocator, BoundingTreeInsertion, EBTree, UBTree, UBTreeFiller,
 };

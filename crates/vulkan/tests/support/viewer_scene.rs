@@ -1,5 +1,5 @@
 //! A live V3d viewer exercises ordinary driver, structure and group creation.
-pub use crate::view_setup::unlit_aspects::unlit_style;
+pub use super::view_setup::unlit_aspects::unlit_style;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
@@ -41,5 +41,5 @@ impl ViewerScene {
     }
 }
 
-use crate::view_setup;
+use super::view_setup;
 use view_setup::{configure_view, triangle_vertices};

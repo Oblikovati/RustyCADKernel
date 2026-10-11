@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkshhealing"
 description = "OCCT TKShHealing toolkit: Shape Healing (analysis, fixing, conversion and division of shapes)"
 version.workspace = true
@@ -24,3 +25,23 @@ rustycad-tkprim = { path = "../tkprim", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkshhealing-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
+
+# Initializes the process-wide ShapeExtend message catalog.
+[[test]]
+name = "shape_extend_messages"
+path = "tests/shape_extend_messages.rs"
+
+# Expects warning identifiers before the process-wide ShapeExtend catalog is initialized.
+[[test]]
+name = "shape_fix_face_orientation"
+path = "tests/shape_fix_face_orientation.rs"
+
+# Expects warning identifiers before the process-wide ShapeExtend catalog is initialized.
+[[test]]
+name = "shape_fix_wireframe_merge_branches"
+path = "tests/shape_fix_wireframe_merge_branches.rs"

@@ -9,6 +9,7 @@ Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
 from __future__ import annotations
 import argparse
+from test_target_selection import cargo_case_command, original_case_names
 import hashlib
 import json
 import os
@@ -234,8 +235,8 @@ def rust_tests(output: Path, rows: list[dict], expected: set, environment: dict)
     """Require exactly the mapped Rust tests to pass; rust_tests(out, rows, expected, env)."""
     targets = sorted({(row['rust_package'],row['rust_target']) for row in rows})
     for package,target in targets:
-        result = run(['cargo','test','--locked','-p',package,'--test',target,'--','--test-threads=1'],output/f'rust-{target}.log',env=environment)
-        passed = set(re.findall(r'^test (\S+) \.\.\. ok$',result,re.M))
+        result = run(cargo_case_command(ROOT, package, target, ['--test-threads=1']),output/f'rust-{target}.log',env=environment)
+        passed = original_case_names(set(re.findall(r'^test (\S+) \.\.\. ok$',result,re.M)), target)
         require_exact_rust_cases(package, target, passed, {name for owner,mapped,name in expected if (owner,mapped) == (package,target)})
 
 

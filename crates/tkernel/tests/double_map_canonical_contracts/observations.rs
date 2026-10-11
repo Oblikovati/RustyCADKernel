@@ -6,7 +6,7 @@ fn borrowed_bind_copies_value_then_key() {
     let (key, value) = (trace.key('K', 1), trace.key('V', 5));
     trace.watch("C");
     map.bind_ref(&key, &value).unwrap();
-    crate::native_order(
+    super::super::native_order(
         "borrowed_allocation",
         format!("borrowed_allocation {}", trace.events()),
     );
@@ -20,7 +20,7 @@ fn removal_hashes_both_keys_then_drops_key1_then_key2() {
     map.bind_ref(&key, &value).unwrap();
     trace.watch("HD");
     assert!(map.unbind1(&key));
-    crate::native_order(
+    super::super::native_order(
         "remove_observer",
         format!("remove_observer {}", trace.events().trim_end_matches(',')),
     );
@@ -35,7 +35,7 @@ fn clear_drops_key1_then_key2_and_keeps_an_empty_table() {
     map.bind(trace.key('K', 1), trace.key('V', 5)).unwrap();
     trace.watch("HD");
     map.clear(false);
-    crate::native_order(
+    super::super::native_order(
         "clear_observer",
         format!("clear_observer {}", trace.events().trim_end_matches(',')),
     );
@@ -46,7 +46,7 @@ fn clear_drops_key1_then_key2_and_keeps_an_empty_table() {
 fn assert_retained_tables(map: &super::observation_fixture::ObservedMap) {
     // The native row's middle field reports the protected second table emptied (plan D1 B6);
     // the public first table stands in for it.
-    crate::native_row(
+    super::super::native_row(
         "retained_tables",
         format!(
             "retained_tables {} {} {}",
@@ -64,7 +64,7 @@ fn assign_copies_locals_then_hashes_then_copies_value_then_key() {
     let mut target = trace.map();
     trace.watch("CHD");
     target.assign(&source);
-    crate::native_order("assign_order", format!("assign_order {}", trace.events()));
+    super::super::native_order("assign_order", format!("assign_order {}", trace.events()));
     trace.stop();
 }
 #[test]
@@ -76,12 +76,12 @@ fn mixed_borrowed_owned_overloads_copy_only_the_borrowed_key() {
     let moved_value = trace.key('V', 5);
     trace.watch("C");
     map.bind_key1_ref(&key, moved_value).unwrap();
-    crate::native_order("mixed_first", format!("mixed_first {}", trace.events()));
+    super::super::native_order("mixed_first", format!("mixed_first {}", trace.events()));
     map.clear(false);
     let moved_key = trace.key('K', 1);
     trace.watch("C");
     map.bind_key2_ref(moved_key, &value).unwrap();
-    crate::native_order("mixed_second", format!("mixed_second {}", trace.events()));
+    super::super::native_order("mixed_second", format!("mixed_second {}", trace.events()));
     trace.stop();
 }
 #[test]

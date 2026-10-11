@@ -25,7 +25,7 @@ annotations across the existing size/projection/translation controls. A release
 rebuilding and complete Vulkan redraw/readback.
 
 ```sh
-cargo test -p rustycad-tkv3d --test ais_text_label --locked
+cargo test -p rustycad-tkv3d --test toolkit ais_text_label:: --locked
 python3 tools/verify_vulkan.py --source ../OCCT \
   --build ../RustyCADKernel/target/occt-all-full \
   --output target/text-label.json --case-family text-label

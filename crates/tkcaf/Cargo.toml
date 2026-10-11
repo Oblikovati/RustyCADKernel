@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkcaf"
 description = "OCCT TKCAF toolkit: topological naming (TNaming), the extended attributes (TDataXtd) and the standard application (AppStd)"
 version.workspace = true
@@ -23,3 +24,8 @@ rustycad-tklcaf = { path = "../tklcaf", version = "0.1.1" }
 
 [dev-dependencies]
 rustycad-tkprim = { path = "../tkprim", version = "0.1.1" }
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

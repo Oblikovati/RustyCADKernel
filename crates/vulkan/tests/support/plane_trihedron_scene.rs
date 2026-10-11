@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Plane trihedrons through the real AIS context, including separate arrow/text styles.
-use crate::{line_scene::fixture, view_setup};
+use super::{line_scene::fixture, view_setup};
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},

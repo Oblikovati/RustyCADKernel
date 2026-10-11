@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkmath"
 version.workspace = true
 edition.workspace = true
@@ -27,3 +28,8 @@ rustycad-tkmesh = { path = "../tkmesh", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkmath-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

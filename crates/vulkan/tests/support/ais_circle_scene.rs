@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Real adaptive circle and arc datums through AIS presentation and selection.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},

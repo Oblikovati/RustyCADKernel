@@ -1,4 +1,5 @@
 use super::super::{flag, int, point2};
+use crate::wire_fixture;
 use rustycad_tkernel::{
     ncollection::Shared,
     standard::{Handle, SharedState},

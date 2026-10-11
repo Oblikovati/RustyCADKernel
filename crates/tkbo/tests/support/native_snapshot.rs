@@ -7,11 +7,7 @@ macro_rules! native_boolean_snapshot {
         if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
             include_str!(concat!("fixtures/", $probe, ".macos.expected"))
         } else if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
-            include_str!(concat!(
-                "fixtures/",
-                $probe,
-                ".windows.expected"
-            ))
+            include_str!(concat!("fixtures/", $probe, ".windows.expected"))
         } else {
             include_str!(concat!("fixtures/", $probe, ".expected"))
         }

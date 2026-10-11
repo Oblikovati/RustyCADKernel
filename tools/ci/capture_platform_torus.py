@@ -10,6 +10,10 @@ import json
 import os
 import platform
 import subprocess
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from test_target_selection import cargo_case_command
 
 
 def capture_native(root: Path, output: Path) -> Path:
@@ -65,17 +69,7 @@ def capture_rust(root: Path, output: Path) -> int:
     try:
         with (output / "rust-test.log").open("w") as log:
             result = subprocess.run(
-                [
-                    "cargo",
-                    "test",
-                    "-p",
-                    "rustycad-tkbo",
-                    "--test",
-                    "bop_algo_bop_torus",
-                    "--locked",
-                    "--",
-                    "--nocapture",
-                ],
+                cargo_case_command(root, 'rustycad-tkbo', 'bop_algo_bop_torus', ['--nocapture']),
                 cwd=root,
                 stdout=log,
                 stderr=subprocess.STDOUT,

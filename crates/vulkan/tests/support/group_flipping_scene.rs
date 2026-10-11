@@ -1,5 +1,5 @@
 //! Ordered annotation brackets paired with martensite_vulkan_group_flipping.cxx.
-use crate::scene::ViewerScene;
+use super::scene::ViewerScene;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
     standard::Handle,
@@ -28,7 +28,7 @@ fn reset_flipping_scene(scene: &ViewerScene, offset: f64) {
     scene.group.clear(false);
     scene
         .group
-        .set_group_primitives_aspect(&crate::scene::unlit_style([1., 0., 0., 1.]));
+        .set_group_primitives_aspect(&super::scene::unlit_style([1., 0., 0., 1.]));
     let transform = Transform3::translation_vector(Vector3::new(offset, 0., 0.));
     let datum = Handle::new(rustycad_tkmath::toploc::Datum3::new(transform));
     scene.structure.set_transformation(&datum);
@@ -133,12 +133,12 @@ fn add_label(scene: &ViewerScene) {
     scene.group.add_text(&text, true);
 }
 fn add_cap(scene: &ViewerScene) {
-    crate::capping_scene::cube(&*scene.group, 0.);
+    super::capping_scene::cube(&*scene.group, 0.);
     scene
         .group
         .set_transformation(&Transform3::translation_vector(Vector3::new(3., 0., 1.)));
     let planes = Handle::new(Graphic3dSequenceOfHClipPlane::default());
-    planes.append(crate::capping_scene::cap_plane([0., 0., -1., 0.]));
+    planes.append(super::capping_scene::cap_plane([0., 0., -1., 0.]));
     scene.view.set_clip_planes(&planes);
 }
 

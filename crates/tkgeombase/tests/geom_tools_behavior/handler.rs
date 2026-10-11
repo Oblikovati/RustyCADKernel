@@ -1,6 +1,6 @@
 //! The process-wide undefined-type handler: the base behaviour, installation, a custom
 //! handler that stores another class, and the debug dump.
-use crate::fakes::{
+use super::fakes::{
     HelixHandler, RecordingConsole, handler_lock, helix, line, output_stream, text_stream, unread,
     written_text,
 };

@@ -1,5 +1,6 @@
 //! Concrete BRepMesh_ModelBuilder and ShapeVisitor oracle twin.
 use super::super::{flag, int, orientation, real};
+use crate::wire_fixture;
 use rustycad_tkernel::{message::Status, standard::Handle};
 use rustycad_tkmesh::{
     brep_mesh::BRepMeshModelBuilder,

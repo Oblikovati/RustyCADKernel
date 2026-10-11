@@ -1,5 +1,5 @@
 //! The dump and compact layouts, precision handling and the printer quirks.
-use crate::fakes::{bspline, circle, line, output_stream, written_text};
+use super::fakes::{bspline, circle, line, output_stream, written_text};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::storage::IoStream;
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
@@ -71,7 +71,7 @@ fn two_d_bspline_dump_runs_knots_into_poles_and_uses_one_space_before_knots() {
     for (index, pole) in poles.into_iter().enumerate() {
         pole_array.set_value(index as i32 + 1, pole).unwrap();
     }
-    let knots = crate::fakes::array(&[0.0, 1.0]);
+    let knots = super::fakes::array(&[0.0, 1.0]);
     let mut mults = rustycad_tkernel::ncollection::Array1::with_bounds(1, 2).unwrap();
     mults.set_value(1, 3).unwrap();
     mults.set_value(2, 3).unwrap();
@@ -86,7 +86,7 @@ fn two_d_bspline_dump_runs_knots_into_poles_and_uses_one_space_before_knots() {
 #[test]
 fn offset_curve_dump_has_no_newline_after_its_tag() {
     let offset: Handle<dyn GeomCurve> = Handle::new(
-        GeomOffsetCurve::new(&circle(1.0), 0.5, crate::fakes::z_direction(), false).unwrap(),
+        GeomOffsetCurve::new(&circle(1.0), 0.5, super::fakes::z_direction(), false).unwrap(),
     )
     .into_cast();
     let dump = printed(|s| geom_tools::dump_curve(&offset, s).unwrap());

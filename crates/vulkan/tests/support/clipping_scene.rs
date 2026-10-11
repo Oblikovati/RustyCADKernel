@@ -1,5 +1,5 @@
 //! Paired with martensite_vulkan_clipping.cxx: retained planes, not direct GPU submissions.
-use crate::scene::ViewerScene;
+use super::scene::ViewerScene;
 use rustycad_tkernel::{ncollection::Vec4, standard::Handle};
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkservice::{aspect::AspectTypeOfMarker, graphic3d::*};

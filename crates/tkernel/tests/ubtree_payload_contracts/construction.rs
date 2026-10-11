@@ -1,7 +1,7 @@
 use super::fixture::{Node, Pair, PayloadTrace};
 use rustycad_tkernel::ncollection::{UBTree, UBTreeFiller};
 fn result(label: &str, trace: &PayloadTrace) {
-    crate::native_row(
+    super::super::native_row(
         label,
         format!("{label} {} {}", trace.events(), trace.stable()),
     );

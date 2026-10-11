@@ -1,4 +1,5 @@
 //! Each timed AIS cycle includes selection lifecycle and two completed GPU readbacks.
+use crate::view_setup;
 #[path = "../../tests/support/ais_scene.rs"]
 pub(super) mod ais_scene;
 use martensite_vulkan::Graphic3dRenderDriver;

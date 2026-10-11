@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-parity"
 version.workspace = true
 edition.workspace = true
@@ -8,3 +9,8 @@ publish.workspace = true
 
 [lints]
 workspace = true
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

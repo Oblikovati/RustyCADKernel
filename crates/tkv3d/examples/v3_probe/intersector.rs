@@ -1,4 +1,5 @@
 //! Twin of tools/oracle/tkv3d_probe_intersector.cxx.
+use crate::abstract_intersector;
 #[path = "../../tests/support/base_defaults_fake.rs"]
 mod base_defaults_fake;
 use super::common::{Reader, attempt, captured, end, flag, int, pnt, real};

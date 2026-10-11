@@ -1,5 +1,5 @@
 //! Explicit discrete input for polygon publication, paired with the native oracle.
-use crate::wire_fixture;
+use super::wire_fixture;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::top_abs::Orientation;

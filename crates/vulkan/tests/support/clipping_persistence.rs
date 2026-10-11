@@ -1,6 +1,6 @@
 //! Clipping must classify persistent anchors before disabling global fragment planes.
+use super::super::scene::ViewerScene;
 use super::{clip_plane, single_plane};
-use crate::scene::ViewerScene;
 use Graphic3dTransModeFlags as Flags;
 use rustycad_tkernel::{
     ncollection::Vec2,

@@ -1,4 +1,4 @@
-use crate::{allocation_trace::*, observed_key::Key};
+use super::{allocation_trace::*, observed_key::Key};
 use rustycad_tkernel::ncollection::{BaseAllocator, UBTree, UBTreeFiller};
 #[test]
 fn native_dispatch_does_not_claim_observable_self_assignment_parity() {

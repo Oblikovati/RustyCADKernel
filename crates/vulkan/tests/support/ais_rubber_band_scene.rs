@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Real AIS_RubberBand overlays exercise screen persistence and live polygon updates.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     ncollection::Vec2,

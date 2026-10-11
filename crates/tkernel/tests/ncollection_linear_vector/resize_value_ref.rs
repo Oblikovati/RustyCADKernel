@@ -112,7 +112,7 @@ fn borrowed_fill_clone_panic_retains_completed_unpublished_tail() {
     assert_eq!(control.attempts.get(), 2);
     assert_eq!(control.drops.get(), 0);
     // SAFETY: exactly the first spare clone succeeded; native state is asserted above.
-    unsafe { crate::tail_repair::destroy_completed_tail(&mut vector, 1) };
+    unsafe { super::tail_repair::destroy_completed_tail(&mut vector, 1) };
     assert_eq!(control.drops.get(), 1);
     assert_values(&vector, &[1]);
 }

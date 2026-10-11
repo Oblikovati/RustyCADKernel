@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkgeombase"
 description = "OCCT TKGeomBase toolkit: construction of elementary geometry and the ModelingData geometry algorithms"
 version.workspace = true
@@ -18,3 +19,18 @@ rustycad-tkg3d = { path = "../tkg3d", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkgeombase-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"
+
+# Requires a fresh process-wide FEmTool reference cache.
+[[test]]
+name = "fem_tool_reference_cache"
+path = "tests/fem_tool_reference_cache.rs"
+
+# Requires a fresh process-wide FEmTool reference cache.
+[[test]]
+name = "app_def_reference_cache"
+path = "tests/app_def_reference_cache.rs"

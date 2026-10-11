@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkgeomalgo"
 description = "OCCT TKGeomAlgo toolkit: intersections, hatching, constraint solving, filling and plate algorithms on geometry"
 version.workspace = true
@@ -23,3 +24,8 @@ rustycad-tkshhealing = { path = "../tkshhealing", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkgeomalgo-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

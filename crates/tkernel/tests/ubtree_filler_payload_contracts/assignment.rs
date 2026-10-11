@@ -1,5 +1,5 @@
+use super::allocation_trace::*;
 use super::{assert_native, caught, event_text};
-use crate::allocation_trace::*;
 use rustycad_tkernel::ncollection::{BaseAllocator, ObjBnd, UBTreeFiller};
 fn self_assign(pair: &mut ObjBnd<Payload<'O'>, Payload<'B'>>) {
     pair.assign_self_with(Payload::assign_self, Payload::assign_self);

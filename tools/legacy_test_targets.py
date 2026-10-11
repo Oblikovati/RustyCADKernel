@@ -22,6 +22,7 @@ from typing import Protocol
 from api_inventory.inputs import JSONObject
 from legacy_pending_dependency import runnable_rows
 from tkernel_mapping import mapped_runtime_sets
+from test_target_selection import compiled_case_target, original_case_names
 
 ROOT = Path(__file__).resolve().parents[1]
 TargetKey = tuple[str, str]
@@ -97,8 +98,14 @@ class CargoTestLister:
         listed: dict[TargetKey, set[str]] = {}
         for package in sorted({package for package, _ in targets}):
             names = [target for owner, target in targets if owner == package]
-            for target, executable in self.build(package, names).items():
-                listed[(package, target)] = terse_test_names(self.output([str(executable), "--list", "--format=terse"]))
+            compiled = {target: compiled_case_target(self.root, package, target) for target in names}
+            binaries = self.build(package, sorted(set(compiled.values())))
+            cases = {binary: terse_test_names(self.output([str(executable), '--list', '--format=terse']))
+                     for binary, executable in binaries.items()}
+            for target, binary in compiled.items():
+                selected = cases[binary] if target == binary else {
+                    name for name in cases[binary] if name.startswith(f'{target}::')}
+                listed[(package, target)] = original_case_names(selected, target)
         return listed
 
     def build(self, package: str, targets: list[str]) -> dict[str, Path]:

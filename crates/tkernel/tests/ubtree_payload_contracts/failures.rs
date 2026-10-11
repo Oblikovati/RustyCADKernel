@@ -11,7 +11,7 @@ fn construction_failure(pair: bool, kind: char) {
         }
     });
     let label = format!("{}_ctor_fail {kind}", if pair { "pair" } else { "node" });
-    crate::native_row(
+    super::super::native_row(
         &label,
         format!("{label} {} {}", trace.events(), u8::from(failed)),
     );
@@ -30,7 +30,7 @@ fn pair_default_failure_drops_the_object_if_bounds_construction_fails() {
         trace.reject('N', kind);
         let failed = trace.with_defaults(|| caught(|| drop(Pair::default())));
         let label = format!("default_fail {kind}");
-        crate::native_row(
+        super::super::native_row(
             &label,
             format!("{label} {} {}", trace.events(), u8::from(failed)),
         );
@@ -84,7 +84,7 @@ fn node_drop_failure(kind: char) {
     trace.reject('D', kind);
     let failed = caught(|| drop(target));
     let label = format!("node_drop_fail {kind}");
-    crate::native_row(
+    super::super::native_row(
         &label,
         format!(
             "{label} {} {} {}",
@@ -101,7 +101,7 @@ fn pair_drop_failure(kind: char) {
     trace.reject('D', kind);
     let failed = caught(|| drop(target));
     let label = format!("pair_drop_fail {kind}");
-    crate::native_row(
+    super::super::native_row(
         &label,
         format!(
             "{label} {} {} {}",
@@ -120,7 +120,7 @@ fn throwing_member_destructor_drains_other_member_at_its_original_address() {
 }
 
 fn assignment_row(label: &str, trace: &PayloadTrace, failed: bool, object: i32, bounds: i32) {
-    crate::native_row(
+    super::super::native_row(
         label,
         format!(
             "{label} {} {} {} {object} {bounds}",

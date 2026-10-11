@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "martensite-vulkan"
 description = "Martensite Vulkan 1.3 visualization renderer"
 version.workspace = true
@@ -20,3 +21,8 @@ rustycad-tkg3d = { path = "../tkg3d", version = "0.1.1" }
 
 [target.'cfg(target_os = "linux")'.dev-dependencies]
 x11-dl = "=2.21.0"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

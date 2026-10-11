@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkoffset"
 description = "OCCT TKOffset toolkit: offset modeling algorithms"
 version.workspace = true
@@ -26,3 +27,8 @@ rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.1.1" }
 
 rustycad-tkbo = { path = "../tkbo", version = "0.1.1" }
 rustycad-tkprim = { path = "../tkprim", version = "0.1.1" }
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

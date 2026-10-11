@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Real FreeType glyph scenes through V3d and retained Graphic3d text commands.
-use crate::scene::ViewerScene;
+use super::scene::ViewerScene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
@@ -122,7 +122,7 @@ impl TextScene {
     fn occlusion(&self, annotation: bool) {
         self.scene
             .group
-            .set_primitives_aspect(&crate::scene::unlit_style([1., 0., 0., 1.]));
+            .set_primitives_aspect(&super::scene::unlit_style([1., 0., 0., 1.]));
         self.scene
             .group
             .add_primitive_array(&self.scene.vertices, true);

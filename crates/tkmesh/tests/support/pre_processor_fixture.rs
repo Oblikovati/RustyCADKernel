@@ -29,7 +29,7 @@ pub fn existing_model(v: &[i32]) -> Handle<dyn MeshModel> {
 }
 fn prepare_face(model: &Handle<dyn MeshModel>, index: i32, v: &[i32]) {
     let face = model.get_face(index).unwrap();
-    let (wire, _, _) = crate::wire_fixture::order_fixture(0, 0, 0);
+    let (wire, _, _) = super::wire_fixture::order_fixture(0, 0, 0);
     face.add_wire(&wire, 1)
         .add_edge(model.get_edge(0).unwrap().downgrade(), Orientation::Forward);
     face.status().set_status(Status(v[2]));

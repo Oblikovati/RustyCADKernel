@@ -65,6 +65,8 @@ def main() -> None:
         text=True,
     )
     commands = workspace_commands(json.loads(output))
+    # include! indexes are deliberately small; rustfmt does not traverse them.
+    commands += format_batches('2024', [str(path) for path in root.glob('crates/*/tests/suites/*.rs')])
     for command in commands:
         subprocess.run(command, cwd=root, check=True)
     print(f"Rust formatting passed across {len(commands)} bounded commands.")

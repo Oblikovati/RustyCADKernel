@@ -1,6 +1,6 @@
 #![allow(unsafe_code)]
-use crate::allocation_trace::*;
-use crate::observed_key::Key;
+use super::allocation_trace::*;
+use super::observed_key::Key;
 use rustycad_tkernel::ncollection::{BaseAllocator, EBTree};
 pub type Editable = EBTree<Key, Payload<'B'>>;
 pub fn populated(count: usize) -> (Editable, BaseAllocator) {

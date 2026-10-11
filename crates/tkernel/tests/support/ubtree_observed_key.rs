@@ -1,5 +1,5 @@
 //! Shared native object copy/assignment and hashed-key callback fixture.
-use crate::allocation_trace::{Payload, record_key_phase};
+use super::allocation_trace::{Payload, record_key_phase};
 use rustycad_tkernel::ncollection::HashKey;
 #[repr(transparent)]
 #[derive(Debug, Default)]

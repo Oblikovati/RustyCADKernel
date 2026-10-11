@@ -26,7 +26,7 @@ pub fn ordered_map() -> (OrderedMap, Rc<RefCell<String>>) {
     (map, events)
 }
 fn assert_trace(label: &str, events: &RefCell<String>) {
-    crate::native_row(label, format!("{label} {}", events.borrow()));
+    super::super::native_row(label, format!("{label} {}", events.borrow()));
     events.borrow_mut().clear();
 }
 #[test]
@@ -48,13 +48,13 @@ fn are_bound_preserves_native_wrong_chain_and_hashes_both_before_search() {
     map.bind(2, 6).unwrap();
     events.borrow_mut().clear();
     assert!(!map.are_bound(&99, &5));
-    crate::native_row(
+    super::super::native_row(
         "are_missing",
         format!("are_missing 0 trace {}", events.borrow()),
     );
     events.borrow_mut().clear();
     assert!(!map.are_bound(&1, &5));
-    crate::native_row(
+    super::super::native_row(
         "are_primary_next_quirk",
         format!("are_primary_next_quirk 0 trace {}", events.borrow()),
     );
@@ -66,7 +66,7 @@ fn resize_and_both_unbind_paths_keep_native_hash_order() {
     map.bind(2, 6).unwrap();
     events.borrow_mut().clear();
     map.resize(200);
-    crate::native_row(
+    super::super::native_row(
         "resize",
         format!("resize {} trace {}", map.bucket_count(), events.borrow()),
     );

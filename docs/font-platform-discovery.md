@@ -27,8 +27,8 @@ The required runtime regressions never skip a missing library or an empty native
 Windows/macOS font catalog:
 
 ```sh
-cargo test -p rustycad-tkservice --test font_platform_runtime --locked
-cargo test -p martensite-vulkan --test group_flipping --locked
+cargo test -p rustycad-tkservice --test toolkit font_platform_runtime:: --locked
+cargo test -p martensite-vulkan --test toolkit group_flipping:: --locked
 ```
 
 A Windows GNU build running under Wine reproduces the missing-library failure

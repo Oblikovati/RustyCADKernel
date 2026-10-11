@@ -120,25 +120,42 @@ Test fixtures encode Windows wide characters as UTF-16 and apply their existing
 platform guards consistently. No renderer parity threshold was relaxed.
 
 
-Workspace tests and coverage are split into six deterministic package groups on
-hosted runners. Run `python3 tools/ci_test_shards.py --shard 0 --count 6 --runner
-test` to reproduce one group (indices 0–5). Cargo metadata discovers every member;
-target counts balance the groups without excluding any crate, feature, or doctest.
-Formatting, full-workspace Clippy, and documentation checks run once per platform.
-Run `cargo test-all` locally for the original whole-workspace invocation.
+Workspace integration tests now share one executable per toolkit, with explicit
+exceptions for process-state and global-allocator tests. Hosted CI runs the complete
+workspace on each of Linux, macOS, and Windows; the six numbered partitions are no
+longer needed. `cargo test-all` includes every toolkit and doctest. Formatting,
+full-workspace Clippy, and documentation checks run once per platform.
 
-Run `38075760896` exhausted Ubuntu disk while linking the workspace tests; its
-coverage runner also reached only 5 MB free. Debug symbols and incremental builds
-were already disabled. Each coverage group now deletes its ordinary build before
-instrumentation, retaining nextest XML and uploading its LCOV report as
-`coverage-and-tests-<index>`. All six reports constitute the workspace coverage
-set; no individual group's percentage represents the entire workspace.
+Run `38075760896` exhausted Ubuntu disk while linking 1,650 integration-test
+executables even with debug symbols and incremental builds disabled. Grouping
+case files into toolkit modules removes repeated linkage while preserving their
+assertions, fixtures, and upstream identities. The final layout has 29 toolkit
+suites and 28 explicitly isolated targets: 57 executables, with all 15,555
+integration-case identities preserved. The suite discovery check rejects
+new test files omitted from the generated indexes.
+
+Coverage runs `cargo llvm-cov nextest --workspace --all-features --locked --profile
+ci --lcov --output-path target/lcov.info` once. This single instrumented build
+produces both the complete workspace LCOV report and nextest JUnit results,
+uploaded as `coverage-and-tests`. It replaces the duplicate normal and instrumented
+test runs and six partial reports. Doctests remain part of each platform's ordinary
+test job. Coverage uses `LLVM_PROFILE_FILE_NAME=martensite-%4m.profraw`: LLVM's
+online merging pool keeps at most four raw counter files per instrumented binary.
+Without this setting, nextest's process-per-case execution wrote 17,210 profiles
+(65,625,136,664 bytes) locally, despite the smaller executable count. Counter
+merging preserves all test executions and avoids that second disk multiplier.
+The pooled run passed all 17,022 unit/integration tests and generated LCOV. The
+final profile set, including the TKHLR isolation refresh, uses 332 files and
+551,186,152 bytes. Full functional tests and doctests also pass. The
+[measurement receipt](evidence/toolkit-tests-2026-10-11/measurement.json) records
+case preservation, mapped-target checks, and archive validation scope.
 
 Extracted release archives are checked one package at a time, with both default
 and all features, including all targets and doctests. The temporary build is
-deleted after each package/profile pair, and release builds use the same disabled
-debug-symbol/incremental settings as CI. Package contents and test coverage are
-unchanged.
+deleted after each complete feature profile, and release builds use the same disabled
+debug-symbol/incremental settings as CI. Dependency builds are reused across packages within each profile, while each
+package retains its own Cargo feature scope. Package contents and test coverage
+are unchanged.
 
 ## Platform geometry fixtures
 

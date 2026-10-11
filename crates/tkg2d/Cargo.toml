@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkg2d"
 description = "OCCT TKG2d toolkit: transient 2D geometry (Geom2d) and 2D curve adaptors (Adaptor2d, Geom2dAdaptor)"
 version.workspace = true
@@ -20,3 +21,8 @@ rustycad-tkgeomalgo = { path = "../tkgeomalgo", version = "0.1.1" }
 [[example]]
 name = "rustycad-tkg2d-numeric-probe"
 path = "examples/numeric_probe.rs"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

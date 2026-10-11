@@ -95,7 +95,7 @@ fn permanent_removal_detaches_membership_affinity_and_presentations_then_can_red
 #[test]
 fn direct_clear_global_keeps_context_and_remove_rejects_foreign_before_changes() {
     let context = context();
-    let foreign = crate::context();
+    let foreign = self::context();
     let object = ContextObject::new();
     context.display(&object.cast(), false).unwrap();
     assert!(foreign.remove(&object.cast(), false).is_err());

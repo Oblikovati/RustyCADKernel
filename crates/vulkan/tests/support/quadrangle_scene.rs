@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Paired native controls expose quad diagonals, strip winding and unordered alpha composition.
-use crate::scene::ViewerScene;
+use super::scene::ViewerScene;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::{
     quantity::{Color, ColorRgba, ColorSpace},

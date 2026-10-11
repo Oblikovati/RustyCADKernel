@@ -1,0 +1,145 @@
+"""Toolkit consolidation preserves discovery, isolation, and legacy case identity."""
+
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import unittest
+
+from test_target_selection import (
+    cargo_case_command, compiled_case_target, original_case_names, package_manifests,
+)
+from toolkit_test_suites import (
+    INDEX_SIZE, configured_suite_manifests, suite_contents, suite_sources, synchronize_suite,
+)
+from legacy_test_targets import CargoTestLister
+
+
+class ToolkitCheckoutFake:
+    """Small on-disk Cargo checkout with case sources and an isolated process test."""
+
+    def __init__(self, root: Path) -> None:
+        self.root = root
+        self.directory = root / 'crates' / 'custom'
+        self.tests = self.directory / 'tests'
+        self.tests.mkdir(parents=True)
+        self.manifest = self.directory / 'Cargo.toml'
+        self.manifest.write_text('[package]\nname = "custom-package"\nautotests = false\n'
+                                 '[[test]]\nname = "toolkit"\npath = "tests/toolkit.rs"\n'
+                                 '[[test]]\nname = "fatal"\npath = "tests/fatal.rs"\n')
+        for name in ['alpha', 'fatal']:
+            (self.tests / f'{name}.rs').write_text('#[test]\nfn case() {}\n')
+
+
+class CompiledToolkitListerFake(CargoTestLister):
+    """Lists known binary cases while recording build requests."""
+
+    def __init__(self, root: Path) -> None:
+        super().__init__(root, {})
+        self.builds: list[tuple[str, list[str]]] = []
+
+    def build(self, package: str, targets: list[str]) -> dict[str, Path]:
+        self.builds.append((package, targets))
+        return {target: Path(target) for target in targets}
+
+    def output(self, command: list[str]) -> str:
+        if command[0] == 'fatal':
+            return 'fatal_case: test\n'
+        return 'alpha::case: test\nalpha::nested::case: test\nforeign::case: test\n'
+
+
+class ToolkitSuiteTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temporary = TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.checkout = ToolkitCheckoutFake(Path(self.temporary.name))
+        package_manifests.cache_clear()
+
+    def test_discovery_includes_directory_targets_and_excludes_isolation(self) -> None:
+        nested = self.checkout.tests / 'nested'
+        nested.mkdir()
+        (nested / 'main.rs').write_text('#[test]\nfn nested_case() {}\n')
+        names = [source.relative_to(self.checkout.tests).as_posix()
+                 for source in suite_sources(self.checkout.manifest)]
+        self.assertEqual(names, ['alpha.rs', 'nested/main.rs'])
+        generated = suite_contents(suite_sources(self.checkout.manifest))
+        self.assertIn('#[path = "../nested/main.rs"]\npub mod nested;', generated['suites/cases_00.rs'])
+
+    def test_deleted_isolated_source_is_an_error(self) -> None:
+        (self.checkout.tests / 'fatal.rs').unlink()
+        with self.assertRaisesRegex(ValueError, 'fatal.rs.*existing test file'):
+            suite_sources(self.checkout.manifest)
+
+    def test_new_toolkit_cannot_bypass_consolidation(self) -> None:
+        self.assertEqual(configured_suite_manifests(self.checkout.root), [self.checkout.manifest])
+        self.checkout.manifest.write_text('[package]\nname = "custom-package"\n')
+        with self.assertRaisesRegex(ValueError, 'expected autotests=false and a toolkit target'):
+            configured_suite_manifests(self.checkout.root)
+
+    def test_disabled_discovery_requires_a_declared_toolkit_target(self) -> None:
+        self.checkout.manifest.write_text('[package]\nname = "custom-package"\nautotests = false\n')
+        with self.assertRaisesRegex(ValueError, 'expected an explicit toolkit target'):
+            configured_suite_manifests(self.checkout.root)
+
+    def test_indexes_are_bounded_and_keep_every_case_namespace(self) -> None:
+        generated = suite_contents([Path(f'case_{index}.rs') for index in range(INDEX_SIZE + 1)])
+        self.assertEqual(len(generated), 3)
+        self.assertEqual(sum(text.count('\npub mod ') for text in generated.values()), INDEX_SIZE + 1)
+        self.assertTrue(all(len(text.splitlines()) < 500 for text in generated.values()))
+
+    def test_synchronization_detects_new_cases_and_removes_stale_indexes(self) -> None:
+        self.assertTrue(synchronize_suite(self.checkout.manifest, False))
+        synchronize_suite(self.checkout.manifest, True)
+        self.assertEqual(synchronize_suite(self.checkout.manifest, False), [])
+        (self.checkout.tests / 'new_case.rs').write_text('#[test]\nfn new_case() {}\n')
+        stale = self.checkout.tests / 'suites' / 'cases_99.rs'
+        stale.write_text('obsolete')
+        self.assertTrue(synchronize_suite(self.checkout.manifest, False))
+        synchronize_suite(self.checkout.manifest, True)
+        self.assertFalse(stale.exists())
+        self.assertEqual(synchronize_suite(self.checkout.manifest, False), [])
+
+    def test_package_lookup_and_compiled_target_preserve_isolation(self) -> None:
+        self.assertEqual(package_manifests(self.checkout.root), {'custom-package': self.checkout.manifest})
+        self.assertEqual(compiled_case_target(self.checkout.root, 'custom-package', 'alpha'), 'toolkit')
+        self.assertEqual(compiled_case_target(self.checkout.root, 'custom-package', 'fatal'), 'fatal')
+        self.assertEqual(compiled_case_target(self.checkout.root, 'absent', 'alpha'), 'alpha')
+
+    def test_command_selects_whole_original_namespace_and_retains_flags(self) -> None:
+        command = cargo_case_command(self.checkout.root, 'custom-package', 'alpha', ['--list'])
+        self.assertEqual(command[-5:], ['--test', 'toolkit', '--', 'alpha::', '--list'])
+        isolated = cargo_case_command(self.checkout.root, 'custom-package', 'fatal', ['--list'])
+        self.assertEqual(isolated[-4:], ['--test', 'fatal', '--', '--list'])
+
+    def test_identity_removes_only_selected_prefix_and_keeps_unexpected_cases(self) -> None:
+        names = {'alpha::nested::case', 'other::case', 'case'}
+        self.assertEqual(original_case_names(names, 'alpha'), {'nested::case', 'other::case', 'case'})
+
+    def test_substring_filter_excludes_suffix_collision_without_skipping_selected_cases(self) -> None:
+        (self.checkout.tests / 'prefixed_alpha.rs').write_text('#[test]\nfn foreign_case() {}\n')
+        command = cargo_case_command(self.checkout.root, 'custom-package', 'alpha', ['--list'])
+        self.assertEqual(command[-5:], ['--', 'alpha::', '--skip', 'prefixed_alpha::', '--list'])
+
+    def test_legacy_lister_builds_shared_toolkit_once_and_preserves_nested_identity(self) -> None:
+        lister = CompiledToolkitListerFake(self.checkout.root)
+        listed = lister.list_tests([('custom-package', 'alpha'), ('custom-package', 'fatal')])
+        self.assertEqual(lister.builds, [('custom-package', ['fatal', 'toolkit'])])
+        self.assertEqual(listed, {('custom-package', 'alpha'): {'case', 'nested::case'},
+                                  ('custom-package', 'fatal'): {'fatal_case'}})
+
+
+class ToolkitWorkflowTests(unittest.TestCase):
+    def test_ci_has_one_workspace_run_per_os_and_one_instrumented_coverage_run(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        workflow = (root / '.github/workflows/ci.yml').read_text()
+        self.assertNotIn('matrix.shard', workflow)
+        self.assertIn('LLVM_PROFILE_FILE_NAME: martensite-%4m.profraw', workflow)
+        self.assertIn('os: [ubuntu-latest, windows-latest, macos-latest]', workflow)
+        coverage = workflow.split('  coverage:\n', 1)[1].split('  vulkan-runtime:', 1)[0]
+        self.assertEqual(coverage.count('run: cargo llvm-cov nextest'), 1)
+        self.assertNotIn('run: cargo clean', coverage)
+        self.assertNotIn('run: cargo nextest', coverage)
+        self.assertIn('target/llvm-cov-target/nextest/ci/junit.xml', coverage)
+        self.assertIn('target/lcov.info', coverage)
+
+
+if __name__ == '__main__':
+    unittest.main()

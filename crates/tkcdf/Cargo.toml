@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-tkcdf"
 description = "OCCT TKCDF toolkit: the document, application and storage-driver framework of OCAF (CDM, PCDM, CDF)"
 version.workspace = true
@@ -10,3 +11,8 @@ publish.workspace = true
 workspace = true
 [dependencies]
 rustycad-tkernel = { path = "../tkernel", version = "0.1.1" }
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

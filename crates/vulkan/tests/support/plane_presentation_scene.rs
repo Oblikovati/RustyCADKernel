@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Exercise real plane presentation builders through the production retained renderer.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::{geom::GeomPlane, geom_adaptor::GeomAdaptorSurface};

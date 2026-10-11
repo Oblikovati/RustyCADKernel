@@ -1,5 +1,5 @@
 //! Named frustum fixture: inherited state with abstract geometry guarded against calls.
-use crate::abstract_intersector;
+use super::abstract_intersector;
 use rustycad_tkernel::standard::{Handle, StandardTransient, dump::DumpStream};
 use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkservice::graphic3d::Graphic3dCamera;

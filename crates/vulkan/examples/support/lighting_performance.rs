@@ -1,4 +1,5 @@
 //! End-to-end lighting timings include live normal/light mutations and GPU readback.
+use crate::scene;
 #[allow(dead_code)]
 #[path = "../../tests/support/lighting_scene.rs"]
 mod lighting_scene;

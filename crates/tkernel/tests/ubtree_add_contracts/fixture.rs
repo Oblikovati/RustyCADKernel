@@ -1,5 +1,5 @@
 #![allow(unsafe_code)]
-use crate::allocation_trace::*;
+use super::allocation_trace::*;
 use rustycad_tkernel::ncollection::BaseAllocator;
 pub fn populated(count: usize) -> (Tree, BaseAllocator) {
     let allocator = BaseAllocator::accumulating(65536).unwrap();

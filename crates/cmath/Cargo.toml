@@ -1,4 +1,5 @@
 [package]
+autotests = false
 name = "rustycad-cmath"
 description = "Adapter to the platform C math library for functions Rust re-implements differently"
 version.workspace = true
@@ -14,3 +15,8 @@ missing_docs = "warn"
 
 [lints.clippy]
 all = "warn"
+
+# Test modules share one executable per toolkit to avoid repeated linkage.
+[[test]]
+name = "toolkit"
+path = "tests/toolkit.rs"

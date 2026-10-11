@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Actual Martensite point clouds exercise copied/aliased buffers and forced subsets.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     quantity::{Color, ColorSpace, NamedColor},

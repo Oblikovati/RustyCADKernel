@@ -98,7 +98,7 @@ fn resize_with_value_retains_completed_tail_after_clone_panics() {
     assert_eq!(vector[0].value, 42);
     assert_eq!(control.dropped.get(), 1); // Only the owned fill argument was dropped.
     // SAFETY: one clone completed in spare slot len; the second constructor failed.
-    unsafe { crate::tail_repair::destroy_completed_tail(&mut vector, 1) };
+    unsafe { super::tail_repair::destroy_completed_tail(&mut vector, 1) };
     assert_eq!(control.dropped.get(), 2);
 }
 
@@ -115,7 +115,7 @@ fn assign_keeps_size_but_retains_completed_common_item_assignment() {
     assert_eq!(destination[0].value, 10);
     assert_eq!(control.dropped.get(), 0);
     // SAFETY: the first spare clone completed; the second failed before writing its slot.
-    unsafe { crate::tail_repair::destroy_completed_tail(&mut destination, 1) };
+    unsafe { super::tail_repair::destroy_completed_tail(&mut destination, 1) };
     assert_eq!(control.dropped.get(), 1);
 }
 

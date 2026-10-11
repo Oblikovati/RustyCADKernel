@@ -1,4 +1,5 @@
 //! Native-style AIS mutations run against the selected Vulkan device, with validation enabled.
+use crate::view_setup;
 #[path = "ais_lifecycle.rs"]
 pub(super) mod ais_lifecycle;
 #[path = "../../tests/support/ais_scene.rs"]

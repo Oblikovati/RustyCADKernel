@@ -9,6 +9,10 @@ import json
 import os
 import platform
 import subprocess
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from test_target_selection import cargo_case_command
 
 
 def probe_compiler_flags() -> str:
@@ -55,7 +59,7 @@ def capture_rust(root: Path, output: Path, package: str, target: str, marker: st
     source.write_text(original.replace(marker, addition + '\n' + marker))
     try:
         with (output / f'{target}.log').open('w') as log:
-            return subprocess.run(['cargo', 'test', '-p', f'rustycad-{package}', '--test', target, '--locked', '--', '--nocapture'], stdout=log, stderr=subprocess.STDOUT, cwd=root).returncode
+            return subprocess.run(cargo_case_command(root, f'rustycad-{package}', target, ['--nocapture']), stdout=log, stderr=subprocess.STDOUT, cwd=root).returncode
     finally:
         source.write_text(original)
 

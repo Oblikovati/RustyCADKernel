@@ -1,5 +1,6 @@
 use super::super::{flag, int, real};
 use super::post_processor::fixtures as post_fixture;
+use crate::wire_fixture;
 use rustycad_tkernel::{message::ProgressRange, standard::Handle};
 use rustycad_tkmesh::{
     brep_mesh::BRepMeshModelPreProcessor,

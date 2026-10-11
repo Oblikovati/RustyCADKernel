@@ -37,12 +37,25 @@ python3 tools/porting.py status
 alias are rustc/Clippy arguments because the alias already contains `--`.
 `cargo test-all` includes doctests; nextest is the parallel integration/unit runner.
 Retries are disabled in CI so nondeterministic failures remain visible.
+Integration tests share one executable per toolkit crate. Existing case files remain
+modules with their original filenames as namespaces; select a case family with
+`cargo test -p rustycad-tkernel --test toolkit standard_guid::`.
+New toolkit crates with integration tests declare `autotests = false` and a
+`[[test]]` named `toolkit` at `tests/toolkit.rs` in their manifest.
+After adding a test file, run `python3 tools/toolkit_test_suites.py --write`.
+CI runs the same tool without `--write` and rejects missing or stale declarations.
+Tests requiring process-wide state, a custom global allocator, or self-execution
+remain explicit separate targets, with their isolation reason in `Cargo.toml`.
+Oracle mappings retain their original case identities; the verification tools
+resolve those identities to the toolkit executable and namespace filter.
 The parity crate has four harness tests. TKernel accounts for all 1316 discovered
 GoogleTest declarations: 1315 translated declarations and one explicitly skipped
 native declaration with a current-behavior regression. TKMath porting is underway;
 see [TKernel progress](tkernel-progress.md) and [TKMath progress](tkmath-progress.md).
 
-`cargo coverage` writes `target/lcov.info`. Stable LLVM instrumentation measures
+`cargo coverage` writes `target/lcov.info`. When using nextest for coverage, set
+`LLVM_PROFILE_FILE_NAME=martensite-%4m.profraw` to merge process counters into a
+bounded pool per binary; CI applies this setting automatically. Stable LLVM instrumentation measures
 Rust source coverage; branch instrumentation and doctest instrumentation are not
 part of this setup. Doctests still run normally. `cargo coverage` counts only the
 `cargo test` runs.

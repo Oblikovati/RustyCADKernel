@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 //! Built-in point datums and actual native screen-space marker styles.
-use crate::view_setup;
+use super::view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{
     ncollection::HArray1,

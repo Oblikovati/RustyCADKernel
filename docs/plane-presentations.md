@@ -51,8 +51,8 @@ Strict gates remain unchanged; full legacy OpenGL replacement
 proof remains incomplete.
 
 ```sh
-cargo test -p rustycad-tkv3d --test plane_presentations --locked
-cargo test -p martensite-vulkan --test polygon_primitives --locked
+cargo test -p rustycad-tkv3d --test toolkit plane_presentations:: --locked
+cargo test -p martensite-vulkan --test toolkit polygon_primitives:: --locked
 python3 tools/verify_vulkan.py --source ../OCCT \
   --build ../RustyCADKernel/target/occt-all-full --output target/planes.json \
   --captures target/plane-captures --case-family plane-presentations \

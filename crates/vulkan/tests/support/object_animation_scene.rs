@@ -1,5 +1,5 @@
 //! Object animation fixtures shared by capture, retained-stream and performance checks.
-use crate::ais_scene::AisViewerScene;
+use super::ais_scene::AisViewerScene;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_TOP;

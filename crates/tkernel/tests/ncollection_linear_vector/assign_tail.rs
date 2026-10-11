@@ -81,7 +81,7 @@ fn tail_copy_panic_keeps_common_assignment_and_unpublished_tail() {
     assert_eq!(Rc::strong_count(&control), 6);
     // SAFETY: one tail clone completed before the second failed; no retry touched it.
     // Explicit test repair follows native-state assertions and is not kernel behavior.
-    unsafe { crate::tail_repair::destroy_completed_tail(&mut destination, 1) };
+    unsafe { super::tail_repair::destroy_completed_tail(&mut destination, 1) };
     assert_eq!(control.drops.get(), 1);
     drop(destination);
     drop(source);

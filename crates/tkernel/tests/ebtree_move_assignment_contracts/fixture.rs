@@ -1,4 +1,4 @@
-use crate::trace::{Item, Trace};
+use super::super::trace::{Item, Trace};
 use rustycad_tkernel::ncollection::{BaseAllocator, EBTree, HashKey};
 use std::fmt::{Debug, Formatter, Result};
 impl PartialEq for Item<'O'> {

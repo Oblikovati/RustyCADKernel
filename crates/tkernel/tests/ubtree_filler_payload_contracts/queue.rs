@@ -1,5 +1,5 @@
+use super::allocation_trace::*;
 use super::{assert_native, caught, event_text, policy::*};
-use crate::allocation_trace::*;
 use rustycad_tkernel::ncollection::{BaseAllocator, BoundingVolume, UBTree, UBTreeFiller};
 fn append<O: QueuePayload, B: QueuePayload + BoundingVolume>(
     filler: &mut UBTreeFiller<'_, O, B>,
