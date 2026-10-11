@@ -1,4 +1,4 @@
-//! Reject style states that the initial opaque pipeline cannot yet represent.
+//! Validate solid surface styles before opaque or unordered blend submission.
 use crate::{RenderError, error::rejected};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{aspect::AspectInteriorStyle, graphic3d::*};
@@ -15,12 +15,6 @@ fn validated_surface_color(style: &dyn Graphic3dAspectsSource) -> Result<[f32; 4
     validate_shading(style)?;
     validate_alpha_offset(style)?;
     let color = style.interior_color_rgba();
-    if color.alpha() != 1.0 || style.front_material().transparency() != 0.0 {
-        return Err(rejected(
-            (color.alpha(), style.front_material().transparency()),
-            "opaque surface shading in this renderer slice",
-        ));
-    }
     Ok([
         color.rgb().red() as f32,
         color.rgb().green() as f32,
@@ -73,11 +67,11 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
 fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
     if !matches!(
         style.alpha_mode(),
-        Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto
+        Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto | Graphic3dAlphaMode::Blend
     ) {
         return Err(rejected(
             style.alpha_mode(),
-            "opaque or automatic opaque alpha mode",
+            "opaque, automatic or explicit unordered blend alpha mode",
         ));
     }
     if style.polygon_offsets().0 != 0 {
@@ -87,4 +81,35 @@ fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), Rende
         ));
     }
     Ok(())
+}
+
+pub(crate) fn surface_uses_blending(style: &dyn Graphic3dAspectsSource) -> bool {
+    style.alpha_mode() == Graphic3dAlphaMode::Blend
+        || (style.alpha_mode() == Graphic3dAlphaMode::BlendAuto
+            && style.front_material().transparency() != 0.)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn unlit_color_alpha_is_independent_of_material_and_blend_policy() {
+        let style = Graphic3dAspects::default();
+        style.set_shading_model(Graphic3dTypeOfShadingModel::Unlit);
+        style.set_polygon_offsets(0, 0., 0.);
+        let mut material = style.front_material();
+        material.set_transparency(0.8).unwrap();
+        style.set_front_material(material);
+        assert!(surface_uses_blending(&style));
+        assert_eq!(validated_surface_color(&style).unwrap()[3], 1.);
+        style.set_interior_color_rgba(rustycad_tkernel::quantity::ColorRgba::from_rgb(
+            style.interior_color(),
+            0.2,
+        ));
+        style.set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.5);
+        assert!(!surface_uses_blending(&style));
+        assert_eq!(validated_surface_color(&style).unwrap()[3], 0.2);
+        style.set_alpha_mode(Graphic3dAlphaMode::Blend, 0.5);
+        assert!(surface_uses_blending(&style));
+    }
 }

@@ -1,0 +1,1144 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "capture_source_revision": "ba440386dd4bf311945aa8274c33ee13291b9c9b",
+  "source_hashes_match_repeat": true,
+  "strict_overall_status": "failed",
+  "accepted_overall_performance_baseline": false,
+  "functional_modes": 28,
+  "cases_per_profile": 168,
+  "workloads_per_profile": 29,
+  "samples_per_workload": 100,
+  "warmup_samples": 20,
+  "native_gen_id_sequence": [
+    2147483647,
+    1,
+    2,
+    1,
+    3
+  ],
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "strict_capture_counts": {
+        "failed": 44,
+        "passed": 124
+      },
+      "runtime_process_errors": 0,
+      "layer_role_assertions": {
+        "passed": 24
+      },
+      "capture_failures": [
+        {
+          "case": "64-64-0-0-aisplane-wire",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-wire', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-current",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-current', pixels=4096, color_mismatch_pixels=148, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            14,
+            50,
+            49
+          ],
+          "depth_error_bounds": [
+            13,
+            14,
+            50,
+            49
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-selected",
+          "maximum_rgba_byte_delta": 204,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-selected', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-detected",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-detected', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "64-64-0-0-aisplane-redisplayed",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-redisplayed', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-unset-color",
+          "maximum_rgba_byte_delta": 206,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-unset-color', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-wire",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-wire', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-current",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-current', pixels=4608, color_mismatch_pixels=110, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            10,
+            66,
+            37
+          ],
+          "depth_error_bounds": [
+            38,
+            10,
+            66,
+            37
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-minimum",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-minimum', pixels=4608, color_mismatch_pixels=46, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            49,
+            18,
+            60,
+            29
+          ],
+          "depth_error_bounds": [
+            49,
+            18,
+            60,
+            29
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-selected",
+          "maximum_rgba_byte_delta": 204,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-selected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-detected",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-detected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "96-48-0-2-aisplane-redisplayed",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-redisplayed', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-unset-color",
+          "maximum_rgba_byte_delta": 206,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-unset-color', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-0-2-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='96-48-0-2-quad-gradient', pixels=4608, color_mismatch_pixels=23, maximum_depth_delta=1.4901161193847656e-08); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            46,
+            14,
+            64,
+            33
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-0--3-aisplane-wire",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-wire', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-current",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-current', pixels=4608, color_mismatch_pixels=110, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            34,
+            30,
+            61
+          ],
+          "depth_error_bounds": [
+            2,
+            34,
+            30,
+            61
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-minimum",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-minimum', pixels=4608, color_mismatch_pixels=46, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            8,
+            42,
+            19,
+            53
+          ],
+          "depth_error_bounds": [
+            8,
+            42,
+            19,
+            53
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-selected",
+          "maximum_rgba_byte_delta": 204,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-selected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-detected",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-detected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-0--3-aisplane-redisplayed",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-redisplayed', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-unset-color",
+          "maximum_rgba_byte_delta": 206,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-unset-color', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.8080808371305466); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-0--3-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='48-96-0--3-quad-gradient', pixels=4608, color_mismatch_pixels=3, maximum_depth_delta=1.4901161193847656e-08); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            22,
+            52,
+            28,
+            56
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "64-64-1-0-aisplane-wire",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-wire', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "64-64-1-0-aisplane-current",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-current', pixels=4096, color_mismatch_pixels=148, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            14,
+            50,
+            49
+          ],
+          "depth_error_bounds": [
+            13,
+            14,
+            50,
+            49
+          ]
+        },
+        {
+          "case": "64-64-1-0-aisplane-selected",
+          "maximum_rgba_byte_delta": 204,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-selected', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "64-64-1-0-aisplane-detected",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-detected', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "64-64-1-0-aisplane-redisplayed",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-redisplayed', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "64-64-1-0-aisplane-unset-color",
+          "maximum_rgba_byte_delta": 206,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-unset-color', pixels=4096, color_mismatch_pixels=152, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ],
+          "depth_error_bounds": [
+            13,
+            15,
+            50,
+            48
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-wire",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-wire', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-current",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-current', pixels=4608, color_mismatch_pixels=110, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            10,
+            66,
+            37
+          ],
+          "depth_error_bounds": [
+            38,
+            10,
+            66,
+            37
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-minimum",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-minimum', pixels=4608, color_mismatch_pixels=46, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            49,
+            18,
+            60,
+            29
+          ],
+          "depth_error_bounds": [
+            49,
+            18,
+            60,
+            29
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-selected",
+          "maximum_rgba_byte_delta": 204,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-selected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-detected",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-detected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "96-48-1-2-aisplane-redisplayed",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-redisplayed', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-unset-color",
+          "maximum_rgba_byte_delta": 206,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-unset-color', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ],
+          "depth_error_bounds": [
+            38,
+            11,
+            66,
+            36
+          ]
+        },
+        {
+          "case": "96-48-1-2-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='96-48-1-2-quad-gradient', pixels=4608, color_mismatch_pixels=23, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            46,
+            14,
+            64,
+            33
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-1--3-aisplane-wire",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-wire', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-1--3-aisplane-current",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-current', pixels=4608, color_mismatch_pixels=110, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            34,
+            30,
+            61
+          ],
+          "depth_error_bounds": [
+            2,
+            34,
+            30,
+            61
+          ]
+        },
+        {
+          "case": "48-96-1--3-aisplane-minimum",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-minimum', pixels=4608, color_mismatch_pixels=46, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            8,
+            42,
+            19,
+            53
+          ],
+          "depth_error_bounds": [
+            8,
+            42,
+            19,
+            53
+          ]
+        },
+        {
+          "case": "48-96-1--3-aisplane-selected",
+          "maximum_rgba_byte_delta": 204,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-selected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-1--3-aisplane-detected",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-detected', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-1--3-aisplane-redisplayed",
+          "maximum_rgba_byte_delta": 255,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-redisplayed', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-1--3-aisplane-unset-color",
+          "maximum_rgba_byte_delta": 206,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-unset-color', pixels=4608, color_mismatch_pixels=114, maximum_depth_delta=0.0317387580871582); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ],
+          "depth_error_bounds": [
+            2,
+            35,
+            30,
+            60
+          ]
+        },
+        {
+          "case": "48-96-1--3-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='48-96-1--3-quad-gradient', pixels=4608, color_mismatch_pixels=21, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            10,
+            38,
+            25,
+            57
+          ],
+          "depth_error_bounds": null
+        }
+      ],
+      "performance_repeat_failures": [
+        "ais-display-erase median_ms=0.824ms exceeds 0.808ms",
+        "ais-display-erase p95_ms=1.811ms exceeds 1.236ms",
+        "ais-remove-display p95_ms=1.276ms exceeds 1.178ms"
+      ],
+      "plane_timings": [
+        {
+          "workload": "ais-plane-wire-updates",
+          "median_ms": 0.39466,
+          "p95_ms": 0.5057459999999999
+        },
+        {
+          "workload": "ais-plane-shaded-updates",
+          "median_ms": 0.370335,
+          "p95_ms": 0.464409
+        }
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "strict_capture_counts": {
+        "passed": 140,
+        "failed": 28
+      },
+      "runtime_process_errors": 0,
+      "layer_role_assertions": {
+        "passed": 24
+      },
+      "capture_failures": [
+        {
+          "case": "64-64-0-0-aisplane-xy",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-xy', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=3.3229589462280273e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            22,
+            16,
+            60,
+            41
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-xz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-xz', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=6.198883056640625e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            22,
+            18,
+            60,
+            41
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-yz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-yz', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=5.285441875457764e-05); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            22,
+            16,
+            22,
+            41
+          ]
+        },
+        {
+          "case": "64-64-0-0-aisplane-sized",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='64-64-0-0-aisplane-sized', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=3.4570693969726562e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            22,
+            21,
+            41,
+            41
+          ]
+        },
+        {
+          "case": "64-64-0-0-quad-strips",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='64-64-0-0-quad-strips', pixels=4096, color_mismatch_pixels=3, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            14,
+            28,
+            27,
+            42
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "96-48-0-2-aisplane-xy",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-xy', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=3.0994415283203125e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            45,
+            12,
+            74,
+            31
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-xz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-xz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=1.0453164577484131e-05); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            45,
+            14,
+            74,
+            31
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-yz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-yz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=0.00012511014938354492); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            45,
+            12,
+            45,
+            31
+          ]
+        },
+        {
+          "case": "96-48-0-2-aisplane-sized",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='96-48-0-2-aisplane-sized', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=2.2351741790771484e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            45,
+            18,
+            59,
+            30
+          ]
+        },
+        {
+          "case": "96-48-0-2-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='96-48-0-2-quad-gradient', pixels=4608, color_mismatch_pixels=26, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            14,
+            66,
+            33
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "96-48-0-2-quad-strips",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='96-48-0-2-quad-strips', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            50,
+            33,
+            50,
+            33
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-0--3-aisplane-xy",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-xy', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=3.0994415283203125e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            9,
+            36,
+            38,
+            55
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-xz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-xz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=1.0453164577484131e-05); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            9,
+            38,
+            38,
+            55
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-yz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-yz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=0.00012511014938354492); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            9,
+            36,
+            9,
+            55
+          ]
+        },
+        {
+          "case": "48-96-0--3-aisplane-sized",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='48-96-0--3-aisplane-sized', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=2.2351741790771484e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            9,
+            42,
+            23,
+            54
+          ]
+        },
+        {
+          "case": "48-96-0--3-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='48-96-0--3-quad-gradient', pixels=4608, color_mismatch_pixels=26, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            38,
+            30,
+            57
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-0--3-quad-strips",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='48-96-0--3-quad-strips', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            14,
+            57,
+            14,
+            57
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "64-64-1-0-aisplane-xz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-xz', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=1.1920928955078125e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            21,
+            35,
+            22,
+            40
+          ]
+        },
+        {
+          "case": "64-64-1-0-aisplane-yz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='64-64-1-0-aisplane-yz', pixels=4096, color_mismatch_pixels=0, maximum_depth_delta=4.291534423828125e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            18,
+            12,
+            23,
+            40
+          ]
+        },
+        {
+          "case": "64-64-1-0-quad-strips",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='64-64-1-0-quad-strips', pixels=4096, color_mismatch_pixels=3, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            14,
+            28,
+            27,
+            42
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "96-48-1-2-aisplane-xz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-xz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=1.3709068298339844e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            67,
+            25,
+            74,
+            31
+          ]
+        },
+        {
+          "case": "96-48-1-2-aisplane-yz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='96-48-1-2-aisplane-yz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=8.64267349243164e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            45,
+            11,
+            45,
+            13
+          ]
+        },
+        {
+          "case": "96-48-1-2-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='96-48-1-2-quad-gradient', pixels=4608, color_mismatch_pixels=26, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            38,
+            14,
+            66,
+            33
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "96-48-1-2-quad-strips",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='96-48-1-2-quad-strips', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            50,
+            33,
+            50,
+            33
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-1--3-aisplane-xz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-xz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=1.0728836059570312e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            36,
+            54,
+            38,
+            55
+          ]
+        },
+        {
+          "case": "48-96-1--3-aisplane-yz",
+          "maximum_rgba_byte_delta": 0,
+          "error": "received CaptureComparison(case='48-96-1--3-aisplane-yz', pixels=4608, color_mismatch_pixels=0, maximum_depth_delta=4.231929779052734e-06); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": null,
+          "depth_error_bounds": [
+            3,
+            33,
+            12,
+            38
+          ]
+        },
+        {
+          "case": "48-96-1--3-quad-gradient",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='48-96-1--3-quad-gradient', pixels=4608, color_mismatch_pixels=26, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            2,
+            38,
+            30,
+            57
+          ],
+          "depth_error_bounds": null
+        },
+        {
+          "case": "48-96-1--3-quad-strips",
+          "maximum_rgba_byte_delta": 1,
+          "error": "received CaptureComparison(case='48-96-1--3-quad-strips', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=0.0); expected identical RGBA and depth delta <= 1e-6",
+          "color_error_bounds": [
+            14,
+            57,
+            14,
+            57
+          ],
+          "depth_error_bounds": null
+        }
+      ],
+      "performance_repeat_failures": [
+        "window-present p95_ms=0.766ms exceeds 0.700ms"
+      ],
+      "plane_timings": [
+        {
+          "workload": "ais-plane-wire-updates",
+          "median_ms": 0.2611785,
+          "p95_ms": 0.343235
+        },
+        {
+          "workload": "ais-plane-shaded-updates",
+          "median_ms": 0.2880925,
+          "p95_ms": 0.382498
+        }
+      ]
+    }
+  ],
+  "remaining_scope": [
+    "strict wire raster, gradient interpolation and depth differences",
+    "unverified native quad policies outside llvmpipe/radeonsi",
+    "OIT and alpha masks",
+    "transparent capping",
+    "transparent back-face material distinction",
+    "translucent line, point, text and highlight colors"
+  ],
+  "artifact_sha256": {
+    "gen-id-green.log": "f0bdce49d81445e8b06c7bd001e887c589aaa95e916e007a3bbb7a122cd0aa47",
+    "gen-id-red.log": "f84eef5cea22a89483bab7bdd6d27643664103c0757ba1b8929c9de07da7f9b4",
+    "native-gen-id.cxx": "0a472264f66e24e6d977df1e9c49ec7993f0d7549ca3b720f240d2f26493692e",
+    "captures.tar.gz": "16b9333ba55cb927dd31af293bf667943a4dcf6470e3a2c021f2f30246b69cd9",
+    "renderer-final.json.gz": "2b4f07217b451e6759b7466da5a68744fa2eb12b5037ade4b175c6fd2408cf7b",
+    "performance-repeat.json.gz": "a4c7d973506f213cd6ac3c8e9a7d65344d79fb407b4e678df308aeb2d3c27f68",
+    "clippy.log": "2a86d935d2db5ffdacd5ade67626f700d3e3f670df0e4c5a9cd1b83a23926bba"
+  }
+}

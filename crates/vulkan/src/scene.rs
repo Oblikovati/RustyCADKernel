@@ -150,11 +150,8 @@ pub(crate) fn validate_components(
             "finite vertex components and clip transform",
         ));
     }
-    if let Some(vertex) = vertices.iter().find(|v| v.color[3] != 1.0) {
-        return Err(rejected(
-            vertex.color,
-            "opaque vertex colors in this renderer slice",
-        ));
+    if let Some(vertex) = vertices.iter().find(|v| !(0.0..=1.0).contains(&v.color[3])) {
+        return Err(rejected(vertex.color, "vertex alpha in 0..=1"));
     }
     Ok(())
 }
@@ -170,6 +167,16 @@ fn validate_extent(width: u32, height: u32) -> Result<(), RenderError> {
         return Err(rejected(
             [width, height],
             "nonzero extent fitting a 32-bit RGBA byte count",
+        ));
+    }
+    Ok(())
+}
+
+pub(crate) fn validate_annotation_opacity(vertices: &[RenderVertex]) -> Result<(), RenderError> {
+    if let Some(vertex) = vertices.iter().find(|v| v.color[3] != 1.) {
+        return Err(rejected(
+            vertex.color,
+            "opaque point, text and highlight colors",
         ));
     }
     Ok(())

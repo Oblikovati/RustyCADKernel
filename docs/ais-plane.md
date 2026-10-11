@@ -40,7 +40,7 @@ in the API ledger. The defined XYZ path, SetAxis2Placement after drawer setup,
 is compared against native OCCT. Detached native drawers must be reconfigured
 before aspect-dependent operations after UnsetSize/UnsetColor release them.
 
-## Verification and remaining renderer work
+## Verification
 
 `cargo test -p rustycad-tkv3d --test ais_plane` checks construction, setters,
 geometry caches, selection replacement, appearance ownership, minimum persistence,
@@ -49,7 +49,32 @@ numeric corpus adds 210 exact request sequences spanning three geometry frames,
 seven constructor/XYZ setup variants, linked and detached drawer preconditions,
 and all defined state operations.
 
-Vulkan quadrangle lowering, AIS plane view captures and plane-specific performance
-workloads on both lavapipe and the native host GPU are still pending. Numeric
-submission parity does not establish renderer replacement equivalence. These
-remain the next renderer work before progressing to unrelated porting.
+The Vulkan path now lowers quadrangles and quadrangle strips, retains quad corners
+for the verified llvmpipe/radeonsi diagonal policies, and defers unordered blended
+surfaces until opaque layers finish or depth must be cleared. Blended surfaces test
+depth without writing it. Unlit color alpha stays independent of material opacity,
+matching the native plane's material-only transparency and explicit shading-alpha
+controls. Opaque framebuffer alpha remains unchanged by geometry.
+
+The `ais-plane` capture family adds 17 real AIS plane modes and 11 quadrangle
+controls, each at six projection/window/offset configurations. Full-view layer
+controls assert visible occluder colors as well as comparing both engines. The
+[renderer receipt](../porting/runtime-evidence/ais-plane-renderer-2026-10-11/summary.json)
+retains 124/168 strict passes on lavapipe and 140/168 on AMD, with no runtime
+process errors. All shaded plane and analytic transparency/layer controls pass.
+Remaining wireframe, gradient rounding and depth differences keep failed statuses;
+colored quad differences are at most one byte after device tessellation selection.
+Native policies outside the two tested driver profiles remain unverified.
+
+Two release workloads measure live wireframe resizing and transparent shaded
+recomputation plus redraw/readback. Both pass the source-frozen repeat comparison
+at median ratio 1.25 and p95 ratio 1.5. The complete 29-workload measurement retains
+older AIS/window regressions, so no overall timing baseline is accepted. Raw
+captures and both measurements are retained in the receipt directory. OIT, alpha
+masks, transparent capping, transparent back-face distinction and translucent
+line/point/text/highlight colors remain outside this implemented slice.
+
+The new layer controls also exposed an `AspectGenId` intermediate overflow for the
+valid viewer interval `[1, INT_MAX]`. Allocation now computes the remaining offset
+before adding the lower bound; its failing-then-passing regression and native
+allocation/reuse sequence are retained with the renderer evidence.

@@ -56,6 +56,7 @@ impl PrimitiveDraw {
                 "one UV coordinate per vertex",
             ));
         }
+        crate::scene::validate_annotation_opacity(&vertices)?;
         let mut draw = Self::new(vertices, indices, clip)?;
         draw.textured_style = Some(style);
         Ok(draw)

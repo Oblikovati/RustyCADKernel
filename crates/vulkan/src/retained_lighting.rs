@@ -116,8 +116,7 @@ fn validate_non_surface_lighting(
     Ok(())
 }
 pub(crate) fn aspect_material(aspect: &dyn Graphic3dAspectsSource) -> RenderMaterial {
-    let front = aspect.front_material();
-    let back = aspect.back_material();
+    let (front, back) = surface_material_pair(aspect);
     let mut material = RenderMaterial::default();
     // The target is an sRGB attachment; coefficients stay linear, matching active framebuffer sRGB.
     material.init(
@@ -128,6 +127,17 @@ pub(crate) fn aspect_material(aspect: &dyn Graphic3dAspectsSource) -> RenderMate
         *aspect.back_interior_color_rgba().rgb(),
     );
     material
+}
+fn surface_material_pair(
+    aspect: &dyn Graphic3dAspectsSource,
+) -> (Graphic3dMaterialAspect, Graphic3dMaterialAspect) {
+    let mut front = aspect.front_material();
+    let mut back = aspect.back_material();
+    if aspect.alpha_mode() == Graphic3dAlphaMode::Opaque {
+        front.set_transparency(0.).expect("valid opacity");
+        back.set_transparency(0.).expect("valid opacity");
+    }
+    (front, back)
 }
 pub(crate) fn apply_view_lights(
     layers: &mut [RenderLayer],
@@ -204,5 +214,21 @@ mod tests {
         assert!(surface_algorithm(M::Pbr, true).is_err());
         assert!(validate_non_surface_lighting(M::Phong, true).is_err());
         assert!(validate_non_surface_lighting(M::Phong, false).is_ok());
+    }
+}
+
+#[cfg(test)]
+mod opacity_tests {
+    use super::*;
+    #[test]
+    fn opaque_lighting_overrides_transparency_without_mutating_aspects() {
+        let aspect = Graphic3dAspects::default();
+        let mut source = aspect.front_material();
+        source.set_transparency(0.8).unwrap();
+        aspect.set_front_material(source);
+        assert!((aspect_material(&aspect).common[0].diffuse[3] - 0.2).abs() < 1e-6);
+        aspect.set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.5);
+        assert_eq!(aspect_material(&aspect).common[0].diffuse[3], 1.);
+        assert_eq!(aspect.front_material().transparency(), 0.8);
     }
 }

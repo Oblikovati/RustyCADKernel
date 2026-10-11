@@ -132,14 +132,16 @@ fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> 
     if params.method != Graphic3dRenderingMode::Rasterization
         || params.nb_msaa_samples != 0
         || params.render_resolution_scale != 1.0
+        || params.transparency_method != Graphic3dRenderTransparentMethod::BlendUnordered
     {
         return Err(rejected(
             (
                 params.method,
                 params.nb_msaa_samples,
                 params.render_resolution_scale,
+                params.transparency_method,
             ),
-            "single-sample rasterization at scale 1",
+            "single-sample rasterization at scale 1 with unordered blending",
         ));
     }
     Ok(())

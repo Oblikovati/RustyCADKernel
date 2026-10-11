@@ -5,15 +5,19 @@ pub(crate) fn triangle_indices(
     kind: Graphic3dTypeOfPrimitiveArray,
     indices: &[u32],
 ) -> Result<Vec<u32>, RenderError> {
-    use Graphic3dTypeOfPrimitiveArray::{Polygons, Trianglefans, Triangles, Trianglestrips};
+    use Graphic3dTypeOfPrimitiveArray::{
+        Polygons, Quadrangles, Quadranglestrips, Trianglefans, Triangles, Trianglestrips,
+    };
     match kind {
         // OpenGL ignores incomplete primitives at the end of each draw, including each bound.
         Triangles => Ok(indices[..indices.len() / 3 * 3].to_vec()),
+        Quadrangles => Ok(quad_triangles(indices)),
+        Quadranglestrips => Ok(quad_strip_triangles(indices)),
         Trianglestrips => Ok(strip_triangles(indices)),
         Trianglefans | Polygons => Ok(fan_triangles(indices)),
         _ => Err(rejected(
             kind,
-            "triangles, triangle strips, triangle fans or convex polygons",
+            "triangles, triangle strips, triangle fans, convex polygons, quadrangles or quadrangle strips",
         )),
     }
 }
@@ -52,4 +56,21 @@ pub(crate) fn line_indices(
             .collect()),
         _ => Err(rejected(kind, "segments or polylines")),
     }
+}
+
+// Paired colored captures at OCCT 3d097a0 expose the native GL_QUADS 0-to-2 diagonal.
+fn quad_triangles(indices: &[u32]) -> Vec<u32> {
+    indices
+        .as_chunks::<4>()
+        .0
+        .iter()
+        .flat_map(|q| [q[0], q[1], q[2], q[0], q[2], q[3]])
+        .collect()
+}
+fn quad_strip_triangles(indices: &[u32]) -> Vec<u32> {
+    indices
+        .windows(4)
+        .step_by(2)
+        .flat_map(|q| [q[0], q[1], q[3], q[2], q[0], q[3]])
+        .collect()
 }

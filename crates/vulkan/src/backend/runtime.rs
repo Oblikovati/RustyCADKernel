@@ -33,6 +33,7 @@ pub(super) struct VulkanRuntime {
     pub large_points: bool,
     pub lines: super::line_device::LineCapabilities,
     pub name: String,
+    pub quad_diagonal: crate::quad_assembly::QuadDiagonal,
 }
 impl VulkanRuntime {
     pub fn create(options: VulkanOptions) -> Result<Arc<Self>, RenderError> {
@@ -69,6 +70,7 @@ impl VulkanRuntime {
             large_points: false,
             lines: Default::default(),
             name: String::new(),
+            quad_diagonal: Default::default(),
         })
     }
     pub fn device(&self) -> &Device {
@@ -81,6 +83,7 @@ impl VulkanRuntime {
             .to_string_lossy()
             .into_owned();
         self.limits = properties.limits;
+        self.quad_diagonal = crate::quad_assembly::QuadDiagonal::for_vendor(properties.vendor_id);
         self.depth_clamp =
             unsafe { self.instance.get_physical_device_features(physical) }.depth_clamp == vk::TRUE;
         self.large_points = unsafe { self.instance.get_physical_device_features(physical) }

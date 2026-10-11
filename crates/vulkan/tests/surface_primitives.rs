@@ -60,10 +60,12 @@ fn live_bound_colors_and_vertex_color_precedence() {
         };
         assert_eq!(draws(&scene)[0].vertices()[0].color, expected);
         array.bounds().set_color(0, Vec4::new(0., 0., 0., 0.5));
+        let submitted = draws(&scene);
         assert_eq!(
-            scene.group.triangle_draws(&scene.camera).is_ok(),
-            array.has_vertex_colors()
+            submitted[0].vertices()[0].color[3],
+            if array.has_vertex_colors() { 1. } else { 0.5 }
         );
+        assert!(!submitted[0].is_surface_blended());
     }
 }
 #[test]

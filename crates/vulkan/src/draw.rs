@@ -47,6 +47,7 @@ impl LineStyle {
 pub struct PrimitiveDraw {
     pub(crate) vertices: Vec<RenderVertex>,
     pub(crate) indices: Vec<u32>,
+    pub(crate) quad_corners: Vec<[u32; 4]>,
     pub(crate) clip_transform: [f32; 16],
     pub(crate) depth_clamp: bool,
     pub(crate) mirrored: bool,
@@ -55,6 +56,7 @@ pub struct PrimitiveDraw {
     pub(crate) clipping: Option<crate::RenderClipping>,
     pub(crate) lighting: Option<crate::RenderLighting>,
     pub(crate) annotation: bool,
+    pub(crate) surface_blend: bool,
     pub(crate) line_style: Option<LineStyle>,
     pub(crate) textured_style: Option<crate::TexturedStyle>,
     pub(crate) point_style: Option<crate::PointStyle>,
@@ -90,9 +92,11 @@ impl PrimitiveDraw {
             return Err(rejected(indices, "point indices within the vertex array"));
         }
         crate::scene::validate_components(&vertices, &clip_transform)?;
+        crate::scene::validate_annotation_opacity(&vertices)?;
         Ok(Self {
             vertices,
             indices,
+            quad_corners: Vec::new(),
             clip_transform,
             depth_clamp: false,
             capping_pass: crate::RenderCappingPass::None,
@@ -101,6 +105,7 @@ impl PrimitiveDraw {
             clipping: None,
             lighting: None,
             annotation: false,
+            surface_blend: false,
             line_style: None,
             textured_style: None,
             point_style: Some(style),
@@ -127,9 +132,14 @@ impl PrimitiveDraw {
     ) -> Result<Self, RenderError> {
         validate_indices(&indices, vertices.len(), line_style.is_some())?;
         crate::scene::validate_components(&vertices, &clip_transform)?;
+        if line_style.is_some() && vertices.iter().any(|v| v.color[3] != 1.) {
+            return Err(rejected(&vertices, "opaque line vertex colors"));
+        }
+        let surface_blend = line_style.is_none() && vertices.iter().any(|v| v.color[3] < 1.);
         Ok(Self {
             vertices,
             indices,
+            quad_corners: Vec::new(),
             clip_transform,
             depth_clamp: false,
             capping_pass: crate::RenderCappingPass::None,
@@ -138,6 +148,7 @@ impl PrimitiveDraw {
             clipping: None,
             lighting: None,
             annotation: false,
+            surface_blend,
             line_style,
             textured_style: None,
             point_style: None,
@@ -188,4 +199,11 @@ fn validate_indices(indices: &[u32], vertices: usize, line: bool) -> Result<(), 
             "triangle index triples within the vertex array"
         },
     ))
+}
+
+impl PrimitiveDraw {
+    /// Whether this surface belongs to the deferred unordered blend pass; `draw.is_surface_blended()`.
+    pub fn is_surface_blended(&self) -> bool {
+        self.surface_blend
+    }
 }

@@ -22,7 +22,9 @@ impl PrimitiveDraw {
     /// Tag opaque triangle geometry for capping; `draw.with_capping_pass(RenderCappingPass::Surface)?`.
     pub fn with_capping_pass(mut self, pass: RenderCappingPass) -> Result<Self, RenderError> {
         if pass != RenderCappingPass::None
-            && (self.topology() != PrimitiveTopology::Triangles || self.textured_style.is_some())
+            && (self.topology() != PrimitiveTopology::Triangles
+                || self.textured_style.is_some()
+                || self.surface_blend)
         {
             return Err(rejected(
                 (pass, self.topology()),

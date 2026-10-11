@@ -86,6 +86,8 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_group_flipping.cxx"
 #include "martensite_vulkan_ais_text_label.cxx"
 #include "martensite_vulkan_plane_presentations.cxx"
+#include "martensite_vulkan_ais_plane.cxx"
+#include "martensite_vulkan_quadrangles.cxx"
 #include "martensite_vulkan_lighting.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
@@ -147,6 +149,15 @@ static void run_scene(int argc, char **argv) {
     return;
   }
   const bool rasterControl = raster_control_option(argc, argv);
+  if(mode.rfind("aisplane-",0)==0) {
+    MartensiteOracleAisPlaneScene scene(viewer,mode,offset);
+    if(mode=="aisplane-detected")scene.detect(view);
+    write_capture(view,width,height,argv[5],mode=="aisplane-detected");print_device(view);view->Remove();return;
+  }
+  if(mode.rfind("quad-",0)==0) {
+    auto scene=quadrangle_probe_scene(viewer,mode,offset);
+    write_capture(view,width,height,argv[5],mode=="quad-layers"||mode=="quad-clear-depth");print_device(view);view->Remove();return;
+  }
   if (mode.rfind("prsplane-",0)==0) {
     auto scene=plane_presentation_scene(viewer,mode,offset);
     write_capture(view,width,height,argv[5],false); print_device(view);

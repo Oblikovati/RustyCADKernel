@@ -1,0 +1,91 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkservice-f26d4ca0f675d791)
+
+running 79 tests
+test aspect::background::tests::gradient_dump_lists_colors_and_method ... ok
+test aspect::background::tests::gradient_keeps_both_colors_and_the_method ... ok
+test aspect::background::tests::plain_background_defaults_to_matra_gray ... ok
+test aspect::exceptions::tests::every_constructor_keeps_its_class_name_and_message ... ok
+test aspect::gen_id::tests::freeing_the_last_identifier_in_use_resets ... ok
+test aspect::gen_id::tests::identifiers_come_in_order_and_freed_ones_first ... ok
+test aspect::gen_id::tests::dump_lists_counters_and_free_ids ... ok
+test aspect::gen_id::tests::wrong_interval_and_default_bounds ... ok
+test aspect::gen_id::tests::maximal_positive_interval_allocates_and_recycles_viewer_layer_ids ... ok
+test aspect::input_values::tests::frustum_scales_and_casts ... ok
+test aspect::input_values::tests::scroll_delta_point_and_touch_delta ... ok
+test aspect::neutral_window::tests::setters_report_changes_and_geometry_follows ... ok
+test aspect::skydome_background::tests::defaults_and_setters_follow_the_native_checks ... ok
+test aspect::vkey_set::tests::axis_presses_one_side_and_releases_the_other ... ok
+test aspect::skydome_background::tests::dump_names_the_gradient_class_as_natively ... ok
+test aspect::vkey_set::tests::a_key_is_held_until_its_release_is_read ... ok
+test aspect::vkey_set::tests::modifiers_follow_their_keys ... ok
+test aspect::vkey_set::tests::keys_beyond_the_maximum_are_out_of_range ... ok
+test aspect::display_connection::tests::an_unreachable_display_raises_the_definition_error ... ok
+test aspect::window_input_listener::tests::buttons_and_3d_mouse_keys ... ok
+test cast::tests::truncates_and_reports_out_of_range_as_int_min ... ok
+test cast::tests::unsigned_conversion_keeps_the_low_32_bits ... ok
+test aspect::window_input_listener::tests::touches_follow_the_native_rules ... ok
+test font::ft_font::point_size_tests::point_scale_respects_native_long_width ... ok
+test font::rect::tests::corners_and_sizes ... ok
+test graphic3d::cube_map_order::tests::swap_and_permute_compose_locations ... ok
+test graphic3d::cube_map_order::tests::orders_validate_permutations_only ... ok
+[31;1mError: no image library available[0m
+test graphic3d::hatch_style::tests::predefined_and_custom_patterns ... ok
+test graphic3d::material_aspect::tests::increase_shine_reverts_out_of_range_results ... ok
+test graphic3d::material_aspect::tests::every_predefined_material_builds ... ok
+test graphic3d::material_aspect::tests::names_match_case_insensitively_and_through_aliases ... ok
+test graphic3d::material_aspect::tests::dump_lists_the_members ... [31;1mDDS Reader error - invalid face index #1 within buffer[0m
+ok
+[31;1mError: no image library available[0m
+test graphic3d::material_aspect::tests::out_of_range_coefficients_raise_with_the_value ... ok
+test graphic3d::material_aspect::tests::physical_colors_and_shininess_make_the_material_user_defined ... ok
+test graphic3d::material_aspect::tests::predefined_materials_keep_their_names_and_types ... ok
+test graphic3d::material_aspect::tests::ranks_outside_the_catalogue_raise_out_of_range ... ok
+test graphic3d::material_aspect::tests::reflection_mode_off_blackens_the_component ... ok
+test graphic3d::material_aspect::tests::set_material_type_never_marks_user_defined ... ok
+test graphic3d::material_aspect::tests::set_color_scales_by_the_requested_coefficients ... ok
+test graphic3d::shader_object::tests::empty_sources_give_a_null_handle ... ok
+test graphic3d::shader_object::tests::ids_are_unique_and_sources_mark_done ... ok
+test graphic3d::shader_object::tests::missing_files_give_a_null_handle ... ok
+[31;1mError: no image library available[0m
+test graphic3d::shader_object::tests::geometry_stages_use_interface_blocks ... ok
+test graphic3d::shader_object::tests::uniforms_and_plain_in_outs_are_declared_per_stage ... ok
+test graphic3d::shader_program::tests::defaults_follow_the_native_constructor ... ok
+test graphic3d::shader_program::tests::header_lines_are_joined_by_newlines ... ok
+test graphic3d::shader_program::tests::variables_need_a_name ... ok
+[31;1mError: Unable to open file '/nonexistent/x.png'[0m
+test graphic3d::shader_program::tests::stages_attach_once_and_detach ... ok
+test graphic3d::shader_variable::tests::attributes_keep_name_and_location ... ok
+test graphic3d::shader_variable::tests::type_ids_are_the_native_header_lines ... ok
+test graphic3d::shader_variable::tests::variables_are_done_with_a_name_and_a_value ... ok
+test graphic3d::small_values::tests::vertex_and_range_follow_the_native_arithmetic ... ok
+test graphic3d::texture_params::tests::generation_mode_keeps_both_planes ... ok
+test graphic3d::texture_params::tests::levels_are_ordered ... ok
+test graphic3d::texture_params::tests::sampler_revision_counts_sampler_changes_only ... ok
+test image::alien_pix_map::tests::copies_need_the_same_format ... ok
+test image::colors::tests::channels_follow_the_memory_order ... ok
+test image::compressed_pix_map::tests::compressed_pixmap_setters ... ok
+test image::compressed_pix_map::tests::supported_formats_track_the_compressed_flag ... ok
+test image::dds_parser::tests::header_gives_mip_levels_and_face_size ... ok
+test image::alien_pix_map::tests::loading_fails_and_saving_writes_ppm ... ok
+test image::dds_parser::tests::missing_files_and_unknown_formats_give_null ... ok
+test image::diff_save::tests::border_filter_drops_thin_lines_next_to_drawn_pixels ... ok
+test image::diff_save::tests::compare_counts_and_paints_differences ... ok
+test image::pix_map_data::tests::bottom_up_rows_start_at_the_last_line ... ok
+test image::pix_map_data::tests::typed_access_and_fill ... ok
+test image::pix_map_init::tests::init_members_follow_the_native_layout ... ok
+test image::pix_map_ops::tests::swap_flip_and_black_white ... ok
+test image::pixel::tests::pixels_round_trip_through_their_bytes ... ok
+test image::pixel_convert::tests::half_floats_round_trip ... ok
+test image::pixel_convert::tests::pixels_convert_both_ways ... ok
+test image::texture::tests::ids_follow_the_source ... ok
+test json_dump::tests::dumped_fields_stop_at_depth_zero ... ok
+test json_dump::tests::numerical_fields_use_the_converted_key ... ok
+test wnt::hid_space_mouse::tests::large_values_widen_the_range_and_rotation_reads_the_second_half ... ok
+test wnt::hid_space_mouse::tests::keys_follow_the_model_tables ... ok
+test wnt::hid_space_mouse::tests::translation_applies_the_dead_zone_and_scale ... ok
+test image::texture::tests::probing_a_missing_file_returns_zero_text ... ok
+test xlib::tests::an_unreachable_server_gives_no_display ... ok
+
+test result: ok. 79 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
