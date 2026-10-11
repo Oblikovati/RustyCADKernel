@@ -94,8 +94,13 @@ jobs:
       - run: rustup show
       - run: cargo install cargo-nextest --version 0.9.148 --locked
       - run: cargo install cargo-llvm-cov --version 0.9.1 --locked
+      # Run 38156653032 timed out in Bug30655's 211k-triangle sphere workload.
+      # All three functional matrices keep it; coverage avoids the duplicate dense replay.
       - name: Run instrumented tests once, with coverage and JUnit output
-        run: cargo llvm-cov nextest --workspace --all-features --locked --profile ci --lcov --output-path target/lcov.info
+        run: >-
+          cargo llvm-cov nextest --workspace --all-features --locked --profile ci
+          -E 'not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)'
+          --lcov --output-path target/lcov.info
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: coverage-and-tests
