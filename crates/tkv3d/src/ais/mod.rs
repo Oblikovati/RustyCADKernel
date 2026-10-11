@@ -243,3 +243,11 @@ mod view_controller_space_mouse;
 
 #[cfg(test)]
 mod view_controller_space_mouse_tests;
+
+mod camera_frustum;
+mod camera_frustum_geometry;
+mod camera_frustum_presentations;
+mod camera_frustum_selection;
+pub use camera_frustum::{AisCameraFrustum, AisCameraFrustumFields, AisCameraFrustumSelectionMode};
+#[cfg(test)]
+mod camera_frustum_tests;
