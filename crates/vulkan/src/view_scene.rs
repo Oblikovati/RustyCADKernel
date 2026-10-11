@@ -103,12 +103,18 @@ fn layer_pass(
             )?);
         }
     }
+    let offset = settings.polygon_offset();
     Ok(RenderLayer::new(
         draws,
         settings.to_enable_depth_test(),
         settings.to_enable_depth_write(),
         settings.to_clear_depth(),
-    ))
+    )
+    .with_polygon_offset(crate::RenderPolygonOffset::new(
+        offset.mode.0,
+        offset.factor,
+        offset.units,
+    )?))
 }
 fn structure_draws(
     structure: &Handle<dyn Graphic3dCStructure>,

@@ -37,7 +37,11 @@ fn vulkan_rejects_unavailable_device() {
     assert!(result.is_err());
 }
 
+#[path = "support/polygon_offset_runtime.rs"]
+mod polygon_offset_runtime;
+
 fn main() {
+    polygon_offset_runtime::check_polygon_offsets();
     vulkan_offscreen_depth_orientation_and_repeated_resize();
     vulkan_rejects_unavailable_device();
     vulkan_layer_depth_policies();
@@ -58,7 +62,7 @@ fn main() {
     #[cfg(target_os = "linux")]
     window_runtime::check_windows();
     ais_circle_runtime::check_circle_datums();
-    let checks = if cfg!(target_os = "linux") { 19 } else { 18 };
+    let checks = if cfg!(target_os = "linux") { 20 } else { 19 };
     println!("PASS: {checks} Vulkan runtime checks; validation errors: 0");
 }
 

@@ -50,6 +50,7 @@ pub struct PrimitiveDraw {
     pub(crate) quad_corners: Vec<[u32; 4]>,
     pub(crate) clip_transform: [f32; 16],
     pub(crate) depth_clamp: bool,
+    pub(crate) polygon_offset: Option<crate::RenderPolygonOffset>,
     pub(crate) mirrored: bool,
     pub(crate) face_culling: crate::RenderFaceCulling,
     pub(crate) capping_pass: crate::RenderCappingPass,
@@ -99,6 +100,7 @@ impl PrimitiveDraw {
             quad_corners: Vec::new(),
             clip_transform,
             depth_clamp: false,
+            polygon_offset: None,
             capping_pass: crate::RenderCappingPass::None,
             face_culling: crate::RenderFaceCulling::None,
             mirrored: false,
@@ -115,6 +117,15 @@ impl PrimitiveDraw {
     pub fn with_clipping(mut self, clipping: crate::RenderClipping) -> Self {
         self.clipping = (!clipping.chains().is_empty()).then_some(clipping);
         self
+    }
+    /// Retain explicit native offset state; `draw.with_polygon_offset(RenderPolygonOffset::new(1, 1., 1.)?)`.
+    pub fn with_polygon_offset(mut self, offset: crate::RenderPolygonOffset) -> Self {
+        self.polygon_offset = Some(offset);
+        self
+    }
+    /// Read optional ordered offset state; `draw.polygon_offset()`.
+    pub fn polygon_offset(&self) -> Option<crate::RenderPolygonOffset> {
+        self.polygon_offset
     }
     /// Read the clipping snapshot; `draw.clipping()`.
     pub fn clipping(&self) -> Option<&crate::RenderClipping> {
@@ -142,6 +153,7 @@ impl PrimitiveDraw {
             quad_corners: Vec::new(),
             clip_transform,
             depth_clamp: false,
+            polygon_offset: None,
             capping_pass: crate::RenderCappingPass::None,
             face_culling: crate::RenderFaceCulling::None,
             mirrored: false,

@@ -44,9 +44,9 @@ fn unsupported_shading_and_invalid_indices_fail_explicitly() {
     array.indices().set_index(0, 99);
     assert!(scene.group.triangle_draws(&scene.camera).is_err());
     array.indices().set_index(0, 0);
-    scene
-        .group
-        .set_group_primitives_aspect(&Handle::new(Graphic3dAspects::default()).cast());
+    let unsupported = Handle::new(Graphic3dAspects::default());
+    unsupported.set_shading_model(Graphic3dTypeOfShadingModel::Pbr);
+    scene.group.set_group_primitives_aspect(&unsupported.cast());
     assert!(scene.group.triangle_draws(&scene.camera).is_err());
 }
 #[test]
@@ -72,7 +72,7 @@ fn unsupported_raster_states_fail_instead_of_being_ignored() {
     let scene = GraphicScene::new();
     scene.triangle();
     let style = scene.group.aspects();
-    style.set_polygon_offsets(1, 1., 1.);
+    style.set_polygon_offsets(1, f32::NAN, 1.);
     assert!(
         scene
             .group
@@ -118,5 +118,30 @@ fn assert_no_triangles(scene: &GraphicScene) {
             .triangle_draws(&scene.camera)
             .unwrap()
             .is_empty()
+    );
+}
+#[test]
+fn live_polygon_offset_aspects_are_retained_and_can_be_disabled() {
+    let scene = GraphicScene::new();
+    scene.triangle();
+    let style = scene.group.aspects();
+    style.set_polygon_offsets(1, 2., 3.);
+    let draws = scene.group.triangle_draws(&scene.camera).unwrap();
+    assert_eq!(draws[0].polygon_offset().unwrap().parameters(), (1, 2., 3.));
+    style.set_polygon_offsets(8, 9., 10.);
+    assert_eq!(
+        scene.group.triangle_draws(&scene.camera).unwrap()[0]
+            .polygon_offset()
+            .unwrap()
+            .parameters(),
+        (8, 9., 10.)
+    );
+    style.set_polygon_offsets(0, 0., 0.);
+    assert_eq!(
+        scene.group.triangle_draws(&scene.camera).unwrap()[0]
+            .polygon_offset()
+            .unwrap()
+            .parameters(),
+        (0, 0., 0.)
     );
 }

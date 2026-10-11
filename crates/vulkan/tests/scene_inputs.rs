@@ -97,3 +97,21 @@ fn ordered_layers_retain_draw_ranges_and_empty_frame_clear() {
     assert_eq!(empty.layers()[0].depth_policy(), (true, true, true));
     assert_eq!(empty.layers()[0].draw_range(), 0..0);
 }
+#[test]
+fn polygon_offset_survives_layer_flattening_and_transparent_deferral() {
+    let opaque = PrimitiveDraw::new(vec![], vec![], identity_clip()).unwrap();
+    let transparent = PrimitiveDraw::new(
+        vec![RenderVertex::new([0.; 3], [1., 1., 1., 0.5]); 3],
+        vec![0, 1, 2],
+        identity_clip(),
+    )
+    .unwrap();
+    let offset = RenderPolygonOffset::new(1, 2., 3.).unwrap();
+    let layer =
+        RenderLayer::new(vec![transparent, opaque], true, true, false).with_polygon_offset(offset);
+    let frame = RenderFrame::with_layers(1, 1, [0.; 4], vec![layer]).unwrap();
+    assert_eq!(frame.layers().len(), 2);
+    for layer in frame.layers() {
+        assert_eq!(layer.polygon_offset(), offset);
+    }
+}

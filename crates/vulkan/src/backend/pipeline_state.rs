@@ -155,6 +155,7 @@ fn vertex_state(text: bool, lighting: bool) -> vk::PipelineVertexInputStateCreat
 pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
     vk::PipelineRasterizationStateCreateInfo::default()
         .depth_clamp_enable(depth_clamp)
+        .depth_bias_enable(true)
         .polygon_mode(vk::PolygonMode::FILL)
         .cull_mode(vk::CullModeFlags::NONE)
         .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
@@ -162,16 +163,17 @@ pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateC
 }
 
 fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
-    const STATES: [vk::DynamicState; 7] = [
+    const STATES: [vk::DynamicState; 8] = [
         vk::DynamicState::VIEWPORT,
         vk::DynamicState::SCISSOR,
         vk::DynamicState::DEPTH_TEST_ENABLE,
         vk::DynamicState::DEPTH_WRITE_ENABLE,
         vk::DynamicState::CULL_MODE,
         vk::DynamicState::FRONT_FACE,
+        vk::DynamicState::DEPTH_BIAS,
         vk::DynamicState::LINE_WIDTH,
     ];
-    &STATES[..if line { 7 } else { 6 }]
+    &STATES[..if line { 8 } else { 7 }]
 }
 
 #[cfg(test)]
@@ -198,6 +200,6 @@ mod tests {
     fn triangle_pipelines_do_not_require_dynamic_line_width() {
         assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));
         assert!(dynamic_states(true).contains(&vk::DynamicState::LINE_WIDTH));
-        assert_eq!(&dynamic_states(true)[..6], dynamic_states(false));
+        assert_eq!(&dynamic_states(true)[..7], dynamic_states(false));
     }
 }
