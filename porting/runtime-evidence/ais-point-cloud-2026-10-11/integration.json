@@ -1,0 +1,75 @@
+{
+  "feature_commit": "954ecd7d05019ee3efbafa5e6ce0083ef777a6b7",
+  "merge_commit": "6e6733483d657c9b8a9a5caede1af8a2f6a37732",
+  "deleted_worktree": "/home/vmiguel/git/oblikovati-workspace/Martensite-ais-point-cloud",
+  "worktree_deleted": true,
+  "branch_deleted": true,
+  "physical_bytes_removed": 28726300672,
+  "process_reference_audit": [],
+  "local_changes_before_deletion": false,
+  "main_source_hashes_match_gpu_receipt": true,
+  "main_tests": "cargo test -p rustycad-tkv3d --lib --test ais_point_cloud --test ais_point_cloud_owner --test prs_mgr_test",
+  "main_clippy": "cargo clippy -p rustycad-tkv3d -p martensite-vulkan --all-targets -- -D warnings",
+  "main_fmt": "cargo fmt --all -- --check",
+  "next_renderer_prerequisite": {
+    "upstream_marker_model": "OpenGl_ShaderManager::ChooseMarkerShadingModel delegates to ChooseLineShadingModel; Gouraud/Phong require nodal normals, facet models fall back to Unlit",
+    "upstream_alpha": "OpenGl_PrimitiveArray binds marker programs with Graphic3d_AlphaMode_Opaque",
+    "implementation_required": "normal-bearing marker shaders, simultaneous sprite/lighting descriptors, retained material/light state and native functional/performance cases"
+  },
+  "inventory": {
+    "pipeline_exit_code": 0,
+    "unresolved_rows": 0,
+    "point_cloud_resolutions": {
+      "implemented": 35,
+      "excluded": 3
+    },
+    "totals_by_scope": {
+      "excluded": {
+        "api_declarations": 1855,
+        "api_done": 0,
+        "api_open": 1855,
+        "api_partial": 0,
+        "gtests_mapped": 0,
+        "gtests_not_applicable": 0,
+        "gtests_unmapped": 197,
+        "toolkits": 10
+      },
+      "port": {
+        "api_declarations": 76041,
+        "api_done": 51968,
+        "api_open": 23098,
+        "api_partial": 975,
+        "gtests_mapped": 7969,
+        "gtests_not_applicable": 2,
+        "gtests_unmapped": 480,
+        "toolkits": 56
+      },
+      "replaced": {
+        "api_declarations": 6418,
+        "api_done": 0,
+        "api_open": 6418,
+        "api_partial": 0,
+        "gtests_mapped": 0,
+        "gtests_not_applicable": 0,
+        "gtests_unmapped": 0,
+        "toolkits": 2
+      }
+    },
+    "tkv3d_api": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 165,
+        "partial": 2,
+        "unclaimed": 2823,
+        "upstream_unimplemented": 0,
+        "verified": 2182
+      },
+      "declarations": 5172,
+      "done": 2347,
+      "done_percent": 45.4
+    },
+    "primary_api_done_increase": 29,
+    "primary_api_denominator_changed": false,
+    "complete": false
+  }
+}
