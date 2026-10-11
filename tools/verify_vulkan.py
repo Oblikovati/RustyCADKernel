@@ -422,6 +422,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
             "object-animation",
             "group-flipping",
             "text-label",
+            "plane-presentations",
         ),
         default="all",
     )

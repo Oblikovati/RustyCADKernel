@@ -27,6 +27,7 @@ RECEIPT_ORACLE_PATHS = (
     "tools/oracle/martensite_vulkan_object_animation.cxx",
     "tools/oracle/martensite_vulkan_group_flipping.cxx",
     "tools/oracle/martensite_vulkan_ais_text_label.cxx",
+    "tools/oracle/martensite_vulkan_plane_presentations.cxx",
     "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
     "tools/oracle/martensite_vulkan_window.cxx",
     "tools/oracle/martensite_vulkan_persistence.cxx",

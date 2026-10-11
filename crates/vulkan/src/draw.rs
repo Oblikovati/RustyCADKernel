@@ -32,6 +32,11 @@ impl LineStyle {
             factor,
         })
     }
+    // OpenGL aliased lines round a positive subpixel request to the minimum one-pixel width.
+    // Keep the requested style for live aspect queries; Vulkan's dynamic state needs this width.
+    pub(crate) fn raster_width(&self) -> f32 {
+        self.width.max(1.)
+    }
     /// Read `(width, pattern, factor)`; `style.parameters()`.
     pub fn parameters(&self) -> (f32, u16, u16) {
         (self.width, self.pattern, self.factor)

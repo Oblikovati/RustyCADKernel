@@ -19,7 +19,10 @@ from vulkan_object_animation_cases import OBJECT_ANIMATION_MODES
 from vulkan_group_flipping_cases import GROUP_FLIPPING_MODES
 from vulkan_ais_text_label_cases import AIS_TEXT_LABEL_MODES
 
+from vulkan_plane_presentation_cases import PLANE_PRESENTATION_MODES
+
 ALL_CAPTURE_MODES = (
+    *PLANE_PRESENTATION_MODES,
     "default",
     "full",
     *AIS_MODES,
@@ -45,6 +48,7 @@ ALL_CAPTURE_MODES = (
 )
 
 FAMILY_CAPTURE_MODES = {
+    "plane-presentations": PLANE_PRESENTATION_MODES,
     "text-label": AIS_TEXT_LABEL_MODES,
     "group-flipping": GROUP_FLIPPING_MODES,
     "object-animation": OBJECT_ANIMATION_MODES,
@@ -61,5 +65,5 @@ def capture_modes(case_family: str) -> tuple[str, ...]:
     if case_family in FAMILY_CAPTURE_MODES:
         return FAMILY_CAPTURE_MODES[case_family]
     raise ValueError(
-        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label"
+        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations"
     )

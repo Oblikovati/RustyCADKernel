@@ -177,7 +177,7 @@ fn upload_draw(
         vertices: vertex_buffer,
         indices: index_buffer,
         count,
-        line_width: draw.line_style.map(|style| style.width),
+        line_width: draw.line_style.map(|style| style.raster_width()),
         transform: encode_transform(draw, extent),
     })
 }
