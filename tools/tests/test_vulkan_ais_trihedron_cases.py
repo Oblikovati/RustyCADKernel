@@ -26,11 +26,16 @@ class TrihedronCaseTests(unittest.TestCase):
             self.assertEqual(int(tokens[2]),len(tokens[4:]))
         self.assertTrue(any(" 14 " in row for row in rows))
 
-    def test_roles_reject_blank_geometry_and_wrong_highlight_colors(self) -> None:
+    def test_roles_reject_blank_geometry_and_unchanged_selection(self) -> None:
         for mode in AIS_TRIHEDRON_MODES:
-            self.assertEqual(trihedron_pixels(1,1,bytes([0,0,255,255]),mode)["status"],"failed")
+            self.assertEqual(trihedron_pixels(1,1,bytes([0,0,255,255]),mode,bytes([0,0,255,255]))["status"],"failed")
         self.assertEqual(trihedron_pixels(1,1,bytes([84,57,7,255]),"tri-wire")["status"],"passed")
-        self.assertEqual(trihedron_pixels(1,1,bytes([84,57,7,255]),"tri-axis")["status"],"failed")
-        self.assertEqual(trihedron_pixels(1,1,bytes([255,255,0,255]),"tri-axis")["status"],"passed")
+        ordinary=bytes([255,255,0,255])
+        self.assertEqual(trihedron_pixels(1,1,ordinary,"tri-axis",ordinary)["status"],"failed")
+        self.assertEqual(trihedron_pixels(1,1,bytes([204,204,204,255]),"tri-selected",ordinary)["status"],"passed")
+        self.assertEqual(trihedron_pixels(1,1,bytes([150,150,150,255]),"tri-shaded-axis",ordinary)["status"],"passed")
+        self.assertEqual(trihedron_pixels(1,1,ordinary,"tri-shaded-origin",ordinary)["status"],"failed")
+        with self.assertRaises(ValueError):
+            trihedron_pixels(1,1,ordinary,"tri-selected")
         with self.assertRaises(ValueError):
             trihedron_pixels(0,1,b"","tri-axis")

@@ -221,7 +221,9 @@ def capture_case(
         if any(role["status"] != "passed" for role in row["cloud_roles"]):
             row["status"] = "failed"
     if mode.startswith("tri-"):
-        row["trihedron_roles"] = [trihedron_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode) for prefix in (gl, vk)]
+        reference_mode = "tri-shaded" if "shaded" in mode else "tri-wire"
+        reference_label = f"{width}-{height}-{perspective}-{offset}-{reference_mode}"
+        row["trihedron_roles"] = [trihedron_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode, (folder / f"{backend}-{reference_label}.rgba").read_bytes()) for prefix, backend in ((gl, "gl"), (vk, "vk"))]
         if any(role["status"] != "passed" for role in row["trihedron_roles"]):
             row["status"] = "failed"
     row.update(runtime_output=output, opengl_runtime=native_output)

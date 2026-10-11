@@ -43,3 +43,18 @@ checks accompany strict raw color/depth comparisons. The release performance sui
 adds `ais-trihedron-shaded-updates`: alternating size, AIS recomputation, submission
 and GPU readback. Rendering evidence must retain strict raster differences; this
 slice does not establish complete legacy-renderer parity.
+
+Shaded trihedrons require retained polygon offsets. Martensite now validates the
+native offset mask and finite factor/units, preserves ordered `Aspect_POM_None`
+state, extracts layer defaults, and submits dynamic Vulkan depth bias for filled
+geometry. Nonpolygon draws reset the applied bias without discarding the retained
+state. Both device profiles pass forward/reverse depth movement and reset checks,
+with unchanged color and zero validation errors. Arbitrary cross-layer offset
+inheritance still needs native differential coverage.
+
+Selection image checks compare each capture with its own unselected wire/shaded
+reference. Native whole-object selection is gray; yellow belongs to the ordinary
+axis labels and cannot prove highlighting. Shaded part fixtures retain failures
+when the selected frame is unchanged, including native scenes where the chosen
+part has no observable pixel change. CPU/native group and owner comparisons pass;
+these image fixtures do not prove complete shaded selection rendering.
