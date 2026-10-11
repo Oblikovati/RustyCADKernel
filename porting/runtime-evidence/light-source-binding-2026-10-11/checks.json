@@ -1,0 +1,28 @@
+{
+  "project": "Martensite",
+  "toolkit": "TKV3d",
+  "local_platform": "Linux",
+  "cargo_build_jobs": 2,
+  "local_tests_passed": 562,
+  "native_snapshots": 46,
+  "native_fixture_runs": 2,
+  "rust_functions_max_lines": 20,
+  "ledger_rows": 29,
+  "ledger_unique_cpp_ids": 29,
+  "ledger_unique_rust_items": 29,
+  "implemented_api_rows": 28,
+  "partial_api_rows": 1,
+  "checks": [
+    "cargo test -p rustycad-tkv3d --all-targets --locked",
+    "cargo clippy -p rustycad-tkv3d --all-targets --locked -- -D warnings",
+    "python3 tools/toolkit_test_suites.py",
+    "python3 tools/check_rust_format.py",
+    "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_toolkit_test_suites.py",
+    "git diff --check"
+  ],
+  "deferred": [
+    "Windows/macOS validation",
+    "concrete light construction/aspect setup/presentation/selection/owner/dragging"
+  ],
+  "renderer_submission_changes": false
+}
