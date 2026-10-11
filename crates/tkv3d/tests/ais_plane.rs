@@ -114,15 +114,8 @@ fn automatic_frame_projects_center_and_manual_frame_ignores_maximum_point() {
     assert!(!manual.size(&mut x, &mut y));
     assert_eq!((x, y), (0.1, 4.8));
     assert!(manual.has_own_size());
-    assert_eq!(
-        manual
-            .attributes()
-            .plane_aspect()
-            .edges_aspect()
-            .aspect()
-            .width(),
-        1.
-    );
+    let edges = manual.attributes().plane_aspect().edges_aspect();
+    assert_eq!(edges.aspect().width(), 1.);
     assert!(manual.accept_display_mode(0));
     assert!(!manual.accept_display_mode(1));
 }
