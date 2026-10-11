@@ -2,6 +2,7 @@
 #include <Graphic3d_CLight.hxx>
 #include <Graphic3d_LightSet.hxx>
 #include <Graphic3d_CView.hxx>
+#include <Graphic3d_ArrayOfSegments.hxx>
 static Quantity_Color lighting_rgb(float r, float g, float b) {
   return Quantity_Color(r,g,b,Quantity_TOC_RGB);
 }
@@ -26,9 +27,12 @@ static occ::handle<Graphic3d_AspectFillArea3d> lighting_aspects(const std::strin
   aspect->SetUseVertexColorForBackFaces(mode != "lit-front-color-only");
   return aspect;
 }
-static occ::handle<Graphic3d_ArrayOfTriangles> lighting_vertices(const std::string &mode) {
+static occ::handle<Graphic3d_ArrayOfPrimitives> lighting_vertices(const std::string &mode, bool line) {
   const bool colored = mode == "lit-colored" || mode == "lit-front-color-only";
-  occ::handle<Graphic3d_ArrayOfTriangles> vertices = new Graphic3d_ArrayOfTriangles(3,3,static_cast<Graphic3d_ArrayFlags>((mode != "lit-no-normals" ? Graphic3d_ArrayFlags_VertexNormal : 0) | (colored ? Graphic3d_ArrayFlags_VertexColor : 0) | (mode == "lit-normal-updated" ? Graphic3d_ArrayFlags_AttribsMutable : 0)));
+  const auto flags = static_cast<Graphic3d_ArrayFlags>((mode != "lit-no-normals" ? Graphic3d_ArrayFlags_VertexNormal : 0) | (colored ? Graphic3d_ArrayFlags_VertexColor : 0) | (mode == "lit-normal-updated" ? Graphic3d_ArrayFlags_AttribsMutable : 0));
+  occ::handle<Graphic3d_ArrayOfPrimitives> vertices;
+  if (line) vertices = new Graphic3d_ArrayOfSegments(3,6,flags);
+  else vertices = new Graphic3d_ArrayOfTriangles(3,3,flags);
   const float points[3][3] = {{-8,-8,0},{8,-8,0},{0,8,0}};
   const float normals[3][3] = {{0,0,1},{.6f,0,.8f},{0,.6f,.8f}};
   for (int i=0;i<3;++i) {
@@ -37,6 +41,7 @@ static occ::handle<Graphic3d_ArrayOfTriangles> lighting_vertices(const std::stri
     if (mode != "lit-no-normals") vertices->SetVertexNormal(i+1,normals[i][0],normals[i][1],normals[i][2]);
     if (colored) vertices->SetVertexColor(i+1,lighting_rgb(.5f,.75f,.25f));
   }
+  if (line) { for (int index : {1,2,2,3,3,1}) vertices->AddEdge(index); return vertices; }
   const bool back = mode == "lit-back" || mode == "lit-distinct-back" || mode == "lit-front-color-only";
   vertices->AddEdge(1); vertices->AddEdge(back ? 3 : 2); vertices->AddEdge(back ? 2 : 3);
   return vertices;
@@ -58,12 +63,18 @@ static occ::handle<Graphic3d_CLight> lighting_lights(const occ::handle<V3d_View>
   view->View()->SetLights(lights);
   return light;
 }
-static void lighting_scene(const occ::handle<Graphic3d_Structure> &structure, const occ::handle<V3d_View> &view, const std::string &mode) {
+static void lighting_scene(const occ::handle<Graphic3d_Structure> &structure, const occ::handle<V3d_View> &view, const std::string &input_mode) {
+  const bool line = input_mode.find("lit-line-") == 0;
+  const std::string mode = line ? "lit-" + input_mode.substr(9) : input_mode;
   structure->Clear();
   view->ChangeRenderingParams().ShadingModel = Graphic3d_TypeOfShadingModel_Phong;
   auto group = structure->NewGroup();
   auto aspect = lighting_aspects(mode);
-  auto vertices = lighting_vertices(mode);
+  if (line) {
+    aspect->SetLineWidth(3.f);
+    if (mode == "lit-patterned") aspect->SetLineType(Aspect_TOL_DASH);
+  }
+  auto vertices = lighting_vertices(mode,line);
   group->SetGroupPrimitivesAspect(aspect);
   group->AddPrimitiveArray(vertices);
   auto light = lighting_lights(view,mode);

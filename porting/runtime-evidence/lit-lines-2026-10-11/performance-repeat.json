@@ -1,0 +1,32 @@
+{
+  "median_ratio": 1.25,
+  "p95_ratio": 1.5,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "workloads": 34,
+      "failures": [],
+      "overall_renderer_baseline_accepted": false
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "workloads": 34,
+      "failures": [],
+      "overall_renderer_baseline_accepted": false
+    }
+  ]
+}

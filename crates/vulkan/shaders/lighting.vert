@@ -7,6 +7,9 @@ layout(location=1) in vec4 color;
 layout(location=2) in vec3 normal;
 layout(push_constant) uniform Transform {
     mat4 clipFromObject;
+#ifdef MARTENSITE_LINE_LIGHTING
+    vec2 viewport; uint pattern; uint factor;
+#endif
 #ifdef MARTENSITE_MARKER_LIGHTING
     float size; uint width; uint height;
 #endif

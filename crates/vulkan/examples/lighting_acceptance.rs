@@ -4,6 +4,8 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::graphic3d::*;
 #[path = "support/device_options.rs"]
 mod device_options;
+#[path = "support/line_lighting_acceptance.rs"]
+mod line_lighting_acceptance;
 fn material() -> RenderMaterial {
     let mut material = RenderMaterial::default();
     for face in &mut material.common {
@@ -119,6 +121,7 @@ fn check_algorithm(renderer: &mut VulkanRenderer, shading: RenderShading) {
 }
 fn main() {
     let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
+    line_lighting_acceptance::check_lit_lines(&mut renderer);
     for shading in [
         RenderShading::PhongFacet,
         RenderShading::Gouraud,
@@ -132,5 +135,5 @@ fn main() {
         renderer.validation_errors()
     );
     println!("MARTENSITE_DEVICE={}", renderer.device_name());
-    println!("PASS: 15 lit scenes, 61440 analytic color/depth pixels; validation errors: 0");
+    println!("PASS: 21 lit scenes, 86016 analytic color/depth pixels; validation errors: 0");
 }

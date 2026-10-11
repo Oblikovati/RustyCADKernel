@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 from vulkan_capping_cases import CAPPING_MODES
 from verify_vulkan import CASES, capture_modes, configuration, parse_arguments
-from vulkan_lighting_cases import LIGHTING_MODES
+from vulkan_lighting_cases import LIGHTING_MODES, LIT_LINE_MODES
 
 
 class LightingCaptureCasesTests(unittest.TestCase):
@@ -54,4 +54,44 @@ class CappingFamilySelectionTests(unittest.TestCase):
         self.assertEqual(capture_modes("capping"), CAPPING_MODES)
         self.assertTrue(
             {"cap-lit-facet", "cap-lit-gouraud", "cap-lit-phong"} <= set(CAPPING_MODES)
+        )
+
+
+class LitLineFamilyTests(unittest.TestCase):
+    def test_nodal_line_family_preserves_mutations_and_fallbacks(self) -> None:
+        self.assertEqual(capture_modes("lit-lines"), LIT_LINE_MODES)
+        self.assertEqual(len(LIT_LINE_MODES), 10)
+        for suffix in (
+            "gouraud",
+            "phong",
+            "facet",
+            "no-normals",
+            "patterned",
+            "clipped",
+            "normal-updated",
+            "material-updated",
+            "light-updated",
+        ):
+            with self.subTest(suffix=suffix):
+                self.assertIn(f"lit-line-{suffix}", LIT_LINE_MODES)
+
+
+class LitLineShaderVariantTests(unittest.TestCase):
+    def test_lit_line_shaders_are_recompiled_for_both_clip_states(self) -> None:
+        from verify_vulkan import shader_variants, shader_variant_name
+
+        variants = shader_variants("lighting.frag")
+        self.assertIn((False, False, True), variants)
+        self.assertIn((True, False, True), variants)
+        self.assertEqual(len(variants), 6)
+        self.assertEqual(
+            shader_variants("unlit.vert"), ((False, False, False), (True, False, False))
+        )
+        self.assertEqual(
+            shader_variant_name("lighting.vert", False, False, True),
+            "lighting.line.vert.spv",
+        )
+        self.assertEqual(
+            shader_variant_name("lighting.frag", True, False, True),
+            "lighting.line.clipped.frag.spv",
         )

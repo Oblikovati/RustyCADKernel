@@ -21,8 +21,11 @@ pub(crate) fn apply_surface_lighting(
         .iter()
         .any(|draw| draw.topology() != crate::PrimitiveTopology::Triangles)
     {
-        if draws.iter().all(|draw| draw.point_style.is_some()) {
-            return apply_marker_lighting(draws, primitive, aspects, context, model, normals);
+        if draws
+            .iter()
+            .all(|draw| draw.point_style.is_some() || draw.line_style.is_some())
+        {
+            return apply_nodal_lighting(draws, primitive, aspects, context, model, normals);
         }
         return validate_non_surface_lighting(model, normals.is_some());
     }
@@ -37,7 +40,7 @@ pub(crate) fn apply_surface_lighting(
     Ok(())
 }
 
-fn apply_marker_lighting(
+fn apply_nodal_lighting(
     draws: &mut [PrimitiveDraw],
     primitive: &PrimitiveSubmission,
     aspects: &Handle<dyn Graphic3dAspectsSource>,
@@ -139,7 +142,7 @@ fn validate_non_surface_lighting(
     {
         return Err(rejected(
             (model, normals),
-            "unlit non-surface geometry or Gouraud/Phong markers; lit lines and PBR markers remain unsupported",
+            "unlit non-surface geometry or Gouraud/Phong nodal lighting; PBR remains unsupported",
         ));
     }
     Ok(())

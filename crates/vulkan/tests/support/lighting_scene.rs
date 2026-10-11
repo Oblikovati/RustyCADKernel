@@ -15,12 +15,11 @@ pub struct LightingScene {
 impl LightingScene {
     /// Build the paired native fixture; `LightingScene::new(&driver, "lit-phong")`.
     pub fn new(driver: &Handle<Graphic3dRenderDriver>, mode: &str) -> Self {
+        let line = mode.starts_with("lit-line-");
+        let mode = lighting_fixture_mode(mode);
+        let mode = mode.as_str();
         let base = ViewerScene::new(driver);
-        base.group.clear(false);
-        let aspect = lighting_aspect(mode);
-        base.group.set_group_primitives_aspect(&aspect.cast());
-        let vertices = lighting_vertices(mode);
-        base.group.add_primitive_array(&vertices, true);
+        let (aspect, vertices) = configure_lighting_group(&base, mode, line);
         let light = configure_lights(&base, mode);
         configure_lighting_view(&base, mode);
         Self {
@@ -32,6 +31,8 @@ impl LightingScene {
     }
     /// Apply one live state change after the first redraw; `scene.mutate("lit-normal-updated")`.
     pub fn mutate(&self, mode: &str) {
+        let mode = lighting_fixture_mode(mode);
+        let mode = mode.as_str();
         if mode == "lit-normal-updated" {
             self.vertices.set_vertex_normal(2, 1., 0., 0.).unwrap();
             self.vertices.attributes().invalidate().unwrap();
@@ -87,24 +88,64 @@ fn lighting_aspect(mode: &str) -> Handle<Graphic3dAspects> {
     aspect.set_use_vertex_color_for_back_faces(mode != "lit-front-color-only");
     aspect
 }
-fn lighting_vertices(mode: &str) -> Handle<Graphic3dArrayOfPrimitives> {
+fn configure_lighting_group(
+    base: &ViewerScene,
+    mode: &str,
+    line: bool,
+) -> (Handle<Graphic3dAspects>, Handle<Graphic3dArrayOfPrimitives>) {
+    base.group.clear(false);
+    let aspect = lighting_aspect(mode);
+    if line {
+        configure_lit_line_aspect(&aspect, mode);
+    }
+    base.group.set_group_primitives_aspect(&aspect.cast());
+    let vertices = lighting_vertices(mode, line);
+    base.group.add_primitive_array(&vertices, true);
+    (aspect, vertices)
+}
+fn configure_lit_line_aspect(aspect: &Graphic3dAspects, mode: &str) {
+    aspect.set_line_width(3.).unwrap();
+    if mode == "lit-patterned" {
+        aspect.set_line_type(rustycad_tkservice::aspect::AspectTypeOfLine::Dash);
+    }
+}
+fn lighting_vertices(mode: &str, line: bool) -> Handle<Graphic3dArrayOfPrimitives> {
+    let kind = if line {
+        Graphic3dTypeOfPrimitiveArray::Segments
+    } else {
+        Graphic3dTypeOfPrimitiveArray::Triangles
+    };
     let vertices = Handle::new(
         Graphic3dArrayOfPrimitives::new(
-            Graphic3dTypeOfPrimitiveArray::Triangles,
+            kind,
             3,
             0,
-            3,
+            if line { 6 } else { 3 },
             lighting_vertex_flags(mode),
         )
         .unwrap(),
     );
     fill_lighting_vertex_slots(&vertices, mode);
-    if mode == "lit-colored" || mode == "lit-front-color-only" {
-        for index in 1..=3 {
-            vertices
-                .set_vertex_color(index, rgb([0.5, 0.75, 0.25]))
-                .unwrap();
+    fill_lighting_colors(&vertices, mode);
+    fill_lighting_indices(&vertices, mode, line);
+    vertices
+}
+fn fill_lighting_colors(vertices: &Graphic3dArrayOfPrimitives, mode: &str) {
+    if !matches!(mode, "lit-colored" | "lit-front-color-only") {
+        return;
+    }
+    for index in 1..=3 {
+        vertices
+            .set_vertex_color(index, rgb([0.5, 0.75, 0.25]))
+            .unwrap();
+    }
+}
+fn fill_lighting_indices(vertices: &Graphic3dArrayOfPrimitives, mode: &str, line: bool) {
+    if line {
+        for index in [1, 2, 2, 3, 3, 1] {
+            vertices.add_edge(index).unwrap();
         }
+        return;
     }
     let back = matches!(
         mode,
@@ -113,7 +154,6 @@ fn lighting_vertices(mode: &str) -> Handle<Graphic3dArrayOfPrimitives> {
     vertices
         .add_edges3(1, if back { 3 } else { 2 }, if back { 2 } else { 3 })
         .unwrap();
-    vertices
 }
 fn lighting_vertex_flags(mode: &str) -> Graphic3dArrayFlags {
     let mut flags = if mode == "lit-no-normals" {
@@ -208,4 +248,9 @@ fn configure_lighting_view(base: &ViewerScene, mode: &str) {
         ));
         base.cview().set_clip_planes(&planes);
     }
+}
+
+fn lighting_fixture_mode(mode: &str) -> String {
+    mode.strip_prefix("lit-line-")
+        .map_or_else(|| mode.to_owned(), |suffix| format!("lit-{suffix}"))
 }

@@ -181,3 +181,26 @@ fn marker_lighting_accepts_nodal_algorithms_and_rejects_facet_derivatives() {
     facet.shading = RenderShading::PhongFacet;
     assert!(draw.with_lighting(facet).is_err());
 }
+
+#[test]
+fn segment_lighting_accepts_nodal_models_and_rejects_facet_derivatives() {
+    let draw = PrimitiveDraw::segments(
+        vec![RenderVertex::new([0.; 3], [1.; 4]); 3],
+        vec![0, 1, 1, 2],
+        identity_clip(),
+        crate::LineStyle::new(3., 0xFFC0, 1).unwrap(),
+    )
+    .unwrap();
+    for shading in [
+        RenderShading::Phong,
+        RenderShading::Gouraud,
+        RenderShading::PhongFacet,
+    ] {
+        let mut lighting = state(identity_clip(), identity_clip(), false);
+        lighting.shading = shading;
+        assert_eq!(
+            draw.clone().with_lighting(lighting).is_ok(),
+            shading != RenderShading::PhongFacet
+        );
+    }
+}

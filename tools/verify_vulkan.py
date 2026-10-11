@@ -82,36 +82,63 @@ def check_reference(source: Path, build: Path, env: dict[str, str]) -> None:
         )
 
 
+SHADER_STAGES = tuple(
+    f"{name}.{stage}"
+    for name in ("unlit", "line", "point", "text", "lighting")
+    for stage in ("vert", "frag")
+)
+
+
+def shader_variants(name: str) -> tuple[tuple[bool, bool, bool], ...]:
+    """Enumerate clipped surface/marker/line shader variants; shader_variants('lighting.vert')."""
+    standard = ((False, False, False), (True, False, False))
+    nodal = (
+        (False, True, False),
+        (True, True, False),
+        (False, False, True),
+        (True, False, True),
+    )
+    return standard + nodal if name.startswith("lighting.") else standard
+
+
+def shader_variant_name(name: str, clipped: bool, marker: bool, line: bool) -> str:
+    """Name a checked-in Vulkan shader binary; shader_variant_name('lighting.frag', True, False, True)."""
+    stem, stage = name.split(".")
+    suffix = f"{stem}.clipped.{stage}.spv" if clipped else f"{name}.spv"
+    if marker:
+        return suffix.replace("lighting.", "lighting.point.")
+    return suffix.replace("lighting.", "lighting.line.") if line else suffix
+
+
+def check_shader_variant(
+    name: str, flags: tuple[bool, bool, bool], folder: Path, env: dict[str, str]
+) -> None:
+    """Require binary bytes to match current GLSL; check_shader_variant('lighting.frag', (True, False, True), tmp, env)."""
+    source = ROOT / f"crates/vulkan/shaders/{name}"
+    suffix = shader_variant_name(name, *flags)
+    output = folder / suffix
+    compile_shader(source, output, env, *flags)
+    if output.read_bytes() != (source.parent / suffix).read_bytes():
+        raise ValueError(
+            f"received stale SPIR-V for {suffix}; expected current GLSL compiler output"
+        )
+
+
 def check_shaders(folder: Path, env: dict[str, str]) -> str:
     """Recompile checked-in GLSL for Vulkan 1.3 and compare SPIR-V; e.g. check_shaders(tmp, env)."""
-    for name in (
-        "unlit.vert",
-        "unlit.frag",
-        "line.vert",
-        "line.frag",
-        "point.vert",
-        "point.frag",
-        "text.vert",
-        "text.frag",
-        "lighting.vert",
-        "lighting.frag",
-    ):
-        for clipped, marker in ((False, False), (True, False), *(((False, True), (True, True)) if name.startswith("lighting.") else ())):
-            source = ROOT / f"crates/vulkan/shaders/{name}"
-            stem, stage = name.split(".")
-            suffix = f"{stem}.clipped.{stage}.spv" if clipped else f"{name}.spv"
-            suffix = suffix.replace("lighting.", "lighting.point.") if marker else suffix
-            output = folder / suffix
-            compile_shader(source, output, env, clipped, marker)
-            if output.read_bytes() != (source.parent / suffix).read_bytes():
-                raise ValueError(
-                    f"received stale SPIR-V for {suffix}; expected current GLSL compiler output"
-                )
+    for name in SHADER_STAGES:
+        for flags in shader_variants(name):
+            check_shader_variant(name, flags, folder, env)
     return run(["glslangValidator", "--version"], env)
 
 
 def compile_shader(
-    source: Path, output: Path, env: dict[str, str], clipped: bool = False, marker: bool = False
+    source: Path,
+    output: Path,
+    env: dict[str, str],
+    clipped: bool = False,
+    marker: bool = False,
+    line: bool = False,
 ) -> None:
     """Compile a GLSL stage for the required runtime; e.g. compile_shader(vertex, spv, env)."""
     run(
@@ -119,6 +146,7 @@ def compile_shader(
             "glslangValidator",
             *(["-DMARTENSITE_CLIPPING=1"] if clipped else []),
             *(["-DMARTENSITE_MARKER_LIGHTING=1"] if marker else []),
+            *(["-DMARTENSITE_LINE_LIGHTING=1"] if line else []),
             "--target-env",
             "vulkan1.3",
             "-V",
@@ -207,7 +235,10 @@ def capture_case(
         )
     row = export_comparison(label, width, height, gl, vk, FileCaptureStore())
     if mode.startswith("rubber-"):
-        row["rubber_band_roles"] = [rubber_band_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode) for prefix in (gl, vk)]
+        row["rubber_band_roles"] = [
+            rubber_band_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode)
+            for prefix in (gl, vk)
+        ]
         if any(role["status"] != "passed" for role in row["rubber_band_roles"]):
             row["status"] = "failed"
     if mode.startswith("window-"):
@@ -222,13 +253,25 @@ def capture_case(
         if any(role["status"] != "passed" for role in row["layer_roles"]):
             row["status"] = "failed"
     if mode.startswith("cloud-"):
-        row["cloud_roles"] = [point_cloud_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode) for prefix in (gl, vk)]
+        row["cloud_roles"] = [
+            point_cloud_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode)
+            for prefix in (gl, vk)
+        ]
         if any(role["status"] != "passed" for role in row["cloud_roles"]):
             row["status"] = "failed"
     if mode.startswith("tri-"):
         reference_mode = "tri-shaded" if "shaded" in mode else "tri-wire"
         reference_label = f"{width}-{height}-{perspective}-{offset}-{reference_mode}"
-        row["trihedron_roles"] = [trihedron_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode, (folder / f"{backend}-{reference_label}.rgba").read_bytes()) for prefix, backend in ((gl, "gl"), (vk, "vk"))]
+        row["trihedron_roles"] = [
+            trihedron_pixels(
+                width,
+                height,
+                Path(f"{prefix}.rgba").read_bytes(),
+                mode,
+                (folder / f"{backend}-{reference_label}.rgba").read_bytes(),
+            )
+            for prefix, backend in ((gl, "gl"), (vk, "vk"))
+        ]
         if any(role["status"] != "passed" for role in row["trihedron_roles"]):
             row["status"] = "failed"
     row.update(runtime_output=output, opengl_runtime=native_output)
@@ -444,6 +487,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
         choices=(
             "all",
             "lighting",
+            "lit-lines",
             "capping",
             "camera-animation",
             "object-animation",

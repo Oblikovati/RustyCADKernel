@@ -5,7 +5,8 @@ normal-bearing point arrays. The retained Graphic3d extraction path reads live
 normals, resolves the aspect/view shading model and selects Gouraud or Phong.
 Points without normals and facet shading models remain Unlit, matching
 `OpenGl_ShaderManager::ChooseMarkerShadingModel` in pinned OCCT `3d097a0`.
-PBR markers and lit lines still report explicit unsupported requests.
+PBR markers still report explicit unsupported requests. [Nodal line lighting](vulkan-lit-lines.md)
+now shares the retained material/light extraction path.
 
 Lit markers preserve screen-space size, nearest-sampled sprite coverage, the
 native alpha discard threshold and per-view clipping. Lighting uses descriptor

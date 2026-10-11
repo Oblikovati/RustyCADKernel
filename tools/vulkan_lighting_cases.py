@@ -23,3 +23,19 @@ LIGHTING_MODES = (
     "lit-light-updated",
     "lit-light-off",
 )
+
+LIT_LINE_MODES = tuple(
+    f"lit-line-{suffix}"
+    for suffix in (
+        "phong",
+        "gouraud",
+        "facet",
+        "no-normals",
+        "colored",
+        "patterned",
+        "clipped",
+        "normal-updated",
+        "material-updated",
+        "light-updated",
+    )
+)

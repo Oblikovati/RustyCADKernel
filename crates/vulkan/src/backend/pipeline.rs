@@ -81,7 +81,7 @@ impl DrawPipeline {
         lighting: bool,
     ) -> Result<(), RenderError> {
         let shaders: [&[u8]; 2] = if lighting {
-            lighting_shaders(clipped, point)
+            lighting_shaders(clipped, point, line)
         } else if clipped {
             clipping_shaders(line, point, text)
         } else if text {
@@ -260,20 +260,40 @@ fn clipping_shaders(line: bool, point: bool, text: bool) -> [&'static [u8]; 2] {
     ]
 }
 
-fn lighting_shaders(clipped: bool, point: bool) -> [&'static [u8]; 2] {
-    if point {
-        return if clipped {
-            [
-                include_bytes!("../../shaders/lighting.point.clipped.vert.spv"),
-                include_bytes!("../../shaders/lighting.point.clipped.frag.spv"),
-            ]
-        } else {
-            [
-                include_bytes!("../../shaders/lighting.point.vert.spv"),
-                include_bytes!("../../shaders/lighting.point.frag.spv"),
-            ]
-        };
+fn lighting_shaders(clipped: bool, point: bool, line: bool) -> [&'static [u8]; 2] {
+    if line {
+        return line_lighting_shaders(clipped);
     }
+    if point {
+        return point_lighting_shaders(clipped);
+    }
+    surface_lighting_shaders(clipped)
+}
+fn line_lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
+    if clipped {
+        return [
+            include_bytes!("../../shaders/lighting.line.clipped.vert.spv"),
+            include_bytes!("../../shaders/lighting.line.clipped.frag.spv"),
+        ];
+    }
+    [
+        include_bytes!("../../shaders/lighting.line.vert.spv"),
+        include_bytes!("../../shaders/lighting.line.frag.spv"),
+    ]
+}
+fn point_lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
+    if clipped {
+        return [
+            include_bytes!("../../shaders/lighting.point.clipped.vert.spv"),
+            include_bytes!("../../shaders/lighting.point.clipped.frag.spv"),
+        ];
+    }
+    [
+        include_bytes!("../../shaders/lighting.point.vert.spv"),
+        include_bytes!("../../shaders/lighting.point.frag.spv"),
+    ]
+}
+fn surface_lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
     if clipped {
         return [
             include_bytes!("../../shaders/lighting.clipped.vert.spv"),

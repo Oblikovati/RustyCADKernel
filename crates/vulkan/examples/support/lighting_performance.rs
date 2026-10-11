@@ -8,7 +8,21 @@ use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
 use std::time::Instant;
 pub fn benchmark(driver: &Handle<Graphic3dRenderDriver>, warmup: usize, count: usize) {
-    let scene = LightingScene::new(driver, "lit-phong");
+    for (mode, workload) in [
+        ("lit-phong", "lighting-updates"),
+        ("lit-line-phong", "lit-line-normal-updates"),
+    ] {
+        benchmark_configuration(driver, mode, workload, warmup, count);
+    }
+}
+fn benchmark_configuration(
+    driver: &Handle<Graphic3dRenderDriver>,
+    mode: &str,
+    workload: &str,
+    warmup: usize,
+    count: usize,
+) {
+    let scene = LightingScene::new(driver, mode);
     scene.base.window.set_size(256, 256);
     scene.base.view.must_be_resized();
     for index in 0..warmup {
@@ -17,15 +31,24 @@ pub fn benchmark(driver: &Handle<Graphic3dRenderDriver>, warmup: usize, count: u
     let samples: Vec<f64> = (0..count)
         .map(|index| timed_redraw(&scene, index))
         .collect();
-    assert_ne!(
-        scene.base.render_view().capture().unwrap().pixel(128, 128),
-        Some([0, 0, 255, 255])
-    );
+    check_lighting_workload(&scene);
     println!(
-        "MARTENSITE_PERFORMANCE={{\"workload\":\"lighting-updates\",\"draws\":1,\"warmup\":{warmup},\"validation\":false,\"samples_ms\":{samples:?}}}"
+        "MARTENSITE_PERFORMANCE={{\"workload\":\"{workload}\",\"draws\":1,\"warmup\":{warmup},\"validation\":false,\"samples_ms\":{samples:?}}}"
     );
     scene.base.view.remove();
 }
+fn check_lighting_workload(scene: &LightingScene) {
+    let capture = scene.base.render_view().capture().unwrap();
+    assert!(
+        capture
+            .rgba
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .any(|pixel| *pixel != [0, 0, 255, 255])
+    );
+}
+
 fn timed_redraw(scene: &LightingScene, index: usize) -> f64 {
     let start = Instant::now();
     scene

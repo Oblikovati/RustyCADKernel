@@ -76,7 +76,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    with native comparisons and both GPU profiles. [Nodal marker lighting](vulkan-lit-markers.md)
    now supports Gouraud/Phong points, sprite coverage and clipping. Retain strict
    point/line raster gates alongside live-normal update timings; continue remaining
-   point material/alpha policies and lit line rendering.
+   point material/alpha policies. [Nodal line lighting](vulkan-lit-lines.md) now adds
+   Gouraud/Phong segments with clipping, native solid fallback for requested patterns,
+   live-normal snapshots and both-device functional/performance coverage. Strict
+   endpoint and color interpolation parity remains open.
    [AIS trihedrons](ais-trihedron.md) now provide cached wire/shaded datum parts,
    native owner selection and protected application subclass hooks. Vulkan polygon
    offsets support the shaded geometry with both-device runtime checks; strict

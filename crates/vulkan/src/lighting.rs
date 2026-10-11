@@ -160,12 +160,14 @@ fn validate_lighting_components(
     Ok(())
 }
 impl PrimitiveDraw {
-    /// Attach opaque surface or nodal-marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
+    /// Attach opaque surface or nodal line/marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
     pub fn with_lighting(mut self, lighting: RenderLighting) -> Result<Self, RenderError> {
         if lighting.normals.len() != self.vertices.len()
             || (self.topology() != crate::PrimitiveTopology::Triangles
-                && self.point_style.is_none())
-            || (self.point_style.is_some() && lighting.shading == RenderShading::PhongFacet)
+                && self.point_style.is_none()
+                && self.line_style.is_none())
+            || ((self.point_style.is_some() || self.line_style.is_some())
+                && lighting.shading == RenderShading::PhongFacet)
             || self.textured_style.is_some()
             || self.capping_pass.is_mask()
         {
@@ -177,7 +179,7 @@ impl PrimitiveDraw {
                     self.textured_style.is_some(),
                     self.capping_pass,
                 ),
-                "one normal per untextured triangle or Gouraud/Phong marker vertex outside stencil masks",
+                "one normal per untextured triangle or Gouraud/Phong line/marker vertex outside stencil masks",
             ));
         }
         self.lighting = Some(lighting);
