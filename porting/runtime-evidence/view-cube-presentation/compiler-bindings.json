@@ -1,0 +1,289 @@
+{
+  "rustdoc_toolchain": "nightly-2026-09-25",
+  "rustdoc_format_version": 61,
+  "capture_command": "cargo +nightly-2026-09-25 rustdoc --locked --package rustycad-tkv3d --lib --all-features -Z unstable-options -- --document-private-items --output-format json -Z unstable-options",
+  "raw_capture_sha256": "58aeb173c4eec9a38fef65a397eddd6b56235aff1176090b3d989f9e264dc95a",
+  "normalization": "tools.normalize_rustdoc_inventory.make_reachable_inventory",
+  "scope": "Nine visible AIS_ViewCube declarations; protected included; no class/constructor/private claims",
+  "results": [
+    {
+      "upstream_id": "AIS_ViewCube::createRoundRectangleTriangles",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "22f0af0eb8a0e971da13fac52c8ede65f4ec9712672e9013e2e3597d38e3318f"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_round_rectangle_triangles"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_round_rectangle_triangles"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_round_rectangle_triangles",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "04b80398fbe6d7056d42c34cdbf208876ec6f260ccf4825a13da09c25997a327",
+          "source_file": "crates/tkv3d/src/ais/view_cube_rectangle.rs",
+          "source_status": null,
+          "source_sha256": "8834ef59929ab8f617eb3a7aa0c8c945d06091ca196da7e346322455f3c567a3"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::createBoxCornerTriangles",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "264fc8957d1a7a89874d7234953bec4b6c90cfb3d92f002da2bafd860014c345"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_corner_triangles"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_corner_triangles"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_create_box_corner_triangles",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "d57addd32bb2fde47b91f9b5a01707eee8cd73b9e8bcade00b9a5525b19c9d0a",
+          "source_file": "crates/tkv3d/src/ais/view_cube_corners.rs",
+          "source_status": null,
+          "source_sha256": "19a8c2602463a9c998a24a841652713e622bff52aed7f639f02b61a3082d0d44"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::createBoxEdgeTriangles",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "57aa314ea51a1c59036b2410bae019907fa784f6d30c2475e87401511848b753"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_edge_triangles"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_edge_triangles"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_create_box_edge_triangles",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "f125321da1da0a5ec76480e8ef33c13d6947e55f5bb97f3e6e373f4046dda125",
+          "source_file": "crates/tkv3d/src/ais/view_cube_geometry.rs",
+          "source_status": null,
+          "source_sha256": "af13d6ef1e20026a03347774121ca66df209ecde77fdbd4a10c4ac39e211655c"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::IsBoxSide",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "762f5e96d4564af928326d85cf7d5b20432e255dcc95ff5e42576f4b60c7bd37"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_is_box_side"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_is_box_side"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_is_box_side",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "50edbce2946d9e5aee994b5289ed29ce48d8f25d53bd3bb0ace8b1d658860b1f",
+          "source_file": "crates/tkv3d/src/ais/view_cube_classification.rs",
+          "source_status": null,
+          "source_sha256": "ecb9d32cb94b1728a6683e970a97129fce5de1359d28fba27a9bd9b76f8e032e"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::createBoxPartTriangles",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "7e975fd0a520bc6ececbc4dc19121a0a449451812fe3ad23ae6033381a4b4730"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_part_triangles"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_part_triangles"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_create_box_part_triangles",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "242ff6e5e734b22191b7db95bb6a8eee89ac3ef107ee496013479bd3c911bceb",
+          "source_file": "crates/tkv3d/src/ais/view_cube_geometry.rs",
+          "source_status": null,
+          "source_sha256": "af13d6ef1e20026a03347774121ca66df209ecde77fdbd4a10c4ac39e211655c"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::IsBoxCorner",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "a81413c4222871095f8f3f14c944ac83ff50f78c4e50cc11338e973a0ff64080"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_is_box_corner"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_is_box_corner"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_is_box_corner",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "e76b205799a5e4f851c2f8951f461cb6daee0cca0d52f0d542ed0b93bd4aef1a",
+          "source_file": "crates/tkv3d/src/ais/view_cube_classification.rs",
+          "source_status": null,
+          "source_sha256": "ecb9d32cb94b1728a6683e970a97129fce5de1359d28fba27a9bd9b76f8e032e"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::IsBoxEdge",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "c3c2bdb5234d0fdc1003011a2e9680467cb32e1801350e49be333dfb7e154b16"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_is_box_edge"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_is_box_edge"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_is_box_edge",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "351bf1ca676d72f5f9c67322f7f7bf2b24ed5955037a0eea10042d59812b9b01",
+          "source_file": "crates/tkv3d/src/ais/view_cube_classification.rs",
+          "source_status": null,
+          "source_sha256": "ecb9d32cb94b1728a6683e970a97129fce5de1359d28fba27a9bd9b76f8e032e"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::Compute",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "c412c7902c1a3ca783b60808447bc4ec176be9e5701aad179f52f4bbdf47018b"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_compute"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_compute"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_compute",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "e8f5363cabdf7abf72a4b9a8ba2956eaa31ca2ff71334994f23c028b5df21d06",
+          "source_file": "crates/tkv3d/src/ais/view_cube_compute.rs",
+          "source_status": null,
+          "source_sha256": "e92583743d2bae1725a37767496f30e623b47ca11cb0152e72030997d3ab4e68"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::createBoxSideTriangles",
+      "toolkit": "TKV3d",
+      "parity_status": "implemented",
+      "resolution": "implemented",
+      "cpp_status": "unique",
+      "cpp_ids": [
+        "e5870c8a1599599122b594f19992105b535afb60ab3d6ebe87777f1f9b170ffc"
+      ],
+      "rust_status": "unique",
+      "declared_rust_kind": "function",
+      "declared_rust_selectors": null,
+      "declared_rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_side_triangles"
+      ],
+      "rust_paths": [
+        "rustycad_tkv3d::ais::ais_view_cube_create_box_side_triangles"
+      ],
+      "rust_matches": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_create_box_side_triangles",
+          "kind": "function",
+          "impl_context": null,
+          "declaration_sha256": "11450091539694cb8f04c759a2019e80e4bb77bfae1086dfa90a9a6ecd20ec49",
+          "source_file": "crates/tkv3d/src/ais/view_cube_geometry.rs",
+          "source_status": null,
+          "source_sha256": "af13d6ef1e20026a03347774121ca66df209ecde77fdbd4a10c4ac39e211655c"
+        }
+      ],
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx"
+    }
+  ]
+}

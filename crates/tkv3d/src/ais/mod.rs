@@ -333,3 +333,39 @@ pub use light_source_aspects::ais_light_source_initialize;
 
 #[cfg(test)]
 mod light_source_concrete_tests;
+
+mod view_cube_appearance;
+mod view_cube_axes;
+mod view_cube_classification;
+mod view_cube_compute;
+mod view_cube_corners;
+mod view_cube_geometry;
+mod view_cube_labels;
+mod view_cube_presentation;
+mod view_cube_rectangle;
+mod view_cube_submission;
+pub use view_cube_classification::{
+    ais_view_cube_is_box_corner, ais_view_cube_is_box_edge, ais_view_cube_is_box_side,
+};
+pub use view_cube_compute::ais_view_cube_compute;
+pub use view_cube_presentation::{
+    AisViewCubeGeometry, AisViewCubePresentationBase, AisViewCubePresentationSettings,
+    AisViewCubePresentationSource, AisViewCubeTriangleCounts,
+};
+pub use view_cube_rectangle::ais_view_cube_round_rectangle_triangles;
+
+pub use view_cube_corners::ais_view_cube_create_box_corner_triangles;
+pub use view_cube_geometry::{
+    ais_view_cube_create_box_edge_triangles, ais_view_cube_create_box_part_triangles,
+    ais_view_cube_create_box_side_triangles,
+};
+
+#[cfg(test)]
+mod view_cube_fixture_replay;
+#[cfg(test)]
+mod view_cube_geometry_tests;
+#[cfg(test)]
+mod view_cube_test_probe;
+
+#[cfg(test)]
+mod view_cube_submission_tests;

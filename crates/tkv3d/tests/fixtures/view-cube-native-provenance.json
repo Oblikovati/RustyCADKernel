@@ -1,0 +1,45 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "upstream_source_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+    "src/Visualization/TKV3d/AIS/AIS_ViewCube.cxx": "49c4696acd43ab80e1d53a423c3a02c27ed186cb9c1eafb4bd48ad84ca3365f2"
+  },
+  "generator": "tools/oracle/martensite_view_cube_presentation.cxx",
+  "generator_sha256": "7d783360cb09090b96723546719ed6cdf3df8e34c39ad545ae26dea796a29fe5",
+  "null_driver": "tools/oracle/tkservice_probe_null_driver.cxx",
+  "null_driver_sha256": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+  "assets": [
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-native-geometry.txt",
+      "sha256": "2cbe69869778360cf51350f6afd16f8eb7e25645c2dcd46d6d7719db9853d5d0",
+      "records": 438
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-native-presentations.txt",
+      "sha256": "b27d43fbcbf19c5d83a1fd8cd3b3fa07b7deeb95cc3db56be347e69505d98f6a",
+      "records": 122
+    }
+  ],
+  "native_records": 560,
+  "repeatability": "Two complete executions byte-identical",
+  "local_only": true,
+  "configuration": "Local Linux C++17; pinned existing full OCCT TKV3d/TKService/TKMath/TKernel libraries, real AIS_InteractiveContext DefaultDrawer, null graphics driver; no GPU resources",
+  "invalid_probe_diagnostics": [
+    {
+      "setup": "No context drawer link",
+      "result": "Native SIGSEGV exit 139 when case6 dereferenced null DatumAspect; excluded from successful fixtures",
+      "partial_stdout": {
+        "path": "porting/runtime-evidence/view-cube-presentation/native-invalid-drawer-probe.log.gz",
+        "uncompressed_sha256": "4178345a6724c095c2f48311af7a99e27b5e2ecafb7b5c5068d8e5130f3eaf89",
+        "records": 318,
+        "credit": "Excluded from successful native records"
+      }
+    },
+    {
+      "setup": "Own datum aspect only, no context default boundary aspect",
+      "result": "Native SIGSEGV exit 139 in outlined scene1 FaceBoundaryAspect; excluded from successful fixtures"
+    }
+  ],
+  "rust_boundary": "Missing required datum or face-boundary aspect returns typed null_object with offending value and expected context link",
+  "raster_limit": "Vulkan oriented-text BackCulled behavior not validated; renderer capture/performance claims excluded"
+}
