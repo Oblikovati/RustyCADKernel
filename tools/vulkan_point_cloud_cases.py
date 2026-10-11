@@ -1,6 +1,7 @@
 """Point cloud geometry, whole-object and subset-owner capture controls."""
 POINT_CLOUD_MODES = (
     "cloud-points", "cloud-colors", "cloud-normals-unlit", "cloud-box",
+    "cloud-lit-phong", "cloud-lit-gouraud", "cloud-lit-colors", "cloud-lit-clipped", "cloud-lit-normal-updated",
     "cloud-selected", "cloud-subset-selected", "cloud-subset-detected",
     "cloud-moved", "cloud-erased", "cloud-redisplayed", "cloud-unset-color",
 )

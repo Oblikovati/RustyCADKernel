@@ -21,6 +21,9 @@ pub(crate) fn apply_surface_lighting(
         .iter()
         .any(|draw| draw.topology() != crate::PrimitiveTopology::Triangles)
     {
+        if draws.iter().all(|draw| draw.point_style.is_some()) {
+            return apply_marker_lighting(draws, primitive, aspects, context, model, normals);
+        }
         return validate_non_surface_lighting(model, normals.is_some());
     }
     let lighting = surface_lighting(primitive, &**aspects, context, model, normals.as_deref())?;
@@ -33,6 +36,32 @@ pub(crate) fn apply_surface_lighting(
     }
     Ok(())
 }
+
+fn apply_marker_lighting(
+    draws: &mut [PrimitiveDraw],
+    primitive: &PrimitiveSubmission,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    context: &TextSceneContext<'_>,
+    model: Graphic3dTypeOfShadingModel,
+    normals: Option<Vec<[f32; 3]>>,
+) -> Result<(), RenderError> {
+    let Some(normals) = normals else {
+        return Ok(());
+    };
+    if !matches!(
+        model,
+        Graphic3dTypeOfShadingModel::Gouraud | Graphic3dTypeOfShadingModel::Phong
+    ) {
+        return validate_non_surface_lighting(model, true);
+    }
+    let mut lighting = surface_lighting(primitive, &**aspects, context, model, Some(&normals))?;
+    lighting.normals = normals;
+    for draw in draws {
+        draw.lighting = Some(lighting.clone());
+    }
+    Ok(())
+}
+
 pub(crate) fn validate_unlit_surface(
     aspects: &dyn Graphic3dAspectsSource,
 ) -> Result<(), RenderError> {
@@ -110,7 +139,7 @@ fn validate_non_surface_lighting(
     {
         return Err(rejected(
             (model, normals),
-            "lit line/point normal attributes are not implemented yet",
+            "unlit non-surface geometry or Gouraud/Phong markers; lit lines and PBR markers remain unsupported",
         ));
     }
     Ok(())

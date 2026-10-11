@@ -162,3 +162,22 @@ fn translucent_common_records_cannot_enter_the_opaque_pipeline() {
         );
     }
 }
+
+#[test]
+fn marker_lighting_accepts_nodal_algorithms_and_rejects_facet_derivatives() {
+    let draw = PrimitiveDraw::points(
+        vec![RenderVertex::new([0.; 3], [1.; 4]); 3],
+        vec![0, 1, 2],
+        identity_clip(),
+        crate::PointStyle::new(3., [1, 1], vec![[1.; 4]]).unwrap(),
+    )
+    .unwrap();
+    assert!(
+        draw.clone()
+            .with_lighting(state(identity_clip(), identity_clip(), false))
+            .is_ok()
+    );
+    let mut facet = state(identity_clip(), identity_clip(), false);
+    facet.shading = RenderShading::PhongFacet;
+    assert!(draw.with_lighting(facet).is_err());
+}

@@ -152,6 +152,7 @@ static void run_scene(int argc, char **argv) {
   const bool rasterControl = raster_control_option(argc, argv);
   if(mode.rfind("cloud-",0)==0) {
     MartensiteOraclePointCloudScene scene(viewer,mode,offset);
+    scene.configure_lights(view,mode);
     if(mode.find("subset")!=std::string::npos)scene.detect(view,mode=="cloud-subset-selected");
     write_capture(view,width,height,argv[5],mode=="cloud-subset-detected");print_device(view);view->Remove();return;
   }

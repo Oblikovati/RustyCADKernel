@@ -66,7 +66,7 @@ ownership transitions and actual ray-driven owner highlight snapshots. Native an
 Rust finite values, signed zeros, exception types and output tokens compare exactly.
 Direct tests also exercise derived geometry providers and derived subset owners.
 
-The renderer harness includes the `point-cloud` family in its full corpus. Eleven
+The renderer harness includes the `point-cloud` family in its full corpus. Sixteen
 modes cover ordinary/color/normal buffers, box display, whole-object selection,
 selected and detected subsets, mutation, erase/redisplay and color restoration.
 Six camera/window/translation configurations run on each of lavapipe and the native
@@ -86,7 +86,6 @@ python3 tools/verify_vulkan.py --source ../OCCT \
 See the [runtime evidence](../porting/runtime-evidence/ais-point-cloud-2026-10-11/README.md)
 for final results and retained failures. Renderer parity remains incomplete: strict
 point/line raster and depth differences remain visible. These fixtures explicitly
-use Unlit shading for normal-bearing buffers. Gouraud/Phong point-normal lighting,
-translucent points and other unsupported point rendering policies remain explicit
-renderer errors; normal storage and AIS material behavior are implemented, but lit
-point rendering is the next renderer prerequisite. No tolerance or scope was relaxed.
+use Unlit shading for normal-bearing buffers. [Gouraud/Phong point-normal lighting](vulkan-lit-markers.md) now reaches Vulkan.
+Translucent points, PBR markers and other unsupported point rendering policies
+remain explicit renderer errors. No tolerance or scope was relaxed.

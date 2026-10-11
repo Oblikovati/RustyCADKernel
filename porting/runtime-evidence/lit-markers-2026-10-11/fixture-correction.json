@@ -1,0 +1,30 @@
+{
+  "incorrect_view_policy": "native reference setup_view forced Unlit, replacing configured lights with white ambient",
+  "corrected_view_policy": "both native and Martensite lit fixtures explicitly use Phong view lighting",
+  "red_native_palette": [
+    [
+      84,
+      57,
+      7,
+      255,
+      25
+    ]
+  ],
+  "corrected_native_and_vulkan_palette": [
+    [
+      255,
+      208,
+      126,
+      255,
+      15
+    ],
+    [
+      163,
+      102,
+      14,
+      255,
+      10
+    ]
+  ],
+  "regression": "verify_lit_palette.py fails against the original captures and passes all corrected lit fixtures"
+}
