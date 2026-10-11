@@ -1,0 +1,74 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "oracle_execution": "local only; committed assets are Rust-only test inputs",
+  "generator": "tools/oracle/martensite_sensitive_triangulation_matching.cxx",
+  "generator_sha256": "73544ab52170e788ad15724abf923aef86e98fde88e15aa977affe359d7e1e1e",
+  "volume_generator_dependency": "tools/oracle/martensite_sensitive_primitive_matching.cxx",
+  "volume_generator_sha256": "cfc144de5ddebc783af29a33534014170f0264c4c9aac0d7040f02c11650be05",
+  "fixture_sha256": "36b2d450931d4c7b8ff8d5126726e481f63501769f264ec77b0921ad11e6ec81",
+  "snapshots": 5196,
+  "repeat_generation": "byte-identical native rerun",
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveTriangulation.hxx",
+  "source_sha256": "3d3e3d515aa6f6e5911883d601c91c846d5d60b43d97f1fa85174ef1dc969bfa",
+  "implementation_sha256": "5dd9ec90129a190e1e1269e407a803519ab4cc570281cba98c90097d08562cf3",
+  "native_configuration": "RelWithDebInfo -fexceptions -O2 -g -DNDEBUG; no No_Exception/No_Standard_OutOfRange defines",
+  "chunk_count": 11,
+  "chunks": [
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-00.txt",
+      "rows": 480,
+      "sha256": "93b35bff112d6076d0cee5986cb722c60e4ad71b20ac22a48c524dd927106519"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-01.txt",
+      "rows": 480,
+      "sha256": "6f425e4b4d39b165de28b1fe81fce52dae801fa90f3465161c3c26aa17df53b3"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-02.txt",
+      "rows": 480,
+      "sha256": "1db99e51b046276fc9f85e043be0db7b0bd9a8c5b25947776bfeb8014dee0f1b"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-03.txt",
+      "rows": 480,
+      "sha256": "dafbe16d07774c56e58a55f16af00ba0dbaa93f124f440e7e409616e4e22272b"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-04.txt",
+      "rows": 480,
+      "sha256": "99f7d9df7f44eda8608916fd975af6719da1c86531ce789c761ebb74b0965742"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-05.txt",
+      "rows": 480,
+      "sha256": "15f5dd8c01cf961691060c1ca1cc23e97b68e16ae2c0bff34784a72ae3fc0e27"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-06.txt",
+      "rows": 480,
+      "sha256": "9b3e125e0c640f70711330fcf448f3c4b40481d8053b2bd8ff80c7f3170492f3"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-07.txt",
+      "rows": 480,
+      "sha256": "1309160154836b0e9371827db0003cbdb73e1d262fd64ca643f2a0e324fce92a"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-08.txt",
+      "rows": 480,
+      "sha256": "09e6e4c04eb697ce385287403ff89df435c5a185bfd2d71390506e5a22a934ed"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-09.txt",
+      "rows": 480,
+      "sha256": "2d4cc9699b78df56a254d775ad9f41b9f4a6f293f7598d290a5b9912b7c19097"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-triangulation-native-10.txt",
+      "rows": 396,
+      "sha256": "a00f9e4141d0bd0ea2e603ddbb93485da172f47cd517bfbc49bbe01f5fd1d1d7"
+    }
+  ]
+}
