@@ -72,5 +72,19 @@
   ],
   "worktree_deleted": true,
   "branch_deleted": true,
-  "reclaimed_artifacts_gib_approximate": 2.8
+  "reclaimed_artifacts_gib_approximate": 2.8,
+  "suite_followup": {
+    "failed_run": 38154197912,
+    "cause": "manually appended module differed from sorted generated toolkit suite",
+    "correction": "python3 tools/toolkit_test_suites.py --write",
+    "discovery_check_passed": true,
+    "generator_regression_tests": 12,
+    "rerun_cpu_cases": 473,
+    "repository_format_check_passed": true,
+    "fixed_suite_sha256": "8320c5de9646dab995e9276bd0c34ccafc2c753b827574866e0970c117e35cb6",
+    "previous_renderer_ci": {
+      "run": 38152996286,
+      "conclusion": "success"
+    }
+  }
 }

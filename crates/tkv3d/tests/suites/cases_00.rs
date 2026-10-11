@@ -55,6 +55,8 @@ pub mod ais_text_label;
 pub mod ais_trihedron;
 #[path = "../ais_trihedron_subclass.rs"]
 pub mod ais_trihedron_subclass;
+#[path = "../ais_view_input_buffer.rs"]
+pub mod ais_view_input_buffer;
 #[path = "../axis_intersector.rs"]
 pub mod axis_intersector;
 #[path = "../base_frustum.rs"]
@@ -119,5 +121,3 @@ pub mod viewer_selector_pick;
 pub mod viewer_selector_state;
 #[path = "../viewer_selector_traversal.rs"]
 pub mod viewer_selector_traversal;
-#[path = "../ais_view_input_buffer.rs"]
-pub mod ais_view_input_buffer;

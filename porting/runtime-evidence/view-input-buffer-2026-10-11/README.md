@@ -36,3 +36,12 @@ approximately 2.8 GiB. Detailed source status, counts and cleanup results are in
 See [the implementation notes](../../../docs/ais-view-input-buffer.md) for public
 usage and fixture regeneration. AIS view controller behavior remains separate
 porting work; this header supplies its full native event-record dependency.
+
+CI follow-up: run 38154197912 caught a noncanonical generated toolkit suite. The
+new module had been appended instead of placed by the generator's sorted output.
+`python3 tools/toolkit_test_suites.py` reproduced the exact failure locally;
+`--write` regeneration fixes the ordering, and the checker plus all 12 generator
+tests pass. The 473 TKV3d tests and repository formatting checks pass again after
+the correction. No test is omitted or moved into a separate executable. The failed
+run was canceled after inspecting its Ubuntu log; fresh inventory fingerprints
+were rebuilt before publishing the correction.
