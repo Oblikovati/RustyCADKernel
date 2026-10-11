@@ -1,10 +1,10 @@
 {
   "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "candidate_source_hashes_match": true,
-  "native_numeric_requests": 230,
+  "native_numeric_requests": 236,
   "native_numeric_exact": true,
-  "tkv3d_focused_tests": 7,
-  "tkv3d_all_targets": "passed",
+  "tkv3d_focused_tests": 9,
+  "tkv3d_all_targets": "passed after callback snapshot correction",
   "clippy_all_targets": [
     "rustycad-tkv3d",
     "martensite-vulkan"
@@ -32,19 +32,21 @@
       "failed_cases": [],
       "functional_results_reproduced": true,
       "performance_workloads": 27,
-      "independent_performance_comparison_failures": [],
+      "independent_performance_comparison_failures": [
+        "persistence-groups p95_ms=1.979ms exceeds 1.737ms"
+      ],
       "plane_performance_comparison_failures": [],
       "plane_performance": {
         "workload": "plane-presentation-updates",
         "draws": 1,
         "warmup": 20,
         "validation": false,
-        "median_ms": 0.508521,
-        "mean_ms": 0.51791105,
-        "p95_ms": 0.595852,
-        "p99_ms": 0.671602,
-        "minimum_ms": 0.45972,
-        "maximum_ms": 0.672865,
+        "median_ms": 0.5236635000000001,
+        "mean_ms": 0.54672205,
+        "p95_ms": 0.686369,
+        "p99_ms": 0.750178,
+        "minimum_ms": 0.445073,
+        "maximum_ms": 0.942724,
         "samples": 100
       }
     },
@@ -72,8 +74,8 @@
             44
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-64-64-0-0-prsplane-edges",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-64-64-0-0-prsplane-edges",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-64-64-0-0-prsplane-edges",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-64-64-0-0-prsplane-edges",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -88,8 +90,8 @@
             44
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-64-64-0-0-prsplane-isos",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-64-64-0-0-prsplane-isos",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-64-64-0-0-prsplane-isos",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-64-64-0-0-prsplane-isos",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -104,8 +106,8 @@
             44
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-64-64-0-0-prsplane-center",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-64-64-0-0-prsplane-center",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-64-64-0-0-prsplane-center",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-64-64-0-0-prsplane-center",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -120,8 +122,8 @@
             44
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-64-64-0-0-prsplane-corners",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-64-64-0-0-prsplane-corners",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-64-64-0-0-prsplane-corners",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-64-64-0-0-prsplane-corners",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -136,8 +138,8 @@
             33
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-96-48-0-2-prsplane-edges",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-96-48-0-2-prsplane-edges",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-96-48-0-2-prsplane-edges",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-96-48-0-2-prsplane-edges",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -152,8 +154,8 @@
             33
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-96-48-0-2-prsplane-isos",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-96-48-0-2-prsplane-isos",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-96-48-0-2-prsplane-isos",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-96-48-0-2-prsplane-isos",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -168,8 +170,8 @@
             33
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-96-48-0-2-prsplane-center",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-96-48-0-2-prsplane-center",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-96-48-0-2-prsplane-center",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-96-48-0-2-prsplane-center",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -184,8 +186,8 @@
             33
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-96-48-0-2-prsplane-corners",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-96-48-0-2-prsplane-corners",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-96-48-0-2-prsplane-corners",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-96-48-0-2-prsplane-corners",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -200,8 +202,8 @@
             57
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-48-96-0--3-prsplane-edges",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-48-96-0--3-prsplane-edges",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-48-96-0--3-prsplane-edges",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-48-96-0--3-prsplane-edges",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -216,8 +218,8 @@
             57
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-48-96-0--3-prsplane-isos",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-48-96-0--3-prsplane-isos",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-48-96-0--3-prsplane-isos",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-48-96-0--3-prsplane-isos",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -232,8 +234,8 @@
             57
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-48-96-0--3-prsplane-center",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-48-96-0--3-prsplane-center",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-48-96-0--3-prsplane-center",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-48-96-0--3-prsplane-center",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -248,8 +250,8 @@
             57
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-48-96-0--3-prsplane-corners",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-48-96-0--3-prsplane-corners",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-48-96-0--3-prsplane-corners",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-48-96-0--3-prsplane-corners",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -264,8 +266,8 @@
             28
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-64-64-1-0-prsplane-center",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-64-64-1-0-prsplane-center",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-64-64-1-0-prsplane-center",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-64-64-1-0-prsplane-center",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -280,8 +282,8 @@
             46
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-64-64-1-0-prsplane-corners",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-64-64-1-0-prsplane-corners",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-64-64-1-0-prsplane-corners",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-64-64-1-0-prsplane-corners",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -296,8 +298,8 @@
             34
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-96-48-1-2-prsplane-corners",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-96-48-1-2-prsplane-corners",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-96-48-1-2-prsplane-corners",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-96-48-1-2-prsplane-corners",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -312,8 +314,8 @@
             45
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-48-96-1--3-prsplane-center",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-48-96-1--3-prsplane-center",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-48-96-1--3-prsplane-center",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-48-96-1--3-prsplane-center",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         },
@@ -328,8 +330,8 @@
             58
           ],
           "color_error_bounds": null,
-          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/gl-48-96-1--3-prsplane-corners",
-          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-verified/host/vk-48-96-1--3-prsplane-corners",
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/gl-48-96-1--3-prsplane-corners",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/target/plane-presentations-snapshot-verified/host/vk-48-96-1--3-prsplane-corners",
           "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
           "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
         }
@@ -337,25 +339,27 @@
       "functional_results_reproduced": true,
       "performance_workloads": 27,
       "independent_performance_comparison_failures": [
-        "ais-text-label-updates p95_ms=0.752ms exceeds 0.727ms",
-        "plane-presentation-updates median_ms=0.481ms exceeds 0.480ms"
+        "resize p95_ms=0.545ms exceeds 0.475ms",
+        "curve-presentations p95_ms=3.765ms exceeds 3.499ms",
+        "plane-trihedron-updates p95_ms=1.048ms exceeds 0.959ms"
       ],
-      "plane_performance_comparison_failures": [
-        "plane-presentation-updates median_ms=0.481ms exceeds 0.480ms"
-      ],
+      "plane_performance_comparison_failures": [],
       "plane_performance": {
         "workload": "plane-presentation-updates",
         "draws": 1,
         "warmup": 20,
         "validation": false,
-        "median_ms": 0.481425,
-        "mean_ms": 0.52294798,
-        "p95_ms": 0.7620800000000001,
-        "p99_ms": 0.9473520000000001,
-        "minimum_ms": 0.413495,
-        "maximum_ms": 1.196162,
+        "median_ms": 0.411366,
+        "mean_ms": 0.45853288999999997,
+        "p95_ms": 0.658278,
+        "p99_ms": 0.8668130000000001,
+        "minimum_ms": 0.35484600000000005,
+        "maximum_ms": 0.914531,
         "samples": 100
       }
     }
-  ]
+  ],
+  "initial_source_commit": "31ab8c6af",
+  "initial_integration_commit": "5a3f4afd5",
+  "callback_mutation_regressions": "two tests fail before the snapshot correction and pass after it"
 }

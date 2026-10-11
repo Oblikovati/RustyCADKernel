@@ -25,7 +25,7 @@ static occ::handle<Prs3d_Drawer> plane_probe_drawer(GaReader& r,int flags) {
 }
 void v3_plane_add(std::istream& input) {
   GaReader r{input};int kind=r.integer(),variant=r.integer(),flags=r.integer();auto drawer=plane_probe_drawer(r,flags);
-  V3DisplayTrace trace;occ::handle<V3d_Viewer> viewer=new V3d_Viewer(new V3DisplayDriver(trace));
+  V3DisplayTrace trace;if(flags&16)trace.mutatePlaneAspect=drawer->PlaneAspect();occ::handle<V3d_Viewer> viewer=new V3d_Viewer(new V3DisplayDriver(trace));
   occ::handle<Graphic3d_Structure> prs=new Graphic3d_Structure(viewer->StructureManager());
   gp_Pnt a(1,2,3),b(-4,5,6),c(7,-8,9);auto surface=plane_probe_surface(kind);
   GA_TRY(if(variant==1)DsgPrs_XYZPlanePresentation::Add(prs,drawer,a,b,c);

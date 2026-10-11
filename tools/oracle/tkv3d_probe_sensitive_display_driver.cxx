@@ -1,8 +1,9 @@
 // A named recording driver captures real native buffer callbacks without rendering.
 #include <Graphic3d_Buffer.hxx>
+#include <Prs3d_PlaneAspect.hxx>
 #include <Graphic3d_Text.hxx>
 #include <Graphic3d_IndexBuffer.hxx>
-struct V3DisplayTrace { std::vector<double> events; std::vector<occ::handle<Graphic3d_Text>> texts; int fail=-1,groups=0; occ::handle<SelectMgr_Selection> appendSelection; occ::handle<SelectMgr_SelectableObject> appendObject; };
+struct V3DisplayTrace { occ::handle<Prs3d_PlaneAspect> mutatePlaneAspect; std::vector<double> events; std::vector<occ::handle<Graphic3d_Text>> texts; int fail=-1,groups=0; occ::handle<SelectMgr_Selection> appendSelection; occ::handle<SelectMgr_SelectableObject> appendObject; };
 class V3DisplayGroup: public SvGroup {
   V3DisplayTrace& trace;
 public:
@@ -10,6 +11,8 @@ public:
   void AddText(const occ::handle<Graphic3d_Text>& text, const bool evaluate=true) override {trace.texts.push_back(text); SvGroup::AddText(text,evaluate);}
   void aspect(const occ::handle<Graphic3d_Aspects>& value){
     auto c=value->InteriorColor();trace.events.insert(trace.events.end(),{3.,c.Red(),c.Green(),c.Blue(),double(value->LineType()),double(value->LineWidth()),double(value->MarkerType()),double(value->MarkerScale())});
+    auto changed=trace.mutatePlaneAspect;trace.mutatePlaneAspect.Nullify();
+    if(!changed.IsNull()){changed->SetPlaneLength(20.,30.);changed->SetArrowsSize(9.);changed->SetArrowsLength(4.);changed->SetArrowsAngle(.4);}
   }
   void SetPrimitivesAspect(const occ::handle<Graphic3d_Aspects>& value) override {aspect(value);SvGroup::SetPrimitivesAspect(value);}
   void SetGroupPrimitivesAspect(const occ::handle<Graphic3d_Aspects>& value) override {aspect(value);SvGroup::SetGroupPrimitivesAspect(value);}

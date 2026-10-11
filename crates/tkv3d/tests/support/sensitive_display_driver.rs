@@ -12,6 +12,7 @@ pub struct SensitiveDisplayTrace {
     pub events: Vec<f64>,
     pub texts: Vec<Handle<Graphic3dText>>,
     pub fail_group: i32,
+    pub mutate_plane_aspect: Handle<rustycad_tkv3d::prs3d::Prs3dPlaneAspect>,
     pub groups: i32,
     pub append_selection: Handle<rustycad_tkv3d::select_mgr::SelectMgrSelection>,
     pub append_object: Handle<dyn rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>,

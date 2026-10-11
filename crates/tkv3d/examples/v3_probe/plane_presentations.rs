@@ -52,6 +52,9 @@ pub fn plane_add_case(values: &[f64]) {
     let (kind, variant, flags) = (reader.integer(), reader.integer(), reader.integer());
     let drawer = probe_drawer(&mut reader, flags);
     let (driver, trace) = display_driver::SensitiveDisplayDriver::new_handle(0);
+    if flags & 16 != 0 {
+        trace.write().mutate_plane_aspect = drawer.plane_aspect();
+    }
     let viewer = V3dViewer::new(&driver).unwrap();
     let prs = Graphic3dStructure::new(&viewer.structure_manager(), &Handle::default()).unwrap();
     attempt(|| submit_plane(&prs.cast(), &drawer, kind, variant));

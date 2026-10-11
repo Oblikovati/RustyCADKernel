@@ -8,13 +8,13 @@ pub(super) fn draw_plane_edges(
     group: &Handle<dyn Graphic3dGroup>,
     plane: &GeomPlane,
     aspect: &Handle<Prs3dPlaneAspect>,
+    extents: [f64; 2],
 ) -> Result<(), Failure> {
     if !aspect.display_edges() {
         return Ok(());
     }
     group.set_primitives_aspect(&aspect.edges_aspect().aspect().cast());
-    let x = 0.5 * aspect.plane_x_length();
-    let y = 0.5 * aspect.plane_y_length();
+    let [x, y] = extents;
     let vertices = Handle::new(Graphic3dArrayOfPolylines::new(5, 0, 0, 0)?);
     for (u, v) in [(-x, y), (x, y), (x, -y), (-x, -y), (-x, y)] {
         vertices.add_vertex_pnt(&plane.value(u, v)?)?;
@@ -26,12 +26,12 @@ pub(super) fn draw_plane_isos(
     group: &Handle<dyn Graphic3dGroup>,
     plane: &GeomPlane,
     aspect: &Handle<Prs3dPlaneAspect>,
+    extents: [f64; 2],
 ) -> Result<(), Failure> {
     if !aspect.display_iso() {
         return Ok(());
     }
     group.set_primitives_aspect(&aspect.iso_aspect().aspect().cast());
-    let extents = [0.5 * aspect.plane_x_length(), 0.5 * aspect.plane_y_length()];
     let spacing = aspect.iso_distance();
     let counts = [
         iso_count(extents[0], spacing)?,

@@ -198,3 +198,26 @@ fn nonplane_creates_current_group_without_submitting_aspects_or_vertices() {
     assert_eq!(trace.read().events, [2.]);
     assert!(!StdPrsPlane::matches(0., 0., 0., 100., &surface, &drawer).unwrap());
 }
+
+#[test]
+fn plane_extents_are_snapshotted_before_aspect_callbacks() {
+    let (prs, drawer, trace) = plane_fixture();
+    drawer.plane_aspect().set_plane_length(4., 6.);
+    trace.write().mutate_plane_aspect = drawer.plane_aspect();
+    StdPrsPlane::add(&prs.cast(), &surface(), &drawer).unwrap();
+    let packets = primitive_packets(&trace.read().events);
+    assert_eq!(packets[0].1[0], [-2., 3., 0.]);
+    assert_eq!(drawer.plane_aspect().plane_x_length(), 20.);
+}
+#[test]
+fn normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks() {
+    let (prs, drawer, trace) = plane_fixture();
+    drawer.plane_aspect().set_display_edges(false);
+    drawer.plane_aspect().set_display_center_arrow(true);
+    drawer.plane_aspect().set_arrows_size(2.);
+    trace.write().mutate_plane_aspect = drawer.plane_aspect();
+    StdPrsPlane::add(&prs.cast(), &surface(), &drawer).unwrap();
+    let packets = primitive_packets(&trace.read().events);
+    assert_eq!(packets[0].1, [[0., 0., 0.], [0., 0., 2.]]);
+    assert_eq!(drawer.plane_aspect().arrows_size(), 9.);
+}

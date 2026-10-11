@@ -25,10 +25,13 @@ whose floating-point-to-integer conversion or capacity arithmetic would be
 undefined in C++ return a descriptive Rust failure instead. No native result is
 claimed for that undefined input domain.
 
-Validation uses seven focused builder tests, two retained polygon tests and
-230 exact native differential requests. The native corpus covers all sixteen
+Validation uses nine focused builder tests, two retained polygon tests and
+236 exact native differential requests. The native corpus covers all sixteen
 visibility combinations, translated tilted planes, negative extents,
-nonplanes, sparse isolines, both datum builders and distance matching.
+nonplanes, sparse isolines, both datum builders and distance matching. Driver
+callbacks that mutate aspect settings retain native geometry snapshots: plane
+extents precede the edge callbacks, while arrow dimensions precede the arrow
+aspect callback after edges and isolines have been submitted.
 
 Rendering verification includes six paired plane modes on lavapipe and the host
 GPU, with color/depth captures and the `plane-presentation-updates` performance
@@ -37,12 +40,12 @@ the native AMD GPU. All 72 RGBA captures match exactly; the remaining 17 native
 GPU failures are depth precision deltas above the unchanged 1e-6 threshold.
 Both closed datum builders pass every case on both profiles. Measured results
 and integration receipts are recorded in
-`porting/runtime-evidence/plane-presentations-2026-10-11`. The two final runs reproduce the same functional results. All 27 lavapipe
-performance comparisons pass the existing median/p95 budgets. The host repeat
-exceeds the plane-update median limit by about 0.001 ms and also exceeds the
-existing label-update p95 budget; these failures remain recorded rather than
-accepting an overall performance baseline. Plane-update medians are about
-0.509 ms on lavapipe and 0.481 ms on the host in the repeat.
+`porting/runtime-evidence/plane-presentations-2026-10-11`. The two final runs reproduce the same functional results. The plane-update
+workload passes both unchanged median/p95 budgets on both profiles, with repeat
+medians around 0.524 ms on lavapipe and 0.411 ms on the host. One existing
+lavapipe workload and three existing host workloads exceed p95 limits;
+those signed failures are retained, and no overall performance baseline is
+accepted.
 
 Strict gates remain unchanged; full legacy OpenGL replacement
 proof remains incomplete.
