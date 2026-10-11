@@ -207,6 +207,16 @@ fn record_draw(
                 &[],
             );
         }
+        if let Some(image) = &draw.surface_image {
+            device.cmd_bind_descriptor_sets(
+                command,
+                vk::PipelineBindPoint::GRAPHICS,
+                draw.pipeline.layout,
+                draw.pipeline.sprite_set,
+                &[image.set],
+                &[],
+            );
+        }
         if let Some(clipping) = &draw.clipping {
             device.cmd_bind_descriptor_sets(
                 command,

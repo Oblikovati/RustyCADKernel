@@ -13,6 +13,7 @@ pub(super) struct DrawPipeline {
     pub clipping_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
     pub lighting_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
     pub sprite_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
+    pub surface_layout: Option<super::surface_image_descriptor::SurfaceImageLayout>,
 }
 impl DrawPipeline {
     pub fn new(
@@ -33,8 +34,15 @@ impl DrawPipeline {
             runtime: runtime.clone(),
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
-            push_stages: push_range(line || point || text).stage_flags,
-            sprite_set: if lighting && point { 2 } else { 0 },
+            push_stages: push_range(
+                line || point || text || kind.surface_texture || kind.surface_alpha,
+            )
+            .stage_flags,
+            sprite_set: if lighting && (point || kind.surface_texture) {
+                2
+            } else {
+                0
+            },
             shaders: vec![],
             clipping_layout: if clipped {
                 Some(super::storage_descriptor::StorageDescriptorLayout::new(
@@ -52,6 +60,13 @@ impl DrawPipeline {
             } else {
                 None
             },
+            surface_layout: if kind.surface_texture {
+                Some(super::surface_image_descriptor::SurfaceImageLayout::new(
+                    runtime,
+                )?)
+            } else {
+                None
+            },
             sprite_layout: if point || text {
                 Some(super::storage_descriptor::StorageDescriptorLayout::new(
                     runtime,
@@ -61,11 +76,21 @@ impl DrawPipeline {
                 None
             },
         };
-        pipeline.load_shaders(line, point, text, clipped, lighting)?;
+        if kind.surface_texture || kind.surface_alpha {
+            for bytes in super::surface_texture_pipeline::surface_shaders(kind) {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else {
+            pipeline.load_shaders(line, point, text, clipped, lighting)?;
+        }
         pipeline.layout = create_layout(
             runtime,
-            line || point || text,
-            pipeline.sprite_layout.as_ref(),
+            line || point || text || kind.surface_texture || kind.surface_alpha,
+            pipeline
+                .sprite_layout
+                .as_ref()
+                .map(|v| v.handle)
+                .or_else(|| pipeline.surface_layout.as_ref().map(|v| v.handle)),
             pipeline.lighting_layout.as_ref(),
             pipeline.clipping_layout.as_ref(),
         )?;
@@ -205,14 +230,14 @@ fn create_pipeline(
 fn create_layout(
     runtime: &VulkanRuntime,
     line: bool,
-    sprite: Option<&super::storage_descriptor::StorageDescriptorLayout>,
+    sprite: Option<vk::DescriptorSetLayout>,
     lighting: Option<&super::storage_descriptor::StorageDescriptorLayout>,
     clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
 ) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
     let ranges = [push_range(line)];
     let layouts = descriptor_layout_handles(
-        sprite.map(|s| s.handle),
+        sprite,
         lighting.map(|s| s.handle),
         clipping.map(|s| s.handle),
     );

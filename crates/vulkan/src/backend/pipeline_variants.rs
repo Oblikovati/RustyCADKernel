@@ -6,6 +6,8 @@ use std::sync::Arc;
 #[derive(Clone, Copy)]
 pub(super) struct PipelineVariant {
     pub lighting: bool,
+    pub surface_texture: bool,
+    pub surface_alpha: bool,
     pub surface_blend: bool,
     pub line_blend: bool,
     pub point_blend: bool,
@@ -77,6 +79,8 @@ fn empty_variant(
 ) -> PipelineVariant {
     PipelineVariant {
         lighting: false,
+        surface_texture: false,
+        surface_alpha: false,
         surface_blend: false,
         line_blend: false,
         point_blend: false,
@@ -92,6 +96,7 @@ fn empty_variant(
 }
 pub(super) struct RasterPipelines {
     variants: Vec<Option<Arc<DrawPipeline>>>,
+    pub surface_images: super::surface_image_cache::SurfaceImageCache,
     pub stencil: bool,
     runtime: Arc<VulkanRuntime>,
     special_variants: std::sync::Mutex<std::collections::BTreeMap<usize, Arc<DrawPipeline>>>,
@@ -114,13 +119,17 @@ impl RasterPipelines {
         }
         Ok(Self {
             variants,
+            surface_images: Default::default(),
             stencil,
             runtime: runtime.clone(),
             special_variants: Default::default(),
         })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        if draw.lighting.is_some()
+        if draw.surface_texture.is_some()
+            || draw.surface_cutoff.is_some()
+            || draw.surface_forced_blend
+            || draw.lighting.is_some()
             || draw.surface_blend
             || draw.text_background_blend
             || draw.line_style.is_some_and(|s| s.alpha_blend)
@@ -135,7 +144,10 @@ impl RasterPipelines {
         })
     }
     fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        let index = variant_index(draw) + 64 * usize::from(draw.lighting.is_some());
+        let index = variant_index(draw)
+            + 64 * usize::from(draw.lighting.is_some())
+            + 128 * usize::from(draw.surface_texture.is_some())
+            + 256 * usize::from(draw.surface_cutoff.is_some());
         let mut variants = self
             .special_variants
             .lock()
@@ -145,6 +157,9 @@ impl RasterPipelines {
         }
         let mut kind = PipelineVariant::from_index(index % 64, self.stencil);
         kind.lighting = draw.lighting.is_some();
+        kind.surface_texture = draw.surface_texture.is_some();
+        kind.surface_alpha = draw.surface_cutoff.is_some();
+        kind.capping = draw.capping_pass;
         if kind.clamp && !self.runtime.depth_clamp {
             return Err(rejected(true, "device depth-clamp support"));
         }
@@ -180,7 +195,8 @@ fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
     if draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend) {
         return Some(36 + flags);
     }
-    (draw.surface_blend || draw.text_background_blend).then_some(28 + flags)
+    (draw.surface_blend || draw.surface_forced_blend || draw.text_background_blend)
+        .then_some(28 + flags)
 }
 
 #[cfg(test)]

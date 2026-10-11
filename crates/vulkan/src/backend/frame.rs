@@ -24,6 +24,7 @@ pub(super) struct UploadedDraw {
     pub clipping: Option<super::storage_descriptor::UploadedStorage>,
     pub lighting: Option<super::storage_descriptor::UploadedStorage>,
     pub sprite: Option<super::storage_descriptor::UploadedStorage>,
+    pub surface_image: Option<Arc<super::surface_image_descriptor::SurfaceImageBinding>>,
 }
 pub(super) struct FrameResources {
     pub extent: vk::Extent2D,
@@ -144,6 +145,20 @@ fn upload_draw(
             )
         })
         .transpose()?;
+    let surface_image = draw
+        .surface_texture
+        .as_ref()
+        .map(|style| {
+            pipelines.surface_images.binding(
+                runtime,
+                pipeline
+                    .surface_layout
+                    .as_ref()
+                    .expect("surface image layout"),
+                style,
+            )
+        })
+        .transpose()?;
     let clipping = draw
         .clipping
         .as_ref()
@@ -176,6 +191,7 @@ fn upload_draw(
         lighting,
         clipping,
         sprite,
+        surface_image,
         annotation: draw.annotation,
         text_shadow_bias: draw.text_shadow_bias,
         polygon_offset: draw.polygon_offset,
@@ -218,6 +234,13 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
+        if draw.surface_texture.is_some() || draw.surface_cutoff.is_some() {
+            let uv = draw
+                .surface_texture
+                .as_ref()
+                .map_or([0., 0., 0., 1.], |style| style.uv[index]);
+            bytes.extend(uv.iter().flat_map(|v| v.to_ne_bytes()));
+        }
         if let Some(lighting) = &draw.lighting {
             bytes.extend(lighting.normals[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
@@ -249,6 +272,14 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         bytes.extend(style.image.extent.iter().flat_map(|v| v.to_ne_bytes()));
         bytes.extend(style.alpha_cutoff.to_ne_bytes());
         bytes.extend(0u32.to_ne_bytes());
+    }
+    if draw.surface_texture.is_some() || draw.surface_cutoff.is_some() {
+        let flags = draw.surface_texture.as_ref().map_or(0, |s| {
+            1 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
+        }) + 8 * u32::from(draw.surface_cutoff.is_some());
+        bytes.extend(draw.surface_cutoff.unwrap_or(0.).to_ne_bytes());
+        bytes.extend(flags.to_ne_bytes());
+        bytes.extend([0_u8; 8]);
     }
     bytes
 }

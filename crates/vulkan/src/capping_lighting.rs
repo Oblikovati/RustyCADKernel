@@ -9,6 +9,12 @@ pub(crate) fn apply_cap_lighting(
     scene: &CappingScene<'_>,
     orientation: Mat4<f32>,
 ) -> Result<(), RenderError> {
+    if aspects.to_map_texture() {
+        return Err(crate::error::rejected(
+            aspects.texture_map().is_null(),
+            "section-cap texture coordinates are not implemented yet",
+        ));
+    }
     let model = crate::retained_lighting::resolved_model(&**aspects, scene.rendering.shading_model);
     if model == Graphic3dTypeOfShadingModel::Unlit {
         return crate::retained_lighting::validate_unlit_surface(&**aspects);

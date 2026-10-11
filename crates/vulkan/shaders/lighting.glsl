@@ -50,6 +50,10 @@ vec4 computeLighting(vec3 normal, vec3 view, vec4 world, bool front, vec4 vertex
         + diffuse * lighting.materials[face].rgb + specular * lighting.materials[face+2u].rgb,
         lighting.materials[face].a);
     if (lighting.settings.z != 0u && (front || lighting.settings.w == 0u)) result *= vertexColor;
+#if defined(MARTENSITE_FRAGMENT) && defined(MARTENSITE_SURFACE_TEXTURE)
+    // Native Phong modulates the lit terms before adding untextured emission; Gouraud modulates later.
+    result *= surfaceTexel();
+#endif
     result.rgb += lighting.materials[face+1u].rgb;
     return result;
 }

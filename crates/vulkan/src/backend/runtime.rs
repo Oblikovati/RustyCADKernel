@@ -31,6 +31,7 @@ pub(super) struct VulkanRuntime {
     pub limits: vk::PhysicalDeviceLimits,
     pub depth_clamp: bool,
     pub large_points: bool,
+    pub sampler_anisotropy: bool,
     pub lines: super::line_device::LineCapabilities,
     pub name: String,
     pub quad_diagonal: crate::quad_assembly::QuadDiagonal,
@@ -68,6 +69,7 @@ impl VulkanRuntime {
             limits: Default::default(),
             depth_clamp: false,
             large_points: false,
+            sampler_anisotropy: false,
             lines: Default::default(),
             name: String::new(),
             quad_diagonal: Default::default(),
@@ -88,6 +90,9 @@ impl VulkanRuntime {
             unsafe { self.instance.get_physical_device_features(physical) }.depth_clamp == vk::TRUE;
         self.large_points = unsafe { self.instance.get_physical_device_features(physical) }
             .large_points
+            == vk::TRUE;
+        self.sampler_anisotropy = unsafe { self.instance.get_physical_device_features(physical) }
+            .sampler_anisotropy
             == vk::TRUE;
         self.lines = super::line_device::LineCapabilities::query(&self.instance, physical)?;
         self.memory = unsafe {
@@ -222,7 +227,10 @@ fn create_device(
     let mut features = vk::PhysicalDeviceVulkan13Features::default()
         .dynamic_rendering(true)
         .synchronization2(true);
+    let supported = unsafe { instance.get_physical_device_features(physical) };
     let core_features = vk::PhysicalDeviceFeatures::default()
+        .sampler_anisotropy(supported.sampler_anisotropy == vk::TRUE)
+        .texture_compression_bc(supported.texture_compression_bc == vk::TRUE)
         .depth_clamp(depth_clamp)
         .large_points(large_points)
         .wide_lines(lines.wide);
