@@ -1,15 +1,13 @@
 //! Native OpenGl_Text::drawRect (3d097a0) keeps formatter winding, order and depth writes.
-use crate::{GlyphLayout, PrimitiveDraw, RenderError, RenderVertex, text_transform::TextTransform};
+use crate::{GlyphLayout, PrimitiveDraw, RenderError, RenderVertex};
 use rustycad_tkservice::{aspect::AspectTypeOfStyleText, graphic3d::*};
 
-/// Preserve native formatter winding and ordered depth; `subtitle_rectangle(text, aspect, layout, transform)` returns the decoration pass.
+/// Preserve native formatter winding and ordered depth; `subtitle_rectangle(aspect, layout, clip)` returns the decoration pass.
 pub(crate) fn subtitle_rectangle(
-    text: &Graphic3dText,
     aspect: &dyn Graphic3dAspectsSource,
     layout: &GlyphLayout,
-    transform: &TextTransform,
+    clip: [f32; 16],
 ) -> Result<PrimitiveDraw, RenderError> {
-    let clip = transform.clip(text, aspect, layout.point_size)?;
     let vertices = subtitle_vertices(layout, aspect);
     let mut draw = PrimitiveDraw::new(vertices, vec![0, 1, 2, 1, 3, 2], clip)?;
     draw.surface_blend = false;

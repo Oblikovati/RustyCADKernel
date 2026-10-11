@@ -1,6 +1,6 @@
 //! Background bounds include advance whitespace and preserve native triangle-strip winding.
 use super::*;
-use crate::RasterImage;
+use crate::{RasterImage, text_transform::TextTransform};
 use rustycad_tkernel::{ncollection::Mat4, quantity::ColorRgba};
 use rustycad_tkservice::{aspect::*, font::FontRect};
 fn subtitle_fixture_rectangle(right: f32) -> FontRect {
@@ -25,6 +25,7 @@ fn subtitle_fixture_transform() -> TextTransform {
     TextTransform {
         projection: Mat4::identity(),
         model_view: Mat4::identity(),
+        model_world: Mat4::identity(),
         camera_rotation: Mat4::identity(),
         viewport: [0, 0, 128, 128],
     }
