@@ -14,6 +14,7 @@ import tempfile
 from dataclasses import asdict, dataclass
 from vulkan_build import build_vulkan_examples
 from vulkan_ais_trihedron_cases import trihedron_pixels
+from vulkan_rubber_band_cases import rubber_band_pixels
 from vulkan_capture_families import capture_modes
 from vulkan_ais_plane_cases import layer_quad_pixels
 from vulkan_point_cloud_cases import point_cloud_pixels
@@ -205,6 +206,10 @@ def capture_case(
             f"received OpenGL device {native_output}; expected {profile.name} graphics"
         )
     row = export_comparison(label, width, height, gl, vk, FileCaptureStore())
+    if mode.startswith("rubber-"):
+        row["rubber_band_roles"] = [rubber_band_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode) for prefix in (gl, vk)]
+        if any(role["status"] != "passed" for role in row["rubber_band_roles"]):
+            row["status"] = "failed"
     if mode.startswith("window-"):
         row["window"] = compare_window_pixels(width, height, gl, vk, FileCaptureStore())
         if row["window"]["status"] != "passed":
@@ -448,6 +453,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
             "ais-plane",
             "point-cloud",
             "ais-trihedron",
+            "rubber-band",
         ),
         default="all",
     )

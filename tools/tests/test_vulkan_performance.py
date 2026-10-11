@@ -43,6 +43,7 @@ class VulkanPerformanceTests(unittest.TestCase):
                 "ais-axis-appearance",
                 "plane-trihedron-updates",
                 "ais-trihedron-shaded-updates",
+                "ais-rubber-band-updates",
                 "circle-datum-updates",
                 "clipping-plane-updates",
                 "homogeneous-position-updates",
@@ -62,7 +63,7 @@ class VulkanPerformanceTests(unittest.TestCase):
             )
         ]
         rows = performance_rows("\n".join(lines))
-        self.assertEqual(len(rows), 32)
+        self.assertEqual(len(rows), 33)
         self.assertEqual(rows[0]["median_ms"], 2.0)
         with self.assertRaises(ValueError):
             performance_rows(lines[0])

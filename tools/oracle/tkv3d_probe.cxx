@@ -75,7 +75,9 @@
 #include "tkv3d_probe_context_location.cxx"
 #include "tkv3d_probe_animation_object.cxx"
 #include "tkv3d_probe_ais_trihedron.cxx"
+#include "tkv3d_probe_ais_rubber_band.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
+ {"v3_ais_rubber_band", v3_ais_rubber_band},
  {"v3_ais_trihedron", v3_ais_trihedron},
  {"v3_ais_point_cloud", v3_ais_point_cloud},
  {"v3_point_cloud_alias", v3_point_cloud_alias},

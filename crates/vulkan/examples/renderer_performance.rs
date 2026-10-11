@@ -41,6 +41,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_axis_performance::benchmark(&driver, warmup, samples);
     plane_trihedron_performance::benchmark(&driver, warmup, samples);
     ais_trihedron_performance::benchmark(&driver, warmup, samples);
+    ais_rubber_band_performance::benchmark(&driver, warmup, samples);
     #[cfg(target_os = "linux")]
     window_performance::benchmark(&driver, warmup, samples);
     ais_circle_performance::benchmark(&driver, warmup, samples);
@@ -227,3 +228,8 @@ mod cloud_scene;
 mod ais_trihedron_performance;
 #[path = "../tests/support/ais_trihedron_scene.rs"]
 mod trihedron_scene;
+
+#[path = "support/ais_rubber_band_performance.rs"]
+mod ais_rubber_band_performance;
+#[path = "../tests/support/ais_rubber_band_scene.rs"]
+mod rubber_band_scene;
