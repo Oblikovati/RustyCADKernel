@@ -22,9 +22,10 @@ impl StdPrsPlane {
         }
         let plane = GeomPlane::from_pln(surface.plane()?);
         let aspect = drawer.plane_aspect();
-        draw_plane_edges(&group, &plane, &aspect)?;
-        draw_plane_isos(&group, &plane, &aspect)?;
-        draw_plane_arrows(prs, &group, &plane, &aspect)
+        let extents = [0.5 * aspect.plane_x_length(), 0.5 * aspect.plane_y_length()];
+        draw_plane_edges(&group, &plane, &aspect, extents)?;
+        draw_plane_isos(&group, &plane, &aspect, extents)?;
+        draw_plane_arrows(prs, &group, &plane, &aspect, extents)
     }
     /// Inclusive distance to the infinite plane, ignoring drawer size; `Self::matches(0., 0., 1., 1., &surface, &drawer)?`.
     pub fn matches(

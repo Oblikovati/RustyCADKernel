@@ -30,6 +30,16 @@ impl SensitiveDisplayGroup {
             f64::from(aspect.marker_scale()),
         ]);
     }
+    fn apply_plane_aspect_change(&self) {
+        let aspect = std::mem::take(&mut self.trace.write().mutate_plane_aspect);
+        if aspect.is_null() {
+            return;
+        }
+        aspect.set_plane_length(20., 30.);
+        aspect.set_arrows_size(9.);
+        aspect.set_arrows_length(4.);
+        aspect.set_arrows_angle(0.4);
+    }
     fn apply_append_callbacks(&self) {
         use rustycad_tkv3d::select_mgr::*;
         let (selection, object) = {
@@ -65,10 +75,12 @@ impl Graphic3dGroup for SensitiveDisplayGroup {
     }
     fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
         self.record_aspect(aspect);
+        self.apply_plane_aspect_change();
         self.inner.set_group_primitives_aspect(aspect)
     }
     fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
         self.record_aspect(aspect);
+        self.apply_plane_aspect_change();
         self.inner.set_primitives_aspect(aspect)
     }
     fn synchronize_aspects(&self) {

@@ -1,0 +1,33 @@
+   Compiling rustycad-tkv3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/crates/tkv3d)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.06s
+     Running tests/plane_presentations.rs (target/debug/deps/plane_presentations-d91af2eca23b0de6)
+
+running 2 tests
+test plane_extents_are_snapshotted_before_aspect_callbacks ... FAILED
+test normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks ... FAILED
+
+failures:
+
+---- plane_extents_are_snapshotted_before_aspect_callbacks stdout ----
+
+thread 'plane_extents_are_snapshotted_before_aspect_callbacks' (2654567) panicked at crates/tkv3d/tests/plane_presentations.rs:209:5:
+assertion `left == right` failed
+  left: [-10.0, 15.0, 0.0]
+ right: [-2.0, 3.0, 0.0]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks stdout ----
+
+thread 'normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks' (2654566) panicked at crates/tkv3d/tests/plane_presentations.rs:221:5:
+assertion `left == right` failed
+  left: [[0.0, 0.0, 0.0], [0.0, 0.0, 9.0]]
+ right: [[0.0, 0.0, 0.0], [0.0, 0.0, 2.0]]
+
+
+failures:
+    normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks
+    plane_extents_are_snapshotted_before_aspect_callbacks
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p rustycad-tkv3d --test plane_presentations`

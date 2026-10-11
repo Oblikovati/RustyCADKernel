@@ -1,15 +1,17 @@
    Compiling rustycad-tkv3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/crates/tkv3d)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.16s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.44s
      Running tests/plane_presentations.rs (target/debug/deps/plane_presentations-d91af2eca23b0de6)
 
-running 7 tests
+running 9 tests
 test match_uses_infinite_plane_inclusive_distance_and_ignores_null_drawer ... ok
 test nonplane_creates_current_group_without_submitting_aspects_or_vertices ... ok
-test datum_plane_builders_close_the_triangle_and_retain_native_topology ... ok
-test rectangular_plane_edges_and_isos_use_native_corner_and_increment_order ... ok
-test nonpositive_iso_capacity_keeps_native_empty_submission_behavior ... ok
+test plane_extents_are_snapshotted_before_aspect_callbacks ... ok
 test iso_undefined_casts_report_values ... ok
+test normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks ... ok
+test rectangular_plane_edges_and_isos_use_native_corner_and_increment_order ... ok
+test datum_plane_builders_close_the_triangle_and_retain_native_topology ... ok
+test nonpositive_iso_capacity_keeps_native_empty_submission_behavior ... ok
 test arrows_preserve_center_shaft_first_and_corner_shafts_last ... ok
 
-test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
