@@ -1,0 +1,71 @@
+   Compiling martensite-vulkan v0.1.0 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/vulkan)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.78s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-066d8a0ffbf1629f)
+
+running 53 tests
+test backend::capping_state::tests::mask_and_surface_follow_native_stencil_and_depth_policy ... ok
+test backend::image::tests::only_capped_depth_targets_allocate_a_combined_depth_stencil_attachment ... ok
+test backend::draw_state::tests::repeated_bounds_reuse_constants_but_live_transforms_upload ... ok
+test backend::draw_state::tests::pipeline_change_repushes_even_identical_transform_bytes ... ok
+test backend::line_device::tests::widths_must_fit_the_selected_device_range ... ok
+test backend::line_device::tests::absent_line_and_wide_capabilities_reject_only_unsupported_requests ... ok
+test backend::memory_selection::tests::device_memory_selection_preserves_required_properties ... ok
+test backend::memory_selection::tests::readback_falls_back_when_cached_type_is_not_allowed ... ok
+test backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match ... ok
+test backend::memory_selection::tests::readback_requires_coherence_even_when_cached ... ok
+test backend::memory_selection::tests::unsupported_memory_returns_no_selection ... ok
+test backend::memory_selection::tests::uploads_keep_first_compatible_memory ... ok
+test backend::pipeline::tests::triangle_constants_do_not_invalidate_fragment_state ... ok
+test backend::pipeline_state::tests::default_opaque_buffer_preserves_alpha_during_annotation_blending ... ok
+test backend::pipeline_state::tests::triangle_pipelines_do_not_require_dynamic_line_width ... ok
+test backend::point_sprite::tests::point_sizes_respect_feature_and_range ... ok
+test backend::pipeline_variants::tests::stencil_variants_round_trip_clamp_and_clipping_flags ... ok
+test backend::window_blit::tests::blit_covers_the_top_left_extent ... ok
+test backend::window_chain::tests::rejected_surface_presentations_still_own_the_fence ... ok
+test backend::window_support::tests::presentation_modes_and_formats_are_explicit ... ok
+test backend::window_support::tests::surface_limits_bound_counts_and_dimensions ... ok
+test capping_planes::tests::sibling_halfspaces_are_reversed_and_intersected_not_unioned ... ok
+test capping_geometry::tests::homogeneous_plane_vertices_lie_on_translated_cardinal_and_oblique_planes ... ok
+test clipping::tests::affine_transform_validation_does_not_reject_mirroring_or_singular_scale ... ok
+test clipping::tests::empty_volume_is_valid_but_empty_or_invalid_chains_are_rejected ... ok
+test clipping::tests::storage_layout_preserves_chains_equations_and_model ... ok
+test driver_text::tests::multiline_tabs_controls_and_kerning_follow_native_width_rules ... ok
+test driver_text::tests::font_parameters_use_view_resolution_and_native_minimum_height ... ok
+test face_culling::tests::automatic_culling_is_only_for_closed_opaque_geometry ... ok
+test capping_style::tests::inheritance_preserves_cap_alpha_and_shading_while_copying_requested_properties ... ok
+test group_flipping::tests::nested_identity_push_restores_each_saved_model_and_exact_clip ... ok
+test group_flipping::tests::no_rotation_preserves_the_original_clip_precision ... ok
+test group_flipping::tests::offset_reference_origin_is_fixed_by_the_rotation ... ok
+test group_flipping::tests::eight_axis_signs_choose_native_half_turns ... ok
+test light_snapshot::tests::ambient_revision_refresh_filters_disabled_lights_and_snapshots_are_immutable ... ok
+test light_snapshot::tests::snapshot_rejects_nonfinite_inverse_view_with_offending_value ... ok
+test light_snapshot::tests::headlights_translate_positions_but_only_rotate_and_normalize_directions ... ok
+test lighting::tests::inverse_transpose_and_eye_use_separate_model_and_view_matrices ... ok
+test light_snapshot::tests::spot_records_keep_cone_attenuation_range_and_world_position ... ok
+test highlight_style::tests::color_highlight_preserves_homogeneous_position_weight ... ok
+test retained_lighting::tests::native_surface_fallbacks_and_unsupported_models_are_explicit ... ok
+test light_snapshot::tests::null_and_empty_sets_preserve_native_ambient_alpha_difference ... ok
+test light_snapshot::tests::unlit_view_replaces_sources_with_white_ambient_even_for_lit_aspects ... ok
+test raster_image::tests::grayscale_and_alpha_glyphs_have_matching_coverage ... ok
+test raster_image::tests::immutable_images_reject_bad_shape_and_nonfinite_components ... ok
+test light_snapshot::tests::directional_sources_negate_direction_and_keep_intensity_separate_from_rgb ... ok
+test text_font::tests::font_cache_key_distinguishes_resolution_height_aspect_and_hinting ... ok
+test lighting::tests::stencil_masks_force_unlit_and_cannot_reacquire_surface_lighting ... ok
+test lighting::tests::std430_layout_keeps_matrices_eye_material_and_flags_at_native_offsets ... ok
+test lighting::tests::translucent_common_records_cannot_enter_the_opaque_pipeline ... ok
+test lighting::tests::std430_sources_keep_eighty_byte_stride_and_enabled_count ... ok
+test lighting::tests::validation_rejects_nonfinite_and_singular_inputs_and_mismatched_normals ... ok
+test text_atlas::tests::atlas_gutters_wrapping_and_quad_uvs_preserve_coverage ... ok
+
+test result: ok. 53 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/group_flipping.rs (target/debug/deps/group_flipping-49fa5fb8e74ff697)
+
+running 4 tests
+test ordered_nested_commands_restore_ordinary_geometry_and_keep_selection_flipper ... ok
+test native_fill_filter_keeps_cap_masks_unflipped_and_bypasses_group_transform ... ok
+test flipping_is_camera_dependent_and_clear_removes_the_brackets ... ok
+test every_flipping_mode_reaches_retained_draws ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
