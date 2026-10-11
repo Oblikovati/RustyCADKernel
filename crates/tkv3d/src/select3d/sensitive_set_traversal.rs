@@ -13,21 +13,15 @@ fn with_built_tree<S: Select3DSensitiveSet + ?Sized, R>(
     body: impl FnOnce(&BvhTree<BvhVec3d>, &Select3DBndBox3d) -> Result<R, Failure>,
 ) -> Result<R, Failure> {
     let mut content = set.set_base().lock_content();
-    let (tree, bounds) = {
-        let mut primitives = SetPrimitives {
-            set,
-            content: &mut content,
-        };
-        primitives.update()?;
-        let bounds = primitives.cached_box()?;
-        (primitives.take_primitive_bvh()?, bounds)
-    };
-    let result = body(&tree, &bounds);
-    SetPrimitives {
+    let mut primitives = SetPrimitives {
         set,
         content: &mut content,
-    }
-    .restore_primitive_bvh(tree);
+    };
+    primitives.update()?;
+    let bounds = primitives.cached_box()?;
+    let tree = primitives.take_primitive_bvh()?;
+    let result = body(&tree, &bounds);
+    primitives.restore_primitive_bvh(tree);
     result
 }
 
@@ -48,26 +42,67 @@ fn process_elements<S: Select3DSensitiveSet + ?Sized>(
     pick_result: &mut SelectBasicsPickResult,
     matches_nb: &mut i32,
 ) -> Result<bool, Failure> {
-    let mut pick = SelectBasicsPickResult::default();
+    let mut state = ElementMatchState::new(pick_result, matches_nb);
     for idx in range.first..=range.last {
-        if !manager.is_overlap_allowed() {
-            if !set.element_is_inside(manager, idx, range.is_full_inside)? {
-                if to_check_all_inside {
-                    continue;
-                }
-                return Ok(false);
-            }
-        } else {
-            if !set.overlaps_element(&mut pick, manager, idx, range.is_full_inside)? {
-                continue;
-            }
-            if pick_result.depth() > pick.depth() {
-                *pick_result = pick;
-                set.set_base().set_detected_idx(idx);
-            }
+        if !process_range_element(set, manager, range, idx, to_check_all_inside, &mut state)? {
+            return Ok(false);
         }
-        *matches_nb += 1;
     }
+    Ok(true)
+}
+
+struct ElementMatchState<'a> {
+    scratch: SelectBasicsPickResult,
+    nearest: &'a mut SelectBasicsPickResult,
+    matches: &'a mut i32,
+}
+impl<'a> ElementMatchState<'a> {
+    fn new(nearest: &'a mut SelectBasicsPickResult, matches: &'a mut i32) -> Self {
+        Self {
+            scratch: SelectBasicsPickResult::default(),
+            nearest,
+            matches,
+        }
+    }
+    fn retain_nearest<S: Select3DSensitiveSet + ?Sized>(&mut self, set: &S, idx: i32) {
+        // Keep the native strict comparison: unordered NaN depths must not replace a pick.
+        if self.nearest.depth() > self.scratch.depth() {
+            *self.nearest = self.scratch;
+            set.set_base().set_detected_idx(idx);
+        }
+    }
+}
+fn process_range_element<S: Select3DSensitiveSet + ?Sized>(
+    set: &S,
+    manager: &dyn SelectBasicsSelectingVolumeManager,
+    range: &ElementRange,
+    idx: i32,
+    check_all: bool,
+    state: &mut ElementMatchState<'_>,
+) -> Result<bool, Failure> {
+    // Callbacks may change volume policy; native OCCT queries it for every element.
+    let overlap = manager.is_overlap_allowed();
+    if !match_range_element(set, manager, range, idx, overlap, state)? {
+        return Ok(overlap || check_all);
+    }
+    *state.matches += 1;
+    Ok(true)
+}
+fn match_range_element<S: Select3DSensitiveSet + ?Sized>(
+    set: &S,
+    manager: &dyn SelectBasicsSelectingVolumeManager,
+    range: &ElementRange,
+    idx: i32,
+    overlap: bool,
+    state: &mut ElementMatchState<'_>,
+) -> Result<bool, Failure> {
+    if !overlap {
+        return set.element_is_inside(manager, idx, range.is_full_inside);
+    }
+    if !set.overlaps_element(&mut state.scratch, manager, idx, range.is_full_inside)? {
+        return Ok(false);
+    }
+    state.retain_nearest(set, idx);
     Ok(true)
 }
 
@@ -198,27 +233,33 @@ fn visit_children(
     full_inside_check: bool,
     to_check_all_inside: bool,
 ) -> Result<Option<ChildVisits>, Failure> {
-    let mut left = NodeInStack {
-        id: data.0,
-        is_full_inside: full_inside_check,
-    };
-    let mut right = NodeInStack {
-        id: data.1,
-        is_full_inside: full_inside_check,
-    };
+    let mut left = child_stack_node(data.0, full_inside_check);
+    let mut right = child_stack_node(data.1, full_inside_check);
     let (mut to_left, mut to_right) = (true, true);
     if !node.is_full_inside {
         to_left = overlaps_node(manager, tree, &mut left, full_inside_check)?;
         to_right = overlaps_node(manager, tree, &mut right, full_inside_check)?;
     }
-    if !manager.is_overlap_allowed() && !to_check_all_inside {
-        if !to_left || !to_right {
+    let visits = ((left, to_left), (right, to_right));
+    filter_child_visits(manager, to_check_all_inside, visits)
+}
+fn child_stack_node(id: i32, is_full_inside: bool) -> NodeInStack {
+    // Containment traversal inherits this flag before volume callbacks refine it.
+    NodeInStack { id, is_full_inside }
+}
+fn filter_child_visits(
+    manager: &dyn SelectBasicsSelectingVolumeManager,
+    check_all: bool,
+    mut visits: ChildVisits,
+) -> Result<Option<ChildVisits>, Failure> {
+    if !manager.is_overlap_allowed() && !check_all {
+        if !visits.0.1 || !visits.1.1 {
             return Ok(None);
         }
-        to_left &= !left.is_full_inside;
-        to_right &= !right.is_full_inside;
+        visits.0.1 &= !visits.0.0.is_full_inside;
+        visits.1.1 &= !visits.1.0.is_full_inside;
     }
-    Ok(Some(((left, to_left), (right, to_right))))
+    Ok(Some(visits))
 }
 
 /// The overlap test of a child node box, clearing its full-inside flag when it misses.
@@ -250,49 +291,120 @@ fn traverse<S: Select3DSensitiveSet + ?Sized>(
     pick_result: &mut SelectBasicsPickResult,
     matches_nb: &mut i32,
 ) -> Result<bool, Failure> {
-    let mut stack: Vec<NodeInStack> = Vec::with_capacity(MAX_TREE_DEPTH as usize);
+    let mut inputs = TraversalInputs {
+        set,
+        manager,
+        tree,
+        full_inside_check,
+        to_check_all_inside,
+        pick_result,
+        matches_nb,
+    };
+    run_traversal(&mut inputs)
+}
+struct TraversalInputs<'a, S: Select3DSensitiveSet + ?Sized> {
+    set: &'a S,
+    manager: &'a dyn SelectBasicsSelectingVolumeManager,
+    tree: &'a BvhTree<BvhVec3d>,
+    full_inside_check: bool,
+    to_check_all_inside: bool,
+    pick_result: &'a mut SelectBasicsPickResult,
+    matches_nb: &'a mut i32,
+}
+enum TraversalStep {
+    Next(NodeInStack),
+    Finished(bool),
+}
+fn run_traversal<S: Select3DSensitiveSet + ?Sized>(
+    inputs: &mut TraversalInputs<'_, S>,
+) -> Result<bool, Failure> {
+    let mut stack = Vec::with_capacity(MAX_TREE_DEPTH as usize);
     let mut node = NodeInStack::default();
     loop {
-        let info = tree.node_info_buffer()[node.id as usize];
-        if info.x() == 0 {
-            let Some(((left, to_left), (right, to_right))) = visit_children(
-                manager,
-                tree,
-                node,
-                (info.y(), info.z()),
-                full_inside_check,
-                to_check_all_inside,
-            )?
-            else {
-                return Ok(false);
-            };
-            if to_left || to_right {
-                node = if to_left { left } else { right };
-                if to_left && to_right {
-                    stack.push(right);
-                }
-                continue;
-            }
-        } else {
-            let range = ElementRange {
-                first: info.y(),
-                last: info.z(),
-                is_full_inside: node.is_full_inside,
-            };
-            if !process_elements(
-                set,
-                manager,
-                &range,
-                to_check_all_inside,
-                pick_result,
-                matches_nb,
-            )? {
-                return Ok(false);
-            }
+        match visit_traversal_node(inputs, node, &mut stack)? {
+            TraversalStep::Next(next) => node = next,
+            TraversalStep::Finished(result) => return Ok(result),
         }
-        let Some(next) = stack.pop() else {
-            return Ok(true);
-        };
-        node = next;
     }
 }
+fn visit_traversal_node<S: Select3DSensitiveSet + ?Sized>(
+    inputs: &mut TraversalInputs<'_, S>,
+    node: NodeInStack,
+    stack: &mut Vec<NodeInStack>,
+) -> Result<TraversalStep, Failure> {
+    let info = inputs.tree.node_info_buffer()[node.id as usize];
+    let indices = (info.y(), info.z());
+    if info.x() == 0 {
+        return visit_inner_node(inputs, node, indices, stack);
+    }
+    if !visit_leaf_node(inputs, node, indices)? {
+        return Ok(TraversalStep::Finished(false));
+    }
+    Ok(pop_traversal_node(stack))
+}
+fn visit_leaf_node<S: Select3DSensitiveSet + ?Sized>(
+    inputs: &mut TraversalInputs<'_, S>,
+    node: NodeInStack,
+    indices: (i32, i32),
+) -> Result<bool, Failure> {
+    let range = ElementRange {
+        first: indices.0,
+        last: indices.1,
+        is_full_inside: node.is_full_inside,
+    };
+    process_elements(
+        inputs.set,
+        inputs.manager,
+        &range,
+        inputs.to_check_all_inside,
+        inputs.pick_result,
+        inputs.matches_nb,
+    )
+}
+fn traversal_child_visits<S: Select3DSensitiveSet + ?Sized>(
+    inputs: &TraversalInputs<'_, S>,
+    node: NodeInStack,
+    indices: (i32, i32),
+) -> Result<Option<ChildVisits>, Failure> {
+    visit_children(
+        inputs.manager,
+        inputs.tree,
+        node,
+        indices,
+        inputs.full_inside_check,
+        inputs.to_check_all_inside,
+    )
+}
+fn visit_inner_node<S: Select3DSensitiveSet + ?Sized>(
+    inputs: &TraversalInputs<'_, S>,
+    node: NodeInStack,
+    indices: (i32, i32),
+    stack: &mut Vec<NodeInStack>,
+) -> Result<TraversalStep, Failure> {
+    let Some(visits) = traversal_child_visits(inputs, node, indices)? else {
+        return Ok(TraversalStep::Finished(false));
+    };
+    if let Some(next) = descend_child_node(visits, stack) {
+        return Ok(TraversalStep::Next(next));
+    }
+    Ok(pop_traversal_node(stack))
+}
+fn descend_child_node(visits: ChildVisits, stack: &mut Vec<NodeInStack>) -> Option<NodeInStack> {
+    let ((left, to_left), (right, to_right)) = visits;
+    if to_left && to_right {
+        stack.push(right);
+    }
+    if to_left {
+        return Some(left);
+    }
+    to_right.then_some(right)
+}
+fn pop_traversal_node(stack: &mut Vec<NodeInStack>) -> TraversalStep {
+    stack
+        .pop()
+        .map_or(TraversalStep::Finished(true), TraversalStep::Next)
+}
+
+#[cfg(test)]
+#[path = "sensitive_set_traversal_tests.rs"]
+mod tests;
