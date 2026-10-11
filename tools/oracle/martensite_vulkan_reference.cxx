@@ -69,6 +69,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 }
 #include "martensite_vulkan_camera_animation.cxx"
 #include "martensite_vulkan_ais.cxx"
+#include "martensite_vulkan_object_animation.cxx"
 #include "martensite_vulkan_ais_line.cxx"
 #include "martensite_vulkan_ais_point.cxx"
 #include "martensite_vulkan_text.cxx"
@@ -175,7 +176,13 @@ static void run_scene(int argc, char **argv) {
     scene.context->Remove(scene.axis, false);
     return;
   }
-  if (mode.rfind("point-", 0) == 0) {
+  if (mode.rfind("animobj-", 0) == 0) {
+    MartensiteOracleAisScene scene(viewer, offset);
+    object_animation_scene(scene, view, mode, offset);
+    write_capture(view, width, height, argv[5], false);
+    print_device(view);
+    scene.context->Erase(scene.object, false);
+  } else if (mode.rfind("point-", 0) == 0) {
     MartensiteOraclePointScene scene(viewer, offset);
     scene.transition(mode, view);
     write_capture(view, width, height, argv[5], mode == "point-detected");

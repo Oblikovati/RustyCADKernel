@@ -48,6 +48,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     capping_performance::benchmark(&driver, warmup, samples);
     lighting_performance::benchmark(&driver, warmup, samples);
     camera_animation_performance::benchmark(&driver, warmup, samples);
+    object_animation_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -156,7 +157,6 @@ mod window_performance;
 #[path = "support/window_scene.rs"]
 mod window_scene;
 
-#[cfg(target_os = "linux")]
 use ais_performance::ais_scene;
 
 #[path = "support/ais_circle_performance.rs"]
@@ -185,3 +185,9 @@ mod camera_animation_performance;
 #[allow(dead_code)]
 #[path = "../tests/support/camera_animation_scene.rs"]
 mod camera_animation_scene;
+
+#[path = "support/object_animation_performance.rs"]
+mod object_animation_performance;
+#[allow(dead_code)]
+#[path = "../tests/support/object_animation_scene.rs"]
+mod object_animation_scene;

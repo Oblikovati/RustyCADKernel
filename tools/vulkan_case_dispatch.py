@@ -3,6 +3,7 @@
 from pathlib import Path
 
 CAPTURE_EXECUTABLES = {
+    "animobj-": "object_animation_capture",
     "lit-": "lighting_capture",
     "ais-": "ais_capture",
     "datum-": "ais_line_capture",
