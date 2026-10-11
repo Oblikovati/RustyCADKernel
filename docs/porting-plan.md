@@ -122,6 +122,9 @@ serializes local `main` integration, checks and deletion of completed worktrees.
    now preserves all five overloads and native retained/failed initialization state.
    [Light-source binding](ais-light-source-binding.md) adds properties and world/local
    transforms; concrete light drawings, construction and interactions remain open.
+   [Native line alpha](vulkan-line-alpha.md) now preserves forced blending in draw
+   order with depth writes. Committed native buffers support Rust-only GPU replay;
+   strict software endpoint parity and timing-baseline acceptance remain open.
    Continue its remaining dispatch alongside the remaining presentation
    and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
