@@ -34,7 +34,7 @@ pub(super) fn quadric_snapshot(
     append_quadric_detection(&mut columns, probe);
     columns
 }
-fn append_quadric_pick(columns: &mut Vec<f64>, pick: &SelectBasicsPickResult) {
+pub(super) fn append_quadric_pick(columns: &mut Vec<f64>, pick: &SelectBasicsPickResult) {
     columns.extend([
         f64::from(pick.is_valid()),
         pick.depth(),
@@ -82,7 +82,7 @@ fn append_quadric_detection(columns: &mut Vec<f64>, probe: &Handle<dyn Select3DS
             .map_or(-1., |cylinder| f64::from(cylinder.is_hollow())),
     );
 }
-fn append_quadric_point(columns: &mut Vec<f64>, point: &Point3) {
+pub(super) fn append_quadric_point(columns: &mut Vec<f64>, point: &Point3) {
     // Coordinate columns preserve exact earlier outputs when later callbacks fail.
     columns.extend([point.x(), point.y(), point.z()]);
 }
