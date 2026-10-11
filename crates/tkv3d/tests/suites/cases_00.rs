@@ -29,6 +29,14 @@ pub mod ais_context_removal;
 pub mod ais_detection_test;
 #[path = "../ais_global_status.rs"]
 pub mod ais_global_status;
+#[path = "../ais_light_dragging.rs"]
+pub mod ais_light_dragging;
+#[path = "../ais_light_highlight.rs"]
+pub mod ais_light_highlight;
+#[path = "../ais_light_presentation.rs"]
+pub mod ais_light_presentation;
+#[path = "../ais_light_selection.rs"]
+pub mod ais_light_selection;
 #[path = "../ais_line.rs"]
 pub mod ais_line;
 #[path = "../ais_plane.rs"]

@@ -311,7 +311,25 @@ mod color_scale_property_tests;
 mod context_selection_bounds;
 mod view_controller_fit_all;
 
+mod light_source_aspects;
+mod light_source_geometry;
 #[cfg(test)]
 mod view_controller_fit_fixture;
 #[cfg(test)]
 mod view_controller_fit_tests;
+
+mod light_source_arrows;
+mod light_source_presentation;
+pub use light_source_presentation::ais_light_source_compute;
+mod light_source_dragging;
+mod light_source_highlight;
+mod light_source_object;
+mod light_source_selection;
+pub use light_source_dragging::ais_light_source_process_dragging;
+pub use light_source_object::AisLightSource;
+pub use light_source_selection::AisLightSourceOwner;
+
+pub use light_source_aspects::ais_light_source_initialize;
+
+#[cfg(test)]
+mod light_source_concrete_tests;

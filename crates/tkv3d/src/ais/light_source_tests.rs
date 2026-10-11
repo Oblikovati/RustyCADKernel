@@ -4,10 +4,12 @@ use crate::{prs_mgr::*, select_mgr::*};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkmath::{gp::*, toploc::Datum3};
 use rustycad_tkservice::{aspect::AspectTypeOfMarker, graphic3d::*};
-struct FakeLightPresentation {
+pub(super) struct FakeLightPresentation {
     transient: StandardTransient,
     light: AisLightSourceBase,
     fail_refresh: std::sync::atomic::AtomicBool,
+    pub(super) persistence_calls: std::sync::atomic::AtomicUsize,
+    pub(super) frame_calls: std::sync::atomic::AtomicUsize,
 }
 rustycad_tkernel::impl_transient!(
     FakeLightPresentation,
@@ -17,10 +19,12 @@ rustycad_tkernel::impl_transient!(
     interfaces:[dyn AisLightSourceSource,dyn AisInteractiveObject,dyn SelectMgrSelectableObject,dyn PrsMgrPresentableObject]
 );
 impl FakeLightPresentation {
-    fn new(kind: Graphic3dTypeOfLightSource) -> Self {
+    pub(super) fn new(kind: Graphic3dTypeOfLightSource) -> Self {
         Self {
             transient: StandardTransient::default(),
             fail_refresh: std::sync::atomic::AtomicBool::new(false),
+            persistence_calls: std::sync::atomic::AtomicUsize::new(0),
+            frame_calls: std::sync::atomic::AtomicUsize::new(0),
             light: AisLightSourceBase::new(&Handle::new(Graphic3dCLight::new(kind))),
         }
     }
@@ -28,6 +32,16 @@ impl FakeLightPresentation {
 impl AisLightSourceSource for FakeLightPresentation {
     fn light_source_base(&self) -> &AisLightSourceBase {
         &self.light
+    }
+    fn update_light_transform_persistence(&self) -> Result<(), Failure> {
+        self.persistence_calls
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        ais_light_source_update_persistence(self)
+    }
+    fn update_light_local_transformation(&self) -> Result<(), Failure> {
+        self.frame_calls
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        ais_light_source_update_local_transform(self)
     }
     fn update_light_aspects(&self) -> Result<(), Failure> {
         if self.fail_refresh.load(std::sync::atomic::Ordering::Relaxed) {
@@ -88,7 +102,7 @@ fn configure(object: &FakeLightPresentation, kind: usize, zoom: bool, head: bool
     }
     object.set_zoomable(zoom);
 }
-fn assigned_transform() -> Transform3 {
+pub(super) fn assigned_transform() -> Transform3 {
     let mut transform = Transform3::default();
     transform
         .set_rotation(
