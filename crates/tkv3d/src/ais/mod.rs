@@ -119,3 +119,9 @@ pub use animation_playback::{
     ais_animation_pause, ais_animation_start, ais_animation_start_timer, ais_animation_stop,
     ais_animation_update, ais_animation_update_timer, ais_animation_update_with_children,
 };
+
+mod text_label;
+mod text_label_layout;
+mod text_label_presentations;
+mod text_label_style;
+pub use text_label::{AisTextLabel, AisTextLabelFields};

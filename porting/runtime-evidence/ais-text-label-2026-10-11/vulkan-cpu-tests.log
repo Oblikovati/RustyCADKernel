@@ -1,0 +1,413 @@
+running 53 tests
+test backend::capping_state::tests::mask_and_surface_follow_native_stencil_and_depth_policy ... ok
+test backend::draw_state::tests::pipeline_change_repushes_even_identical_transform_bytes ... ok
+test backend::image::tests::only_capped_depth_targets_allocate_a_combined_depth_stencil_attachment ... ok
+test backend::draw_state::tests::repeated_bounds_reuse_constants_but_live_transforms_upload ... ok
+test backend::line_device::tests::widths_must_fit_the_selected_device_range ... ok
+test backend::memory_selection::tests::device_memory_selection_preserves_required_properties ... ok
+test backend::line_device::tests::absent_line_and_wide_capabilities_reject_only_unsupported_requests ... ok
+test backend::memory_selection::tests::readback_requires_coherence_even_when_cached ... ok
+test backend::memory_selection::tests::readback_falls_back_when_cached_type_is_not_allowed ... ok
+test backend::memory_selection::tests::readback_prefers_cached_coherent_memory_over_first_match ... ok
+test backend::memory_selection::tests::unsupported_memory_returns_no_selection ... ok
+test backend::pipeline::tests::triangle_constants_do_not_invalidate_fragment_state ... ok
+test backend::pipeline_state::tests::triangle_pipelines_do_not_require_dynamic_line_width ... ok
+test backend::memory_selection::tests::uploads_keep_first_compatible_memory ... ok
+test backend::pipeline_state::tests::default_opaque_buffer_preserves_alpha_during_annotation_blending ... ok
+test backend::point_sprite::tests::point_sizes_respect_feature_and_range ... ok
+test backend::window_blit::tests::blit_covers_the_top_left_extent ... ok
+test backend::pipeline_variants::tests::stencil_variants_round_trip_clamp_and_clipping_flags ... ok
+test backend::window_support::tests::presentation_modes_and_formats_are_explicit ... ok
+test backend::window_chain::tests::rejected_surface_presentations_still_own_the_fence ... ok
+test capping_planes::tests::sibling_halfspaces_are_reversed_and_intersected_not_unioned ... ok
+test backend::window_support::tests::surface_limits_bound_counts_and_dimensions ... ok
+test capping_geometry::tests::homogeneous_plane_vertices_lie_on_translated_cardinal_and_oblique_planes ... ok
+test clipping::tests::affine_transform_validation_does_not_reject_mirroring_or_singular_scale ... ok
+test clipping::tests::storage_layout_preserves_chains_equations_and_model ... ok
+test clipping::tests::empty_volume_is_valid_but_empty_or_invalid_chains_are_rejected ... ok
+test driver_text::tests::font_parameters_use_view_resolution_and_native_minimum_height ... ok
+test driver_text::tests::multiline_tabs_controls_and_kerning_follow_native_width_rules ... ok
+test face_culling::tests::automatic_culling_is_only_for_closed_opaque_geometry ... ok
+test capping_style::tests::inheritance_preserves_cap_alpha_and_shading_while_copying_requested_properties ... ok
+test group_flipping::tests::no_rotation_preserves_the_original_clip_precision ... ok
+test group_flipping::tests::nested_identity_push_restores_each_saved_model_and_exact_clip ... ok
+test group_flipping::tests::offset_reference_origin_is_fixed_by_the_rotation ... ok
+test light_snapshot::tests::ambient_revision_refresh_filters_disabled_lights_and_snapshots_are_immutable ... ok
+test light_snapshot::tests::null_and_empty_sets_preserve_native_ambient_alpha_difference ... ok
+test light_snapshot::tests::headlights_translate_positions_but_only_rotate_and_normalize_directions ... ok
+test light_snapshot::tests::directional_sources_negate_direction_and_keep_intensity_separate_from_rgb ... ok
+test light_snapshot::tests::unlit_view_replaces_sources_with_white_ambient_even_for_lit_aspects ... ok
+test light_snapshot::tests::spot_records_keep_cone_attenuation_range_and_world_position ... ok
+test light_snapshot::tests::snapshot_rejects_nonfinite_inverse_view_with_offending_value ... ok
+test lighting::tests::inverse_transpose_and_eye_use_separate_model_and_view_matrices ... ok
+test group_flipping::tests::eight_axis_signs_choose_native_half_turns ... ok
+test lighting::tests::translucent_common_records_cannot_enter_the_opaque_pipeline ... ok
+test lighting::tests::std430_layout_keeps_matrices_eye_material_and_flags_at_native_offsets ... ok
+test retained_lighting::tests::native_surface_fallbacks_and_unsupported_models_are_explicit ... ok
+test highlight_style::tests::color_highlight_preserves_homogeneous_position_weight ... ok
+test text_font::tests::font_cache_key_distinguishes_resolution_height_aspect_and_hinting ... ok
+test raster_image::tests::grayscale_and_alpha_glyphs_have_matching_coverage ... ok
+test lighting::tests::std430_sources_keep_eighty_byte_stride_and_enabled_count ... ok
+test lighting::tests::validation_rejects_nonfinite_and_singular_inputs_and_mismatched_normals ... ok
+test raster_image::tests::immutable_images_reject_bad_shape_and_nonfinite_components ... ok
+test lighting::tests::stencil_masks_force_unlit_and_cannot_reacquire_surface_lighting ... ok
+test text_atlas::tests::atlas_gutters_wrapping_and_quad_uvs_preserve_coverage ... ok
+
+test result: ok. 53 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test real_interactive_triangle_activates_and_deactivates_its_sensitive_point ... ok
+test object_view_affinity_survives_erase_and_redisplay ... ok
+test display_mode_switches_color_and_keeps_only_one_visible_presentation ... ok
+test retained_ais_geometry_transform_and_resize_reach_the_rendered_frame ... ok
+test failed_presentation_mode_preserves_partial_native_status ... ok
+test context_display_and_erase_update_the_real_view_and_reuse_presentations ... ok
+test removal_destroys_gpu_presentations_and_redisplay_recomputes_geometry ... ok
+test bulk_lifecycle_updates_once_and_clear_prs_retains_selection_activation ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 3 tests
+test animation_constructor_supports_repeated_bounded_progress_for_performance ... ok
+test animation_frames_invalidate_view_and_defer_submission_until_requested_redraw ... ok
+test native_fixture_modes_keep_complete_camera_state_and_retained_triangle ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 3 tests
+test capping_cannot_accidentally_mask_lines ... ok
+test invalid_capping_order_fails_before_backend_submission ... ok
+test complete_masks_and_ordinary_draws_preserve_their_order ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 10 tests
+test shadow_and_own_groups_keep_separate_masks_even_when_their_volumes_overlap ... ok
+test child_on_flag_does_not_disable_a_cap_in_an_enabled_chain ... ok
+test cap_default_resolves_live_view_model_and_rejects_pbr ... ok
+test material_inheritance_copies_interior_color_without_changing_plane_or_shading ... ok
+test cap_plane_model_replaces_group_and_structure_transforms ... ok
+test cap_masks_snapshot_live_equations_and_preserve_ordinary_geometry ... ok
+test closed_group_masks_accumulate_unless_object_properties_require_separate_surfaces ... ok
+test persistent_parent_uses_local_caps_but_disables_global_fragment_planes ... ok
+test open_disabled_outside_empty_and_override_states_do_not_generate_caps ... ok
+test lit_caps_keep_native_normals_and_unlit_masks_for_every_legacy_model ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 1 test
+test retained_capture_cases_submit_live_clipping_and_clear_it_when_requested ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 1 test
+test attaching_clipping_preserves_geometry_and_empty_volume_removes_it ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 9 tests
+test world_plane_coordinates_include_structure_and_group_transforms ... ok
+test local_override_retains_fragment_clipping_for_a_persistent_structure ... ok
+test persistent_structure_uses_global_planes_only_for_its_world_anchor ... ok
+test group_persistence_clears_model_translation_before_fragment_clipping ... ok
+test recalculated_empty_bounds_are_culled_even_without_a_clip_plane ... ok
+test view_planes_follow_live_equations_flags_and_chain_links_without_mutating_prior_frames ... ok
+test local_sequences_intersect_global_chains_and_even_empty_override_replaces_globals ... ok
+test bounding_box_culls_the_entire_structure_and_its_check_can_be_disabled ... ok
+test invalid_or_unsupported_planes_fail_redraw_and_cannot_return_stale_capture ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test packed_colors_vec2_positions_and_both_index_widths ... ok
+test unindexed_buffers_and_truncated_attributes ... ok
+test homogeneous_positions_reject_nonfinite_weights ... ok
+test homogeneous_positions_preserve_finite_weights ... ok
+test multiple_geometry_sources_share_a_live_parent ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+test group_and_primitive_aspects_keep_the_native_sequence ... ok
+test retained_buffers_visibility_and_clear_are_observed ... ok
+test replacing_aspects_updates_all_retained_slots ... ok
+test unsupported_shading_and_invalid_indices_fail_explicitly ... ok
+test unsupported_raster_states_fail_instead_of_being_ignored ... ok
+test unsupported_group_commands_remain_ordered_until_clear ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test ordered_nested_commands_restore_ordinary_geometry_and_keep_selection_flipper ... ok
+test native_fill_filter_keeps_cap_masks_unflipped_and_bypasses_group_transform ... ok
+test flipping_is_camera_dependent_and_clear_removes_the_brackets ... ok
+test every_flipping_mode_reaches_retained_draws ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+
+running 2 tests
+test explicit_homogeneous_vertices_validate_all_four_components ... ok
+test native_bounds_ignore_weight_and_retained_buffers_remain_live ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 3 tests
+test pbr_and_transparent_back_materials_are_rejected_without_phong_substitution ... ok
+test live_nodal_normals_snapshot_without_mutating_previous_draws ... ok
+test default_and_missing_normals_resolve_using_native_surface_policy ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test immutable_lines_reject_invalid_state_and_indices ... ok
+test surface_only_states_do_not_reject_native_lines ... ok
+test independent_segments_and_polylines_restart_per_bound ... ok
+test incomplete_endpoints_and_single_point_bounds_produce_no_extra_lines ... ok
+test all_native_line_modes_keep_live_width_pattern_and_vertex_color ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 9 tests
+test aspect_tints_ambient_diffuse_and_emission_but_never_specular ... ok
+test equality_is_bitwise_including_signed_zero_and_nan_payloads ... ok
+test aliasing_copies_front_instead_of_reinitializing_back ... ok
+test gamma_conversion_preserves_fourth_channels_and_never_converts_pbr ... ok
+test highlight_preserves_alpha_and_non_color_properties_on_both_faces ... ok
+test packed_order_matches_shader_abi ... ok
+test native_defaults_and_mutable_coefficients ... ok
+test pbr_init_preserves_unused_channels_and_packs_normalized_roughness ... ok
+test physical_material_ignores_interior_color ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test performance_animation_reuses_bounded_progress_and_presentation ... ok
+test object_updates_defer_redraw_and_keep_active_selection ... ok
+test immediate_layer_invalidates_only_for_escaped_z_range ... ok
+test all_capture_modes_keep_exact_local_endpoints ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 4 tests
+test invalid_sprite_shapes_and_components_are_rejected ... ok
+test indexed_point_submission_preserves_order_and_rejects_missing_vertices ... ok
+test batch_retains_one_draw_for_1024_points ... ok
+test all_point_modes_lower_to_sprites_or_explicitly_empty_frames ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+running 7 tests
+test injected_backends_can_report_input_errors ... ok
+test malformed_geometry_reports_the_offending_input ... ok
+test invalid_extents_and_clear_colors_fail_before_backend_calls ... ok
+test named_recording_backend_uses_the_same_capture_contract ... ok
+test ordered_layers_retain_draw_ranges_and_empty_frame_clear ... ok
+test transparency_and_invalid_transforms_are_rejected ... ok
+test retained_transform_is_available_to_injected_backends ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test native_empty_shadow_bounds_are_hidden_when_frustum_culling_is_enabled ... ok
+test shadow_keeps_persistence_handle_when_source_replaces_its_state ... ok
+test color_highlight_changes_submission_and_unhighlight_restores_it ... ok
+test nested_shadow_uses_original_parent_snapshot_and_its_own_transform ... ok
+test shadow_instances_ignore_source_visibility_and_keep_live_geometry ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test degenerate_triangles_preserve_strip_parity_and_ignore_unconsumed_indices ... ok
+test reordered_strip_indices_follow_both_live_index_widths ... ok
+test unsupported_topology_and_invalid_used_index_fail ... ok
+test bounds_preserve_empty_ranges_ignore_tail_and_reject_overrun ... ok
+test live_bound_colors_and_vertex_color_precedence ... ok
+test strips_fans_and_triangles_restart_at_each_colored_bound ... ok
+test unbounded_assembly_handles_short_and_incomplete_primitives ... ok
+test indexed_multi_bound_performance_fixture_submits_each_range ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 7 tests
+test textures_validate_uv_shape_and_alpha_threshold ... ok
+test unsupported_text_display_states_fail_explicitly ... ok
+test text_bookkeeping_and_ordered_live_styles_match_group_contract ... ok
+test retained_text_defaults_height_and_forwards_live_view_and_string ... ok
+test text_planes_anchor_modes_and_annotation_retain_valid_geometry ... ok
+test billboard_size_stays_fixed_and_zoomable_text_follows_camera_scale ... ok
+test font_cutoff_is_fixed_and_only_mask_blend_enables_coverage_blending ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 5 tests
+test direct_persistent_extraction_requires_a_valid_viewport ... ok
+test orthographic_persistence_does_not_mutate_the_live_perspective_camera ... ok
+test local_anchor_includes_model_translation_once ... ok
+test persistence_tracks_live_anchor_and_capture_extent ... ok
+test all_persistence_modes_reach_the_viewer_and_select_native_depth_policy ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 2 tests
+test live_structure_bounds_and_camera_changes_reach_the_frustum_cache ... ok
+test no_update_preserves_previous_cull_state_and_off_resets_it ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 14 tests
+test native_windows_reject_fake_devices_and_virtual_dump_remains_available ... ok
+test framebuffer_dimensions_limits_and_release_follow_the_dump_lifecycle ... ok
+test unsupported_window_and_removed_view_fail_explicitly ... ok
+test ordinary_view_and_group_creation_reach_the_injected_backend ... ok
+test depth_dump_and_layer_policies_follow_viewer_state ... ok
+test buffer_dump_rejects_incompatible_dimensions_and_formats ... ok
+test layer_removal_preserves_geometry_and_later_erase ... ok
+test default_unlit_view_rejects_front_only_color_and_material_distinction ... ok
+test failed_redraw_cannot_return_the_previous_successful_capture ... ok
+test padded_bottom_up_rgb_and_red_captures_preserve_logical_rows ... ok
+test unsupported_multisampling_and_connected_rendering_return_errors ... ok
+test shadow_requests_are_explicit_and_disabled_casters_remain_renderable ... ok
+test resize_and_pixmap_dump_preserve_capture_rows_and_restore_target ... ok
+test camera_geometry_visibility_and_removal_reach_redraw ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test native_window::tests::screen_masks_decode_channels_independently ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test native_window::tests::screen_masks_decode_channels_independently ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test native_window::tests::screen_masks_decode_channels_independently ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test native_window::tests::screen_masks_decode_channels_independently ... ok
+test capture_request::tests::valid_capture_arguments_and_failures_are_explicit ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

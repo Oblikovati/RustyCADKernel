@@ -525,3 +525,7 @@ consumes them in Vulkan PhongFacet, Gouraud and Phong shaders with retained
 normals and lights, clipping, front/back coefficients and live updates. Analytic
 GPU checks pass on lavapipe and AMD; strict native captures and timing budgets
 remain open. PBR, shadow maps and lit section materials still require implementation.
+
+AIS annotation placement now includes [AIS_TextLabel](ais-text-label.md), with
+paired font/layout comparisons, viewer captures and complete label-update timings.
+The existing strict text raster and additional display-mode gaps remain open.
