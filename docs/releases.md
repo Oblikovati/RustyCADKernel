@@ -31,7 +31,7 @@ registry. This process does not publish to crates.io.
 On a clean checkout at the release tag, use the pinned Rust toolchain and run:
 
 ```sh
-python3 tools/release_packages.py --tag v0.1.0
+python3 tools/release_packages.py --tag v0.1.1
 ```
 
 The command derives the package inventory from Cargo metadata. Cargo creates
