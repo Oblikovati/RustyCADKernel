@@ -108,7 +108,7 @@ pub(super) fn fetch(c: &mut AisViewController, name: &str, crouch: f64, run: f64
     );
     assert_native(&values, name);
 }
-fn component_values(w: &AisWalkDelta) -> Vec<f64> {
+pub(super) fn component_values(w: &AisWalkDelta) -> Vec<f64> {
     [
         AisWalkTranslation::Forward,
         AisWalkTranslation::Side,
@@ -128,7 +128,7 @@ fn component_values(w: &AisWalkDelta) -> Vec<f64> {
     .flat_map(|p| [p.value, p.pressure, p.duration])
     .collect()
 }
-fn walk_queries(w: &AisWalkDelta) -> [f64; 7] {
+pub(super) fn walk_queries(w: &AisWalkDelta) -> [f64; 7] {
     [
         w.is_empty(),
         w.to_move(),

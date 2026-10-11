@@ -155,7 +155,7 @@ fn append_primitive_xr(values: &mut Vec<f64>, view: &V3dView) {
         values.extend([0.0; 21]);
     }
 }
-fn append_primitive_camera(values: &mut Vec<f64>, c: &Graphic3dCamera) {
+pub(super) fn append_primitive_camera(values: &mut Vec<f64>, c: &Graphic3dCamera) {
     for p in [c.center(), c.eye()] {
         values.extend([p.x(), p.y(), p.z()]);
     }
