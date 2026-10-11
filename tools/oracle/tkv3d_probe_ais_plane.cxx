@@ -52,6 +52,22 @@ static void ais_plane_selection(const occ::handle<AIS_Plane>& obj,int mode) {
   for(int i=1;i<=poly->NbNodes();++i)ga_pnt(poly->Node(i));
   for(int i=1;i<=poly->NbTriangles();++i){int a,b,c;poly->Triangle(i).Get(a,b,c);ga_int(a);ga_int(b);ga_int(c);}
 }
+static void ais_plane_geometry_operation(const occ::handle<AIS_Plane>& obj,int op) {
+  switch(op) {
+  case 12:obj->SetCenter(gp_Pnt(7,8,9));break;
+  case 13:obj->SetComponent(ais_plane_geometry(2));break;
+  case 14:obj->SetAxis2Placement(ais_plane_axis(),AIS_TOPL_YZPlane);break;
+  case 15:obj->SetPlaneAttributes(ais_plane_geometry(1),gp_Pnt(2,3,4),gp_Pnt(2,1,0),gp_Pnt(100,100,100));break;
+  case 16:obj->SetCurrentMode(!obj->CurrentMode());break;
+  case 17:obj->SetTypeOfSensitivity(Select3D_TOS_INTERIOR);break;
+  case 18:obj->SetTypeOfSensitivity(Select3D_TOS_BOUNDARY);break;
+  case 19:ais_plane_selection(obj,-1);break;
+  case 20:ais_plane_selection(obj,0);break;
+  case 21:ais_plane_selection(obj,99);break;
+  case 22:obj->SetInfiniteState(true);break;
+  case 23:obj->SetContext(nullptr);break;
+  }
+}
 static void ais_plane_operation(const occ::handle<AIS_Plane>& obj,const occ::handle<Graphic3d_Structure>& prs,V3DisplayTrace& trace,int op) {
   switch(op) {
   case 0:case 1:case 2:case 3: {
@@ -65,18 +81,7 @@ static void ais_plane_operation(const occ::handle<AIS_Plane>& obj,const occ::han
   case 9:obj->SetMinimumSize(2.);break;
   case 10:obj->SetMinimumSize(0.);break;
   case 11:obj->UnsetMinimumSize();break;
-  case 12:obj->SetCenter(gp_Pnt(7,8,9));break;
-  case 13:obj->SetComponent(ais_plane_geometry(2));break;
-  case 14:obj->SetAxis2Placement(ais_plane_axis(),AIS_TOPL_YZPlane);break;
-  case 15:obj->SetPlaneAttributes(ais_plane_geometry(1),gp_Pnt(2,3,4),gp_Pnt(2,1,0),gp_Pnt(100,100,100));break;
-  case 16:obj->SetCurrentMode(!obj->CurrentMode());break;
-  case 17:obj->SetTypeOfSensitivity(Select3D_TOS_INTERIOR);break;
-  case 18:obj->SetTypeOfSensitivity(Select3D_TOS_BOUNDARY);break;
-  case 19:ais_plane_selection(obj,-1);break;
-  case 20:ais_plane_selection(obj,0);break;
-  case 21:ais_plane_selection(obj,99);break;
-  case 22:obj->SetInfiniteState(true);break;
-  case 23:obj->SetContext(nullptr);break;
+  default:ais_plane_geometry_operation(obj,op);break;
   }
 }
 void v3_ais_plane(std::istream& input) {
