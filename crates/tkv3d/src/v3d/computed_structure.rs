@@ -27,8 +27,8 @@ pub struct V3dComputedStructure {
     base: Graphic3dStructureBase,
     owner: WeakHandle<dyn V3dStructureComputer>,
 }
-rustycad_tkernel::impl_transient!(V3dComputedStructure, "Graphic3d_Structure", dyn Graphic3dStructureSource, transient,
-    interfaces: [dyn Graphic3dStructureSource]);
+#[path = "computed_structure_type.rs"]
+mod inherited_type;
 
 impl V3dComputedStructure {
     /// A structure of a manager computed by `owner`; the manager without driver is refused.

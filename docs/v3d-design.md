@@ -1,5 +1,12 @@
 # Martensite TKV3d design notes
 
+Private grid and trihedron structures at OCCT `3d097a0` override `Compute` without
+declaring RTTI. Martensite's `V3dComputedStructure` therefore inherits the
+`Graphic3dStructureSource` descriptor, whose parent is `Standard_Transient`.
+Its separate Rust caster descriptor preserves concrete/interface handle round
+trips without adding a native inheritance level. `computed_structure_rtti`
+regression tests check descriptor identity, parent and casts.
+
 This note fixes how the OCCT toolkit TKV3d maps to Martensite (`crates/tkv3d`, `rustycad-tkv3d`:
 packages BRepFont, Select3D, SelectBasics, SelectMgr, Prs3d, StdPrs, StdSelect, DsgPrs, PrsDim,
 PrsMgr, AIS and V3d). The rules of [geom-design.md](geom-design.md) sections 1 to 4,

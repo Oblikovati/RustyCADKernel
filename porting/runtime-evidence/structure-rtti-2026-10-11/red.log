@@ -1,0 +1,55 @@
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling smallvec v1.16.2
+   Compiling rustc_apfloat v0.2.3+llvm-462a31f5a5ab
+   Compiling allocator-api2 v0.4.0
+   Compiling bytemuck v1.25.2
+   Compiling bitflags v2.13.2
+   Compiling rustycad-cmath v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/cmath)
+   Compiling pkg-config v0.3.34
+   Compiling once_cell v1.21.4
+   Compiling num-traits v0.2.19
+   Compiling x11-dl v2.21.0
+   Compiling num-complex v0.4.6
+   Compiling rustycad-tkernel v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkernel)
+   Compiling rustycad-tkmath v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkmath)
+   Compiling rustycad-tkg2d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkg2d)
+   Compiling rustycad-tkservice v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkservice)
+   Compiling rustycad-tkg3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkg3d)
+   Compiling rustycad-tkgeombase v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkgeombase)
+   Compiling rustycad-tkbrep v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkbrep)
+   Compiling rustycad-tkgeomalgo v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkgeomalgo)
+   Compiling rustycad-tktopalgo v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tktopalgo)
+   Compiling rustycad-tkshhealing v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkshhealing)
+   Compiling rustycad-tkmesh v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkmesh)
+   Compiling rustycad-tkv3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkv3d)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 54.65s
+     Running tests/computed_structure_rtti.rs (target/debug/deps/computed_structure_rtti-b176306e9a19586a)
+
+running 2 tests
+test computed_structure_inherits_native_descriptor_and_parent ... FAILED
+test inherited_descriptor_preserves_concrete_and_interface_casts ... FAILED
+
+failures:
+
+---- computed_structure_inherits_native_descriptor_and_parent stdout ----
+
+thread 'computed_structure_inherits_native_descriptor_and_parent' (1770882) panicked at crates/tkv3d/tests/computed_structure_rtti.rs:10:5:
+assertion `left == right` failed
+  left: "Graphic3d_Structure"
+ right: "Standard_Transient"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- inherited_descriptor_preserves_concrete_and_interface_casts stdout ----
+
+thread 'inherited_descriptor_preserves_concrete_and_interface_casts' (1770883) panicked at crates/tkv3d/tests/computed_structure_rtti.rs:22:5:
+assertion failed: structure.is_instance(<dyn Graphic3dStructureSource>::static_type())
+
+
+failures:
+    computed_structure_inherits_native_descriptor_and_parent
+    inherited_descriptor_preserves_concrete_and_interface_casts
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p rustycad-tkv3d --test computed_structure_rtti`
