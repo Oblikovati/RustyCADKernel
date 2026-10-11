@@ -1,0 +1,44 @@
+{
+  "api": [
+    {
+      "upstream_id": "AIS_ViewController::PickPoint(gp_Pnt &, const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &, const NCollection_Vec2<int> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "2dc6bcdb058fa00b703ab5d330d47f3e240378b780856cdd43d1550e7529b750",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::pick_point",
+      "status": "implemented",
+      "notes": "Martensite complete native controller picking/orbit pivot or context gravity forwarding at OCCT 3d097a0. 80 committed real context/view/point native snapshots plus Rust failure-order, empty-bound fallback and infinite-coordinate regressions. Native Precision::IsInfinite, integer cursor/window division, unfiltered selection and retained output on miss. See docs/ais-controller-picking.md. Controller class/dispatch remains partial."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::GravityPoint(const occ::handle<V3d_View> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "30e1ba67cc9c98941c8f04dd61db8aa15714a8c6af6cb2fd4479a05266dd4d3d",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::gravity_point",
+      "status": "implemented",
+      "notes": "Martensite complete native controller picking/orbit pivot or context gravity forwarding at OCCT 3d097a0. 80 committed real context/view/point native snapshots plus Rust failure-order, empty-bound fallback and infinite-coordinate regressions. Native Precision::IsInfinite, integer cursor/window division, unfiltered selection and retained output on miss. See docs/ais-controller-picking.md. Controller class/dispatch remains partial."
+    },
+    {
+      "upstream_id": "AIS_ViewController::PickAxis(gp_Pnt &, const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &, const gp_Ax1 &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "581c47685949858a75d4427fe962659df0fb2148c3391907c0c42c8f9526d7f7",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::pick_axis",
+      "status": "implemented",
+      "notes": "Martensite complete native controller picking/orbit pivot or context gravity forwarding at OCCT 3d097a0. 80 committed real context/view/point native snapshots plus Rust failure-order, empty-bound fallback and infinite-coordinate regressions. Native Precision::IsInfinite, integer cursor/window division, unfiltered selection and retained output on miss. See docs/ais-controller-picking.md. Controller class/dispatch remains partial."
+    },
+    {
+      "upstream_id": "AIS_ViewController::GravityPoint(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "f93c0417bcdcad2e7685a594a7202b1ed094612efcf3ab09f03d7bd14db9c3b3",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::gravity_point",
+      "status": "implemented",
+      "notes": "Martensite complete native controller picking/orbit pivot or context gravity forwarding at OCCT 3d097a0. 80 committed real context/view/point native snapshots plus Rust failure-order, empty-bound fallback and infinite-coordinate regressions. Native Precision::IsInfinite, integer cursor/window division, unfiltered selection and retained output on miss. See docs/ais-controller-picking.md. Controller class/dispatch remains partial."
+    }
+  ]
+}

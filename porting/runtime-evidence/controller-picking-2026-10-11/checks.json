@@ -1,0 +1,30 @@
+{
+  "project": "Martensite",
+  "base_revision": "cdbb118f8",
+  "commands": [
+    {
+      "command": "cargo test -p rustycad-tkv3d --all-targets --locked",
+      "exit_code": 0,
+      "passed": 586
+    },
+    {
+      "command": "cargo clippy -p rustycad-tkv3d --all-targets --locked -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 tools/toolkit_test_suites.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 tools/check_rust_format.py",
+      "exit_code": 0
+    }
+  ],
+  "log_sha256_uncompressed": {
+    "tests.log.gz": "1d62b2952f71914f04657f0b05224b765567eaa4ef37e4bb7d85105a8f3a5bd2",
+    "clippy.log.gz": "8c20e9a8f4fdea4d3ca98a9562b198ddda262394691649301372fa3125511539"
+  },
+  "native_snapshots": 80,
+  "new_regressions": 4,
+  "local_only": true
+}
