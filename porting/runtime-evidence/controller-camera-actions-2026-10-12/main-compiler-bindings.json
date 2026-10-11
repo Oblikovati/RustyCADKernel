@@ -1,0 +1,363 @@
+[
+  {
+    "upstream_id": "AIS_ViewController::handleCameraActions(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &, const AIS_WalkDelta &)",
+    "toolkit": "TKV3d",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "29f796d9da4963b93acea60a9842cbdcbce5f2d14ab52c5de18df26818439711"
+    ],
+    "cpp_matches": [
+      {
+        "id": "29f796d9da4963b93acea60a9842cbdcbce5f2d14ab52c5de18df26818439711",
+        "usr": "c:@S@AIS_ViewController@F@handleCameraActions#&1$@N@opencascade@S@handle>#$@S@AIS_InteractiveContext#&1$@N@opencascade@S@handle>#$@S@V3d_View#&1$@S@AIS_WalkDelta#",
+        "qualified_name": "AIS_ViewController::handleCameraActions",
+        "kind": "CXXMethod",
+        "signature": "void (const class opencascade::handle<class AIS_InteractiveContext> &, const class opencascade::handle<class V3d_View> &, const struct AIS_WalkDelta &)",
+        "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::ais::AisViewController::handle_camera_actions"
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::ais::AisViewController::handle_camera_actions"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkv3d::ais::AisViewController::handle_camera_actions",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "context",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "AisInteractiveContext",
+                        "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                        "args": null
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "view",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle",
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "path": "V3dView",
+                                    "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                                    "args": null
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "walk",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "AisWalkDelta",
+                        "resolved_item_path": "rustycad_tkv3d::ais::walk_delta::AisWalkDelta",
+                        "args": null
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::AisViewController",
+              "resolved_item_path": "rustycad_tkv3d::ais::view_controller::AisViewController",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "cc1cfe666180ae011e771b6a4304ab84b29ddb4572f207d6ff4a8282a4bbd3bc",
+        "source_file": "crates/tkv3d/src/ais/view_controller_camera_actions.rs",
+        "source_status": null,
+        "source_sha256": "ac8b1292bcbc2c5fca868b385144d8488f66c39ae19d2f2f6c270b0a201397a6"
+      }
+    ],
+    "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx"
+  },
+  {
+    "upstream_id": "AIS_ViewController::contextLazyMoveTo(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &, const NCollection_Vec2<int> &)",
+    "toolkit": "TKV3d",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "46ca14df6653663fa4dbaddd6e450e0e9fc9042e58c62c60683d306996d7fd6f"
+    ],
+    "cpp_matches": [
+      {
+        "id": "46ca14df6653663fa4dbaddd6e450e0e9fc9042e58c62c60683d306996d7fd6f",
+        "usr": "c:@S@AIS_ViewController@F@contextLazyMoveTo#&1$@N@opencascade@S@handle>#$@S@AIS_InteractiveContext#&1$@N@opencascade@S@handle>#$@S@V3d_View#&1$@S@NCollection_Vec2>#I#",
+        "qualified_name": "AIS_ViewController::contextLazyMoveTo",
+        "kind": "CXXMethod",
+        "signature": "void (const class opencascade::handle<class AIS_InteractiveContext> &, const class opencascade::handle<class V3d_View> &, const class NCollection_Vec2<int> &)",
+        "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkv3d::ais::AisViewController::context_lazy_move_to"
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::ais::AisViewController::context_lazy_move_to"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkv3d::ais::AisViewController::context_lazy_move_to",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": true,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "context",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "AisInteractiveContext",
+                        "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                        "args": null
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "view",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "Handle",
+                        "resolved_item_path": "rustycad_tkernel::standard::handle::Handle",
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "resolved_path": {
+                                    "path": "V3dView",
+                                    "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                                    "args": null
+                                  }
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                "pixel",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "resolved_path": {
+                        "path": "Vec2",
+                        "resolved_item_path": "rustycad_tkernel::ncollection::vector::Vec2",
+                        "args": {
+                          "angle_bracketed": {
+                            "args": [
+                              {
+                                "type": {
+                                  "primitive": "i32"
+                                }
+                              }
+                            ],
+                            "constraints": []
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "tuple": []
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::AisViewController",
+              "resolved_item_path": "rustycad_tkv3d::ais::view_controller::AisViewController",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "e4c50849c39ace5166893bbf1a757c0f50b472b4bcd53f123786e0435e4d9447",
+        "source_file": "crates/tkv3d/src/ais/view_controller_lazy_move.rs",
+        "source_status": null,
+        "source_sha256": "af70b300f45b35930ced31024ae8fdda5f98dda6e92296ffceb713cd99eeb917"
+      }
+    ],
+    "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx"
+  }
+]
