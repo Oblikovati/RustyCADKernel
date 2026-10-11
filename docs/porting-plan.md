@@ -97,6 +97,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    mouse gestures and six-axis walking state with native boundary/flag/copy fixtures.
    [AIS view controller input](ais-view-controller.md) now queues native selection,
    zoom and Z rotation, with public policies and UI-only navigation cancellation.
+   [Keyboard navigation](ais-view-controller-keyboard.md) now preserves frame
+   timing, all six axes, stance/thrust/release semantics and focus-loss reset.
    Continue its remaining dispatch alongside the remaining presentation
    and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).

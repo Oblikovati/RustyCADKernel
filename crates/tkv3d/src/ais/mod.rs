@@ -211,3 +211,13 @@ mod view_controller_parameters;
 mod view_controller_selection;
 mod view_controller_zoom;
 pub use view_controller::AisViewController;
+
+mod view_controller_input_state;
+mod view_controller_keyboard;
+#[cfg(test)]
+mod view_controller_keyboard_fixture;
+#[cfg(test)]
+mod view_controller_keyboard_tests;
+mod view_controller_navigation;
+mod view_controller_navigation_axes;
+mod view_controller_reset;

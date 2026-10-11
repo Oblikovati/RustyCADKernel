@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "headers_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx": "9f41b3aa572e7dab79e6abe3da58e3ae7f98a4e8cb195d33720758a1de644be2",
+    "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx": "2ac2255d204c93a7ba7b4735d3fa38dff2b3df797d8692a054e58172af88a8d3"
+  },
+  "implementations_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.cxx": "0ab7c71da3f6902eab0ff582a459ae298ad93eba6a37257d52ba87acdc4ecfd4"
+  },
+  "generator": "tools/oracle/martensite_view_controller_keys.cxx",
+  "generator_sha256": "0f8f8a4e86c99d9ff8ffe1adf303a037562f9520f8e81dff49070ff138b3d3f0",
+  "fixture": "crates/tkv3d/tests/fixtures/view-controller-keys-native.txt",
+  "fixture_sha256": "9c60381563dc026ffedbbb78012cfccd13bac6754106db00b25f09dc70bcf34f",
+  "cases": 206,
+  "native_link_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "rust_test_occt_dependency": false,
+  "frozen_stopped_event_timers": true
+}

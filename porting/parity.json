@@ -591272,6 +591272,166 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewController::thrust_speed",
       "status": "implemented",
       "notes": "Martensite controller event state at OCCT 3d097a0. Native committed fixtures preserve selection accumulation/tool flags, zoom coalescing/modifiers, touch rotation, UI-only navigation cancellation and public parameter defaults/setters. Record and constructor stay partial: rendering dispatch, animations, listener inheritance, keyboard/mouse/touch dispatch and XR remain open. See docs/ais-view-controller.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::updateEventsTime(double &, double &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "029b850a3649b54e43d4936f782bf463598e4319a80f488e34ab7f8bb645c593",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_events_time",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::EventTime",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "30e79c1b41f19af3c31d23116d8baffa8927c893a546069e8b8f7260bcba8745",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::event_time",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ChangeKeys",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "31f5796dbb60e4886ac5e615afcd704eb743d87ed6d50af5c2a4242a87ae5246",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::change_keys",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::Keys",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "38fc5c9fea8ad271160495612e5c24c3f3ba181ec32a395cf8a5f5aa93d6634b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::keys",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::KeyDown(Aspect_VKey, double, double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "4285ccb3f94dacfc506e4f0e4461c101859d18960ba0295627bf54f9d9cbf813",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::key_down",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::setAskNextFrame(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "4650520883ac35ddd9122aec1bd0302648c9367faf7f60f3a2c0e6e222fda193",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_ask_next_frame",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::KeyUp(Aspect_VKey, double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "5d581c054475b315c3caf2bad27e8db2f0a1b732441b2116b13b24621a621df6",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::key_up",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ProcessInput()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "5ed58394800e6e01bd1a75136b055a9b8a157b6bf05ce14707eeb1247e2a5c33",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::process_input",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ResetViewInput()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "678ea24ecb63ff99064119570c37a054cdc727a8f332d3c023b5b23572b517fa",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::reset_view_input",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ProcessExpose()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "73e8ea02d5a016f36f405f239ab51372480d2215875e166dd86c317de875b525",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::process_expose",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::toAskNextFrame() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "891638f9eae9c9e0aedafbad6ab149cfc21106e33e789f4d8b5d0dcb36c28c53",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::to_ask_next_frame",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ProcessClose()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "937651cf747a332e3abbc891967c310a08386d32bf501a99ce831bf77ccd2a84",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::process_close",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ProcessConfigure(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "97230711f252382136864482927ec2605c9e9b1ddc95fd596d7474618e56a812",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::process_configure",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::FetchNavigationKeys(double, double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "a35fcaf05710f408017b3b0838b67d5f3349d2c87aa50688c66456fe76c42e94",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::fetch_navigation_keys",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ProcessFocus(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "b305f6432e3bc2ececb4a5c4bfb62f4cc3f712b2d2efa8e555362a67550f4b46",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::process_focus",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::KeyFromAxis(Aspect_VKey, Aspect_VKey, double, double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "e43c547ed92d1bff92dcfde6c063a5e06e08cc8cd03bbdf076fedefa87618d7f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::key_from_axis",
+      "status": "implemented",
+      "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
     }
   ],
   "tests": [

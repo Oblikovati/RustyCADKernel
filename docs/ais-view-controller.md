@@ -6,7 +6,9 @@ policy getters/setters, selection queue editing, zoom/wheel coalescing, touch
 Z-rotation accumulation, navigation policy and previous-highlight position.
 The controller type and constructor remain partial in the ledger. Rendering
 and camera dispatch, animation ownership, window-listener inheritance,
-keyboard/mouse/multi-touch dispatch and XR are still open porting work.
+mouse/multi-touch dispatch and XR are still open porting work.
+[Keyboard navigation](ais-view-controller-keyboard.md) now adds 16 captured
+keyboard, focus/reset and event-clock declarations using the shared listener base.
 
 `AisViewController` owns independent UI and rendering buffers. Changing
 navigation mode clears four UI rotation request flags, even when choosing the
