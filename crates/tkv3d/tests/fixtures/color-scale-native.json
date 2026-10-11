@@ -1,0 +1,30 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+  "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+  "generator": "tools/oracle/martensite_color_scale.cxx",
+  "generator_sha256": "fa8bab80963fad9d28a08bf5488b25c8a375ffb59fa5fd585938cbd972ab1207",
+  "null_driver_sha256": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+  "snapshot_count": 760,
+  "presentation_cases": 32,
+  "numeric_snapshots": 84,
+  "repeatability": "Two native executions byte-identical",
+  "local_only": true,
+  "fixtures": {
+    "crates/tkv3d/tests/fixtures/color-scale-native-numeric.txt": {
+      "sha256": "ac4872eca6f79e0b9b2c9ca74b47f8cd9ea3549d5df9b9ff42e9e6feccc2d25d",
+      "snapshot_count": 84
+    },
+    "crates/tkv3d/tests/fixtures/color-scale-native-scenes-1.txt": {
+      "sha256": "0c991e59b6b01a24b2a795a589887ac67944e429a3ae0d338c3cbcb4c6a98e46",
+      "snapshot_count": 324
+    },
+    "crates/tkv3d/tests/fixtures/color-scale-native-scenes-0.txt": {
+      "sha256": "3737b7eef11273a1ed0c7dc4527d7b07b668e2d867932b2dd59c5a682f5a0716",
+      "snapshot_count": 352
+    }
+  },
+  "configuration": "Local Linux, pinned full OCCT build; c++ -std=c++17, TKV3d/TKService/TKMath/TKernel; recording driver observes actual submissions; no OpenGL or GPU resources required",
+  "implementation_source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.cxx",
+  "implementation_source_sha256": "90bb3e2ba15f38e7a885df378409f2fe0b369e35f034149aaeac001ceb7679ce"
+}

@@ -270,3 +270,26 @@ mod light_source_tests;
 pub use camera_frustum::{AisCameraFrustum, AisCameraFrustumFields, AisCameraFrustumSelectionMode};
 #[cfg(test)]
 mod camera_frustum_tests;
+mod color_scale;
+mod color_scale_placement;
+mod color_scale_policies;
+mod color_scale_ranges;
+pub use color_scale::AisColorScale;
+mod color_scale_collections;
+mod color_scale_dimensions;
+pub use color_scale_collections::{
+    AisColorScaleColors, AisColorScaleFormat, AisColorScaleLabels, AisColorScaleTitle,
+};
+mod color_scale_bar;
+mod color_scale_layout;
+#[cfg(test)]
+mod color_scale_numeric_tests;
+mod color_scale_presentations;
+#[cfg(test)]
+mod color_scale_recording;
+#[cfg(test)]
+mod color_scale_scene_tests;
+mod color_scale_uniform;
+
+#[cfg(test)]
+mod color_scale_property_tests;
