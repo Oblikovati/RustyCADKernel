@@ -283,3 +283,11 @@ mod view_controller_touch_synthesis;
 mod view_controller_touch_synthesis_fixture;
 #[cfg(test)]
 mod view_controller_touch_synthesis_tests;
+
+mod context_selection_bounds;
+mod view_controller_fit_all;
+
+#[cfg(test)]
+mod view_controller_fit_fixture;
+#[cfg(test)]
+mod view_controller_fit_tests;
