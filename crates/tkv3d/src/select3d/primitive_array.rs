@@ -349,15 +349,16 @@ pub(crate) fn point_index(indices: &Handle<dyn Graphic3dIndexBufferSource>, offs
 }
 
 /// The position attribute of the vertices: its byte offset, stride and dimension (None when
-/// absent or not a 2D, 3D or 4D vector).
+/// absent; an unsupported type retains its native stride but has no position offset).
 pub(crate) fn position_attribute(
     verts: &dyn Graphic3dBufferSource,
-) -> Option<(usize, usize, bool)> {
+) -> Option<(Option<usize>, usize, bool)> {
     let (index, offset, stride) = verts.attribute_data(Graphic3dTypeOfAttribute::Pos)?;
     let data_type = verts.attribute(index)?.data_type;
     let is_3d = matches!(
         data_type,
         Graphic3dTypeOfData::Vec3 | Graphic3dTypeOfData::Vec4
     );
-    (is_3d || data_type == Graphic3dTypeOfData::Vec2).then_some((offset, stride, is_3d))
+    let position = (is_3d || data_type == Graphic3dTypeOfData::Vec2).then_some(offset);
+    Some((position, stride, is_3d))
 }
