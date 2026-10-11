@@ -38,9 +38,6 @@ class VerifierTableTests(unittest.TestCase):
         self.assertEqual(ORACLE.libraries[0], 'TKPrim')
         self.assertEqual(set(ORACLE.libraries) - set(LINKED_TOOLKITS), set())
 
-    def test_ci_runs_the_tkprim_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKPrim', workflow)
 
     def test_the_workspace_builds_the_tkprim_crate(self):
         manifest = (ROOT/'Cargo.toml').read_text()

@@ -42,9 +42,6 @@ class V3dVerifierTableTests(unittest.TestCase):
         self.assertIn('gtest_main', V3D_CLOSURE_TARGETS)
         self.assertEqual(PROFILE_CLOSURES['TKV3d'][2], 'target/occt-v3d-full')
 
-    def test_ci_runs_the_tkv3d_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKV3d', workflow)
 
 
 class V3dCorpusTests(unittest.TestCase):

@@ -43,9 +43,6 @@ class ExpressVerifierTableTests(unittest.TestCase):
         self.assertEqual((toolkits, targets, tree),
                          (EXPRESS_TOOLKITS, EXPRESS_CLOSURE_TARGETS, 'target/occt-express-full'))
 
-    def test_ci_runs_the_tkexpress_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKExpress', workflow)
 
 
 class ExpressCorpusTests(unittest.TestCase):

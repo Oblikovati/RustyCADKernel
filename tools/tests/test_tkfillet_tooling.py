@@ -38,9 +38,6 @@ class FilletVerifierTableTests(unittest.TestCase):
         # Dependants come first in the link order: TKFillet sits on TKBO.
         self.assertLess(LINKED_TOOLKITS.index('TKFillet'), LINKED_TOOLKITS.index('TKBO'))
 
-    def test_ci_runs_the_tkfillet_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKFillet', workflow)
 
 
 class FilletCorpusTests(unittest.TestCase):

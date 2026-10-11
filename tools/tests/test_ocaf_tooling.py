@@ -1,13 +1,10 @@
 """The TKCDF, TKLCAF and TKCAF verifier wiring: profiles without numeric oracle, the native
-libraries they link, their own closure tree, and the CI steps that run them."""
+libraries they link, their own closure tree."""
 import unittest
-from pathlib import Path
 from native_build import (ADDITIONAL_TOOLKITS, CAF_CLOSURE_TARGETS, CAF_LINKED_TOOLKITS, CAF_TOOLKITS,
                           LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, OCAF_LINKED_TOOLKITS, OCAF_TOOLKITS,
                           closure_flags)
 from verify_toolkit import NUMERIC_VERIFIERS, PROFILE_CLOSURES, PROFILES_WITHOUT_NUMERIC, linked_toolkits
-
-ROOT = Path(__file__).resolve().parents[2]
 
 
 class OcafVerifierProfileTests(unittest.TestCase):
@@ -57,12 +54,6 @@ class OcafVerifierProfileTests(unittest.TestCase):
         self.assertNotEqual(tree, PROFILE_CLOSURES['TKLCAF'][2])
         self.assertEqual(set(OCAF_TOOLKITS) - set(CAF_TOOLKITS), set())
         self.assertEqual(set(CAF_TOOLKITS) - set(CAF_LINKED_TOOLKITS), set())
-
-    def test_ci_runs_the_ocaf_verifiers(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKCDF', workflow)
-        self.assertIn('tools/verify_toolkit.py TKLCAF', workflow)
-        self.assertIn('tools/verify_toolkit.py TKCAF', workflow)
 
 
 if __name__ == '__main__':

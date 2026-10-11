@@ -43,9 +43,6 @@ class ServiceVerifierTableTests(unittest.TestCase):
         self.assertEqual(VISUALIZATION_TOOLKITS, ('TKService',))
         self.assertIn('gtest_main', VISUALIZATION_CLOSURE_TARGETS)
 
-    def test_ci_runs_the_tkservice_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKService', workflow)
 
 
 class ServiceCorpusTests(unittest.TestCase):

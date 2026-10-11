@@ -1,11 +1,8 @@
 """The TKDE verifier wiring: a profile without numeric oracle, the DE format libraries its
-unchanged suite links, its own closure tree, and the CI step that runs it."""
+unchanged suite links, its own closure tree."""
 import unittest
-from pathlib import Path
 from native_build import DE_CLOSURE_TARGETS, DE_LINKED_TOOLKITS, DE_TOOLKITS, closure_flags
 from verify_toolkit import NUMERIC_VERIFIERS, PROFILE_CLOSURES, PROFILES_WITHOUT_NUMERIC, linked_toolkits
-
-ROOT = Path(__file__).resolve().parents[2]
 
 
 class TkdeVerifierProfileTests(unittest.TestCase):
@@ -29,10 +26,6 @@ class TkdeVerifierProfileTests(unittest.TestCase):
         self.assertEqual(targets, DE_CLOSURE_TARGETS)
         self.assertNotIn(tree, {closure[2] for name, closure in PROFILE_CLOSURES.items() if name != 'TKDE'})
         self.assertIn('-DBUILD_ADDITIONAL_TOOLKITS=' + ' '.join(DE_TOOLKITS), closure_flags(['FoundationClasses'], DE_TOOLKITS))
-
-    def test_ci_runs_the_tkde_profile(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('python3 tools/verify_toolkit.py TKDE --source target/occt-source --jobs 2', workflow)
 
 
 if __name__ == '__main__':

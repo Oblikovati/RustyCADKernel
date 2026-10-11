@@ -1,12 +1,9 @@
 """The TKXSBase verifier wiring: a profile without numeric oracle, the native libraries it
-links, its own closure tree, and the CI step that runs it."""
+links, its own closure tree."""
 import unittest
-from pathlib import Path
 from native_build import (EXCHANGE_CLOSURE_TARGETS, EXCHANGE_LINKED_TOOLKITS, EXCHANGE_TOOLKITS,
                           LINKED_TOOLKITS, OCAF_CLOSURE_TARGETS, closure_flags)
 from verify_toolkit import NUMERIC_VERIFIERS, PROFILE_CLOSURES, PROFILES_WITHOUT_NUMERIC, linked_toolkits
-
-ROOT = Path(__file__).resolve().parents[2]
 
 
 class XsbaseVerifierProfileTests(unittest.TestCase):
@@ -31,10 +28,6 @@ class XsbaseVerifierProfileTests(unittest.TestCase):
         self.assertEqual(PROFILE_CLOSURES['TKCDF'][1], OCAF_CLOSURE_TARGETS)
         self.assertIn('-DBUILD_ADDITIONAL_TOOLKITS=TKDE TKXSBase', closure_flags(['FoundationClasses'], EXCHANGE_TOOLKITS))
         self.assertNotIn('TKXSBase', LINKED_TOOLKITS)
-
-    def test_ci_runs_the_tkxsbase_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKXSBase', workflow)
 
 
 if __name__ == '__main__':

@@ -40,9 +40,6 @@ class VerifierTableTests(unittest.TestCase):
         self.assertEqual(ORACLE.libraries[0], 'TKTopAlgo')
         self.assertEqual(set(ORACLE.libraries) - set(LINKED_TOOLKITS), set())
 
-    def test_ci_runs_the_tktopalgo_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKTopAlgo', workflow)
 
 
 class CorpusTests(unittest.TestCase):

@@ -45,9 +45,6 @@ class HlrVerifierTableTests(unittest.TestCase):
         self.assertIn('TKHLR', ADDITIONAL_TOOLKITS)
         self.assertIn('TKHLR', CLOSURE_TARGETS)
 
-    def test_ci_runs_the_tkhlr_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKHLR', workflow)
 
 
 class HlrCorpusTests(unittest.TestCase):

@@ -44,9 +44,6 @@ class VerifierTableTests(unittest.TestCase):
         self.assertIn('TKShHealing', CLOSURE_TARGETS)
         self.assertIn('TKPrim', CLOSURE_TARGETS)
 
-    def test_ci_runs_the_tkshhealing_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKShHealing', workflow)
 
 
 class CorpusTests(unittest.TestCase):

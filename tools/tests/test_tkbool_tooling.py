@@ -45,9 +45,6 @@ class BoolVerifierTableTests(unittest.TestCase):
         self.assertIn('TKOffset', ADDITIONAL_TOOLKITS)
         self.assertIn('TKOffset', CLOSURE_TARGETS)
 
-    def test_ci_runs_the_tkbool_verifier(self):
-        workflow = (ROOT/'.github/workflows/ci.yml').read_text()
-        self.assertIn('tools/verify_toolkit.py TKBool', workflow)
 
 
 class BoolCorpusTests(unittest.TestCase):

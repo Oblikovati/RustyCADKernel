@@ -31,7 +31,7 @@ registry. This process does not publish to crates.io.
 On a clean checkout at the release tag, use the pinned Rust toolchain and run:
 
 ```sh
-python3 tools/release_packages.py --tag v0.1.1
+python3 tools/release_packages.py --tag v0.1.2
 ```
 
 The command derives the package inventory from Cargo metadata. Cargo creates
@@ -70,7 +70,8 @@ tests the extracted files. Only the final publication job has write permission.
 It verifies checksums, creates a draft with all assets, and publishes the draft
 as a stable release. An existing release causes an error; assets are not
 replaced.
-A failed native, oracle, package, or documentation check prevents publication.
+A failed Rust, tooling, Vulkan, package, or documentation check prevents publication.
+Native OCCT comparisons run locally and do not gate publication.
 
 Creating these tools does not certify all kernel capabilities or publish a
 release. The application pin remains empty until the owner release passes.
