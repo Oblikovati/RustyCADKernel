@@ -20,22 +20,44 @@ pub(crate) fn build_glyph_layout(
         return Ok(None);
     }
     let (atlas, tiles) = pack_glyphs(&glyphs)?;
-    let mut layout = GlyphLayout {
-        positions: vec![],
-        uv: vec![],
-        indices: vec![],
-        atlas,
-        point_size: font.point_size(),
-    };
+    let mut layout = initial_native_glyph_layout(font, formatter, atlas);
+    append_native_instances(&mut layout, &glyphs, &tiles, instances);
+    Ok(Some(layout))
+}
+fn append_native_instances(
+    layout: &mut GlyphLayout,
+    glyphs: &BTreeMap<u32, GlyphBitmap>,
+    tiles: &BTreeMap<u32, [u32; 2]>,
+    instances: Vec<GlyphInstance>,
+) {
     for instance in instances {
         append_quad(
-            &mut layout,
+            layout,
             &glyphs[&instance.symbol],
             tiles[&instance.symbol],
             instance.offset,
         );
     }
-    Ok(Some(layout))
+}
+// Subtitle rectangles use formatter advance/line bounds, never the union of rasterized glyph ink.
+fn native_formatter_rectangle(formatter: &FontTextFormatter) -> FontRect {
+    let mut rectangle = FontRect::default();
+    formatter.bnd_box(&mut rectangle);
+    rectangle
+}
+fn initial_native_glyph_layout(
+    font: &FontFTFont,
+    formatter: &FontTextFormatter,
+    atlas: RasterImage,
+) -> GlyphLayout {
+    GlyphLayout {
+        positions: vec![],
+        uv: vec![],
+        indices: vec![],
+        atlas,
+        formatter_bounds: native_formatter_rectangle(formatter),
+        point_size: font.point_size(),
+    }
 }
 fn collect_glyphs(
     font: &FontFTFont,
@@ -183,6 +205,7 @@ mod tests {
             uv: vec![],
             indices: vec![],
             atlas,
+            formatter_bounds: rustycad_tkservice::font::FontRect::default(),
             point_size: 16,
         };
         append_quad(&mut layout, &glyphs[&65], tiles[&65], [0.5, -0.5]);
@@ -194,3 +217,7 @@ mod tests {
         assert_eq!(layout.indices, vec![0, 1, 2, 3, 0, 2]);
     }
 }
+
+#[cfg(test)]
+#[path = "subtitle_bounds_tests.rs"]
+mod subtitle_bounds_tests;

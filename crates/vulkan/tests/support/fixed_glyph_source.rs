@@ -26,6 +26,12 @@ impl TextLayoutSource for FixedGlyphSource {
             uv: vec![[0., 1.], [1., 1.], [1., 0.], [0., 0.]],
             indices: vec![0, 1, 2, 0, 2, 3],
             atlas: RasterImage::new([2, 2], vec![[1.; 4]; 4])?,
+            formatter_bounds: rustycad_tkservice::font::FontRect {
+                left: 0.,
+                right: 4.,
+                top: 6.,
+                bottom: 0.,
+            },
             point_size: text.height() as u32,
         }))
     }

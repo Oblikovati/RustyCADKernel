@@ -66,7 +66,9 @@ impl TextSceneContext<'_> {
 fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
     if !matches!(
         aspect.text_display_type(),
-        AspectTypeOfDisplayText::Normal | AspectTypeOfDisplayText::Shadow
+        AspectTypeOfDisplayText::Normal
+            | AspectTypeOfDisplayText::Shadow
+            | AspectTypeOfDisplayText::Subtitle
     ) || !aspect.shader_program().is_null()
     {
         return Err(rejected(
@@ -74,7 +76,7 @@ fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), Render
                 aspect.text_display_type(),
                 aspect.shader_program().object_address(),
             ),
-            "Normal or Shadow text display without a custom shader",
+            "Normal, Shadow or Subtitle text display without a custom shader",
         ));
     }
     Ok(())
