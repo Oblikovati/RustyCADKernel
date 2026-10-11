@@ -591592,6 +591592,626 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewController::update_3d_mouse",
       "status": "implemented",
       "notes": "Martensite full native HID controller routing at OCCT 3d097a0. Shared fallible keyboard interface preserves direct translation-cache updates, virtual rotation/button callbacks, ordering, policy gates, skipped/reversed axes and partial error state. 288 committed native snapshots verify all virtual-key lifecycles, pressures, durations and report button cache across product mappings, combined packets and exceptional scales. Camera/window/redraw/XR and controller class/constructor remain partial/open. See docs/ais-view-controller-space-mouse.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::SetCameraFrustum(const occ::handle<Graphic3d_Camera> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "02be25f7350eefc7d0eb4e54cb4ff783e16c0ce72d4dfe183ca71e47970cee46",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::set_camera_frustum",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "0b8f11a4e549d2f41fbc994d55a959a5e2e2319aba193780bbb9f4dfb7e5f3e1",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::ComputeSelection(const occ::handle<SelectMgr_Selection> &,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "1e36808a13e2aadde733ecefe57d37b8e95b4ba80a57aadce1fc1ab30b46d5d7",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::myBorders",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "1fc99daad239884c09d5a9d2cb5b4e641db568764fdfad58693b98a206a3046d",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustumFields::borders",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::fillTriangles()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "3dafc2adcce0caf85f7bbbbedd02bb193921df2dabde0cfe0e9aa529327eddfd",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::fill_triangles",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::myPoints",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "4218e14d0d3d1488aa29b3a081dcbe06616e2c752ef790ae8d5a4bd083c5e56f",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustumFields::points",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::Compute(const occ::handle<PrsMgr_PresentationManager> &,const occ::handle<Prs3d_Presentation> &,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "5119e58c0ee751887567d5742f43f7762ca0e4e1f59a8a66b939c2c887316f4e",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::SelectionMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "7e7a8d83601b9ef9ae3cbe7883401d24e5fc357c7c3a9154c6ce8dc4450f5e85",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustumSelectionMode",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::myTriangles",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "90a82a3f714151bbac3d9680e5fe99dab93741f743d2ca1babbe1a019292b1e9",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustumFields::triangles",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::SetColor(const Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "aab74f03912f3ab6587f24f223117dfdba700199d23f5bdcf2300548993fb9f8",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::AIS_CameraFrustum()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "b6a90732034174fc8a60041e9ff168888cd1a4bf74c5fa44fc37bd5ebf7ff875",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::new",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::fillBorders()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "bbf440a48c12ed24b1c6ef1e8630471ee3efdca254882d7d1a50530903d8ed28",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::fill_borders",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::SelectionMode_Volume",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "d81df2cbe99d55d7ebecb3c7ce2636611c04f3452b6fbe105197eba55887a268",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustumSelectionMode::Volume",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::AcceptDisplayMode(const int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "dd3a6b3487331e6d9e1748a3f6dd2eb423e3a4862a48bc6a137ced66e677fadd",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::SelectionMode_Edges",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "e2635aecd5e6b63de63a51bfc9becf490cf7819400eb0bf7f24dccb91905338b",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustumSelectionMode::Edges",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum::UnsetTransparency()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "ec212e7892e04000171318fe5e21962c62d252db3c7022e5b3d6db3ada9c157d",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_transparency",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_CameraFrustum",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_CameraFrustum.hxx",
+      "source_sha256": "011770a8c18c3dc9cb3b1054963f1b39a3d4c89dd78b4b6b6450b7e78b9910be",
+      "cpp_declaration_id": "f4c1dd9a379382cbaa7e9c1040b17e20f3357cf51b0a8b296d8f69a408487dcd",
+      "rust_item": "rustycad_tkv3d::ais::AisCameraFrustum",
+      "status": "implemented",
+      "notes": "Martensite full defined AIS_CameraFrustum behavior: camera snapshots, stable indexed arrays, presentation routing/live aspects, edge and volume sensitivity. 120 native snapshots and Rust-only lifecycle regressions; native uninitialized spare point and pre-camera selection dereference are given defined safe Rust states. Renderer precision gates are separate. See docs/ais-camera-frustum.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::ToDisplayName()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "04433c283ae60fd443b8258598ea30e66c5cf2d55925f275cef996c830f95997",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::to_display_name",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetDisplayName(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "1135e8a0c209967891a89a130594112dd00c6f96cff00f8a9845442b49acd270",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_display_name",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::NbSplitsQuadric()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "12af0b7144313b1f3b1cc1641aa7ec33d2b6b0351ed4d4c05a31905a69d20a10",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::nb_splits_quadric",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetNbSplitsQuadric(int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "1606fcad590b10529956299946fe2a5c25ca5e634f9c85670b0d04dbd7aac487",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_nb_splits_quadric",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetNbSplitsArrow(int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "322c2d38bd2e71b64635af845c1c87151143bb7b90f996607ead2d6577f9ae00",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_nb_splits_arrow",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetLight(const occ::handle<Graphic3d_CLight> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "34da787d504de1d0272225a9c68c8c181a791c88a6cdd526fb775e8948787384",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource::set_light",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::ToSwitchOnClick()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "4a5f7bc53fd4723511359add4010f52f305dcd99ba42e8b1a6050e69a94360c6",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource::to_switch_on_click",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetArcSize(int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "4ed82084d817685ea7dff63500336909cc5e33c12a0ebf42786687f59c7b3853",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_arc_size",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::Light()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "51a3ebc9ae2c690c52d313d2bbefe8b2e332bd6fa57cb47825a310b642b52688",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource::light",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::Size()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "654984234df178ad2c1a51d4787f37d607121ffa1a48d0db2dd8c9a37211c0bf",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::size",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::setLocalTransformation(const occ::handle<TopLoc_Datum3D> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "6a13a0b64739c84b2e3e70f960407f1e5b00e7b78109fd00cd8f284022f20ac9",
+      "rust_item": "rustycad_tkv3d::ais::ais_light_source_set_local_transform",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetZoomable(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "746a438d94b55ed403a7898269c0b287dbaad119a53992c6927611039bb1b445",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_zoomable",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::updateLightLocalTransformation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "7a8602e64adc04769a29c128ed85bfbeccedbcf98608138a99db2d72cd01229d",
+      "rust_item": "rustycad_tkv3d::ais::ais_light_source_update_local_transform",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::MarkerImage(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "7c47d45d29bd639c87404d79d9f6e7be45394909dd17bc9d81bf200a8d2ea0d7",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::marker_image",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetMarkerImage(const occ::handle<Graphic3d_MarkerImage> &,bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "92e2505bc762bfd9b11ae7436d5eab50dae6f2039b3a9c70ec50f132f46caa4a",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_marker_image",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::IsZoomable()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "9a1975401e23eb7e57a6d2bc179a5f04fd44c3880ccc919ad3206bf65723676f",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::is_zoomable",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::ToDisplayRange()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "9ccd55d0b52a7b48d8e26fb2f8fc94244a5c02661084918badffc3ea05b356af",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::to_display_range",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetDraggable(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "a627e8c0000fc128fd7c3b54360092e32858abb22094313571a82bc93354c4dd",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource::set_draggable",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::MarkerType(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "b41d0ad0ce09bd82dbe53f5b1c69201e1408f5ec1271b8a9642a916acf1372ad",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::marker_type",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetSize(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "b840e2bce8b875a1a5d4f02d15677f3d023b6ad550aa783d07c1723c590f1b6b",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_size",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetDisplayRange(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "c17e2bfbf318363f41f6b7978737c94781cd94b50f7e4b9cc16a62f8b9252b7c",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_display_range",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::updateLightTransformPersistence()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "c3c5dd3592284965d6ba254258c19c7b9fa1cd08ee8a115073275fc60a2df810",
+      "rust_item": "rustycad_tkv3d::ais::ais_light_source_update_persistence",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::NbArrows()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "c755daeb9ebb888162bbb69de8233d09739f94b6adda3e3a0b943441ddde0a25",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::nb_arrows",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "c8d0510a42f259ec156a7f875ce76fa15a6cdc807755d45aeca7e5228e2a9671",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource",
+      "status": "partial",
+      "notes": "Only embeddable state, properties and native world binding are implemented. Concrete construction/aspects, presentation, selection, dragging and light owner remain unported."
+    },
+    {
+      "upstream_id": "AIS_LightSource::NbSplitsArrow()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "e0ca7e8ddc9c208bbf526266c26f882ef1c0ba195bd3f4a6d3eebbe566d4a1d5",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::nb_splits_arrow",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetSwitchOnClick(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "e2f25de8284c960c162726e34a8873801ab036b9b390a64ed946c5764fc6576d",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource::set_switch_on_click",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetNbArrows(int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "e3a5d97b5fab4fff0fbb0e41aea293821e1f4ccb51e1bc4a35391b62e7a1a15f",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_nb_arrows",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::ArcSize()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "f6bed661b23179bc0fa9972048eccee87d5cb41fba8b95f8d0cc52af685f6d1e",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::arc_size",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_LightSource::SetMarkerType(Aspect_TypeOfMarker,bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "f92414dc3423724b0ebfde4dd16a9aa67451daca3b943adbe82ceae6baa30f0f",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceMembers::set_marker_type",
+      "status": "implemented",
+      "notes": "Martensite native light properties and world binding at OCCT 3d097a0; 46 deterministic local native snapshots plus Rust ownership, dirty status, retained persistence and marker identity regressions. Application subclasses supply native drawing/aspect hooks. Concrete constructor/aspects, presentation, selection, dragging and light owner remain open; see docs/ais-light-source-binding.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::flushBuffers(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "97bb67935fac5022f489abb7f03867e0349aa49e62aa02c34d449b29e754f8b2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::flush_buffers",
+      "status": "implemented",
+      "notes": "Martensite complete native protected queue transfer at OCCT 3d097a0: sticky render requests, replacement flags/zoom, allocator-preserving independent selection copy, drag abort/stop priority and retained coordinates. 3072 committed native snapshots compare all 117 columns over three frames; Rust-only allocator identity/ownership regression. Gesture synthesis/public FlushViewEvents/camera/redraw/XR remain open and controller class/constructor partial. See docs/ais-view-controller-transfer.md."
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::BoundingBox()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::<rustycad_tkv3d::select3d::Select3DSensitiveEntity>::bounding_box",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "03e4f00af9626d84c568326ae3edb14cc1d6824218dd3c79b6b6652f36b6c763"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::NbSubElements() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::<rustycad_tkv3d::select3d::Select3DSensitiveEntity>::nb_sub_elements",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "0f4740a91966c62c8e7b75d9fce9fdc770a971966d674556cb55656af7322ac7"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::CenterOfGeometry() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::<rustycad_tkv3d::select3d::Select3DSensitiveEntity>::center_of_geometry",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "1ea98e738c48265936639138ed07a87b85597e13a6a9dbe50a77d1704fabecbb"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::SetPatchSizeMax(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::set_patch_size_max",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "2650ffa39c7fb2d22783e257d3b625608571caef81fd53969c4fdec6118137db"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::Center(const int, const int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::<rustycad_tkv3d::select3d::Select3DSensitiveSet>::center",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "2f3961311d56cffa469dcd8bc6d321800cff852943699fe12deddb220a7a24e1"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::InitPoints(const occ::handle<Graphic3d_Buffer> &, const occ::handle<Graphic3d_IndexBuffer> &, const TopLoc_Location &, const int, const int, const bool, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::init_points",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "4f8e21918a3acdd416fdcc67a8a4841859c477ca319a01d9615d8bf8df16738d"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::InitPoints(const occ::handle<Graphic3d_Buffer> &, const TopLoc_Location &, const bool, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::init_points_vertices",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "57970ff64b9a7e419df36addab7fbfde652a19116be3639171a929322d968990"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::InitTriangulation(const occ::handle<Graphic3d_Buffer> &, const occ::handle<Graphic3d_IndexBuffer> &, const TopLoc_Location &, const int, const int, const bool, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::init_triangulation",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "67ce31fdb996fbb5ba469a832ca5224589580d7e8ee9d8a9efdb6389ede7b11e"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::InitTriangulation(const occ::handle<Graphic3d_Buffer> &, const occ::handle<Graphic3d_IndexBuffer> &, const TopLoc_Location &, const bool, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::init_triangulation_all",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "6ac370f41b4b8997ff390568761409f7152cad46097a61fd76c545f023f592e8"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::InitPoints(const occ::handle<Graphic3d_Buffer> &, const occ::handle<Graphic3d_IndexBuffer> &, const TopLoc_Location &, const bool, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::init_points_all",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "79bfce6daa04a397a079856df75df9f3e99624f461cd922187bb4ee0e50360bb"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::Size() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::<rustycad_tkv3d::select3d::Select3DSensitiveSet>::size",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "85409ea3cbee42a3e571eb800eca72ccdbd758d558a51fddd279f9b2f19a4ef5"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::SetPatchDistance(const float)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::set_patch_distance",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "8fee2ddbb77fe2b9843a6638a93599d6fb86645bdaf43af8cfb362f971297451"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::PatchDistance() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::patch_distance",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "c24c3e953773fb151ff60044d53a4662810c9a1fb05a60ef1411e08371d85199"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::PatchSizeMax() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::patch_size_max",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "dc7117c9af6081178131b98af1512ca21f2620f7488b357959386bbef5415564"
+    },
+    {
+      "upstream_id": "Select3D_SensitivePrimitiveArray::Box(const int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "source_sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e",
+      "rust_item": "rustycad_tkv3d::select3d::Select3DSensitivePrimitiveArray::<rustycad_tkv3d::select3d::Select3DSensitiveSet>::element_box",
+      "status": "implemented",
+      "notes": "Martensite primitive initialization: 339 committed native snapshots at pinned OCCT 3d097a0 cover buffer dimensions/index layouts/ranges/patches/groups/translated bounds, repeat initialization and rejected-buffer partial state; see docs/sensitive-primitive-initialization.md. Matching/detection and class-wide parity remain unclaimed.",
+      "cpp_declaration_id": "feef592d47d7d33fe0d25bcd30d79b3dc33178c59c3141a0061645cd5e4722e6"
     }
   ],
   "tests": [
