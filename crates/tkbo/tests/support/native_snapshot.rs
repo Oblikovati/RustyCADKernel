@@ -5,15 +5,15 @@
 macro_rules! native_boolean_snapshot {
     ($probe:literal) => {{
         if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
-            include_str!(concat!("../../../tools/oracle/", $probe, ".macos.expected"))
+            include_str!(concat!("fixtures/", $probe, ".macos.expected"))
         } else if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
             include_str!(concat!(
-                "../../../tools/oracle/",
+                "fixtures/",
                 $probe,
                 ".windows.expected"
             ))
         } else {
-            include_str!(concat!("../../../tools/oracle/", $probe, ".expected"))
+            include_str!(concat!("fixtures/", $probe, ".expected"))
         }
     }};
 }

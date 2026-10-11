@@ -32,12 +32,12 @@ fn parse_native_hash_row(index: usize, row: &str) -> (u64, u64) {
 fn native_cylinder_snapshot() -> &'static str {
     // Run 38123916241 independently captures native OCCT node and triangle order.
     if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
-        return include_str!("../../../../tools/oracle/tkmesh_cylinder_nodes.macos.expected");
+        return include_str!("../fixtures/tkmesh_cylinder_nodes.macos.expected");
     }
     if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
-        return include_str!("../../../../tools/oracle/tkmesh_cylinder_nodes.windows.expected");
+        return include_str!("../fixtures/tkmesh_cylinder_nodes.windows.expected");
     }
-    include_str!("../../../../tools/oracle/tkmesh_cylinder_nodes.expected")
+    include_str!("../fixtures/tkmesh_cylinder_nodes.expected")
 }
 
 /// FNV-1a over every node position and UV bit pattern; pins a native node order.

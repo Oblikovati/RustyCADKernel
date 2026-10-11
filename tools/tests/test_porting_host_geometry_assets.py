@@ -35,7 +35,7 @@ class HostGeometryAssetTests(unittest.TestCase):
         for host in ('macos', 'windows'):
             fixture = NativeOracleCaptureFixture(host)
             for name, (probe, _) in PROBES.items():
-                asset = (ROOT / f'tools/oracle/tkbo_{probe}.{host}.expected').read_bytes()
+                asset = (ROOT / f'crates/tkbo/tests/fixtures/tkbo_{probe}.{host}.expected').read_bytes()
                 self.assertEqual(asset, fixture.native_bytes(f'{name}.expected'))
                 self.assertEqual(hashlib.sha256(asset).hexdigest(), fixture.sha256[f'{name}.expected'])
 
@@ -51,7 +51,7 @@ class HostGeometryAssetTests(unittest.TestCase):
     def test_all_cylinder_face_assets_retain_native_node_and_triangle_hashes(self) -> None:
         for host in ('macos', 'windows'):
             fixture = NativeOracleCaptureFixture(host)
-            asset = (ROOT / f'tools/oracle/tkmesh_cylinder_nodes.{host}.expected').read_bytes()
+            asset = (ROOT / f'crates/tkmesh/tests/fixtures/tkmesh_cylinder_nodes.{host}.expected').read_bytes()
             self.assertEqual(asset, fixture.native_bytes('cylinder.expected'))
             self.assertEqual(hashlib.sha256(asset).hexdigest(), fixture.sha256['cylinder.expected'])
             native = re.findall(r'^hash (\d+) ([0-9a-f]+) ([0-9a-f]+)$', asset.decode().replace('\r\n', '\n'), re.M)

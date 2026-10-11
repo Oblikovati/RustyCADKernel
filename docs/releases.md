@@ -189,8 +189,8 @@ gh run download RUN_ID --name geometry-oracle-windows-latest --dir target/oracle
 
 After checking the receipt hashes and comparing native and Martensite results,
 commit `platform-geometry/<probe>.expected` under
-`tools/oracle/tkbo_<probe>.<host>.expected`. The cylinder capture becomes
-`tools/oracle/tkmesh_cylinder_nodes.<host>.expected`. Keep the original native
+`crates/tkbo/tests/fixtures/tkbo_<probe>.<host>.expected`. The cylinder capture becomes
+`crates/tkmesh/tests/fixtures/tkmesh_cylinder_nodes.<host>.expected`. Keep the original native
 bytes, including Windows CRLF, and retain the receipt and diagnostic logs.
 Integrate the assets into `main` with their test changes. Normal CI reads these
 committed assets; it does not regenerate expectations from the code under test.
@@ -205,5 +205,7 @@ all three cylinder-face node and triangle hashes independently agree on macOS
 ARM64 and Windows x64. Those native captures now supply the committed fixtures.
 The original failures against Linux fixtures remain in the evidence directory.
 Tests still compare every logical row and its count, or every node/triangle hash,
-exactly. All tracked oracle assets also enter the extracted-package test-support
-bundle.
+exactly. These baselines are owned by the Rust test crates and included directly
+in their Cargo archives. Removing the OCCT generators and porting receipts does
+not remove these behavior tests or their fixtures. Legacy test resources still
+enter the extracted-package test-support bundle until their ownership is migrated.

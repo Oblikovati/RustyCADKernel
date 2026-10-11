@@ -1,0 +1,26 @@
+{
+  "behavior_tests": "Rust integration tests",
+  "permanent_fixture_ownership": {
+    "crates/tkbo/tests/fixtures": 12,
+    "crates/tkmesh/tests/fixtures": 3
+  },
+  "archive_contents": "all 15 fixtures checked byte-exact against packaged files",
+  "extracted_behavior_check": {
+    "passed": 8,
+    "failed": 0,
+    "removed_before_testing": [
+      "tools",
+      "porting"
+    ],
+    "native_occt_execution": false,
+    "temporary_workspace_and_build_artifacts": "deleted"
+  },
+  "windows_target_compilation": "passed; hosted runtime still required",
+  "clippy_warnings_denied": "passed",
+  "package_archives_sha256": {
+    "rustycad-tkbo": "d7afd5636e849ee8761cede637868c9d46bb37868aa9d425209a1ed04fb36457",
+    "rustycad-tkmesh": "035bb803505da9eb365d3de654553935bff4e504eff115782e58e7b7e4da7dc2"
+  },
+  "oracle_retirement": "remove live OCCT source/build/capture/comparison infrastructure after porting; preserve standalone Rust behavior tests and crate-owned baselines",
+  "release_publication": "still pending complete owner checks and tagged archive verification"
+}

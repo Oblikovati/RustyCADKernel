@@ -123,8 +123,11 @@ Port each upstream test's setup, inputs, assertions, cleanup, platform variants
 and tolerances into executable Rust tests. A native comparison receipt does not
 replace that translation. Rust behavioral tests must run from the Martensite
 checkout or extracted release packages without an OCCT installation, source tree,
-build, executable, or OCCT-linked C++ subprocess. Static expected files and test resources
-remain usable independently; retain their attribution and capture provenance.
+build, executable, or OCCT-linked C++ subprocess. Static expected files and test
+resources belong to the Rust test crates and remain usable independently; retain
+their attribution and capture provenance. Keep permanent test resources outside
+removable oracle-tool directories; migrate existing shared fixtures before
+retiring their harnesses.
 
 Keep C++ probes, capture generators, live differential comparisons and upstream
 inventory checks in removable porting infrastructure. Use them to establish
