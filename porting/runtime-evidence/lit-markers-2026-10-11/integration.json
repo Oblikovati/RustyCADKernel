@@ -1,0 +1,75 @@
+{
+  "feature_commit": "fe43c074416399cd7ae1cd7f035c816652862f8d",
+  "merge_commit": "9771c694c2e247d9e419b03a936510770e44969d",
+  "deleted_worktree": "/home/vmiguel/git/oblikovati-workspace/Martensite-lit-markers",
+  "worktree_deleted": true,
+  "branch_deleted": true,
+  "physical_bytes_removed": 26724671488,
+  "process_reference_audit": [],
+  "local_changes_before_deletion": false,
+  "main_source_hashes_match_gpu_receipt": true,
+  "main_checks": [
+    "cargo test -p martensite-vulkan --lib --test point_lighting --test lighting_submission --example ais_point_cloud_capture",
+    "cargo clippy -p martensite-vulkan --all-targets -- -D warnings",
+    "cargo fmt --all -- --check",
+    "replay archived native/Vulkan lit-marker palettes: 60 passed"
+  ],
+  "next_visualization_work": {
+    "entities": [
+      "AIS_Trihedron",
+      "AIS_TrihedronOwner"
+    ],
+    "reason": "Remaining selectable trihedron API; its sphere/quadric/arrow, label and selection prerequisites already exist",
+    "existing_dependencies": [
+      "Prs3dToolSphere and Prs3dToolQuadric (prs3d/tools.rs, tool_quadric.rs)",
+      "Geom_Axis2Placement",
+      "Prs3dArrow::draw_shaded",
+      "Prs3dArrow::draw_segments",
+      "Prs3dDatumAspect",
+      "Select3D sensitive point/segment/triangle/primitive array",
+      "Vulkan surface lighting and glyph rendering"
+    ],
+    "native_selection_note": "Use constructor priorities (complete=5, origin=8, axes=7) and exact native probes; header overview gives different historical values",
+    "unclaimed_declarations": 72
+  },
+  "inventory": {
+    "pipeline_exit_code": 0,
+    "unresolved_rows": 0,
+    "totals_by_scope": {
+      "excluded": {
+        "api_declarations": 1855,
+        "api_done": 0,
+        "api_open": 1855,
+        "api_partial": 0,
+        "gtests_mapped": 0,
+        "gtests_not_applicable": 0,
+        "gtests_unmapped": 197,
+        "toolkits": 10
+      },
+      "port": {
+        "api_declarations": 76041,
+        "api_done": 51968,
+        "api_open": 23098,
+        "api_partial": 975,
+        "gtests_mapped": 7969,
+        "gtests_not_applicable": 2,
+        "gtests_unmapped": 480,
+        "toolkits": 56
+      },
+      "replaced": {
+        "api_declarations": 6418,
+        "api_done": 0,
+        "api_open": 6418,
+        "api_partial": 0,
+        "gtests_mapped": 0,
+        "gtests_not_applicable": 0,
+        "gtests_unmapped": 0,
+        "toolkits": 2
+      }
+    },
+    "primary_api_done_increase": 0,
+    "primary_api_denominator_changed": false,
+    "behavioral_equivalence_proven": false,
+    "renderer_parity_complete": false
+  }
+}
