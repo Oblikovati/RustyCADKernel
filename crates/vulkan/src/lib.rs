@@ -87,3 +87,6 @@ mod retained_lighting;
 mod capping_lighting;
 
 mod quad_assembly;
+
+mod polygon_offset;
+pub use polygon_offset::RenderPolygonOffset;

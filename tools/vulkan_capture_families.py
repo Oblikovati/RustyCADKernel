@@ -1,6 +1,7 @@
 """Explicit fixture families preserve the complete legacy renderer corpus."""
 
 from vulkan_line_cases import LINE_MODES
+from vulkan_ais_trihedron_cases import AIS_TRIHEDRON_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_ais_line_cases import AIS_LINE_MODES
 from vulkan_ais_point_cases import AIS_POINT_MODES
@@ -26,6 +27,7 @@ from vulkan_ais_plane_cases import AIS_PLANE_MODES, QUAD_MODES
 from vulkan_point_cloud_cases import POINT_CLOUD_MODES
 
 ALL_CAPTURE_MODES = (
+    *AIS_TRIHEDRON_MODES,
     *POINT_CLOUD_MODES,
     *AIS_PLANE_MODES,
     *QUAD_MODES,
@@ -55,6 +57,7 @@ ALL_CAPTURE_MODES = (
 )
 
 FAMILY_CAPTURE_MODES = {
+    "ais-trihedron": AIS_TRIHEDRON_MODES,
     "point-cloud": POINT_CLOUD_MODES,
     "ais-plane": (*AIS_PLANE_MODES, *QUAD_MODES),
     "plane-presentations": PLANE_PRESENTATION_MODES,
@@ -74,5 +77,5 @@ def capture_modes(case_family: str) -> tuple[str, ...]:
     if case_family in FAMILY_CAPTURE_MODES:
         return FAMILY_CAPTURE_MODES[case_family]
     raise ValueError(
-        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations or ais-plane or point-cloud"
+        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label or plane-presentations or ais-plane or point-cloud or ais-trihedron"
     )

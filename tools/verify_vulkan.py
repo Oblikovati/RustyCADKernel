@@ -13,6 +13,7 @@ import tempfile
 
 from dataclasses import asdict, dataclass
 from vulkan_build import build_vulkan_examples
+from vulkan_ais_trihedron_cases import trihedron_pixels
 from vulkan_capture_families import capture_modes
 from vulkan_ais_plane_cases import layer_quad_pixels
 from vulkan_point_cloud_cases import point_cloud_pixels
@@ -218,6 +219,12 @@ def capture_case(
     if mode.startswith("cloud-"):
         row["cloud_roles"] = [point_cloud_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode) for prefix in (gl, vk)]
         if any(role["status"] != "passed" for role in row["cloud_roles"]):
+            row["status"] = "failed"
+    if mode.startswith("tri-"):
+        reference_mode = "tri-shaded" if "shaded" in mode else "tri-wire"
+        reference_label = f"{width}-{height}-{perspective}-{offset}-{reference_mode}"
+        row["trihedron_roles"] = [trihedron_pixels(width, height, Path(f"{prefix}.rgba").read_bytes(), mode, (folder / f"{backend}-{reference_label}.rgba").read_bytes()) for prefix, backend in ((gl, "gl"), (vk, "vk"))]
+        if any(role["status"] != "passed" for role in row["trihedron_roles"]):
             row["status"] = "failed"
     row.update(runtime_output=output, opengl_runtime=native_output)
     return row
@@ -440,6 +447,7 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
             "plane-presentations",
             "ais-plane",
             "point-cloud",
+            "ais-trihedron",
         ),
         default="all",
     )

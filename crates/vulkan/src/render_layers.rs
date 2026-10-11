@@ -8,6 +8,7 @@ pub struct RenderLayer {
     pub(crate) depth_test: bool,
     pub(crate) depth_write: bool,
     pub(crate) clear_depth: bool,
+    pub(crate) polygon_offset: crate::RenderPolygonOffset,
 }
 impl RenderLayer {
     /// Retain a layer's draws and depth policy; `RenderLayer::new(draws, true, true, false)`.
@@ -24,7 +25,15 @@ impl RenderLayer {
             depth_test,
             depth_write,
             clear_depth,
+            polygon_offset: crate::RenderPolygonOffset::default(),
         }
+    }
+}
+impl RenderLayer {
+    /// Retain the layer's default polygon offset; `layer.with_polygon_offset(RenderPolygonOffset::new(1, 1., 1.)?)`.
+    pub fn with_polygon_offset(mut self, offset: crate::RenderPolygonOffset) -> Self {
+        self.polygon_offset = offset;
+        self
     }
 }
 /// Range of frame draws sharing one depth policy; `frame.layers()[0].draw_range()`.
@@ -34,11 +43,16 @@ pub struct RenderLayerSpan {
     pub(crate) depth_test: bool,
     pub(crate) depth_write: bool,
     pub(crate) clear_depth: bool,
+    pub(crate) polygon_offset: crate::RenderPolygonOffset,
 }
 impl RenderLayerSpan {
     /// Index into `frame.draws()`; `frame.layers()[0].draw_range()`.
     pub fn draw_range(&self) -> Range<usize> {
         self.draw_range.clone()
+    }
+    /// Read the retained layer default; `frame.layers()[0].polygon_offset()`.
+    pub fn polygon_offset(&self) -> crate::RenderPolygonOffset {
+        self.polygon_offset
     }
     /// Read `(test, write, clear)` flags; `frame.layers()[0].depth_policy()`.
     pub fn depth_policy(&self) -> (bool, bool, bool) {
@@ -68,14 +82,17 @@ fn split_blended_layer(layer: RenderLayer) -> (RenderLayer, Option<RenderLayer>)
         depth_test,
         depth_write,
         clear_depth,
+        polygon_offset,
     } = layer;
     let (blended, opaque): (Vec<_>, Vec<_>) = draws
         .into_iter()
         .partition(PrimitiveDraw::is_surface_blended);
-    let transparent =
-        (!blended.is_empty()).then(|| RenderLayer::new(blended, depth_test, false, false));
+    let transparent = (!blended.is_empty()).then(|| {
+        RenderLayer::new(blended, depth_test, false, false).with_polygon_offset(polygon_offset)
+    });
     (
-        RenderLayer::new(opaque, depth_test, depth_write, clear_depth),
+        RenderLayer::new(opaque, depth_test, depth_write, clear_depth)
+            .with_polygon_offset(polygon_offset),
         transparent,
     )
 }
@@ -101,5 +118,6 @@ fn append_layer_span(
         depth_test: layer.depth_test,
         depth_write: layer.depth_write,
         clear_depth: layer.clear_depth,
+        polygon_offset: layer.polygon_offset,
     });
 }

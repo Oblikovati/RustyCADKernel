@@ -375,6 +375,8 @@ fn lower_styled_primitive(
     highlighted: bool,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     let (color, line) = primitive_style(primitive.kind, aspects, closed)?;
+    let (mode, factor, units) = aspects.polygon_offsets();
+    let offset = crate::RenderPolygonOffset::new(mode, factor, units)?;
     if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
         let culling = crate::face_culling::resolve_culling(
             aspects.face_culling(),
@@ -383,7 +385,12 @@ fn lower_styled_primitive(
         return primitive.draws(color, matrix, line, None).map(|draws| {
             draws
                 .into_iter()
-                .map(|draw| surface_alpha_policy(draw.with_face_culling(culling), aspects))
+                .map(|draw| {
+                    surface_alpha_policy(
+                        draw.with_face_culling(culling).with_polygon_offset(offset),
+                        aspects,
+                    )
+                })
                 .collect()
         });
     }
@@ -391,7 +398,14 @@ fn lower_styled_primitive(
         return Ok(vec![]);
     }
     let sprite = crate::point_style::marker_style(&**aspects, highlighted)?;
-    primitive.draws(color, matrix, line, Some(sprite))
+    primitive
+        .draws(color, matrix, line, Some(sprite))
+        .map(|draws| {
+            draws
+                .into_iter()
+                .map(|draw| draw.with_polygon_offset(offset))
+                .collect()
+        })
 }
 
 fn lower_group_surface(

@@ -136,6 +136,7 @@ fn record_draws(
 ) {
     let mut state = super::draw_state::DrawState::default();
     let mut depth_policy = (layer.depth_test, layer.depth_write);
+    let mut offsets = crate::polygon_offset::PolygonOffsetState::new(layer.polygon_offset);
     let mut culling = (crate::RenderFaceCulling::None, false);
     super::capping_record::set_culling(runtime, command, culling);
     for draw in &resources.draws[layer.draw_range.clone()] {
@@ -161,6 +162,12 @@ fn record_draws(
             culling = (draw.face_culling, draw.mirrored);
             super::capping_record::set_culling(runtime, command, culling);
         }
+        let [units, factor] = offsets.advance(draw.polygon_offset, draw.polygon);
+        unsafe {
+            runtime
+                .device()
+                .cmd_set_depth_bias(command, units, 0., factor)
+        };
         record_draw(runtime, command, draw, push);
     }
 }

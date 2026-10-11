@@ -1,0 +1,127 @@
+{
+  "source_revision": "fdc3ee03f45dd681ad44f77687702c8405508ef3",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "strict_renderer_parity": false,
+  "accepted_overall_performance_baseline": false,
+  "numeric_comparisons": 159688,
+  "tkv3d_tests": 462,
+  "vulkan_tests": 226,
+  "python_tests": 59,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "strict_passed": 60,
+      "strict_total": 96,
+      "roles_passed": 170,
+      "roles_total": 192,
+      "runtime_checks": 20,
+      "analytic_pixels": 61440,
+      "performance_workloads": 32,
+      "trihedron_timing": [
+        {
+          "workload": "ais-trihedron-shaded-updates",
+          "draws": 10,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 1.3030005,
+          "mean_ms": 1.34067716,
+          "p95_ms": 1.485779,
+          "p99_ms": 1.665561,
+          "minimum_ms": 1.1927159999999999,
+          "maximum_ms": 2.072024,
+          "samples": 100
+        }
+      ],
+      "repeat_failures": [
+        "ais-remove-display p95_ms=1.531ms exceeds 1.433ms"
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "strict_passed": 1,
+      "strict_total": 96,
+      "roles_passed": 170,
+      "roles_total": 192,
+      "runtime_checks": 20,
+      "analytic_pixels": 61440,
+      "performance_workloads": 32,
+      "trihedron_timing": [
+        {
+          "workload": "ais-trihedron-shaded-updates",
+          "draws": 10,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 1.3301405,
+          "mean_ms": 1.44247394,
+          "p95_ms": 2.0658719999999997,
+          "p99_ms": 2.252126,
+          "minimum_ms": 1.272565,
+          "maximum_ms": 2.4598210000000003,
+          "samples": 100
+        }
+      ],
+      "repeat_failures": []
+    }
+  ],
+  "artifacts": {
+    "README.md": "35a88730cfe2eb57dd3d133b904cf3ae51659ff9b017861150ae3516a7639a4b",
+    "all-tests.log.gz": "7fbe45562b415c5c3aaca70c5bdd71dd78c0a6e6edaa1786dc264e7c46dc938b",
+    "captures.tar.gz": "cfa9aaf8f34d5bb2e54560dbdb665db56b694d5d064b672728bdb4014ea2f49c",
+    "clippy-final.log.gz": "f742d76e236d4a2e73f9f63b7550d8908afe4f6c4b7928203d724e3c067042aa",
+    "compiler-capture.log.gz": "71a50bb10ace62287406af4d704ce0ecb024ff5b3e2ffb45c7d4e352ad3752a9",
+    "full-numeric.log.gz": "2d2ef411e02c5bb525814c6363dc901562965d9a4dd942e63fbade216fbfcca6",
+    "gpu-corrected.log.gz": "837c20a8b741d05e8b48a404cfde235e59e1dd05a129cd9fafcca76d6fcd7bb0",
+    "initial-polygon-offset-failure.json.gz": "67db0b56ebf8a99db5261067d4e71189a55ad5561321f4b4e50f6a13f15fde4a",
+    "inventory-coverage.log.gz": "7076a72a71c011be07d4651d3cdffc65da2497361b332f67dd5b73f9fd05324c",
+    "inventory-normalize.log.gz": "2a9925a1b3670ae16b112092b6fce5ef3c0e8ca4e462e1b2ccf29f0765abf590",
+    "offset-all-tests.log.gz": "ac3239013e4c64b0b977225912617ee536c9e03b0d1ead89fa770470659a945c",
+    "offset-clippy.log.gz": "e9e0e8107c5ad63c8f8bee22a63e256d81059e6744146a9eab2a7fcff2668c15",
+    "offset-tests.log.gz": "f88ea4d7a676ff572eec99c671b5be9d3e6563197029a322a6c6f5aecc4cbac5",
+    "performance-repeat.json.gz": "b362b8d2576ce997c7a70d3638e21fee1744c5411553efe7c1be1f7f0f7552b6",
+    "python-final.log.gz": "d7d758f55410671c552ee9485310038df8bbf06da3b2049a883dec181e878324",
+    "python-roles.log.gz": "7921534a813e2127bbdc4187bf59ba71e415d12b292809a200c6cfe104f67708",
+    "renderer-corrected.json.gz": "832f25866f122008c2e8211d8e93568058b7a7877b868d2564c418211297953b",
+    "renderer-original.json.gz": "e59d384871b826e04a8d72554292517338cf9d56f747e81f65b31320625757a7",
+    "roles-recomputed.json.gz": "43447352b3476ffe50759f5eff70253c9106d7f3c43e6a8175a47f492aeaa8ff",
+    "tests-final.log.gz": "72eddb0f605318f7d261e473c8c424a057e0a13a000d3f3bc749ddf35c7dfdc4"
+  },
+  "resolved_new_implemented_bindings": 75,
+  "unresolved_parity_rows": 0,
+  "inventory": {
+    "api_declarations": 76041,
+    "api_done": 52037,
+    "api_open": 23029,
+    "api_partial": 975,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "tkv3d_api": {
+    "by_status": {
+      "claimed_unverified": 0,
+      "excluded": 165,
+      "partial": 2,
+      "unclaimed": 2754,
+      "upstream_unimplemented": 0,
+      "verified": 2251
+    },
+    "declarations": 5172,
+    "done": 2416,
+    "done_percent": 46.7
+  }
+}

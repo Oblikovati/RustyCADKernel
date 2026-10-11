@@ -74,12 +74,8 @@ fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), Rende
             "opaque, automatic or explicit unordered blend alpha mode",
         ));
     }
-    if style.polygon_offsets().0 != 0 {
-        return Err(rejected(
-            style.polygon_offsets(),
-            "polygon offset disabled in this renderer slice",
-        ));
-    }
+    let (mode, factor, units) = style.polygon_offsets();
+    crate::RenderPolygonOffset::new(mode, factor, units)?;
     Ok(())
 }
 

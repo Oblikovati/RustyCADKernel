@@ -18,6 +18,7 @@ def append_tkv3d_requests(requests: list[str]) -> None:
     __import__("tkv3d_corpus_ais_circle").append_ais_circle_requests(requests)
     __import__("tkv3d_corpus_deflection_curve").append_deflection_curve_requests(requests)
     __import__("tkv3d_corpus_plane_trihedron").append_plane_trihedron_requests(requests)
+    __import__("tkv3d_corpus_ais_trihedron").append_trihedron_requests(requests)
     __import__("tkv3d_corpus_ais_axis").append_ais_axis_requests(requests)
     __import__("tkv3d_corpus_ais_point").append_ais_point_requests(requests)
     __import__("tkv3d_corpus_ais_point_cloud").append_point_cloud_requests(requests)

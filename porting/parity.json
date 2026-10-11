@@ -588192,6 +588192,776 @@
       "rust_item": "rustycad_tkv3d::ais::AisPointCloudSelectionMode::BndBox",
       "status": "implemented",
       "notes": "Martensite native point-cloud geometry alias/copy, cached float-buffer bounds, virtual application providers, facing-aware appearance, point/subset/box selection and forced zero-based subset owners. Exact numeric oracle, CPU regressions, both GPU profiles and update timings; Gouraud/Phong marker lighting is implemented; PBR markers, remaining point alpha policies and strict sprite raster parity remain open. See docs/ais-point-cloud.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::ToDrawArrows() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "068b12095560fa5b9302e9b13fe1370fc2f07a28d93bd9b6c9dd114eeb95c18c",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::to_draw_arrows",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetArrowColor(enum Prs3d_DatumParts, const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "06cee69041a730937ed98da57d306e8fadf4924d612ca512c70210eba7d28d35",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_arrow_color_part",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::ComputeSelection(const class opencascade::handle<class SelectMgr_Selection> &, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "078f2110c823f0b42289f9045d880228e33cece4f83657f04778e07e32255583",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myHasOwnTextColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "0b939a2d5e634f15cd95d6000543e1612a3444acf5bf255810dc187aa2d57e18",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::has_own_text_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetAxisColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "0ca434ddbe08df5e618f9d50c844e463d1f61e0d681019addc17ea4a3a8f9658",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_axis_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::ClearSelected()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "0e6fcc7615966db6eba8ac5abd8cfd2a4e731ac4824dcbcb0fe70814dd6516ab",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::clear_selected",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetDatumDisplayMode(enum Prs3d_DatumMode)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "12ca6b4db7439981694fefc4fe41a7c8e3f49fac55ded22dcbdd95e9ab193587",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_datum_display_mode",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::HasArrowColor() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "155ab71bacf13fe6360533d12fea57a1b64434a32ae770ff4ffeb22f7f736f97",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::has_arrow_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::ArrowColor() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "1600bad4b72d5718f450fbc86ffc65b663b803950704103a6d061efe71efb458",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::arrow_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myComponent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "17ce63fc1d926b0a8041bb6a085d3635126e62a3b875accbb58fd98f694da6d1",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::component",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::DynamicType() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "1adfbfbe044c7e31c5e37e8f444ffb58e4c616ffabb9ffdc81cbb6dbc4ccc457",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::Component() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "1d2102a39eb25a3f41be37d3ff2ded2dff9e97235ef82e44bb5a3e3fbf20f660",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::component",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "1ea442827ad79e7f2cca306f1d56f6aeebbb75e9e5b5e667bd927d7f35016a18",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronSelectionMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronSelectionMode.hxx",
+      "source_sha256": "fd540af47adda17398e68c6c8392d6d45a7680e655fbd7590ea01febab0480fe",
+      "cpp_declaration_id": "2719a5787a09614502a6ab3f722a713a07663210ad56a738dbf30d1a54c0f733",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSelectionMode",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::myDatumPart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "29d2e448a86eae41f45f83a5f35edd7e6d5fba0a8c2df2af436b369911e6af5a",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwnerBase::part",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::DatumPart() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "2a24d538a4f007eb4cee67fa237db87eff3a05e2c6aad6dfcb28735c86f931df",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwnerSource::datum_part",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::Size() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "300146d1dc8486e5e84c1e9115ac101fa38b555caa6417695e84e77073a9b353",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::size",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::mySelectionPriority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "303a311a47cbef01264cfc7aa9ef26e52a00ea20a9fd1cb9cc2005a01d1b05b7",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::selection_priority",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::AcceptDisplayMode(int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "34d698a7544e33c38168293e60095a2218d86ca533ea62c3dbfee137c13ce0e2",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::get_type_name()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "3596f00bab129e769f6c8dcd207ff47e4a7c6f5b5311333e99227786c6a85c22",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myPrimitives",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "37be2f66572da3a167425cdd8f18d54d3125bb77f436d488f6c3e83229f9b585",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::primitives",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetDrawArrows(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "3cc18b72751bb8c02e524be0d71f6028dcef45dbf79ae19c4b9566e0aed14399",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_draw_arrows",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetXAxisColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "3fadeb002846e411fc6fa576dc885409d8ef47738fdfb9fc57f87bacedde561b",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_x_axis_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronSelectionMode_EntireObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronSelectionMode.hxx",
+      "source_sha256": "fd540af47adda17398e68c6c8392d6d45a7680e655fbd7590ea01febab0480fe",
+      "cpp_declaration_id": "47a4f518f2741f9f43f72f913f63bcc32e9648639df381935d0f8e45c8b7e543",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSelectionMode::EntireObject",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::Label(enum Prs3d_DatumParts)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "482162d935abbb539b2fc1e34163c580e9b74cbbec4b5c80b4dd75b7cdcb6842",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::label",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myHasOwnSize",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "4a286c570549420906eaa9456027d612c58a3dab363bc405174103d4b2cdc1e7",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::has_own_size",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetYAxisColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "4eb4008578491a33fcce9ddddf2044406466b8b34c6913039b3adf8031aad892",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_y_axis_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetDatumPartColor(enum Prs3d_DatumParts, const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "505d7f12941c1fb216c7e8551a95e7d5b087a9e8b54a8effb7f556152ece454d",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_datum_part_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetArrowColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "5388e2756324db6ebce97519433fe9100a4c691766bf626216fbea0375a598bf",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_arrow_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::computePresentation(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Graphic3d_Structure> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "5bc1d4f62f319739e8a0dd2f410e8e814f821c461eb361511a2c40525d07d6c6",
+      "rust_item": "rustycad_tkv3d::ais::ais_trihedron_compute_presentation",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::base_type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "5de9def87b8dbc9044e27c88180ef3b4e22e41490124e91b118b45cb6dd1aa9e",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: native RTTI base_type typedef is descriptor wiring; Rust impl_transient registers the same parent without a callable alias."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::TextColor() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "5ecd193eaef1ba48a4b2c1a4395713739c4de58132ddc019b74afa71290dbd21",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::text_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myHiddenLineAspect",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "60a95e6538a8995e9393249c5125b559950d69860a6656552e3a6a5c4cf2d798",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::hidden_line_aspect",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetOriginColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "68cc5bf8fae5182e79ad661c17dd6cb56f312a34d34ffa5cf03697bfeca61fea",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_origin_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myTrihDispMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "68e05f966bf91266abca2cb4bf2b62061c656a1b1aacebe714875bbc629c8b62",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::datum_mode",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::get_type_name()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "6cea0dd70f15101c8c2fb63d3e5b5dbb1d85a39ca63152438db9754b2e7a5c9f",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::DumpJson(class std::basic_ostream<char> &, int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "6da3b504bbe280f660ec96a2166c38c633e6b1f0b6d9834d71c779738effd89e",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::dump_json",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::get_type_descriptor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "6e58e0a0996c1dde8f6ddc02852987baeab06dfb88c49ed7cb306c2ac4be160d",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::DatumDisplayMode() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "7048b66213d803cee894fa1e705622fa55ba1976175f4646f0e7b6ba1db76337",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::datum_display_mode",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::UnsetSize()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "75406e7f285aec29f09d3e9188c0e39703f78cb34dabfc55a7a41a14bfe5b3e7",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::unset_size",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetSelectionPriority(enum Prs3d_DatumParts, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "76c1cea553c66d37dd36d3a0efb818f0124d3a355f39164b02e8751bd1218590",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_selection_priority",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "772a8a340e28bd54ab6289056b7ab2d30344ace8674ea6d74ec3dffc4f82df87",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::Unhilight(const class opencascade::handle<class PrsMgr_PresentationManager> &, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "7c96fc77c1fef530cbbe9ba6655e22c788ed99e0e7625d261d81d5e45735d923",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::unhilight",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::Type() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "894384d90c574e5764c59895d003b5ae7f7ab5f3cc7fd32e32cf326697687986",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::Signature() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "9182d71b459a58188de79ffc0fc66541b10761a06937080fb21a1031ab8177f3",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::ais::AisInteractiveObject>::signature",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::setOwnDatumAspect()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "92a3a6691ac8481f1183a5535aef95cfef0c32a3797d0a60db288cc69e1b4cf2",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_own_datum_aspect",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::HilightOwnerWithColor(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Prs3d_Drawer> &, const class opencascade::handle<class SelectMgr_EntityOwner> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "93179acfdd5462415b923f8eb2d19977ed86931dce017aea22435b5d9bb1c92c",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::hilight_owner_with_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronSelectionMode_MainPlanes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronSelectionMode.hxx",
+      "source_sha256": "fd540af47adda17398e68c6c8392d6d45a7680e655fbd7590ea01febab0480fe",
+      "cpp_declaration_id": "97737a4c3683ab50fbe5370217ec9160958cbccb44fa5d03720c70055e7c2aff",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSelectionMode::MainPlanes",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::HasOwnSize() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "99118f88ce1bd75b6a7dea00eb82a31416c77811a29db44954ca63b0f9923536",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::has_own_size",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::mySelectedParts",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "9a2983f823277492d1cf48b4e74f0c8b9da77bf7bff1ad2f218ecb3defd8b4ad",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::selected_parts",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::HilightWithColor(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Prs3d_Drawer> &, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "9a76072ec35b9fe46ac281913cbc324eaf3bfafc1ef1291a9918e0e0d8e02525",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::hilight_with_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetComponent(const class opencascade::handle<class Geom_Axis2Placement> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "9e591b054294f91d9c04019c9da8bd7fe483000c105020b62674e1ec1db132fa",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_component",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "9ed76b378963decd127cdaaba0da1b4d8064e39e5b46f5e54663ce1824fc60d8",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::arrayOfPrimitives(enum Prs3d_DatumParts) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "9ff9d88723969568c8993dfd42e28de4a1b0e22040bdb6dcfab89389cc8a5567",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::array_of_primitives",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronSelectionMode_Origin",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronSelectionMode.hxx",
+      "source_sha256": "fd540af47adda17398e68c6c8392d6d45a7680e655fbd7590ea01febab0480fe",
+      "cpp_declaration_id": "a450a5744fdf02331369a9f25e877366b64c576fbb84f1464c96c25d7eda8278",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSelectionMode::Origin",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myPartToGroup",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "aa97b1b0ccb9ec53d1a43d9533423391c7df4c7901eefeab6a9006c49a2ea725",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::part_groups",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SelectionPriority(enum Prs3d_DatumParts)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "aae477bae306c2d3c5da5e2ca9f8acd53b522d4904c4adb864683639eb340a08",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::selection_priority",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetSize(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "af7e8427ba2bc45bfdaa7727954fcf1a33f22fbbbbd79c2fed3147e6651c117e",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_size",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "b0a126470ea324ccfe8301f4dd3556984d05ba2473a4901c1922a42d39dd36e6",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::AIS_Trihedron(const class opencascade::handle<class Geom_Axis2Placement> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "b0b346b2b287e5e6e363031887db77ae258cfd685e4a30d7d1341f0c6dc4eabc",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::new",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::AIS_TrihedronOwner(const class opencascade::handle<class SelectMgr_SelectableObject> &, enum Prs3d_DatumParts, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "b30a461baef814fa72694026c2c8a3fdfe7d771417f368f169e16313cd279b77",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::new",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::createSensitiveEntity(enum Prs3d_DatumParts, const class opencascade::handle<class SelectMgr_EntityOwner> &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "b4b6f8ab23cbec278e47bf2e1f29050fba1e64038a40e40821cec3344802ed52",
+      "rust_item": "rustycad_tkv3d::ais::ais_trihedron_sensitive",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::DatumPartColor(enum Prs3d_DatumParts)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "c1e37c03268ed504af28a26643239928f0cadc1edb59adae7d3adbd2fc21d713",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::datum_part_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetTextColor(enum Prs3d_DatumParts, const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "c31a7cdb1b0e0d1d8014e5466d50b768f859a05d32411f76a985b8b350933dee",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_text_color_part",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetLabel(enum Prs3d_DatumParts, const class TCollection_ExtendedString &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "ca8127dfd775e15539c9531e8196f89f78d355330be34385f3d778ab7d0e222a",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_label",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::HasTextColor() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "ce1a215083e3a5ba1b3e9aa43c3682454fe2119b547a3c2d99c006dcd84b0a72",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::has_text_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::base_type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "d58f166ee92293eec657567dc2899d80f0e5e59f15a43c0c7d6123dcb4f22b84",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: native RTTI base_type typedef is descriptor wiring; Rust impl_transient registers the same parent without a callable alias."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::IsHilighted(const class opencascade::handle<class PrsMgr_PresentationManager> &, int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "dc8b74f70b154f583add3b954bb4b186d56830b92dd6b580a3507729e35b1226",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::is_hilighted",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myHasOwnArrowColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "dd5b491156b58d25d5e6989cff4b7d03d2643b09c82e1f979df71e197862a80f",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::has_own_arrow_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::HilightSelected(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class NCollection_Sequence<class opencascade::handle<class SelectMgr_EntityOwner>> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "df0e360545fc629b54a961ee53ed9899be164baf7c5bcfaf5bcad0712a7d4a7c",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::hilight_selected",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::myLabels",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "e5267ba34134c81412a1359caad17d7d5318bd2242c30b2ae451328303112fc4",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronFields::labels",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::Compute(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Graphic3d_Structure> &, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "e6c4e4f04bb3ed97c5be31c581c6584a5c9e80479c9a7ec3c936265e8d165518",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedron::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::SetTextColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "f4201646edd43c03bac9ad68a55bb0fc871631703df32acf347fada7867df935",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSource::set_text_color",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::DynamicType() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "f68b30f6a6abd5a1bbad303f9f123d98c7519db06848eae24737d9885aec15cc",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronSelectionMode_Axes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronSelectionMode.hxx",
+      "source_sha256": "fd540af47adda17398e68c6c8392d6d45a7680e655fbd7590ea01febab0480fe",
+      "cpp_declaration_id": "f8d15f4a2690eb6089790da07b431c2534628c884cf703b4c3fdc6eebf846885",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronSelectionMode::Axes",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_TrihedronOwner::get_type_descriptor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TrihedronOwner.hxx",
+      "source_sha256": "e6e3679b14f60ebdce37cb8a9e27de51ef021d1774d196cbfecf5f307a7adc5b",
+      "cpp_declaration_id": "fc5e2158ca88fcb98b0bc1b57af7bd5395e78d3feb79719218a9971f26c48680",
+      "rust_item": "rustycad_tkv3d::ais::AisTrihedronOwner::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_Trihedron::updatePrimitives(const class opencascade::handle<class Prs3d_DatumAspect> &, enum Prs3d_DatumMode, const class gp_Pnt &, const class gp_Dir &, const class gp_Dir &, const class gp_Dir &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "source_sha256": "ff0c22a17f1d1db2a7e9d375a7d60587e4b001586c960e05c9bde4faa692b82c",
+      "cpp_declaration_id": "ff21413f8c69fa35a82673eccc379aba2c36da0a46c5dc53125c6e3ce4b41f8e",
+      "rust_item": "rustycad_tkv3d::ais::ais_trihedron_update_primitives",
+      "status": "implemented",
+      "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
     }
   ],
   "tests": [

@@ -46,7 +46,8 @@ in `deny.toml`; its copyright and license notice must accompany distributions.
 Unsupported styles and commands return errors. Current restrictions include
 triangle lists/strips/fans, segments/polylines and point sprites, full homogeneous Vec4 positions, opaque
 vertex/interior colors, unlit solid shading and [opaque Phong-family surfaces](vulkan-lighting.md),
-opaque face culling, [ordered annotation flipping](vulkan-group-flipping.md) and disabled polygon offsets. General group stencil commands,
+opaque face culling, [ordered annotation flipping](vulkan-group-flipping.md) and
+[retained polygon offsets](ais-trihedron.md). General group stencil commands,
 bounding-box highlighting, textures and custom shaders are not implemented.
 [Stencil capping](vulkan-capping.md) now renders opaque unlit sections with native
 closed-group masks, chain filtering and plane/object appearance; broader section

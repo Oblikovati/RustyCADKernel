@@ -172,7 +172,10 @@ fn cap_draw(
     aspect: &Handle<dyn Graphic3dAspectsSource>,
 ) -> Result<PrimitiveDraw, RenderError> {
     let vertices = crate::capping_geometry::cap_vertices(color);
+    let (mode, factor, units) = aspect.polygon_offsets();
+    let offset = crate::RenderPolygonOffset::new(mode, factor, units)?;
     Ok(PrimitiveDraw::new(vertices, (0..12).collect(), matrix)?
+        .with_polygon_offset(offset)
         .with_capping_pass(RenderCappingPass::Surface)?
         .with_face_culling(crate::face_culling::resolve_culling(
             aspect.face_culling(),

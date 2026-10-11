@@ -77,6 +77,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    now supports Gouraud/Phong points, sprite coverage and clipping. Retain strict
    point/line raster gates alongside live-normal update timings; continue remaining
    point material/alpha policies and lit line rendering.
+   [AIS trihedrons](ais-trihedron.md) now provide cached wire/shaded datum parts,
+   native owner selection and protected application subclass hooks. Vulkan polygon
+   offsets support the shaded geometry with both-device runtime checks; strict
+   shaded selection, image parity and performance-baseline gates remain open.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
