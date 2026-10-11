@@ -162,3 +162,40 @@ mod group_policy_fixtures;
 
 #[cfg(test)]
 mod group_primitive_tests;
+
+mod group_source;
+pub use group_source::{
+    Select3DSensitiveGroupBase, Select3DSensitiveGroupSource, select3d_group_matches,
+};
+
+#[cfg(test)]
+mod group_json_tests;
+
+pub use group_dump::select3d_group_dump_json;
+pub use group_source::{
+    select3d_group_distance_to_cog, select3d_group_element_is_inside,
+    select3d_group_overlaps_element,
+};
+
+#[cfg(test)]
+mod group_hook_fake;
+
+#[cfg(test)]
+mod group_hook_tests;
+
+#[cfg(test)]
+mod group_hook_fixtures;
+
+#[cfg(test)]
+mod group_dump_child_fake;
+
+#[cfg(test)]
+mod group_json_failure_tests;
+
+#[cfg(test)]
+mod group_state_tests;
+
+pub use group_source::select3d_group_downcast;
+
+#[cfg(test)]
+mod group_subclass_json_tests;

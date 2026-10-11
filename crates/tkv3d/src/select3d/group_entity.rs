@@ -19,9 +19,8 @@ impl Select3DSensitiveEntity for Select3DSensitiveGroup {
         manager: &dyn SelectBasicsSelectingVolumeManager,
         pick_result: &mut SelectBasicsPickResult,
     ) -> Result<bool, Failure> {
-        super::triangulation_failure::catch_triangulation_failure(|| {
-            self.match_group_volume(manager, pick_result)
-        })
+        // Application wrappers use this same dispatch seam to retain virtual protected hooks.
+        super::select3d_group_matches(self, manager, pick_result)
     }
     fn nb_sub_elements(&self) -> i32 {
         // Membership and primitive indices can differ after a defined child callback failure.
