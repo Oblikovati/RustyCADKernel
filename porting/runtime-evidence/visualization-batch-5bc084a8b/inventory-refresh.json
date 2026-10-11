@@ -1,0 +1,170 @@
+{
+  "project": "Martensite",
+  "source_revision": "5bc084a8bf83b0ac49d650b88b8c2d109d6e6a58",
+  "pipeline": [
+    {
+      "stage": 0,
+      "command": [
+        "python3",
+        "tools/capture_rustdoc_json.py",
+        "capture"
+      ],
+      "exit_code": 0,
+      "seconds": 101.49078766899765,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-0.log"
+    },
+    {
+      "stage": 1,
+      "command": [
+        "python3",
+        "tools/normalize_rustdoc_inventory.py"
+      ],
+      "exit_code": 0,
+      "seconds": 80.33428941000602,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-1.log"
+    },
+    {
+      "stage": 2,
+      "command": [
+        "python3",
+        "tools/api_coverage_report.py"
+      ],
+      "exit_code": 0,
+      "seconds": 169.86211432798882,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-2.log"
+    },
+    {
+      "stage": 3,
+      "command": [
+        "python3",
+        "tools/publish_api_snapshot.py"
+      ],
+      "exit_code": 0,
+      "seconds": 12.188963759981561,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-3.log"
+    },
+    {
+      "stage": 4,
+      "command": [
+        "python3",
+        "tools/api_metrics_report.py"
+      ],
+      "exit_code": 0,
+      "seconds": 14.085218760999851,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-4.log"
+    },
+    {
+      "stage": 5,
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.39729589098715223,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-5.log"
+    },
+    {
+      "stage": 6,
+      "command": [
+        "python3",
+        "tools/capture_rustdoc_json.py",
+        "verify"
+      ],
+      "exit_code": 0,
+      "seconds": 20.63957816999755,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-6.log"
+    },
+    {
+      "stage": 7,
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "status"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9767189509875607,
+      "log": "/tmp/martensite-integrated-inventory-5bc084a8b-7.log"
+    }
+  ],
+  "compiler_claims_audited": 21,
+  "new_group_api_claims": 20,
+  "animation_getter_partial_to_implemented": 1,
+  "cpp_and_rust_unique_bindings": 21,
+  "defined_visibility_and_upstream_hashes_verified": true,
+  "rust_source_hashes_verified": true,
+  "unresolved_ledger_rows": 0,
+  "ledger_name_correction": {
+    "rows": 20,
+    "reason": "Group qualified names accidentally included return types, causing missing_cpp despite valid explicit IDs. Names now match pinned declarations exactly; explicit IDs distinguish overloads. Production C++ matcher and final full crosswalk resolve all20 uniquely. No Rust source or behavior changed.",
+    "corrected_global_and_evidence_fragment": true,
+    "coverage_publish_metrics_rerun_exit_codes": [
+      0,
+      0,
+      0
+    ]
+  },
+  "port_metrics": {
+    "api_declarations": 76041,
+    "api_done": 52582,
+    "api_open": 22475,
+    "api_partial": 984,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "tkv3d": {
+    "api": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 165,
+        "partial": 9,
+        "unclaimed": 2200,
+        "upstream_unimplemented": 0,
+        "verified": 2798
+      },
+      "declarations": 5172,
+      "done": 2963,
+      "done_percent": 57.3
+    },
+    "boilerplate": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 404,
+        "partial": 21,
+        "unclaimed": 265,
+        "upstream_unimplemented": 0,
+        "verified": 233
+      },
+      "declarations": 923,
+      "done": 637,
+      "done_percent": 69.0
+    },
+    "gtests": {
+      "mapped": 1,
+      "not_applicable": 0,
+      "unmapped": 72
+    },
+    "ledger_defects": {},
+    "open_boilerplate_by_category": {
+      "rtti-macro": 242,
+      "special-member": 23
+    },
+    "open_gap_by_category": {
+      "alias": 22,
+      "enum-constant": 165,
+      "field": 349,
+      "member": 1333,
+      "protected-member": 150,
+      "record": 181
+    },
+    "scope": "port",
+    "scope_reason": ""
+  },
+  "limitations": [
+    "Complete behavioral/configuration/declaration proofs remain false.",
+    "Renderer evidence is bound to its recorded source revisions.",
+    "ViewCube and sensitive-group class records remain partial."
+  ]
+}
