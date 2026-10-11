@@ -209,6 +209,11 @@ pub use walk_delta::{AisWalkDelta, AisWalkPart, AisWalkRotation, AisWalkTranslat
 mod view_controller;
 mod view_controller_parameters;
 mod view_controller_selection;
+mod view_controller_transfer;
+#[cfg(test)]
+mod view_controller_transfer_fixture;
+#[cfg(test)]
+mod view_controller_transfer_tests;
 mod view_controller_zoom;
 pub use view_controller::AisViewController;
 
