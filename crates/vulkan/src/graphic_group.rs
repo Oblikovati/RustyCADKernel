@@ -48,7 +48,10 @@ impl GroupGeometry {
         context: &crate::text_submission::TextSceneContext<'_>,
     ) -> Result<Vec<PrimitiveDraw>, RenderError> {
         match self {
-            Self::Text(text) => context.draws(&text, aspects),
+            Self::Text(text) => context.draws(&text, aspects).map(|mut draws| {
+                crate::text_culling::apply_text_face_culling(&mut draws, &**aspects, closed);
+                draws
+            }),
             Self::Primitives(primitive) => {
                 lower_group_surface(&primitive, aspects, closed, matrix, highlighted, context)
             }

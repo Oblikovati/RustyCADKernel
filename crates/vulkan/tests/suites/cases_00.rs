@@ -53,6 +53,8 @@ pub mod shadow_presentations;
 pub mod surface_blending;
 #[path = "../surface_primitives.rs"]
 pub mod surface_primitives;
+#[path = "../text_culling_test.rs"]
+pub mod text_culling_test;
 #[path = "../text_primitives.rs"]
 pub mod text_primitives;
 #[path = "../transform_persistence.rs"]

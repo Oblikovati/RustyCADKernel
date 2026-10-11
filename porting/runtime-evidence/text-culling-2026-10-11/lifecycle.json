@@ -1,0 +1,12 @@
+{
+  "fresh-mirror-before-back": {
+    "lifecycle": "new empty structure -> mirror -> AddText -> Display -> capture",
+    "native_foreground_pixels": 102
+  },
+  "live-mirror-before-back": {
+    "lifecycle": "initial triangle -> Display -> Clear(true) -> mirror -> AddText -> capture, no redisplay",
+    "native_foreground_pixels": 0,
+    "rust_recording_device_draws": 0
+  },
+  "scope": "Native lifecycle matches Martensite; no bounds mutation fix and no unrelated policy changes"
+}

@@ -1,0 +1,53 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_commit": "73b798621435fb54f84147740f10ebae338c45a8",
+  "source_sha256": {
+    "crates/vulkan/src/text_culling.rs": "ff247da367974110bbbf44592a9dba6230abd381d349e42053389e7a3021bd28",
+    "crates/vulkan/src/graphic_group.rs": "1e83b764aa7b0c3736d10300de0e4bfd944b1bb0994de129a315ce05774f5821",
+    "crates/vulkan/src/face_culling.rs": "8ac264093d1e388712fdfa3e5748188b98a0f1c64a94609761036249ae2304f8",
+    "crates/vulkan/tests/support/text_culling_scene.rs": "d02e7601a868db5e107fd37b2b3cd6905ec753bf23684ad2311899e323c2f906",
+    "crates/vulkan/tests/support/text_scene.rs": "04921e13a906e419b7b82a7db55a5c2154b257b065adffc4455dfe8ce98ca0bd",
+    "crates/vulkan/examples/text_culling_capture.rs": "9ac833606d72e1763757280e009cf7217cbf19c345ed2dce69fe17308c1d95ba",
+    "crates/vulkan/examples/text_culling_performance.rs": "d0a81d4c9452715970e844da2f623c7a5c20a7e6de4129d3350876ec13a6fdda",
+    "tools/oracle/martensite_text_culling_probe.hxx": "56b0fb9cf672783a5890ce9ba9adad349117124e0cfc182c28a4a3b2a25ac91c",
+    "tools/oracle/martensite_vulkan_text_culling_policy.cxx": "54a944f566f25457d20690039200448e5302b4340463008acf99861009078573",
+    "tools/oracle/martensite_vulkan_text_culling_capture.cxx": "c31d9ea52be389a2392cd403205128623435d2b72409deb63fe63eb669e232fc",
+    "crates/vulkan/src/view_scene.rs": "5770e95d1e6783ffe35733d843101f115f2d7b36e03fa659fa874d54e1fd6713"
+  },
+  "upstream_source_sha256": {
+    "src/Visualization/TKOpenGl/OpenGl/OpenGl_Workspace.cxx": "9d76876a230ec4559729241a6aad07a308f297bed1b73ffc9b8c6c907fe1af0d",
+    "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.cxx": "41d73d1f7e0448e6a3838bfd3f515014d23a57f6d8c28f9957987f9a88e5d6e8",
+    "src/Visualization/TKOpenGl/OpenGl/OpenGl_Structure.cxx": "6616e23b01e6a00231a5f43f3a3c5dd9759f67f4b6b19d544c5591f16f3e1a47",
+    "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.cxx": "39a458622d2a6a9a588df1435e4d8ccf04820ce5bd19dc286f61ede89dcdc47b",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_Group.cxx": "41bdbf913e611c3c2369d8b26b8d9efd549c9d030731771633f4a534756a3fd1",
+    "src/Visualization/TKOpenGl/OpenGl/OpenGl_Workspace.hxx": "5769e0fc5f60b90739f7812137d8ac2f902fc3d312c4c48aa21175c4531eac42"
+  },
+  "native_libraries_sha256": {
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKOpenGl.so": "9a6beea3fdf0d7b7b9a88a96d1313e06bb177788da56eabb09561f9e06d38932",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24"
+  },
+  "installed_workspace_header_wrapper": "// Copyright (c) 2025 OPEN CASCADE SAS\n//\n// This file is part of Open CASCADE Technology software library.\n//\n// This library is free software; you can redistribute it and/or modify it under\n// the terms of the GNU Lesser General Public License version 2.1 as published\n// by the Free Software Foundation, with special exception defined in the file\n// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT\n// distribution for complete text of the license and disclaimer of any warranty.\n//\n// Alternatively, this file may be used under the terms of Open CASCADE\n// commercial license or contractual agreement.\n\n// clang-format off\n#include \"/home/vmiguel/git/oblikovati-workspace/OCCT/src/Visualization/TKOpenGl/OpenGl/OpenGl_Workspace.hxx\"// clang-format on\n",
+  "installed_workspace_header_wrapper_sha256": "6d184c816d4b583a95775e9f62883bf5f6bfb061a8f3dc5a42c967b6227f659a",
+  "native_device": "OCCT_GL_RENDERER=AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)",
+  "policy_fixture_sha256": "f405b81489970a7d33e86bb791bdb0d5fd70a6e55d14a6e19286f0e7706a83b7",
+  "oracle_scope": "384 actual OpenGl_Workspace::ApplyAspects(false) calls plus glIsEnabled(GL_CULL_FACE)/glGetIntegerv(GL_CULL_FACE_MODE); generation requires real GL, Rust replay is CPU-only",
+  "limitations": [
+    "No whole OpenGl_Text implementation claim",
+    "Shadow is absent on base73b798621; generic every-pass policy tested with two draws, combined Shadow integration requires root check",
+    "Linux only; no Windows/macOS evidence",
+    "No performance baseline comparison; optimized end-to-end distributions only"
+  ],
+  "probe_binary_sha256": {
+    "target/debug/examples/text_culling_capture": "43baf99e5bc43f219c6b21ce4d124e0878e10ded086b52a3664553c41e942799",
+    "target/release/examples/text_culling_performance": "0090745aae39e29f9b4d8df45fd7e28479b03334aff6c789cb79490dcbb46cf3",
+    "target/oracle/martensite-vulkan-text-culling-policy": "513b7c98a56bb61c66df52bbeca4513e73a0b3951d9a539425ac5bde01caf539",
+    "target/oracle/martensite-vulkan-text-culling-capture": "12c5eec0e79dffaf9e844ffb5ef29b58b7a092a9a672e7cf8a8dec918167e803"
+  },
+  "vulkan_icd_sha256": {
+    "/usr/share/vulkan/icd.d/lvp_icd.json": "8468db31369dbd0140b68783f1a7943e6158cadcf5314e949e6be31f42068e13",
+    "/usr/share/vulkan/icd.d/radeon_icd.json": "bca32a660ca32a42b598d53cdc63b3e3e917ea40c0b3b1e00fdbd3115280b51d"
+  }
+}
