@@ -333,3 +333,14 @@ pub use light_source_aspects::ais_light_source_initialize;
 
 #[cfg(test)]
 mod light_source_concrete_tests;
+
+mod view_controller_camera_primitives;
+mod view_controller_camera_zoom;
+
+#[cfg(test)]
+mod view_controller_camera_fixture;
+#[cfg(test)]
+mod view_controller_camera_tests;
+
+#[cfg(test)]
+mod view_controller_camera_failure;
