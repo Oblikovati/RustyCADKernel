@@ -96,7 +96,7 @@ jobs:
       - run: cargo install cargo-llvm-cov --version 0.9.1 --locked
       - name: Run instrumented tests once, with coverage and JUnit output
         run: cargo llvm-cov nextest --workspace --all-features --locked --profile ci --lcov --output-path target/lcov.info
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         with:
           name: coverage-and-tests
           path: |
@@ -120,7 +120,7 @@ jobs:
           done
       - name: Measure release renderer performance on lavapipe
         run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --release --example renderer_performance --locked > target/renderer-performance.log
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: lavapipe-renderer-performance
@@ -182,7 +182,7 @@ jobs:
       - run: sudo apt-get install -y libfreetype-dev libfontconfig-dev libx11-dev
       - run: python3 tools/verify_toolkit.py TKService --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKV3d --source target/occt-source --jobs 2
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: tkernel-oracle-evidence

@@ -54,7 +54,7 @@ jobs:
           MARTENSITE_FP_CONTRACT: ${{ inputs.fp_contract }}
           MARTENSITE_CYLINDER_ONLY: ${{ inputs.capture == 'cylinder' }}
         run: python3 tools/ci/capture_platform_geometry.py
-      - uses: actions/upload-artifact@v7.0.1
+      - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
           name: geometry-oracle-${{ matrix.os }}
