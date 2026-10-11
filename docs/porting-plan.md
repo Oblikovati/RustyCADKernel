@@ -12,6 +12,12 @@ base-toolkit-first scheduling in `porting/base-toolkit-priority.json` and the
 original phase order below. Dependencies still need correct implementations;
 complete the particular prerequisite that blocks a visualization or renderer slice.
 
+User decision, 2026-10-11: verify porting locally on this Linux host and defer
+Windows/macOS testing. Run the affected toolkit suites locally; rendering changes
+retain local lavapipe and native-host functional captures and performance checks.
+Linux CI remains enabled. Deferred platform checks remain part of eventual
+validation and do not remove APIs or behavior from the defined porting scope.
+
 1. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
    camera-dependent selection, native comparisons and regression tests.
 2. Continue Martensite's Vulkan renderer through the existing Graphic3d interfaces.

@@ -127,12 +127,14 @@ class ToolkitSuiteTests(unittest.TestCase):
 
 
 class ToolkitWorkflowTests(unittest.TestCase):
-    def test_ci_has_one_workspace_run_per_os_and_one_instrumented_coverage_run(self) -> None:
+    def test_ci_has_one_linux_workspace_run_and_one_instrumented_coverage_run(self) -> None:
         root = Path(__file__).resolve().parents[2]
         workflow = (root / '.github/workflows/ci.yml').read_text()
         self.assertNotIn('matrix.shard', workflow)
         self.assertIn('LLVM_PROFILE_FILE_NAME: martensite-%4m.profraw', workflow)
-        self.assertIn('os: [ubuntu-latest, windows-latest, macos-latest]', workflow)
+        self.assertIn('os: [ubuntu-latest]', workflow)
+        self.assertNotIn('windows-latest', workflow)
+        self.assertNotIn('macos-latest', workflow)
         coverage = workflow.split('  coverage:\n', 1)[1].split('  vulkan-runtime:', 1)[0]
         self.assertEqual(coverage.count('cargo llvm-cov nextest'), 1)
         self.assertNotIn('run: cargo clean', coverage)
