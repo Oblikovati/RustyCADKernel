@@ -9,7 +9,7 @@ fn selection_bounds_and_camera_fit_match_native_global_and_part_owner_scenes() {
 }
 fn replay_fit_chunk(fixture: &str) {
     let mut scene = fit_scene(0);
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     for line in fixture.lines() {
         let row: Vec<f64> = line
             .split_whitespace()
@@ -17,7 +17,7 @@ fn replay_fit_chunk(fixture: &str) {
             .collect();
         if row[1] == 0.0 {
             scene = fit_scene(row[0] as usize);
-            controller = AisViewController::new();
+            controller = AisViewController::new().unwrap();
         }
         apply_fit_frame(&mut controller, &scene, row[1] as usize);
         assert_fit_row(&scene, &row);
@@ -97,7 +97,7 @@ fn selected_bounds_validate_margin_before_changing_camera() {
 fn fitting_toggles_selection_and_scene_without_replacing_camera() {
     let scene = fit_scene(1);
     let camera = scene.view.camera();
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     controller
         .fit_all_auto(&scene.context, &scene.view)
         .unwrap();

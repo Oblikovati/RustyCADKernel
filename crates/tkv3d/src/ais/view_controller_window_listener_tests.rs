@@ -10,7 +10,7 @@ use rustycad_tkservice::wnt::WntHidSpaceMouse;
 
 #[test]
 fn dynamic_listener_routes_keyboard_and_window_callbacks() {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let listener: &mut dyn AspectWindowInputListener = &mut controller;
     listener.process_expose();
     listener.process_configure(true);
@@ -30,7 +30,7 @@ fn dynamic_listener_routes_keyboard_and_window_callbacks() {
 
 #[test]
 fn dynamic_listener_routes_mouse_and_touch_controller_requests() {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     exercise_mouse_and_touch(&mut controller);
     let ui = controller.input_buffer(AisViewInputBufferType::Ui);
     assert!(ui.dragging.to_start);
@@ -58,7 +58,7 @@ fn exercise_mouse_and_touch(listener: &mut dyn AspectWindowInputListener) {
     assert!(!listener.remove_touch_point(5, false).unwrap());
 }
 fn failing_listener() -> AisViewController {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let animation = Handle::new(ClickPauseRecorder::new(true));
     animation.start(false).unwrap();
     controller.set_objects_animation(&animation.cast::<dyn AisAnimationSource>());
@@ -104,7 +104,7 @@ fn dynamic_touch_release_propagates_animation_failure_after_removal() {
 }
 #[test]
 fn dynamic_listener_retains_shared_hid_callbacks() {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let listener: &mut dyn AspectWindowInputListener = &mut controller;
     let bytes = [3, 2, 0, 0, 0];
     let report = WntHidSpaceMouse::new(0xC62B, &bytes);

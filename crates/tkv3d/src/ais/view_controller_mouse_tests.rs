@@ -34,8 +34,8 @@ fn replay_mouse_fixture(fixture: &str) {
 fn default_mouse_bindings_are_live_and_independent() {
     use super::*;
     use rustycad_tkservice::aspect::*;
-    let mut c = AisViewController::default();
-    let other = AisViewController::default();
+    let mut c = AisViewController::new().unwrap();
+    let other = AisViewController::new().unwrap();
     assert_eq!(c.mouse_gesture_map().extent(), 9);
     assert_left_binding(&c, AisMouseGesture::RotateOrbit);
     c.change_mouse_gesture_map()

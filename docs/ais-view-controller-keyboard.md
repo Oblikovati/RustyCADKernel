@@ -47,7 +47,7 @@ they preserve queued gestures until explicit flushing.
 ```rust
 use rustycad_tkv3d::ais::AisViewController;
 use rustycad_tkservice::aspect::{AspectVKey, AspectVKeyBasic};
-let mut controller = AisViewController::new();
+let mut controller = AisViewController::new()?;
 let key = AspectVKeyBasic::NavForward as AspectVKey;
 controller.key_down(key, controller.event_time(), 0.5)?;
 let movement = controller.fetch_navigation_keys(0.5, 2.0)?;

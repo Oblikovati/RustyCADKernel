@@ -7,7 +7,7 @@ macro_rules! check_parameter {
     ($name:ident, $getter:ident, $setter:ident, $changed:expr, $row:literal) => {
         #[test]
         fn $name() {
-            let mut c = AisViewController::new();
+            let mut c = AisViewController::new().unwrap();
             assert_snapshot(&parameters(&c), "parameters-default");
             let initial = c.$getter();
             let changed = $changed;
@@ -203,9 +203,9 @@ check_parameter!(
 );
 #[test]
 fn controller_default_trait_matches_native_input_defaults() {
-    assert_event(&AisViewController::default(), "default-ui", -1);
+    assert_event(&AisViewController::new().unwrap(), "default-ui", -1);
     assert_snapshot(
-        &parameters(&AisViewController::default()),
+        &parameters(&AisViewController::new().unwrap()),
         "parameters-default",
     );
 }

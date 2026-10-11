@@ -62,7 +62,7 @@ pub(super) fn rotation_scene(index: usize) -> PrimitiveScene {
     let mut scene = primitive_scene(0);
     configure_rotation_camera(&scene.view, index);
     configure_rotation_xr(&scene.view, index);
-    scene.controller = AisViewController::new();
+    scene.controller = AisViewController::new().unwrap();
     seed_rotation_requests(&mut scene.controller, index);
     seed_retained_rotation_state(&mut scene.controller, &scene.view.camera());
     scene.controller.view_animation().set_view(&scene.view);

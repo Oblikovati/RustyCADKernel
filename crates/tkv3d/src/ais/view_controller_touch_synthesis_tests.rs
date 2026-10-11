@@ -5,7 +5,7 @@ use rustycad_tkernel::{ncollection::Vec2, standard::Handle};
 use rustycad_tkservice::aspect::AspectTouch;
 #[test]
 fn pinch_negates_y_before_converting_at_signed_integer_boundary() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     c.touch_dispatch.update_start_pan = false;
     for index in 0..2 {
         let mut touch = AspectTouch::at(f64::from(index * 20), -1_073_741_824., false);
@@ -35,7 +35,7 @@ fn gesture_synthesis_matches_native_contact_modes_tolerances_and_three_frames() 
 }
 fn replay_synthesis_chunk(fixture: &str) {
     let (_viewer, view) = synthesis_view();
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     for line in fixture.lines() {
         let row: Vec<f64> = line
             .split_whitespace()
@@ -90,7 +90,7 @@ fn missing_view_failure_preserves_native_start_mutations() {
 }
 #[test]
 fn contact_count_transitions_are_detected_without_motion_or_view() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     c.flush_gestures(&Handle::default(), &Handle::default())
         .unwrap();
     assert!(!c.render_input.is_new_gesture);

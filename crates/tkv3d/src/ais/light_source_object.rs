@@ -92,5 +92,5 @@ impl SelectMgrSelectableObject for AisLightSource {
 
 // Native bool APIs unwind Standard_Failure; retaining its type avoids erasing native errors.
 pub(super) fn native_light_bool_result(result: Result<bool, Failure>) -> bool {
-    result.unwrap_or_else(|error| std::panic::panic_any(error))
+    rustycad_tkernel::standard::raise_native_failure(result)
 }

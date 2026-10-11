@@ -46,7 +46,7 @@ fn configure_picking_camera(view: &V3dView, projection: i32) {
 fn controller_picking_replays_native_context_selection() {
     for projection in 0..2 {
         let (_viewer, view, context) = picking_scene(projection);
-        let mut controller = AisViewController::new();
+        let mut controller = AisViewController::new().unwrap();
         for line in include_str!("../../tests/fixtures/controller-picking-native.txt").lines() {
             let expected: Vec<f64> = line
                 .split_whitespace()
@@ -110,7 +110,7 @@ fn center_picking_requires_window_without_resetting_previous_pixel() {
     let viewer = V3dViewer::new(&NullGraphicDriver::new_handle()).unwrap();
     let view = viewer.create_view().unwrap();
     let context = AisInteractiveContext::new(&viewer).unwrap();
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     controller.set_rotation_mode(AisRotationMode::PickCenter);
     controller.previous_move_to = Vec2::new(14, 18);
     assert!(
@@ -154,7 +154,7 @@ fn execute_gravity_row(
 fn picking_failure_resets_highlight_before_volume_initialization() {
     let (viewer, _view, context) = picking_scene(0);
     let view = viewer.create_view().unwrap();
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     controller.previous_move_to = Vec2::new(1, 2);
     let mut point = Point3::new(97., 98., 99.);
     let error = controller

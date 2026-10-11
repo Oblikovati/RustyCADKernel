@@ -429,3 +429,26 @@ mod view_controller_view_rotation;
 mod view_controller_rotation_fixture;
 #[cfg(test)]
 mod view_controller_rotation_tests;
+
+mod view_controller_camera_action_state;
+mod view_controller_construction;
+mod view_controller_lazy_move;
+
+mod view_controller_camera_actions;
+mod view_controller_camera_anchors;
+mod view_controller_camera_feedback;
+mod view_controller_camera_pan;
+mod view_controller_camera_rotation_actions;
+mod view_controller_camera_zoom_actions;
+
+#[cfg(test)]
+mod view_controller_action_callback_fixture;
+#[cfg(test)]
+mod view_controller_action_scene_fixture;
+#[cfg(test)]
+mod view_controller_action_seed_fixture;
+
+#[cfg(test)]
+mod view_controller_action_snapshot_fixture;
+#[cfg(test)]
+mod view_controller_action_tests;

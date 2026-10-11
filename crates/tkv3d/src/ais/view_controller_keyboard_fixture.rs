@@ -47,7 +47,7 @@ pub(super) fn prepare(
 ) -> (AisViewController, Arc<FrozenNavigationClock>) {
     let clock = Arc::new(FrozenNavigationClock(AtomicU64::new(0.0_f64.to_bits())));
     let timer = Timer::with_cpu(false, Arc::new(FrozenNavigationCpu), clock.clone());
-    let mut c = AisViewController::with_event_timer(timer);
+    let mut c = AisViewController::with_event_timer(timer).unwrap();
     c.navigation_state.last_events_time = previous;
     clock.set(current);
     (c, clock)

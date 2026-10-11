@@ -51,7 +51,7 @@ fn controller_space_mouse_matches_native_key_state_and_hold_lifecycles() {
             .map(|n| n.parse().unwrap())
             .collect();
         if row[1] == 0.0 {
-            c = AisViewController::with_event_timer(c.input_base().event_timer.clone());
+            c = AisViewController::with_event_timer(c.input_base().event_timer.clone()).unwrap();
             configure_space_controller(&mut c, row[0] as usize);
         }
         let time = 1.0 + row[1] * 0.5;
