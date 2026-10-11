@@ -119,8 +119,41 @@ impl MMgrOpt {
 }
 
 /// `strerror(code)` as the C runtime words it; `os_error_text(12) == "Cannot allocate memory"`.
+#[cfg(not(windows))]
 fn os_error_text(code: i32) -> String {
     let text = std::io::Error::from_raw_os_error(code).to_string();
     let suffix = format!(" (os error {code})");
     text.strip_suffix(&suffix).unwrap_or(&text).to_owned()
+}
+
+#[cfg(windows)]
+#[allow(unsafe_code)]
+fn os_error_text(code: i32) -> String {
+    unsafe extern "C" {
+        fn strerror_s(buffer: *mut libc::c_char, size: usize, code: i32) -> libc::c_int;
+    }
+    let mut buffer = [0_u8; 128];
+    // The documented POSIX allocation model uses CRT errno values, not Win32 codes
+    // (runner 38133190067). Copy into owned storage so parallel errors cannot alias.
+    let status = unsafe { strerror_s(buffer.as_mut_ptr().cast(), buffer.len(), code) };
+    assert_eq!(status, 0, "CRT errno {code}: expected strerror_s success");
+    let end = buffer
+        .iter()
+        .position(|byte| *byte == 0)
+        .unwrap_or(buffer.len());
+    String::from_utf8_lossy(&buffer[..end]).into_owned()
+}
+
+#[cfg(test)]
+mod errno_regressions {
+    #[test]
+    fn allocation_errno_words_use_the_crt_namespace() {
+        assert_eq!(super::os_error_text(super::EINVAL), "Invalid argument");
+        let expected = if cfg!(windows) {
+            "Not enough space"
+        } else {
+            "Cannot allocate memory"
+        };
+        assert_eq!(super::os_error_text(super::ENOMEM), expected);
+    }
 }

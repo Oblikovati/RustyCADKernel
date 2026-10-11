@@ -27,3 +27,17 @@ c++ -std=c++17 -O2 \
 The separate `tkernel_hex_float.cxx` fixture supplies 1,312 supplemental hexadecimal-double cases, including default/explicit precision, ties, subnormals, signed zeros, special values, casing, prefixes and padding. Source and output hashes are in `porting/audits/standard-hex-float.json`. This matches the Linux glibc C-locale profile at default nearest/even rounding; alternative rounding modes and C libraries remain unproven.
 
 The `%p` implementation formats a typed address without accessing its storage. `tkernel_pointer_format.cxx` records 72 Linux x86_64 glibc cases, including null `(nil)` and precision/width/sign interactions; hashes and the reproduction command are in `porting/audits/standard-pointer-format.json`. Other platform pointer spellings remain unproven.
+
+Windows hexadecimal formatting now has a crate-owned native snapshot:
+`crates/tkernel/tests/fixtures/tkernel_hex_float.windows.expected`. The MSVC x64 CRT
+capture [38142140001](https://github.com/Oblikovati/RustyCADKernel/actions/runs/38142140001)
+compiled `tkernel_hex_float.cxx` with `MARTENSITE_CRT_ONLY`, using the C-locale CRT
+forwarding that Standard_CString delegates to. This mode independently reproduces
+all 1,312 Linux oracle rows without OCCT, and captures 100 Windows differences:
+default thirteen-digit fractions, signed/signaling NaN text, and alternate
+zero-precision special values. Rust tests select the host snapshot and compare
+every byte, count, terminator, and untouched buffer tail. They do not execute the
+capture program or need an OCCT build. The capture workflow/source can be retired
+with the other porting oracles while the Rust test and fixture remain.
+
+Windows fixture SHA-256: `70b977eb1d2be9d7f2e4afa4c2efd523a3f54e8917656513eeb6f11cd0bd238b`.

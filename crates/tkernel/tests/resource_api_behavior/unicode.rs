@@ -120,7 +120,13 @@ fn utf8_locale_and_unconverted_formats() {
         [0x61, 0xF8, 0x88, 0x80, 0x80, 0x80]
     );
     assert_eq!(decoded(FormatType::NoConversion, b"\xe9"), [0xE9]);
-    assert_eq!(decoded(FormatType::SystemLocale, b"ab"), [0x61]);
+    // Windows converts the whole ANSI sequence; Unix preserves the native iterator quirk.
+    let expected: &[u16] = if cfg!(windows) {
+        &[0x61, 0x62]
+    } else {
+        &[0x61]
+    };
+    assert_eq!(decoded(FormatType::SystemLocale, b"ab"), expected);
     assert_eq!(
         encoded(FormatType::Utf8, &[0xE9], 3),
         (true, vec![0xC3, 0xA9, 0])

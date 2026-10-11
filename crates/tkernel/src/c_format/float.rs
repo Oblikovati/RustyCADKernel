@@ -22,6 +22,8 @@ fn nonfinite(spec: &Spec, value: f64, prefix: Vec<u8>) -> Vec<u8> {
         word.as_bytes().to_vec(),
         spec.conversion.is_ascii_uppercase(),
     );
+    #[cfg(windows)]
+    let (prefix, digits) = windows_special_hexadecimal(spec, prefix, digits);
     pad(spec, prefix, digits, false)
 }
 
@@ -123,4 +125,56 @@ fn trimmed(mut text: String, alternate: bool) -> String {
         return text;
     }
     text.trim_end_matches('0').trim_end_matches('.').to_owned()
+}
+
+#[cfg(any(windows, test))]
+fn windows_special_hexadecimal(
+    spec: &Spec,
+    mut prefix: Vec<u8>,
+    mut digits: Vec<u8>,
+) -> (Vec<u8>, Vec<u8>) {
+    if !spec.alternate || spec.precision != Some(0) || !matches!(spec.conversion, b'a' | b'A') {
+        return (prefix, digits);
+    }
+    // UCRT's alternate zero-precision special-value spelling is byte evidence in
+    // runner 38142140001, including the negative-value hexadecimal prefix quirk.
+    let negative = prefix.first() == Some(&b'-');
+    if negative {
+        prefix.extend_from_slice(b"0x");
+        if spec.conversion == b'A' {
+            prefix.make_ascii_uppercase();
+        }
+    }
+    digits.insert(usize::from(!negative), b'.');
+    (prefix, digits)
+}
+
+#[cfg(test)]
+mod windows_hex_regressions {
+    const MSVC_ALTERNATE_SPECIAL_VALUES: [(&str, &str, &str); 5] = [
+        ("", "INF", "I.NF"),
+        ("-", "INF", "-0X.INF"),
+        ("", "NAN", "N.AN"),
+        ("-", "NAN(IND)", "-0X.NAN(IND)"),
+        ("", "NAN(SNAN)", "N.AN(SNAN)"),
+    ];
+
+    #[test]
+    fn alternate_special_values_match_the_msvc_snapshot() {
+        let spec = super::Spec {
+            alternate: true,
+            precision: Some(0),
+            conversion: b'A',
+            ..Default::default()
+        };
+        for (prefix, digits, expected) in MSVC_ALTERNATE_SPECIAL_VALUES {
+            let (mut prefix, digits) = super::windows_special_hexadecimal(
+                &spec,
+                prefix.as_bytes().to_vec(),
+                digits.as_bytes().to_vec(),
+            );
+            prefix.extend_from_slice(&digits);
+            assert_eq!(prefix, expected.as_bytes());
+        }
+    }
 }

@@ -17,7 +17,7 @@ struct FakePluginResources {
 impl ResourceIo for FakePluginResources {
     fn read(&self, path: &Path) -> io::Result<Vec<u8>> {
         self.reads.fetch_add(1, Ordering::SeqCst);
-        if path == Path::new("/fake/Plugin") {
+        if path == Path::new("C:/fake/Plugin") {
             return Ok(self.file.clone().into_bytes());
         }
         Err(io::Error::from(io::ErrorKind::NotFound))
@@ -33,7 +33,7 @@ impl ResourceIo for FakePluginResources {
 struct FakePluginEnvironment;
 impl ResourceEnvironment for FakePluginEnvironment {
     fn directory(&self, name: &str) -> Option<PathBuf> {
-        (name == "CSF_PluginDefaults").then(|| PathBuf::from("/fake"))
+        (name == "CSF_PluginDefaults").then(|| PathBuf::from("C:/fake"))
     }
 }
 

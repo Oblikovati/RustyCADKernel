@@ -171,8 +171,8 @@ fn shifted_active_unit_converts_to_si_with_the_native_formula() {
 #[test]
 fn current_units_come_from_the_injected_resources() {
     let resources = Arc::new(InMemoryUnitsResources::default());
-    resources.define("CurrentUnits", "/defaults", "LENGTH : mm\n");
-    resources.define_user("CurrentUnits", "/user");
+    resources.define("CurrentUnits", "C:/defaults", "LENGTH : mm\n");
+    resources.define_user("CurrentUnits", "C:/user");
     let mut api = units_support::api_with(resources.clone());
     assert_eq!(api.current_unit(b"LENGTH").unwrap(), "mm");
     assert_eq!(api.current_to_si(2.0, b"LENGTH").unwrap(), 0.002);
@@ -188,7 +188,7 @@ fn current_units_come_from_the_injected_resources() {
         .files
         .lock()
         .unwrap()
-        .get(std::path::Path::new("/user/CurrentUnits"))
+        .get(std::path::Path::new("C:/user/CurrentUnits"))
         .cloned();
     assert!(String::from_utf8(saved.unwrap()).unwrap().contains("SPEED"));
     api.set_local_system(SystemUnits::Mdtv).unwrap();

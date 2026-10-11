@@ -62,10 +62,13 @@ fn pointer_text_keeps_the_short_form_quirk() {
     );
     let live = Handle::new(StandardTransient::default());
     let text = dump::get_handle_pointer_info(&live, false).unwrap();
-    assert_eq!(
-        text.as_bytes(),
-        format!("{:#x}", live.as_ptr() as usize).as_bytes()
-    );
+    let address = live.as_ptr() as usize;
+    let expected = if cfg!(target_env = "msvc") {
+        format!("{address:0width$X}", width = 2 * size_of::<usize>())
+    } else {
+        format!("{address:#x}")
+    };
+    assert_eq!(text.as_bytes(), expected.as_bytes());
 }
 
 #[test]

@@ -1,10 +1,12 @@
-//! Binary64 `%a` layout matched to OCCT's Linux C-locale printf forwarding.
+//! Binary64 `%a` layout matched to OCCT's host C-locale printf forwarding.
 //! Rounding uses nearest/even, like the default native floating-point environment.
 use super::{Spec, pad};
 
 pub(super) fn format(spec: &Spec, magnitude: f64, mut prefix: Vec<u8>) -> Vec<u8> {
     let (significand, exponent) = binary_parts(magnitude);
-    let mut digits = mantissa(significand, spec.precision, spec.alternate);
+    // MSVC retains all thirteen fraction digits at default precision (run 38142140001).
+    let precision = spec.precision.or(cfg!(windows).then_some(13));
+    let mut digits = mantissa(significand, precision, spec.alternate);
     digits.extend_from_slice(format!("p{exponent:+}").as_bytes());
     let upper = spec.conversion == b'A';
     prefix.extend_from_slice(if upper { b"0X" } else { b"0x" });

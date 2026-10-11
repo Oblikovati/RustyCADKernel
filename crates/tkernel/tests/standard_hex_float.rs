@@ -1,7 +1,10 @@
 //! Supplemental C-locale oracle rows, not additional legacy test declarations.
 use rustycad_tkernel::standard::c_string::{FormatArg, sprintf_into_slice};
 
+#[cfg(not(windows))]
 const HEX_ROWS: &str = include_str!("../../../tools/oracle/tkernel_hex_float.expected");
+#[cfg(windows)]
+const HEX_ROWS: &str = include_str!("fixtures/tkernel_hex_float.windows.expected");
 
 #[test]
 fn hexadecimal_double_formats_match_pinned_native_rows() {

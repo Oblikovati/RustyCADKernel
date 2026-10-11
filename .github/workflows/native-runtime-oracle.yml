@@ -24,5 +24,7 @@ jobs:
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: windows-runtime-oracle
-          path: target/runtime-oracle/*.expected
+          path: |
+            target/runtime-oracle/*.expected
+            target/runtime-oracle/hashes.txt
           if-no-files-found: error

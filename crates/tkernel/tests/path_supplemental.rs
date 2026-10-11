@@ -27,9 +27,16 @@ impl ProcessSource for FakeDirectorySource {
 #[test]
 fn injected_directory_source_keeps_queries_deterministic() {
     let mut path = Process::with_source(FakeDirectorySource).current_directory();
-    assert_eq!(path.trek().as_bytes(), b"|workspace|project|");
+    // Windows CurrentDirectory keeps the final component as Name, as OCCT does.
+    let expected: &[u8] = if cfg!(windows) {
+        b"|workspace"
+    } else {
+        b"|workspace|project|"
+    };
+    assert_eq!(path.trek().as_bytes(), expected);
     path.up_trek();
-    assert_eq!(path.trek().as_bytes(), b"|workspace|");
+    let parent: &[u8] = if cfg!(windows) { b"" } else { b"|workspace|" };
+    assert_eq!(path.trek().as_bytes(), parent);
 }
 #[test]
 fn syntax_profiles_preserve_unc_parent_markers_and_native_classification_quirks() {

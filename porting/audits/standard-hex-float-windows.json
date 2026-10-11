@@ -1,0 +1,22 @@
+{
+  "capture_run": "https://github.com/Oblikovati/RustyCADKernel/actions/runs/38142140001",
+  "capture_commit": "f7c49948e",
+  "profile": "Windows x64 MSVC CRT, initial C locale and default rounding",
+  "oracle_mode": "MARTENSITE_CRT_ONLY (Standard_CString C-locale forwarding, no OCCT build)",
+  "cases": 1312,
+  "different_from_linux": 100,
+  "sha256": {
+    "tools/oracle/tkernel_hex_float.cxx": "f6da3c1efb63c61b37b2bf68ba3bc284883aa6cd8e2b1c1d29f571a16bfb15d9",
+    "crates/tkernel/tests/fixtures/tkernel_hex_float.windows.expected": "70b977eb1d2be9d7f2e4afa4c2efd523a3f54e8917656513eeb6f11cd0bd238b"
+  },
+  "linux_standalone_validation": {
+    "command": "c++ -DMARTENSITE_CRT_ONLY tools/oracle/tkernel_hex_float.cxx; compare output with tools/oracle/tkernel_hex_float.expected",
+    "exact_match": true,
+    "sha256": "0b6626f9287022296b74b8310d884340b8037b9a62fa50eb93b9f670a6f3c929"
+  },
+  "rust_test": "standard_hex_float::hexadecimal_double_formats_match_pinned_native_rows",
+  "limitations": [
+    "Captured supported host CRT; other versions and nondefault rounding are unproven.",
+    "Historical Linux receipt retains its original source hash; this receipt identifies the standalone capture extension."
+  ]
+}

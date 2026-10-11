@@ -194,10 +194,12 @@ fn sizes_near_usize_max_wrap_like_the_macros() {
         "mmap of the wrapped zero length"
     );
     let huge = opt.allocate(1 << 62).unwrap_err();
-    assert_eq!(
-        String::from_utf8_lossy(huge.what()),
+    let expected = if cfg!(windows) {
+        "Not enough space"
+    } else {
         "Cannot allocate memory"
-    );
+    };
+    assert_eq!(String::from_utf8_lossy(huge.what()), expected);
     let unmapped = manager(true, false).allocate(1 << 62).unwrap_err();
     assert_eq!(
         String::from_utf8_lossy(unmapped.what()),
