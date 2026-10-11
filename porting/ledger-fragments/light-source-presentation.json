@@ -26,9 +26,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "147de5d6a44f2a14a63e766c5bf305275be2ca40ffc5e9da2bef39a9b66613b3",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSourceOwner::hilight_with_color",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::hilight_with_color",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSourceOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::hilight_with_color",
+          "declaration_sha256": "393e6412b792b823aa25bd2e5f25162d77a8d5f78d7d4457a923b6e1fe347e9d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSourceOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_selection::AisLightSourceOwner"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrEntityOwnerSource",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSource::computeDirectional(const occ::handle<Prs3d_Presentation> &,const int)",
@@ -46,9 +70,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "332c6df99a3f3cab6ee83fdba4389897cf29c47af8de223245fa904b1991cc62",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSource::accept_display_mode",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+          "declaration_sha256": "fc4dfc4fbed1afea85d2e9ab7fad4ecc8754f1dc74eaeb269b6905599d2616df",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PrsMgrPresentableObject",
+              "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSource::ProcessDragging(const occ::handle<AIS_InteractiveContext> &,const occ::handle<V3d_View> &,const occ::handle<SelectMgr_EntityOwner> &,const NCollection_Vec2<int> &,const NCollection_Vec2<int> &,const AIS_DragAction)",
@@ -96,9 +144,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "772e07d628a26635c347c7658874331f0091d72f6b3ab266a3616ae33d8aa28a",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSource::compute_selection",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+          "declaration_sha256": "69e91dc74c6a7115b4778e87870c7727c321aad6890364bea9993f0b035d38a8",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrSelectableObject",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSourceOwner::HandleMouseClick(const NCollection_Vec2<int> &,Aspect_VKeyMouse,Aspect_VKeyFlags,bool)",
@@ -106,9 +178,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "cb980fe934b376c41228797b624ece1b15ab4fba873f21c3fb9dd9009c1cc81d",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSourceOwner::handle_mouse_click",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::handle_mouse_click",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSourceOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::handle_mouse_click",
+          "declaration_sha256": "4ae205f98f13e8a7462986e46da898099b030f1855f83921d94035bd23b8de83",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSourceOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_selection::AisLightSourceOwner"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrEntityOwnerSource",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSource::Type()",
@@ -116,9 +212,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "d047356ec756efed7f6ef1ce2dcde0655ed5b8ab7ae363da0241e7d98737f863",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSource::kind_of_interactive",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+          "declaration_sha256": "1bbb5ad15fcbbfc221f61e56eca3693c643981b65d0927d73256dcf3cc62aab1",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "AisInteractiveObject",
+              "resolved_item_path": "rustycad_tkv3d::ais::interactive_object::AisInteractiveObject"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSource::computeAmbient(const occ::handle<Prs3d_Presentation> &,const int)",
@@ -136,9 +256,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "e17156b2a4788d13c0c40d8ce322123677c799efb447818d894755b51a7e13e3",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSourceOwner::is_forced_hilight",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSourceOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::is_forced_hilight",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSourceOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::is_forced_hilight",
+          "declaration_sha256": "d4a03df7e675e0cf7445ffa1bff1b2858d8a3247ba79c0dcca314898ba430000",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSourceOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_selection::AisLightSourceOwner"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrEntityOwnerSource",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSource::updateLightAspects()",
@@ -146,9 +290,33 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
       "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
       "cpp_declaration_id": "e3ed9a59ab2afb3a7b32e1b83eac1a4934226b64cb78c1279c19fa077fc63f28",
-      "rust_item": "rustycad_tkv3d::ais::AisLightSource::update_light_aspects",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisLightSourceSource>::update_light_aspects",
       "status": "implemented",
-      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisLightSourceSource>::update_light_aspects",
+          "declaration_sha256": "9641a0a54de23d16832967db042252c85e6b4ec21cd2a8687cd40c7da0b390a8",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "AisLightSourceSource",
+              "resolved_item_path": "rustycad_tkv3d::ais::light_source::AisLightSourceSource"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_LightSource::computeSpot(const occ::handle<Prs3d_Presentation> &,const int)",
