@@ -61,14 +61,22 @@ the native code makes (AGENTS.md: wrap third-party libs).
   `bundled` feature `pkg-config` must find `freetype2` (the build fails on the Windows and macOS
   CI runners), and with it the crate compiles a second FreeType, libpng and zlib that differ from
   the system FreeType the native oracle links. The port uses a minimal hand-written FFI
-  (`font::freetype_ffi`) that loads the system `libfreetype.so.6` at run time with `dlopen` and
+  (`font::freetype_ffi`) that loads the system FreeType library at run time with
+  `dlopen` on Unix or `LoadLibraryW` on Windows and
   binds only the functions `Font_FTLibrary` and `Font_FTFont` call. When the library is missing,
   `FT_Init_FreeType` is reported as failed and `Font_FTLibrary::IsValid` is false, which is the
   native behavior of a failed initialisation, so no platform needs FreeType to build.
+  Rendering CI installs FreeType explicitly and runs strict glyph checks that fail
+  when it is missing. Windows uses pinned FreeType 2.13.3 built with the host MSVC
+  ABI. [Platform font evidence](font-platform-discovery.md) records registry/directory
+  discovery and the original missing text-draw regression.
 - **fontconfig (Font_FontMgr).** Same reasoning and shape: `yeslogic-fontconfig-sys` needs `dlib`
   for its `dlopen` mode; a dozen fontconfig calls do not justify it, so `font::fontconfig_ffi`
   loads `libfontconfig.so.1` with `dlopen`. Without it the font manager falls back to the native
   directory list, as the native code does when `FcConfigGetFontDirs` gives nothing.
+  Windows reads the native font registry in enumeration order and resolves relative
+  paths beneath the system Windows font directory. macOS scans OCCT's two native
+  font directories without the X11 fontconfig or `fonts.dir` policy.
 - **X11 (Xw).** `x11-dl` is maintained, MIT, and loads Xlib with `dlopen`; it is the wrapper
   (`xw::xlib`), on Linux only (`cfg(target_os = "linux")`). `Xw_Window` exposes the `Window` id
   and the `Display*` that the Vulkan driver gives to `vkCreateXlibSurfaceKHR`.

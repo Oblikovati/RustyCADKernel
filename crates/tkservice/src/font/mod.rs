@@ -4,9 +4,16 @@
 //! them the library is invalid and the font database holds only what can be read without them.
 mod enums;
 mod font_check;
+#[cfg(not(windows))]
+mod font_directory_discovery;
 mod font_mgr;
 mod font_mgr_database;
 mod font_mgr_find;
+#[cfg(any(windows, test))]
+mod font_windows;
+#[cfg(windows)]
+mod font_windows_ffi;
+#[cfg(not(windows))]
 mod fontconfig_ffi;
 pub(crate) mod freetype_ffi;
 mod ft_font;

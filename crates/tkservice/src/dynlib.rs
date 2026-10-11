@@ -1,15 +1,15 @@
 //! The run-time loader of the system libraries this crate wraps (FreeType, fontconfig;
 //! visualization-design.md section 2): `dlopen` once, `dlsym` per entry point, never closed.
-//! On a platform without `dlopen` every library is reported as missing.
+//! Windows uses LoadLibraryW/GetProcAddress and retains the same process lifetime.
 #![allow(unsafe_code)]
-#[cfg(unix)]
+#[cfg(any(unix, windows))]
 use std::ffi::CString;
 use std::ffi::c_void;
 
 /// An open shared library; `DynamicLibrary::open(&["libfreetype.so.6"])`.
 pub(crate) struct DynamicLibrary {
     /// The `dlopen` handle (an address; the library stays loaded for the process).
-    #[cfg(unix)]
+    #[cfg(any(unix, windows))]
     handle: usize,
 }
 
@@ -30,7 +30,21 @@ impl DynamicLibrary {
         })
     }
 
-    #[cfg(not(unix))]
+    #[cfg(windows)]
+    fn open_one(name: &str) -> Option<Self> {
+        if name.contains('\0') {
+            return None;
+        }
+        let wide: Vec<u16> = name.encode_utf16().chain(Some(0)).collect();
+        // SAFETY: the terminated path lives through the call; retain the DLL for its symbols.
+        let handle =
+            unsafe { windows_sys::Win32::System::LibraryLoader::LoadLibraryW(wide.as_ptr()) };
+        (!handle.is_null()).then_some(Self {
+            handle: handle as usize,
+        })
+    }
+
+    #[cfg(not(any(unix, windows)))]
     fn open_one(_name: &str) -> Option<Self> {
         None
     }
@@ -45,7 +59,20 @@ impl DynamicLibrary {
         (!address.is_null()).then_some(address)
     }
 
-    #[cfg(not(unix))]
+    #[cfg(windows)]
+    pub(crate) fn symbol(&self, name: &str) -> Option<*mut c_void> {
+        let name = CString::new(name).ok()?;
+        // SAFETY: this DLL remains loaded and the symbol name is terminated.
+        let address = unsafe {
+            windows_sys::Win32::System::LibraryLoader::GetProcAddress(
+                self.handle as *mut c_void,
+                name.as_ptr().cast(),
+            )
+        }?;
+        Some(address as *mut c_void)
+    }
+
+    #[cfg(not(any(unix, windows)))]
     pub(crate) fn symbol(&self, _name: &str) -> Option<*mut c_void> {
         None
     }
@@ -80,3 +107,21 @@ macro_rules! bind_symbols {
     }};
 }
 pub(crate) use bind_symbols;
+
+#[cfg(test)]
+mod tests {
+    use super::DynamicLibrary;
+    #[test]
+    fn missing_libraries_and_invalid_names_are_rejected() {
+        assert!(DynamicLibrary::open(&["Martensite-no-such-library-96c1"]).is_none());
+        assert!(DynamicLibrary::open(&["bad\0name"]).is_none());
+    }
+    #[cfg(windows)]
+    #[test]
+    fn windows_system_dll_exports_are_retained_and_resolved() {
+        let dll = DynamicLibrary::open(&["missing-96c1.dll", "kernel32.dll"]).unwrap();
+        assert!(dll.symbol("GetCurrentProcessId").is_some());
+        assert!(dll.symbol("Martensite-no-such-symbol-96c1").is_none());
+        assert!(dll.symbol("bad\0symbol").is_none());
+    }
+}
