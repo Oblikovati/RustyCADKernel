@@ -66,3 +66,25 @@ mod primitive_array_lifecycle_tests;
 
 #[cfg(test)]
 mod primitive_array_matching_fixtures;
+
+mod triangulation_bounds;
+mod triangulation_construction;
+mod triangulation_entity;
+mod triangulation_geometry;
+mod triangulation_primitives;
+
+#[cfg(test)]
+mod triangulation_oracle_fixtures;
+#[cfg(test)]
+mod triangulation_oracle_geometry;
+#[cfg(test)]
+mod triangulation_oracle_snapshot;
+#[cfg(test)]
+mod triangulation_oracle_tests;
+
+mod triangulation_failure;
+
+#[cfg(test)]
+mod triangulation_fault_tests;
+
+mod triangulation_detection;

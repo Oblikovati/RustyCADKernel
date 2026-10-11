@@ -1,0 +1,24 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "oracle_execution": "local only; committed assets are Rust-only test inputs",
+  "generator": "tools/oracle/martensite_sensitive_triangulation_faults.cxx",
+  "generator_sha256": "12d679ddffdd8a41c568fd7272622c1f5bdea3306f11e7c1f185359e1b512e26",
+  "dependencies": [
+    {
+      "generator": "tools/oracle/martensite_sensitive_triangulation_matching.cxx",
+      "generator_sha256": "73544ab52170e788ad15724abf923aef86e98fde88e15aa977affe359d7e1e1e",
+      "volume_generator_dependency": "tools/oracle/martensite_sensitive_primitive_matching.cxx",
+      "volume_generator_sha256": "cfc144de5ddebc783af29a33534014170f0264c4c9aac0d7040f02c11650be05"
+    }
+  ],
+  "fixture": "crates/tkv3d/tests/fixtures/sensitive-triangulation-faults.txt",
+  "fixture_sha256": "d04b7179350554fd0168801c5810febe36a92195eab62f39eae78da69988366e",
+  "snapshots": 54,
+  "columns": "kind,operation; fault and repair each: failure,dirty,detected,pick-valid,depth,retained-tree-size,triangle-indices[3],nodes[9]; last-detected-triangle-index",
+  "repeat_generation": "byte-identical native rerun",
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveTriangulation.hxx",
+  "source_sha256": "3d3e3d515aa6f6e5911883d601c91c846d5d60b43d97f1fa85174ef1dc969bfa",
+  "implementation_sha256": "5dd9ec90129a190e1e1269e407a803519ab4cc570281cba98c90097d08562cf3",
+  "native_configuration": "RelWithDebInfo -fexceptions -O2 -g -DNDEBUG; no No_Exception/No_Standard_OutOfRange defines"
+}
