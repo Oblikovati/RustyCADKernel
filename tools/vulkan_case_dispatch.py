@@ -3,6 +3,7 @@
 from pathlib import Path
 
 CAPTURE_EXECUTABLES = {
+    "tri-": "ais_trihedron_capture",
     "cloud-": "ais_point_cloud_capture",
     "aisplane-": "ais_plane_capture",
     "quad-": "quadrangle_capture",

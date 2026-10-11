@@ -76,6 +76,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_ais_axis.cxx"
 #include "martensite_vulkan_ais_circle.cxx"
 #include "martensite_vulkan_plane_trihedron.cxx"
+#include "martensite_vulkan_ais_trihedron.cxx"
 #include "martensite_vulkan_lines.cxx"
 #include "martensite_vulkan_persistence.cxx"
 #include "martensite_vulkan_stdprs.cxx"
@@ -187,6 +188,11 @@ static void run_scene(int argc, char **argv) {
     write_capture(view, width, height, argv[5], false);
     print_device(view);
     return;
+  }
+  if (mode.rfind("tri-", 0) == 0) {
+    MartensiteOracleTrihedronScene scene(viewer,offset,mode);
+    scene.transition(mode);write_capture(view,width,height,argv[5],false);
+    print_device(view);scene.context->Remove(scene.object,false);view->Remove();return;
   }
   if (mode.rfind("plane-", 0) == 0) {
     MartensiteOraclePlaneScene scene(viewer, offset, mode);

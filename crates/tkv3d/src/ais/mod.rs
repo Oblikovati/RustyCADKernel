@@ -152,3 +152,26 @@ pub use point_cloud_owner::{
     ais_point_cloud_owner_hilight_with_color,
 };
 pub use point_cloud_presentations::{ais_point_cloud_compute, ais_point_cloud_compute_selection};
+
+mod trihedron;
+mod trihedron_appearance;
+mod trihedron_highlighting;
+mod trihedron_owner;
+mod trihedron_presentations;
+mod trihedron_primitives;
+mod trihedron_selection;
+pub use trihedron::{
+    AisTrihedron, AisTrihedronBase, AisTrihedronFields, AisTrihedronSelectionMode,
+    AisTrihedronSource,
+};
+pub use trihedron_appearance::*;
+pub use trihedron_highlighting::{
+    ais_trihedron_clear_selected, ais_trihedron_dump_json, ais_trihedron_hilight_owner,
+    ais_trihedron_hilight_selected,
+};
+pub use trihedron_owner::{
+    AisTrihedronOwner, AisTrihedronOwnerBase, AisTrihedronOwnerSource, ais_trihedron_owner_hilight,
+};
+pub use trihedron_presentations::{ais_trihedron_compute, ais_trihedron_compute_presentation};
+pub use trihedron_primitives::ais_trihedron_update_primitives;
+pub use trihedron_selection::{ais_trihedron_compute_selection, ais_trihedron_sensitive};

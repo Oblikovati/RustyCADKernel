@@ -118,3 +118,5 @@ pub mod plane_presentations;
 pub mod ais_plane;
 
 pub mod ais_point_cloud;
+
+pub mod ais_trihedron;
