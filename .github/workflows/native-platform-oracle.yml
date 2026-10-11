@@ -1,6 +1,16 @@
 name: Native platform geometry oracle
 on:
   workflow_dispatch:
+    inputs:
+      platforms:
+        description: JSON runner list for the controlled capture
+        type: string
+        default: '["ubuntu-latest", "macos-latest", "windows-latest"]'
+      fp_contract:
+        description: Native compiler floating-point contraction
+        type: choice
+        options: ['off', 'on', 'fast']
+        default: 'off'
 permissions:
   contents: read
 env:
@@ -12,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: ${{ fromJSON(inputs.platforms) }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
     steps:
@@ -31,6 +41,7 @@ jobs:
           -DBUILD_MODULE_Visualization=OFF -DBUILD_MODULE_ApplicationFramework=OFF
           -DBUILD_MODULE_DataExchange=OFF -DBUILD_MODULE_Draw=OFF
           -DBUILD_GTEST=OFF -DUSE_TBB=OFF -DUSE_FREETYPE=OFF
+          -DCMAKE_CXX_FLAGS="${{ runner.os == 'Windows' && '/fp:strict' || format('-ffp-contract={0}', inputs.fp_contract) }}"
       - name: Build native geometry toolkits
         run: cmake --build target/native-platform --config RelWithDebInfo --target TKBO TKPrim TKMesh --parallel 3
       - name: Capture native and Rust geometry independently
