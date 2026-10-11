@@ -1,0 +1,14 @@
+{
+  "api": [
+    {
+      "upstream_id": "AIS_ViewController::flushBuffers(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "97bb67935fac5022f489abb7f03867e0349aa49e62aa02c34d449b29e754f8b2",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::flush_buffers",
+      "status": "implemented",
+      "notes": "Martensite complete native protected queue transfer at OCCT 3d097a0: sticky render requests, replacement flags/zoom, allocator-preserving independent selection copy, drag abort/stop priority and retained coordinates. 3072 committed native snapshots compare all 117 columns over three frames; Rust-only allocator identity/ownership regression. Gesture synthesis/public FlushViewEvents/camera/redraw/XR remain open and controller class/constructor partial. See docs/ais-view-controller-transfer.md."
+    }
+  ]
+}
