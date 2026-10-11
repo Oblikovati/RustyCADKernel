@@ -58,7 +58,16 @@ fn box_torus_fuse_matches_native_oracle() {
     )
     .unwrap();
     dump_result(fuse.shape(), &mut rows);
-    let expected = include_str!("../../../tools/oracle/tkbo_bop_torus.expected");
+    // Run 38119937683: pinned OCCT compiled with -ffp-contract=off agrees bit for bit.
+    let expected = if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
+        include_str!("../../../tools/oracle/tkbo_bop_torus.macos.expected")
+    } else if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
+        include_str!("../../../tools/oracle/tkbo_bop_torus.windows.expected")
+    } else {
+        include_str!("../../../tools/oracle/tkbo_bop_torus.expected")
+    };
+    // Native Windows CRT streams use CRLF; every numeric and topology field stays exact.
+    let expected = expected.replace("\r\n", "\n");
     for (line, (actual, wanted)) in rows.lines().zip(expected.lines()).enumerate() {
         assert_eq!(actual, wanted, "first difference at line {}", line + 1);
     }

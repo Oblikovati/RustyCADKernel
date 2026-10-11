@@ -16,7 +16,8 @@ pub(super) fn format(spec: &Spec, argument: Option<&CArg<'_>>) -> Vec<u8> {
 
 fn nonfinite(spec: &Spec, value: f64, prefix: Vec<u8>) -> Vec<u8> {
     // glibc pads infinities and NaNs with spaces even under the `0` flag.
-    let word = if value.is_nan() { "nan" } else { "inf" };
+    let signed = super::nonfinite_text(value);
+    let word = signed.strip_prefix('-').unwrap_or(&signed);
     let digits = cased(
         word.as_bytes().to_vec(),
         spec.conversion.is_ascii_uppercase(),

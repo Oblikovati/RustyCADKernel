@@ -6,6 +6,8 @@
 //! It implements literal and dynamic width/precision, `c_format` numeric/text conversions,
 //! and glibc layout rules. The public wrappers validate a narrower defined subset before render.
 mod float;
+mod nonfinite;
+pub(crate) use nonfinite::nonfinite_text;
 mod hexadecimal;
 mod integer;
 mod pointer;

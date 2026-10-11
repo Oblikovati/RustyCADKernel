@@ -53,6 +53,10 @@ class CiTestShardTests(unittest.TestCase):
             "target/lcov.info", shard_command("coverage", [PackageWeight("a", 1)])
         )
 
+    def test_ordinary_tests_collect_all_target_failures(self) -> None:
+        command = shard_command("test", [PackageWeight("a", 1)])
+        self.assertIn("--no-fail-fast", command)
+
     def test_empty_shard_and_unknown_runner_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "empty"):
             shard_command("test", [])
@@ -97,7 +101,7 @@ class CiTestShardExecutionTests(unittest.TestCase):
         run_shard(Path("."), 1, 2, "test", cargo)
         self.assertEqual(
             cargo.commands[0],
-            ["cargo", "test", "--all-features", "--locked", "--package", "a"],
+            ["cargo", "test", "--no-fail-fast", "--all-features", "--locked", "--package", "a"],
         )
         self.assertEqual(cargo.commands[1][-4:], ["--package", "b", "--package", "c"])
 

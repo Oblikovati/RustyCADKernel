@@ -50,7 +50,7 @@ def capture_rust(root: Path, output: Path) -> int:
     """Add only a diagnostic print, run the original assertions, and restore; capture_rust(root, output)."""
     source = root / "crates/tkbo/tests/bop_algo_bop_torus.rs"
     original = source.read_text()
-    marker = "    let expected = include_str!"
+    marker = "    let expected = if cfg!"
     if original.count(marker) != 1:
         raise ValueError(
             f"Marker count {original.count(marker)}: expected exactly one fixture comparison"

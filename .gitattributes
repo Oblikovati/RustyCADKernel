@@ -1,3 +1,5 @@
 # Native oracle captures are byte evidence; checkout must preserve their recorded
 # line endings even when Windows enables core.autocrlf (run 38077155403).
 *.expected -text
+# Embedded OCCT message literals are byte-exact C resources, not checkout text.
+crates/tkxsbase/src/xs_message/XSTEP.* -text

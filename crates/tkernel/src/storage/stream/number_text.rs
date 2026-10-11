@@ -12,21 +12,8 @@
 /// assert_eq!(format_general(2.5, 1), "2");
 /// ```
 pub fn format_general(value: f64, precision: usize) -> String {
-    if value.is_nan() {
-        return if value.is_sign_negative() {
-            "-nan"
-        } else {
-            "nan"
-        }
-        .into();
-    }
-    if value.is_infinite() {
-        return if value.is_sign_negative() {
-            "-inf"
-        } else {
-            "inf"
-        }
-        .into();
+    if !value.is_finite() {
+        return crate::c_format::nonfinite_text(value);
     }
     let significant = precision.max(1);
     let scientific = format!("{value:.*e}", significant - 1);

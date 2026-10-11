@@ -15,7 +15,11 @@ class OracleCaptureFixture:
         self.output.mkdir(parents=True)
         self.source = root / "crates/tkbo/tests/bop_algo_bop_torus.rs"
         self.source.parent.mkdir(parents=True)
-        self.original = '    let expected = include_str!("fixture");\n'
+        self.original = (
+            '    let expected = if cfg!(target_os = "macos") {\n'
+            '        include_str!("macos-fixture")\n'
+            '    } else { include_str!("fixture") };\n'
+        )
         self.source.write_text(self.original)
         library = root / "target/native-platform/mac/clang/lib/libTKBO.dylib"
         library.parent.mkdir(parents=True)

@@ -10,6 +10,8 @@ use windows::missing_library_error;
 
 /// Substitute only host C/loader fragments; `expected_on_host(recorded)`.
 pub fn expected_on_host(recorded: &str) -> String {
+    // Undo fixture checkout transport before inserting literal host loader CRLF.
+    let recorded = recorded.replace("\r\n", "\n");
     let expected = recorded.replace(
         "dval 0/0 = -nan\n",
         &format!("dval 0/0 = {}\n", zero_divided_by_zero()),
@@ -75,10 +77,24 @@ fn unrelated_capture_rows_remain_byte_exact() {
 
 #[test]
 fn host_fragments_keep_the_surrounding_command_output() {
-    let expected = expected_on_host("before\ndval 0/0 = -nan\nafter\n");
+    let expected = expected_on_host("before\r\ndval 0/0 = -nan\r\nafter\r\n");
     assert_eq!(
         expected,
         format!("before\ndval 0/0 = {}\nafter\n", zero_divided_by_zero())
     );
     assert!(!missing_library_error().is_empty());
+}
+
+#[cfg(windows)]
+#[test]
+fn loader_message_retains_its_literal_crlf_after_fixture_transport() {
+    let recorded = "dtryload: Loading /nonexistent/libnothing.so failed: /nonexistent/libnothing.so: cannot open shared object file: No such file or directory\r\n";
+    assert_eq!(
+        expected_on_host(recorded),
+        format!(
+            "dtryload: Loading /nonexistent/libnothing.so failed: {}\n",
+            missing_library_error()
+        )
+    );
+    assert!(missing_library_error().ends_with("\r\n"));
 }

@@ -80,6 +80,7 @@ fn assignment_swap_clear_and_equality() {
 }
 
 #[test]
+#[cfg(not(windows))]
 fn locale_conversions_follow_the_c_locale() {
     let mut text = utf8("keep");
     text.from_locale(b"abc", -1);
@@ -91,6 +92,7 @@ fn locale_conversions_follow_the_c_locale() {
 }
 
 #[test]
+#[cfg(not(windows))]
 fn to_locale_mirrors_wcstombs_results() {
     let mut buffer = [0x55u8; 4];
     assert!(utf8("abcdef").to_locale(&mut buffer));
@@ -102,4 +104,32 @@ fn to_locale_mirrors_wcstombs_results() {
     assert!(!String8::new().to_locale(&mut buffer));
     assert_eq!(buffer, [0, 0x55]);
     assert!(!utf8("a").to_locale(&mut []));
+}
+
+// NCollection_UtfString.cxx at 3d097a0 selects Win32 conversion, not mblen/wcstombs.
+#[test]
+#[cfg(windows)]
+fn locale_conversions_follow_the_windows_code_page() {
+    let mut text = utf8("keep");
+    text.from_locale(b"abc", -1);
+    assert_eq!(text, utf8("abc"));
+    text.from_locale(b"abcdef", 2);
+    assert_eq!(text, utf8("ab"));
+    text.from_locale(b"", -1);
+    assert!(text.is_empty());
+}
+
+#[test]
+#[cfg(windows)]
+fn to_locale_keeps_win32_termination_and_short_buffer_results() {
+    let mut buffer = [0x55u8; 4];
+    assert!(utf8("abc").to_locale(&mut buffer));
+    assert_eq!(buffer, *b"abc\0");
+    assert!(!utf8("abcdef").to_locale(&mut buffer));
+    assert_eq!(buffer[0], 0);
+    let mut empty = [0x55u8; 2];
+    assert!(String8::new().to_locale(&mut empty));
+    assert_eq!(empty, [0, 0x55]);
+    // Win32 treats zero capacity as a size query; OCCT returns its positive result.
+    assert!(utf8("a").to_locale(&mut []));
 }
