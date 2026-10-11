@@ -6,12 +6,21 @@ use rustycad_tkernel::{
 use rustycad_tkmath::gp::Axis2;
 use rustycad_tkservice::{graphic3d::*, null_driver::*};
 use std::sync::Arc;
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub(super) enum ScaleDrawRequest {
     Array {
         kind: i32,
         vertices: Vec<Vec<f64>>,
         indices: Vec<i32>,
+    },
+    Text3d {
+        frame: [f64; 9],
+        height: f32,
+        horizontal: i32,
+        vertical: i32,
+        anchor: bool,
+        plane: bool,
+        text: String,
     },
     Text {
         point: [f64; 2],
@@ -25,6 +34,17 @@ pub(super) type ScaleDrawTrace = Arc<SharedState<Vec<ScaleDrawRequest>>>;
 pub(super) fn recording_presentation(
     trace: &ScaleDrawTrace,
 ) -> Handle<dyn Graphic3dStructureSource> {
+    recording_presentation_mode(trace, false)
+}
+pub(super) fn recording_oriented_presentation(
+    trace: &ScaleDrawTrace,
+) -> Handle<dyn Graphic3dStructureSource> {
+    recording_presentation_mode(trace, true)
+}
+fn recording_presentation_mode(
+    trace: &ScaleDrawTrace,
+    oriented: bool,
+) -> Handle<dyn Graphic3dStructureSource> {
     let manager =
         Handle::new(Graphic3dStructureManager::new(&NullGraphicDriver::new_handle()).unwrap());
     let prs = Graphic3dStructure::new(&manager, &Handle::default()).unwrap();
@@ -32,6 +52,7 @@ pub(super) fn recording_presentation(
         transient: StandardTransient::default(),
         inner: prs.cstructure(),
         trace: trace.clone(),
+        oriented,
     });
     prs.structure_base().fields.write().cstructure = recorder.cast();
     prs.cast()
@@ -40,6 +61,7 @@ struct ScaleRecordingStructure {
     transient: StandardTransient,
     inner: Handle<dyn Graphic3dCStructure>,
     trace: ScaleDrawTrace,
+    oriented: bool,
 }
 rustycad_tkernel::impl_transient!(ScaleRecordingStructure,"ScaleRecordingStructure",StandardTransient,transient,interfaces:[dyn Graphic3dCStructure]);
 impl Graphic3dCStructure for ScaleRecordingStructure {
@@ -81,6 +103,7 @@ impl Graphic3dCStructure for ScaleRecordingStructure {
             transient: StandardTransient::default(),
             inner: NullGroup::new(structure),
             trace: self.trace.clone(),
+            oriented: self.oriented,
         })
         .cast();
         self.cstructure_base()
@@ -95,6 +118,7 @@ struct ScaleRecordingGroup {
     transient: StandardTransient,
     inner: NullGroup,
     trace: ScaleDrawTrace,
+    oriented: bool,
 }
 rustycad_tkernel::impl_transient!(ScaleRecordingGroup,"ScaleRecordingGroup",StandardTransient,transient,interfaces:[dyn Graphic3dGroup]);
 impl Graphic3dGroup for ScaleRecordingGroup {
@@ -123,6 +147,10 @@ impl Graphic3dGroup for ScaleRecordingGroup {
         self.inner.set_flipping_options(on, axis);
     }
     fn add_text(&self, text: &Handle<Graphic3dText>, _: bool) {
+        if self.oriented {
+            self.trace.write().push(record_cube_text(text));
+            return;
+        }
         let point = text.orientation().location();
         self.trace.write().push(ScaleDrawRequest::Text {
             point: [point.x(), point.y()],
@@ -156,21 +184,62 @@ impl Graphic3dGroup for ScaleRecordingGroup {
         });
     }
 }
-fn record_scale_vertices(vertices: &Handle<dyn Graphic3dBufferSource>) -> Vec<Vec<f64>> {
+pub(super) fn record_scale_vertices(vertices: &Handle<dyn Graphic3dBufferSource>) -> Vec<Vec<f64>> {
+    (0..vertices.nb_elements())
+        .map(|index| record_scale_vertex(vertices, index))
+        .collect()
+}
+fn record_scale_vertex(vertices: &Handle<dyn Graphic3dBufferSource>, index: i32) -> Vec<f64> {
     let (_, offset, stride) = vertices
         .attribute_data(Graphic3dTypeOfAttribute::Pos)
         .unwrap();
-    (0..vertices.nb_elements())
-        .map(|index| {
-            let point: Vec3<f32> = vertices.read_at(offset + index as usize * stride).unwrap();
-            let mut values = [point.x, point.y, point.z].map(f64::from).to_vec();
-            if let Some((_, offset, stride)) =
-                vertices.attribute_data(Graphic3dTypeOfAttribute::Color)
-            {
-                let color: Vec4<u8> = vertices.read_at(offset + index as usize * stride).unwrap();
-                values.extend([color.x, color.y, color.z, color.w].map(f64::from));
-            }
-            values
-        })
-        .collect()
+    let point: Vec3<f32> = vertices.read_at(offset + index as usize * stride).unwrap();
+    let mut values = [point.x, point.y, point.z].map(f64::from).to_vec();
+    record_scale_color(vertices, index, &mut values);
+    if let Some((_, offset, stride)) = vertices.attribute_data(Graphic3dTypeOfAttribute::Norm) {
+        let normal: Vec3<f32> = vertices.read_at(offset + index as usize * stride).unwrap();
+        values.extend([normal.x, normal.y, normal.z].map(f64::from));
+    }
+    values
+}
+fn record_scale_color(
+    vertices: &Handle<dyn Graphic3dBufferSource>,
+    index: i32,
+    values: &mut Vec<f64>,
+) {
+    if let Some((_, offset, stride)) = vertices.attribute_data(Graphic3dTypeOfAttribute::Color) {
+        let color: Vec4<u8> = vertices.read_at(offset + index as usize * stride).unwrap();
+        values.extend([color.x, color.y, color.z, color.w].map(f64::from));
+    }
+}
+
+fn record_cube_text(text: &Graphic3dText) -> ScaleDrawRequest {
+    ScaleDrawRequest::Text3d {
+        frame: record_cube_text_frame(text),
+        height: text.height(),
+        horizontal: text.horizontal_alignment() as i32,
+        vertical: text.vertical_alignment() as i32,
+        anchor: text.has_own_anchor_point(),
+        plane: text.has_plane(),
+        text: String::from_utf8_lossy(text.text().to_c_string())
+            .trim_end_matches('\0')
+            .to_owned(),
+    }
+}
+fn record_cube_text_frame(text: &Graphic3dText) -> [f64; 9] {
+    let frame = text.orientation();
+    let location = frame.location();
+    let normal = frame.direction();
+    let x = frame.x_direction();
+    [
+        location.x(),
+        location.y(),
+        location.z(),
+        normal.x(),
+        normal.y(),
+        normal.z(),
+        x.x(),
+        x.y(),
+        x.z(),
+    ]
 }

@@ -1,0 +1,38 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_commit": "54382fc12",
+  "scoped_nonmacro_claims": 9,
+  "claim_scope": {
+    "public": 4,
+    "protected": 5,
+    "private": 0
+  },
+  "native_records": 560,
+  "native_repeatability": "Two complete executions byte-identical",
+  "new_rust_tests": 8,
+  "tkv3d_all_target_tests": 650,
+  "tests": "cargo test -p rustycad-tkv3d --all-targets --locked",
+  "test_results": "172 unit + 1 trait binding + 477 integration, all passed",
+  "clippy": "cargo clippy -p rustycad-tkv3d --all-targets --locked -- -D warnings; passed",
+  "format": "cargo fmt --all -- --check; passed",
+  "function_and_file_limits": "Declared Rust function bodies <=20 lines; every added source/fixture/JSON file <500 lines",
+  "compiler_bindings": "Nine unique API-visible pinned C++ IDs and nine unique publicly reachable Rust function declarations verified against freshly captured rustdoc JSON format61 (nightly-2026-09-25); compiler-bindings.json",
+  "rustdoc_warnings": "Four inherited warnings: two TKMath unstable-name collisions and two TKV3d existing unresolved macro doc links; capture completed successfully",
+  "renderer": "Submission interfaces unchanged; no new GPU capture/performance claims; plane-text BackCulled raster policy needs separate renderer work",
+  "deferred": [
+    "Complete native class/constructor",
+    "Selection/highlighting/owners",
+    "Mouse interaction/camera animation",
+    "Vulkan plane-text BackCulled captures",
+    "Windows/macOS"
+  ],
+  "compact_build": {
+    "jobs": 2,
+    "incremental": false,
+    "dev_debug": 0,
+    "test_debug": 0
+  },
+  "ledger_fragments": [
+    "porting/ledger-fragments/view-cube-presentation.json"
+  ]
+}
