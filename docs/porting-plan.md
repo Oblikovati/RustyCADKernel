@@ -20,6 +20,10 @@ on 2026-10-11, stop pushing to the remote. Integrate into local `main`, test loc
 and delete completed merged worktrees and branches. Deferred platform checks remain part of eventual
 validation and do not remove APIs or behavior from the defined porting scope.
 
+User decision, 2026-10-11: parallel porting uses at most six agents, including
+the coordinating agent. Independent slices use separate checkouts; the coordinator
+serializes local `main` integration, checks and deletion of completed worktrees.
+
 1. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
    camera-dependent selection, native comparisons and regression tests.
 2. Continue Martensite's Vulkan renderer through the existing Graphic3d interfaces.
@@ -109,6 +113,15 @@ validation and do not remove APIs or behavior from the defined porting scope.
    timing, all six axes, stance/thrust/release semantics and focus-loss reset.
    [Click and touch dispatch](ais-view-controller-pointer.md) now preserves animation
    ownership, selection bindings and native touch transitions.
+   [Window-listener integration](ais-view-controller-window-listener.md) now exposes
+   the complete controller callback interface with typed mouse/touch failures.
+   [UI/render queue transfer](ais-view-controller-transfer.md) preserves pending
+   requests, allocator ownership and drag priority across frames.
+   [Camera frustums](ais-camera-frustum.md) add live geometry, appearance and both
+   selection modes. [Primitive-array initialization](sensitive-primitive-initialization.md)
+   now preserves all five overloads and native retained/failed initialization state.
+   [Light-source binding](ais-light-source-binding.md) adds properties and world/local
+   transforms; concrete light drawings, construction and interactions remain open.
    Continue its remaining dispatch alongside the remaining presentation
    and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
