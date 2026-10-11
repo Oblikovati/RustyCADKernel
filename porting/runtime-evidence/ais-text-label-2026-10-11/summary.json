@@ -1,0 +1,932 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "candidate_source_hashes_match": true,
+  "native_numeric_values": 228,
+  "native_numeric_exact": true,
+  "tkv3d_focused_tests": 7,
+  "tkv3d_all_targets": "passed before final helper refactor; focused tests and both-crate Clippy passed after it",
+  "clippy_all_targets": [
+    "rustycad-tkv3d",
+    "martensite-vulkan"
+  ],
+  "python_tests": 48,
+  "ledger_rows_added": 46,
+  "global_completion_proven": false,
+  "renderer_capability_completion": false,
+  "functional_baseline_accepted": false,
+  "median_ratio": 1.25,
+  "p95_ratio": 1.5,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "passed_cases": 16,
+      "total_cases": 36,
+      "failed_cases": [
+        {
+          "case": "64-64-0-0-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-zoom', pixels=4096, color_mismatch_pixels=1, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            27,
+            33,
+            27,
+            33
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-64-64-0-0-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-64-64-0-0-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-0-0-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-angle', pixels=4096, color_mismatch_pixels=48, maximum_depth_delta=0.808080717921257); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            37,
+            23,
+            37,
+            23
+          ],
+          "color_error_bounds": [
+            24,
+            23,
+            38,
+            40
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-64-64-0-0-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-64-64-0-0-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            49,
+            25,
+            49,
+            25
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-0-2-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-0-2-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-plane', pixels=4608, color_mismatch_pixels=30, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            42,
+            18,
+            61,
+            29
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-0-2-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-0-2-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-flip",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-flip', pixels=4608, color_mismatch_pixels=35, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            34,
+            18,
+            52,
+            29
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-0-2-label-flip",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-0-2-label-flip",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-angle', pixels=4608, color_mismatch_pixels=48, maximum_depth_delta=0.808080717921257); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            57,
+            15,
+            57,
+            15
+          ],
+          "color_error_bounds": [
+            44,
+            15,
+            58,
+            32
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-0-2-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-0-2-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            13,
+            49,
+            13,
+            49
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-0--3-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-0--3-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-plane', pixels=4608, color_mismatch_pixels=30, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            6,
+            42,
+            25,
+            53
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-0--3-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-0--3-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-flip",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-flip', pixels=4608, color_mismatch_pixels=35, maximum_depth_delta=1.043081283569336e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            42,
+            40,
+            53
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-0--3-label-flip",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-0--3-label-flip",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-angle', pixels=4608, color_mismatch_pixels=48, maximum_depth_delta=0.808080717921257); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            21,
+            39,
+            21,
+            39
+          ],
+          "color_error_bounds": [
+            8,
+            39,
+            22,
+            56
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-0--3-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-0--3-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-zoom', pixels=4096, color_mismatch_pixels=1, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            27,
+            33,
+            27,
+            33
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-64-64-1-0-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-64-64-1-0-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-angle', pixels=4096, color_mismatch_pixels=48, maximum_depth_delta=0.03173863887786865); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            37,
+            23,
+            37,
+            23
+          ],
+          "color_error_bounds": [
+            24,
+            23,
+            38,
+            40
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-64-64-1-0-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-64-64-1-0-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            49,
+            25,
+            49,
+            25
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-1-2-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-1-2-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-plane', pixels=4608, color_mismatch_pixels=30, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            42,
+            18,
+            61,
+            29
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-1-2-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-1-2-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-flip",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-flip', pixels=4608, color_mismatch_pixels=35, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            34,
+            18,
+            52,
+            29
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-1-2-label-flip",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-1-2-label-flip",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-angle', pixels=4608, color_mismatch_pixels=48, maximum_depth_delta=0.03173863887786865); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            57,
+            15,
+            57,
+            15
+          ],
+          "color_error_bounds": [
+            44,
+            15,
+            58,
+            32
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-96-48-1-2-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-96-48-1-2-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            13,
+            49,
+            13,
+            49
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-1--3-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-1--3-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-plane', pixels=4608, color_mismatch_pixels=30, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            6,
+            42,
+            25,
+            53
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-1--3-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-1--3-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-flip",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-flip', pixels=4608, color_mismatch_pixels=35, maximum_depth_delta=5.960464477539063e-08); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            42,
+            40,
+            53
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-1--3-label-flip",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-1--3-label-flip",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-angle', pixels=4608, color_mismatch_pixels=48, maximum_depth_delta=0.03173863887786865); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            21,
+            39,
+            21,
+            39
+          ],
+          "color_error_bounds": [
+            8,
+            39,
+            22,
+            56
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/gl-48-96-1--3-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/lavapipe/vk-48-96-1--3-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 256 bits)",
+          "opengl_runtime": "GLvendor: Mesa\nGLdevice: llvmpipe (LLVM 20.1.2, 256 bits)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        }
+      ],
+      "workloads": 26,
+      "independent_performance_failures": [],
+      "label_timing": [
+        {
+          "workload": "ais-text-label-updates",
+          "draws": 1,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 0.4972995,
+          "mean_ms": 0.50722224,
+          "p95_ms": 0.6069530000000001,
+          "p99_ms": 0.6574760000000001,
+          "minimum_ms": 0.45431999999999995,
+          "maximum_ms": 0.663487,
+          "samples": 100
+        }
+      ]
+    },
+    {
+      "profile": "host",
+      "passed_cases": 6,
+      "total_cases": 36,
+      "failed_cases": [
+        {
+          "case": "64-64-0-0-label-screen",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-screen', pixels=4096, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            28,
+            39,
+            36
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-0-0-label-screen",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-0-0-label-screen",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-0-0-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-plane', pixels=4096, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            28,
+            39,
+            36
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-0-0-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-0-0-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-0-0-label-flip",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-flip', pixels=4096, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            28,
+            39,
+            36
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-0-0-label-flip",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-0-0-label-flip",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-0-0-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-angle', pixels=4096, color_mismatch_pixels=25, maximum_depth_delta=0.8080807030200958); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            37,
+            23,
+            37,
+            23
+          ],
+          "color_error_bounds": [
+            24,
+            23,
+            38,
+            37
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-0-0-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-0-0-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-0-0-label-update",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-0-0-label-update', pixels=4096, color_mismatch_pixels=10, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            26,
+            31,
+            41,
+            40
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-0-0-label-update",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-0-0-label-update",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-screen",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-screen', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            42,
+            20,
+            59,
+            28
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-0-2-label-screen",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-0-2-label-screen",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            49,
+            25,
+            49,
+            25
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-0-2-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-0-2-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-plane', pixels=4608, color_mismatch_pixels=2, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            44,
+            25,
+            55,
+            26
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-0-2-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-0-2-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-angle', pixels=4608, color_mismatch_pixels=25, maximum_depth_delta=0.8080807030200958); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            57,
+            15,
+            57,
+            15
+          ],
+          "color_error_bounds": [
+            44,
+            15,
+            58,
+            29
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-0-2-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-0-2-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-0-2-label-update",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-0-2-label-update', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            41,
+            23,
+            56,
+            31
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-0-2-label-update",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-0-2-label-update",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-screen",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-screen', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            6,
+            44,
+            23,
+            52
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-0--3-label-screen",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-0--3-label-screen",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            13,
+            49,
+            13,
+            49
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-0--3-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-0--3-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-plane', pixels=4608, color_mismatch_pixels=2, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            8,
+            49,
+            19,
+            50
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-0--3-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-0--3-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-angle', pixels=4608, color_mismatch_pixels=25, maximum_depth_delta=0.8080807030200958); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            21,
+            39,
+            21,
+            39
+          ],
+          "color_error_bounds": [
+            8,
+            39,
+            22,
+            53
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-0--3-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-0--3-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-0--3-label-update",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-0--3-label-update', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            17,
+            47,
+            32,
+            55
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-0--3-label-update",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-0--3-label-update",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-screen",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-screen', pixels=4096, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            28,
+            39,
+            36
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-1-0-label-screen",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-1-0-label-screen",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-plane', pixels=4096, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            28,
+            39,
+            36
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-1-0-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-1-0-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-flip",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-flip', pixels=4096, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            22,
+            28,
+            39,
+            36
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-1-0-label-flip",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-1-0-label-flip",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-angle', pixels=4096, color_mismatch_pixels=25, maximum_depth_delta=0.03173863887786865); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            37,
+            23,
+            37,
+            23
+          ],
+          "color_error_bounds": [
+            24,
+            23,
+            38,
+            37
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-1-0-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-1-0-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "64-64-1-0-label-update",
+          "status": "failed",
+          "error": "received CaptureComparison(case='64-64-1-0-label-update', pixels=4096, color_mismatch_pixels=10, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            26,
+            31,
+            41,
+            40
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-64-64-1-0-label-update",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-64-64-1-0-label-update",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-screen",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-screen', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            42,
+            20,
+            59,
+            28
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-1-2-label-screen",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-1-2-label-screen",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            49,
+            25,
+            49,
+            25
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-1-2-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-1-2-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-plane', pixels=4608, color_mismatch_pixels=2, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            44,
+            25,
+            55,
+            26
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-1-2-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-1-2-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-angle', pixels=4608, color_mismatch_pixels=25, maximum_depth_delta=0.03173863887786865); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            57,
+            15,
+            57,
+            15
+          ],
+          "color_error_bounds": [
+            44,
+            15,
+            58,
+            29
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-1-2-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-1-2-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "96-48-1-2-label-update",
+          "status": "failed",
+          "error": "received CaptureComparison(case='96-48-1-2-label-update', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            41,
+            23,
+            56,
+            31
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-96-48-1-2-label-update",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-96-48-1-2-label-update",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-screen",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-screen', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            6,
+            44,
+            23,
+            52
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-1--3-label-screen",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-1--3-label-screen",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-zoom",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-zoom', pixels=4608, color_mismatch_pixels=1, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            13,
+            49,
+            13,
+            49
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-1--3-label-zoom",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-1--3-label-zoom",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-plane",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-plane', pixels=4608, color_mismatch_pixels=2, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            8,
+            49,
+            19,
+            50
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-1--3-label-plane",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-1--3-label-plane",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-angle",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-angle', pixels=4608, color_mismatch_pixels=25, maximum_depth_delta=0.03173863887786865); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": [
+            21,
+            39,
+            21,
+            39
+          ],
+          "color_error_bounds": [
+            8,
+            39,
+            22,
+            53
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-1--3-label-angle",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-1--3-label-angle",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        },
+        {
+          "case": "48-96-1--3-label-update",
+          "status": "failed",
+          "error": "received CaptureComparison(case='48-96-1--3-label-update', pixels=4608, color_mismatch_pixels=9, maximum_depth_delta=1.1920928955078125e-07); expected identical RGBA and depth delta <= 1e-6",
+          "depth_error_bounds": null,
+          "color_error_bounds": [
+            17,
+            47,
+            32,
+            55
+          ],
+          "native_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/gl-48-96-1--3-label-update",
+          "ported_capture": "/home/vmiguel/git/oblikovati-workspace/Martensite-text-label/target/label-verified-captures/host/vk-48-96-1--3-label-update",
+          "runtime_output": "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "opengl_runtime": "GLvendor: AMD\nGLdevice: AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)\nGLversion: 4.6 (Compatibility Profile) Mesa 26.1.6-1pop0~1787580452~24.04~a5619ea\nGLSLversion: 4.60"
+        }
+      ],
+      "workloads": 26,
+      "independent_performance_failures": [
+        "window-present p95_ms=0.548ms exceeds 0.545ms"
+      ],
+      "label_timing": [
+        {
+          "workload": "ais-text-label-updates",
+          "draws": 1,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 0.38669600000000004,
+          "mean_ms": 0.40635305,
+          "p95_ms": 0.538436,
+          "p99_ms": 0.653769,
+          "minimum_ms": 0.359866,
+          "maximum_ms": 0.665611,
+          "samples": 100
+        }
+      ]
+    }
+  ],
+  "completed_worktree_deleted": false
+}

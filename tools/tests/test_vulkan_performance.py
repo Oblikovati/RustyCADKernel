@@ -51,12 +51,13 @@ class VulkanPerformanceTests(unittest.TestCase):
                 "camera-animation-updates",
                 "object-animation-updates",
                 "group-flipping-updates",
+                "ais-text-label-updates",
                 "window-present",
                 "window-resize-present",
             )
         ]
         rows = performance_rows("\n".join(lines))
-        self.assertEqual(len(rows), 25)
+        self.assertEqual(len(rows), 26)
         self.assertEqual(rows[0]["median_ms"], 2.0)
         with self.assertRaises(ValueError):
             performance_rows(lines[0])

@@ -84,6 +84,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_homogeneous.cxx"
 #include "martensite_vulkan_capping.cxx"
 #include "martensite_vulkan_group_flipping.cxx"
+#include "martensite_vulkan_ais_text_label.cxx"
 #include "martensite_vulkan_lighting.cxx"
 static void write_capture(const occ::handle<V3d_View> &view, int width,
                           int height, const std::string &prefix, bool full) {
@@ -145,6 +146,11 @@ static void run_scene(int argc, char **argv) {
     return;
   }
   const bool rasterControl = raster_control_option(argc, argv);
+  if (mode.rfind("label-",0)==0) {
+    MartensiteOracleLabelScene scene(viewer,view,mode,offset);
+    write_capture(view,width,height,argv[5],false); print_device(view);
+    scene.context->Remove(scene.label,false); view->Remove(); return;
+  }
   if (mode.rfind("flip-",0)==0) {
     auto structure=triangle_scene(viewer,offset);
     group_flipping_scene(structure,view,mode);

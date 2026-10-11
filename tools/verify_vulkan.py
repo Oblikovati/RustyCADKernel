@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
 import os
@@ -14,6 +13,8 @@ import tempfile
 
 from dataclasses import asdict, dataclass
 from vulkan_build import build_vulkan_examples
+from vulkan_capture_families import capture_modes
+from vulkan_source_receipt import source_hashes
 from vulkan_line_cases import LINE_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_ais_line_cases import AIS_LINE_MODES
@@ -34,6 +35,7 @@ from vulkan_profiles import VulkanProfile, probe_profile, confirm_device
 from vulkan_camera_animation_cases import CAMERA_ANIMATION_MODES
 from vulkan_object_animation_cases import OBJECT_ANIMATION_MODES
 from vulkan_group_flipping_cases import GROUP_FLIPPING_MODES
+from vulkan_ais_text_label_cases import AIS_TEXT_LABEL_MODES
 from vulkan_performance import (
     performance_rows,
     regression_failures,
@@ -245,92 +247,6 @@ def capture_cases(
     return results
 
 
-def capture_modes(case_family: str) -> tuple[str, ...]:
-    """Select an explicit fixture family without changing parity gates; capture_modes('lighting')."""
-    if case_family == "group-flipping":
-        return GROUP_FLIPPING_MODES
-    if case_family == "object-animation":
-        return OBJECT_ANIMATION_MODES
-    if case_family == "camera-animation":
-        return CAMERA_ANIMATION_MODES
-    if case_family == "capping":
-        return CAPPING_MODES
-    if case_family == "lighting":
-        return LIGHTING_MODES
-    if case_family != "all":
-        raise ValueError(
-            f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping"
-        )
-    return (
-        "default",
-        "full",
-        *AIS_MODES,
-        *CAMERA_ANIMATION_MODES,
-        *OBJECT_ANIMATION_MODES,
-        *GROUP_FLIPPING_MODES,
-        *SURFACE_MODES,
-        *PERSISTENCE_MODES,
-        *LINE_MODES,
-        *STDPRS_MODES,
-        *AIS_LINE_MODES,
-        *AIS_POINT_MODES,
-        *TEXT_MODES,
-        *AIS_AXIS_MODES,
-        *PLANE_TRIHEDRON_MODES,
-        *WINDOW_MODES,
-        *CIRCLE_MODES,
-        *CLIPPING_MODES,
-        *HOMOGENEOUS_MODES,
-        *CAPPING_MODES,
-        *LIGHTING_MODES,
-    )
-
-
-def source_hashes() -> dict[str, str]:
-    """Fingerprint the actual renderer and transitive source inputs; e.g. source_hashes()."""
-    paths = [ROOT / "Cargo.toml", ROOT / "Cargo.lock"]
-    for crate in sorted(p.name for p in (ROOT / "crates").iterdir() if p.is_dir()):
-        paths.extend(p for p in (ROOT / "crates" / crate).rglob("*") if p.is_file())
-    paths.extend(
-        ROOT / p
-        for p in (
-            "tools/verify_vulkan.py",
-            "tools/vulkan_capture_compare.py",
-            "tools/oracle/martensite_vulkan_reference.cxx",
-            "tools/oracle/martensite_vulkan_capping.cxx",
-            "tools/oracle/martensite_vulkan_lighting.cxx",
-            "tools/vulkan_lighting_cases.py",
-            "tools/vulkan_capping_cases.py",
-            "tools/oracle/martensite_vulkan_ais.cxx",
-            "tools/oracle/martensite_vulkan_surfaces.cxx",
-            "tools/oracle/martensite_vulkan_bound_array.hxx",
-            "tools/oracle/martensite_vulkan_lines.cxx",
-            "tools/oracle/martensite_stdprs_geometry.hxx",
-            "tools/oracle/martensite_vulkan_stdprs.cxx",
-            "tools/oracle/martensite_vulkan_ais_line.cxx",
-            "tools/oracle/martensite_vulkan_ais_point.cxx",
-            "tools/oracle/martensite_vulkan_text.cxx",
-            "tools/oracle/martensite_vulkan_ais_axis.cxx",
-            "tools/oracle/martensite_vulkan_ais_circle.cxx",
-            "tools/oracle/martensite_vulkan_camera_animation.cxx",
-            "tools/oracle/martensite_vulkan_object_animation.cxx",
-            "tools/oracle/martensite_vulkan_group_flipping.cxx",
-            "tools/oracle/martensite_vulkan_plane_trihedron.cxx",
-            "tools/oracle/martensite_vulkan_window.cxx",
-            "tools/oracle/martensite_vulkan_persistence.cxx",
-            "tools/oracle/martensite_vulkan_clipping.cxx",
-            "tools/oracle/martensite_vulkan_homogeneous.cxx",
-            "tools/oracle/martensite_vulkan_raster_control.cxx",
-        )
-    )
-    paths.extend(ROOT.glob("tools/vulkan_*.py"))
-    paths.extend(ROOT.glob("tools/tests/test_vulkan_*.py"))
-    return {
-        str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-        for p in sorted(paths)
-    }
-
-
 def verify_profile(
     profile: VulkanProfile, target: Path, native: Path, config: HarnessConfig
 ) -> dict[str, object]:
@@ -498,7 +414,15 @@ def parse_arguments(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--host-icd", type=Path)
     parser.add_argument(
         "--case-family",
-        choices=("all", "lighting", "capping", "camera-animation", "object-animation", "group-flipping"),
+        choices=(
+            "all",
+            "lighting",
+            "capping",
+            "camera-animation",
+            "object-animation",
+            "group-flipping",
+            "text-label",
+        ),
         default="all",
     )
     performance_arguments(parser)

@@ -63,6 +63,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    immediate-layer Z-fit invalidation with native and GPU/performance fixtures.
    [Ordered group flipping](vulkan-group-flipping.md) now preserves annotation
    brackets, live orientation, lighting/clipping transforms and native cap filtering.
+   [AIS text labels](ais-text-label.md) add native font-measured annotation placement,
+   sensitive rectangles, retained aspect changes and viewer persistence transitions.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

@@ -50,6 +50,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     camera_animation_performance::benchmark(&driver, warmup, samples);
     object_animation_performance::benchmark(&driver, warmup, samples);
     group_flipping_performance::benchmark(&driver, warmup, samples);
+    ais_text_label_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -197,3 +198,8 @@ mod object_animation_performance;
 #[allow(dead_code)]
 #[path = "../tests/support/object_animation_scene.rs"]
 mod object_animation_scene;
+
+#[path = "support/ais_text_label_performance.rs"]
+mod ais_text_label_performance;
+#[path = "../tests/support/ais_text_label_scene.rs"]
+mod text_label_scene;

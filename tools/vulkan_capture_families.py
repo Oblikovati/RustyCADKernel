@@ -1,0 +1,65 @@
+"""Explicit fixture families preserve the complete legacy renderer corpus."""
+
+from vulkan_line_cases import LINE_MODES
+from vulkan_stdprs_cases import STDPRS_MODES
+from vulkan_ais_line_cases import AIS_LINE_MODES
+from vulkan_ais_point_cases import AIS_POINT_MODES
+from vulkan_text_cases import TEXT_MODES
+from vulkan_ais_axis_cases import AIS_AXIS_MODES
+from vulkan_plane_trihedron_cases import PLANE_TRIHEDRON_MODES
+from vulkan_window_cases import WINDOW_MODES, compare_window_pixels
+from vulkan_circle_cases import CIRCLE_MODES
+from vulkan_clipping_cases import CLIPPING_MODES
+from vulkan_homogeneous_cases import HOMOGENEOUS_MODES
+from vulkan_capping_cases import CAPPING_MODES
+from vulkan_lighting_cases import LIGHTING_MODES
+from vulkan_scene_cases import SURFACE_MODES, PERSISTENCE_MODES, AIS_MODES
+from vulkan_camera_animation_cases import CAMERA_ANIMATION_MODES
+from vulkan_object_animation_cases import OBJECT_ANIMATION_MODES
+from vulkan_group_flipping_cases import GROUP_FLIPPING_MODES
+from vulkan_ais_text_label_cases import AIS_TEXT_LABEL_MODES
+
+ALL_CAPTURE_MODES = (
+    "default",
+    "full",
+    *AIS_MODES,
+    *CAMERA_ANIMATION_MODES,
+    *OBJECT_ANIMATION_MODES,
+    *GROUP_FLIPPING_MODES,
+    *AIS_TEXT_LABEL_MODES,
+    *SURFACE_MODES,
+    *PERSISTENCE_MODES,
+    *LINE_MODES,
+    *STDPRS_MODES,
+    *AIS_LINE_MODES,
+    *AIS_POINT_MODES,
+    *TEXT_MODES,
+    *AIS_AXIS_MODES,
+    *PLANE_TRIHEDRON_MODES,
+    *WINDOW_MODES,
+    *CIRCLE_MODES,
+    *CLIPPING_MODES,
+    *HOMOGENEOUS_MODES,
+    *CAPPING_MODES,
+    *LIGHTING_MODES,
+)
+
+FAMILY_CAPTURE_MODES = {
+    "text-label": AIS_TEXT_LABEL_MODES,
+    "group-flipping": GROUP_FLIPPING_MODES,
+    "object-animation": OBJECT_ANIMATION_MODES,
+    "camera-animation": CAMERA_ANIMATION_MODES,
+    "capping": CAPPING_MODES,
+    "lighting": LIGHTING_MODES,
+}
+
+
+def capture_modes(case_family: str) -> tuple[str, ...]:
+    """Select an explicit fixture family without relaxing gates; capture_modes('text-label')."""
+    if case_family == "all":
+        return ALL_CAPTURE_MODES
+    if case_family in FAMILY_CAPTURE_MODES:
+        return FAMILY_CAPTURE_MODES[case_family]
+    raise ValueError(
+        f"received case family {case_family!r}; expected all, lighting, capping, camera-animation, object-animation or group-flipping or text-label"
+    )
