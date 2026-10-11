@@ -48,6 +48,15 @@ fn recording_presentation_mode(
     let manager =
         Handle::new(Graphic3dStructureManager::new(&NullGraphicDriver::new_handle()).unwrap());
     let prs = Graphic3dStructure::new(&manager, &Handle::default()).unwrap();
+    install_scale_recording(&prs.cast(), trace, oriented);
+    prs.cast()
+}
+/// Retain cached identity while observing actual groups; `install_scale_recording(&prs,&trace,true)`.
+pub(super) fn install_scale_recording(
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    trace: &ScaleDrawTrace,
+    oriented: bool,
+) {
     let recorder = Handle::new(ScaleRecordingStructure {
         transient: StandardTransient::default(),
         inner: prs.cstructure(),
@@ -55,8 +64,8 @@ fn recording_presentation_mode(
         oriented,
     });
     prs.structure_base().fields.write().cstructure = recorder.cast();
-    prs.cast()
 }
+
 struct ScaleRecordingStructure {
     transient: StandardTransient,
     inner: Handle<dyn Graphic3dCStructure>,

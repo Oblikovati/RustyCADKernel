@@ -379,3 +379,35 @@ mod view_cube_test_probe;
 
 #[cfg(test)]
 mod view_cube_submission_tests;
+
+mod view_cube_animation;
+mod view_cube_camera_fit;
+mod view_cube_highlight;
+mod view_cube_interaction;
+mod view_cube_owner;
+mod view_cube_policies;
+mod view_cube_selection;
+mod view_cube_sensitive;
+pub use view_cube_animation::{
+    ais_view_cube_handle_click, ais_view_cube_start_animation, ais_view_cube_update_animation,
+    ais_view_cube_update_animation_step,
+};
+pub use view_cube_camera_fit::ais_view_cube_view_fit_all;
+pub use view_cube_highlight::ais_view_cube_hilight_owner_with_color;
+pub use view_cube_interaction::{
+    AisViewCube, AisViewCubeAnimationEvents, AisViewCubeInteractionBase,
+    AisViewCubeInteractionFields, AisViewCubeSource,
+};
+pub use view_cube_owner::AisViewCubeOwner;
+pub use view_cube_policies::AisViewCubeMembers;
+pub use view_cube_selection::ais_view_cube_compute_selection;
+pub use view_cube_sensitive::AisViewCubeSensitive;
+
+#[cfg(test)]
+mod view_cube_highlight_tests;
+#[cfg(test)]
+mod view_cube_interaction_fixture;
+#[cfg(test)]
+mod view_cube_interaction_tests;
+#[cfg(test)]
+mod view_cube_policy_tests;

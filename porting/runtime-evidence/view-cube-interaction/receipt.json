@@ -1,0 +1,82 @@
+{
+  "project": "Martensite",
+  "base_commit": "157a46e5e",
+  "branch": "porting/martensite-view-cube-interaction",
+  "scope": "Concrete ViewCube construction, actual sensitive owners/picking, immediate highlighting, owner clicks, camera fitting and timer-backed animation; all whole classes partial",
+  "fragments": [
+    {
+      "path": "porting/ledger-fragments/view-cube-interaction.json",
+      "rows": 9
+    },
+    {
+      "path": "porting/ledger-fragments/view-cube-animation.json",
+      "rows": 27
+    },
+    {
+      "path": "porting/ledger-fragments/view-cube-owners.json",
+      "rows": 10
+    }
+  ],
+  "claims": {
+    "total": 46,
+    "implemented": 43,
+    "partial": 3,
+    "public": 33,
+    "protected": 13,
+    "private": 0,
+    "duplicate_ids": 0,
+    "existing_core_overlaps": 0,
+    "direct_owned_field_bindings": 8
+  },
+  "native": {
+    "records": 1808,
+    "runs": 2,
+    "byte_identical": true,
+    "details": "native-provenance.json"
+  },
+  "checks": [
+    {
+      "command": "cargo test --locked -p rustycad-tkv3d --all-targets",
+      "result": "passed",
+      "tests": 673,
+      "new_tests": 13,
+      "suite_counts": [
+        195,
+        1,
+        477,
+        0,
+        0
+      ],
+      "log_sha256": "9dd2ea18409ecc7ba1a7d2bb79868a2154ffb2555582678586aac6dfe6b1ea48"
+    },
+    {
+      "command": "cargo clippy --locked -p rustycad-tkv3d --all-targets -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "cargo fmt --all --check",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    },
+    {
+      "command": "pinned nightly rustdoc + make_reachable_inventory + match_api_row",
+      "result": "46 unique visible pinned C++ declarations and unique current-source Rust bindings; all source hashes verified"
+    },
+    {
+      "command": "focused file/function audit",
+      "result": "files <500 lines; function bodies <=20 lines"
+    }
+  ],
+  "rustdoc_warnings": "Existing dependency ElementCast float-method future collisions and pre-existing sensitive_poly/selectable_object macro doc links; no warnings introduced by this slice",
+  "build_environment": {
+    "jobs": 2,
+    "dev_debug": 0,
+    "test_debug": 0,
+    "incremental": 0
+  },
+  "gpu": "No renderer interface changes or additional GPU claims; coordinated root-owned device proof separately",
+  "deferred": "Windows/macOS; remaining ViewCube appearance-management APIs and exhaustive generated type alias/RTTI entry-point mapping"
+}
