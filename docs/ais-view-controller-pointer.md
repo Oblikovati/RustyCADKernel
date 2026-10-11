@@ -50,5 +50,6 @@ method deliberately ignores the flag. Pixel-to-integer comparisons use finite
 coordinates within the upstream integer range, where native conversion is defined.
 
 Run `cargo test -p rustycad-tkv3d --all-targets --locked`. CI requires no OCCT
-headers, compiler or runtime. Continue remaining pointer/window dispatch using
-these transitions and the existing [keyboard navigation](ais-view-controller-keyboard.md).
+headers, compiler or runtime. [Mouse button and pointer-motion dispatch](ais-view-controller-mouse.md)
+builds on these transitions and the existing [keyboard navigation](ais-view-controller-keyboard.md).
+Camera/window application and 3D mouse integration remain open.

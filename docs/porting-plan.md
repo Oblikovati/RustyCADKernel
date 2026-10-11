@@ -469,3 +469,7 @@ pinned stable tools; native third-party libraries may remain; no production OCCT
 fallback; API/test coverage distinct from line coverage; no premature math dependency.
 Representation choices, platform profile details and numeric substitutions are made
 per slice with oracle evidence and recorded alongside the mapping.
+
+Mouse button and pointer-motion dispatch now has committed local native oracle
+fixtures and Rust regressions; see [Martensite mouse dispatch](ais-view-controller-mouse.md).
+Camera/window application and 3D mouse integration remain open.

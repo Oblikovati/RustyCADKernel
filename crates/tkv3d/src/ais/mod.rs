@@ -227,3 +227,14 @@ mod view_controller_reset;
 mod view_controller_touch;
 #[cfg(test)]
 mod view_controller_touch_tests;
+
+mod view_controller_mouse_buttons;
+mod view_controller_mouse_gestures;
+mod view_controller_mouse_motion;
+mod view_controller_mouse_position;
+mod view_controller_mouse_state;
+
+#[cfg(test)]
+mod view_controller_mouse_fixture;
+#[cfg(test)]
+mod view_controller_mouse_tests;

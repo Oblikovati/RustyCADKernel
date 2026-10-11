@@ -591542,6 +591542,46 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewController::update_touch_point",
       "status": "implemented",
       "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ChangeMouseGestureMap()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "4e607d5be130102f6055b658c7805d7dff8db1c4fd681c9a0133e1078fc67c85",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::change_mouse_gesture_map",
+      "status": "implemented",
+      "notes": "Martensite native mouse dispatch at OCCT 3d097a0. 1220 committed local snapshots cover every gesture, policy gates, scaled tolerances, button priority, click thresholds/timers, selection completion, modifier routing, accumulated pan/zoom, idle-walk rotation and queued drag requests. Rust-only regressions cover error ordering and exact timer boundaries. Controller class/constructor and renderer/window dispatch remain partial/open. See docs/ais-view-controller-mouse.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::MouseGestureMap() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "f30a64b3ddf5cec0b59c8aae471f0734d12802f0414be6875ffa187d74e9f2f3",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::mouse_gesture_map",
+      "status": "implemented",
+      "notes": "Martensite native mouse dispatch at OCCT 3d097a0. 1220 committed local snapshots cover every gesture, policy gates, scaled tolerances, button priority, click thresholds/timers, selection completion, modifier routing, accumulated pan/zoom, idle-walk rotation and queued drag requests. Rust-only regressions cover error ordering and exact timer boundaries. Controller class/constructor and renderer/window dispatch remain partial/open. See docs/ais-view-controller-mouse.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateMouseButtons(const NCollection_Vec2<int> &, Aspect_VKeyMouse, Aspect_VKeyFlags, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "d505d5e945375f8235b7cc7c03feef9e51b71644932bea52266c67a39306c6f0",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_mouse_buttons",
+      "status": "implemented",
+      "notes": "Martensite native mouse dispatch at OCCT 3d097a0. 1220 committed local snapshots cover every gesture, policy gates, scaled tolerances, button priority, click thresholds/timers, selection completion, modifier routing, accumulated pan/zoom, idle-walk rotation and queued drag requests. Rust-only regressions cover error ordering and exact timer boundaries. Controller class/constructor and renderer/window dispatch remain partial/open. See docs/ais-view-controller-mouse.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateMousePosition(const NCollection_Vec2<int> &, Aspect_VKeyMouse, Aspect_VKeyFlags, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "824d83350096a491c9acf2dbf19101709f29aef972fc3bfbd5f33a4a1dd4e9de",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_mouse_position",
+      "status": "implemented",
+      "notes": "Martensite native mouse dispatch at OCCT 3d097a0. 1220 committed local snapshots cover every gesture, policy gates, scaled tolerances, button priority, click thresholds/timers, selection completion, modifier routing, accumulated pan/zoom, idle-walk rotation and queued drag requests. Rust-only regressions cover error ordering and exact timer boundaries. Controller class/constructor and renderer/window dispatch remain partial/open. See docs/ais-view-controller-mouse.md."
     }
   ],
   "tests": [

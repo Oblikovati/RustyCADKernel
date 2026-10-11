@@ -1,6 +1,7 @@
 //! Martensite AIS view-controller input state; rendering dispatch is still being ported.
 use super::view_controller_clicks::ViewControllerClickDispatch;
 use super::view_controller_input_state::{ViewControllerClickState, ViewControllerNavigationState};
+use super::view_controller_mouse_state::ViewControllerMouseDispatch;
 use super::view_controller_parameters::ViewControllerParameters;
 use super::view_controller_touch::ViewControllerTouchDispatch;
 use super::{AisNavigationMode, AisViewInputBuffer, AisViewInputBufferType};
@@ -19,6 +20,7 @@ pub struct AisViewController {
     pub(super) navigation_state: ViewControllerNavigationState,
     pub(super) click_dispatch: ViewControllerClickDispatch,
     pub(super) touch_dispatch: ViewControllerTouchDispatch,
+    pub(super) mouse_dispatch: ViewControllerMouseDispatch,
 }
 impl Default for AisViewController {
     fn default() -> Self {
@@ -45,6 +47,7 @@ impl AisViewController {
             navigation_state: ViewControllerNavigationState::default(),
             click_dispatch: ViewControllerClickDispatch::new(),
             touch_dispatch,
+            mouse_dispatch: ViewControllerMouseDispatch::default(),
         }
     }
     /// Borrow the UI or rendering queue; `controller.input_buffer(AisViewInputBufferType::Ui)`.
