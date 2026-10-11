@@ -4,8 +4,12 @@ mod bvh_index_buffer;
 mod interior_point_set;
 mod point_data;
 mod primitive_array;
+mod primitive_array_bounds;
+mod primitive_array_entity;
 mod primitive_array_init;
 mod primitive_array_match;
+mod primitive_array_overloads;
+mod primitive_array_patches;
 mod sensitive_box;
 mod sensitive_curve;
 mod sensitive_entity;
@@ -49,3 +53,6 @@ pub use sensitive_wire::Select3DSensitiveWire;
 
 mod sensitive_poly_source;
 pub use sensitive_poly_source::Select3DSensitivePolySource;
+
+#[cfg(test)]
+mod primitive_array_init_tests;
