@@ -1,0 +1,30 @@
+{
+  "project": "Martensite",
+  "base_commit": "fe3b6cd7f",
+  "branch": "porting/martensite-view-cube-animation-reference",
+  "changed_claim": "AIS_ViewCube::ViewAnimation",
+  "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
+  "canonical_binding": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
+  "status": "implemented",
+  "native_records": 7,
+  "native_runs": 2,
+  "byte_identical": true,
+  "tests": 691,
+  "new_regressions": 2,
+  "checks": [
+    "cargo test --locked -p rustycad-tkv3d --all-targets: passed",
+    "cargo clippy --locked -p rustycad-tkv3d --all-targets -- -D warnings: passed",
+    "cargo fmt --all --check: passed",
+    "git diff --check: passed",
+    "Pinned nightly rustdoc + crosswalk: unique exact C++/Rust binding; current source hashes verified"
+  ],
+  "contract": "Borrowed live actual handle slot; no retained lock/animation ownership; setters/null/direct protected replacement observed by both aliases. Explicit snapshots remain separate. Callback copies current ownership and releases field lock before user setter invocation.",
+  "limits": [
+    "No new global ledger edits or additional declarations claimed",
+    "Copied view_animation is an unclaimed convenience",
+    "Other appearance reference getters and class completion deferred",
+    "No GPU or Windows/macOS proof required for this reference-only correction"
+  ],
+  "style": "Focused files <500 lines and function bodies <=20 lines",
+  "build_environment": "jobs2, dev/test debug0, incremental0"
+}
