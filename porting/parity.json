@@ -593672,6 +593672,76 @@
       "rust_item": "rustycad_tkv3d::ais::AisLightSourceSource::compute_spot",
       "status": "implemented",
       "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::handleZoom(const occ::handle<V3d_View> &, const Aspect_ScrollDelta &, const gp_Pnt *)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "3acc5db0524038026eb3aa23c2ac05db30f82d8bed8da4655501a9a225703496",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_zoom",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::handlePanning(const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "749680eccfdcff9b6f8bc0b3b76258a23c001a9cd1715c92329bdcfc0a940700",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_panning",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::handleZRotate(const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "863cf6266e858f1d3603ce020edd0c24304a550fab63d6186dca2af91baacda0",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_z_rotate",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::handleZFocusScroll(const occ::handle<V3d_View> &, const Aspect_ScrollDelta &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "c2d2a944ce151cd432e75d56349236ac45ea9eb4a8d36e9cd1ae9e24b842c516",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_z_focus_scroll",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::hasPanningAnchorPoint()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "c5623b4c3061ac631956ecda69adc793c5dbba9a373855f4b9c3c408f3f95f04",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::has_panning_anchor_point",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::setPanningAnchorPoint(const gp_Pnt &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "ef5bc519d1f295a91933148f2cfadd4a06e7441291ccc0dacc8ea52597f8dc57",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_panning_anchor_point",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::panningAnchorPoint()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "fca081aabf967df0d8a6590252858a662b5852bd3d1d7b2f9bf46d792c21fbb8",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::panning_anchor_point",
+      "status": "implemented",
+      "notes": "Martensite complete native camera primitive or retained anchor API at OCCT 3d097a0. Actual camera/view, animation partial failure order, XR synchronization and unchanged UI/GL queues.4302 local native snapshots and Rust sentinel regression. Controller/constructor remain partial; see docs/ais-view-controller-camera-primitives.md."
     }
   ],
   "tests": [
