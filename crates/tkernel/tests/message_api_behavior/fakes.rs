@@ -49,7 +49,7 @@ pub struct FakeMsgFileSource {
 }
 impl MsgFileSource for FakeMsgFileSource {
     fn read_file(&self, path: &str) -> Option<Vec<u8>> {
-        self.files.get(path).cloned()
+        self.files.get(&path.replace('\\', "/")).cloned()
     }
     fn variable(&self, name: &str) -> Option<String> {
         self.variables.get(name).cloned()

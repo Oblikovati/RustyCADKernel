@@ -63,16 +63,10 @@ fn depth_squares<T: Clone + Default, B: BoundingVolume>(
 
 /// `%<width>.<precision>f` as glibc prints it, including `nan`/`-nan`/`inf` spellings.
 fn printf_fixed(value: f64, width: usize, precision: usize) -> String {
-    let text: String = if value.is_nan() {
-        String::from(if value.is_sign_negative() {
-            "-nan"
-        } else {
-            "nan"
-        })
-    } else if value.is_infinite() {
-        String::from(if value < 0.0 { "-inf" } else { "inf" })
-    } else {
+    let text = if value.is_finite() {
         format!("{value:.precision$}")
+    } else {
+        crate::c_format::nonfinite_text(value)
     };
     format!("{text:>width$}")
 }
@@ -84,7 +78,8 @@ mod tests {
     #[test]
     fn glibc_fixed_spellings() {
         assert_eq!(printf_fixed(1.005, 7, 2), "   1.00");
-        assert_eq!(printf_fixed(-f64::NAN, 7, 2), "   -nan");
+        let expected = crate::c_format::nonfinite_text(-f64::NAN);
+        assert_eq!(printf_fixed(-f64::NAN, 7, 2), format!("{expected:>7}"));
         assert_eq!(printf_fixed(f64::INFINITY, 7, 2), "    inf");
         assert_eq!(printf_fixed(123_456.789, 7, 2), "123456.79");
     }

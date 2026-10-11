@@ -166,6 +166,8 @@ jobs:
           path: target/occt-source
       - run: rustup show
       - run: python3 tools/run_tool_tests.py --jobs 2
+      # OCCT embeds git rev-parse --short; match the pinned ten-digit version literal.
+      - run: git -C target/occt-source config core.abbrev 10
       - run: python3 tools/verify_tkernel.py --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKMath --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKG2d --source target/occt-source --jobs 2

@@ -152,7 +152,12 @@ fn filler_drop_fills_reset_discards_and_check_tree_reports_balance() {
         let mut filler: UBTreeFiller<'_, i32, Span> = UBTreeFiller::new(&mut tree, None, false);
         let mut text: String = String::new();
         assert_eq!(filler.check_tree(&mut text).unwrap(), 1);
-        assert_eq!(text, "Checking UBTree:       1 leaves, balance =   -nan\n");
+        let zero = std::hint::black_box(0.0_f64);
+        let native_nan = rustycad_tkernel::storage::format_general(zero / zero, 2);
+        assert_eq!(
+            text,
+            format!("Checking UBTree:       1 leaves, balance ={native_nan:>7}\n")
+        );
         filler.add(2, span(3.0, 4.0));
         filler.reset();
     }

@@ -17,7 +17,12 @@ fn stream_printer_colors_console_output_only() {
     assert!(printer.to_colorize());
     printer.send_ascii(&AsciiString::new("warn"), Gravity::Warning);
     printer.send_ascii(&AsciiString::new("hidden"), Gravity::Trace);
-    assert_eq!(console.contents(), b"\x1b[33;1mwarn\x1b[0m\n");
+    let expected: &[u8] = if cfg!(windows) {
+        b"warn\n"
+    } else {
+        b"\x1b[33;1mwarn\x1b[0m\n"
+    };
+    assert_eq!(console.contents(), expected);
     printer.set_to_colorize(false);
     printer.send_c_str(b"plain\0rest", Gravity::Fail);
     assert!(console.contents().ends_with(b"plain\n"));
@@ -36,7 +41,8 @@ fn console_escapes_and_file_names() {
     let mut out: Vec<u8> = Vec::new();
     PrinterOStream::set_console_text_color(Some(&mut out), ConsoleColor::Cyan, true);
     PrinterOStream::set_console_text_color(None, ConsoleColor::Red, false);
-    assert_eq!(out, b"\x1b[36;1m");
+    let expected: &[u8] = if cfg!(windows) { b"" } else { b"\x1b[36;1m" };
+    assert_eq!(out, expected);
     assert!(PrinterOStream::from_file_name("CERR", false, Gravity::Info).to_colorize());
     let directory = std::env::temp_dir();
     let fallback =

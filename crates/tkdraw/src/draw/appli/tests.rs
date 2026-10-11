@@ -32,10 +32,14 @@ fn errors_are_red_when_colors_are_on() {
     session.interpretor().set_to_colorize(true);
     interprete(&session, "error oops");
     let output = console.take_output();
-    assert!(
-        output.starts_with("\u{1b}[") && output.contains("oops"),
-        "{output:?}"
-    );
+    if cfg!(windows) {
+        assert_eq!(output, "oops\n");
+    } else {
+        assert!(
+            output.starts_with("\u{1b}[") && output.contains("oops"),
+            "{output:?}"
+        );
+    }
 }
 
 #[test]

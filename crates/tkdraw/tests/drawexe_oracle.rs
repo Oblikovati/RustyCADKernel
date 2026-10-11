@@ -45,8 +45,9 @@ fn drawexe_matches_native_drawexe_on_every_oracle_script() {
     for script in &scripts {
         let expected = std::fs::read_to_string(script.with_extension("expected"))
             .expect("a recorded native output");
-        let expected = platform_oracle::expected_on_host(&expected);
-        let actual = run_drawexe(script, &empty_default);
+        let expected = platform_oracle::expected_on_host(&expected).replace("\r\n", "\n");
+        // Tcl translates console newlines on Windows; compare the same logical lines.
+        let actual = run_drawexe(script, &empty_default).replace("\r\n", "\n");
         if actual != expected {
             mismatches.push(format!(
                 "{}:\n--- native\n{expected}\n--- rust\n{actual}",
