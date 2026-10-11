@@ -7,8 +7,9 @@ next-frame requests and inherited key/event-time exports. The controller owns
 the existing `AspectWindowInputListenerBase`; all keyboard accessors share its
 cache. `with_event_timer` injects the clock used by both event timing and click
 bookkeeping. [Click/touch dispatch and animation ownership](ais-view-controller-pointer.md)
-are now ported. The full window-listener trait interface, mouse-button/position
-and 3D-mouse dispatch, camera/render dispatch and XR remain unported.
+are now ported, as are mouse-button/position and 3D-mouse dispatch.
+[The complete window-listener trait](ais-view-controller-window-listener.md)
+routes these paths. Camera/render dispatch and XR remain unported.
 The controller record and constructor remain partial in the inventory.
 
 Navigation fetch advances the previous/current event-time interval. Held or

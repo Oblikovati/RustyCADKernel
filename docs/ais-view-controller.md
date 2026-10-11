@@ -5,8 +5,9 @@ Martensite now ports 66 public `AIS_ViewController` methods at OCCT
 policy getters/setters, selection queue editing, zoom/wheel coalescing, touch
 Z-rotation accumulation, navigation policy and previous-highlight position.
 The controller type and constructor remain partial in the ledger. Rendering
-and camera dispatch, window-listener inheritance, mouse-button/position and
-3D-mouse dispatch, and XR are still open porting work.
+and camera dispatch and XR are still open porting work. Mouse-button/position,
+3D-mouse dispatch and [window-listener integration](ais-view-controller-window-listener.md)
+are now ported.
 [Animation ownership and click/touch dispatch](ais-view-controller-pointer.md)
 now preserve native callbacks and gesture transitions.
 [Keyboard navigation](ais-view-controller-keyboard.md) now adds 16 captured

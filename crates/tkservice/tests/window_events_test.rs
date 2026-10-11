@@ -20,6 +20,7 @@ use rustycad_tkservice::xw::{XwWindow, XwXEvent};
 struct RecordingInputListener {
     base: AspectWindowInputListenerBase,
     events: Vec<String>,
+    fail_pointer: bool,
 }
 impl AspectWindowInputListener for RecordingInputListener {
     fn input_base(&self) -> &AspectWindowInputListenerBase {
@@ -68,9 +69,14 @@ impl AspectWindowInputListener for RecordingInputListener {
         buttons: AspectVKeyMouse,
         _modifiers: AspectVKeyFlags,
         _is_emulated: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
+        if self.fail_pointer {
+            return Err(Failure::new(
+                "pointer buttons failed; expected accepted event",
+            ));
+        }
         self.events.push(format!("buttons {buttons}"));
-        true
+        Ok(true)
     }
     fn update_mouse_position(
         &mut self,
@@ -78,9 +84,14 @@ impl AspectWindowInputListener for RecordingInputListener {
         _buttons: AspectVKeyMouse,
         _modifiers: AspectVKeyFlags,
         _is_emulated: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
+        if self.fail_pointer {
+            return Err(Failure::new(
+                "pointer motion failed; expected accepted event",
+            ));
+        }
         self.events.push(format!("move {} {}", point.x, point.y));
-        true
+        Ok(true)
     }
     fn update_3d_mouse(&mut self, event: &WntHidSpaceMouse<'_>) -> Result<bool, Failure> {
         self.update_3d_mouse_keys(event)
@@ -94,7 +105,9 @@ fn canvas_window_events_without_emscripten() {
     assert!(window.process_ui_event(&mut listener, 0, None));
     assert!(window.process_focus_event(&mut listener, 0, None));
     assert!(!window.process_touch_event(&mut listener, 0, None));
-    listener.add_touch_point(1, Vec2::new(1.0, 2.0), false);
+    listener
+        .add_touch_point(1, Vec2::new(1.0, 2.0), false)
+        .unwrap();
     assert!(window.process_touch_event(&mut listener, 0, None));
     assert!(
         !window.process_message(&mut listener, 0)
@@ -169,4 +182,24 @@ fn x_window_keys_constructors_and_events() {
             "input".into()
         ]
     );
+}
+
+#[cfg(target_os = "linux")]
+#[test]
+fn x_window_pointer_failures_stop_before_processing_input() {
+    let Ok(display) = AspectDisplayConnection::new() else {
+        return;
+    };
+    let window = XwWindow::create(&Handle::new(display), "pointer failure", 0, 0, 16, 16).unwrap();
+    let mut listener = RecordingInputListener {
+        fail_pointer: true,
+        ..Default::default()
+    };
+    let mut press = button_event(4, window.x_window(), [3, 4], 1);
+    assert!(window.process_message(&mut listener, &mut press).is_err());
+    let mut release = button_event(5, window.x_window(), [3, 4], 1);
+    assert!(window.process_message(&mut listener, &mut release).is_err());
+    let mut motion = button_event(6, window.x_window(), [3, 4], 0);
+    assert!(window.process_message(&mut listener, &mut motion).is_err());
+    assert!(listener.events.is_empty());
 }

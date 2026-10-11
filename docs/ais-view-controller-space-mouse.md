@@ -8,9 +8,10 @@ follow both motion stages. Combined packets retain the decoder's shared raw rang
 The project-owned `MartensiteSpaceMouseInput` interface supplies listener settings
 and fallible keyboard callbacks without requiring window callbacks. Existing
 `AspectWindowInputListener` implementations receive a blanket adapter; the AIS
-controller supplies its own keyboard target. Both use the same dispatch functions.
-This avoids duplicating HID routing or swallowing animation failures to implement
-the remaining window-listener interface prematurely.
+controller now implements the complete fallible window listener and receives the
+same blanket adapter. Both use the same dispatch functions.
+[Window-listener integration](ais-view-controller-window-listener.md) preserves
+mouse/touch animation failures through typed results.
 
 Translation intentionally updates the key cache directly. Rotation uses the
 keyboard callback, skipping disabled axes and reversing configured axes. Buttons

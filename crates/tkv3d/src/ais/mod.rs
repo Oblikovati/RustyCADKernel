@@ -240,6 +240,10 @@ mod view_controller_mouse_fixture;
 mod view_controller_mouse_tests;
 
 mod view_controller_space_mouse;
+mod view_controller_window_listener;
 
 #[cfg(test)]
 mod view_controller_space_mouse_tests;
+
+#[cfg(test)]
+mod view_controller_window_listener_tests;

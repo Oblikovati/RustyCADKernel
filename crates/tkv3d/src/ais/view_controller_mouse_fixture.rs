@@ -39,8 +39,14 @@ pub(super) fn mouse_action(c: &mut AisViewController, row: &[f64]) -> bool {
     let m = row[6] as u32;
     let e = row[7] != 0.0;
     match row[2] as i32 {
-        0 => c.update_mouse_buttons(p, b, m, e).unwrap(),
-        1 => c.update_mouse_position(p, b, m, e).unwrap(),
+        0 => rustycad_tkservice::aspect::AspectWindowInputListener::update_mouse_buttons(
+            c, p, b, m, e,
+        )
+        .unwrap(),
+        1 => rustycad_tkservice::aspect::AspectWindowInputListener::update_mouse_position(
+            c, p, b, m, e,
+        )
+        .unwrap(),
         op => panic!("mouse operation {op}; expected 0 or 1"),
     }
 }

@@ -180,7 +180,7 @@ impl XwWindow {
             .filter(|(mask, _)| state & mask != 0)
             .fold(ASPECT_VKEY_MOUSE_NONE, |acc, (_, b)| acc | b);
         let flags = modifier_flags(listener, state)?;
-        listener.update_mouse_position(Vec2::new(px, py), buttons, flags, false);
+        listener.update_mouse_position(Vec2::new(px, py), buttons, flags, false)?;
         listener.process_input();
         Ok(true)
     }
@@ -257,9 +257,9 @@ fn process_button(
         let delta = if number == x::Button4 { 1.0 } else { -1.0 };
         listener.update_mouse_scroll(&AspectScrollDelta::new(point, delta, flags));
     } else if is_press {
-        listener.press_mouse_button(point, button_of(number), flags, false);
+        listener.press_mouse_button(point, button_of(number), flags, false)?;
     } else {
-        listener.release_mouse_button(point, button_of(number), flags, false);
+        listener.release_mouse_button(point, button_of(number), flags, false)?;
     }
     listener.process_input();
     Ok(true)
