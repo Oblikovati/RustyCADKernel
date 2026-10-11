@@ -34,3 +34,13 @@ This capability slice adds no inventory API claims. Ordinary transparency,
 custom shaders, textures and full gradient/depth line parity are not declared
 complete. The coordinating agent integrates the committed branch into local main
 and deletes its completed checkout/build artifacts afterward.
+
+The completed branch is integrated and its checkout/branch deleted; see
+[integration.json](integration.json). Verification from combined local `main`
+passed both-device functional, analytic, lighting and native-buffer checks.
+[Integrated receipt](integrated-main-cb6d08a35.json.gz) binds the complete source
+at measurement revision `9ae6678687f4068af2b90feb149fa48acce50eae` to two further
+36-workload runs (100 samples, 20 warmup). Alpha median/p95 is 0.3653/0.4367 ms
+on lavapipe and 0.2602/0.3710 ms on AMD. All ten historical software budgets pass
+in this run. Native identity mismatch, strict software endpoint differences and
+unaccepted alpha baselines remain open; shared-host compilation is recorded.

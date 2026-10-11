@@ -39,6 +39,13 @@ also misses the historical surface-bound median and window-present p95 budgets;
 the initial run passed those ten budgets. Native historical probe identity does
 not match, so its historical regression comparison remains unverified.
 
+Verification from combined local `main` also passed both profiles' functional,
+analytic, lighting and native-buffer checks. Integrated median/p95 timings are
+0.3653/0.4367 ms on lavapipe and 0.2602/0.3710 ms on AMD. The integrated software
+run passed all ten historical workload budgets. Its receipt retains the earlier
+misses, native identity mismatch and observed shared-host compilation caveat;
+the new alpha baseline remains unaccepted.
+
 ```sh
 cargo test -p martensite-vulkan --all-targets --locked
 cargo run -p martensite-vulkan --example offscreen_acceptance --locked
