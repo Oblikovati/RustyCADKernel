@@ -591432,6 +591432,116 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewController::key_from_axis",
       "status": "implemented",
       "notes": "Martensite keyboard navigation at OCCT 3d097a0. Committed frozen-time native fixtures preserve all six axes, opposing-key assignment order, pressure/duration, stance/jump/release consumption, thrust state, nonfinite comparisons and focus-loss input reset. Native empty event callbacks deliberately preserve queued gestures. Base event-time/key exports share listener state. Record/constructor and remaining dispatch stay partial/open. See docs/ais-view-controller-keyboard.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::AbortViewAnimation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "00d173ba0c01715bb19dfe7a1c6d838ab073b2c692b0a276da2a8508d2887cd1",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::abort_view_animation",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::RemoveTouchPoint(size_t, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "0f93c4ae43021531abbd8e97be2713ef9a2e8e7df13f7fd63d9689cebf10911b",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::remove_touch_point",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateMouseClick(const NCollection_Vec2<int> &, Aspect_VKeyMouse, Aspect_VKeyFlags, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "2e80a5420fd7737b8cd2470d85ab55e88cd82b36998c5060ff583c9e7e55c763",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_mouse_click",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::MouseSelectionSchemes()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "4037193eacc099c2abbca8b96197305f7093402386327d7ec503fa0032d2802d",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::mouse_selection_schemes",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetObjectsAnimation(const occ::handle<AIS_Animation> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "61a0a316bddec54a51e1dadc833f42b3a51c6ab1e84a2644c995bc0ebaad9dbb",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_objects_animation",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ViewAnimation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "78c9e4f5567c14286f90d087a3134baac21032c258683481d8ce8991d39755bd",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::view_animation",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ObjectsAnimation()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "7ce41091126c05edc53a5d4fd15b3e33ed8ea465cd82a6b9e5f0a53e8baf3503",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::objects_animation",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::SetViewAnimation(const occ::handle<AIS_AnimationCamera> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "b29c269489c6f904b576eea45c93b60a20226c7a5f6ff6de36f12370cbd09ee1",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::set_view_animation",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::AddTouchPoint(size_t, const NCollection_Vec2<double> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "bc2d5f0684f68d6ed33e3c23c9616d8cd4f5f36bc10ac0158fe13bbaf24fbf4e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::add_touch_point",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::ChangeMouseSelectionSchemes()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "cf3b70780366de84e14b1c0fe63740ff13ace2ef6bf1f9f1a81241f2d9ea70fd",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::change_mouse_selection_schemes",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::UpdateTouchPoint(size_t, const NCollection_Vec2<double> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "d741adb6a6a8b4e50ba0a6f230f824f66251f013d653b2c5e0afc3b61ee5f1af",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_touch_point",
+      "status": "implemented",
+      "notes": "Martensite controller click/touch dispatch at OCCT 3d097a0. Committed native snapshots verify animation identity/defaults/abort, polymorphic pause-before-selection, selection map edits, touch clearing, duplicate and unknown IDs, pinch transitions, tolerance comparisons and double-tap lifecycle. Renderer/window dispatch and controller class/constructor remain partial/open. See docs/ais-view-controller-pointer.md."
     }
   ],
   "tests": [

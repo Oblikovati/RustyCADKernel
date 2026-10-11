@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "headers_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.hxx": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+    "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.hxx": "878f723d92c60ea72dc0c34ebc2d4d2e6ca2c002fe0ddaf51dc70ae5ef2f6afd",
+    "src/Visualization/TKService/Aspect/Aspect_Touch.hxx": "618da66cfecf830f18a4fbd2b4691c4a9c0a6dc5326c6fc444d65cebebb9b131",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9"
+  },
+  "implementations_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.cxx": "0ab7c71da3f6902eab0ff582a459ae298ad93eba6a37257d52ba87acdc4ecfd4",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.cxx": "6d8efaacccf41a662def60e2350d4692ffac7b767b429014c9d725e8a8b841a3"
+  },
+  "generator": "tools/oracle/martensite_view_controller_clicks.cxx",
+  "generator_sha256": "eef7127fe86fa55cf0110995dd4925ce89d36c58b85438ec668f8a5ead5177c8",
+  "fixture": "crates/tkv3d/tests/fixtures/view-controller-clicks-native.txt",
+  "fixture_sha256": "e58753fcd7f7a231f0a3fab23e6b350314fdc2055fa40af94ca5319e627a8cb4",
+  "cases": 163,
+  "native_link_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "rust_test_occt_dependency": false,
+  "native_fixture_reproduced_byte_for_byte": true,
+  "local_null_driver_sha256": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5"
+}

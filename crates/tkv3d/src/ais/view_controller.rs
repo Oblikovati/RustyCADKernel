@@ -1,11 +1,13 @@
 //! Martensite AIS view-controller input state; rendering dispatch is still being ported.
+use super::view_controller_clicks::ViewControllerClickDispatch;
 use super::view_controller_input_state::{ViewControllerClickState, ViewControllerNavigationState};
 use super::view_controller_parameters::ViewControllerParameters;
+use super::view_controller_touch::ViewControllerTouchDispatch;
 use super::{AisNavigationMode, AisViewInputBuffer, AisViewInputBufferType};
 use rustycad_tkernel::{ncollection::Vec2, osd::Timer};
 use rustycad_tkservice::aspect::AspectWindowInputListenerBase;
 /// Queues native viewer gestures; `AisViewController::new().update_z_rotation(0.1)`.
-/// Camera dispatch, animations, the full window-listener interface and XR remain unported.
+/// Camera/redraw dispatch, the full window-listener interface and XR remain unported.
 pub struct AisViewController {
     pub(super) ui_input: AisViewInputBuffer,
     pub(super) render_input: AisViewInputBuffer,
@@ -15,6 +17,8 @@ pub struct AisViewController {
     pub(super) input_base: AspectWindowInputListenerBase,
     pub(super) click_state: ViewControllerClickState,
     pub(super) navigation_state: ViewControllerNavigationState,
+    pub(super) click_dispatch: ViewControllerClickDispatch,
+    pub(super) touch_dispatch: ViewControllerTouchDispatch,
 }
 impl Default for AisViewController {
     fn default() -> Self {
@@ -29,6 +33,7 @@ impl AisViewController {
     /// Inject event clocks for deterministic input; `AisViewController::with_event_timer(timer)` starts the timer.
     pub fn with_event_timer(event_timer: Timer) -> Self {
         let click_state = ViewControllerClickState::with_timer(event_timer.clone());
+        let touch_dispatch = ViewControllerTouchDispatch::with_timer(event_timer.clone());
         Self {
             ui_input: AisViewInputBuffer::new(),
             render_input: AisViewInputBuffer::new(),
@@ -38,6 +43,8 @@ impl AisViewController {
             input_base: AspectWindowInputListenerBase::with_timer(event_timer),
             click_state,
             navigation_state: ViewControllerNavigationState::default(),
+            click_dispatch: ViewControllerClickDispatch::new(),
+            touch_dispatch,
         }
     }
     /// Borrow the UI or rendering queue; `controller.input_buffer(AisViewInputBufferType::Ui)`.

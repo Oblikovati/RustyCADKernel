@@ -99,6 +99,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    zoom and Z rotation, with public policies and UI-only navigation cancellation.
    [Keyboard navigation](ais-view-controller-keyboard.md) now preserves frame
    timing, all six axes, stance/thrust/release semantics and focus-loss reset.
+   [Click and touch dispatch](ais-view-controller-pointer.md) now preserves animation
+   ownership, selection bindings and native touch transitions.
    Continue its remaining dispatch alongside the remaining presentation
    and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
