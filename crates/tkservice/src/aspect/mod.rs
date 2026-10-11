@@ -60,3 +60,13 @@ pub use xr_session::{
     ASPECT_XR_TRACKED_DEVICE_ROLE_NB, AspectXRSession, AspectXRSessionBase, AspectXRSessionFields,
     AspectXRSessionInfoString, AspectXRSessionMembers, AspectXRSessionTrackingUniverseOrigin,
 };
+
+mod space_mouse_dispatch;
+mod space_mouse_input;
+pub use space_mouse_dispatch::{
+    dispatch_space_mouse_keys, dispatch_space_mouse_rotation, dispatch_space_mouse_translation,
+};
+pub use space_mouse_input::MartensiteSpaceMouseInput;
+
+#[cfg(test)]
+mod space_mouse_dispatch_tests;

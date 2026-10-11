@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "headers_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.hxx": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+    "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.hxx": "878f723d92c60ea72dc0c34ebc2d4d2e6ca2c002fe0ddaf51dc70ae5ef2f6afd",
+    "src/Visualization/TKService/Aspect/Aspect_Touch.hxx": "618da66cfecf830f18a4fbd2b4691c4a9c0a6dc5326c6fc444d65cebebb9b131",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx": "3cd5f42867a7ad41387beb25df16033e3cad11c1b85f2a90c460bd84815626b9",
+    "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.hxx": "ca7bd2a2458ca0239312277693ed99990cdc067ec433d7074ca637c8f520c6d0",
+    "src/Visualization/TKService/Aspect/Aspect_VKeySet.hxx": "2ac2255d204c93a7ba7b4735d3fa38dff2b3df797d8692a054e58172af88a8d3",
+    "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.hxx": "9f41b3aa572e7dab79e6abe3da58e3ae7f98a4e8cb195d33720758a1de644be2"
+  },
+  "implementations_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKService/Aspect/Aspect_WindowInputListener.cxx": "0ab7c71da3f6902eab0ff582a459ae298ad93eba6a37257d52ba87acdc4ecfd4",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.cxx": "6d8efaacccf41a662def60e2350d4692ffac7b767b429014c9d725e8a8b841a3",
+    "src/Visualization/TKService/WNT/WNT_HIDSpaceMouse.cxx": "84b6c83abd00d76f2f4b3e48ff089a4da77be9df09b4106dbfaeaa6c00dc55a4",
+    "src/Visualization/TKService/Aspect/Aspect_VKeySet.cxx": "20665229ff36eb063416c9c61eb84749ea7b1473c868ee6373ecf84dbd741204"
+  },
+  "native_link_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "rust_test_occt_dependency": false,
+  "native_fixture_reproduced_byte_for_byte": true,
+  "generator": "tools/oracle/martensite_view_controller_space_mouse.cxx",
+  "generator_sha256": "6c6a6810cea0b9bd79b659642546a954c56a2e8bddf00a4b362e050580fcd551",
+  "cases": 288,
+  "fixture": "crates/tkv3d/tests/fixtures/view-controller-space-mouse-native.txt",
+  "fixture_sha256": "4e24890599233e0ce8fd8e85b07a22fb3d1e29353c480532b8acc28f818648ea"
+}

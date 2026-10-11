@@ -15,7 +15,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
 User decision, 2026-10-11: verify porting locally on this Linux host and defer
 Windows/macOS testing. Run the affected toolkit suites locally; rendering changes
 retain local lavapipe and native-host functional captures and performance checks.
-Linux CI remains enabled. Deferred platform checks remain part of eventual
+Existing Linux CI remains enabled. New porting work is kept local: user decision
+on 2026-10-11, stop pushing to the remote. Integrate into local `main`, test locally,
+and delete completed merged worktrees and branches. Deferred platform checks remain part of eventual
 validation and do not remove APIs or behavior from the defined porting scope.
 
 1. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
@@ -472,4 +474,5 @@ per slice with oracle evidence and recorded alongside the mapping.
 
 Mouse button and pointer-motion dispatch now has committed local native oracle
 fixtures and Rust regressions; see [Martensite mouse dispatch](ais-view-controller-mouse.md).
-Camera/window application and 3D mouse integration remain open.
+[3D mouse controller routing](ais-view-controller-space-mouse.md) now uses shared
+HID dispatch with committed native snapshots. Camera/window application remains open.

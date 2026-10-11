@@ -7,7 +7,7 @@
 //! state, the touch points and the 3D-mouse settings.
 use super::{
     ASPECT_VKEY_FLAGS_NONE, ASPECT_VKEY_MOUSE_NONE, AspectScrollDelta, AspectTouch, AspectVKey,
-    AspectVKeyBasic, AspectVKeyFlags, AspectVKeyMouse, AspectVKeySet,
+    AspectVKeyFlags, AspectVKeyMouse, AspectVKeySet,
 };
 use crate::wnt::WntHidSpaceMouse;
 use rustycad_tkernel::ncollection::{IndexedDataMap, Vec2, Vec3};
@@ -93,7 +93,7 @@ impl AspectWindowInputListenerBase {
     }
 }
 
-/// A window input listener; `AIS_ViewController` implements it in TKV3d.
+/// A window input listener; Martensite HID targets may use `MartensiteSpaceMouseInput` independently.
 pub trait AspectWindowInputListener {
     /// The embedded base; `listener.input_base().keys.modifiers()`.
     fn input_base(&self) -> &AspectWindowInputListenerBase;
@@ -180,100 +180,18 @@ pub trait AspectWindowInputListener {
         &mut self,
         event: &WntHidSpaceMouse<'_>,
     ) -> Result<bool, Failure> {
-        if !event.is_translation() {
-            return Ok(false);
-        }
-        let base = self.input_base();
-        let time = base.event_timer.elapsed_time();
-        let (translation, _) = event.translation(base.mouse3d_is_quadric);
-        let translation = translation * f64::from(base.mouse3d_accel_trans);
-        use AspectVKeyBasic as V;
-        base.keys.key_from_axis(
-            V::NavSlideLeft as AspectVKey,
-            V::NavSlideRight as AspectVKey,
-            time,
-            translation.x,
-        )?;
-        base.keys.key_from_axis(
-            V::NavForward as AspectVKey,
-            V::NavBackward as AspectVKey,
-            time,
-            translation.y,
-        )?;
-        base.keys.key_from_axis(
-            V::NavSlideUp as AspectVKey,
-            V::NavSlideDown as AspectVKey,
-            time,
-            translation.z,
-        )?;
-        Ok(true)
+        super::dispatch_space_mouse_translation(self, event)
     }
     /// Maps a 3D-mouse rotation to the look and roll keys (through the virtual
     /// `key_from_axis`), skipping ignored axes; `listener.update_3d_mouse_rotation(&r)?`.
     fn update_3d_mouse_rotation(&mut self, event: &WntHidSpaceMouse<'_>) -> Result<bool, Failure> {
-        if !event.is_rotation() {
-            return Ok(false);
-        }
-        let base = self.input_base();
-        let time = base.event_timer.elapsed_time();
-        let (rotation, _) = event.rotation(base.mouse3d_is_quadric);
-        let rotation = rotation * f64::from(base.mouse3d_accel_rotate);
-        let (skip, reverse) = (base.mouse3d_no_rotate, base.mouse3d_to_reverse);
-        use AspectVKeyBasic as V;
-        let axes = [
-            (skip.x, reverse.x, rotation.x, V::NavLookUp, V::NavLookDown),
-            (skip.y, reverse.y, rotation.y, V::NavRollCW, V::NavRollCCW),
-            (
-                skip.z,
-                reverse.z,
-                rotation.z,
-                V::NavLookLeft,
-                V::NavLookRight,
-            ),
-        ];
-        let mut to_update = false;
-        for (skipped, reversed, value, negative, positive) in axes {
-            if skipped {
-                continue;
-            }
-            let pressure = if reversed { -value } else { value };
-            self.key_from_axis(
-                negative as AspectVKey,
-                positive as AspectVKey,
-                time,
-                pressure,
-            )?;
-            to_update = true;
-        }
-        Ok(to_update)
+        super::dispatch_space_mouse_rotation(self, event)
     }
     /// Presses and releases the virtual keys of the 3D-mouse buttons that changed.
     ///
     /// Example: `listener.update_3d_mouse_keys(&report)?`.
     fn update_3d_mouse_keys(&mut self, event: &WntHidSpaceMouse<'_>) -> Result<bool, Failure> {
-        if !event.is_key_state() {
-            return Ok(false);
-        }
-        let time = self.input_base().event_timer.elapsed_time();
-        let key_state = event.key_state();
-        let mut to_update = false;
-        for key_bit in 0..32u16 {
-            let is_pressed = key_state & (1 << key_bit) != 0;
-            let state = &mut self.input_base_mut().mouse3d_button_state[usize::from(key_bit)];
-            let is_released = *state && !is_pressed;
-            *state = is_pressed;
-            let key = event.hid_to_space_key(key_bit);
-            if (!is_released && !is_pressed) || key == AspectVKeyBasic::Unknown as AspectVKey {
-                continue;
-            }
-            to_update = true;
-            if is_pressed {
-                self.key_down(key, time, 1.0)?;
-            } else {
-                self.key_up(key, time)?;
-            }
-        }
-        Ok(to_update)
+        super::dispatch_space_mouse_keys(self, event)
     }
 }
 
@@ -378,6 +296,7 @@ impl<T: AspectWindowInputListener + ?Sized> AspectWindowInputListenerMembers for
 
 #[cfg(test)]
 mod tests {
+    use super::super::AspectVKeyBasic;
     use super::*;
 
     /// A listener that keeps the native key bodies and records the mouse buttons.
@@ -476,5 +395,31 @@ mod tests {
         assert!(listener.keys().is_key_down(fit).unwrap());
         assert_eq!(listener.get_3d_mouse_translation_scale(), 2.0);
         assert!(listener.get_3d_mouse_to_reverse().x);
+    }
+    #[test]
+    fn window_listener_space_helpers_use_shared_keyboard_dispatch() {
+        let mut listener = listener();
+        listener.base.event_timer.stop();
+        listener.base.event_timer.reset_to(1.25);
+        let listener: &mut dyn AspectWindowInputListener = &mut listener;
+        let translation = WntHidSpaceMouse::new(0xC62B, &[1, 94, 1, 0, 0, 0, 0]);
+        let rotation = WntHidSpaceMouse::new(0xC62B, &[2, 94, 1, 0, 0, 0, 0]);
+        assert!(listener.update_3d_mouse_translation(&translation).unwrap());
+        assert!(listener.update_3d_mouse_rotation(&rotation).unwrap());
+        assert_space_key(listener, AspectVKeyBasic::NavSlideRight, true);
+        assert_space_key(listener, AspectVKeyBasic::NavLookUp, true);
+        let press = WntHidSpaceMouse::new(0xC62B, &[3, 2, 0, 0, 0]);
+        let release = WntHidSpaceMouse::new(0xC62B, &[3, 0, 0, 0, 0]);
+        assert!(listener.update_3d_mouse_keys(&press).unwrap());
+        assert!(listener.update_3d_mouse_keys(&release).unwrap());
+        assert_space_key(listener, AspectVKeyBasic::ViewFitAll, false);
+    }
+    fn assert_space_key(
+        listener: &dyn AspectWindowInputListener,
+        key: AspectVKeyBasic,
+        down: bool,
+    ) {
+        let key = key as AspectVKey;
+        assert_eq!(listener.keys().is_key_down(key).unwrap(), down);
     }
 }

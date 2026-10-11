@@ -52,4 +52,5 @@ coordinates within the upstream integer range, where native conversion is define
 Run `cargo test -p rustycad-tkv3d --all-targets --locked`. CI requires no OCCT
 headers, compiler or runtime. [Mouse button and pointer-motion dispatch](ais-view-controller-mouse.md)
 builds on these transitions and the existing [keyboard navigation](ais-view-controller-keyboard.md).
-Camera/window application and 3D mouse integration remain open.
+[3D mouse routing](ais-view-controller-space-mouse.md) now supplies HID navigation.
+Camera/window application remains open.

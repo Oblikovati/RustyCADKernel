@@ -591582,6 +591582,16 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewController::update_mouse_position",
       "status": "implemented",
       "notes": "Martensite native mouse dispatch at OCCT 3d097a0. 1220 committed local snapshots cover every gesture, policy gates, scaled tolerances, button priority, click thresholds/timers, selection completion, modifier routing, accumulated pan/zoom, idle-walk rotation and queued drag requests. Rust-only regressions cover error ordering and exact timer boundaries. Controller class/constructor and renderer/window dispatch remain partial/open. See docs/ais-view-controller-mouse.md."
+    },
+    {
+      "upstream_id": "AIS_ViewController::Update3dMouse(const WNT_HIDSpaceMouse &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "75aad8282c1ba93a70d656e6893f300b91bafa3e00eae1183ea233d937cb76d4",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::update_3d_mouse",
+      "status": "implemented",
+      "notes": "Martensite full native HID controller routing at OCCT 3d097a0. Shared fallible keyboard interface preserves direct translation-cache updates, virtual rotation/button callbacks, ordering, policy gates, skipped/reversed axes and partial error state. 288 committed native snapshots verify all virtual-key lifecycles, pressures, durations and report button cache across product mappings, combined packets and exceptional scales. Camera/window/redraw/XR and controller class/constructor remain partial/open. See docs/ais-view-controller-space-mouse.md."
     }
   ],
   "tests": [

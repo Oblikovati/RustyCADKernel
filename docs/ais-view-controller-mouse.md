@@ -32,5 +32,7 @@ Run `cargo test -p rustycad-tkv3d --all-targets --locked` for the toolkit tests.
 Windows and macOS execution is deferred while porting is tested on this host.
 
 The controller class and constructor remain partial. Camera/window application,
-redraw dispatch and 3D mouse controller integration still require porting; these
+redraw dispatch and the full window-listener interface still require porting; these
 input request methods do not claim completion of those downstream paths.
+
+[3D mouse routing](ais-view-controller-space-mouse.md) supplies native HID navigation.

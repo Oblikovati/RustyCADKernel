@@ -238,3 +238,8 @@ mod view_controller_mouse_state;
 mod view_controller_mouse_fixture;
 #[cfg(test)]
 mod view_controller_mouse_tests;
+
+mod view_controller_space_mouse;
+
+#[cfg(test)]
+mod view_controller_space_mouse_tests;
