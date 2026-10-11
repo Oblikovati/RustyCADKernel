@@ -1,0 +1,131 @@
+{
+  "source_revision": "70c94f511914b7bef189093ccd0a400082ed1337",
+  "pipeline": [
+    {
+      "stage": 0,
+      "command": [
+        "python3",
+        "tools/capture_rustdoc_json.py",
+        "capture"
+      ],
+      "exit_code": 0,
+      "seconds": 111.7120956479921,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-0.log"
+    },
+    {
+      "stage": 1,
+      "command": [
+        "python3",
+        "tools/normalize_rustdoc_inventory.py"
+      ],
+      "exit_code": 0,
+      "seconds": 86.81194127100753,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-1.log"
+    },
+    {
+      "stage": 2,
+      "command": [
+        "python3",
+        "tools/api_coverage_report.py"
+      ],
+      "exit_code": 0,
+      "seconds": 167.10850604600273,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-2.log"
+    },
+    {
+      "stage": 3,
+      "command": [
+        "python3",
+        "tools/publish_api_snapshot.py"
+      ],
+      "exit_code": 0,
+      "seconds": 12.847109994007042,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-3.log"
+    },
+    {
+      "stage": 4,
+      "command": [
+        "python3",
+        "tools/api_metrics_report.py"
+      ],
+      "exit_code": 0,
+      "seconds": 13.406921967020025,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-4.log"
+    },
+    {
+      "stage": 5,
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.37860607099719346,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-5.log"
+    },
+    {
+      "stage": 6,
+      "command": [
+        "python3",
+        "tools/capture_rustdoc_json.py",
+        "verify"
+      ],
+      "exit_code": 0,
+      "seconds": 20.429191949981032,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-6.log"
+    },
+    {
+      "stage": 7,
+      "command": [
+        "python3",
+        "tools/porting.py",
+        "status"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9448120210145134,
+      "log": "/tmp/martensite-integrated-inventory-70c94f511-7.log"
+    }
+  ],
+  "compiler_claims_audited": 55,
+  "new_api_claims": 28,
+  "updated_existing_claims": 27,
+  "implemented_to_partial_class_corrections": 2,
+  "cpp_and_rust_unique_bindings": 55,
+  "source_pin_sha_and_visibility_verified": true,
+  "rust_crates_verified": 31,
+  "unresolved_ledger_rows": 0,
+  "defined_scope_totals": {
+    "api_declarations": 76041,
+    "api_done": 52498,
+    "api_open": 22562,
+    "api_partial": 981,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "tkv3d": {
+    "by_status": {
+      "claimed_unverified": 0,
+      "excluded": 165,
+      "partial": 6,
+      "unclaimed": 2287,
+      "upstream_unimplemented": 0,
+      "verified": 2714
+    },
+    "declarations": 5172,
+    "done": 2879,
+    "done_percent": 55.7
+  },
+  "snapshot_sha256": {
+    "porting/api-inventory/completeness.json": "b2f8dd86aeb2e83c8aadfe0c640f57b356a3505a01837338bd6faa53ddb9e0a7",
+    "porting/api-inventory/api-crosswalk.json.gz": "98cc186e54279b48dac1246376e7c6c1f88e503b344de16531480809ffe942c7",
+    "porting/api-inventory/METRICS.md": "0c3facbe98f3f3ab39f69ed20ae82ec08c0744c76941d155d9880c8595f0ae36",
+    "porting/api-inventory/metrics.json": "e03f3da24e55fbfc27447d2510759072c49b7a9add903a0b814d74878b7600c5",
+    "porting/api-inventory/rust-api.json.gz": "1501dd295ac6a4558834c2153d9c3b0369d19527dcd99d21b9d447805d6ea6dc"
+  },
+  "full_api_and_behavioral_equivalence_complete": false,
+  "configuration_matrix_complete": false,
+  "integrated_main_gpu_validation": "pending actual presentation harness integration and combined source-bound replay",
+  "local_only": true
+}
