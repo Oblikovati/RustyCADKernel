@@ -1,7 +1,8 @@
 //! The non-virtual members of `PrsMgr_PresentableObject`, for every presentable object.
 use super::presentable_defaults::is_non_identity;
 use super::{
-    PrsMgrDisplayStatus, PrsMgrPresentableObject, PrsMgrPresentation, PrsMgrTypeOfPresentation3d,
+    PrsMgrDisplayStatus, PrsMgrPresentableObject, PrsMgrPresentableObjectBase, PrsMgrPresentation,
+    PrsMgrTypeOfPresentation3d,
 };
 use crate::prs3d::Prs3dDrawer;
 use rustycad_tkernel::quantity::{Color, NamedColor};
@@ -82,23 +83,7 @@ pub trait PrsMgrPresentableObjectMembers: PrsMgrPresentableObject {
     /// `SetHilightMode`: creates the gray-80 and cyan highlight drawers on demand.
     /// Example: `object.set_hilight_mode(1)`.
     fn set_hilight_mode(&self, mode: i32) {
-        let fields = self.presentable_base().read();
-        let mut highlight = fields.hilight_drawer.clone();
-        let mut dynamic = fields.dyn_hilight_drawer.clone();
-        if highlight.is_null() {
-            highlight = highlight_drawer(
-                &fields.drawer,
-                NamedColor::GRAY80,
-                GRAPHIC3D_ZLAYER_ID_UNKNOWN,
-            );
-        }
-        if dynamic.is_null() {
-            dynamic = highlight_drawer(&fields.drawer, NamedColor::CYAN1, GRAPHIC3D_ZLAYER_ID_TOP);
-        }
-        highlight.set_display_mode(mode);
-        dynamic.set_display_mode(mode);
-        let mut own = self.presentable_base().fields.write();
-        (own.hilight_drawer, own.dyn_hilight_drawer) = (highlight, dynamic);
+        prs_mgr_initialize_hilight_mode(self.presentable_base(), mode);
     }
     /// `UnsetHilightMode`; `object.unset_hilight_mode()`.
     fn unset_hilight_mode(&self) {
@@ -339,4 +324,25 @@ impl<T: PrsMgrPresentableObject + ?Sized> PrsMgrPresentableObjectMembers for T {
 /// `getIdentityTrsf` (protected static): the identity transformation; `prs_mgr_identity_trsf()`.
 pub fn prs_mgr_identity_trsf() -> Transform3 {
     Transform3::default()
+}
+
+/// Reuse native highlight initialization while constructing subclass base storage.
+pub(crate) fn prs_mgr_initialize_hilight_mode(base: &PrsMgrPresentableObjectBase, mode: i32) {
+    let fields = base.read();
+    let mut highlight = fields.hilight_drawer.clone();
+    let mut dynamic = fields.dyn_hilight_drawer.clone();
+    if highlight.is_null() {
+        highlight = highlight_drawer(
+            &fields.drawer,
+            NamedColor::GRAY80,
+            GRAPHIC3D_ZLAYER_ID_UNKNOWN,
+        );
+    }
+    if dynamic.is_null() {
+        dynamic = highlight_drawer(&fields.drawer, NamedColor::CYAN1, GRAPHIC3D_ZLAYER_ID_TOP);
+    }
+    highlight.set_display_mode(mode);
+    dynamic.set_display_mode(mode);
+    let mut own = base.fields.write();
+    (own.hilight_drawer, own.dyn_hilight_drawer) = (highlight, dynamic);
 }

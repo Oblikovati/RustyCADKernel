@@ -13,6 +13,15 @@ type ProbeCase = fn(&[f64]);
 /// operations under its own comment, as in the native table.
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("v3_ais_plane", v3_probe::ais_plane::plane_case),
+    ("v3_ais_point_cloud", v3_probe::ais_point_cloud::cloud_case),
+    (
+        "v3_point_cloud_owner",
+        v3_probe::ais_point_cloud::owner_case,
+    ),
+    (
+        "v3_point_cloud_alias",
+        v3_probe::ais_point_cloud::alias_case,
+    ),
     (
         "v3_plane_add",
         v3_probe::plane_presentations::plane_add_case,

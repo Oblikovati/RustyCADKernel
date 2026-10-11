@@ -555,3 +555,14 @@ raster, one-byte gradient and depth differences retain failed statuses. The
 source-frozen repeated timing run includes 29 workloads, with two new AIS plane
 workloads passing their comparison. Older AIS and window workloads exceed budgets;
 no overall baseline or renderer replacement equivalence is claimed.
+
+
+## AIS point clouds
+
+[AIS point clouds](ais-point-cloud.md) now feed production point buffers and bounding
+box presentations into Martensite's Vulkan path. Native selected/detected subset
+owners supply their own point overlays and layer policies. The `point-cloud` capture
+family and `ais-point-cloud-updates` benchmark are included in the complete harness;
+role checks require actual geometry and subset highlights. Strict raster/depth
+comparisons remain open. Normal-bearing buffers are captured with explicit Unlit
+shading; Gouraud/Phong point-normal lighting remains a renderer prerequisite.

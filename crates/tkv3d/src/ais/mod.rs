@@ -133,3 +133,22 @@ mod plane_persistence;
 mod plane_presentations;
 mod plane_selection;
 pub use plane::{AisPlane, AisPlaneFields, AisTypeOfPlane};
+
+mod point_cloud;
+mod point_cloud_appearance;
+mod point_cloud_geometry;
+mod point_cloud_owner;
+mod point_cloud_presentations;
+pub use point_cloud::{
+    AisPointCloud, AisPointCloudBase, AisPointCloudDisplayMode, AisPointCloudFields,
+    AisPointCloudSelectionMode, AisPointCloudSource,
+};
+pub use point_cloud_appearance::{
+    ais_point_cloud_set_color, ais_point_cloud_set_material, ais_point_cloud_unset_color,
+    ais_point_cloud_unset_material,
+};
+pub use point_cloud_owner::{
+    AisPointCloudOwner, AisPointCloudOwnerBase, AisPointCloudOwnerFields, AisPointCloudOwnerSource,
+    ais_point_cloud_owner_hilight_with_color,
+};
+pub use point_cloud_presentations::{ais_point_cloud_compute, ais_point_cloud_compute_selection};
