@@ -41,6 +41,7 @@ def performance_rows(output: str) -> list[dict[str, object]]:
         "persistence-groups",
         "line-bounds",
         "line-alpha-updates",
+        "point-alpha-updates",
         "curve-presentations",
         "ais-line-appearance",
         "point-sprites",

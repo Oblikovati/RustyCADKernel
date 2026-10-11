@@ -34,6 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     bound_performance::benchmark(&driver, warmup, samples, false);
     bound_performance::benchmark(&driver, warmup, samples, true);
     line_alpha_performance::benchmark(&driver, warmup, samples);
+    point_alpha_performance::benchmark(&driver, warmup, samples);
     persistence_performance::benchmark(&driver, warmup, samples);
     curve_performance::benchmark(&driver, warmup, samples);
     ais_line_performance::benchmark(&driver, warmup, samples);
@@ -237,3 +238,11 @@ mod rubber_band_scene;
 
 #[path = "support/line_alpha_performance.rs"]
 mod line_alpha_performance;
+
+#[path = "../tests/support/point_alpha_arrays.rs"]
+mod point_alpha_arrays;
+#[path = "support/point_alpha_performance.rs"]
+mod point_alpha_performance;
+
+#[path = "support/alpha_redraw_performance.rs"]
+mod alpha_redraw_performance;

@@ -18,6 +18,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let driver = Graphic3dRenderDriver::new(device_options::validation_options())?;
     let scene = scene::ViewerScene::new(&driver);
     request.configure(&scene.window, &scene.view);
+    if point_alpha_arrays::MODES.contains(&request.mode.as_str()) {
+        point_alpha_arrays::replace_alpha_points(&*scene.group, &request.mode);
+    }
     if request.mode.starts_with("surface-") {
         surface_arrays::replace_surface(&*scene.group, &request.mode, 1);
     }
@@ -119,3 +122,6 @@ mod capping_scene;
 #[allow(dead_code)]
 #[path = "../tests/support/camera_animation_scene.rs"]
 mod camera_animation_scene;
+
+#[path = "../tests/support/point_alpha_arrays.rs"]
+mod point_alpha_arrays;

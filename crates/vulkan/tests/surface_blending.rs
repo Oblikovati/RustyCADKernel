@@ -66,9 +66,9 @@ fn transparent_layers_flush_before_depth_clear_and_after_opaque_layers() {
 fn translucent_points_and_text_do_not_silently_enter_surface_pipelines() {
     let vertices = colored_surface([1., 0., 0.], 0.5).vertices().to_vec();
     let point = PointStyle::new(1., [1, 1], vec![[1.; 4]]).unwrap();
-    assert!(
-        PrimitiveDraw::points(vertices.clone(), vec![0, 1, 2], identity_clip(), point).is_err()
-    );
+    let draw = PrimitiveDraw::points(vertices.clone(), vec![0, 1, 2], identity_clip(), point).unwrap();
+    assert!(!draw.is_surface_blended());
+    assert!(draw.point_style().unwrap().alpha_blending());
     let image = RasterImage::new([1, 1], vec![[1.; 4]]).unwrap();
     let style = TexturedStyle::new(image, vec![[0.; 2]; 3], 0.1).unwrap();
     assert!(PrimitiveDraw::textured(vertices, vec![0, 1, 2], identity_clip(), style).is_err());

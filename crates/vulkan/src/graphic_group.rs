@@ -397,7 +397,11 @@ fn lower_styled_primitive(
     if aspects.marker_type() == rustycad_tkservice::aspect::AspectTypeOfMarker::Empty {
         return Ok(vec![]);
     }
-    let sprite = crate::point_style::marker_style(&**aspects, highlighted)?;
+    let vertex_colors = primitive
+        .attributes
+        .attribute_data(Graphic3dTypeOfAttribute::Color)
+        .is_some();
+    let sprite = crate::point_style::marker_style(&**aspects, highlighted, vertex_colors)?;
     primitive
         .draws(color, matrix, line, Some(sprite))
         .map(|draws| {

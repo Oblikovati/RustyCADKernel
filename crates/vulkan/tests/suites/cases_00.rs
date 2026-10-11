@@ -33,6 +33,8 @@ pub mod line_primitives;
 pub mod material_packing;
 #[path = "../object_animation_capture_cases.rs"]
 pub mod object_animation_capture_cases;
+#[path = "../point_alpha.rs"]
+pub mod point_alpha;
 #[path = "../point_lighting.rs"]
 pub mod point_lighting;
 #[path = "../point_primitives.rs"]

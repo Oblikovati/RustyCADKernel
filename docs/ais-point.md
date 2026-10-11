@@ -84,3 +84,7 @@ and 25,962,254,227-byte checkout/build cache were deleted, without archiving.
 The refreshed inventory records 51,592 done, 974 partial and 23,475 open APIs
 out of 76,041 in scope, with zero unresolved ledger rows. Full port completion
 and renderer parity remain unproven.
+
+Built-in unlit native point and sprite alpha behavior is documented in
+[Martensite native point alpha](vulkan-point-alpha.md), including committed buffer
+replay, GPU timings and remaining software precision gates.

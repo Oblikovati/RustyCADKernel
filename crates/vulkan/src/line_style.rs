@@ -12,12 +12,6 @@ pub(crate) fn primitive_style(
             .get()
             .ok_or_else(|| rejected("null point aspects", "explicit Graphic3d aspects"))?;
         validate_line_shading(style)?;
-        if !matches!(
-            style.alpha_mode(),
-            Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto
-        ) {
-            return Err(rejected(style.alpha_mode(), "opaque point alpha mode"));
-        }
         return Ok((rgba_color(style), None));
     }
     if !matches!(

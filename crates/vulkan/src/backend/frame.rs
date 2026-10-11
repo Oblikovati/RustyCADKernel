@@ -241,7 +241,7 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
     if let Some(style) = &draw.point_style {
         bytes.extend(style.size.to_ne_bytes());
         bytes.extend(style.image.extent.into_iter().flat_map(|v| v.to_ne_bytes()));
-        bytes.extend(0u32.to_ne_bytes());
+        bytes.extend((style.color_policy as u32).to_ne_bytes());
     }
     if let Some(style) = &draw.textured_style {
         bytes.extend(style.image.extent.iter().flat_map(|v| v.to_ne_bytes()));

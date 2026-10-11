@@ -2,6 +2,7 @@
 
 from vulkan_rubber_band_cases import RUBBER_BAND_MODES
 from vulkan_line_cases import LINE_MODES, LINE_ALPHA_MODES
+from vulkan_point_alpha_cases import POINT_ALPHA_MODES
 from vulkan_ais_trihedron_cases import AIS_TRIHEDRON_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_ais_line_cases import AIS_LINE_MODES
@@ -45,6 +46,7 @@ ALL_CAPTURE_MODES = (
     *PERSISTENCE_MODES,
     *LINE_MODES,
     *LINE_ALPHA_MODES,
+    *POINT_ALPHA_MODES,
     *STDPRS_MODES,
     *AIS_LINE_MODES,
     *AIS_POINT_MODES,
@@ -63,6 +65,7 @@ ALL_CAPTURE_MODES = (
 
 FAMILY_CAPTURE_MODES = {
     "line-alpha": LINE_ALPHA_MODES,
+    "point-alpha": POINT_ALPHA_MODES,
     "rubber-band": RUBBER_BAND_MODES,
     "ais-trihedron": AIS_TRIHEDRON_MODES,
     "point-cloud": POINT_CLOUD_MODES,
