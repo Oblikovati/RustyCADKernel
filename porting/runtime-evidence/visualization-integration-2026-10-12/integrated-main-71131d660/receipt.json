@@ -1,0 +1,191 @@
+{
+  "source_revision": "71131d6607ca3d3b408fbacb797a36fde8a15acb",
+  "source_hashes": 11577,
+  "functional_exit_code": 0,
+  "performance_exit_code": 0,
+  "final_source_binary_head_hashes_verified": true,
+  "native_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "functional_receipt": "functional.json.gz",
+  "performance_receipt": "performance.json.gz",
+  "capture_manifest": "capture-sha256.json.gz",
+  "extra_native_sources": "extra-native-source.json",
+  "tracked_main_changes": false,
+  "baseline_accepted": false,
+  "gates_unchanged": true,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "offscreen_acceptance": "passed",
+      "rust_replay_tests": 26,
+      "strict_comparisons": {
+        "shadow_text": {
+          "passed": 37,
+          "total": 54
+        },
+        "text_culling": {
+          "passed": 19,
+          "total": 19
+        },
+        "named_lights": {
+          "passed": 2,
+          "total": 4
+        },
+        "view_cube": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "view_cube_label_toggle_pixels": {
+        "default": 126,
+        "-lit": 298
+      },
+      "optimized_workloads": 63,
+      "samples_per_workload": 100,
+      "warmups_per_workload": 20,
+      "performance_command_exits": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "accepted10baseline_failures": [],
+      "selected_timings": [
+        {
+          "workload": "line-alpha-updates",
+          "median_ms": 0.365381,
+          "p95_ms": 0.48167099999999996
+        },
+        {
+          "workload": "point-alpha-updates",
+          "median_ms": 0.3500375,
+          "p95_ms": 0.446425
+        },
+        {
+          "workload": "clipping-plane-updates",
+          "median_ms": 0.4207535,
+          "p95_ms": 0.484456
+        },
+        {
+          "workload": "shadow-text-1024-glyphs",
+          "median_ms": 2.1326549999999997,
+          "p95_ms": 2.838841
+        },
+        {
+          "workload": "view-cube-default",
+          "median_ms": 1.80307,
+          "p95_ms": 2.222541
+        },
+        {
+          "workload": "view-cube-lit",
+          "median_ms": 1.7266135,
+          "p95_ms": 2.0048280000000003
+        }
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "offscreen_acceptance": "passed",
+      "rust_replay_tests": 26,
+      "strict_comparisons": {
+        "shadow_text": {
+          "passed": 17,
+          "total": 54
+        },
+        "text_culling": {
+          "passed": 19,
+          "total": 19
+        },
+        "named_lights": {
+          "passed": 0,
+          "total": 4
+        },
+        "view_cube": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "view_cube_label_toggle_pixels": {
+        "default": 126,
+        "-lit": 298
+      },
+      "optimized_workloads": 63,
+      "samples_per_workload": 100,
+      "warmups_per_workload": 20,
+      "performance_command_exits": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "accepted10baseline_failures": [
+        "received different device/driver identity; expected the baseline's exact profile"
+      ],
+      "selected_timings": [
+        {
+          "workload": "line-alpha-updates",
+          "median_ms": 0.271122,
+          "p95_ms": 0.334318
+        },
+        {
+          "workload": "point-alpha-updates",
+          "median_ms": 0.30784449999999997,
+          "p95_ms": 0.409086
+        },
+        {
+          "workload": "clipping-plane-updates",
+          "median_ms": 0.307098,
+          "p95_ms": 0.45702600000000004
+        },
+        {
+          "workload": "shadow-text-1024-glyphs",
+          "median_ms": 0.911807,
+          "p95_ms": 1.195552
+        },
+        {
+          "workload": "view-cube-default",
+          "median_ms": 1.5421575,
+          "p95_ms": 1.8634870000000001
+        },
+        {
+          "workload": "view-cube-lit",
+          "median_ms": 1.5104090000000001,
+          "p95_ms": 1.870971
+        }
+      ]
+    }
+  ],
+  "timing_start": {
+    "utc": "2026-10-11T22:06:16Z",
+    "loadavg": "6.89 13.87 13.22 1/3916 156254",
+    "compiler_processes": []
+  },
+  "timing_end": {
+    "utc": "2026-10-11T22:06:31Z",
+    "loadavg": "6.75 13.38 13.08 1/3917 157730",
+    "compiler_processes": []
+  },
+  "limitations": [
+    "Shadow text strict precision remains partial; initial37/54software17/54host failures preserved.",
+    "Named light captures use explicit common world layer; default AIS Topmost-layer parity is not claimed.",
+    "ViewCube fixture is presentation-only, preserves actual default Topmost/triedron settings; selection/widget completion not claimed.",
+    "All eight ViewCube strict comparisons fail unchanged gates despite successful rendering and visible labels.",
+    "Known point cutoff/sRGB and line endpoint/pixel-row special cases remain; this run adds local replays, not a new full parity claim.",
+    "Only ten historical workloads have accepted budgets; other workloads are source-bound measurements without accepted baseline.",
+    "AMD exact device/driver identity differs from historical baseline; performance comparison not accepted.",
+    "Owned compilers were quiet at snapshots; shared-host load and snapshots do not establish continuous machine isolation."
+  ]
+}
