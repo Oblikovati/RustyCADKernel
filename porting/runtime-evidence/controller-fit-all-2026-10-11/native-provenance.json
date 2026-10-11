@@ -1,0 +1,45 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "354712838",
+  "native_fixture_rows": 3072,
+  "native_fixture_columns": 43,
+  "repeat_generation_byte_identical": true,
+  "first_generation_sha256": "12e7c644fec19edbee7761151792c34ad752ee5b9875d7b754ea14fb87ff9c3f",
+  "second_generation_sha256": "12e7c644fec19edbee7761151792c34ad752ee5b9875d7b754ea14fb87ff9c3f",
+  "files": {
+    "tools/oracle/martensite_controller_fit_all.cxx": "53713d40326ac3edc72b390b877c3545204ac6cd4639b59e87ff429d90329987",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-0-native.txt": "322499e0a997cabe5e0bdd305c6790a05bbe5291cf2b58f7c55647d49bd0bcd3",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-1-native.txt": "0c35ea81dcb5859cb2be1d6b046a45ccdcf9af05f900ee08af0f2b364da66cd8",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-2-native.txt": "19bff7762e9a5622ac1507210114a64808e5485558fddfafd8475cc06f7498e7",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-3-native.txt": "33df9b47021a99007dc27d213ead3fe3cf58631d257ffd5b8838d43fff8fe7f3",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-4-native.txt": "cca6a7bf8916380bd99b4aff077fecedde6a9582016b99a1f999451e9dba5aff",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-5-native.txt": "0005507bde98fa71462276a21d7dbf3d2648e636b542f04fb214f3c18fb39c9c",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-6-native.txt": "d447a8be928113e6ece256713b9444c3ab8954c4178c85d6a6d920187cf35d1e",
+    "crates/tkv3d/tests/fixtures/controller-fit-all-7-native.txt": "0958b534d57c63d77c8bb5b7fa5294ba40f10ee3ee8f6be2ec66572a04ce071e"
+  },
+  "upstream_sources": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.cxx": "4a5a57f205b5ab55fb9e9f97072d5dc2e48da871902abd61f4a24d4d8b8bd4ae",
+    "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectableObject.cxx": "203bd134608f237bbd878ac9bd4c5eb57541bc6ad3ca8ff9201432ba5c77b8ea"
+  },
+  "seed": "512 cases: index%8 selection, (index/8)%2 translation, (index/16)%16 visibility/infinite flags, index/256 projection. Actual clouds (-2,-3,-4)/(1,5,7), outer(-20,-30,-40)/(40,50,60), trihedron origin(5,6,7) size20, optional translation(10,-4,3). Part indices1/2 are Y/Z (zero-based native vector). Selection7 replaces selected cloud with one point(1,2,3), selects only its global owner, proving zero-diagonal strict toggle comparisons.",
+  "frames": "initial, three FitAllAuto calls, FitSelected(view), FitSelected(view,.05,false)",
+  "schema": "case,frame,selection_count; three seven-field boxes [void,minXYZ,maxXYZ]: selection(view),selection(nullview),scene; camera centerXYZ,eyeXYZ,upXYZ,directionXYZ,scale,distance,aspect,projection,znear,zfar,fovy",
+  "native_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKG3d",
+    "TKMath",
+    "TKernel"
+  ],
+  "limitations": [
+    "Local native generation only; Rust tests do not load OCCT.",
+    "Deprecated no-argument bounds wrapper unclaimed; controller/context classes stay partial.",
+    "Windows/macOS execution deferred."
+  ],
+  "native_build_command": "g++ -std=c++17 -I ../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/martensite_controller_fit_all.cxx -L ../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKV3d -lTKService -lTKG3d -lTKMath -lTKernel -o target/oracle/controller-fit-all"
+}

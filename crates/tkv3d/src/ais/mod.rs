@@ -307,3 +307,11 @@ mod color_scale_uniform;
 
 #[cfg(test)]
 mod color_scale_property_tests;
+
+mod context_selection_bounds;
+mod view_controller_fit_all;
+
+#[cfg(test)]
+mod view_controller_fit_fixture;
+#[cfg(test)]
+mod view_controller_fit_tests;
