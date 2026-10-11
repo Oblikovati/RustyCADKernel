@@ -156,3 +156,15 @@ is unproven. Both macOS cylinder captures produce node hash `5c0ce88cea863cc7`,
 matching Rust. Raw captures, compiler configuration, hashes, and original failing
 test results are retained in
 `porting/runtime-evidence/release-ci-2026-10-11/`.
+
+Run `38120792912` independently verifies all 56 Windows x64 torus rows and the
+cylinder hash `8051bf23619e245b` against pinned OCCT with MSVC `/fp:precise`.
+The Windows torus fixture keeps native CRT CRLF bytes; its raw SHA-256 is
+`308525d257049fe0d6f9680232b3d10ca16d12725c28916b0306fce23dcb343d`.
+Original Linux-fixture failures are retained alongside both native captures.
+
+Locale tests preserve host libc behavior: Darwin's C locale accepts bytes through
+`0xff`, while the Linux C locale rejects non-ASCII bytes. Unrepresentable-character
+regressions use `€` so both hosts exercise the native conversion error. DRAW output
+comparisons reverse Tcl console transport once and retain the literal CRLF in
+Win32 loader messages. Neither case changes the production locale or loader API.

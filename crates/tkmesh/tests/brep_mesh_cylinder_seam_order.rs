@@ -36,6 +36,9 @@ fn cylinder_seam_copy_matches_pinned_native_order() {
     // Run 38118858849: host libm changes coordinate bits; node order remains native-exact.
     let expected = if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
         0x5c0c_e88c_ea86_3cc7
+    } else if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
+        // Run 38120792912: independently captured native MSVC /fp:precise coordinates.
+        0x8051_bf23_619e_245b
     } else {
         0x72a7_2694_b373_88ef
     };

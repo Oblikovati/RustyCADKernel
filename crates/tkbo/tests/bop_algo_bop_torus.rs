@@ -61,6 +61,8 @@ fn box_torus_fuse_matches_native_oracle() {
     // Run 38119937683: pinned OCCT compiled with -ffp-contract=off agrees bit for bit.
     let expected = if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
         include_str!("../../../tools/oracle/tkbo_bop_torus.macos.expected")
+    } else if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
+        include_str!("../../../tools/oracle/tkbo_bop_torus.windows.expected")
     } else {
         include_str!("../../../tools/oracle/tkbo_bop_torus.expected")
     };

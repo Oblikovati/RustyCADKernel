@@ -64,7 +64,7 @@ fn native_utf8_first_character_byte_count_limits_wide_character_count() {
 }
 
 #[test]
-fn native_locale_output_preserves_truncation_and_error_result() {
+fn native_locale_output_preserves_truncation_result() {
     let _locale = TestThreadLocale::enter(c"C.UTF-8");
     let text = UtfString::<u8>::from_unicode_units("äb".as_bytes(), -1);
     let mut one = [0xff];
@@ -74,9 +74,14 @@ fn native_locale_output_preserves_truncation_and_error_result() {
     assert!(text.to_locale(&mut two));
     assert_eq!(two, [0xc3, 0xa4]);
     assert!(!text.to_locale(&mut []));
+}
+
+#[test]
+fn native_locale_output_preserves_unrepresentable_character_error() {
     let _c_locale = CLocaleSentry::new();
+    let unrepresentable = UtfString::<u8>::from_unicode_units("€".as_bytes(), -1);
     let mut unsupported = [0xff; 4];
-    assert!(text.to_locale(&mut unsupported));
+    assert!(unrepresentable.to_locale(&mut unsupported));
     assert_eq!(unsupported, [0xff; 4]);
 }
 
@@ -85,7 +90,7 @@ fn sentry_restores_multibyte_conversion_and_explicit_symbol_limit() {
     let _locale = TestThreadLocale::enter(c"C.UTF-8");
     {
         let _sentry = CLocaleSentry::new();
-        converted("äbc".as_bytes(), b"", 0);
+        converted_c_locale_byte(0xe4);
     }
     converted("äbc".as_bytes(), "äb".as_bytes(), 2);
     let mut text = UtfString::<u16>::new();
@@ -129,6 +134,22 @@ fn public_utf_string_tool_preserves_zero_output_termination_and_conversion_error
 
     let _c_locale = CLocaleSentry::new();
     let mut unsupported = [0xff; 4];
-    assert!(UtfStringTool::to_locale(&[0xe4, 0], &mut unsupported));
+    assert!(UtfStringTool::to_locale(&[0x20ac, 0], &mut unsupported));
     assert_eq!(unsupported, [0xff; 4]);
+}
+
+#[test]
+fn native_c_locale_preserves_the_host_single_byte_repertoire() {
+    let _locale = TestThreadLocale::enter(c"C");
+    converted(b"abc", b"a", 1);
+    converted_c_locale_byte(0xe4);
+}
+
+fn converted_c_locale_byte(byte: u8) {
+    // Run 38119050375 and Apple Libc 71bbe350: Darwin C accepts bytes through 0xff.
+    if cfg!(target_os = "macos") {
+        converted(&[byte, b'b'], &[byte], 1);
+    } else {
+        converted(&[byte, b'b'], b"", 0);
+    }
 }

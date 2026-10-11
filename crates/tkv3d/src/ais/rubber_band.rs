@@ -136,7 +136,7 @@ pub trait AisRubberBandSource: AisInteractiveObject {
     fn line_type(&self) -> AspectTypeOfLine {
         self.attributes().line_aspect().aspect().line_kind()
     }
-    /// Assign transparency in [0,1]; `band.set_fill_transparency(0.25)?`.
+    /// Assign transparency in `[0, 1]`; `band.set_fill_transparency(0.25)?`.
     fn set_fill_transparency(&self, transparency: f64) -> Result<(), Failure> {
         self.attributes()
             .shading_aspect()
