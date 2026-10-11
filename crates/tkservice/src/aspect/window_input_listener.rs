@@ -93,6 +93,7 @@ impl AspectWindowInputListenerBase {
     }
 }
 
+/// Mouse and touch callbacks preserve native exception propagation through typed `Failure` results.
 /// A window input listener; Martensite HID targets may use `MartensiteSpaceMouseInput` independently.
 pub trait AspectWindowInputListener {
     /// The embedded base; `listener.input_base().keys.modifiers()`.
@@ -125,55 +126,65 @@ pub trait AspectWindowInputListener {
     ) -> Result<(), Failure>;
     /// Handles a scroll; `listener.update_mouse_scroll(&delta)`.
     fn update_mouse_scroll(&mut self, delta: &AspectScrollDelta) -> bool;
-    /// Handles a change of the pressed buttons; `listener.update_mouse_buttons(p, b, m, false)`.
+    /// Handles a change of the pressed buttons; `listener.update_mouse_buttons(p, b, m, false)?`.
     fn update_mouse_buttons(
         &mut self,
         point: Vec2<i32>,
         buttons: AspectVKeyMouse,
         modifiers: AspectVKeyFlags,
         is_emulated: bool,
-    ) -> bool;
-    /// Handles a mouse move; `listener.update_mouse_position(p, b, m, false)`.
+    ) -> Result<bool, Failure>;
+    /// Handles a mouse move; `listener.update_mouse_position(p, b, m, false)?`.
     fn update_mouse_position(
         &mut self,
         point: Vec2<i32>,
         buttons: AspectVKeyMouse,
         modifiers: AspectVKeyFlags,
         is_emulated: bool,
-    ) -> bool;
+    ) -> Result<bool, Failure>;
     /// Handles a 3D-mouse report; `listener.update_3d_mouse(&report)?`.
     fn update_3d_mouse(&mut self, event: &WntHidSpaceMouse<'_>) -> Result<bool, Failure>;
-    /// Adds a touch, optionally clearing the others first; `listener.add_touch_point(1, p, false)`.
-    fn add_touch_point(&mut self, id: usize, point: Vec2<f64>, clear_before: bool) {
+    /// Adds a touch, optionally clearing the others first; `listener.add_touch_point(1, p, false)?`.
+    fn add_touch_point(
+        &mut self,
+        id: usize,
+        point: Vec2<f64>,
+        clear_before: bool,
+    ) -> Result<(), Failure> {
         if clear_before {
-            self.remove_touch_point(ASPECT_TOUCH_ID_ALL, false);
+            self.remove_touch_point(ASPECT_TOUCH_ID_ALL, false)?;
         }
         self.input_base_mut()
             .touch_points
             .add(id, AspectTouch::new(point, false));
+        Ok(())
     }
     /// Removes a touch ([`ASPECT_TOUCH_ID_ALL`] removes all); false when the id is unknown.
-    /// A single remaining touch restarts from its origin. Example: `listener.remove_touch_point(1, false)`.
-    fn remove_touch_point(&mut self, id: usize, _clear_select_points: bool) -> bool {
+    /// A single remaining touch restarts from its origin. Example: `listener.remove_touch_point(1, false)?`.
+    fn remove_touch_point(
+        &mut self,
+        id: usize,
+        _clear_select_points: bool,
+    ) -> Result<bool, Failure> {
         let touches = &mut self.input_base_mut().touch_points;
         if id == ASPECT_TOUCH_ID_ALL {
             touches.clear(false);
         } else if !touches.remove_key(&id) {
-            return false;
+            return Ok(false);
         }
         if touches.extent() == 1 {
             let first = touches.change_from_index(1).expect("one touch");
             first.to = first.from;
         }
-        true
+        Ok(true)
     }
-    /// Moves a touch, adding it when unknown; `listener.update_touch_point(1, p)`.
-    fn update_touch_point(&mut self, id: usize, point: Vec2<f64>) {
+    /// Moves a touch, adding it when unknown; `listener.update_touch_point(1, p)?`.
+    fn update_touch_point(&mut self, id: usize, point: Vec2<f64>) -> Result<(), Failure> {
         if let Some(touch) = self.input_base_mut().touch_points.change_seek(&id) {
             touch.to = point;
-            return;
+            return Ok(());
         }
-        self.add_touch_point(id, point, false);
+        self.add_touch_point(id, point, false)
     }
     /// Maps a 3D-mouse translation to the slide and walk keys; `listener.update_3d_mouse_translation(&r)?`.
     fn update_3d_mouse_translation(
@@ -209,25 +220,25 @@ pub trait AspectWindowInputListenerMembers: AspectWindowInputListener {
     fn change_keys(&mut self) -> &mut AspectVKeySet {
         &mut self.input_base_mut().keys
     }
-    /// Adds a button to the pressed ones; `listener.press_mouse_button(p, b, m, false)`.
+    /// Adds a button to the pressed ones; `listener.press_mouse_button(p, b, m, false)?`.
     fn press_mouse_button(
         &mut self,
         point: Vec2<i32>,
         button: AspectVKeyMouse,
         modifiers: AspectVKeyFlags,
         is_emulated: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let buttons = self.input_base().mouse_pressed | button;
         self.update_mouse_buttons(point, buttons, modifiers, is_emulated)
     }
-    /// Removes a button from the pressed ones; `listener.release_mouse_button(p, b, m, false)`.
+    /// Removes a button from the pressed ones; `listener.release_mouse_button(p, b, m, false)?`.
     fn release_mouse_button(
         &mut self,
         point: Vec2<i32>,
         button: AspectVKeyMouse,
         modifiers: AspectVKeyFlags,
         is_emulated: bool,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let buttons = self.input_base().mouse_pressed & !button;
         self.update_mouse_buttons(point, buttons, modifiers, is_emulated)
     }
@@ -340,10 +351,10 @@ mod tests {
             buttons: AspectVKeyMouse,
             _modifiers: AspectVKeyFlags,
             _is_emulated: bool,
-        ) -> bool {
+        ) -> Result<bool, Failure> {
             self.buttons.push(buttons);
             self.base.mouse_pressed = buttons;
-            true
+            Ok(true)
         }
         fn update_mouse_position(
             &mut self,
@@ -351,8 +362,8 @@ mod tests {
             _buttons: AspectVKeyMouse,
             _modifiers: AspectVKeyFlags,
             _is_emulated: bool,
-        ) -> bool {
-            false
+        ) -> Result<bool, Failure> {
+            Ok(false)
         }
         fn update_3d_mouse(&mut self, event: &WntHidSpaceMouse<'_>) -> Result<bool, Failure> {
             self.update_3d_mouse_keys(event)
@@ -369,24 +380,36 @@ mod tests {
     #[test]
     fn touches_follow_the_native_rules() {
         let mut listener = listener();
-        listener.add_touch_point(7, Vec2::new(1.0, 1.0), false);
-        listener.update_touch_point(7, Vec2::new(2.0, 3.0));
-        listener.update_touch_point(8, Vec2::new(5.0, 5.0));
+        listener
+            .add_touch_point(7, Vec2::new(1.0, 1.0), false)
+            .unwrap();
+        listener.update_touch_point(7, Vec2::new(2.0, 3.0)).unwrap();
+        listener.update_touch_point(8, Vec2::new(5.0, 5.0)).unwrap();
         assert_eq!(listener.touch_points().extent(), 2);
-        assert!(listener.remove_touch_point(8, false));
-        assert!(!listener.remove_touch_point(9, false));
+        assert!(listener.remove_touch_point(8, false).unwrap());
+        assert!(!listener.remove_touch_point(9, false).unwrap());
         let touch = listener.touch_points().find_from_index(1).unwrap();
         assert_eq!(touch.to, touch.from);
-        assert!(listener.remove_touch_point(ASPECT_TOUCH_ID_ALL, false));
+        assert!(
+            listener
+                .remove_touch_point(ASPECT_TOUCH_ID_ALL, false)
+                .unwrap()
+        );
         assert!(!listener.has_touch_points());
     }
 
     #[test]
     fn buttons_and_3d_mouse_keys() {
         let mut listener = listener();
-        listener.press_mouse_button(Vec2::new(0, 0), 2, 0, false);
-        listener.press_mouse_button(Vec2::new(0, 0), 4, 0, false);
-        listener.release_mouse_button(Vec2::new(0, 0), 2, 0, false);
+        listener
+            .press_mouse_button(Vec2::new(0, 0), 2, 0, false)
+            .unwrap();
+        listener
+            .press_mouse_button(Vec2::new(0, 0), 4, 0, false)
+            .unwrap();
+        listener
+            .release_mouse_button(Vec2::new(0, 0), 2, 0, false)
+            .unwrap();
         assert_eq!(listener.buttons, vec![2, 6, 4]);
         let report = [3u8, 2, 0, 0, 0];
         let mouse = WntHidSpaceMouse::new(0xC62B, &report);

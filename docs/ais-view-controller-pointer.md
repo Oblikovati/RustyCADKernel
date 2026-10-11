@@ -4,8 +4,8 @@ Martensite now ports 11 more captured `AIS_ViewController` declarations from OCC
 `3d097a0328e71b826377d4814ab05ec3c3d23871`: camera/object animation ownership,
 camera animation abort, mutable selection bindings, mouse clicks, and touch
 add/update/remove. Controller class and constructor claims remain partial.
-Mouse buttons/position, 3D-mouse, full window-listener interface, camera/render
-flushing and XR remain open. Animation ownership is ready for redraw dispatch;
+Mouse buttons/position, 3D-mouse and the full window-listener interface are now
+ported. Camera/render flushing and XR remain open. Animation ownership is ready for redraw dispatch;
 this slice does not claim that redraw scheduling is complete.
 
 Each controller owns distinct, nonnull, stopped default animations. Camera

@@ -65,7 +65,8 @@ fn controller_space_mouse_matches_native_key_state_and_hold_lifecycles() {
 fn replay_space_row(c: &mut AisViewController, row: &[f64], time: f64) {
     let bytes: Vec<u8> = row[4..17].iter().map(|b| *b as u8).collect();
     let report = WntHidSpaceMouse::new(row[2] as u64, &bytes[..row[3] as usize]);
-    let result = c.update_3d_mouse(&report).unwrap();
+    let result =
+        rustycad_tkservice::aspect::AspectWindowInputListener::update_3d_mouse(c, &report).unwrap();
     let actual = space_controller_snapshot(c, result, &report, time);
     assert_eq!(actual.len(), row.len() - 17);
     for (column, (actual, expected)) in actual.iter().zip(&row[17..]).enumerate() {

@@ -40,6 +40,7 @@ fn touch_action(c: &mut AisViewController, row: &[f64]) -> bool {
         row[3] as usize
     };
     let point = Vec2::new(row[4], row[5]);
+    let c: &mut dyn rustycad_tkservice::aspect::AspectWindowInputListener = c;
     match row[2] as i32 {
         0 => {
             c.add_touch_point(id, point, row[6] != 0.0).unwrap();
