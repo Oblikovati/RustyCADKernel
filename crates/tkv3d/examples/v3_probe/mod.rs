@@ -120,3 +120,5 @@ pub mod ais_plane;
 pub mod ais_point_cloud;
 
 pub mod ais_trihedron;
+
+pub mod ais_rubber_band;

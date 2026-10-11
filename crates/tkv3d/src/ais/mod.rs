@@ -175,3 +175,13 @@ pub use trihedron_owner::{
 pub use trihedron_presentations::{ais_trihedron_compute, ais_trihedron_compute_presentation};
 pub use trihedron_primitives::ais_trihedron_update_primitives;
 pub use trihedron_selection::{ais_trihedron_compute_selection, ais_trihedron_sensitive};
+
+mod rubber_band;
+mod rubber_band_presentations;
+mod rubber_band_triangles;
+pub use rubber_band::{
+    AisRubberBand, AisRubberBandBase, AisRubberBandFields, AisRubberBandSource,
+    ais_rubber_band_initialize_overlay,
+};
+pub use rubber_band_presentations::ais_rubber_band_compute;
+pub use rubber_band_triangles::ais_rubber_band_fill_triangles;

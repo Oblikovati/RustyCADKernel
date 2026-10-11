@@ -588962,6 +588962,376 @@
       "rust_item": "rustycad_tkv3d::ais::ais_trihedron_update_primitives",
       "status": "implemented",
       "notes": "Martensite native trihedron ownership, cached wire/shaded part arrays, selection owners and highlight hooks. Exact native numeric comparisons, CPU/subclass regressions and paired native/Vulkan rendering fixtures with geometry-update timings. Strict renderer raster/depth parity remains open. See docs/ais-trihedron.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::AddPoint(const class NCollection_Vec2<int> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "0cf7c029ad0bf33a6414df2dd7228114c797ae474ae77712db3bc87d113aa99c",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::add_point",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::myBorders",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "0d0d9f48b0b3e2bc2208ed97af20b4d2ed832e941ecf44ee8f8c21fd421f92b4",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandFields::borders",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::FillTransparency() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "0ff0b2e8936c6d127eda7da571ad13733df15473c3e4dea27b20b1fad5b466ab",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::fill_transparency",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::IsPolygonClosed() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "309b6a84a6f3f0c010c3d026695d10c81b97dd6ad8aedbc4a5bd9236b9d392e7",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::is_polygon_closed",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetFilling(const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "3a0c84551d57e6da90c08ea7197fe1c683d69509cf68df1b09459f87c526ecba",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_filling",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetPolygonClosed(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "3fe2a2290daaf84c4d9e629617c75da6ae95c5815fe80330bcd23f204a7bd119",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_polygon_closed",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::myIsPolygonClosed",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "4ab4f8bb2d8573f3eb3c6615432c925a3a4540b6dc841825be0aba0c41a23f0c",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandFields::is_polygon_closed",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::base_type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "4cb3dc2fa523dae4544e1ab5e577d49a5a515e1ac2d7c4b3b6c91a495b3f95e0",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: native RTTI base_type typedef is descriptor wiring; Rust impl_transient registers the same parent without a callable alias."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetLineColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "4d9e3b03208eec605a62ea841a3a482ff760b8349a82cdcbaa06daea984751ac",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_line_color",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::ComputeSelection(const class opencascade::handle<class SelectMgr_Selection> &, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "54c159d1c09df4e91e1c0d5faac7e393dc44833af5b17c19230bd9e021acf542",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::FillColor() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "69cc0510cec8267cc2cfd8b3d4aca44ee11ef6916b044c02ead5f2744499c80a",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::fill_color",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetLineType(const enum Aspect_TypeOfLine)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "758ba955e1297ac63565c1f393672b23d45932632e12a66c98d7c14dc28e7742",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_line_type",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::ClearPoints()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "76d5ba5d9edecd2b6d4b255f1ed3ac622f180a82b303eee16b7d53d0f75d2fa9",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::clear_points",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::get_type_descriptor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "7b5a03e9f056ae44ec37e1e824bc2e376a8e134767653677abbaa4e9bb1c8ee3",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::AIS_RubberBand(const class Quantity_Color &, const enum Aspect_TypeOfLine, const double, const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "802b76542718c1aadf3763f0a44444eb132fe717b2ac2cb2738a02bc49e1ae04",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::with_line",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::IsFilling() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "8e9e9418f0ce95824a7d71c9d936e9649f46be0e7f2cba61215def2b53ebe441",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::is_filling",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::DynamicType() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "92b97a291677c343559196ccf8f545957e438d12969f5f22d471a9ee72c9d82e",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::myPoints",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "9685c9592b4f70ca806608b0a4f07af0f680b131180662ce082577e4829e4aea",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandFields::points",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::LineWidth() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "97135aa60a12ed6dbab3049a0fb25dc693b66526ae039d473c95846872a6778f",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::line_width",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::AIS_RubberBand(const class Quantity_Color &, const enum Aspect_TypeOfLine, const class Quantity_Color, const double, const double, const bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "9756da33a6888b7238e249079cf81c477a588de0aa955d5a8541927be79374b6",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::with_filling",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetLineWidth(const double) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "a1112ba77cf9c3baa8d946e0d3bdda9fbd6d8ff3c782ad28d20102fcc0c91c47",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_line_width",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::AcceptDisplayMode(const int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "a459bfc8267d97e99e4cc3aac1501557b50130fe12006c75a4e75c99ecf8692b",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::fillTriangles()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "ac6a02c3168b6a06497c869885dc9ec27218f269e72ea215ca96ae202dac1d6b",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::fill_triangles",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::Points() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "b04f27afbefcdb26113809493cb3aa2ba7cc663007d34e6dd828c4024f5fd82b",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::points",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::get_type_name()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "b0543692be9bf9b9aeae3f455ba3d9200fbe2f85dc7dd20cdcf33d1d4ca26089",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "b61d801597cdb06757c34dc7420478e515936ff77ccfef7c383f85bc92645ddd",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetFilling(const class Quantity_Color, const double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "b7ea11f48ca38e5d2b7bd62432747cdc3966b037dcbc9d56d1bb7f17cfd56be6",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_filling_color",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::~AIS_RubberBand() noexcept",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "c00c54d553b10c12a1badb21a4d554de13e8da39715489e5117a65c0eaf140d2",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<core::ops::drop::Drop>::drop",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::RemoveLastPoint()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "c2cf852688e879741f1b951260e71c43f1bf563a12fd6bf9f00aeb82116d155b",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::remove_last_point",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::LineColor() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "c6f366d95634000eba92c83152673beb8e13779108b967fadedafbf8e588a7fd",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::line_color",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetFillTransparency(const double) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "c7e88476a928e699f8b7eb3bf4c0624cf0638f3f08a072e0b56a430c701ef0fb",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_fill_transparency",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::AIS_RubberBand()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "cc43e22d14768d0f4154088aaef2ddb90452c2628fb583ac8394ab708dc93499",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::new",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::Compute(const class opencascade::handle<class PrsMgr_PresentationManager> &, const class opencascade::handle<class Graphic3d_Structure> &, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "d3cf36b4e638494b980468622865369752aa0941807a7edccb8d9b7d386a4b9b",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBand::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::LineType() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "de5429d7987b615c7b6beb8fd7b51366caa43a875135763004446871e9703cfe",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::line_type",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetFillColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "e91be78bed3c1fb052c6c63be6f575bf7045e5bc3d35818e8bf765e8044e8515",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_fill_color",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::myTriangles",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "f230f5521e2ac337809d2fd13e5df764d7e8cf3c9a922477f4232a2867aa436a",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandFields::triangles",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
+    },
+    {
+      "upstream_id": "AIS_RubberBand::SetRectangle(const int, const int, const int, const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RubberBand.hxx",
+      "source_sha256": "668196e59f978dfacc773afc3a36f5e78cd72f3907cc8c3be36caa087151f13a",
+      "cpp_declaration_id": "f9b2dab2190f09e2916941a242f03fad9b4112a62f0076770df23b9a573f5123",
+      "rust_item": "rustycad_tkv3d::ais::AisRubberBandSource::set_rectangle",
+      "status": "implemented",
+      "notes": "Martensite native screen-point sequence, appearance transitions, Delaunay filling, reusable arrays and protected subclass hooks. Native numeric comparisons and CPU/subclass regressions; paired Vulkan captures and polygon-update performance workload. Strict renderer parity remains open; see docs/ais-rubber-band.md."
     }
   ],
   "tests": [

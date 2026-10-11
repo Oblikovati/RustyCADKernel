@@ -81,6 +81,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    native owner selection and protected application subclass hooks. Vulkan polygon
    offsets support the shaded geometry with both-device runtime checks; strict
    shaded selection, image parity and performance-baseline gates remain open.
+   [Rubber-band overlays](ais-rubber-band.md) now preserve live screen-point sequences,
+   frontier-constrained polygon filling, reusable geometry and application subclass hooks,
+   with paired native captures and polygon-update timings.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both
