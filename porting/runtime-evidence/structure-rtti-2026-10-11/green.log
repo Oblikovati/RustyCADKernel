@@ -1,0 +1,26 @@
+   Compiling rustycad-tkv3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-structure-rtti/crates/tkv3d)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.84s
+     Running tests/computed_structure_rtti.rs (target/debug/deps/computed_structure_rtti-b176306e9a19586a)
+
+running 2 tests
+test computed_structure_inherits_native_descriptor_and_parent ... ok
+test inherited_descriptor_preserves_concrete_and_interface_casts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/v3d_viewer_test.rs (target/debug/deps/v3d_viewer_test-1e05da5c2dcfeb64)
+
+running 10 tests
+test view_orientation_names_round_trip_except_the_native_typo ... ok
+test privileged_plane_is_stored ... ok
+test removing_a_view_forgets_it_in_the_viewer ... ok
+test set_size_and_zero_depth_follow_the_native_checks ... ok
+test pixel_and_view_conversions_are_inverse ... ok
+test a_new_view_is_defined_and_activated_by_set_window ... ok
+test fit_all_on_an_empty_viewer_keeps_the_camera_valid ... ok
+test set_proj_orientation_points_the_eye_along_the_axis ... ok
+test rectangular_grid_values_round_trip_through_the_viewer ... ok
+test viewer_and_view_dump_json ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
