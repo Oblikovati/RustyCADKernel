@@ -1,0 +1,93 @@
+{
+  "source_revision": "d29dc4f0871dc88013604d60242ed2b48c01336e",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "strict_renderer_parity": false,
+  "accepted_overall_performance_baseline": false,
+  "exact_lit_palette_comparisons": 60,
+  "cpu_checks": {
+    "library": 62,
+    "surface_lighting": 3,
+    "marker_lighting": 3,
+    "capture_example": 2,
+    "python_tool_tests": 56,
+    "palette_unit_tests": 2
+  },
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "strict_capture_passed": 52,
+      "strict_capture_failed": 44,
+      "roles_passed": 192,
+      "roles_total": 192,
+      "exact_lit_palettes": 30,
+      "performance_workloads": 31,
+      "repeat_failures": [],
+      "lit_point_workload": {
+        "workload": "lit-point-normal-updates",
+        "draws": 1,
+        "points": 1024,
+        "warmup": 20,
+        "validation": false,
+        "median_ms": 0.6685415000000001,
+        "mean_ms": 0.69379079,
+        "p95_ms": 0.820738,
+        "p99_ms": 1.11362,
+        "minimum_ms": 0.597395,
+        "maximum_ms": 1.396724,
+        "samples": 100
+      }
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "strict_capture_passed": 12,
+      "strict_capture_failed": 84,
+      "roles_passed": 192,
+      "roles_total": 192,
+      "exact_lit_palettes": 30,
+      "performance_workloads": 31,
+      "repeat_failures": [],
+      "lit_point_workload": {
+        "workload": "lit-point-normal-updates",
+        "draws": 1,
+        "points": 1024,
+        "warmup": 20,
+        "validation": false,
+        "median_ms": 0.417106,
+        "mean_ms": 0.43953948,
+        "p95_ms": 0.564064,
+        "p99_ms": 0.676983,
+        "minimum_ms": 0.388519,
+        "maximum_ms": 0.8125829999999999,
+        "samples": 100
+      }
+    }
+  ],
+  "artifacts": {
+    "lit-marker-palette-verified.json.gz": "5b0fdd98427d4dabdc59210c6b910f79d0766d21809fe4ce73c9114cad660838",
+    "verify_lit_palette.py": "9dc47d6523ad159cbfcedeaef5e65bcd6e5d5ea85d75b2508950631172e76da4",
+    "lit-marker-clippy-final.log.gz": "7f23dc9866df9b3beaa34b0061cdc470c100248fd5cb56b014d9bcbf58d8a806",
+    "lit-marker-gpu-integrated.log.gz": "7d4acf6259c1798bc8216651c0ba91df6e30792fe19f46716d3a8b6fe4629615",
+    "lit-marker-python-all.log.gz": "ad5d6742c9e8cc2a38435770508f1b545e91a17f95bdb07790a5e2b89fc070ff",
+    "lit-marker-palette-green.log.gz": "046bb14a365fa12960374418c59941a4c9f571b7233e40f0b8f4251c35a37f61",
+    "fixture-correction.json": "cf5eb1168be8d2832ee5cb4e8fe8dfe5bf196b3a4e1a9bf65d12b5a98ba1c724",
+    "captures.tar.gz": "a6761286a050f7dfc6999aead3a4e3b07c87b909a8c288419346375f13a2ee44",
+    "lit-marker-renderer-integrated.json.gz": "74c94fd1e3f268b8e67fd6fbc28e0c24b10202d26047d43fc06301417a16d85f",
+    "lit-marker-performance-repeat.json.gz": "9952f43298f17943918f497b8a6ae0094a96e9e81e7590008f9974820dbe012c",
+    "lit-marker-palette-red.log.gz": "f50361e8982151236f3cc34d2cc4b68ef7416c70346ca437b68622af07413fda",
+    "lit-marker-tests-final.log.gz": "33ddcc0f495e40b7a821e219e7ad83a49e6c27b7d3e56cb06508677c6dc98c0e"
+  }
+}
