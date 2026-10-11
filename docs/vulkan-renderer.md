@@ -86,6 +86,14 @@ The shared-state regression gate passed 543 TKService/TKV3d Rust tests, 73 mappe
 native/Rust suite cases and 144,511 numeric comparisons. These gates validate the
 ported service/viewer contracts separately from rendered images.
 
+The subsequent [Shadow](vulkan-shadow-text.md), [text face-culling](vulkan-text-culling.md)
+and [Subtitle](vulkan-subtitle-text.md) slices are integrated. They retain native
+CPU fixtures, Rust-only GPU replay, both-device functional captures and optimized
+performance distributions. Their receipts identify the exact checked source
+revisions. Strict raster/color differences remain recorded; these slices do not
+complete the text capability family. Standard surface textures and Decal text
+are active work outside the current integrated implementation.
+
 ## Reproduce the checks
 
 Device-independent input and Graphic3d submission tests:

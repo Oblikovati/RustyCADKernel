@@ -61,7 +61,8 @@ redisplaying. Both native OCCT and Martensite omit that draw. A fresh structure
 transformed before adding text and displayed afterward instead renders 102
 foreground pixels. This diagnostic does not justify a bounds behavior change.
 
-This slice does not claim complete `OpenGl_Text` parity. Shadow is absent from the
-starting branch; the generic two-pass policy is tested, while its combined Shadow
-integration is checked by the coordinating agent. Windows and macOS remain
-untested.
+This slice does not claim complete `OpenGl_Text` parity. The coordinator integrated
+and checked Shadow together with culling, and subsequently checked Subtitle
+culling on both devices. The [combined main receipt](../porting/runtime-evidence/visualization-integration-2026-10-12/integrated-main-71131d660/)
+records its exact source revision; [Subtitle integration](../porting/runtime-evidence/subtitle-text-2026-10-12/integration.json)
+records the later checks. Windows and macOS remain untested.

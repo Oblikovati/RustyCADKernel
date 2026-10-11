@@ -7,7 +7,7 @@ The implementation follows OCCT `3d097a0328e71b826377d4814ab05ec3c3d23871`, `Ope
 - The shadow anchor moves by `(1, -1)` window pixels before floor alignment and unprojection. A plane without its own anchor ignores that displacement upstream; Martensite preserves this distinction.
 - Depth-tested shadows temporarily force Fill offset, retain the current slope factor, and add one depth unit. This temporary bias does not change the ordered polygon-offset state. Annotation shadows skip the bias.
 - Both passes share the layout, glyph coverage, fixed `0.285` font discard cutoff, and native `MaskBlend` selection. Subtitle RGBA is retained; fractional glyph colors preserve text ordering and depth writes.
-- Normal text, surface, line, and point policies remain separate. Subtitle rectangles, Decal, XOR/Blend display, and custom text shaders remain explicitly rejected.
+- Normal text, surface, line, and point policies remain separate. [Subtitle rectangles](vulkan-subtitle-text.md) are integrated in subsequent work. Decal, XOR/Blend display, and custom text shaders remain explicitly rejected on current `main`.
 
 ## Local validation
 
@@ -15,7 +15,7 @@ Run `cargo test -p martensite-vulkan --all-targets --locked` for CPU extraction,
 
 The complete nine-mode, six-view strict capture matrix is retained in [the evidence directory](../porting/runtime-evidence/shadow-text-2026-10-11/). Lavapipe passes 37/54 comparisons; the native AMD host passes 17/54. All nine modes submit successfully, and the selected exact replay paths pass on both devices. Strict raster and color differences remain open; thresholds were unchanged. Targeted unchanged Normal text comparisons also fail for the square billboard, rotated, and zoomable probes. These diagnostics do not establish that every Shadow discrepancy has the same cause.
 
-Actual AIS light names are nonempty and removing them changes rendered pixels in all four Rust light types. The paired native probe explicitly uses the common default world layer; it passes 2/4 strict software comparisons and 0/4 native comparisons. Initial native-default-layer captures are preserved separately: OCCT constructor state retains Topmost, while the existing Rust scene has a different layer policy. The common-layer fixture does not prove default AIS layer parity. Existing aspect BackCulled text extraction is also outside this slice and remains incomplete.
+Actual AIS light names are nonempty and removing them changes rendered pixels in all four Rust light types. The paired native probe explicitly uses the common default world layer; it passes 2/4 strict software comparisons and 0/4 native comparisons. Initial native-default-layer captures are preserved separately: OCCT constructor state retains Topmost, while the existing Rust scene has a different layer policy. The common-layer fixture does not prove default AIS layer parity. [Retained text face culling](vulkan-text-culling.md) was integrated afterward; its combined Shadow checks pass on both devices. This does not resolve the strict named-light capture differences.
 
 ## Performance
 
