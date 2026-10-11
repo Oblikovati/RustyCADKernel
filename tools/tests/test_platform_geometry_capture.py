@@ -12,24 +12,24 @@ SPEC.loader.exec_module(GEOMETRY)
 
 class FakeGeometryProcesses:
     """Capture the native build commands and write a named executable."""
-    def __init__(self, root: Path):
+    def __init__(self, root: Path) -> None:
         self.root = root
         self.commands: list[list[str]] = []
 
-    def run(self, command: list[str], **kwargs):
+    def run(self, command: list[str], *, check: bool) -> None:
         self.commands.append(command)
         if command[1] == '--build':
             folder = Path(command[2])
             folder.mkdir(parents=True, exist_ok=True)
             (folder / 'native-torus').write_bytes(b'native-only')
 
-    def check_output(self, command: list[str], **kwargs) -> bytes:
+    def check_output(self, command: list[str], *, env: dict[str, str]) -> bytes:
         self.commands.append(command)
         return b'independent native rows\n'
 
 
 class PlatformGeometryCaptureTests(unittest.TestCase):
-    def test_native_probe_links_pinned_libraries_and_returns_only_native_bytes(self):
+    def test_native_probe_links_pinned_libraries_and_returns_only_native_bytes(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             native = root / 'target/native-platform'
@@ -46,7 +46,7 @@ class PlatformGeometryCaptureTests(unittest.TestCase):
             self.assertNotIn('cargo', project)
             self.assertEqual(len(process.commands), 3)
 
-    def test_missing_rust_marker_cannot_silently_change_a_test(self):
+    def test_missing_rust_marker_cannot_silently_change_a_test(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             source = root / 'crates/tkbo/tests/torus.rs'
