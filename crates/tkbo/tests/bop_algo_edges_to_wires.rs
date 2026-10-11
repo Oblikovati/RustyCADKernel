@@ -1,5 +1,7 @@
 //! Native replay of BOPAlgo_Tools::EdgesToWires and WiresToFaces; see
 //! tools/oracle/tkbo_edges_to_wires.cxx.
+#[path = "support/native_snapshot.rs"]
+mod native_snapshot;
 #[path = "shape_dump/mod.rs"]
 mod shape_dump;
 use rustycad_tkbo::bop_algo::tools::{edges_to_wires, wires_to_faces};
@@ -137,7 +139,8 @@ fn edges_to_wires_and_faces_match_native() {
         &mut rows,
     );
     run("empty", &compound(&[]), true, &mut rows);
-    let expected = include_str!("../../../tools/oracle/tkbo_edges_to_wires.expected");
+    // Native OCCT run 38123916241 pins each host's exact arithmetic.
+    let expected = native_snapshot::native_boolean_snapshot!("tkbo_edges_to_wires");
     for (line, (actual, wanted)) in rows.lines().zip(expected.lines()).enumerate() {
         assert_eq!(actual, wanted, "line {}", line + 1);
     }

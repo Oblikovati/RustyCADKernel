@@ -1,0 +1,85 @@
+{
+  "run": 38123916241,
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_revision": "c93242e118c935f8659f3fb4f702f6dedf0eaf43",
+  "comparisons": {
+    "macos": {
+      "native_boolean_exact_rows": {
+        "torus": 56,
+        "cells_builder": 1329,
+        "edges_to_wires": 195,
+        "defeaturing": 596
+      },
+      "native_cylinder_faces_exact": 3,
+      "native_cylinder_hashes": [
+        [
+          "0",
+          "5c0ce88cea863cc7",
+          "9d9a61149fcee165"
+        ],
+        [
+          "1",
+          "10abad82ddd2e779",
+          "18b7f5c5a0991ab6"
+        ],
+        [
+          "2",
+          "6e2bad82ddd2e779",
+          "18b7f5c5a0991ab6"
+        ]
+      ],
+      "raw_sha256": {
+        "cylinder.expected": "8826dc43f43da30ffd32b339ced78084f77b18636eaab057dff27aacabb30920",
+        "edges_to_wires.expected": "583b427009103318fc7434cd17777edeca78ad532fc3f72d27e04c5e971b85b7",
+        "memory.expected": "fb1ca7367a1fd4b4e76f034bfd0ae41b03f1b96858372a78f44b028240309870",
+        "cells_builder.expected": "480284f1e1d99518b017fce03c8b0ff7938f0f192bd423feea2da4ccc50a3808",
+        "torus.expected": "84a28573b5dab93032b643e53c2441196a4925758ca5ba7179924156c4e4146d",
+        "defeaturing.expected": "ac4a7ca5eb377518a18e3c65dd3fde8ef1092e08cb633a494d85e3119ce93651"
+      }
+    },
+    "windows": {
+      "native_boolean_exact_rows": {
+        "torus": 56,
+        "cells_builder": 1329,
+        "edges_to_wires": 195,
+        "defeaturing": 596
+      },
+      "native_cylinder_faces_exact": 3,
+      "native_cylinder_hashes": [
+        [
+          "0",
+          "8051bf23619e245b",
+          "9d9a61149fcee165"
+        ],
+        [
+          "1",
+          "64b08418fe54b4a3",
+          "efd12fb178e67a7c"
+        ],
+        [
+          "2",
+          "ff588418fe54b4a3",
+          "efd12fb178e67a7c"
+        ]
+      ],
+      "raw_sha256": {
+        "cells_builder.expected": "3ca27e94e10a5c16db88bca47c981676e8f14abd1ee0cffa5c281f87a9d939d7",
+        "cylinder.expected": "84e36ab8a81922e11ff1d5da15d3cdaedfa176f5aab3f42304d7964b39b8cff6",
+        "defeaturing.expected": "203438a76060430f5cd2173b60e19bd309250812ce1cfc53270cb7488b25683c",
+        "edges_to_wires.expected": "7e14f8f6d3c25bd5fa1ec6486892ffbe44773cde1570ff17dd9a1770608a55c3",
+        "torus.expected": "308525d257049fe0d6f9680232b3d10ca16d12725c28916b0306fce23dcb343d"
+      }
+    }
+  },
+  "local_validation": {
+    "rust_behavior_tests": 8,
+    "failed": 0,
+    "native_asset_integrity_tests": 3,
+    "clippy_tests_warnings_denied": "passed",
+    "windows_target_compilation": "passed; runtime still required",
+    "capture_tool_module": "passed",
+    "release_contract_tool_module": "passed",
+    "format": "passed"
+  },
+  "oracle_lifecycle": "temporary porting infrastructure; standalone Rust behavior tests and static baselines survive oracle retirement"
+}

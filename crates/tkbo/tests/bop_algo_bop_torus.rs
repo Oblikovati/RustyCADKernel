@@ -1,5 +1,7 @@
 //! Native replay of a fuse of a box with a trimmed torus ring crossing its seams; see
 //! tools/oracle/tkbo_bop_torus.cxx.
+#[path = "support/native_snapshot.rs"]
+mod native_snapshot;
 #[path = "shape_dump/mod.rs"]
 mod shape_dump;
 use rustycad_tkbo::brep_algo_api::BRepAlgoAPIFuse;
@@ -59,13 +61,7 @@ fn box_torus_fuse_matches_native_oracle() {
     .unwrap();
     dump_result(fuse.shape(), &mut rows);
     // Run 38119937683: pinned OCCT compiled with -ffp-contract=off agrees bit for bit.
-    let expected = if cfg!(all(target_os = "macos", target_arch = "aarch64")) {
-        include_str!("../../../tools/oracle/tkbo_bop_torus.macos.expected")
-    } else if cfg!(all(target_os = "windows", target_arch = "x86_64")) {
-        include_str!("../../../tools/oracle/tkbo_bop_torus.windows.expected")
-    } else {
-        include_str!("../../../tools/oracle/tkbo_bop_torus.expected")
-    };
+    let expected = native_snapshot::native_boolean_snapshot!("tkbo_bop_torus");
     // Native Windows CRT streams use CRLF; every numeric and topology field stays exact.
     let native_snapshot_rows = expected.replace("\r\n", "\n");
     for (line, (actual, wanted)) in rows.lines().zip(native_snapshot_rows.lines()).enumerate() {

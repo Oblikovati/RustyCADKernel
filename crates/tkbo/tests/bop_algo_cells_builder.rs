@@ -1,4 +1,6 @@
 //! Native replay of BOPAlgo_CellsBuilder; see tools/oracle/tkbo_cells_builder.cxx.
+#[path = "support/native_snapshot.rs"]
+mod native_snapshot;
 #[path = "shape_dump/mod.rs"]
 mod shape_dump;
 use rustycad_tkbo::bop_algo::BOPAlgoCellsBuilder;
@@ -241,7 +243,8 @@ fn cells_builder_matches_native_steps() {
     mixed(&mut rows);
     unified_faces(&mut rows);
     unified_edges(&mut rows);
-    let expected = include_str!("../../../tools/oracle/tkbo_cells_builder.expected");
+    // Native OCCT run 38123916241 pins each host's exact arithmetic.
+    let expected = native_snapshot::native_boolean_snapshot!("tkbo_cells_builder");
     for (line, (actual, wanted)) in rows.lines().zip(expected.lines()).enumerate() {
         assert_eq!(actual, wanted, "line {}", line + 1);
     }

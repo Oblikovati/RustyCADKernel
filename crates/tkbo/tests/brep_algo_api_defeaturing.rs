@@ -1,5 +1,7 @@
 //! Native replay of BRepAlgoAPI_Defeaturing / BOPAlgo_RemoveFeatures; see
 //! tools/oracle/tkbo_defeaturing.cxx.
+#[path = "support/native_snapshot.rs"]
+mod native_snapshot;
 #[path = "shape_dump/mod.rs"]
 mod shape_dump;
 use rustycad_tkbo::bop_algo::{
@@ -279,7 +281,8 @@ fn refused_cases(base: &Shape, rows: &mut String) {
 fn defeaturing_matches_native_results_and_history() {
     let mut rows = String::new();
     feature_cases(&mut rows);
-    let expected = include_str!("../../../tools/oracle/tkbo_defeaturing.expected");
+    // Native OCCT run 38123916241 pins each host's exact arithmetic.
+    let expected = native_snapshot::native_boolean_snapshot!("tkbo_defeaturing");
     for (line, (actual, wanted)) in rows.lines().zip(expected.lines()).enumerate() {
         assert_eq!(actual, wanted, "line {}", line + 1);
     }

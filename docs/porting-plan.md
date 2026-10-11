@@ -113,6 +113,33 @@ used by OCCT may remain external dependencies; port their OCCT adapters and reta
 the capabilities they enable. Linking the OCCT kernel to provide a missing Rust
 operation does not count as implementing that operation.
 
+### Independent Rust tests and oracle retirement
+
+User decision, 2026-10-11: OCCT is a temporary oracle during porting. Martensite
+will evolve independently after the port; upstream compatibility is the initial
+behavioral baseline, not a permanent dependency or evolution policy.
+
+Port each upstream test's setup, inputs, assertions, cleanup, platform variants
+and tolerances into executable Rust tests. A native comparison receipt does not
+replace that translation. Rust behavioral tests must run from the Martensite
+checkout or extracted release packages without an OCCT installation, source tree,
+build, executable, or OCCT-linked C++ subprocess. Static expected files and test resources
+remain usable independently; retain their attribution and capture provenance.
+
+Keep C++ probes, capture generators, live differential comparisons and upstream
+inventory checks in removable porting infrastructure. Use them to establish
+baselines and diagnose differences while porting. Ordinary Rust tests consume
+committed assets rather than regenerating expectations from the implementation
+under test. Porting-only receipt checks are not the behavioral regression suite.
+
+Before declaring the port complete, remove the OCCT harnesses and source-fetch,
+build and comparison jobs, then run the full Rust functional, rendering and
+performance suite and extracted-package checks without OCCT available. Preserve
+the translated test coverage and static baselines. Subsequent behavior changes
+follow Martensite's own reviewed requirements; OCCT revision metadata becomes
+historical provenance. Third-party libraries used through Martensite adapters
+remain separate from this OCCT dependency boundary.
+
 Rust naming, ownership and error syntax may differ from C++. Each upstream API
 must still have an explicit equivalent with the same capabilities and observable
 contract. C++ ABI compatibility is not implied by a Rust port. Convenience APIs can
@@ -120,8 +147,9 @@ be added after the mapped compatibility API passes its parity tests.
 
 Baseline: OCCT **8.1.0-dev1**, commit
 `3d097a0328e71b826377d4814ab05ec3c3d23871`. This is a development checkout, not a
-released OCCT version. Freeze it for this port; handle later OCCT changes through
-reviewed baseline updates. The existing sibling checkout is clean and remains unmodified.
+released OCCT version. Freeze it for this port. Any baseline update during porting
+requires review; completing the port does not establish an obligation to follow
+later OCCT changes. The existing sibling checkout is clean and remains unmodified.
 
 ## Measured source scope
 
@@ -352,7 +380,9 @@ without JSON number loss; encode `f64` bit patterns when exact values are needed
 Every fixture records OCCT revision, compiler/build/dependency profile, platform,
 input hashes, output schema version, tolerance/comparator version and provenance.
 Record crashes, timeouts, stderr and exit codes as failures with reproducible inputs.
-A missing oracle executable must fail explicitly; it must never skip and pass.
+A missing oracle executable in a live porting comparison must fail explicitly;
+it must never skip and pass. Standalone Rust behavioral tests use committed
+fixtures and must not require that executable.
 
 | Result | Default comparison |
 | --- | --- |

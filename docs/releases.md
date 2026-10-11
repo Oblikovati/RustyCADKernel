@@ -168,3 +168,42 @@ Locale tests preserve host libc behavior: Darwin's C locale accepts bytes throug
 regressions use `€` so both hosts exercise the native conversion error. DRAW output
 comparisons reverse Tcl console transport once and retain the literal CRLF in
 Win32 loader messages. Neither case changes the production locale or loader API.
+
+## Regenerating host oracle assets
+
+During porting, generate host fixtures with the manual
+`native-platform-oracle.yml` workflow.
+It builds pinned OCCT on each requested runner, captures the C++ probe output
+directly, and uploads `geometry-oracle-<runner>` artifacts with source revisions,
+compiler configuration, raw-output hashes, and separate Martensite test logs.
+Native output supplies the expected files; Martensite output never supplies them.
+
+For example:
+
+```sh
+gh workflow run native-platform-oracle.yml --ref main \
+  -f platforms='["macos-latest","windows-latest"]' -f fp_contract=off -f capture=geometry
+gh run download RUN_ID --name geometry-oracle-macos-latest --dir target/oracle-import/macos
+gh run download RUN_ID --name geometry-oracle-windows-latest --dir target/oracle-import/windows
+```
+
+After checking the receipt hashes and comparing native and Martensite results,
+commit `platform-geometry/<probe>.expected` under
+`tools/oracle/tkbo_<probe>.<host>.expected`. The cylinder capture becomes
+`tools/oracle/tkmesh_cylinder_nodes.<host>.expected`. Keep the original native
+bytes, including Windows CRLF, and retain the receipt and diagnostic logs.
+Integrate the assets into `main` with their test changes. Normal CI reads these
+committed assets; it does not regenerate expectations from the code under test.
+During porting, regenerate when the pinned upstream revision, probe inputs, or
+compiler policy changes. This workflow and its receipt-integrity tool tests are
+temporary porting infrastructure. The Rust behavioral tests and static assets
+remain when the OCCT harnesses are removed; subsequent changes follow
+[Martensite's independent test policy](porting-plan.md#independent-rust-tests-and-oracle-retirement).
+
+Run `38123916241` confirms all four Boolean snapshots (2,176 rows per host) and
+all three cylinder-face node and triangle hashes independently agree on macOS
+ARM64 and Windows x64. Those native captures now supply the committed fixtures.
+The original failures against Linux fixtures remain in the evidence directory.
+Tests still compare every logical row and its count, or every node/triangle hash,
+exactly. All tracked oracle assets also enter the extracted-package test-support
+bundle.

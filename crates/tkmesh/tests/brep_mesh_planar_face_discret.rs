@@ -18,7 +18,7 @@ mod triangulation_hash;
 use rustycad_tktopalgo::brep_builder_api::{
     BRepBuilderAPIMakeEdge, BRepBuilderAPIMakeFace, BRepBuilderAPIMakeShape, BRepBuilderAPIMakeWire,
 };
-use triangulation_hash::{cylinder_node_hash, cylinder_triangle_hash};
+use triangulation_hash::{cylinder_face_native_hashes, cylinder_node_hash, cylinder_triangle_hash};
 
 #[test]
 fn square_hole_matches_pinned_native_node_and_triangle_counts() {
@@ -123,29 +123,14 @@ fn cylinder_faces_match_pinned_native_mesh_hashes() {
     )
     .unwrap();
     let mut faces = Explorer::new(&shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-    let expected_nodes = [
-        0x72a7_2694_b373_88ef,
-        0x300f_8f31_3113_efe0,
-        0xaa27_8f31_3113_efe0,
-    ];
-    let expected_triangles = [
-        0x9d9a_6114_9fce_e165,
-        0xefd1_2fb1_78e6_7a7c,
-        0xefd1_2fb1_78e6_7a7c,
-    ];
-    for face_index in 0..3 {
+    let expected_hashes = cylinder_face_native_hashes();
+    for (expected_nodes, expected_triangles) in expected_hashes {
         let face = rustycad_tkbrep::topods::face(faces.current()).unwrap();
         let triangulation = BRepTool::triangulation(&face, mesh_purpose::NONE)
             .unwrap()
             .0;
-        assert_eq!(
-            cylinder_node_hash(&triangulation),
-            expected_nodes[face_index]
-        );
-        assert_eq!(
-            cylinder_triangle_hash(&triangulation),
-            expected_triangles[face_index]
-        );
+        assert_eq!(cylinder_node_hash(&triangulation), expected_nodes);
+        assert_eq!(cylinder_triangle_hash(&triangulation), expected_triangles);
         faces.next().unwrap();
     }
 }
