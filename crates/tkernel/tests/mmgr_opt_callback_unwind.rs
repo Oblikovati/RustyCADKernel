@@ -8,10 +8,12 @@ use callback_fixture::{
 };
 
 fn failed_free_case(cell: usize, size: usize, label: &str) {
-    let mut allocator = MMgrOpt::new(true, false, cell, 100, 512);
-    let block = allocator.allocate(size).unwrap();
-    allocator.bytes_mut(block).unwrap().fill(9);
-    let _scope = CallbackScope::new(PanicPhase::Free);
+    let (_scope, (mut allocator, block)) = CallbackScope::with_setup(PanicPhase::Free, || {
+        let mut allocator = MMgrOpt::new(true, false, cell, 100, 512);
+        let block = allocator.allocate(size).unwrap();
+        allocator.bytes_mut(block).unwrap().fill(9);
+        (allocator, block)
+    });
     let caught = catches(|| allocator.free(Some(block)).unwrap());
     let preserved = allocator
         .bytes(block)
@@ -51,11 +53,17 @@ fn populated_old_block(allocator: &mut MMgrOpt) -> StorageAddress {
     old
 }
 
+fn populated_callback_case(phase: PanicPhase) -> (CallbackScope, (MMgrOpt, StorageAddress)) {
+    CallbackScope::with_setup(phase, || {
+        let mut allocator = MMgrOpt::new(true, false, 0, 100, 512);
+        let old = populated_old_block(&mut allocator);
+        (allocator, old)
+    })
+}
+
 #[test]
 fn reallocation_free_notification_failure_keeps_both_blocks_live_after_copy() {
-    let mut allocator = MMgrOpt::new(true, false, 0, 100, 512);
-    let old = populated_old_block(&mut allocator);
-    let _scope = CallbackScope::new(PanicPhase::Free);
+    let (_scope, (mut allocator, old)) = populated_callback_case(PanicPhase::Free);
     let caught = catches(|| {
         allocator.reallocate(Some(old), 40).unwrap();
     });
@@ -81,9 +89,7 @@ fn repair_pair(allocator: &mut MMgrOpt, old: StorageAddress, moved: StorageAddre
 
 #[test]
 fn reallocation_allocation_notification_failure_preserves_old_and_uncopied_new_block() {
-    let mut allocator = MMgrOpt::new(true, false, 0, 100, 512);
-    let old = populated_old_block(&mut allocator);
-    let _scope = CallbackScope::new(PanicPhase::Allocate);
+    let (_scope, (mut allocator, old)) = populated_callback_case(PanicPhase::Allocate);
     let caught = catches(|| {
         allocator.reallocate(Some(old), 40).unwrap();
     });
@@ -118,9 +124,7 @@ fn failed_allocation_callback_retains_captured_storage_for_explicit_repair() {
 
 #[test]
 fn fitting_reallocation_and_null_free_do_not_notify() {
-    let mut allocator = MMgrOpt::new(true, false, 0, 100, 512);
-    let old = populated_old_block(&mut allocator);
-    let _scope = CallbackScope::new(PanicPhase::Allocate);
+    let (_scope, (mut allocator, old)) = populated_callback_case(PanicPhase::Allocate);
     let same = allocator.reallocate(Some(old), 8).unwrap();
     allocator.free(None).unwrap();
     assert_native_row(&format!(

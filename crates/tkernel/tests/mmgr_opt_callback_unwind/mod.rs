@@ -29,9 +29,17 @@ pub struct CallbackScope {
 impl CallbackScope {
     /// Installs an isolated callback policy; `CallbackScope::new(PanicPhase::Free)`.
     pub fn new(phase: PanicPhase) -> Self {
+        Self::with_setup(phase, || ()).0
+    }
+
+    /// Serializes setup before installing the observer; `CallbackScope::with_setup(PanicPhase::Free, || allocator.allocate(24))`.
+    pub fn with_setup<T>(phase: PanicPhase, setup: impl FnOnce() -> T) -> (Self, T) {
         let serial = CALLBACK_SERIAL
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner());
+        // Setup can notify the global callback, so it belongs inside the critical
+        // section too (macOS runner 38141570023; reproduced locally in six runs).
+        let prepared = setup();
         TRACE.with(|trace| {
             *trace.borrow_mut() = CallbackTrace {
                 phase,
@@ -39,7 +47,7 @@ impl CallbackScope {
             }
         });
         MMgrOpt::set_call_back_function(Some(observe));
-        Self { _serial: serial }
+        (Self { _serial: serial }, prepared)
     }
 }
 impl Drop for CallbackScope {
