@@ -1,0 +1,5 @@
+# Martensite ViewCube presentation evidence
+
+Actual native `AIS_ViewCube` and the Rust presentation-only context adapter preserve Topmost/triedron defaults. Both devices render default and explicitly lit variants; native and Rust label toggles affect 126/298 pixels respectively. CPU fixture tests, validation, and capture/performance commands succeed. All eight strict color/depth comparisons remain failures, with unchanged gates; see the raw pairs, PNG diffs and functional receipt. No renderer or API-completion claim is made.
+
+Raw `.rgba`/`.depth` oracle buffers are committed so comparisons can be repeated without OCCT using `tools.vulkan_capture_artifacts.export_comparison` with extent320×320 and the native/ported prefixes below `captures/{lavapipe,host}`. `capture-sha256.json` pins every capture. Source hashes match across functional/performance receipts; the optimized executable hash, device probes, 100 raw samples per workload, and start/end process/load snapshots are retained. No baseline was accepted.
