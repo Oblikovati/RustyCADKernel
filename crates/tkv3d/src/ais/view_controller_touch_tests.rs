@@ -161,7 +161,16 @@ fn touch_sequences_replay_all_committed_native_add_move_remove_transitions() {
 }
 #[test]
 fn touch_double_tap_interval_matches_native_recent_expired_negative_and_nan_cases() {
-    for (index, expected) in [(16, true), (17, false), (18, false), (19, false)] {
+    for index in 16..20 {
+        let prefix = format!("{index} 1 ");
+        let expected = include_str!("../../tests/fixtures/view-controller-touch-native.txt")
+            .lines()
+            .find(|row| row.starts_with(&prefix))
+            .unwrap()
+            .split_whitespace()
+            .nth(29)
+            .unwrap()
+            == "1";
         let mut c = touch_case(index);
         assert_eq!(c.touch_double_click(), expected);
         assert!(c.touch_dispatch.double_tap_timer.is_started());
