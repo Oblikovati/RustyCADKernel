@@ -134,11 +134,22 @@ class ToolkitWorkflowTests(unittest.TestCase):
         self.assertIn('LLVM_PROFILE_FILE_NAME: martensite-%4m.profraw', workflow)
         self.assertIn('os: [ubuntu-latest, windows-latest, macos-latest]', workflow)
         coverage = workflow.split('  coverage:\n', 1)[1].split('  vulkan-runtime:', 1)[0]
-        self.assertEqual(coverage.count('run: cargo llvm-cov nextest'), 1)
+        self.assertEqual(coverage.count('cargo llvm-cov nextest'), 1)
         self.assertNotIn('run: cargo clean', coverage)
         self.assertNotIn('run: cargo nextest', coverage)
-        self.assertIn('target/llvm-cov-target/nextest/ci/junit.xml', coverage)
+        self.assertIn('target/nextest/ci/junit.xml', coverage)
         self.assertIn('target/lcov.info', coverage)
+
+    def test_coverage_skips_only_dense_sphere_replay_and_preserves_functional_suites(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        workflow = (root / '.github/workflows/ci.yml').read_text()
+        coverage = workflow.split('  coverage:\n', 1)[1].split('  vulkan-runtime:', 1)[0]
+        selector = "-E 'not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance)'"
+        self.assertEqual(coverage.count('-E '), 1)
+        self.assertIn(selector, coverage)
+        functional = workflow.split('  coverage:\n', 1)[0]
+        self.assertIn('cargo test-all --no-fail-fast', functional)
+        self.assertNotIn('-E ', functional)
 
 
 if __name__ == '__main__':
