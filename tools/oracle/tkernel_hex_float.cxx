@@ -1,5 +1,11 @@
 // OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871, Standard_CString C-locale forwarding.
+#ifdef MARTENSITE_CRT_ONLY
+// Standard_CString forwards to the C-locale CRT; this capture needs no OCCT build.
+#include <cstdio>
+#define Sprintf std::sprintf
+#else
 #include <Standard_CString.hxx>
+#endif
 #include <cstdint>
 #include <cstring>
 #include <iomanip>

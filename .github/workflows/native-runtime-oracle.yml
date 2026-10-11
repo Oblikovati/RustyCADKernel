@@ -1,0 +1,28 @@
+name: Native runtime oracle
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-runtime:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Capture C-locale hexadecimal formatting with the MSVC CRT
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force target/runtime-oracle | Out-Null
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $installation = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          $developer = Join-Path $installation 'Common7\Tools\VsDevCmd.bat'
+          $command = "call `"$developer`" -arch=x64 -host_arch=x64 && cl /nologo /EHsc /DMARTENSITE_CRT_ONLY tools\oracle\tkernel_hex_float.cxx /Fe:target\runtime-oracle\hex-float.exe && target\runtime-oracle\hex-float.exe > target\runtime-oracle\tkernel_hex_float.windows.expected"
+          & cmd.exe /d /c $command
+          if ($LASTEXITCODE -ne 0) { throw "CRT capture returned $LASTEXITCODE; expected zero" }
+          Get-FileHash tools/oracle/tkernel_hex_float.cxx, target/runtime-oracle/tkernel_hex_float.windows.expected | Format-List | Out-File target/runtime-oracle/hashes.txt
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: windows-runtime-oracle
+          path: target/runtime-oracle/*.expected
+          if-no-files-found: error
