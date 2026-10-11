@@ -17,3 +17,10 @@ or errors, and no sphere-distance case. LCOV output is nonempty. The retained
 compressed logs include the original CI failure, local workload trace and complete
 filtered workspace verification. CI run 38157888201 independently completed green
 before this change.
+
+The workflow regression checks preserve exactly one coverage invocation and one
+precise exclusion while retaining unfiltered functional suites. The JUnit artifact
+path is `target/nextest/ci/junit.xml`, matching the produced report.
+
+All 199 tools-test modules pass using the CI command
+`python3 tools/run_tool_tests.py --jobs 2`; 13 toolkit/workflow regressions pass.
