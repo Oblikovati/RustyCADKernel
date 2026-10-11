@@ -8,8 +8,8 @@ separate bounds. Incomplete endpoint pairs are ignored as in native OCCT.
 `PrimitiveDraw` describes triangles or lines. `TriangleDraw` remains a compatibility
 alias. `Graphic3dDrawGroup::primitive_draws` and `primitive_draws_for_view` expose
 the generic extraction path; existing triangle-named methods remain available.
-The immutable contract validates endpoint indices, finite positive widths, opaque
-colors and stipple factors in `1..=256`.
+The immutable contract validates endpoint indices, finite positive widths, finite RGBA
+colors with alpha in `[0,1]` and stipple factors in `1..=256`.
 
 Devices must expose `VK_EXT_line_rasterization` with `bresenhamLines` to draw lines.
 Widths other than one additionally require `wideLines` and must fit the device's
@@ -23,7 +23,9 @@ chooses the dominant screen derivative and indexes the 16-bit pattern with the
 absolute screen coordinate and stipple factor. Vulkan fragment Y is converted to
 the OpenGL origin. Hardware stipple counters would restart differently and are
 not used. Surface-only lighting and culling settings do not reject line arrays.
-Textures, custom shaders and transparent lines remain unsupported.
+Textures and custom shaders remain unsupported.
+[Native line alpha](vulkan-line-alpha.md) now implements in-place MaskBlend while
+preserving ordinary line mode, depth and draw-order behavior.
 
 ## Color encoding
 
@@ -66,7 +68,7 @@ gradient cases exact. Three lavapipe gradient cases still differ in two or four
 pixels by one color byte. Native AMD sloped-depth lines retain three small depth
 differences and one perspective case with two coverage differences. These are
 strict failures, not waived tolerances. The existing 34 host persistence failures
-also remain. Points, antialiasing, textured/transparent lines and wider built-in
+also remain. Antialiasing, textured lines, additional transparency policies and wider built-in
 AIS presentations remain future work.
 
 ## Integrated verification

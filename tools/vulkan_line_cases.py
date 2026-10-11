@@ -17,3 +17,17 @@ LINE_MODES = (
     "line-gradient",
     "line-depth",
 )
+
+LINE_ALPHA_MODES = (
+    "line-alpha-opaque",
+    "line-alpha-auto",
+    "line-alpha-blend",
+    "line-alpha-mask",
+    "line-alpha-forced",
+    "line-alpha-zero",
+    "line-alpha-vertices",
+    "line-alpha-depth",
+    "line-alpha-wide",
+    "line-alpha-dash",
+    "line-alpha-clipped",
+)

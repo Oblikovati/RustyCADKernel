@@ -12,6 +12,12 @@ pub(crate) fn primitive_style(
             .get()
             .ok_or_else(|| rejected("null point aspects", "explicit Graphic3d aspects"))?;
         validate_line_shading(style)?;
+        if !matches!(
+            style.alpha_mode(),
+            Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto
+        ) {
+            return Err(rejected(style.alpha_mode(), "opaque point alpha mode"));
+        }
         return Ok((rgba_color(style), None));
     }
     if !matches!(
@@ -35,7 +41,8 @@ fn line_parameters(
         style.line_width(),
         style.line_pattern(),
         style.line_stipple_factor(),
-    )?;
+    )?
+    .with_alpha_blending(style.alpha_mode() == Graphic3dAlphaMode::MaskBlend);
     Ok((rgba, Some(line)))
 }
 
@@ -45,12 +52,6 @@ fn validate_line_shading(style: &dyn Graphic3dAspectsSource) -> Result<(), Rende
             (style.to_map_texture(), !style.shader_program().is_null()),
             "untextured built-in line shading",
         ));
-    }
-    if !matches!(
-        style.alpha_mode(),
-        Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto
-    ) {
-        return Err(rejected(style.alpha_mode(), "opaque line alpha mode"));
     }
     Ok(())
 }

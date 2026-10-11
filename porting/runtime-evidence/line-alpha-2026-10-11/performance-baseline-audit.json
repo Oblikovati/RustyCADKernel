@@ -1,0 +1,25 @@
+[
+  {
+    "profile": "lavapipe",
+    "baseline": "porting/runtime-evidence/vulkan-clipping-baseline-2026-10-10.json",
+    "median_ratio": 1.25,
+    "p95_ratio": 1.5,
+    "matched_workloads": 10,
+    "failures": [
+      "surface-bounds median_ms=4.326ms exceeds 4.296ms",
+      "window-present p95_ms=1.528ms exceeds 1.220ms"
+    ],
+    "new_workload_baseline": "unaccepted"
+  },
+  {
+    "profile": "host",
+    "baseline": "porting/runtime-evidence/vulkan-clipping-baseline-2026-10-10.json",
+    "median_ratio": 1.25,
+    "p95_ratio": 1.5,
+    "matched_workloads": 10,
+    "failures": [
+      "received different device/driver identity; expected the baseline's exact profile"
+    ],
+    "new_workload_baseline": "unaccepted"
+  }
+]

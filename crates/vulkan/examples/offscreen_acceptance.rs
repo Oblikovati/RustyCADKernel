@@ -52,6 +52,7 @@ fn main() {
     surface_runtime::check_surface_lifecycle();
     persistence_runtime::check_persistence_lifecycle();
     line_runtime::check_line_lifecycle();
+    line_alpha_runtime::check_line_alpha();
     color_runtime::check_linear_to_srgb_capture();
     stdprs_runtime::check_curve_lifecycle();
     ais_line_runtime::check_line_datums();
@@ -190,3 +191,9 @@ mod circle_scene;
 
 #[path = "support/capping_runtime.rs"]
 mod capping_runtime;
+
+#[path = "support/line_alpha_runtime.rs"]
+mod line_alpha_runtime;
+
+#[path = "support/line_alpha_goldens.rs"]
+mod line_alpha_goldens;

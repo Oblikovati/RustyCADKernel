@@ -1,6 +1,7 @@
 // Native line assembly and shader stipple at OCCT 3d097a0.
 #include "martensite_vulkan_bound_array.hxx"
 #include <array>
+#include "martensite_vulkan_line_alpha.cxx"
 static occ::handle<Graphic3d_ArrayOfPrimitives>
 line_vertices(const std::string &mode) {
   const bool segments = mode.rfind("line-segments", 0) == 0;
@@ -58,6 +59,10 @@ static void configure_line_style(const occ::handle<Graphic3d_Aspects> &aspects,
 }
 static void line_scene(const occ::handle<Graphic3d_Structure> &structure,
                        const std::string &mode) {
+  if (mode.rfind("line-alpha-", 0) == 0) {
+    alpha_line_scene(structure, mode);
+    return;
+  }
   structure->Clear();
   auto group = structure->NewGroup();
   auto aspects = unlit_aspects();

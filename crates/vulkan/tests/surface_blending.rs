@@ -24,7 +24,7 @@ fn transparent_surfaces_follow_opaque_geometry_without_distance_sorting() {
     assert_eq!(frame.draws(), &[red, green, blue]);
 }
 #[test]
-fn transparent_capping_and_lines_report_unsupported_state() {
+fn transparent_capping_is_rejected_and_lines_keep_their_own_policy() {
     let draw = colored_surface([1., 0., 0.], 0.5);
     for pass in [RenderCappingPass::MaskStart, RenderCappingPass::Surface] {
         assert!(
@@ -35,14 +35,15 @@ fn transparent_capping_and_lines_report_unsupported_state() {
                 .contains("opaque triangle")
         );
     }
-    let error = PrimitiveDraw::segments(
+    let line = PrimitiveDraw::segments(
         draw.vertices()[..2].to_vec(),
         vec![0, 1],
         identity_clip(),
         LineStyle::new(1., 0xffff, 1).unwrap(),
     )
-    .unwrap_err();
-    assert!(error.to_string().contains("opaque line vertex colors"));
+    .unwrap();
+    assert!(!line.is_surface_blended());
+    assert!(!line.line_style().unwrap().alpha_blending());
 }
 
 #[test]
