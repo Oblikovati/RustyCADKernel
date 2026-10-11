@@ -223,6 +223,9 @@ impl PointCloudScene {
         if !mode.starts_with("cloud-lit-") {
             return;
         }
+        self.view.change_rendering_params(&mut |params| {
+            params.shading_model = Graphic3dTypeOfShadingModel::Phong
+        });
         let ambient = Handle::new(Graphic3dCLight::new(Graphic3dTypeOfLightSource::Ambient));
         ambient.set_color(Color::new(0.125, 0.25, 0.5, ColorSpace::Rgb).unwrap());
         ambient.set_intensity(2.).unwrap();

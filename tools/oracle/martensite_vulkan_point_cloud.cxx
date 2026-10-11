@@ -28,6 +28,7 @@ struct MartensiteOraclePointCloudScene {
   }
   void configure_lights(const occ::handle<V3d_View>& view,const std::string& mode) {
     if(mode.rfind("cloud-lit-",0)!=0)return;
+    view->ChangeRenderingParams().ShadingModel=Graphic3d_TypeOfShadingModel_Phong;
     occ::handle<Graphic3d_CLight> ambient=new Graphic3d_CLight(Graphic3d_TypeOfLightSource_Ambient);
     ambient->SetColor(Quantity_Color(.125,.25,.5,Quantity_TOC_RGB));ambient->SetIntensity(2);
     occ::handle<Graphic3d_CLight> directional=new Graphic3d_CLight(Graphic3d_TypeOfLightSource_Directional);
