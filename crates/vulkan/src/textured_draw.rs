@@ -56,9 +56,10 @@ impl PrimitiveDraw {
                 "one UV coordinate per vertex",
             ));
         }
-        crate::scene::validate_annotation_opacity(&vertices)?;
         let mut draw = Self::new(vertices, indices, clip)?;
         draw.textured_style = Some(style);
+        // OpenGl_Text preserves depth writes/order even when color or glyph coverage blends (3d097a0).
+        draw.surface_blend = false;
         Ok(draw)
     }
     /// Inspect a textured submission; `draw.textured_style()`.

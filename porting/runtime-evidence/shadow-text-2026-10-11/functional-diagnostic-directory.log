@@ -1,0 +1,14 @@
+lavapipe shadow strict 37 54
+Traceback (most recent call last):
+  File "/tmp/martensite-shadow-functional.py", line 18, in <module>
+    entry['normal_diagnostic']=[capture_case(f/'opengl-reference',Path('target/debug/examples/text_capture'),f/'normal-diagnostic'/name,p,case,mode) for case,mode in [((64,64,0,0),'text-basic'),((96,48,0,2),'text-basic'),((96,48,0,2),'text-rotated'),((96,48,0,2),'text-zoomable')]]
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-shadow-text/tools/verify_vulkan.py", line 224, in capture_case
+    native_output = run([str(native), *args, str(gl), mode], profile.environment)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-shadow-text/tools/verify_vulkan.py", line 65, in run
+    raise RuntimeError(
+RuntimeError: received exit 1 from ['target/shadow-text/opengl-reference', '64', '64', '0', '0', 'target/shadow-text/normal-diagnostic/lavapipe/gl-64-64-0-0-text-basic', 'text-basic']:
+
+capture files failed
+; expected success

@@ -72,5 +72,6 @@ fn translucent_points_and_text_do_not_silently_enter_surface_pipelines() {
     assert!(draw.point_style().unwrap().alpha_blending());
     let image = RasterImage::new([1, 1], vec![[1.; 4]]).unwrap();
     let style = TexturedStyle::new(image, vec![[0.; 2]; 3], 0.1).unwrap();
-    assert!(PrimitiveDraw::textured(vertices, vec![0, 1, 2], identity_clip(), style).is_err());
+    let text = PrimitiveDraw::textured(vertices, vec![0, 1, 2], identity_clip(), style).unwrap();
+    assert!(!text.is_surface_blended());
 }

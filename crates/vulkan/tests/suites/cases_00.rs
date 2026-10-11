@@ -49,6 +49,8 @@ pub mod quadrangle_primitives;
 pub mod scene_inputs;
 #[path = "../shadow_presentations.rs"]
 pub mod shadow_presentations;
+#[path = "../shadow_text.rs"]
+pub mod shadow_text;
 #[path = "../surface_blending.rs"]
 pub mod surface_blending;
 #[path = "../surface_primitives.rs"]

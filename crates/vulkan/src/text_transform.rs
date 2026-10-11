@@ -15,30 +15,45 @@ impl TextTransform {
         aspect: &dyn Graphic3dAspectsSource,
         size: u32,
     ) -> Result<[f32; 16], RenderError> {
-        let p = text.position();
-        let win = tr::project(
-            [p.x(), p.y(), p.z()],
-            &self.model_view,
-            &self.projection,
-            self.viewport,
-        )
-        .ok_or_else(|| rejected(p, "a projectable text anchor"))?;
-        let projection = if text.has_plane() && text.has_own_anchor_point() {
-            self.projection * self.camera_rotation
-        } else {
-            self.projection
-        };
+        self.clip_offset(text, aspect, size, [0., 0.])
+    }
+    pub fn clip_offset(
+        &self,
+        text: &Graphic3dText,
+        aspect: &dyn Graphic3dAspectsSource,
+        size: u32,
+        offset: [f64; 2],
+    ) -> Result<[f32; 16], RenderError> {
+        let win = self.projected_anchor(text)?;
+        let projection = self.glyph_projection(text);
         let scale = if aspect.is_text_zoomable() {
             1.
         } else {
             self.pixel_scale(win, size)?
         };
-        let mut model = self.text_model(text, aspect, win, &projection)?;
+        let shifted = [win[0] + offset[0], win[1] + offset[1], win[2]];
+        let mut model = self.text_model(text, aspect, shifted, &projection)?;
         tr::scale(&mut model, [scale; 3]);
         if text.has_plane() && !text.has_own_anchor_point() {
             model = self.model_view * model;
         }
         Ok((projection * model).data().map(|v| v as f32))
+    }
+    fn projected_anchor(&self, text: &Graphic3dText) -> Result<[f64; 3], RenderError> {
+        let p = text.position();
+        tr::project(
+            [p.x(), p.y(), p.z()],
+            &self.model_view,
+            &self.projection,
+            self.viewport,
+        )
+        .ok_or_else(|| rejected(p, "a projectable text anchor"))
+    }
+    fn glyph_projection(&self, text: &Graphic3dText) -> Mat4<f64> {
+        if text.has_plane() && text.has_own_anchor_point() {
+            return self.projection * self.camera_rotation;
+        }
+        self.projection
     }
     fn pixel_scale(&self, win: [f64; 3], size: u32) -> Result<f64, RenderError> {
         let first = self.unproject(win, &self.projection)?;

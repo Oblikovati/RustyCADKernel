@@ -73,6 +73,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_ais_line.cxx"
 #include "martensite_vulkan_ais_point.cxx"
 #include "martensite_vulkan_text.cxx"
+#include "martensite_vulkan_named_light.cxx"
 #include "martensite_vulkan_ais_axis.cxx"
 #include "martensite_vulkan_ais_circle.cxx"
 #include "martensite_vulkan_plane_trihedron.cxx"
@@ -183,6 +184,10 @@ static void run_scene(int argc, char **argv) {
     group_flipping_scene(structure,view,mode);
     write_capture(view,width,height,argv[5],false);
     print_device(view); view->Remove(); return;
+  }
+  if (mode.rfind("named-light-", 0) == 0) {
+    const auto lightContext = named_light_scene(viewer, view, std::stoi(mode.substr(12)));
+    write_capture(view, width, height, argv[5], false); print_device(view); view->Remove(); return;
   }
   if (mode.rfind("text-", 0) == 0) {
     MartensiteOracleTextScene scene(viewer, offset);

@@ -36,6 +36,10 @@ impl PolygonOffsetState {
     pub fn new(layer: RenderPolygonOffset) -> Self {
         Self { current: layer }
     }
+    // OpenGl_Text::BackPolygonOffsetSentry at 3d097a0 temporarily forces Fill and adds one unit.
+    pub fn shadow_bias(&self) -> [f32; 2] {
+        [self.current.units + 1., self.current.factor]
+    }
     pub fn advance(&mut self, offset: Option<RenderPolygonOffset>, polygon: bool) -> [f32; 2] {
         if let Some(offset) = offset.filter(|offset| offset.mode & 8 == 0) {
             self.current = offset;
@@ -49,6 +53,15 @@ impl PolygonOffsetState {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn shadow_fill_bias_is_temporary_and_preserves_factor_even_when_fill_disabled() {
+        let mut state = PolygonOffsetState::new(RenderPolygonOffset::new(2, 3., -2.).unwrap());
+        assert_eq!(state.shadow_bias(), [-1., 3.]);
+        assert_eq!(state.advance(None, true), [0., 0.]);
+        state.advance(Some(RenderPolygonOffset::new(1, 5., 8.).unwrap()), true);
+        assert_eq!(state.shadow_bias(), [9., 5.]);
+        assert_eq!(state.advance(None, true), [8., 5.]);
+    }
     #[test]
     fn native_masks_and_finite_parameters_are_validated() {
         for mode in 0..=15 {

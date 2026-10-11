@@ -14,6 +14,7 @@ pub(super) struct UploadedDraw {
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
     pub annotation: bool,
+    pub text_shadow_bias: bool,
     pub polygon_offset: Option<crate::RenderPolygonOffset>,
     pub polygon: bool,
     pub surface_blend: bool,
@@ -176,6 +177,7 @@ fn upload_draw(
         clipping,
         sprite,
         annotation: draw.annotation,
+        text_shadow_bias: draw.text_shadow_bias,
         polygon_offset: draw.polygon_offset,
         polygon: draw.topology() == crate::PrimitiveTopology::Triangles
             && draw.textured_style.is_none(),

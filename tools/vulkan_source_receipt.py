@@ -25,6 +25,7 @@ RECEIPT_ORACLE_PATHS = (
     "tools/oracle/martensite_vulkan_ais_line.cxx",
     "tools/oracle/martensite_vulkan_ais_point.cxx",
     "tools/oracle/martensite_vulkan_text.cxx",
+    "tools/oracle/martensite_vulkan_named_light.cxx",
     "tools/oracle/martensite_vulkan_ais_axis.cxx",
     "tools/oracle/martensite_vulkan_ais_circle.cxx",
     "tools/oracle/martensite_vulkan_camera_animation.cxx",

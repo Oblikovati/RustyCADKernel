@@ -1,7 +1,7 @@
 //! Shared real Martensite light scene for functional captures and completed-frame timings.
 #[allow(dead_code)]
 #[path = "view_setup.rs"]
-mod view_setup;
+pub(crate) mod view_setup;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
@@ -24,7 +24,7 @@ pub fn light_view(driver: &Handle<Graphic3dRenderDriver>) -> (Handle<V3dViewer>,
 pub fn rendered_light(kind: usize) -> Result<Handle<AisLightSource>, Box<dyn std::error::Error>> {
     let light = capture_light(kind)?;
     let object = AisLightSource::new(&light)?;
-    // Shadow-style light labels remain an explicit Vulkan text limitation.
+    // Geometry-only legacy captures remain available alongside the named Shadow-text probe.
     object.set_display_name(false);
     object.set_zoomable(true);
     object.set_size(6.0);
