@@ -594473,10 +594473,10 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
       "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
       "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
-      "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Root fidelity audit: native returns a const animation-handle reference that observes SetViewAnimation replacement; current view_animation copies the handle. Retained-reference adapter and native replacement/null alias regression remain required; copied convenience alone does not complete this API."
+      "status": "implemented",
+      "notes": "Martensite native live animation-handle reference: two aliases observe setter replacement/null/restore and protected-field replacement without retaining a lock or old target. Seven pinned native snapshots replay slot/target identity, null state and reference counts exactly; copied view_animation remains an unclaimed convenience. See docs/ais-view-cube-animation-reference.md."
     },
     {
       "upstream_id": "AIS_ViewCube::SetViewAnimation",
