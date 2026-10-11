@@ -10,6 +10,9 @@ pub const TWO_PI: f64 = std::f64::consts::TAU;
 /// Native Euler number; `EULER_NUMBER`.
 pub const EULER_NUMBER: f64 = std::f64::consts::E;
 /// Golden expansion ratio; `GOLDEN_RATIO`.
+// Preserve the OCCT literal: Rust 1.99 Clippy recognizes golden ratios, but
+// replacing this value can change oracle results or raise the Rust 1.98.1 MSRV.
+#[allow(clippy::approx_constant)]
 pub const GOLDEN_RATIO: f64 = 1.618033988749895;
 /// Complementary golden section; `GOLDEN_SECTION`.
 pub const GOLDEN_SECTION: f64 = 0.381966011250105;

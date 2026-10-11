@@ -11,7 +11,7 @@ if ! command -v rustup >/dev/null 2>&1; then
 fi
 # Reads the toolchain and components from rust-toolchain.toml.
 rustup show
-cargo install cargo-nextest --version 0.9.146 --locked
+cargo install cargo-nextest --version 0.9.148 --locked
 cargo install cargo-llvm-cov --version 0.9.1 --locked
 cargo install cargo-deny --version 0.20.2 --locked
 cargo fetch --locked

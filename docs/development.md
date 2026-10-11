@@ -79,7 +79,7 @@ that OCCT DRAW calls (no bindgen), linked through `pkg-config tcl8.6`/`tk8.6`, b
 safe wrapper. Its `header_check` test compiles every declaration against the installed
 `tcl.h`/`tk.h` with `cc`, so building it needs the Tcl/Tk 8.6 development packages and a C
 compiler.
-The facade depends on the TKernel workspace crate; `smallvec` 1.16.2 supplies inline storage behind the
+The facade depends on the TKernel workspace crate; `smallvec` 1.16.3 supplies inline storage behind the
 `LocalArray` interface. Rayon 1.12.0 supplies parallel workers behind the `osd` interface. `allocator-api2` 0.4.0 supplies allocator-aware storage behind NCollection interfaces.
 `cargo deny check` checks advisory,
 license, source and dependency policy; license additions require a specific review.
@@ -161,3 +161,22 @@ under its own evidence directory. Shared Cargo example names could otherwise
 reuse another toolkit's executable after a workspace build, even when Cargo
 reported the selected crate as fresh. The regression tests cover package identity
 and removal of old evidence executables after a failed build.
+
+## Dependency maintenance
+
+Dependabot checks Cargo and GitHub Actions weekly, grouping version updates into one
+update per ecosystem. Integrate reviewed updates into `main` with the toolkit tests
+and dependency policy checks; preserve SHA pins in the release workflow. CI and
+`tools/bootstrap.sh` pin the same nextest, llvm-cov, and cargo-deny versions.
+
+The October 11, 2026 audit refreshed libc to 0.2.190, smallvec to 1.16.3,
+Rust to 1.99.0, nextest to 0.9.148, upload-artifact to 7.0.2, download-artifact
+to 8.0.2, and the Windows FreeType build to 2.14.3. Checkout 7.0.1 and all other
+registry dependencies are current within their upstream requirements. Ash 0.38.0
+requires libloading 0.8; libloading and windows-sys 0.61.2 require windows-link 0.2.
+Their newer incompatible versions cannot replace those transitive dependencies
+until upstream adopts them. `cargo update --dry-run` resolves no further updates.
+
+Tcl/Tk use the latest 8.6 patch, 8.6.18; moving to the 9.x ABI requires a separate
+FFI migration. OCCT oracle revisions and historical capture toolchains remain fixed
+to preserve provenance. The workspace minimum supported Rust version stays 1.98.1.

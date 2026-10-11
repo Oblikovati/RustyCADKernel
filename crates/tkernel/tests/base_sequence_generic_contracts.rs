@@ -117,6 +117,8 @@ fn sequence_cursor_assignment_clone_and_both_conversion_directions_preserve_link
     assert!(std::ptr::eq(destination.assign(&writable), identity));
     assert!(std::ptr::eq(destination.assign_self(), identity));
     assert!(destination == readonly);
+    // Exercise the explicit Clone contract even though this cursor is also Copy.
+    #[allow(clippy::clone_on_copy)]
     let copied = Clone::clone(&destination);
     assert!(copied == writable);
     assert_eq!(copied.previous_node(), sequence.link(0));

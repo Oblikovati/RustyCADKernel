@@ -89,6 +89,8 @@ fn legacy_cursor_assignment_preserves_captured_end_and_returns_receiver() {
         receiver,
         constant.assign_from_mutable(&mutable)
     ));
+    // Exercise the explicit Clone contract even though this cursor is also Copy.
+    #[allow(clippy::clone_on_copy)]
     let copied = Clone::clone(&constant);
     array.append(50);
     assert!(!copied.shifted(4).more());

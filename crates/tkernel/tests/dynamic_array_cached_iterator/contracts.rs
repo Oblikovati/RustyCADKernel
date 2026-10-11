@@ -43,6 +43,8 @@ fn empty_default_and_dead_slot_reload_are_checked() {
 fn cached_cursor_copy_and_signed_overflow_preserve_state() {
     let source = source_array();
     let mut cursor = DynamicArrayCachedIterator::from_shared(&source, 0).unwrap();
+    // Exercise the explicit Clone contract even though this cursor is also Copy.
+    #[allow(clippy::clone_on_copy)]
     let copied = Clone::clone(&cursor);
     assert_eq!(copied.pointer(), cursor.pointer());
     cursor.offset_with(&source, isize::MAX).unwrap();

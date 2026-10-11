@@ -2,9 +2,15 @@ version: 2
 updates:
   - package-ecosystem: cargo
     directory: /
+    groups:
+      ecosystem-updates:
+        patterns: ["*"]
     schedule:
       interval: weekly
   - package-ecosystem: github-actions
     directory: /
+    groups:
+      ecosystem-updates:
+        patterns: ["*"]
     schedule:
       interval: weekly

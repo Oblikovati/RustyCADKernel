@@ -2,6 +2,9 @@
 use super::Function;
 use rustycad_tkernel::standard::Failure;
 mod search;
+// Preserve the OCCT literal: Rust 1.99 Clippy recognizes golden ratios, but
+// replacing this value can change oracle results or raise the Rust 1.98.1 MSRV.
+#[allow(clippy::approx_constant)]
 const GOLD: f64 = 1.618034;
 #[derive(Clone, Copy)]
 struct Sample {

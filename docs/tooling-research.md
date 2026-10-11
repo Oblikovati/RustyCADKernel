@@ -4,7 +4,7 @@ Verified on **2026-09-27** against official documentation, release manifests, an
 
 ## Language toolchain
 
-Use **Rust 1.98.1**, released September 3, 2026, with **edition 2024** and workspace **resolver 3**. The live stable distribution manifest agrees with the official release index. Pin the patch release in `rust-toolchain.toml` for repeatable local and CI builds; review upgrades explicitly. Rust 1.98.1 includes a compiler miscompilation fix, so prefer it over 1.98.0. [Release notes](https://doc.rust-lang.org/releases.html), [stable distribution manifest](https://static.rust-lang.org/dist/channel-rust-stable.toml), [edition guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html), [resolver documentation](https://doc.rust-lang.org/cargo/reference/resolver.html).
+Use **Rust 1.99.0**, released October 1, 2026, with **edition 2024** and workspace **resolver 3**. Pin the release in `rust-toolchain.toml` for repeatable local and CI builds; the workspace minimum supported Rust version remains 1.98.1. [Release announcement](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/), [stable distribution manifest](https://static.rust-lang.org/dist/channel-rust-stable.toml), [edition guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html), [resolver documentation](https://doc.rust-lang.org/cargo/reference/resolver.html).
 
 Use **rustup 1.29.1** to manage toolchains; its version is separate from the compiler. Install the toolchain's `rustfmt`, `clippy`, `rust-src`, and `llvm-tools-preview` components. Obtain formatting and lint tools through rustup so they match the compiler. [rustup release](https://blog.rust-lang.org/2026/09/01/Rustup-1.29.1/), [rustup distribution manifest](https://static.rust-lang.org/rustup/release-stable.toml), [toolchain file format](https://rust-lang.github.io/rustup/overrides.html), [Clippy installation](https://doc.rust-lang.org/clippy/installation.html), [rustfmt installation](https://github.com/rust-lang/rustfmt#quick-start).
 
@@ -12,7 +12,7 @@ Use **rustup 1.29.1** to manage toolchains; its version is separate from the com
 
 | Tool | Stable version | Minimum Rust to build | Intended use |
 | --- | --- | --- | --- |
-| cargo-nextest | 0.9.146 | 1.91 | Unit and integration tests, CI reports, eventual suite sharding |
+| cargo-nextest | 0.9.148 | 1.91 | Unit and integration tests, CI reports, eventual suite sharding |
 | cargo-llvm-cov | 0.9.1 | 1.87 | Rust line, region, and function coverage reports |
 | cargo-deny | 0.20.2 | 1.88.0 | Dependency advisory, license, source, and duplicate checks |
 

@@ -37,7 +37,7 @@ The baseline is OCCT **8.1.0-dev1**, commit
 
 ## Setup
 
-Rust **1.98.1**, edition **2024**, is pinned in `rust-toolchain.toml`.
+Rust **1.99.0**, edition **2024**, is pinned in `rust-toolchain.toml`.
 On Linux/macOS (or WSL), with a C linker, curl, Git, and Python 3 installed:
 
 ```sh
