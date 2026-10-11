@@ -20,7 +20,17 @@ struct MartensiteOracleTextScene {
     structure->SetTransformation(new TopLoc_Datum3D(tr));
     structure->Display();
   }
-  void apply(const std::string &mode, const occ::handle<V3d_View> &view) {
+  void apply(std::string mode, const occ::handle<V3d_View> &view) {
+    if (mode.rfind("text-shadow-", 0) == 0) {
+      style->SetTextDisplayType(Aspect_TODT_SHADOW);
+      style->SetColorSubTitle(Quantity_NOC_RED);
+      if (mode == "text-shadow-rgba") {
+        style->SetColorSubTitle(Quantity_ColorRGBA(Quantity_Color(Quantity_NOC_RED), 0.5f));
+        mode = "text-basic";
+      } else {
+        mode = "text-" + mode.substr(12);
+      }
+    }
     if (mode == "text-opaque")
       style->SetAlphaMode(Graphic3d_AlphaMode_Opaque, 0.99f);
     if (mode == "text-mask")

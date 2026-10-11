@@ -14,7 +14,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let driver = Graphic3dRenderDriver::new(device_options::validation_options())?;
     let (viewer, view) = light_scene::light_view(&driver);
     let context = AisInteractiveContext::new(&viewer)?;
-    context.display(&light_scene::rendered_light(kind)?.cast(), false)?;
+    let light = light_scene::rendered_light(kind)?;
+    let named = args.get(3).is_some_and(|value| value == "named");
+    light.set_display_name(named);
+    if named {
+        light.light().set_name(&"Light".into());
+    }
+    context.display(&light.cast(), false)?;
     view_capture::capture_view(&view, 64, 64, &args[2], true)?;
     time_light_frames(&view);
     assert!(
@@ -43,9 +49,9 @@ fn time_light_frames(view: &V3dView) {
 }
 
 fn capture_light_kind(args: &[String]) -> Result<usize, Box<dyn std::error::Error>> {
-    if args.len() != 3 {
+    if !(3..=4).contains(&args.len()) || args.get(3).is_some_and(|value| value != "named") {
         return Err(format!(
-            "received {} arguments; expected kind[0..3] prefix",
+            "received {} arguments; expected kind[0..3] prefix [named]",
             args.len()
         )
         .into());

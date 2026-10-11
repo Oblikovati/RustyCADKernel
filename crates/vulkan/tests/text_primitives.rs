@@ -13,6 +13,7 @@ use martensite_vulkan::*;
 use recording_device::RecordingDevice;
 use rustycad_tkernel::{
     ncollection::{Mat4, Vec4},
+    quantity::{Color, NamedColor},
     standard::Handle,
 };
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
@@ -207,4 +208,65 @@ fn font_cutoff_is_fixed_and_only_mask_blend_enables_coverage_blending() {
             &initial.clone().with_alpha_blending(false)
         );
     }
+}
+
+#[test]
+fn shadow_precedes_foreground_with_one_pixel_offset_and_live_color() {
+    let fixture = TextFixture::new();
+    fixture
+        .style
+        .set_text_display_type(AspectTypeOfDisplayText::Shadow);
+    fixture.style.set_edge_color(Color::named(NamedColor::RED));
+    let frame = fixture.redraw();
+    let draws = frame.draws();
+    assert_eq!(draws.len(), 2);
+    assert_eq!(draws[0].vertices()[0].color, [1., 0., 0., 1.]);
+    assert_eq!(draws[0].textured_style(), draws[1].textured_style());
+    let first = screen_anchor(&draws[0]);
+    let second = screen_anchor(&draws[1]);
+    assert!((first[0] - second[0] - 1.).abs() < 1e-5);
+    assert!((first[1] - second[1] + 1.).abs() < 1e-5);
+    fixture
+        .style
+        .set_text_display_type(AspectTypeOfDisplayText::Normal);
+    assert_eq!(fixture.redraw().draws().len(), 1);
+}
+fn screen_anchor(draw: &PrimitiveDraw) -> [f32; 2] {
+    let c = Mat4::from_data(*draw.clip_transform()) * Vec4::new(0., 0., 0., 1.);
+    [c.x / c.w * 32., c.y / c.w * 32.]
+}
+#[test]
+fn local_plane_shadow_keeps_native_unshifted_anchor() {
+    let fixture = TextFixture::new();
+    fixture
+        .style
+        .set_text_display_type(AspectTypeOfDisplayText::Shadow);
+    let axis = Axis2::new(Point3::new(1., 2., 0.), Direction3::Z).unwrap();
+    fixture.text.set_orientation(&axis);
+    fixture.text.set_own_anchor_point(false);
+    let frame = fixture.redraw();
+    assert_eq!(
+        frame.draws()[0].clip_transform(),
+        frame.draws()[1].clip_transform()
+    );
+    fixture.text.set_own_anchor_point(true);
+    let frame = fixture.redraw();
+    assert_ne!(
+        frame.draws()[0].clip_transform(),
+        frame.draws()[1].clip_transform()
+    );
+}
+#[test]
+fn translucent_glyph_colors_keep_native_order_and_depth_policy() {
+    let image = RasterImage::new([1, 1], vec![[1.; 4]]).unwrap();
+    let style = TexturedStyle::new(image, vec![[0.; 2]; 3], 0.285).unwrap();
+    let draw = PrimitiveDraw::textured(
+        vec![RenderVertex::new([0.; 3], [1., 0., 0., 0.5]); 3],
+        vec![0, 1, 2],
+        identity_clip(),
+        style,
+    )
+    .unwrap();
+    assert!(!draw.is_surface_blended());
+    assert_eq!(draw.vertices()[0].color[3], 0.5);
 }

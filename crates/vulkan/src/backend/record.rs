@@ -162,7 +162,12 @@ fn record_draws(
             culling = (draw.face_culling, draw.mirrored);
             super::capping_record::set_culling(runtime, command, culling);
         }
-        let [units, factor] = offsets.advance(draw.polygon_offset, draw.polygon);
+        let ordinary_bias = offsets.advance(draw.polygon_offset, draw.polygon);
+        let [units, factor] = if draw.text_shadow_bias && policy.0 {
+            offsets.shadow_bias()
+        } else {
+            ordinary_bias
+        };
         unsafe {
             runtime
                 .device()

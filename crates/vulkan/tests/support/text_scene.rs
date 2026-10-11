@@ -8,6 +8,17 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
 use rustycad_tkservice::{aspect::*, graphic3d::*};
+pub const SHADOW_MODES: [&str; 9] = [
+    "text-shadow-basic",
+    "text-shadow-rotated",
+    "text-shadow-zoomable",
+    "text-shadow-plane",
+    "text-shadow-plane-local",
+    "text-shadow-depth",
+    "text-shadow-annotation",
+    "text-shadow-opaque",
+    "text-shadow-rgba",
+];
 pub const MODES: [&str; 23] = [
     "text-basic",
     "text-unicode",
@@ -56,6 +67,9 @@ impl TextScene {
         Self { scene, text, style }
     }
     pub fn apply(&self, mode: &str) {
+        if self.apply_shadow_mode(mode) {
+            return;
+        }
         match mode {
             "text-opaque" => self.style.set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.99),
             "text-mask" => self.style.set_alpha_mode(Graphic3dAlphaMode::Mask, 0.99),
@@ -83,6 +97,26 @@ impl TextScene {
         }
         self.scene.group.set_primitives_aspect(&self.style.cast());
         self.scene.group.add_text(&self.text, true);
+    }
+    fn apply_shadow_mode(&self, mode: &str) -> bool {
+        let Some(base) = mode.strip_prefix("text-shadow-") else {
+            return false;
+        };
+        self.style
+            .set_text_display_type(AspectTypeOfDisplayText::Shadow);
+        self.style.set_edge_color(Color::named(NamedColor::RED));
+        if base == "rgba" {
+            self.style
+                .set_edge_color_rgba(rustycad_tkernel::quantity::ColorRgba::from_rgb(
+                    Color::named(NamedColor::RED),
+                    0.5,
+                ));
+        }
+        self.apply(&format!(
+            "text-{}",
+            if base == "rgba" { "basic" } else { base }
+        ));
+        true
     }
     fn geometric_mode(&self, mode: &str) {
         match mode {

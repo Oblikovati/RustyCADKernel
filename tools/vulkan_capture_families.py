@@ -7,7 +7,7 @@ from vulkan_ais_trihedron_cases import AIS_TRIHEDRON_MODES
 from vulkan_stdprs_cases import STDPRS_MODES
 from vulkan_ais_line_cases import AIS_LINE_MODES
 from vulkan_ais_point_cases import AIS_POINT_MODES
-from vulkan_text_cases import TEXT_MODES
+from vulkan_text_cases import TEXT_MODES, SHADOW_TEXT_MODES
 from vulkan_ais_axis_cases import AIS_AXIS_MODES
 from vulkan_plane_trihedron_cases import PLANE_TRIHEDRON_MODES
 from vulkan_window_cases import WINDOW_MODES, compare_window_pixels
@@ -51,6 +51,7 @@ ALL_CAPTURE_MODES = (
     *AIS_LINE_MODES,
     *AIS_POINT_MODES,
     *TEXT_MODES,
+    *SHADOW_TEXT_MODES,
     *AIS_AXIS_MODES,
     *PLANE_TRIHEDRON_MODES,
     *WINDOW_MODES,
@@ -64,6 +65,7 @@ ALL_CAPTURE_MODES = (
 )
 
 FAMILY_CAPTURE_MODES = {
+    "shadow-text": SHADOW_TEXT_MODES,
     "line-alpha": LINE_ALPHA_MODES,
     "point-alpha": POINT_ALPHA_MODES,
     "rubber-band": RUBBER_BAND_MODES,

@@ -25,3 +25,9 @@ TEXT_MODES = (
     "text-blend",
     "text-cutoff",
 )
+
+SHADOW_TEXT_MODES = (
+    "text-shadow-basic", "text-shadow-rotated", "text-shadow-zoomable",
+    "text-shadow-plane", "text-shadow-plane-local", "text-shadow-depth",
+    "text-shadow-annotation", "text-shadow-opaque", "text-shadow-rgba",
+)
