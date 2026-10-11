@@ -73,8 +73,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    sensitive rectangles, retained aspect changes and viewer persistence transitions.
    [Point clouds](ais-point-cloud.md) now preserve aliased/copied buffers, cached
    bounds, application geometry callbacks and forced subset-owner highlighting,
-   with native comparisons and both GPU profiles. Continue lit point-normal
-   rendering and retain the strict point/line raster gates alongside update timings.
+   with native comparisons and both GPU profiles. [Nodal marker lighting](vulkan-lit-markers.md)
+   now supports Gouraud/Phong points, sprite coverage and clipping. Retain strict
+   point/line raster gates alongside live-normal update timings; continue remaining
+   point material/alpha policies and lit line rendering.
    Continue the remaining presentation and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).
    Keep functional captures and performance regression workloads together on both

@@ -10,7 +10,7 @@ from tkv3d_corpus_ais_point_cloud import append_point_cloud_requests
 class PointCloudCaseTests(unittest.TestCase):
     def test_capture_modes_dispatch_and_remain_in_full_corpus(self) -> None:
         self.assertEqual(capture_modes("point-cloud"), POINT_CLOUD_MODES)
-        self.assertEqual(len(POINT_CLOUD_MODES), 11)
+        self.assertEqual(len(POINT_CLOUD_MODES), 16)
         self.assertTrue(set(POINT_CLOUD_MODES).issubset(capture_modes("all")))
         for mode in POINT_CLOUD_MODES:
             self.assertEqual(capture_executable(Path("examples/capture"), mode), Path("examples/ais_point_cloud_capture"))

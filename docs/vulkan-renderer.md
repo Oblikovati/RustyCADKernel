@@ -566,3 +566,7 @@ family and `ais-point-cloud-updates` benchmark are included in the complete harn
 role checks require actual geometry and subset highlights. Strict raster/depth
 comparisons remain open. Normal-bearing buffers are captured with explicit Unlit
 shading; Gouraud/Phong point-normal lighting remains a renderer prerequisite.
+
+Normal-bearing [lit markers](vulkan-lit-markers.md) now use Gouraud/Phong material
+and light snapshots, per-point colors, sprite coverage and clipping, with native
+capture fixtures and a live-normal redraw benchmark on both GPU profiles.

@@ -94,12 +94,13 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
         "lighting.vert",
         "lighting.frag",
     ):
-        for clipped in (False, True):
+        for clipped, marker in ((False, False), (True, False), *(((False, True), (True, True)) if name.startswith("lighting.") else ())):
             source = ROOT / f"crates/vulkan/shaders/{name}"
             stem, stage = name.split(".")
             suffix = f"{stem}.clipped.{stage}.spv" if clipped else f"{name}.spv"
+            suffix = suffix.replace("lighting.", "lighting.point.") if marker else suffix
             output = folder / suffix
-            compile_shader(source, output, env, clipped)
+            compile_shader(source, output, env, clipped, marker)
             if output.read_bytes() != (source.parent / suffix).read_bytes():
                 raise ValueError(
                     f"received stale SPIR-V for {suffix}; expected current GLSL compiler output"
@@ -108,13 +109,14 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
 
 
 def compile_shader(
-    source: Path, output: Path, env: dict[str, str], clipped: bool = False
+    source: Path, output: Path, env: dict[str, str], clipped: bool = False, marker: bool = False
 ) -> None:
     """Compile a GLSL stage for the required runtime; e.g. compile_shader(vertex, spv, env)."""
     run(
         [
             "glslangValidator",
             *(["-DMARTENSITE_CLIPPING=1"] if clipped else []),
+            *(["-DMARTENSITE_MARKER_LIGHTING=1"] if marker else []),
             "--target-env",
             "vulkan1.3",
             "-V",

@@ -8,6 +8,7 @@ pub(super) struct DrawPipeline {
     pub handle: vk::Pipeline,
     pub layout: vk::PipelineLayout,
     pub push_stages: vk::ShaderStageFlags,
+    pub sprite_set: u32,
     shaders: Vec<vk::ShaderModule>,
     pub clipping_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
     pub lighting_layout: Option<super::storage_descriptor::StorageDescriptorLayout>,
@@ -33,6 +34,7 @@ impl DrawPipeline {
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
             push_stages: push_range(line || point || text).stage_flags,
+            sprite_set: if lighting && point { 2 } else { 0 },
             shaders: vec![],
             clipping_layout: if clipped {
                 Some(super::storage_descriptor::StorageDescriptorLayout::new(
@@ -63,10 +65,8 @@ impl DrawPipeline {
         pipeline.layout = create_layout(
             runtime,
             line || point || text,
-            pipeline
-                .sprite_layout
-                .as_ref()
-                .or(pipeline.lighting_layout.as_ref()),
+            pipeline.sprite_layout.as_ref(),
+            pipeline.lighting_layout.as_ref(),
             pipeline.clipping_layout.as_ref(),
         )?;
         pipeline.create(kind)?;
@@ -81,7 +81,7 @@ impl DrawPipeline {
         lighting: bool,
     ) -> Result<(), RenderError> {
         let shaders: [&[u8]; 2] = if lighting {
-            lighting_shaders(clipped)
+            lighting_shaders(clipped, point)
         } else if clipped {
             clipping_shaders(line, point, text)
         } else if text {
@@ -206,12 +206,16 @@ fn create_layout(
     runtime: &VulkanRuntime,
     line: bool,
     sprite: Option<&super::storage_descriptor::StorageDescriptorLayout>,
+    lighting: Option<&super::storage_descriptor::StorageDescriptorLayout>,
     clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
 ) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
     let ranges = [push_range(line)];
-    let mut layouts: Vec<_> = sprite.or(clipping).iter().map(|s| s.handle).collect();
-    layouts.extend(clipping.iter().map(|s| s.handle));
+    let layouts = descriptor_layout_handles(
+        sprite.map(|s| s.handle),
+        lighting.map(|s| s.handle),
+        clipping.map(|s| s.handle),
+    );
     let info = vk::PipelineLayoutCreateInfo::default()
         .push_constant_ranges(&ranges)
         .set_layouts(&layouts);
@@ -256,7 +260,20 @@ fn clipping_shaders(line: bool, point: bool, text: bool) -> [&'static [u8]; 2] {
     ]
 }
 
-fn lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
+fn lighting_shaders(clipped: bool, point: bool) -> [&'static [u8]; 2] {
+    if point {
+        return if clipped {
+            [
+                include_bytes!("../../shaders/lighting.point.clipped.vert.spv"),
+                include_bytes!("../../shaders/lighting.point.clipped.frag.spv"),
+            ]
+        } else {
+            [
+                include_bytes!("../../shaders/lighting.point.vert.spv"),
+                include_bytes!("../../shaders/lighting.point.frag.spv"),
+            ]
+        };
+    }
     if clipped {
         return [
             include_bytes!("../../shaders/lighting.clipped.vert.spv"),
@@ -282,5 +299,53 @@ mod tests {
                 .stage_flags
                 .contains(vk::ShaderStageFlags::FRAGMENT)
         );
+    }
+}
+
+fn descriptor_layout_handles(
+    sprite: Option<vk::DescriptorSetLayout>,
+    lighting: Option<vk::DescriptorSetLayout>,
+    clipping: Option<vk::DescriptorSetLayout>,
+) -> Vec<vk::DescriptorSetLayout> {
+    if let (Some(sprite), Some(lighting)) = (sprite, lighting) {
+        // Keep clipping at set 1; an unused compatible layout fills its slot when absent.
+        return vec![lighting, clipping.unwrap_or(lighting), sprite];
+    }
+    sprite
+        .or(lighting)
+        .or(clipping)
+        .into_iter()
+        .chain(clipping)
+        .collect()
+}
+
+#[cfg(test)]
+mod marker_descriptor_tests {
+    use super::*;
+    use ash::vk::Handle;
+    #[test]
+    fn lit_marker_keeps_lighting_clipping_and_sprite_in_distinct_slots() {
+        let [sprite, lighting, clipping] = [1, 2, 3].map(vk::DescriptorSetLayout::from_raw);
+        assert_eq!(
+            descriptor_layout_handles(Some(sprite), Some(lighting), Some(clipping)),
+            vec![lighting, clipping, sprite]
+        );
+        assert_eq!(
+            descriptor_layout_handles(Some(sprite), Some(lighting), None),
+            vec![lighting, lighting, sprite]
+        );
+        assert_eq!(
+            descriptor_layout_handles(Some(sprite), None, Some(clipping)),
+            vec![sprite, clipping]
+        );
+        assert_eq!(
+            descriptor_layout_handles(None, Some(lighting), Some(clipping)),
+            vec![lighting, clipping]
+        );
+        assert_eq!(
+            descriptor_layout_handles(None, None, Some(clipping)),
+            vec![clipping, clipping]
+        );
+        assert!(descriptor_layout_handles(None, None, None).is_empty());
     }
 }

@@ -190,7 +190,7 @@ fn record_draw(
                 command,
                 vk::PipelineBindPoint::GRAPHICS,
                 draw.pipeline.layout,
-                0,
+                draw.pipeline.sprite_set,
                 &[sprite.set],
                 &[],
             );
