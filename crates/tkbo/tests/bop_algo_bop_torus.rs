@@ -67,9 +67,9 @@ fn box_torus_fuse_matches_native_oracle() {
         include_str!("../../../tools/oracle/tkbo_bop_torus.expected")
     };
     // Native Windows CRT streams use CRLF; every numeric and topology field stays exact.
-    let expected = expected.replace("\r\n", "\n");
-    for (line, (actual, wanted)) in rows.lines().zip(expected.lines()).enumerate() {
+    let native_snapshot_rows = expected.replace("\r\n", "\n");
+    for (line, (actual, wanted)) in rows.lines().zip(native_snapshot_rows.lines()).enumerate() {
         assert_eq!(actual, wanted, "first difference at line {}", line + 1);
     }
-    assert_eq!(rows, expected);
+    assert_eq!(rows, native_snapshot_rows);
 }

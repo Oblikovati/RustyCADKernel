@@ -51,6 +51,7 @@ jobs:
         run: cmake --build target/native-platform --config RelWithDebInfo --target ${{ inputs.capture == 'cylinder' && 'TKPrim TKMesh' || 'TKBO TKPrim TKMesh' }} --parallel 3
       - name: Capture native and Rust geometry independently
         env:
+          MARTENSITE_FP_CONTRACT: ${{ inputs.fp_contract }}
           MARTENSITE_CYLINDER_ONLY: ${{ inputs.capture == 'cylinder' }}
         run: python3 tools/ci/capture_platform_geometry.py
       - uses: actions/upload-artifact@v7.0.1

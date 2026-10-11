@@ -48,6 +48,19 @@ class FakeRustGeometryProcesses:
         return subprocess.CompletedProcess(command, 101)
 
 
+class FakeBooleanSnapshotCaptures:
+    def __init__(self) -> None:
+        self.native_names: list[str] = []
+
+    def capture_probe(self, root: Path, output: Path, name: str, source: Path) -> bytes:
+        self.native_names.append(name)
+        return b'independent native snapshot\n'
+
+    def capture_rust(self, root: Path, output: Path, package: str, target: str, marker: str, addition: str) -> int:
+        assert 'MARTENSITE_SNAPSHOT_BEGIN' in addition
+        return 101
+
+
 class PlatformGeometryCaptureTests(unittest.TestCase):
     def test_native_probe_links_pinned_libraries_and_returns_only_native_bytes(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
@@ -80,13 +93,32 @@ class PlatformGeometryCaptureTests(unittest.TestCase):
             root = Path(folder)
             source = root / 'crates/tkmesh/tests/brep_mesh_planar_face_discret.rs'
             source.parent.mkdir(parents=True)
-            original = '    let expected_nodes = [0];\n'
+            original = '    let mut faces = Explorer::new();\n'
             source.write_text(original)
             process = FakeRustGeometryProcesses(source)
             with patch.object(GEOMETRY.subprocess, 'run', process.run):
                 status = GEOMETRY.capture_cylinder_faces(root, root)
             self.assertEqual(status, 101)
             self.assertEqual(source.read_text(), original)
+
+    def test_boolean_snapshots_keep_native_bytes_and_all_original_verdicts(self) -> None:
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            processes = FakeBooleanSnapshotCaptures()
+            with patch.object(GEOMETRY, 'capture_probe', processes.capture_probe), patch.object(GEOMETRY, 'capture_rust', processes.capture_rust):
+                statuses = GEOMETRY.capture_boolean_snapshots(root, root)
+            self.assertEqual(len(statuses), 4)
+            self.assertEqual(set(statuses.values()), {101})
+            for name in processes.native_names:
+                self.assertEqual((root / f'{name}.expected').read_bytes(), b'independent native snapshot\n')
+
+    def test_probe_contraction_policy_is_explicit_and_rejects_unknown_values(self) -> None:
+        for policy in ('off', 'on', 'fast'):
+            with patch.dict(GEOMETRY.os.environ, {'MARTENSITE_FP_CONTRACT': policy}):
+                self.assertEqual(GEOMETRY.probe_compiler_flags(), f'-ffp-contract={policy}')
+        with patch.dict(GEOMETRY.os.environ, {'MARTENSITE_FP_CONTRACT': 'invalid'}):
+            with self.assertRaisesRegex(ValueError, "invalid.*expected off"):
+                GEOMETRY.probe_compiler_flags()
 
     def test_missing_rust_marker_cannot_silently_change_a_test(self) -> None:
         with tempfile.TemporaryDirectory() as folder:
