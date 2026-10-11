@@ -6,6 +6,13 @@ fn unix(path: &str, sys_type: SysType) -> CadPath {
     CadPath::parse(path, sys_type, PathSyntax::Unix).unwrap()
 }
 
+fn unix_component_path(components: [&str; 7]) -> CadPath {
+    let [node, user, password, disk, trek, name, extension] = components;
+    let mut path = CadPath::empty(PathSyntax::Unix);
+    path.set_values(node, user, password, disk, trek, name, extension);
+    path
+}
+
 fn bytes(path: &CadPath) -> Vec<Vec<u8>> {
     let values = path.values();
     [
@@ -70,7 +77,7 @@ fn unix_build_keeps_the_vms_name_quirks_and_failures() {
 
 #[test]
 fn unix_build_spells_every_dialect() {
-    let path = CadPath::from_values("host", "user", "pw", "DISK$1", "a|^|b|", "n", ".e");
+    let path = unix_component_path(["host", "user", "pw", "DISK$1", "a|^|b|", "n", ".e"]);
     assert_eq!(
         path.system_name().as_bytes(),
         b"user\"pw\"@host:/DISK1a/../b/n.e"
@@ -83,7 +90,7 @@ fn unix_build_spells_every_dialect() {
         path.system_name_as(SysType::MacOs).unwrap().as_bytes(),
         b"DISK$1:n.e"
     );
-    let no_trek = CadPath::from_values("", "", "", "DATA", "", "n", ".e");
+    let no_trek = unix_component_path(["", "", "", "DATA", "", "n", ".e"]);
     let error = no_trek.system_name_as(SysType::Os2).unwrap_err();
     assert_eq!(error.exception_type(), "Standard_OutOfRange");
     assert_eq!(
@@ -94,7 +101,7 @@ fn unix_build_spells_every_dialect() {
 
 #[test]
 fn unix_build_edits_treks_by_token_text() {
-    let mut path = CadPath::from_values("", "", "", "", "|ab|b|", "n", ".e");
+    let mut path = unix_component_path(["", "", "", "", "|ab|b|", "n", ".e"]);
     assert_eq!(path.trek_length(), 2);
     assert_eq!(path.trek_value(2).unwrap().as_bytes(), b"b");
     path.remove_a_trek(2).unwrap();
@@ -265,4 +272,11 @@ fn name_and_extension_splitters_and_validity() {
         PathSyntax::Unix
     ));
     assert_eq!(PathSyntax::Windows.host_sys_type(), SysType::WindowsNt);
+}
+
+#[test]
+fn native_component_constructor_retains_the_host_syntax() {
+    let path = CadPath::from_values("", "", "", "", "|tmp|", "part", ".step");
+    assert_eq!(path.syntax(), PathSyntax::native());
+    assert_eq!(path.name().as_bytes(), b"part");
 }
