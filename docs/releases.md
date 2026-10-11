@@ -139,3 +139,20 @@ and all features, including all targets and doctests. The temporary build is
 deleted after each package/profile pair, and release builds use the same disabled
 debug-symbol/incremental settings as CI. Package contents and test coverage are
 unchanged.
+
+## Platform geometry fixtures
+
+The torus Boolean and cylinder seam tests compare exact native bits on the tested
+host. macOS ARM64 uses its own independently captured coordinates and parameters;
+its libm results differ from the Linux captures. The canonical native comparison
+uses `-ffp-contract=off` with Clang/GCC and `/fp:precise` with MSVC, matching Rust's
+separate multiply and add operations. This is a compiler policy, not a numerical
+tolerance: every recorded numeric and topology field remains exact.
+
+Run `38119937683` proves all 56 macOS torus rows agree under that policy. The
+unmodified default Clang contraction capture in `38118858849` differs on nine
+numeric rows and remains recorded; bitwise agreement with that compiler policy
+is unproven. Both macOS cylinder captures produce node hash `5c0ce88cea863cc7`,
+matching Rust. Raw captures, compiler configuration, hashes, and original failing
+test results are retained in
+`porting/runtime-evidence/release-ci-2026-10-11/`.

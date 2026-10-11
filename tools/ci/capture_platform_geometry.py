@@ -53,7 +53,7 @@ def main() -> None:
     statuses: dict[str, int] = {}
     for name, file in [('torus', 'tkbo_bop_torus.cxx'), ('cylinder', 'tkmesh_cylinder_nodes.cxx')]:
         (output / f'{name}.expected').write_bytes(capture_probe(root, output, name, root / 'tools/oracle' / file))
-    statuses['torus'] = capture_rust(root, output, 'tkbo', 'bop_algo_bop_torus', '    let expected = include_str!', '    println!("MARTENSITE_TORUS_BEGIN\\n{rows}MARTENSITE_TORUS_END");')
+    statuses['torus'] = capture_rust(root, output, 'tkbo', 'bop_algo_bop_torus', '    let expected = if cfg!', '    println!("MARTENSITE_TORUS_BEGIN\\n{rows}MARTENSITE_TORUS_END");')
     statuses['cylinder'] = capture_rust(root, output, 'tkmesh', 'brep_mesh_cylinder_seam_order', '    assert_eq!(cylinder_node_hash', '    println!("MARTENSITE_CYLINDER_HASH={:016x}", cylinder_node_hash(&triangulation));')
     receipt = {'platform': platform.platform(), 'machine': platform.machine(), 'rust_tests': statuses, 'occt_revision': subprocess.check_output(['git', '-C', 'target/occt-source', 'rev-parse', 'HEAD'], cwd=root, text=True).strip(), 'source_revision': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip(), 'sha256': {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in output.glob('*.expected')}}
     (output / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
