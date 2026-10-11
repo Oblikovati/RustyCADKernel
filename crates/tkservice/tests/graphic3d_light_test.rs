@@ -63,7 +63,10 @@ fn set_iterator_over_a_null_set_is_empty() {
         Graphic3dLightSetIterationFilter::None,
     );
     assert!(!it.more());
-    assert!(it.value().is_null());
+    assert_eq!(
+        it.value().err().unwrap().exception_type(),
+        "Standard_NoSuchObject"
+    );
     let set = Graphic3dLightSet::default();
     assert_eq!((set.lower(), set.upper(), set.is_empty()), (1, 0, true));
     assert_eq!(
