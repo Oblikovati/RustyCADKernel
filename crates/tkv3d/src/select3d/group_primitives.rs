@@ -1,7 +1,6 @@
 //! Primitive hooks expose the group map through its independently reordered BVH indices.
 use super::{
-    Select3DBndBox3d, Select3DSensitiveEntity, Select3DSensitiveGroup, Select3DSensitiveSet,
-    Select3DSensitiveSetBase,
+    Select3DBndBox3d, Select3DSensitiveGroup, Select3DSensitiveSet, Select3DSensitiveSetBase,
 };
 use crate::select_basics::{SelectBasicsPickResult, SelectBasicsSelectingVolumeManager};
 use rustycad_tkernel::standard::Failure;
@@ -45,26 +44,28 @@ impl Select3DSensitiveSet for Select3DSensitiveGroup {
         elem_idx: i32,
         _is_full_inside: bool,
     ) -> Result<bool, Failure> {
-        self.primitive_member(elem_idx)
-            .get()
-            .expect(
-                "Select3D_SensitiveGroup::overlapsElement null member; expected a sensitive entity",
-            )
-            .matches(manager, pick_result)
+        super::select3d_group_overlaps_element(
+            self,
+            pick_result,
+            manager,
+            elem_idx,
+            _is_full_inside,
+        )
     }
+
     fn element_is_inside(
         &self,
         manager: &dyn SelectBasicsSelectingVolumeManager,
         elem_idx: i32,
         is_full_inside: bool,
     ) -> Result<bool, Failure> {
-        let mut dummy = SelectBasicsPickResult::default();
-        self.overlaps_element(&mut dummy, manager, elem_idx, is_full_inside)
+        super::select3d_group_element_is_inside(self, manager, elem_idx, is_full_inside)
     }
+
     fn distance_to_cog(
         &self,
         manager: &dyn SelectBasicsSelectingVolumeManager,
     ) -> Result<f64, Failure> {
-        manager.dist_to_geometry_center(&self.center_of_geometry())
+        super::select3d_group_distance_to_cog(self, manager)
     }
 }

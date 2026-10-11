@@ -1,26 +1,8 @@
 //! Direct all/check-all selection keeps one reusable child pick and preserves earlier output writes.
-use super::select3d_set_matches;
-use super::{Select3DSensitiveGroup, Select3DSensitiveSet};
+use super::Select3DSensitiveGroup;
 use crate::select_basics::{SelectBasicsPickResult, SelectBasicsSelectingVolumeManager};
-use crate::select_mgr::SelectMgrSelectionType;
 use rustycad_tkernel::standard::Failure;
 impl Select3DSensitiveGroup {
-    pub(super) fn match_group_volume(
-        &self,
-        manager: &dyn SelectBasicsSelectingVolumeManager,
-        pick_result: &mut SelectBasicsPickResult,
-    ) -> Result<bool, Failure> {
-        // OCCT 3d097a0 invokes selection type twice; each callback may change the subsequent policy.
-        let to_match_all = manager.get_active_selection_type() != SelectMgrSelectionType::Point
-            && self.must_match_all();
-        let to_check_all = manager.get_active_selection_type() != SelectMgrSelectionType::Point
-            && self.to_check_overlap_all();
-        if !to_match_all && !to_check_all {
-            return select3d_set_matches(self, manager, pick_result, false);
-        }
-        self.matches_all(manager, pick_result, to_match_all, to_check_all)
-    }
-
     /// `SetMatchType`; `group.set_match_type(false)`.
     pub fn set_match_type(&self, must_match_all: bool) {
         // This policy affects only nonpoint selection and never dirties geometry.
@@ -43,21 +25,7 @@ impl Select3DSensitiveGroup {
     }
     /// The match of every entity (`Matches` for a box or polyline with `MustMatchAll` or
     /// `ToCheckOverlapAll`), keeping the nearest pick.
-    pub(super) fn matches_all(
-        &self,
-        volume: &dyn SelectBasicsSelectingVolumeManager,
-        result: &mut SelectBasicsPickResult,
-        must_all: bool,
-        check_all: bool,
-    ) -> Result<bool, Failure> {
-        let failed = self.check_group_children(volume, result, (must_all, check_all))?;
-        if failed {
-            return Ok(false);
-        }
-        result.set_dist_to_geom_center(self.distance_to_cog(volume)?);
-        Ok(true)
-    }
-    fn check_group_children(
+    pub(super) fn check_group_children(
         &self,
         volume: &dyn SelectBasicsSelectingVolumeManager,
         result: &mut SelectBasicsPickResult,

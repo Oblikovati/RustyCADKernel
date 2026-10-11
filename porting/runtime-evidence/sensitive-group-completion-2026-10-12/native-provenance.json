@@ -1,0 +1,197 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_configuration": "existing RelWithDebInfo exception-enabled OCCT libraries; -O2 -g -DNDEBUG, no No_Exception defines; no OCCT rebuild",
+  "oracle_execution": "Local CPU only; existing native libraries, no OCCT rebuild; Rust replay has no OCCT/compiler/GPU/I/O dependency",
+  "new_rows": 2460,
+  "new_hook_snapshots": 1152,
+  "ordinary_json_cases": 30,
+  "json_failure_mutation_cases": 30,
+  "application_json_distance_cases": 20,
+  "state_rtti_sequences": 4,
+  "protected_state_cases": 3,
+  "prior_evidence_manifest": "crates/tkv3d/tests/fixtures/sensitive-group-native.json",
+  "prior_evidence_sha256": "ca19e80c87e806c2a7e65addd45d3484fd0aa74fbc44ff996b30c0a0883cd2c0",
+  "generators": [
+    {
+      "path": "tools/oracle/martensite_group_json_addresses.hxx",
+      "sha256": "1f1d66b718e8dced9bfeb10c84fc3d6ef5f0c18a4bceca2afdfd90b403bc70e3"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_group_faults.cxx",
+      "sha256": "ae54af61ae4e285eff82256c39c95363a89978727b3dde781b4a2150173462a8"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_group_hooks.cxx",
+      "sha256": "3f6f481bd58630c8bcf4a690de8a76385b2866664e353013efffd377e2065b0c"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_group_json.cxx",
+      "sha256": "41013abbbcbee4017382f292d20b9a13a7076c0fe630e715a46760abf7c9d410"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_group_selection.cxx",
+      "sha256": "a1d036bb812384dddbbbbabf632a4d190253be90ca612fb328715bdab6e4d31f"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_group_state.cxx",
+      "sha256": "fa99c60faf74981321702818ac3c013cd3ea357e642c9a0b66a5316138c48f64"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_group_subclass_json.cxx",
+      "sha256": "a7aed89ac9dfaa20684717370f08ac6e1ccfa2d420c0520d4fa54acbbdeb1f17"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_primitive_matching.cxx",
+      "sha256": "cfc144de5ddebc783af29a33534014170f0264c4c9aac0d7040f02c11650be05"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_quadric_selection.cxx",
+      "sha256": "cde645841d92cbc73c90917e25b6df31599f2a009874133773e060776cdb3cb3"
+    }
+  ],
+  "sources": [
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx",
+      "sha256": "ed2b0743a5383272f598d9ace2ff104db9c0a3066eaeb1a88259080be1b636fa"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.cxx",
+      "sha256": "65f6a02341fd7c7d59dc174084ee3e11273a4f6a806729ba339634e56c6c1b16"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveSet.cxx",
+      "sha256": "59947f91e865f3eb5106dee47c8dc7c2a0b084145338aa66333a82855f2bde3d"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveSphere.hxx",
+      "sha256": "51e13e7e4428b8b0f215871112a6fbfa64d117a36bb89247711299d9e5841f2b"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveSphere.cxx",
+      "sha256": "cfefa6483f5453cd1a5e826991685c9031e93c9dbfd0e7cc34978e47ed730225"
+    },
+    {
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.cxx",
+      "sha256": "c6a9a92384fb66e286dda183db53a3531b5aa56395f4be371bac20a41c2ef238"
+    },
+    {
+      "source": "src/Visualization/TKV3d/SelectBasics/SelectBasics_PickResult.hxx",
+      "sha256": "85968aba66be0fa2f2ec9e3572b72b572b3893af8ece10691a2b18ebd1752122"
+    },
+    {
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IndexedMap.hxx",
+      "sha256": "986806b3bd709e74d0a5b0e9fa7ea1af1bda20faf37f0edb813a66d3c7ca133a"
+    },
+    {
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "sha256": "a3ed414887819b3b077ced7c0067e4cdeb02e260fa16f6a1b4f4a4275937889f"
+    },
+    {
+      "source": "src/FoundationClasses/TKMath/gp/gp_XYZ.hxx",
+      "sha256": "257c13047ec024e4d44f906a75a8542dff2a850697511d84e8bf7783b1fd6a9a"
+    },
+    {
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "sha256": "9d486666c6f05674aec2b3180eba8147e2c7c6396e5fea9dcf82d4d85ac94674"
+    },
+    {
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.cxx",
+      "sha256": "453bac1bea2134727ad044e5d333112970a30d97d5695c6b518ac69e3f992429"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveSet.hxx",
+      "sha256": "2256d1567cca1c549108e944df9b00ec48287409b8018d64835c3549e4aba195"
+    }
+  ],
+  "corpora": [
+    {
+      "suite": "hooks",
+      "rows": 2304,
+      "reconstructed_sha256": "9be492c99835a40bebbb4c2dea17f87a79c6ec4d74e38f53e9334add46cca5a8",
+      "repeat_byte_identical": true,
+      "chunks": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-hooks-00.txt",
+          "rows": 480,
+          "sha256": "06a6d03ae614af0f51516fcbf5b558c4a9ede38b4a4f6eef486aff0f47f685f3"
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-hooks-01.txt",
+          "rows": 480,
+          "sha256": "61446d965049578d7c6b2dcf0a208080b6d1f570176438e0c856add67358fc05"
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-hooks-02.txt",
+          "rows": 480,
+          "sha256": "4494e33299bfc8233bc03a4617382a089f59e5b09c055b28b364b8180c394a9e"
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-hooks-03.txt",
+          "rows": 480,
+          "sha256": "701a074867f4787920859b49025b2b9138658fbc5326a5a7a214b32052ea9243"
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-hooks-04.txt",
+          "rows": 384,
+          "sha256": "04e032d66e8048197f8e994e51498f054d6b4a9b75e9b6f13256364de3a371e7"
+        }
+      ]
+    },
+    {
+      "suite": "json",
+      "rows": 90,
+      "reconstructed_sha256": "f09246cc8d98edac77353dc0d7b9a574a3cdb28459357e28abe09c0030b257b2",
+      "repeat_byte_identical": true,
+      "chunks": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-json.txt",
+          "rows": 30,
+          "sha256": "6aaff5c2aabede3c7a050625681cade14d0b243e3ce41d71ce5d8c15f50ead7a"
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-json-failures.txt",
+          "rows": 60,
+          "sha256": "8780b31f850ce16dff6db3a58645ec2a5c380cc99452b60dd4ae9c3a22a69bd1"
+        }
+      ]
+    },
+    {
+      "suite": "state",
+      "rows": 26,
+      "reconstructed_sha256": "5dced4f67bac59e48f1a203f8eab614b21910f5b6d49819849a82d5496237b64",
+      "repeat_byte_identical": true,
+      "chunks": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-state.txt",
+          "rows": 20,
+          "sha256": "2246f1f22822264aab46e525529ef0faa1d933c8837aef6b948f00db885846c0"
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-protected-state.txt",
+          "rows": 6,
+          "sha256": "a421c0ec96726954d11954106aa7f48ff72acf3c90f050e3c98e395297215cbc"
+        }
+      ]
+    },
+    {
+      "suite": "subclass_json",
+      "rows": 40,
+      "reconstructed_sha256": "e04e45bd2c9be3246e6fbe64e22a716212b3da83a14182fff4068c848a63fa40",
+      "repeat_byte_identical": true,
+      "chunks": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/sensitive-group-subclass-json.txt",
+          "rows": 40,
+          "sha256": "e04e45bd2c9be3246e6fbe64e22a716212b3da83a14182fff4068c848a63fa40"
+        }
+      ]
+    }
+  ],
+  "defined_scope_notes": [
+    "All34 api_visible Group declarations are implemented; six private fields receive no credits",
+    "Native application subclass without its own RTTI preserves Group descriptor and virtual hooks",
+    "Native JSON fragment bytes preserved; unstable pointer addresses alone normalized",
+    "Prior map/node aliases remain valid only while their nodes survive; invalid noexcept indexing, dangling refs, null sensitive dereferences and data races remain undefined upstream"
+  ]
+}
