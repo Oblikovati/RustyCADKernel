@@ -1,0 +1,29 @@
+{
+  "feature_commit": "b0474326b998b582a3bf54e55635cb805e378fee",
+  "integrated_branch_tip": "c270ff6dd076398b3ffe18be0b14da565796e260",
+  "merge_commit": "4c323554b76c281ce71a0e6d1dc7cacb014b0f6f",
+  "deleted_worktree": "/home/vmiguel/git/oblikovati-workspace/Martensite-ais-rubber-band",
+  "worktree_deleted": true,
+  "branch_deleted": true,
+  "worktree_apparent_bytes_removed": 48750598794,
+  "process_reference_audit": [],
+  "local_changes_before_deletion": false,
+  "main_source_hashes_match_gpu_receipt": true,
+  "main_checks": [
+    "cargo test -p rustycad-tkv3d --test ais_rubber_band --test ais_rubber_band_subclass --locked: 7 passed",
+    "cargo test -p martensite-vulkan --test line_primitives --test surface_primitives --locked: 13 passed",
+    "Python Vulkan tool tests: 62 passed",
+    "Rustfmt check: tkv3d and Vulkan passed",
+    "Compiler inventory fingerprints current; unresolved ledger rows: 0"
+  ],
+  "inventory": {
+    "api_done": 52069,
+    "api_declarations": 76041,
+    "api_partial": 975,
+    "api_open": 22997,
+    "unresolved_rows": 0,
+    "complete": false
+  },
+  "renderer_limitations": "Both device profiles pass rubber-band visibility and filling roles; strict image failures and lavapipe window-resize timing failure remain recorded in summary.json and performance-repeat.json.",
+  "next_visualization_work": "Normal-bearing lit lines: match legacy OpenGL shading selection and validate on lavapipe and native host."
+}
