@@ -261,5 +261,12 @@ pub use light_source_transforms::{
     ais_light_source_set_local_transform, ais_light_source_update_local_transform,
     ais_light_source_update_persistence,
 };
+mod camera_frustum;
+mod camera_frustum_geometry;
+mod camera_frustum_presentations;
+mod camera_frustum_selection;
 #[cfg(test)]
 mod light_source_tests;
+pub use camera_frustum::{AisCameraFrustum, AisCameraFrustumFields, AisCameraFrustumSelectionMode};
+#[cfg(test)]
+mod camera_frustum_tests;
