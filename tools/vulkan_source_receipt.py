@@ -19,6 +19,7 @@ RECEIPT_ORACLE_PATHS = (
     "tools/oracle/martensite_vulkan_bound_array.hxx",
     "tools/oracle/martensite_vulkan_lines.cxx",
     "tools/oracle/martensite_vulkan_line_alpha.cxx",
+    "tools/oracle/martensite_vulkan_point_alpha.cxx",
     "tools/oracle/martensite_stdprs_geometry.hxx",
     "tools/oracle/martensite_vulkan_stdprs.cxx",
     "tools/oracle/martensite_vulkan_ais_line.cxx",

@@ -8,6 +8,7 @@ pub(super) struct PipelineVariant {
     pub lighting: bool,
     pub surface_blend: bool,
     pub line_blend: bool,
+    pub point_blend: bool,
     pub clamp: bool,
     pub line: bool,
     pub point: bool,
@@ -28,6 +29,7 @@ impl PipelineVariant {
             let base = (index % 10) / 2;
             kind.line = base == 1;
             kind.point = base == 2;
+            kind.point_blend = kind.point;
             kind.text = base >= 3;
             kind.text_blend = base == 3;
         }
@@ -54,9 +56,10 @@ fn blended_variant(index: usize, stencil: bool) -> PipelineVariant {
         stencil,
         RenderCappingPass::None,
     );
-    kind.line_blend = index >= 32;
-    kind.surface_blend = !kind.line_blend;
+    kind.line_blend = (32..36).contains(&index);
+    kind.surface_blend = index < 32;
     kind.line = kind.line_blend;
+    kind.point = index >= 36;
     kind
 }
 fn capping_variant(index: usize) -> RenderCappingPass {
@@ -76,6 +79,7 @@ fn empty_variant(
         lighting: false,
         surface_blend: false,
         line_blend: false,
+        point_blend: false,
         clamp,
         line: false,
         point: false,
@@ -119,6 +123,7 @@ impl RasterPipelines {
         if draw.lighting.is_some()
             || draw.surface_blend
             || draw.line_style.is_some_and(|s| s.alpha_blend)
+            || draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend)
         {
             return self.select_special(draw);
         }
@@ -171,12 +176,40 @@ fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
     if draw.line_style.is_some_and(|s| s.alpha_blend) {
         return Some(32 + flags);
     }
+    if draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend) {
+        return Some(36 + flags);
+    }
     draw.surface_blend.then_some(28 + flags)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn plain_point_variants_preserve_clipping_clamp_and_depth_policy() {
+        for index in 36..40 {
+            let kind = PipelineVariant::from_index(index, true);
+            assert!(kind.point && !kind.point_blend);
+            assert!(!kind.line && !kind.line_blend && !kind.surface_blend);
+            assert_eq!(kind.clamp, index & 1 != 0);
+            assert_eq!(kind.clipped, index & 2 != 0);
+            let draw = plain_variant_draw(kind);
+            assert_eq!(variant_index(&draw), index);
+        }
+    }
+    fn plain_variant_draw(kind: PipelineVariant) -> PrimitiveDraw {
+        let style = crate::PointStyle::new(1., [1, 1], vec![[1.; 4]])
+            .unwrap()
+            .with_alpha_blending(false);
+        let mut draw =
+            PrimitiveDraw::points(vec![], vec![], crate::identity_clip(), style).unwrap();
+        draw.depth_clamp = kind.clamp;
+        if kind.clipped {
+            draw.clipping =
+                Some(crate::RenderClipping::new(vec![], crate::identity_clip()).unwrap());
+        }
+        draw
+    }
     #[test]
     fn stencil_variants_round_trip_clamp_and_clipping_flags() {
         for index in 0..28 {

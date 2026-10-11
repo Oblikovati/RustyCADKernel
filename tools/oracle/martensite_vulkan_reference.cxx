@@ -79,6 +79,7 @@ triangle_scene(const occ::handle<V3d_Viewer> &viewer, double offset) {
 #include "martensite_vulkan_ais_trihedron.cxx"
 #include "martensite_vulkan_ais_rubber_band.cxx"
 #include "martensite_vulkan_lines.cxx"
+#include "martensite_vulkan_point_alpha.cxx"
 #include "martensite_vulkan_persistence.cxx"
 #include "martensite_vulkan_stdprs.cxx"
 #include "martensite_vulkan_surfaces.cxx"
@@ -231,7 +232,7 @@ static void run_scene(int argc, char **argv) {
     write_capture(view, width, height, argv[5], false);
     print_device(view);
     scene.context->Erase(scene.object, false);
-  } else if (mode.rfind("point-", 0) == 0) {
+  } else if (mode.rfind("point-", 0) == 0 && mode.rfind("point-alpha-", 0) != 0) {
     MartensiteOraclePointScene scene(viewer, offset);
     scene.transition(mode, view);
     write_capture(view, width, height, argv[5], mode == "point-detected");
@@ -257,6 +258,8 @@ static void run_scene(int argc, char **argv) {
       group->SetGroupPrimitivesAspect(unlit_aspects());
       group->AddPrimitiveArray(surface_vertices(mode));
     }
+    if (mode.rfind("point-alpha-", 0) == 0 || mode.rfind("sprite-alpha-", 0) == 0)
+      alpha_point_scene(structure, mode);
     if (mode.rfind("line-", 0) == 0)
       line_scene(structure, mode);
     if (mode.rfind("stdprs-", 0) == 0)

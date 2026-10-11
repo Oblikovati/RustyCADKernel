@@ -1,4 +1,7 @@
 //! Device-bound native assets preserve line behavior without loading OCCT in Rust tests.
+use super::native_golden::assert_capture;
+#[cfg(test)]
+use super::native_golden::assert_golden_depth;
 use super::{line_runtime::line_arrays, viewer_runtime::scene::ViewerScene};
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
@@ -73,21 +76,7 @@ fn assert_retained_golden(scene: &ViewerScene, fixture: &LineGolden) {
     line_arrays::replace_lines(&*scene.group, mode, 1);
     scene.render_view().try_redraw().unwrap();
     let capture = scene.render_view().capture().unwrap();
-    assert_eq!(
-        capture.rgba, *rgba,
-        "received different line pixels for {mode}; expected pinned native RGBA"
-    );
-    assert_golden_depth(&capture.depth, depth, mode);
-}
-fn assert_golden_depth(actual: &[f32], expected: &[u8], mode: &str) {
-    assert_eq!(actual.len() * 4, expected.len());
-    for (actual, bytes) in actual.iter().zip(expected.as_chunks::<4>().0) {
-        let native = f32::from_le_bytes(*bytes);
-        assert!(
-            (actual - native).abs() <= 1e-6,
-            "received {actual} depth for {mode}; expected {native} within 1e-6"
-        );
-    }
+    assert_capture(&capture, rgba, depth, mode);
 }
 #[cfg(test)]
 mod tests {

@@ -104,7 +104,6 @@ impl PrimitiveDraw {
             return Err(rejected(indices, "point indices within the vertex array"));
         }
         crate::scene::validate_components(&vertices, &clip_transform)?;
-        crate::scene::validate_annotation_opacity(&vertices)?;
         Ok(Self {
             vertices,
             indices,

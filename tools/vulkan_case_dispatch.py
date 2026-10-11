@@ -3,6 +3,8 @@
 from pathlib import Path
 
 CAPTURE_EXECUTABLES = {
+    "point-alpha-": "graphic3d_capture",
+    "sprite-alpha-": "graphic3d_capture",
     "rubber-": "ais_rubber_band_capture",
     "tri-": "ais_trihedron_capture",
     "cloud-": "ais_point_cloud_capture",

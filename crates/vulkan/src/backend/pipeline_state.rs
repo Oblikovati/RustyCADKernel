@@ -87,7 +87,11 @@ impl PipelineState {
             blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(
                 if kind.capping.is_mask() {
                     &super::capping_state::MASK_BLEND
-                } else if point || (text && text_blend) || kind.surface_blend || kind.line_blend {
+                } else if kind.point_blend
+                    || (text && text_blend)
+                    || kind.surface_blend
+                    || kind.line_blend
+                {
                     &POINT_BLEND
                 } else {
                     &BLEND

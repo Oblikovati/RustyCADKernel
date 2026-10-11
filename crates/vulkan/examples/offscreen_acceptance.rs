@@ -53,6 +53,7 @@ fn main() {
     persistence_runtime::check_persistence_lifecycle();
     line_runtime::check_line_lifecycle();
     line_alpha_runtime::check_line_alpha();
+    point_alpha_runtime::check_point_alpha();
     color_runtime::check_linear_to_srgb_capture();
     stdprs_runtime::check_curve_lifecycle();
     ais_line_runtime::check_line_datums();
@@ -197,3 +198,12 @@ mod line_alpha_runtime;
 
 #[path = "support/line_alpha_goldens.rs"]
 mod line_alpha_goldens;
+
+#[path = "support/native_golden.rs"]
+mod native_golden;
+#[path = "../tests/support/point_alpha_arrays.rs"]
+mod point_alpha_arrays;
+#[path = "support/point_alpha_goldens.rs"]
+mod point_alpha_goldens;
+#[path = "support/point_alpha_runtime.rs"]
+mod point_alpha_runtime;

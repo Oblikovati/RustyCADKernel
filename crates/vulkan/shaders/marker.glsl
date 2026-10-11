@@ -7,3 +7,16 @@ vec4 markerTexel(uvec2 extent) {
     uvec2 pixel = min(uvec2(gl_PointCoord * vec2(extent)), extent - 1u);
     return sprite.pixels[pixel.y * extent.x + pixel.x];
 }
+
+// OCCT 3d097a0 sprite coverage replaces alpha; plain POINT retains vertex alpha.
+vec4 unlitMarkerColor(vec4 texel, vec4 vertex, uint policy) {
+    if (policy == 4u) return vertex;
+    if (policy == 2u) return texel;
+    if (policy == 1u || policy == 3u) return vec4(vertex.rgb, texel.a);
+    return texel * vertex;
+}
+vec4 litMarkerColor(vec4 texel, vec4 lit, uint policy) {
+    if (policy == 4u) return lit;
+    if (policy == 1u) return vec4(lit.rgb, texel.a);
+    return texel * lit;
+}

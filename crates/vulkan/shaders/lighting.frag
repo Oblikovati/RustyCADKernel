@@ -13,7 +13,7 @@ layout(location=0) out vec4 fragmentColor;
 #ifdef MARTENSITE_MARKER_LIGHTING
 #define MARTENSITE_SPRITE_SET 2
 #include "marker.glsl"
-layout(push_constant) uniform Transform { mat4 clip; float size; uint width; uint height; } transform;
+layout(push_constant) uniform Transform { mat4 clip; float size; uint width; uint height; uint policy; } transform;
 #endif
 #ifdef MARTENSITE_LINE_LIGHTING
 layout(push_constant) uniform LineTransform { mat4 clip; vec2 viewport; uint pattern; uint factor; } transform;
@@ -46,7 +46,7 @@ void main() {
     // intentionally retain solid coverage even when their retained aspect is dashed.
     fragmentColor = litFragmentColor();
 #ifdef MARTENSITE_MARKER_LIGHTING
-    fragmentColor *= markerTexel(uvec2(transform.width, transform.height));
+    fragmentColor = litMarkerColor(markerTexel(uvec2(transform.width, transform.height)), fragmentColor, transform.policy);
     if (fragmentColor.a <= 0.1) discard;
 #endif
 }

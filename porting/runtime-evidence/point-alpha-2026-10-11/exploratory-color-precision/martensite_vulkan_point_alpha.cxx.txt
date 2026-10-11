@@ -1,0 +1,59 @@
+// Native point programs bind Opaque, sprites always blend, at OCCT 3d097a0.
+static void alpha_point_image(const occ::handle<Graphic3d_Aspects>& style,
+                              const std::string& mode) {
+  if(mode.rfind("sprite-alpha-user",0)!=0) return;
+  occ::handle<Image_PixMap> image=new Image_PixMap;
+  image->InitZero(Image_Format_RGBA,4,4);
+  image->SetTopDown(true);
+  const uint8_t alpha[4]={0,25,64,128};
+  for(int y=0;y<4;++y) for(int x=0;x<4;++x) {
+    auto& pixel=image->ChangeValue<Image_ColorRGBA>(y,x);
+    pixel.r()=51;pixel.g()=102;pixel.b()=204;pixel.a()=alpha[x];
+  }
+  style->SetMarkerType(Aspect_TOM_USERDEFINED);
+  style->SetMarkerImage(new Graphic3d_MarkerImage(image));
+}
+static void alpha_point_style(const occ::handle<Graphic3d_Aspects>& style,
+                              const std::string& mode) {
+  float alpha = mode.find("zero") != std::string::npos ? 0.f :
+                mode == "point-alpha-cutoff" ? 0.1f : 0.25f;
+  style->SetInteriorColor(Quantity_ColorRGBA(Quantity_Color(1.,0.,0.,Quantity_TOC_RGB),alpha));
+  Graphic3d_AlphaMode policy = Graphic3d_AlphaMode_MaskBlend;
+  if ((mode == "point-alpha-opaque" || mode == "sprite-alpha-opaque")) policy = Graphic3d_AlphaMode_Opaque;
+  if ((mode == "point-alpha-auto" || mode == "sprite-alpha-auto")) policy = Graphic3d_AlphaMode_BlendAuto;
+  if ((mode == "point-alpha-blend" || mode == "sprite-alpha-blend")) policy = Graphic3d_AlphaMode_Blend;
+  if ((mode == "point-alpha-mask" || mode == "sprite-alpha-mask")) policy = Graphic3d_AlphaMode_Mask;
+  style->SetAlphaMode(policy,0.9f);
+  style->SetMarkerType(mode.rfind("sprite-alpha-color",0)==0 ? Aspect_TOM_BALL :
+                       mode.rfind("sprite-",0)==0 ? Aspect_TOM_PLUS : Aspect_TOM_POINT);
+  alpha_point_image(style,mode);
+  style->SetMarkerScale(5.f);
+}
+static occ::handle<Graphic3d_ArrayOfPrimitives> alpha_point_array(const std::string& mode) {
+  bool colored = mode.find("vertices") != std::string::npos || mode == "point-alpha-depth";
+  auto flags = Graphic3d_ArrayFlags(colored ? Graphic3d_ArrayFlags_VertexColor : 0);
+  occ::handle<Graphic3d_ArrayOfPrimitives> array =
+      new MartensiteOracleBoundArray(Graphic3d_TOPA_POINTS,3,0,0,flags);
+  const uint8_t colors[3][4] = {{255,0,0,64},{0,255,0,128},{255,255,255,0}};
+  const float xs[3] = {-6.125f,0.375f,6.625f};
+  const float zs[3] = {2.f,0.f,-2.f};
+  for (int i=0;i<3;++i) {
+    int rank=array->AddVertex(mode=="point-alpha-depth" ? 0.375f : xs[i],0.375f,
+                              mode=="point-alpha-depth" ? zs[i] : 0.f);
+    if (colored) array->SetVertexColor(rank,NCollection_Vec4<uint8_t>(colors[i][0],colors[i][1],colors[i][2],colors[i][3]));
+  }
+  return array;
+}
+static void alpha_point_scene(const occ::handle<Graphic3d_Structure>& structure,
+                              const std::string& mode) {
+  structure->Clear();
+  auto group=structure->NewGroup();
+  auto style=unlit_aspects();
+  alpha_point_style(style,mode);
+  group->SetGroupPrimitivesAspect(style);
+  group->AddPrimitiveArray(alpha_point_array(mode));
+  if(mode!="point-alpha-clipped") return;
+  occ::handle<Graphic3d_SequenceOfHClipPlane> planes=new Graphic3d_SequenceOfHClipPlane;
+  planes->Append(new Graphic3d_ClipPlane(NCollection_Vec4<double>(1.,0.,0.,0.)));
+  structure->SetClipPlanes(planes);
+}

@@ -11,7 +11,7 @@ layout(push_constant) uniform Transform {
     vec2 viewport; uint pattern; uint factor;
 #endif
 #ifdef MARTENSITE_MARKER_LIGHTING
-    float size; uint width; uint height;
+    float size; uint width; uint height; uint policy;
 #endif
 } transform;
 layout(location=0) out vec4 vertexColor;
