@@ -1,0 +1,26 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_commit": "cdbb118f8",
+  "scoped_nonmacro_claims": 73,
+  "native_snapshots": 760,
+  "native_repeatability": "Two executions byte-identical",
+  "new_rust_tests": 28,
+  "tkv3d_all_target_tests": 610,
+  "tests": "cargo test -p rustycad-tkv3d --all-targets --locked",
+  "clippy": "cargo clippy -p rustycad-tkv3d --all-targets --locked -- -D warnings",
+  "format": "cargo fmt --all -- --check",
+  "module_limits": "ColorScale Rust modules <500 lines; declared function bodies <=20 lines",
+  "renderer": "Existing submission interfaces unchanged; no new device precision or performance claims",
+  "deferred": "Windows/macOS; private unused SizeHint excluded from API scope",
+  "compact_build": {
+    "jobs": 2,
+    "incremental": false,
+    "dev_debug": 0,
+    "test_debug": 0
+  },
+  "ledger_fragments": [
+    "porting/ledger-fragments/color-scale-presentation-layout.json",
+    "porting/ledger-fragments/color-scale-palette-properties.json"
+  ],
+  "ledger_packaging": "73 unchanged unique rows; identical union verified after splitting files below 500 lines"
+}

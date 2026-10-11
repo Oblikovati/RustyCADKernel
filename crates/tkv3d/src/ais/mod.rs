@@ -283,3 +283,27 @@ mod view_controller_touch_synthesis;
 mod view_controller_touch_synthesis_fixture;
 #[cfg(test)]
 mod view_controller_touch_synthesis_tests;
+
+mod color_scale;
+mod color_scale_placement;
+mod color_scale_policies;
+mod color_scale_ranges;
+pub use color_scale::AisColorScale;
+mod color_scale_collections;
+mod color_scale_dimensions;
+pub use color_scale_collections::{
+    AisColorScaleColors, AisColorScaleFormat, AisColorScaleLabels, AisColorScaleTitle,
+};
+mod color_scale_bar;
+mod color_scale_layout;
+#[cfg(test)]
+mod color_scale_numeric_tests;
+mod color_scale_presentations;
+#[cfg(test)]
+mod color_scale_recording;
+#[cfg(test)]
+mod color_scale_scene_tests;
+mod color_scale_uniform;
+
+#[cfg(test)]
+mod color_scale_property_tests;

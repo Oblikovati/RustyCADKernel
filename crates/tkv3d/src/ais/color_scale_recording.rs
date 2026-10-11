@@ -1,0 +1,176 @@
+//! Named CPU recorder observes real Graphic3d calls, without replacing scale geometry or layout.
+use rustycad_tkernel::{
+    ncollection::{Vec3, Vec4},
+    standard::{Failure, Handle, SharedState, StandardTransient},
+};
+use rustycad_tkmath::gp::Axis2;
+use rustycad_tkservice::{graphic3d::*, null_driver::*};
+use std::sync::Arc;
+#[derive(Debug, PartialEq)]
+pub(super) enum ScaleDrawRequest {
+    Array {
+        kind: i32,
+        vertices: Vec<Vec<f64>>,
+        indices: Vec<i32>,
+    },
+    Text {
+        point: [f64; 2],
+        height: f32,
+        alignment: i32,
+        anchor: bool,
+        text: String,
+    },
+}
+pub(super) type ScaleDrawTrace = Arc<SharedState<Vec<ScaleDrawRequest>>>;
+pub(super) fn recording_presentation(
+    trace: &ScaleDrawTrace,
+) -> Handle<dyn Graphic3dStructureSource> {
+    let manager =
+        Handle::new(Graphic3dStructureManager::new(&NullGraphicDriver::new_handle()).unwrap());
+    let prs = Graphic3dStructure::new(&manager, &Handle::default()).unwrap();
+    let recorder = Handle::new(ScaleRecordingStructure {
+        transient: StandardTransient::default(),
+        inner: prs.cstructure(),
+        trace: trace.clone(),
+    });
+    prs.structure_base().fields.write().cstructure = recorder.cast();
+    prs.cast()
+}
+struct ScaleRecordingStructure {
+    transient: StandardTransient,
+    inner: Handle<dyn Graphic3dCStructure>,
+    trace: ScaleDrawTrace,
+}
+rustycad_tkernel::impl_transient!(ScaleRecordingStructure,"ScaleRecordingStructure",StandardTransient,transient,interfaces:[dyn Graphic3dCStructure]);
+impl Graphic3dCStructure for ScaleRecordingStructure {
+    fn cstructure_base(&self) -> &Graphic3dCStructureBase {
+        self.inner.cstructure_base()
+    }
+    fn on_visibility_changed(&self) {
+        self.inner.on_visibility_changed();
+    }
+    fn clear(&self) {
+        self.inner.clear();
+    }
+    fn connect(&self, other: &dyn Graphic3dCStructure) {
+        self.inner.connect(other);
+    }
+    fn disconnect(&self, other: &dyn Graphic3dCStructure) {
+        self.inner.disconnect(other);
+    }
+    fn graphic_highlight(&self, style: &Handle<dyn Graphic3dPresentationAttributesSource>) {
+        self.inner.graphic_highlight(style);
+    }
+    fn graphic_unhighlight(&self) {
+        self.inner.graphic_unhighlight();
+    }
+    fn shadow_link(
+        &self,
+        manager: &Handle<Graphic3dStructureManager>,
+    ) -> Result<Handle<dyn Graphic3dCStructure>, Failure> {
+        self.inner.shadow_link(manager)
+    }
+    fn remove_group(&self, group: &Handle<dyn Graphic3dGroup>) {
+        self.inner.remove_group(group);
+    }
+    fn new_group(
+        &self,
+        structure: &Handle<dyn Graphic3dStructureSource>,
+    ) -> Result<Handle<dyn Graphic3dGroup>, Failure> {
+        let group: Handle<dyn Graphic3dGroup> = Handle::new(ScaleRecordingGroup {
+            transient: StandardTransient::default(),
+            inner: NullGroup::new(structure),
+            trace: self.trace.clone(),
+        })
+        .cast();
+        self.cstructure_base()
+            .fields
+            .write()
+            .groups
+            .push(group.clone());
+        Ok(group)
+    }
+}
+struct ScaleRecordingGroup {
+    transient: StandardTransient,
+    inner: NullGroup,
+    trace: ScaleDrawTrace,
+}
+rustycad_tkernel::impl_transient!(ScaleRecordingGroup,"ScaleRecordingGroup",StandardTransient,transient,interfaces:[dyn Graphic3dGroup]);
+impl Graphic3dGroup for ScaleRecordingGroup {
+    fn group_base(&self) -> &Graphic3dGroupBase {
+        self.inner.group_base()
+    }
+    fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource> {
+        self.inner.aspects()
+    }
+    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+        self.inner.set_group_primitives_aspect(aspect);
+    }
+    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+        self.inner.set_primitives_aspect(aspect);
+    }
+    fn synchronize_aspects(&self) {
+        self.inner.synchronize_aspects();
+    }
+    fn replace_aspects(&self, map: &Graphic3dAspectsReplaceMap) {
+        self.inner.replace_aspects(map);
+    }
+    fn set_stencil_test_options(&self, on: bool) {
+        self.inner.set_stencil_test_options(on);
+    }
+    fn set_flipping_options(&self, on: bool, axis: &Axis2) {
+        self.inner.set_flipping_options(on, axis);
+    }
+    fn add_text(&self, text: &Handle<Graphic3dText>, _: bool) {
+        let point = text.orientation().location();
+        self.trace.write().push(ScaleDrawRequest::Text {
+            point: [point.x(), point.y()],
+            height: text.height(),
+            alignment: text.vertical_alignment() as i32,
+            anchor: text.has_own_anchor_point(),
+            text: String::from_utf8_lossy(text.text().to_c_string())
+                .trim_end_matches('\0')
+                .to_owned(),
+        });
+    }
+    fn add_primitive_array_buffers(
+        &self,
+        kind: Graphic3dTypeOfPrimitiveArray,
+        indices: &Handle<dyn Graphic3dIndexBufferSource>,
+        vertices: &Handle<dyn Graphic3dBufferSource>,
+        _: &Handle<Graphic3dBoundBuffer>,
+        _: bool,
+    ) {
+        let indexes = if indices.is_null() {
+            Vec::new()
+        } else {
+            (0..indices.nb_elements())
+                .map(|i| indices.index(i).unwrap())
+                .collect()
+        };
+        self.trace.write().push(ScaleDrawRequest::Array {
+            kind: kind as i32,
+            vertices: record_scale_vertices(vertices),
+            indices: indexes,
+        });
+    }
+}
+fn record_scale_vertices(vertices: &Handle<dyn Graphic3dBufferSource>) -> Vec<Vec<f64>> {
+    let (_, offset, stride) = vertices
+        .attribute_data(Graphic3dTypeOfAttribute::Pos)
+        .unwrap();
+    (0..vertices.nb_elements())
+        .map(|index| {
+            let point: Vec3<f32> = vertices.read_at(offset + index as usize * stride).unwrap();
+            let mut values = [point.x, point.y, point.z].map(f64::from).to_vec();
+            if let Some((_, offset, stride)) =
+                vertices.attribute_data(Graphic3dTypeOfAttribute::Color)
+            {
+                let color: Vec4<u8> = vertices.read_at(offset + index as usize * stride).unwrap();
+                values.extend([color.x, color.y, color.z, color.w].map(f64::from));
+            }
+            values
+        })
+        .collect()
+}

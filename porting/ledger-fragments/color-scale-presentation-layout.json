@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "AIS_ColorScale::GetPosition(double &,double &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "018c1f849271e00d42a2794dbef2471d2b9a641f4eaba439f110ce0f25c570be",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetTitle(const TCollection_ExtendedString &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "08309b081964af520dcad2829d37b88801951794dfdc91beae83af076e68ee68",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_title",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetHeight(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "17e91abce631afce73a27e4525cd40b0bf0cea622893a426b3da50d5a366cbe4",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_height",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetSize(const int,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "268bc68ced021226d97d35f278e2c82c0db603e3194a952363a884c7362d312e",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_size",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::AcceptDisplayMode(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "270075d0c93f74d8a0494f91d2b321884ac18a5630ee4a39dcbb4e2a92a066c2",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::ComputeSelection(const occ::handle<SelectMgr_Selection> &,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "2a60500534cb2b001485f0207240a5327efa8f7b62d4673d3995e80fc9ff9eea",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetYPosition()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "2a65a2d7380b0ffda6b867e517993095f762af99de05987f70456068a26d0d6b",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_y_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetBreadth(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "2b3a246c0b30c6b91e0735e291c2891c64819c6c6b83801bd89ad05d99c94944",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_breadth",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetLabelPosition(const Aspect_TypeOfColorScalePosition)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "31de5199f3fef8946996975bebe6aaf7d3789ca32a5b0f07058ba95d0e736364",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_label_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetTextHeight(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "33b4aa57c6eadbb534efcd4e8b88ed694e5f59e00a4eb41db697a324accfa4b0",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_text_height",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::AIS_ColorScale()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "42f2224e14e5e339248bdbd5c5487fd499db9821cb1814041daa3b7dd660261a",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::new",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::TextWidth(const TCollection_ExtendedString &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "50b70d46bd231440a2458e241dcd360bcd76b0db3a1ae31953f0fcd799524150",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::text_width",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetLabelPosition()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "53f0f6b868e560a7ade1655719113c83f99cd8594ce9bc377348adbf8e8908dd",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_label_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetXPosition()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "55e13dda67081a0d190a665289159442829e1052e5e8be3a54d40480f291c51b",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_x_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::TextSize(const TCollection_ExtendedString &,const int,int &,int &,int &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "56f0b8c626652d8d68eff08bf381a5b8cd57c0f388fd2a50d4bf174a67631ca6",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::text_size",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "5730f04cadc1387f5894e2cf34bf29f7e7bdce973222785f5ecafea305a4aed5",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::Compute(const occ::handle<PrsMgr_PresentationManager> &,const occ::handle<Prs3d_Presentation> &,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "68ca2139906422e2779412a181a1abf839c71ba33a202f317e9f17d8cb3b0dbb",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetXPosition(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "6a14b46cd345a372b447aeff2678f1db677fdcbd71c96146d38ab04a347880b5",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_x_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetTitlePosition(const Aspect_TypeOfColorScalePosition)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "7ae3fb5d264bc1cd9a3ec61388bd0fa29d316bc1817b1883d45f4d5a2b0d33e9",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_title_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetBreadth()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "8a3058a714ae69a9ed1aeaf0b2b0ba45127c5b68de168bcd144b262dc85945d4",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_breadth",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetTextHeight()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "a4aa2dbb81227b921a71657389afac28fbd7c1ae1d1d92d3fb82f76a84b76ffa",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_text_height",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetHeight()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "c4a9b0b725358bac67293b9481feb75555ccb99171d6cae2f94b1dcaa3ea619c",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_height",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetSize(int &,int &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "d88d67504e53fa0e27a750136331657f8a919f5858f14948f79ee3648a84257c",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_size",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetTitlePosition()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "dedfc3290e4b2a6ae769f98b9b7730168d4f78d491509e189b8f6fcd275aba52",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_title_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetPosition(const int,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "edbdfbb47515fdd47dcecd15a9e6ee52b97756edc2cb2ef32c463baaf46089e2",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::GetTitle()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "f607c474b39de4f9373d3a2061855ad22e29a512b1bc3162a061e9de19883b88",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::get_title",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::SetYPosition(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "faa07248d95bc63a48c8929fd9e54049c304331f7308ebd576640fde35354c36",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::set_y_position",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    },
+    {
+      "upstream_id": "AIS_ColorScale::TextHeight(const TCollection_ExtendedString &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "source_sha256": "f345cc08ef0da49a2bab5cb16bd8423695940c372f799e017eaf2662275b29ab",
+      "cpp_declaration_id": "fff9419505bfd84dca5ae3de3861fe8a274d1147a391bbf7b8d60ddd13e2642b",
+      "rust_item": "rustycad_tkv3d::ais::AisColorScale::text_height",
+      "status": "implemented",
+      "notes": "Martensite defined AIS_ColorScale behavior: actual colored indexed triangles, gradient ramps, frame polylines, labels/title, live driver metrics, range/custom storage and CIE Lch/DeltaE2000 palette generation. 760 pinned native snapshots and Rust-only regression replay. Native undefined input boundaries receive safe errors/defaults; private helpers and unused SizeHint receive no inventory credit. See docs/ais-color-scale.md."
+    }
+  ]
+}
