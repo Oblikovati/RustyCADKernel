@@ -229,6 +229,8 @@ mod view_controller_keyboard_fixture;
 mod view_controller_keyboard_tests;
 mod view_controller_navigation;
 mod view_controller_navigation_axes;
+mod view_controller_navigation_motion;
+mod view_controller_navigation_transform;
 mod view_controller_picking;
 #[cfg(test)]
 mod view_controller_picking_tests;
@@ -344,3 +346,10 @@ mod view_controller_camera_tests;
 
 #[cfg(test)]
 mod view_controller_camera_failure;
+
+#[cfg(test)]
+mod view_controller_navigation_motion_fixture;
+#[cfg(test)]
+mod view_controller_navigation_motion_tests;
+#[cfg(test)]
+mod view_controller_navigation_xr_fixture;
