@@ -429,3 +429,8 @@ mod view_controller_view_rotation;
 mod view_controller_rotation_fixture;
 #[cfg(test)]
 mod view_controller_rotation_tests;
+
+mod view_cube_animation_reference;
+pub use view_cube_animation_reference::AisViewCubeAnimationRef;
+#[cfg(test)]
+mod view_cube_animation_reference_tests;

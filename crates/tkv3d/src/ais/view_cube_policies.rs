@@ -3,7 +3,12 @@ use super::{AisAnimationCamera, AisAnimationMembers, AisViewCubeSource};
 use rustycad_tkernel::standard::{Failure, Handle};
 /// Nonvirtual native ViewCube policy members; `cube.set_fixed_animation_loop(false)`.
 pub trait AisViewCubeMembers: AisViewCubeSource {
-    /// Retain the animation handle, including null; `cube.view_animation()`.
+    /// Borrow the native live handle slot; `let alias=cube.view_animation_ref()`.
+    fn view_animation_ref(&self) -> super::AisViewCubeAnimationRef<'_> {
+        super::AisViewCubeAnimationRef::new(&self.interaction_base().fields)
+    }
+    /// Copy the current animation handle; replacements do not alter this snapshot.
+    /// Example: `let owned=cube.view_animation()`; native ViewAnimation parity uses `view_animation_ref`.
     fn view_animation(&self) -> Handle<AisAnimationCamera> {
         self.interaction_base().fields.read().animation.clone()
     }
