@@ -111,7 +111,7 @@ fn replay_primitive_failure_frame(scene: &mut PrimitiveScene, row: &[f64]) {
 }
 #[test]
 fn panning_anchor_matches_native_infinite_x_sentinel_and_retains_other_coordinates() {
-    let mut controller = super::AisViewController::new();
+    let mut controller = super::AisViewController::new().unwrap();
     assert!(!controller.has_panning_anchor_point());
     for (x, defined) in [
         (0.0, true),

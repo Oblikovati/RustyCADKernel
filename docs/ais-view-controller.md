@@ -34,7 +34,7 @@ the next accepted rotation starts a fresh angle.
 
 ```rust
 use rustycad_tkv3d::ais::{AisViewController, AisViewInputBufferType};
-let mut controller = AisViewController::new();
+let mut controller = AisViewController::new()?;
 controller.set_allow_touch_z_rotation(true);
 assert!(controller.update_z_rotation(0.5));
 assert!(!controller.update_z_rotation(-0.25));

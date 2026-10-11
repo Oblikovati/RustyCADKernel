@@ -76,7 +76,7 @@ fn assert_rotation_column(row: &[f64], column: usize, actual: f64, expected: f64
 fn deterministic_retained_rotation_defaults_do_not_read_uninitialized_roll() {
     use super::AisViewController;
     use rustycad_tkmath::gp::{Direction3, Point3};
-    let c = AisViewController::new();
+    let c = AisViewController::new().unwrap();
     assert_eq!(c.rotation_state.current_roll, 0.0);
     assert_eq!(c.rotation_state.pivot, Point3::default());
     assert_eq!(c.rotation_state.start_up, Direction3::X);

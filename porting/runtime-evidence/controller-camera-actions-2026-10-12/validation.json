@@ -1,0 +1,156 @@
+{
+  "local_host_only": true,
+  "build_profile": "dev/test debug0 incremental0 jobs2",
+  "commands": [
+    "cargo test -p rustycad-tkv3d -p rustycad-tkernel --all-targets --locked",
+    "cargo test -p rustycad-tkv3d --all-targets --locked (final full17digit fixtures)",
+    "cargo clippy -p rustycad-tkv3d -p rustycad-tkernel --all-targets --locked -- -D warnings",
+    "python3 tools/check_rust_format.py",
+    "python3 tools/toolkit_test_suites.py",
+    "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_toolkit_test_suites.py"
+  ],
+  "all_passed": true,
+  "toolkit_suite_discovery_tests": 13,
+  "full_target_results": [
+    {
+      "target": "     Running unittests src/lib.rs (target/debug/deps/rustycad_tkernel-106ef4742a755ac5)",
+      "passed": 300
+    },
+    {
+      "target": "     Running tests/aliased_array_exception_stacks.rs (target/debug/deps/aliased_array_exception_stacks-3ed0dd93eb206175)",
+      "passed": 1
+    },
+    {
+      "target": "     Running tests/message_defaults_behavior.rs (target/debug/deps/message_defaults_behavior-13b8c33b5028b3ba)",
+      "passed": 4
+    },
+    {
+      "target": "     Running tests/message_messenger.rs (target/debug/deps/message_messenger-fae1bfe1513cd1d5)",
+      "passed": 2
+    },
+    {
+      "target": "     Running tests/mmgr_opt_callback_unwind.rs (target/debug/deps/mmgr_opt_callback_unwind-a0520ff2d3e99924)",
+      "passed": 8
+    },
+    {
+      "target": "     Running tests/mmgr_opt_initialize.rs (target/debug/deps/mmgr_opt_initialize-605257cb11345ff4)",
+      "passed": 3
+    },
+    {
+      "target": "     Running tests/ordered_borrowed_clear.rs (target/debug/deps/ordered_borrowed_clear-687799a51f62cd4a)",
+      "passed": 4
+    },
+    {
+      "target": "     Running tests/ordered_copy_lifetimes.rs (target/debug/deps/ordered_copy_lifetimes-2c9542b5a8a7a460)",
+      "passed": 5
+    },
+    {
+      "target": "     Running tests/osd_sec_sleep_signal.rs (target/debug/deps/osd_sec_sleep_signal-1b2b65d6c5cc4612)",
+      "passed": 3
+    },
+    {
+      "target": "     Running tests/osd_timing_api_behavior.rs (target/debug/deps/osd_timing_api_behavior-1707af2522dd0753)",
+      "passed": 13
+    },
+    {
+      "target": "     Running tests/packed_map_iterator_errors.rs (target/debug/deps/packed_map_iterator_errors-8e542475c5ca5611)",
+      "passed": 19
+    },
+    {
+      "target": "     Running tests/packed_map_native_rehash.rs (target/debug/deps/packed_map_native_rehash-5db598439748003e)",
+      "passed": 11
+    },
+    {
+      "target": "     Running tests/packed_map_object_storage.rs (target/debug/deps/packed_map_object_storage-bd395128ce4dbc02)",
+      "passed": 30
+    },
+    {
+      "target": "     Running tests/resource_api_behavior.rs (target/debug/deps/resource_api_behavior-4a2196a64d70aace)",
+      "passed": 15
+    },
+    {
+      "target": "     Running tests/standard_c_locale_sentry.rs (target/debug/deps/standard_c_locale_sentry-38a3bd7826fa9fa9)",
+      "passed": 1
+    },
+    {
+      "target": "     Running tests/standard_character_locale.rs (target/debug/deps/standard_character_locale-4735e0032c8f6319)",
+      "passed": 1
+    },
+    {
+      "target": "     Running tests/standard_runtime_api_behavior/main.rs (target/debug/deps/standard_runtime_api_behavior-c6aff90f95c8bea9)",
+      "passed": 40
+    },
+    {
+      "target": "     Running tests/standard_runtime_stack_api_behavior.rs (target/debug/deps/standard_runtime_stack_api_behavior-503252c31d134e24)",
+      "passed": 5
+    },
+    {
+      "target": "     Running tests/standard_services_api_behavior.rs (target/debug/deps/standard_services_api_behavior-6aa8d2bd4b509fea)",
+      "passed": 73
+    },
+    {
+      "target": "test osd_perf_meter::OSD_PerfMeterTest__KillRunningMeter ... ok",
+      "passed": 4415
+    },
+    {
+      "target": "     Running unittests examples/api_probe/main.rs (target/debug/examples/api_probe-d301db1f31417831)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/ascii_string_probe.rs (target/debug/examples/ascii_string_probe-cdb581c18901fff4)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/extended_string_probe.rs (target/debug/examples/extended_string_probe-96adda31a21ee954)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/geometry_probe.rs (target/debug/examples/geometry_probe-c737f84b7a2c87fc)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/kdtree_probe.rs (target/debug/examples/kdtree_probe-af63bc50878741eb)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/list_owner_scaling.rs (target/debug/examples/list_owner_scaling-9c54bbb71c31847a)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/oracle_probe/main.rs (target/debug/examples/oracle_probe-9b50dfaa50df3a49)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/strtod_probe.rs (target/debug/examples/strtod_probe-217d2074306e829f)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/units_probe.rs (target/debug/examples/units_probe-011482955df28c53)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests src/lib.rs (target/debug/deps/rustycad_tkv3d-825dae014f0e828b)",
+      "passed": 217
+    },
+    {
+      "target": "     Running tests/ais_context_fatal.rs (target/debug/deps/ais_context_fatal-85c0bdcc594d3487)",
+      "passed": 1
+    },
+    {
+      "target": "     Running tests/toolkit.rs (target/debug/deps/toolkit-20675af5eb8daa1f)",
+      "passed": 477
+    },
+    {
+      "target": "     Running unittests examples/ais_text_label_probe.rs (target/debug/examples/ais_text_label_probe-f83a66a61dc0ffb3)",
+      "passed": 0
+    },
+    {
+      "target": "     Running unittests examples/numeric_probe.rs (target/debug/examples/rustycad_tkv3d_numeric_probe-36a80464e263ece9)",
+      "passed": 0
+    }
+  ],
+  "final_tkv3d_tests": 695,
+  "new_function_lines": "4..20; all newRustfiles<500",
+  "cpp_rust_scoped_production_crosswalk": "bothmethodsimplemented/unique/unique; actualheaderownership/sourcepins; crosswalk.json",
+  "api_change": "AisViewController::new/with_event_timer nowResult<Self,Failure>; infallibleDefaultremoved; allin-repositorycallersadapted; constructor/classremainpartial"
+}

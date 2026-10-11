@@ -7,14 +7,14 @@ use rustycad_tkservice::aspect::*;
 use rustycad_tkv3d::ais::*;
 #[test]
 fn controller_input_roles_start_independent() {
-    let c = AisViewController::new();
+    let c = AisViewController::new().unwrap();
     assert_event(&c, "default-ui", -1);
     assert_snapshot(&parameters(&c), "parameters-default");
     assert_snapshot(&event(&c, AisViewInputBufferType::Gl, -1), "default-gl");
 }
 #[test]
 fn controller_picks_and_polygon_edits_follow_native_transitions() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     c.select_in_viewer(Vec2::new(1, 2), AisSelectionScheme::Add);
     assert_event(&c, "pick-first", -1);
     c.select_in_viewer(Vec2::new(3, 4), AisSelectionScheme::Xor);
@@ -43,7 +43,7 @@ fn controller_sequence_selection_snapshots_points_and_retains_apply_flag() {
     }
 }
 fn check_sequence(length: i32) {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     let mut points = Sequence::default();
     for i in 0..length {
         points.append(Vec2::new(i, -i));
@@ -63,7 +63,7 @@ fn check_sequence_edits(c: &mut AisViewController, length: i32) {
 }
 #[test]
 fn controller_zoom_merges_only_adjacent_pixels_and_preserves_first_modifiers() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     for (name, x, y, delta, flags) in [
         ("zoom-first", 1, 2, 0.5, ASPECT_VKEY_FLAGS_SHIFT),
         ("zoom-merge", 1, 2, -0.5, ASPECT_VKEY_FLAGS_CTRL),
@@ -96,7 +96,7 @@ fn check_scroll(c: &mut AisViewController) {
 }
 #[test]
 fn controller_touch_rotation_gates_accumulation_and_restarts_after_reset() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     let result = c.update_z_rotation(0.5);
     assert_event(&c, "z-disabled", result as i32);
     c.set_allow_touch_z_rotation(true);

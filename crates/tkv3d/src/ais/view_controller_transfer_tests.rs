@@ -12,7 +12,7 @@ fn all_drag_flag_pairs_and_three_frame_queue_lifecycles_match_native() {
 }
 
 fn replay_transfer_chunk(fixture: &str) {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     for line in fixture.lines() {
         let expected: Vec<f64> = line
             .split_whitespace()
@@ -24,7 +24,7 @@ fn replay_transfer_chunk(fixture: &str) {
 
 fn replay_transfer_frame(c: &mut AisViewController, expected: &[f64]) {
     if expected[1] == 0.0 {
-        *c = AisViewController::new();
+        *c = AisViewController::new().unwrap();
         seed_queue(&mut c.ui_input, expected[0] as i32, 0);
         seed_queue(&mut c.render_input, expected[0] as i32, 1);
     }
@@ -54,7 +54,7 @@ fn transfer_native_chunks() -> [&'static str; 7] {
 
 #[test]
 fn transfer_preserves_allocator_identity_and_independent_selection_storage() {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let ui_arena = BaseAllocator::incremental(1024);
     let render_arena = BaseAllocator::incremental(1024);
     seed_allocator_queues(&mut controller, &ui_arena, &render_arena);

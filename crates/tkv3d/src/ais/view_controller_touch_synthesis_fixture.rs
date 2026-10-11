@@ -23,7 +23,7 @@ pub(super) fn synthesis_view() -> (Handle<V3dViewer>, Handle<V3dView>) {
     (viewer, view)
 }
 pub(super) fn synthesis_case(index: usize) -> AisViewController {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     c.navigation_mode = TOUCH_MODES[(index / 5) % 3];
     c.set_touch_tolerance_scale(TOUCH_SCALES[(index / 60) % 6]);
     c.set_mouse_acceleration(if index.is_multiple_of(2) { 2.0 } else { -0.5 });

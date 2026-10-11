@@ -1,4 +1,5 @@
 //! Martensite AIS view-controller input state; rendering dispatch is still being ported.
+use super::view_controller_camera_action_state::ViewControllerCameraActionState;
 use super::view_controller_clicks::ViewControllerClickDispatch;
 use super::view_controller_input_state::{ViewControllerClickState, ViewControllerNavigationState};
 use super::view_controller_mouse_state::ViewControllerMouseDispatch;
@@ -6,16 +7,17 @@ use super::view_controller_parameters::ViewControllerParameters;
 use super::view_controller_rotation_state::ViewControllerRotationState;
 use super::view_controller_touch::ViewControllerTouchDispatch;
 use super::{AisNavigationMode, AisViewInputBuffer, AisViewInputBufferType};
-use rustycad_tkernel::{ncollection::Vec2, osd::Timer};
+use rustycad_tkernel::ncollection::Vec2;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::aspect::AspectWindowInputListenerBase;
-/// Queues native viewer gestures; `AisViewController::new().update_z_rotation(0.1)`.
+/// Queues native viewer gestures; `AisViewController::new()?.update_z_rotation(0.1)`.
 /// Full camera/redraw dispatch and XR remain unported; window input and picking are available.
 pub struct AisViewController {
     pub(super) ui_input: AisViewInputBuffer,
     pub(super) render_input: AisViewInputBuffer,
     pub(super) parameters: ViewControllerParameters,
     pub(super) panning_anchor: Point3,
+    pub(super) camera_action_state: ViewControllerCameraActionState,
     pub(super) rotation_state: ViewControllerRotationState,
     pub(super) navigation_mode: AisNavigationMode,
     pub(super) previous_move_to: Vec2<i32>,
@@ -26,36 +28,7 @@ pub struct AisViewController {
     pub(super) touch_dispatch: ViewControllerTouchDispatch,
     pub(super) mouse_dispatch: ViewControllerMouseDispatch,
 }
-impl Default for AisViewController {
-    fn default() -> Self {
-        Self::with_event_timer(Timer::new(false))
-    }
-}
 impl AisViewController {
-    /// Create native input defaults; `let controller = AisViewController::new()`.
-    pub fn new() -> Self {
-        Self::default()
-    }
-    /// Inject event clocks for deterministic input; `AisViewController::with_event_timer(timer)` starts the timer.
-    pub fn with_event_timer(event_timer: Timer) -> Self {
-        let click_state = ViewControllerClickState::with_timer(event_timer.clone());
-        let touch_dispatch = ViewControllerTouchDispatch::with_timer(event_timer.clone());
-        Self {
-            ui_input: AisViewInputBuffer::new(),
-            render_input: AisViewInputBuffer::new(),
-            parameters: ViewControllerParameters::default(),
-            navigation_mode: AisNavigationMode::Orbit,
-            rotation_state: ViewControllerRotationState::default(),
-            panning_anchor: Point3::new(rustycad_tkernel::precision::infinite(), 0.0, 0.0),
-            previous_move_to: Vec2::new(-1, -1),
-            input_base: AspectWindowInputListenerBase::with_timer(event_timer),
-            click_state,
-            navigation_state: ViewControllerNavigationState::default(),
-            click_dispatch: ViewControllerClickDispatch::new(),
-            touch_dispatch,
-            mouse_dispatch: ViewControllerMouseDispatch::default(),
-        }
-    }
     /// Borrow the UI or rendering queue; `controller.input_buffer(AisViewInputBufferType::Ui)`.
     pub fn input_buffer(&self, role: AisViewInputBufferType) -> &AisViewInputBuffer {
         match role {
@@ -101,7 +74,7 @@ mod tests {
     use super::*;
     #[test]
     fn dispatched_highlight_pixel_and_reset_match_native() {
-        let mut controller = AisViewController::new();
+        let mut controller = AisViewController::new().unwrap();
         controller.previous_move_to = Vec2::new(4, 8);
         assert_previous(&controller, "previous-defined");
         controller.reset_previous_move_to();

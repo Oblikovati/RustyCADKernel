@@ -63,7 +63,7 @@ fn click_timeline(state: i32) -> Handle<ClickPauseRecorder> {
     animation
 }
 fn replay_native_click(row: &[i32]) {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let animation = click_timeline(row[0]);
     let timeline = if row[0] == 0 {
         Handle::default()
@@ -124,7 +124,7 @@ fn clicks_replay_all_native_modifier_double_click_and_animation_states() {
 }
 #[test]
 fn native_default_timelines_are_nonnull_stopped_and_match_snapshot() {
-    let c = AisViewController::new();
+    let c = AisViewController::new().unwrap();
     let actual = format!(
         "defaults {} {} {} {} {} {} {} {}",
         c.view_animation().is_null() as i32,
@@ -144,8 +144,8 @@ fn native_default_timelines_are_nonnull_stopped_and_match_snapshot() {
 }
 #[test]
 fn default_timelines_have_native_names_and_independent_handle_identity() {
-    let first = AisViewController::new();
-    let second = AisViewController::new();
+    let first = AisViewController::new().unwrap();
+    let second = AisViewController::new().unwrap();
     assert_eq!(
         first.view_animation().name().as_bytes(),
         b"AIS_ViewController_ViewAnimation"
@@ -170,7 +170,7 @@ fn abort_camera_replays_native_running_paused_stopped_and_null_handles() {
     }
 }
 fn replay_camera_abort(row: &[i32]) {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let target = click_camera_target();
     let animation = Handle::new(AisAnimationCamera::new("camera", &target));
     seed_camera_abort(&mut controller, &animation, row[0]);
@@ -203,7 +203,7 @@ fn seed_camera_abort(c: &mut AisViewController, a: &Handle<AisAnimationCamera>, 
 }
 #[test]
 fn timeline_setters_retain_identity_and_accept_null_without_stopping_previous_owner() {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let camera = controller.view_animation().clone();
     let objects = controller.objects_animation().clone();
     camera.start(false).unwrap();
@@ -219,7 +219,7 @@ fn timeline_setters_retain_identity_and_accept_null_without_stopping_previous_ow
 }
 #[test]
 fn selection_map_edits_share_storage_and_clear_removes_default_bindings() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     let address = c.mouse_selection_schemes() as *const _;
     assert_eq!(address, c.change_mouse_selection_schemes() as *const _);
     c.change_mouse_selection_schemes().clear(false);
@@ -230,7 +230,7 @@ fn selection_map_edits_share_storage_and_clear_removes_default_bindings() {
 }
 #[test]
 fn custom_clicks_keep_duplicate_picks_and_do_not_mutate_render_queue() {
-    let mut c = AisViewController::new();
+    let mut c = AisViewController::new().unwrap();
     c.change_mouse_selection_schemes()
         .bind(3, AisSelectionScheme::Add);
     for double in [false, true] {
@@ -243,7 +243,7 @@ fn custom_clicks_keep_duplicate_picks_and_do_not_mutate_render_queue() {
 }
 #[test]
 fn failing_polymorphic_pause_precedes_selection_and_preserves_queued_points() {
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     let animation = Handle::new(ClickPauseRecorder::new(true));
     animation.start(false).unwrap();
     controller.set_objects_animation(&animation.cast::<dyn AisAnimationSource>());

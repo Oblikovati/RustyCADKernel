@@ -27,7 +27,7 @@ pub(super) fn primitive_scene(index: usize) -> PrimitiveScene {
     let view = viewer.create_view().unwrap();
     configure_primitive_view(&view, index);
     configure_primitive_xr(&view, index);
-    let mut controller = AisViewController::new();
+    let mut controller = AisViewController::new().unwrap();
     configure_primitive_controller(&mut controller, index);
     controller.view_animation().set_view(&view);
     controller.view_animation().start(false).unwrap();
