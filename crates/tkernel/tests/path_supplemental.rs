@@ -1,5 +1,7 @@
 //! Explicit parser profiles and named environment/filesystem fixtures.
 use rustycad_tkernel::osd::{CadPath, LocalTime, PathSyntax, Process, ProcessSource};
+const WINDOWS_CURRENT_TREK: &[u8] = b"|workspace|";
+const WINDOWS_PARENT_TREK: &[u8] = b"|";
 struct FakeDirectorySource;
 impl ProcessSource for FakeDirectorySource {
     fn process_id(&self) -> i32 {
@@ -29,13 +31,17 @@ fn injected_directory_source_keeps_queries_deterministic() {
     let mut path = Process::with_source(FakeDirectorySource).current_directory();
     // Windows CurrentDirectory keeps the final component as Name, as OCCT does.
     let expected: &[u8] = if cfg!(windows) {
-        b"|workspace"
+        WINDOWS_CURRENT_TREK
     } else {
         b"|workspace|project|"
     };
     assert_eq!(path.trek().as_bytes(), expected);
     path.up_trek();
-    let parent: &[u8] = if cfg!(windows) { b"" } else { b"|workspace|" };
+    let parent: &[u8] = if cfg!(windows) {
+        WINDOWS_PARENT_TREK
+    } else {
+        b"|workspace|"
+    };
     assert_eq!(path.trek().as_bytes(), parent);
 }
 #[test]
@@ -53,4 +59,13 @@ fn syntax_profiles_preserve_unc_parent_markers_and_native_classification_quirks(
     assert!(!CadPath::is_remote_protocol_path("x:y://host"));
     assert!(CadPath::is_relative_path(""));
     assert!(CadPath::default().system_name().is_empty());
+}
+
+#[test]
+fn windows_directory_components_match_the_process_source_contract() {
+    let mut path = CadPath::with_syntax("/workspace/project", PathSyntax::Windows);
+    assert_eq!(path.trek().as_bytes(), WINDOWS_CURRENT_TREK);
+    assert_eq!(path.name().as_bytes(), b"project");
+    path.up_trek();
+    assert_eq!(path.trek().as_bytes(), WINDOWS_PARENT_TREK);
 }
