@@ -130,7 +130,7 @@ fn set_state(s: &Graphic3dLightSet) {
         let mut it = Graphic3dLightSetIterator::new(s, filter);
         let mut count = 0;
         while it.more() {
-            int(it.value().light_type() as i32);
+            int(it.value().unwrap().light_type() as i32);
             count += 1;
             it.next();
         }

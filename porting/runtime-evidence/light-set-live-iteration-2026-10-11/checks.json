@@ -1,0 +1,82 @@
+{
+  "base_commit": "54382fc12cd0a93a06db00842661c16ea1e5d626",
+  "branch": "porting/martensite-light-set-live-iteration",
+  "worktree": "/home/vmiguel/git/oblikovati-workspace/Martensite-light-set-live-iteration",
+  "build_environment": {
+    "CARGO_PROFILE_DEV_DEBUG": "0",
+    "CARGO_PROFILE_TEST_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2"
+  },
+  "checks": [
+    {
+      "command": "cargo test -p rustycad-tkservice --all-targets",
+      "passed": true,
+      "lib_tests": 89,
+      "toolkit_tests": 160,
+      "new_regression_tests": 4,
+      "native_fixture_transitions": 576
+    },
+    {
+      "command": "cargo clippy -p rustycad-tkservice --all-targets -- -D warnings",
+      "passed": true
+    },
+    {
+      "command": "python3 tools/check_rust_format.py",
+      "passed": true,
+      "bounded_commands": 2
+    },
+    {
+      "command": "python3 tools/toolkit_test_suites.py",
+      "passed": true
+    },
+    {
+      "command": "PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p 'test_toolkit_test_suites.py'",
+      "passed": true,
+      "tests": 13
+    },
+    {
+      "command": "Single TKService nightly-2026-09-25 rustdoc JSON capture and make_reachable_inventory normalization",
+      "passed": true,
+      "unique_reachable_fragment_items": 27,
+      "default_impl_selectors": 2,
+      "warning": "Pre-existing broken Graphic3dStructureMembers doc link in structure.rs; no new LightSet rustdoc warning."
+    },
+    {
+      "command": "Pinned native generator executed twice; outputs compared byte-for-byte",
+      "passed": true,
+      "rows": 576
+    },
+    {
+      "command": "Changed Rust/native function <=20 and code/fixture file <500 line audit",
+      "passed": true
+    },
+    {
+      "command": "git diff --check",
+      "passed": true
+    }
+  ],
+  "claim_audit": {
+    "api_visible_pins": 27,
+    "implemented_operations": 25,
+    "partial_class_records": 2,
+    "unique_cpp_declaration_ids": 27,
+    "new_getter_porting_credit": false,
+    "private_helper_credit": false,
+    "shared_parity_or_generated_inventory_edits": false
+  },
+  "limitations": [
+    "Linux sequential CPU observations; Windows/macOS deferred.",
+    "Native protected raw map/state fields and complete subclass layout remain open.",
+    "Rust storage-retention safety has its own regression; not claimed from native dangling-memory behavior.",
+    "Renderer submission unchanged; no new GPU functional/capture/performance receipt needed."
+  ],
+  "logs_sha256": {
+    "local-tkservice-tests.log": "141e288df8df3e6fec89ece52056d226fef08ff37087a21a6d237721b938d7c6",
+    "local-clippy.log": "6724f82ff5c3ddd929916e92af9f9716c3aeb029cac63e8e79ce7f196e401ea8",
+    "format.log": "d5ea3b094219abd3ca85bd7921304556ad90101689e9f0eecc77ab79f4da5610",
+    "discovery.log": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4",
+    "toolkit-runner-tests.log": "4732ec9db95e6b50c006e716108c7452ecbae8b44d77a76e1a2d248054b14ed5",
+    "rustdoc-selector-capture.log": "5e0b1b89900844944c9c21552b1ef149f897e107165e926d4925af17c1a4b089"
+  }
+}

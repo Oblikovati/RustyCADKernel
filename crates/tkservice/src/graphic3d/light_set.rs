@@ -5,6 +5,11 @@ use rustycad_tkernel::ncollection::Vec4;
 use rustycad_tkernel::standard::exceptions::{out_of_range, program_error};
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkernel::tcollection::AsciiString;
+use std::sync::Arc;
+
+#[path = "light_set_iterator.rs"]
+mod live_iterator;
+pub use live_iterator::Graphic3dLightSetIterator;
 
 /// The key letter of each light type (`THE_LIGHT_KEY_LETTERS`).
 const THE_LIGHT_KEY_LETTERS: [u8; 4] = *b"adps";
@@ -46,7 +51,7 @@ struct LightSetState {
 /// A set of lights; `let set = Graphic3dLightSet::default(); set.add(&light)?;`.
 pub struct Graphic3dLightSet {
     transient: StandardTransient,
-    state: SharedState<LightSetState>,
+    state: Arc<SharedState<LightSetState>>,
 }
 rustycad_tkernel::impl_transient!(
     Graphic3dLightSet,
@@ -55,9 +60,9 @@ rustycad_tkernel::impl_transient!(
     transient
 );
 
-impl Default for Graphic3dLightSet {
+impl Default for LightSetState {
     fn default() -> Self {
-        let state = LightSetState {
+        Self {
             lights: Vec::new(),
             ambient: Vec4::new(0.0, 0.0, 0.0, 0.0),
             key_enabled_long: AsciiString::default(),
@@ -68,10 +73,15 @@ impl Default for Graphic3dLightSet {
             nb_cast_shadows: 0,
             revision: 1,
             cache_revision: 0,
-        };
+        }
+    }
+}
+
+impl Default for Graphic3dLightSet {
+    fn default() -> Self {
         Self {
             transient: StandardTransient::default(),
-            state: SharedState::new(state),
+            state: Arc::new(SharedState::new(LightSetState::default())),
         }
     }
 }
@@ -97,7 +107,9 @@ impl Graphic3dLightSet {
     /// Example: `set.value(1)?`.
     pub fn value(&self, index: i32) -> Result<Handle<Graphic3dCLight>, Failure> {
         let state = self.state.read();
-        let slot = usize::try_from(index - 1).ok();
+        let slot = index
+            .checked_sub(1)
+            .and_then(|slot| usize::try_from(slot).ok());
         slot.and_then(|i| state.lights.get(i))
             .map(|(light, _)| light.clone())
             .ok_or_else(|| {
@@ -107,7 +119,8 @@ impl Graphic3dLightSet {
                 ))
             })
     }
-    /// The lights in index order; `set.lights()`.
+    /// Copies the current indexed handles; later membership changes do not change this snapshot.
+    /// Example: `let snapshot = set.lights();`.
     pub fn lights(&self) -> Vec<Handle<Graphic3dCLight>> {
         self.state
             .read()
@@ -213,7 +226,6 @@ impl Graphic3dLightSet {
 
 /// The cache recomputation of `UpdateRevision`.
 fn recompute_cache(state: &mut LightSetState) {
-    use Graphic3dTypeOfLightSource as T;
     state.cache_revision = state.revision;
     state.nb_cast_shadows = 0;
     state.ambient = Vec4::new(0.0, 0.0, 0.0, 0.0);
@@ -222,99 +234,41 @@ fn recompute_cache(state: &mut LightSetState) {
     let mut lights = std::mem::take(&mut state.lights);
     for (light, cached) in &mut lights {
         *cached = light.revision();
-        if !light.is_enabled() {
-            continue;
-        }
-        let kind = light.light_type();
-        state.light_types_enabled[kind as usize] += 1;
-        if kind == T::Ambient {
-            state.ambient += light.packed_color() * light.intensity();
-            continue;
-        }
-        let letter = THE_LIGHT_KEY_LETTERS[kind as usize];
-        let casts = light.to_cast_shadows();
-        state.nb_cast_shadows += i32::from(casts);
-        key_long.push(if casts {
-            letter.to_ascii_uppercase()
-        } else {
-            letter
-        });
+        cache_enabled_light(state, light, &mut key_long);
     }
     state.lights = lights;
+    finish_cache_keys(state, &key_long);
+}
+
+// Disabled lights still refresh their cached revision before this helper is called.
+fn cache_enabled_light(state: &mut LightSetState, light: &Graphic3dCLight, key: &mut Vec<u8>) {
+    if !light.is_enabled() {
+        return;
+    }
+    let kind = light.light_type();
+    state.light_types_enabled[kind as usize] += 1;
+    if kind == Graphic3dTypeOfLightSource::Ambient {
+        state.ambient += light.packed_color() * light.intensity();
+        return;
+    }
+    let letter = THE_LIGHT_KEY_LETTERS[kind as usize];
+    let casts = light.to_cast_shadows();
+    state.nb_cast_shadows += i32::from(casts);
+    key.push(if casts {
+        letter.to_ascii_uppercase()
+    } else {
+        letter
+    });
+}
+
+fn finish_cache_keys(state: &mut LightSetState, key_long: &[u8]) {
     state.ambient.w = 1.0;
     let enabled = state.light_types_enabled;
     state.nb_enabled = enabled[1] + enabled[2] + enabled[3];
-    state.key_enabled_long = AsciiString::from(String::from_utf8_lossy(&key_long).as_ref());
+    state.key_enabled_long = AsciiString::from(String::from_utf8_lossy(key_long).as_ref());
     let short: Vec<u8> = (1..4)
         .filter(|&kind| enabled[kind] > 0)
         .map(|kind| THE_LIGHT_KEY_LETTERS[kind])
         .collect();
     state.key_enabled_short = AsciiString::from(String::from_utf8_lossy(&short).as_ref());
-}
-
-/// `Graphic3d_LightSet::Iterator`: the lights of a set (snapshot of the handles), skipping
-/// those excluded by the filter when it reaches them.
-/// Example: `let it = Graphic3dLightSetIterator::new(&set, Graphic3dLightSetIterationFilter::ExcludeAmbient);`.
-#[derive(Clone, Default)]
-pub struct Graphic3dLightSetIterator {
-    items: Vec<Handle<Graphic3dCLight>>,
-    index: usize,
-    filter: i32,
-}
-
-impl Graphic3dLightSetIterator {
-    /// An iterator over `set` with `filter`; `Graphic3dLightSetIterator::new(&set, filter)`.
-    pub fn new(set: &Graphic3dLightSet, filter: Graphic3dLightSetIterationFilter) -> Self {
-        let mut it = Self {
-            items: set.lights(),
-            index: 0,
-            filter: filter as i32,
-        };
-        it.skip_filtered();
-        it
-    }
-    /// An iterator over a handle; a null set gives an empty iterator.
-    /// Example: `Graphic3dLightSetIterator::from_handle(&set, filter)`.
-    pub fn from_handle(
-        set: &Handle<Graphic3dLightSet>,
-        filter: Graphic3dLightSetIterationFilter,
-    ) -> Self {
-        match set.get() {
-            Some(set) => Self::new(set, filter),
-            None => Self {
-                filter: filter as i32,
-                ..Self::default()
-            },
-        }
-    }
-    /// Whether a current light exists; `it.more()`.
-    pub fn more(&self) -> bool {
-        self.index < self.items.len()
-    }
-    /// The current light, null past the end; `it.value()`.
-    pub fn value(&self) -> Handle<Graphic3dCLight> {
-        self.items.get(self.index).cloned().unwrap_or_default()
-    }
-    /// Moves to the next light that passes the filter; `it.next()`.
-    pub fn next(&mut self) {
-        self.index += 1;
-        self.skip_filtered();
-    }
-    /// `skipFiltered`: advances past the lights that the filter excludes.
-    fn skip_filtered(&mut self) {
-        while self
-            .items
-            .get(self.index)
-            .is_some_and(|light| self.excludes(light))
-        {
-            self.index += 1;
-        }
-    }
-    fn excludes(&self, light: &Graphic3dCLight) -> bool {
-        use Graphic3dLightSetIterationFilter as F;
-        let has = |flag: F| self.filter & flag as i32 != 0;
-        (has(F::ExcludeAmbient) && light.light_type() == Graphic3dTypeOfLightSource::Ambient)
-            || (has(F::ExcludeDisabled) && !light.is_enabled())
-            || (has(F::ExcludeNoShadow) && !light.to_cast_shadows())
-    }
 }

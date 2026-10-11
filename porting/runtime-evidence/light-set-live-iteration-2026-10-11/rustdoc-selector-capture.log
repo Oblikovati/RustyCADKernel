@@ -1,0 +1,64 @@
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.190
+   Compiling num-traits v0.2.19
+   Compiling pkg-config v0.3.34
+    Checking smallvec v1.16.3
+   Compiling rustc_apfloat v0.2.3+llvm-462a31f5a5ab
+   Compiling x11-dl v2.21.0
+    Checking bitflags v2.13.2
+    Checking allocator-api2 v0.4.0
+    Checking bytemuck v1.25.2
+    Checking rustycad-cmath v0.1.2 (/home/vmiguel/git/oblikovati-workspace/Martensite-light-set-live-iteration/crates/cmath)
+    Checking num-complex v0.4.6
+    Checking rustycad-tkernel v0.1.2 (/home/vmiguel/git/oblikovati-workspace/Martensite-light-set-live-iteration/crates/tkernel)
+    Checking once_cell v1.21.4
+    Checking rustycad-tkmath v0.1.2 (/home/vmiguel/git/oblikovati-workspace/Martensite-light-set-live-iteration/crates/tkmath)
+warning: a method with this name may be added to the standard library in the future
+  --> crates/tkmath/src/gp/transform/json.rs:62:85
+   |
+62 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+   |                                                                                     ^^^^
+   |
+   = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+   = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+   = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+   = note: `#[warn(unstable_name_collisions)]` (part of `#[warn(future_incompatible)]`) on by default
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+  --> crates/tkmath/src/lib.rs:2:1
+   |
+ 2 + #![feature(float_conversions)]
+   |
+
+warning: a method with this name may be added to the standard library in the future
+   --> crates/tkmath/src/gp/general_transform/algebra.rs:108:85
+    |
+108 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+    |                                                                                     ^^^^
+    |
+    = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+    = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+    = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+   --> crates/tkmath/src/lib.rs:2:1
+    |
+  2 + #![feature(float_conversions)]
+    |
+
+warning: `rustycad-tkmath` (lib) generated 2 warnings
+ Documenting rustycad-tkservice v0.1.2 (/home/vmiguel/git/oblikovati-workspace/Martensite-light-set-live-iteration/crates/tkservice)
+warning: unresolved link to `Graphic3dStructureMembers`
+ --> crates/tkservice/src/graphic3d/structure.rs:4:39
+  |
+4 | //! with the non-virtual members in [`Graphic3dStructureMembers`] and the concrete class
+  |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^ no item named `Graphic3dStructureMembers` in scope
+  |
+  = help: to escape `[` and `]` characters, add '\' before them like `\[` or `\]`
+  = note: `#[warn(rustdoc::broken_intra_doc_links)]` on by default
+help: there's a similarly named item `Graphic3dStructureManager`
+  |
+4 - //! with the non-virtual members in [`Graphic3dStructureMembers`] and the concrete class
+4 + //! with the non-virtual members in [`Graphic3dStructureManager`] and the concrete class
+  |
+
+warning: `rustycad-tkservice` (lib doc) generated 1 warning
+    Finished `dev` profile [unoptimized] target(s) in 8.13s
