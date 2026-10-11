@@ -130,5 +130,6 @@ fn to_locale_keeps_win32_termination_and_short_buffer_results() {
     let mut empty = [0x55u8; 2];
     assert!(String8::new().to_locale(&mut empty));
     assert_eq!(empty, [0, 0x55]);
-    assert!(!utf8("a").to_locale(&mut []));
+    // Win32 treats zero capacity as a size query; OCCT returns its positive result.
+    assert!(utf8("a").to_locale(&mut []));
 }
