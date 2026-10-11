@@ -52,6 +52,7 @@ mod text_font;
 pub use text_font::FreeTypeTextSource;
 mod text_atlas;
 
+mod text_culling;
 mod text_drawing;
 mod text_submission;
 mod text_transform;

@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "cases": 19,
+  "profiles": [
+    "lavapipe",
+    "host"
+  ],
+  "validation_errors": 0,
+  "gates": {
+    "coverage": "identical pixel mask",
+    "host_rgba": "exact bytes",
+    "lavapipe_rgba": "at most18 differing channel bytes and maximum channel delta1 in real-font blended captures",
+    "depth": "maxdelta<=1e-6"
+  },
+  "observed_max_depth_delta": 1.1920928955078125e-07,
+  "native_policy_rows": 384,
+  "cpu_all_target_tests": 260
+}

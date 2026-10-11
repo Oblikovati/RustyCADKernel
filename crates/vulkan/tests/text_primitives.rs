@@ -235,6 +235,35 @@ fn screen_anchor(draw: &PrimitiveDraw) -> [f32; 2] {
     let c = Mat4::from_data(*draw.clip_transform()) * Vec4::new(0., 0., 0., 1.);
     [c.x / c.w * 32., c.y / c.w * 32.]
 }
+const SHADOW_NATIVE_CULLING_POLICIES: [(Graphic3dTypeOfBackfacingModel, RenderFaceCulling); 3] = [
+    (
+        Graphic3dTypeOfBackfacingModel::BackCulled,
+        RenderFaceCulling::Back,
+    ),
+    (
+        Graphic3dTypeOfBackfacingModel::FrontCulled,
+        RenderFaceCulling::Front,
+    ),
+    (
+        Graphic3dTypeOfBackfacingModel::DoubleSided,
+        RenderFaceCulling::None,
+    ),
+];
+#[test]
+fn shadow_and_foreground_keep_the_same_live_native_face_culling() {
+    let fixture = TextFixture::new();
+    fixture
+        .style
+        .set_text_display_type(AspectTypeOfDisplayText::Shadow);
+    for (native, expected) in SHADOW_NATIVE_CULLING_POLICIES {
+        fixture.style.set_face_culling(native);
+        let frame = fixture.redraw();
+        assert_eq!(frame.draws().len(), 2);
+        for glyph_pass in frame.draws() {
+            assert_eq!(glyph_pass.face_culling(), expected);
+        }
+    }
+}
 #[test]
 fn local_plane_shadow_keeps_native_unshifted_anchor() {
     let fixture = TextFixture::new();
