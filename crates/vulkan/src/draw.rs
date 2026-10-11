@@ -16,6 +16,7 @@ pub struct LineStyle {
     pub(crate) width: f32,
     pub(crate) pattern: u16,
     pub(crate) factor: u16,
+    pub(crate) alpha_blend: bool,
 }
 impl LineStyle {
     /// Validate line state before GPU work; `LineStyle::new(1., 0xffff, 1)?`.
@@ -30,7 +31,17 @@ impl LineStyle {
             width,
             pattern,
             factor,
+            alpha_blend: false,
         })
+    }
+    /// Match native forced blending without deferring depth writes; `style.with_alpha_blending(true)`.
+    pub fn with_alpha_blending(mut self, enabled: bool) -> Self {
+        self.alpha_blend = enabled;
+        self
+    }
+    /// Read native MaskBlend policy; `style.alpha_blending()`.
+    pub fn alpha_blending(&self) -> bool {
+        self.alpha_blend
     }
     // OpenGL aliased lines round a positive subpixel request to the minimum one-pixel width.
     // Keep the requested style for live aspect queries; Vulkan's dynamic state needs this width.
@@ -143,9 +154,6 @@ impl PrimitiveDraw {
     ) -> Result<Self, RenderError> {
         validate_indices(&indices, vertices.len(), line_style.is_some())?;
         crate::scene::validate_components(&vertices, &clip_transform)?;
-        if line_style.is_some() && vertices.iter().any(|v| v.color[3] != 1.) {
-            return Err(rejected(&vertices, "opaque line vertex colors"));
-        }
         let surface_blend = line_style.is_none() && vertices.iter().any(|v| v.color[3] < 1.);
         Ok(Self {
             vertices,

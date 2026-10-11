@@ -23,6 +23,8 @@ pub mod group_flipping;
 pub mod homogeneous_vertices;
 #[path = "../lighting_submission.rs"]
 pub mod lighting_submission;
+#[path = "../line_alpha.rs"]
+pub mod line_alpha;
 #[path = "../line_lighting.rs"]
 pub mod line_lighting;
 #[path = "../line_primitives.rs"]

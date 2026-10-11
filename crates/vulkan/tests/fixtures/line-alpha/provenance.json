@@ -1,0 +1,87 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "generator": "tools/oracle/martensite_vulkan_reference.cxx",
+  "alpha_generator": "tools/oracle/martensite_vulkan_line_alpha.cxx",
+  "configuration": [
+    64,
+    64,
+    0,
+    0
+  ],
+  "local_only": true,
+  "profiles": {
+    "lavapipe": {
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "assets": {
+        "line-alpha-opaque.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-opaque.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-auto.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-auto.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-blend.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-blend.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-mask.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-mask.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-forced.rgba": "87f4e4dba0480edb1e419f6a9bb72cf03fd6047683033da333d5df4880f66852",
+        "line-alpha-forced.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-zero.rgba": "c34fb4331b2d031d7c644860b54a678424c66ef12352fc165a91dc09840d98fd",
+        "line-alpha-zero.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-vertices.rgba": "6b54163bae8b17b6781db29db2fac061d188cf0c127c8504adc52c2f2f570424",
+        "line-alpha-vertices.depth": "3446356641d89dcfdcd8f4f02ce40f08d94ea9168cebd3eb0f83df68707e4f24",
+        "line-alpha-depth.rgba": "f3010b9969e2d6865b179b1a624af038228863863cf77a531ddf718fbe707895",
+        "line-alpha-depth.depth": "e0ca873a9fcd9ad89e9f38f13ca389a6bb3180f3fb19f6b70ca2708143982c11",
+        "line-alpha-wide.rgba": "200d4dfff3cbf2797c2f5d7fe16c1950f3667a8d1c710300e12ded407b000d21",
+        "line-alpha-wide.depth": "4b89d378b412a8c3bc5c55094bec10132699730849cfb56d85bd589c4ddaafc9",
+        "line-alpha-dash.rgba": "649c0da7b3338ce277368d1c11d16d959c1b40b1c69c376eb07df57ea433cb66",
+        "line-alpha-dash.depth": "ea72f8eed62441b6e5d73de0dfa778a365aa9d4a5f2e93018146a8e30dc9bf8f",
+        "line-alpha-clipped.rgba": "9c39c543eddd00b704c91edd9f3582c1ce9cea2a3a1eaa8c9c8ab99a8d9ed0a7",
+        "line-alpha-clipped.depth": "c815b875328aaaddc03b07d4a09241d7bbcdb6b90be052d1895f7cd0ec25f098"
+      }
+    },
+    "host": {
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "assets": {
+        "line-alpha-opaque.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-opaque.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-auto.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-auto.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-blend.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-blend.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-mask.rgba": "c2c6c36d73c4f3cdef726e905f0ce138f50a0f9d5592dd623d0d7ebfdca467a6",
+        "line-alpha-mask.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-forced.rgba": "87f4e4dba0480edb1e419f6a9bb72cf03fd6047683033da333d5df4880f66852",
+        "line-alpha-forced.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-zero.rgba": "c34fb4331b2d031d7c644860b54a678424c66ef12352fc165a91dc09840d98fd",
+        "line-alpha-zero.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-vertices.rgba": "a1dcad4ce86a0778a1c5c9a6c1a3f215d1e68c3a4f336516af13d0dcc11d4ce9",
+        "line-alpha-vertices.depth": "44580199bd48ab639e7c33dcbd04d0d3454e5a01acf468847a06fd4a83c0eee6",
+        "line-alpha-depth.rgba": "3c8ff7afe46fbdbd83403983026d6f28f9fcaabbae57993e9cbee191aeea79d5",
+        "line-alpha-depth.depth": "f4fd8836414d79e3d068e2713b96844a8aed8b103053be465f160e2d0e685949",
+        "line-alpha-wide.rgba": "200d4dfff3cbf2797c2f5d7fe16c1950f3667a8d1c710300e12ded407b000d21",
+        "line-alpha-wide.depth": "e2dd3d6fc5989d764671611060547e11bd467b81741425ef6e415e4b371f438a",
+        "line-alpha-dash.rgba": "649c0da7b3338ce277368d1c11d16d959c1b40b1c69c376eb07df57ea433cb66",
+        "line-alpha-dash.depth": "dd6351f26044458f012ec4ff0926d5eacfb57f588a4c094dde7e193fd229f3c6",
+        "line-alpha-clipped.rgba": "9c39c543eddd00b704c91edd9f3582c1ce9cea2a3a1eaa8c9c8ab99a8d9ed0a7",
+        "line-alpha-clipped.depth": "2c0a8f2f97a14b654f0b7a40672673dd50465a35270b5e561ed8097b938fa4fc"
+      }
+    }
+  },
+  "repeatability": "All 44 native buffer assets byte-identical on a second complete matrix execution",
+  "generator_sha256": {
+    "tools/oracle/martensite_vulkan_reference.cxx": "4f2c3133d44735e60c4a65ddf403d4c74e1c636756da6d217b2e1af00078faca",
+    "tools/oracle/martensite_vulkan_lines.cxx": "ec2598756b52f13c748a0b7e1dbe2da3e43c5ac862910d22d1016a82c90091ed",
+    "tools/oracle/martensite_vulkan_line_alpha.cxx": "269b8c3b7cc02ffe3f1b5250e313bf1c9959be9e8f67ea98e7ae80e5b3dfa90d",
+    "tools/oracle/martensite_vulkan_bound_array.hxx": "d244d76e310199eed58845fc7ebfb0ea89002b69be37a9e1e7af840c046628e5"
+  }
+}

@@ -1,4 +1,6 @@
 //! Paired strokes distinguish connectivity, bound resets, color precedence and screen stipple.
+#[path = "line_alpha_arrays.rs"]
+pub mod alpha;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{aspect::AspectTypeOfLine, graphic3d::*};
 pub const MODES: [&str; 15] = [
@@ -116,6 +118,9 @@ pub fn replace_lines(
     mode: &str,
     repeats: i32,
 ) -> Handle<Graphic3dArrayOfPrimitives> {
+    if mode.starts_with("line-alpha-") {
+        return alpha::replace_alpha_lines(group, mode);
+    }
     let aspects = group.aspects();
     configure_line_style(&*aspects, mode);
     group.clear(false);

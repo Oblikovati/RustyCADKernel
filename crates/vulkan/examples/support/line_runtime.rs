@@ -1,7 +1,7 @@
 //! Live widths, empty patterns and mixed topologies must reach actual validated readback.
 use super::viewer_runtime::scene;
 #[path = "../../tests/support/line_arrays.rs"]
-mod line_arrays;
+pub(super) mod line_arrays;
 use martensite_vulkan::{FrameCapture, Graphic3dRenderDriver};
 use rustycad_tkservice::graphic3d::*;
 pub fn check_line_lifecycle() {
@@ -16,6 +16,7 @@ pub fn check_line_lifecycle() {
     assert!(ink(&scene.render_view().capture().unwrap()) > thin);
     check_empty_and_mixed(&scene);
     check_persistent_lines(&scene);
+    super::line_alpha_goldens::check_line_goldens(&driver);
     println!("MARTENSITE_DEVICE={}", driver.device_name());
     assert!(
         driver.validation_errors().is_empty(),

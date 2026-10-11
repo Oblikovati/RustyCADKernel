@@ -7,6 +7,7 @@ use std::sync::Arc;
 pub(super) struct PipelineVariant {
     pub lighting: bool,
     pub surface_blend: bool,
+    pub line_blend: bool,
     pub clamp: bool,
     pub line: bool,
     pub point: bool,
@@ -18,34 +19,19 @@ pub(super) struct PipelineVariant {
 }
 impl PipelineVariant {
     fn from_index(index: usize, stencil: bool) -> Self {
-        let blend = index >= 28;
-        let index = if blend { (index - 28) % 4 } else { index };
-        let base = index % 10;
-        let ordinary = index < 20;
-        Self {
-            lighting: false,
-            surface_blend: blend,
-            clamp: index & 1 != 0,
-            line: !blend && ordinary && base / 2 == 1,
-            point: !blend && ordinary && base / 2 == 2,
-            text: !blend && ordinary && base / 2 >= 3,
-            text_blend: !blend && ordinary && base / 2 == 3,
-            clipped: if blend {
-                index & 2 != 0
-            } else if ordinary {
-                index >= 10
-            } else {
-                index & 2 != 0
-            },
-            stencil,
-            capping: if ordinary {
-                RenderCappingPass::None
-            } else if index < 24 {
-                RenderCappingPass::MaskStart
-            } else {
-                RenderCappingPass::Surface
-            },
+        if index >= 28 {
+            return blended_variant(index, stencil);
         }
+        let clipped = ordinary_clipping(index);
+        let mut kind = empty_variant(index & 1 != 0, clipped, stencil, capping_variant(index));
+        if index < 20 {
+            let base = (index % 10) / 2;
+            kind.line = base == 1;
+            kind.point = base == 2;
+            kind.text = base >= 3;
+            kind.text_blend = base == 3;
+        }
+        kind
     }
     pub fn depth_format(self) -> vk::Format {
         if self.stencil {
@@ -53,6 +39,51 @@ impl PipelineVariant {
         } else {
             vk::Format::D32_SFLOAT
         }
+    }
+}
+fn ordinary_clipping(index: usize) -> bool {
+    if index < 20 {
+        return index >= 10;
+    }
+    index & 2 != 0
+}
+fn blended_variant(index: usize, stencil: bool) -> PipelineVariant {
+    let mut kind = empty_variant(
+        index & 1 != 0,
+        index & 2 != 0,
+        stencil,
+        RenderCappingPass::None,
+    );
+    kind.line_blend = index >= 32;
+    kind.surface_blend = !kind.line_blend;
+    kind.line = kind.line_blend;
+    kind
+}
+fn capping_variant(index: usize) -> RenderCappingPass {
+    match index {
+        0..20 => RenderCappingPass::None,
+        20..24 => RenderCappingPass::MaskStart,
+        _ => RenderCappingPass::Surface,
+    }
+}
+fn empty_variant(
+    clamp: bool,
+    clipped: bool,
+    stencil: bool,
+    capping: RenderCappingPass,
+) -> PipelineVariant {
+    PipelineVariant {
+        lighting: false,
+        surface_blend: false,
+        line_blend: false,
+        clamp,
+        line: false,
+        point: false,
+        text: false,
+        text_blend: false,
+        clipped,
+        stencil,
+        capping,
     }
 }
 pub(super) struct RasterPipelines {
@@ -85,7 +116,10 @@ impl RasterPipelines {
         })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        if draw.lighting.is_some() || draw.surface_blend {
+        if draw.lighting.is_some()
+            || draw.surface_blend
+            || draw.line_style.is_some_and(|s| s.alpha_blend)
+        {
             return self.select_special(draw);
         }
         let index = variant_index(draw);
@@ -114,8 +148,8 @@ impl RasterPipelines {
     }
 }
 fn variant_index(draw: &PrimitiveDraw) -> usize {
-    if draw.surface_blend {
-        return 28 + usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some());
+    if let Some(index) = alpha_variant_index(draw) {
+        return index;
     }
     if draw.capping_pass != RenderCappingPass::None {
         return (if draw.capping_pass.is_mask() { 20 } else { 24 })
@@ -130,6 +164,14 @@ fn variant_index(draw: &PrimitiveDraw) -> usize {
             .textured_style
             .as_ref()
             .map_or(0, |style| if style.blend { 6 } else { 8 })
+}
+
+fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
+    let flags = usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some());
+    if draw.line_style.is_some_and(|s| s.alpha_blend) {
+        return Some(32 + flags);
+    }
+    draw.surface_blend.then_some(28 + flags)
 }
 
 #[cfg(test)]
@@ -174,5 +216,36 @@ mod blend_tests {
             assert_eq!(kind.capping, RenderCappingPass::None);
             assert!(!kind.line && !kind.point && !kind.text && !kind.lighting);
         }
+    }
+}
+
+#[cfg(test)]
+mod forced_line_tests {
+    use super::*;
+    #[test]
+    fn forced_line_variants_keep_topology_clamp_clipping_and_order_policy() {
+        for index in 32..36 {
+            let kind = PipelineVariant::from_index(index, true);
+            assert!(kind.line && kind.line_blend);
+            assert!(!kind.surface_blend && !kind.point && !kind.text);
+            assert_eq!(kind.clamp, index & 1 != 0);
+            assert_eq!(kind.clipped, index & 2 != 0);
+            assert_eq!(kind.capping, RenderCappingPass::None);
+            let draw = forced_draw(kind);
+            assert_eq!(variant_index(&draw), index);
+        }
+    }
+    fn forced_draw(kind: PipelineVariant) -> PrimitiveDraw {
+        let style = crate::LineStyle::new(1., 0xffff, 1)
+            .unwrap()
+            .with_alpha_blending(true);
+        let mut draw =
+            PrimitiveDraw::segments(vec![], vec![], crate::identity_clip(), style).unwrap();
+        draw.depth_clamp = kind.clamp;
+        draw.clipping = kind.clipped.then(|| {
+            crate::RenderClipping::new(vec![vec![[1., 0., 0., 0.]]], crate::identity_clip())
+                .unwrap()
+        });
+        draw
     }
 }

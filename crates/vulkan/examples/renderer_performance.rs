@@ -33,6 +33,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ais_performance::benchmark(&driver, warmup, samples)?;
     bound_performance::benchmark(&driver, warmup, samples, false);
     bound_performance::benchmark(&driver, warmup, samples, true);
+    line_alpha_performance::benchmark(&driver, warmup, samples);
     persistence_performance::benchmark(&driver, warmup, samples);
     curve_performance::benchmark(&driver, warmup, samples);
     ais_line_performance::benchmark(&driver, warmup, samples);
@@ -233,3 +234,6 @@ mod trihedron_scene;
 mod ais_rubber_band_performance;
 #[path = "../tests/support/ais_rubber_band_scene.rs"]
 mod rubber_band_scene;
+
+#[path = "support/line_alpha_performance.rs"]
+mod line_alpha_performance;
