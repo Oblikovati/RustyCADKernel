@@ -525,7 +525,8 @@ packing with exact differential evidence. [Lighting](vulkan-lighting.md) now
 consumes them in Vulkan PhongFacet, Gouraud and Phong shaders with retained
 normals and lights, clipping, front/back coefficients and live updates. Analytic
 GPU checks pass on lavapipe and AMD; strict native captures and timing budgets
-remain open. PBR, shadow maps and lit section materials still require implementation.
+remain open. Opaque lit section materials share this path; PBR, shadow maps,
+textured sections and custom section shaders still require implementation.
 
 AIS annotation placement now includes [AIS_TextLabel](ais-text-label.md), with
 paired font/layout comparisons, viewer captures and complete label-update timings.
@@ -571,3 +572,19 @@ shading; Gouraud/Phong point-normal lighting remains a renderer prerequisite.
 Normal-bearing [lit markers](vulkan-lit-markers.md) now use Gouraud/Phong material
 and light snapshots, per-point colors, sprite coverage and clipping, with native
 capture fixtures and a live-normal redraw benchmark on both GPU profiles.
+
+## Nodal line lighting
+
+[Retained line lighting](vulkan-lit-lines.md) now supplies Gouraud/Phong normals,
+materials and lights for segments and polylines. It preserves native solid coverage
+for pattern-requested lit lines, facet/normal-free unlit fallback, widths and
+clipping. Live normal updates do not mutate earlier snapshots. The same nodal
+material/front-face policy serves lit markers.
+
+The [runtime evidence](../porting/runtime-evidence/lit-lines-2026-10-11/README.md)
+records 231 CPU cases, both-device analytic color/depth checks with no Vulkan
+validation errors, and strict captures passing 42/60 on lavapipe and 56/60 on AMD.
+Endpoint and color interpolation failures remain explicit. The new normal/light
+redraw workload brings the release matrix to 34 workloads; an independent repeat
+passes all median/p95 budgets on both devices. This remains partial renderer
+coverage while strict captures and other legacy capabilities remain open.
