@@ -220,6 +220,7 @@ pub use view_controller::AisViewController;
 #[cfg(test)]
 mod view_controller_click_tests;
 mod view_controller_clicks;
+mod view_controller_gravity;
 mod view_controller_input_state;
 mod view_controller_keyboard;
 #[cfg(test)]
@@ -228,6 +229,9 @@ mod view_controller_keyboard_fixture;
 mod view_controller_keyboard_tests;
 mod view_controller_navigation;
 mod view_controller_navigation_axes;
+mod view_controller_picking;
+#[cfg(test)]
+mod view_controller_picking_tests;
 mod view_controller_reset;
 mod view_controller_touch;
 #[cfg(test)]

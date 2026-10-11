@@ -8,7 +8,7 @@ use super::{AisNavigationMode, AisViewInputBuffer, AisViewInputBufferType};
 use rustycad_tkernel::{ncollection::Vec2, osd::Timer};
 use rustycad_tkservice::aspect::AspectWindowInputListenerBase;
 /// Queues native viewer gestures; `AisViewController::new().update_z_rotation(0.1)`.
-/// Camera/redraw dispatch, the full window-listener interface and XR remain unported.
+/// Full camera/redraw dispatch and XR remain unported; window input and picking are available.
 pub struct AisViewController {
     pub(super) ui_input: AisViewInputBuffer,
     pub(super) render_input: AisViewInputBuffer,

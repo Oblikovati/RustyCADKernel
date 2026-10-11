@@ -1,0 +1,23 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "cdbb118f8",
+  "native_fixture_rows": 80,
+  "repeat_generation_byte_identical": true,
+  "files": {
+    "tools/oracle/martensite_controller_picking.cxx": "a8cdc8b2239b00d0694095b28e77c72b745ae306ccc16259f95f0b9bc92ab9a6",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+    "crates/tkv3d/tests/fixtures/controller-picking-native.txt": "dc67c2489821fa59f4cb9ed5b3feb0c544f87f8dabe76583967b68fdfc9acc7f"
+  },
+  "upstream_sources": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.cxx": "4a5a57f205b5ab55fb9e9f97072d5dc2e48da871902abd61f4a24d4d8b8bd4ae"
+  },
+  "limitations": [
+    "Full controller dispatch, FitAllAuto, redraw and XR remain open; class stays partial.",
+    "Native null window dereference is represented as typed Failure at the operation boundary.",
+    "OCCT generation remains local-only; Rust replay does not load OCCT."
+  ]
+}
