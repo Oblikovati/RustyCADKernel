@@ -270,3 +270,22 @@ mod light_source_tests;
 pub use camera_frustum::{AisCameraFrustum, AisCameraFrustumFields, AisCameraFrustumSelectionMode};
 #[cfg(test)]
 mod camera_frustum_tests;
+
+mod light_source_aspects;
+mod light_source_geometry;
+
+mod light_source_arrows;
+mod light_source_presentation;
+pub use light_source_presentation::ais_light_source_compute;
+mod light_source_dragging;
+mod light_source_highlight;
+mod light_source_object;
+mod light_source_selection;
+pub use light_source_dragging::ais_light_source_process_dragging;
+pub use light_source_object::AisLightSource;
+pub use light_source_selection::AisLightSourceOwner;
+
+pub use light_source_aspects::ais_light_source_initialize;
+
+#[cfg(test)]
+mod light_source_concrete_tests;

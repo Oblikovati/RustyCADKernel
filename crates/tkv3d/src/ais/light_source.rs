@@ -24,6 +24,7 @@ pub struct AisLightSourceBase {
     /// Inherited interactive state for application subclasses.
     pub interactive: AisInteractiveObjectBase,
     pub(super) parameters: SharedState<LightSourceParameters>,
+    pub(super) visual: SharedState<super::light_source_aspects::LightSourceVisual>,
 }
 impl AisLightSourceBase {
     /// Retain the live light and initialize native fields; `AisLightSourceBase::new(&light)`.
@@ -32,6 +33,7 @@ impl AisLightSourceBase {
         Self {
             interactive: AisInteractiveObjectBase::new(PrsMgrTypeOfPresentation3d::AllView),
             parameters: SharedState::new(LightSourceParameters::new(light, kind)),
+            visual: SharedState::default(),
         }
     }
 }
@@ -81,6 +83,48 @@ pub trait AisLightSourceSource: AisInteractiveObject {
     fn light_source_base(&self) -> &AisLightSourceBase;
     /// Refresh live presentation aspects after a light change; `object.update_light_aspects()?`.
     fn update_light_aspects(&self) -> Result<(), rustycad_tkernel::standard::Failure>;
+    /// Refresh persistence through an overridable native hook; `object.update_light_transform_persistence()?`.
+    fn update_light_transform_persistence(
+        &self,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        super::ais_light_source_update_persistence(self)
+    }
+    /// Refresh the light-derived frame through an overridable hook; `object.update_light_local_transformation()?`.
+    fn update_light_local_transformation(&self) -> Result<(), rustycad_tkernel::standard::Failure> {
+        super::ais_light_source_update_local_transform(self)
+    }
+    /// Native ambient geometry hook; `object.compute_ambient(&presentation,0)?`.
+    fn compute_ambient(
+        &self,
+        presentation: &Handle<dyn Graphic3dStructureSource>,
+        mode: i32,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        super::light_source_arrows::compute_light_ambient(self, presentation, mode)
+    }
+    /// Native directional geometry hook; `object.compute_directional(&presentation,0)?`.
+    fn compute_directional(
+        &self,
+        presentation: &Handle<dyn Graphic3dStructureSource>,
+        mode: i32,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        super::light_source_arrows::compute_light_directional(self, presentation, mode)
+    }
+    /// Native positional geometry hook; `object.compute_positional(&presentation,0)?`.
+    fn compute_positional(
+        &self,
+        presentation: &Handle<dyn Graphic3dStructureSource>,
+        mode: i32,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        super::light_source_geometry::compute_light_positional(self, presentation, mode)
+    }
+    /// Native spot geometry hook; `object.compute_spot(&presentation,0)?`.
+    fn compute_spot(
+        &self,
+        presentation: &Handle<dyn Graphic3dStructureSource>,
+        mode: i32,
+    ) -> Result<(), rustycad_tkernel::standard::Failure> {
+        super::light_source_geometry::compute_light_spot(self, presentation, mode)
+    }
     /// Retain the current live light; `object.light()`.
     fn light(&self) -> Handle<Graphic3dCLight> {
         self.light_source_base().parameters.read().light.clone()

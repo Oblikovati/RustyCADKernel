@@ -1,0 +1,32 @@
+{
+  "project": "Martensite",
+  "base_commit": "cdbb118f83a67cb4f8359c09bd18208a6f4fec9f",
+  "tkv3d_all_targets": {
+    "library_tests": 114,
+    "isolated_alias_tests": 1,
+    "toolkit_tests": 477,
+    "passed": true
+  },
+  "vulkan_functional": {
+    "profiles": [
+      "lavapipe",
+      "native"
+    ],
+    "test_cases_per_profile": 1,
+    "light_kinds_per_case": 4,
+    "visible_geometry": true,
+    "validation_errors": 0
+  },
+  "example_parser_tests": 1,
+  "clippy": "cargo clippy -p rustycad-tkv3d -p martensite-vulkan --all-targets --locked -- -D warnings:passed",
+  "format": "python3 tools/check_rust_format.py:passed",
+  "discovery": "python3 tools/toolkit_test_suites.py:passed;13 targeted discovery tests passed",
+  "style": "Every newly formatted Rust function <=20 lines; light modules/tests/helpers <500lines",
+  "ledger": "16 unique exact pinned api_visible identities;15 new implemented operations,1 partial owner class; protected hooks allowed, no private helper credit. Existing LightSource class remains partial.",
+  "capture_preview": "capture-grid.png:lavapipe top row/native bottom row, ambient/directional/positional/spot left-to-right; inspected visible matching geometry",
+  "limitations": [
+    "Native Shadow light-name text currently rejected by Vulkan renderer; geometry GPUprobe disables optional display name",
+    "No Windows/macOS validation or OpenGL capture parity/performance baseline",
+    "No whole-class completion, RTTI/inherited/member-field parity remains open"
+  ]
+}

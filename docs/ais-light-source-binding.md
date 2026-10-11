@@ -45,3 +45,5 @@ Native OCCT remains a local oracle only. Windows/macOS validation is deferred.
 This slice changes no renderer submission or shader path. Concrete light aspect
 setup, drawings, selection, light-owner click/highlight behavior and directional
 dragging remain open; the class is partial and its constructor is unclaimed.
+
+The concrete construction, drawing, owner, selection, highlight, and dragging slice is described in [Martensite interactive light presentations](ais-light-source-presentation.md). The base/source interface remains available for native-compatible application subclasses.

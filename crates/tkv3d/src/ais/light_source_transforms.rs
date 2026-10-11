@@ -93,6 +93,8 @@ fn make_persistence(
 pub fn ais_light_source_update_local_transform<O: AisLightSourceSource + ?Sized>(
     object: &O,
 ) -> Result<(), Failure> {
+    // OCCT 3d097a0 clears this datum before direction conversion can unwind.
+    clear_light_local_frame(object);
     let light = object.light();
     let transform = light_local_transform(&light, object.is_zoomable())?;
     object
@@ -149,7 +151,7 @@ pub fn ais_light_source_set_local_transform<O: AisLightSourceSource + ?Sized>(
         .local_transformation = Handle::new(Datum3::new(transform));
     object.update_transformation()?;
     object.update_light_aspects()?;
-    ais_light_source_update_persistence(object)
+    object.update_light_transform_persistence()
 }
 fn propagate_light_transform<O: AisLightSourceSource + ?Sized>(
     object: &O,
@@ -179,4 +181,12 @@ fn propagate_positional(light: &Graphic3dCLight, transform: Transform3) -> Resul
         light.set_direction(&Direction3::Z.reversed().transformed(transform))?;
     }
     Ok(())
+}
+
+fn clear_light_local_frame<O: AisLightSourceSource + ?Sized>(object: &O) {
+    object
+        .presentable_base()
+        .fields
+        .write()
+        .local_transformation = Handle::default();
 }
