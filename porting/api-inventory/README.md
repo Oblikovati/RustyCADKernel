@@ -71,6 +71,23 @@ implementations by content hash; changing those tools requires regenerating
 the affected stages. Captured absolute build paths identify the original environment;
 content hashes and source-relative declaration paths are the portable identity.
 
+Preflight a new Martensite claim fragment against that fresh normalized inventory
+before integrating its ledger rows:
+
+```sh
+python3 tools/verify_api_claims.py porting/ledger-fragments/example.json \
+  --output target/api-proof/example-bindings.json
+PYTHONPATH=tools python3 -m unittest discover -s tools/tests -p test_api_claim_preflight.py
+```
+
+The fragment may be an array or an object with an `api` array. The verifier uses
+the production C++/Rust matcher, requires unique implemented/partial bindings,
+checks declaration headers and current Rust source hashes, and rejects duplicate
+C++ claims within the fragment. This catches malformed names and stale selectors
+before a full publication; it does not grant behavioral or configuration proof.
+Use `--workspace` and `--rust` when checking another checkout and its compiler
+inventory. Full inventory publication and integration checks remain required.
+
 ## Parity metrics
 
 Quote `METRICS.md`, not the raw counts of `completeness.json`. The raw counts include every
