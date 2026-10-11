@@ -1,0 +1,22 @@
+   Compiling martensite-vulkan v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/crates/vulkan)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.47s
+     Running unittests src/lib.rs (target/debug/deps/martensite_vulkan-066d8a0ffbf1629f)
+
+running 1 test
+test backend::line_device::tests::subpixel_native_lines_use_one_pixel_without_requiring_wide_lines ... FAILED
+
+failures:
+
+---- backend::line_device::tests::subpixel_native_lines_use_one_pixel_without_requiring_wide_lines stdout ----
+
+thread 'backend::line_device::tests::subpixel_native_lines_use_one_pixel_without_requiring_wide_lines' (2542964) panicked at crates/vulkan/src/backend/line_device.rs:77:9:
+assertion failed: narrow.validate(style, [1., 8.]).is_ok()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    backend::line_device::tests::subpixel_native_lines_use_one_pixel_without_requiring_wide_lines
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 53 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p martensite-vulkan --lib`

@@ -1,0 +1,31 @@
+    Blocking waiting for file lock on build directory
+   Compiling martensite-vulkan v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-plane-presentations/crates/vulkan)
+warning: field `structure` is never read
+ --> crates/vulkan/tests/support/graphic_scene.rs:6:9
+  |
+5 | pub struct GraphicScene {
+  |            ------------ field in this struct
+6 |     pub structure: Handle<Graphic3dStructure>,
+  |         ^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `triangle` is never used
+  --> crates/vulkan/tests/support/graphic_scene.rs:25:12
+   |
+10 | impl GraphicScene {
+   | ----------------- method in this implementation
+...
+25 |     pub fn triangle(&self) -> Handle<Graphic3dArrayOfPrimitives> {
+   |            ^^^^^^^^
+
+warning: `martensite-vulkan` (test "polygon_primitives") generated 2 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 42.98s
+     Running tests/polygon_primitives.rs (target/debug/deps/polygon_primitives-1fe0171febee4dad)
+
+running 2 tests
+test closed_datum_polygon_retains_degenerate_closing_triangle ... ok
+test indexed_polygons_restart_at_colored_bounds_and_ignore_short_tail ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

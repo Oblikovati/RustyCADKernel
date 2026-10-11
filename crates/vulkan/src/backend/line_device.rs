@@ -32,8 +32,8 @@ impl LineCapabilities {
     }
     pub fn validate(&self, style: LineStyle, range: [f32; 2]) -> Result<(), RenderError> {
         if !self.bresenham
-            || (!self.wide && style.width != 1.)
-            || !(range[0]..=range[1]).contains(&style.width)
+            || (!self.wide && style.raster_width() != 1.)
+            || !(range[0]..=range[1]).contains(&style.raster_width())
         {
             return Err(rejected(
                 (style.width, self.bresenham, self.wide, range),
@@ -68,6 +68,17 @@ mod tests {
                 .validate(LineStyle::new(1., 0xffff, 1).unwrap(), [1., 8.])
                 .is_err()
         );
+    }
+    #[test]
+    fn subpixel_native_lines_use_one_pixel_without_requiring_wide_lines() {
+        let narrow = LineCapabilities {
+            bresenham: true,
+            wide: false,
+        };
+        let style = LineStyle::new(0.5, 0xffff, 1).unwrap();
+        assert_eq!(style.parameters().0, 0.5);
+        assert_eq!(style.raster_width(), 1.);
+        assert!(narrow.validate(style, [1., 8.]).is_ok());
     }
     #[test]
     fn widths_must_fit_the_selected_device_range() {

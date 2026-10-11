@@ -5,15 +5,15 @@ pub(crate) fn triangle_indices(
     kind: Graphic3dTypeOfPrimitiveArray,
     indices: &[u32],
 ) -> Result<Vec<u32>, RenderError> {
-    use Graphic3dTypeOfPrimitiveArray::{Trianglefans, Triangles, Trianglestrips};
+    use Graphic3dTypeOfPrimitiveArray::{Polygons, Trianglefans, Triangles, Trianglestrips};
     match kind {
         // OpenGL ignores incomplete primitives at the end of each draw, including each bound.
         Triangles => Ok(indices[..indices.len() / 3 * 3].to_vec()),
         Trianglestrips => Ok(strip_triangles(indices)),
-        Trianglefans => Ok(fan_triangles(indices)),
+        Trianglefans | Polygons => Ok(fan_triangles(indices)),
         _ => Err(rejected(
             kind,
-            "triangles, triangle strips or triangle fans",
+            "triangles, triangle strips, triangle fans or convex polygons",
         )),
     }
 }

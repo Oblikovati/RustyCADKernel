@@ -11,3 +11,8 @@ mod deflection_match;
 mod deflection_queries;
 mod deflection_sampling;
 pub use deflection_curve::StdPrsDeflectionCurve;
+
+mod plane;
+mod plane_arrows;
+mod plane_geometry;
+pub use plane::StdPrsPlane;
