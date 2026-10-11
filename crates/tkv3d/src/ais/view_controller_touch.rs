@@ -5,6 +5,9 @@ use rustycad_tkservice::aspect::{
     ASPECT_TOUCH_ID_ALL, ASPECT_VKEY_FLAGS_NONE, ASPECT_VKEY_MOUSE_LEFT_BUTTON, AspectTouch,
 };
 pub(super) struct ViewControllerTouchDispatch {
+    pub(super) last_touch_count: usize,
+    pub(super) zoom_ratio: f32,
+    pub(super) z_rotation_threshold: f32,
     pub(super) click: AspectTouch,
     pub(super) click_threshold_px: f32,
     pub(super) double_tap_timer: Timer,
@@ -17,6 +20,9 @@ impl ViewControllerTouchDispatch {
     pub(super) fn with_timer(mut timer: Timer) -> Self {
         timer.reset();
         Self {
+            last_touch_count: 0,
+            zoom_ratio: 0.13,
+            z_rotation_threshold: (2.0 * std::f64::consts::PI / 180.0) as f32,
             click: AspectTouch::default(),
             click_threshold_px: 3.0,
             double_tap_timer: timer,

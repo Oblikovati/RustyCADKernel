@@ -274,3 +274,12 @@ mod light_source_tests;
 pub use camera_frustum::{AisCameraFrustum, AisCameraFrustumFields, AisCameraFrustumSelectionMode};
 #[cfg(test)]
 mod camera_frustum_tests;
+
+mod view_controller_touch_pinch;
+mod view_controller_touch_rotation;
+mod view_controller_touch_synthesis;
+
+#[cfg(test)]
+mod view_controller_touch_synthesis_fixture;
+#[cfg(test)]
+mod view_controller_touch_synthesis_tests;

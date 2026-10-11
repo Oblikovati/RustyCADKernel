@@ -1,0 +1,14 @@
+{
+  "api": [
+    {
+      "upstream_id": "AIS_ViewController::flushGestures(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "cpp_declaration_id": "3ea6d36f23ec286de53a2256dd4dbb199f946c7881da3ce626d546ddd536da80",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::flush_gestures",
+      "status": "implemented",
+      "notes": "Martensite complete native protected touch synthesis at pinned OCCT 3d097a0: contact-count transitions; orbit/flight/walk rotation acceleration; precise/minimum thresholds; pinch zoom, limited-angle Z rotation and panning; retained starts, From advancement, actual V3dView invalidation. 1116 local native snapshots across three frames; Rust failure-order/UI-preservation regressions. General allow rotation/panning/zoom gates are deliberately not applied here, matching upstream. Public FlushViewEvents/camera/redraw/XR and controller class/constructor remain open. See docs/ais-view-controller-gestures.md."
+    }
+  ]
+}
