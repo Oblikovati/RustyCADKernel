@@ -587392,6 +587392,426 @@
       "rust_item": "rustycad_tkv3d::dsg_prs::DsgPrsXYZPlanePresentation",
       "status": "implemented",
       "notes": "Martensite native plane presentation builders: edges, incremental isolines, ordered center/corner arrows, infinite-plane matching, closed datum polylines and polygons. All 236 pinned native callback/distance cases exact, including mutable driver callbacks; raster parity is tracked separately. See docs/plane-presentations.md."
+    },
+    {
+      "upstream_id": "AIS_TOPL_YZPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfPlane.hxx",
+      "source_sha256": "1d5afcc36bfef476e6ca37b6364ee1701f23a83dda394b868c947aeb8e66ca91",
+      "cpp_declaration_id": "07516808d80c78975ece96371d068f463cc73acdbc9698d2201faf8f9d4cd8b0",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfPlane::YZPlane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::AIS_Plane(const class opencascade::handle<class Geom_Plane> &, const class gp_Pnt &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "0e314e8a05480888a4fa168e078a35f36e526da3783510a3f8afda9110a7e2f4",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::with_center",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::UnsetSize()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "0e32f700d0a5ac8ae475f26d9013f5ec4647240d6dc141895df65d4d35be644d",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::unset_size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::HasMinimumSize() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "162353e8eb2879f1389a5c10711f1ca428e87decbd0142a5b3d33e4d8edca8bc",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::has_minimum_size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetComponent(const class opencascade::handle<class Geom_Plane> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "1b7a8503c53ccd41561d74ee0a4439fb762fa32cce7c5fdb5e7f764fcfbb1dd9",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_component",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_TOPL_XYPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfPlane.hxx",
+      "source_sha256": "1d5afcc36bfef476e6ca37b6364ee1701f23a83dda394b868c947aeb8e66ca91",
+      "cpp_declaration_id": "1e2ea24b5239ce5038f2e286c715c55c256421be1ce424f2ea7e73de5bf2de79",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfPlane::XYPlane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetContext(const class opencascade::handle<class AIS_InteractiveContext> &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "1e9bf1d8b1025e73fba56024b3051006cb96c691feba7d6697844856ed64ec3f",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::ais::AisInteractiveObject>::set_context",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::Size(double &, double &) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "1f344c95f0266a23df8829b419d20e796a1344280505c9a48ccbe0088bdb88d0",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetPlaneAttributes(const class opencascade::handle<class Geom_Plane> &, const class gp_Pnt &, const class gp_Pnt &, const class gp_Pnt &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "2488841c3ee84bdd703c44de25d897149fae6c4c2013ceef1c41b9be7d065f74",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_plane_attributes",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::Axis2Placement()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "28106f2146a7a9e57b906bd75e4c16bf7f657d4df8571533e6f991a5447764b1",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::axis2_placement",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::CurrentMode()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "2c9ccdbd9a22c49450e29bf0bd5d7b3b8d7206ce8ce20a592e0aed8148dcbe53",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::current_mode",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::UnsetMinimumSize()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "346af55125c63e8101444179e897ed996afe77e161705fc198ea04b4a4aaa5fb",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::unset_minimum_size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::PlaneAttributes(class opencascade::handle<class Geom_Plane> &, class gp_Pnt &, class gp_Pnt &, class gp_Pnt &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "52fe2429a45c8bcf4f53b54e6567030d15288ce0039bff6004f76f02f5b75363",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::plane_attributes",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::AcceptDisplayMode(int) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "537d2112adecbc5192878ed75db2d1cd32dd6d67af01539dd1db50cee192b5b6",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::IsXYZPlane()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "6a54412378c9e72ee666bd7566d2f495a9b248ae4a3ec0b3ec9b2bc462d47f70",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::is_xyz_plane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_TypeOfPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfPlane.hxx",
+      "source_sha256": "1d5afcc36bfef476e6ca37b6364ee1701f23a83dda394b868c947aeb8e66ca91",
+      "cpp_declaration_id": "70cfb6c01fcb3095a6947305cda17129f46bb338d1ff6f38cd7106aa4d6026b3",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfPlane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::get_type_descriptor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "71a1340a6825f9aac7b933f920229d1d7c79c5aa675fcdc3cd0c75803f9a098b",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetColor(const class Quantity_Color &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "772eb62de4ec8d474334a5aad298474527d588f88e6c9e7803309ea3a817b304",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::Signature() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "781122d3a4f45e93e6ddcb684999f4f8856769173e46440c1dc211cbbac17003",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::ais::AisInteractiveObject>::signature",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "7aed1d5c6cd54922596346ac2d3a837e79d1ffce5246d17776c6402fc3126403",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::DynamicType() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "7b00dd9b463a057a4a51a0de5bfdba53b42d8f927c1b546d03837e9bc1eab396",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::AIS_Plane(const class opencascade::handle<class Geom_Axis2Placement> &, enum AIS_TypeOfPlane, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "7ba7872c4ff9574fa3ec7fb5b6ed622731625f60dad45b90f41f16ac82e41806",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::with_axis2",
+      "status": "partial",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md. Pinned native XYZ constructor dereferences an unset datum aspect; Rust supplies its intended default safely. Defined SetAxis2Placement path verified after drawer setup; native constructor equivalence cannot be claimed."
+    },
+    {
+      "upstream_id": "AIS_Plane::ComputeSelection(const class opencascade::handle<class SelectMgr_Selection> &, int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "8c059b6de13d7f4d2f068ded78fca5a60f72327ff5789f0e1ee227c41b92718b",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetSize(double, double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "904711c40d046501679729e924a4e3371d5aca888dc8730024912449db62c150",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_size_xy",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::Center() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "94ebfbc7a158458d59aa53d99354755c7a81f67e3871bfffc3f5630c80403ac3",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::center",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::AIS_Plane(const class opencascade::handle<class Geom_Plane> &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "a3bee7cf94f56d028656ee192a204694ed45897430bb730eb375183b0116622c",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::new",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::UnsetColor()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "a6d3ba11d7b2c9cd738c34cdc36620cf50a5f33d75b2d21e0dc4ed19cfbbadc9",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::Component()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "a7795e1f11b9c105ca9410982db57cc154fbc620e4f73cdd5ef4a38a068bebec",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::component",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::TypeOfSensitivity() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "a86f14dad7eba11aa2df9b00b577c7d955b002eaf5bee264077360300169a357",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::type_of_sensitivity",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetAxis2Placement(const class opencascade::handle<class Geom_Axis2Placement> &, enum AIS_TypeOfPlane)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "b10dd74c6f033c2a195cbcedce1aaa2f10c1baa2f69249ea6a787f18eb1dd6fc",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_axis2_placement",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::HasOwnSize() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "b7071edc334fde60f515b2089a9b448c853d2c32a58f9722abe8b6b2ac7dd828",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::has_own_size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md. Native constructors leave myHasOwnSize uninitialized; Rust starts false and comparisons assign size before native reads."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetSize(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "b8ff5830ffdfd707b8afa72a1e7cd282a868f273b2725087491dac14526b4caf",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::Type() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "bd1d35974e57a8acb3686b9a8f93363cb626c5130dfa03d4078a8a37e9b27af4",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::TypeOfPlane()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "bd9fadf2708fb8f4d4c7a114a83bd0dca036e89a3c9ac3d1261420596dbd666e",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::type_of_plane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetMinimumSize(double)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "c04eb0c10c4ae55f189ee4c7699d838f2264689923444f9d99a9d37f81f649aa",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_minimum_size",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetTypeOfSensitivity(enum Select3D_TypeOfSensitivity)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "c3d58f7abb31146c10d78e9ed3f62cf84b452d5088dc578ca2bd95fc7cc4e9a1",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_type_of_sensitivity",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_TOPL_XZPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfPlane.hxx",
+      "source_sha256": "1d5afcc36bfef476e6ca37b6364ee1701f23a83dda394b868c947aeb8e66ca91",
+      "cpp_declaration_id": "c6ff9182a87c7e4f739c31ab6b23319fff655e7e9fba703e7e7ec40d90c87eb9",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfPlane::XZPlane",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::get_type_name()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "cf1357416f49099f01d0bf6951903e2503055de4e2b4d3a01edca12121c51ead",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::AIS_Plane(const class opencascade::handle<class Geom_Plane> &, const class gp_Pnt &, const class gp_Pnt &, const class gp_Pnt &, bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "d85577497e88cc523ecaae40936b4229efed290e14d499dfd0e034a748c9eac4",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::with_bounds",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetCenter(const class gp_Pnt &)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "e283eb511011de2bd100c951886e755d37d2159afe19c494c4655a8b1273ccc8",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_center",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_Plane::SetCurrentMode(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_Plane.hxx",
+      "source_sha256": "d21529c99f5d34c32522efe3577d34159cc8e479db102e80a901848db3fb6cec",
+      "cpp_declaration_id": "f3081d9dacdda6572c4b0d7d47a6ca67261a8f6443aeb2ca673af2b18c361146",
+      "rust_item": "rustycad_tkv3d::ais::AisPlane::set_current_mode",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
+    },
+    {
+      "upstream_id": "AIS_TOPL_Unknown",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfPlane.hxx",
+      "source_sha256": "1d5afcc36bfef476e6ca37b6364ee1701f23a83dda394b868c947aeb8e66ca91",
+      "cpp_declaration_id": "f52c15d68c8635b515edbfcc488b113c438297876204bf72944ab01ffa6833a5",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfPlane::Unknown",
+      "status": "implemented",
+      "notes": "Martensite AIS plane datums: 210 pinned native exact state, selection mesh and presentation callback request sequences; seven focused regression tests. Renderer quadrangle lowering and device capture/performance proof remain pending separately. See docs/ais-plane.md."
     }
   ],
   "tests": [

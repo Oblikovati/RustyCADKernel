@@ -39,7 +39,10 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    [AIS_Axis and labeled axis presentations](ais-axis.md) now add coordinate datums,
    native selection snapshots and inherited text-aspect rendering.
    [Plane presentation builders](plane-presentations.md) now preserve native edges,
-   isolines, normal arrows and datum polygon submissions as prerequisites for AIS_Plane.
+   isolines, normal arrows and datum polygon submissions. [AIS plane datums](ais-plane.md)
+   add native geometry, cached triangulation selection, size/color ownership and minimum
+   persistence. Their Vulkan quadrangle lowering and device capture/performance fixtures
+   remain next; the unsafe upstream XYZ constructor is explicitly partial.
    [Plane trihedrons](ais-plane-trihedron.md) now add labeled XY frames, child-owner
    selection, native comparisons and geometry-update performance coverage.
    [Native X11 presentation](vulkan-window-presentation.md) now adds swapchains,

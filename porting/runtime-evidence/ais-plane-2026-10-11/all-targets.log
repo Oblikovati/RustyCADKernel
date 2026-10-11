@@ -1,0 +1,787 @@
+   Compiling rustycad-tkv3d v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-ais-plane/crates/tkv3d)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 45s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkv3d-043095682ea94e0b)
+
+running 42 tests
+test prs3d::arrow_aspect::tests::angle_range_is_checked ... ok
+test prs3d::bnd_box::tests::box_segments_have_eight_corners_and_twelve_edges ... ok
+test prs3d::arrow::tests::segments_cone_layout ... ok
+test prs3d::datum_aspect::tests::drawn_parts_follow_axes_and_arrows ... ok
+test prs3d::datum_aspect::tests::defaults_follow_the_native_constructor ... ok
+test prs3d::datum_aspect::tests::copy_aspects_from_copies_flags_and_colors ... ok
+test prs3d::dimension_aspect::tests::flags_and_positions ... ok
+test prs3d::dimension_aspect::tests::defaults_and_common_color ... ok
+test prs3d::dimension_aspect::tests::units_default_to_meters_and_radians ... ok
+test prs3d::arrow::tests::shaded_arrow_parts ... ok
+test prs3d::enums::tests::discriminants_and_aliases_match_the_native_values ... ok
+test prs3d::line_aspect::tests::iso_aspect_is_a_line_aspect ... ok
+test prs3d::line_aspect::tests::setters_reach_the_graphic_aspect ... ok
+test prs3d::package::tests::deflection_of_corners_and_boxes ... ok
+test prs3d::package::tests::match_segment_projects_and_measures ... ok
+test prs3d::plane_aspect::tests::defaults_and_setters ... ok
+test prs3d::root::tests::match_uses_euclidean_distance ... ok
+test prs3d::point_aspect::tests::marker_setters_and_texture ... ok
+test prs3d::shading_aspect::tests::material_selection_by_side ... ok
+test prs3d::package::tests::polylines_become_segments ... ok
+test prs3d::shading_aspect::tests::one_sided_color_turns_distinction_on ... ok
+test prs3d::shading_aspect::tests::transparency_updates_material_and_alpha ... ok
+test prs3d::text_aspect::tests::defaults_and_setters ... ok
+test select_basics::pick_result::tests::default_result_is_invalid_and_has_no_point ... ok
+test select_basics::pick_result::tests::invalidate_resets_depth_point_and_normal ... ok
+test select_basics::pick_result::tests::min_prefers_the_first_on_ties ... ok
+test prs3d::tools::tests::null_normals_raise ... ok
+test prs3d::tools::tests::counts_and_grid_layout ... ok
+test select_basics::tests::owner_priority_range_is_zero_to_nine ... ok
+test prs3d::tools::tests::sphere_torus_and_sector_vertices ... ok
+test select_mgr::enums::tests::discriminants_match_the_native_values ... ok
+test select_mgr::bvh_thread_pool::tests::an_empty_worker_cannot_erase_the_shutdown_wake ... ok
+test select_mgr::viewer_selector_traversal_view::tests::direct_object_frame_keeps_its_camera_value_and_matrices ... ok
+test v3d::circular_grid::tests::circles_and_points_follow_the_native_counts ... ok
+test v3d::enums::tests::discriminants_and_aliases ... ok
+test select_mgr::viewer_selector_traversal_view::tests::root_frame_observes_original_camera_slot_after_manager_replacement ... ok
+test select_mgr::viewer_selector_traversal_view::tests::root_frame_does_not_keep_a_replaced_camera_alive ... ok
+test v3d::package::tests::orientation_names_keep_the_native_table ... ok
+test v3d::package::tests::proj_axes_are_unit_directions ... ok
+test v3d::lights::tests::lights_keep_type_color_and_geometry ... ok
+test v3d::rectangular_grid::tests::line_lists_split_every_tenth_line ... ok
+test v3d::view_grid::tests::grid_matrix_composes_plane_and_rotation ... ok
+
+test result: ok. 42 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_animation.rs (target/debug/deps/ais_animation-488dc1661296a42f)
+
+running 8 tests
+test defaults_names_and_empty_started_timeline_follow_native_state ... ok
+test derived_atoms_preserve_native_animation_rtti_and_handle_downcasts ... ok
+test nan_and_signed_zero_follow_cpp_comparison_order ... ok
+test identity_edits_find_cached_limits_and_clear_keep_native_quirks ... ok
+test live_child_cursor_visits_an_appended_started_child_during_same_frame ... ok
+test final_frame_stops_children_before_own_callback_and_pause_stops_children ... ok
+test nested_progress_is_global_pts_and_local_offsets_with_children_first ... ok
+test replace_allows_duplicate_handles_and_copy_retains_name_and_state ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_animation_camera.rs (target/debug/deps/ais_animation_camera-be14f8b0bf0c4e77)
+
+running 3 tests
+test missing_endpoints_are_noops_and_zero_duration_applies_end_camera ... ok
+test animation_mutates_live_camera_preserving_identity_and_immediate_update_mode ... ok
+test camera_handle_members_accept_detached_targets_and_keep_native_rtti ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_animation_object.rs (target/debug/deps/ais_animation_object-29e0bee39b10da7c)
+
+running 8 tests
+test null_object_skips_interpolation_even_when_scale_crosses_zero ... ok
+test base_hook_is_noop_but_nonvirtual_transform_body_is_available ... ok
+test zero_and_negative_own_duration_apply_start_placement ... ok
+test native_base_and_child_rtti_allow_interface_round_trips ... ok
+test exact_local_endpoints_replace_existing_placement ... ok
+test interpolation_failure_leaves_placement_unchanged ... ok
+test nested_progress_and_paused_atoms_preserve_native_timeline ... ok
+test context_animation_applies_active_selection_updates ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_animation_timer.rs (target/debug/deps/ais_animation_timer-34540b4812416207)
+
+running 3 tests
+test stopped_timer_seek_retains_requested_position_even_beyond_animation_end ... ok
+test injected_clock_tracks_speed_pause_resume_and_clamped_stop ... ok
+test missing_timer_reports_native_program_error_and_start_timer_creates_one ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_axis.rs (target/debug/deps/ais_axis-8acc8e05a2722ff8)
+
+running 5 tests
+test native_width_zero_resets_then_throws_without_own_width_assignment ... ok
+test coordinate_axis_setters_keep_native_cached_fields_and_owner_identity ... ok
+test display_aspect_and_color_reset_keep_native_handle_and_stale_drawer_color ... ok
+test ray_and_axis1_constructors_preserve_modes_and_native_length_validation ... ok
+test infinite_axis_snapshots_units_and_geometry_until_setter_is_called ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/ais_circle.rs (target/debug/deps/ais_circle-1b62d2540f2556d3)
+
+running 4 tests
+test selection_snapshots_geometry_and_filled_sensitivity ... ok
+test setters_force_arc_state_while_full_turn_constructors_keep_exact_circles ... ok
+test circle_unset_width_preserves_native_state_without_synchronizing_groups ... ok
+test computation_restores_coefficient_after_success_and_retains_it_after_sampling_failure ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context.rs (target/debug/deps/ais_context-f8cba8e2f99725a1)
+
+running 7 tests
+test context_constructor_creates_native_managers_flags_and_style_identity ... ok
+test object_context_link_owner_and_default_virtual_members_are_native ... ok
+test highlight_plane_edges_share_default_aspects_while_lines_are_independent ... ok
+test dropping_context_clears_registered_object_links_selection_flags_and_bvh_status ... ok
+test style_setters_preserve_none_default_pair_without_relinking_objects ... ok
+test redisplay_recomputes_real_presentations_and_restores_recorded_selection_modes ... ok
+test object_presentation_lookup_uses_its_context_manager_and_display_mode ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context_display.rs (target/debug/deps/ais_context_display-677f38113a9e23bb)
+
+running 9 tests
+test first_compute_failure_retains_registration_before_presentation_and_selection ... ok
+test selection_failure_keeps_the_displayed_presentation_and_can_be_retried ... ok
+test disabling_automatic_selection_still_displays_and_explicit_modes_override_it ... ok
+test display_erase_and_redisplay_reuse_geometry_and_reactivate_selection ... ok
+test null_operations_are_noops_and_new_display_resets_only_new_affinity ... ok
+test erase_clears_matching_selection_and_dynamic_highlight_only ... ok
+test erased_display_loads_without_computing_and_later_uses_default_mode ... ok
+test explicit_modes_hide_old_presentations_without_changing_object_defaults ... ok
+test erased_foreign_object_clears_custom_selection_before_context_rejection ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context_fatal.rs (target/debug/deps/ais_context_fatal-4991661e83609f45)
+
+running 1 test
+test context_clear_failure_aborts ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.07s
+
+     Running tests/ais_context_lifecycle.rs (target/debug/deps/ais_context_lifecycle-b322afb4211db10b)
+
+running 6 tests
+test interactive_enum_values_and_legacy_aliases_are_native ... ok
+test interactive_dump_override_and_presentation_base_preserve_native_identity ... ok
+test all_supported_aspects_change_only_the_last_group ... ok
+test redisplay_failure_stops_in_native_order_and_retains_partial_changes ... ok
+test remembered_view_requires_current_active_viewer_membership ... ok
+test replacement_selection_is_borrowed_and_destructor_dispatches_virtual_clear ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context_load.rs (target/debug/deps/ais_context_load-c22db8676c7c4118)
+
+running 7 tests
+test null_and_unregistered_objects_are_not_displayed_or_assigned_affinity ... ok
+test registered_view_affinity_changes_only_the_requested_view ... ok
+test defaults_honor_acceptance_explicit_modes_and_null_outputs ... ok
+test repeated_and_legacy_load_preserve_mode_status_and_affinity ... ok
+test first_load_resets_affinity_and_registers_without_computing ... ok
+test child_status_propagates_even_without_visual_propagation ... ok
+test foreign_context_rejection_preserves_partial_child_assignment ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context_location.rs (target/debug/deps/ais_context_location-590bef5f2e1879c4)
+
+running 9 tests
+test empty_identity_preserves_datum ... ok
+test location_queries_absolute_parent_transform_after_local_reset ... ok
+test identity_datum_replaces_prior_datum_and_reset_clears_it ... ok
+test consecutive_locations_replace_instead_of_compose ... ok
+test highlights_only_matching_selectable_and_defaults_mode_to_zero ... ok
+test null_location_updates_are_noops_but_query_rejects_null ... ok
+test highlight_callback_reenters_context_and_identity_reset_skips_it ... ok
+test active_selection_updates_without_recomputing_geometry ... ok
+test selection_failure_preserves_transform_and_skips_highlight ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context_null_registration.rs (target/debug/deps/ais_context_null_registration-3f1774086c593b2a)
+
+running 2 tests
+test null_presentation_clear_ignores_even_a_registered_null_key ... ok
+test unfiltered_query_preserves_null_registration_and_continues_bucket_traversal ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_context_removal.rs (target/debug/deps/ais_context_removal-a1f9ce0508802aa3)
+
+running 15 tests
+test invalidated_native_map_traversal_reports_safe_failure_instead_of_stale_memory ... ok
+test query_callbacks_observe_no_temporary_native_owning_references ... ok
+test display_all_releases_context_guard_before_computation_callbacks ... ok
+test query_bucket_order_matches_native_map_without_clearing_existing_prefix ... ok
+test reentrant_kind_callback_sees_changes_in_later_buckets ... ok
+test objects_for_view_includes_other_states_before_considering_affinity ... ok
+test permanent_removal_detaches_membership_affinity_and_presentations_then_can_redisplay ... ok
+test selected_display_uses_owner_order_and_erase_restarts_from_current_head ... ok
+test bulk_display_and_erase_keep_membership_and_selection_modes ... ok
+test clear_prs_erases_only_the_registered_mode_and_keeps_active_selection ... ok
+test remove_all_clears_detection_and_detaches_registered_children ... ok
+test query_overloads_append_and_distinguish_status_none_from_unfiltered ... ok
+test remove_all_uses_native_snapshot_while_callbacks_register_new_objects ... ok
+test deleting_a_future_binding_during_a_query_uses_updated_bucket_links ... ok
+test direct_clear_global_keeps_context_and_remove_rejects_foreign_before_changes ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_detection_test.rs (target/debug/deps/ais_detection_test-e1c229b69465f12a)
+
+running 8 tests
+test native_detection_enum_values_are_stable ... ok
+test highlight_mode_priority_and_original_style_slot_follow_native_rules ... ok
+test highlight_failure_retains_last_owner_and_immediate_draw_state ... ok
+test detection_filters_preserve_cycling_candidates_and_cursor_independence ... ok
+test slow_highlighting_invalidates_until_a_requested_update_redraws ... ok
+test repeated_detection_skips_highlighting_unless_owner_forces_it ... ok
+test drawer_replacement_during_accept_mode_is_observed_without_a_lock ... ok
+test public_pixel_and_axis_detection_use_real_geometry_and_validate_view_first ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_global_status.rs (target/debug/deps/ais_global_status-40d05bcfc5c7095b)
+
+running 4 tests
+test global_status_borrows_retained_style_and_modes ... ok
+test global_status_defaults_and_independent_flags ... ok
+test global_status_modes_are_unique_ordered_and_removable ... ok
+test viewer_selector_typedef_preserves_native_type_identity ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_line.rs (target/debug/deps/ais_line-46459ef312602650)
+
+running 5 tests
+test width_errors_dispatch_through_base_and_preserve_partial_assignment ... ok
+test appearance_restoration_uses_link_and_keeps_native_own_width ... ok
+test coincident_segment_fails_before_replacing_the_cached_component ... ok
+test setters_preserve_native_cached_geometry_and_infinite_state ... ok
+test live_units_change_infinite_selection_and_owner_identity ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/ais_plane.rs (target/debug/deps/ais_plane-eef0568e99bd6320)
+
+running 7 tests
+test plane_constructors_and_geometry_setters_preserve_native_state ... ok
+test minimum_size_uses_concrete_persistence_and_clears_for_nonpositive_values ... ok
+test size_and_color_copy_on_write_create_defaults_and_restore_only_native_properties ... ok
+test rectangle_selection_replaces_entities_and_snapshots_geometry_and_sensitivity ... ok
+test shaded_rectangle_keeps_untranslated_plane_origin_and_quadrangle_topology ... ok
+test xyz_sizes_leave_cached_corners_until_compute_and_keep_global_component_planes ... ok
+test automatic_frame_projects_center_and_manual_frame_ignores_maximum_point ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_plane_trihedron.rs (target/debug/deps/ais_plane_trihedron-f37e71fbc5c61554)
+
+running 6 tests
+test selection_modes_share_whole_owner_and_keep_old_child_geometry ... ok
+test origin_selection_tracks_plane_but_not_child_point_and_minus_one_clears ... ok
+test presentation_retains_byte_labels_and_infinite_state_on_structure ... ok
+test only_length_marks_existing_presentations_for_update ... ok
+test length_and_color_mutations_preserve_native_drawer_rules ... ok
+test constructors_convert_units_and_accessors_allocate_live_datums ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/ais_point.rs (target/debug/deps/ais_point-c4560f31cceec007)
+
+running 6 tests
+test identity_and_custom_highlights_preserve_native_defaults ... ok
+test every_selection_mode_has_a_live_priority_ten_owner ... ok
+test live_coordinates_drive_standard_matching_and_fresh_vertices ... ok
+test negative_inherited_width_fails_after_marker_and_color_mutation ... ok
+test marker_precedence_and_width_refresh_preserve_inherited_state ... ok
+test normal_and_highlight_presentations_follow_modes_and_infinite_flag ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_selection.rs (target/debug/deps/ais_selection-83e8c8fc0af4b859)
+
+running 10 tests
+test composition_filters_preserve_short_circuit_and_failure_order ... ok
+test append_owner_validates_owner_before_filter_then_dispatches_add ... ok
+test externally_cleared_owner_flag_preserves_native_duplicate_list_entries ... ok
+test add_selection_keeps_list_order_and_actual_borrowed_handles ... ok
+test forced_highlighting_observes_an_already_advanced_cursor ... ok
+test replace_extra_compares_count_and_membership_even_for_duplicate_picks ... ok
+test failing_and_reentrant_filters_observe_unlocked_pre_mutation_state ... ok
+test disabled_selectables_skip_failing_filters_and_observe_shared_updates ... ok
+test remove_repairs_successor_positions_and_advances_public_iteration ... ok
+test composite_virtual_members_dispatch_clear_select_and_add_to_subclasses ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ais_selection_actions_test.rs (target/debug/deps/ais_selection_actions_test-19013c012d6445c0)
+
+running 12 tests
+test pick_status_discriminants_match_native_values ... ok
+test handled_click_leaves_existing_selection_and_remove_skips_click ... ok
+test invalid_owner_style_keeps_output_but_missing_object_style_clears_it ... ok
+test selected_owner_rejected_by_filter_can_still_be_removed ... ok
+test hilight_selected_visits_an_owner_appended_by_a_callback ... ok
+test nonautomatic_owners_are_grouped_in_selection_order ... ok
+test selection_schemes_preserve_order_and_public_cursor ... ok
+test selection_failure_preserves_mutation_for_recovery ... ok
+test camera_selection_uses_real_sensitive_geometry_and_empty_replacement_clears ... ok
+test context_assignment_reaches_children_and_rejects_foreign_context ... ok
+test selection_drawer_replacement_is_observed_after_accept_mode_callback ... ok
+test selection_validates_viewer_before_remembering_a_foreign_view ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/ais_text_label.rs (target/debug/deps/ais_text_label-c369ab29ead37319)
+
+running 7 tests
+test measurement_requires_a_live_context_instead_of_dereferencing_null ... ok
+test annotation_constructor_and_retained_setters_preserve_native_identity ... ok
+test label_appearance_converts_radians_preserves_alpha_and_ignores_material ... ok
+test invalid_font_size_falls_back_to_a_point_and_keeps_unclosed_flip_bracket ... ok
+test measured_label_rectangle_tracks_alignment_rotation_and_selection_snapshot ... ok
+test label_presentation_sets_persistence_brackets_and_formatter_then_selection_origin ... ok
+test screen_label_keeps_explicit_2d_persistence_until_zoomable ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests/axis_intersector.rs (target/debug/deps/axis_intersector-45d444c982853c79)
+
+running 10 tests
+test linear_rejections_invalidate_pick_but_keep_distance_to_center ... ok
+test clipping_preserves_native_point_writes_and_box_depth_only_updates ... ok
+test identity_form_transform_resets_initialization_but_numeric_identity_preserves_it ... ok
+test polygon_interior_tests_the_plane_while_triangle_checks_containment ... ok
+test sphere_inside_hit_retains_native_root_order_and_pick_range_error ... ok
+test protected_helpers_work_before_init_and_point_at_origin_is_a_direction_error ... ok
+test transformed_copy_transforms_location_and_normalizes_direction_without_translation ... ok
+test transformed_quadric_picks_keep_local_depth_and_transform_point_and_normal ... ok
+test native_descriptor_is_inherited_but_trait_handles_keep_concrete_identity ... ok
+test uninitialized_volume_returns_native_program_errors_while_setters_are_noops ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/base_frustum.rs (target/debug/deps/base_frustum-cdb00610c032849e)
+
+running 9 tests
+test a_collapsed_projection_preserves_native_direction_failure ... ok
+test defaults_create_distinct_builders_and_keep_tolerance_values ... ok
+test boundary_test_dispatches_the_virtual_sphere_intersection ... ok
+test crossing_and_rounded_tangent_keep_the_inside_flag_untouched ... ok
+test projected_inside_vertex_sets_flag_and_last_entry_is_ignored ... ok
+test camera_propagates_and_resets_a_preexisting_viewport ... ok
+test degenerate_edges_and_endpoints_on_sphere_do_not_create_crossings ... ok
+test dump_depth_controls_base_and_keeps_tolerance_when_builder_is_null ... ok
+test replacing_builder_adopts_camera_and_null_builder_retains_it ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/base_intersector.rs (target/debug/deps/base_intersector-284a9118d9d4931d)
+
+running 8 tests
+test base_defaults_keep_window_unset_and_use_infinite_sentinels ... ok
+test base_ray_uses_native_positive_x_and_infinite_sentinels ... ok
+test circle_distinguishes_disk_outline_and_parallel_rays ... ok
+test base_planes_are_cleared_and_dump_records_default_fields ... ok
+test camera_identity_and_changes_are_visible_through_trait_handle ... ok
+test cylinder_and_cone_keep_cap_and_hollow_semantics ... ok
+test cylinder_tangency_is_rejected_and_single_crossing_retains_missing_leave ... ok
+test sphere_returns_nearest_magnitude_first_including_negative_times ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bvh_thread_pool.rs (target/debug/deps/bvh_thread_pool-a718caaa633d78fe)
+
+running 11 tests
+test construction_clamps_bounds_and_rejected_entities_do_not_start_workers ... ok
+test sentry_locks_all_workers_and_releases_on_unlock_and_drop ... ok
+test callbacks_can_inspect_workers_and_enqueue_more_work ... ok
+test worker_copies_share_osd_runs_but_have_independent_mutexes ... ok
+test duplicate_jobs_and_failures_preserve_fifo_and_processing_continues ... ok
+test queued_entities_survive_caller_handles_and_pool_destruction_joins_workers ... ok
+test default_worker_replacement_and_custom_function_are_the_actual_public_threads ... ok
+test workers_build_simultaneously_and_hold_their_exposed_mutexes ... ok
+test stopping_retains_unstarted_jobs_and_an_add_restarts_the_pool ... ok
+test wait_observes_active_jobs_even_when_an_idle_worker_empties_the_queue ... ok
+test shutdown_and_empty_queue_workers_keep_the_wake_across_restarts ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/computed_structure_rtti.rs (target/debug/deps/computed_structure_rtti-b176306e9a19586a)
+
+running 2 tests
+test computed_structure_inherits_native_descriptor_and_parent ... ok
+test inherited_descriptor_preserves_concrete_and_interface_casts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/dsg_prs_xyz_axis.rs (target/debug/deps/dsg_prs_xyz_axis-586a2471ba9dfea7)
+
+running 1 test
+test axis_overloads_keep_labels_and_apply_text_aspect_even_for_empty_text ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/frustum_builder.rs (target/debug/deps/frustum_builder-f0b17fd08127e0f6)
+
+running 3 tests
+test default_builder_and_camera_state_follow_native_defaults ... ok
+test plane_distance_normalizes_and_rejects_tiny_normals ... ok
+test invalidating_viewport_restores_the_pixel_projection ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/frustum_core.rs (target/debug/deps/frustum_core-2e90edb996876cbf)
+
+running 10 tests
+test degenerate_segments_overlap_even_when_the_point_is_outside ... ok
+test box_inside_flags_are_refined_and_remain_false_once_false ... ok
+test a_hollow_cylinder_containing_the_frustum_does_not_overlap_its_boundary ... ok
+test generic_arrays_preserve_native_dimensions_and_default_projections ... ok
+test enclosing_circle_selects_filled_area_but_not_an_outline ... ok
+test invalid_box_projection_reports_bounds_instead_of_silently_overlapping ... ok
+test polygon_normal_is_written_before_plane_rejection_and_short_inputs_report_shape ... ok
+test triangle_normal_stays_untouched_on_early_rejection_but_changes_on_late_rejection ... ok
+test sphere_refinement_depends_on_presence_of_inside_output_and_ignores_depth_planes ... ok
+test dump_depth_skips_geometry_only_and_preserves_cached_scalar_fields ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/legacy_sensitive_primitive_array.rs (target/debug/deps/legacy_sensitive_primitive_array-4f722d8b7b2cc127)
+
+running 1 test
+test primitive_array_get_vertex_returns_triangle_vertices ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/plane_presentations.rs (target/debug/deps/plane_presentations-d91af2eca23b0de6)
+
+running 9 tests
+test match_uses_infinite_plane_inclusive_distance_and_ignores_null_drawer ... ok
+test nonplane_creates_current_group_without_submitting_aspects_or_vertices ... ok
+test plane_extents_are_snapshotted_before_aspect_callbacks ... ok
+test rectangular_plane_edges_and_isos_use_native_corner_and_increment_order ... ok
+test nonpositive_iso_capacity_keeps_native_empty_submission_behavior ... ok
+test datum_plane_builders_close_the_triangle_and_retain_native_topology ... ok
+test normal_arrow_dimensions_are_snapshotted_before_arrow_aspect_callbacks ... ok
+test iso_undefined_casts_report_values ... ok
+test arrows_preserve_center_shaft_first_and_corner_shafts_last ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/prs3d_drawer_test.rs (target/debug/deps/prs3d_drawer_test-ab5522035009cf0b)
+
+running 7 tests
+test deviation_keeps_previous_value ... ok
+test values_fall_back_to_link_then_constants ... ok
+test units_are_inherited_and_reset ... ok
+test clear_local_attributes_needs_a_link ... ok
+test aspects_are_inherited_until_own ... ok
+test shader_program_and_shading_model_reach_own_aspects ... ok
+test own_aspects_copy_the_link_graphic_aspects ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/prs_mgr_test.rs (target/debug/deps/prs_mgr_test-394cc5180700c1a1)
+
+running 11 tests
+test children_combine_the_parent_transformation ... ok
+test display_mode_is_set_only_when_accepted ... ok
+test hilight_mode_creates_both_highlight_drawers ... ok
+test transparency_and_material_follow_the_native_flags ... ok
+test color_highlights_and_unhighlight_restores_the_hidden_state ... ok
+test clip_planes_reach_the_presentations ... ok
+test display_creates_one_presentation_per_mode_and_erase_forgets_it ... ok
+test bounding_box_is_void_without_a_view_displaying_the_structure ... ok
+test immediate_mode_queues_highlight_shadows ... ok
+test update_flags_and_update_presentations ... ok
+test bounding_box_is_the_box_of_the_display_mode_presentation ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/rectangular_frustum.rs (target/debug/deps/rectangular_frustum-0fc839045125b291)
+
+running 12 tests
+test initialized_assertions_differ_from_infallible_empty_ray_getters ... ok
+test clipping_retains_point_writes_and_sphere_tries_its_second_root ... ok
+test inherited_runtime_identity_supports_both_interfaces_and_concrete_downcast ... ok
+test planar_predicates_reuse_native_geometry_and_quadric_calls_keep_inside_outputs ... ok
+test init_preserves_geometry_and_build_respects_pixel_tolerance_and_viewport ... ok
+test identity_form_resets_selection_but_numeric_identity_preserves_it ... ok
+test selection_rectangle_tracks_mouse_and_independent_bounds_without_sorting ... ok
+test scaled_transforms_rescale_point_depth_but_native_box_depth_stays_local ... ok
+test builder_copies_keep_tolerance_and_pixels_but_require_reconstruction ... ok
+test polygon_and_triangle_picks_preserve_distinct_point_and_normal_fields ... ok
+test protected_plane_success_changes_only_depth_and_failure_invalidates_pick ... ok
+test plane_output_replaces_entries_and_dump_retains_explicit_class_name ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/select3d_test.rs (target/debug/deps/select3d_test-83e8b91994efdf8e)
+
+running 7 tests
+test group_keeps_distinct_entities_and_matches_all_for_a_box ... ok
+test poly_rounds_points_to_single_precision_and_builds_its_segments ... ok
+test sensitive_matches_propagates_distance_failure_after_successful_overlap ... ok
+test sensitivity_factor_refuses_negative_values ... ok
+test wire_center_is_the_running_half_sum ... ok
+test triangulation_counts_free_edges_and_centers_on_the_triangles ... ok
+test primitive_array_detects_the_nearest_triangle ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/selectable_object_set.rs (target/debug/deps/selectable_object_set-62c136db1d6d9ef0)
+
+running 12 tests
+test iterator_initialized_empty_does_not_revisit_preceding_subsets ... ok
+test empty_sets_preserve_regular_dirty_state_and_validate_subset_values ... ok
+test iterator_observes_live_swaps_and_requires_more_to_cross_subsets ... ok
+test copied_sets_keep_independent_maps_and_share_the_native_tree_handles ... ok
+test object_set_dump_ignores_depth ... ok
+test persistence_transitions_follow_all_five_native_classes ... ok
+test null_camera_updates_viewport_without_rebuilding_persistent_objects ... ok
+test unique_membership_swap_last_removal_and_null_contracts ... ok
+test retained_regular_tree_is_rebuilt_in_place_and_kept_when_empty ... ok
+test group_local_transforms_are_excluded_from_flipping_bounds ... ok
+test persistent_failure_keeps_dirty_flags_and_partial_update_order ... ok
+test camera_orientation_only_rebuilds_world_space_persistent_subsets ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/selecting_volume_manager.rs (target/debug/deps/selecting_volume_manager-631df18173af92f1)
+
+running 9 tests
+test empty_overloads_do_not_mutate_pick_or_inside ... ok
+test empty_manager_preserves_sentinels_and_configuration_failures ... ok
+test custom_volume_failures_reach_sensitive_matching_without_defaulting ... ok
+test empty_copy_retains_state_but_empty_transform_resets_it ... ok
+test axis_switch_replaces_rectangle_and_reuses_axis_on_reinitialization ... ok
+test clipping_uses_world_ray_and_nonpoint_updates_retain_old_range ... ok
+test builder_copy_reconstructs_geometry_and_transform_retains_clip_state ... ok
+test rectangular_modes_reuse_configuration_and_value_clones_share_volume ... ok
+test polyline_permission_updates_only_during_initialization ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/selection_display.rs (target/debug/deps/selection_display-14df08670c30cd57)
+
+running 6 tests
+test sensitive_curves_expose_the_shared_polyline_base ... ok
+test flipping_callbacks_can_append_entities_and_live_object_selections ... ok
+test failing_group_creation_preserves_only_previously_appended_structures ... ok
+test explicit_display_clears_old_structures_and_ignores_selection_activation ... ok
+test display_all_appends_empty_objects_and_redisplays_retained_structures ... ok
+test every_sensitive_geometry_kind_emits_native_graphics ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/selection_image.rs (target/debug/deps/selection_image-a0faef4c9b9bbc92)
+
+running 11 tests
+test custom_filler_default_flush_and_protected_state_are_available ... ok
+test selection_image_modes_keep_native_numeric_values_and_unknowns ... ok
+test raw_depth_outside_rgb_range_preserves_the_previous_pixel ... ok
+test unfilled_inverted_depth_flushes_white_but_extreme_hit_sentinels_stay_black ... ok
+test color_generator_is_repeatable_and_unique_calls_do_not_repeat ... ok
+test normal_filler_uses_float_normalization_and_black_for_zero ... ok
+test normalized_depth_is_deferred_and_missing_hits_stay_black_when_inverted ... ok
+test empty_image_error_precedes_unknown_kind_and_valid_unknown_does_not_pick ... ok
+test palettes_distinguish_entity_owner_and_runtime_type_with_duplicate_memberships ... ok
+test last_membership_sets_mode_and_missing_palette_entries_are_black ... ok
+test public_pixmap_completes_all_modes_and_preserves_unflushed_depth_on_pick_failure ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/selection_manager.rs (target/debug/deps/selection_manager-f5c3dbe2343af20a)
+
+running 10 tests
+test foreground_prebuild_failure_stops_later_entities ... ok
+test foreground_prebuild_uses_inclusive_threshold_and_only_direct_group_children ... ok
+test failed_computation_preserves_registration_and_recomputation_flags ... ok
+test activation_skips_erased_children_and_counts_tolerance_once ... ok
+test non_presenting_parent_still_loads_and_removes_its_children ... ok
+test removal_keeps_the_selection_update_flag_and_reactivation_replaces_cleared_selection ... ok
+test sensitivity_validation_precedes_null_checks_and_updates_retained_tolerance_counts ... ok
+test load_is_child_first_and_repeated_load_does_not_compute_a_new_mode ... ok
+test non_forced_recompute_includes_inactive_modes_but_update_does_not ... ok
+test manager_builds_foreground_heavy_entities_and_background_group_children ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/selection_ranking.rs (target/debug/deps/selection_ranking-35f30d71140503cb)
+
+running 8 tests
+test depth_priority_fallback_is_not_a_lexicographic_order ... ok
+test layer_and_raw_depth_precede_normal_and_priority ... ok
+test negative_and_zero_tolerances_keep_the_native_default_rule ... ok
+test older_priority_uses_confusion_before_mouse_distance ... ok
+test ranking_defaults_clone_public_fields_and_ignore_preference_flag ... ok
+test tolerance_adjusted_depth_depends_on_surface_angle ... ok
+test tolerance_defaults_and_custom_offset_are_distinct ... ok
+test tolerance_frequencies_preserve_inactive_keys_and_reactivation ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/sensitive_entity_set.rs (target/debug/deps/sensitive_entity_set-97eef54288da0b4a)
+
+running 7 tests
+test empty_selection_marks_dirty_and_null_handles_fail_explicitly ... ok
+test rejected_runtime_type_deactivates_without_inserting ... ok
+test runtime_base_casts_preserve_properties_and_dirty_state ... ok
+test query_indices_and_owner_helpers_follow_native_rules ... ok
+test duplicate_persistence_counters_survive_removal_and_use_current_flags ... ok
+test unique_map_counts_owners_and_removes_by_swap_last ... ok
+test retained_tree_updates_while_builder_assignment_does_not_mark_dirty ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/stdprs_curve.rs (target/debug/deps/stdprs_curve-1a27ce8a26f96bee)
+
+running 5 tests
+test circle_matching_can_overshoot_the_requested_last_parameter ... ok
+test automatic_limits_expand_but_explicit_limits_clamp ... ok
+test matching_preserves_manhattan_endpoint_and_strict_segment_thresholds ... ok
+test point_overloads_keep_aspect_and_suppress_arrows_even_when_enabled ... ok
+test sample_sequences_append_and_use_native_knot_scaling ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/stdprs_deflection.rs (target/debug/deps/stdprs_deflection-e0641363a6ef5433)
+
+running 4 tests
+test all_matching_overloads_include_endpoints_and_reject_far_queries ... ok
+test draw_false_preserves_groups_even_with_arrow_and_appends_requested_points ... ok
+test c1_intervals_keep_duplicate_endpoints_and_empty_raw_range_adds_nothing ... ok
+test unbounded_degenerate_curve_stops_after_native_iteration_budget ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/triangular_frustum.rs (target/debug/deps/triangular_frustum-697ed8bed94cd4a5)
+
+running 9 tests
+test clear_releases_builder_but_retains_camera_and_reports_invalid_rebuild ... ok
+test boundary_queries_return_false_and_unknown_triangle_sensitivity_returns_true ... ok
+test dynamic_handles_preserve_ancestry_and_drop_releases_the_builder ... ok
+test builder_copy_starts_empty_and_adopts_shared_configuration ... ok
+test initialization_retains_geometry_until_build_and_rebuilds_from_new_pixels ... ok
+test point_and_sphere_overloads_preserve_their_different_native_algorithms ... ok
+test all_inside_outputs_and_pick_fields_are_untouched_and_clipping_is_ignored ... ok
+test transformed_copy_ignores_scale_and_builder_and_preserves_source ... ok
+test planes_append_to_existing_output_and_dump_depth_controls_inherited_geometry ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/triangular_frustum_set.rs (target/debug/deps/triangular_frustum_set-1fd4fe0afb3f7d68)
+
+running 12 tests
+test initial_state_preserves_native_failures_and_empty_plane_output ... ok
+test degenerate_polylines_produce_empty_sets_without_fabricated_triangles ... ok
+test invalid_lower_bound_retains_native_winding_failure_and_clears_children ... ok
+test point_and_quadric_picks_retain_child_output_fields_and_ignore_clip_ranges ... ok
+test inherited_type_identity_and_shared_builder_survive_interface_casts ... ok
+test box_inside_flag_refines_containment_only_when_overlap_is_disabled ... ok
+test planar_queries_reject_outer_boundary_crossings_but_keep_native_sensitivity ... ok
+test sphere_and_circle_full_containment_modes_follow_boundary_geometry ... ok
+test overlap_mode_controls_crossing_segments_and_transform_resets_it ... ok
+test plane_output_clears_once_and_dump_depth_controls_child_geometry ... ok
+test delaunay_build_handles_concavity_and_replaces_old_geometry_only_on_build ... ok
+test copied_sets_share_input_arrays_but_keep_separate_built_geometry ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/v3d_viewer_test.rs (target/debug/deps/v3d_viewer_test-1e05da5c2dcfeb64)
+
+running 10 tests
+test view_orientation_names_round_trip_except_the_native_typo ... ok
+test privileged_plane_is_stored ... ok
+test removing_a_view_forgets_it_in_the_viewer ... ok
+test a_new_view_is_defined_and_activated_by_set_window ... ok
+test fit_all_on_an_empty_viewer_keeps_the_camera_valid ... ok
+test set_size_and_zero_depth_follow_the_native_checks ... ok
+test pixel_and_view_conversions_are_inverse ... ok
+test set_proj_orientation_points_the_eye_along_the_axis ... ok
+test rectangular_grid_values_round_trip_through_the_viewer ... ok
+test viewer_and_view_dump_json ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/view_clip_range.rs (target/debug/deps/view_clip_range-bbd4fc80212f6266)
+
+running 3 tests
+test clipped_lookup_reports_its_boundary_even_when_outside_query ... ok
+test clipping_subranges_merge_in_native_single_pass_order ... ok
+test void_query_preserves_the_callers_depth_like_native_get_min ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/viewer_selector_geometry.rs (target/debug/deps/viewer_selector_geometry-48a9145a5a919b72)
+
+running 10 tests
+test clear_sensitive_reports_invalid_null_structure_without_dropping_the_sequence ... ok
+test explicit_normal_uses_initial_location_but_argument_entity_sensitivity ... ok
+test non_point_and_invalid_picks_preserve_native_untouched_fields ... ok
+test singular_transform_matches_native_exception_profile ... ok
+test tiny_normals_remain_untransformed_and_detected_points_use_criterion_depth ... ok
+test scale_only_cache_keeps_volume_identity_and_object_clipping_is_not_cached ... ok
+test unscaled_identity_reuses_object_and_transformed_scaling_bypasses_cache ... ok
+test failed_frustum_transform_preserves_output_and_does_not_populate_cache ... ok
+test clear_sensitive_removes_retained_structures_then_releases_sequence ... ok
+test layer_order_follows_clear_and_write_transitions_and_discards_old_entries ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/viewer_selector_overlap.rs (target/debug/deps/viewer_selector_overlap-ff44f1970953c6f5)
+
+running 5 tests
+test closer_match_replaces_entity_without_changing_insertion_index_or_sorted_flag ... ok
+test repeated_owner_count_survives_nonwinning_matches_and_box_skips_point_update ... ok
+test failing_match_keeps_owner_changes_but_does_not_add_or_increment_a_criterion ... ok
+test owner_slot_changed_by_point_update_is_used_only_when_inserting_a_new_owner ... ok
+test null_owner_still_matches_and_replacement_uses_pre_match_selectable ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/viewer_selector_pick.rs (target/debug/deps/viewer_selector_pick-195e1c45048016b1)
+
+running 4 tests
+test missing_window_fails_after_point_initialization ... ok
+test public_pick_failure_keeps_completed_results_and_recovers ... ok
+test point_then_box_reuses_volume_and_axis_retains_camera_frame ... ok
+test public_pick_switches_volumes_and_dispatches_derived_sorter ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/viewer_selector_state.rs (target/debug/deps/viewer_selector_state-8b712f17cb751563)
+
+running 11 tests
+test constructor_and_tolerance_preferences_preserve_native_defaults_and_early_returns ... ok
+test clear_and_invalid_ranks_preserve_native_permutation_storage ... ok
+test lazy_sorting_prefers_depth_until_explicitly_resorted_after_configuration_changes ... ok
+test lazy_access_dispatches_to_the_derived_sorter ... ok
+test entity_sets_rebuild_remove_and_preserve_their_tree_when_builder_changes ... ok
+test activation_reset_preserves_mode_state_and_owner_output_keeps_duplicates ... ok
+test object_removal_removes_all_matching_picks_and_keeps_other_owners ... ok
+test absent_mode_queries_append_and_status_reports_containment_separately ... ok
+test selector_volume_and_object_set_are_the_actual_owned_instances ... ok
+test repeated_prebuild_enable_replaces_the_pool_and_disabled_queue_is_a_no_op ... ok
+test selector_dump_preserves_native_children_counts_and_null_pointer_fields ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/viewer_selector_traversal.rs (target/debug/deps/viewer_selector_traversal-c1c6e9bd02f1fbf2)
+
+running 6 tests
+test empty_traversal_clears_results_and_dispatches_the_derived_sorter ... ok
+test matching_failure_preserves_unsorted_prefix_and_releases_worker_sentry ... ok
+test point_selection_uses_real_entity_matches_and_world_space_picked_points ... ok
+test view_affinity_is_ignored_only_for_the_all_views_sentinel ... ok
+test replacing_camera_in_matches_changes_later_persistent_entity_results ... ok
+test containment_discards_owners_with_unmatched_or_inactive_entities ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/ais_text_label_probe.rs (target/debug/examples/ais_text_label_probe-03d9d2ebbc10a908)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/numeric_probe.rs (target/debug/examples/rustycad_tkv3d_numeric_probe-bd7698289dbff8fb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
