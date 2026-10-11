@@ -41,7 +41,7 @@ jobs:
           -DBUILD_MODULE_Visualization=OFF -DBUILD_MODULE_ApplicationFramework=OFF
           -DBUILD_MODULE_DataExchange=OFF -DBUILD_MODULE_Draw=OFF
           -DBUILD_GTEST=OFF -DUSE_TBB=OFF -DUSE_FREETYPE=OFF
-          -DCMAKE_CXX_FLAGS="${{ runner.os == 'Windows' && '/fp:strict' || format('-ffp-contract={0}', inputs.fp_contract) }}"
+          -DCMAKE_CXX_FLAGS="${{ runner.os == 'Windows' && '/fp:precise' || format('-ffp-contract={0}', inputs.fp_contract) }}"
       - name: Build native geometry toolkits
         run: cmake --build target/native-platform --config RelWithDebInfo --target TKBO TKPrim TKMesh --parallel 3
       - name: Capture native and Rust geometry independently

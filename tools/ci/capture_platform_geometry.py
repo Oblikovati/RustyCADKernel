@@ -17,9 +17,10 @@ def capture_probe(root: Path, output: Path, name: str, source: Path) -> bytes:
     extension = '.lib' if os.name == 'nt' else '.dylib' if platform.system() == 'Darwin' else '.so'
     names = 'TKBO TKMesh TKPrim TKShHealing TKTopAlgo TKGeomAlgo TKBRep TKGeomBase TKG3d TKG2d TKMath TKernel'.split()
     libraries = [next(build.rglob(('' if os.name == 'nt' else 'lib') + toolkit + extension)) for toolkit in names]
+    include = next(build.rglob('BRepAlgoAPI_Fuse.hxx')).parent
     project = output / name
     project.mkdir(parents=True, exist_ok=True)
-    cmake = ['cmake_minimum_required(VERSION 3.20)', 'project(MartensiteProbe LANGUAGES CXX)', 'set(CMAKE_CXX_STANDARD 17)', f'add_executable(native-{name} "{source.as_posix()}")', f'target_include_directories(native-{name} PRIVATE "{(build / "include/opencascade").as_posix()}")', f'target_link_libraries(native-{name} PRIVATE ' + ' '.join(f'"{library.as_posix()}"' for library in libraries) + ')']
+    cmake = ['cmake_minimum_required(VERSION 3.20)', 'project(MartensiteProbe LANGUAGES CXX)', 'set(CMAKE_CXX_STANDARD 17)', f'add_executable(native-{name} "{source.as_posix()}")', f'target_include_directories(native-{name} PRIVATE "{include.as_posix()}")', f'target_link_libraries(native-{name} PRIVATE ' + ' '.join(f'"{library.as_posix()}"' for library in libraries) + ')']
     (project / 'CMakeLists.txt').write_text('\n'.join(cmake) + '\n')
     subprocess.run(['cmake', '-S', str(project), '-B', str(project / 'build')], check=True)
     subprocess.run(['cmake', '--build', str(project / 'build'), '--config', 'RelWithDebInfo'], check=True)

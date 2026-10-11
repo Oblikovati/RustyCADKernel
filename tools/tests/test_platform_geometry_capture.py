@@ -34,6 +34,9 @@ class PlatformGeometryCaptureTests(unittest.TestCase):
             root = Path(folder)
             native = root / 'target/native-platform'
             native.mkdir(parents=True)
+            include = native / "inc"
+            include.mkdir()
+            (include / "BRepAlgoAPI_Fuse.hxx").write_bytes(b"native header")
             for name in 'TKBO TKMesh TKPrim TKShHealing TKTopAlgo TKGeomAlgo TKBRep TKGeomBase TKG3d TKG2d TKMath TKernel'.split():
                 (native / f'lib{name}.so').write_bytes(b'')
             process = FakeGeometryProcesses(root)
@@ -43,6 +46,7 @@ class PlatformGeometryCaptureTests(unittest.TestCase):
             project = (root / 'capture/torus/CMakeLists.txt').read_text()
             self.assertIn('libTKBO.so', project)
             self.assertIn('native.cxx', project)
+            self.assertIn(f'"{include.as_posix()}"', project)
             self.assertNotIn('cargo', project)
             self.assertEqual(len(process.commands), 3)
 
