@@ -12,40 +12,20 @@ mod subtitle_scene;
 mod text_scene;
 #[path = "support/view_setup.rs"]
 mod view_setup;
-use fixed_glyph_source::FixedGlyphSource;
+#[path = "support/visible_fixed_glyph_source.rs"]
+mod visible_fixed_glyph_source;
 use martensite_vulkan::*;
 use recording_device::RecordingDevice;
 use rustycad_tkernel::{quantity::ColorRgba, standard::Handle};
 use rustycad_tkservice::graphic3d::*;
 use std::sync::Arc;
-#[derive(Default)]
-struct SubtitleGlyphFixture {
-    glyphs: FixedGlyphSource,
-}
-impl TextLayoutSource for SubtitleGlyphFixture {
-    fn layout(
-        &self,
-        text: &Graphic3dText,
-        aspects: &dyn Graphic3dAspectsSource,
-        params: &Graphic3dRenderingParams,
-    ) -> Result<Option<GlyphLayout>, RenderError> {
-        if text
-            .text()
-            .to_c_string()
-            .iter()
-            .all(|c| matches!(*c, 0 | b' ' | b'\t' | b'\n'))
-        {
-            return Ok(None);
-        }
-        self.glyphs.layout(text, aspects, params)
-    }
-}
+use visible_fixed_glyph_source::VisibleFixedGlyphSource;
 fn subtitle_recording_driver() -> (Handle<Graphic3dRenderDriver>, RecordingDevice) {
     let device = RecordingDevice::default();
     let driver = Graphic3dRenderDriver::with_backend_and_fonts(
         device.clone(),
         256,
-        Arc::new(SubtitleGlyphFixture::default()),
+        Arc::new(VisibleFixedGlyphSource::default()),
     )
     .unwrap();
     (driver, device)

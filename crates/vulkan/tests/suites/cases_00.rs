@@ -15,6 +15,8 @@ pub mod clipping_capture_cases;
 pub mod clipping_draw;
 #[path = "../clipping_view.rs"]
 pub mod clipping_view;
+#[path = "../decal_text_policy.rs"]
+pub mod decal_text_policy;
 #[path = "../graphic_buffers.rs"]
 pub mod graphic_buffers;
 #[path = "../graphic_submission.rs"]

@@ -265,7 +265,7 @@ fn shadow_and_foreground_keep_the_same_live_native_face_culling() {
     }
 }
 #[test]
-fn local_plane_shadow_keeps_native_unshifted_anchor() {
+fn local_plane_shadow_compounds_current_native_world_view() {
     let fixture = TextFixture::new();
     fixture
         .style
@@ -273,12 +273,12 @@ fn local_plane_shadow_keeps_native_unshifted_anchor() {
     let axis = Axis2::new(Point3::new(1., 2., 0.), Direction3::Z).unwrap();
     fixture.text.set_orientation(&axis);
     fixture.text.set_own_anchor_point(false);
-    let frame = fixture.redraw();
-    assert_eq!(
-        frame.draws()[0].clip_transform(),
-        frame.draws()[1].clip_transform()
-    );
+    // Actual native draw traces at 3d097a0 show local-plane setupMatrix consumes the previous pass.
+    assert_local_shadow_passes_differ(&fixture);
     fixture.text.set_own_anchor_point(true);
+    assert_local_shadow_passes_differ(&fixture);
+}
+fn assert_local_shadow_passes_differ(fixture: &TextFixture) {
     let frame = fixture.redraw();
     assert_ne!(
         frame.draws()[0].clip_transform(),
