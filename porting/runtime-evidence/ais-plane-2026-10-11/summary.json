@@ -1,0 +1,31 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "requests": 210,
+  "comparison": "all native/Rust tokens exact under the existing comparator; no tolerance adjustment",
+  "requests_sha256": "34f401d4c49d445d378862da4e2bd875e5aea72ce5fcb1bb2a3d9ba592d349d3",
+  "native_stdout_sha256": "4cffc923754948e6f34d0707cc5c55a414cd25b0dccc4cf7debc8aa9a555d4b2",
+  "rust_stdout_sha256": "4cffc923754948e6f34d0707cc5c55a414cd25b0dccc4cf7debc8aa9a555d4b2",
+  "source_sha256": {
+    "crates/tkv3d/src/ais/plane_selection.rs": "4b6993517e387c63101262bcd348ec30f20ddbd0c2ce84dcbab4769a5e4f1d6e",
+    "crates/tkv3d/src/ais/plane.rs": "6536234566551f7163cf7a711fffeab3653c2d58d038628ec111535e8d028c7e",
+    "crates/tkv3d/src/ais/plane_persistence.rs": "c20d48b835c65740a2d5fc4468685b9a871eae08c66865bf4c8f445445a6c0a4",
+    "crates/tkv3d/src/ais/plane_presentations.rs": "d906ffb65b3160158cd8d66b6d283a8c40dddf6002c3d163b58897e1f888dec5",
+    "crates/tkv3d/src/ais/plane_appearance.rs": "c6c4fe067c14174742f05530ce86b67b698c3f535bc59b3c74b39f370cdef095",
+    "crates/tkv3d/src/ais/plane_geometry.rs": "7005d865e4fad9cbc0251be7ad71598e3591b984b6c9ccece1b78e32de385250",
+    "crates/tkv3d/tests/ais_plane.rs": "90c6eb54c656810ec2e4f795d41f314fcf32782636be62c583f9fb396e6bf7d2",
+    "crates/tkv3d/examples/v3_probe/ais_plane.rs": "9eb8540c9f9c79454b988b021627c0715d2ab05e71e2da092710bf8039921845",
+    "tools/oracle/tkv3d_probe_ais_plane.cxx": "2bccb089fead1d1301e967eedb8b84fab0238a0d975bc393c4f1aadc72514ee7",
+    "tools/tkv3d_corpus_ais_plane.py": "5a1a86d643e6bcb0242f9883aae4293dfd205e260c2bcfd884f98bf29177662f"
+  },
+  "native_xyz_constructor_exit": -11,
+  "constructor_status": "partial: pinned native XYZ constructor dereferences null DatumAspect; safe Rust default is explicit",
+  "renderer_status": "pending: quadrangle lowering, both device capture profiles and performance workload",
+  "worktree_branch": "porting/martensite-ais-plane",
+  "checks": {
+    "focused_tests": 7,
+    "native_requests": 210,
+    "full_tkv3d_all_targets": "passed",
+    "clippy": "passed",
+    "python_corpus_tests": 3
+  }
+}

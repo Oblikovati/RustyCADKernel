@@ -125,3 +125,11 @@ mod text_label_layout;
 mod text_label_presentations;
 mod text_label_style;
 pub use text_label::{AisTextLabel, AisTextLabelFields};
+
+mod plane;
+mod plane_appearance;
+mod plane_geometry;
+mod plane_persistence;
+mod plane_presentations;
+mod plane_selection;
+pub use plane::{AisPlane, AisPlaneFields, AisTypeOfPlane};

@@ -1,0 +1,7 @@
+{
+  "native_xyz_constructor_exit": -11,
+  "stdout": "",
+  "stderr": "",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source": "#include <AIS_Plane.hxx>\n#include <Geom_Axis2Placement.hxx>\nint main() {\n  occ::handle<Geom_Axis2Placement> frame=new Geom_Axis2Placement(gp_Ax2());\n  occ::handle<AIS_Plane> plane=new AIS_Plane(frame,AIS_TOPL_XYPlane,false);\n  return plane.IsNull();\n}\n"
+}
