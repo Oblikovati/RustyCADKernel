@@ -92,6 +92,7 @@ def shard_command(runner: str, packages: list[PackageWeight]) -> list[str]:
         )
     return (
         RUNNER_PREFIXES[runner]
+        + (["--no-fail-fast"] if runner == "test" else [])
         + ["--all-features", "--locked"]
         + [argument for package in packages for argument in ["--package", package.name]]
     )
