@@ -1,0 +1,18 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "counterexample": {
+    "from_y": -1073741824,
+    "to_y": 1073741824,
+    "delta_y": 2147483648,
+    "expected_render_pan_y": -2147483648
+  },
+  "reason": "OCCT converts int(-deltaY); Rust must negate before saturating i32 conversion.",
+  "native_repeated_byte_identical": true,
+  "native_fixture_rows": 1,
+  "files": {
+    "tools/oracle/martensite_touch_pan_boundary.cxx": "53dcad07355ebd6ec81f2dd2c65dff7c4abb9586420e4018544bd844c572dd0b",
+    "crates/tkv3d/tests/fixtures/touch-pan-boundary-native.txt": "384ae0b1389bee24036067dad9c072bd52465af7b8ca658d7af6f69c94489bcd"
+  },
+  "local_only": true
+}

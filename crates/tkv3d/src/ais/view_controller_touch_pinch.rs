@@ -98,7 +98,7 @@ impl AisViewController {
             self.start_touch_pinch_pan(view)?;
             self.render_input.panning.to_pan = true;
             self.render_input.panning.delta =
-                Vec2::new(motion.deviation.x as i32, -motion.deviation.y as i32);
+                Vec2::new(motion.deviation.x as i32, (-motion.deviation.y) as i32);
             return Ok(true);
         }
         Ok(false)

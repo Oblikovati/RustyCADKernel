@@ -4,6 +4,26 @@ use super::{AisViewController, view_controller_transfer_fixture::queue_snapshot}
 use rustycad_tkernel::{ncollection::Vec2, standard::Handle};
 use rustycad_tkservice::aspect::AspectTouch;
 #[test]
+fn pinch_negates_y_before_converting_at_signed_integer_boundary() {
+    let mut c = AisViewController::new();
+    c.touch_dispatch.update_start_pan = false;
+    for index in 0..2 {
+        let mut touch = AspectTouch::at(f64::from(index * 20), -1_073_741_824., false);
+        touch.to = Vec2::new(f64::from(index * 20), 1_073_741_824.);
+        c.input_base.touch_points.add(index as usize, touch);
+    }
+    c.flush_gestures(&Handle::default(), &Handle::default())
+        .unwrap();
+    let expected: Vec<i32> = include_str!("../../tests/fixtures/touch-pan-boundary-native.txt")
+        .split_whitespace()
+        .map(|value| value.parse().unwrap())
+        .collect();
+    assert_eq!(
+        c.render_input.panning.delta,
+        Vec2::new(expected[0], expected[1])
+    );
+}
+#[test]
 fn gesture_synthesis_matches_native_contact_modes_tolerances_and_three_frames() {
     for fixture in [
         include_str!("../../tests/fixtures/view-controller-gestures-0-native.txt"),
