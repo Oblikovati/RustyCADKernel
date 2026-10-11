@@ -1,0 +1,11 @@
+{
+  "upstream_id": "AIS_ViewCube::ViewAnimation",
+  "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
+  "previous_status": "implemented",
+  "corrected_status": "partial",
+  "reason": "Native const handle reference observes replacement/null while current Rust getter returns a cloned snapshot handle.",
+  "native_source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx:79",
+  "rust_source": "crates/tkv3d/src/ais/view_cube_policies.rs:9",
+  "required_proof": "Two retained references, replacement/null/restore and protected field replacement; real nonblocking live view and exact canonical compiler binding.",
+  "existing_copied_convenience": "Preserve, without full native getter credit."
+}
