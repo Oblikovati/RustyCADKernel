@@ -35,7 +35,10 @@ fn payload_reborrows_do_not_replace_original_deallocation_provenance() {
 
 #[test]
 fn aligned_payload_reborrows_free_their_original_layouts() {
-    for alignment in [1, 2, 4, 8, 16, 64, 4096] {
+    for &alignment in super::ACCEPTED_NATIVE_ALIGNMENTS
+        .iter()
+        .chain([4096].iter())
+    {
         let mut owner = memory::allocate_aligned(17, alignment).unwrap();
         owner.as_mut_slice()[3..7].copy_from_slice(b"test");
         assert_eq!(&owner.as_slice()[3..7], b"test");

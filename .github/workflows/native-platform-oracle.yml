@@ -2,6 +2,11 @@ name: Native platform geometry oracle
 on:
   workflow_dispatch:
     inputs:
+      capture:
+        description: Geometry scope for the diagnostic capture
+        type: choice
+        options: ['geometry', 'cylinder']
+        default: 'geometry'
       platforms:
         description: JSON runner list for the controlled capture
         type: string
@@ -43,8 +48,11 @@ jobs:
           -DBUILD_GTEST=OFF -DUSE_TBB=OFF -DUSE_FREETYPE=OFF
           -DCMAKE_CXX_FLAGS="${{ runner.os == 'Windows' && '/fp:precise' || format('-ffp-contract={0}', inputs.fp_contract) }}"
       - name: Build native geometry toolkits
-        run: cmake --build target/native-platform --config RelWithDebInfo --target TKBO TKPrim TKMesh --parallel 3
+        run: cmake --build target/native-platform --config RelWithDebInfo --target ${{ inputs.capture == 'cylinder' && 'TKPrim TKMesh' || 'TKBO TKPrim TKMesh' }} --parallel 3
       - name: Capture native and Rust geometry independently
+        env:
+          MARTENSITE_FP_CONTRACT: ${{ inputs.fp_contract }}
+          MARTENSITE_CYLINDER_ONLY: ${{ inputs.capture == 'cylinder' }}
         run: python3 tools/ci/capture_platform_geometry.py
       - uses: actions/upload-artifact@v7.0.1
         if: always()

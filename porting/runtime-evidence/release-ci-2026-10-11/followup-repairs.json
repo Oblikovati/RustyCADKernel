@@ -1,0 +1,67 @@
+{
+  "source_revision": "d9625414e3015c11cbdbcb1a0b2c17c98e832d93",
+  "baseline_run": 38122208200,
+  "baseline_conclusion": "cancelled after platform failures and Windows shard 0 hang",
+  "windows_thread_hang": {
+    "test": "timed_wait_times_out_then_joins",
+    "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "native_file": "src/OSD/OSD_Thread.cxx",
+    "negative_timeout": -5,
+    "win32_timeout_milliseconds": 4294967291,
+    "fix": "retain unsigned native conversion; exercise negative Windows timeout with a finishing worker rather than one waiting for a release after the join"
+  },
+  "local_path_and_thread_tests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "windows_tkernel_library_and_tests_cross_check": "passed; compilation only, hosted runtime still required",
+  "local_locale_utility_tests": {
+    "passed": 24,
+    "failed": 0
+  },
+  "local_memory_storage_tests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "local_shape_message_doctests": {
+    "passed": 75,
+    "failed": 0,
+    "preexisting_ignored": 1
+  },
+  "embedded_resources": {
+    "preserved_bytes": [
+      "SHAPE.*",
+      "bop_algo/messages.msg",
+      "Units.dat"
+    ],
+    "windows_autocrlf_shape_us_reproduction": "267 CRLF pairs before attributes, zero after; native LF bytes retained"
+  },
+  "extracted_packages": {
+    "all_31_packages": "default and all features, all targets and doctests passed before integration; not publication",
+    "integrated_main_source": "3c9a1e811cbbd673dab9f8719fade87de02e9046",
+    "integrated_main_changed_packages": [
+      "rustycad-tkernel",
+      "rustycad-tkbo",
+      "rustycad-tkmesh",
+      "rustycad-tkdraw",
+      "rustycad-tkv3d"
+    ],
+    "integrated_main_changed_packages_verdict": "both profiles, all targets and doctests passed"
+  },
+  "pending_native_capture": {
+    "run": 38123916241,
+    "source_revision": "c93242e118c935f8659f3fb4f702f6dedf0eaf43",
+    "status_at_recording": "queued; no runner assigned",
+    "checks": [
+      "all three cylinder faces",
+      "torus",
+      "cells builder",
+      "edges to wires",
+      "defeaturing",
+      "Darwin native memory behavior"
+    ]
+  },
+  "release_publication": "pending host regressions, complete owner checks and tagged archive verification",
+  "porting": "paused at user request",
+  "tkernel_all_targets_all_features_clippy": "passed; warnings denied"
+}

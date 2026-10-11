@@ -1,5 +1,19 @@
 //! Native allocation identity and reallocation ownership, rather than a Vec capacity simulation.
 use rustycad_tkernel::standard::memory::{self, StandardMemory};
+#[path = "standard_memory_storage/native_zero_realloc.rs"]
+mod native_zero_realloc;
+
+// Standard.cxx 3d097a0: ARM POSIX uses posix_memalign; x86/MSVC permit small alignments.
+const DIRECT_POSIX_ALIGNMENT: bool = cfg!(not(any(
+    target_env = "msvc",
+    target_arch = "x86",
+    target_arch = "x86_64"
+)));
+const ACCEPTED_NATIVE_ALIGNMENTS: &[usize] = if DIRECT_POSIX_ALIGNMENT {
+    &[8, 16, 64]
+} else {
+    &[1, 2, 4, 8, 16, 64]
+};
 
 fn assert_storage_row(actual: &str) {
     let fixture = include_str!("../../../tools/oracle/tkernel_standard_memory_storage.expected");
@@ -39,7 +53,7 @@ fn simultaneous_zero_byte_allocations_are_real_distinct_aligned_blocks() {
 
 #[test]
 fn zero_byte_aligned_owners_follow_the_same_real_allocation_contract() {
-    for alignment in [1, 2, 4, 8, 16, 64] {
+    for &alignment in ACCEPTED_NATIVE_ALIGNMENTS {
         let first = memory::allocate_aligned(0, alignment).unwrap();
         let second = memory::allocate_aligned(0, alignment).unwrap();
         let expected = alignment.max(16);
@@ -50,6 +64,20 @@ fn zero_byte_aligned_owners_follow_the_same_real_allocation_contract() {
             u8::from(first.address().is_multiple_of(expected)),
             u8::from(second.address().is_multiple_of(expected))
         ));
+    }
+}
+
+#[test]
+fn sub_pointer_alignment_matches_the_pinned_native_backend() {
+    for alignment in [1, 2, 4] {
+        assert_eq!(
+            memory::allocate_aligned(0, alignment).is_none(),
+            DIRECT_POSIX_ALIGNMENT
+        );
+        assert_eq!(
+            memory::allocate_aligned(17, alignment).is_none(),
+            DIRECT_POSIX_ALIGNMENT
+        );
     }
 }
 
@@ -104,9 +132,15 @@ fn positive_allocation_failure_preserves_old_pointer_and_bytes() {
 }
 
 #[test]
-fn existing_zero_size_reallocation_releases_owner_before_reporting_native_error() {
+fn existing_zero_size_reallocation_matches_native_owner_and_error_result() {
     let mut slot = Some(memory::allocate(8).unwrap());
-    let failure = memory::reallocate(&mut slot, 0).unwrap_err();
+    let result = memory::reallocate(&mut slot, 0);
+    if !native_zero_realloc::existing_zero_reallocation_returns_null() {
+        result.unwrap();
+        assert!(slot.unwrap().is_empty());
+        return;
+    }
+    let failure = result.unwrap_err();
     assert_eq!(failure.exception_type(), "Standard_OutOfMemory");
     assert_storage_row(&format!(
         "realloc-existing-zero 1 {}",

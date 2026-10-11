@@ -256,6 +256,8 @@ fn timed_wait_times_out_then_joins() {
     assert!(thread.run(9, 0));
     let id: usize = thread.id();
     assert_eq!(thread.wait_for(10), None);
+    // OSD_Thread.cxx 3d097a0 casts -5 to a 49-day DWORD timeout on Windows.
+    #[cfg(not(windows))]
     assert_eq!(thread.wait_for(-5), None);
     SPIN_RELEASED.store(true, Ordering::SeqCst);
     assert_eq!(thread.wait_for(10_000), Some(10));
@@ -298,4 +300,12 @@ fn a_panicking_thread_function_makes_wait_fail() {
     assert!(thread.run(0, 0));
     assert_eq!(thread.wait_for(10_000), None);
     assert!(!thread.wait(), "the failed join consumed the handle");
+}
+
+#[cfg(windows)]
+#[test]
+fn negative_timeout_can_join_a_finishing_windows_worker() {
+    let thread = OsdThread::with_function(double);
+    assert!(thread.run(5, 0));
+    assert_eq!(thread.wait_for(-5), Some(10));
 }

@@ -273,3 +273,16 @@ impl Drop for OsdThread {
         self.detach();
     }
 }
+
+#[cfg(all(test, windows))]
+mod timeout_cast_tests {
+    use super::join_timeout;
+    use std::time::Duration;
+
+    #[test]
+    fn negative_timeout_preserves_the_native_win32_dword_value() {
+        // OSD_Thread.cxx 3d097a0 passes the signed int directly to WaitForSingleObject.
+        assert_eq!(join_timeout(-5), Duration::from_millis(4_294_967_291));
+        assert_eq!(join_timeout(10), Duration::from_millis(10));
+    }
+}
