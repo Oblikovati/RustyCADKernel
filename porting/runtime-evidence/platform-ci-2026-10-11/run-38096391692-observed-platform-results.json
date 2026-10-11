@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "run": 38096391692,
+      "head": "662e54360923912e647694f59a2e14ddaf30212e",
+      "job": 114343052320,
+      "platform": "macos-latest",
+      "shard": 2,
+      "conclusion": "failure",
+      "test": "cylinder_seam_copy_matches_pinned_native_order",
+      "actual_fingerprint": 6632932043137629383,
+      "expected_fingerprint": 8261614461542172911
+    },
+    {
+      "run": 38096391692,
+      "head": "662e54360923912e647694f59a2e14ddaf30212e",
+      "job": 114343052458,
+      "platform": "macos-latest",
+      "shard": 3,
+      "conclusion": "failure",
+      "test": "box_torus_fuse_matches_native_oracle",
+      "first_difference_line": 21,
+      "actual": "e 3eb0c6f7a0b5ed8d 3fb54a633a1788b6 3fed531d08308e82 0: 2F 3R",
+      "expected": "e 3eb0c6f7a0b5ed8d 3fb54a633a178ecc 3fed531d08308ec3 0: 2F 3R"
+    }
+  ],
+  "status": "partial observation; other jobs are not claimed passing"
+}
