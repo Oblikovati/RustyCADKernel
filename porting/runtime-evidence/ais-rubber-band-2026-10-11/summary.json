@@ -1,0 +1,80 @@
+{
+  "source_revision": "b0474326b",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "numeric_comparisons": 162208,
+  "new_rubber_band_numeric_cases": 2520,
+  "tkv3d_full_suite_before_final_destruction_test": 468,
+  "final_rubber_band_cpu_and_subclass_tests": 7,
+  "vulkan_tests": 227,
+  "python_tests": 62,
+  "strict_renderer_parity": false,
+  "accepted_overall_performance_baseline": false,
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "strict_passed": 0,
+      "strict_total": 48,
+      "roles_passed": 96,
+      "roles_total": 96,
+      "maximum_depth_delta": 0.0,
+      "runtime_checks": 20,
+      "analytic_pixels": 61440,
+      "performance_workloads": 33,
+      "rubber_band_timing": [
+        {
+          "workload": "ais-rubber-band-updates",
+          "draws": 2,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 0.5784255,
+          "mean_ms": 0.60956621,
+          "p95_ms": 0.815428,
+          "p99_ms": 1.0776029999999999,
+          "minimum_ms": 0.481681,
+          "maximum_ms": 1.115603,
+          "samples": 100
+        }
+      ]
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "strict_passed": 0,
+      "strict_total": 48,
+      "roles_passed": 96,
+      "roles_total": 96,
+      "maximum_depth_delta": 0.0,
+      "runtime_checks": 20,
+      "analytic_pixels": 61440,
+      "performance_workloads": 33,
+      "rubber_band_timing": [
+        {
+          "workload": "ais-rubber-band-updates",
+          "draws": 2,
+          "warmup": 20,
+          "validation": false,
+          "median_ms": 0.404759,
+          "mean_ms": 0.43047562,
+          "p95_ms": 0.567811,
+          "p99_ms": 0.850313,
+          "minimum_ms": 0.360247,
+          "maximum_ms": 0.909573,
+          "samples": 100
+        }
+      ]
+    }
+  ]
+}

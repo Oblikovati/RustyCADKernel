@@ -53,3 +53,12 @@ DISPLAY=:1 python3 tools/verify_vulkan.py --source ../OCCT --build target/occt-a
 
 Strict renderer raster/depth parity and an accepted performance baseline remain
 separate open gates. Ported API mappings do not claim overall renderer completion.
+
+The [2026-10-11 evidence](../porting/runtime-evidence/ais-rubber-band-2026-10-11/README.md)
+records 162,208 exact native comparisons, including 2,520 rubber-band requests.
+Both GPU profiles pass 96/96 visibility/filling roles and have zero depth differences;
+all 48 strict image comparisons per profile retain boundary coverage/blending failures.
+The measured rubber-band update medians are 0.578 ms on lavapipe and 0.405 ms on the
+AMD host. Its repeated median/p95 budgets pass on both devices. The complete repeated
+suite retains a lavapipe `window-resize-present` median-budget failure, so no overall
+performance baseline is accepted.
