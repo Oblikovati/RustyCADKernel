@@ -13,8 +13,8 @@
     "TKV3d": 582,
     "Vulkan": 247
   },
-  "new_pinned_api_claims": 62,
-  "new_implemented_api_claims": 61,
+  "new_pinned_api_claims": 60,
+  "new_implemented_api_claims": 59,
   "new_partial_class_claims": 1,
   "clippy_warnings_denied": true,
   "bounded_format_check": "passed",
@@ -22,5 +22,85 @@
   "rust_test_occt_dependency": false,
   "primary_validation_host": "local Linux",
   "windows_macos_validation": "deferred",
-  "full_port_complete": false
+  "full_port_complete": false,
+  "private_helpers_not_api_claims": [
+    "AIS_CameraFrustum::fillBorders()",
+    "AIS_CameraFrustum::fillTriangles()"
+  ],
+  "rust_capture_revision": "564bb2e6ab3a0fc2c333a47c57da603633fcd935",
+  "rust_capture_inputs": {
+    "cargo_metadata_sha256": "47fdf821d8b0c91873df6299c2578484f9004527fc3a616cffb14fce60af27a3",
+    "tool_versions": {
+      "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
+    },
+    "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
+    "workspace_file_count": 11174,
+    "workspace_inputs_sha256": "b2e520e6bc0f119b6c735970257d72e9ef97e098837dd2478a9ac8588ed2b59d",
+    "workspace_revision": "564bb2e6ab3a0fc2c333a47c57da603633fcd935"
+  },
+  "rust_crates": 31,
+  "observed_cpp_api_declarations": 108622,
+  "resolved_implementation_claims": 52618,
+  "unresolved_ledger_rows": 0,
+  "port_scope_metrics": {
+    "api_declarations": 76041,
+    "api_done": 52352,
+    "api_open": 22711,
+    "api_partial": 978,
+    "gtests_mapped": 7969,
+    "gtests_not_applicable": 2,
+    "gtests_unmapped": 480,
+    "toolkits": 56
+  },
+  "tkv3d_metrics": {
+    "api": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 165,
+        "partial": 5,
+        "unclaimed": 2436,
+        "upstream_unimplemented": 0,
+        "verified": 2566
+      },
+      "declarations": 5172,
+      "done": 2731,
+      "done_percent": 52.8
+    },
+    "boilerplate": {
+      "by_status": {
+        "claimed_unverified": 0,
+        "excluded": 404,
+        "partial": 21,
+        "unclaimed": 265,
+        "upstream_unimplemented": 0,
+        "verified": 233
+      },
+      "declarations": 923,
+      "done": 637,
+      "done_percent": 69.0
+    },
+    "gtests": {
+      "mapped": 1,
+      "not_applicable": 0,
+      "unmapped": 72
+    },
+    "ledger_defects": {},
+    "open_boilerplate_by_category": {
+      "rtti-macro": 242,
+      "special-member": 23
+    },
+    "open_gap_by_category": {
+      "alias": 22,
+      "enum-constant": 165,
+      "field": 357,
+      "member": 1533,
+      "protected-member": 173,
+      "record": 186
+    },
+    "scope": "port",
+    "scope_reason": ""
+  },
+  "full_api_coverage": "UNKNOWN"
 }

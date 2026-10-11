@@ -14,7 +14,7 @@ discovery and `git diff --check` passed. Build profiles used debug=0,
 incremental=false and CARGO_BUILD_JOBS=2.
 
 All new Rust files are below 500 lines; function bodies are at most 20 lines.
-The fragment `porting/ledger-fragments/camera-frustum.json` pins 17 functional,
+The fragment `porting/ledger-fragments/camera-frustum.json` pins 15 functional,
 type, field and enum declarations. It does not edit the shared parity ledger or
 published inventory; integration and compiled crosswalk proof belong to the root.
 RTTI macro mappings are left to the standard generator, with explicit runtime
