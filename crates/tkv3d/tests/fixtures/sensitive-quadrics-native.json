@@ -1,0 +1,111 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "oracle_execution": "local CPU only; Rust regressions load committed assets without OCCT",
+  "native_configuration": "existing RelWithDebInfo exception-enabled OCCT libraries; -O2 -g -DNDEBUG, no No_Exception defines; no OCCT rebuild",
+  "generators": [
+    {
+      "path": "tools/oracle/martensite_sensitive_quadric_selection.cxx",
+      "sha256": "cde645841d92cbc73c90917e25b6df31599f2a009874133773e060776cdb3cb3"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_quadric_faults.cxx",
+      "sha256": "a7b8cb0fe1d3a2f91b194c07b533895a6d3fbf8c3bf06bb928883b4fd45f8f78"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_quadric_reference.cxx",
+      "sha256": "94de8c8c9be7e3e34ebf47003d1bc08d53b78c21d336fa97485be9c9e6c99979"
+    },
+    {
+      "path": "tools/oracle/martensite_sensitive_primitive_matching.cxx",
+      "sha256": "cfc144de5ddebc783af29a33534014170f0264c4c9aac0d7040f02c11650be05"
+    }
+  ],
+  "sources": [
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveCircle.hxx",
+      "source_sha256": "471722ed60826866549e24cdb42edf1789f5219b3aeaf6172f21e575bbe328fe",
+      "implementation_sha256": "ca9ae2e67a8730dc469d4a64347f3c42594a5e42de8a02d4f0ad2cb9d1154bb7"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveCylinder.hxx",
+      "source_sha256": "02475fd57013553df12961874297db1cc123e00cedf4724d8466ceb39e28d47d",
+      "implementation_sha256": "63ec78264b5d179fe7d881707566ad9cbbe62fddfe869829dccf1fca278bcec3"
+    },
+    {
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveSphere.hxx",
+      "source_sha256": "51e13e7e4428b8b0f215871112a6fbfa64d117a36bb89247711299d9e5841f2b",
+      "implementation_sha256": "cfefa6483f5453cd1a5e826991685c9031e93c9dbfd0e7cc34978e47ed730225"
+    }
+  ],
+  "snapshots": 4140,
+  "geometry_variants": 23,
+  "volume_policies": 9,
+  "camera_policies": 2,
+  "clip_policies": 2,
+  "lifecycle_steps": 5,
+  "fixture_sha256": "d6740ea1f3139d5553e86c0d38b209cc8ebf5d9a7cb55997a596e3f659df1d2b",
+  "repeat_generation": "all three generators repeat byte-identically",
+  "chunk_count": 9,
+  "chunks": [
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-00.txt",
+      "rows": 480,
+      "sha256": "0a02b2310b4eaf179429c285ecd3847a1acedfd28f581134225fce1138b976f7"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-01.txt",
+      "rows": 480,
+      "sha256": "760a3f189e13465425b8b4e3047e2320f37fdb96702b075b7be0efc6156f3664"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-02.txt",
+      "rows": 480,
+      "sha256": "2cc20fbe67b5d892772b57972aa95ca84ac2f37285d059a829484df5da323831"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-03.txt",
+      "rows": 480,
+      "sha256": "fa6aba6acf196872f2f1064b3a29a4e2adc66bf5a2fb026dff75974498dc0927"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-04.txt",
+      "rows": 480,
+      "sha256": "a83b3556331b22f6e2f8081c24ecc38bfeb73fe70410babf841abcad7f1383e6"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-05.txt",
+      "rows": 480,
+      "sha256": "6d9fd0178f2ddcfdc47b527612a8b90c8eb5053ea2787bf93dc9531757620c67"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-06.txt",
+      "rows": 480,
+      "sha256": "b3173dc6f0ad6cf381da797b249c3272e9294218ab2c8e45c04a825f90a6fbf0"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-07.txt",
+      "rows": 480,
+      "sha256": "a2ec2c320d834084bfffa198fe2fc18265b96d63bd86dd2f48e38a86e3564682"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-native-08.txt",
+      "rows": 300,
+      "sha256": "ebc9044e8af4d0582cc4ca656d0b2b669adfdcd5ddcda14f22dcad7925831753"
+    }
+  ],
+  "additional_fixtures": [
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-faults.txt",
+      "snapshots": 30,
+      "rows": 60,
+      "sha256": "a58714f3ca7d2008f559dea78040a70b666891ed6537dddc24dea76f10afccd7"
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/sensitive-quadrics-reference.txt",
+      "snapshots": 11,
+      "rows": 11,
+      "sha256": "00faf335449e0962ad238b22f3a6909b2e61b36d3dd73073599a1150be1eced0"
+    }
+  ]
+}

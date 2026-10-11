@@ -10,8 +10,11 @@ mod primitive_array_init;
 mod primitive_array_match;
 mod primitive_array_overloads;
 mod primitive_array_patches;
+mod quadric_selection;
 mod sensitive_box;
+mod sensitive_circle;
 mod sensitive_curve;
+mod sensitive_cylinder;
 mod sensitive_entity;
 mod sensitive_face;
 mod sensitive_group;
@@ -30,7 +33,9 @@ pub use interior_point_set::Select3DInteriorSensitivePointSet;
 pub use point_data::{Select3DPnt, Select3DPointData};
 pub use primitive_array::{Select3DPrimArrayInit, Select3DSensitivePrimitiveArray};
 pub use sensitive_box::Select3DSensitiveBox;
-pub use sensitive_curve::{Select3DSensitiveCircle, Select3DSensitiveCurve};
+pub use sensitive_circle::Select3DSensitiveCircle;
+pub use sensitive_curve::Select3DSensitiveCurve;
+pub use sensitive_cylinder::Select3DSensitiveCylinder;
 pub use sensitive_entity::{
     Select3DBndBox3d, Select3DSensitiveEntity, Select3DSensitiveEntityBase,
     Select3DSensitiveEntityFields, Select3DSensitiveEntityMembers,
@@ -47,7 +52,7 @@ pub use sensitive_set::{
     select3d_set_center_of_geometry, select3d_set_default_bvh_builder, select3d_set_dump_json,
 };
 pub use sensitive_set_traversal::select3d_set_matches;
-pub use sensitive_sphere::{Select3DSensitiveCylinder, Select3DSensitiveSphere};
+pub use sensitive_sphere::Select3DSensitiveSphere;
 pub use sensitive_triangle::{Select3DSensitiveTriangle, Select3DTypeOfSensitivity};
 pub use sensitive_triangulation::Select3DSensitiveTriangulation;
 pub use sensitive_wire::Select3DSensitiveWire;
@@ -88,3 +93,26 @@ mod triangulation_failure;
 mod triangulation_fault_tests;
 
 mod triangulation_detection;
+
+#[cfg(test)]
+mod quadric_oracle_fixtures;
+#[cfg(test)]
+mod quadric_oracle_geometry;
+#[cfg(test)]
+mod quadric_oracle_snapshot;
+#[cfg(test)]
+mod quadric_oracle_tests;
+#[cfg(test)]
+mod quadric_oracle_volume;
+
+#[cfg(test)]
+mod quadric_fault_tests;
+#[cfg(test)]
+mod quadric_fault_volume_fake;
+#[cfg(test)]
+mod selector_volume_delegation;
+
+mod sphere_detection_reference;
+pub use sphere_detection_reference::Select3DSphereDetectionRef;
+#[cfg(test)]
+mod quadric_reference_tests;

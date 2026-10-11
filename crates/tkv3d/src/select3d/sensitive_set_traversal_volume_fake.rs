@@ -24,21 +24,7 @@ impl ChangingPolicyVolume {
         }
     }
 }
-// Delegation keeps unrelated selector operations on the real implementation.
-macro_rules! delegate_volume_operation {
-    ($name:ident($($arg:ident: $ty:ty),* $(,)?) -> $ret:ty) => {
-        fn $name(&self, $($arg: $ty),*) -> $ret {
-            // Only point callbacks and the policy above differ from the real selector.
-            self.inner.$name($($arg),*)
-        }
-    };
-    ($name:ident($($arg:ident: $ty:ty),* $(,)?)) => {
-        fn $name(&self, $($arg: $ty),*) {
-            // Mutable-output operations use the same selector implementation.
-            self.inner.$name($($arg),*)
-        }
-    };
-}
+use super::super::super::selector_volume_delegation::delegate_volume_operation;
 impl SelectBasicsSelectingVolumeManager for ChangingPolicyVolume {
     fn is_overlap_allowed(&self) -> bool {
         self.calls.borrow_mut().push("policy");
