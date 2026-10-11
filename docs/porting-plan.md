@@ -41,8 +41,9 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    [Plane presentation builders](plane-presentations.md) now preserve native edges,
    isolines, normal arrows and datum polygon submissions. [AIS plane datums](ais-plane.md)
    add native geometry, cached triangulation selection, size/color ownership and minimum
-   persistence. Their Vulkan quadrangle lowering and device capture/performance fixtures
-   remain next; the unsafe upstream XYZ constructor is explicitly partial.
+   persistence. Vulkan quadrangle lowering, unordered surface blending, device captures
+   and plane-update timings are integrated. Strict raster/depth and timing gates remain
+   open; the unsafe upstream XYZ constructor is explicitly partial.
    [Plane trihedrons](ais-plane-trihedron.md) now add labeled XY frames, child-owner
    selection, native comparisons and geometry-update performance coverage.
    [Native X11 presentation](vulkan-window-presentation.md) now adds swapchains,

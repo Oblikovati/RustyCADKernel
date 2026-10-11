@@ -33,7 +33,8 @@ const BLEND: [vk::PipelineColorBlendAttachmentState; 1] = [vk::PipelineColorBlen
     src_alpha_blend_factor: vk::BlendFactor::ZERO,
     dst_alpha_blend_factor: vk::BlendFactor::ZERO,
     alpha_blend_op: vk::BlendOp::ADD,
-    color_write_mask: vk::ColorComponentFlags::RGBA,
+    // Native buffersOpaqueAlpha keeps the cleared attachment alpha even for opaque draws.
+    color_write_mask: vk::ColorComponentFlags::from_raw(0x7),
 }];
 const POINT_BLEND: [vk::PipelineColorBlendAttachmentState; 1] =
     [vk::PipelineColorBlendAttachmentState {
@@ -86,7 +87,7 @@ impl PipelineState {
             blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(
                 if kind.capping.is_mask() {
                     &super::capping_state::MASK_BLEND
-                } else if point || (text && text_blend) {
+                } else if point || (text && text_blend) || kind.surface_blend {
                     &POINT_BLEND
                 } else {
                     &BLEND

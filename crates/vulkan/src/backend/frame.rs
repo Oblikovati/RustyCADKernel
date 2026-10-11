@@ -14,6 +14,7 @@ pub(super) struct UploadedDraw {
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
     pub annotation: bool,
+    pub surface_blend: bool,
     pub capping: crate::RenderCappingPass,
     pub mirrored: bool,
     pub face_culling: crate::RenderFaceCulling,
@@ -114,7 +115,10 @@ fn upload_draw(
         )?;
     }
     let vertices = encode_vertices(draw);
-    let indices: Vec<u8> = draw.indices.iter().flat_map(|i| i.to_ne_bytes()).collect();
+    let indices: Vec<u8> = crate::quad_assembly::device_quad_indices(draw, runtime.quad_diagonal)
+        .iter()
+        .flat_map(|i| i.to_ne_bytes())
+        .collect();
     let vertex_buffer = upload_bytes(runtime, &vertices, vk::BufferUsageFlags::VERTEX_BUFFER)?;
     let index_buffer = upload_bytes(runtime, &indices, vk::BufferUsageFlags::INDEX_BUFFER)?;
     let count = u32::try_from(draw.indices.len())
@@ -170,6 +174,7 @@ fn upload_draw(
         clipping,
         sprite,
         annotation: draw.annotation,
+        surface_blend: draw.surface_blend,
         capping: draw.capping_pass,
         face_culling: draw.face_culling,
         mirrored: draw.mirrored,

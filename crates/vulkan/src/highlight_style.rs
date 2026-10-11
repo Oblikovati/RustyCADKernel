@@ -34,6 +34,7 @@ pub(crate) fn apply_highlight(
         .map(|v| crate::RenderVertex { color: rgba, ..*v })
         .collect::<Vec<_>>();
     crate::scene::validate_components(&vertices, &draw.clip_transform)?;
+    crate::scene::validate_annotation_opacity(&vertices)?;
     draw.vertices = vertices;
     if let Some(lighting) = &mut draw.lighting {
         lighting
@@ -71,5 +72,7 @@ mod tests {
         apply_highlight(&mut draw, &fields).unwrap();
         assert_eq!(draw.vertices[0].weight, 2.);
         assert_eq!(draw.vertices[0].color, [0., 1., 0., 1.]);
+        fields.highlight_style.set_transparency(0.5);
+        assert!(apply_highlight(&mut draw, &fields).is_err());
     }
 }

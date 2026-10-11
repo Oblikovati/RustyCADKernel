@@ -1,0 +1,22 @@
+   Compiling rustycad-tkservice v0.1.0 (/home/vmiguel/git/oblikovati-workspace/Martensite-ais-plane-renderer/crates/tkservice)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.11s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkservice-f26d4ca0f675d791)
+
+running 1 test
+test aspect::gen_id::tests::maximal_positive_interval_allocates_and_recycles_viewer_layer_ids ... FAILED
+
+failures:
+
+---- aspect::gen_id::tests::maximal_positive_interval_allocates_and_recycles_viewer_layer_ids stdout ----
+
+thread 'aspect::gen_id::tests::maximal_positive_interval_allocates_and_recycles_viewer_layer_ids' (3285174) panicked at crates/tkservice/src/aspect/gen_id.rs:112:14:
+attempt to add with overflow
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    aspect::gen_id::tests::maximal_positive_interval_allocates_and_recycles_viewer_layer_ids
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 78 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p rustycad-tkservice --lib`

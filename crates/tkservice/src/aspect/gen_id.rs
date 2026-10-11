@@ -109,7 +109,9 @@ impl AspectGenId {
             return None;
         }
         self.free_count -= 1;
-        Some(self.lower_bound + self.length - self.free_count - 1)
+        // OCCT 3d097a0 uses [1, INT_MAX] for viewer layers; the final ID fits even
+        // though adding the lower bound before subtracting the free count would overflow.
+        Some(self.lower_bound + (self.length - self.free_count - 1))
     }
     /// `DumpJson`: counters and bounds, then every free identifier under the key `FreeId`.
     ///
@@ -129,6 +131,17 @@ impl AspectGenId {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn maximal_positive_interval_allocates_and_recycles_viewer_layer_ids() {
+        let mut ids = AspectGenId::new(1, i32::MAX).unwrap();
+        assert_eq!(ids.available(), i32::MAX);
+        assert_eq!(ids.next_id().unwrap(), 1);
+        assert_eq!(ids.next_id().unwrap(), 2);
+        ids.free(1);
+        assert_eq!(ids.next_id().unwrap(), 1);
+        assert_eq!(ids.next_id().unwrap(), 3);
+    }
 
     #[test]
     fn identifiers_come_in_order_and_freed_ones_first() {

@@ -6,6 +6,7 @@ use std::sync::Arc;
 #[derive(Clone, Copy)]
 pub(super) struct PipelineVariant {
     pub lighting: bool,
+    pub surface_blend: bool,
     pub clamp: bool,
     pub line: bool,
     pub point: bool,
@@ -17,16 +18,21 @@ pub(super) struct PipelineVariant {
 }
 impl PipelineVariant {
     fn from_index(index: usize, stencil: bool) -> Self {
+        let blend = index >= 28;
+        let index = if blend { (index - 28) % 4 } else { index };
         let base = index % 10;
         let ordinary = index < 20;
         Self {
             lighting: false,
+            surface_blend: blend,
             clamp: index & 1 != 0,
-            line: ordinary && base / 2 == 1,
-            point: ordinary && base / 2 == 2,
-            text: ordinary && base / 2 >= 3,
-            text_blend: ordinary && base / 2 == 3,
-            clipped: if ordinary {
+            line: !blend && ordinary && base / 2 == 1,
+            point: !blend && ordinary && base / 2 == 2,
+            text: !blend && ordinary && base / 2 >= 3,
+            text_blend: !blend && ordinary && base / 2 == 3,
+            clipped: if blend {
+                index & 2 != 0
+            } else if ordinary {
                 index >= 10
             } else {
                 index & 2 != 0
@@ -53,7 +59,7 @@ pub(super) struct RasterPipelines {
     variants: Vec<Option<Arc<DrawPipeline>>>,
     pub stencil: bool,
     runtime: Arc<VulkanRuntime>,
-    lit_variants: std::sync::Mutex<std::collections::BTreeMap<usize, Arc<DrawPipeline>>>,
+    special_variants: std::sync::Mutex<std::collections::BTreeMap<usize, Arc<DrawPipeline>>>,
 }
 impl RasterPipelines {
     pub fn new(runtime: &Arc<VulkanRuntime>, stencil: bool) -> Result<Self, RenderError> {
@@ -75,12 +81,12 @@ impl RasterPipelines {
             variants,
             stencil,
             runtime: runtime.clone(),
-            lit_variants: Default::default(),
+            special_variants: Default::default(),
         })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        if draw.lighting.is_some() {
-            return self.select_lit(draw);
+        if draw.lighting.is_some() || draw.surface_blend {
+            return self.select_special(draw);
         }
         let index = variant_index(draw);
         self.variants.get(index).and_then(Clone::clone).ok_or_else(|| {
@@ -88,17 +94,17 @@ impl RasterPipelines {
                 "device support for requested stencil, depth-clamp and line rasterization features")
         })
     }
-    fn select_lit(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        let index = variant_index(draw);
+    fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
+        let index = variant_index(draw) + 64 * usize::from(draw.lighting.is_some());
         let mut variants = self
-            .lit_variants
+            .special_variants
             .lock()
             .map_err(|e| rejected(e.to_string(), "an unpoisoned pipeline cache"))?;
         if let Some(pipeline) = variants.get(&index) {
             return Ok(pipeline.clone());
         }
-        let mut kind = PipelineVariant::from_index(index, self.stencil);
-        kind.lighting = true;
+        let mut kind = PipelineVariant::from_index(index % 64, self.stencil);
+        kind.lighting = draw.lighting.is_some();
         if kind.clamp && !self.runtime.depth_clamp {
             return Err(rejected(true, "device depth-clamp support"));
         }
@@ -108,6 +114,9 @@ impl RasterPipelines {
     }
 }
 fn variant_index(draw: &PrimitiveDraw) -> usize {
+    if draw.surface_blend {
+        return 28 + usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some());
+    }
     if draw.capping_pass != RenderCappingPass::None {
         return (if draw.capping_pass.is_mask() { 20 } else { 24 })
             + usize::from(draw.depth_clamp)
@@ -149,5 +158,21 @@ mod tests {
             PipelineVariant::from_index(0, false).depth_format(),
             vk::Format::D32_SFLOAT
         );
+    }
+}
+
+#[cfg(test)]
+mod blend_tests {
+    use super::*;
+    #[test]
+    fn blended_variants_keep_clipping_and_clamp_independent() {
+        for index in 28..32 {
+            let kind = PipelineVariant::from_index(index, false);
+            assert!(kind.surface_blend);
+            assert_eq!(kind.clamp, index & 1 != 0);
+            assert_eq!(kind.clipped, index & 2 != 0);
+            assert_eq!(kind.capping, RenderCappingPass::None);
+            assert!(!kind.line && !kind.point && !kind.text && !kind.lighting);
+        }
     }
 }

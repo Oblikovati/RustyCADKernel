@@ -529,3 +529,29 @@ remain open. PBR, shadow maps and lit section materials still require implementa
 AIS annotation placement now includes [AIS_TextLabel](ais-text-label.md), with
 paired font/layout comparisons, viewer captures and complete label-update timings.
 The existing strict text raster and additional display-mode gaps remain open.
+
+## AIS planes, quadrangles and unordered surface blending
+
+[AIS plane datums](ais-plane.md#verification) now have native/Vulkan capture
+controls for geometry, size, current mode, manual limits, XY/XZ/YZ frames,
+minimum persistence, selection/detection and display transitions. Quadrangles
+retain source corners, so the backend can use the native interpolation diagonal
+established by llvmpipe and host radeonsi captures without reinterpreting ordinary
+triangle meshes. Quadrangle strips restart at bounds and ignore incomplete tails.
+Other native driver policies remain unverified.
+
+Opaque draws precede blended surfaces across layers until the next depth clear.
+The transparent pass retains submission order, tests depth and suppresses depth
+writes. Automatic blending follows front-material transparency; explicit Blend
+and Opaque remain distinct. Unlit uniform/vertex/bound alpha retains its native
+color semantics, while lighting uses material opacity. Opaque framebuffer alpha
+is preserved. Alpha masks, OIT, transparent caps, transparent back-face distinction
+and translucent annotation/line colors still fail explicitly.
+
+The [receipt](../porting/runtime-evidence/ais-plane-renderer-2026-10-11/summary.json)
+records 168 strict cases per device: lavapipe passes 124 and AMD passes 140.
+No runtime process fails; every layer-control visibility assertion passes. Wire
+raster, one-byte gradient and depth differences retain failed statuses. The
+source-frozen repeated timing run includes 29 workloads, with two new AIS plane
+workloads passing their comparison. Older AIS and window workloads exceed budgets;
+no overall baseline or renderer replacement equivalence is claimed.

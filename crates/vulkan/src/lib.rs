@@ -85,3 +85,5 @@ pub use lighting::{RenderLighting, RenderShading};
 mod retained_lighting;
 
 mod capping_lighting;
+
+mod quad_assembly;

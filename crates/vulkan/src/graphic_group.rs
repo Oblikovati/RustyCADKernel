@@ -376,11 +376,14 @@ fn lower_styled_primitive(
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     let (color, line) = primitive_style(primitive.kind, aspects, closed)?;
     if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
-        let culling = crate::face_culling::resolve_culling(aspects.face_culling(), closed);
+        let culling = crate::face_culling::resolve_culling(
+            aspects.face_culling(),
+            closed && !crate::style::surface_uses_blending(&**aspects),
+        );
         return primitive.draws(color, matrix, line, None).map(|draws| {
             draws
                 .into_iter()
-                .map(|draw| draw.with_face_culling(culling))
+                .map(|draw| surface_alpha_policy(draw.with_face_culling(culling), aspects))
                 .collect()
         });
     }
@@ -402,4 +405,14 @@ fn lower_group_surface(
     let mut lowered = lower_styled_primitive(primitive, aspects, closed, matrix, highlighted)?;
     crate::retained_lighting::apply_surface_lighting(&mut lowered, primitive, aspects, context)?;
     Ok(lowered)
+}
+
+fn surface_alpha_policy(
+    mut draw: PrimitiveDraw,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+) -> PrimitiveDraw {
+    if draw.topology() == crate::PrimitiveTopology::Triangles && draw.textured_style.is_none() {
+        draw.surface_blend = crate::style::surface_uses_blending(&**aspects);
+    }
+    draw
 }

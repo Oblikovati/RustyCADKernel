@@ -3,12 +3,22 @@ use super::{frame::UploadedDraw, runtime::VulkanRuntime};
 use crate::RenderLayerSpan;
 use ash::vk;
 pub(super) fn depth_policy(draw: &UploadedDraw, layer: &RenderLayerSpan) -> (bool, bool) {
-    let mask = draw.capping.is_mask();
-    (
-        layer.depth_test && !draw.annotation && !mask,
-        layer.depth_write && !mask,
+    draw_depth_flags(
+        layer.depth_policy(),
+        draw.annotation,
+        draw.capping.is_mask(),
+        draw.surface_blend,
     )
 }
+fn draw_depth_flags(
+    layer: (bool, bool, bool),
+    annotation: bool,
+    mask: bool,
+    blend: bool,
+) -> (bool, bool) {
+    (layer.0 && !annotation && !mask, layer.1 && !mask && !blend)
+}
+
 pub(super) fn set_depth_policy(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
@@ -68,6 +78,34 @@ pub(super) fn set_culling(
             } else {
                 vk::FrontFace::COUNTER_CLOCKWISE
             },
+        );
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::draw_depth_flags;
+    #[test]
+    fn transparent_surfaces_test_depth_without_writing_it() {
+        assert_eq!(
+            draw_depth_flags((true, true, false), false, false, true),
+            (true, false)
+        );
+        assert_eq!(
+            draw_depth_flags((false, true, false), false, false, true),
+            (false, false)
+        );
+        assert_eq!(
+            draw_depth_flags((true, true, false), false, false, false),
+            (true, true)
+        );
+        assert_eq!(
+            draw_depth_flags((true, true, false), true, false, false),
+            (false, true)
+        );
+        assert_eq!(
+            draw_depth_flags((true, true, false), false, true, false),
+            (false, false)
         );
     }
 }

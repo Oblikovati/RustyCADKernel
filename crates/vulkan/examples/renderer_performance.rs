@@ -52,6 +52,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     group_flipping_performance::benchmark(&driver, warmup, samples);
     ais_text_label_performance::benchmark(&driver, warmup, samples);
     plane_presentation_performance::benchmark(&driver, warmup, samples);
+    ais_plane_performance::benchmark(&driver, warmup, samples);
     Ok(())
 }
 fn count_argument(
@@ -209,3 +210,8 @@ mod text_label_scene;
 mod plane_presentation_performance;
 #[path = "../tests/support/plane_presentation_scene.rs"]
 mod plane_presentation_scene;
+
+#[path = "support/ais_plane_performance.rs"]
+mod ais_plane_performance;
+#[path = "../tests/support/ais_plane_scene.rs"]
+mod ais_plane_scene;

@@ -1,0 +1,74 @@
+//! Transparent geometry retains submission order and cannot enter opaque-only paths.
+use martensite_vulkan::*;
+fn colored_surface(rgb: [f32; 3], alpha: f32) -> PrimitiveDraw {
+    let color = [rgb[0], rgb[1], rgb[2], alpha];
+    PrimitiveDraw::new(
+        vec![RenderVertex::new([0.; 3], color); 3],
+        vec![0, 1, 2],
+        identity_clip(),
+    )
+    .unwrap()
+}
+#[test]
+fn transparent_surfaces_follow_opaque_geometry_without_distance_sorting() {
+    let green = colored_surface([0., 1., 0.], 0.5);
+    let red = colored_surface([1., 0., 0.], 1.);
+    let blue = colored_surface([0., 0., 1.], 0.2);
+    let layer = RenderLayer::new(
+        vec![green.clone(), red.clone(), blue.clone()],
+        true,
+        true,
+        true,
+    );
+    let frame = RenderFrame::with_layers(16, 16, [0.; 4], vec![layer]).unwrap();
+    assert_eq!(frame.draws(), &[red, green, blue]);
+}
+#[test]
+fn transparent_capping_and_lines_report_unsupported_state() {
+    let draw = colored_surface([1., 0., 0.], 0.5);
+    for pass in [RenderCappingPass::MaskStart, RenderCappingPass::Surface] {
+        assert!(
+            draw.clone()
+                .with_capping_pass(pass)
+                .unwrap_err()
+                .to_string()
+                .contains("opaque triangle")
+        );
+    }
+    let error = PrimitiveDraw::segments(
+        draw.vertices()[..2].to_vec(),
+        vec![0, 1],
+        identity_clip(),
+        LineStyle::new(1., 0xffff, 1).unwrap(),
+    )
+    .unwrap_err();
+    assert!(error.to_string().contains("opaque line vertex colors"));
+}
+
+#[test]
+fn transparent_layers_flush_before_depth_clear_and_after_opaque_layers() {
+    let green = colored_surface([0., 1., 0.], 0.5);
+    let red = colored_surface([1., 0., 0.], 1.);
+    let blue = colored_surface([0., 0., 1.], 1.);
+    let layers = vec![
+        RenderLayer::new(vec![green.clone()], true, true, true),
+        RenderLayer::new(vec![red.clone()], true, true, false),
+        RenderLayer::new(vec![blue.clone()], true, true, true),
+    ];
+    let frame = RenderFrame::with_layers(16, 16, [0.; 4], layers).unwrap();
+    assert_eq!(frame.draws(), &[red, green, blue]);
+    assert_eq!(frame.layers()[2].depth_policy(), (true, false, false));
+    assert_eq!(frame.layers()[3].depth_policy(), (true, true, true));
+}
+
+#[test]
+fn translucent_points_and_text_do_not_silently_enter_surface_pipelines() {
+    let vertices = colored_surface([1., 0., 0.], 0.5).vertices().to_vec();
+    let point = PointStyle::new(1., [1, 1], vec![[1.; 4]]).unwrap();
+    assert!(
+        PrimitiveDraw::points(vertices.clone(), vec![0, 1, 2], identity_clip(), point).is_err()
+    );
+    let image = RasterImage::new([1, 1], vec![[1.; 4]]).unwrap();
+    let style = TexturedStyle::new(image, vec![[0.; 2]; 3], 0.1).unwrap();
+    assert!(PrimitiveDraw::textured(vertices, vec![0, 1, 2], identity_clip(), style).is_err());
+}

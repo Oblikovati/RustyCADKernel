@@ -97,8 +97,21 @@ impl PrimitiveSubmission {
         }
         match line {
             Some(style) => PrimitiveDraw::segments(vertices, indices, matrix, style),
-            None => PrimitiveDraw::new(vertices, indices, matrix),
+            None => self.quad_tagged_draw(vertices, indices, matrix, &range.indices),
         }
+    }
+    fn quad_tagged_draw(
+        &self,
+        vertices: Vec<RenderVertex>,
+        indices: Vec<u32>,
+        matrix: [f32; 16],
+        source: &[u32],
+    ) -> Result<PrimitiveDraw, RenderError> {
+        let mut draw = PrimitiveDraw::new(vertices, indices, matrix)?;
+        if self.kind == Graphic3dTypeOfPrimitiveArray::Quadrangles {
+            draw.quad_corners = source.as_chunks::<4>().0.to_vec();
+        }
+        Ok(draw)
     }
     fn vertex(
         &self,

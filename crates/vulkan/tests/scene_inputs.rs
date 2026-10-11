@@ -51,15 +51,13 @@ fn named_recording_backend_uses_the_same_capture_contract() {
     assert_eq!(capture.pixel(0, 1), None);
 }
 #[test]
-fn transparency_and_invalid_transforms_are_rejected() {
+fn surface_alpha_is_validated_and_invalid_transforms_are_rejected() {
     let mut vertices = vec![RenderVertex::new([0.; 3], [1.; 4]); 3];
     vertices[0].color[3] = 0.5;
-    assert!(
-        TriangleDraw::new(vertices.clone(), vec![0, 1, 2], identity_clip())
-            .unwrap_err()
-            .to_string()
-            .contains("opaque")
-    );
+    let blended = TriangleDraw::new(vertices.clone(), vec![0, 1, 2], identity_clip()).unwrap();
+    assert!(blended.is_surface_blended());
+    vertices[0].color[3] = 1.1;
+    assert!(TriangleDraw::new(vertices.clone(), vec![0, 1, 2], identity_clip()).is_err());
     vertices[0].color[3] = 1.;
     let mut matrix = identity_clip();
     matrix[3] = f32::INFINITY;

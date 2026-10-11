@@ -235,6 +235,13 @@ fn unsupported_multisampling_and_connected_rendering_return_errors() {
     scene
         .cview()
         .change_rendering_params(&mut |params| params.nb_msaa_samples = 0);
+    scene.cview().change_rendering_params(&mut |params| {
+        params.transparency_method = Graphic3dRenderTransparentMethod::BlendOit;
+    });
+    assert_redraw_error(&scene, "unordered blending");
+    scene.cview().change_rendering_params(&mut |params| {
+        params.transparency_method = Graphic3dRenderTransparentMethod::BlendUnordered;
+    });
     let child =
         Graphic3dStructure::new(&scene.viewer.structure_manager(), &Handle::default()).unwrap();
     scene
