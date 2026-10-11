@@ -93,6 +93,8 @@ complete the particular prerequisite that blocks a visualization or renderer sli
    with paired native captures and polygon-update timings.
    [AIS view input buffers](ais-view-input-buffer.md) now preserve all public gesture
    records, native defaults and reset/copy semantics through committed oracle assets.
+   [AIS navigation dependencies](ais-view-navigation.md) now preserve camera policies,
+   mouse gestures and six-axis walking state with native boundary/flag/copy fixtures.
    Continue the dependent AIS view controller alongside the remaining presentation
    and legacy renderer capabilities
    (see [current evidence](vulkan-renderer.md)).

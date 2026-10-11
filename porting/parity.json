@@ -590012,6 +590012,586 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewInputHighlighting::to_hilight",
       "status": "implemented",
       "notes": "Martensite AIS view input records at OCCT 3d097a0. All flags, retained coordinates, native enum values and one-based sequences are covered by committed native-generated snapshots and Rust default/reset/copy regressions. Reset clears zoom actions but retains selection points, angle and coordinates. View controller behavior is tracked separately. See docs/ais-view-input-buffer.md."
+    },
+    {
+      "upstream_id": "AIS_NavigationMode_FirstPersonFlight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "113f30e5877faa01c1ff9d13d98b077aa9c4f2c15e1137d4b794c77049a11ac2",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationMode::FirstPersonFlight",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_ZoomVertical",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "131c499573da37abd26983085b03664d82761bfc9f9ec44155aa58c7eea57055",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::ZoomVertical",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkTranslation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "13ebb7eb943dba2ee310cf342dee54c38a9ebe4ec36581b92157f8b510a1b22c",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkTranslation",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "1ab9e5d2895ec93d35e48e88d4394ef2a8ee6e693b429649bee7842887f8b575",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationMode",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_UPPER",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "359ea506618a8c49efcc7a9e487be1024a231d8d396ad179c25faceadf0ba184",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationModeBounds::Upper",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::operator[](AIS_WalkTranslation)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "3714c7e5ad13a6ba4005bee9b793a96699334fc639a54a30f3115a15ab57072e",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::translation_mut",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::IsJumping() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "407ed4ecbd5872e51d777b60e7ef00d3018d433508c75500bb8bee13a32fa666",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::is_jumping",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_BndBoxScene",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "45eca36fae8db791e63f2a42f54ac911a3cb4efd7f592ecf55e19e540f6112a1",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationMode::BndBoxScene",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_NavigationMode_UPPER",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "46678957edbbde7a0cdfc162e5b0e5f473f3f17e0054c1199dc0240766a4025a",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationModeBounds::Upper",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::IsEmpty() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "4d110b807e564d41495dd7468d6483cb57ba3848aed0d660916f1ea4bf73c75b",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::is_empty",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkPart::IsEmpty() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "51efeafa86ca58f16ffd1dcd69059d0cbaf06095b8fa131c7615245853114828",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkPart::is_empty",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::ToMove() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "52439ff75ea610f3a68dd0f3d649cd663b7f22da0085391711eb73730e810394",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::to_move",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_SelectLasso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "561ea2a60e62d43428d1f04f315b85b2f53c5e4023ea137befeaf44b3acef917",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::SelectLasso",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_NONE",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "5774a58d869972ec4491711235184425e92b09f9f87112df91cd7566044da531",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::None",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkPart::Duration",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "5941de5d06600dad88e8cb7102276ee8bfb62b897b002be5825868aa536b6dde",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkPart::duration",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::SetCrouching(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "5cecf183a92ac984f5285ac2f881a327643c4084acba4bfa2ea801e64020b8b0",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::set_crouching",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkPart::Pressure",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "5d4718bcf1b917aaf55c674033f3337d0b2c531d382e03fcee4f6ef6df60ba07",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkPart::pressure",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_PickCenter",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "5fc0bcb731721ea409ef2a9ca8b3f303252e3faf18bb6ac1e93bfac65bc352ce",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationMode::PickCenter",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkTranslation_Side",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "6273cd1285e58188086a6a810865e0dea6c2015fce21cd7fd5fcfaa7290874ad",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkTranslation::Side",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::operator[](AIS_WalkRotation)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "63ce3d8dc62b2cd421f954857ccf37b9e216113a463aae4b93997fcaad3d2020",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::rotation_mut",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::SetJumping(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "674c20fe6a631009077cc31487d2084d9d1643b489d39a78ea83ae50600ced47",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::set_jumping",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::SetDefined(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "6aef5e4ef37de3cb1c20ab900bf7b8b7b88556a97fb29e9c3fee3c9af14a958b",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::set_defined",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkRotation_Yaw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "72ef1a4d0e394e660bf61112ce8dcde61fadeba8094ddbe3918c1c9a672ea279",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkRotation::Yaw",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_PickLast",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "7b27d4dd5cf9f67c5ecab1a76723bface09febe58bc1bdd9297e335204eb62af",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationMode::PickLast",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_BndBoxActive",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "7e2ff68837ae1a70cf3c529a4edda614fb39190aa698c73c5399034b8c6dac3c",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationMode::BndBoxActive",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkRotation_Pitch",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "7e723723a14413908cca68402dca635e2e4f4c9586c8ea5d593f2bfef57a337c",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkRotation::Pitch",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_Zoom",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "84659d2f226cb62efb5ae988379fe0f3c1fdb3e3b9273b48343d3fa3f9e0c7c7",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::Zoom",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_RotateOrbit",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "86e113e5bc0ddd1ffb0793c65ba6153639e65625bfad1240f3b252dc1679fbc2",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::RotateOrbit",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::operator[](AIS_WalkRotation) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "88ea6702abce721968cac23f17733c508e4111fd297e4d98cd368c2b7abb97e3",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::rotation",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "(unnamed enum at /home/vmiguel/git/oblikovati-workspace/OCCT/src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx:27:1)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "9360a1f9d86238952130927874d74c7c058e2950078152563eda4f95d2b589b9",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationModeBounds",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_NavigationMode_LOWER",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "9598e1e36b3a9e5281217f8ce494d29dfed95f03146fb0a6118c7bbd17583406",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationModeBounds::Lower",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_SelectRectangle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "99e18cef2e1b2fae794f19ab3f2afab5dede6bdf538095758b7bc3838536ec3b",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::SelectRectangle",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_RotateView",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "9a65b99a6b7846157b515e04c6017af0378cbea2753eeefb46b9f04d5d9e1381",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::RotateView",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkPart::AIS_WalkPart()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "9b94d890510c05d668be8528254062a36a4633e995b88e9295aebc2189cc8159",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkPart::new",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::ToRotate() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "9c2d21dbcbae604d953de8872694f797eb569e6f388da082b0c2bf23ffdb9719",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::to_rotate",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::IsCrouching() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "9f74d3b27868c39e8606ca53e83ab0a0a2ed028b9df4f58a1662a257a125b8b0",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::is_crouching",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_LOWER",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "acbc8a0008d6b4062d5effd1f89b5fb05fc10dfd8a97bb4f1463393bf1d58cd0",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationModeBounds::Lower",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "b6367575ddb5861cfdd637719e474e228546b51ede88b2ad67e93b2b4d860e2c",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkTranslation_Forward",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "ba334c67dc3a6906744b9e5e3c60dc757db7a7e7a8f2d192147c15c407edc479",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkTranslation::Forward",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::IsRunning() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "c3d8a952565797a07ecb606044dab88b1260d1e7c3b249d36a2853aea7ebfe40",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::is_running",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::IsDefined() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "c8564da8cd3f0602c4fda221b0775cd5910173886afae38ca8557f0247ee23a0",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::is_defined",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkPart::Value",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "caab2061220d10748bb70fd1aedb2dfd34f9c2f3e4b35e462e5e24495fafefae",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkPart::value",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkTranslation_Up",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "cb0133cf1700f693c3a66a3e9e08b6aefc717fb816c65b166428a6ff1b7d53af",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkTranslation::Up",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "cd10c202a31e6ffb738a72edf9b2567ec5ebf8181d45dca28d259ab13776ab08",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_Pan",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "cd86b5726da3f2980adda637b4a1e8a5de57f35b68017595e4959cfc1f4b30ff",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::Pan",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_Drag",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "d049d763fbef41400f51c1c6322a2dd9d3ba6711c1a8031bbf8e0025b44bf3b3",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::Drag",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkRotation_Roll",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "d49bcc664a84f0d54271b8d1bc8bd066a2903dca370285ba7c65a7e534deda4c",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkRotation::Roll",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_NavigationMode_FirstPersonWalk",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "d803079f7b7aca941172ca4a86e03c250329e1c1e8a9850ff25edff2bd218830",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationMode::FirstPersonWalk",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "(unnamed enum at /home/vmiguel/git/oblikovati-workspace/OCCT/src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx:25:1)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "e1ca1de582ed9508f8396d2e6f01201f45f07bded2e0509ba466e2282757a398",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationModeBounds",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_RotationMode_CameraAt",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_RotationMode.hxx",
+      "source_sha256": "9e731ac11ea5094a4856d5f8bc52a10ac303c44d148efd524f0084cf20b69688",
+      "cpp_declaration_id": "e24241d709718e0def3e0d6f7f507f32954551f460d5b8406d06d643c4d44825",
+      "rust_item": "rustycad_tkv3d::ais::AisRotationMode::CameraAt",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_MouseGesture_ZoomWindow",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_MouseGesture.hxx",
+      "source_sha256": "26d24edb634eba11972d7a723f88b97f73f9df7dd13450f369088fb782062169",
+      "cpp_declaration_id": "e738744a628540d51cae0be34b11c05f8247d7cd81ce869540fb64bf07e80c61",
+      "rust_item": "rustycad_tkv3d::ais::AisMouseGesture::ZoomWindow",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::AIS_WalkDelta()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "e9c41e8c649837e5618b72621c341268eaa48c2bb58bbef5bc228dc963402aa1",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::new",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_NavigationMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "ed6d55119d2cc88d062f6b887112618e9b17367f123e540470284a3f541ce4d6",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationMode",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::operator[](AIS_WalkTranslation) const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "ee46447cd25e790c75d9b9892f1e2f6b981d552a155fe78488a43b4c25ef0153",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::translation",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkRotation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "ee695d4bd1154283e32c275b719a182d179cdc0fcff12b398dd8c29dbb1dae2d",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkRotation",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_NavigationMode_Orbit",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_NavigationMode.hxx",
+      "source_sha256": "f4fcff829ffc3618d03a8a38b48344fdb9b986829b53f818586e316a91df3667",
+      "cpp_declaration_id": "ef6858ea526de256fdd7f6cf728ae3dbe26b9727b3ea9076a174f6f51eaf0e80",
+      "rust_item": "rustycad_tkv3d::ais::AisNavigationMode::Orbit",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkPart",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "f2862cda5594e51bfd2c79d7187c9aa553b350064890bd30e4a15861cb17b2bb",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkPart",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
+    },
+    {
+      "upstream_id": "AIS_WalkDelta::SetRunning(bool)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_WalkDelta.hxx",
+      "source_sha256": "041b329bfb94b4e7736adca32914c227e9fe90258117daf18d78f5f225af24ef",
+      "cpp_declaration_id": "f7a1fd7898a562351340896d86bf59c85266ca8bbe163b6d4800b158deb06a86",
+      "rust_item": "rustycad_tkv3d::ais::AisWalkDelta::set_running",
+      "status": "implemented",
+      "notes": "Martensite AIS navigation dependencies at OCCT 3d097a0. Native-generated fixtures cover every enum/bound value, six-axis mutable/shared access, copy independence, held-key/stance combinations and exact DBL_MIN boundary semantics including NaN/infinities. Anonymous bound enums have named Rust counterparts; no scope exclusion. View controller behavior is tracked separately. See docs/ais-view-navigation.md."
     }
   ],
   "tests": [

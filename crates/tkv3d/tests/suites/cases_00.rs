@@ -57,6 +57,8 @@ pub mod ais_trihedron;
 pub mod ais_trihedron_subclass;
 #[path = "../ais_view_input_buffer.rs"]
 pub mod ais_view_input_buffer;
+#[path = "../ais_view_navigation.rs"]
+pub mod ais_view_navigation;
 #[path = "../axis_intersector.rs"]
 pub mod axis_intersector;
 #[path = "../base_frustum.rs"]

@@ -198,3 +198,10 @@ pub use view_input_types::{
     AisViewInputBufferType, AisViewInputHighlighting, AisViewInputOrientation,
     AisViewInputSelection, AisViewSelectionTool,
 };
+mod navigation_modes;
+mod walk_delta;
+pub use navigation_modes::{
+    AisMouseGesture, AisNavigationMode, AisNavigationModeBounds, AisRotationMode,
+    AisRotationModeBounds,
+};
+pub use walk_delta::{AisWalkDelta, AisWalkPart, AisWalkRotation, AisWalkTranslation};
