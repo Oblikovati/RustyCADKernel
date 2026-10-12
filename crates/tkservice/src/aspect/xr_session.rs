@@ -8,8 +8,8 @@ use super::{
 };
 use crate::graphic3d::Graphic3dArrayOfTriangles;
 use crate::image::ImageTexture;
-use rustycad_tkernel::ncollection::{Mat4, Vec2};
-use rustycad_tkernel::standard::exceptions::{out_of_range, program_error};
+use rustycad_tkernel::ncollection::{Array1, Mat4, Vec2};
+use rustycad_tkernel::standard::exceptions::program_error;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, Transient};
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::gp::Transform3;
@@ -46,13 +46,14 @@ pub enum AspectXRSessionInfoString {
 #[derive(Clone)]
 pub struct AspectXRSessionFields {
     /// `myRoleActions`: the generic actions of each device role.
-    pub role_actions: Vec<Vec<Handle<AspectXRAction>>>,
+    pub role_actions:
+        [Array1<'static, Handle<AspectXRAction>>; ASPECT_XR_TRACKED_DEVICE_ROLE_NB as usize],
     /// `myActionSets`.
     pub action_sets: Vec<(AsciiString, Handle<AspectXRActionSet>)>,
     /// `myTrackOrigin`.
     pub track_origin: AspectXRSessionTrackingUniverseOrigin,
-    /// `myTrackedPoses` (indexed from 0).
-    pub tracked_poses: Vec<AspectTrackedDevicePose>,
+    /// `myTrackedPoses`: actual signed-bound array, initially indexed from 0.
+    pub tracked_poses: Array1<'static, AspectTrackedDevicePose>,
     /// `myHeadPose`.
     pub head_pose: Transform3,
     /// `myRendSize`.
@@ -76,12 +77,13 @@ pub struct AspectXRSessionFields {
 impl Default for AspectXRSessionFields {
     /// Standing origin, one (invalid) tracked pose, unit factor 1, aspect 1, 90 degrees.
     fn default() -> Self {
-        let actions = vec![Handle::default(); ASPECT_XR_GENERIC_ACTION_NB as usize];
         Self {
-            role_actions: vec![actions; ASPECT_XR_TRACKED_DEVICE_ROLE_NB as usize],
+            role_actions: std::array::from_fn(|_| {
+                Array1::with_size(ASPECT_XR_GENERIC_ACTION_NB as usize)
+            }),
             action_sets: Vec::new(),
             track_origin: AspectXRSessionTrackingUniverseOrigin::Standing,
-            tracked_poses: vec![AspectTrackedDevicePose::default()],
+            tracked_poses: Array1::with_size(1),
             head_pose: Transform3::default(),
             rend_size: Vec2::new(0, 0),
             frustum_l: AspectFrustumLrbt::default(),
@@ -137,17 +139,17 @@ pub trait AspectXRSession: Transient {
     /// The state of a digital action; `session.get_digital_action_data(&action)?`.
     fn get_digital_action_data(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<AspectXRDigitalActionData, Failure>;
     /// The state of an analog action; `session.get_analog_action_data(&action)?`.
     fn get_analog_action_data(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<AspectXRAnalogActionData, Failure>;
     /// The pose of an action for the next frame; `session.get_pose_action_data_for_next_frame(&action)?`.
     fn get_pose_action_data_for_next_frame(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<AspectXRPoseActionData, Failure>;
     /// Sets the tracking origin; `session.set_tracking_origin(origin)`.
     fn set_tracking_origin(&self, origin: AspectXRSessionTrackingUniverseOrigin) {
@@ -165,7 +167,7 @@ pub trait AspectXRSession: Transient {
     /// `triggerHapticVibrationAction`; `session.trigger_haptic_vibration_action_impl(&action, &params)?`.
     fn trigger_haptic_vibration_action_impl(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
         params: &AspectXRHapticActionData,
     ) -> Result<(), Failure>;
 }
@@ -217,6 +219,11 @@ pub trait AspectXRSessionMembers: AspectXRSession {
             fields.frustum_l
         }
     }
+    /// Borrow the actual head-transform field; `session.head_pose_ref().snapshot()?`.
+    fn head_pose_ref(&self) -> super::AspectXrTransformRef<'_> {
+        let fields = &self.xr_session_base().fields;
+        super::AspectXrTransformRef::Head(fields)
+    }
     /// The head pose; `session.head_pose()`.
     fn head_pose(&self) -> Transform3 {
         self.xr_session_base().fields.read().head_pose
@@ -229,9 +236,19 @@ pub trait AspectXRSessionMembers: AspectXRSession {
     fn right_hand_pose(&self) -> Result<Transform3, Failure> {
         role_pose(self, AspectXRTrackedDeviceRole::RightHand)
     }
+    /// Borrow the actual signed-bounds array object; `session.tracked_poses_ref().lower()`.
+    fn tracked_poses_ref(&self) -> super::AspectXrTrackedPosesRef<'_> {
+        let fields = &self.xr_session_base().fields;
+        super::AspectXrTrackedPosesRef::new(fields)
+    }
     /// The tracked poses; `session.tracked_poses()`.
     fn tracked_poses(&self) -> Vec<AspectTrackedDevicePose> {
-        self.xr_session_base().fields.read().tracked_poses.clone()
+        self.xr_session_base()
+            .fields
+            .read()
+            .tracked_poses
+            .as_slice()
+            .to_vec()
     }
     /// Whether a device pose is valid; a device out of range raises `Standard_OutOfRange`.
     /// Example: `session.has_tracked_pose(0)?`.
@@ -261,7 +278,7 @@ pub trait AspectXRSessionMembers: AspectXRSession {
     /// Example: `session.trigger_haptic_vibration_action(&action, &params)?`.
     fn trigger_haptic_vibration_action(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
         params: &AspectXRHapticActionData,
     ) -> Result<(), Failure> {
         if !params.is_valid() {
@@ -275,7 +292,7 @@ pub trait AspectXRSessionMembers: AspectXRSession {
     /// Example: `session.abort_haptic_vibration_action(&action)?`.
     fn abort_haptic_vibration_action(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<(), Failure> {
         self.trigger_haptic_vibration_action_impl(action, &AspectXRHapticActionData::default())
     }
@@ -283,13 +300,22 @@ pub trait AspectXRSessionMembers: AspectXRSession {
     fn tracking_origin(&self) -> AspectXRSessionTrackingUniverseOrigin {
         self.xr_session_base().fields.read().track_origin
     }
+    /// Borrow the actual generic action slot; `session.generic_action_ref(role,action)`.
+    fn generic_action_ref(
+        &self,
+        role: AspectXRTrackedDeviceRole,
+        action: AspectXRGenericAction,
+    ) -> Result<super::AspectXrActionRef<'_>, Failure> {
+        let fields = &self.xr_session_base().fields;
+        super::AspectXrActionRef::from_fields(fields, role, action)
+    }
     /// The generic action of a device role; `session.generic_action(role, AspectXRGenericAction::InputPoseBase)`.
     fn generic_action(
         &self,
         role: AspectXRTrackedDeviceRole,
         action: AspectXRGenericAction,
     ) -> Handle<AspectXRAction> {
-        self.xr_session_base().fields.read().role_actions[role as usize][action as usize].clone()
+        self.xr_session_base().fields.read().role_actions[role as usize][action as i32].clone()
     }
 }
 impl<T: AspectXRSession + ?Sized> AspectXRSessionMembers for T {}
@@ -299,16 +325,11 @@ fn tracked_pose(
     fields: &AspectXRSessionFields,
     device: i32,
 ) -> Result<AspectTrackedDevicePose, Failure> {
-    usize::try_from(device)
-        .ok()
-        .and_then(|d| fields.tracked_poses.get(d))
+    fields
+        .tracked_poses
+        .value(device)
         .copied()
-        .ok_or_else(|| {
-            out_of_range(&format!(
-                "NCollection_Array1::Value - device {device}; expected 0..{}",
-                fields.tracked_poses.len()
-            ))
-        })
+        .map_err(|error| error.into_failure("Aspect_XRSession::TrackedPoses"))
 }
 
 /// The pose of a role's device, the identity without one.

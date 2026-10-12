@@ -5,6 +5,7 @@ use rustycad_tkservice::aspect::{
     AspectEye, AspectOpenVRSession, AspectXRAction, AspectXRActionSet, AspectXRActionType,
     AspectXRAnalogActionData, AspectXRGenericAction, AspectXRHapticActionData, AspectXRSession,
     AspectXRSessionMembers, AspectXRSessionTrackingUniverseOrigin, AspectXRTrackedDeviceRole,
+    AspectXrActionRef,
 };
 
 fn action(id: &str, kind: AspectXRActionType) -> Handle<AspectXRAction> {
@@ -58,16 +59,29 @@ fn openvr_session_without_openvr() {
             .is_null()
     );
     let digital = action("/d", AspectXRActionType::InputDigital);
-    assert!(session.get_digital_action_data(&digital).is_ok());
-    let error = session.get_analog_action_data(&digital).unwrap_err();
+    assert!(
+        session
+            .get_digital_action_data(&AspectXrActionRef::borrowed(&digital))
+            .is_ok()
+    );
+    let error = session
+        .get_analog_action_data(&AspectXrActionRef::borrowed(&digital))
+        .unwrap_err();
     assert_eq!(error.exception_type(), "Standard_ProgramError");
     let haptic = action("/h", AspectXRActionType::OutputHaptic);
     assert!(
         session
-            .trigger_haptic_vibration_action(&haptic, &AspectXRHapticActionData::default())
+            .trigger_haptic_vibration_action(
+                &AspectXrActionRef::borrowed(&haptic),
+                &AspectXRHapticActionData::default()
+            )
             .is_err()
     );
-    assert!(session.abort_haptic_vibration_action(&haptic).is_ok());
+    assert!(
+        session
+            .abort_haptic_vibration_action(&AspectXrActionRef::borrowed(&haptic))
+            .is_ok()
+    );
     let mut texture = Handle::default();
     assert!(session.load_render_model(0, &mut texture).is_null());
     assert_eq!(session.unit_factor(), 1.0);

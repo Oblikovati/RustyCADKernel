@@ -70,3 +70,21 @@ pub use space_mouse_input::MartensiteSpaceMouseInput;
 
 #[cfg(test)]
 mod space_mouse_dispatch_tests;
+
+mod xr_pose_reference;
+pub use xr_pose_reference::AspectXrTransformRef;
+
+mod xr_action_reference;
+pub use xr_action_reference::AspectXrActionRef;
+
+#[cfg(test)]
+mod xr_reference_tests;
+
+mod xr_tracked_array_reference;
+pub use xr_tracked_array_reference::AspectXrTrackedPosesRef;
+
+#[cfg(test)]
+mod xr_array_replay_tests;
+
+#[cfg(test)]
+mod xr_action_rebase_tests;
