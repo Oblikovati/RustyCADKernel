@@ -74,6 +74,8 @@ static void iterator_null_init() {
   occ::handle<Graphic3d_SequenceOfHClipPlane> null;
   iterator.Init(null);
   std::cout << "iterator-null " << iterator.More() << ' ' << sequence->GetRefCount() << '\n';
+  sequence->Remove(iterator);
+  std::cout << "remove-end " << iterator.More() << ' ' << sequence->Size() << '\n';
 }
 int main() {
   null_and_empty();
