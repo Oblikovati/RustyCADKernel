@@ -3,14 +3,16 @@ use super::{
     Graphic3dClipPlane, Graphic3dClipPlaneSequenceSource, Graphic3dClipPlaneSource,
     Graphic3dSequenceOfHClipPlane,
 };
-use rustycad_tkernel::standard::{Handle, HandleObserver, HandleReference};
+use rustycad_tkernel::standard::{
+    Handle, HandleObserver, HandleReference, ProjectedHandleReference,
+};
 
 macro_rules! borrowed_clip_source_argument {
     ($concrete:ty, $source:ty) => {
         impl HandleReference<$source> for Handle<$concrete> {
             fn observe(&self) -> HandleObserver<$source> {
                 // A cast followed by observe/drop would add an observable native reference.
-                self.observe_as::<$source>()
+                ProjectedHandleReference::<$concrete, $source>::new(self).observe()
             }
             fn reference_address(&self) -> *const () {
                 std::ptr::from_ref(self).cast()
