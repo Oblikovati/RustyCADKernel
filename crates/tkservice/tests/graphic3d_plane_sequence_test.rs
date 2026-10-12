@@ -49,14 +49,35 @@ fn iterator_remove_moves_to_the_next_plane() {
     assert_eq!(sequence.items(), vec![all[0].clone(), all[2].clone()]);
     it.next();
     assert!(!it.more());
-    assert_eq!(
-        sequence.remove_at(&mut it).unwrap_err().exception_type(),
-        "Standard_OutOfRange"
-    );
+    sequence.remove_at(&mut it).unwrap();
     let null = Graphic3dSequenceOfHClipPlaneIterator::from_handle(&Handle::default());
     assert!(!null.more());
     sequence.clear();
     assert!(sequence.is_empty());
+}
+
+#[test]
+fn removing_a_default_or_null_initialized_iterator_is_a_native_noop() {
+    let sequence = Graphic3dSequenceOfHClipPlane::default();
+    let plane = planes(1).pop().unwrap();
+    sequence.append(plane.clone());
+    let mut iterator = Graphic3dSequenceOfHClipPlaneIterator::default();
+    sequence.remove_at(&mut iterator).unwrap();
+    iterator.init_handle(&Handle::default());
+    sequence.remove_at(&mut iterator).unwrap();
+    assert_eq!(sequence.size(), 1);
+    assert_eq!(plane.ref_count(), 2);
+    assert!(!iterator.more());
+    assert_native_end_cursor(&sequence, &iterator);
+}
+
+fn assert_native_end_cursor(
+    sequence: &Graphic3dSequenceOfHClipPlane,
+    iterator: &Graphic3dSequenceOfHClipPlaneIterator,
+) {
+    let actual = format!("remove-end {} {}", i32::from(iterator.more()), sequence.size());
+    let expected = include_str!("fixtures/clip-collection-references-native.txt");
+    assert_eq!(actual, expected.lines().last().unwrap());
 }
 
 #[test]
