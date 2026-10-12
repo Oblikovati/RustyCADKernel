@@ -1,0 +1,40 @@
+diff --git a/crates/tkv3d/src/ais/view_cube_selection.rs b/crates/tkv3d/src/ais/view_cube_selection.rs
+index e487cbc81..6ee58754d 100644
+--- a/crates/tkv3d/src/ais/view_cube_selection.rs
++++ b/crates/tkv3d/src/ais/view_cube_selection.rs
+@@ -3,6 +3,7 @@ use super::*;
+ use crate::{
+     prs_mgr::*, prs3d::Prs3dDrawer, select_mgr::*, select3d::*, v3d::V3dTypeOfOrientation,
+ };
++use rustycad_tkernel::standard::HandleReference;
+ use rustycad_tkernel::standard::{Failure, Handle};
+ use rustycad_tkservice::graphic3d::*;
+ /// Append real point-sensitive parts, leaving unsupported modes untouched; `ais_view_cube_compute_selection(&cube,&selection,0)?`.
+@@ -58,10 +59,10 @@ impl SelectMgrSelectableObject for AisViewCube {
+     }
+     fn compute_selection(
+         &self,
+-        selection: &Handle<SelectMgrSelection>,
++        selection: &dyn HandleReference<SelectMgrSelection>,
+         mode: i32,
+     ) -> Result<(), Failure> {
+-        ais_view_cube_compute_selection(self, selection, mode)
++        ais_view_cube_compute_selection(self, &selection.observe(), mode)
+     }
+     fn global_sel_owner(&self) -> Handle<dyn SelectMgrEntityOwnerSource> {
+         Handle::default()
+@@ -97,11 +98,11 @@ impl PrsMgrPresentableObject for AisViewCube {
+     }
+     fn compute(
+         &self,
+-        _: &Handle<PrsMgrPresentationManager>,
+-        prs: &Handle<dyn Graphic3dStructureSource>,
++        _: &dyn HandleReference<PrsMgrPresentationManager>,
++        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
+         mode: i32,
+     ) -> Result<(), Failure> {
+-        ais_view_cube_compute(self, prs, mode)
++        ais_view_cube_compute(self, &prs.observe(), mode)
+     }
+     fn accept_display_mode(&self, mode: i32) -> bool {
+         mode == 0
