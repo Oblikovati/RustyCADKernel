@@ -1,0 +1,21 @@
+FAILED test_returned_private_receipt.py (exit 1)
+.E......
+======================================================================
+ERROR: test_current_receipt_replays (test_returned_private_receipt.ReturnedReceiptTests.test_current_receipt_replays)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/tests/test_returned_private_receipt.py", line 33, in test_current_receipt_replays
+    result = replay(ROOT, ROOT / DEFAULT_RECEIPT)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/verify_returned_private_reachability.py", line 105, in replay
+    verify_files(root, receipt)
+  File "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/verify_returned_private_reachability.py", line 39, in verify_files
+    raise ValueError(f"{path}: expected SHA256 {row.get('sha256')}")
+ValueError: /home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/api_inventory/CMakeLists.txt: expected SHA256 b47c8ad5721dc93684fd8122ee37a7e51028db79de5579704aa24d1cce68482d
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.050s
+
+FAILED (errors=1)
+
+tool test modules: 209 passed, 1 failed

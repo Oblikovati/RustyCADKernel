@@ -1,0 +1,1551 @@
+{
+  "artifacts_sha256": {
+    "catalog.json.gz": "0906409157e4b5fd2a4d08a810f27420ebe409db72193a9aa18371ba7fa2532b",
+    "compiler-commands.json.gz": "08bb940624619972c5c2e0b626d54bada067d57bd1230f9cd416ff59adb6f6b6",
+    "compiler-observations.jsonl.gz": "b7fd5e794f7e7dd6a17d7a503704f797463f075a162fd104424aedcf3222849e",
+    "failed-compiler-observations.jsonl.gz": "f3668e5bac385c6ad170cd87ded45e2e5c5b220212fe7e4d86698ec0cc6a5171",
+    "rejected-candidates.json.gz": "f9c6b7d8ea886ac4c023644f1a4e595f1f6d289919b60512c8a626b081ea4767",
+    "unmatched-markers.json.gz": "cb363cfd8e51767a89ec2298dc732de0712de9564e3d071602c8df732f926e7f"
+  },
+  "capture_inputs": {
+    "capture_mode": "retirement_markers_only; not primary declaration coverage",
+    "database_sha256": "c56fbebd9b0d77b48a14a544d33c8bb4727ea7d040f8ec9360072421851a3968",
+    "extractor_sha256": "23413e14515123f36495f9771a7fc6c606dea09636f15964aadb9ef05b8530fa",
+    "manifest_sha256": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
+    "source_candidates": [
+      "src/ApplicationFramework/TKLCAF/TDataStd/TDataStd_Real.hxx",
+      "src/ApplicationFramework/TKLCAF/TDataStd/TDataStd_Variable.hxx",
+      "src/ApplicationFramework/TKLCAF/TDocStd/TDocStd_Application.hxx",
+      "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_GltfJsonParser.hxx",
+      "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_GltfLatePrimitiveArray.hxx",
+      "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_MaterialCommon.hxx",
+      "src/DataExchange/TKDESTL/StlAPI/StlAPI.hxx",
+      "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "src/DataExchange/TKXCAF/XCAFDoc/XCAFDoc_VisMaterial.hxx",
+      "src/DataExchange/TKXCAF/XCAFDoc/XCAFDoc_VisMaterialCommon.hxx",
+      "src/DataExchange/TKXSBase/IFSelect/IFSelect_ModelCopier.hxx",
+      "src/DataExchange/TKXSBase/IFSelect/IFSelect_TransformStandard.hxx",
+      "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "src/DataExchange/TKXSBase/Transfer/Transfer_TransferDeadLoop.hxx",
+      "src/Draw/TKViewerTest/ViewerTest/ViewerTest.hxx",
+      "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "src/FoundationClasses/TKMath/Poly/Poly.hxx",
+      "src/FoundationClasses/TKMath/Poly/Poly_PolygonOnTriangulation.hxx",
+      "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "src/FoundationClasses/TKMath/math/math_NotSquare.hxx",
+      "src/FoundationClasses/TKMath/math/math_SingularMatrix.hxx",
+      "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "src/FoundationClasses/TKernel/Message/Message_ProgressSentry.hxx",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "src/FoundationClasses/TKernel/NCollection/NCollection_Vector.hxx",
+      "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_DefineHandle.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Macro.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "src/FoundationClasses/TKernel/TColStd/TColStd_PackedMapOfInteger.hxx",
+      "src/FoundationClasses/TKernel/TCollection/TCollection.hxx",
+      "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
+      "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_BooleanOperation.hxx",
+      "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Common.hxx",
+      "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Cut.hxx",
+      "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Fuse.hxx",
+      "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Section.hxx",
+      "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Curve.hxx",
+      "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_GenChamfer.hxx",
+      "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_Builder.hxx",
+      "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_InternalBuilder.hxx",
+      "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeDef.hxx",
+      "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FastDiscret.hxx",
+      "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "src/ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.hxx",
+      "src/ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.hxx",
+      "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+      "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfCircle.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfEllipse.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfHyperbola.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfParabola.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeCircle.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeEllipse.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeHyperbola.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeLine.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeMirror.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeParabola.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeRotation.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeScale.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeSegment.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeTranslation.hxx",
+      "src/ModelingData/TKGeomBase/GCE2d/GCE2d_Root.hxx",
+      "src/Visualization/TKMeshVS/MeshVS/MeshVS_Mesh.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_Aspects.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_AspectsSprite.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_Caps.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_Context.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlCore11Fwd.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlCore13.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlCore30.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlFunctions.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlNative.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_Sampler.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.hxx",
+      "src/Visualization/TKService/Aspect/Aspect_GradientFillMethod.hxx",
+      "src/Visualization/TKService/Aspect/Aspect_InteriorStyle.hxx",
+      "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_AspectFillArea3d.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_Group.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_Layer.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderFlags.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_Structure.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfLightSource.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfPrimitiveArray.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfShadingModel.hxx",
+      "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfTexture.hxx",
+      "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "src/Visualization/TKV3d/AIS/AIS_InteractiveObject.hxx",
+      "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "src/Visualization/TKV3d/Prs3d/Prs3d_DatumAspect.hxx",
+      "src/Visualization/TKV3d/Prs3d/Prs3d_Drawer.hxx",
+      "src/Visualization/TKV3d/Prs3d/Prs3d_Root.hxx",
+      "src/Visualization/TKV3d/Prs3d/Prs3d_ToolQuadric.hxx",
+      "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "src/Visualization/TKV3d/PrsMgr/PrsMgr_TypeOfPresentation3d.hxx",
+      "src/Visualization/TKV3d/Select3D/Select3D_InteriorSensitivePointSet.hxx",
+      "src/Visualization/TKV3d/Select3D/Select3D_SensitiveCircle.hxx",
+      "src/Visualization/TKV3d/Select3D/Select3D_SensitiveFace.hxx",
+      "src/Visualization/TKV3d/Select3D/Select3D_SensitivePoly.hxx",
+      "src/Visualization/TKV3d/SelectBasics/SelectBasics_SelectingVolumeManager.hxx",
+      "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.hxx",
+      "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
+      "src/Visualization/TKV3d/V3d/V3d_CircularGrid.hxx",
+      "src/Visualization/TKV3d/V3d/V3d_Plane.hxx",
+      "src/Visualization/TKV3d/V3d/V3d_RectangularGrid.hxx",
+      "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx"
+    ],
+    "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+    "wrapper_sha256": "1d8fe991e6902b55f36eead9bf94550f22c9010d759124d9f3d44fe1f39487f8"
+  },
+  "capture_results": [
+    {
+      "artifact": "headers/b542821bfe2949a71feebf818b95e6365cac97ef1b859f93e0ca1d97c0b96dbb.jsonl",
+      "output_sha256": "3d863bb7da33c122fe0ea5ac014fa0182ff6e47d8a4f6c9b55b7baf78bc1e75f",
+      "path": "src/ApplicationFramework/TKLCAF/TDataStd/TDataStd_Real.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKLCAF"
+    },
+    {
+      "artifact": "headers/84b2ce3ccdc65d6643a6da3d037854a901a8bcca6be326f90c84e208330a94bc.jsonl",
+      "output_sha256": "ee4de772b5e2f099a45110fe7445423ed294ed40aabdd0c9b85cd8356c50fdc7",
+      "path": "src/ApplicationFramework/TKLCAF/TDataStd/TDataStd_Variable.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKLCAF"
+    },
+    {
+      "artifact": "headers/7b88578422809cf2ae532a89057e3365871f66c12c1d13c859f657f500f5d8d1.jsonl",
+      "output_sha256": "f55c9f78cded01e615fb4adfe7c04fa4ea58b6c32a7c0d6bd62d3be4919a0a82",
+      "path": "src/ApplicationFramework/TKLCAF/TDocStd/TDocStd_Application.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKLCAF"
+    },
+    {
+      "artifact": "headers/f670a2ad4e7ecd1de61276b97878cbbef73785ac3af87911fabbce766d4d8120.jsonl",
+      "output_sha256": "3112ab7dc8c600a6063d2ddfcb7aa4e43b6563923be3f7e9a391842dcb3db3cb",
+      "path": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKVCAF"
+    },
+    {
+      "artifact": "headers/89e1c599953ab6b37433c0fe2c696a9260936f4b17f8b0a9981eb1555d879b1b.jsonl",
+      "output_sha256": "09e5e86a7d5827e8add05f69052df80b8739b3f1f71a44fee3ff29ddd130df7e",
+      "path": "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_GltfJsonParser.hxx",
+      "returncode": 1,
+      "status": "parse_failed",
+      "stderr": "1 error generated.\n",
+      "toolkit": "TKDEGLTF"
+    },
+    {
+      "artifact": "headers/197bc900c0273f94171f4d0c221d6f41196d819f3b0ee33b55d202d930751a1b.jsonl",
+      "output_sha256": "fa2f121fcf8373c1a63dea33fc1cb7b37e64ef383fc753927033ac373f613f3f",
+      "path": "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_GltfLatePrimitiveArray.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKDEGLTF"
+    },
+    {
+      "artifact": "headers/22b465a2d621a35b4a14f35e5e0ca06a355c54c8e4be7ce57fc95e9f924f7f11.jsonl",
+      "output_sha256": "7c3d42aa943d733aa887d0f59314d68d5a0eeccd8a133f14c6307999a49e6fa2",
+      "path": "src/DataExchange/TKDEGLTF/RWGltf/RWGltf_MaterialCommon.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKDEGLTF"
+    },
+    {
+      "artifact": "headers/0ee3bccce0a72e546714a41e0120713296fcc89b1af4b489157832e08047bad6.jsonl",
+      "output_sha256": "d6c7f3e3319c25417294412ecf0412d29200d4e837af4d6fadb3ee9e66e75254",
+      "path": "src/DataExchange/TKDESTL/StlAPI/StlAPI.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKDESTL"
+    },
+    {
+      "artifact": "headers/05a4696671efe762254a1099f89c8854248054c2890fdf067c99cf0bc7639a5c.jsonl",
+      "output_sha256": "ee8e42f18d611ea44abf766d3de2951afe717ffa3418fe253aaa0940c02c1995",
+      "path": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKDEVRML"
+    },
+    {
+      "artifact": "headers/3aa4452b97a97200bb846d533be4a15e9021d8ad67e061026c9c1c927fb0e15e.jsonl",
+      "output_sha256": "08443a7b13f71ab0287e2a1607aedb08972c9f617d8f89e8d039e7fa0be7fba2",
+      "path": "src/DataExchange/TKXCAF/XCAFDoc/XCAFDoc_VisMaterial.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKXCAF"
+    },
+    {
+      "artifact": "headers/d27e0040eec0df1683ca73d26dd5e3995baf793e4a1b96be19901cc2a2ae4cbc.jsonl",
+      "output_sha256": "70809d454e5448b289271be9be2c02f366a7b22f54cc405fdf657e1e4512b03f",
+      "path": "src/DataExchange/TKXCAF/XCAFDoc/XCAFDoc_VisMaterialCommon.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKXCAF"
+    },
+    {
+      "artifact": "headers/1a7088615c752895f777ac0efae536d3ebaeb829b29faef6bcedcb01d015caa1.jsonl",
+      "output_sha256": "2090041c40ca42ee537c5118884b1552c1c24c5065ef831c8ac6fc671d12ca7e",
+      "path": "src/DataExchange/TKXSBase/IFSelect/IFSelect_ModelCopier.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKXSBase"
+    },
+    {
+      "artifact": "headers/5f427fc65de91287d0b01516ef24839076c876194aa61715032c45cd219ca20a.jsonl",
+      "output_sha256": "d629314b88466bfa708e4b41cac3aceaa6eaf862fe366e71316d1ebde1a87d3c",
+      "path": "src/DataExchange/TKXSBase/IFSelect/IFSelect_TransformStandard.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKXSBase"
+    },
+    {
+      "artifact": "headers/b8ac580503a97759d2e0411e8e4d69e6b2df9c13fba0ab09ca3888bb90dc6614.jsonl",
+      "output_sha256": "97aba660c5553042d812fcc76c88a01aca9d2be3a579fb70af5edc8a3d16407b",
+      "path": "src/DataExchange/TKXSBase/Interface/Interface_IntList.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKXSBase"
+    },
+    {
+      "artifact": "headers/9daea304d0edf8a7101c91be022f0d34ef9e0a7cb1b86f63ecb5bb357d6459e5.jsonl",
+      "output_sha256": "885651f26ae9a4bafbc09c3a24aac730dfc2add19b04cd3cc1561e0ab7a9e47e",
+      "path": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferDeadLoop.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKXSBase"
+    },
+    {
+      "artifact": "headers/83eced5b2cffe03151b4ec6f0e6f10aa77cdb175d4efd7e16dc50e2c125fad7d.jsonl",
+      "output_sha256": "81292aaccbafba29dd798586eff8f719f78d15eb82eb9838a31cd47005318c80",
+      "path": "src/Draw/TKViewerTest/ViewerTest/ViewerTest.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKViewerTest"
+    },
+    {
+      "artifact": "headers/4792b7d35eb547efa4d93ebfbe2316e963b506f62e28ba6bcaa6a352b456cd74.jsonl",
+      "output_sha256": "03f038296fa68aa95fd3b2cdf8d6b1337d2afd8b7e85d050769223fb9c2d43d1",
+      "path": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/e0d73d8f0360aa80335076dc3544dae055a6d01dc587a28bf1a72b82d9edf988.jsonl",
+      "output_sha256": "1d2d6f7bb13e275e88c488eefe7bfe9d097aee46c0fce663752782bd357a85a4",
+      "path": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/cc02d9ba3861980d4f3f15fc88544f41592adb89739da76c80f40657e221791f.jsonl",
+      "output_sha256": "daef8f28b3dcf8831935bd6268b9d36b5648bd5ad04d4d3d1b7ca903ef159bf3",
+      "path": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/c754045fc84189006caf215e7385fdb469c4a918b535decc0b5850ccc4d79646.jsonl",
+      "output_sha256": "d0d11cae2502cf23270b9616c056cfe6a12f9f743b76783e34e88f226817fa3e",
+      "path": "src/FoundationClasses/TKMath/Poly/Poly.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/a69390a5b85bebdfa89fe387f566eb1206a9e25e8acb8e4c802a6750a8690cec.jsonl",
+      "output_sha256": "72273016c8013c2ad2ff6a228a0ad7ac79d0349ca81ab0ccb8f4debd6ed63b8e",
+      "path": "src/FoundationClasses/TKMath/Poly/Poly_PolygonOnTriangulation.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/758a0d5d95a8ec604c49517799fff692412a89883e7c0642352ce0b757f8fa0e.jsonl",
+      "output_sha256": "2b093cdfb95083fd00e1ee16f178ac31a219c71677ae593ab26f99dc5decefef",
+      "path": "src/FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/92d81fb766f0f7b397e1c0240f217276e693eb7eb6fc48bd68f5395808901a3e.jsonl",
+      "output_sha256": "9635aa55822d4b0447d7a91290443cdae038aef9a3b928438a1ec0b2ff19fbe6",
+      "path": "src/FoundationClasses/TKMath/math/math_NotSquare.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/9b7d9445e8b62c50a15033a0f83f41565e1b11f75e3b6ce1cb6cd2c9ace780aa.jsonl",
+      "output_sha256": "1a191d0e1d80bdaba63cff555a2b86cd5e3d1ed3280acd1e5f3bf0cb02d1c067",
+      "path": "src/FoundationClasses/TKMath/math/math_SingularMatrix.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMath"
+    },
+    {
+      "artifact": "headers/3a459eb9eb4248c25bdae89af3fd335fe271a302bd0f990957bc4f97548f1aa9.jsonl",
+      "output_sha256": "a92fedb7fb6ffd509fb28153f3035ae705f5d4cbc67cc1eeb433964a13f1a174",
+      "path": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/565f33da61ebcb7c91bf5c89ed18977e94cbf91932e897ae6d5880b8de2ad0f5.jsonl",
+      "output_sha256": "0f6ba7eaf4f902ea4ba67e9d0ec6f4153af4cba020cf7392fd648edcf27a6379",
+      "path": "src/FoundationClasses/TKernel/Message/Message_ProgressSentry.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/9b7b301215ee75c58986f2e1d90c0f41d68c88f804e6022604e2a52707c4a0de.jsonl",
+      "output_sha256": "5a93aec8a1114ed8570be581f3023a82020d2d299ee89bd66f84f203bc629f74",
+      "path": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/9d3ff5937199ebfad4a45ae4e0e5a59b5849b7822f07249f84ca10105c6f81a5.jsonl",
+      "output_sha256": "aa412898b5280ce4421a1f55963a7da2732dd1fc5a2f1dfec6fbcacc9c511aa1",
+      "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Map.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/e6da320cbb2036850a4904b206c74f9ba4c19e9c251f656cbd0d8032b4823c80.jsonl",
+      "output_sha256": "bf7576c01eb8637d7d71319b04e043ce7cf8af00619f7f26c24ed8c937a8a7a1",
+      "path": "src/FoundationClasses/TKernel/NCollection/NCollection_PackedMap.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/5016a1d83932e3c12d8455bf86e67708a90f951645578a3306190657d82c78c0.jsonl",
+      "output_sha256": "f5d13cfade55b011242d34d978254132408cc324b96e2663448487cb26e12cf5",
+      "path": "src/FoundationClasses/TKernel/NCollection/NCollection_Vector.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "1 warning generated.\n",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/aabeafebe78c0bf74b7b6d4fd7d5fb35828cb4830b1597df3a134a5bda8f3520.jsonl",
+      "output_sha256": "fce73ca0a999dadf44a1fa1e17963c010832b79659dc9f872f50ebcafaf07361",
+      "path": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/886efc89d61bd29313d3388740970f7f254da52b6691103dc4c01c427e7f06f6.jsonl",
+      "output_sha256": "7f5edcbd92a162f830d6de729f50e5ff72ab45e874cc0016dfb5c71c744964ea",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/dda764f281adcc2ff020b6a92bebbdc3c1f7af962faa7b0a951f6a0db1d5424c.jsonl",
+      "output_sha256": "36ab1f220b36d90b4ef200ad9c668660929522355d4bade8501735240886fbbf",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_DefineHandle.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/835c28c7bf42d5e04052c5dd86a5ede49a62631320de5df48a961dd6404cd74e.jsonl",
+      "output_sha256": "6c3fca4e7382d5e9dc2926f02fdbcc13d638deb9ce1728c58fd6125a61c62726",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/5a191708301a6376b7e9a095301933a73cac9ecb28ab94fae5e15407c4e622b1.jsonl",
+      "output_sha256": "45159805e0be436df7567181ab7dc184c0e18c4d15fbfc96ab2308ee2b1e1029",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/8d3066bafe3b458fb20e9493d705c190af7e2805a5054773f0659192db9d14ee.jsonl",
+      "output_sha256": "71264c4b982f989a09581f2b820d6ad74241599cd869f6a62a5c8e7b35d56bc2",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/e5fd3d5df40c5fd68729db6442939c77bc2729c1a3a619fbf5998ccee659b13e.jsonl",
+      "output_sha256": "0e2a10b4964868f4a01070dadd2292b045b46e3715c2bd133df7c49c293fdfc1",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Macro.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/499bdf9f6a230fc76b7b42686caae1becc1317652dfc24a82500b8291c4c3e50.jsonl",
+      "output_sha256": "ad552a3a141f10967976cdb8bdb2d9482a497bb908b34702c9aa406d0897d68b",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/42532b641b24565691268910a737e47ae4bf730f3335359710a3d10a16d9b1a3.jsonl",
+      "output_sha256": "ccc941b852ca53e10988ee7930d3821cf0650b3f4ba82ece8915a1d0e22a6fc5",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/8cb91160dda5baa7023d68d3fbda2e158b2952f824b0918f33dab27c5321815c.jsonl",
+      "output_sha256": "9abf7767a038a8179f304efccf29bf003d8957e5d0698e818c022accd49d0c82",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/b8611ff8cf84801814f7474e071243dea7a199a188c43524c0c21e872de04762.jsonl",
+      "output_sha256": "ed60e0fca64898d84c5b89f07092cfebd09a2a581d6e3a588510615c83bafa34",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/3d536b5dfb09ff1bff455e149a8a46b29607929f9df21145bc2a73ee0ba6b209.jsonl",
+      "output_sha256": "d999b47d1fd7786edb18ee11838ce54f2600f2a66c31a0b342533218ef988a07",
+      "path": "src/FoundationClasses/TKernel/Standard/Standard_TypeDef.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/1b73d25f84906f86b48884885ff42663732d90f291f87700c91fce5e0d2828b0.jsonl",
+      "output_sha256": "aca8eeef25187137c889b69e5df04ad70fff1548182902c96cab9c1e4ee01d1c",
+      "path": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/1ff6446be37670153f73202f5b2dc9b04c23b3293aba1d13b396f1a27196bef4.jsonl",
+      "output_sha256": "fe1e5dd2881c47703567d342144906cc502eff5bd2284bf9bfec7c08616fc9f3",
+      "path": "src/FoundationClasses/TKernel/TColStd/TColStd_PackedMapOfInteger.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/8005fabbed106dc52423eb3cb3fad538a1d5c729e808600642c3634fe6e66a06.jsonl",
+      "output_sha256": "d01307a2425564d1ca5cbae2622f0a7d47cb79eee068e6379b3d41146ddeac7f",
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/94bc090dd1ac16dde4cd0ddd9db18c435177efb1c9069206937fb6632f3cbb7b.jsonl",
+      "output_sha256": "58e8112d1bc60d0c35fa3ccf32d7e9c08e056ef574f2004c2ff0810db39cb410",
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/bdbc73210d515b94c9bed5a63b3c7bc5f0136f702a0a11e0343fa2f2d847ddf1.jsonl",
+      "output_sha256": "e133704d5daa228b83b8723683b4c09e739d5f2ceff5677d5cd0e0e40dfe2c58",
+      "path": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKernel"
+    },
+    {
+      "artifact": "headers/29179b8d8ab55dd662ad3f3dd009ca5bc862675d1a4acd324abcaafb56f286a5.jsonl",
+      "output_sha256": "e9d75469a0c67d439609f3d3c117e0c274510b6feea159ecf3fb00f677e1c69e",
+      "path": "src/ModelingAlgorithms/TKBO/BOPDS/BOPDS_CoupleOfPaveBlocks.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBO"
+    },
+    {
+      "artifact": "headers/6c057bfc5e9ace96a53a22ea0a1b92468368f827af83818cc9d96ef400b6bde7.jsonl",
+      "output_sha256": "13e1107692d66ea98547ec7e0e1a9e03a87c7600daceaa9e7d4bacda57117663",
+      "path": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_BooleanOperation.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBO"
+    },
+    {
+      "artifact": "headers/b194274ca92f7ee27c769f3960a0ed1e5b83a68bd81137e83fe100170de66fd5.jsonl",
+      "output_sha256": "db38fcfd8d1889d7bff34dfd09ff7ff727285732b6706df1a24676049364d3b1",
+      "path": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Common.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBO"
+    },
+    {
+      "artifact": "headers/b1d36764572a373bfa1b71cf2f327ba131bb5e5594a53e3ff021cfc9db1c76ea.jsonl",
+      "output_sha256": "3f7a65cb693ec2f616e5dfe5e99a3d4276ec5f4a3aebed110239c7e34290a57e",
+      "path": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Cut.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBO"
+    },
+    {
+      "artifact": "headers/2142d51f613898ebe059092c52eb926f1acc2e3c53e436df9b2ae32bd367651e.jsonl",
+      "output_sha256": "c9a1bb6259cc0d8df211ea414ebfd132b873db924a85abad33a580729addfc57",
+      "path": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Fuse.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBO"
+    },
+    {
+      "artifact": "headers/003da884c5eaf940b3e7e783891223991cc33c4b8ea3bbb74864f80c440a511c.jsonl",
+      "output_sha256": "8dab74b36537b2430c29d6a095d5aa88475e54d05283bbac6022c5845e39781f",
+      "path": "src/ModelingAlgorithms/TKBO/BRepAlgoAPI/BRepAlgoAPI_Section.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBO"
+    },
+    {
+      "artifact": "headers/f54715acc6ccb71a49778da341e661372b63235c48701bc5ecd1a719ff202e4c.jsonl",
+      "output_sha256": "ada2db77ac5324dd0ae1ac62b199f83c519dc7120d5a8f1421d4685592fe5c86",
+      "path": "src/ModelingAlgorithms/TKBool/TopOpeBRepDS/TopOpeBRepDS_Curve.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKBool"
+    },
+    {
+      "artifact": "headers/2b1d12038c8a1384b56351a7f322ff0fed5dc71fecfd4f39bf8f8a9816db774f.jsonl",
+      "output_sha256": "e064194e68d9ad7299ba2edad3ca119e2990d56a7b4962006dad88db72d675d5",
+      "path": "src/ModelingAlgorithms/TKFillet/BlendFunc/BlendFunc_GenChamfer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKFillet"
+    },
+    {
+      "artifact": "headers/78e32cdeeeac55481dd54e7188b4fa55d6d48dcd12323b644143eb6d06d45eed.jsonl",
+      "output_sha256": "f71af7bdd5b07552234338f5a3923c744a74edcce989f011993c08b55ee618ba",
+      "path": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_Builder.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKFillet"
+    },
+    {
+      "artifact": "headers/18ede4b5421ef0932c86ea7b0133538f9895b28694b90d8b603f80f4bdacbad0.jsonl",
+      "output_sha256": "a0887764bbf5636624fc11fbb0cb1211133be1c0ddb28ab9edc74cc79929297e",
+      "path": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_InternalBuilder.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKFillet"
+    },
+    {
+      "artifact": "headers/70b4f1b2e8e07a0164efc2cb157173abc4b3b24997d206b7d9b30fd9cd3cca52.jsonl",
+      "output_sha256": "8ad3f6f440ae047e13b601cc220c70038570ee56cbd6696252239aa1df903543",
+      "path": "src/ModelingAlgorithms/TKGeomAlgo/IntCurveSurface/IntCurveSurface_TheHCurveTool.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomAlgo"
+    },
+    {
+      "artifact": "headers/adf50a2f0bc7efbfcc362ae464b7d7fb151fed4602fd3aef97434e0094c47530.jsonl",
+      "output_sha256": "dcbd7b6d4949aef35cb02a94f15d92007b59c7b47ba16981eee10fdc5c191cfc",
+      "path": "src/ModelingAlgorithms/TKGeomAlgo/Plate/Plate_Plate.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomAlgo"
+    },
+    {
+      "artifact": "headers/58abdb31d0886b5a57637f53c6ecde971a536684c2d2379b83b846018bd4e4f5.jsonl",
+      "output_sha256": "a17c62a16520205419ddcfdfce64a4fe53c7ba94396457e35eeca2d8cb929e28",
+      "path": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_LineTool.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKHLR"
+    },
+    {
+      "artifact": "headers/097145279447cfe0632a97b19bd8a9043beb5aaadbb7c14365dd36a1ea0d501e.jsonl",
+      "output_sha256": "00fc539de5e3e9e7779543052b2b86bb4f232d386d6d169322c17ad0406bb708",
+      "path": "src/ModelingAlgorithms/TKHLR/HLRBRep/HLRBRep_TypeDef.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKHLR"
+    },
+    {
+      "artifact": "headers/bb7d75fb9fbaf61245680e24e1db34dd188326e5887866af75a1c35b6ef82a8b.jsonl",
+      "output_sha256": "7844b64e50bae99d2500d59ffd9588abafebf773d281813681f3879b61906fa6",
+      "path": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FastDiscret.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMesh"
+    },
+    {
+      "artifact": "headers/dcecee6d422fb79b68ef497a2f1aea8dc86b003702a2db6f0da045327c6c8eba.jsonl",
+      "output_sha256": "3ecfcd65939905034e290ddcd6df8db17ed6e59de6a04ee5000ab3e0fb768f3b",
+      "path": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_FreeBounds.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKShHealing"
+    },
+    {
+      "artifact": "headers/61736d995aaa54df5c1d4ad29f192938d0a73679dccc38c36719fb55a82a5b43.jsonl",
+      "output_sha256": "fe0f92df7065b3b490eeec39bbca1d8037c72b771dec6212ab114494f838e809",
+      "path": "src/ModelingAlgorithms/TKShHealing/ShapeAnalysis/ShapeAnalysis_ShapeContents.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKShHealing"
+    },
+    {
+      "artifact": "headers/b6225e39ea5a18e7402407b4e07c96e287c12c029e90609162034d7f8cd6e6d0.jsonl",
+      "output_sha256": "84eb5f2ae9a22a77a78650705f880716215d8c2c9cf8a8988be6b809403698d4",
+      "path": "src/ModelingAlgorithms/TKTopAlgo/BRepExtrema/BRepExtrema_DistShapeShape.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKTopAlgo"
+    },
+    {
+      "artifact": "headers/79c22104631819bc694d692128685ad54f39c3273df97dd7fd6231a747f8b8fb.jsonl",
+      "output_sha256": "084df0883d7df5566bf3cb68c10cadd7d31d2633973ce6b801f4adb753087a10",
+      "path": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_Face.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKTopAlgo"
+    },
+    {
+      "artifact": "headers/9553c787cf0e3833d05552b93f90168b74006d4cfdd97536101d1af7dbf0873b.jsonl",
+      "output_sha256": "9b978082fd04e8787bc78eb1468f8394c4d1c8d807f6f560f401a768d4aafa20",
+      "path": "src/ModelingAlgorithms/TKTopAlgo/BRepGProp/BRepGProp_MeshCinert.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKTopAlgo"
+    },
+    {
+      "artifact": "headers/32c012ee62f32b545d6f96bbc96d152c2f02bec63f1f298cf1b30f722972c64f.jsonl",
+      "output_sha256": "f05098c447d0269ee413c3312419850540fee9aa3114fc56b91f39719d95d1d1",
+      "path": "src/ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG2d"
+    },
+    {
+      "artifact": "headers/89d85e343e1dde656643a9980909aa9c56682ff114d3ed8f6e058a68d191202d.jsonl",
+      "output_sha256": "411d9bcb35362eeb13e4e6275e0c6778585a3da71f6095218306b8955d49571e",
+      "path": "src/ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG2d"
+    },
+    {
+      "artifact": "headers/df459782b6e16f22c50765bef029e3cd53bcd9a0b573a3229a13769caa2c061c.jsonl",
+      "output_sha256": "abb99bda59bd0f566e1866c6c029fc5ec7ab79e362339c6fd31267914124e107",
+      "path": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG3d"
+    },
+    {
+      "artifact": "headers/7e4bb377dce7f7b76ac8a18759ae70544d0e9dbb258755ef57606fdb27bb4d5d.jsonl",
+      "output_sha256": "31841554488edf51c3bb7462197a8716304b855cf413a2902c8c085deca347f3",
+      "path": "src/ModelingData/TKG3d/Geom/Geom_BSplineSurface.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG3d"
+    },
+    {
+      "artifact": "headers/d8ea8d9448c0c68e53f795f1be8086478a815c47e6ef11756ef7892e951f4c68.jsonl",
+      "output_sha256": "dd5f7fe9e06baa3640d0e2fb82f06193fcf20618a5d0a02df35658ef1ec4611f",
+      "path": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG3d"
+    },
+    {
+      "artifact": "headers/c961be2b8802be49a8c6db8f2521e881d012dcfb7b44131a6cab259e3f321a5d.jsonl",
+      "output_sha256": "154d88fba98dcdd49763a4a4b52c225ca2dcec495e8520ae323dc054800a3f0d",
+      "path": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG3d"
+    },
+    {
+      "artifact": "headers/1076f1da2a524eaeb0dc3853ed240d265760d9bb1caca632393a56293a61196d.jsonl",
+      "output_sha256": "328b378f70701906f1669742bc2cafa61ae6308053835e854ff43ac01da7fe9b",
+      "path": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKG3d"
+    },
+    {
+      "artifact": "headers/e4e5f540b8f0b7616aef2e52b06510bd1c89f0174844ddc5f9c95b6f7470ef78.jsonl",
+      "output_sha256": "da78d8e17e2d40bde5c04a0858297a3eadc5651440fe84142e51486d1972d9a3",
+      "path": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/74ee4482050dc1c2a69856429eff4cd9dca9818e88ae7940730d9cdef45bf7a6.jsonl",
+      "output_sha256": "848abdfe01a387c01cc3d789d19ce4f7b1dbf256a0311d8a0c264699dbd7a266",
+      "path": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/f05eb20e6eef7955cddd5780eb2b8b6c6c60a34f2dcc86e3edcc6e9b8e624af9.jsonl",
+      "output_sha256": "e5aa0f284df7b533f7fb14b856e277a642d8839936b18233651b56809f3258cd",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfCircle.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/ed3b8279a2dfbbfaeeb10670e92f1f62e09851a65f3263cedbacd03c350d96c5.jsonl",
+      "output_sha256": "be5c2d7b71e0a9b92fe4fd21df8f8b3d67b19c4dac942d31081430d2937f4940",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfEllipse.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/b3d6c879b1b17956f3548eacd62783f597e068ddfd64ccfdee12226b51491668.jsonl",
+      "output_sha256": "df9d02d5483ae1ffe153515bfc61933047b71aa0709d946480057488220dc4c9",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfHyperbola.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/8dcf939c501f84ddbc2a196e9f2ef806736c6fcd18f92cd8150271711e65f410.jsonl",
+      "output_sha256": "398c81583eec2bb6fb0ad61095c8756de10037b1f0ab9873edb8352216a8a8e1",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfParabola.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/d86f8b962d53601792031ab7088bc0dbd17ce6e6c6ade89f6f01621836d7275b.jsonl",
+      "output_sha256": "8ac55942e44ed92570237d861f9809e2f525c4c028148158a5719dfe4b017211",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeCircle.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/7bb5118c080e2dbe38aee59d3f67e0431fb6250f183af3400589e187725466af.jsonl",
+      "output_sha256": "73b5b22be2b100bfcbc221a6644f888dc0fa892d040077b57820c40f78d5df3a",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeEllipse.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/f7552ff59158d80757422ec61b4c2698cd25e82d41d0adffa6d14c12ae05ef34.jsonl",
+      "output_sha256": "847c57e21436d0e32b2b2425f9b5101502c361969054b16fa7a988fcc28fee17",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeHyperbola.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/4eecc83f010cd4518ca14f56e3b55ed881edbb2c06ab758f22bf88499e6fc87d.jsonl",
+      "output_sha256": "80bb4552f7c1cbc26557c8a9539cb9bcc4d483f8dad21c5b3c1d2be5baf7d0f1",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeLine.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/f35eb73f3165ec354a8462458413f328bb110fab0406b638c7ec6c5c00ee1823.jsonl",
+      "output_sha256": "e1b7ad3d71df25f41a8135896b14614048b9ceac506adac2da583648ca356354",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeMirror.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/c60bccf8c48dd2bd07217e930fa108bdd686f43ab8ac4b4d17fb5449645938ad.jsonl",
+      "output_sha256": "22a643b83ce8136f395bdf6d3b142ff19ebd44648e506e306967351600b85e21",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeParabola.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/ff6adbbac9af87293cb8ac5adaf986a6dea12a200a78896cc5bd46584eeb7669.jsonl",
+      "output_sha256": "6c8e8b63bf0a7243a5ce99104b47b820e827a80d95b31c3f74d4b764c2aa46f1",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeRotation.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/83ea6834ee1499b8d7b096a3709900da4a278f8b30a311ecd7be2b34c5e760c7.jsonl",
+      "output_sha256": "45382f68fc9a1781a4ca6037629bef13430b93ce00426615b60b921d95fb8aa6",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeScale.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/991250520e7c260aa188c1eaa0969fe442c61c3cc326ebb4e438164744d487ae.jsonl",
+      "output_sha256": "5e62929678afcb4fad3583ae5c49acb23d52ab753f99c27d9bc51a5cc8e18bfb",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeSegment.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/8af1a1cfb21f5ffbe3453489591f788f2429fc157acc608309de6935e95c7d0b.jsonl",
+      "output_sha256": "af05ed6d0dfa38d1b4def0ad85c57c80991257e0d826963e40f8e8681189687e",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeTranslation.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/fc795d71a615cfe7057bbe9735605205b26ba0f431faa0de67712b49dc2bf202.jsonl",
+      "output_sha256": "44ad13cbf4009b873b459fc4ae55ec1257b46f3a58f8ba6d2a7d00e367d2e1d1",
+      "path": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_Root.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKGeomBase"
+    },
+    {
+      "artifact": "headers/27796edcd171fd8f4b62bf86ca866e17af5b054173409b928f5be04cfe8371b1.jsonl",
+      "output_sha256": "880da8a3b2b6f1911d9946918a991c3bcd9e02f307bbeddb3043dfbfda66aab5",
+      "path": "src/Visualization/TKMeshVS/MeshVS/MeshVS_Mesh.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKMeshVS"
+    },
+    {
+      "artifact": "headers/1ffdf29e3e7c2131e924d8312530c7a004434f9b9e86a31f0a778a7a281725c4.jsonl",
+      "output_sha256": "3d1b51962ae277bb04fd96487d72f755e2a77cce02389d53fe629f55816e9cc9",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Aspects.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/5aa65a8026ffe8f96ebd2dfc483728ff89dfcfafd98fc00fcb417b786e450e53.jsonl",
+      "output_sha256": "e91f13f73168f771c1bd9b7e31fc7d4f210e17ca08a5565155de1c8af7861405",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_AspectsSprite.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/3066428e4ed7f15865e6aafe9f9209357166bb4448148c08877bc0df23dc6ebc.jsonl",
+      "output_sha256": "5d10659e70d8b963e61f1da03bb7fdf43056917e26dc07d118056187d25c5364",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Caps.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/8296f23d28a0601066700924405368c1f7b26568fe09adf4888e3fba7211a45e.jsonl",
+      "output_sha256": "d0608765fef21d6ed7025f32c20c047d5a05cd84e0aebc0791e54f0a27479c4f",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Context.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/c2e2418e09346c7fe07258cdf943338bf814f1173cd6eea121a5e94549763ab6.jsonl",
+      "output_sha256": "71602af1d1ca8b196f25477dc1b3481daf67dec1379a36c430eae543f0ac5250",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/1b04d51709cf51121728c2e4f0d588c3a40ebf0695fdf5ce97b69cd4e35390f8.jsonl",
+      "output_sha256": "3bcaf21e0ce17d987751198baaf33498927beaed3869be674f567d64bbe12fb8",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlCore11Fwd.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/22a2ecffd6dbb3ed90eae548564a9f7c1f34b4536d096f9206e2fb85d47f6e83.jsonl",
+      "output_sha256": "c3329c43d0a94d6f0874bff8c44a9eccc62146c99946cf9327817618883432a5",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlCore13.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/bc30ff0c5fd31364fe0460acb52827e2d80179f4e7b2a8fd6083670223098be9.jsonl",
+      "output_sha256": "1d06d820432bf9d9b5f27912e7a0dc7c8b060025f0f09cdcd887d4875fa08d30",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlCore30.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/db20feee016a1fb62279cfca57411191e27637967cef0c6b12e5fef859e203a5.jsonl",
+      "output_sha256": "3a9f1a858c2818a2e1c45cc4cd89d1883936961659699f594d1657a20cbd8f3f",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlFunctions.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/8fd9038742453340187f78ad748ac410984996be58734a14792d18925f348a41.jsonl",
+      "output_sha256": "6c10c1037b6069e8007d1cc90b86353af10bfea4f36ca9b9380dcb7a63e2f3a7",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_GlNative.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/f577822a18673c9426740a180c97d7a18eca3dfc3feda51d624df10ac47e2d6d.jsonl",
+      "output_sha256": "ec74105bfd918758c4ea82a7e6f6428b1a8cfed7c4f82b29ca311f1c2f211ae0",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Sampler.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/38fb7007913af5c0d7fff4da97388af6103d1429a7c6b0de22f0210656af9ac5.jsonl",
+      "output_sha256": "d8fd5100057f3b4948674231574a469638704f0835733ab812105b80283e4d90",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/d9bbd849493d006b8b523fc02c3d018d85ea739d25d5b1fd6c0dc4765173dc46.jsonl",
+      "output_sha256": "748f6fb269d9917c87515227204e7def600ad3033770127d9ae689df38a0850f",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/3896c64ccb8024544bdbaea0bcb93a96b15c203e8fdcbe4b0c30ff62d8df81bb.jsonl",
+      "output_sha256": "7440c0847a507b26ba9521677919634988b2501f0f39e30992083da93ebace6c",
+      "path": "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKOpenGl"
+    },
+    {
+      "artifact": "headers/81350b4924cca1a4336ec32775aab2142fa49df66c3680156022e6699854623a.jsonl",
+      "output_sha256": "8a8d48c78c377bb6373238182192b55070927365fe953bbf26340866486049d0",
+      "path": "src/Visualization/TKService/Aspect/Aspect_GradientFillMethod.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/2cd0515167dbddc1936dd842286a0b2662bc04607925f38f6a2b150d6894813d.jsonl",
+      "output_sha256": "2b12e5660ccd74ef07b0fdcc3350325dc3ad77cf584d29de835746a7c73f4109",
+      "path": "src/Visualization/TKService/Aspect/Aspect_InteriorStyle.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/63cd45473097540a42e22c2de58364d5a394bd772cad21cd1dcc5f7166dff30c.jsonl",
+      "output_sha256": "4c4f0267ae45401209d62563a5756ac1eac03ec44e48f4d0cc520b51a751c90d",
+      "path": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/6143fbf9c5eb75974804a0f74af29ba679eb0d1b4c04b5dbee67fd32492040cf.jsonl",
+      "output_sha256": "ce021844d1a53d1e80fdf0ed7f4fd290b56d09e26571fd85893033da3902b462",
+      "path": "src/Visualization/TKService/Font/Font_FontMgr.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/9042d8fbf77b1046b994a3d1b104dd16ff08fd31b0df3bcb7893f0a8062733df.jsonl",
+      "output_sha256": "2ebb569b4800f4925499679a2e61cc7b6f8c9b73aeea0d91802411e4d7b352e2",
+      "path": "src/Visualization/TKService/Font/Font_TextFormatter.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/9855280bb18befda329261846752524ffd0b90893749dac98ff1b2684adb794a.jsonl",
+      "output_sha256": "c3724a9bef65738095082e5553eab3853af261fae61a35b0cca5340ae645cb7a",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectFillArea3d.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/5fc14a130bdabf62f70aa0067c1d39101f9e26f167d5afef9b681d01059cf511.jsonl",
+      "output_sha256": "a79ae7191ab68ec8ce36449d649012dddadbc7438b19b0d33891596b5994db40",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_AspectText3d.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/88d218dfbd042ea243d9a4dbabc1d2e133d7c2199a72e8a118a2247272d4271d.jsonl",
+      "output_sha256": "f31b3417799013ef8663c8887c95fb7b065a7993b28a222b908329f4c6443c43",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Aspects.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/9cc764af1044ab62b36a2e8cbf3204e19022b6860347c141a683d4e32e2c73ca.jsonl",
+      "output_sha256": "06eb803cb743acc7d20fa95010e079d9e1090257a15b657255ad2ec0e9750263",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/50b09658fc49c7477f0d55b9dce72463ca8045a083d70afc8c40604181ff1463.jsonl",
+      "output_sha256": "fa80702040c2fc86d78fa39594f7a9a5c6b373d4da1f2ef0f124cebd8fcfa0ac",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Group.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/eb4b82f09e9dfebbd067c6caac4d445fda1dc7e1f7287c92c3c11163494cb8dd.jsonl",
+      "output_sha256": "64af06fd70a006eea1e77c6ee9d858c611784f170183161949dc91c61fa75915",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Layer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/0e5b5eb69f43262d61f0392644fc5b5353fe4142c15eb28d9c3a337643579fa1.jsonl",
+      "output_sha256": "12ab3f076a102766f9f0360f0897dc408d2589ecffc425d7e6124d15e348e68a",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_MaterialAspect.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/45191fb068958f3e0f03eaaa678748cce07034f39d6b47d228cc82a234cf3ffc.jsonl",
+      "output_sha256": "4a79cf02fbbb8aa2b7f5534d090a76934fe323f0d89308f2c653db6c1a278340",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_ShaderFlags.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/da326e8b139f1c5eeb30ff909b737be93bc2c1622e8c89805f2a191ca2fa5c17.jsonl",
+      "output_sha256": "39b72cf4ee32c1583c9c93c0480d385a59836d1046893ed46866ada21c091869",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Structure.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/b2df82c7b460ff5ae8c2fc8836f56e6eb2872e2a4615beccf7436cf3459699ec.jsonl",
+      "output_sha256": "81837511844c542398716b5aed268f775c24ed26c27e162f2eb6f64f30b0fe36",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfLightSource.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/540b76c5b9a99e51df12c84356fc81e30c6d00c79ef961927d346dcfeb295bb6.jsonl",
+      "output_sha256": "0a814b656d2862674a4b6c70fb2866a37cdb3fc84a01e9750a946f803d28e873",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfPrimitiveArray.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/f71e37813276a46d8b36bc5f57a088093e39dd3e514d9de5f9df4eaf2752697d.jsonl",
+      "output_sha256": "030db407dfa730ad267dc2986005953bba9a70c77eacb4b9b5049edd15f27996",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfShadingModel.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/388583763c9c2d9c3410ca93d1cfe927dcba8fed1196b53642b52a9b0bcea1d7.jsonl",
+      "output_sha256": "2efd958b949df0021cf700c46aeb50c4081e4a1d149bbe33ed278fc6b74413fa",
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_TypeOfTexture.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKService"
+    },
+    {
+      "artifact": "headers/e7be744a904c7d6295b84bfcf640bc149371423b5617ef30251127a563019cce.jsonl",
+      "output_sha256": "5be93cd36ceb2cd03e986ea2031a17b83f57f37d930e396850919aff2b2de80a",
+      "path": "src/Visualization/TKV3d/AIS/AIS_ColorScale.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/b6f8a24460604c9e16df2afbf4a33cce61090f810564d9cf9556596adbe47a4d.jsonl",
+      "output_sha256": "f3f7eeb6b5ad5db0057fe3d592a08fc610073403067be7ee76e8fa42c38fd91a",
+      "path": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/2b672467fe38b4afa96e38e77632f7c6475b9ad91b73e359da24ec5323c9b0fa.jsonl",
+      "output_sha256": "58bbaf2c0c8f889237338d3b29bd4de6172220fac4e4e095c1bf9286af02d33d",
+      "path": "src/Visualization/TKV3d/AIS/AIS_InteractiveObject.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/de9316b2b0599d12371392b7a467537f50ae3c84cbb77ff010fec672c6d9e9af.jsonl",
+      "output_sha256": "a58e201fe2331937eaba04cf20a76609c627b49b679450f6bc01abd2fc34b0ce",
+      "path": "src/Visualization/TKV3d/AIS/AIS_Line.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/ee2405bf4f2e72fc2c3786f8da47f0ff43a347e2ce22d64f56ce40392d3f113d.jsonl",
+      "output_sha256": "fc0d4877e763b65d96667a9bb7441a721b69fce3ebb2c66c5009e68b0486c44c",
+      "path": "src/Visualization/TKV3d/AIS/AIS_Trihedron.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/5dec5e01333376d6053d226d8e8349bfe9fee37a5466253fe3d81f5bb5aab4df.jsonl",
+      "output_sha256": "98a1899fed5612e3c915ced10c00568f68acd5a0feddec9c31ef4c79dc86f71f",
+      "path": "src/Visualization/TKV3d/Prs3d/Prs3d_DatumAspect.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/5a787d95b056c06c8dc502e06da2b393eb1edd8a983fb650261b56996d6103c0.jsonl",
+      "output_sha256": "b5b4bb005b63908d8a23fc3ca014afb9236c4c5ec62d59c66cf8123280471f43",
+      "path": "src/Visualization/TKV3d/Prs3d/Prs3d_Drawer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/5745e2c4a04cfa1c7a9049f5870c5d519c992cd8f09cd9a395f8c3f710935a35.jsonl",
+      "output_sha256": "326ad0569516c2b56a37333b3e61a841103fe60e53f7b1a8e9cf5026eadb6436",
+      "path": "src/Visualization/TKV3d/Prs3d/Prs3d_Root.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/339791a57f0e44038d8af0b34a8909b890b0e686fb21e048bee21188033c65cd.jsonl",
+      "output_sha256": "1fbc153b6ee7cee72f641a77720a5501697d12a3bb427682622e24d75e522835",
+      "path": "src/Visualization/TKV3d/Prs3d/Prs3d_ToolQuadric.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/b73812dc18f9238370d836f9f27c8cb9ab160afa7333aab5e392004546cfdb17.jsonl",
+      "output_sha256": "a0e200f4229f68f4afe6570bcc77f04b3cdebfb386a95537c6cb7fcd42f6f11a",
+      "path": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentableObject.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/7c2d44e39109e1522e8daab1105c6f492f4a7b887f87d04e7ba79e035fa67462.jsonl",
+      "output_sha256": "b449f0ca6e92ef7abacc337d765b865dcca1ebaec70b23c2e4d90368470c8833",
+      "path": "src/Visualization/TKV3d/PrsMgr/PrsMgr_Presentation.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/d666f70cb14d5a85f3c77b57a3678ec5772e6b534816cea417e55019d529bda5.jsonl",
+      "output_sha256": "dd2ac7d49684b5daf7f5f6d6d0412401ae93452e0a8d939d4a1f3f06696aaa81",
+      "path": "src/Visualization/TKV3d/PrsMgr/PrsMgr_TypeOfPresentation3d.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/53414e941d447dfe5a3e884cfea39c6062ed5c7963d65d9e4f5c346f59822262.jsonl",
+      "output_sha256": "c17d0a607cf08d896d1b1df02218bad7967f8f2c5b754cc342e6e4aefd487d19",
+      "path": "src/Visualization/TKV3d/Select3D/Select3D_InteriorSensitivePointSet.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/6192d860654683e931fb3cf638e5742fb5f93b683005c3b011d2e8de35a1d1b4.jsonl",
+      "output_sha256": "22f56c89d30794f2c25f514812f91a28065569b9fe3bc9295f4553512d7f0966",
+      "path": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveCircle.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/4be588d052c0399283ab38918412cc04ad16c479b8d66ce5a91baabefc5d63da.jsonl",
+      "output_sha256": "e020bb45b4ae8d1ebabf6ddedb2c2af257319077f62ad10bbad6cfbdf751cb17",
+      "path": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveFace.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/73525d6410cbfdff195952dbb5dbbea237ffe446e3d87a1b30ea62277f9afa7e.jsonl",
+      "output_sha256": "ff5b1213b6e0ff7d70842bfa654ddccbd7be1ce12e3480d711fa9071ab8dd122",
+      "path": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePoly.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/53076c0bd6f77f538a69e6372c2b57d25469ca2193ebaef663611a115a36765e.jsonl",
+      "output_sha256": "7c308e9d96c0af81c40178eac9c984eb5706c020ea232a49a805bd3638a72f27",
+      "path": "src/Visualization/TKV3d/SelectBasics/SelectBasics_SelectingVolumeManager.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/50636567cdcef410f83689aef95b14e79efc8bba6030ff77bbbb2d2c6d7b3244.jsonl",
+      "output_sha256": "f793a743313e2f065e1ccc0766489bb8048585c6e246587f4e7fbe633c00daf6",
+      "path": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/f188ed667adaa48fe8a0697f339489497f0d36afb629ee6eb2efcc1f5d76aae7.jsonl",
+      "output_sha256": "1c64bf2589b144abec629613c6b893ce5bbf0ffc2de9384e222e61858911a87a",
+      "path": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/d0c49be384b26d70fcd2f29101bf23b6867af669b0476f04b1928d075d390366.jsonl",
+      "output_sha256": "431a2cc7ddbebce35fc03eb94f582727ad294acaa79e663f396eafca524acaa4",
+      "path": "src/Visualization/TKV3d/StdSelect/StdSelect_BRepSelectionTool.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/84eb8721674702d6f7b8b112881f346aeb5d9412b89dc8292fedf231ced896db.jsonl",
+      "output_sha256": "55e8c6e2d2136a86d8a60a5ba37ba44fcd85666d11399635e2a453d2ddbd0fb7",
+      "path": "src/Visualization/TKV3d/V3d/V3d_CircularGrid.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/1f7d91a20ac13c6cfad3aede8f31634159d305b13cf68bcc550f4095c9e17bb5.jsonl",
+      "output_sha256": "df1800cdcb22f721950f173eac8d6501d4b42e1ec62106a95babca2347b11353",
+      "path": "src/Visualization/TKV3d/V3d/V3d_Plane.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/4f21adbccd34b91f6fcc0bb8ff64ad8c9432034c521be85e7b5bda5e68e9c807.jsonl",
+      "output_sha256": "4275b13c1775bc3ff946623900e6d730d53e05a1c8c57a1b8609aac0680ae1bb",
+      "path": "src/Visualization/TKV3d/V3d/V3d_RectangularGrid.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/9c8c201af4e5aa3a2fbd096a8f59c8765480c21b47cb6bbaf9bc0fa60a227c13.jsonl",
+      "output_sha256": "a01e7b44a779b01190c64e1d15818e976cb07fd787083cb82494faaf1d8640c5",
+      "path": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    },
+    {
+      "artifact": "headers/b5c3f20d4036e5ab20691b903f194e1a677b1a4300332b05dc4e2004d7e1598a.jsonl",
+      "output_sha256": "5ee0f563809f28adaec0d18a0ede24062935213cb8355be04ce88a0cf1f2b604",
+      "path": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "returncode": 0,
+      "status": "parsed",
+      "stderr": "",
+      "toolkit": "TKV3d"
+    }
+  ],
+  "classification_source_sha256": {
+    "tools/api_inventory/src/UpstreamRetirement.cpp": "4dbee068560909165d53f3a39c5b8dd24b36392a5f4266d4391b1c20599a5bc3",
+    "tools/api_retirement_markers.py": "a2b9595c0432708b11b55e201280ebda287fbe43292bca687555411257e399fc"
+  },
+  "compiler_fingerprint_status": "source/ledger/artifact/tool fingerprints current",
+  "complete_primary_inventory": false,
+  "current_port_scope_metrics": {
+    "defined": 76041,
+    "done": 52833,
+    "open": 22170,
+    "partial": 1038,
+    "unresolved_ledger_rows": 0
+  },
+  "existing_implementations_preserved": true,
+  "matched_observed_retired_apis": 500,
+  "new_exclusions": 90,
+  "partial_exclusions": [
+    "84845a59ccf56f59bc1c08cbc4b89f205a34000720f58c403ba3f03f73b88a9c",
+    "32deb8fbd465dc10460ff695e1b90aa9703707cc6f290089c094f5de52ed711f"
+  ],
+  "previous_resolution": {
+    "excluded": 37,
+    "implemented": 371,
+    "partial": 2,
+    "unclaimed": 90
+  },
+  "remaining_probe_failure": "RWGltf_GltfJsonParser.hxx: dependency compilation error. Only retirement-text candidate concerns obsolete glTF1 format of myIsGltf1, not retirement of parser or APIs; no exclusion inferred.",
+  "source_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "unmatched_identity_policy": "Exact source-site identity preferred; unique Clang USR/kind/signature/template identity links redeclarations across source sites. No name-only joins. No unmatched marked compiler identities remain.",
+  "validation": {
+    "all_tool_modules_validated": 210,
+    "clang_fixture_tests": 4,
+    "historical_receipt_fixed_module_passed": 1,
+    "historical_receipt_regression_cases": 9,
+    "python_classifier_cases": 9,
+    "returned_type_modules_final_passed": 5,
+    "rust_source_changes": false,
+    "tool_modules_unchanged_passed": 209
+  }
+}

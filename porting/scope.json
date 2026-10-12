@@ -1,6 +1,12 @@
 {
   "schema_version": 1,
   "default_scope": "port",
+  "api_policy": {
+    "upstream_deprecated_or_obsolete": "excluded",
+    "preserve_existing_implementations": true,
+    "evidence": "Explicit pinned OCCT declaration attribute or API documentation; see docs/adr/0002-exclude-upstream-retired-apis.md.",
+    "decided": "2026-10-12"
+  },
   "scopes": {
     "port": "Ported to Rust with API and test parity against the pinned OCCT revision.",
     "replaced": "Not ported 1:1; a new Rust design takes its place (user decision).",

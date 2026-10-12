@@ -13,6 +13,7 @@ struct Config {
   std::filesystem::path sourceRoot;
   std::filesystem::path mainHeader;
   std::set<std::filesystem::path> extraEmitHeaders;
+  bool retirementMarkersOnly = false;
 };
 
 std::filesystem::path canonicalPath(const std::filesystem::path &path);

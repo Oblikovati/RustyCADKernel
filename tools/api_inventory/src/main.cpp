@@ -129,6 +129,10 @@ bool parseArguments(int argc, char **argv, Config &config,
       compilerArguments.push_back(argument);
       continue;
     }
+    if (argument == "--retirement-markers-only") {
+      config.retirementMarkersOnly = true;
+      continue;
+    }
     if (argument == "--source-root" || argument == "--main-header" ||
         argument == "--emit-header") {
       if (++index >= argc) {
@@ -141,7 +145,7 @@ bool parseArguments(int argc, char **argv, Config &config,
       if (argument == "--emit-header") config.extraEmitHeaders.insert(path);
       continue;
     }
-    error = "unexpected argument " + argument + "; expected --source-root, --main-header, --emit-header, then -- compiler flags";
+    error = "unexpected argument " + argument + "; expected --source-root, --main-header, --emit-header, --retirement-markers-only, then -- compiler flags";
     return false;
   }
   if (config.sourceRoot.empty() || config.mainHeader.empty()) {

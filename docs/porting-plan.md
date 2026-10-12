@@ -6,6 +6,11 @@ coverage; toolkit notes and runtime receipts record behavioral evidence.
 
 ## Current priorities
 
+User decision, 2026-10-12: APIs explicitly marked deprecated or obsolete by OCCT
+do not require new ports. Keep existing implementations for now and record
+declaration-specific upstream evidence for exclusions. See the
+[retired API scope decision](adr/0002-exclude-upstream-retired-apis.md).
+
 User decision, 2026-10-10: prioritize visualization and the new Vulkan renderer
 above exchange-format porting. This execution order supersedes the earlier
 base-toolkit-first scheduling in `porting/base-toolkit-priority.json` and the

@@ -50,6 +50,17 @@ class ReturnedReceiptTests(unittest.TestCase):
             self.receipt["capture_source_root"], original["capture_source_root"]
         )
 
+    def test_historical_extractor_sources_preserve_attested_bytes(self) -> None:
+        original = read_object(
+            ROOT / "porting/audits/returned-private-type-extractor-v2.json"
+        )
+        expected = {row["path"]: row["sha256"] for row in original["attested_files"]}
+        for row in self.receipt["attested_files"]:
+            if "capture_source_path" not in row:
+                continue
+            self.assertEqual(row["sha256"], expected[row["capture_source_path"]])
+            self.assertEqual(digest(ROOT / row["path"]), row["sha256"])
+
     def test_changed_attested_hash_is_rejected(self) -> None:
         receipt = copy.deepcopy(self.receipt)
         receipt["attested_files"][0]["sha256"] = "wrong"
