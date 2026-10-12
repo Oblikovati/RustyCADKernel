@@ -10,15 +10,11 @@ use rustycad_tkbrep::{
 use rustycad_tkernel::{ncollection::Array2, standard::Handle};
 use rustycad_tkg3d::geom::GeomBezierSurface;
 use rustycad_tkmath::gp::Point3;
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
 use std::sync::atomic::Ordering;
 #[test]
 fn native_curve_topology_mutation_rereads_orientation_before_sampling_and_preserves_output() {
     let curve = BrepContourMutationCurveFake::new();
-    let edge = BRepBuilderAPIMakeEdge::from_curve_params(&curve.cast(), 0., 1.)
-        .unwrap()
-        .edge()
-        .unwrap();
+    let edge = BrepContourMutationCurveFake::edge_fixture(&curve);
     let face = contour_mutation_face(&edge);
     let owner = SelectMgrEntityOwner::new(5).into_cast();
     let mut entities =
@@ -35,6 +31,7 @@ fn native_curve_topology_mutation_rereads_orientation_before_sampling_and_preser
         include_str!("../../tests/fixtures/colored-shape-compute/native-contour-orientation.txt")
     );
 }
+
 fn invoke_mutating_contour(
     face: &Face,
     owner: &Handle<dyn crate::select_mgr::SelectMgrEntityOwnerSource>,
@@ -49,7 +46,7 @@ fn mutating_contour_row(curve: &BrepContourMutationCurveFake, count: usize, edge
         edge.nb_children()
     )
 }
-fn contour_mutation_face(edge: &Edge) -> Face {
+pub(super) fn contour_mutation_face(edge: &Edge) -> Face {
     let builder = BRepBuilder::default();
     let mut wire = Wire::default();
     let mut face = Face::default();

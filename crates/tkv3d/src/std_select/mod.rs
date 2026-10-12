@@ -7,6 +7,11 @@ pub type StdSelectViewerSelector3d = crate::select_mgr::SelectMgrViewerSelector;
 
 mod selection_image;
 pub use selection_image::StdSelectTypeOfSelectionImage;
+mod brep_edge_destination;
+#[cfg(test)]
+mod brep_edge_output_owner;
+#[cfg(test)]
+mod brep_edge_output_tests;
 #[cfg(test)]
 mod brep_edge_pick_tests;
 mod brep_edge_polygons;
@@ -32,9 +37,12 @@ pub use brep_owner::{
     StdSelectBRepOwner, StdSelectBRepOwnerBase, StdSelectBRepOwnerMembers, StdSelectBRepOwnerSource,
 };
 mod brep_face_contour;
+mod brep_face_destination;
 mod brep_face_plane;
 mod brep_face_quadric;
 mod brep_face_sensitive;
+#[cfg(test)]
+mod brep_face_sequence_tests;
 pub(crate) mod brep_selection_load;
 mod brep_sensitive_compute;
 mod brep_solid_cylinder;
@@ -49,6 +57,12 @@ mod brep_contour_orientation_tests;
 #[cfg(test)]
 mod brep_origin_callback_tests;
 
+#[cfg(test)]
+mod brep_edge_borrow_tests;
+#[cfg(test)]
+mod brep_origin_slot_owner;
+#[cfg(test)]
+mod brep_origin_slot_tests;
 #[cfg(test)]
 mod brep_owner_slot_curve_callback;
 #[cfg(test)]

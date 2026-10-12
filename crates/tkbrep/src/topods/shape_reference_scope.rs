@@ -22,12 +22,21 @@ impl Shape {
         project: impl FnOnce(&Shape) -> Result<R, Failure>,
     ) -> Result<R, Failure> {
         catch_native_failure(|| {
-            let shape = Shape {
-                tshape: ShapeTopologyStorage::Observed(topology.observe()),
-                location: location.clone(),
-                orient: orientation,
-            };
+            let shape = scoped_reference_shape(topology, location, orientation);
             project(&shape)
         })
+    }
+}
+
+pub(super) fn scoped_reference_shape(
+    topology: &dyn HandleReference<dyn TShape>,
+    location: &Location,
+    orientation: Orientation,
+) -> Shape {
+    // Only callback-scoped frames contain observed storage; public Clone always acquires native ownership.
+    Shape {
+        tshape: ShapeTopologyStorage::Observed(topology.observe()),
+        location: location.clone(),
+        orient: orientation,
     }
 }

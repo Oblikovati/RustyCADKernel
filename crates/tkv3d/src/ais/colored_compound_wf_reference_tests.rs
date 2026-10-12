@@ -32,16 +32,14 @@ fn compound_wf_reference_rows(fail: bool) -> String {
     map.add(&key, &compound).unwrap();
     let trace = ColoredCompoundGraphicsTrace::new(&map, fail);
     let prs = compound_reference_presentation(&trace);
-    writeln!(
-        trace.rows.lock().unwrap(),
-        "wf-before {} {}",
-        i32::from(fail),
-        compound.tshape().ref_count()
-    )
-    .unwrap();
+    record_compound_wf_before(&trace, fail, compound.tshape().ref_count());
     project_compound_wireframe(&map, &prs, &drawer, &trace);
     record_compound_wf_finish(&map, &compound, &prs, &trace);
     std::mem::take(&mut *trace.rows.lock().unwrap())
+}
+fn record_compound_wf_before(trace: &ColoredCompoundGraphicsTrace, fail: bool, count: i32) {
+    let failed = i32::from(fail);
+    writeln!(trace.rows.lock().unwrap(), "wf-before {failed} {count}").unwrap();
 }
 fn compound_wf_reference_drawer() -> Handle<Prs3dDrawer> {
     let drawer = Handle::new(Prs3dDrawer::new());
@@ -60,12 +58,8 @@ fn project_compound_wireframe(
     let result = StdPrsWfShape::add_reference(prs, &alias, drawer);
     if let Err(failure) = result {
         assert_eq!(failure.exception_type(), "Standard_ProgramError");
-        writeln!(
-            trace.rows.lock().unwrap(),
-            "wf-failed {}",
-            alias.compound_ref_count().unwrap()
-        )
-        .unwrap();
+        let count = alias.compound_ref_count().unwrap();
+        writeln!(trace.rows.lock().unwrap(), "wf-failed {count}").unwrap();
         trace.fail.store(false, Ordering::Relaxed);
         alias
             .with_shape(|shape| StdPrsWfShape::add(prs, shape, drawer))
@@ -78,18 +72,14 @@ fn record_compound_wf_finish(
     prs: &Handle<dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource>,
     trace: &ColoredCompoundGraphicsTrace,
 ) {
+    let count = compound.tshape().ref_count();
     writeln!(
         trace.rows.lock().unwrap(),
-        "wf-after {} {}",
-        prs.groups().len(),
-        compound.tshape().ref_count()
+        "wf-after {} {count}",
+        prs.groups().len()
     )
     .unwrap();
     map.clear(false);
-    writeln!(
-        trace.rows.lock().unwrap(),
-        "wf-cleared {}",
-        compound.tshape().ref_count()
-    )
-    .unwrap();
+    let count = compound.tshape().ref_count();
+    writeln!(trace.rows.lock().unwrap(), "wf-cleared {count}").unwrap();
 }

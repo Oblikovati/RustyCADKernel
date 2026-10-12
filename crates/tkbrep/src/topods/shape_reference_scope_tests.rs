@@ -40,7 +40,10 @@ fn reference_scope_releases_observation_after_result_or_typed_failure() {
         &topology,
         &Location::default(),
         Orientation::Forward,
-        |_| Ok(raise_native_failure::<()>(Err(failure.clone()))),
+        |_| {
+            raise_native_failure::<()>(Err(failure.clone()));
+            Ok(())
+        },
     );
     assert_eq!(panicked, Err(failure));
     assert_eq!(topology.ref_count(), 1);

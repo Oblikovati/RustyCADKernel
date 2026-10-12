@@ -33,7 +33,7 @@ impl StdSelectBrepSelectionTool {
     #[allow(clippy::too_many_arguments)] // Actual native origin overload.
     pub fn load_with_selectable(
         selection: &dyn HandleReference<SelectMgrSelection>,
-        selectable: &Handle<dyn SelectMgrSelectableObject>,
+        selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>,
         shape: &Shape,
         kind: ShapeEnum,
         deflection: f64,
@@ -46,7 +46,7 @@ impl StdSelectBrepSelectionTool {
         let tolerances = (deflection, angle, max_parameter);
         let sampling = (auto_triangulation, priority, edge_points);
         let criteria = brep_load_criteria(tolerances, sampling);
-        load_brep_origin_checked(selection, selectable, shape, kind, criteria)
+        catch_brep_origin_load(selection, selectable, shape, kind, criteria)
     }
 }
 type BrepLoadCriteria = (f64, f64, bool, i32, i32, f64);
@@ -95,9 +95,19 @@ fn brep_load_sensitive_build<'a>(
     BrepSensitiveBuild::from_arguments((owner, selection), sampling)
 }
 
+fn catch_brep_origin_load(
+    selection: &dyn HandleReference<SelectMgrSelection>,
+    selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>,
+    shape: &Shape,
+    kind: ShapeEnum,
+    criteria: BrepLoadCriteria,
+) -> Result<(), Failure> {
+    // A virtual SetSelectable override can throw after an earlier owner has already changed.
+    catch_native_failure(|| load_brep_origin_checked(selection, selectable, shape, kind, criteria))
+}
 fn load_brep_origin_checked(
     selection: &dyn HandleReference<SelectMgrSelection>,
-    selectable: &Handle<dyn SelectMgrSelectableObject>,
+    selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>,
     shape: &Shape,
     kind: ShapeEnum,
     criteria: BrepLoadCriteria,
@@ -142,7 +152,7 @@ fn load_brep_owned_shape(
 }
 pub(crate) fn set_brep_selection_origin(
     selection: &SelectMgrSelection,
-    selectable: &Handle<dyn SelectMgrSelectableObject>,
+    selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>,
 ) {
     // DynamicArray iterator freezes its end but rereads existing Value slots after callbacks.
     let extent = selection.native_entity_count();

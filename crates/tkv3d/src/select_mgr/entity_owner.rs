@@ -83,6 +83,16 @@ fn presentable_of(
     selectable.cast()
 }
 
+/// Invoke the native setter base body after an override changes its argument slot.
+/// Example: `select_mgr_entity_owner_set_selectable(owner, &object_slot)`.
+pub fn select_mgr_entity_owner_set_selectable<S: SelectMgrEntityOwnerSource + ?Sized>(
+    owner: &S,
+    selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>,
+) {
+    let target = selectable.observe();
+    // OCCT 3d097a0 stores a raw pointer: this base assignment must not acquire native ownership.
+    owner.owner_base().fields.write().selectable = target.downgrade();
+}
 /// An owner of detected entities; the default bodies are the native ones.
 pub trait SelectMgrEntityOwnerSource: Transient {
     /// The embedded base; `owner.owner_base()`.
@@ -92,8 +102,9 @@ pub trait SelectMgrEntityOwnerSource: Transient {
         self.owner_base().read().selectable.upgrade()
     }
     /// `SetSelectable`; `owner.set_selectable(&object)`.
-    fn set_selectable(&self, selectable: &Handle<dyn SelectMgrSelectableObject>) {
-        self.owner_base().fields.write().selectable = selectable.downgrade();
+    fn set_selectable(&self, selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>) {
+        // Native virtual dispatch preserves the original slot through an override's mutation.
+        select_mgr_entity_owner_set_selectable(self, selectable);
     }
     /// `HandleMouseClick`: false (not handled) by default.
     /// Example: `owner.handle_mouse_click(Vec2::new(1, 2), button, flags, false)`.
@@ -322,7 +333,10 @@ pub trait SelectMgrEntityOwnerMembers: SelectMgrEntityOwnerSource {
         self.owner_base().fields.write().from_decomposition = is_from_decomposition;
     }
     /// `Set(selectable)` (deprecated): `SetSelectable`; `owner.set_selectable_deprecated(&object)`.
-    fn set_selectable_deprecated(&self, selectable: &Handle<dyn SelectMgrSelectableObject>) {
+    fn set_selectable_deprecated(
+        &self,
+        selectable: &dyn HandleReference<dyn SelectMgrSelectableObject>,
+    ) {
         self.set_selectable(selectable);
     }
     /// `Set(priority)` (deprecated): `SetPriority`; `owner.set_priority_deprecated(1)`.

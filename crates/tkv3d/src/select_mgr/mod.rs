@@ -10,7 +10,8 @@ mod selection;
 pub use entity_owner::{
     SelectMgrEntityOwner, SelectMgrEntityOwnerBase, SelectMgrEntityOwnerFields,
     SelectMgrEntityOwnerMembers, SelectMgrEntityOwnerSource, select_mgr_entity_owner_bind,
-    select_mgr_entity_owner_dump_json, select_mgr_owner_hilight_with_color,
+    select_mgr_entity_owner_dump_json, select_mgr_entity_owner_set_selectable,
+    select_mgr_owner_hilight_with_color,
 };
 pub use enums::*;
 pub use filter::{

@@ -15,7 +15,9 @@ use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 pub(super) struct BrepSensitiveBuild<'a> {
+    // OCCT 3d097a0 keeps the caller slot live; geometry callbacks can replace it before a later constructor.
     pub owner: &'a dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    // Appends reread the original argument after Value callbacks rather than targeting an earlier snapshot.
     pub selection: &'a dyn HandleReference<SelectMgrSelection>,
     pub deflection: f64,
     pub angle: f64,
@@ -147,19 +149,37 @@ fn compute_brep_face_entities(
     shape: &Shape,
     build: &BrepSensitiveBuild<'_>,
 ) -> Result<(), Failure> {
-    let face = topods::face(shape)?;
-    let mut entities = Vec::new();
-    StdSelectBrepSelectionTool::get_sensitive_for_face(
-        &face,
+    rustycad_tkbrep::topods::Face::with_shape_reference(shape, |face| {
+        append_borrowed_brep_face_entities(face, build)
+    })
+}
+fn append_borrowed_brep_face_entities(
+    face: &rustycad_tkbrep::topods::Face,
+    build: &BrepSensitiveBuild<'_>,
+) -> Result<(), Failure> {
+    let entities = rustycad_tkernel::standard::SharedState::new(
+        rustycad_tkernel::ncollection::Sequence::default(),
+    );
+    StdSelectBrepSelectionTool::get_sensitive_for_face_into(
+        face,
         build.owner,
-        &mut entities,
+        &entities,
         build.auto_triangulation,
         build.edge_points,
         build.max_parameter,
         true,
     )?;
-    for entity in entities {
-        build.selection.observe().add(&entity)?;
+    append_face_sequence_to_selection(&entities, build.selection)
+}
+fn append_face_sequence_to_selection(
+    entities: &rustycad_tkernel::standard::SharedState<
+        rustycad_tkernel::ncollection::Sequence<Handle<dyn Select3DSensitiveEntity>>,
+    >,
+    selection: &dyn HandleReference<SelectMgrSelection>,
+) -> Result<(), Failure> {
+    // The native private list owns every entity until the entire Add loop has completed.
+    for entity in entities.read().iter() {
+        selection.observe().add(entity)?;
     }
     Ok(())
 }

@@ -30,6 +30,17 @@ impl BrepContourMutationCurveFake {
             slot_callback: SharedState::new(None),
         })
     }
+    /// Build the native finite linear-parameter curve fixture; `BrepContourMutationCurveFake::edge_fixture(&curve)`.
+    pub fn edge_fixture(curve: &Handle<Self>) -> rustycad_tkbrep::topods::Edge {
+        let builder =
+            rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge::from_curve_params(
+                &curve.cast(),
+                0.,
+                1.,
+            )
+            .unwrap();
+        builder.edge().unwrap()
+    }
     pub fn activate(&self, edge: &Shape) {
         *self.edge.write() = edge.tshape().downgrade();
         self.calls.store(0, Ordering::Relaxed);

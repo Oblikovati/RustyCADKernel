@@ -49,16 +49,19 @@ impl SelectMgrEntityOwnerSource for BrepOriginCallbackOwnerFake {
         // The actual parent state carries native weak selectable ownership.
         &self.owner
     }
-    fn set_selectable(&self, object: &Handle<dyn SelectMgrSelectableObject>) {
+    fn set_selectable(
+        &self,
+        object: &dyn rustycad_tkernel::standard::HandleReference<dyn SelectMgrSelectableObject>,
+    ) {
         writeln!(
             &mut *self.rows.write(),
             "origin-call {} {} {}",
             self.label,
             self.transient.ref_count(),
-            object.ref_count()
+            object.observe().ref_count()
         )
         .unwrap();
-        self.owner.fields.write().selectable = object.downgrade();
+        select_mgr_entity_owner_set_selectable(self, object);
         if self.label == 1 {
             self.replace_later_selection_slot();
         }
@@ -84,10 +87,22 @@ fn invoke_origin_callback_load(
     object: &Handle<AisColoredShape>,
     empty: &Compound,
 ) {
-    let selectable = object.observe_as::<dyn SelectMgrSelectableObject>();
+    type NativeSelectableSlot<'a> = rustycad_tkernel::standard::ProjectedHandleReference<
+        'a,
+        AisColoredShape,
+        dyn SelectMgrSelectableObject,
+    >;
+    let selectable = NativeSelectableSlot::new(object);
+    invoke_projected_origin_load(selection, &selectable, empty);
+}
+fn invoke_projected_origin_load(
+    selection: &Handle<SelectMgrSelection>,
+    selectable: &dyn rustycad_tkernel::standard::HandleReference<dyn SelectMgrSelectableObject>,
+    empty: &Compound,
+) {
     StdSelectBrepSelectionTool::load_with_selectable(
         selection,
-        &selectable,
+        selectable,
         empty,
         ShapeEnum::Shape,
         0.1,
@@ -99,6 +114,7 @@ fn invoke_origin_callback_load(
     )
     .unwrap();
 }
+
 fn origin_callback_point(
     owner: &Handle<BrepOriginCallbackOwnerFake>,
     x: f64,

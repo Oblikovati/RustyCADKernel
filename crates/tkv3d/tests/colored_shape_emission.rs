@@ -63,12 +63,7 @@ impl ColoredEmissionFixture {
         let base = Handle::new(AisColoredDrawer::new(&object.attributes()));
         let custom = Handle::new(AisColoredDrawer::new(&object.attributes()));
         let styles = emission_styles(&input, &shape, &custom, scenario);
-        if scenario == 3 {
-            object.set_infinite_state(true);
-        }
-        if scenario >= 7 {
-            object.attributes().set_face_boundary_draw(true);
-        }
+        configure_emission_flags(&object, scenario);
         let scene = Self {
             object,
             base,
@@ -78,6 +73,14 @@ impl ColoredEmissionFixture {
         };
         dispatch_emission_fixture(&scene, &shape, &styles);
         scene
+    }
+}
+fn configure_emission_flags(object: &AisColoredShape, scenario: usize) {
+    if scenario == 3 {
+        object.set_infinite_state(true);
+    }
+    if scenario >= 7 {
+        object.attributes().set_face_boundary_draw(true);
     }
 }
 fn emission_input_shape(input: &geometry::ColoredExpansionInputs, scenario: usize) -> Shape {
@@ -145,17 +148,17 @@ fn check_emission_state(
         assert_eq!(failure.exception_type(), "Standard_ProgramError");
     }
     assert_eq!(prs.groups().len(), fields[1].parse::<usize>().unwrap());
-    assert_eq!(
-        scene.base.type_of_deflection() as i32,
-        fields[2].parse::<i32>().unwrap()
-    );
-    assert_eq!(scene.base.has_own_type_of_deflection(), fields[3] == "1");
-    assert_eq!(
-        scene.custom.type_of_deflection() as i32,
-        fields[4].parse::<i32>().unwrap()
-    );
-    assert_eq!(scene.custom.has_own_type_of_deflection(), fields[5] == "1");
+    check_emission_drawer(&scene.base, &fields[2..4]);
+    check_emission_drawer(&scene.custom, &fields[4..6]);
 }
+fn check_emission_drawer(drawer: &AisColoredDrawer, fields: &[&str]) {
+    assert_eq!(
+        drawer.type_of_deflection() as i32,
+        fields[0].parse::<i32>().unwrap()
+    );
+    assert_eq!(drawer.has_own_type_of_deflection(), fields[1] == "1");
+}
+
 fn compare_emission_buffers(events: &[f64], fields: &[&str]) {
     assert_eq!(fields[0].parse::<usize>().unwrap(), events.len());
     let expected: Vec<f64> = fields[1..]
@@ -261,24 +264,32 @@ fn native_driver_observed_graphics_ownership_matches_actual_const_handle_argumen
     let mut rows = String::new();
     for mode in [0, 1] {
         writeln!(rows, "mode {mode}").unwrap();
-        let object = compute_fixture_object(4);
-        let (driver, trace) = display_driver::SensitiveDisplayDriver::new_handle(0);
-        let viewer = V3dViewer::new(&driver).unwrap();
-        let prs = Graphic3dStructure::new(&viewer.structure_manager(), &Handle::default()).unwrap();
-        object
-            .compute(&Handle::default(), &prs.cast(), mode)
-            .unwrap();
-        for count in &trace.read().ownership_counts {
-            writeln!(
-                rows,
-                "count {} {} {} {} {}",
-                count[0], count[1], count[2], count[3], count[4]
-            )
-            .unwrap();
-        }
+        record_native_driver_counts(mode, &mut rows);
     }
     assert_eq!(
         rows,
         include_str!("fixtures/colored-shape-compute/native-graphics-counts.txt")
     );
+}
+
+fn record_native_driver_counts(mode: i32, rows: &mut String) {
+    let object = compute_fixture_object(4);
+    let (driver, trace) = display_driver::SensitiveDisplayDriver::new_handle(0);
+    let viewer = V3dViewer::new(&driver).unwrap();
+    let prs = Graphic3dStructure::new(&viewer.structure_manager(), &Handle::default()).unwrap();
+    object
+        .compute(&Handle::default(), &prs.cast(), mode)
+        .unwrap();
+    for count in &trace.read().ownership_counts {
+        record_graphic_owner_count(rows, count);
+    }
+}
+fn record_graphic_owner_count(rows: &mut String, count: &[i32; 5]) {
+    use std::fmt::Write;
+    writeln!(
+        rows,
+        "count {} {} {} {} {}",
+        count[0], count[1], count[2], count[3], count[4]
+    )
+    .unwrap();
 }

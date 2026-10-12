@@ -39,3 +39,9 @@ pub use typed::{
 };
 #[cfg(test)]
 mod shape_reference_scope_tests;
+
+mod edge_reference_scope;
+#[cfg(test)]
+mod edge_reference_tests;
+
+mod face_reference_scope;

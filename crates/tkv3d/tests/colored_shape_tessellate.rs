@@ -90,18 +90,14 @@ fn record_colored_mesh_flags(
     mesh: (bool, bool),
 ) -> String {
     let (automatic, iso, repeat) = scenario;
-    let flags = (
-        fixture.wire.must_be_updated(),
-        fixture.shade.must_be_updated(),
-    );
+    let wire = i32::from(fixture.wire.must_be_updated());
+    let shade = i32::from(fixture.shade.must_be_updated());
+    let automatic = i32::from(automatic);
+    let iso = i32::from(iso);
+    let before = i32::from(mesh.0);
+    let after = i32::from(mesh.1);
     format!(
-        "tessellate {} {} {repeat} {} {} {} {} {}\n",
-        i32::from(automatic),
-        i32::from(iso),
-        i32::from(mesh.0),
-        i32::from(mesh.1),
-        i32::from(flags.0),
-        i32::from(flags.1),
+        "tessellate {automatic} {iso} {repeat} {before} {after} {wire} {shade} {}\n",
         fixture.shade.groups().len()
     )
 }

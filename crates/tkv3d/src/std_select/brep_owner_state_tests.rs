@@ -139,12 +139,9 @@ fn record_presentation_replacement(
             let same = i32::from(shape.is_equal(second));
             let counts = (first.tshape().ref_count(), second.tshape().ref_count());
             let updated = i32::from(object.to_be_updated(true));
-            writeln!(
-                rows,
-                "shape-replaced {same} {} {} {updated}",
-                counts.0, counts.1
-            )
-            .unwrap();
+            let old = counts.0;
+            let next = counts.1;
+            writeln!(rows, "shape-replaced {same} {old} {next} {updated}").unwrap();
             Ok(())
         })
         .unwrap();

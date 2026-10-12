@@ -138,13 +138,13 @@ fn colored_selection_solid(scenario: usize) -> Shape {
             .solid()
             .unwrap()
             .into_shape(),
-        10 => BRepPrimAPIMakeBox::from_sizes(2., 3., 4.)
-            .unwrap()
-            .solid()
-            .unwrap()
-            .into_shape(),
+        10 => box_selection_solid(),
         _ => panic!("solid scenario={scenario}; expected 6..=10"),
     }
+}
+fn box_selection_solid() -> Shape {
+    let mut builder = BRepPrimAPIMakeBox::from_sizes(2., 3., 4.).unwrap();
+    builder.solid().unwrap().into_shape()
 }
 fn cone_selection_solid(top_radius: f64) -> Shape {
     let mut builder = BRepPrimAPIMakeCone::new(2., top_radius, 4.).unwrap();
@@ -261,9 +261,7 @@ fn check_colored_selection_rays(
         Point3::new(50., 50., 20.),
     ] {
         assert_eq!(fields.next(), Some("pick"));
-        let mut volume = SelectMgrSelectingVolumeManager::new();
-        volume.init_axis_selecting_volume(Axis1::new(origin, -Direction3::Z));
-        volume.build_selecting_volume().unwrap();
+        let volume = selection_axis_volume(origin);
         let mut pick = SelectBasicsPickResult::default();
         let hit = entity.matches(&volume, &mut pick).unwrap();
         assert_eq!(hit, fields.next() == Some("1"));
@@ -271,6 +269,12 @@ fn check_colored_selection_rays(
             check_selection_pick_values(&pick, fields);
         }
     }
+}
+fn selection_axis_volume(origin: Point3) -> SelectMgrSelectingVolumeManager {
+    let mut volume = SelectMgrSelectingVolumeManager::new();
+    volume.init_axis_selecting_volume(Axis1::new(origin, -Direction3::Z));
+    volume.build_selecting_volume().unwrap();
+    volume
 }
 fn check_selection_pick_values(
     pick: &SelectBasicsPickResult,

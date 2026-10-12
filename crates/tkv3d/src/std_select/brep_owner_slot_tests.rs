@@ -4,8 +4,7 @@ use super::{
     brep_owner_slot_curve_callback::BrepCurveSlotReplacement,
 };
 use crate::{select_mgr::*, select3d::*};
-use rustycad_tkernel::standard::{Handle, HandleFieldRef, SharedState};
-use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeEdge;
+use rustycad_tkernel::standard::{Handle, HandleFieldRef, HandleReference, SharedState};
 use std::{fmt::Write, sync::Arc};
 #[test]
 fn native_curve_callback_replaces_const_owner_slot_before_sensitive_construction() {
@@ -20,19 +19,14 @@ fn native_curve_callback_replaces_const_owner_slot_before_sensitive_construction
 }
 fn owner_slot_case(compute: bool) -> String {
     let curve = BrepContourMutationCurveFake::new();
-    let edge = BRepBuilderAPIMakeEdge::from_curve_params(&curve.cast(), 0., 1.)
-        .unwrap()
-        .edge()
-        .unwrap();
+    let edge = BrepContourMutationCurveFake::edge_fixture(&curve);
     let previous: Handle<dyn SelectMgrEntityOwnerSource> =
         SelectMgrEntityOwner::new(19).into_cast();
     let incoming: Handle<dyn SelectMgrEntityOwnerSource> =
         SelectMgrEntityOwner::new(21).into_cast();
     let slot = Arc::new(SharedState::new(previous.clone()));
-    let rows = Arc::new(SharedState::new(format!(
-        "slot-case {}\n",
-        i32::from(compute)
-    )));
+    let scenario = i32::from(compute);
+    let rows = Arc::new(SharedState::new(format!("slot-case {scenario}\n")));
     *curve.slot_callback.write() = Some(Box::new(BrepCurveSlotReplacement::new(
         &slot, &incoming, &rows, "slot",
     )));
@@ -42,6 +36,7 @@ fn owner_slot_case(compute: bool) -> String {
     record_owner_slot_finish(&entity, &previous, &incoming, &selection, &rows);
     rows.read().clone()
 }
+
 fn owner_slot_identity(
     slot: &Handle<dyn SelectMgrEntityOwnerSource>,
 ) -> &Handle<dyn SelectMgrEntityOwnerSource> {
@@ -51,11 +46,7 @@ fn owner_slot_identity(
 fn invoke_owner_slot_selection(
     compute: bool,
     edge: &rustycad_tkbrep::topods::Edge,
-    reference: &HandleFieldRef<
-        '_,
-        Handle<dyn SelectMgrEntityOwnerSource>,
-        dyn SelectMgrEntityOwnerSource,
-    >,
+    reference: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     selection: &Handle<SelectMgrSelection>,
 ) -> Handle<dyn Select3DSensitiveEntity> {
     if compute {
@@ -65,6 +56,13 @@ fn invoke_owner_slot_selection(
         .unwrap();
         return selection.entities()[0].base_sensitive();
     }
+    owner_slot_direct_edge(edge, reference, selection)
+}
+fn owner_slot_direct_edge(
+    edge: &rustycad_tkbrep::topods::Edge,
+    reference: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    selection: &Handle<SelectMgrSelection>,
+) -> Handle<dyn Select3DSensitiveEntity> {
     let mut output = Handle::default();
     StdSelectBrepSelectionTool::get_edge_sensitive(
         edge,
@@ -79,6 +77,7 @@ fn invoke_owner_slot_selection(
     .unwrap();
     output
 }
+
 fn record_owner_slot_finish(
     entity: &Handle<dyn Select3DSensitiveEntity>,
     previous: &Handle<dyn SelectMgrEntityOwnerSource>,
@@ -91,12 +90,11 @@ fn record_owner_slot_finish(
     let priority = owner.priority();
     drop(owner);
     let counts = (previous.ref_count(), incoming.ref_count());
+    let (old_count, new_count) = counts;
+    let count = selection.entities().len();
     writeln!(
         &mut *rows.write(),
-        "slot-finished {priority} {same} {} {} {}",
-        counts.0,
-        counts.1,
-        selection.entities().len()
+        "slot-finished {priority} {same} {old_count} {new_count} {count}"
     )
     .unwrap();
 }

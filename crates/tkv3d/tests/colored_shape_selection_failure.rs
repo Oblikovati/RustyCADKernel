@@ -32,25 +32,29 @@ fn replay_selection_fault(route: usize, mode: i32, rows: &mut String) {
     let object = AisColoredShape::new(&wire);
     configure_selection_fault(&object, route);
     let selection = Handle::new(SelectMgrSelection::new(mode));
-    let owner = SelectMgrEntityOwner::new(17).into_cast();
-    selection
-        .add(&Handle::new(Select3DSensitivePoint::new(&owner, Point3::new(9., 8., 7.))).cast())
-        .unwrap();
+    seed_fault_selection(&selection);
     let failed = invoke_selection_fault(route, &object, &wire, &selection, mode, 1e-9);
     if let Err(failure) = &failed {
         assert_eq!(failure.exception_type(), "Standard_ConstructionError");
     }
-    record_selection_fault(
-        "fault",
-        route,
-        mode,
-        failed.is_err(),
-        &selection,
-        &object,
-        rows,
-    );
+    record_failed_selection((route, mode), failed.is_err(), &selection, &object, rows);
     invoke_selection_fault(route, &object, &wire, &selection, mode, 0.1).unwrap();
     record_selection_fault("repaired", route, mode, false, &selection, &object, rows);
+}
+fn record_failed_selection(
+    scenario: (usize, i32),
+    failed: bool,
+    selection: &SelectMgrSelection,
+    object: &AisColoredShape,
+    rows: &mut String,
+) {
+    let (route, mode) = scenario;
+    record_selection_fault("fault", route, mode, failed, selection, object, rows);
+}
+fn seed_fault_selection(selection: &SelectMgrSelection) {
+    let owner = SelectMgrEntityOwner::new(17).into_cast();
+    let point = Select3DSensitivePoint::new(&owner, Point3::new(9., 8., 7.));
+    selection.add(&Handle::new(point).cast()).unwrap();
 }
 fn selection_fault_wire() -> Wire {
     let ellipse = Ellipse3::new(Axis2::default(), 3., 1.).unwrap();
@@ -87,20 +91,26 @@ fn invoke_selection_fault(
     deflection: f64,
 ) -> Result<(), Failure> {
     if route == 0 {
-        let owner = StdSelectBRepOwner::with_shape(wire, 7, false).into_cast();
-        return StdSelectBrepSelectionTool::compute_sensitive(
-            wire, &owner, selection, deflection, 0.5, 9, 500., false,
-        );
+        return invoke_direct_selection_fault(wire, selection, deflection);
     }
-    object
-        .attributes()
-        .set_maximal_chordial_deviation(deflection);
+    let drawer = object.attributes();
+    drawer.set_maximal_chordial_deviation(deflection);
     if route == 2 {
         return object.compute_selection(selection, mode);
     }
     let messenger = Messenger::new();
     messenger.printers_mut().clear();
     ais_shape_compute_selection_with_messenger(object, selection, mode, &messenger)
+}
+fn invoke_direct_selection_fault(
+    wire: &Wire,
+    selection: &Handle<SelectMgrSelection>,
+    deflection: f64,
+) -> Result<(), Failure> {
+    let owner = StdSelectBRepOwner::with_shape(wire, 7, false).into_cast();
+    StdSelectBrepSelectionTool::compute_sensitive(
+        wire, &owner, selection, deflection, 0.5, 9, 500., false,
+    )
 }
 #[allow(clippy::too_many_arguments)] // Native row includes both route and retained failure/repair phase.
 fn record_selection_fault(
@@ -113,28 +123,29 @@ fn record_selection_fault(
     rows: &mut String,
 ) {
     let entities = selection.entities();
-    write!(
-        rows,
-        "{label} {route} {mode} {} {}",
-        i32::from(failed),
-        entities.len()
-    )
-    .unwrap();
+    let failed = i32::from(failed);
+    let count = entities.len();
+    write!(rows, "{label} {route} {mode} {failed} {count}").unwrap();
     for wrapper in entities {
-        let entity = wrapper.base_sensitive();
-        let owner = entity.owner_id();
-        let assigned =
-            owner.selectable().object_address() == (object as *const AisColoredShape).cast();
-        write!(
-            rows,
-            " {} {} {} {} {}",
-            entity.dynamic_type().unwrap().name(),
-            entity.nb_sub_elements(),
-            owner.priority(),
-            i32::from(owner.comes_from_decomposition()),
-            i32::from(assigned)
-        )
-        .unwrap();
+        record_selection_fault_entity(rows, &wrapper.base_sensitive(), object);
     }
     rows.push('\n');
+}
+
+fn record_selection_fault_entity(
+    rows: &mut String,
+    entity: &Handle<dyn Select3DSensitiveEntity>,
+    object: &AisColoredShape,
+) {
+    let owner = entity.owner_id();
+    let assigned = owner.selectable().object_address() == (object as *const AisColoredShape).cast();
+    let flags = (
+        i32::from(owner.comes_from_decomposition()),
+        i32::from(assigned),
+    );
+    let kind = entity.dynamic_type().unwrap().name().to_owned();
+    let count = entity.nb_sub_elements();
+    let priority = owner.priority();
+    let (decomposed, assigned) = flags;
+    write!(rows, " {kind} {count} {priority} {decomposed} {assigned}").unwrap();
 }

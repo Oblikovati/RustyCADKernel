@@ -162,16 +162,7 @@ const PRIORITY_KINDS: [ShapeEnum; 9] = [
 #[test]
 fn native_standard_priority_matrix_uses_explicit_leaf_before_shape_type() {
     let input = colored_shape_expansion_inputs::ColoredExpansionInputs::new();
-    let shapes = [
-        &input.base,
-        &input.compsolid,
-        &input.solid,
-        &input.shell,
-        &input.faces[0],
-        &input.wire,
-        &input.edges[0],
-        &input.vertex,
-    ];
+    let shapes = priority_fixture_shapes(&input);
     let mut rows = String::new();
     for (index, shape) in shapes.into_iter().enumerate() {
         priority_shape_row(&mut rows, index, shape);
@@ -181,6 +172,20 @@ fn native_standard_priority_matrix_uses_explicit_leaf_before_shape_type() {
         rows,
         include_str!("../../tests/fixtures/colored-shape-compute/native-priority.txt")
     );
+}
+fn priority_fixture_shapes(
+    input: &colored_shape_expansion_inputs::ColoredExpansionInputs,
+) -> [&Shape; 8] {
+    [
+        &input.base,
+        &input.compsolid,
+        &input.solid,
+        &input.shell,
+        &input.faces[0],
+        &input.wire,
+        &input.edges[0],
+        &input.vertex,
+    ]
 }
 fn priority_shape_row(rows: &mut String, index: usize, shape: &Shape) {
     write!(rows, "priority {index}").unwrap();

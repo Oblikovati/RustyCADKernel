@@ -103,11 +103,7 @@ pub(super) fn brep_edge_fixture(index: usize) -> Edge {
             0.2,
             3.4,
         ),
-        2 => BRepBuilderAPIMakeEdge::from_elips_params(
-            Ellipse3::new(Axis2::default(), 3., 1.).unwrap(),
-            0.2,
-            5.4,
-        ),
+        2 => brep_ellipse_fixture_builder(),
         4 => BRepBuilderAPIMakeEdge::from_circ_params(
             Circle3::new(Axis2::default(), 1e-8).unwrap(),
             0.,
@@ -118,6 +114,11 @@ pub(super) fn brep_edge_fixture(index: usize) -> Edge {
     builder.unwrap().edge().unwrap()
 }
 
+fn brep_ellipse_fixture_builder()
+-> Result<BRepBuilderAPIMakeEdge, rustycad_tkernel::standard::Failure> {
+    let ellipse = Ellipse3::new(Axis2::default(), 3., 1.).unwrap();
+    BRepBuilderAPIMakeEdge::from_elips_params(ellipse, 0.2, 5.4)
+}
 fn brep_polygon_fixture(index: usize) -> Edge {
     let mut edge = Edge::default();
     let builder = BRepBuilder::default();

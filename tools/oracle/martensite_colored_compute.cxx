@@ -71,6 +71,15 @@ class ColoredTessellatePresentation:public PrsMgr_Presentation
 public:
   ColoredTessellatePresentation(const occ::handle<PrsMgr_PresentationManager>& manager,const occ::handle<PrsMgr_PresentableObject>& object,int mode):PrsMgr_Presentation(manager,object,mode){}
 };
+static void tessellate_repeat(bool automatic,bool iso,int repeat,const TopoDS_Shape& shape,
+  const occ::handle<ColoredEmissionProbe>& object,const occ::handle<PrsMgr_PresentationManager>& manager,
+  const occ::handle<PrsMgr_Presentation>& wire,const occ::handle<PrsMgr_Presentation>& shade)
+{
+  wire->SetUpdateStatus(false);shade->SetUpdateStatus(false);shade->Clear();
+  const bool before=BRepTools::Triangulation(shape,Precision::Infinite(),false);
+  object->Compute(manager,shade,1);
+  std::cout<<"tessellate "<<automatic<<' '<<iso<<' '<<repeat<<' '<<before<<' '<<BRepTools::Triangulation(shape,Precision::Infinite(),false)<<' '<<wire->MustBeUpdated()<<' '<<shade->MustBeUpdated()<<' '<<shade->Groups().Size()<<'\n';
+}
 static void tessellate_case(bool automatic,bool iso)
 {
   const TopoDS_Shape shape=BRepPrimAPI_MakeBox(2,3,4).Shape();
@@ -82,12 +91,7 @@ static void tessellate_case(bool automatic,bool iso)
   const occ::handle<PrsMgr_Presentation> shade=new ColoredTessellatePresentation(manager,object,1);
   object->attach(wire);object->attach(shade);
   for(int repeat=0;repeat<2;++repeat)
-  {
-    wire->SetUpdateStatus(false);shade->SetUpdateStatus(false);shade->Clear();
-    const bool before=BRepTools::Triangulation(shape,Precision::Infinite(),false);
-    object->Compute(manager,shade,1);
-    std::cout<<"tessellate "<<automatic<<' '<<iso<<' '<<repeat<<' '<<before<<' '<<BRepTools::Triangulation(shape,Precision::Infinite(),false)<<' '<<wire->MustBeUpdated()<<' '<<shade->MustBeUpdated()<<' '<<shade->Groups().Size()<<'\n';
-  }
+    tessellate_repeat(automatic,iso,repeat,shape,object,manager,wire,shade);
 }
 int main(int argc,char**)
 {

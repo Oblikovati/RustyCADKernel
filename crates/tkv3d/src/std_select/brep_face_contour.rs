@@ -25,14 +25,12 @@ pub(super) fn brep_face_contour_sensitive(
     face: &Face,
     surface: &BRepAdaptorSurface,
     owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
-    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+    entities: &mut dyn super::brep_face_destination::BrepFaceEntityDestination,
     criteria: &FaceSelectionCriteria,
 ) -> Result<bool, Failure> {
-    let wires = Explorer::new(face, ShapeEnum::Wire, ShapeEnum::Shape)?;
-    if !wires.more() {
+    let Some(wire) = first_face_contour_wire(face)? else {
         return Ok(false);
-    }
-    let wire = topods::wire(wires.current())?;
+    };
     let mut explorer = WireExplorer::with_wire(&wire)?;
     let context = FaceContourContext {
         owner,
@@ -41,10 +39,18 @@ pub(super) fn brep_face_contour_sensitive(
     };
     collect_face_contour(&mut explorer, &context, entities)
 }
+fn first_face_contour_wire(face: &Face) -> Result<Option<rustycad_tkbrep::topods::Wire>, Failure> {
+    // OCCT 3d097a0 destroys the explorer's topology copies before the first curve callback.
+    let wires = Explorer::new(face, ShapeEnum::Wire, ShapeEnum::Shape)?;
+    if !wires.more() {
+        return Ok(None);
+    }
+    Ok(Some(topods::wire(wires.current())?))
+}
 fn collect_face_contour(
     explorer: &mut WireExplorer,
     context: &FaceContourContext<'_>,
-    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+    entities: &mut dyn super::brep_face_destination::BrepFaceEntityDestination,
 ) -> Result<bool, Failure> {
     let mut points = Vec::new();
     while explorer.more() {
@@ -64,7 +70,7 @@ fn append_face_contour_edge(
     explorer: &WireExplorer,
     context: &FaceContourContext<'_>,
     points: &mut Vec<Point3>,
-    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+    entities: &mut dyn super::brep_face_destination::BrepFaceEntityDestination,
 ) -> Result<(), Failure> {
     let Some(curve) = load_face_contour_curve(explorer)? else {
         return Ok(());
@@ -106,7 +112,7 @@ fn append_face_curve_kind(
     explorer: &WireExplorer,
     context: &FaceContourContext<'_>,
     points: &mut Vec<Point3>,
-    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+    entities: &mut dyn super::brep_face_destination::BrepFaceEntityDestination,
 ) -> Result<(), Failure> {
     match curve.get_type()? {
         CurveType::Line => append_face_line_endpoint(curve, range, explorer, points),
@@ -138,7 +144,7 @@ fn append_face_circle(
     explorer: &WireExplorer,
     context: &FaceContourContext<'_>,
     points: &mut Vec<Point3>,
-    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+    entities: &mut dyn super::brep_face_destination::BrepFaceEntityDestination,
 ) -> Result<(), Failure> {
     let full = 2. * std::f64::consts::PI - (range.1 - range.0).abs() <= precision::confusion();
     let sampled = sampled_face_circle_surface(context.surface_type);
@@ -246,28 +252,30 @@ fn append_face_contour_entity(
     owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     points: &[Point3],
     interior: bool,
-    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+    entities: &mut dyn super::brep_face_destination::BrepFaceEntityDestination,
 ) -> Result<(), Failure> {
     if points.len() == 2 {
-        entities.push(
-            Handle::new(Select3DSensitiveCurve::from_points(
-                &owner.observe(),
-                points,
-            )?)
-            .cast(),
-        );
+        let curve = Select3DSensitiveCurve::from_points(&owner.observe(), points)?;
+        entities.push(Handle::new(curve).cast());
         return Ok(());
     }
     if points.len() > 2 {
-        let kind = if interior {
-            Select3DTypeOfSensitivity::Interior
-        } else {
-            Select3DTypeOfSensitivity::Boundary
-        };
-        entities
-            .push(Handle::new(Select3DSensitiveFace::new(&owner.observe(), points, kind)?).cast());
+        entities.push(contour_sensitive_face(owner, points, interior)?);
     }
     Ok(())
+}
+fn contour_sensitive_face(
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    points: &[Point3],
+    interior: bool,
+) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
+    let kind = if interior {
+        Select3DTypeOfSensitivity::Interior
+    } else {
+        Select3DTypeOfSensitivity::Boundary
+    };
+    let face = Select3DSensitiveFace::new(&owner.observe(), points, kind)?;
+    Ok(Handle::new(face).cast())
 }
 
 fn face_sampling_orientation(explorer: &WireExplorer) -> Result<Orientation, Failure> {

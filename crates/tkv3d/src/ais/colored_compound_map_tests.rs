@@ -132,11 +132,7 @@ fn native_value_assignment_keeps_old_pointer_at_zero_before_retaining_incoming()
     Builder.make_compound(&mut replacement);
     let rows = Arc::new(Mutex::new(String::new()));
     let old = ColoredCompoundValueDropFake::new(&map, replacement.tshape(), &rows);
-    let old = Compound::unchecked(Shape::from_parts(
-        old.into_cast(),
-        Location::default(),
-        Orientation::External,
-    ));
+    let old = compound_assignment_source(old);
     map.add(&drawer, &old).unwrap();
     drop(old);
     record_native_compound_assignment(&map, &replacement, &rows);
@@ -144,6 +140,10 @@ fn native_value_assignment_keeps_old_pointer_at_zero_before_retaining_incoming()
         *rows.lock().unwrap(),
         include_str!("../../tests/fixtures/colored-shape-compute/native-compound-assignment.txt")
     );
+}
+fn compound_assignment_source(old: Handle<ColoredCompoundValueDropFake>) -> Compound {
+    let shape = Shape::from_parts(old.into_cast(), Location::default(), Orientation::External);
+    Compound::unchecked(shape)
 }
 fn record_native_compound_assignment(
     map: &AisColoredDrawerCompounds,

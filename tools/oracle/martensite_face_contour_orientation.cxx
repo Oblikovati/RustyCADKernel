@@ -57,4 +57,5 @@ int main()
   try{StdSelect_BRepSelectionTool::GetSensitiveForFace(face,owner,entities,false,9,500.,true);}
   catch(const Standard_NoSuchObject&){failed=true;}
   std::cout<<"contour-mutation "<<failed<<' '<<curve->calls<<' '<<entities.Length()<<' '<<edge.NbChildren()<<'\n';
+  return 0;
 }
