@@ -1,0 +1,22 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checkpoint_status": "native collection references only; Rust live collection replay pending",
+  "rows": 9,
+  "two_runs_identical": true,
+  "hashes": {
+    "tools/oracle/martensite_clip_collection_references.cxx": "c563c095b4d7911199b55481043e3249ce069b0ba425674e927e1518400ea579",
+    "crates/tkservice/tests/fixtures/clip-collection-references-native.txt": "7d32a82f6441a8d13722ea3c958cb12f645f126f48fdaf7478f4ddaa7b02be68",
+    "target/martensite_clip_collection_references": "977ca19804edf2619c8b2c7324e290a6b3f73d40c50ccf9f6ad77439bc28fc1d",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_ClipPlane.hxx": "b1908fd3cc2ab1e625de8e3ccd3940e979468c739c5164066b52aed61737c00a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_Sequence.hxx": "131278a50ac7588c166accadc5395fa00a0758523a617dab3260a761db98607f",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb"
+  },
+  "observations": [
+    "Null Append succeeds once and deduplicates thereafter; empty First throws Standard_NoSuchObject.",
+    "First and iterator Value borrow the same actual node handle field, observe protected replacement, and acquire no target ownership.",
+    "Removing another node and appending a new node is observed by an existing live iterator.",
+    "Removing current advances to end and releases exactly the collection ownership.",
+    "Iterator handle construction and null Init acquire no collection/plane ownership."
+  ]
+}
