@@ -1,0 +1,22 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "row_count": 6,
+  "native_runs": "two independently executed byte-identical CPU runs",
+  "fixture_sha256": "a95c36aa18ac6960a035b0259e3a15a80309a3883d7e07b1cb9a744e5ee8fa79",
+  "second_run_sha256": "a95c36aa18ac6960a035b0259e3a15a80309a3883d7e07b1cb9a744e5ee8fa79",
+  "second_run_compressed_sha256": "2b4b7b41c4d7c013dacfecc97000c68beb7e1af8a628e72bbf6d54fce2c3f2b7",
+  "oracle_executable_sha256": "4f3ff5338c0a1b0abc81a18bad1bbdd43fa8771840322a672b16a31f6871ca9e",
+  "sources": {
+    "tools/oracle/martensite_v3d_subview_nodes.cxx": "9970961f1567c555f31e4c386684b6ba8b074d0d683ec2523c4474b0e6d077c9",
+    "tools/oracle/martensite_controller_camera_primitives.cxx": "dbf9f6ffb2512b14f4cc24d4652d174d9951150c693c9c200a7423be651f4e1a",
+    "tools/oracle/martensite_view_controller_transfer.cxx": "343128301ebcac151850c0997fae7d9ed644464b1b5912ec890f3ed26a2aea13",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "OCCT/src/Visualization/TKV3d/V3d/V3d_View.hxx": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+    "OCCT/src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012",
+    "OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx": "a1172b06eec049b5016f2f478a354ce837811a78c0fdac5a76d99c1608509beb"
+  },
+  "shared_wrapper_sha256": "2f99b337bfa8d82525868560d8c708ab496a96f60379ba8d0c67c57fde05f2da",
+  "shared_wrapper_generation": "replace only int main( with int martensite_unused_martensite_controller_camera_primitives_main( in martensite_controller_camera_primitives.cxx",
+  "schema": "policy beforeIdentity afterIdentity sameCurrentSlot exactViewRefCount liveSequenceLength",
+  "configuration": "genuine native V3d_View subclass calls inherited Redraw then modifies actual private parent Subviews Sequence via RemoveSubview/AddSubview or auxiliary const_cast in-place current handle replacement (not a declared V3d public mutation); CPU recording driver, no GPU/headset; current-node removal/dangling excluded"
+}
