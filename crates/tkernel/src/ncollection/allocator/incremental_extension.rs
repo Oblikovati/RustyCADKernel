@@ -51,7 +51,7 @@ impl IncAllocatorExtension<'_> {
 impl BaseAllocator {
     /// Borrows the real protected incremental engine; `let access = arena.incremental_extension()?`.
     pub fn incremental_extension(&self) -> Result<IncAllocatorExtension<'_>, Failure> {
-        let AllocatorKind::Incremental(engine) = &*self.inner else {
+        let AllocatorKind::Incremental(engine) = &*self.fields.inner else {
             return Err(Failure::with_message(
                 "Standard_TypeMismatch",
                 &format!(
