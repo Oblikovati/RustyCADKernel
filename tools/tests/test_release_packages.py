@@ -69,11 +69,16 @@ class FakeCommands:
         self.dirty = ""
         self.tagged = REVISION
         self.fail_tests = False
+        self.stale_suites = False
         self.features: object = {}
         self.calls: list[list[str]] = []
 
     def run(self, arguments: list[str], root: Path) -> str:
         self.calls.append(arguments)
+        if arguments == ["python3", "tools/toolkit_test_suites.py"]:
+            if self.stale_suites:
+                raise subprocess.CalledProcessError(2, arguments)
+            return ""
         if arguments[0] == "git":
             return self.git_result(arguments)
         if arguments[1] == "metadata":
@@ -117,6 +122,12 @@ class ReleasePackageTests(unittest.TestCase):
     def test_inventory_and_named_archive(self) -> None:
         self.assertEqual(release_inventory(self.fixture.root, self.runner), [CRATE])
         self.assertEqual(CRATE.archive, "rustycad-kernel-0.1.0.crate")
+
+    def test_stale_suites_refuse_release_before_packaging(self) -> None:
+        self.runner.stale_suites = True
+        with self.assertRaises(subprocess.CalledProcessError):
+            build_release(self.fixture.root, "v0.1.0", self.runner)
+        self.assertFalse(any(call[:2] == ["cargo", "package"] for call in self.runner.calls))
 
     def test_featureless_release_does_not_repeat_identical_cargo_tests(self) -> None:
         build_release(self.fixture.root, "v0.1.0", self.runner)
