@@ -3,7 +3,6 @@
 //! driver statistics.
 use super::{V3dTypeOfVisualization, V3dView};
 use rustycad_tkernel::quantity::{Color, ColorSpace};
-use rustycad_tkernel::standard::exceptions::type_mismatch;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkservice::aspect::{
@@ -11,12 +10,12 @@ use rustycad_tkservice::aspect::{
     AspectSkydomeBackground,
 };
 use rustycad_tkservice::graphic3d::{
-    Graphic3dCLight, Graphic3dCViewComputed as _, Graphic3dCViewMembers as _, Graphic3dClipPlane,
-    Graphic3dCubeMap, Graphic3dDiagnosticInfo, Graphic3dFrameStatsDict,
-    Graphic3dGraphicDriverMembers as _, Graphic3dLightSet, Graphic3dRenderingParams,
-    Graphic3dRenderingParamsFrustumCulling, Graphic3dSequenceOfHClipPlane, Graphic3dTexture2D,
-    Graphic3dTextureEnv, Graphic3dTextureMap, Graphic3dTextureMapMembers as _,
-    Graphic3dTypeOfBackfacingModel, Graphic3dTypeOfShadingModel, Graphic3dTypeOfVisualization,
+    Graphic3dCViewComputed as _, Graphic3dCViewMembers as _, Graphic3dClipPlane, Graphic3dCubeMap,
+    Graphic3dDiagnosticInfo, Graphic3dFrameStatsDict, Graphic3dGraphicDriverMembers as _,
+    Graphic3dRenderingParams, Graphic3dRenderingParamsFrustumCulling,
+    Graphic3dSequenceOfHClipPlane, Graphic3dTexture2D, Graphic3dTextureEnv, Graphic3dTextureMap,
+    Graphic3dTextureMapMembers as _, Graphic3dTypeOfBackfacingModel, Graphic3dTypeOfShadingModel,
+    Graphic3dTypeOfVisualization,
 };
 
 impl V3dView {
@@ -184,116 +183,6 @@ impl V3dView {
     /// `GradientBackground`; `view.gradient_background()`.
     pub fn gradient_background(&self) -> AspectGradientBackground {
         self.view().gradient_background()
-    }
-}
-
-/// Lights.
-impl V3dView {
-    /// `UpdateLights`: the active lights to the driver view; `view.update_lights()`.
-    pub fn update_lights(&self) {
-        let lights = Graphic3dLightSet::default();
-        for light in &self.state.read().active_lights {
-            // A light already in the set is skipped; a set error leaves the light out.
-            let _ = lights.add(light);
-        }
-        self.view().set_lights(&Handle::new(lights));
-    }
-    /// `SetLightOn(light)`: activates a light in this view; `view.set_light_on_one(&light)?`.
-    pub fn set_light_on_one(&self, light: &Handle<Graphic3dCLight>) -> Result<(), Failure> {
-        {
-            let mut state = self.state.write();
-            if state.active_lights.contains(light) {
-                return Ok(());
-            }
-            state.active_lights.push(light.clone());
-        }
-        self.update_lights();
-        Ok(())
-    }
-    /// `SetLightOff(light)`: deactivates a view light; a global light raises
-    /// `Standard_TypeMismatch`. Example: `view.set_light_off_one(&light)?`.
-    pub fn set_light_off_one(&self, light: &Handle<Graphic3dCLight>) -> Result<(), Failure> {
-        if self
-            .viewer()
-            .get()
-            .is_some_and(|v| v.is_global_light(light))
-        {
-            return Err(type_mismatch("V3d_View::SetLightOff, the light is global"));
-        }
-        self.state.write().active_lights.retain(|l| l != light);
-        self.update_lights();
-        Ok(())
-    }
-    /// `IsActiveLight`; `view.is_active_light(&light)`.
-    pub fn is_active_light(&self, light: &Handle<Graphic3dCLight>) -> bool {
-        !light.is_null() && self.state.read().active_lights.contains(light)
-    }
-    /// `SetLightOn()`: activates every light defined in the viewer; `view.set_light_on()`.
-    pub fn set_light_on(&self) {
-        let defined = self
-            .viewer()
-            .get()
-            .map(|v| v.defined_lights())
-            .unwrap_or_default();
-        {
-            let mut state = self.state.write();
-            for light in defined {
-                if !state.active_lights.contains(&light) {
-                    state.active_lights.push(light);
-                }
-            }
-        }
-        self.update_lights();
-    }
-    /// `SetLightOff()`: deactivates every non-global light; `view.set_light_off()`.
-    pub fn set_light_off(&self) {
-        let viewer = self.viewer();
-        let is_global = |light: &Handle<Graphic3dCLight>| {
-            viewer.get().is_some_and(|v| v.is_global_light(light))
-        };
-        self.state.write().active_lights.retain(is_global);
-        self.update_lights();
-    }
-    /// `ActiveLights`; `view.active_lights()`.
-    pub fn active_lights(&self) -> Vec<Handle<Graphic3dCLight>> {
-        self.state.read().active_lights.clone()
-    }
-    /// `ActiveLightIterator`; `view.active_light_iterator()`.
-    pub fn active_light_iterator(&self) -> std::vec::IntoIter<Handle<Graphic3dCLight>> {
-        self.active_lights().into_iter()
-    }
-    /// `LightLimit`: the driver limit; `view.light_limit()`.
-    pub fn light_limit(&self) -> i32 {
-        self.viewer()
-            .get()
-            .and_then(|v| v.driver().get().map(|d| d.inquire_light_limit()))
-            .unwrap_or(0)
-    }
-    /// Deprecated `IfMoreLights`; `view.if_more_lights()`.
-    pub fn if_more_lights(&self) -> bool {
-        (self.state.read().active_lights.len() as i32) < self.light_limit()
-    }
-    /// Deprecated `InitActiveLights`; `view.init_active_lights()`.
-    pub fn init_active_lights(&self) {
-        self.state.write().active_lights_cursor = 0;
-    }
-    /// Deprecated `MoreActiveLights`; `view.more_active_lights()`.
-    pub fn more_active_lights(&self) -> bool {
-        let state = self.state.read();
-        state.active_lights_cursor < state.active_lights.len()
-    }
-    /// Deprecated `NextActiveLights`; `view.next_active_lights()`.
-    pub fn next_active_lights(&self) {
-        self.state.write().active_lights_cursor += 1;
-    }
-    /// Deprecated `ActiveLight`; null past the end; `view.active_light()`.
-    pub fn active_light(&self) -> Handle<Graphic3dCLight> {
-        let state = self.state.read();
-        state
-            .active_lights
-            .get(state.active_lights_cursor)
-            .cloned()
-            .unwrap_or_default()
     }
 }
 

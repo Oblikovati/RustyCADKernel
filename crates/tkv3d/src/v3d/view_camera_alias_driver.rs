@@ -16,6 +16,11 @@ impl Graphic3dGraphicDriver for BorrowedCameraDriver {
         let retained = Graphic3dRetainedView::new(manager, &self.delegate.layers())?;
         let view = Handle::new(BorrowedCameraView {
             transient: Default::default(),
+            identity: self
+                .control
+                .light_identity
+                .fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+                + 1,
             retained,
             control: self.control.clone(),
         })

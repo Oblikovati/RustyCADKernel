@@ -1,9 +1,8 @@
 //! Native Camera references stay bound to their selected field through replacement and callbacks.
-use super::{
-    Graphic3dCView, Graphic3dCViewBase, Graphic3dCViewFields, Graphic3dCamera,
-    Graphic3dDataStructureManager,
+use super::{Graphic3dCView, Graphic3dCViewBase, Graphic3dCViewFields, Graphic3dCamera};
+use rustycad_tkernel::standard::{
+    Handle, HandleFieldRef, HandleReference, StandardTransient, Transient,
 };
-use rustycad_tkernel::standard::{Handle, HandleFieldRef, HandleReference};
 /// Borrow actual myCamera without retaining its target; `graphic3d_cview_camera_ref(view.cview_base())`.
 pub fn graphic3d_cview_camera_ref(
     base: &Graphic3dCViewBase,
@@ -27,3 +26,24 @@ impl<T: Graphic3dCView> Graphic3dDataStructureManager for T {
         self.cview_dump_json(stream, depth)
     }
 }
+
+/// `Graphic3d_DataStructureManager`: an object with a camera that structures are computed
+/// for (the views).
+pub trait Graphic3dDataStructureManager: Transient {
+    /// Native virtual constHandle borrow; `let alias=manager.camera_ref()`.
+    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_>;
+    /// Explicit owning snapshot convenience; native Camera binds camera_ref; `manager.camera()`.
+    fn camera(&self) -> Handle<Graphic3dCamera> {
+        self.camera_ref().clone_handle()
+    }
+    /// `DumpJson`: the class name; `manager.dump_json(&mut stream, -1)?`.
+    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
+        let _ = depth;
+        super::driver_dump::dump_data_structure_manager(stream)
+    }
+}
+rustycad_tkernel::impl_transient_interface!(
+    dyn Graphic3dDataStructureManager,
+    "Graphic3d_DataStructureManager",
+    StandardTransient
+);

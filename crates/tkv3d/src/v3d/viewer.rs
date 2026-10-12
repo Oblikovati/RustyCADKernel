@@ -34,8 +34,8 @@ pub(crate) struct V3dViewerState {
     pub(crate) z_layer_gen_id: AspectGenId,
     pub(crate) defined_views: AllocatorList<Handle<dyn V3dViewSource>>,
     pub(crate) active_views: AllocatorList<Handle<dyn V3dViewSource>>,
-    pub(crate) defined_lights: Vec<Handle<Graphic3dCLight>>,
-    pub(crate) active_lights: Vec<Handle<Graphic3dCLight>>,
+    pub(crate) defined_lights: AllocatorList<Handle<Graphic3dCLight>>,
+    pub(crate) active_lights: AllocatorList<Handle<Graphic3dCLight>>,
     pub(crate) background: AspectBackground,
     pub(crate) gradient_background: AspectGradientBackground,
     pub(crate) view_size: f64,
@@ -43,7 +43,7 @@ pub(crate) struct V3dViewerState {
     pub(crate) visualization: V3dTypeOfVisualization,
     pub(crate) default_type_of_view: V3dTypeOfView,
     pub(crate) default_rendering_params: Graphic3dRenderingParams,
-    pub(crate) iterators: [usize; 4],
+    pub(crate) light_cursors: [rustycad_tkernel::ncollection::ListCursor; 2],
     pub(crate) view_cursors: [rustycad_tkernel::ncollection::ListCursor; 2],
     pub(crate) computed_mode: bool,
     pub(crate) default_computed_mode: bool,
@@ -92,8 +92,8 @@ impl V3dViewer {
             z_layer_gen_id: AspectGenId::new(1, i32::MAX)?,
             defined_views: AllocatorList::default(),
             active_views: AllocatorList::default(),
-            defined_lights: Vec::new(),
-            active_lights: Vec::new(),
+            defined_lights: AllocatorList::default(),
+            active_lights: AllocatorList::default(),
             background: AspectBackground::new(Color::named(NamedColor::GRAY30)),
             gradient_background: AspectGradientBackground::default(),
             view_size: 1000.0,
@@ -101,7 +101,7 @@ impl V3dViewer {
             visualization: V3dTypeOfVisualization::Zbuffer,
             default_type_of_view: V3dTypeOfView::Orthographic,
             default_rendering_params: Graphic3dRenderingParams::new()?,
-            iterators: [0; 4],
+            light_cursors: Default::default(),
             view_cursors: [rustycad_tkernel::ncollection::ListCursor::default(); 2],
             computed_mode: true,
             default_computed_mode: false,
@@ -202,6 +202,10 @@ impl V3dViewer {
     /// The graphic driver; `viewer.driver()`.
     pub fn driver(&self) -> Handle<dyn Graphic3dGraphicDriver> {
         self.driver.clone()
+    }
+    /// Borrow the actual immutable driver handle slot; `viewer.driver_ref().observe()`.
+    pub fn driver_ref(&self) -> &Handle<dyn Graphic3dGraphicDriver> {
+        &self.driver
     }
     /// The structure manager; `viewer.structure_manager()`.
     pub fn structure_manager(&self) -> Handle<Graphic3dStructureManager> {
