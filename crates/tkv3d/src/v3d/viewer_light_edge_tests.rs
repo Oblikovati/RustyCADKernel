@@ -6,6 +6,7 @@ use rustycad_tkservice::graphic3d::{Graphic3dCLight, Graphic3dLightSet};
 fn null_membership_and_set_lights_caller_replacement_replay_native() {
     let mut rows = capture_repeated_null_membership();
     rows.extend(capture_set_argument_replacement());
+    rows.extend(capture_borrowed_driver_limit());
     assert_eq!(
         rows.join("\n") + "\n",
         include_str!("../../tests/fixtures/viewer-light-edge-cases-native.txt")
@@ -63,4 +64,27 @@ fn set_argument_replacement_row(
         first.ref_count(),
         second.ref_count()
     )
+}
+
+fn capture_borrowed_driver_limit() -> Vec<String> {
+    let scene = make_light_probe_scene(15);
+    let alias = scene.viewer.driver_ref();
+    let mut rows = vec![driver_field_alias_row("before", &scene.viewer, alias)];
+    *scene.control.armed.write() = true;
+    let limit = scene.views[0].light_limit();
+    rows.extend(scene.control.rows.write().drain(..));
+    rows.push(format!("limit-result {limit}"));
+    let more = scene.views[0].if_more_lights() as u8;
+    rows.extend(scene.control.rows.write().drain(..));
+    rows.push(format!("more-result {more}"));
+    rows.push(driver_field_alias_row("after", &scene.viewer, alias));
+    rows
+}
+fn driver_field_alias_row(
+    phase: &str,
+    viewer: &V3dViewer,
+    alias: &Handle<dyn rustycad_tkservice::graphic3d::Graphic3dGraphicDriver>,
+) -> String {
+    let same_slot = std::ptr::eq(alias, viewer.driver_ref()) as u8;
+    format!("driver-{phase} {same_slot} {}", alias.ref_count())
 }

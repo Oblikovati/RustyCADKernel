@@ -72,6 +72,11 @@ class LiveLightDriver : public SvDriver {
 public:
   std::array<LiveLightDriverView*,3> views{};
   LiveLightDriver(LiveLightControl& controller):control(controller) {}
+  int InquireLimit(const Graphic3d_TypeOfLimit kind) const override {
+    if(control.armed&&control.policy==15&&kind==Graphic3d_TypeOfLimit_MaxNbLights)
+      std::cout<<"limit "<<GetRefCount()<<'\n';
+    return SvDriver::InquireLimit(kind);
+  }
   occ::handle<Graphic3d_CView> CreateView(const occ::handle<Graphic3d_StructureManager>& manager) override {
     auto* view=new LiveLightDriverView(manager,control,++count);views[count-1]=view;return view;
   }

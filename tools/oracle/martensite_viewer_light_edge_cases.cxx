@@ -29,7 +29,18 @@ static void capture_borrowed_argument_replacement() {
   std::cout<<"argument "<<(caller==second)<<' '<<(driver->views[0]->Lights()==second)<<' '
     <<first->GetRefCount()<<' '<<second->GetRefCount()<<'\n';
 }
+static void capture_borrowed_driver_limit() {
+  LiveLightControl control;control.policy=15;
+  occ::handle<LiveLightDriver> driver=new LiveLightDriver(control);
+  occ::handle<V3d_Viewer> viewer=new V3d_Viewer(driver);
+  occ::handle<V3d_View> view=new V3d_View(viewer);driver.Nullify();
+  const auto& alias=viewer->Driver();control.armed=true;
+  std::cout<<"driver-before "<<(&alias==&viewer->Driver())<<' '<<alias->GetRefCount()<<'\n';
+  const auto limit=view->LightLimit();std::cout<<"limit-result "<<limit<<'\n';
+  const auto more=view->IfMoreLights();std::cout<<"more-result "<<more<<'\n';
+  std::cout<<"driver-after "<<(&alias==&viewer->Driver())<<' '<<alias->GetRefCount()<<'\n';
+}
 int main() {
-  capture_repeated_null_membership();capture_borrowed_argument_replacement();
+  capture_repeated_null_membership();capture_borrowed_argument_replacement();capture_borrowed_driver_limit();
   return 0;
 }

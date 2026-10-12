@@ -56,14 +56,16 @@ probe proves the original assignment is already safe.
 `tools/oracle/martensite_viewer_live_lights.cxx` and its named recording
 driver substitute drawing I/O only. The real native viewer/view bodies,
 light-set keys, retained lists, virtual callbacks, and ownership counts
-produce twelve bounded cases. The Rust-only replay uses actual embedded
+produce fourteen bounded cases. The Rust-only replay uses actual embedded
 `V3dViewSource` bases and actual retained driver storage.
 
 `tools/oracle/martensite_viewer_light_aliases.cxx` exercises physical node
 aliases and retained driver light-set aliases, including self-assignment.
 `tools/oracle/martensite_viewer_light_edge_cases.cxx` covers repeated null
 membership failures and callback replacement of a borrowed caller light-set
-slot. Final run, source, library, and executable provenance belongs in the
+slot. A derived driver also observes LightLimit and IfMoreLights without an
+extra driver owner; Driver borrows its actual immutable handle field.
+Final run, source, library, and executable provenance belongs in the
 runtime receipt; authored probes are not a claim that final gates passed.
 
 Removing the currently referenced node, dangling owner storage, or a

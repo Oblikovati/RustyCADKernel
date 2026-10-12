@@ -118,3 +118,17 @@ fn replace_caller_set_slot(control: &ViewerLightProbeControl) {
     let replacement = control.replacement_set.read().observe().clone();
     *control.caller_set.write() = replacement;
 }
+
+pub(super) fn record_driver_light_limit(
+    control: &ViewerLightProbeControl,
+    kind: rustycad_tkservice::graphic3d::Graphic3dTypeOfLimit,
+    owners: i32,
+) {
+    if !*control.armed.read()
+        || control.policy != 15
+        || kind != rustycad_tkservice::graphic3d::Graphic3dTypeOfLimit::MaxNbLights
+    {
+        return;
+    }
+    control.rows.write().push(format!("limit {owners}"));
+}
