@@ -1,0 +1,18 @@
+E
+======================================================================
+ERROR: test_toolkit_test_suites (unittest.loader._FailedTest.test_toolkit_test_suites)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_toolkit_test_suites
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text/tools/tests/test_toolkit_test_suites.py", line 7, in <module>
+    from test_target_selection import (
+ModuleNotFoundError: No module named 'test_target_selection'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

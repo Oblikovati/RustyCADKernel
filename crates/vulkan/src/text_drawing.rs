@@ -47,6 +47,7 @@ fn native_text_pass(
     };
     let mut draw = glyph_draw(layout, aspect, clip, color)?;
     draw.text_shadow_bias = pass != last && !draw.annotation;
+    draw.text_logic_xor = aspect.text_display_type() == AspectTypeOfDisplayText::Blend;
     Ok(draw)
 }
 fn glyph_draw(
@@ -85,7 +86,7 @@ pub(crate) fn text_vertex_rgba(color: ColorRgba) -> [f32; 4] {
     ]
 }
 #[cfg(test)]
-mod tests {
+pub(crate) mod tests {
     use super::*;
     use rustycad_tkernel::ncollection::Mat4;
     #[test]
@@ -109,7 +110,7 @@ mod tests {
         assert!(draws[0].text_shadow_bias);
         assert!(!draws[1].text_shadow_bias);
     }
-    pub(super) fn minimal_glyph_layout() -> GlyphLayout {
+    pub(crate) fn minimal_glyph_layout() -> GlyphLayout {
         GlyphLayout {
             positions: vec![[0.; 2]; 3],
             uv: vec![[0.; 2]; 3],
@@ -119,13 +120,14 @@ mod tests {
             point_size: 16,
         }
     }
-    pub(super) fn identity_text_transform() -> TextTransform {
+    pub(crate) fn identity_text_transform() -> TextTransform {
         TextTransform {
             projection: Mat4::identity(),
             model_view: Mat4::identity(),
             model_world: Mat4::identity(),
             camera_rotation: Mat4::identity(),
             viewport: [0, 0, 64, 64],
+            pixel_coordinates: false,
         }
     }
 }
@@ -133,3 +135,7 @@ mod tests {
 #[cfg(test)]
 #[path = "text_decal_tests.rs"]
 mod decal_tests;
+
+#[cfg(test)]
+#[path = "text_xor_tests.rs"]
+mod xor_tests;

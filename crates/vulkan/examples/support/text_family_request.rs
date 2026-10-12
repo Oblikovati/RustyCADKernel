@@ -4,10 +4,14 @@ use rustycad_tkservice::aspect::AspectTypeOfDisplayText;
 /// Validate actual display mode; `text_family(Some("shadow"))?` selects the native Shadow family.
 pub fn text_family(name: Option<&str>) -> Result<AspectTypeOfDisplayText, RenderError> {
     match name.unwrap_or("decal") {
+        "blend" => Ok(AspectTypeOfDisplayText::Blend),
         "decal" => Ok(AspectTypeOfDisplayText::Dekale),
         "shadow" => Ok(AspectTypeOfDisplayText::Shadow),
         "subtitle" => Ok(AspectTypeOfDisplayText::Subtitle),
-        actual => Err(RenderError::rejected(actual, "decal, shadow or subtitle")),
+        actual => Err(RenderError::rejected(
+            actual,
+            "decal, shadow, subtitle or blend",
+        )),
     }
 }
 #[cfg(test)]

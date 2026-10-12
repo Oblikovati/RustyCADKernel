@@ -1,5 +1,6 @@
 // Observe real native glyph draws without replacing native setupMatrix or drawing algorithms.
 #include <OpenGl_ShaderProgram.hxx>
+#include <OpenGl_GlCore30.hxx>
 #include <iomanip>
 #include <fstream>
 struct NativeDecalDrawTrace {
@@ -8,10 +9,11 @@ struct NativeDecalDrawTrace {
   std::ofstream stream;
   int count = 0;
   int limit;
+  bool attachmentPolicy;
   // OpenGL exposes a C callback table; per-thread state scopes one injected observer, not renderer globals.
   static thread_local NativeDecalDrawTrace* active;
-  NativeDecalDrawTrace(const occ::handle<OpenGl_Context>& ctx, const std::string& prefix, int draws = 5)
-      : context(ctx), original(ctx->core11fwd->glDrawArrays), stream(prefix + ".trace"), limit(draws) {
+  NativeDecalDrawTrace(const occ::handle<OpenGl_Context>& ctx, const std::string& prefix, int draws = 5, bool attachment = false)
+      : context(ctx), original(ctx->core11fwd->glDrawArrays), stream(prefix + ".trace"), limit(draws), attachmentPolicy(attachment) {
     active = this; context->core11fwd->glDrawArrays = observe;
     stream << std::setprecision(9);
   }
@@ -29,7 +31,9 @@ struct NativeDecalDrawTrace {
     stream << count++ << ' ' << vertices;
     for (int column = 0; column < 4; ++column)
       for (int row = 0; row < 4; ++row) stream << ' ' << clip.GetValue(row, column);
-    emit_color_and_policy(); stream << '\n';
+    emit_color_and_policy();
+    if (attachmentPolicy) emit_attachment_policy();
+    stream << '\n';
   }
   NCollection_Mat4<float> uniform_matrix(const char* name) {
     GLint program = 0; context->core11fwd->glGetIntegerv(GL_CURRENT_PROGRAM, &program);
@@ -52,5 +56,19 @@ struct NativeDecalDrawTrace {
     stream << ' ' << int(context->core11fwd->glIsEnabled(GL_COLOR_LOGIC_OP)) << ' ' << operation
            << ' ' << int(context->core11fwd->glIsEnabled(GL_BLEND));
   }
+  void emit_attachment_policy() {
+    if (!context->core30) throw Standard_Failure("core30 null; expected native GL3.0 attachment queries");
+    stream << ' ' << int(context->core11fwd->glIsEnabled(GL_FRAMEBUFFER_SRGB));
+    for (const auto name : {GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING, GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE,
+                           GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE, GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE,
+                           GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE, GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE}) {
+      GLint value = 0;
+      context->core30->glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, name, &value);
+      stream << ' ' << value;
+    }
+    GLboolean masks[4] = {}; context->core11fwd->glGetBooleanv(GL_COLOR_WRITEMASK, masks);
+    for (const auto value : masks) stream << ' ' << int(value);
+  }
+
 };
 thread_local NativeDecalDrawTrace* NativeDecalDrawTrace::active = nullptr;
