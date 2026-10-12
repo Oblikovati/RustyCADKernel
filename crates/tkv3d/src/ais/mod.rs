@@ -61,6 +61,7 @@ pub use detection_status::AisStatusOfDetection;
 
 mod context_highlight_owners;
 mod context_owner_walk;
+mod context_selected_applicative;
 mod context_selected_members;
 mod context_selection_actions;
 mod context_unhighlight_owners;
