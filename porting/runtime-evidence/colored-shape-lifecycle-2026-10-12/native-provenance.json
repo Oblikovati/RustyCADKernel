@@ -1,0 +1,75 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_probes": [
+    {
+      "case": "owner",
+      "compile_command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+        "-Itools/oracle",
+        "tools/oracle/martensite_colored_shape_owner.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKBRep",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-owner"
+      ],
+      "source": "tools/oracle/martensite_colored_shape_owner.cxx",
+      "source_sha256": "38445abc012667acf21979458c56f95cc6362e9a5fd9eaad11f427d9734a462a",
+      "executable_sha256": "1a0ee6ef6bfc32dec4ef2a2d86a1f21fcac2cf1362c5c8af2498f876ec4f4de7",
+      "fixture": "crates/tkv3d/tests/fixtures/colored-shape/native-owner.txt",
+      "fixture_sha256": "3cd32696c278f0d0294916d6bb0c706f9178014beba1fa2373fd05f1cde7415b",
+      "rows": 23,
+      "repeat_byte_identical": true
+    },
+    {
+      "case": "dispatch",
+      "compile_command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+        "-Itools/oracle",
+        "tools/oracle/martensite_colored_shape_dispatch.cxx",
+        "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKBRep",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-dispatch"
+      ],
+      "source": "tools/oracle/martensite_colored_shape_dispatch.cxx",
+      "source_sha256": "31225ec539b50d480e910d259814f3ff324dbb6f821ae7d23f4c864cbcbc58c6",
+      "executable_sha256": "eaccc18b0682bcf4a4ea03e3ac0fdc99b0e97c782d175c74e32c84a72fddc3a0",
+      "fixture": "crates/tkv3d/tests/fixtures/colored-shape/native-dispatch.txt",
+      "fixture_sha256": "96823e643b19bd056219069b40deecdd098fb50cba5b40dcc9df11a95af283e2",
+      "rows": 24,
+      "repeat_byte_identical": true
+    }
+  ],
+  "input_sha256": {
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_Shape.hxx": "c0889c43fb2904c2a40faa304102b013243de05018eb4fa15776f03daefe05fc",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_Shape.cxx": "5757c1d24235d87c8e2b2d9d87f863ba7e82856f773ddf550178bcbe36f33491",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_ColoredShape.cxx": "3ee45b9f6a0369fe71406f3ac58317216241c7e334621ca5d115d4842ef28b6e",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.cxx": "a4a84687e85059dad70193d2b839dbffb6650dd360ff86dc94e61bb8f3461da0",
+    "../OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx": "042b96740ec8d4ddb424994ff6c8aaec2a17e97940275df47fee17b4eb80a33a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKBRep.so": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "compiler_version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "observed_upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871"
+}
