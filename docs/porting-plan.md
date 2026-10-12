@@ -258,10 +258,13 @@ port. Passing scaffold CI does not satisfy these gates.
 1. **API coverage is 100%.** Every public type, callable overload, constructor,
    operator, constant, enum/value, public field, public template contract and
    extension point has an explicit Rust mapping. Include inline/header-only code,
-   inherited accessible interfaces, supported specializations, deprecated APIs,
+   inherited accessible interfaces and supported specializations,
    generated headers, command APIs and configuration/platform-dependent APIs.
    Protected hooks used by subclasses are part of the extension contract. Audit
    public macros and classify observable functionality separately from C++ syntax.
+   APIs explicitly marked deprecated or obsolete by OCCT are excluded from required
+   new ports under [ADR0002](adr/0002-exclude-upstream-retired-apis.md); retain their
+   existing Rust implementations and upstream exclusion evidence.
 2. **Upstream test translation is 100%.** Each upstream unit/regression case maps
    to a runnable Rust test with the same setup, inputs, assertions, cleanup and
    tolerance. Parameterized and typed instances, DRAW setup scripts, data and
