@@ -3,7 +3,7 @@
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "e0b093be3935b3b2e23d314bd4289da81a14dae309280f1c8ab8edbaa21d4b3c",
+    "parity": "c5eb75bbac973b20b2a8f526e1ceb7d3bc700495abadb5e1c233c5b7d6bdc5e6",
     "rust": "54a2c12157505e4345d082c782e9dcac61d2beec3ab1dc010e8f4b9fa7489d0f"
   },
   "schema_version": 1,
@@ -1730,16 +1730,16 @@
     "TKService": {
       "api": {
         "by_status": {
-          "claimed_unverified": 5,
+          "claimed_unverified": 0,
           "excluded": 132,
           "partial": 23,
           "unclaimed": 0,
           "upstream_unimplemented": 0,
-          "verified": 4342
+          "verified": 4347
         },
         "declarations": 4502,
-        "done": 4474,
-        "done_percent": 99.4
+        "done": 4479,
+        "done_percent": 99.5
       },
       "boilerplate": {
         "by_status": {
@@ -1759,17 +1759,12 @@
         "not_applicable": 0,
         "unmapped": 3
       },
-      "ledger_defects": {
-        "rows_with_unresolved_rust_target": 5
-      },
+      "ledger_defects": {},
       "open_boilerplate_by_category": {
         "rtti-macro": 21,
         "special-member": 40
       },
-      "open_gap_by_category": {
-        "member": 4,
-        "protected-member": 1
-      },
+      "open_gap_by_category": {},
       "scope": "port",
       "scope_reason": ""
     },
@@ -2088,49 +2083,47 @@
     "TKV3d": {
       "api": {
         "by_status": {
-          "claimed_unverified": 35,
+          "claimed_unverified": 0,
           "excluded": 187,
-          "partial": 35,
+          "partial": 41,
           "unclaimed": 1906,
           "upstream_unimplemented": 0,
-          "verified": 3009
+          "verified": 3038
         },
         "declarations": 5172,
-        "done": 3196,
-        "done_percent": 61.8
+        "done": 3225,
+        "done_percent": 62.4
       },
       "boilerplate": {
         "by_status": {
-          "claimed_unverified": 4,
+          "claimed_unverified": 0,
           "excluded": 405,
           "partial": 21,
           "unclaimed": 247,
           "upstream_unimplemented": 0,
-          "verified": 246
+          "verified": 250
         },
         "declarations": 923,
-        "done": 651,
-        "done_percent": 70.5
+        "done": 655,
+        "done_percent": 71.0
       },
       "gtests": {
         "mapped": 1,
         "not_applicable": 0,
         "unmapped": 72
       },
-      "ledger_defects": {
-        "rows_with_unresolved_rust_target": 39
-      },
+      "ledger_defects": {},
       "open_boilerplate_by_category": {
-        "rtti-macro": 230,
+        "rtti-macro": 226,
         "special-member": 21
       },
       "open_gap_by_category": {
         "alias": 21,
         "enum-constant": 162,
         "field": 311,
-        "member": 1136,
-        "protected-member": 136,
-        "record": 175
+        "member": 1110,
+        "protected-member": 129,
+        "record": 173
       },
       "scope": "port",
       "scope_reason": ""
@@ -3011,9 +3004,9 @@
     },
     "port": {
       "api_declarations": 76041,
-      "api_done": 52840,
-      "api_open": 22182,
-      "api_partial": 1019,
+      "api_done": 52874,
+      "api_open": 22142,
+      "api_partial": 1025,
       "gtests_mapped": 7969,
       "gtests_not_applicable": 2,
       "gtests_unmapped": 480,
