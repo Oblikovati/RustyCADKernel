@@ -12,6 +12,8 @@
 #include <Xw_Window.hxx>
 #include <iostream>
 struct NativeTextPolicyProbe {
+  // V3d_View keeps a raw MyViewer pointer; destroy its owner after both borrowers.
+  occ::handle<V3d_Viewer> viewer;
   occ::handle<V3d_View> view;
   occ::handle<OpenGl_Workspace> workspace;
 };
@@ -27,5 +29,5 @@ static NativeTextPolicyProbe create_policy_probe() {
   const auto glView = occ::handle<OpenGl_View>::DownCast(view->View());
   const auto context = glView->GlWindow()->GetGlContext();
   std::cerr << "OCCT_GL_RENDERER=" << context->core11fwd->glGetString(GL_RENDERER) << std::endl;
-  return {view, new OpenGl_Workspace(glView.get(), glView->GlWindow())};
+  return {viewer, view, new OpenGl_Workspace(glView.get(), glView->GlWindow())};
 }

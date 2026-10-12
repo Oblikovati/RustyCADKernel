@@ -1,0 +1,116 @@
+{
+  "project": "Martensite",
+  "rust_source_revision": "c042e64fa",
+  "rust_sources_unchanged_since_camera_protocol_check": true,
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "bug": "Native capture factory returned V3d_View without retaining its V3d_Viewer; MyViewer is a raw pointer. Keep viewer as first probe member, destroyed after view/workspace.",
+  "original_reproduction": {
+    "mode": "nearest",
+    "software_native_exit": 139,
+    "log": "surface-viewer-lifetime-before.log.gz"
+  },
+  "corrected_reproduction": {
+    "native_profiles": [
+      "AMD radeonsi",
+      "llvmpipe LLVM20.1.2"
+    ],
+    "nearest_runs_per_profile": 2,
+    "exit_codes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "repeat_equal": true
+  },
+  "all_texture_modes": {
+    "modes": 68,
+    "native_invocations": 272,
+    "repeated_buffer_pairs": 276,
+    "all_repeated_equal": true,
+    "amd_buffers_equal_previous_oracle": true
+  },
+  "current_vulkan": {
+    "binary_sha256": "58339c8232ebfea2b599d43eebca07ee92e8a4ea3842866732adc95ed379f01e",
+    "invocations": 136,
+    "gates": {
+      "rgba": "exact bytes",
+      "maximum_depth_delta": 1e-06
+    },
+    "profiles": {
+      "amd": {
+        "cases": 68,
+        "strict_pass": 65,
+        "failures": [
+          {
+            "profile": "amd",
+            "mode": "projective",
+            "rgba_exact": false,
+            "changed_pixels": 49,
+            "maximum_channel_delta": 4,
+            "maximum_depth_delta": 0.0,
+            "strict_pass": false
+          },
+          {
+            "profile": "amd",
+            "mode": "perspective",
+            "rgba_exact": false,
+            "changed_pixels": 92,
+            "maximum_channel_delta": 6,
+            "maximum_depth_delta": 5.364418029785156e-07,
+            "strict_pass": false
+          },
+          {
+            "profile": "amd",
+            "mode": "transformed",
+            "rgba_exact": false,
+            "changed_pixels": 67,
+            "maximum_channel_delta": 6,
+            "maximum_depth_delta": 0.0,
+            "strict_pass": false
+          }
+        ]
+      },
+      "software": {
+        "cases": 68,
+        "strict_pass": 66,
+        "failures": [
+          {
+            "profile": "software",
+            "mode": "projective",
+            "rgba_exact": false,
+            "changed_pixels": 1,
+            "maximum_channel_delta": 1,
+            "maximum_depth_delta": 1.4901161193847656e-08,
+            "strict_pass": false
+          },
+          {
+            "profile": "software",
+            "mode": "perspective",
+            "rgba_exact": false,
+            "changed_pixels": 1,
+            "maximum_channel_delta": 1,
+            "maximum_depth_delta": 5.960464477539063e-08,
+            "strict_pass": false
+          }
+        ]
+      }
+    }
+  },
+  "helper_sha256": "de097f6eba453ca6ab484339f2ad8aa8069437f3327ba58d7766d14ab0c11012",
+  "native_binary_sha256": "0519ce1ce7aeb7149745c118269d8cd9b14b34eb2c5ace9305976b636bbcf977",
+  "affected_callers": [
+    "tools/oracle/martensite_vulkan_text_culling_capture.cxx",
+    "tools/oracle/martensite_vulkan_decal_capture.cxx",
+    "tools/oracle/martensite_standard_texture_format.cxx",
+    "tools/oracle/martensite_vulkan_subtitle_capture.cxx",
+    "tools/oracle/martensite_vulkan_blend_capture.cxx",
+    "tools/oracle/martensite_vulkan_text_culling_policy.cxx",
+    "tools/oracle/martensite_vulkan_surface_texture_capture.cxx",
+    "tools/oracle/martensite_vulkan_pixel_text_capture.cxx",
+    "tools/oracle/martensite_vulkan_xor_color_transfer.cxx"
+  ],
+  "remaining_audit": "Other text/policy callers need repaired-owner capture comparison. Renderer worker is regenerating texgen captures. Do not claim whole renderer parity or new completion credit.",
+  "performance": "No runtime renderer code changed; prior Rust optimized timings remain associated with their original source manifests. No new timing baseline accepted.",
+  "local_only": true
+}
