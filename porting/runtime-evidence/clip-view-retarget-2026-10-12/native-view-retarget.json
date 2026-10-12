@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Native-only valid protected myView retarget prerequisite, not Rust replay or method/class completion. Genuine inherited Add/Remove retain their local sequence but dispatch the setter through the then-current driver view. Retained View alias follows the actual slot; retained Camera alias stays at the old returned field.",
+  "source": "tools/oracle/martensite_v3d_clip_view_retarget.cxx",
+  "source_sha256": "8633e9a5fd1f1ab6ac6f334e8f79a57870e184fbc9abeb715a4dc3ce0518b884",
+  "included_source": "tools/oracle/tkservice_probe_null_driver.cxx",
+  "included_source_sha256": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+  "fixture": "crates/tkv3d/tests/fixtures/v3d-clip-view-retarget-native.txt",
+  "fixture_sha256": "41ea641332bdd8851d1fe14512b05c9f4ce8ddb00ff0efee74db7eb70c3e60d2",
+  "executable_sha256": "2cd2f0621f0c27eec2726e3e67c7b5e8b9e2f8d99a4cdafc55049ef27043afcd",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_headers": {
+    "V3d_View.hxx": "c13418252b29597572643d3cb966148c6e5b4cd1cc1a111041f2b4f5158bc05b",
+    "Graphic3d_CView.hxx": "c8f3b05d3b4093a333e51a08a58dfeae745879cd303e54d3cdcbd7c4ed85b6e2",
+    "Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb",
+    "Standard_Transient.hxx": "3310b0daaadb07c61a9cc09b410d1d0381c70174194def87c4a86ec397ed3416"
+  },
+  "native_libraries": {
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "native_records": 10,
+  "native_runs_identical": 2,
+  "native_exit_codes": [
+    0,
+    0
+  ],
+  "valid_lifetime": "External owning handles preserve both CView objects through callback, old Camera alias use and final measurements. Replacement handle ownership is intentional; no dangling native access. Null driver is an explicit external rendering fake; no drawing/parity credit.",
+  "missing_rust_contract": "V3d protected myView is currently an immutable/private Handle; it cannot be replaced from genuine derived virtual callbacks or update retained View aliases. Introduce real live slot and captured weak field aliases without CView ownership.",
+  "api_completion_claims": false,
+  "binary_reverse_engineering_or_debugger_work": false
+}
