@@ -81,7 +81,24 @@ impl DrawPipeline {
                 None
             },
         };
-        if kind.mesh_edges {
+        if kind.fixed_lighting {
+            let shaders = if kind.mesh_edges {
+                super::fixed_lighting_pipeline::fixed_mesh_triple(kind).to_vec()
+            } else {
+                super::fixed_lighting_pipeline::fixed_lighting_pair(kind).to_vec()
+            };
+            for bytes in shaders {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else if kind.fixed_line_stipple && !kind.lighting {
+            for bytes in super::fixed_lighting_pipeline::fixed_unlit_line_pair(kind.clipped) {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else if kind.point && kind.encoded_surface && !kind.lighting {
+            for bytes in super::fixed_lighting_pipeline::fixed_unlit_point_pair(kind.clipped) {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else if kind.mesh_edges {
             for bytes in super::mesh_edge_pipeline::edge_shader_bytes(kind) {
                 pipeline.shaders.push(load_shader(runtime, bytes)?);
             }
@@ -100,6 +117,7 @@ impl DrawPipeline {
                 || kind.surface_texture
                 || kind.surface_alpha,
             kind.mesh_edges,
+            point && kind.encoded_surface,
             pipeline
                 .sprite_layout
                 .as_ref()
@@ -172,7 +190,10 @@ impl DrawPipeline {
             .description(self.layout, &stages)
             .push_next(&mut rendering);
         let mut line_state = vk::PipelineRasterizationLineStateCreateInfoEXT::default()
-            .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM);
+            .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM)
+            .stippled_line_enable(kind.fixed_line_stipple)
+            .line_stipple_factor(1)
+            .line_stipple_pattern(0xffff);
         let mut raster =
             super::pipeline_state::raster_state(kind.clamp).polygon_mode(if kind.polygon_edges {
                 vk::PolygonMode::LINE
@@ -264,12 +285,13 @@ fn create_layout(
     runtime: &VulkanRuntime,
     line: bool,
     edges: bool,
+    fixed_marker: bool,
     sprite: Option<vk::DescriptorSetLayout>,
     lighting: Option<&super::storage_descriptor::StorageDescriptorLayout>,
     clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
 ) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
-    let ranges = [push_range(line, edges)];
+    let ranges = [fixed_marker_push_range(line, edges, fixed_marker)];
     let layouts = descriptor_layout_handles(
         sprite,
         lighting.map(|s| s.handle),
@@ -281,6 +303,13 @@ fn create_layout(
     let layout = unsafe { runtime.device().create_pipeline_layout(&info, None) }
         .map_err(|e| vk_error("create pipeline layout", e))?;
     Ok(layout)
+}
+fn fixed_marker_push_range(line: bool, edges: bool, fixed_marker: bool) -> vk::PushConstantRange {
+    let mut range = push_range(line, edges);
+    if fixed_marker {
+        range.size = 84;
+    }
+    range
 }
 
 fn push_range(line: bool, edges: bool) -> vk::PushConstantRange {
@@ -378,6 +407,16 @@ fn surface_lighting_shaders(clipped: bool) -> [&'static [u8]; 2] {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn fixed_marker_cutoff_extends_only_its_point_constant_range() {
+        assert_eq!(fixed_marker_push_range(true, false, true).size, 84);
+        assert_eq!(fixed_marker_push_range(true, false, false).size, 80);
+        assert_eq!(fixed_marker_push_range(false, false, false).size, 64);
+        assert_eq!(
+            fixed_marker_push_range(true, false, true).stage_flags,
+            vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT
+        );
+    }
     #[test]
     fn triangle_constants_do_not_invalidate_fragment_state() {
         assert_eq!(

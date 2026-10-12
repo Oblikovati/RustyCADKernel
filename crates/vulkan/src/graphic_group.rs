@@ -1,5 +1,5 @@
 //! Retained Graphic3d commands distinguish the group style from later primitive styles.
-use crate::line_style::primitive_style;
+use crate::line_style::primitive_style_in_pipeline;
 use crate::{PrimitiveDraw, RenderError, error::rejected, primitive::PrimitiveSubmission};
 use rustycad_tkernel::{
     ncollection::Vec4,
@@ -387,8 +387,10 @@ fn lower_styled_primitive(
     closed: bool,
     matrix: [f32; 16],
     highlighted: bool,
+    lighting_pipeline: crate::RenderLightingPipeline,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-    let (color, line) = primitive_style(primitive.kind, aspects, closed)?;
+    let (color, line) =
+        primitive_style_in_pipeline(primitive.kind, aspects, closed, lighting_pipeline)?;
     let (mode, factor, units) = aspects.polygon_offsets();
     let offset = crate::RenderPolygonOffset::new(mode, factor, units)?;
     if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
@@ -434,13 +436,30 @@ fn lower_group_surface(
     highlighted: bool,
     context: &crate::text_submission::TextSceneContext<'_>,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
-    let mut lowered = lower_styled_primitive(primitive, aspects, closed, matrix, highlighted)?;
+    let lighting_pipeline =
+        crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure());
+    let mut lowered = lower_styled_primitive(
+        primitive,
+        aspects,
+        closed,
+        matrix,
+        highlighted,
+        lighting_pipeline,
+    )?;
     crate::retained_surface_texture::apply_surface_texture(
         &mut lowered,
         primitive,
         aspects,
         context,
     )?;
+    for draw in &mut lowered {
+        draw.source_line_strip = primitive.kind == Graphic3dTypeOfPrimitiveArray::Polylines;
+        draw.source_color_array = !highlighted
+            && primitive
+                .attributes
+                .attribute_data(Graphic3dTypeOfAttribute::Color)
+                .is_some();
+    }
     crate::retained_lighting::apply_surface_lighting(&mut lowered, primitive, aspects, context)?;
     lower_group_edges(&mut lowered, aspects, context)?;
     Ok(lowered)

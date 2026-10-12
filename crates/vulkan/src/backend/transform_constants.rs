@@ -48,6 +48,9 @@ fn append_point_constants(bytes: &mut Vec<u8>, draw: &PrimitiveDraw) {
                 .flat_map(|value| value.to_ne_bytes()),
         );
         bytes.extend((style.color_policy as u32).to_ne_bytes());
+        if draw.fixed_function_lighting {
+            bytes.extend(style.fixed_material_cutoff.unwrap_or(-1.).to_ne_bytes());
+        }
     }
 }
 fn append_glyph_constants(bytes: &mut Vec<u8>, draw: &PrimitiveDraw) {

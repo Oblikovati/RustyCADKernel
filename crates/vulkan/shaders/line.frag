@@ -11,6 +11,7 @@ void main() {
     discardClippedFragment();
 #endif
 
+#ifndef MARTENSITE_FIXED_LINE_STIPPLE
     // OCCT 3d097a0 Graphic3d_ShaderManager uses the dominant screen derivative,
     // not a stipple counter restarted at each segment. Convert Vulkan's Y origin.
     float coordinate = transform.viewport.y - gl_FragCoord.y;
@@ -18,5 +19,6 @@ void main() {
         coordinate = gl_FragCoord.x;
     uint bit = uint(floor(coordinate / float(transform.factor) + 0.5)) & 15u;
     if ((transform.pattern & (1u << bit)) == 0u) discard;
+#endif
     fragmentColor = vertexColor;
 }
