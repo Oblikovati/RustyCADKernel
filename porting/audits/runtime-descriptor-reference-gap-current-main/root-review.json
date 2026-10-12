@@ -1,0 +1,253 @@
+{
+  "reviewed_main": "fbdbbd1836f1aa84d7e7a3b10f71a92fffc7e8bd",
+  "agent_audit_commit": "65bd99abf",
+  "rows": [
+    {
+      "cpp_declaration_id": "81dd6ec708a841d530f27d10615e2312f82a77227f9cd29257997065410a39d0",
+      "previous": {
+        "upstream_id": "Standard_Transient::get_type_descriptor()",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::RuntimeTyped::static_type",
+        "status": "implemented",
+        "notes": "The registered descriptor of the class."
+      },
+      "current": {
+        "upstream_id": "Standard_Transient::get_type_descriptor()",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::RuntimeTyped::static_type",
+        "status": "partial",
+        "notes": "The registered descriptor of the class. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "8306f327e3e8f411954c0648f4c22b0aef459aa380f74383df3dbf67391b3abe",
+      "previous": {
+        "upstream_id": "Standard_Transient::DynamicType() const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::Transient::dynamic_type",
+        "status": "implemented",
+        "notes": "The most-derived descriptor. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+      },
+      "current": {
+        "upstream_id": "Standard_Transient::DynamicType() const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::Transient::dynamic_type",
+        "status": "partial",
+        "notes": "The most-derived descriptor. Compared with OCCT by the runtime_object probe for four classes and every registered column type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82",
+      "previous": {
+        "upstream_id": "Standard_Type::get_type_descriptor()",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+        "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "implemented",
+        "notes": "Compiler inventory ID eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82 returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor; RuntimeTyped::static_type_handle() explicitly clones an owning Handle when callers need one. The descriptor keeps its static owner. Rust does not expose a borrowed Handle wrapper, so the exact C++ return type is not reproduced."
+      },
+      "current": {
+        "upstream_id": "Standard_Type::get_type_descriptor()",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+        "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "partial",
+        "notes": "Compiler inventory ID eda5819a51c16688a368e08f3aa68a4186bfece64a43d2234fabae6e12d3ad82 returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor; RuntimeTyped::static_type_handle() explicitly clones an owning Handle when callers need one. The descriptor keeps its static owner. Rust does not expose a borrowed Handle wrapper, so the exact C++ return type is not reproduced. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784",
+      "previous": {
+        "upstream_id": "Standard_Type::DynamicType() const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+        "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "implemented",
+        "notes": "Compiler inventory ID 3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784 returns const handle<Standard_Type>& for the dynamic class. Rust returns the same static descriptor by borrow; Transient::dynamic_type_handle() makes an owning copy. RuntimeType's class descriptor has the native-style static baseline owner. Rust does not expose the borrowed C++ Handle wrapper type."
+      },
+      "current": {
+        "upstream_id": "Standard_Type::DynamicType() const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+        "rust_item": "rustycad_tkernel::standard::RuntimeType::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "partial",
+        "notes": "Compiler inventory ID 3ca790c595889096031ce8662881115db12d87a7c82be5f09f14ea302dbad784 returns const handle<Standard_Type>& for the dynamic class. Rust returns the same static descriptor by borrow; Transient::dynamic_type_handle() makes an owning copy. RuntimeType's class descriptor has the native-style static baseline owner. Rust does not expose the borrowed C++ Handle wrapper type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb",
+      "previous": {
+        "upstream_id": "Standard_Persistent::get_type_descriptor()",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+        "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "implemented",
+        "notes": "Compiler inventory ID ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor, and RuntimeTyped::static_type_handle() explicitly clones an owner when needed; the descriptor's static owner also owns one handle to Standard_Transient. Rust does not expose the borrowed C++ Handle wrapper type."
+      },
+      "current": {
+        "upstream_id": "Standard_Persistent::get_type_descriptor()",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+        "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "partial",
+        "notes": "Compiler inventory ID ebec4323c193c7f03b511f349d4e5832eb00eaa69004ebd17749552cea4efcdb returns const handle<Standard_Type>&. Rust returns a static borrowed RuntimeType descriptor, and RuntimeTyped::static_type_handle() explicitly clones an owner when needed; the descriptor's static owner also owns one handle to Standard_Transient. Rust does not expose the borrowed C++ Handle wrapper type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174",
+      "previous": {
+        "upstream_id": "Standard_Persistent::DynamicType() const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+        "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "implemented",
+        "notes": "Compiler inventory ID f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174 returns const handle<Standard_Type>&. Rust dynamically selects and borrows this descriptor; Transient::dynamic_type_handle() provides an explicit owning copy with the same identity. Rust does not expose the borrowed C++ Handle wrapper type."
+      },
+      "current": {
+        "upstream_id": "Standard_Persistent::DynamicType() const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+        "rust_item": "rustycad_tkernel::standard::StandardPersistent::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "partial",
+        "notes": "Compiler inventory ID f176172467a2621f40b031a6f4a22802977f72a47d81f616ad525f4e79071174 returns const handle<Standard_Type>&. Rust dynamically selects and borrows this descriptor; Transient::dynamic_type_handle() provides an explicit owning copy with the same identity. Rust does not expose the borrowed C++ Handle wrapper type. Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "c09466390610ef495313f98292513f4cec1b2710105a2362aee4848d6f360f47",
+      "previous": {
+        "upstream_id": "Standard_Transient::IsInstance(const opencascade::handle<Standard_Type>&) const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::Transient::is_instance",
+        "status": "implemented",
+        "notes": "Descriptor identity. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+      },
+      "current": {
+        "upstream_id": "Standard_Transient::IsInstance(const opencascade::handle<Standard_Type>&) const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::Transient::is_instance",
+        "status": "partial",
+        "notes": "Descriptor identity. Compared with OCCT by the runtime_object probe for four classes and every registered column type. Source audit 2026-10-13: Native borrows the caller handle through virtual DynamicType; the legacy Rust target accepts a pointee, preventing callback replacement of the original caller slot from affecting the subsequent query. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "324f306d54a4377eaf97f1c2296a6d3684eec631f776344e10ef95aec1ca9dd6",
+      "previous": {
+        "upstream_id": "Standard_Transient::IsKind(const opencascade::handle<Standard_Type>&) const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::Transient::is_kind",
+        "status": "implemented",
+        "notes": "SubType of the dynamic type. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+      },
+      "current": {
+        "upstream_id": "Standard_Transient::IsKind(const opencascade::handle<Standard_Type>&) const",
+        "toolkit": "TKernel",
+        "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+        "rust_item": "rustycad_tkernel::standard::Transient::is_kind",
+        "status": "partial",
+        "notes": "SubType of the dynamic type. Compared with OCCT by the runtime_object probe for four classes and every registered column type. Source audit 2026-10-13: Native borrows the caller handle through virtual DynamicType; the legacy Rust target accepts a pointee, preventing callback replacement of the original caller slot from affecting the subsequent query. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity."
+      }
+    },
+    {
+      "cpp_declaration_id": "5858cff8421c02e61530a390b309b66a374a44239bd57437c099c08382937281",
+      "previous": {
+        "upstream_id": "Graphic3d_ClipPlane::DynamicType() const",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "implemented",
+        "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+        "cpp_declaration_id": "5858cff8421c02e61530a390b309b66a374a44239bd57437c099c08382937281",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      },
+      "current": {
+        "upstream_id": "Graphic3d_ClipPlane::DynamicType() const",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "partial",
+        "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
+        "cpp_declaration_id": "5858cff8421c02e61530a390b309b66a374a44239bd57437c099c08382937281",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      }
+    },
+    {
+      "cpp_declaration_id": "d9dfc31d949afcc9fe5c9117bc7463d7bfa439e6ccbaad997b3938b891381e4b",
+      "previous": {
+        "upstream_id": "Graphic3d_ClipPlane::get_type_descriptor()",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "implemented",
+        "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+        "cpp_declaration_id": "d9dfc31d949afcc9fe5c9117bc7463d7bfa439e6ccbaad997b3938b891381e4b",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      },
+      "current": {
+        "upstream_id": "Graphic3d_ClipPlane::get_type_descriptor()",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "partial",
+        "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dClipPlane, \"Graphic3d_ClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane.rs:62 registers descriptor \"Graphic3d_ClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
+        "cpp_declaration_id": "d9dfc31d949afcc9fe5c9117bc7463d7bfa439e6ccbaad997b3938b891381e4b",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      }
+    },
+    {
+      "cpp_declaration_id": "c0d3991bd1a84e128cc5da3378e11d6a474ce9c5c59ed59d9855de18c9afc97d",
+      "previous": {
+        "upstream_id": "Graphic3d_SequenceOfHClipPlane::DynamicType() const",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "implemented",
+        "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+        "cpp_declaration_id": "c0d3991bd1a84e128cc5da3378e11d6a474ce9c5c59ed59d9855de18c9afc97d",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      },
+      "current": {
+        "upstream_id": "Graphic3d_SequenceOfHClipPlane::DynamicType() const",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<rustycad_tkernel::standard::Transient>::dynamic_type",
+        "status": "partial",
+        "notes": "DEFINE_STANDARD_RTTI DynamicType(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
+        "cpp_declaration_id": "c0d3991bd1a84e128cc5da3378e11d6a474ce9c5c59ed59d9855de18c9afc97d",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      }
+    },
+    {
+      "cpp_declaration_id": "ddb5e7ebdec30a1633060482ef966074d54fada6854bb696f289cd28cfc5d3f6",
+      "previous": {
+        "upstream_id": "Graphic3d_SequenceOfHClipPlane::get_type_descriptor()",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "implemented",
+        "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor).",
+        "cpp_declaration_id": "ddb5e7ebdec30a1633060482ef966074d54fada6854bb696f289cd28cfc5d3f6",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      },
+      "current": {
+        "upstream_id": "Graphic3d_SequenceOfHClipPlane::get_type_descriptor()",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+        "status": "partial",
+        "notes": "DEFINE_STANDARD_RTTI get_type_descriptor(): impl_transient!(Graphic3dSequenceOfHClipPlane, \"Graphic3d_SequenceOfHClipPlane\", StandardTransient) at crates/tkservice/src/graphic3d/clip_plane_sequence.rs:22 registers descriptor \"Graphic3d_SequenceOfHClipPlane\"; C++ base_type is Standard_Transient. get_type_name is TYPE_NAME, get_type_descriptor is RuntimeTyped::static_type and DynamicType is the virtual dynamic_type of the Rust target (most-derived descriptor). Source audit 2026-10-13: Native result is the actual const handle field; legacy Rust target returns only its pointee and exposes neither selected handle-slot identity nor full retained alias behavior. Required descriptor-field migration remains on the unfinished chain branch; do not count its prototype as integrated parity.",
+        "cpp_declaration_id": "ddb5e7ebdec30a1633060482ef966074d54fada6854bb696f289cd28cfc5d3f6",
+        "generated_by": "tools/generate_api_macro_rows.py"
+      }
+    }
+  ],
+  "count": 12,
+  "native_headers_and_actual_legacy_source_anchors_verified": true,
+  "production_code_changed": false
+}
