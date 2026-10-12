@@ -1,0 +1,19 @@
+{
+  "project": "Martensite",
+  "source_manifest": "performance-source-hashes.json.gz",
+  "source_entries": 7432,
+  "source_manifest_sha256": "d5a4f925153013f0f53d5eb368ecefe606d26a5b51aa6564f57fd034b5c3e134",
+  "executable": "target/release/examples/xr_device_performance",
+  "executable_sha256": "739ea56d0c8052f48268e3fdd01c94f669120483e4b4250d3b020c2ad652f762",
+  "build_command": "CARGO_PROFILE_RELEASE_DEBUG=0 CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo build -p martensite-vulkan --release --example xr_device_performance",
+  "workloads_per_device": 10,
+  "warmup": 20,
+  "samples": 100,
+  "validation": false,
+  "devices": [
+    "AMD Radeon 8060S Graphics",
+    "llvmpipe (LLVM 20.1.2, 256 bits)"
+  ],
+  "timing_status": "awaiting root exclusive GO",
+  "baseline_accepted": false
+}
