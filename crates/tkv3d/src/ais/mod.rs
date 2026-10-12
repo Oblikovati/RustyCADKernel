@@ -461,4 +461,4 @@ mod shape_bounds;
 mod textured_shape_compute;
 mod textured_shape_object;
 pub use textured_shape_compute::ais_textured_shape_compute;
-pub use textured_shape_object::AisTexturedShape;
+pub use textured_shape_object::{AisTexturedShape, AisTexturedShapeParent};

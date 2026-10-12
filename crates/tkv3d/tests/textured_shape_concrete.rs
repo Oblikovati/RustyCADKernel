@@ -23,6 +23,17 @@ fn textured_concrete_casts_share_native_descriptor_and_object() {
 }
 
 #[test]
+fn textured_concrete_native_parent_alias_retains_real_object_and_descriptor() {
+    let object = AisTexturedShape::new(&Shape::default());
+    let parent = object.clone().cast::<AisTexturedShapeParent>();
+    assert_eq!(parent.object_address(), object.object_address());
+    assert!(std::ptr::eq(
+        AisTexturedShapeParent::static_type(),
+        object.dynamic_type().unwrap().parent().unwrap()
+    ));
+}
+
+#[test]
 fn textured_concrete_virtual_source_retains_actual_pixmap_field() {
     let object = AisTexturedShape::new(&Shape::default());
     let source = object.clone().cast::<dyn AisTexturedShapeSource>();

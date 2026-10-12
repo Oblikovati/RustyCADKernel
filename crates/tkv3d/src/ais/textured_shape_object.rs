@@ -6,6 +6,9 @@ use rustycad_tkernel::{message::Messenger, quantity::Color, standard::*};
 use rustycad_tkservice::graphic3d::*;
 use std::sync::Arc;
 
+/// Native `base_type` identity; `object.cast::<AisTexturedShapeParent>()` retains its AIS_Shape interface.
+pub type AisTexturedShapeParent = dyn AisShapeSource;
+
 /// Real native textured presentation object, with bounded inherited shape behavior.
 /// Example: `let object=AisTexturedShape::new(&shape); object.set_texture_pix_map(&pixels);`.
 pub struct AisTexturedShape {
