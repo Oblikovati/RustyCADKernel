@@ -21,18 +21,36 @@ fn xr_state_columns(
     failure: bool,
 ) -> Vec<f64> {
     let color = alias.value().rgb();
-    let mut row = vec![
+    let mut row = xr_state_initial_columns(device, ordinal, step, failure);
+    row.extend(color.map(f64::from));
+    row.push(f64::from(
+        alias.is_same_reference(&device.laser_color_ref()),
+    ));
+    append_xr_state_tail(&mut row, device, prs, events);
+
+    row
+}
+fn xr_state_initial_columns(
+    device: &Handle<AisXrTrackedDevice>,
+    ordinal: i32,
+    step: i32,
+    failure: bool,
+) -> Vec<f64> {
+    vec![
         f64::from(ordinal),
         f64::from(step),
         f64::from(failure),
         f64::from(device.role() as i32),
         f64::from(device.unit_factor()),
         f64::from(device.laser_length()),
-    ];
-    row.extend(color.map(f64::from));
-    row.push(f64::from(
-        alias.is_same_reference(&device.laser_color_ref()),
-    ));
+    ]
+}
+fn append_xr_state_tail(
+    row: &mut Vec<f64>,
+    device: &Handle<AisXrTrackedDevice>,
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    events: &XrRecordingEvents,
+) {
     row.extend([
         f64::from(device.to_be_updated(false)),
         f64::from(prs.is_infinite()),
@@ -43,7 +61,6 @@ fn xr_state_columns(
     for group in prs.groups() {
         row.extend(group.cast::<XrRecordingGroup>().snapshot());
     }
-    row
 }
 fn replay_xr_state(ordinal: i32, expected: &mut std::str::Lines<'_>) {
     let (device, _context) = xr_state_device(ordinal);
@@ -53,25 +70,29 @@ fn replay_xr_state(ordinal: i32, expected: &mut std::str::Lines<'_>) {
     let second = device.laser_color_ref();
     assert!(alias.is_same_reference(&second));
     for step in 0..20 {
-        events.callbacks.write().clear();
-        let result = xr_state_operation(&device, &prs, &events, step);
-        if let Err(ref failure) = result {
-            assert_eq!(failure.exception_type(), "Standard_Failure");
-        }
-        let row = xr_state_columns(
-            &device,
-            &prs,
-            &alias,
-            &events,
-            ordinal,
-            step,
-            result.is_err(),
-        );
-        crate::select3d::compare_oracle_snapshot(
-            &row,
-            expected.next().unwrap(),
-        );
+        replay_xr_state_step((&device, &prs, &events), &alias, ordinal, step, expected);
     }
+}
+type XrStateScene<'a> = (
+    &'a Handle<AisXrTrackedDevice>,
+    &'a Handle<dyn Graphic3dStructureSource>,
+    &'a XrRecordingEvents,
+);
+fn replay_xr_state_step(
+    scene: XrStateScene<'_>,
+    alias: &AisXrLaserColorRef<'_>,
+    ordinal: i32,
+    step: i32,
+    expected: &mut std::str::Lines<'_>,
+) {
+    let (device, prs, events) = scene;
+    events.callbacks.write().clear();
+    let result = xr_state_operation(device, prs, events, step);
+    if let Err(ref failure) = result {
+        assert_eq!(failure.exception_type(), "Standard_Failure");
+    }
+    let row = xr_state_columns(device, prs, alias, events, ordinal, step, result.is_err());
+    crate::select3d::compare_oracle_snapshot(&row, expected.next().unwrap());
 }
 #[test]
 fn native_xr_models_axes_ray_accumulation_aliases_fault_repair_and_nan_comparisons() {

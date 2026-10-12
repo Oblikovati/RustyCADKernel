@@ -49,27 +49,32 @@ fn add_xr_axes<O: AisXrTrackedDeviceSource + ?Sized>(
 ) -> Result<(), Failure> {
     let size = 0.1_f32 * object.unit_factor();
     group.set_group_primitives_aspect(&object.attributes().line_aspect().aspect().cast());
+    let lines = xr_axis_segments(size)?;
+    group.add_primitive_array(&lines.cast(), true);
+    Ok(())
+}
+fn xr_axis_segments(size: f32) -> Result<Handle<Graphic3dArrayOfSegments>, Failure> {
     let lines = Handle::new(Graphic3dArrayOfSegments::new(
         6,
         0,
         GRAPHIC3D_ARRAY_FLAGS_VERTEX_COLOR,
     )?);
-    add_xr_axis(
-        &lines,
-        Point3::new(f64::from(size), 0., 0.),
-        NamedColor::RED,
-    )?;
-    add_xr_axis(
-        &lines,
-        Point3::new(0., f64::from(size), 0.),
-        NamedColor::GREEN,
-    )?;
-    add_xr_axis(
-        &lines,
-        Point3::new(0., 0., f64::from(size)),
-        NamedColor::BLUE,
-    )?;
-    group.add_primitive_array(&lines.cast(), true);
+    populate_xr_axes(&lines, size)?;
+    Ok(lines)
+}
+fn populate_xr_axes(lines: &Handle<Graphic3dArrayOfSegments>, size: f32) -> Result<(), Failure> {
+    for (axis, color) in [NamedColor::RED, NamedColor::GREEN, NamedColor::BLUE]
+        .into_iter()
+        .enumerate()
+    {
+        let mut coordinates = [0.; 3];
+        coordinates[axis] = f64::from(size);
+        add_xr_axis(
+            lines,
+            Point3::new(coordinates[0], coordinates[1], coordinates[2]),
+            color,
+        )?;
+    }
     Ok(())
 }
 fn add_xr_axis(
@@ -89,13 +94,7 @@ pub fn ais_xr_tracked_device_compute_laser_ray<O: AisXrTrackedDeviceSource + ?Si
     catch_native_failure(|| refresh_xr_laser(object))
 }
 fn refresh_xr_laser<O: AisXrTrackedDeviceSource + ?Sized>(object: &O) -> Result<(), Failure> {
-    let state = object.xr_tracked_device_base().parameters.read();
-    let (group, length, color) = (
-        state.ray_group.clone(),
-        state.laser_length,
-        state.laser_color,
-    );
-    drop(state);
+    let (group, length, color) = xr_laser_parameters(object);
     if group.is_null() {
         return Ok(());
     }
@@ -110,6 +109,16 @@ fn refresh_xr_laser<O: AisXrTrackedDeviceSource + ?Sized>(object: &O) -> Result<
     group.set_group_primitives_aspect(&object.attributes().line_aspect().aspect().cast());
     group.add_primitive_array(&lines.cast(), false);
     Ok(())
+}
+fn xr_laser_parameters<O: AisXrTrackedDeviceSource + ?Sized>(
+    object: &O,
+) -> (Handle<dyn Graphic3dGroup>, f32, Color) {
+    let state = object.xr_tracked_device_base().parameters.read();
+    (
+        state.ray_group.clone(),
+        state.laser_length,
+        state.laser_color,
+    )
 }
 fn xr_laser_segments(
     length: f32,

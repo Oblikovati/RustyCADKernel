@@ -465,7 +465,9 @@ mod xr_tracked_device_presentation;
 mod xr_tracked_device_selection;
 mod xr_tracked_device_texture;
 pub use xr_laser_color_reference::AisXrLaserColorRef;
-pub use xr_tracked_device::{AisXrTrackedDeviceBase, AisXrTrackedDeviceSource};
+pub use xr_tracked_device::{
+    AisXrTrackedDeviceBase, AisXrTrackedDeviceParent, AisXrTrackedDeviceSource,
+};
 pub use xr_tracked_device_members::AisXrTrackedDeviceMembers;
 pub use xr_tracked_device_object::AisXrTrackedDevice;
 pub use xr_tracked_device_presentation::{
@@ -474,11 +476,4 @@ pub use xr_tracked_device_presentation::{
 pub use xr_tracked_device_selection::ais_xr_tracked_device_compute_selection;
 
 #[cfg(test)]
-mod xr_recording_group;
-#[cfg(test)]
-mod xr_recording_structure;
-
-#[cfg(test)]
-mod xr_state_fixture;
-#[cfg(test)]
-mod xr_state_tests;
+mod xr_tests;

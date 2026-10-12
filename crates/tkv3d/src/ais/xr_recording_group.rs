@@ -10,6 +10,7 @@ use std::sync::Arc;
 pub(super) struct XrRecordingEvents {
     pub callbacks: SharedState<Vec<i32>>,
     pub fail_aspect: SharedState<bool>,
+    pub unexpected_panic: SharedState<bool>,
     pub fail_new_group: SharedState<i32>,
 }
 impl XrRecordingEvents {
@@ -18,6 +19,7 @@ impl XrRecordingEvents {
         Self {
             callbacks: SharedState::default(),
             fail_aspect: SharedState::new(false),
+            unexpected_panic: SharedState::new(false),
             fail_new_group: SharedState::new(-1),
         }
     }
@@ -53,12 +55,7 @@ impl XrRecordingGroup {
     pub fn snapshot(&self) -> Vec<f64> {
         let bounds = self.bounding_box();
         let state = self.recorded.read();
-        let mut row = vec![
-            f64::from(self.is_empty()),
-            f64::from(bounds.is_valid()),
-            f64::from(state.clears),
-            state.arrays.len() as f64,
-        ];
+        let mut row = xr_recorded_group_header(self, &state);
         if bounds.is_valid() {
             for axis in 0..3 {
                 row.extend([
@@ -84,6 +81,9 @@ impl Graphic3dGroup for XrRecordingGroup {
     }
     fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
         self.events.callbacks.write().push(100 + self.index);
+        if *self.events.unexpected_panic.read() {
+            std::panic::panic_any("Martensite_XrUnexpectedCallback");
+        }
         if *self.events.fail_aspect.read() {
             raise_native_failure::<()>(Err(XrProbeFailure::new(
                 "XR aspect callback=true; expected successful assignment",
@@ -142,17 +142,8 @@ fn xr_recorded_array(
     vertices: &Handle<dyn Graphic3dBufferSource>,
     evaluate: bool,
 ) -> Vec<f64> {
-    let colors = vertices
-        .attribute_data(Graphic3dTypeOfAttribute::Color)
-        .is_some();
+    let mut row = xr_recorded_array_header(kind, indices, vertices, evaluate);
     let count = indices.get().map_or(0, |value| value.nb_elements());
-    let mut row = vec![
-        f64::from(kind as i32),
-        f64::from(evaluate),
-        f64::from(vertices.nb_elements()),
-        f64::from(count),
-        f64::from(colors),
-    ];
     for vertex in record_scale_vertices(vertices) {
         row.extend(vertex);
     }
@@ -160,4 +151,32 @@ fn xr_recorded_array(
         row.push(f64::from(indices.index(index).unwrap()));
     }
     row
+}
+
+fn xr_recorded_array_header(
+    kind: Graphic3dTypeOfPrimitiveArray,
+    indices: &Handle<dyn Graphic3dIndexBufferSource>,
+    vertices: &Handle<dyn Graphic3dBufferSource>,
+    evaluate: bool,
+) -> Vec<f64> {
+    let colors = vertices
+        .attribute_data(Graphic3dTypeOfAttribute::Color)
+        .is_some();
+    let count = indices.get().map_or(0, |value| value.nb_elements());
+    vec![
+        f64::from(kind as i32),
+        f64::from(evaluate),
+        f64::from(vertices.nb_elements()),
+        f64::from(count),
+        f64::from(colors),
+    ]
+}
+
+fn xr_recorded_group_header(group: &XrRecordingGroup, state: &XrRecordedGroupState) -> Vec<f64> {
+    vec![
+        f64::from(group.is_empty()),
+        f64::from(group.bounding_box().is_valid()),
+        f64::from(state.clears),
+        state.arrays.len() as f64,
+    ]
 }

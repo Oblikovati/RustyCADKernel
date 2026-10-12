@@ -34,6 +34,11 @@ pub trait AisXrTrackedDeviceMembers: AisXrTrackedDeviceSource {
         // Returning a copied Color would lose updates observed through retained const references.
         AisXrLaserColorRef::new(&self.xr_tracked_device_base().parameters)
     }
+    /// Calls the native nonvirtual protected refresh; `device.compute_laser_ray()?`.
+    fn compute_laser_ray(&self) -> Result<(), Failure> {
+        // Blanket membership prevents application overrides from intercepting native setter refreshes.
+        super::ais_xr_tracked_device_compute_laser_ray(self)
+    }
     /// Copies color only when native tolerance considers it unequal; `device.set_laser_color(color)?`.
     fn set_laser_color(&self, color: Color) -> Result<(), Failure> {
         let mut state = self.xr_tracked_device_base().parameters.write();

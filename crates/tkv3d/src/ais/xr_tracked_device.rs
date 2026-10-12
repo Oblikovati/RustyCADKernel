@@ -55,8 +55,16 @@ pub trait AisXrTrackedDeviceSource: AisInteractiveObject {
     /// Borrows the same native state for base calls; `device.xr_tracked_device_base()`.
     fn xr_tracked_device_base(&self) -> &AisXrTrackedDeviceBase;
 }
-rustycad_tkernel::impl_transient_interface!(
-    dyn AisXrTrackedDeviceSource,
-    "AIS_XRTrackedDevice",
-    dyn AisInteractiveObject
-);
+/// The native base_type alias; `let parent:Handle<AisXrTrackedDeviceParent>=device.cast();`.
+pub type AisXrTrackedDeviceParent = dyn AisInteractiveObject;
+impl rustycad_tkernel::standard::RuntimeTyped for dyn AisXrTrackedDeviceSource {
+    const TYPE_NAME: &'static str = "AIS_XRTrackedDevice";
+    fn static_type() -> &'static rustycad_tkernel::standard::RuntimeType {
+        // The source is a Rust dispatch seam, not another native ancestor or class descriptor.
+        <super::AisXrTrackedDevice as rustycad_tkernel::standard::RuntimeTyped>::static_type()
+    }
+    fn project_from(object: &dyn rustycad_tkernel::standard::Transient) -> Option<&Self> {
+        // Interface casting keeps application implementations of the parent's virtual methods.
+        rustycad_tkernel::standard::project_interface::<Self>(object)
+    }
+}

@@ -57,23 +57,46 @@ pub(super) fn xr_state_operation(
     events: &XrRecordingEvents,
     step: i32,
 ) -> Result<(), Failure> {
+    if step <= 6 {
+        return xr_state_early_operation(device, prs, step);
+    }
+    if step <= 10 {
+        return xr_state_color_role_operation(device, step);
+    }
+    xr_state_late_operation(device, prs, events, step)
+}
+fn xr_state_early_operation(
+    device: &Handle<AisXrTrackedDevice>,
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    step: i32,
+) -> Result<(), Failure> {
     match step {
         0 => device.compute(&Handle::default(), prs, 1),
-        1 => {
-            device.set_laser_length(1.)?;
-            device.compute(&Handle::default(), prs, 0)
-        }
+        1 => xr_first_state_render(device, prs),
         2 | 3 => device.set_laser_length(2.),
         4 => device.set_laser_length(-1.),
-        5 | 6 => device.set_laser_length(f32::NAN),
+        _ => device.set_laser_length(f32::NAN),
+    }
+}
+fn xr_first_state_render(
+    device: &Handle<AisXrTrackedDevice>,
+    prs: &Handle<dyn Graphic3dStructureSource>,
+) -> Result<(), Failure> {
+    device.set_laser_length(1.)?;
+    device.compute(&Handle::default(), prs, 0)
+}
+fn xr_state_color_role_operation(
+    device: &Handle<AisXrTrackedDevice>,
+    step: i32,
+) -> Result<(), Failure> {
+    match step {
         7 => device.set_laser_color(Color::new(0.00001, 0., 1., ColorSpace::Rgb).unwrap()),
         8 | 9 => device.set_laser_color(Color::named(NamedColor::RED)),
-        10 => {
+        _ => {
             device.set_role(AspectXRTrackedDeviceRole::LeftHand);
             device.set_unit_factor(7.);
             Ok(())
         }
-        _ => xr_state_late_operation(device, prs, events, step),
     }
 }
 fn xr_state_late_operation(
@@ -84,25 +107,31 @@ fn xr_state_late_operation(
 ) -> Result<(), Failure> {
     match step {
         11 | 19 => device.compute(&Handle::default(), prs, 0),
-        12 => {
-            *events.fail_aspect.write() = true;
-            device.set_laser_length(3.)
-        }
-        13 => {
-            *events.fail_aspect.write() = false;
-            device.set_laser_length(3.)
-        }
+        12 | 13 => xr_faulted_state_length(device, events, step == 12),
         14 => device.set_laser_length(4.),
         15 => device.set_laser_length(0.),
         16 => device.set_laser_length(5.),
-        17 => {
-            *events.fail_new_group.write() = prs.number_of_groups() + 1;
-            device.compute(&Handle::default(), prs, 0)
-        }
-        18 => {
-            *events.fail_new_group.write() = -1;
-            device.set_laser_color(Color::named(NamedColor::GREEN))
-        }
-        _ => unreachable!("XR mutation step={step}; expected0..20"),
+        _ => xr_state_allocation_color_operation(device, prs, events, step),
     }
+}
+fn xr_faulted_state_length(
+    device: &Handle<AisXrTrackedDevice>,
+    events: &XrRecordingEvents,
+    fail: bool,
+) -> Result<(), Failure> {
+    *events.fail_aspect.write() = fail;
+    device.set_laser_length(3.)
+}
+fn xr_state_allocation_color_operation(
+    device: &Handle<AisXrTrackedDevice>,
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    events: &XrRecordingEvents,
+    step: i32,
+) -> Result<(), Failure> {
+    if step == 17 {
+        *events.fail_new_group.write() = prs.number_of_groups() + 1;
+        return device.compute(&Handle::default(), prs, 0);
+    }
+    *events.fail_new_group.write() = -1;
+    device.set_laser_color(Color::named(NamedColor::GREEN))
 }

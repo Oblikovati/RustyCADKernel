@@ -13,10 +13,7 @@ rustycad_tkernel::impl_transient!(AisXrTrackedDevice,"AIS_XRTrackedDevice",dyn A
 impl AisXrTrackedDevice {
     /// Creates the native axes-only device; `AisXrTrackedDevice::new()?`.
     pub fn new() -> Result<Handle<Self>, Failure> {
-        let device = Handle::new(Self {
-            transient: StandardTransient::default(),
-            base: AisXrTrackedDeviceBase::new(),
-        });
+        let device = Handle::new(unbound_xr_tracked_device());
         prs_mgr_presentable_bind(&device.clone().cast());
         Ok(device)
     }
@@ -25,12 +22,8 @@ impl AisXrTrackedDevice {
         triangles: &Handle<Graphic3dArrayOfTriangles>,
         texture: &Handle<dyn ImageTextureSource>,
     ) -> Result<Handle<Self>, Failure> {
-        let device = Self::new()?;
-        let mut state = device.base.parameters.write();
-        state.triangles = triangles.clone();
-        state.show_axes = false;
-        drop(state);
-        super::xr_tracked_device_texture::initialize_xr_shading(&*device, texture)?;
+        let device = Handle::new(unbound_xr_tracked_device_model(triangles, texture)?);
+        prs_mgr_presentable_bind(&device.clone().cast());
         Ok(device)
     }
 }
@@ -77,4 +70,24 @@ impl SelectMgrSelectableObject for AisXrTrackedDevice {
     ) -> Result<(), Failure> {
         super::ais_xr_tracked_device_compute_selection(self, selection, mode)
     }
+}
+
+pub(super) fn unbound_xr_tracked_device() -> AisXrTrackedDevice {
+    // Native construction precedes binding this() to its final most-derived owning object.
+    AisXrTrackedDevice {
+        transient: StandardTransient::default(),
+        base: AisXrTrackedDeviceBase::new(),
+    }
+}
+pub(super) fn unbound_xr_tracked_device_model(
+    triangles: &Handle<Graphic3dArrayOfTriangles>,
+    texture: &Handle<dyn ImageTextureSource>,
+) -> Result<AisXrTrackedDevice, Failure> {
+    let device = unbound_xr_tracked_device();
+    let mut state = device.base.parameters.write();
+    state.triangles = triangles.clone();
+    state.show_axes = false;
+    drop(state);
+    super::xr_tracked_device_texture::initialize_xr_shading(&device, texture)?;
+    Ok(device)
 }

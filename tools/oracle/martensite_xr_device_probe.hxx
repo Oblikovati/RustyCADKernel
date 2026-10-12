@@ -33,7 +33,10 @@ class XrProbeGroup:public SvGroup {
 public:
   std::vector<XrRecordedArray> arrays;
   int index,clears=0;
-  XrProbeGroup(const occ::handle<Graphic3d_Structure>& structure,XrProbeEvents& source,int ordinal):SvGroup(structure),events(source),index(ordinal) {}
+  XrProbeGroup(const occ::handle<Graphic3d_Structure>& structure,XrProbeEvents& source,int ordinal):SvGroup(structure),events(source),index(ordinal) {
+    // The named probe retains its injected dependency for every real native callback.
+    // Constructor behavior remains inherited; no geometry or failure is fabricated here.
+  }
   void SetGroupPrimitivesAspect(const occ::handle<Graphic3d_Aspects>& aspect) override {
     events.callbacks.push_back(100+index);
     if(events.failAspect)throw Standard_Failure("XR aspect callback=true; expected successful aspect assignment");
@@ -52,17 +55,23 @@ public:
 class XrProbeStructure:public SvCStructure {
   XrProbeEvents& events;
 public:
-  XrProbeStructure(const occ::handle<Graphic3d_StructureManager>& manager,XrProbeEvents& source):SvCStructure(manager),events(source) {}
+  XrProbeStructure(const occ::handle<Graphic3d_StructureManager>& manager,XrProbeEvents& source):SvCStructure(manager),events(source) {
+    // The named probe retains its injected dependency for every real native callback.
+    // Constructor behavior remains inherited; no geometry or failure is fabricated here.
+  }
   occ::handle<Graphic3d_Group> NewGroup(const occ::handle<Graphic3d_Structure>& structure) override {
     int index=myGroups.Length();events.callbacks.push_back(400+index);
-    if(events.failNewGroup==index)throw Standard_Failure("XR new-group callback index rejected; expected live group");
+    if(events.failNewGroup==index)throw Standard_Failure(("XR new-group index="+std::to_string(index)+"; expected live group").c_str());
     occ::handle<Graphic3d_Group> group=new XrProbeGroup(structure,events,index);myGroups.Append(group);return group;
   }
 };
 class XrProbeDriver:public SvDriver {
   XrProbeEvents& events;
 public:
-  XrProbeDriver(XrProbeEvents& source):events(source) {}
+  XrProbeDriver(XrProbeEvents& source):events(source) {
+    // The named probe retains its injected dependency for every real native callback.
+    // Constructor behavior remains inherited; no geometry or failure is fabricated here.
+  }
   occ::handle<Graphic3d_CStructure> CreateStructure(const occ::handle<Graphic3d_StructureManager>& manager) override {
     // The real parent group computes bounds; this driver only records actual virtual submissions.
     return new XrProbeStructure(manager,events);
@@ -76,6 +85,10 @@ public:
   using AIS_XRTrackedDevice::AcceptDisplayMode;
   using AIS_XRTrackedDevice::computeLaserRay;
 };
+static void XrPrintVertexColor(const uint8_t* colors,size_t stride,int vertex) {
+  if(colors==nullptr)return;
+  for(int channel=0;channel<4;++channel)std::cout<<' '<<int(colors[vertex*stride+channel]);
+}
 static void XrPrintArray(const XrRecordedArray& array) {
   int posIndex=-1,colorIndex=-1;size_t posStride=0,colorStride=0;
   auto positions=array.vertices->AttributeData(Graphic3d_TOA_POS,posIndex,posStride);
@@ -84,7 +97,7 @@ static void XrPrintArray(const XrRecordedArray& array) {
   for(int i=0;i<array.vertices->NbElements;++i) {
     float point[3];std::memcpy(point,positions+i*posStride,sizeof(point));
     for(float channel:point)std::cout<<' '<<channel;
-    if(colors)for(int channel=0;channel<4;++channel)std::cout<<' '<<int(colors[i*colorStride+channel]);
+    XrPrintVertexColor(colors,colorStride,i);
   }
   if(!array.indices.IsNull())for(int i=0;i<array.indices->NbElements;++i)std::cout<<' '<<array.indices->Index(i);
 }

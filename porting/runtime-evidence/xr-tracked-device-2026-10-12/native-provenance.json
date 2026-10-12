@@ -1,0 +1,228 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "configuration": "Pinned exception-enabled RelWithDebInfo OCCT libraries; c++ -std=c++17 -O2; existing root target/occt-all-full include and libi. CPU only; OCCT never rebuilt or required by Rust tests.",
+  "link_libraries": [
+    "TKV3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "total_rows": 1058,
+  "suites": [
+    {
+      "suite": "state",
+      "generator": "tools/oracle/martensite_xr_device_state.cxx",
+      "rows": 960,
+      "reconstructed_sha256": "74045f597bba59fc912369d3f5c5e2b2e7451a63400fae81e26e14a29676022d",
+      "repeated_byte_identically": true,
+      "fixtures": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-state-00.txt",
+          "sha256": "1eeee8d0e75b5637409212b4208e9ef090e4ea65efcd67b233e619f9ef2e82e3",
+          "rows": 480
+        },
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-state-01.txt",
+          "sha256": "3ec84d0b45adf9e60c4d2285a4299f74d4f8303baed7d7a31286c1a306bd12e8",
+          "rows": 480
+        }
+      ]
+    },
+    {
+      "suite": "selection",
+      "generator": "tools/oracle/martensite_xr_device_selection.cxx",
+      "rows": 60,
+      "reconstructed_sha256": "1958c86825c8ce78a6e5d5a7f72697f6e039331233a43256b7653ccb3ee194ad",
+      "repeated_byte_identically": true,
+      "fixtures": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-selection.txt",
+          "sha256": "1958c86825c8ce78a6e5d5a7f72697f6e039331233a43256b7653ccb3ee194ad",
+          "rows": 60
+        }
+      ]
+    },
+    {
+      "suite": "texture",
+      "generator": "tools/oracle/martensite_xr_device_texture.cxx",
+      "rows": 12,
+      "reconstructed_sha256": "a6195703316e31e79a4a585661f0b160830a09ad5b56ad378495fd9de8d0f1f5",
+      "repeated_byte_identically": true,
+      "fixtures": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-texture.txt",
+          "sha256": "a6195703316e31e79a4a585661f0b160830a09ad5b56ad378495fd9de8d0f1f5",
+          "rows": 12
+        }
+      ]
+    },
+    {
+      "suite": "color_reference",
+      "generator": "tools/oracle/martensite_xr_device_color_reference.cxx",
+      "rows": 8,
+      "reconstructed_sha256": "f917c30c7b57c7d90775461e9b8ec8f4983f561114b18f8d64d5eff671f1231f",
+      "repeated_byte_identically": true,
+      "fixtures": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-color-reference.txt",
+          "sha256": "f917c30c7b57c7d90775461e9b8ec8f4983f561114b18f8d64d5eff671f1231f",
+          "rows": 8
+        }
+      ]
+    },
+    {
+      "suite": "cached_presentation",
+      "generator": "tools/oracle/martensite_xr_device_cached_presentation.cxx",
+      "rows": 8,
+      "reconstructed_sha256": "98bdf1e14724b6144eb4bf0775e5223cedbfaad56ae48c1812d8b8f84cd05407",
+      "repeated_byte_identically": true,
+      "fixtures": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-cached-presentation.txt",
+          "sha256": "98bdf1e14724b6144eb4bf0775e5223cedbfaad56ae48c1812d8b8f84cd05407",
+          "rows": 8
+        }
+      ]
+    },
+    {
+      "suite": "dispatch",
+      "generator": "tools/oracle/martensite_xr_device_dispatch.cxx",
+      "rows": 10,
+      "reconstructed_sha256": "1d3f5a27c87f71b8193f38d800782f702551155d0ed9602c95d2e1940516a58c",
+      "repeated_byte_identically": true,
+      "fixtures": [
+        {
+          "path": "crates/tkv3d/tests/fixtures/xr-device-dispatch.txt",
+          "sha256": "1d3f5a27c87f71b8193f38d800782f702551155d0ed9602c95d2e1940516a58c",
+          "rows": 10
+        }
+      ]
+    }
+  ],
+  "transitive_oracle_sources": [
+    {
+      "path": "tools/oracle/martensite_sensitive_primitive_matching.cxx",
+      "sha256": "cfc144de5ddebc783af29a33534014170f0264c4c9aac0d7040f02c11650be05"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_cached_presentation.cxx",
+      "sha256": "41f3c82261dcb28d9bc009f58037c18a64249679f19d0bd9ef3b3ce886c26398"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_color_reference.cxx",
+      "sha256": "a9dcf6d6985b038acce848dc245a88cd9cc49f8cf45e80d5286e1551b288998c"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_dispatch.cxx",
+      "sha256": "58d0397cd6d4e29c5daff418e85db3a12f315ffcb8fa62fb6d9a49f09df56acd"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_probe.hxx",
+      "sha256": "8eea8911dc04773a714154f28c809f86717af95630b1815fb2a50562c9e82698"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_selection.cxx",
+      "sha256": "d022aea2aeaffa7b264e936c423d01e6c72a05b770618071076791553ba730b5"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_selection.hxx",
+      "sha256": "3a88471b173a1bfb94ee9dff89665c7ba9bc4ab4a2093ec969c65536b0a0c3f1"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_state.cxx",
+      "sha256": "3a4c781f98e91df77c1737073a056fafdb21e3a9fc9b4da8709b1b9ee51ccecd"
+    },
+    {
+      "path": "tools/oracle/martensite_xr_device_texture.cxx",
+      "sha256": "9ad31df1a2b0dd8df4fc7d855120c5e08371b65f3c4ce3e7916f48242e7ba3fd"
+    },
+    {
+      "path": "tools/oracle/tkservice_probe_null_driver.cxx",
+      "sha256": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5"
+    }
+  ],
+  "upstream_sources": [
+    {
+      "path": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc"
+    },
+    {
+      "path": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.cxx",
+      "sha256": "6866a9116649550622e096fe33c0a1b0e70942da7cf1d72bc7e2327a5a48fc78"
+    },
+    {
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Group.hxx",
+      "sha256": "0c5fea62e0e3d0733e076a95796612fa27c0d70bfcbf6c3f9ae03049d8202edd"
+    },
+    {
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Group.cxx",
+      "sha256": "41bdbf913e611c3c2369d8b26b8d9efd549c9d030731771633f4a534756a3fd1"
+    },
+    {
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.hxx",
+      "sha256": "949818d1ccbd94a83907e9cacd82435d94d33f511d6a3668618ea08b5025ed57"
+    },
+    {
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_Texture2D.cxx",
+      "sha256": "f3ecb07cc75d314cb625ba7bc001d13de1d2307dfd5b83986c092b3132da7004"
+    },
+    {
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.hxx",
+      "sha256": "9fc468859aa3b2880607d2bbe2e151aa5e89b0f69ee1f4c43958f6a77301bdc3"
+    },
+    {
+      "path": "src/Visualization/TKService/Graphic3d/Graphic3d_TextureRoot.cxx",
+      "sha256": "499e9a19b29561c1f2105d222dcf80adfc03ccf2fe785dc4044926256c2d7f24"
+    },
+    {
+      "path": "src/Visualization/TKService/Image/Image_Texture.hxx",
+      "sha256": "4fb37beff0017acefa294f28cb89de843ce63287ade4247cc92c23058ea53cf8"
+    },
+    {
+      "path": "src/Visualization/TKService/Image/Image_Texture.cxx",
+      "sha256": "fc3d5a250b48bd188e51d3bfbb1d5c88c9e74380ae49c65be5f746baf0033d63"
+    },
+    {
+      "path": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "sha256": "ac739bf29d6e1b445572b9de29b41de814c9bbdead1db0f1e7c55d487d375d28"
+    },
+    {
+      "path": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.cxx",
+      "sha256": "52907481c123b36484707edc9798f8899f5609aedb658769adeb324604e307ed"
+    },
+    {
+      "path": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.hxx",
+      "sha256": "a78864478a6d2e9182fe0bb3873e0e35a388971071a134bad4629df1be1f22f3"
+    },
+    {
+      "path": "src/Visualization/TKV3d/PrsMgr/PrsMgr_PresentationManager.cxx",
+      "sha256": "115f52908875f28cd3abbd75d3f95496fd34eaec10d936626863340cfda5c9ac"
+    },
+    {
+      "path": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.hxx",
+      "sha256": "407407c6711d3c0b95801f158545e30a21904e4133c9b7d3a382bb173efe261e"
+    },
+    {
+      "path": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePrimitiveArray.cxx",
+      "sha256": "658dcbc6997edc292271fc9ecd3461d0a5497603443bfa2bd8f48167dde858a7"
+    }
+  ],
+  "rustdoc_toolchain": "nightly-2026-09-25",
+  "rustdoc_capture_flags": "--document-private-items --all-features; JSON normalized with reachable inventory and public trait resolution",
+  "checks": {
+    "TKService_tests": 250,
+    "TKV3d_tests": 719,
+    "clippy": "all-targets -D warnings",
+    "format": "tools/check_rust_format.py",
+    "discovery_regressions": 13,
+    "preflight_regressions": 13,
+    "production_scoped_bindings": 19
+  },
+  "undefined_behavior_excluded": [
+    "Native dangling references/null dereferences",
+    "Invalid enums and unchecked native array indices",
+    "Concurrent data races"
+  ],
+  "prerequisite": "../../../../crates/tkservice/tests/fixtures/texture-2d-native-rtti.json"
+}
