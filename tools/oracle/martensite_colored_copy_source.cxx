@@ -29,7 +29,10 @@ static void copy_source_case(const ColoredExpansionInputs& input, int stage, boo
 int main()
 {
   const ColoredExpansionInputs input;
-  for (int stage : {3,4,5})
-    for (bool owned : {false,true})
-      for (int failure : {0,1,2}) copy_source_case(input, stage, owned, failure);
+  for (int scenario=0;scenario<18;++scenario)
+  {
+    const int stage=3+scenario/6;
+    const bool owned=(scenario/3)%2==1;
+    copy_source_case(input,stage,owned,scenario%3);
+  }
 }
