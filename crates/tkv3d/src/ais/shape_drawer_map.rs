@@ -6,7 +6,7 @@ use super::{
 use rustycad_tkbrep::{topods::Shape, toptools::ShapeMapHasher};
 use rustycad_tkernel::{
     ncollection::{DataMap, HashPolicy},
-    standard::{Failure, Handle, SharedState},
+    standard::{Failure, Handle, HandleReference, SharedState},
 };
 use std::sync::{
     Arc,
@@ -43,6 +43,14 @@ impl AisShapeDrawerMap {
     /// Binds or replaces a value while retaining the first stored key and node.
     /// Example: `map.bind(&shape.reversed(), &replacement)?`.
     pub fn bind(&self, key: &Shape, value: &Handle<AisColoredDrawer>) -> Result<bool, Failure> {
+        // The borrowed-slot path also serves native same-map expansion without owning input copies.
+        self.bind_reference(key, value)
+    }
+    pub(super) fn bind_reference(
+        &self,
+        key: &Shape,
+        value: &impl HandleReference<AisColoredDrawer>,
+    ) -> Result<bool, Failure> {
         let mut nodes = self.nodes.write();
         prepare_shape_drawer_binding(&mut nodes);
         if let Some(node) = find_shape_drawer_node(&nodes, key) {
@@ -109,7 +117,7 @@ pub(super) fn find_shape_drawer_node<'a>(
     let hash = ShapeMapHasher.hash(key);
     nodes
         .find_hashed(hash, |node| {
-            node.read_fields(|live| ShapeMapHasher.equal(&live.key, key))
+            node.read_fields(|live| ShapeMapHasher.equal(live.key, key))
                 .expect("ShapeDrawerNode fields=None; expected a live mapped key")
         })
         .map(|(node, ())| node)
