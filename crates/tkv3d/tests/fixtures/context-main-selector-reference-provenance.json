@@ -1,0 +1,22 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "main_base": "79f2f8382",
+  "row_count": 4,
+  "native_runs": "fresh main-base compilation; two byte-identical local CPU runs; no GPU/headset",
+  "fixture_sha256": "202092691ab836ef429eeebbe094ea0ba4ea873cfde4b6f740448748915e0640",
+  "first_run_sha256": "202092691ab836ef429eeebbe094ea0ba4ea873cfde4b6f740448748915e0640",
+  "second_run_sha256": "202092691ab836ef429eeebbe094ea0ba4ea873cfde4b6f740448748915e0640",
+  "oracle_executable_sha256": "2d7043a6395fb1b66374c440aba1e7892b6988ad8d690d928d648f8fc0d82256",
+  "sources": {
+    "tools/oracle/martensite_context_main_selector_reference.cxx": "166c8001fa2f8c7518f2330342b9d545ec204564716404cf33b0755b62ac6d69",
+    "tools/oracle/martensite_controller_camera_primitives.cxx": "dbf9f6ffb2512b14f4cc24d4652d174d9951150c693c9c200a7423be651f4e1a",
+    "tools/oracle/martensite_view_controller_transfer.cxx": "343128301ebcac151850c0997fae7d9ed644464b1b5912ec890f3ed26a2aea13",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "OCCT/src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+    "OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectionManager.hxx": "d97531b3e724ddb45b81ae60b129bad73a28ead02587f50da4e3cba68c63e5a3"
+  },
+  "schema": "phase same-original-selector-slot same-original-selector-object original-manager-count next-manager-count original-selector-count next-selector-count context-current-manager-is-original",
+  "scope": "Retained native MainSelector reference across actual context manager replacement/nullification/restoration, both managers externally retained; no dangling manager reference or class/frame completion claims.",
+  "shared_wrapper_generation": "Replace only int main( with int martensite_unused_martensite_controller_camera_primitives_main( in committed camera-primitives source; include tools/oracle unchanged.",
+  "generated_wrapper_sha256": "2f99b337bfa8d82525868560d8c708ab496a96f60379ba8d0c67c57fde05f2da"
+}

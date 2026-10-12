@@ -44,6 +44,8 @@ pub use interactive_object::{
 };
 mod context_members;
 pub use context_members::AisContextHandle;
+mod context_selector_reference;
+pub use context_selector_reference::AisMainSelectorRef;
 
 mod context_updates;
 mod interactive_object_members;

@@ -56,8 +56,8 @@ impl AisInteractiveContext {
         self.borrow_handle(0, |f, _| &f.presentation_manager)
     }
     /// Borrow the selection manager's actual selector; `context.main_selector()`.
-    pub fn main_selector(&self) -> AisContextHandle<'_, dyn SelectMgrViewerSelectorSource> {
-        self.borrow_handle(0, |f, _| f.selection_manager.selector())
+    pub fn main_selector(&self) -> super::AisMainSelectorRef {
+        super::AisMainSelectorRef::from_context(self)
     }
     /// Borrow the selected-owner container; `context.selection()`.
     pub fn selection(&self) -> AisContextHandle<'_, dyn AisSelectionSource> {
