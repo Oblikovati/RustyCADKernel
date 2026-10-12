@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "recorded_utc": "2026-10-12T09:34:43.700740+00:00",
+  "generator": "tools/oracle/martensite_textured_shape_drop_peers.cxx",
+  "generator_sha256": "d9b3d484b3d80f2082d11ba06455329ecd2cefd2d0d3542f360bc0e8de1544f1",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/tools/oracle/martensite_textured_shape_drop_peers.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKG3d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/oracle/martensite-textured-shape-drop-peers"
+  ],
+  "binary_sha256": "2a15862adee8bc40aa48dfae0411ae99a5780633e4c1f50705701f30781e172e",
+  "fixture": "native-drop-peers.txt",
+  "fixture_sha256": "07404879629f349b591c1f1e06864e97bf5f6813382c72870001db0dad35f3fc",
+  "repeat_stdout_byte_identical": true,
+  "repeat_stderr_byte_identical": true,
+  "probe_includes_sha256": {},
+  "native_link_libraries_sha256": {
+    "libTKTopAlgo.so": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKBRep.so": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "libTKG3d.so": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKPrim.so": "b48063f4379072c6739140c99b5f3293e2f98448703fbbe626a28baa8c0c97dd",
+    "libTKMesh.so": "08bfc41062c0955d1c149ffa4736150561c87bd4ac8da23a4c310ed11e9e1325"
+  },
+  "scope": "Actual Image_PixMap subclass destructor peer counts during genuine AIS_TexturedShape destruction, without rendering.",
+  "native_source_sha256": {
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx": "5ce11a239588c7bcdfe62652b4152ea0f283207909c125772ed737e833fe6e3c",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "src/Visualization/TKV3d/AIS/AIS_TexturedShape.cxx": "3ccf131ae52e98fbf49317c392e5b633bdcf7f191b3292a605b937d27e3fd6ed",
+    "src/Visualization/TKV3d/AIS/AIS_TexturedShape.hxx": "072908fd2669a0ed319e3af5f2e6b72630f8464959b95b2e4554f0589e9a938f"
+  }
+}

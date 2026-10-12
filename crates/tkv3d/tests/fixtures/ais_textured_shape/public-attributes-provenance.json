@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "recorded_utc": "2026-10-12T07:48:18.176558+00:00",
+  "generator": "tools/oracle/martensite_textured_shape_public_attributes.cxx",
+  "generator_sha256": "3ae4457901ee1bb2781f5168f95c9c606750ec78d11c4396b4be42c7be9b0b47",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/tools/oracle/martensite_textured_shape_public_attributes.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKG3d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/oracle/martensite-textured-shape-public-attributes"
+  ],
+  "binary_sha256": "4ad6a117498544754214b069fd3becf214f513f835da658f65a7fab1541c1b64",
+  "fixture": "native-public-attributes.txt",
+  "fixture_sha256": "40a72030a1748f7614b59be577275460c4da9ce9d9e83db5e97d00c7c1e4f129",
+  "repeat_stdout_byte_identical": true,
+  "repeat_stderr_byte_identical": true,
+  "probe_includes_sha256": {
+    "tools/oracle/martensite_textured_shape_state.hxx": "0e3298f2f0eb84d4886ddbb3c1b7dc7047ff5c0ba0c767ee06f15b7d810109aa",
+    "tools/oracle/martensite_textured_face_fixture.hxx": "8a37aef3c32f7cc8ff9e338792f8a828734dd5b9dd71d050b56ec00abe2da2cf",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+    "tools/oracle/tkv3d_probe_sensitive_display_driver.cxx": "48a4c0e10752f91c57852de41f441d9d9f6bdcfdcdc36b37825d45eb9a983d9c",
+    "tools/oracle/martensite_textured_volume_fixture.hxx": "f51696822cb5b60ae1d7d2859540dc97b1dc7eb0c68040493ebcbab138559b32",
+    "tools/oracle/martensite_textured_shape_compute.cxx": "f74bf5157aeedecba493dfb2964239035ddd0d37acf89dc23f9d7dc623a245ee"
+  },
+  "native_link_libraries_sha256": {
+    "libTKTopAlgo.so": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKBRep.so": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "libTKG3d.so": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKPrim.so": "b48063f4379072c6739140c99b5f3293e2f98448703fbbe626a28baa8c0c97dd",
+    "libTKMesh.so": "08bfc41062c0955d1c149ffa4736150561c87bd4ac8da23a4c310ed11e9e1325"
+  },
+  "scope": "Actual public UpdateAttributes via genuine context current-mode presentation; geometry group retained, texture/aspect replaced, actual group aspect updated with one native aspect callback."
+}

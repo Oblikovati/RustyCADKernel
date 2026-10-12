@@ -1,0 +1,216 @@
+{
+  "api": [
+    {
+      "upstream_id": "Aspect_XRSession::myRoleActions",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "144fd3fc3ff83b7391f0543153e64bc2cf83b71753580ca5eff9f5846f43a06c",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::role_actions",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackedPoses",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "650558f5a1048e4137fcb8b50913507e735f2211c7a08944064eabc3b7539b91",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses_ref",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::HeadPose",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "68b7edf6edcf13741140468b2d5f8552865b20dfa57498e9d933a1797c85afbb",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose_ref",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::myTrackedPoses",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "9f8f50763522c3573e75e5ee5f6082b00b92f86fb632ef8f9570f23ef7ee9c73",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::tracked_poses",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
+    },
+    {
+      "upstream_id": "Aspect_XRSession::GenericAction",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "afac9203f3e0501591793c1238efffd0d5e14ad07142d5a665c5a4debaf580a3",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action_ref",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
+    },
+    {
+      "upstream_id": "V3d_View::Subviews",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "93b48f4249e881f12694481d9258e48dcdea2a42771991a929162d1625d2cb4d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+          "declaration_sha256": "fb7dea567238e0f1cdaab4bdfcb05bdfb47e2ff39e86250c381bcb7842c85fdc",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite actual const subview sequence-object alias and readonly one-based values/endpoints/live cursor; five pinned native public AddSubview/RemoveSubview phases plus six auxiliary callback/node rows, exact intrusive counts and Rust-only replay. Private storage/class/controller frame claims excluded; no declared V3d API node transfer. See docs/v3d-subview-sequence.md."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::operator=",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "source_sha256": "c0e6d29756cbec7a0ddc857b4b6a4ba4528496136933f2d4f7ef40a71eae417b",
+      "cpp_declaration_id": "dccb21ff6fa9b8ea21ea2900d5abad188cc6ca2f92f12fed102f1033299c42ca",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
+          "declaration_sha256": "25ec637827a223030c4d01f9c7ab71cd52f8c4bc563b95a1aa6df4838f709e61",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "Graphic3dFrameStatsDataTmp",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::frame_stats_data::Graphic3dFrameStatsDataTmp",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite temporary statistics frame assignment preserves actual running OSD timer object and prior sample history while copying frame values. Six pinned native rows repeated byte-for-byte and Rust replay compares exact bits through assignment, next delta, repeated assignment, final averaging and reset. Safe Rust borrowing prohibits aliased mutable destination/source; no native exception, move/vector-reference or whole-class credit. See docs/frame-statistics-assignment.md and porting/runtime-evidence/frame-stats-assignment/."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::ClearCustomAspects",
+      "cpp_declaration_id": "0830bcbc8f247c4291670295e7bd5663f2f8e0a87ff6dc898549595c567dc8ec",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeSource::clear_custom_aspects",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::CustomAspectsMap",
+      "cpp_declaration_id": "4a8731f6b311c503d281afbdb8b36bf3f7a8a24d64532687209df002fd5c53cb",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeMembers::custom_aspects_map",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::myShapeColors",
+      "cpp_declaration_id": "7744e906e771327b2eef6abb28de0ab9345c1f0b84206341174c208d3002a3c1",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeBase::shape_colors",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::CustomAspects",
+      "cpp_declaration_id": "84fcc9f9e6a06b33c2464116e5f1146be701fff2f38408baad38b071658d8a87",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeSource::custom_aspects",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::get_type_name",
+      "cpp_declaration_id": "91526d5793610cad385d523fda2378370a0714b0387edead250a28ee5f4d40b6",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::DynamicType",
+      "cpp_declaration_id": "c108628c234d4d228a4b2f7d53517d6bb489aff11c8864b25e1d46448bc85d0a",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::ChangeCustomAspectsMap",
+      "cpp_declaration_id": "c3b8e1d4dcc1ff0c885cca4be9ec15ca8530d12776e7ff0846d3a2295c41d2c5",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeMembers::change_custom_aspects_map",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::get_type_descriptor",
+      "cpp_declaration_id": "d72d48b80e96a255048c83bfb8a2bce5606e091f9baecb391e4a3797715457b7",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::UnsetCustomAspects",
+      "cpp_declaration_id": "df686f50311d8a1dcadc54f83780cb3bbc7451fae6de19fcbb669d283fdcf18a",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeMembers::unset_custom_aspects",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::AIS_ColoredShape",
+      "cpp_declaration_id": "f67a58558ac256df8077faa99a3021647abb93f428c5a36bd9f08af97ea75f7c",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::new",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    }
+  ]
+}

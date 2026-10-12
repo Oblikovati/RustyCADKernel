@@ -21,7 +21,9 @@ impl AsciiString {
         let mut terminated = Vec::with_capacity(super::storage::padded_byte_capacity(length));
         terminated.resize(length, byte);
         terminated.push(0);
-        Self { terminated }
+        Self {
+            terminated: super::allocation::OwnedAsciiBuffer::from_vector(terminated),
+        }
     }
     /// Copies at most `maximum` bytes, stopping at the first NUL or the span end
     /// (`TCollection_AsciiString(const char*, int)`); `AsciiString::with_max_length("hello", 3)`.

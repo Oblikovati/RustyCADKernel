@@ -1,7 +1,7 @@
 //! OCCT string storage; interfaces are added alongside legacy suites.
 mod ascii_string;
 pub(crate) use ascii_string::c_string_prefix;
-pub use ascii_string::{AsciiString, CatOperand};
+pub use ascii_string::{AsciiString, AsciiStringBufferIdentity, CatOperand};
 mod extended_string;
 pub use extended_string::ExtendedString;
 mod h_ascii_string;

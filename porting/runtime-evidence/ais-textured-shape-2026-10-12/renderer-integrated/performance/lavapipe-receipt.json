@@ -1,0 +1,44 @@
+{
+  "profile": "lavapipe",
+  "device": {
+    "index": 0,
+    "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+    "api_version": "1.4.354",
+    "driver": "llvmpipe"
+  },
+  "environment": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "MARTENSITE_VULKAN_DEVICE": "0"
+  },
+  "command": [
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/release/examples/ais_textured_shape_performance"
+  ],
+  "source_revision": "27f99664564aed58d8d76fe0744b809c2ea58247",
+  "manifest_sha256": "a0ae549e145f65835b6abd7f95a33b8ce4fdd2a1deeb8386b467648fb07de030",
+  "before": {
+    "utc": "2026-10-12T10:07:22.698407+00:00",
+    "loadavg": "1.72 3.89 4.39 2/5088 810219",
+    "processes": []
+  },
+  "before_hashes": {
+    "source_entries_verified": 12865,
+    "source_mismatches": [],
+    "binary_sha256": "36416fcd335843553a51fc51b7a9d1115be2f59e78465975336a7654d8346d60"
+  },
+  "baseline_accepted": false,
+  "exit": 0,
+  "after": {
+    "utc": "2026-10-12T10:07:23.804217+00:00",
+    "loadavg": "1.72 3.89 4.39 1/5085 810319",
+    "processes": []
+  },
+  "after_hashes": {
+    "source_entries_verified": 12865,
+    "source_mismatches": [],
+    "binary_sha256": "36416fcd335843553a51fc51b7a9d1115be2f59e78465975336a7654d8346d60"
+  },
+  "workloads": 24,
+  "samples": 2400
+}

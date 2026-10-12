@@ -12,8 +12,14 @@ pub(super) fn padded_byte_capacity(length: usize) -> usize {
 impl AsciiString {
     pub(super) fn ensure_owned_terminator(&mut self) {
         if self.terminated.is_empty() {
-            self.terminated.push(0);
+            self.reserve_buffer_length(1);
+            self.terminated.write().push(0);
         }
+    }
+
+    pub(super) fn reserve_buffer_length(&mut self, required: usize) {
+        // Growth replaces the unique allocation owner before a mutable Vec operation.
+        self.terminated.reserve(required);
     }
 }
 

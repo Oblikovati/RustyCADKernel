@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "recorded_utc": "2026-10-12T09:18:50.746791+00:00",
+  "generator": "tools/oracle/martensite_textured_shape_file_buffer.cxx",
+  "generator_sha256": "7e7789be7ceac04e6c67de609099efd508a922fec5d2a3155b2e356266ab387a",
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/tools/oracle/martensite_textured_shape_file_buffer.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKG3d",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/oracle/martensite-textured-shape-file-buffer"
+  ],
+  "binary_sha256": "3d241bdd227937f794189feb34ede353847e165e006beb40b8d77e6d139d95bc",
+  "fixture": "native-file-buffer.txt",
+  "fixture_sha256": "c2a69864c58fc27e69db054f346400167ccba6aa6b150f90568a3883a2c47709",
+  "repeat_stdout_byte_identical": true,
+  "repeat_stderr_byte_identical": true,
+  "probe_includes_sha256": {},
+  "native_link_libraries_sha256": {
+    "libTKTopAlgo.so": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKBRep.so": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "libTKG3d.so": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKPrim.so": "b48063f4379072c6739140c99b5f3293e2f98448703fbbe626a28baa8c0c97dd",
+    "libTKMesh.so": "08bfc41062c0955d1c149ffa4736150561c87bd4ac8da23a4c310ed11e9e1325"
+  },
+  "scope": "15 actual borrowed const char* allocation, intrusive count and defined lifetime rows, including valid same/shorter and protected in-place edits, static-empty aliases and genuine ownership Move/Swap. No dangling pointer read after release.",
+  "native_source_sha256": {
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx": "5ce11a239588c7bcdfe62652b4152ea0f283207909c125772ed737e833fe6e3c",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "src/Visualization/TKV3d/AIS/AIS_TexturedShape.cxx": "3ccf131ae52e98fbf49317c392e5b633bdcf7f191b3292a605b937d27e3fd6ed",
+    "src/Visualization/TKV3d/AIS/AIS_TexturedShape.hxx": "072908fd2669a0ed319e3af5f2e6b72630f8464959b95b2e4554f0589e9a938f"
+  },
+  "protocol_change": "Omit empty-byte trailing separator only; original raw output/provenance retained in runtime evidence. All15 semantic rows unchanged."
+}

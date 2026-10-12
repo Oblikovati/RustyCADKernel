@@ -12,7 +12,8 @@
 #include <Xw_Window.hxx>
 #include <iostream>
 struct NativeTextPolicyProbe {
-  // V3d_View keeps a raw MyViewer pointer; destroy its owner after both borrowers.
+  // Checked main 700823fd1: V3d_View keeps a raw MyViewer pointer.
+  // Keep its owner alive until both borrowing view and workspace are destroyed.
   occ::handle<V3d_Viewer> viewer;
   occ::handle<V3d_View> view;
   occ::handle<OpenGl_Workspace> workspace;
