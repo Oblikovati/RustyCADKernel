@@ -104,7 +104,7 @@
       "existing_status": "implemented",
       "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::set_clip_planes",
       "recommended_status": "partial",
-      "gap": "Narrowed concrete collection argument misses valid source-derived virtual collection transport."
+      "gap": "Argument accepts only &Handle<concrete collection>, so genuine retained field/source slot HandleReference arguments and their callback retargeting cannot be forwarded without an owning copy."
     },
     {
       "upstream_id": "V3d_View::ClipPlanes",
@@ -118,7 +118,7 @@
       "existing_status": "implemented",
       "existing_rust_item": "rustycad_tkv3d::v3d::V3dView::set_clip_planes",
       "recommended_status": "partial",
-      "gap": "Narrowed concrete collection argument misses borrowed source-derived collection transport."
+      "gap": "Argument accepts only &Handle<concrete collection>, so genuine retained field/source slot HandleReference arguments and their callback retargeting cannot be forwarded without an owning copy."
     }
   ]
 }
