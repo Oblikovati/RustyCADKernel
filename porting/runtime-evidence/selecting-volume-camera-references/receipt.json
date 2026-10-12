@@ -27,5 +27,13 @@
   "diagnostics": "Initial canonical invocation missed required PYTHONPATH=tools; corrected suite passes13. Initial evidence packaging omitted required explicit null trait selector context; production verifier caught it, corrected selector matches actual absence. Logs preserved; no Rust/native test failures.",
   "public_rust_interface_change": "SetCamera virtual/source and concrete family arguments now &dyn HandleReference<Graphic3dCamera>; Handle arguments still valid, storage acquires explicit clone_handle at actual native assignments. Manager converts typed virtual Failure transport and resumes unrelated panics.",
   "preserved_unfinished_tree": "../Martensite-controller-frame-events clean9a1f70c86, no dependency on this standalone checkout/target artifacts.",
-  "fragment_sha256": "1d489bff37525a0427fc25a6877f66fddec9b9fb9cf5b6e353d949a94cdaf88a"
+  "fragment_sha256": "1d489bff37525a0427fc25a6877f66fddec9b9fb9cf5b6e353d949a94cdaf88a",
+  "unchanged_selector_audit": {
+    "published_baseline_commit": "df7a8b979",
+    "affected_bindings": 139,
+    "additional_refresh_rows": 0,
+    "unproved_comparisons": 0,
+    "comparison": "Recursively identical excluding source_sha256/declaration_sha256 only; exact current baseline, including nested reexports",
+    "audit": "unchanged-selector-audit.json"
+  }
 }
