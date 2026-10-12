@@ -14,6 +14,15 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
     pub fn observe(&self) -> HandleObserver<T> {
         HandleObserver::from_owner(self.owner.clone())
     }
+    /// Borrow a registered base/interface without retaining it; `handle.observe_as::<dyn Transient>()`.
+    pub fn observe_as<U: ?Sized + RuntimeTyped>(&self) -> HandleObserver<U> {
+        // Native constHandle argument conversions must not invent temporary intrusive ownership.
+        let owner = self
+            .owner
+            .clone()
+            .filter(|owner| U::project_from(owner.get()).is_some());
+        HandleObserver::from_owner(owner)
+    }
 }
 impl<T: ?Sized + RuntimeTyped> Deref for HandleObserver<T> {
     type Target = Handle<T>;

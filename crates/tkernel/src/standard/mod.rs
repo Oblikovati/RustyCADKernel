@@ -74,7 +74,7 @@ mod nonrecursive_mutex;
 pub use nonrecursive_mutex::{NonRecursiveMutex, NonRecursiveMutexGuard};
 
 mod handle_reference;
-pub use handle_reference::HandleReference;
+pub use handle_reference::{HandleReference, ProjectedHandleReference};
 mod handle_field_ref;
 pub use handle_field_ref::HandleFieldRef;
 

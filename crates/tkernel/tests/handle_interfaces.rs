@@ -1,6 +1,9 @@
 //! Handles of abstract classes written as traits (`Handle<dyn Trait>`): RTTI,
 //! down casts, identity and shared mutation through interior mutability.
-use rustycad_tkernel::standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient, Transient};
+use rustycad_tkernel::standard::{
+    Handle, HandleFieldRef, HandleReference, ProjectedHandleReference, RuntimeType, RuntimeTyped,
+    SharedState, StandardTransient, Transient,
+};
 use rustycad_tkernel::{impl_transient, impl_transient_interface};
 use std::sync::RwLock;
 
@@ -69,6 +72,60 @@ fn mutation_through_concrete_handle_is_visible_through_interface_handle() {
     shape.scale(4.0);
     assert_eq!(concrete.radius(), 4.0);
     assert_eq!(concrete.ref_count(), 2);
+}
+
+#[test]
+fn interface_observer_uses_registered_projection_without_intrusive_ownership() {
+    let concrete = disk(2.0);
+    let projected = concrete.observe_as::<dyn FakeShape>();
+    assert_eq!(projected.object_address(), concrete.object_address());
+    assert_eq!(projected.area(), 12.0);
+    projected.scale(0.5);
+    assert_eq!(concrete.radius(), 1.0);
+    assert_eq!(concrete.ref_count(), 1);
+    assert!(concrete.observe_as::<dyn FakeUnrelated>().is_null());
+}
+
+fn projected_disk_slot(slot: &Handle<FakeDisk>) -> &Handle<FakeDisk> {
+    // The selector must return the caller's actual storage, not a retained target snapshot.
+    slot
+}
+#[test]
+fn projected_reference_rereads_replacement_and_null_without_temporary_ownership() {
+    let first = disk(2.0);
+    let second = disk(3.0);
+    let fields = SharedState::new(first.clone());
+    let alias = HandleFieldRef::new(&fields, projected_disk_slot);
+    let projected = ProjectedHandleReference::<FakeDisk, dyn FakeShape>::new(&alias);
+    assert_eq!(projected.reference_address(), alias.reference_address());
+    assert_projected_disk_target(&projected, &first, 2);
+    *fields.write() = second.clone();
+    assert_projected_disk_target(&projected, &second, 2);
+    assert_eq!(first.ref_count(), 1);
+    *fields.write() = Handle::default();
+    assert!(projected.observe().is_null());
+    assert_eq!(second.ref_count(), 1);
+}
+fn assert_projected_disk_target(
+    reference: &dyn HandleReference<dyn FakeShape>,
+    expected: &Handle<FakeDisk>,
+    owners: i32,
+) {
+    let observed = reference.observe();
+    assert_eq!(observed.object_address(), expected.object_address());
+    assert_eq!(observed.area(), expected.area());
+    assert_eq!(observed.ref_count(), owners);
+}
+#[test]
+fn failed_projection_preserves_slot_identity_without_acquiring_a_target() {
+    let concrete = disk(2.0);
+    let projected = ProjectedHandleReference::<FakeDisk, dyn FakeUnrelated>::new(&concrete);
+    assert!(projected.observe().is_null());
+    assert_eq!(
+        projected.reference_address(),
+        std::ptr::from_ref(&concrete).cast()
+    );
+    assert_eq!(concrete.ref_count(), 1);
 }
 
 #[test]
