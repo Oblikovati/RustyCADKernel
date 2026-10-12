@@ -1,0 +1,34 @@
+{
+  "source_main": "416edd351",
+  "rows": [
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::Camera() const",
+      "cpp_declaration_id": "08b79a06b1b5aa8e614decfe338f3f064c7355c513297a73651ffc7939f332b2",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera",
+      "source_sha256": "21a256ed88f430e1cfe8bb060786cf601dce9f41ffd3b64f873427e752e21845",
+      "before": "implemented",
+      "after": "partial",
+      "reason": "Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::Camera() const",
+      "cpp_declaration_id": "ff40e8623c6adfe8cbbdc5aa2c8d6a0f050dc8bbc7b8e7464afd662ffed5549e",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera",
+      "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+      "before": "implemented",
+      "after": "partial",
+      "reason": "Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::Camera() const",
+      "cpp_declaration_id": "4b98d620e66c73dc4993a8150a96a628d391d6e5feedc1a81bdf23ce1ec14adb",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera",
+      "source_sha256": "3d27e65092106743071f046b4eab21052d53eefdced55195873ced8ab5be51a2",
+      "before": "implemented",
+      "after": "partial",
+      "reason": "Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
+    }
+  ],
+  "source_scope": "Getter copy/reference mismatch; no class-wide status inferred.",
+  "ids_and_rust_targets_preserved": true
+}
