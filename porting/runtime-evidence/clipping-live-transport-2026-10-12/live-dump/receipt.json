@@ -1,0 +1,71 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "original_source_commit": "59e8c54dc",
+  "original_inspection_sha256": "d853a2dbd6c8c0f18598194f44eedbe611f44534de8ed231c87e99e60b4b3747",
+  "scope": "Valid null/depth0 native diagnostic omission, live child callback removes OTHER node and appends new node; actual JSON, depth and intrusive counts. Source fix is confined to full clipping WIP, not an outstanding checked-main regression.",
+  "native_runs_identical": 2,
+  "native_records": 6,
+  "native_exit_codes": [
+    0,
+    0
+  ],
+  "native_command": [
+    "g++",
+    "-std=c++17",
+    "-O0",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_clip_dump_live.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "target/clip-dump-live"
+  ],
+  "source_hashes": {
+    "tools/oracle/martensite_clip_dump_live.cxx": "8093aa537ae3837e3993bc8177f988718ab3cf8499b5af00d499982ae6126e03",
+    "crates/tkservice/src/graphic3d/clip_dump_live_replay.rs": "1b2af9650465b339eb6adb1baed94abb11164a093b34765abe533d7344dd4389",
+    "crates/tkservice/src/graphic3d/clip_sequence_inspection.rs": "0fe24c4cd85f740a7984dfb4d3f1f4befb11c4007f287acab5b9d73a33e48989"
+  },
+  "fixture": "crates/tkservice/tests/fixtures/clip-dump-live-native.txt",
+  "fixture_sha256": "05f1071933bdc384405c03e6fafe69cf8a070a9a566b713d342326a61a019cd9",
+  "executable_sha256": "3799af26d2eefa0b72ff583e10d05d43c967be2f06bb7fdac3e2bbeeae45e21b",
+  "headers": {
+    "Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "Graphic3d_ClipPlane.hxx": "b1908fd3cc2ab1e625de8e3ccd3940e979468c739c5164066b52aed61737c00a",
+    "Standard_Dump.hxx": "c1176d107a9af6cebd47f04c276f8f40de58b5d62678ac4c7315947470d7f56c"
+  },
+  "libraries": {
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "red_before": {
+    "failed": 1,
+    "passed": 1,
+    "exit_code": 101,
+    "test": "null_dump_children_and_depth_zero_replay_native_json_without_projection"
+  },
+  "final_checks": {
+    "family_tests": 15,
+    "failed": 0,
+    "all_target_clippy": "passed"
+  },
+  "completion_claims": false,
+  "logs": {
+    "red-before": {
+      "original_sha256": "fbc11491d81015b55448970a5c3f08c9dccdb56497d8836e49f1e003722e7a99",
+      "gzip_sha256": "bde2d521e146225d53b7a0e0c0c7e1be2657b09ca6bf8a4dfbe863b87a53357b"
+    },
+    "final-family-tests": {
+      "original_sha256": "ac563e9f071a1850d33da0ee5372194e61beb90e22515da7b9e2b723ae10599c",
+      "gzip_sha256": "d6678da2f91ec963bc99b128312710b0c49feae0234b1b97e8bc3a701bfcb95e"
+    },
+    "final-clippy": {
+      "original_sha256": "572987ce1223c7969e8c2133d5200cbe1fdad17d90dfabca49f53913f3026cd8",
+      "gzip_sha256": "a7276a7bcd8b27fde0d30e1baaa10ff132d55cda7930d6e2e2c4b24216e351ff"
+    }
+  }
+}

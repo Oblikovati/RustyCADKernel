@@ -31,6 +31,10 @@ impl Graphic3dSequenceOfHClipPlane {
             "myToOverrideGlobal",
             i32::from(self.to_override_global()),
         )?;
+        // OCCT 3d097a0 depth-zero macros cannot invoke child callbacks or dereference planes.
+        if depth == 0 {
+            return Ok(());
+        }
         let mut cursor = Graphic3dSequenceOfHClipPlaneIterator::new(self);
         while cursor.more() {
             dump_clip_current(&cursor, stream, depth)?;
@@ -48,9 +52,10 @@ fn dump_clip_current(
         .value_ref()
         .map_err(|failure| io::Error::other(failure.to_string()))?;
     let plane = field.observe();
-    let plane = plane
-        .get()
-        .ok_or_else(|| io::Error::other("clip diagnostic target=null; expected live plane"))?;
+    let Some(plane) = plane.get() else {
+        // Null fields are valid sequence entries and native diagnostics simply omit them.
+        return Ok(());
+    };
     field_dumped(stream, depth, "aClipPlane.get()", &|output, nesting| {
         plane.dump_json(output, nesting)
     })
