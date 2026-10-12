@@ -1,0 +1,61 @@
+{
+  "project": "Martensite",
+  "native_virtual_contract": "AIS_Animation.hxx virtual Start, Update and UpdateTimer; AIS_ViewCube accepts base camera-animation handles that may contain subclasses.",
+  "native_virtual_lines": [
+    156,
+    171,
+    187
+  ],
+  "gap": "Rust Cube stores concrete Handle<AisAnimationCamera> and cannot transport valid derived animation overrides.",
+  "preserved_evidence": "Concrete animation live-reference, timing, callback, camera and GPU fixtures remain valid; the broader API input domain is partial.",
+  "rust_source_sha256": {
+    "crates/tkv3d/src/ais/view_cube_policies.rs": "7660b9474bf1b4397fe5a410c3772f8361b5d014d84b6467dc77537a0af8c11e",
+    "crates/tkv3d/src/ais/view_cube_interaction.rs": "d5f4806f415a308c00e776824ff3171ccaeb3d83c2c5019e8a106a2e652c2911",
+    "crates/tkv3d/src/ais/view_cube_animation.rs": "138cd0ea3e89a2e495a8ae5218ababc742342c4dc7d1c062a24c58087742245c"
+  },
+  "correction_owner": "next ViewCube animation-source slice, coordinated with porting/martensite-controller-frame-events",
+  "rows": [
+    {
+      "upstream_id": "AIS_ViewCube::StartAnimation",
+      "cpp_declaration_id": "8ec7e3bdaa6d909142249730f67df37c085c8b2a0a1535365e7efc5c49e63c75",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::UpdateAnimation",
+      "cpp_declaration_id": "76f7cca54f35f4c23dfaee5472b82a23ab5f1eb6894831b54e197161f63cb522",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::HandleClick",
+      "cpp_declaration_id": "968a5d947a09b14cedd0ae08e7da32297e0b3b558775856ed610727bac378c2c",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::updateAnimation",
+      "cpp_declaration_id": "a220b227c946ada67f263ecca98357a26b0cbadef202c125c09b2011f4d312b7",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::ViewAnimation",
+      "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::SetViewAnimation",
+      "cpp_declaration_id": "e5c909252b354ac0c0459151b78323be83097b9f40ba9ec56347af0355131e29",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::set_view_animation",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_ViewCube::myViewAnimation",
+      "cpp_declaration_id": "472f4ff1d204111e438285534a9dbad77b63d716adba281618e0466a47df6708",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
+      "status": "partial"
+    }
+  ]
+}

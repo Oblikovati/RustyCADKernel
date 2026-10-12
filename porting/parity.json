@@ -594398,8 +594398,8 @@
       "cpp_declaration_id": "8ec7e3bdaa6d909142249730f67df37c085c8b2a0a1535365e7efc5c49e63c75",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
       "rust_kind": "function",
-      "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::UpdateAnimation",
@@ -594409,8 +594409,8 @@
       "cpp_declaration_id": "76f7cca54f35f4c23dfaee5472b82a23ab5f1eb6894831b54e197161f63cb522",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
       "rust_kind": "function",
-      "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::HandleClick",
@@ -594420,8 +594420,8 @@
       "cpp_declaration_id": "968a5d947a09b14cedd0ae08e7da32297e0b3b558775856ed610727bac378c2c",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
       "rust_kind": "function",
-      "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::updateAnimation",
@@ -594431,8 +594431,8 @@
       "cpp_declaration_id": "a220b227c946ada67f263ecca98357a26b0cbadef202c125c09b2011f4d312b7",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
       "rust_kind": "function",
-      "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::viewFitAll",
@@ -594475,8 +594475,8 @@
       "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
       "rust_kind": "function",
-      "status": "implemented",
-      "notes": "Martensite native live animation-handle reference: two aliases observe setter replacement/null/restore and protected-field replacement without retaining a lock or old target. Seven pinned native snapshots replay slot/target identity, null state and reference counts exactly; copied view_animation remains an unclaimed convenience. See docs/ais-view-cube-animation-reference.md."
+      "status": "partial",
+      "notes": "Martensite native live animation-handle reference: two aliases observe setter replacement/null/restore and protected-field replacement without retaining a lock or old target. Seven pinned native snapshots replay slot/target identity, null state and reference counts exactly; copied view_animation remains an unclaimed convenience. See docs/ais-view-cube-animation-reference.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::SetViewAnimation",
@@ -594486,8 +594486,8 @@
       "cpp_declaration_id": "e5c909252b354ac0c0459151b78323be83097b9f40ba9ec56347af0355131e29",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::set_view_animation",
       "rust_kind": "function",
-      "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::Duration",
@@ -594618,8 +594618,8 @@
       "cpp_declaration_id": "472f4ff1d204111e438285534a9dbad77b63d716adba281618e0466a47df6708",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
       "rust_kind": "struct_field",
-      "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "status": "partial",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewCube::myStartState",
