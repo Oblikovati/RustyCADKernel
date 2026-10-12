@@ -500,8 +500,6 @@ mod shape_drawer_oracle_rows;
 #[cfg(test)]
 mod shape_drawer_reference_tests;
 
-mod shape;
-pub use shape::{AisShapeBase, AisShapeFields, AisShapeSource};
 
 mod colored_shape;
 mod colored_shape_members;
