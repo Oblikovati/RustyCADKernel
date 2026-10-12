@@ -15,6 +15,7 @@ pub(super) struct UploadedDraw {
     pub line_width: Option<f32>,
     pub annotation: bool,
     pub text_shadow_bias: bool,
+    pub text_logic_xor: bool,
     pub polygon_offset: Option<crate::RenderPolygonOffset>,
     pub polygon: bool,
     pub surface_blend: bool,
@@ -24,6 +25,7 @@ pub(super) struct UploadedDraw {
     pub clipping: Option<super::storage_descriptor::UploadedStorage>,
     pub lighting: Option<super::storage_descriptor::UploadedStorage>,
     pub sprite: Option<super::storage_descriptor::UploadedStorage>,
+    pub surface_image: Option<Arc<super::surface_image_descriptor::SurfaceImageBinding>>,
 }
 pub(super) struct FrameResources {
     pub extent: vk::Extent2D,
@@ -39,6 +41,7 @@ impl FrameResources {
         frame: &RenderFrame,
         pipeline: &RasterPipelines,
     ) -> Result<Self, RenderError> {
+        pipeline.surface_images.prune()?;
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
             width: frame.width,
@@ -144,6 +147,23 @@ fn upload_draw(
             )
         })
         .transpose()?;
+    if let Some(unavailable) = &draw.surface_texture_unavailable {
+        pipelines.surface_images.forget(&unavailable.resource_id)?;
+    }
+    let surface_image = draw
+        .surface_texture
+        .as_ref()
+        .map(|style| {
+            pipelines.surface_images.binding(
+                runtime,
+                pipeline
+                    .surface_layout
+                    .as_ref()
+                    .expect("surface image layout"),
+                style,
+            )
+        })
+        .transpose()?;
     let clipping = draw
         .clipping
         .as_ref()
@@ -176,8 +196,10 @@ fn upload_draw(
         lighting,
         clipping,
         sprite,
+        surface_image,
         annotation: draw.annotation,
         text_shadow_bias: draw.text_shadow_bias,
+        text_logic_xor: draw.text_logic_xor,
         polygon_offset: draw.polygon_offset,
         // Native font glyph triangles retain ordinary Fill slope/units; OpenGl_Text at 3d097a0.
         polygon: draw.topology() == crate::PrimitiveTopology::Triangles,
@@ -207,22 +229,41 @@ fn upload_bytes(
 fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
     let mut bytes = Vec::new();
     for (index, vertex) in draw.vertices.iter().enumerate() {
-        bytes.extend(
-            vertex
-                .position
-                .iter()
-                .chain(std::iter::once(&vertex.weight))
-                .chain(&vertex.color)
-                .flat_map(|v| v.to_ne_bytes()),
-        );
+        bytes.extend(encoded_vertex_header(vertex, draw.text_logic_xor));
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
+        append_surface_coordinates(&mut bytes, draw, index);
         if let Some(lighting) = &draw.lighting {
             bytes.extend(lighting.normals[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
     }
     bytes
+}
+fn append_surface_coordinates(bytes: &mut Vec<u8>, draw: &PrimitiveDraw, index: usize) {
+    if draw.surface_texture.is_none()
+        && draw.surface_cutoff.is_none()
+        && draw.surface_texture_unavailable.is_none()
+    {
+        return;
+    }
+    let uv = draw
+        .surface_texture
+        .as_ref()
+        .map_or([0., 0., 0., 1.], |style| style.uv[index]);
+    bytes.extend(uv.iter().flat_map(|value| value.to_ne_bytes()));
+}
+
+fn encoded_vertex_header(vertex: &crate::RenderVertex, xor: bool) -> Vec<u8> {
+    // Native framebuffer conversion precedes XOR; public submissions remain linear RGBA.
+    let color = crate::text_logic::text_target_rgba(xor, vertex.color);
+    vertex
+        .position
+        .iter()
+        .chain(std::iter::once(&vertex.weight))
+        .chain(&color)
+        .flat_map(|value| value.to_ne_bytes())
+        .collect()
 }
 
 fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
@@ -250,5 +291,57 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         bytes.extend(style.alpha_cutoff.to_ne_bytes());
         bytes.extend(0u32.to_ne_bytes());
     }
+    if draw.surface_texture.is_some()
+        || draw.surface_cutoff.is_some()
+        || draw.surface_texture_unavailable.is_some()
+    {
+        let flags = draw.surface_texture.as_ref().map_or(0, |s| {
+            1 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
+        }) + draw.surface_texture_unavailable.as_ref().map_or(0, |s| {
+            16 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
+        }) + 8 * u32::from(draw.surface_cutoff.is_some());
+        bytes.extend(draw.surface_cutoff.unwrap_or(0.).to_ne_bytes());
+        bytes.extend(flags.to_ne_bytes());
+        bytes.extend([0_u8; 8]);
+    }
     bytes
+}
+
+#[cfg(test)]
+mod xor_tests {
+    use super::*;
+    #[test]
+    fn xor_pack_encodes_only_upload_rgb_and_preserves_linear_submission_and_alpha() {
+        let color = [0.18, 0.4, 0.7, 0.4];
+        let vertices = vec![crate::RenderVertex::new([0.; 3], color); 3];
+        let mut draw = PrimitiveDraw::new(vertices, vec![0, 1, 2], crate::identity_clip()).unwrap();
+        for xor in [false, true] {
+            draw.text_logic_xor = xor;
+            let encoded = encode_vertices(&draw);
+            let packed = packed_vertex_rgba(&encoded);
+            assert_eq!(packed, crate::text_logic::text_target_rgba(xor, color));
+            assert_eq!(draw.vertices()[0].color, color);
+            assert_eq!(packed[3], 0.4);
+        }
+    }
+    fn packed_vertex_rgba(bytes: &[u8]) -> [f32; 4] {
+        std::array::from_fn(|index| {
+            let slice = &bytes[16 + index * 4..20 + index * 4];
+            f32::from_ne_bytes(slice.try_into().unwrap())
+        })
+    }
+    #[test]
+    fn unavailable_surface_and_alpha_only_pack_projective_default_coordinates() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        let mut bytes = vec![];
+        append_surface_coordinates(&mut bytes, &draw, 0);
+        assert!(bytes.is_empty());
+        draw.surface_cutoff = Some(0.5);
+        append_surface_coordinates(&mut bytes, &draw, 0);
+        let expected: Vec<u8> = [0_f32, 0., 0., 1.]
+            .iter()
+            .flat_map(|value| value.to_ne_bytes())
+            .collect();
+        assert_eq!(bytes, expected);
+    }
 }

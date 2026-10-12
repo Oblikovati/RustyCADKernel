@@ -49,7 +49,10 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
         !style.to_use_vertex_color_for_back_faces(),
     );
     let unlit = style.shading_model() == Graphic3dTypeOfShadingModel::Unlit;
-    if features.0 || features.1 || features.2 || features.3 || (unlit && (features.4 || features.5))
+    if features.1
+        || features.2
+        || features.3
+        || (unlit && !features.0 && (features.4 || features.5))
     {
         return Err(rejected(
             features,
@@ -61,7 +64,11 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
 fn validate_alpha_offset(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
     if !matches!(
         style.alpha_mode(),
-        Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto | Graphic3dAlphaMode::Blend
+        Graphic3dAlphaMode::Opaque
+            | Graphic3dAlphaMode::BlendAuto
+            | Graphic3dAlphaMode::Blend
+            | Graphic3dAlphaMode::Mask
+            | Graphic3dAlphaMode::MaskBlend
     ) {
         return Err(rejected(
             style.alpha_mode(),

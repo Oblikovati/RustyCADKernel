@@ -69,7 +69,11 @@ impl PipelineState {
             ..
         } = kind;
         Self {
-            vertex: vertex_state(text, kind.lighting),
+            vertex: if kind.surface_texture || kind.surface_alpha {
+                super::surface_texture_pipeline::surface_vertex_state(kind.lighting)
+            } else {
+                vertex_state(text, kind.lighting)
+            },
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
                 vk::PrimitiveTopology::POINT_LIST
             } else if line {
@@ -84,8 +88,10 @@ impl PipelineState {
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: super::capping_state::depth_state(kind.capping),
-            blend: vk::PipelineColorBlendStateCreateInfo::default().attachments(
-                if kind.capping.is_mask() {
+            blend: vk::PipelineColorBlendStateCreateInfo::default()
+                .logic_op_enable(kind.text_logic_xor)
+                .logic_op(vk::LogicOp::XOR)
+                .attachments(if kind.capping.is_mask() {
                     &super::capping_state::MASK_BLEND
                 } else if kind.point_blend
                     || (text && text_blend)
@@ -95,8 +101,7 @@ impl PipelineState {
                     &POINT_BLEND
                 } else {
                     &BLEND
-                },
-            ),
+                }),
             dynamic: vk::PipelineDynamicStateCreateInfo::default()
                 .dynamic_states(dynamic_states(line)),
         }
@@ -205,5 +210,22 @@ mod tests {
         assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));
         assert!(dynamic_states(true).contains(&vk::DynamicState::LINE_WIDTH));
         assert_eq!(&dynamic_states(true)[..7], dynamic_states(false));
+    }
+}
+
+#[cfg(test)]
+mod xor_tests {
+    use super::*;
+    #[test]
+    fn xor_uses_integer_logic_and_native_opaque_alpha_mask() {
+        let mut kind = super::super::pipeline_variants::text_xor_variant(40, false);
+        let state = PipelineState::new(kind);
+        assert_eq!(state.blend.logic_op_enable, vk::TRUE);
+        assert_eq!(state.blend.logic_op, vk::LogicOp::XOR);
+        let attachment = unsafe { &*state.blend.p_attachments };
+        assert_eq!(attachment.blend_enable, vk::FALSE);
+        assert_eq!(attachment.color_write_mask.as_raw(), 7);
+        kind.text_logic_xor = false;
+        assert_eq!(PipelineState::new(kind).blend.logic_op_enable, vk::FALSE);
     }
 }

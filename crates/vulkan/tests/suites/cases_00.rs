@@ -3,6 +3,8 @@
 pub mod ais_integration;
 #[path = "../ais_light_source.rs"]
 pub mod ais_light_source;
+#[path = "../blend_text_policy.rs"]
+pub mod blend_text_policy;
 #[path = "../camera_animation_capture_cases.rs"]
 pub mod camera_animation_capture_cases;
 #[path = "../capping_pass.rs"]
@@ -47,12 +49,16 @@ pub mod point_primitives;
 pub mod polygon_primitives;
 #[path = "../quadrangle_primitives.rs"]
 pub mod quadrangle_primitives;
+#[path = "../sampled_xor_boundary.rs"]
+pub mod sampled_xor_boundary;
 #[path = "../scene_inputs.rs"]
 pub mod scene_inputs;
 #[path = "../shadow_presentations.rs"]
 pub mod shadow_presentations;
 #[path = "../shadow_text.rs"]
 pub mod shadow_text;
+#[path = "../standard_surface_textures.rs"]
+pub mod standard_surface_textures;
 #[path = "../subtitle_text_policy.rs"]
 pub mod subtitle_text_policy;
 #[path = "../surface_blending.rs"]

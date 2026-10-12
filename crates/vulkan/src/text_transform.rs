@@ -8,6 +8,7 @@ pub(crate) struct TextTransform {
     pub model_world: Mat4<f64>,
     pub camera_rotation: Mat4<f64>,
     pub viewport: [i32; 4],
+    pub pixel_coordinates: bool,
 }
 impl TextTransform {
     pub fn clip(
@@ -25,6 +26,9 @@ impl TextTransform {
         size: u32,
         offset: [f64; 2],
     ) -> Result<[f32; 16], RenderError> {
+        if self.pixel_coordinates {
+            return Ok(self.pixel_clip(text, aspect, offset));
+        }
         let win = self.projected_anchor(text)?;
         let projection = self.glyph_projection(text);
         let scale = if aspect.is_text_zoomable() {
@@ -112,3 +116,6 @@ fn plane_model(text: &Graphic3dText, anchor: [f64; 3]) -> Mat4<f64> {
 
 #[path = "text_pass_transform.rs"]
 mod pass_transform;
+
+#[path = "text_pixel_transform.rs"]
+mod pixel_transform;

@@ -12,9 +12,24 @@ pub(crate) fn apply_surface_lighting(
     aspects: &Handle<dyn Graphic3dAspectsSource>,
     context: &TextSceneContext<'_>,
 ) -> Result<(), RenderError> {
-    let model = resolved_model(&**aspects, context.rendering.shading_model);
+    let mut model = resolved_model(&**aspects, context.rendering.shading_model);
+    if draws.iter().any(|draw| {
+        draw.surface_texture.as_ref().is_some_and(|t| !t.modulate)
+            || draw
+                .surface_texture_unavailable
+                .as_ref()
+                .is_some_and(|t| !t.modulate)
+    }) {
+        model = Graphic3dTypeOfShadingModel::Unlit;
+    }
     if model == Graphic3dTypeOfShadingModel::Unlit {
-        return validate_unlit_surface(&**aspects);
+        return if draws.iter().any(|draw| {
+            draw.surface_texture.is_some() || draw.surface_texture_unavailable.is_some()
+        }) {
+            Ok(())
+        } else {
+            validate_unlit_surface(&**aspects)
+        };
     }
     let normals = primitive.normals()?;
     if draws
@@ -166,7 +181,7 @@ fn surface_material_pair(
 ) -> (Graphic3dMaterialAspect, Graphic3dMaterialAspect) {
     let mut front = aspect.front_material();
     let mut back = aspect.back_material();
-    if aspect.alpha_mode() == Graphic3dAlphaMode::Opaque {
+    if !crate::style::surface_uses_blending(aspect) {
         front.set_transparency(0.).expect("valid opacity");
         back.set_transparency(0.).expect("valid opacity");
     }

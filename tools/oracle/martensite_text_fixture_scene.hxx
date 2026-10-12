@@ -27,6 +27,7 @@ static void subtitle_style(const occ::handle<Graphic3d_AspectText3d>& style, con
   if (mode == "subtitle-opaque-translucent") style->SetAlphaMode(Graphic3d_AlphaMode_Opaque);
   if (mode == "subtitle-offset") style->SetPolygonOffsets(Aspect_POM_Fill, 2.f, 3.f);
   if (mode == "subtitle-rotated") style->SetTextAngle(30.f);
+  if (mode == "subtitle-xor-colored") style->SetColor(Quantity_Color(0.18, 0.4, 0.7, Quantity_TOC_RGB));
   if (mode == "subtitle-foreground-alpha") style->SetColor(Quantity_ColorRGBA(Quantity_Color(Quantity_NOC_WHITE), 0.4f));
   if (mode == "subtitle-zoomable") style->SetTextZoomable(true);
   if (mode == "subtitle-back-culled" || mode == "subtitle-right-back-culled" || mode == "subtitle-view-double")

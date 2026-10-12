@@ -9,6 +9,9 @@ impl TextTransform {
         size: u32,
         offsets: &[[f64; 2]],
     ) -> Result<Vec<[f32; 16]>, RenderError> {
+        if self.pixel_coordinates {
+            return Ok(self.pixel_pass_clips(text, aspect, offsets));
+        }
         if text.has_plane() && !text.has_own_anchor_point() {
             return self.local_pass_clips(text, aspect, size, offsets.len());
         }
@@ -45,7 +48,12 @@ impl TextTransform {
         }
         Ok(clips)
     }
-    fn advance_local_pass(&self, current: &mut Mat4<f64>, local: Mat4<f64>, pass: usize) {
+    pub(super) fn advance_local_pass(
+        &self,
+        current: &mut Mat4<f64>,
+        local: Mat4<f64>,
+        pass: usize,
+    ) {
         if pass != 0 {
             *current *= self.model_world;
         }

@@ -46,7 +46,10 @@ mod raster_image;
 pub use raster_image::RasterImage;
 mod textured_draw;
 pub use textured_draw::TexturedStyle;
+mod pixel_text;
 mod text_layout;
+mod text_logic;
+pub use pixel_text::{PixelTextView, lower_pixel_text};
 pub use text_layout::{GlyphLayout, TextLayoutSource};
 mod text_font;
 pub use text_font::FreeTypeTextSource;
@@ -93,3 +96,12 @@ mod quad_assembly;
 
 mod polygon_offset;
 pub use polygon_offset::RenderPolygonOffset;
+
+mod retained_surface_texture;
+mod retained_texture_images;
+mod retained_texture_samplers;
+mod surface_texture;
+mod surface_texture_compressed;
+mod surface_texture_lifetime;
+mod surface_texture_pixels;
+mod surface_texture_uv;

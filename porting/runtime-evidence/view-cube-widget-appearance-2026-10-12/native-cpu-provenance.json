@@ -1,0 +1,50 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "header": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+  "header_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+  "execution": "real native displayedAIS_ViewCube withnamed recordingGraphicDriver; no simulatedsetter/oracle logic",
+  "native_classes": "AppearanceCube extends actual AIS_ViewCube, exposes protected label maps/defaults and aspect slots; real AISInteractiveContext/V3dViewer/Selection/PresentationManager",
+  "lifetime_domain": "retain every original owninghandle while comparingnative borrowedaliases; invalidnative danglingreferences excluded",
+  "snapshots": [
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-appearance-state.txt",
+      "sha256": "334e671d7cdd475fdca672188cfaf8ee061da661c8bc7dfd72379d629d3ce37f",
+      "records": 125
+    },
+    {
+      "path": "crates/tkv3d/tests/fixtures/view-cube-appearance-aliases.txt",
+      "sha256": "d30afa9323b8c2a8deb97e9a82aa84196e9160c8c7b9b62781c8b399baee0e1d",
+      "records": 29
+    }
+  ],
+  "sources": [
+    {
+      "path": "tools/oracle/martensite_view_cube_appearance.cxx",
+      "sha256": "177e34a32bbdc8f02b02cc95c6deeaa70ca4f150d8aef90345e6d53e3afe9a36"
+    },
+    {
+      "path": "tools/oracle/martensite_view_cube_appearance_aliases.cxx",
+      "sha256": "bce0b116393f86d7c6fb6e485c6fdf8d3f4df053f2157cd0fafbf4e67d731345"
+    },
+    {
+      "path": "tools/oracle/martensite_view_cube_appearance_lifetimes.cxx",
+      "sha256": "ac6c237a0dd7dca6684396e362eb0f3375402d9b0e0043601752a913643464ab"
+    },
+    {
+      "path": "tools/oracle/martensite_view_cube_interaction.cxx",
+      "sha256": "f20331bb5f9b7f96fc9ee4351dc6d27ff3e71d5c4e5d6e29a9c6b38301d42f19"
+    },
+    {
+      "path": "tools/oracle/tkservice_probe_null_driver.cxx",
+      "sha256": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5"
+    }
+  ],
+  "repeatability": "full native state125 andalias29generators each ran twice withbyte-identical output",
+  "compile_template": "c++ -std=c++17 -I ../RustyCADKernel/target/occt-all-full/include/opencascade SOURCE -L ../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKV3d -lTKService -lTKMath -lTKernel -o BINARY",
+  "replay": "cargo test --locked -p rustycad-tkv3d --all-targets; noOCCTlinking needed",
+  "native_binary_sha256": {
+    "view-cube-appearance": "1d317379d39ab499c6ea42bc98894f4419b0517ec634b76d2e548db22925edef",
+    "view-cube-appearance-aliases": "70930464f1a4a9c36a03aec02376ed47a61adeacbaeb06cb15e566db6e882175"
+  }
+}

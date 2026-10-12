@@ -6,6 +6,8 @@ use std::sync::Arc;
 #[derive(Clone, Copy)]
 pub(super) struct PipelineVariant {
     pub lighting: bool,
+    pub surface_texture: bool,
+    pub surface_alpha: bool,
     pub surface_blend: bool,
     pub line_blend: bool,
     pub point_blend: bool,
@@ -14,12 +16,16 @@ pub(super) struct PipelineVariant {
     pub point: bool,
     pub text: bool,
     pub text_blend: bool,
+    pub text_logic_xor: bool,
     pub clipped: bool,
     pub stencil: bool,
     pub capping: RenderCappingPass,
 }
 impl PipelineVariant {
     fn from_index(index: usize, stencil: bool) -> Self {
+        if (40..44).contains(&index) {
+            return text_xor_variant(index, stencil);
+        }
         if index >= 28 {
             return blended_variant(index, stencil);
         }
@@ -77,6 +83,8 @@ fn empty_variant(
 ) -> PipelineVariant {
     PipelineVariant {
         lighting: false,
+        surface_texture: false,
+        surface_alpha: false,
         surface_blend: false,
         line_blend: false,
         point_blend: false,
@@ -85,6 +93,7 @@ fn empty_variant(
         point: false,
         text: false,
         text_blend: false,
+        text_logic_xor: false,
         clipped,
         stencil,
         capping,
@@ -92,6 +101,7 @@ fn empty_variant(
 }
 pub(super) struct RasterPipelines {
     variants: Vec<Option<Arc<DrawPipeline>>>,
+    pub surface_images: super::surface_image_cache::SurfaceImageCache,
     pub stencil: bool,
     runtime: Arc<VulkanRuntime>,
     special_variants: std::sync::Mutex<std::collections::BTreeMap<usize, Arc<DrawPipeline>>>,
@@ -114,15 +124,21 @@ impl RasterPipelines {
         }
         Ok(Self {
             variants,
+            surface_images: Default::default(),
             stencil,
             runtime: runtime.clone(),
             special_variants: Default::default(),
         })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        if draw.lighting.is_some()
+        if draw.surface_texture_unavailable.is_some()
+            || draw.surface_texture.is_some()
+            || draw.surface_cutoff.is_some()
+            || draw.surface_forced_blend
+            || draw.lighting.is_some()
             || draw.surface_blend
             || draw.text_background_blend
+            || draw.text_logic_xor
             || draw.line_style.is_some_and(|s| s.alpha_blend)
             || draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend)
         {
@@ -135,7 +151,8 @@ impl RasterPipelines {
         })
     }
     fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        let index = variant_index(draw) + 64 * usize::from(draw.lighting.is_some());
+        crate::text_logic::require_text_xor(draw.text_logic_xor, self.runtime.logic_op)?;
+        let index = special_variant_key(draw);
         let mut variants = self
             .special_variants
             .lock()
@@ -143,15 +160,45 @@ impl RasterPipelines {
         if let Some(pipeline) = variants.get(&index) {
             return Ok(pipeline.clone());
         }
-        let mut kind = PipelineVariant::from_index(index % 64, self.stencil);
-        kind.lighting = draw.lighting.is_some();
-        if kind.clamp && !self.runtime.depth_clamp {
-            return Err(rejected(true, "device depth-clamp support"));
-        }
+        let kind = special_variant(draw, self.stencil);
+        validate_special_features(kind, self.runtime.depth_clamp, self.runtime.lines.bresenham)?;
         let pipeline = Arc::new(DrawPipeline::new(&self.runtime, kind)?);
         variants.insert(index, pipeline.clone());
         Ok(pipeline)
     }
+}
+fn special_variant_key(draw: &PrimitiveDraw) -> usize {
+    variant_index(draw)
+        + 64 * usize::from(draw.lighting.is_some())
+        + 128 * usize::from(draw.surface_texture.is_some())
+        + 256 * usize::from(draw.surface_cutoff.is_some())
+        + 512 * usize::from(draw.surface_texture_unavailable.is_some())
+        + 1024 * (draw.capping_pass as usize)
+}
+fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
+    let mut kind = PipelineVariant::from_index(variant_index(draw), stencil);
+    kind.lighting = draw.lighting.is_some();
+    kind.surface_texture = draw.surface_texture.is_some();
+    kind.surface_alpha =
+        draw.surface_cutoff.is_some() || draw.surface_texture_unavailable.is_some();
+    kind.capping = draw.capping_pass;
+    kind
+}
+fn validate_special_features(
+    kind: PipelineVariant,
+    depth_clamp: bool,
+    bresenham: bool,
+) -> Result<(), RenderError> {
+    if kind.clamp && !depth_clamp {
+        return Err(rejected(kind.clamp, "device depth-clamp support"));
+    }
+    if kind.line && !bresenham {
+        return Err(rejected(
+            kind.line,
+            "device Bresenham line-rasterization support",
+        ));
+    }
+    Ok(())
 }
 fn variant_index(draw: &PrimitiveDraw) -> usize {
     if let Some(index) = alpha_variant_index(draw) {
@@ -173,6 +220,9 @@ fn variant_index(draw: &PrimitiveDraw) -> usize {
 }
 
 fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
+    if draw.text_logic_xor {
+        return Some(40 + usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some()));
+    }
     let flags = usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some());
     if draw.line_style.is_some_and(|s| s.alpha_blend) {
         return Some(32 + flags);
@@ -180,7 +230,8 @@ fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
     if draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend) {
         return Some(36 + flags);
     }
-    (draw.surface_blend || draw.text_background_blend).then_some(28 + flags)
+    (draw.surface_blend || draw.surface_forced_blend || draw.text_background_blend)
+        .then_some(28 + flags)
 }
 
 #[cfg(test)]
@@ -297,5 +348,66 @@ mod subtitle_pipeline_tests {
         assert!(kind.surface_blend && !kind.text && !kind.line);
         draw.text_background_blend = false;
         assert_eq!(variant_index(&draw), 0);
+    }
+}
+
+#[cfg(test)]
+mod surface_variant_tests {
+    use super::*;
+    #[test]
+    fn surface_mask_blend_keeps_ordered_depth_and_independent_capping_identity() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        draw.surface_cutoff = Some(0.5);
+        draw.surface_forced_blend = true;
+        let ordinary = special_variant_key(&draw);
+        let kind = special_variant(&draw, true);
+        assert!(kind.surface_alpha && kind.surface_blend && !draw.surface_blend);
+        draw.capping_pass = RenderCappingPass::Surface;
+        assert_ne!(ordinary, special_variant_key(&draw));
+        assert_eq!(
+            special_variant(&draw, true).capping,
+            RenderCappingPass::Surface
+        );
+    }
+    #[test]
+    fn unsupported_special_line_and_clamp_features_fail_before_pipeline_creation() {
+        let mut kind = PipelineVariant::from_index(32, false);
+        assert!(validate_special_features(kind, true, false).is_err());
+        assert!(validate_special_features(kind, true, true).is_ok());
+        kind.clamp = true;
+        assert!(validate_special_features(kind, false, true).is_err());
+    }
+}
+
+pub(super) fn text_xor_variant(index: usize, stencil: bool) -> PipelineVariant {
+    let mut kind = empty_variant(
+        index & 1 != 0,
+        index & 2 != 0,
+        stencil,
+        RenderCappingPass::None,
+    );
+    kind.text = true;
+    kind.text_logic_xor = true;
+    kind
+}
+
+#[cfg(test)]
+mod xor_tests {
+    use super::*;
+    #[test]
+    fn xor_cache_indices_keep_all_existing_variant_flags_and_texture_reservations() {
+        for index in 40..44 {
+            let kind = PipelineVariant::from_index(index, true);
+            assert!(kind.text && kind.text_logic_xor && kind.stencil);
+            assert!(!kind.text_blend && !kind.surface_blend && !kind.point);
+            let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+            draw.text_logic_xor = true;
+            draw.depth_clamp = kind.clamp;
+            draw.clipping = kind
+                .clipped
+                .then(|| crate::RenderClipping::new(vec![], crate::identity_clip()).unwrap());
+            assert_eq!(variant_index(&draw), index);
+            assert!(variant_index(&draw) < 64);
+        }
     }
 }

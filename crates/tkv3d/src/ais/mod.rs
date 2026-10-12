@@ -210,34 +210,20 @@ mod view_controller;
 mod view_controller_parameters;
 mod view_controller_selection;
 mod view_controller_transfer;
-#[cfg(test)]
-mod view_controller_transfer_fixture;
-#[cfg(test)]
-mod view_controller_transfer_tests;
 mod view_controller_zoom;
 pub use view_controller::AisViewController;
 
-#[cfg(test)]
-mod view_controller_click_tests;
 mod view_controller_clicks;
 mod view_controller_gravity;
 mod view_controller_input_state;
 mod view_controller_keyboard;
-#[cfg(test)]
-mod view_controller_keyboard_fixture;
-#[cfg(test)]
-mod view_controller_keyboard_tests;
 mod view_controller_navigation;
 mod view_controller_navigation_axes;
 mod view_controller_navigation_motion;
 mod view_controller_navigation_transform;
 mod view_controller_picking;
-#[cfg(test)]
-mod view_controller_picking_tests;
 mod view_controller_reset;
 mod view_controller_touch;
-#[cfg(test)]
-mod view_controller_touch_tests;
 
 mod view_controller_mouse_buttons;
 mod view_controller_mouse_gestures;
@@ -245,22 +231,12 @@ mod view_controller_mouse_motion;
 mod view_controller_mouse_position;
 mod view_controller_mouse_state;
 
-#[cfg(test)]
-mod view_controller_mouse_fixture;
-#[cfg(test)]
-mod view_controller_mouse_tests;
-
 mod view_controller_space_mouse;
 mod view_controller_window_listener;
-
-#[cfg(test)]
-mod view_controller_space_mouse_tests;
 
 mod light_source;
 mod light_source_properties;
 mod light_source_transforms;
-#[cfg(test)]
-mod view_controller_window_listener_tests;
 pub use light_source::{AisLightSourceBase, AisLightSourceSource};
 pub use light_source_properties::AisLightSourceMembers;
 pub use light_source_transforms::{
@@ -271,20 +247,11 @@ mod camera_frustum;
 mod camera_frustum_geometry;
 mod camera_frustum_presentations;
 mod camera_frustum_selection;
-#[cfg(test)]
-mod light_source_tests;
 pub use camera_frustum::{AisCameraFrustum, AisCameraFrustumFields, AisCameraFrustumSelectionMode};
-#[cfg(test)]
-mod camera_frustum_tests;
 
 mod view_controller_touch_pinch;
 mod view_controller_touch_rotation;
 mod view_controller_touch_synthesis;
-
-#[cfg(test)]
-mod view_controller_touch_synthesis_fixture;
-#[cfg(test)]
-mod view_controller_touch_synthesis_tests;
 
 mod color_scale;
 mod color_scale_placement;
@@ -298,27 +265,14 @@ pub use color_scale_collections::{
 };
 mod color_scale_bar;
 mod color_scale_layout;
-#[cfg(test)]
-mod color_scale_numeric_tests;
 mod color_scale_presentations;
-#[cfg(test)]
-mod color_scale_recording;
-#[cfg(test)]
-mod color_scale_scene_tests;
 mod color_scale_uniform;
-
-#[cfg(test)]
-mod color_scale_property_tests;
 
 mod context_selection_bounds;
 mod view_controller_fit_all;
 
 mod light_source_aspects;
 mod light_source_geometry;
-#[cfg(test)]
-mod view_controller_fit_fixture;
-#[cfg(test)]
-mod view_controller_fit_tests;
 
 mod light_source_arrows;
 mod light_source_presentation;
@@ -333,19 +287,9 @@ pub use light_source_selection::AisLightSourceOwner;
 
 pub use light_source_aspects::ais_light_source_initialize;
 
-#[cfg(test)]
-mod light_source_concrete_tests;
-
 mod view_controller_camera_primitives;
 mod view_controller_camera_zoom;
 
-#[cfg(test)]
-mod view_controller_camera_fixture;
-#[cfg(test)]
-mod view_controller_camera_tests;
-
-#[cfg(test)]
-mod view_controller_camera_failure;
 mod view_cube_appearance;
 mod view_cube_axes;
 mod view_cube_classification;
@@ -372,22 +316,6 @@ pub use view_cube_geometry::{
     ais_view_cube_create_box_side_triangles,
 };
 
-#[cfg(test)]
-mod view_cube_fixture_replay;
-#[cfg(test)]
-mod view_cube_geometry_tests;
-#[cfg(test)]
-mod view_cube_test_probe;
-
-#[cfg(test)]
-mod view_cube_submission_tests;
-
-#[cfg(test)]
-mod view_controller_navigation_motion_fixture;
-#[cfg(test)]
-mod view_controller_navigation_motion_tests;
-#[cfg(test)]
-mod view_controller_navigation_xr_fixture;
 mod view_cube_animation;
 mod view_cube_camera_fit;
 mod view_cube_highlight;
@@ -411,32 +339,16 @@ pub use view_cube_policies::AisViewCubeMembers;
 pub use view_cube_selection::ais_view_cube_compute_selection;
 pub use view_cube_sensitive::AisViewCubeSensitive;
 
-#[cfg(test)]
-mod view_cube_highlight_tests;
-#[cfg(test)]
-mod view_cube_interaction_fixture;
-#[cfg(test)]
-mod view_cube_interaction_tests;
-#[cfg(test)]
-mod view_cube_policy_tests;
-
 mod view_controller_orbit_rotation;
 mod view_controller_rotation_math;
 mod view_controller_rotation_state;
 mod view_controller_view_rotation;
-
-#[cfg(test)]
-mod view_controller_rotation_fixture;
-#[cfg(test)]
-mod view_controller_rotation_tests;
 
 mod view_cube_animation_reference;
 pub use view_cube_animation_reference::AisViewCubeAnimationRef;
 mod view_controller_camera_action_state;
 mod view_controller_construction;
 mod view_controller_lazy_move;
-#[cfg(test)]
-mod view_cube_animation_reference_tests;
 
 mod view_controller_camera_actions;
 mod view_controller_camera_anchors;
@@ -445,17 +357,37 @@ mod view_controller_camera_pan;
 mod view_controller_camera_rotation_actions;
 mod view_controller_camera_zoom_actions;
 
-#[cfg(test)]
-mod view_controller_action_callback_fixture;
-#[cfg(test)]
-mod view_controller_action_scene_fixture;
-#[cfg(test)]
-mod view_controller_action_seed_fixture;
+mod view_cube_label_maps;
+pub use view_cube_label_maps::{
+    AisViewCubeAxesLabels, AisViewCubeLabelHash, AisViewCubeSideLabels,
+};
+mod view_cube_geometry_members;
+pub use view_cube_geometry_members::AisViewCubeGeometryMembers;
+mod view_cube_label_members;
+pub use view_cube_label_members::AisViewCubeLabelMembers;
+mod view_cube_font_reference;
+mod view_cube_shading_reference;
+pub use view_cube_font_reference::AisViewCubeFontRef;
+pub use view_cube_shading_reference::AisViewCubeShadingRef;
+mod view_cube_color_reference;
+mod view_cube_style_members;
+pub use view_cube_color_reference::AisViewCubeColorRef;
+pub use view_cube_style_members::AisViewCubeStyleMembers;
+mod view_cube_text_members;
+pub use view_cube_appearance::ais_view_cube_default_attributes;
+pub use view_cube_text_members::AisViewCubeTextMembers;
+mod view_cube_reset_members;
+pub use view_cube_reset_members::{
+    AisViewCubeResetMembers, ais_view_cube_default_highlight_attributes,
+    ais_view_cube_unset_attributes, ais_view_cube_unset_hilight_attributes,
+};
 
-#[cfg(test)]
-mod view_controller_action_snapshot_fixture;
-#[cfg(test)]
-mod view_controller_action_tests;
+mod animation_camera_source;
+mod animation_camera_update;
+pub use animation_camera_source::{
+    AisAnimationCameraBase, AisAnimationCameraMembers, AisAnimationCameraSource,
+    ais_animation_camera_update,
+};
 
 mod xr_laser_color_reference;
 mod xr_tracked_device;
@@ -477,3 +409,6 @@ pub use xr_tracked_device_selection::ais_xr_tracked_device_compute_selection;
 
 #[cfg(test)]
 mod xr_tests;
+
+#[cfg(test)]
+include!("test_modules.rs");

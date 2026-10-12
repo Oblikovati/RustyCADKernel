@@ -1,0 +1,404 @@
+{
+  "project": "Martensite",
+  "capability": "Partial retained manual standard2D base-color ordinary triangle surfaces",
+  "oracle_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "original_base": "fe3b6cd7f",
+  "checkpoint": "5e928ce40",
+  "checked_main_refresh": "bb6e110f6",
+  "proof_start_head": "32b1b218b38adf99154e4edbf22f385c6f6272a3",
+  "source_identity": "Both final functional/performance receipts share the same11974 source hashes, including actual source/fixtures. Working-tree implementation was uncommitted at proof time; hashes bind it exactly.",
+  "source_manifest_count": 11974,
+  "binary_hashes": {
+    "target/debug/examples/surface_texture_capture": "e92093ace027a2dc88c1af5430fa9d4072b6d37d56da643f8b4cd3ca3fe0226a",
+    "target/release/examples/surface_texture_performance": "87efa6f8ffcf098f9383966b02102652caa9beb878596fd201d6e6f28e1aaa5d",
+    "/tmp/martensite-standard-textures/surface-oracle-final": "e8ae5116231ebc89ebe737f439c98661461ef5eb21bd959e18fa05d13fac8d73"
+  },
+  "benchmark_binary_sha256": "87efa6f8ffcf098f9383966b02102652caa9beb878596fd201d6e6f28e1aaa5d",
+  "validation": {
+    "amd_all_target_rust_tests": 332,
+    "lavapipe_interface_native_replay_tests": 5,
+    "lavapipe_gpu_resource_lifetime_sampler_tests": 2,
+    "bounded_python_tests": 21,
+    "clippy_Dwarnings": "exit0",
+    "full_bounded_rust_format": "exit0",
+    "canonical_test_discovery": "exit0",
+    "all_shader_binary_verification": "exit0",
+    "native_capture_build": "exit0",
+    "debug_and_optimized_builds": "exit0"
+  },
+  "functional": {
+    "host": {
+      "scenes": 68,
+      "strict_pass": 65,
+      "maximum_depth_delta": 5.364418029785156e-07,
+      "maximum_channel_delta": 6,
+      "strict_failures": [
+        {
+          "mode": "projective",
+          "pixels": 49,
+          "max_channel_delta": 4
+        },
+        {
+          "mode": "perspective",
+          "pixels": 92,
+          "max_channel_delta": 6
+        },
+        {
+          "mode": "transformed",
+          "pixels": 67,
+          "max_channel_delta": 6
+        }
+      ]
+    },
+    "software": {
+      "scenes": 68,
+      "strict_pass": 22,
+      "maximum_depth_delta": 5.960464477539063e-08,
+      "maximum_channel_delta": 6,
+      "strict_failures": [
+        {
+          "mode": "default",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "projective",
+          "pixels": 1367,
+          "max_channel_delta": 6
+        },
+        {
+          "mode": "perspective",
+          "pixels": 1892,
+          "max_channel_delta": 4
+        },
+        {
+          "mode": "clipped",
+          "pixels": 393,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "back",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "back-vertex",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "bilinear",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "clamp",
+          "pixels": 208,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "transformed",
+          "pixels": 1406,
+          "max_channel_delta": 6
+        },
+        {
+          "mode": "bottom-up",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "linear",
+          "pixels": 1128,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "mask",
+          "pixels": 618,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "mask-blend",
+          "pixels": 388,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "blend",
+          "pixels": 519,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "opaque-alpha",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "auto-alpha",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "phong",
+          "pixels": 175,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "gouraud",
+          "pixels": 575,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "facet",
+          "pixels": 175,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "no-modulate",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "generated-mips",
+          "pixels": 2704,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "no-mips",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "anisotropy-fast",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "anisotropy-middle",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "anisotropy-quality",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "image-stale",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "image-updated",
+          "pixels": 753,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "image-null-updated",
+          "pixels": 783,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "image-repaired",
+          "pixels": 753,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-bgr-f",
+          "pixels": 611,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-bgr",
+          "pixels": 654,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-bgr32",
+          "pixels": 654,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-bgra-f",
+          "pixels": 611,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-bgra",
+          "pixels": 654,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-gray-f",
+          "pixels": 623,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-gray-half",
+          "pixels": 230,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-gray",
+          "pixels": 623,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-gray16",
+          "pixels": 227,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rg-f",
+          "pixels": 446,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rg-half",
+          "pixels": 446,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rgb-f",
+          "pixels": 611,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rgb",
+          "pixels": 654,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rgb32",
+          "pixels": 654,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rgba-f",
+          "pixels": 611,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rgba-half",
+          "pixels": 611,
+          "max_channel_delta": 1
+        },
+        {
+          "mode": "format-rgba",
+          "pixels": 654,
+          "max_channel_delta": 1
+        }
+      ]
+    }
+  },
+  "performance": [
+    {
+      "profile": "lavapipe",
+      "device": {
+        "index": 0,
+        "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+        "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+        "api_version": "1.4.354",
+        "driver": "llvmpipe"
+      },
+      "exit": 0,
+      "workloads": 51,
+      "warmup": 20,
+      "samples_per_workload": 100,
+      "median_range_ms": [
+        0.20204350000000001,
+        0.32634850000000004
+      ],
+      "maximum_p95_ms": 0.400731,
+      "each_frame_updates": {
+        "surface-texture-image-updated-each-frame": {
+          "median_ms": 0.32634850000000004,
+          "p95_ms": 0.400731
+        },
+        "surface-texture-sampler-updated-each-frame": {
+          "median_ms": 0.2259375,
+          "p95_ms": 0.289686
+        }
+      },
+      "start_processes": [],
+      "end_processes": [],
+      "start_load": [
+        1.5595703125,
+        2.23095703125,
+        2.70751953125
+      ],
+      "end_load": [
+        1.5595703125,
+        2.23095703125,
+        2.70751953125
+      ],
+      "baseline_gate": "Noacceptednewtexturebaseline; positivefinite100samples/schema/source/device gates pass. Hostshared, no clean-host baseline acceptance."
+    },
+    {
+      "profile": "host",
+      "device": {
+        "index": 0,
+        "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+        "api_version": "1.4.354",
+        "driver": "radv"
+      },
+      "exit": 0,
+      "workloads": 51,
+      "warmup": 20,
+      "samples_per_workload": 100,
+      "median_range_ms": [
+        0.19498100000000002,
+        0.340404
+      ],
+      "maximum_p95_ms": 0.5128780000000001,
+      "each_frame_updates": {
+        "surface-texture-image-updated-each-frame": {
+          "median_ms": 0.340404,
+          "p95_ms": 0.5128780000000001
+        },
+        "surface-texture-sampler-updated-each-frame": {
+          "median_ms": 0.22299200000000002,
+          "p95_ms": 0.288824
+        }
+      },
+      "start_processes": [],
+      "end_processes": [],
+      "start_load": [
+        1.5595703125,
+        2.23095703125,
+        2.70751953125
+      ],
+      "end_load": [
+        1.5595703125,
+        2.23095703125,
+        2.70751953125
+      ],
+      "baseline_gate": "Noacceptednewtexturebaseline; positivefinite100samples/schema/source/device gates pass. Hostshared, no clean-host baseline acceptance."
+    }
+  ],
+  "retained_limits": [
+    "AMD nativeGL uses radeonsi, nativeVulkan RADV and softwareVulkan llvmpipe are distinct identities; software comparisons use AMD-native assets.",
+    "Native software OpenGL LLVM probes SIGSEGV139; rejected/partial buffers and logs retained, no same-profile oracle claim.",
+    "Initial native EMPTY fill/default-layer differences and stale executable/unsynchronized-aspect diagnostics retained; final commonSOLID/Default fixtures source-bound.",
+    "No strict color/depth gate changes, raster tuning, baseline acceptance, class/API completion claims or loader/codec bug credit.",
+    "FreeImageOFF native ordinary file load failure is configured behavior; compressed-firstDDS and genuine in-memory pixels are independently proven."
+  ],
+  "typed_unsupported_paths": {
+    "retained_surface_texture::validate_surface_generation": "nonManual Object/Eye/Sphere/Sprite generation",
+    "retained_surface_texture::validate_texture_family": "non2D/multipletextures/nonbaseunits",
+    "capping_lighting::validate_cap_texture_alpha": "texturemapped caps and capMask/MaskBlend/Blend"
+  },
+  "next_slice": [
+    "Object/Eye native S/T planes and actual fixed-function/program shader distinction, model/view state and parameter revisions.",
+    "OpenGl_CappingPlaneResource homogeneous primitive coordinates/orientation plus CappingAlgo model-state and object texture inheritance.",
+    "Textured-cap stencil winding, clipchains, material/alpha/depth semantics before removing typed gates; both-device strict evidence.",
+    "After root integrates Blend/XOR and textures, actual sampled-surface-after-XOR combined-main regression."
+  ],
+  "artifacts": {
+    "functional": "functional.json.gz",
+    "performance": "performance.json.gz",
+    "final_buffers_images_logs": "final-captures.tar.gz",
+    "all_initial_diagnostics": "exploratory-diagnostics.tar.gz",
+    "native_replay_assets": "crates/vulkan/tests/fixtures/surface_textures/native-amd"
+  },
+  "active_owned_processes_at_handoff": false
+}

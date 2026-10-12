@@ -9,6 +9,7 @@ pub(crate) fn apply_cap_lighting(
     scene: &CappingScene<'_>,
     orientation: Mat4<f32>,
 ) -> Result<(), RenderError> {
+    validate_cap_texture_alpha(&**aspects)?;
     let model = crate::retained_lighting::resolved_model(&**aspects, scene.rendering.shading_model);
     if model == Graphic3dTypeOfShadingModel::Unlit {
         return crate::retained_lighting::validate_unlit_surface(&**aspects);
@@ -40,4 +41,37 @@ fn cap_lighting_snapshot(
         !scene.camera.is_orthographic(),
         crate::retained_lighting::surface_algorithm(model, true)?,
     )
+}
+
+fn validate_cap_texture_alpha(aspects: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
+    if aspects.to_map_texture() {
+        return Err(crate::error::rejected(
+            aspects.to_map_texture(),
+            "untextured section-cap aspects until native section coordinates are implemented",
+        ));
+    }
+    if !matches!(
+        aspects.alpha_mode(),
+        Graphic3dAlphaMode::Opaque | Graphic3dAlphaMode::BlendAuto
+    ) {
+        return Err(crate::error::rejected(
+            aspects.alpha_mode(),
+            "opaque/automatic cap alpha policies until cap masking is ported",
+        ));
+    }
+    Ok(())
+}
+#[cfg(test)]
+mod texture_gate_tests {
+    use super::*;
+    #[test]
+    fn ordinary_texture_support_does_not_silently_expand_cap_coordinates_or_masking() {
+        let aspects = Graphic3dAspects::default();
+        assert!(validate_cap_texture_alpha(&aspects).is_ok());
+        aspects.set_texture_map_on(true);
+        assert!(validate_cap_texture_alpha(&aspects).is_err());
+        aspects.set_texture_map_on(false);
+        aspects.set_alpha_mode(Graphic3dAlphaMode::Mask, 0.5);
+        assert!(validate_cap_texture_alpha(&aspects).is_err());
+    }
 }

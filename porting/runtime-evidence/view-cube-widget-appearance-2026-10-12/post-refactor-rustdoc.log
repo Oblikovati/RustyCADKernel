@@ -1,0 +1,52 @@
+warning: a method with this name may be added to the standard library in the future
+  --> crates/tkmath/src/gp/transform/json.rs:62:85
+   |
+62 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+   |                                                                                     ^^^^
+   |
+   = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+   = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+   = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+   = note: `#[warn(unstable_name_collisions)]` (part of `#[warn(future_incompatible)]`) on by default
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+  --> crates/tkmath/src/lib.rs:2:1
+   |
+ 2 + #![feature(float_conversions)]
+   |
+
+warning: a method with this name may be added to the standard library in the future
+   --> crates/tkmath/src/gp/general_transform/algebra.rs:108:85
+    |
+108 |                 output.set_value(row, column, self.coefficient(row + 1, column + 1).cast());
+    |                                                                                     ^^^^
+    |
+    = help: call with fully qualified syntax `rustycad_tkernel::ncollection::ElementCast::cast(...)` to keep using the current method
+    = warning: once this associated item is added to the standard library, the ambiguity may cause an error or change in behavior!
+    = note: for more information, see issue #48919 <https://github.com/rust-lang/rust/issues/48919>
+help: add `#![feature(float_conversions)]` to the crate attributes to enable `core::f64::<impl f64>::cast`
+   --> crates/tkmath/src/lib.rs:2:1
+    |
+  2 + #![feature(float_conversions)]
+    |
+
+warning: `rustycad-tkmath` (lib) generated 2 warnings
+ Documenting rustycad-tkv3d v0.1.2 (/home/vmiguel/git/oblikovati-workspace/Martensite-view-cube-appearance/crates/tkv3d)
+warning: unresolved link to `impl_select3d_poly`
+ --> crates/tkv3d/src/select3d/sensitive_poly.rs:3:49
+  |
+3 | //! subclass `Select3D_SensitiveCurve` embed; [`impl_select3d_poly`] writes their trait
+  |                                                 ^^^^^^^^^^^^^^^^^^ no item named `impl_select3d_poly` in scope
+  |
+  = note: `macro_rules` named `impl_select3d_poly` exists in this crate, but it is not in scope at this link's location
+  = note: `#[warn(rustdoc::broken_intra_doc_links)]` on by default
+
+warning: unresolved link to `select_mgr_presentable_overrides`
+ --> crates/tkv3d/src/select_mgr/selectable_object.rs:5:57
+  |
+5 | //! its `PrsMgrPresentableObject` implementation with [`select_mgr_presentable_overrides`].
+  |                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ no item named `select_mgr_presentable_overrides` in scope
+  |
+  = note: `macro_rules` named `select_mgr_presentable_overrides` exists in this crate, but it is not in scope at this link's location
+
+warning: `rustycad-tkv3d` (lib doc) generated 2 warnings
+    Finished `dev` profile [unoptimized] target(s) in 1.19s

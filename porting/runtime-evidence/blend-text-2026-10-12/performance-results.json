@@ -1,0 +1,992 @@
+{
+  "profiles": [
+    {
+      "profile": "lavapipe",
+      "device": [
+        "llvmpipe (LLVM 20.1.2, 256 bits)"
+      ],
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "device_index": 0,
+      "pid": 1326905,
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text/target/release/examples/blend_text_performance"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.531176389020402,
+      "start": {
+        "utc": "2026-10-12T01:09:51.145543+00:00",
+        "load_average": [
+          1.5068359375,
+          1.88232421875,
+          2.6240234375
+        ],
+        "processes": [
+          {
+            "pid": 1326890,
+            "comm": "bash",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          },
+          {
+            "pid": 1326898,
+            "comm": "python3",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          }
+        ]
+      },
+      "end": {
+        "utc": "2026-10-12T01:09:53.550962+00:00",
+        "load_average": [
+          1.5068359375,
+          1.88232421875,
+          2.6240234375
+        ],
+        "processes": [
+          {
+            "pid": 1326890,
+            "comm": "bash",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          },
+          {
+            "pid": 1326898,
+            "comm": "python3",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          }
+        ]
+      },
+      "log": "performance-lavapipe.log",
+      "log_sha256": "454eb76d43439d34a7215b945b2408e20f4a40fee7495904acf5a8e4c5834be5",
+      "source_manifest_sha256": "e6b7be2e9e95c53c90b99f00c228c5817ed9f628dcac3cdbd054278ff52fd7d3",
+      "executable_sha256": "06e67adb1e718017c6c133100d1417c273d719932dbf646be0187559dd03f7ec",
+      "source_unchanged": true,
+      "workloads": [
+        {
+          "workload": "retained-xor-decal-basic",
+          "mean_ms": 0.31504526,
+          "median_ms": 0.29440900000000003,
+          "p95_ms": 0.414606
+        },
+        {
+          "workload": "retained-xor-decal-spaces",
+          "mean_ms": 0.28987322,
+          "median_ms": 0.2868305,
+          "p95_ms": 0.338045
+        },
+        {
+          "workload": "retained-xor-decal-tabs",
+          "mean_ms": 0.29515225,
+          "median_ms": 0.2856185,
+          "p95_ms": 0.363913
+        },
+        {
+          "workload": "retained-xor-decal-multiline",
+          "mean_ms": 0.30858175,
+          "median_ms": 0.296183,
+          "p95_ms": 0.398106
+        },
+        {
+          "workload": "retained-xor-decal-centered",
+          "mean_ms": 0.31850992,
+          "median_ms": 0.293277,
+          "p95_ms": 0.40965799999999997
+        },
+        {
+          "workload": "retained-xor-decal-right",
+          "mean_ms": 0.28365786,
+          "median_ms": 0.27122650000000004,
+          "p95_ms": 0.363132
+        },
+        {
+          "workload": "retained-xor-decal-top",
+          "mean_ms": 0.28096572,
+          "median_ms": 0.2754945,
+          "p95_ms": 0.368882
+        },
+        {
+          "workload": "retained-xor-decal-bottom",
+          "mean_ms": 0.29916031,
+          "median_ms": 0.28703100000000004,
+          "p95_ms": 0.38026299999999996
+        },
+        {
+          "workload": "retained-xor-decal-zero-alpha",
+          "mean_ms": 0.30976392,
+          "median_ms": 0.29935849999999997,
+          "p95_ms": 0.41251299999999996
+        },
+        {
+          "workload": "retained-xor-decal-translucent",
+          "mean_ms": 0.2926169,
+          "median_ms": 0.28146550000000004,
+          "p95_ms": 0.371336
+        },
+        {
+          "workload": "retained-xor-decal-opaque-translucent",
+          "mean_ms": 0.30689504,
+          "median_ms": 0.2981015,
+          "p95_ms": 0.378099
+        },
+        {
+          "workload": "retained-xor-decal-annotation",
+          "mean_ms": 0.2995181,
+          "median_ms": 0.2922755,
+          "p95_ms": 0.359836
+        },
+        {
+          "workload": "retained-xor-decal-back-culled",
+          "mean_ms": 0.28102557,
+          "median_ms": 0.27322,
+          "p95_ms": 0.328899
+        },
+        {
+          "workload": "retained-xor-decal-right-back-culled",
+          "mean_ms": 0.27634682,
+          "median_ms": 0.26341749999999997,
+          "p95_ms": 0.349467
+        },
+        {
+          "workload": "retained-xor-decal-front-culled",
+          "mean_ms": 0.30221637,
+          "median_ms": 0.292586,
+          "p95_ms": 0.359024
+        },
+        {
+          "workload": "retained-xor-decal-mirror",
+          "mean_ms": 0.29297984,
+          "median_ms": 0.280183,
+          "p95_ms": 0.378239
+        },
+        {
+          "workload": "retained-xor-decal-view-double",
+          "mean_ms": 0.32444878,
+          "median_ms": 0.32082849999999996,
+          "p95_ms": 0.374252
+        },
+        {
+          "workload": "retained-xor-decal-offset",
+          "mean_ms": 0.29915632,
+          "median_ms": 0.28786749999999994,
+          "p95_ms": 0.35675
+        },
+        {
+          "workload": "retained-xor-decal-zoomable",
+          "mean_ms": 0.35270287,
+          "median_ms": 0.34581,
+          "p95_ms": 0.40517
+        },
+        {
+          "workload": "retained-xor-decal-resolution",
+          "mean_ms": 0.35255960000000003,
+          "median_ms": 0.33522450000000004,
+          "p95_ms": 0.402053
+        },
+        {
+          "workload": "retained-xor-decal-empty",
+          "mean_ms": 0.16773673,
+          "median_ms": 0.1630415,
+          "p95_ms": 0.204669
+        },
+        {
+          "workload": "retained-xor-decal-whitespace",
+          "mean_ms": 0.18746094,
+          "median_ms": 0.17811,
+          "p95_ms": 0.226719
+        },
+        {
+          "workload": "retained-xor-decal-zero-alpha-depth",
+          "mean_ms": 0.36878218,
+          "median_ms": 0.35154,
+          "p95_ms": 0.43295999999999996
+        },
+        {
+          "workload": "retained-xor-decal-zero-alpha-no-depth-write",
+          "mean_ms": 0.34970063,
+          "median_ms": 0.3410305,
+          "p95_ms": 0.398888
+        },
+        {
+          "workload": "retained-xor-decal-annotation-depth",
+          "mean_ms": 0.33364372,
+          "median_ms": 0.32674949999999997,
+          "p95_ms": 0.39568200000000003
+        },
+        {
+          "workload": "retained-xor-decal-rotated",
+          "mean_ms": 0.28835603,
+          "median_ms": 0.27491350000000003,
+          "p95_ms": 0.377789
+        },
+        {
+          "workload": "retained-xor-decal-plane-own",
+          "mean_ms": 0.32441873,
+          "median_ms": 0.329996,
+          "p95_ms": 0.381565
+        },
+        {
+          "workload": "retained-xor-decal-plane-local",
+          "mean_ms": 0.3216777,
+          "median_ms": 0.3283375,
+          "p95_ms": 0.379682
+        },
+        {
+          "workload": "retained-xor-decal-foreground-alpha",
+          "mean_ms": 0.28342691,
+          "median_ms": 0.2770625,
+          "p95_ms": 0.322616
+        },
+        {
+          "workload": "retained-xor-decal-plane-local-transform",
+          "mean_ms": 0.28466459,
+          "median_ms": 0.2785655,
+          "p95_ms": 0.33455799999999997
+        },
+        {
+          "workload": "retained-xor-decal-plane-local-mirror",
+          "mean_ms": 0.27562952,
+          "median_ms": 0.27076100000000003,
+          "p95_ms": 0.316916
+        },
+        {
+          "workload": "retained-xor-blend-colored",
+          "mean_ms": 0.35946578,
+          "median_ms": 0.3541445,
+          "p95_ms": 0.415028
+        },
+        {
+          "workload": "retained-xor-blend-colored-alpha",
+          "mean_ms": 0.30003672,
+          "median_ms": 0.29202999999999996,
+          "p95_ms": 0.358653
+        },
+        {
+          "workload": "retained-xor-blend-alpha-zero",
+          "mean_ms": 0.29930932,
+          "median_ms": 0.2833395,
+          "p95_ms": 0.384631
+        },
+        {
+          "workload": "retained-xor-blend-double",
+          "mean_ms": 0.36095973,
+          "median_ms": 0.3511445,
+          "p95_ms": 0.451865
+        },
+        {
+          "workload": "retained-xor-blend-colored-overlap",
+          "mean_ms": 0.35064217,
+          "median_ms": 0.340445,
+          "p95_ms": 0.41175100000000003
+        },
+        {
+          "workload": "retained-xor-blend-normal-after",
+          "mean_ms": 0.39148961,
+          "median_ms": 0.384962,
+          "p95_ms": 0.444662
+        },
+        {
+          "workload": "retained-xor-blend-palette",
+          "mean_ms": 0.28578151,
+          "median_ms": 0.2780545,
+          "p95_ms": 0.343756
+        },
+        {
+          "workload": "retained-xor-blend-highlight",
+          "mean_ms": 0.27120827000000003,
+          "median_ms": 0.266413,
+          "p95_ms": 0.301889
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-basic",
+          "mean_ms": 0.22222899,
+          "median_ms": 0.2152885,
+          "p95_ms": 0.276101
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-spaces",
+          "mean_ms": 0.20771201,
+          "median_ms": 0.2069825,
+          "p95_ms": 0.23806
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-tabs",
+          "mean_ms": 0.22587537,
+          "median_ms": 0.2111805,
+          "p95_ms": 0.296338
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-multiline",
+          "mean_ms": 0.20548613,
+          "median_ms": 0.19184,
+          "p95_ms": 0.25519200000000003
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-centered",
+          "mean_ms": 0.19504669,
+          "median_ms": 0.186966,
+          "p95_ms": 0.217622
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-right",
+          "mean_ms": 0.19092303,
+          "median_ms": 0.188108,
+          "p95_ms": 0.222271
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-top",
+          "mean_ms": 0.20676469,
+          "median_ms": 0.19445,
+          "p95_ms": 0.267284
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-bottom",
+          "mean_ms": 0.18889601,
+          "median_ms": 0.18311349999999998,
+          "p95_ms": 0.231569
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zero-alpha",
+          "mean_ms": 0.19853278,
+          "median_ms": 0.19261099999999998,
+          "p95_ms": 0.240966
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-translucent",
+          "mean_ms": 0.20423074,
+          "median_ms": 0.19842749999999998,
+          "p95_ms": 0.24582500000000002
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-opaque-translucent",
+          "mean_ms": 0.19550812,
+          "median_ms": 0.1887945,
+          "p95_ms": 0.229465
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-annotation",
+          "mean_ms": 0.19118904,
+          "median_ms": 0.18513249999999998,
+          "p95_ms": 0.240945
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-back-culled",
+          "mean_ms": 0.20350627,
+          "median_ms": 0.1920105,
+          "p95_ms": 0.24871000000000001
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-right-back-culled",
+          "mean_ms": 0.19775651,
+          "median_ms": 0.1883485,
+          "p95_ms": 0.24982200000000002
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-front-culled",
+          "mean_ms": 0.2011161,
+          "median_ms": 0.18938,
+          "p95_ms": 0.272725
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-mirror",
+          "mean_ms": 0.19128511,
+          "median_ms": 0.187697,
+          "p95_ms": 0.230216
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-view-double",
+          "mean_ms": 0.19866996,
+          "median_ms": 0.193944,
+          "p95_ms": 0.237519
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-offset",
+          "mean_ms": 0.2001491,
+          "median_ms": 0.19115300000000002,
+          "p95_ms": 0.251545
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zoomable",
+          "mean_ms": 0.20784215,
+          "median_ms": 0.197565,
+          "p95_ms": 0.256745
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-resolution",
+          "mean_ms": 0.21288166,
+          "median_ms": 0.2088565,
+          "p95_ms": 0.255072
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-empty",
+          "mean_ms": 0.11202389,
+          "median_ms": 0.10942199999999999,
+          "p95_ms": 0.123699
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-whitespace",
+          "mean_ms": 0.11183666,
+          "median_ms": 0.10999400000000001,
+          "p95_ms": 0.130993
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zero-alpha-depth",
+          "mean_ms": 0.21431689,
+          "median_ms": 0.2034065,
+          "p95_ms": 0.27064
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zero-alpha-no-depth-write",
+          "mean_ms": 0.19386674,
+          "median_ms": 0.1899715,
+          "p95_ms": 0.225106
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-annotation-depth",
+          "mean_ms": 0.20308061,
+          "median_ms": 0.19421899999999997,
+          "p95_ms": 0.251605
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-rotated",
+          "mean_ms": 0.19649026,
+          "median_ms": 0.19236599999999998,
+          "p95_ms": 0.226028
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-own",
+          "mean_ms": 0.1967308,
+          "median_ms": 0.1900165,
+          "p95_ms": 0.234995
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-local",
+          "mean_ms": 0.2040012,
+          "median_ms": 0.198482,
+          "p95_ms": 0.255643
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-foreground-alpha",
+          "mean_ms": 0.20340460999999999,
+          "median_ms": 0.1959325,
+          "p95_ms": 0.251064
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-local-transform",
+          "mean_ms": 0.20850736,
+          "median_ms": 0.2014275,
+          "p95_ms": 0.247869
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-local-mirror",
+          "mean_ms": 0.18615088,
+          "median_ms": 0.182803,
+          "p95_ms": 0.208967
+        },
+        {
+          "workload": "explicit-pixel-xor-pixel-reuse",
+          "mean_ms": 0.1973488,
+          "median_ms": 0.18917,
+          "p95_ms": 0.255272
+        },
+        {
+          "workload": "explicit-pixel-xor-pixel-reuse-cached",
+          "mean_ms": 0.20223712,
+          "median_ms": 0.195346,
+          "p95_ms": 0.243872
+        }
+      ]
+    },
+    {
+      "profile": "amd",
+      "device": [
+        "AMD Radeon 8060S Graphics (RADV STRIX_HALO)"
+      ],
+      "icd": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "device_index": 0,
+      "pid": 1327169,
+      "command": [
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text/target/release/examples/blend_text_performance"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.514352690981468,
+      "start": {
+        "utc": "2026-10-12T01:09:53.803204+00:00",
+        "load_average": [
+          1.5068359375,
+          1.88232421875,
+          2.6240234375
+        ],
+        "processes": [
+          {
+            "pid": 1326890,
+            "comm": "bash",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          },
+          {
+            "pid": 1326898,
+            "comm": "python3",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          }
+        ]
+      },
+      "end": {
+        "utc": "2026-10-12T01:09:56.188539+00:00",
+        "load_average": [
+          2.18701171875,
+          2.017578125,
+          2.6640625
+        ],
+        "processes": [
+          {
+            "pid": 1326890,
+            "comm": "bash",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          },
+          {
+            "pid": 1326898,
+            "comm": "python3",
+            "cwd": "/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-blend-text"
+          }
+        ]
+      },
+      "log": "performance-amd.log",
+      "log_sha256": "35f32394871c1b3069a572562556c4f4c79a6f6d60bd6db12e326c3f3d83e670",
+      "source_manifest_sha256": "e6b7be2e9e95c53c90b99f00c228c5817ed9f628dcac3cdbd054278ff52fd7d3",
+      "executable_sha256": "06e67adb1e718017c6c133100d1417c273d719932dbf646be0187559dd03f7ec",
+      "source_unchanged": true,
+      "workloads": [
+        {
+          "workload": "retained-xor-decal-basic",
+          "mean_ms": 0.26986142,
+          "median_ms": 0.2549065,
+          "p95_ms": 0.347463
+        },
+        {
+          "workload": "retained-xor-decal-spaces",
+          "mean_ms": 0.2517213,
+          "median_ms": 0.2424135,
+          "p95_ms": 0.286059
+        },
+        {
+          "workload": "retained-xor-decal-tabs",
+          "mean_ms": 0.25162917,
+          "median_ms": 0.241962,
+          "p95_ms": 0.291589
+        },
+        {
+          "workload": "retained-xor-decal-multiline",
+          "mean_ms": 0.25550577,
+          "median_ms": 0.24432700000000002,
+          "p95_ms": 0.293813
+        },
+        {
+          "workload": "retained-xor-decal-centered",
+          "mean_ms": 0.25862524,
+          "median_ms": 0.2480035,
+          "p95_ms": 0.30587600000000004
+        },
+        {
+          "workload": "retained-xor-decal-right",
+          "mean_ms": 0.25694807,
+          "median_ms": 0.245344,
+          "p95_ms": 0.338346
+        },
+        {
+          "workload": "retained-xor-decal-top",
+          "mean_ms": 0.26721465,
+          "median_ms": 0.2473575,
+          "p95_ms": 0.419576
+        },
+        {
+          "workload": "retained-xor-decal-bottom",
+          "mean_ms": 0.25666432,
+          "median_ms": 0.24566950000000004,
+          "p95_ms": 0.335781
+        },
+        {
+          "workload": "retained-xor-decal-zero-alpha",
+          "mean_ms": 0.25478745,
+          "median_ms": 0.24204750000000003,
+          "p95_ms": 0.32688500000000004
+        },
+        {
+          "workload": "retained-xor-decal-translucent",
+          "mean_ms": 0.25899836,
+          "median_ms": 0.24337999999999999,
+          "p95_ms": 0.346871
+        },
+        {
+          "workload": "retained-xor-decal-opaque-translucent",
+          "mean_ms": 0.26484169,
+          "median_ms": 0.244217,
+          "p95_ms": 0.41562899999999997
+        },
+        {
+          "workload": "retained-xor-decal-annotation",
+          "mean_ms": 0.25292832,
+          "median_ms": 0.2398135,
+          "p95_ms": 0.32022300000000004
+        },
+        {
+          "workload": "retained-xor-decal-back-culled",
+          "mean_ms": 0.25289045,
+          "median_ms": 0.244532,
+          "p95_ms": 0.297681
+        },
+        {
+          "workload": "retained-xor-decal-right-back-culled",
+          "mean_ms": 0.25404891,
+          "median_ms": 0.24379099999999998,
+          "p95_ms": 0.29172
+        },
+        {
+          "workload": "retained-xor-decal-front-culled",
+          "mean_ms": 0.25451025,
+          "median_ms": 0.23966350000000003,
+          "p95_ms": 0.32958899999999997
+        },
+        {
+          "workload": "retained-xor-decal-mirror",
+          "mean_ms": 0.25980153,
+          "median_ms": 0.24909599999999998,
+          "p95_ms": 0.306858
+        },
+        {
+          "workload": "retained-xor-decal-view-double",
+          "mean_ms": 0.25621283,
+          "median_ms": 0.2459905,
+          "p95_ms": 0.302689
+        },
+        {
+          "workload": "retained-xor-decal-offset",
+          "mean_ms": 0.26046469,
+          "median_ms": 0.2414165,
+          "p95_ms": 0.392315
+        },
+        {
+          "workload": "retained-xor-decal-zoomable",
+          "mean_ms": 0.27054087,
+          "median_ms": 0.2490305,
+          "p95_ms": 0.42177000000000003
+        },
+        {
+          "workload": "retained-xor-decal-resolution",
+          "mean_ms": 0.27312116,
+          "median_ms": 0.255778,
+          "p95_ms": 0.329059
+        },
+        {
+          "workload": "retained-xor-decal-empty",
+          "mean_ms": 0.18469945,
+          "median_ms": 0.1766065,
+          "p95_ms": 0.22661900000000001
+        },
+        {
+          "workload": "retained-xor-decal-whitespace",
+          "mean_ms": 0.18272839,
+          "median_ms": 0.1736815,
+          "p95_ms": 0.258418
+        },
+        {
+          "workload": "retained-xor-decal-zero-alpha-depth",
+          "mean_ms": 0.29380965,
+          "median_ms": 0.27880099999999997,
+          "p95_ms": 0.381475
+        },
+        {
+          "workload": "retained-xor-decal-zero-alpha-no-depth-write",
+          "mean_ms": 0.29453064,
+          "median_ms": 0.27678200000000003,
+          "p95_ms": 0.402585
+        },
+        {
+          "workload": "retained-xor-decal-annotation-depth",
+          "mean_ms": 0.2884461,
+          "median_ms": 0.27086599999999994,
+          "p95_ms": 0.39394799999999996
+        },
+        {
+          "workload": "retained-xor-decal-rotated",
+          "mean_ms": 0.26133721,
+          "median_ms": 0.248745,
+          "p95_ms": 0.347263
+        },
+        {
+          "workload": "retained-xor-decal-plane-own",
+          "mean_ms": 0.26002334,
+          "median_ms": 0.246541,
+          "p95_ms": 0.317898
+        },
+        {
+          "workload": "retained-xor-decal-plane-local",
+          "mean_ms": 0.25888594,
+          "median_ms": 0.24023450000000002,
+          "p95_ms": 0.415018
+        },
+        {
+          "workload": "retained-xor-decal-foreground-alpha",
+          "mean_ms": 0.25479623,
+          "median_ms": 0.2421525,
+          "p95_ms": 0.321344
+        },
+        {
+          "workload": "retained-xor-decal-plane-local-transform",
+          "mean_ms": 0.26246053,
+          "median_ms": 0.24626550000000003,
+          "p95_ms": 0.31923
+        },
+        {
+          "workload": "retained-xor-decal-plane-local-mirror",
+          "mean_ms": 0.25401124,
+          "median_ms": 0.2428595,
+          "p95_ms": 0.352723
+        },
+        {
+          "workload": "retained-xor-blend-colored",
+          "mean_ms": 0.25831759,
+          "median_ms": 0.245023,
+          "p95_ms": 0.327596
+        },
+        {
+          "workload": "retained-xor-blend-colored-alpha",
+          "mean_ms": 0.26568782,
+          "median_ms": 0.2506635,
+          "p95_ms": 0.36839099999999997
+        },
+        {
+          "workload": "retained-xor-blend-alpha-zero",
+          "mean_ms": 0.26495557000000003,
+          "median_ms": 0.2513355,
+          "p95_ms": 0.342474
+        },
+        {
+          "workload": "retained-xor-blend-double",
+          "mean_ms": 0.31850852,
+          "median_ms": 0.3024545,
+          "p95_ms": 0.40401800000000004
+        },
+        {
+          "workload": "retained-xor-blend-colored-overlap",
+          "mean_ms": 0.34229724,
+          "median_ms": 0.3276105,
+          "p95_ms": 0.456855
+        },
+        {
+          "workload": "retained-xor-blend-normal-after",
+          "mean_ms": 0.35766437,
+          "median_ms": 0.334839,
+          "p95_ms": 0.44873999999999997
+        },
+        {
+          "workload": "retained-xor-blend-palette",
+          "mean_ms": 0.27304044,
+          "median_ms": 0.252732,
+          "p95_ms": 0.389891
+        },
+        {
+          "workload": "retained-xor-blend-highlight",
+          "mean_ms": 0.26860593,
+          "median_ms": 0.24967699999999998,
+          "p95_ms": 0.367329
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-basic",
+          "mean_ms": 0.25741571,
+          "median_ms": 0.24299500000000002,
+          "p95_ms": 0.34027900000000005
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-spaces",
+          "mean_ms": 0.26348345,
+          "median_ms": 0.2415315,
+          "p95_ms": 0.397896
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-tabs",
+          "mean_ms": 0.26094343,
+          "median_ms": 0.24252849999999998,
+          "p95_ms": 0.38311900000000004
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-multiline",
+          "mean_ms": 0.25913691,
+          "median_ms": 0.2436305,
+          "p95_ms": 0.386936
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-centered",
+          "mean_ms": 0.25365413,
+          "median_ms": 0.239754,
+          "p95_ms": 0.315654
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-right",
+          "mean_ms": 0.25151418999999997,
+          "median_ms": 0.2419925,
+          "p95_ms": 0.31171699999999997
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-top",
+          "mean_ms": 0.27253584,
+          "median_ms": 0.24589500000000003,
+          "p95_ms": 0.417582
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-bottom",
+          "mean_ms": 0.25206327,
+          "median_ms": 0.239989,
+          "p95_ms": 0.31723599999999996
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zero-alpha",
+          "mean_ms": 0.24866512,
+          "median_ms": 0.23776,
+          "p95_ms": 0.31364000000000003
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-translucent",
+          "mean_ms": 0.25758135,
+          "median_ms": 0.24636049999999998,
+          "p95_ms": 0.303131
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-opaque-translucent",
+          "mean_ms": 0.26283465,
+          "median_ms": 0.2439115,
+          "p95_ms": 0.349136
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-annotation",
+          "mean_ms": 0.26113769,
+          "median_ms": 0.24605,
+          "p95_ms": 0.347022
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-back-culled",
+          "mean_ms": 0.25846568,
+          "median_ms": 0.2446975,
+          "p95_ms": 0.317978
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-right-back-culled",
+          "mean_ms": 0.25562708,
+          "median_ms": 0.2426235,
+          "p95_ms": 0.315544
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-front-culled",
+          "mean_ms": 0.25947905,
+          "median_ms": 0.248444,
+          "p95_ms": 0.317297
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-mirror",
+          "mean_ms": 0.24952233000000001,
+          "median_ms": 0.239668,
+          "p95_ms": 0.28152
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-view-double",
+          "mean_ms": 0.25719298,
+          "median_ms": 0.24385099999999998,
+          "p95_ms": 0.319882
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-offset",
+          "mean_ms": 0.2565586,
+          "median_ms": 0.248349,
+          "p95_ms": 0.297239
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zoomable",
+          "mean_ms": 0.2545971,
+          "median_ms": 0.2411105,
+          "p95_ms": 0.356479
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-resolution",
+          "mean_ms": 0.27007793,
+          "median_ms": 0.2494365,
+          "p95_ms": 0.331463
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-empty",
+          "mean_ms": 0.18196311,
+          "median_ms": 0.17370649999999999,
+          "p95_ms": 0.213735
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-whitespace",
+          "mean_ms": 0.18681891,
+          "median_ms": 0.17325100000000002,
+          "p95_ms": 0.229604
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zero-alpha-depth",
+          "mean_ms": 0.25147587,
+          "median_ms": 0.238672,
+          "p95_ms": 0.304263
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-zero-alpha-no-depth-write",
+          "mean_ms": 0.25849191,
+          "median_ms": 0.24553900000000004,
+          "p95_ms": 0.335851
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-annotation-depth",
+          "mean_ms": 0.25861363,
+          "median_ms": 0.243731,
+          "p95_ms": 0.36630799999999997
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-rotated",
+          "mean_ms": 0.26805602,
+          "median_ms": 0.248409,
+          "p95_ms": 0.415068
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-own",
+          "mean_ms": 0.2613974,
+          "median_ms": 0.245103,
+          "p95_ms": 0.40495899999999996
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-local",
+          "mean_ms": 0.25211464,
+          "median_ms": 0.241176,
+          "p95_ms": 0.342624
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-foreground-alpha",
+          "mean_ms": 0.25534942,
+          "median_ms": 0.24431650000000002,
+          "p95_ms": 0.300266
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-local-transform",
+          "mean_ms": 0.26508226,
+          "median_ms": 0.2467965,
+          "p95_ms": 0.403997
+        },
+        {
+          "workload": "explicit-pixel-xor-decal-plane-local-mirror",
+          "mean_ms": 0.25490633,
+          "median_ms": 0.2454235,
+          "p95_ms": 0.327024
+        },
+        {
+          "workload": "explicit-pixel-xor-pixel-reuse",
+          "mean_ms": 0.26289138,
+          "median_ms": 0.251811,
+          "p95_ms": 0.31469199999999997
+        },
+        {
+          "workload": "explicit-pixel-xor-pixel-reuse-cached",
+          "mean_ms": 0.25373881,
+          "median_ms": 0.24318499999999998,
+          "p95_ms": 0.312508
+        }
+      ]
+    }
+  ],
+  "baseline_acceptance": false,
+  "isolation": "All owned workers/root acknowledged quiet before GO; start/end process snapshots only, no claim of continuously isolated shared host."
+}

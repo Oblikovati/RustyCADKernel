@@ -144,7 +144,7 @@ fn unsupported_text_display_states_fail_explicitly() {
     let fixture = TextFixture::new();
     fixture
         .style
-        .set_text_display_type(AspectTypeOfDisplayText::Blend);
+        .set_text_display_type(AspectTypeOfDisplayText::Dimension);
     assert!(fixture.scene.render_view().try_redraw().is_err());
 }
 

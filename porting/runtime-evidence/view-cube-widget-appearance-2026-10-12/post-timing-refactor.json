@@ -1,0 +1,80 @@
+{
+  "reason": "enforce full declaredfunction span\u226420lines afterformatter, including signature; previousaudit counted onlybody",
+  "changes": "extract secondary shading reset/sharedaspectcopy, fixedcolorleaf choice, datum/side label andarrow helpers, selection allocation/sensitivity, test replay helpers, stable animation frame labels andrecording-driver factory; no API/default/geometry/order/timer/gate change",
+  "changed_sources": [
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_boundary_tests.rs",
+      "original_timed_sha256": "818a81eba32208c56c1acc1f439397568cb27385e53d79476db19c722e04834d",
+      "post_refactor_sha256": "9ee2560c7d5125e71eea42ccf913d15c64ab11611457c184d2c5b7e9b5e5161f"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_appearance_fixture.rs",
+      "original_timed_sha256": "a808ed6a7955a0ca8da211c42de3a7a75196209b52f0190f165d10ed0c54f6f5",
+      "post_refactor_sha256": "2b50fe4d7e2670c74f7b60cfcf441e6b442bd231bb23e3f824d45181799154fd"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_color_reference.rs",
+      "original_timed_sha256": "32ca5cdba1f4ff7ac803553b86230c78651326fb7f230d4aa43d322a4ff826c0",
+      "post_refactor_sha256": "9d09ce48c849a7207b0feb33d5286c7092ee5eb49768c7dba042fa81edf2cf02"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_axes.rs",
+      "original_timed_sha256": "4f15997d4882fe8050d8bfff783bb7b7c92705604a60d899495b5b86b33500ca",
+      "post_refactor_sha256": "6e9ffc6f1e7e97aa39cdb5016c09771ed5f0c3b0cb003ca301c4811699be4637"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_shading_alias_tests.rs",
+      "original_timed_sha256": "e425b079bf15dd86ab1e1344ba19f11708f36f6cd4123c4145bf5e81585393c5",
+      "post_refactor_sha256": "082538486b3bec4aef6d1ec3f371b4164496229267bd624d4b70529b373ce4b8"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_color_alias_tests.rs",
+      "original_timed_sha256": "e532f41755e6a51aee25d04efb1f940cfb7afbe7f1c47180242c044e1d92742e",
+      "post_refactor_sha256": "6d4d9cc034d0d1155d4dfb375570aaf5b14a79655337dde099b82ccb6f1b3199"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_appearance_mutations.rs",
+      "original_timed_sha256": "ee5dadaab446a28cd11b6b20b0fdeaf9132a78629aaf089b9be585940b14f9dc",
+      "post_refactor_sha256": "55f2bded15be073b7b2f3d537c0900dc757ba087e20d3763665a7f936dac7716"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_appearance_tests.rs",
+      "original_timed_sha256": "013201be59ab22175666f7fb435fab1552084be6510727f45b80df1aacd797a1",
+      "post_refactor_sha256": "24c7d4d4e00a6fa530bab2e22e689408e11a099abd3740f091501de7b0d1fc27"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_labels.rs",
+      "original_timed_sha256": "18b2d34c51dd6e29a0dbf834fce19d190d6179d1df8bba5caf6783977ba16b29",
+      "post_refactor_sha256": "711baa7f97d949993458deae397373cc3b25588f434eccedc22381e4bd919997"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_appearance.rs",
+      "original_timed_sha256": "45d972a13d8092516a5dc2a8b69a474b8fe3ff8a32f2171361306dd64328cc82",
+      "post_refactor_sha256": "c772b9f10ae6dfc5e33b977a6e6cbba93f5464a3ff70163e05c527c49ffd341c"
+    },
+    {
+      "source": "crates/tkv3d/src/ais/view_cube_selection.rs",
+      "original_timed_sha256": "a9f71a37815b10197c15267ac0d1db7f61ba9a07903f3227d9e3746318449e7c",
+      "post_refactor_sha256": "b0094b5cc247ba5a85d193bc8a0529242b17ae4ab6d860141b2615b05c44d956"
+    },
+    {
+      "source": "crates/vulkan/examples/view_cube_performance.rs",
+      "original_timed_sha256": "e8676ad8949bf37ea83e469f581842537d6b610de6030e4bc76db3f5b92b70d5",
+      "post_refactor_sha256": "cca11db3d09e7c35bb2012d086ec01637d8b9bb602cf91d7312f2cb23f214739"
+    },
+    {
+      "source": "crates/vulkan/tests/support/view_cube_widget.rs",
+      "original_timed_sha256": "c910550158c3f970ff670e9eb3b07d1250f0a8168f90c288038520935be3402e",
+      "post_refactor_sha256": "c701dcab1ea5a6ac7ffa98c53b96d589bb2ab68d52d02bad2051cae796d8d042"
+    }
+  ],
+  "original_timed_binary_sha256": "aea6a3a7f6e2464935dd349bc11bca915087e76ff61bdc5c0e579e29bd75ef87",
+  "post_refactor_binary_sha256": "c9bdedd5f5d3b1f9e500ccdbec5e8eab762e378a24b9062bad28d26db2d51d8f",
+  "original_timed_manifest_preserved": "performance-source-hashes.json",
+  "post_refactor_manifest": "post-refactor-source-hashes.json",
+  "checks": "991tests pass(TKV3d703+Vulkan288), Clippy-Dwarnings andfull declaredfunction\u226420audit pass; fresh rustdoccapture andcanonical selectors refreshed",
+  "relink": "post-refactor-release-relink.log",
+  "final_76_row_preflight": "post-refactor-canonical-bindings.json",
+  "final_post_refactor_timing": "post-refactor-timing/receipt.json",
+  "functional_captures": "notrepeated afterhelperextraction; originalsourcecaptures retained unchanged. Root willverify actualfinalmain onbothprofiles;991repeatedtests establishhelper-only behavioral equivalence"
+}

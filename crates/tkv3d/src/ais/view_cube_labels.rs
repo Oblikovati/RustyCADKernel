@@ -1,4 +1,5 @@
 //! Native face labels use the outward plane frame with Y-up/Z-up orientation rules.
+use super::AisViewCubePresentationSettings;
 use super::AisViewCubePresentationSource;
 use crate::prs_mgr::PrsMgrPresentableObjectMembers;
 use crate::prs3d::Prs3dTextAspect;
@@ -17,17 +18,11 @@ pub(super) fn submit_cube_side_labels<O: AisViewCubePresentationSource + ?Sized>
     let aspect = object.attributes().text_aspect();
     let group = prs.new_group()?;
     group.set_group_primitives_aspect(&aspect.aspect().cast());
-    for (index, label) in settings.side_labels.iter().enumerate() {
-        if label.is_empty() {
+    for orientation in Orientation::ALL[..6].iter() {
+        let Some(label) = cube_visible_side_label(&settings, *orientation) else {
             continue;
-        }
-        let direction = V3d::get_proj_axis(Orientation::ALL[index]);
-        let position = super::view_cube_geometry::cube_point(
-            direction.xyz()
-                * (settings.geometry.size * 0.5 + settings.geometry.facet_extension + 2.0),
-        );
-        let up = cube_face_up(settings.is_y_up, Orientation::ALL[index]);
-        let frame = Axis2::with_x_direction(position, direction, up.crossed(direction)?)?;
+        };
+        let frame = cube_label_frame(&settings, *orientation)?;
         submit_cube_face_label(&group, &aspect, label, &frame);
     }
     Ok(())
@@ -59,4 +54,26 @@ fn submit_cube_face_label(
     text.set_horizontal_alignment(aspect.horizontal_justification());
     text.set_vertical_alignment(aspect.vertical_justification());
     group.add_text(&text, true);
+}
+
+fn cube_label_frame(
+    settings: &super::AisViewCubePresentationSettings,
+    orientation: Orientation,
+) -> Result<Axis2, Failure> {
+    let direction = V3d::get_proj_axis(orientation);
+    let position = super::view_cube_geometry::cube_point(
+        direction.xyz() * (settings.geometry.size * 0.5 + settings.geometry.facet_extension + 2.0),
+    );
+    let up = cube_face_up(settings.is_y_up, orientation);
+    Axis2::with_x_direction(position, direction, up.crossed(direction)?)
+}
+
+fn cube_visible_side_label(
+    settings: &AisViewCubePresentationSettings,
+    orientation: Orientation,
+) -> Option<&AsciiString> {
+    settings
+        .side_labels
+        .seek(&orientation)
+        .filter(|label| !label.is_empty())
 }
