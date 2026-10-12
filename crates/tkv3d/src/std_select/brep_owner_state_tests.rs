@@ -15,13 +15,8 @@ fn actual_native_brep_owner_state_and_reference_contracts_replay() {
     record_owner_origin(&first, &second, &mut rows);
     record_owner_field_alias(&first, &second, &mut rows);
     record_presentation_field_alias(&first, &second, &mut rows);
-    writeln!(
-        rows,
-        "state-finished {} {}",
-        first.tshape().ref_count(),
-        second.tshape().ref_count()
-    )
-    .unwrap();
+    let counts = (first.tshape().ref_count(), second.tshape().ref_count());
+    writeln!(rows, "state-finished {} {}", counts.0, counts.1).unwrap();
     assert_eq!(
         rows,
         include_str!("../../tests/fixtures/colored-shape-compute/native-owner-state.txt")
@@ -72,42 +67,49 @@ fn record_owner_field_alias(first: &Shape, second: &Shape, rows: &mut String) {
     let alias = owner.shape_ref();
     let other = owner.shape_ref();
     let same = alias.is_same_reference(&other);
+    record_owner_borrow(&alias, first, same, rows);
+    owner.brep_owner_base().shape.write().shape = second.clone();
+    record_owner_replacement(&alias, first, second, rows);
+    let copy = alias.clone_shape();
+    let same = i32::from(copy.is_equal(second));
+    writeln!(rows, "owner-copy {} {same}", second.tshape().ref_count()).unwrap();
+}
+fn record_owner_borrow(
+    alias: &StdSelectShapeRef<'_>,
+    first: &Shape,
+    same: bool,
+    rows: &mut String,
+) {
     alias
         .read_current_shape(|shape| {
+            let same = i32::from(same);
+            let equal = i32::from(shape.is_equal(first));
             writeln!(
                 rows,
-                "owner-borrow {} {} {}",
-                i32::from(same),
-                i32::from(shape.is_equal(first)),
+                "owner-borrow {same} {equal} {}",
                 first.tshape().ref_count()
             )
             .unwrap();
             Ok(())
         })
         .unwrap();
-    owner.brep_owner_base().shape.write().shape = second.clone();
+}
+fn record_owner_replacement(
+    alias: &StdSelectShapeRef<'_>,
+    first: &Shape,
+    second: &Shape,
+    rows: &mut String,
+) {
     alias
         .read_current_shape(|shape| {
-            writeln!(
-                rows,
-                "owner-replaced {} {} {}",
-                i32::from(shape.is_equal(second)),
-                first.tshape().ref_count(),
-                second.tshape().ref_count()
-            )
-            .unwrap();
+            let same = i32::from(shape.is_equal(second));
+            let counts = (first.tshape().ref_count(), second.tshape().ref_count());
+            writeln!(rows, "owner-replaced {same} {} {}", counts.0, counts.1).unwrap();
             Ok(())
         })
         .unwrap();
-    let copy = alias.clone_shape();
-    writeln!(
-        rows,
-        "owner-copy {} {}",
-        second.tshape().ref_count(),
-        i32::from(copy.is_equal(second))
-    )
-    .unwrap();
 }
+
 fn record_presentation_field_alias(first: &Shape, second: &Shape, rows: &mut String) {
     let drawer = Handle::new(Prs3dDrawer::new());
     let object = StdSelectShape::new(first, &drawer);
@@ -123,15 +125,24 @@ fn record_presentation_field_alias(first: &Shape, second: &Shape, rows: &mut Str
     )
     .unwrap();
     object.set_shape(second);
+    record_presentation_replacement(&object, &alias, first, second, rows);
+}
+fn record_presentation_replacement(
+    object: &StdSelectShape,
+    alias: &StdSelectShapeRef<'_>,
+    first: &Shape,
+    second: &Shape,
+    rows: &mut String,
+) {
     alias
         .read_current_shape(|shape| {
+            let same = i32::from(shape.is_equal(second));
+            let counts = (first.tshape().ref_count(), second.tshape().ref_count());
+            let updated = i32::from(object.to_be_updated(true));
             writeln!(
                 rows,
-                "shape-replaced {} {} {} {}",
-                i32::from(shape.is_equal(second)),
-                first.tshape().ref_count(),
-                second.tshape().ref_count(),
-                i32::from(object.to_be_updated(true))
+                "shape-replaced {same} {} {} {updated}",
+                counts.0, counts.1
             )
             .unwrap();
             Ok(())

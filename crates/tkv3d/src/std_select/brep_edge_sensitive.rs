@@ -9,6 +9,7 @@ use rustycad_tkbrep::{
     brep_adaptor::BRepAdaptorCurve,
     topods::{self, Shape},
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     precision,
     standard::{Failure, Handle},
@@ -20,8 +21,8 @@ impl StdSelectBrepSelectionTool {
     #[allow(clippy::too_many_arguments)] // Actual OCCT output overload carries both selection and retained sensitive output.
     pub fn get_edge_sensitive(
         shape: &Shape,
-        owner: &Handle<dyn SelectMgrEntityOwnerSource>,
-        selection: &Handle<SelectMgrSelection>,
+        owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         deflection: f64,
         angle: f64,
         edge_points: i32,
@@ -34,8 +35,8 @@ impl StdSelectBrepSelectionTool {
     }
 }
 type EdgeSelectionReferences<'a> = (
-    &'a Handle<dyn SelectMgrEntityOwnerSource>,
-    &'a Handle<SelectMgrSelection>,
+    &'a dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    &'a dyn HandleReference<SelectMgrSelection>,
 );
 type EdgeSamplingCriteria = (f64, f64, i32, f64);
 fn brep_checked_edge_sensitive(
@@ -50,14 +51,19 @@ fn brep_checked_edge_sensitive(
         *output = brep_polygon_sensitive(references.0, &points)?;
         return Ok(());
     }
-    let curve = match rustycad_tkernel::standard::catch_native_failure(|| {
-        BRepAdaptorCurve::with_edge(&edge)
-    }) {
-        Ok(curve) => curve,
-        Err(failure) if failure.exception_type() == "Standard_NullObject" => return Ok(()),
-        Err(failure) => return Err(failure),
+    let Some(curve) = load_brep_edge_curve(&edge)? else {
+        return Ok(());
     };
     brep_analytical_edge_sensitive(&edge, &curve, references, sampling, output)
+}
+fn load_brep_edge_curve(
+    edge: &rustycad_tkbrep::topods::Edge,
+) -> Result<Option<BRepAdaptorCurve>, Failure> {
+    match rustycad_tkernel::standard::catch_native_failure(|| BRepAdaptorCurve::with_edge(edge)) {
+        Ok(curve) => Ok(Some(curve)),
+        Err(failure) if failure.exception_type() == "Standard_NullObject" => Ok(None),
+        Err(failure) => Err(failure),
+    }
 }
 fn brep_analytical_edge_sensitive(
     edge: &rustycad_tkbrep::topods::Edge,
@@ -76,15 +82,16 @@ fn brep_analytical_edge_sensitive(
 fn brep_line_sensitive(
     edge: &rustycad_tkbrep::topods::Edge,
     curve: &BRepAdaptorCurve,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
 ) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
     let (first, last) = BRepTool::range(edge)?;
-    let segment = Select3DSensitiveSegment::new(owner, curve.value(first)?, curve.value(last)?);
+    let points = (curve.value(first)?, curve.value(last)?);
+    let segment = Select3DSensitiveSegment::new(&owner.observe(), points.0, points.1);
     Ok(Handle::new(segment).cast())
 }
 fn brep_sampled_sensitive(
     curve: &BRepAdaptorCurve,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     sampling: EdgeSamplingCriteria,
 ) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
     let (deflection, angle, edge_points, max_parameter) = sampling;
@@ -95,37 +102,53 @@ fn brep_sampled_sensitive(
         edge_points,
         max_parameter,
     )?;
-    Ok(Handle::new(Select3DSensitiveCurve::from_points(owner, &points)?).cast())
+    Ok(Handle::new(Select3DSensitiveCurve::from_points(
+        &owner.observe(),
+        &points,
+    )?)
+    .cast())
 }
 fn brep_polygon_sensitive(
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     points: &[Point3],
 ) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
     if points.len() == 2 {
-        return Ok(Handle::new(Select3DSensitiveSegment::new(owner, points[0], points[1])).cast());
+        return Ok(Handle::new(Select3DSensitiveSegment::new(
+            &owner.observe(),
+            points[0],
+            points[1],
+        ))
+        .cast());
     }
-    let curve = Select3DSensitiveCurve::from_points(owner, points)?;
+    let curve = Select3DSensitiveCurve::from_points(&owner.observe(), points)?;
     Ok(Handle::new(curve).cast())
 }
 fn brep_circle_sensitive(
     curve: &BRepAdaptorCurve,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
-    selection: &Handle<SelectMgrSelection>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     output: &mut Handle<dyn Select3DSensitiveEntity>,
 ) -> Result<(), Failure> {
     let circle = curve.circle()?;
     if circle.radius() <= precision::confusion() {
-        return selection
-            .add(&Handle::new(Select3DSensitivePoint::new(owner, circle.location())).cast());
+        return selection.observe().add(
+            &Handle::new(Select3DSensitivePoint::new(
+                &owner.observe(),
+                circle.location(),
+            ))
+            .cast(),
+        );
     }
-    let sensitive = Select3DSensitivePoly::circle(
-        owner,
-        &circle,
-        curve.first_parameter()?,
-        curve.last_parameter()?,
-        false,
-        12,
-    )?;
-    *output = Handle::new(sensitive).cast();
+    *output = sampled_brep_circle(curve, owner, &circle)?;
     Ok(())
+}
+fn sampled_brep_circle(
+    curve: &BRepAdaptorCurve,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    circle: &rustycad_tkmath::gp::Circle3,
+) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
+    let range = (curve.first_parameter()?, curve.last_parameter()?);
+    let sensitive =
+        Select3DSensitivePoly::circle(&owner.observe(), circle, range.0, range.1, false, 12)?;
+    Ok(Handle::new(sensitive).cast())
 }

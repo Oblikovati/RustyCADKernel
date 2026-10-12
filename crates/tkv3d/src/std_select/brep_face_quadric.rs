@@ -7,6 +7,7 @@ use rustycad_tkbrep::{
     topods::{self, Face, ShapeIterator},
     toptools::IndexedMapOfShape,
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkg3d::{
@@ -21,7 +22,7 @@ use rustycad_tkmath::{
 };
 pub(super) fn brep_face_analytic(
     face: &Face,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     interior: bool,
 ) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     let (surface, location) = BRepTool::surface_with_location(face)?;
@@ -29,13 +30,31 @@ pub(super) fn brep_face_analytic(
     if !sphere.is_null() {
         return brep_full_sphere(face, owner);
     }
+    brep_face_other_analytic(face, owner, interior, &surface, &location)
+}
+fn brep_face_other_analytic(
+    face: &Face,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    interior: bool,
+    surface: &Handle<dyn GeomSurface>,
+    location: &Location,
+) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     let cone = surface.cast::<GeomConicalSurface>();
     if !cone.is_null() {
-        return brep_full_cone(face, &cone, &location, owner);
+        return brep_full_cone(face, &cone, location, owner);
     }
+    brep_face_cylinder_or_plane(face, owner, interior, surface, location)
+}
+fn brep_face_cylinder_or_plane(
+    face: &Face,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    interior: bool,
+    surface: &Handle<dyn GeomSurface>,
+    location: &Location,
+) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     let cylinder = surface.cast::<GeomCylindricalSurface>();
     if !cylinder.is_null() {
-        return brep_full_cylinder(face, &cylinder, &location, owner);
+        return brep_full_cylinder(face, &cylinder, location, owner);
     }
     let plane = surface.cast::<GeomPlane>();
     if !plane.is_null() {
@@ -45,7 +64,7 @@ pub(super) fn brep_face_analytic(
 }
 fn brep_full_sphere(
     face: &Face,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
 ) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     let full = face.nb_children() == 0
         || (face.nb_children() == 1 && sphere_wire_counts(face)? == Some((2, 2)));
@@ -53,8 +72,11 @@ fn brep_full_sphere(
         return Ok(None);
     }
     let sphere = BRepAdaptorSurface::with_face(face, true)?.sphere()?;
-    let sensitive =
-        Select3DSensitiveSphere::new(owner, sphere.position().axis().location(), sphere.radius());
+    let sensitive = Select3DSensitiveSphere::new(
+        &owner.observe(),
+        sphere.position().axis().location(),
+        sphere.radius(),
+    );
     Ok(Some(Handle::new(sensitive).cast()))
 }
 fn sphere_wire_counts(face: &Face) -> Result<Option<(usize, usize)>, Failure> {
@@ -82,7 +104,7 @@ fn is_full_cone_cylinder(face: &Face) -> Result<bool, Failure> {
     }
     let mut seams = 0;
     let mut circles = 0;
-    for shape in ShapeIterator::new(&wire, true, true) {
+    for shape in ShapeIterator::new(wire, true, true) {
         let edge = topods::edge(&shape)?;
         seams += usize::from(BRepTool::is_closed_on_face(&edge, face)?);
         circles +=
@@ -94,7 +116,7 @@ fn brep_full_cone(
     face: &Face,
     cone: &GeomConicalSurface,
     location: &Location,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
 ) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     if !is_full_cone_cylinder(face)? {
         return Ok(None);
@@ -114,7 +136,7 @@ fn brep_full_cylinder(
     face: &Face,
     cylinder: &GeomCylindricalSurface,
     location: &Location,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
 ) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     if !is_full_cone_cylinder(face)? {
         return Ok(None);
@@ -123,28 +145,19 @@ fn brep_full_cylinder(
     let mut position = cylinder.position();
     position.set_location((cylinder.location().xyz() + position.direction().xyz() * first).into());
     let radii = (cylinder.radius(), cylinder.radius());
-    Ok(Some(position_brep_cylinder(
-        owner,
-        radii,
-        last - first,
-        position,
-        location,
-    )?))
+    let sensitive = position_brep_cylinder(owner, radii, last - first, position, location)?;
+    Ok(Some(sensitive))
 }
 fn position_brep_cylinder(
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     radii: (f64, f64),
     height: f64,
     position: Axis3,
     location: &Location,
 ) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
-    let mut local = Transform3::default();
-    local.set_transformation_between(position, Axis3::from_axis2(xoy()));
-    let mut transform = location.transformation().multiplied(local);
-    let scale = transform.scale_factor();
-    transform.set_scale_factor(1.)?;
+    let (transform, scale) = placed_brep_cylinder_transform(position, location)?;
     let cylinder = Select3DSensitiveCylinder::new(
-        owner,
+        &owner.observe(),
         radii.0 * scale,
         radii.1 * scale,
         height * scale,
@@ -153,9 +166,20 @@ fn position_brep_cylinder(
     );
     Ok(Handle::new(cylinder).cast())
 }
+fn placed_brep_cylinder_transform(
+    position: Axis3,
+    location: &Location,
+) -> Result<(Transform3, f64), Failure> {
+    let mut local = Transform3::default();
+    local.set_transformation_between(position, Axis3::from_axis2(xoy()));
+    let mut transform = location.transformation().multiplied(local);
+    let scale = transform.scale_factor();
+    transform.set_scale_factor(1.)?;
+    Ok((transform, scale))
+}
 fn brep_planar_circle(
     face: &Face,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     interior: bool,
 ) -> Result<Option<Handle<dyn Select3DSensitiveEntity>>, Failure> {
     let mut edges = IndexedMapOfShape::default();
@@ -168,12 +192,7 @@ fn brep_planar_circle(
     if adaptor.get_type()? != CurveType::Circle || !BRepTool::is_closed(&edge)? {
         return Ok(None);
     }
-    Ok(Some(
-        Handle::new(Select3DSensitiveCircle::new(
-            owner,
-            &adaptor.circle()?,
-            interior,
-        ))
-        .cast(),
-    ))
+    let circle = adaptor.circle()?;
+    let sensitive = Select3DSensitiveCircle::new(&owner.observe(), &circle, interior);
+    Ok(Some(Handle::new(sensitive).cast()))
 }

@@ -71,24 +71,31 @@ impl ColoredCompoundGraphicsTrace {
         let alias = map.node_ref(1)?;
         alias.assign_compound(&fixture.incoming)?;
         let same = alias.with_shape(|shape| Ok(shape.is_same(&fixture.incoming)))?;
-        let offset = fixture
-            .incoming
-            .location()
-            .transformation()
-            .translation_part();
+        self.record_live_assignment(&fixture, same);
+        Ok(())
+    }
+    fn record_live_assignment(&self, fixture: &ColoredCompoundLiveFixture, same: bool) {
+        let offset = compound_live_translation(&fixture.incoming);
+        let counts = (
+            fixture.original.tshape().ref_count(),
+            fixture.incoming.tshape().ref_count(),
+        );
         writeln!(
             self.rows.lock().unwrap(),
             "wf-value-assigned {} {} {} {} {} {}",
-            fixture.original.tshape().ref_count(),
-            fixture.incoming.tshape().ref_count(),
+            counts.0,
+            counts.1,
             i32::from(same),
             offset.x(),
             offset.y(),
             offset.z()
         )
         .unwrap();
-        Ok(())
     }
+}
+fn compound_live_translation(compound: &Compound) -> rustycad_tkmath::gp::Xyz {
+    // The copied numeric vector outlives no native topology or location ownership.
+    compound.location().transformation().translation_part()
 }
 pub(super) struct ColoredCompoundLiveFixture {
     pub original: Compound,

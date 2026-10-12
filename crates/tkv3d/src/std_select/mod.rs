@@ -41,3 +41,17 @@ mod brep_solid_cylinder;
 
 #[cfg(test)]
 mod brep_owner_state_tests;
+
+#[cfg(test)]
+mod brep_contour_mutation_curve;
+#[cfg(test)]
+mod brep_contour_orientation_tests;
+#[cfg(test)]
+mod brep_origin_callback_tests;
+
+#[cfg(test)]
+mod brep_owner_slot_curve_callback;
+#[cfg(test)]
+mod brep_owner_slot_tests;
+#[cfg(test)]
+mod brep_selection_slot_tests;

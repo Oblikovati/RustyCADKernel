@@ -45,40 +45,67 @@ pub fn ais_shape_compute_selection_with_messenger<S: AisShapeSource + ?Sized>(
     messenger: &Messenger,
 ) -> Result<(), Failure> {
     let source = object.shape_ref();
-    if source.read_current_shape(|shape| {
-        Ok(shape.is_null()
-            || (shape.shape_type()? == ShapeEnum::Compound && shape.nb_children() == 0))
-    })? {
+    if shape_selection_is_empty(&source)? {
         return Ok(());
     }
     let kind = ais_shape_selection_type(mode);
     let shape = source.clone_shape();
     let drawer = object.attributes();
     let deflection = StdPrsToolTriangulatedShape::get_deflection(&shape, &drawer)?;
+    let resources = (selection, &shape, &drawer);
+    protect_shape_selection_load(object, mode, messenger, resources, (kind, deflection))
+}
+type ShapeSelectionResources<'a> = (
+    &'a Handle<SelectMgrSelection>,
+    &'a rustycad_tkbrep::topods::Shape,
+    &'a Handle<crate::prs3d::Prs3dDrawer>,
+);
+fn shape_selection_is_empty(source: &impl TopoDSShapeReadSource) -> Result<bool, Failure> {
+    source.read_current_shape(|shape| {
+        Ok(shape.is_null()
+            || (shape.shape_type()? == ShapeEnum::Compound && shape.nb_children() == 0))
+    })
+}
+fn protect_shape_selection_load<S: AisShapeSource + ?Sized>(
+    object: &S,
+    mode: i32,
+    messenger: &Messenger,
+    resources: ShapeSelectionResources<'_>,
+    criteria: (ShapeEnum, f64),
+) -> Result<(), Failure> {
     let selectable = object.presentable_base().this().cast();
-    let result = catch_native_failure(|| {
-        StdSelectBrepSelectionTool::load_with_selectable(
-            selection,
-            &selectable,
-            &shape,
-            kind,
-            deflection,
-            drawer.deviation_angle(),
-            drawer.is_auto_triangulation(),
-            -1,
-            9,
-            500.,
-        )
-    });
+    let result =
+        catch_native_failure(|| call_shape_selection_load(resources, &selectable, criteria));
     if let Err(failure) = result {
         report_shape_selection_failure(messenger, mode, &failure);
         if mode == 0 {
-            add_shape_fallback_selection(object, selection, &shape, &selectable)?;
+            add_shape_fallback_selection(object, resources.0, resources.1, &selectable)?;
         }
     }
     // OCCT 3d097a0 StdSelect::SetDrawerForBRepOwner has an entirely commented-out body.
     Ok(())
 }
+fn call_shape_selection_load(
+    resources: ShapeSelectionResources<'_>,
+    selectable: &Handle<dyn SelectMgrSelectableObject>,
+    criteria: (ShapeEnum, f64),
+) -> Result<(), Failure> {
+    let (selection, shape, drawer) = resources;
+    let (kind, deflection) = criteria;
+    StdSelectBrepSelectionTool::load_with_selectable(
+        selection,
+        selectable,
+        shape,
+        kind,
+        deflection,
+        drawer.deviation_angle(),
+        drawer.is_auto_triangulation(),
+        -1,
+        9,
+        500.,
+    )
+}
+
 fn report_shape_selection_failure(messenger: &Messenger, mode: i32, failure: &Failure) {
     let text = format!(
         "Error: AIS_Shape::ComputeSelection({mode}) has failed ({})",

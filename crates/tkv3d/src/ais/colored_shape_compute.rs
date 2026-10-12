@@ -70,23 +70,21 @@ fn dispatch_colored_presentation<S: AisColoredShapeSource + ?Sized>(
     let base = source.read_current_shape(|shape| colored_shape_base_drawer(object, shape))?;
     let opened: AisColoredOpenedCompounds = std::array::from_fn(|_| Default::default());
     let closed = AisColoredDrawerCompounds::default();
-    let closed_output = if mode == 1 {
-        &closed
-    } else {
-        &opened[ShapeEnum::Face as usize]
-    };
+    let closed_output = colored_closed_dispatch_output(mode, &opened, &closed);
     source.read_current_shape(|shape| {
-        ais_colored_shape_dispatch_colors(
-            &base,
-            shape,
-            &styles,
-            ShapeEnum::Compound,
-            false,
-            &opened,
-            closed_output,
-        )
+        dispatch_colored_root(&base, shape, &styles, &opened, closed_output)
     })?;
     ais_colored_shape_add_custom_props(object, prs, &opened, &closed, mode)
+}
+fn colored_closed_dispatch_output<'a>(
+    mode: i32,
+    opened: &'a AisColoredOpenedCompounds,
+    closed: &'a AisColoredDrawerCompounds,
+) -> &'a AisColoredDrawerCompounds {
+    if mode == 1 {
+        return closed;
+    }
+    &opened[ShapeEnum::Face as usize]
 }
 pub(super) fn colored_shape_base_drawer<S: AisColoredShapeSource + ?Sized>(
     object: &S,
@@ -97,4 +95,15 @@ pub(super) fn colored_shape_base_drawer<S: AisColoredShapeSource + ?Sized>(
         return Ok(Handle::default());
     };
     node.read_fields(|fields| fields.drawer.clone())
+}
+
+fn dispatch_colored_root(
+    base: &Handle<AisColoredDrawer>,
+    shape: &rustycad_tkbrep::topods::Shape,
+    styles: &AisShapeDrawerMap,
+    opened: &AisColoredOpenedCompounds,
+    closed: &AisColoredDrawerCompounds,
+) -> Result<bool, Failure> {
+    let parent = ShapeEnum::Compound;
+    ais_colored_shape_dispatch_colors(base, shape, styles, parent, false, opened, closed)
 }

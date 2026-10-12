@@ -39,8 +39,8 @@ impl SelectMgrEntityOwnerSource for StdSelectBRepOwner {
         if !child.is_null() {
             manager.clear(&child.cast(), brep_owner_effective_mode(self, mode));
         }
-        let removed = self.brep_owner_base().presentation.write().nullify();
-        let _ = removed;
+        // Native Clear releases the retained child after the manager callback.
+        self.brep_owner_base().presentation.write().nullify();
     }
     fn set_location(&self, _: &Location) {
         // Native base SetLocation does nothing; only the existing child follows Location().

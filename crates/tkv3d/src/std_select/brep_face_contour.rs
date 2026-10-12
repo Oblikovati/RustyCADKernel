@@ -8,6 +8,7 @@ use rustycad_tkbrep::{
     topexp::Explorer,
     topods::{self, Face},
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     precision,
     standard::{Failure, Handle, catch_native_failure},
@@ -23,7 +24,7 @@ use rustycad_tkmath::{
 pub(super) fn brep_face_contour_sensitive(
     face: &Face,
     surface: &BRepAdaptorSurface,
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
     criteria: &FaceSelectionCriteria,
 ) -> Result<bool, Failure> {
@@ -33,21 +34,29 @@ pub(super) fn brep_face_contour_sensitive(
     }
     let wire = topods::wire(wires.current())?;
     let mut explorer = WireExplorer::with_wire(&wire)?;
-    let mut points = Vec::new();
     let context = FaceContourContext {
         owner,
         criteria,
         surface_type: surface.get_type()?,
     };
+    collect_face_contour(&mut explorer, &context, entities)
+}
+fn collect_face_contour(
+    explorer: &mut WireExplorer,
+    context: &FaceContourContext<'_>,
+    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+) -> Result<bool, Failure> {
+    let mut points = Vec::new();
     while explorer.more() {
-        append_face_contour_edge(&explorer, &context, &mut points, entities)?;
+        append_face_contour_edge(explorer, context, &mut points, entities)?;
         explorer.next()?;
     }
-    append_face_contour_entity(owner, &points, criteria.interior, entities)?;
+    append_face_contour_entity(context.owner, &points, context.criteria.interior, entities)?;
     Ok(true)
 }
+
 struct FaceContourContext<'a> {
-    owner: &'a Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &'a dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     criteria: &'a FaceSelectionCriteria,
     surface_type: SurfaceType,
 }
@@ -57,110 +66,130 @@ fn append_face_contour_edge(
     points: &mut Vec<Point3>,
     entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
 ) -> Result<(), Failure> {
-    let curve = match catch_native_failure(|| BRepAdaptorCurve::with_edge(explorer.current())) {
-        Ok(curve) => curve,
-        Err(failure) if failure.exception_type() == "Standard_NullObject" => return Ok(()),
-        Err(failure) => return Err(failure),
+    let Some(curve) = load_face_contour_curve(explorer)? else {
+        return Ok(());
     };
     let range = BRepTool::range(explorer.current())?;
     if (range.0 - range.1).abs() <= precision::confusion() {
         return Ok(());
     }
-    let orientation = explorer.orientation()?;
-    if points.is_empty() {
-        points.push(curve.value(if orientation == Orientation::Forward {
-            range.0
-        } else {
-            range.1
-        })?);
+    append_face_first_point(&curve, range, explorer, points)?;
+    append_face_curve_kind(&curve, range, explorer, context, points, entities)
+}
+fn load_face_contour_curve(explorer: &WireExplorer) -> Result<Option<BRepAdaptorCurve>, Failure> {
+    match catch_native_failure(|| BRepAdaptorCurve::with_edge(explorer.current())) {
+        Ok(curve) => Ok(Some(curve)),
+        Err(failure) if failure.exception_type() == "Standard_NullObject" => Ok(None),
+        Err(failure) => Err(failure),
     }
-    match curve.get_type()? {
-        CurveType::Line => points.push(curve.value(if orientation == Orientation::Forward {
-            range.1
-        } else {
-            range.0
-        })?),
-        CurveType::Circle => {
-            append_face_circle(&curve, range, orientation, context, points, entities)?
-        }
-        _ => append_face_uniform_points(
-            &curve,
-            range,
-            orientation,
-            context.criteria.edge_points,
-            points,
-        )?,
+}
+fn append_face_first_point(
+    curve: &BRepAdaptorCurve,
+    range: (f64, f64),
+    explorer: &WireExplorer,
+    points: &mut Vec<Point3>,
+) -> Result<(), Failure> {
+    if !points.is_empty() {
+        return Ok(());
     }
+    let parameter = if explorer.orientation()? == Orientation::Forward {
+        range.0
+    } else {
+        range.1
+    };
+    points.push(curve.value(parameter)?);
     Ok(())
 }
+fn append_face_curve_kind(
+    curve: &BRepAdaptorCurve,
+    range: (f64, f64),
+    explorer: &WireExplorer,
+    context: &FaceContourContext<'_>,
+    points: &mut Vec<Point3>,
+    entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
+) -> Result<(), Failure> {
+    match curve.get_type()? {
+        CurveType::Line => append_face_line_endpoint(curve, range, explorer, points),
+        CurveType::Circle => append_face_circle(curve, range, explorer, context, points, entities),
+        _ => {
+            append_face_uniform_points(curve, range, explorer, context.criteria.edge_points, points)
+        }
+    }
+}
+fn append_face_line_endpoint(
+    curve: &BRepAdaptorCurve,
+    range: (f64, f64),
+    explorer: &WireExplorer,
+    points: &mut Vec<Point3>,
+) -> Result<(), Failure> {
+    // OCCT 3d097a0 rereads Orientation after first Value; its callback may change underlying edge vertices.
+    let parameter = if explorer.orientation()? == Orientation::Forward {
+        range.1
+    } else {
+        range.0
+    };
+    points.push(curve.value(parameter)?);
+    Ok(())
+}
+
 fn append_face_circle(
     curve: &BRepAdaptorCurve,
     range: (f64, f64),
-    orientation: Orientation,
+    explorer: &WireExplorer,
     context: &FaceContourContext<'_>,
     points: &mut Vec<Point3>,
     entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
 ) -> Result<(), Failure> {
     let full = 2. * std::f64::consts::PI - (range.1 - range.0).abs() <= precision::confusion();
-    let sampled = matches!(
-        context.surface_type,
+    let sampled = sampled_face_circle_surface(context.surface_type);
+    if !full || sampled {
+        return append_sampled_face_circle(curve, range, explorer, context, points);
+    }
+    entities.push(face_full_circle_entity(curve, context)?);
+    Ok(())
+}
+fn append_sampled_face_circle(
+    curve: &BRepAdaptorCurve,
+    range: (f64, f64),
+    explorer: &WireExplorer,
+    context: &FaceContourContext<'_>,
+    points: &mut Vec<Point3>,
+) -> Result<(), Failure> {
+    append_face_uniform_points(curve, range, explorer, context.criteria.edge_points, points)
+}
+fn sampled_face_circle_surface(kind: SurfaceType) -> bool {
+    matches!(
+        kind,
         SurfaceType::Cylinder
             | SurfaceType::Torus
             | SurfaceType::Cone
             | SurfaceType::BSplineSurface
-    );
-    if !full || sampled {
-        return append_face_uniform_points(
-            curve,
-            range,
-            orientation,
-            context.criteria.edge_points,
-            points,
-        );
-    }
+    )
+}
+fn face_full_circle_entity(
+    curve: &BRepAdaptorCurve,
+    context: &FaceContourContext<'_>,
+) -> Result<Handle<dyn Select3DSensitiveEntity>, Failure> {
     let circle = curve.circle()?;
     if circle.radius() <= precision::confusion() {
-        entities.push(
-            Handle::new(Select3DSensitivePoint::new(
-                context.owner,
-                circle.location(),
-            ))
-            .cast(),
-        );
-        return Ok(());
+        let point = Select3DSensitivePoint::new(&context.owner.observe(), circle.location());
+        return Ok(Handle::new(point).cast());
     }
-    entities.push(
-        Handle::new(Select3DSensitiveCircle::new(
-            context.owner,
-            &circle,
-            context.criteria.interior,
-        ))
-        .cast(),
-    );
-    Ok(())
+    let sensitive =
+        Select3DSensitiveCircle::new(&context.owner.observe(), &circle, context.criteria.interior);
+    Ok(Handle::new(sensitive).cast())
 }
+
 fn append_face_uniform_points(
     curve: &BRepAdaptorCurve,
     range: (f64, f64),
-    orientation: Orientation,
+    explorer: &WireExplorer,
     count: i32,
     points: &mut Vec<Point3>,
 ) -> Result<(), Failure> {
-    // OCCT std::max/min retains its first operand for NaN; f64::max/min would change loop behavior.
     let (first, last) = range;
-    let maximum = if first < last { last } else { first };
-    let minimum = if last < first { last } else { first };
-    let intervals = count
-        .checked_sub(1)
-        .ok_or_else(|| {
-            Failure::with_message(
-                "Standard_OutOfRange",
-                &format!("edge point count={count}; expected representable count-1"),
-            )
-        })?
-        .max(2);
-    let step = (maximum - minimum) / f64::from(intervals);
-    match orientation {
+    let step = face_uniform_sample_step(range, count)?;
+    match face_sampling_orientation(explorer)? {
         Orientation::Forward => {
             append_face_forward_samples(curve, first + step, last, step, points)
         }
@@ -169,6 +198,23 @@ fn append_face_uniform_points(
         }
         _ => Ok(()),
     }
+}
+fn face_uniform_sample_step(range: (f64, f64), count: i32) -> Result<f64, Failure> {
+    // OCCT std::max/min retains its first operand for NaN; f64::max/min would change loop behavior.
+    let (first, last) = range;
+    let maximum = if first < last { last } else { first };
+    let minimum = if last < first { last } else { first };
+    let intervals = face_sample_intervals(count)?;
+    Ok((maximum - minimum) / f64::from(intervals))
+}
+fn face_sample_intervals(count: i32) -> Result<i32, Failure> {
+    let intervals = count.checked_sub(1).ok_or_else(|| {
+        Failure::with_message(
+            "Standard_OutOfRange",
+            &format!("edge point count={count}; expected representable count-1"),
+        )
+    })?;
+    Ok(intervals.max(2))
 }
 fn append_face_forward_samples(
     curve: &BRepAdaptorCurve,
@@ -197,13 +243,19 @@ fn append_face_reverse_samples(
     Ok(())
 }
 fn append_face_contour_entity(
-    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
     points: &[Point3],
     interior: bool,
     entities: &mut Vec<Handle<dyn Select3DSensitiveEntity>>,
 ) -> Result<(), Failure> {
     if points.len() == 2 {
-        entities.push(Handle::new(Select3DSensitiveCurve::from_points(owner, points)?).cast());
+        entities.push(
+            Handle::new(Select3DSensitiveCurve::from_points(
+                &owner.observe(),
+                points,
+            )?)
+            .cast(),
+        );
         return Ok(());
     }
     if points.len() > 2 {
@@ -212,7 +264,18 @@ fn append_face_contour_entity(
         } else {
             Select3DTypeOfSensitivity::Boundary
         };
-        entities.push(Handle::new(Select3DSensitiveFace::new(owner, points, kind)?).cast());
+        entities
+            .push(Handle::new(Select3DSensitiveFace::new(&owner.observe(), points, kind)?).cast());
     }
     Ok(())
+}
+
+fn face_sampling_orientation(explorer: &WireExplorer) -> Result<Orientation, Failure> {
+    if explorer.orientation()? == Orientation::Forward {
+        return Ok(Orientation::Forward);
+    }
+    if explorer.orientation()? == Orientation::Reversed {
+        return Ok(Orientation::Reversed);
+    }
+    Ok(Orientation::Internal)
 }

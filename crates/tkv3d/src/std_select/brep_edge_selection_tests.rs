@@ -72,18 +72,9 @@ fn initialize_edge_fixture_selection(index: usize, scene: &mut BrepEdgeFixtureEn
     .unwrap();
 }
 fn replay_edge_points(output: &Handle<dyn Select3DSensitiveEntity>, fields: &[&str]) {
-    let points = if output.is_kind(Select3DSensitiveSegment::static_type()) {
-        let segment = output.cast::<Select3DSensitiveSegment>();
-        vec![segment.start_point(), segment.end_point()]
-    } else if output.is_kind(Select3DSensitivePoly::static_type()) {
-        output.cast::<Select3DSensitivePoly>().points_3d()
-    } else if output.is_kind(Select3DSensitiveCurve::static_type()) {
-        output.cast::<Select3DSensitiveCurve>().core.points_3d()
-    } else {
-        vec![output.cast::<Select3DSensitivePoint>().point()]
-    };
+    let points = brep_output_points(output);
     assert_eq!(points.len() * 3, fields.len());
-    for (point, native) in points.iter().zip(fields.chunks_exact(3)) {
+    for (point, native) in points.iter().zip(fields.as_chunks::<3>().0) {
         for (value, expected) in [point.x(), point.y(), point.z()].into_iter().zip(native) {
             assert!(
                 (value - expected.parse::<f64>().unwrap()).abs() < 1e-12,
@@ -92,39 +83,41 @@ fn replay_edge_points(output: &Handle<dyn Select3DSensitiveEntity>, fields: &[&s
         }
     }
 }
+fn brep_output_points(output: &Handle<dyn Select3DSensitiveEntity>) -> Vec<Point3> {
+    if output.is_kind(Select3DSensitiveSegment::static_type()) {
+        let segment = output.cast::<Select3DSensitiveSegment>();
+        vec![segment.start_point(), segment.end_point()]
+    } else if output.is_kind(Select3DSensitivePoly::static_type()) {
+        output.cast::<Select3DSensitivePoly>().points_3d()
+    } else if output.is_kind(Select3DSensitiveCurve::static_type()) {
+        output.cast::<Select3DSensitiveCurve>().core.points_3d()
+    } else {
+        vec![output.cast::<Select3DSensitivePoint>().point()]
+    }
+}
 pub(super) fn brep_edge_fixture(index: usize) -> Edge {
-    match index {
-        0 => BRepBuilderAPIMakeEdge::from_points(Point3::new(1., 2., 3.), Point3::new(5., 2., 3.))
-            .unwrap()
-            .edge()
-            .unwrap(),
+    let builder = match index {
+        0 => BRepBuilderAPIMakeEdge::from_points(Point3::new(1., 2., 3.), Point3::new(5., 2., 3.)),
         1 => BRepBuilderAPIMakeEdge::from_circ_params(
             Circle3::new(Axis2::default(), 2.).unwrap(),
             0.2,
             3.4,
-        )
-        .unwrap()
-        .edge()
-        .unwrap(),
+        ),
         2 => BRepBuilderAPIMakeEdge::from_elips_params(
             Ellipse3::new(Axis2::default(), 3., 1.).unwrap(),
             0.2,
             5.4,
-        )
-        .unwrap()
-        .edge()
-        .unwrap(),
+        ),
         4 => BRepBuilderAPIMakeEdge::from_circ_params(
             Circle3::new(Axis2::default(), 1e-8).unwrap(),
             0.,
             3.,
-        )
-        .unwrap()
-        .edge()
-        .unwrap(),
-        _ => brep_polygon_fixture(index),
-    }
+        ),
+        _ => return brep_polygon_fixture(index),
+    };
+    builder.unwrap().edge().unwrap()
 }
+
 fn brep_polygon_fixture(index: usize) -> Edge {
     let mut edge = Edge::default();
     let builder = BRepBuilder::default();

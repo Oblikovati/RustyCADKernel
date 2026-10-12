@@ -24,6 +24,26 @@ pub fn ais_colored_shape_compute_selection<S: AisColoredShapeSource + ?Sized>(
 ) -> Result<(), Failure> {
     catch_native_failure(|| compute_colored_shape_selection(object, selection, mode))
 }
+/// Construct native subshape selection using the supplied style map and owner.
+/// Example: `ais_colored_shape_compute_subshape_selection(object,&parent,&styles,&shape,&owner,&selection,ShapeEnum::Face,42,0.1,0.5)?`.
+#[allow(clippy::too_many_arguments)] // Pinned protected native overload.
+pub fn ais_colored_shape_compute_subshape_selection<S: AisColoredShapeSource + ?Sized>(
+    object: &S,
+    parent: &Handle<AisColoredDrawer>,
+    styles: &AisShapeDrawerMap,
+    shape: &Shape,
+    owner: &Handle<StdSelectBRepOwner>,
+    selection: &Handle<SelectMgrSelection>,
+    kind: ShapeEnum,
+    priority: i32,
+    deflection: f64,
+    angle: f64,
+) -> Result<(), Failure> {
+    let references = (selection, styles);
+    let criteria = (priority, deflection, angle);
+    let context = ColoredSubshapeSelection::new(object, references, kind, criteria);
+    catch_native_failure(|| compute_colored_subshape_selection(parent, shape, owner, &context))
+}
 fn compute_colored_shape_selection<S: AisColoredShapeSource + ?Sized>(
     object: &S,
     selection: &Handle<SelectMgrSelection>,
@@ -36,7 +56,28 @@ fn compute_colored_shape_selection<S: AisColoredShapeSource + ?Sized>(
     if object.is_shape_entirely_visible()? {
         return ais_shape_compute_selection(object, selection, mode);
     }
+    compute_hidden_colored_selection(object, selection, mode)
+}
+fn compute_hidden_colored_selection<S: AisColoredShapeSource + ?Sized>(
+    object: &S,
+    selection: &Handle<SelectMgrSelection>,
+    mode: i32,
+) -> Result<(), Failure> {
     let kind = ais_shape_selection_type(mode);
+    let criteria = prepare_colored_selection_geometry(object, kind)?;
+    let styles = AisShapeDrawerMap::default();
+    object.fill_subshape_drawer_map(&styles)?;
+    let context = ColoredSubshapeSelection::new(object, (selection, &styles), kind, criteria);
+    begin_colored_subshape_selection(&context)?;
+    let selectable = object.presentable_base().this().cast();
+    crate::std_select::brep_selection_load::set_brep_selection_origin(selection, &selectable);
+    Ok(())
+}
+fn prepare_colored_selection_geometry<S: AisColoredShapeSource + ?Sized>(
+    object: &S,
+    kind: ShapeEnum,
+) -> Result<(i32, f64, f64), Failure> {
+    let source = object.shape_ref();
     let drawer = object.attributes();
     let deflection = source
         .read_current_shape(|shape| StdPrsToolTriangulatedShape::get_deflection(shape, &drawer))?;
@@ -45,22 +86,9 @@ fn compute_colored_shape_selection<S: AisColoredShapeSource + ?Sized>(
         StdSelectBrepSelectionTool::get_standard_priority(shape, kind)
     })?;
     prepare_colored_selection_mesh(object, deflection, angle)?;
-    let styles = AisShapeDrawerMap::default();
-    object.fill_subshape_drawer_map(&styles)?;
-    let context = ColoredSubshapeSelection {
-        object,
-        selection,
-        styles: &styles,
-        kind,
-        priority,
-        deflection,
-        angle,
-    };
-    begin_colored_subshape_selection(&context)?;
-    let selectable = object.presentable_base().this().cast();
-    crate::std_select::brep_selection_load::set_brep_selection_origin(selection, &selectable);
-    Ok(())
+    Ok((priority, deflection, angle))
 }
+
 fn prepare_colored_selection_mesh<S: AisColoredShapeSource + ?Sized>(
     object: &S,
     deflection: f64,
@@ -85,26 +113,34 @@ struct ColoredSubshapeSelection<'a, S: AisColoredShapeSource + ?Sized> {
     deflection: f64,
     angle: f64,
 }
+impl<'a, S: AisColoredShapeSource + ?Sized> ColoredSubshapeSelection<'a, S> {
+    fn new(
+        object: &'a S,
+        references: (&'a Handle<SelectMgrSelection>, &'a AisShapeDrawerMap),
+        kind: ShapeEnum,
+        criteria: (i32, f64, f64),
+    ) -> Self {
+        let (selection, styles) = references;
+        let (priority, deflection, angle) = criteria;
+        Self {
+            object,
+            selection,
+            styles,
+            kind,
+            priority,
+            deflection,
+            angle,
+        }
+    }
+}
 fn begin_colored_subshape_selection<S: AisColoredShapeSource + ?Sized>(
     context: &ColoredSubshapeSelection<'_, S>,
 ) -> Result<(), Failure> {
     let source = context.object.shape_ref();
-    let mut owner = source.read_current_shape(|shape| {
-        Ok(StdSelectBRepOwner::with_shape(
-            shape,
-            context.priority,
-            false,
-        ))
-    })?;
+    let mut owner = new_colored_root_owner(context.object, context.priority)?;
     if context.kind == ShapeEnum::Shape {
         // Native constructs the root owner twice for mode zero; do not collapse its retain/release sequence.
-        owner = source.read_current_shape(|shape| {
-            Ok(StdSelectBRepOwner::with_shape(
-                shape,
-                context.priority,
-                false,
-            ))
-        })?;
+        owner = new_colored_root_owner(context.object, context.priority)?;
     }
     let base = source.read_current_shape(|shape| {
         super::colored_shape_compute::colored_shape_base_drawer(context.object, shape)
@@ -113,6 +149,15 @@ fn begin_colored_subshape_selection<S: AisColoredShapeSource + ?Sized>(
         compute_colored_subshape_selection(&base, shape, &owner, context)
     })
 }
+fn new_colored_root_owner<S: AisColoredShapeSource + ?Sized>(
+    object: &S,
+    priority: i32,
+) -> Result<Handle<StdSelectBRepOwner>, Failure> {
+    object
+        .shape_ref()
+        .read_current_shape(|shape| Ok(StdSelectBRepOwner::with_shape(shape, priority, false)))
+}
+
 fn compute_colored_subshape_selection<S: AisColoredShapeSource + ?Sized>(
     parent: &Handle<AisColoredDrawer>,
     shape: &Shape,
@@ -129,17 +174,32 @@ fn compute_colored_subshape_selection<S: AisColoredShapeSource + ?Sized>(
         return build_colored_sensitive(shape, owner, context);
     }
     if kind == context.kind {
-        let decomposed = !context.object.shape_ref().is_equal(shape);
-        let owner = StdSelectBRepOwner::with_shape(shape, context.priority, decomposed);
-        return build_colored_sensitive(shape, &owner, context);
+        return build_colored_decomposed_sensitive(shape, context);
     }
+    select_colored_children(&drawer, shape, owner, context)
+}
+fn build_colored_decomposed_sensitive<S: AisColoredShapeSource + ?Sized>(
+    shape: &Shape,
+    context: &ColoredSubshapeSelection<'_, S>,
+) -> Result<(), Failure> {
+    let decomposed = !context.object.shape_ref().is_equal(shape);
+    let owner = StdSelectBRepOwner::with_shape(shape, context.priority, decomposed);
+    build_colored_sensitive(shape, &owner, context)
+}
+fn select_colored_children<S: AisColoredShapeSource + ?Sized>(
+    drawer: &Handle<AisColoredDrawer>,
+    shape: &Shape,
+    owner: &Handle<StdSelectBRepOwner>,
+    context: &ColoredSubshapeSelection<'_, S>,
+) -> Result<(), Failure> {
     let mut children = ShapeIterator::new(shape, true, true);
     while children.more() {
-        compute_colored_subshape_selection(&drawer, children.value()?, owner, context)?;
+        compute_colored_subshape_selection(drawer, children.value()?, owner, context)?;
         children.next();
     }
     Ok(())
 }
+
 fn build_colored_sensitive<S: AisColoredShapeSource + ?Sized>(
     shape: &Shape,
     owner: &Handle<StdSelectBRepOwner>,

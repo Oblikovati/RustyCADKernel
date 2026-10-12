@@ -8,8 +8,10 @@ use rustycad_tkbrep::{
 };
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::top_abs::ShapeEnum;
-use rustycad_tkmath::gp::{Axis1, Direction3, Point3};
+use rustycad_tkmath::gp::{Axis1, Axis3, Cylinder3, Direction3, Plane3, Point3, Sphere3};
+use rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh;
 use rustycad_tkprim::brep_prim_api::*;
+use rustycad_tktopalgo::brep_builder_api::BRepBuilderAPIMakeFace;
 use rustycad_tkv3d::{
     ais::*, prs_mgr::PrsMgrPresentableObjectMembers, select_basics::SelectBasicsPickResult,
     select_mgr::*, select3d::*, std_select::*,
@@ -21,14 +23,28 @@ fn native_colored_selection_replays_constructed_owners_and_real_axis_picks() {
         replay_colored_selection_row(row);
     }
 }
+#[test]
+fn native_curved_contours_infinite_plane_and_triangulated_faces_replay() {
+    let native = include_str!("fixtures/colored-shape-compute/native-selection-curved.txt");
+    for row in native.lines() {
+        replay_colored_selection_row(row);
+    }
+}
+#[test]
+fn native_protected_subshape_selection_replays_supplied_owner_and_style_map() {
+    let native = include_str!("fixtures/colored-shape-compute/native-subselection.txt");
+    for row in native.lines() {
+        replay_colored_selection_row(row);
+    }
+}
 fn replay_colored_selection_row(row: &str) {
     let mut fields = row.split_whitespace();
-    assert_eq!(fields.next(), Some("selection"));
+    let subshape = fields.next().unwrap() == "subselection";
     let scenario = next_selection_usize(&mut fields);
     let style = next_selection_usize(&mut fields);
     let mode = fields.next().unwrap().parse::<i32>().unwrap();
     let (object, shape, selection) = constructed_colored_selection(scenario, style, mode);
-    let result = object.compute_selection(&selection, mode);
+    let result = replay_selection_dispatch(&object, &shape, &selection, mode, subshape);
     assert_eq!(result.is_err(), fields.next() == Some("1"), "{row}");
     let entities = selection.entities();
     assert_eq!(entities.len(), next_selection_usize(&mut fields), "{row}");
@@ -36,6 +52,35 @@ fn replay_colored_selection_row(row: &str) {
         check_colored_selection_entity(&wrapper.base_sensitive(), &object, &shape, &mut fields);
     }
     assert!(fields.next().is_none(), "{row}");
+}
+fn replay_selection_dispatch(
+    object: &AisColoredShape,
+    shape: &Shape,
+    selection: &Handle<SelectMgrSelection>,
+    mode: i32,
+    subshape: bool,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    if !subshape {
+        return object.compute_selection(selection, mode);
+    }
+    let styles = AisShapeDrawerMap::default();
+    object.fill_subshape_drawer_map(&styles)?;
+    let owner = StdSelectBRepOwner::with_shape(shape, 27, false);
+    replay_direct_subselection(object, shape, selection, mode, &styles, &owner)
+}
+fn replay_direct_subselection(
+    object: &AisColoredShape,
+    shape: &Shape,
+    selection: &Handle<SelectMgrSelection>,
+    mode: i32,
+    styles: &AisShapeDrawerMap,
+    owner: &Handle<StdSelectBRepOwner>,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    let parent = Handle::default();
+    let kind = ais_shape_selection_type(mode);
+    ais_colored_shape_compute_subshape_selection(
+        object, &parent, styles, shape, owner, selection, kind, 42, 0.1, 0.5,
+    )
 }
 fn next_selection_usize(fields: &mut std::str::SplitWhitespace<'_>) -> usize {
     let token = fields.next().unwrap();
@@ -52,17 +97,13 @@ fn constructed_colored_selection(
     object.attributes().set_auto_triangulation(false);
     configure_selection_custom(&object, &input, &shape, style);
     let selection = Handle::new(SelectMgrSelection::new(mode));
-    let sentinel = SelectMgrEntityOwner::new(17).into_cast();
-    selection
-        .add(
-            &Handle::new(Select3DSensitivePoint::new(
-                &sentinel,
-                Point3::new(9., 8., 7.),
-            ))
-            .cast(),
-        )
-        .unwrap();
+    seed_selection_sentinel(&selection);
     (object, shape, selection)
+}
+fn seed_selection_sentinel(selection: &SelectMgrSelection) {
+    let sentinel = SelectMgrEntityOwner::new(17).into_cast();
+    let point = Select3DSensitivePoint::new(&sentinel, Point3::new(9., 8., 7.));
+    selection.add(&Handle::new(point).cast()).unwrap();
 }
 fn colored_selection_input(
     input: &selection_geometry::ColoredExpansionInputs,
@@ -75,20 +116,23 @@ fn colored_selection_input(
         3 => input.edges[0].clone(),
         4 => input.wire.clone(),
         5 => input.faces[0].clone(),
+        6..=10 => colored_selection_solid(scenario),
+        12 => torus_selection_solid(),
+        13 => partial_cylinder_selection_face(),
+        14 => partial_sphere_selection_face(),
+        15 => infinite_plane_selection_face(),
+        16 => meshed_selection_box(),
+        _ => input.base.clone(),
+    }
+}
+fn colored_selection_solid(scenario: usize) -> Shape {
+    match scenario {
         6 => BRepPrimAPIMakeCylinder::new(2., 4.)
             .solid()
             .unwrap()
             .into_shape(),
-        7 => BRepPrimAPIMakeCone::new(2., 0., 4.)
-            .unwrap()
-            .solid()
-            .unwrap()
-            .into_shape(),
-        8 => BRepPrimAPIMakeCone::new(2., 1., 4.)
-            .unwrap()
-            .solid()
-            .unwrap()
-            .into_shape(),
+        7 => cone_selection_solid(0.),
+        8 => cone_selection_solid(1.),
         9 => BRepPrimAPIMakeSphere::new(2.)
             .unwrap()
             .solid()
@@ -99,9 +143,22 @@ fn colored_selection_input(
             .solid()
             .unwrap()
             .into_shape(),
-        _ => input.base.clone(),
+        _ => panic!("solid scenario={scenario}; expected 6..=10"),
     }
 }
+fn cone_selection_solid(top_radius: f64) -> Shape {
+    let mut builder = BRepPrimAPIMakeCone::new(2., top_radius, 4.).unwrap();
+    builder.solid().unwrap().into_shape()
+}
+fn torus_selection_solid() -> Shape {
+    let mut builder = BRepPrimAPIMakeTorus::new(4., 1.).unwrap();
+    builder.solid().unwrap().into_shape()
+}
+fn infinite_plane_selection_face() -> Shape {
+    let builder = BRepBuilderAPIMakeFace::from_plane(Plane3::default()).unwrap();
+    builder.face().unwrap().into_shape()
+}
+
 fn empty_selection_compound() -> Shape {
     let mut compound = Compound::default();
     Builder.make_compound(&mut compound);
@@ -118,16 +175,22 @@ fn configure_selection_custom(
         1 => &input.external,
         2 => shape,
         _ => {
-            let faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
-            if faces.more() {
-                object
-                    .custom_aspects(faces.current())
-                    .unwrap()
-                    .set_hidden(true);
-                return;
-            }
-            &input.edges[0]
+            configure_selection_hidden_face(object, input, shape);
+            return;
         }
+    };
+    object.custom_aspects(target).unwrap().set_hidden(true);
+}
+fn configure_selection_hidden_face(
+    object: &AisColoredShape,
+    input: &selection_geometry::ColoredExpansionInputs,
+    shape: &Shape,
+) {
+    let faces = Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape).unwrap();
+    let target = if faces.more() {
+        faces.current()
+    } else {
+        &input.edges[0]
     };
     object.custom_aspects(target).unwrap().set_hidden(true);
 }
@@ -138,6 +201,20 @@ fn check_colored_selection_entity(
     fields: &mut std::str::SplitWhitespace<'_>,
 ) {
     assert_eq!(fields.next(), Some("entity"));
+    check_selection_entity_identity(entity, fields);
+    let owner = entity.owner_id();
+    check_selection_owner_policy(&owner, object, fields);
+    let brep = owner.cast::<StdSelectBRepOwner>();
+    assert_eq!(!brep.is_null(), fields.next() == Some("1"));
+    if !brep.is_null() {
+        check_brep_selection_shape(&brep, shape, fields);
+    }
+    check_colored_selection_rays(entity, fields);
+}
+fn check_selection_entity_identity(
+    entity: &Handle<dyn Select3DSensitiveEntity>,
+    fields: &mut std::str::SplitWhitespace<'_>,
+) {
     assert_eq!(
         entity.dynamic_type().unwrap().name(),
         fields.next().unwrap()
@@ -146,7 +223,12 @@ fn check_colored_selection_entity(
         entity.nb_sub_elements(),
         fields.next().unwrap().parse::<i32>().unwrap()
     );
-    let owner = entity.owner_id();
+}
+fn check_selection_owner_policy(
+    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+    object: &Handle<AisColoredShape>,
+    fields: &mut std::str::SplitWhitespace<'_>,
+) {
     assert_eq!(
         owner.priority(),
         fields.next().unwrap().parse::<i32>().unwrap()
@@ -156,12 +238,6 @@ fn check_colored_selection_entity(
         owner.selectable().object_address() == object.object_address(),
         fields.next() == Some("1")
     );
-    let brep = owner.cast::<StdSelectBRepOwner>();
-    assert_eq!(!brep.is_null(), fields.next() == Some("1"));
-    if !brep.is_null() {
-        check_brep_selection_shape(&brep, shape, fields);
-    }
-    check_colored_selection_rays(entity, fields);
 }
 fn check_brep_selection_shape(
     owner: &StdSelectBRepOwner,
@@ -212,4 +288,29 @@ fn check_selection_pick_values(
         "actual center={}; expected {center}",
         pick.dist_to_geom_center()
     );
+}
+
+fn partial_cylinder_selection_face() -> Shape {
+    let surface = Cylinder3::new(Axis3::default(), 2.).unwrap();
+    let bounds = (0., std::f64::consts::FRAC_PI_2, -2., 2.);
+    BRepBuilderAPIMakeFace::from_cylinder_bounds(surface, bounds)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape()
+}
+fn partial_sphere_selection_face() -> Shape {
+    let surface = Sphere3::new(Axis3::default(), 2.).unwrap();
+    let bounds = (0., 2. * std::f64::consts::PI, -0.4, 0.4);
+    BRepBuilderAPIMakeFace::from_sphere_bounds(surface, bounds)
+        .unwrap()
+        .face()
+        .unwrap()
+        .into_shape()
+}
+fn meshed_selection_box() -> Shape {
+    let mut maker = BRepPrimAPIMakeBox::from_sizes(2., 3., 4.).unwrap();
+    let shape = maker.solid().unwrap().into_shape();
+    BRepMeshIncrementalMesh::with_shape(&shape, 0.1, false, 0.5, false).unwrap();
+    shape
 }

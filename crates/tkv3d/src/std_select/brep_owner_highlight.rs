@@ -18,14 +18,29 @@ pub(super) fn highlight_brep_owner<S: StdSelectBRepOwnerSource + ?Sized>(
     }
     let mode = brep_owner_effective_mode(owner, mode);
     let selectable = owner.selectable();
-    let layer = if style.z_layer() != GRAPHIC3D_ZLAYER_ID_UNKNOWN {
-        style.z_layer()
-    } else {
-        selectable.z_layer()
-    };
+    let layer = brep_highlight_layer(style, &selectable);
     if !owner.comes_from_decomposition() {
         return manager.color(&selectable.cast(), style, mode, &Handle::default(), layer);
     }
+    highlight_decomposed_brep_owner(owner, manager, style, &selectable, (mode, layer))
+}
+fn brep_highlight_layer(
+    style: &Prs3dDrawer,
+    selectable: &Handle<dyn SelectMgrSelectableObject>,
+) -> i32 {
+    if style.z_layer() != GRAPHIC3D_ZLAYER_ID_UNKNOWN {
+        return style.z_layer();
+    }
+    selectable.z_layer()
+}
+fn highlight_decomposed_brep_owner<S: StdSelectBRepOwnerSource + ?Sized>(
+    owner: &S,
+    manager: &Handle<PrsMgrPresentationManager>,
+    style: &Handle<Prs3dDrawer>,
+    selectable: &Handle<dyn SelectMgrSelectableObject>,
+    mode_layer: (i32, i32),
+) -> Result<(), Failure> {
+    let (mode, layer) = mode_layer;
     let child = prepare_brep_highlight_child(owner, style);
     child.set_z_layer(selectable.z_layer());
     child.set_transform_persistence(&selectable.transform_persistence());
@@ -33,6 +48,7 @@ pub(super) fn highlight_brep_owner<S: StdSelectBRepOwnerSource + ?Sized>(
     update_brep_child_attributes(&child.attributes(), style);
     manager.color(&child.cast(), style, mode, &selectable.cast(), layer)
 }
+
 fn prepare_brep_highlight_child<S: StdSelectBRepOwnerSource + ?Sized>(
     owner: &S,
     style: &Handle<Prs3dDrawer>,

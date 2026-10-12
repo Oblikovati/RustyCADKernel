@@ -11,11 +11,12 @@ use rustycad_tkbrep::{
     topods::{self, Shape},
     toptools::IndexedMapOfShape,
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 pub(super) struct BrepSensitiveBuild<'a> {
-    pub owner: &'a Handle<dyn SelectMgrEntityOwnerSource>,
-    pub selection: &'a Handle<SelectMgrSelection>,
+    pub owner: &'a dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+    pub selection: &'a dyn HandleReference<SelectMgrSelection>,
     pub deflection: f64,
     pub angle: f64,
     pub edge_points: i32,
@@ -27,15 +28,46 @@ impl StdSelectBrepSelectionTool {
     #[allow(clippy::too_many_arguments)] // Exact native geometry construction overload.
     pub fn compute_sensitive(
         shape: &Shape,
-        owner: &Handle<dyn SelectMgrEntityOwnerSource>,
-        selection: &Handle<SelectMgrSelection>,
+        owner: &dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         deflection: f64,
         angle: f64,
         edge_points: i32,
         max_parameter: f64,
         auto_triangulation: bool,
     ) -> Result<(), Failure> {
-        let build = BrepSensitiveBuild {
+        let references = (owner, selection);
+        let tolerances = (deflection, angle, max_parameter);
+        let criteria = brep_sensitive_criteria(tolerances, edge_points, auto_triangulation);
+        let build = BrepSensitiveBuild::from_arguments(references, criteria);
+        catch_native_failure(|| compute_brep_sensitive(shape, &build))
+    }
+}
+fn brep_sensitive_criteria(
+    tolerances: (f64, f64, f64),
+    edge_points: i32,
+    auto_triangulation: bool,
+) -> (f64, f64, i32, f64, bool) {
+    let (deflection, angle, max_parameter) = tolerances;
+    (
+        deflection,
+        angle,
+        edge_points,
+        max_parameter,
+        auto_triangulation,
+    )
+}
+impl<'a> BrepSensitiveBuild<'a> {
+    pub(super) fn from_arguments(
+        references: (
+            &'a dyn HandleReference<dyn SelectMgrEntityOwnerSource>,
+            &'a dyn HandleReference<SelectMgrSelection>,
+        ),
+        criteria: (f64, f64, i32, f64, bool),
+    ) -> Self {
+        let (owner, selection) = references;
+        let (deflection, angle, edge_points, max_parameter, auto_triangulation) = criteria;
+        Self {
             owner,
             selection,
             deflection,
@@ -43,8 +75,7 @@ impl StdSelectBrepSelectionTool {
             edge_points,
             max_parameter,
             auto_triangulation,
-        };
-        catch_native_failure(|| compute_brep_sensitive(shape, &build))
+        }
     }
 }
 pub(super) fn compute_brep_sensitive(
@@ -52,13 +83,7 @@ pub(super) fn compute_brep_sensitive(
     build: &BrepSensitiveBuild<'_>,
 ) -> Result<(), Failure> {
     match shape.shape_type()? {
-        ShapeEnum::Vertex => build.selection.add(
-            &Handle::new(Select3DSensitivePoint::new(
-                build.owner,
-                BRepTool::pnt(&topods::vertex(shape)?)?,
-            ))
-            .cast(),
-        ),
+        ShapeEnum::Vertex => compute_brep_vertex_entity(shape, build),
         ShapeEnum::Edge => compute_brep_edge_entity(shape, build),
         ShapeEnum::Wire => compute_brep_wire_entity(shape, build),
         ShapeEnum::Face => compute_brep_face_entities(shape, build),
@@ -67,6 +92,17 @@ pub(super) fn compute_brep_sensitive(
         }
         _ => compute_brep_compound_entities(shape, build),
     }
+}
+fn compute_brep_vertex_entity(
+    shape: &Shape,
+    build: &BrepSensitiveBuild<'_>,
+) -> Result<(), Failure> {
+    let point = BRepTool::pnt(&topods::vertex(shape)?)?;
+    let sensitive = Select3DSensitivePoint::new(&build.owner.observe(), point);
+    build
+        .selection
+        .observe()
+        .add(&Handle::new(sensitive).cast())
 }
 fn brep_build_edge(
     shape: &Shape,
@@ -88,15 +124,15 @@ fn compute_brep_edge_entity(shape: &Shape, build: &BrepSensitiveBuild<'_>) -> Re
     let mut output = Handle::default();
     brep_build_edge(shape, build, &mut output)?;
     if !output.is_null() {
-        build.selection.add(&output)?;
+        build.selection.observe().add(&output)?;
     }
     Ok(())
 }
 fn compute_brep_wire_entity(shape: &Shape, build: &BrepSensitiveBuild<'_>) -> Result<(), Failure> {
     let mut explorer = WireExplorer::with_wire(&topods::wire(shape)?)?;
     let mut output = Handle::default();
-    let wire = Handle::new(Select3DSensitiveWire::new(build.owner));
-    build.selection.add(&wire.cast())?;
+    let wire = Handle::new(Select3DSensitiveWire::new(&build.owner.observe()));
+    build.selection.observe().add(&wire.cast())?;
     while explorer.more() {
         // OCCT 3d097a0 reuses output: missing geometry may repeat the preceding edge entity.
         brep_build_edge(explorer.current(), build, &mut output)?;
@@ -123,7 +159,7 @@ fn compute_brep_face_entities(
         true,
     )?;
     for entity in entities {
-        build.selection.add(&entity)?;
+        build.selection.observe().add(&entity)?;
     }
     Ok(())
 }

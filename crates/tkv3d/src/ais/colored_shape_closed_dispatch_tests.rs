@@ -20,31 +20,44 @@ fn actual_meshed_shell_closure_replays_hidden_front_back_and_nan_policy() {
     );
 }
 fn closed_dispatch_row(rows: &mut String, scenario: usize) {
-    let mut builder = BRepPrimAPIMakeBox::from_sizes(2., 3., 4.).unwrap();
-    let shape = builder.solid().unwrap().into_shape();
-    if scenario != 0 {
-        BRepMeshIncrementalMesh::with_shape(&shape, 0.1, false, 0.5, false).unwrap();
-    }
+    let shape = closed_dispatch_shape(scenario);
     let parent = Handle::new(Prs3dDrawer::new());
     let base = Handle::new(AisColoredDrawer::new(&parent));
     let custom = Handle::new(AisColoredDrawer::new(&parent));
     let styles = closed_dispatch_styles(&shape, &custom, scenario);
     let opened: AisColoredOpenedCompounds = std::array::from_fn(|_| Default::default());
     let closed = AisColoredDrawerCompounds::default();
-    let overridden = ais_colored_shape_dispatch_colors(
-        &base,
-        &shape,
-        &styles,
-        ShapeEnum::Compound,
-        false,
-        &opened,
-        &closed,
-    )
-    .unwrap();
+    let overridden = dispatch_closed_fixture(&base, &shape, &styles, &opened, &closed);
     write!(rows, "closed {scenario} {}", i32::from(overridden)).unwrap();
     dispatch_group_row(rows, &opened[4], &base, &custom);
     dispatch_group_row(rows, &closed, &base, &custom);
     rows.push('\n');
+}
+fn closed_dispatch_shape(scenario: usize) -> Shape {
+    let mut builder = BRepPrimAPIMakeBox::from_sizes(2., 3., 4.).unwrap();
+    let shape = builder.solid().unwrap().into_shape();
+    if scenario != 0 {
+        BRepMeshIncrementalMesh::with_shape(&shape, 0.1, false, 0.5, false).unwrap();
+    }
+    shape
+}
+fn dispatch_closed_fixture(
+    base: &Handle<AisColoredDrawer>,
+    shape: &Shape,
+    styles: &AisShapeDrawerMap,
+    opened: &AisColoredOpenedCompounds,
+    closed: &AisColoredDrawerCompounds,
+) -> bool {
+    ais_colored_shape_dispatch_colors(
+        base,
+        shape,
+        styles,
+        ShapeEnum::Compound,
+        false,
+        opened,
+        closed,
+    )
+    .unwrap()
 }
 fn closed_dispatch_styles(
     shape: &Shape,
@@ -77,16 +90,20 @@ fn configure_closed_dispatch_alpha(custom: &AisColoredDrawer, scenario: usize) {
     let mut front = aspect.front_material();
     let mut back = aspect.back_material();
     front
-        .set_alpha(if scenario <= 4 {
-            0.5
-        } else if scenario == 7 {
-            f32::NAN
-        } else {
-            1.
-        })
+        .set_alpha(closed_dispatch_front_alpha(scenario))
         .unwrap();
     back.set_alpha(0.5).unwrap();
     aspect.set_front_material(front);
     aspect.set_back_material(back);
     aspect.set_distinguish(scenario == 6);
+}
+
+fn closed_dispatch_front_alpha(scenario: usize) -> f32 {
+    if scenario <= 4 {
+        return 0.5;
+    }
+    if scenario == 7 {
+        return f32::NAN;
+    }
+    1.
 }

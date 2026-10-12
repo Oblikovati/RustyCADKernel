@@ -1,8 +1,11 @@
 //! Actual native parent defaults and custom-drawer destructor ordering replay.
 use super::*;
+use crate::select_mgr::SelectMgrEntityOwnerMembers;
+use crate::select3d::Select3DSensitiveEntityMembers;
 use crate::{prs_mgr::*, select_mgr::SelectMgrSelectableObject};
 use rustycad_tkernel::standard::{Handle, RuntimeTyped, Transient, WeakHandle};
 use rustycad_tkmath::gp::Point3;
+use rustycad_tkservice::graphic3d::Graphic3dStructureMembers;
 use rustycad_tkservice::{graphic3d::Graphic3dStructureManager, null_driver::NullGraphicDriver};
 use std::fmt::Write;
 use std::sync::{Arc, Mutex};
@@ -351,21 +354,25 @@ fn record_owner_runtime(scene: &ColoredOwnerReplay) {
     owner_row(scene, &format!("runtime-base {names} {same}"));
 }
 #[test]
-fn partial_colored_shape_explicit_geometry_failures_remain_unclaimed() {
+fn colored_shape_unknown_modes_preserve_native_noop_compute_and_whole_shape_selection() {
     let scene = colored_owner_replay();
     let presentation = scene.prs.clone().cast();
-    let error = scene
+    let before = scene.prs.groups().len();
+    scene
         .object
         .compute(&Handle::default(), &presentation, 17)
-        .unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(error.message().contains("mode=17"));
-    let error = scene
-        .object
-        .compute_selection(&Handle::default(), 18)
-        .unwrap_err();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(error.message().contains("mode=18"));
+        .unwrap();
+    assert_eq!(scene.prs.groups().len(), before);
+    let selection = Handle::new(crate::select_mgr::SelectMgrSelection::new(18));
+    scene.object.compute_selection(&selection, 18).unwrap();
+    assert_eq!(selection.entities().len(), 1);
+    let entity = selection.entities()[0].base_sensitive();
+    assert!(entity.is_kind(crate::select3d::Select3DSensitivePoint::static_type()));
+    assert_eq!(entity.owner_id().priority(), 9);
+    assert_eq!(
+        entity.owner_id().selectable().object_address(),
+        scene.object.object_address()
+    );
 }
 
 fn record_owner_modes(scene: &ColoredOwnerReplay) {

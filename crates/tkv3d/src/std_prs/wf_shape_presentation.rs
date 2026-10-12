@@ -58,7 +58,13 @@ fn add_wf_reference_free_edges<S: TopoDSShapeReadSource>(
         return Ok(());
     }
     let group = prs.new_group()?;
-    group.set_primitives_aspect(&drawer.free_boundary_aspect().aspect().cast());
+    group.set_primitives_aspect(
+        &drawer
+            .free_boundary_aspect()
+            .aspect_ref()
+            .observe()
+            .observe_as::<dyn Graphic3dAspectsSource>(),
+    );
     group.add_primitive_array(&edges, true);
     Ok(())
 }
@@ -93,7 +99,13 @@ fn add_wf_reference_vertices<S: TopoDSShapeReadSource>(
         return Ok(());
     }
     let group = prs.new_group()?;
-    group.set_primitives_aspect(&drawer.point_aspect().aspect().cast());
+    group.set_primitives_aspect(
+        &drawer
+            .point_aspect()
+            .aspect_ref()
+            .observe()
+            .observe_as::<dyn Graphic3dAspectsSource>(),
+    );
     group.add_primitive_array(&vertices.cast(), true);
     Ok(())
 }

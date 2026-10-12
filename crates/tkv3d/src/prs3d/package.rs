@@ -120,11 +120,7 @@ impl Prs3d {
         if primitives.is_null() {
             return Ok(());
         }
-        let group = structure.new_group()?;
-        if let Some(group) = group.get() {
-            group.set_primitives_aspect(&line.aspect().cast());
-            group.add_primitive_array(&primitives, true);
-        }
+        add_borrowed_line_primitives(structure, line, &primitives)?;
         Ok(())
     }
     /// `AddFreeEdges`: appends both ends of every free triangle edge, transformed.
@@ -195,6 +191,25 @@ fn free_edge_nodes(
         }
     }
     Ok(free)
+}
+
+fn add_borrowed_line_primitives(
+    structure: &dyn Graphic3dStructureSource,
+    line: &Prs3dLineAspect,
+    primitives: &Handle<Graphic3dArrayOfPrimitives>,
+) -> Result<(), Failure> {
+    let group = structure.new_group()?;
+    let Some(group) = group.get() else {
+        return Ok(());
+    };
+    // OCCT 3d097a0 passes the actual const handle slot; an owning cast changes driver-visible counts.
+    let aspect = line
+        .aspect_ref()
+        .observe()
+        .observe_as::<dyn rustycad_tkservice::graphic3d::Graphic3dAspectsSource>();
+    group.set_primitives_aspect(&aspect);
+    group.add_primitive_array(primitives, true);
+    Ok(())
 }
 
 #[cfg(test)]

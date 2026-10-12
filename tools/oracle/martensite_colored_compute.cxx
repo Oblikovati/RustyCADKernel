@@ -1,6 +1,9 @@
 // Actual protected per-style presentation emits real buffers, hidden flags and failure deflection state.
 #include "martensite_colored_expansion_inputs.hxx"
 #include <Prs3d_Presentation.hxx>
+#include <PrsMgr_Presentation.hxx>
+#include <PrsMgr_PresentationManager.hxx>
+#include <BRepTools.hxx>
 #include <Prs3d_ShadingAspect.hxx>
 #include <StdPrs_ShadedShape.hxx>
 #include <V3d_Viewer.hxx>
@@ -22,6 +25,7 @@ public:
   using AIS_ColoredShape::dispatchColors;
   using AIS_ColoredShape::Compute;
   using Groups=DataMapOfDrawerCompd;
+  void attach(const occ::handle<PrsMgr_Presentation>& prs){myPresentations.Append(prs);}
 };
 static TopoDS_Shape compute_input(const ColoredExpansionInputs& input,int scenario)
 {
@@ -62,8 +66,32 @@ static void compute_case(int scenario,int mode,bool fail)
   for(double event:trace.events)std::cout<<' '<<event;
   std::cout<<'\n';
 }
-int main()
+class ColoredTessellatePresentation:public PrsMgr_Presentation
 {
+public:
+  ColoredTessellatePresentation(const occ::handle<PrsMgr_PresentationManager>& manager,const occ::handle<PrsMgr_PresentableObject>& object,int mode):PrsMgr_Presentation(manager,object,mode){}
+};
+static void tessellate_case(bool automatic,bool iso)
+{
+  const TopoDS_Shape shape=BRepPrimAPI_MakeBox(2,3,4).Shape();
+  const occ::handle<ColoredEmissionProbe> object=new ColoredEmissionProbe(shape);
+  object->Attributes()->SetupOwnDefaults();object->Attributes()->SetAutoTriangulation(automatic);object->Attributes()->SetIsoOnTriangulation(iso);
+  V3DisplayTrace trace;const occ::handle<V3d_Viewer> viewer=new V3d_Viewer(new V3DisplayDriver(trace));
+  const occ::handle<PrsMgr_PresentationManager> manager=new PrsMgr_PresentationManager(viewer->StructureManager());
+  const occ::handle<PrsMgr_Presentation> wire=new ColoredTessellatePresentation(manager,object,0);
+  const occ::handle<PrsMgr_Presentation> shade=new ColoredTessellatePresentation(manager,object,1);
+  object->attach(wire);object->attach(shade);
+  for(int repeat=0;repeat<2;++repeat)
+  {
+    wire->SetUpdateStatus(false);shade->SetUpdateStatus(false);shade->Clear();
+    const bool before=BRepTools::Triangulation(shape,Precision::Infinite(),false);
+    object->Compute(manager,shade,1);
+    std::cout<<"tessellate "<<automatic<<' '<<iso<<' '<<repeat<<' '<<before<<' '<<BRepTools::Triangulation(shape,Precision::Infinite(),false)<<' '<<wire->MustBeUpdated()<<' '<<shade->MustBeUpdated()<<' '<<shade->Groups().Size()<<'\n';
+  }
+}
+int main(int argc,char**)
+{
+  if(argc>1){for(bool automatic:{false,true})for(bool iso:{false,true})tessellate_case(automatic,iso);return 0;}
   std::cout<<std::setprecision(17);
   for(int scenario=0;scenario<11;++scenario)
     for(int mode:{0,1,2,17})for(bool fail:{false,true})compute_case(scenario,mode,fail);

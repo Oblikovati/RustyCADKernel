@@ -43,8 +43,7 @@ fn emit_colored_shape_maps<S: AisColoredShapeSource + ?Sized>(
     closed: &AisColoredDrawerCompounds,
     emission: &mut ColoredShapeEmission<'_, S>,
 ) -> Result<(), Failure> {
-    for index in 0..=8 {
-        let map = if index == 8 { closed } else { &opened[index] };
+    for (index, map) in opened.iter().chain(std::iter::once(closed)).enumerate() {
         let mut cursor = ColoredCompoundNativeCursor::new(map);
         while let Some(reference) = cursor.current()? {
             emit_colored_shape_entry(&reference, index == 8, emission)?;

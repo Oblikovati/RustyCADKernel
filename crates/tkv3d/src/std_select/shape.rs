@@ -109,16 +109,19 @@ pub fn std_select_shape_compute<S: StdSelectShapeSource + ?Sized>(
     let kind = shape.read_current_shape(|current| current.shape_type())?;
     let drawer = source.attributes();
     if mode == 1 && ((kind as usize) < 5 || kind as usize == 8) {
-        return StdPrsShadedShape::add_reference(
-            prs,
-            &shape,
-            &drawer,
-            StdPrsVolume::Autodetection,
-            &Handle::default(),
-        );
+        return compute_std_select_shading(prs, &shape, &drawer);
     }
     if mode == 0 || mode == 1 {
         return StdPrsWfShape::add_reference(prs, &shape, &drawer);
     }
     Ok(())
+}
+
+fn compute_std_select_shading(
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    shape: &StdSelectShapeRef<'_>,
+    drawer: &Handle<Prs3dDrawer>,
+) -> Result<(), Failure> {
+    let group = Handle::default();
+    StdPrsShadedShape::add_reference(prs, shape, drawer, StdPrsVolume::Autodetection, &group)
 }

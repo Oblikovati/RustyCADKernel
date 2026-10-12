@@ -124,7 +124,14 @@ fn shade_native_shape<S: TopoDSShapeReadSource>(
     }
     let group = selected_shaded_group(context)?;
     group.set_closed(closed);
-    group.set_group_primitives_aspect(&context.drawer.shading_aspect().aspect().cast());
+    group.set_group_primitives_aspect(
+        &context
+            .drawer
+            .shading_aspect()
+            .aspect_ref()
+            .observe()
+            .observe_as::<dyn Graphic3dAspectsSource>(),
+    );
     group.add_primitive_array(&triangles.cast(), true);
     Ok(())
 }
@@ -180,7 +187,14 @@ fn add_shaded_face_boundary_group<S: TopoDSShapeReadSource>(
         return Ok(());
     }
     let group = selected_shaded_group(context)?;
-    group.set_group_primitives_aspect(&context.drawer.face_boundary_aspect().aspect().cast());
+    group.set_group_primitives_aspect(
+        &context
+            .drawer
+            .face_boundary_aspect()
+            .aspect_ref()
+            .observe()
+            .observe_as::<dyn Graphic3dAspectsSource>(),
+    );
     group.add_primitive_array(&lines.cast(), true);
     Ok(())
 }

@@ -21,14 +21,21 @@ pub(super) fn ais_shape_compute_bounds_mode<S: AisShapeSource + ?Sized>(
     if object.is_infinite() {
         prs.set_infinite_state(true);
     }
-    let drawer = object.attributes();
-    if object.is_infinite() {
-        StdPrsWfShape::add_reference(prs, &source, &drawer)?;
-    } else {
-        Prs3dBndBox::add_box(prs, &shape_presentation_bounds_snapshot(object)?, &drawer)?;
-    }
+    render_shape_bounds_mode(object, prs, &source)?;
     prs.re_compute();
     Ok(())
+}
+fn render_shape_bounds_mode<S: AisShapeSource + ?Sized>(
+    object: &S,
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    source: &impl TopoDSShapeReadSource,
+) -> Result<(), Failure> {
+    let drawer = object.attributes();
+    if object.is_infinite() {
+        return StdPrsWfShape::add_reference(prs, source, &drawer);
+    }
+    let bounds = shape_presentation_bounds_snapshot(object)?;
+    Prs3dBndBox::add_box(prs, &bounds, &drawer)
 }
 fn set_shape_bounds_priority(
     kind: ShapeEnum,

@@ -20,6 +20,8 @@ class ColoredSelectionProbe:public AIS_ColoredShape
 public:
   using AIS_ColoredShape::AIS_ColoredShape;
   using AIS_ColoredShape::ComputeSelection;
+  using AIS_ColoredShape::computeSubshapeSelection;
+  using AIS_ColoredShape::fillSubshapeDrawerMap;
 };
 static TopoDS_Shape selection_input(const ColoredExpansionInputs& input,int scenario)
 {
@@ -77,9 +79,32 @@ static void selection_case(int scenario,int style,int mode)
   for(const auto& wrapper:selection->Entities())selection_entity(wrapper->BaseSensitive(),shape,object);
   std::cout<<'\n';
 }
+static void subshape_selection_case(int scenario,int style,int mode)
+{
+  ColoredExpansionInputs input;const TopoDS_Shape shape=selection_input(input,scenario);
+  const occ::handle<ColoredSelectionProbe> object=new ColoredSelectionProbe(shape);
+  object->Attributes()->SetAutoTriangulation(false);selection_custom(object,input,shape,style);
+  NCollection_DataMap<TopoDS_Shape,occ::handle<AIS_ColoredDrawer>,TopTools_ShapeMapHasher> styles;
+  object->fillSubshapeDrawerMap(styles);
+  const occ::handle<SelectMgr_Selection> selection=new SelectMgr_Selection(mode);
+  const occ::handle<SelectMgr_EntityOwner> sentinel=new SelectMgr_EntityOwner(17);
+  selection->Add(new Select3D_SensitivePoint(sentinel,gp_Pnt(9,8,7)));
+  const occ::handle<StdSelect_BRepOwner> owner=new StdSelect_BRepOwner(shape,27,false);
+  bool failed=false;
+  try{object->computeSubshapeSelection({},styles,shape,owner,selection,AIS_Shape::SelectionType(mode),42,.1,.5);}catch(const Standard_Failure&){failed=true;}
+  std::cout<<"subselection "<<scenario<<' '<<style<<' '<<mode<<' '<<failed<<' '<<selection->Entities().Size();
+  for(const auto& wrapper:selection->Entities())selection_entity(wrapper->BaseSensitive(),shape,object);
+  std::cout<<'\n';
+}
 int main(int argc,char**)
 {
   std::cout<<std::setprecision(17);
+  if(argc>2)
+  {
+    for(int scenario=1;scenario<12;++scenario)
+      for(int style=0;style<4;++style)for(int mode:{0,1,2,3,4,8})subshape_selection_case(scenario,style,mode);
+    return 0;
+  }
   if(argc>1)
   {
     for(int scenario=12;scenario<17;++scenario)

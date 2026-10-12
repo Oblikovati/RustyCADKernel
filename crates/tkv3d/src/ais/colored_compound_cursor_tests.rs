@@ -30,29 +30,30 @@ fn record_native_cursor_additions(
     rows: &mut String,
 ) {
     let mut cursor = ColoredCompoundNativeCursor::new(map);
-    writeln!(
-        rows,
-        "cursor-empty {}",
-        i32::from(cursor.current().unwrap().is_some())
-    )
-    .unwrap();
+    let populated = i32::from(cursor.current().unwrap().is_some());
+    writeln!(rows, "cursor-empty {populated}").unwrap();
     map.add(first, compound).unwrap();
     let current = cursor.current().unwrap().unwrap();
     let key = current.live_node().unwrap().drawer.object_address() == first.object_address();
     writeln!(rows, "cursor-added 1 {}", i32::from(key)).unwrap();
     let address = current.compound_address().unwrap();
-    map.resize(1000);
-    map.add(second, compound).unwrap();
-    let stable = cursor
-        .current()
-        .unwrap()
-        .unwrap()
-        .compound_address()
-        .unwrap()
-        == address;
-    writeln!(rows, "cursor-resized 1 {}", i32::from(stable)).unwrap();
+    record_native_cursor_resize(map, &cursor, second, compound, address, rows);
     cursor.next();
     record_native_cursor_tail(map, &cursor, second, rows);
+}
+fn record_native_cursor_resize(
+    map: &AisColoredDrawerCompounds,
+    cursor: &ColoredCompoundNativeCursor<'_>,
+    second: &Handle<AisColoredDrawer>,
+    compound: &Compound,
+    address: *const (),
+    rows: &mut String,
+) {
+    map.resize(1000);
+    map.add(second, compound).unwrap();
+    let current = cursor.current().unwrap().unwrap();
+    let stable = current.compound_address().unwrap() == address;
+    writeln!(rows, "cursor-resized 1 {}", i32::from(stable)).unwrap();
 }
 fn record_native_cursor_tail(
     map: &AisColoredDrawerCompounds,

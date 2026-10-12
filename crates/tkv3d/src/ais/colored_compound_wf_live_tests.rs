@@ -43,21 +43,35 @@ fn replay_live_compound(shaded: bool) -> String {
     let trace = ColoredCompoundGraphicsTrace::with_replacement(&map, &fixture);
     let prs = compound_reference_presentation(&trace);
     render_live_compound(shaded, &prs, &map, &drawer);
-    let label = if shaded {
-        "shade-live-after"
-    } else {
-        "wf-live-after"
-    };
+    record_live_compound_finish(shaded, &trace, &prs, &fixture);
+    trace.rows.lock().unwrap().clone()
+}
+fn record_live_compound_finish(
+    shaded: bool,
+    trace: &ColoredCompoundGraphicsTrace,
+    prs: &Handle<dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource>,
+    fixture: &ColoredCompoundLiveFixture,
+) {
+    let label = live_compound_finish_label(shaded);
+    let counts = (
+        fixture.original.tshape().ref_count(),
+        fixture.incoming.tshape().ref_count(),
+    );
     writeln!(
         trace.rows.lock().unwrap(),
         "{label} {} {} {}",
         prs.groups().len(),
-        fixture.original.tshape().ref_count(),
-        fixture.incoming.tshape().ref_count()
+        counts.0,
+        counts.1
     )
     .unwrap();
-    let rows = trace.rows.lock().unwrap().clone();
-    rows
+}
+
+fn live_compound_finish_label(shaded: bool) -> &'static str {
+    if shaded {
+        return "shade-live-after";
+    }
+    "wf-live-after"
 }
 fn render_live_compound(
     shaded: bool,

@@ -124,18 +124,24 @@ fn brep_selection_c1_points(
     angle: f64,
 ) -> Result<Vec<Point3>, Failure> {
     let intervals = brep_selection_c1_intervals(curve)?;
-    let count = intervals.len() as i32 - 1;
     let range = BrepSelectionC1Range {
         curve,
         first,
         last,
         criteria: TangentialCriteria::new(angle, deflection),
     };
+    collect_brep_selection_c1_points(&range, &intervals)
+}
+fn collect_brep_selection_c1_points(
+    range: &BrepSelectionC1Range<'_>,
+    intervals: &Array1<'_, f64>,
+) -> Result<Vec<Point3>, Failure> {
+    let count = intervals.len() as i32 - 1;
     let mut points = Vec::new();
     for index in 1..=count {
         append_clipped_brep_selection_interval(
-            &range,
-            brep_selection_interval_bounds(&intervals, index)?,
+            range,
+            brep_selection_interval_bounds(intervals, index)?,
             index == count,
             &mut points,
         )?;

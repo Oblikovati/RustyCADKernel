@@ -15,7 +15,13 @@ pub(super) fn emit_colored_shading<S: AisColoredShapeSource + ?Sized>(
     let triangles = collect_colored_triangles(reference, drawer, emission.object)?;
     if !triangles.is_null() {
         let group = colored_shaded_group(closed, emission)?;
-        group.set_primitives_aspect(&drawer.shading_aspect().aspect().cast());
+        group.set_primitives_aspect(
+            &drawer
+                .shading_aspect()
+                .aspect_ref()
+                .observe()
+                .observe_as::<dyn Graphic3dAspectsSource>(),
+        );
         group.add_primitive_array(&triangles.cast(), true);
     }
     emit_colored_face_boundaries(reference, drawer, emission)
@@ -25,7 +31,7 @@ fn collect_colored_triangles<S: AisColoredShapeSource + ?Sized>(
     drawer: &Prs3dDrawer,
     object: &S,
 ) -> Result<Handle<Graphic3dArrayOfTriangles>, Failure> {
-    let aspect = drawer.shading_aspect().aspect();
+    let aspect = drawer.shading_aspect().aspect_ref().observe();
     let textured = aspect.to_map_texture() && !aspect.texture_map().is_null();
     let fields = object.shape_base().fields.read();
     let (origin, repeat, scale) = (fields.uv_origin, fields.uv_repeat, fields.uv_scale);
@@ -66,14 +72,24 @@ fn emit_colored_face_boundaries<S: AisColoredShapeSource + ?Sized>(
     if segments.is_null() {
         return Ok(());
     }
+    emit_colored_boundary_array(drawer, &segments, emission)
+}
+fn emit_colored_boundary_array<S: AisColoredShapeSource + ?Sized>(
+    drawer: &Prs3dDrawer,
+    segments: &Handle<Graphic3dArrayOfSegments>,
+    emission: &mut ColoredShapeEmission<'_, S>,
+) -> Result<(), Failure> {
     if emission.boundary.is_null() {
         emission.boundary = emission.prs.new_group()?;
     }
+    let line = drawer.face_boundary_aspect();
+    let aspect = line
+        .aspect_ref()
+        .observe()
+        .observe_as::<dyn Graphic3dAspectsSource>();
+    emission.boundary.set_primitives_aspect(&aspect);
     emission
         .boundary
-        .set_primitives_aspect(&drawer.face_boundary_aspect().aspect().cast());
-    emission
-        .boundary
-        .add_primitive_array(&segments.cast(), true);
+        .add_primitive_array(&segments.observe_as::<Graphic3dArrayOfPrimitives>(), true);
     Ok(())
 }

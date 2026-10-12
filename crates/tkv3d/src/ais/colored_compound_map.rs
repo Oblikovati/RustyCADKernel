@@ -55,7 +55,7 @@ impl AisColoredDrawerCompounds {
             .iter()
             .position(|slot| Weak::ptr_eq(slot, &Arc::downgrade(node)))
             .map(|position| position + 1)
-            .ok_or_else(|| super::colored_compound_node::colored_compound_removed())
+            .ok_or_else(super::colored_compound_node::colored_compound_removed)
     }
     /// Clear actual owned fields before resetting native Size; `map.clear(false)`.
     pub fn clear(&self, release: bool) {
