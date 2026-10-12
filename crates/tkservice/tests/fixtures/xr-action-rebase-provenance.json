@@ -1,0 +1,23 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "row_count": 4,
+  "native_runs": "two independently executed byte-identical CPU runs; full17-digit floating output",
+  "fixture_sha256": "88ca1a7eb242da36fcdb4be4ae0bbc02b4c2dda1875b362fd1fc9df6bda49887",
+  "second_run_sha256": "88ca1a7eb242da36fcdb4be4ae0bbc02b4c2dda1875b362fd1fc9df6bda49887",
+  "second_run_compressed_sha256": "db759d303b516234eba77eaac1f7e10fb9e6683d8cb7fc7aefef83e4c9e5d4e7",
+  "oracle_executable_sha256": "e102be280413aa359694ed70fcb13ac6fe88e4c85f6233474c56a74167d1835f",
+  "sources": {
+    "Martensite-aspect-xr-references/tools/oracle/martensite_xr_action_rebase.cxx": "fa1bd7c96beabaef85c7f2d8e7bc317710f6d862bbf404fe60e0251a501d1df7",
+    "OCCT/src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+    "OCCT/src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "OCCT/src/Visualization/TKService/Aspect/Aspect_XRSession.hxx": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+    "OCCT/src/Visualization/TKService/Aspect/Aspect_XRSession.cxx": "a4aaaf405f788293a029ace2666579d8b76ca379f9a494ddf6e4a662c7eb387f",
+    "OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx": "5757b7e442ae800da44a8584b9eda60a16624bbbf35efa82b766439c87bed3b6",
+    "OCCT/src/Visualization/TKService/Aspect/Aspect_OpenVRSession.hxx": "bd17bae712a3340e2424820dc4464f0f6e1efba8d21bf416b80acb6d6baf0c33",
+    "OCCT/src/Visualization/TKService/Aspect/Aspect_OpenVRSession.cxx": "d1a18bde4f4ce0576e188b6c0f7e72db257967b9e4a837834ee1eba945139c38",
+    "OCCT/src/Visualization/TKService/Aspect/Aspect_XRAction.hxx": "eb98d8d0da1388b5954100465f2a8f2050e498ed7d2a97a6b3f37d18fc0389d9"
+  },
+  "gate": "exact discrete fields; floating callback replay unchanged 2e-9 * (1 + abs(expected)); no precision reduction",
+  "configuration": "actual native protected signed Array1 storage; same-length rebase and in-place mutation only, no element reallocation/dangling native references; no GPU/headset",
+  "schema": "phase lower upper physicalSlotIdentity isFirst isSecond firstCount secondCount freshLogicalGetterIsNull"
+}
