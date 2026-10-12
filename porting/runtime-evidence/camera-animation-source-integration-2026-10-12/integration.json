@@ -1,0 +1,32 @@
+{
+  "project": "Martensite",
+  "source_commit": "ef87ea0f633e64687760c9728537e3cfd483f825",
+  "dependency_commit": "f1d51ed375953b6d29a4f55c8f2843872e0f7242",
+  "integrated_commit": "7df185ca4",
+  "scope": "Camera source protocol dependency only; controller frame, XR and Cube migrations remain unfinished. No API completion claims.",
+  "rust_tests": {
+    "passed": 6048,
+    "successful_executables": 85,
+    "exit_code": 0,
+    "packages": [
+      "rustycad-tkernel",
+      "rustycad-tkv3d",
+      "martensite-vulkan"
+    ],
+    "all_targets": true
+  },
+  "clippy": {
+    "all_targets": true,
+    "deny_warnings": true,
+    "exit_code": 0
+  },
+  "format_exit_code": 0,
+  "canonical_discovery_tests": 13,
+  "native": {
+    "independent_rebuild": true,
+    "runs": 2,
+    "byte_equal_fixture": true,
+    "fixture_sha256": "bff16f198cb649ed01c56563215da79c3a6233b7762e49932a0e88c7f9770f7a"
+  },
+  "cleanup": "Source worktree retained because its full controller-frame task is still active; no checkout archived."
+}
