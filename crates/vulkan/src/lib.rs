@@ -114,3 +114,4 @@ mod surface_texture_uv;
 mod texture_coordinate_frame;
 mod texture_coordinate_pipeline;
 pub use texture_coordinate_pipeline::RenderTextureCoordinatePipeline;
+mod view_render_camera;

@@ -1,5 +1,6 @@
 //! Native click target preserves the closest quarter-turn up direction and fits selection/scene.
 use super::AisViewCubeSource;
+use crate::v3d::V3dViewSource;
 use crate::{ais::AisInteractiveObjectMembers, v3d::V3dView};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{
@@ -10,7 +11,7 @@ use rustycad_tkservice::graphic3d::*;
 /// Fit selected geometry, falling back to the scene and preserving an empty scene; `ais_view_cube_view_fit_all(&cube,&view,&camera)?`.
 pub fn ais_view_cube_view_fit_all<C: AisViewCubeSource + ?Sized>(
     cube: &C,
-    view: &dyn HandleReference<V3dView>,
+    view: &dyn HandleReference<dyn V3dViewSource>,
     camera: &dyn HandleReference<Graphic3dCamera>,
 ) -> Result<(), Failure> {
     let selected = cube.interaction_base().fields.read().fit_selected;
@@ -25,7 +26,7 @@ pub fn ais_view_cube_view_fit_all<C: AisViewCubeSource + ?Sized>(
 }
 pub(super) fn cube_oriented_end_camera<C: AisViewCubeSource + ?Sized>(
     cube: &C,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     orientation: crate::v3d::V3dTypeOfOrientation,
 ) -> Result<(), Failure> {
     let (start, end, reset) = {
@@ -81,7 +82,7 @@ fn closest_cube_up(start: &Graphic3dCamera, end: &Graphic3dCamera) -> Result<Dir
 
 fn cube_fit_bounds<C: AisViewCubeSource + ?Sized>(
     cube: &C,
-    view: &dyn HandleReference<V3dView>,
+    view: &dyn HandleReference<dyn V3dViewSource>,
     selected: bool,
 ) -> Result<rustycad_tkmath::bnd::BoundingBox3, Failure> {
     if !selected {
@@ -91,7 +92,11 @@ fn cube_fit_bounds<C: AisViewCubeSource + ?Sized>(
     let context = context.get().ok_or_else(|| {
         null_object("AIS_ViewCube context=null; expected an attached interactive context")
     })?;
-    context.bounding_box_of_selection(observed_cube_fit_view(view)?.get())
+    context.bounding_box_of_selection(
+        observed_cube_fit_view(view)?
+            .get()
+            .map(|view| view.view_base()),
+    )
 }
 
 fn cube_end_camera_slot(fields: &super::AisViewCubeInteractionFields) -> &Handle<Graphic3dCamera> {
@@ -99,8 +104,8 @@ fn cube_end_camera_slot(fields: &super::AisViewCubeInteractionFields) -> &Handle
     &fields.end
 }
 fn observed_cube_fit_view(
-    view: &dyn HandleReference<V3dView>,
-) -> Result<rustycad_tkernel::standard::HandleObserver<V3dView>, Failure> {
+    view: &dyn HandleReference<dyn V3dViewSource>,
+) -> Result<rustycad_tkernel::standard::HandleObserver<dyn V3dViewSource>, Failure> {
     let observed = view.observe();
     if observed.is_null() {
         return Err(null_object(
@@ -110,7 +115,7 @@ fn observed_cube_fit_view(
     Ok(observed)
 }
 fn fit_cube_reference_bounds(
-    view: &dyn HandleReference<V3dView>,
+    view: &dyn HandleReference<dyn V3dViewSource>,
     camera: &dyn HandleReference<Graphic3dCamera>,
     bounds: &rustycad_tkmath::bnd::BoundingBox3,
 ) -> Result<(), Failure> {
@@ -124,7 +129,7 @@ fn fit_cube_reference_bounds(
 }
 
 fn cube_view_reference_bounds(
-    view: &dyn HandleReference<V3dView>,
+    view: &dyn HandleReference<dyn V3dViewSource>,
 ) -> Result<rustycad_tkmath::bnd::BoundingBox3, Failure> {
     let observed = observed_cube_fit_view(view)?;
     observed

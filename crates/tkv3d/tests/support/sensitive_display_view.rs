@@ -7,14 +7,11 @@ use super::{
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
-use rustycad_tkv3d::{
-    prs_mgr::*,
-    select_mgr::*,
-    v3d::{V3dView, V3dViewer},
-};
+use rustycad_tkv3d::v3d::V3dViewSource;
+use rustycad_tkv3d::{prs_mgr::*, select_mgr::*, v3d::V3dViewer};
 pub struct SensitiveDisplayView {
     pub _viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub selector: Handle<SelectMgrViewerSelector>,
     pub selection: Handle<SelectMgrSelection>,
     pub trace: DisplayTrace,
@@ -82,7 +79,7 @@ fn populate_display_objects(
     Ok(())
 }
 
-fn display_test_view(viewer: &Handle<V3dViewer>) -> Result<Handle<V3dView>, Failure> {
+fn display_test_view(viewer: &Handle<V3dViewer>) -> Result<Handle<dyn V3dViewSource>, Failure> {
     let view = viewer.create_view()?;
     let window = Handle::new(AspectNeutralWindow::default());
     window.set_size(80, 60);

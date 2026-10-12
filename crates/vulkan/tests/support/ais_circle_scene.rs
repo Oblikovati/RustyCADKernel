@@ -9,6 +9,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::geom::{GeomCircle, GeomConic};
 use rustycad_tkmath::gp::{Axis2, Point3};
 use rustycad_tkservice::aspect::{AspectNeutralWindow, AspectTypeOfDeflection};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, v3d::*};
 pub const MODES: [&str; 19] = [
     "circle-full",
@@ -32,7 +33,7 @@ pub const MODES: [&str; 19] = [
     "circle-absolute",
 ];
 pub struct CircleScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub circle: Handle<AisCircle>,

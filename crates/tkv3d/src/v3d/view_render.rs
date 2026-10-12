@@ -301,23 +301,21 @@ impl V3dView {
 impl V3dView {
     /// `AddClipPlane`: appends a plane unless present; `view.add_clip_plane(&plane)`.
     pub fn add_clip_plane(&self, plane: &Handle<Graphic3dClipPlane>) {
-        let mut planes = self.clip_planes();
-        if planes.is_null() {
-            planes = Handle::new(Graphic3dSequenceOfHClipPlane::default());
-        } else if planes.get().is_some_and(|p| p.items().contains(plane)) {
+        let source = self.this.read().observe();
+        if let Some(source) = source.get() {
+            source.add_clip_plane(plane);
             return;
         }
-        if let Some(sequence) = planes.get() {
-            sequence.append(plane.clone());
-        }
-        self.set_clip_planes(&planes);
+        super::view_source_clipping::v3d_view_add_clip_plane(self, plane);
     }
-    /// `RemoveClipPlane`; `view.remove_clip_plane(&plane)`.
+    /// `RemoveClipPlane`: dispatches the actual native subclass; `view.remove_clip_plane(&plane)`.
     pub fn remove_clip_plane(&self, plane: &Handle<Graphic3dClipPlane>) {
-        let planes = self.clip_planes();
-        if planes.get().is_some_and(|p| p.remove(plane)) {
-            self.set_clip_planes(&planes);
+        let source = self.this.read().observe();
+        if let Some(source) = source.get() {
+            source.remove_clip_plane(plane);
+            return;
         }
+        super::view_source_clipping::v3d_view_remove_clip_plane(self, plane);
     }
     /// `SetClipPlanes`; `view.set_clip_planes(&planes)`.
     pub fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {

@@ -1,5 +1,5 @@
 //! The light members of `V3d_Viewer`: defined and active (global) lights.
-use super::{V3dAmbientLight, V3dDirectionalLight, V3dTypeOfOrientation, V3dView, V3dViewer};
+use super::{V3dAmbientLight, V3dDirectionalLight, V3dTypeOfOrientation, V3dViewer};
 use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::AsciiString;
@@ -111,7 +111,7 @@ impl V3dViewer {
         views
             .iter()
             .filter_map(Handle::get)
-            .for_each(V3dView::update_lights);
+            .for_each(|view| view.update_lights());
     }
     /// `IsGlobalLight`: whether a light is active in the viewer; `viewer.is_global_light(&light)`.
     pub fn is_global_light(&self, light: &Handle<Graphic3dCLight>) -> bool {

@@ -6,6 +6,7 @@ use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::{geom::GeomPlane, geom_adaptor::GeomAdaptorSurface};
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{dsg_prs::*, prs3d::*, std_prs::StdPrsPlane, v3d::*};
 pub const MODES: [&str; 6] = [
     "prsplane-edges",
@@ -18,7 +19,7 @@ pub const MODES: [&str; 6] = [
 pub struct PlanePresentationScene {
     // A V3dView borrows its viewer; retain it until captures and rebuilds finish.
     pub viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub structure: Handle<Graphic3dStructure>,
     pub drawer: Handle<Prs3dDrawer>,

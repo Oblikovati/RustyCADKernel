@@ -1,4 +1,5 @@
 //! Real widget subclass retains argument aliases through endpoint replacement and inherited fitting.
+use crate::v3d::V3dViewSource;
 use super::super::*;
 use super::view_cube_animation_source_fixture::*;
 use crate::{prs_mgr::*, select_mgr::*, v3d::V3dView};
@@ -40,7 +41,7 @@ impl CubeFitReferenceProbe {
     fn capture(
         &self,
         stage: &str,
-        view: &dyn HandleReference<V3dView>,
+        view: &dyn HandleReference<dyn V3dViewSource>,
         camera: &dyn HandleReference<Graphic3dCamera>,
     ) {
         let channels = self.argument_channels(view, camera);
@@ -53,7 +54,7 @@ impl CubeFitReferenceProbe {
     }
     fn argument_channels(
         &self,
-        view: &dyn HandleReference<V3dView>,
+        view: &dyn HandleReference<dyn V3dViewSource>,
         camera: &dyn HandleReference<Graphic3dCamera>,
     ) -> [i32; 9] {
         let fields = &self.base.fields;
@@ -73,7 +74,7 @@ impl CubeFitReferenceProbe {
     }
     fn change_fit_arguments(
         &self,
-        view: &dyn HandleReference<V3dView>,
+        view: &dyn HandleReference<dyn V3dViewSource>,
         camera: &dyn HandleReference<Graphic3dCamera>,
     ) {
         if matches!(self.policy, 1..=3) {
@@ -105,7 +106,7 @@ impl AisViewCubeSource for CubeFitReferenceProbe {
     }
     fn view_fit_all(
         &self,
-        view: &dyn HandleReference<V3dView>,
+        view: &dyn HandleReference<dyn V3dViewSource>,
         camera: &dyn HandleReference<Graphic3dCamera>,
     ) -> Result<(), Failure> {
         self.capture("before", view, camera);

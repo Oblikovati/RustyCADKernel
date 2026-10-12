@@ -7,7 +7,8 @@
 //! orientation), view_mapping.rs (size, zoom, fit and panning), view_convert.rs (pixel and
 //! view coordinates, queries), view_grid.rs (grids and trihedron), view_render.rs (backgrounds,
 //! lights, clip planes, rendering parameters) and view_dump.rs (image dump and `DumpJson`).
-use super::{V3dTrihedron, V3dTypeOfView, V3dViewer, v3d_bad_value};
+use super::{V3dTrihedron, V3dViewer, v3d_bad_value};
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::ncollection::Vec2;
 use rustycad_tkernel::standard::exceptions::{null_object, program_error};
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
@@ -18,8 +19,7 @@ use rustycad_tkservice::aspect::{
 };
 use rustycad_tkservice::graphic3d::{
     Graphic3dCLight, Graphic3dCView, Graphic3dCViewMembers as _, Graphic3dCViewSubviews as _,
-    Graphic3dCamera, Graphic3dCameraFocusType, Graphic3dCameraIodType, Graphic3dCameraProjection,
-    Graphic3dGroup, Graphic3dStructureSource, Graphic3dVertex,
+    Graphic3dCamera, Graphic3dGroup, Graphic3dStructureSource, Graphic3dVertex,
 };
 
 /// The mutable fields of a view.
@@ -34,8 +34,8 @@ pub(crate) struct V3dViewState {
     pub(crate) immediate_update: bool,
     pub(crate) is_invalidated_immediate: bool,
     pub(crate) viewer: WeakHandle<V3dViewer>,
-    pub(crate) subviews: Vec<Handle<V3dView>>,
-    pub(crate) parent_view: WeakHandle<V3dView>,
+    pub(crate) subviews: Vec<Handle<dyn V3dViewSource>>,
+    pub(crate) parent_view: WeakHandle<dyn V3dViewSource>,
     pub(crate) active_lights: Vec<Handle<Graphic3dCLight>>,
     pub(crate) active_lights_cursor: usize,
     pub(crate) default_view_axis: Direction3,
@@ -71,7 +71,7 @@ impl V3dViewState {
     /// The fields before the constructor body. The members that the native constructors
     /// leave uninitialized (`myOldMouseX/Y`, `sx`, `sy`, `rx`, `ry`, `MyZoomAtPointX/Y`,
     /// `MyTrsf`) start at zero.
-    fn initial(viewer: &Handle<V3dViewer>) -> Self {
+    pub(crate) fn initial(viewer: &Handle<V3dViewer>) -> Self {
         Self {
             old_mouse_x: 0.0,
             old_mouse_y: 0.0,
@@ -121,16 +121,19 @@ impl V3dViewState {
 ///
 /// Example: `let view = viewer.create_view()?; view.set_window(&window, 0)?; view.fit_all(0.01, true)?;`.
 pub struct V3dView {
-    transient: StandardTransient,
+    pub(crate) transient: StandardTransient,
     pub(crate) view: Handle<dyn Graphic3dCView>,
-    default_camera: Handle<Graphic3dCamera>,
-    this: SharedState<WeakHandle<V3dView>>,
+    pub(crate) default_camera: Handle<Graphic3dCamera>,
+    pub(crate) this: SharedState<WeakHandle<dyn V3dViewSource>>,
     pub(crate) state: SharedState<V3dViewState>,
 }
-rustycad_tkernel::impl_transient!(V3dView, "V3d_View", StandardTransient, transient);
+rustycad_tkernel::impl_transient!(V3dView, "V3d_View", StandardTransient, transient,
+    interfaces:[dyn V3dViewSource]);
 
 /// The driver view of a viewer's driver; a missing viewer or driver is refused.
-fn create_driver_view(viewer: &Handle<V3dViewer>) -> Result<Handle<dyn Graphic3dCView>, Failure> {
+pub(crate) fn create_driver_view(
+    viewer: &Handle<V3dViewer>,
+) -> Result<Handle<dyn Graphic3dCView>, Failure> {
     let Some(viewer_ref) = viewer.get() else {
         return Err(null_object("V3d_View: null viewer; expected a viewer"));
     };
@@ -150,97 +153,8 @@ fn create_driver_view(viewer: &Handle<V3dViewer>) -> Result<Handle<dyn Graphic3d
 }
 
 impl V3dView {
-    fn allocate(
-        viewer: &Handle<V3dViewer>,
-        view: Handle<dyn Graphic3dCView>,
-        default_camera: Graphic3dCamera,
-    ) -> Handle<Self> {
-        let handle = Handle::new(Self {
-            transient: StandardTransient::default(),
-            view,
-            default_camera: Handle::new(default_camera),
-            this: SharedState::new(WeakHandle::default()),
-            state: SharedState::new(V3dViewState::initial(viewer)),
-        });
-        *handle.this.write() = handle.downgrade();
-        handle
-    }
-    /// `V3d_View(viewer, type)`: a view with the viewer's background, rendering parameters,
-    /// projection, size and visualization, registered in the viewer.
-    /// Example: `V3dView::new(&viewer, V3dTypeOfView::Orthographic)?`.
-    pub fn new(viewer: &Handle<V3dViewer>, kind: V3dTypeOfView) -> Result<Handle<Self>, Failure> {
-        let cview = create_driver_view(viewer)?;
-        let viewer_ref = viewer
-            .get()
-            .ok_or_else(|| null_object("V3d_View: null viewer"))?;
-        cview.set_background(&viewer_ref.get_background_color());
-        cview.set_gradient_background(&viewer_ref.get_gradient_background());
-        let params = viewer_ref.default_rendering_params();
-        cview.change_rendering_params(&mut |p| *p = params.clone());
-        let camera = Graphic3dCamera::default();
-        camera.set_fov_y(45.0);
-        camera.set_iod(Graphic3dCameraIodType::Relative, 0.05);
-        camera.set_z_focus(Graphic3dCameraFocusType::Relative, 1.0);
-        let projection = if kind == V3dTypeOfView::Orthographic {
-            Graphic3dCameraProjection::Orthographic
-        } else {
-            Graphic3dCameraProjection::Perspective
-        };
-        camera.set_projection_type(projection);
-        let view = Self::allocate(viewer, cview, Graphic3dCamera::default());
-        view.set_auto_z_fit_mode(true, 1.0)?;
-        view.set_back_facing_model(
-            rustycad_tkservice::graphic3d::Graphic3dTypeOfBackfacingModel::Auto,
-        );
-        view.set_camera(&Handle::new(camera))?;
-        view.set_axis(0.0, 0.0, 0.0, 1.0, 1.0, 1.0)?;
-        view.set_visualization(viewer_ref.default_visualization());
-        view.set_twist(0.0)?;
-        view.set_at(0.0, 0.0, 0.0)?;
-        view.set_proj_orientation(viewer_ref.default_view_proj(), false)?;
-        view.set_size(viewer_ref.default_view_size())?;
-        let z_size = viewer_ref.default_view_size();
-        view.set_z_size(2.0 * z_size)?;
-        view.set_depth(viewer_ref.default_view_size() / 2.0)?;
-        view.set_view_mapping_default();
-        view.set_view_orientation_default();
-        viewer_ref.add_view(&view);
-        view.init();
-        view.state.write().immediate_update = true;
-        Ok(view)
-    }
-    /// `V3d_View(viewer, view)`: a copy of another view's settings and default camera.
-    /// Example: `V3dView::new_copy(&viewer, &other)?`.
-    pub fn new_copy(
-        viewer: &Handle<V3dViewer>,
-        other: &Handle<V3dView>,
-    ) -> Result<Handle<Self>, Failure> {
-        let Some(other_ref) = other.get() else {
-            return Err(null_object("V3d_View: null view to copy; expected a view"));
-        };
-        let cview = create_driver_view(viewer)?;
-        cview.copy_settings(&other_ref.view())?;
-        let default_camera = Graphic3dCamera::from_camera(&other_ref.default_camera());
-        let view = Self::allocate(viewer, cview, default_camera);
-        {
-            let source = other_ref.state.read().clone();
-            let mut state = view.state.write();
-            (state.default_view_point, state.default_view_axis) =
-                (source.default_view_point, source.default_view_axis);
-        }
-        view.set_auto_z_fit_mode(
-            other_ref.auto_z_fit_mode(),
-            other_ref.auto_z_fit_scale_factor(),
-        )?;
-        if let Some(viewer_ref) = viewer.get() {
-            viewer_ref.add_view(&view);
-        }
-        view.init();
-        view.state.write().immediate_update = true;
-        Ok(view)
-    }
     /// The view itself as a handle (`this`).
-    pub fn this(&self) -> Handle<V3dView> {
+    pub fn this(&self) -> Handle<dyn V3dViewSource> {
         self.this.read().upgrade()
     }
     /// `View`: the driver view; `view.view()`.
@@ -263,19 +177,40 @@ impl V3dView {
     pub fn camera(&self) -> Handle<Graphic3dCamera> {
         self.view.camera()
     }
+    /// Native Camera forwards the actual virtual DSM selected slot; `view.camera_ref().observe()`.
+    pub fn camera_ref(
+        &self,
+    ) -> Box<dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera> + '_> {
+        self.view.camera_ref()
+    }
+    /// Borrow native DefaultCamera by actual field identity; `view.default_camera_ref().observe()`.
+    pub fn default_camera_ref(
+        &self,
+    ) -> &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera> {
+        &self.default_camera
+    }
+    /// Borrow native View by actual retained field identity; `view.view_ref().observe()`.
+    pub fn view_ref(&self) -> &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dCView> {
+        &self.view
+    }
     /// `SetCamera`; a null camera is refused with `Standard_NullObject` (natively it breaks
     /// every later camera member). Example: `view.set_camera(&camera)?`.
-    pub fn set_camera(&self, camera: &Handle<Graphic3dCamera>) -> Result<(), Failure> {
-        if camera.is_null() {
-            return Err(null_object(
-                "V3d_View::SetCamera: null camera; expected a camera",
-            ));
-        }
-        self.view.set_camera(camera);
-        self.immediate_update()
+    pub fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) -> Result<(), Failure> {
+        rustycad_tkernel::standard::catch_native_failure(|| {
+            if camera.is_null() {
+                return Err(null_object(
+                    "V3d_View::SetCamera: null camera; expected a camera",
+                ));
+            }
+            self.view.set_camera(camera);
+            self.immediate_update()
+        })
     }
     /// `Init` (private): the computed mode of the viewer.
-    fn init(&self) {
+    pub(crate) fn init(&self) {
         let Some(viewer) = self
             .viewer()
             .get()
@@ -319,7 +254,7 @@ impl V3dView {
     /// Example: `view.set_subview_window(&parent, Vec2::new(0.5, 0.5), corner, Vec2::new(0.0, 0.0), Vec2::new(0, 0))?`.
     pub fn set_subview_window(
         &self,
-        parent_view: &Handle<V3dView>,
+        parent_view: &Handle<dyn V3dViewSource>,
         size: Vec2<f64>,
         corner: AspectTypeOfTriedronPosition,
         offset: Vec2<f64>,
@@ -359,7 +294,7 @@ impl V3dView {
         self.view.set_subview_margins(margins);
         let window: Handle<dyn AspectWindow> = Handle::new(window).cast();
         self.state.write().window = window.clone();
-        let parent_cview = parent.get().map(V3dView::view).unwrap_or_default();
+        let parent_cview = parent.get().map(|view| view.view()).unwrap_or_default();
         self.view.set_window(&parent_cview, &window, 0);
         if let Some(viewer) = self.viewer().get() {
             viewer.set_view_on_one(&self.this())?;
@@ -372,7 +307,7 @@ impl V3dView {
     pub fn set_magnify(
         &self,
         window: &Handle<dyn AspectWindow>,
-        previous_view: &Handle<V3dView>,
+        previous_view: &Handle<dyn V3dViewSource>,
         x1: i32,
         y1: i32,
         x2: i32,
@@ -419,9 +354,9 @@ impl V3dView {
         subviews
             .iter()
             .filter_map(Handle::get)
-            .for_each(V3dView::remove);
+            .for_each(|view| view.remove());
         if let Some(viewer) = state.viewer.upgrade().get() {
-            viewer.del_view(self);
+            viewer.del_view(self.this.read().object_address());
             self.state.write().viewer = WeakHandle::default();
         }
         self.view.remove();

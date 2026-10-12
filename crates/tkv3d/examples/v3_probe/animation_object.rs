@@ -6,12 +6,13 @@ use rustycad_tkmath::gp::{Axis1, Direction3, Point3, Transform3, Vector3};
 use rustycad_tkservice::{
     aspect::AspectNeutralWindow, graphic3d::*, null_driver::NullGraphicDriver,
 };
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, select_mgr::*, v3d::*};
 struct ObjectAnimationScene {
     context: Handle<AisInteractiveContext>,
     object: Handle<AisPoint>,
     _parent: Handle<AisPoint>,
-    views: [Handle<V3dView>; 2],
+    views: [Handle<dyn V3dViewSource>; 2],
     _viewer: Handle<V3dViewer>,
 }
 /// Compare one native timeline request; `object_case(&[0.,0.,2.,0.,1.])`.
@@ -132,7 +133,7 @@ impl ObjectAnimationScene {
         end();
     }
 }
-fn configured_view(viewer: &V3dViewer, flags: i32) -> Handle<V3dView> {
+fn configured_view(viewer: &V3dViewer, flags: i32) -> Handle<dyn V3dViewSource> {
     let view = viewer.create_view().unwrap();
     view.set_immediate_update(false);
     let window = Handle::new(AspectNeutralWindow::default());

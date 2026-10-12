@@ -5,6 +5,7 @@ use super::{
     view_controller_lazy_move::camera_action_view,
 };
 use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::List,
     standard::{Failure, Handle},
@@ -14,7 +15,7 @@ impl AisViewController {
     pub fn handle_camera_actions(
         &mut self,
         context: &AisInteractiveContext,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         walk: &AisWalkDelta,
     ) -> Result<(), Failure> {
         rustycad_tkernel::standard::catch_native_failure(|| {
@@ -24,7 +25,7 @@ impl AisViewController {
     fn dispatch_camera_actions(
         &mut self,
         context: &AisInteractiveContext,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         walk: &AisWalkDelta,
     ) -> Result<(), Failure> {
         let actual = camera_action_view(view)?;

@@ -1,5 +1,5 @@
 //! `V3d_Plane`: a clipping plane with an optional hatched presentation.
-use super::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::quantity::Color;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::gp::{Plane3, Transform3};
@@ -47,8 +47,12 @@ impl V3dPlane {
     }
     /// `Display`: a hatched transparent square of half the default view size, at the bottom.
     /// Example: `plane.display(&view, gray)?`.
-    pub fn display(&self, view: &Handle<V3dView>, color: Color) -> Result<(), Failure> {
-        let Some(viewer) = view.get().map(V3dView::viewer).filter(|v| !v.is_null()) else {
+    pub fn display(&self, view: &Handle<dyn V3dViewSource>, color: Color) -> Result<(), Failure> {
+        let Some(viewer) = view
+            .get()
+            .map(|view| view.viewer())
+            .filter(|v| !v.is_null())
+        else {
             return Ok(());
         };
         if let Some(previous) = self.structure().get() {

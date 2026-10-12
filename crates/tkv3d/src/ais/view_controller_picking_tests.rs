@@ -1,4 +1,5 @@
 //! Replay real context/point selection without loading OCCT.
+use crate::v3d::V3dViewSource;
 use super::*;
 use crate::v3d::*;
 use rustycad_tkernel::{ncollection::Vec2, standard::Handle};
@@ -12,7 +13,7 @@ fn picking_scene(
     projection: i32,
 ) -> (
     Handle<V3dViewer>,
-    Handle<V3dView>,
+    Handle<dyn V3dViewSource>,
     Handle<AisInteractiveContext>,
 ) {
     let viewer = V3dViewer::new(&NullGraphicDriver::new_handle()).unwrap();

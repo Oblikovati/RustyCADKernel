@@ -1,4 +1,5 @@
 //! The AIS path uses the same virtual view and geometry as the Graphic3d oracle scene.
+use rustycad_tkv3d::v3d::V3dViewSource;
 #[path = "ais_triangle.rs"]
 mod ais_triangle;
 use super::view_setup;
@@ -6,13 +7,10 @@ pub use ais_triangle::AisTriangle;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::aspect::AspectNeutralWindow;
-use rustycad_tkv3d::{
-    ais::AisInteractiveContext,
-    v3d::{V3dView, V3dViewer},
-};
+use rustycad_tkv3d::{ais::AisInteractiveContext, v3d::V3dViewer};
 pub struct AisViewerScene {
     pub viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub object: Handle<AisTriangle>,

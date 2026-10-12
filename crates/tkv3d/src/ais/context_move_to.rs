@@ -1,5 +1,6 @@
 //! Point and axis detection preserve filter, highlight and redraw ordering.
 use super::{AisInteractiveContext, AisStatusOfDetection};
+use crate::v3d::V3dViewSource;
 use crate::{select_mgr::*, v3d::V3dView};
 use rustycad_tkernel::standard::{Failure, Handle, exceptions::program_error};
 use rustycad_tkmath::gp::Axis1;
@@ -9,7 +10,7 @@ impl AisInteractiveContext {
         &self,
         x: i32,
         y: i32,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         redraw: bool,
     ) -> Result<AisStatusOfDetection, Failure> {
         self.validate_detection_view(view)?;
@@ -20,14 +21,14 @@ impl AisInteractiveContext {
     pub fn move_to_axis(
         &self,
         axis: Axis1,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         redraw: bool,
     ) -> Result<AisStatusOfDetection, Failure> {
         self.validate_detection_view(view)?;
         self.detection_selector().pick_axis(axis, view)?;
         self.move_to_detected(view, redraw)
     }
-    fn validate_detection_view(&self, view: &Handle<V3dView>) -> Result<(), Failure> {
+    fn validate_detection_view(&self, view: &Handle<dyn V3dViewSource>) -> Result<(), Failure> {
         if view.viewer() != *self.current_viewer() {
             return Err(program_error(&format!(
                 "MoveTo view {:?}; expected a view belonging to the context viewer",
@@ -39,7 +40,7 @@ impl AisInteractiveContext {
     /// Consume current selector picks using native detection policy; `context.move_to_detected(&view,false)?`.
     pub fn move_to_detected(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         redraw: bool,
     ) -> Result<AisStatusOfDetection, Failure> {
         self.reset_detected_cursors();
@@ -76,7 +77,7 @@ impl AisInteractiveContext {
     fn accept_detected_rank(
         &self,
         rank: i32,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
     ) -> Result<(AisStatusOfDetection, bool), Failure> {
         self.fields.write().current_highlighted = 1;
         let owner = self.detection_selector().picked(rank)?;
@@ -110,7 +111,7 @@ impl AisInteractiveContext {
     }
     fn forget_detected_owner(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
     ) -> Result<(AisStatusOfDetection, bool), Failure> {
         let automatic = self.fields.read().automatic_hilight;
         let update = if automatic {
@@ -121,7 +122,10 @@ impl AisInteractiveContext {
         self.fields.write().last_picked = Handle::default();
         Ok((AisStatusOfDetection::Nothing, update))
     }
-    fn unhighlight_detected_owner(&self, view: &Handle<V3dView>) -> Result<bool, Failure> {
+    fn unhighlight_detected_owner(
+        &self,
+        view: &Handle<dyn V3dViewSource>,
+    ) -> Result<bool, Failure> {
         if !self.last_picked_has_selectable() {
             return Ok(false);
         }
@@ -129,7 +133,7 @@ impl AisInteractiveContext {
         self.clear_dynamic_highlight();
         Ok(true)
     }
-    fn invalidate_slow_highlight(&self, view: &Handle<V3dView>) -> Result<(), Failure> {
+    fn invalidate_slow_highlight(&self, view: &Handle<dyn V3dViewSource>) -> Result<(), Failure> {
         let owner = self.fields.read().last_picked.clone();
         if self.is_slow_hi_style(&owner, &view.viewer())? {
             view.viewer().invalidate();

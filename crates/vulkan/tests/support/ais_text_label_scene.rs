@@ -5,6 +5,7 @@ use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::{standard::Handle, tcollection::ExtendedString};
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3};
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, v3d::*};
 pub const MODES: [&str; 6] = [
     "label-screen",
@@ -15,7 +16,7 @@ pub const MODES: [&str; 6] = [
     "label-update",
 ];
 pub struct TextLabelScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub label: Handle<AisTextLabel>,

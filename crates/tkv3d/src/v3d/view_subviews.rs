@@ -1,5 +1,6 @@
 //! `V3d_View` subviews: the views drawn in a corner of a parent view's window.
 use super::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::ncollection::Vec2;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::aspect::AspectWindowMembers as _;
@@ -12,15 +13,15 @@ impl V3dView {
         !self.state.read().parent_view.upgrade().is_null()
     }
     /// `ParentView`: null for a top view; `view.parent_view()`.
-    pub fn parent_view(&self) -> Handle<V3dView> {
+    pub fn parent_view(&self) -> Handle<dyn V3dViewSource> {
         self.state.read().parent_view.upgrade()
     }
     /// `Subviews`; `view.subviews()`.
-    pub fn subviews(&self) -> Vec<Handle<V3dView>> {
+    pub fn subviews(&self) -> Vec<Handle<dyn V3dViewSource>> {
         self.state.read().subviews.clone()
     }
     /// `AddSubview`; `view.add_subview(&subview)`.
-    pub fn add_subview(&self, view: &Handle<V3dView>) {
+    pub fn add_subview(&self, view: &Handle<dyn V3dViewSource>) {
         self.state.write().subviews.push(view.clone());
     }
     /// `RemoveSubview`: true when the view was a subview; `view.remove_subview(&subview)`.
@@ -29,12 +30,12 @@ impl V3dView {
         let found = state
             .subviews
             .iter()
-            .position(|v| std::ptr::eq(v.object_address(), (view as *const V3dView).cast()));
+            .position(|v| std::ptr::eq(v.object_address(), view.this.read().object_address()));
         found.map(|index| state.subviews.remove(index)).is_some()
     }
     /// `PickSubview`: the topmost active subview under a pixel, this view inside the window
     /// without subview, null outside the window. Example: `view.pick_subview(Vec2::new(10, 10))`.
-    pub fn pick_subview(&self, point: Vec2<i32>) -> Handle<V3dView> {
+    pub fn pick_subview(&self, point: Vec2<i32>) -> Handle<dyn V3dViewSource> {
         let (window, subviews) = {
             let state = self.state.read();
             (state.window.clone(), state.subviews.clone())

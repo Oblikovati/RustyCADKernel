@@ -11,7 +11,7 @@ pub(crate) fn frame_for_view(
 ) -> Result<RenderFrame, RenderError> {
     validate_view(view)?;
     crate::retained_texture_images::prune_view_texture_snapshots(view)?;
-    let camera = view.camera();
+    let camera = crate::view_render_camera::owned_render_camera(view);
     let mut layers = view.layers();
     // OpenGl_FilteredIndexedLayerIterator at the pinned baseline renders normal layers before immediate ones.
     layers.sort_by_key(|layer| layer.is_immediate());
@@ -64,7 +64,7 @@ fn update_view_culling(
 fn view_culling_selector(view: &dyn Graphic3dCView, extent: [u32; 2]) -> Graphic3dCullingTool {
     let mut selector = Graphic3dCullingTool::default();
     selector.set_view_volume(
-        &view.camera(),
+        &crate::view_render_camera::owned_render_camera(view),
         &rustycad_tkernel::ncollection::Mat4::identity(),
     );
     selector.set_viewport_size(
@@ -155,7 +155,7 @@ fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> 
 }
 fn validate_view(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     validate_raster_params(view)?;
-    if view.camera().is_stereo() || view.computed_mode() {
+    if crate::view_render_camera::owned_render_camera(view).is_stereo() || view.computed_mode() {
         return Err(rejected(
             "stereo or computed rendering",
             "ordinary camera rendering in this slice",

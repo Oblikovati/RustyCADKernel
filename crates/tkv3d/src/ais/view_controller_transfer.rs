@@ -1,7 +1,7 @@
 //! Martensite UI/render queue transfer preserves pending render requests.
 use super::view_input_motion::*;
 use super::{AisInteractiveContext, AisViewController, AisViewInputBuffer, AisViewSelectionTool};
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::standard::Handle;
 
 impl AisViewController {
@@ -9,7 +9,7 @@ impl AisViewController {
     pub fn flush_buffers(
         &mut self,
         _context: &Handle<AisInteractiveContext>,
-        _view: &Handle<V3dView>,
+        _view: &Handle<dyn V3dViewSource>,
     ) {
         self.navigation_state.to_ask_next_frame = false;
         transfer_input_requests(&mut self.ui_input, &mut self.render_input);

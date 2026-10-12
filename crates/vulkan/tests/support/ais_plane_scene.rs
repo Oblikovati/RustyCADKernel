@@ -12,6 +12,7 @@ use rustycad_tkservice::{
     aspect::{AspectNeutralWindow, AspectTypeOfFacingModel},
     graphic3d::*,
 };
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, v3d::*};
 pub const AIS_PLANE_MODES: [&str; 17] = [
     "aisplane-wire",
@@ -34,7 +35,7 @@ pub const AIS_PLANE_MODES: [&str; 17] = [
 ];
 pub struct AisPlaneScene {
     pub viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub object: Handle<AisPlane>,

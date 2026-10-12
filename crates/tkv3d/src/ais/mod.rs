@@ -62,8 +62,10 @@ pub use context_highlight::AisHighlightStyle;
 pub use detection_status::AisStatusOfDetection;
 
 mod context_highlight_owners;
+mod context_isoline_policies;
 mod context_owner_walk;
 mod context_selected_applicative;
+pub use context_isoline_policies::AisTypeOfIso;
 mod context_selected_members;
 mod context_selection_actions;
 mod context_unhighlight_owners;
@@ -462,3 +464,11 @@ mod textured_shape_compute;
 mod textured_shape_object;
 pub use textured_shape_compute::ais_textured_shape_compute;
 pub use textured_shape_object::{AisTexturedShape, AisTexturedShapeParent};
+mod colored_drawer;
+pub use colored_drawer::{AisColoredDrawer, AisColoredDrawerFlags, AisColoredDrawerParent};
+
+#[cfg(test)]
+mod colored_drawer_tests;
+
+#[cfg(test)]
+mod colored_drawer_runtime_tests;

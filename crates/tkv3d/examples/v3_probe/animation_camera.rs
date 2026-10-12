@@ -3,13 +3,11 @@ use super::common::{Reader, dir, end, flag, int, pnt, real};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkservice::{graphic3d::*, null_driver::NullGraphicDriver};
-use rustycad_tkv3d::{
-    ais::*,
-    v3d::{V3dView, V3dViewer},
-};
+use rustycad_tkv3d::v3d::V3dViewSource;
+use rustycad_tkv3d::{ais::*, v3d::V3dViewer};
 struct CameraAnimationProbe {
     _viewer: Handle<V3dViewer>,
-    view: Handle<V3dView>,
+    view: Handle<dyn V3dViewSource>,
     live: Handle<Graphic3dCamera>,
     start: Handle<Graphic3dCamera>,
     end: Handle<Graphic3dCamera>,
@@ -74,7 +72,7 @@ fn probe_endpoints(
     (start, end)
 }
 fn probe_atom(
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     start: &Handle<Graphic3dCamera>,
     end: &Handle<Graphic3dCamera>,
     flags: i32,

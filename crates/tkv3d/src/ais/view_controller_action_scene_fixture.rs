@@ -1,4 +1,5 @@
 //! Real retained views, points, anchors, grids and detection mirror native scenes.
+use crate::v3d::V3dViewSource;
 use super::view_controller_action_callback_fixture::ActionCallbackObject;
 use super::view_controller_navigation_xr_fixture::NavigationOpenSession;
 use super::*;
@@ -17,8 +18,8 @@ const ACTION_PROJECTIONS: [Graphic3dCameraProjection; 5] = [
 ];
 pub(super) struct ActionScene {
     pub(super) viewer: Handle<V3dViewer>,
-    pub(super) view: Handle<V3dView>,
-    pub(super) second: Handle<V3dView>,
+    pub(super) view: Handle<dyn V3dViewSource>,
+    pub(super) second: Handle<dyn V3dViewSource>,
     pub(super) context: Handle<AisInteractiveContext>,
     pub(super) primary: Handle<AisPoint>,
     pub(super) secondary: Handle<AisPoint>,
@@ -60,7 +61,7 @@ fn initialize_action_scene(scene: &ActionScene, index: usize) {
     *scene.callback.last_center.write() = Point3::default();
 }
 
-fn action_mapped_view(viewer: &Handle<V3dViewer>) -> Handle<V3dView> {
+fn action_mapped_view(viewer: &Handle<V3dViewer>) -> Handle<dyn V3dViewSource> {
     let view = viewer.create_view().unwrap();
     let window = Handle::new(AspectNeutralWindow::default());
     window.set_size(640, 480);
@@ -72,7 +73,7 @@ fn action_mapped_view(viewer: &Handle<V3dViewer>) -> Handle<V3dView> {
         .set_z_focus(Graphic3dCameraFocusType::Relative, 0.25);
     view
 }
-fn action_primary_view(viewer: &Handle<V3dViewer>, index: usize) -> Handle<V3dView> {
+fn action_primary_view(viewer: &Handle<V3dViewer>, index: usize) -> Handle<dyn V3dViewSource> {
     let view = action_mapped_view(viewer);
     configure_action_camera(&view, index);
     view

@@ -1,5 +1,6 @@
 //! Debug display preserves structure append, redisplay, and view-update order.
 use super::*;
+use crate::v3d::V3dViewSource;
 use crate::{prs_mgr::PrsMgrPresentableObjectMembers, v3d::V3dView};
 use rustycad_tkernel::{
     ncollection::SequenceCursor,
@@ -33,7 +34,7 @@ pub trait SelectMgrViewerSelectorDisplayMembers: SelectMgrViewerSelectorSource {
         &self,
         selection: &Handle<SelectMgrSelection>,
         location: &Transform3,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         clear_others: bool,
     ) -> Result<(), Failure> {
         if clear_others {

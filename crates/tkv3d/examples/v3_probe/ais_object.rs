@@ -1,4 +1,5 @@
 //! Actual context/object redisplay and callbacks, including retained failure state.
+use rustycad_tkv3d::v3d::V3dViewSource;
 #[path = "../../tests/support/context_object.rs"]
 pub(super) mod context_object;
 use super::common::{Reader, attempt, end, flag, int};
@@ -20,7 +21,7 @@ struct ContextScene {
     original: Handle<Prs3dDrawer>,
     extra: Handle<Prs3dDrawer>,
     owner: Handle<StandardTransient>,
-    view: Handle<V3dView>,
+    view: Handle<dyn V3dViewSource>,
 }
 impl ContextScene {
     fn new(active: bool) -> Self {

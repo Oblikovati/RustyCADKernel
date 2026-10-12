@@ -8,6 +8,7 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, v3d::*};
 pub const POINT_CLOUD_MODES: [&str; 16] = [
     "cloud-points",
@@ -29,7 +30,7 @@ pub const POINT_CLOUD_MODES: [&str; 16] = [
 ];
 pub struct PointCloudScene {
     pub viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub cloud: Handle<AisPointCloud>,

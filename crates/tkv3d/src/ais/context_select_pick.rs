@@ -1,6 +1,7 @@
 //! Selection picks remember the view before picking and then apply the current scheme.
 use super::*;
-use crate::{select_basics::SelectBasicsSelectingVolumeManager, select_mgr::*, v3d::V3dView};
+use crate::v3d::V3dViewSource;
+use crate::{select_basics::SelectBasicsSelectingVolumeManager, select_mgr::*};
 use rustycad_tkernel::{
     ncollection::{Array1, Vec2},
     precision,
@@ -14,7 +15,7 @@ impl AisInteractiveContext {
         &self,
         minimum: Vec2<i32>,
         maximum: Vec2<i32>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         scheme: AisSelectionScheme,
     ) -> Result<AisStatusOfPick, Failure> {
         self.prepare_selection_view(view, "SelectRectangle")?;
@@ -31,7 +32,7 @@ impl AisInteractiveContext {
     pub fn select_polygon(
         &self,
         pixels: &Array1<'_, Point2>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         scheme: AisSelectionScheme,
     ) -> Result<AisStatusOfPick, Failure> {
         self.prepare_selection_view(view, "SelectPolygon")?;
@@ -42,7 +43,7 @@ impl AisInteractiveContext {
     pub fn select_point(
         &self,
         point: Vec2<i32>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         scheme: AisSelectionScheme,
     ) -> Result<AisStatusOfPick, Failure> {
         self.prepare_selection_view(view, "SelectPoint")?;
@@ -52,7 +53,7 @@ impl AisInteractiveContext {
     }
     fn prepare_selection_view(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         operation: &str,
     ) -> Result<(), Failure> {
         if view.viewer() != self.detection_viewer() {

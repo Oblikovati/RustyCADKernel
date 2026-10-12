@@ -54,17 +54,30 @@ fn measure_scale_text(
     text: &ExtendedString,
     height: i32,
 ) -> Result<[i32; 3], Failure> {
-    let viewer = context.current_viewer().clone();
-    let view = viewer.active_view_iterator().next().ok_or_else(|| {
-        null_object("AIS_ColorScale active views=0; expected an active view for text metrics")
-    })?;
+    let viewer = context.current_viewer().observe();
+    let cursor = viewer.active_view_iterator();
+    if !cursor.more() {
+        return Err(null_object(
+            "AIS_ColorScale active views=0; expected an active view for text metrics",
+        ));
+    }
+    let view = rustycad_tkernel::standard::HandleReference::observe(&cursor.value_ref());
     let view = view
         .get()
         .ok_or_else(|| null_object("AIS_ColorScale active view=null; expected a live view"))?;
+    scale_driver_text_metrics(&viewer, view, text, height)
+}
+
+fn scale_driver_text_metrics(
+    viewer: &super::super::v3d::V3dViewer,
+    view: &dyn super::super::v3d::V3dViewSource,
+    text: &ExtendedString,
+    height: i32,
+) -> Result<[i32; 3], Failure> {
     let ascii = AsciiString::from_extended(text, None);
     let text = String::from_utf8_lossy(ascii.as_bytes());
     Ok(viewer
         .driver()
-        .text_size(&view.view(), &text, height as f32)
+        .text_size(&view.view_ref().observe(), &text, height as f32)
         .map(|value| value as i32))
 }
