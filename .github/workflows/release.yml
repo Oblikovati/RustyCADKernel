@@ -31,7 +31,8 @@ jobs:
       - name: Install native test prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev mesa-vulkan-drivers vulkan-validationlayers
+          sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev libvulkan1 mesa-vulkan-drivers vulkan-validationlayers
+          echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
       - run: rustup show
       - run: python3 tools/run_tool_tests.py --jobs 2 --pattern 'test_release_*.py'
       - name: Package and test extracted crates
