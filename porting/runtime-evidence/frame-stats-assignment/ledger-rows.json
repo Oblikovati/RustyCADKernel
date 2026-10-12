@@ -1,0 +1,35 @@
+{
+  "api": [
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::operator=",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "source_sha256": "c0e6d29756cbec7a0ddc857b4b6a4ba4528496136933f2d4f7ef40a71eae417b",
+      "cpp_declaration_id": "dccb21ff6fa9b8ea21ea2900d5abad188cc6ca2f92f12fed102f1033299c42ca",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
+          "declaration_sha256": "25ec637827a223030c4d01f9c7ab71cd52f8c4bc563b95a1aa6df4838f709e61",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "Graphic3dFrameStatsDataTmp",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::frame_stats_data::Graphic3dFrameStatsDataTmp",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite temporary statistics frame assignment preserves actual running OSD timer object and prior sample history while copying frame values. Six pinned native rows repeated byte-for-byte and Rust replay compares exact bits through assignment, next delta, repeated assignment, final averaging and reset. Safe Rust borrowing prohibits aliased mutable destination/source; no native exception, move/vector-reference or whole-class credit. See docs/frame-statistics-assignment.md and porting/runtime-evidence/frame-stats-assignment/."
+    }
+  ]
+}
