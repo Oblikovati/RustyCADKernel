@@ -594271,7 +594271,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
-          "declaration_sha256": "50107922f15a1c176d81c159d450f89de9e80e3570500a4bd27bd7cdfab33328",
+          "declaration_sha256": "a9c7e77d74aef34b2ebb16903a315aa42dca52127afe9c59f4b53dcba8e20070",
           "impl_context": null
         }
       ]
@@ -594289,7 +594289,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
-          "declaration_sha256": "7e80457a2c29d38de8947bb4c27117b7bf7a90c61943d72cfc3e1c46505d0fc3",
+          "declaration_sha256": "f13f218aa2dff71e2906fc0cf86745dfb03545ba9db82baececd4a87657459fc",
           "impl_context": null
         }
       ]
@@ -594307,7 +594307,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
-          "declaration_sha256": "ae27b2ef80c08df4e9e9331b413166551929c55292d0a3658993945c1d1e685c",
+          "declaration_sha256": "3207dde5681fb2db41ea15dc0bb91b390c44aa045936ede9a652a34c46bbdede",
           "impl_context": null
         }
       ]
@@ -594325,7 +594325,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
-          "declaration_sha256": "14eef2f44d4d3928605e5c5e590a2b735422e3464c0cd1ac89db85a24e7bda36",
+          "declaration_sha256": "a29377936170636e5d55763d0e91645be65fa4fa401a9fac544a537063ff88c2",
           "impl_context": null
         }
       ]
@@ -596249,7 +596249,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "ed931d5aa78ea794afb592dec80d9d5412cea3a3d8949e1824e5149b60e27b84",
+          "declaration_sha256": "c28f8d523a1a708fc8f17a94daa1f2f3b579f85ff22d3fc56373d4af364c1cd6",
           "impl_context": null
         }
       ]
@@ -596408,7 +596408,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "063af39fc77e09378f2e70a37d5f5bc3b90c3c248b9a8ec7348723d1e09bd11a",
+          "declaration_sha256": "45f23cd2c0b3423e743c94dd99fb0bbd4f4acee439f866507e5dddfc679483c9",
           "impl_context": null
         }
       ]
@@ -597174,6 +597174,78 @@
       "status": "implemented",
       "cpp_declaration_id": "f8504903ee86ec979811c1c7e3f56953bc30daa6fa0faf7ef80e78988100ad66",
       "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Applicative",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "000b722d5aed83979a3d8aa0f4fea8a61e5caa0c381d29c9293cc86d1b255226",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::applicative",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::applicative",
+          "declaration_sha256": "21e6e513dfa6fe1fba853d6fe6c27cf56e6b1f6de849607f768e128e00eea234",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite selected application-owner queries preserve actual cursor selection, owning copy identity and intrusive counts through null-owner, replacement, clear, retained-copy and second-object transitions. Seven actual pinned native rows repeat exactly and replay in Rust. Native requires a selected interactive object; explicit Rust guard covers the otherwise undefined null dereference. No native exception or whole-context completion credit. See docs/selected-application-owners.md and porting/runtime-evidence/selected-applicative/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HasApplicative",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9f5c92f0836b3676edb44724d90fab850c5ed4d0b8ae26f3904e18718beb5e0a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::has_applicative",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::has_applicative",
+          "declaration_sha256": "0a99d429dc3af6f97b0a782add4c0653d29b0dccb2125ce9770364119b955539",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite selected application-owner queries preserve actual cursor selection, owning copy identity and intrusive counts through null-owner, replacement, clear, retained-copy and second-object transitions. Seven actual pinned native rows repeat exactly and replay in Rust. Native requires a selected interactive object; explicit Rust guard covers the otherwise undefined null dereference. No native exception or whole-context completion credit. See docs/selected-application-owners.md and porting/runtime-evidence/selected-applicative/."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::Edge",
+      "cpp_declaration_id": "50a1f8b6155d8b8628e445fdc68c60c08f737b8a20d9c0fdde9d35c006239e2f",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::edge_ref",
+      "status": "implemented",
+      "notes": "Martensite actual borrowed explorer edge slot:20 pinned native alias rows plus retained-topology/source-lifetime probe, twice byte-identical. Root, sibling, pop-reset, wire-slot reuse, repeated Init, shared TShape flags versus copied orientation, checked Standard_TypeMismatch at end, and real nonvirtual parent Face/source destruction proved. Underlying Explorer retains and reads actual iterator shape slots; no cached getter copies. ToolRFace remains partial:allocation operators/class record unclaimed; no parent-family or private helper credits."
     }
   ],
   "tests": [
