@@ -40,7 +40,6 @@ impl BaseAllocator {
         &self,
         size: usize,
     ) -> Option<NonNull<u8>> {
-        let zeroed = !matches!(&*self.fields.inner, AllocatorKind::Common);
-        self.allocate_policy(size, zeroed)
+        self.policy_invocation().allocate_optimal(size)
     }
 }

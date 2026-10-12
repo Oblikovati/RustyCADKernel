@@ -14,17 +14,7 @@ impl Graphic3dGraphicDriver for BorrowedCameraDriver {
         manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCView>, Failure> {
         let retained = Graphic3dRetainedView::new(manager, &self.delegate.layers())?;
-        let view = Handle::new(BorrowedCameraView {
-            transient: Default::default(),
-            identity: self
-                .control
-                .light_identity
-                .fetch_add(1, std::sync::atomic::Ordering::Relaxed)
-                + 1,
-            retained,
-            control: self.control.clone(),
-        })
-        .cast();
+        let view = Handle::new(self.build_borrowed_camera_view(retained)).cast();
         graphic3d_cview_register(&view)?;
         Ok(view)
     }
@@ -102,5 +92,28 @@ impl Graphic3dGraphicDriver for BorrowedCameraDriver {
         view: &mut Handle<dyn Graphic3dCView>,
     ) -> bool {
         self.delegate.view_exists(window, view)
+    }
+}
+
+impl BorrowedCameraDriver {
+    fn build_borrowed_camera_view(&self, retained: Graphic3dRetainedView) -> BorrowedCameraView {
+        let identity = self
+            .control
+            .light_identity
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+            + 1;
+        let clip_probe_slot = self
+            .control
+            .clip_probe
+            .read()
+            .is_some()
+            .then(super::view_clip_retarget_probe::new_owned_clip_probe_slot);
+        BorrowedCameraView {
+            transient: Default::default(),
+            identity,
+            retained,
+            clip_probe_slot,
+            control: self.control.clone(),
+        }
     }
 }

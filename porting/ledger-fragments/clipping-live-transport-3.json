@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "Graphic3d_CView::ClipPlanes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::clip_planes_ref",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d_CView mapping (visualization-design.md section 1): the abstract view is the Graphic3dCView trait (virtual and pure members; Camera through the blanket Graphic3dDataStructureManager impl) over Graphic3dCViewBase (protected fields on Graphic3dCViewFields; the parent view is a weak handle); graphic3d_cview_register takes the identifier from the manager once the handle exists; the non-virtual members are split by topic in Graphic3dCViewMembers, Graphic3dCViewStructures, Graphic3dCViewComputed, Graphic3dCViewXr and Graphic3dCViewSubviews; the displayed set keeps insertion order (natively pointer-hash order); checked by the sv_scene oracle (activation, computed mode, display flows, bounds, dumps) and tests/graphic3d_driver_model_test.rs. Current-main contract audit: Getter returns an owning collection handle, not a genuine borrowed live slot. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "ab75c4469729446f3e06256f98c698da88d6c944eb4de5930d6bdc50f8ef8956",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::clip_planes_ref",
+          "declaration_sha256": "805fe2851de3556afcc8c22eb8e5d1e029b95b63a8f38cbd93a83f094cc7e449",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_CView::SetClipPlanes",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::set_clip_planes",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d_CView mapping (visualization-design.md section 1): the abstract view is the Graphic3dCView trait (virtual and pure members; Camera through the blanket Graphic3dDataStructureManager impl) over Graphic3dCViewBase (protected fields on Graphic3dCViewFields; the parent view is a weak handle); graphic3d_cview_register takes the identifier from the manager once the handle exists; the non-virtual members are split by topic in Graphic3dCViewMembers, Graphic3dCViewStructures, Graphic3dCViewComputed, Graphic3dCViewXr and Graphic3dCViewSubviews; the displayed set keeps insertion order (natively pointer-hash order); checked by the sv_scene oracle (activation, computed mode, display flows, bounds, dumps) and tests/graphic3d_driver_model_test.rs. Current-main contract audit: Argument accepts only &Handle<concrete collection>, so genuine retained field/source slot HandleReference arguments and their callback retargeting cannot be forwarded without an owning copy. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "4ccc3408238c6fb7930613cf698d33f4a3b26ce6cde8e2749a0697c461f9487f",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::set_clip_planes",
+          "declaration_sha256": "3a6758e4eaba03957d5bc34517c663ab776bf8e5b3166027061f95bc7837ba0e",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Current-main contract audit: Getter returns an owning collection handle, not forwarded genuine constHandle reference. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::clip_planes_ref",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "status": "implemented",
+      "toolkit": "TKV3d",
+      "upstream_id": "V3d_View::ClipPlanes",
+      "cpp_declaration_id": "2aa1bc56ed214f360a4be2fb0e6273f97c514989ec1dfbc241a939b288e55866",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::clip_planes_ref",
+          "declaration_sha256": "ca58a2685ebfad6ff6c619c006386e0c37c49081321c955219632e50dfcd7aaf",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Current-main contract audit: Argument accepts only &Handle<concrete collection>, so genuine retained field/source slot HandleReference arguments and their callback retargeting cannot be forwarded without an owning copy. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::set_clip_planes",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "status": "implemented",
+      "toolkit": "TKV3d",
+      "upstream_id": "V3d_View::SetClipPlanes",
+      "cpp_declaration_id": "e55aa64560e8b64819ee22c9a590f6a1d9c14056f600fb879cd72bec6c4baab0",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::set_clip_planes",
+          "declaration_sha256": "da225292fef7bb28acba3971801cf6d2e4c5dccccb298f8299d7fb9366060d83",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane",
+      "status": "partial",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. Current-main whole-clipping audit: Class contains unresolved live-node/cursor/retained-reference and callback-lifecycle contracts; class presence is not whole-class completion. See porting/audits/clipping-class-field-current-main.json. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Class remains partial: inherited and RTTI/reference closure is not claimed.",
+      "cpp_declaration_id": "1fdaf502bad7337a55b3563f8e1fd33441a90dc3b1f19d473dbce8e20f1937df",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane",
+          "declaration_sha256": "7687b10ef984e684f3b33514277822588cee9aaf78ce87f45b4741656daacb5e",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::myToOverrideGlobal",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clip_override_global",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. The protected field is private shared state. Current-main whole-clipping audit: Protected writable native field maps to to_override_global getter returning copied bool, not actual retained field storage. See porting/audits/clipping-class-field-current-main.json. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "5c335e428fa8bcb1084b41f7c111ecbee785aba876eded4e657b369aed811da8",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "struct_field",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clip_override_global",
+          "declaration_sha256": "ef1acb9a22db8c7d1159bd69d838fddddbec76bd57ffe5766a94cef7bf4122cd",
+          "impl_context": null
+        }
+      ]
+    }
+  ]
+}

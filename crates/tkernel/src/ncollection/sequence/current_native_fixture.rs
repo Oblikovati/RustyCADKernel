@@ -1,7 +1,8 @@
 //! Real sequence metadata and live resource replacement for the pinned native Heap fixture.
 #![allow(unsafe_code)]
 use crate::ncollection::{
-    AllocatorObject, AllocatorSource, BaseAllocator, HeapAllocatorObject, Sequence,
+    AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource, BaseAllocator,
+    HeapAllocatorObject, Sequence,
 };
 use crate::standard::{Failure, Handle, SharedState, Transient, WeakHandle};
 use std::{
@@ -27,16 +28,11 @@ unsafe impl AllocatorSource for CurrentSequenceHeap {
         // The actual parent keeps allocation provenance and intrusive identity together.
         self.parent.allocator_object_base()
     }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        let scene = self.scene.upgrade().unwrap();
-        scene.rows.write().push(format!(
-            "current-free {} {} {}",
-            scene.sequence.read().length(),
-            self.transient_base().ref_count(),
-            i32::from(*scene.retired.read())
-        ));
-        // SAFETY: current accepts the exact original heap pointer restored by its lease.
-        unsafe { self.allocator_object_base().free_base(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            free: current_sequence_free,
+            ..Default::default()
+        }
     }
 }
 #[derive(Default)]
@@ -53,15 +49,11 @@ unsafe impl AllocatorSource for ReplacingSequenceHeap {
         // This inherited base retains physical allocation provenance after native owner loss.
         self.parent.allocator_object_base()
     }
-    fn allocate(&self, size: usize) -> Option<NonNull<u8>> {
-        let scene = self.scene.upgrade().unwrap();
-        self.record(&scene, "allocate");
-        scene
-            .sequence
-            .write()
-            .clear(Some(BaseAllocator::from_handle(&self.current.observe())));
-        self.record(&scene, "replaced");
-        self.allocator_object_base().allocate_base(size)
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate: replacing_sequence_allocate,
+            ..Default::default()
+        }
     }
 }
 impl ReplacingSequenceHeap {
@@ -112,4 +104,50 @@ fn install_sequence_resource(
         .sequence
         .write()
         .clear(Some(BaseAllocator::from_handle(original)));
+}
+
+fn record_current_sequence_free(source: &CurrentSequenceHeap) {
+    let scene = source.scene.upgrade().unwrap();
+    scene.rows.write().push(format!(
+        "current-free {} {} {}",
+        scene.sequence.read().length(),
+        source.transient_base().ref_count(),
+        i32::from(*scene.retired.read())
+    ));
+}
+unsafe fn current_sequence_free(
+    invocation: &AllocatorInvocation,
+    pointer: *mut u8,
+) -> Result<(), Failure> {
+    // SAFETY: plain trace mutation has no callbacks; current accepts restored original heap provenance.
+    crate::standard::raise_native_failure(unsafe {
+        invocation.capture(record_current_sequence_free)
+    });
+    unsafe { invocation.free_base(pointer) }
+}
+fn capture_replacing_sequence(
+    source: &ReplacingSequenceHeap,
+) -> (Arc<NativeSequenceScene>, WeakHandle<CurrentSequenceHeap>) {
+    let scene = source.scene.upgrade().unwrap();
+    source.record(&scene, "allocate");
+    (scene, source.current.clone())
+}
+fn record_replaced_sequence(source: &ReplacingSequenceHeap) {
+    let scene = source.scene.upgrade().unwrap();
+    source.record(&scene, "replaced");
+}
+fn replacing_sequence_allocate(
+    invocation: &AllocatorInvocation,
+    size: usize,
+) -> Option<NonNull<u8>> {
+    // SAFETY: selectors read actual fields and trace values; all native resource callbacks run afterward.
+    let (scene, current) = crate::standard::raise_native_failure(unsafe {
+        invocation.capture(capture_replacing_sequence)
+    });
+    scene
+        .sequence
+        .write()
+        .clear(Some(BaseAllocator::from_handle(&current.observe())));
+    crate::standard::raise_native_failure(unsafe { invocation.capture(record_replaced_sequence) });
+    invocation.allocate_base(size)
 }

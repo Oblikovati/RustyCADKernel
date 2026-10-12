@@ -212,7 +212,14 @@ pub use sparse_array_base::{
 
 mod map_payload;
 
+mod allocator_default_dispatch;
+mod allocator_dispatch_code;
+mod allocator_invocation;
 #[allow(unsafe_code)]
 mod allocator_source;
-pub use allocator::{AllocatorPhysicalStorage, AllocatorStorageLease};
+pub use allocator::{AllocatorPhysicalStorage, AllocatorPolicyInvocation, AllocatorStorageLease};
+pub use allocator_dispatch_code::{
+    AllocatorAllocateCode, AllocatorDispatchCode, AllocatorFreeCode,
+};
+pub use allocator_invocation::AllocatorInvocation;
 pub use allocator_source::AllocatorSource;

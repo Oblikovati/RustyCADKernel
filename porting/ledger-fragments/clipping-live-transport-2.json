@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Remove(const occ::handle<Graphic3d_ClipPlane> &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove_reference",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. Current-main contract audit: Releases last target while holding collection write guard; native destructor callback may reenter collection. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "8592283d217e43b3155e04a423b8072f9264c04fd12917fb3978f87438e4dc6f",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove_reference",
+          "declaration_sha256": "a716ddc3b079554e828c39a03f78baced843f5778846e89b01c06f46945ed3fd",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dSequenceOfHClipPlane",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::clip_plane_sequence::Graphic3dSequenceOfHClipPlane"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Remove(Graphic3d_SequenceOfHClipPlane::Iterator &)",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove_at",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. An iterator past the end raises Standard_OutOfRange with its position (natively a null node dereference). Current-main contract audit: Exhausted-cursor no-op is fixed separately, but snapshot index is not actual live node/cursor removal. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "c546e5d7605d81d6a49e5adc720351eec7b7d665298399121189f968028d203b",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove_at",
+          "declaration_sha256": "2842003144df2e51e3ecafbbc5cb61a38fd45e9fe1f050348d7071de16c4832b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dSequenceOfHClipPlane",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::clip_plane_sequence::Graphic3dSequenceOfHClipPlane"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Clear",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clear",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. Current-main contract audit: Holding write guard spans target destructors, unlike valid native reentrant metadata/first callbacks. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "cec57aebdff36f6628be60e9966e37c62da39bd2250116bc9b0cb6fa84c75556",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clear",
+          "declaration_sha256": "0aeda84c4e1cbf84c83c5e380c9f080e5e2f9b79e4d09fd45fb1373801631276",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dSequenceOfHClipPlane",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::clip_plane_sequence::Graphic3dSequenceOfHClipPlane"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::First",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::first_ref",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. An empty sequence raises Standard_NoSuchObject, as the NCollection_Sequence::First Raise_if does. Current-main contract audit: Returns an owning handle copy, not the actual node handle reference; protected replacement is not observed. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "41fb252374b61330a1d2748437650a7d28cc5431eae2f07c900794e2aaa42dcb",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::first_ref",
+          "declaration_sha256": "5b67326ff862c66a18233ea5bf81d2e108fe31af2ed53af4d47f2aefbd3020c7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dSequenceOfHClipPlane",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::clip_plane_sequence::Graphic3dSequenceOfHClipPlane"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::DumpJson",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::dump_json",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. Current-main contract audit: Clones all plane handles and iterates an owning snapshot across actual virtual plane DumpJson callbacks. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "dfe219706c877b6ca9170912e59f3a2bd4a2c7452d487b8f1615890b084e490e",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::dump_json",
+          "declaration_sha256": "1598cf67b9b662dc2f4d4689647e2382c50d734412ff5f5e94036950303846cf",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dSequenceOfHClipPlane",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::clip_plane_sequence::Graphic3dSequenceOfHClipPlane"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::myItems",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clip_plane_items",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. The protected field is private shared state, read through items(). Current-main contract audit: Stored Vec lacks actual native Sequence node identity, live cursors and retained element references. See porting/runtime-evidence/clip-contract-audit-2026-10-12/audit.json; full live clipping family remains unfinished. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "c1f37ffc69043b94defa74d41542b90763469fec6495358a2e11cc1bc5f43805",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_kind": "struct_field",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clip_plane_items",
+          "declaration_sha256": "4b1ed5584af10fcb7a99a63ebc85c5c73acab91de6f03fbe7a4d9f8f055e7f3a",
+          "impl_context": null
+        }
+      ]
+    }
+  ]
+}

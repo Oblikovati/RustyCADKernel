@@ -11,15 +11,15 @@ impl V3dView {
     /// `Update`: recomputes the structures, fits Z and redraws an active view.
     /// Example: `view.update()?`.
     pub fn update(&self) -> Result<(), Failure> {
-        if !self.view.is_defined() || !self.view.is_active() {
+        if !self.driver_view_observer().is_defined() || !self.driver_view_observer().is_active() {
             return Ok(());
         }
         self.state.write().is_invalidated_immediate = false;
-        self.view
+        self.driver_view_observer()
             .update(rustycad_tkservice::graphic3d::GRAPHIC3D_ZLAYER_ID_UNKNOWN);
-        self.view.compute();
+        self.driver_view_observer().compute();
         self.auto_z_fit()?;
-        self.view.redraw();
+        self.driver_view_observer().redraw();
         Ok(())
     }
     /// `Redraw`: fits Z and redraws, recomputing once after a lost device; `view.redraw()`.
@@ -42,13 +42,13 @@ impl V3dView {
     }
     /// `Invalidate`: marks the view for a redraw; `view.invalidate()`.
     pub fn invalidate(&self) {
-        if self.view.is_defined() {
-            self.view.invalidate();
+        if self.driver_view_observer().is_defined() {
+            self.driver_view_observer().invalidate();
         }
     }
     /// `IsInvalidated`; `view.is_invalidated()`.
     pub fn is_invalidated(&self) -> bool {
-        !self.view.is_defined() || self.view.is_invalidated()
+        !self.driver_view_observer().is_defined() || self.driver_view_observer().is_invalidated()
     }
     /// `IsInvalidatedImmediate`; `view.is_invalidated_immediate()`.
     pub fn is_invalidated_immediate(&self) -> bool {
@@ -61,10 +61,10 @@ impl V3dView {
     /// `MustBeResized`: the driver view and the camera aspect follow the window.
     /// Example: `view.must_be_resized()`.
     pub fn must_be_resized(&self) {
-        if !self.view.is_defined() {
+        if !self.driver_view_observer().is_defined() {
             return;
         }
-        self.view.resized();
+        self.driver_view_observer().resized();
         self.set_ratio();
         if self.state.read().immediate_update {
             self.redraw();
@@ -72,16 +72,17 @@ impl V3dView {
     }
     /// `DoMapping`: maps the window; `view.do_mapping()`.
     pub fn do_mapping(&self) {
-        if !self.view.is_defined() {
+        if !self.driver_view_observer().is_defined() {
             return;
         }
-        if let Some(window) = self.view.window().get() {
+        if let Some(window) = self.driver_view_observer().window().get() {
             window.do_mapping();
         }
     }
     /// `IsEmpty`: no displayed structure; `view.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        !self.view.is_defined() || self.view.number_of_displayed_structures() <= 0
+        !self.driver_view_observer().is_defined()
+            || self.driver_view_observer().number_of_displayed_structures() <= 0
     }
     /// `SetAutoZFitMode`; a scale factor <= 0 raises `Standard_ProgramError` (the native
     /// release-mode assertion). Example: `view.set_auto_z_fit_mode(true, 1.0)?`.
@@ -113,7 +114,7 @@ impl V3dView {
     }
     /// `ZFitAll`: fits the camera Z range to the displayed bounds; `view.z_fit_all(1.0)?`.
     pub fn z_fit_all(&self, scale_factor: f64) -> Result<(), Failure> {
-        let (min_max, graphic) = self.view.z_fit_all_bounds()?;
+        let (min_max, graphic) = self.driver_view_observer().z_fit_all_bounds()?;
         self.camera().z_fit_all(scale_factor, &min_max, &graphic)?;
         Ok(())
     }

@@ -1,13 +1,14 @@
 //! Native Camera references stay bound to their selected field through replacement and callbacks.
 use super::{Graphic3dCView, Graphic3dCViewBase, Graphic3dCViewFields, Graphic3dCamera};
 use rustycad_tkernel::standard::{
-    Handle, HandleFieldRef, HandleReference, StandardTransient, Transient,
+    Handle, HandleReference, StandardTransient, Transient, WeakHandleFieldRef,
 };
 /// Borrow actual myCamera without retaining its target; `graphic3d_cview_camera_ref(view.cview_base())`.
 pub fn graphic3d_cview_camera_ref(
     base: &Graphic3dCViewBase,
-) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
-    Box::new(HandleFieldRef::new(&base.fields, retained_cview_camera))
+) -> Box<dyn HandleReference<Graphic3dCamera>> {
+    // A selected alias must survive a temporary noncounting CView observation, without owning it.
+    Box::new(WeakHandleFieldRef::new(&base.fields, retained_cview_camera))
 }
 fn retained_cview_camera(fields: &Graphic3dCViewFields) -> &Handle<Graphic3dCamera> {
     // Direct XR myCamera assignments must remain visible to this retained field alias.
@@ -18,7 +19,7 @@ use rustycad_tkernel::standard::dump::DumpStream;
 use std::io;
 impl<T: Graphic3dCView> Graphic3dDataStructureManager for T {
     /// The native virtual CView override selects the actual borrowed slot.
-    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
+    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera>> {
         self.cview_camera_ref()
     }
     /// `DumpJson`: the view dump.
@@ -31,7 +32,7 @@ impl<T: Graphic3dCView> Graphic3dDataStructureManager for T {
 /// for (the views).
 pub trait Graphic3dDataStructureManager: Transient {
     /// Native virtual constHandle borrow; `let alias=manager.camera_ref()`.
-    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_>;
+    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera>>;
     /// Explicit owning snapshot convenience; native Camera binds camera_ref; `manager.camera()`.
     fn camera(&self) -> Handle<Graphic3dCamera> {
         self.camera_ref().clone_handle()

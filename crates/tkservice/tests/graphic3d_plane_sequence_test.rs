@@ -50,7 +50,7 @@ fn iterator_remove_moves_to_the_next_plane() {
     it.next();
     assert!(!it.more());
     sequence.remove_at(&mut it).unwrap();
-    let null = Graphic3dSequenceOfHClipPlaneIterator::from_handle(&Handle::default());
+    let null = Graphic3dSequenceOfHClipPlaneIterator::from_handle(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     assert!(!null.more());
     sequence.clear();
     assert!(sequence.is_empty());
@@ -63,7 +63,7 @@ fn removing_a_default_or_null_initialized_iterator_is_a_native_noop() {
     sequence.append(plane.clone());
     let mut iterator = Graphic3dSequenceOfHClipPlaneIterator::default();
     sequence.remove_at(&mut iterator).unwrap();
-    iterator.init_handle(&Handle::default());
+    iterator.init_handle(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     sequence.remove_at(&mut iterator).unwrap();
     assert_eq!(sequence.size(), 1);
     assert_eq!(plane.ref_count(), 2);

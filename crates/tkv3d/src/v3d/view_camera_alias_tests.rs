@@ -6,6 +6,45 @@ use rustycad_tkservice::{
     graphic3d::{Graphic3dCViewMembers as _, Graphic3dCamera},
     null_driver::NullGraphicDriver,
 };
+#[test]
+fn protected_driver_view_replacement_updates_view_alias_without_rebinding_old_camera_alias() {
+    let (_control, viewer, owner) = camera_borrow_scenario();
+    let original = owner.view_ref().clone_handle();
+    let next = viewer
+        .driver()
+        .create_view(&viewer.structure_manager())
+        .unwrap();
+    let view_alias = owner.view_ref();
+    let camera_alias = owner.camera_ref();
+    owner.driver_view_slot.assign(&next).unwrap();
+    assert_replaced_driver_alias(&*owner, view_alias, &next);
+    assert_eq!(original.ref_count(), 1);
+    assert_eq!(next.ref_count(), 2);
+    assert_camera_alias_stays_at_original_driver(&*owner, &original, &*camera_alias);
+}
+fn assert_replaced_driver_alias(
+    owner: &dyn V3dViewSource,
+    alias: &dyn HandleReference<dyn rustycad_tkservice::graphic3d::Graphic3dCView>,
+    next: &Handle<dyn rustycad_tkservice::graphic3d::Graphic3dCView>,
+) {
+    assert_eq!(alias.object_address(), next.object_address());
+    assert_eq!(
+        alias.reference_address(),
+        owner.view_ref().reference_address()
+    );
+}
+fn assert_camera_alias_stays_at_original_driver(
+    owner: &dyn V3dViewSource,
+    original: &Handle<dyn rustycad_tkservice::graphic3d::Graphic3dCView>,
+    camera_alias: &dyn HandleReference<Graphic3dCamera>,
+) {
+    let original_address = original.camera_ref().reference_address();
+    let fresh_address = owner.camera_ref().reference_address();
+    assert_eq!(camera_alias.reference_address(), original_address);
+    assert_ne!(camera_alias.reference_address(), fresh_address);
+    assert_eq!(camera_alias.observe().ref_count(), 1);
+    assert_eq!(owner.camera_ref().observe().ref_count(), 1);
+}
 
 #[test]
 fn native_selected_camera_slots_and_intrusive_counts_replay_without_copied_aliases() {

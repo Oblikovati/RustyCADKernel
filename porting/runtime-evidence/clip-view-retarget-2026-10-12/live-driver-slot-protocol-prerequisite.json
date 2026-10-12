@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "scope": "Independent live driver-view/camera field prerequisite only. Actual myView is now the owning IntrusiveReferenceSlot; direct accesses acquire zero-native-count observers and reread after callbacks. Existing virtual Camera aliases capture actual fields through Weak storage, not owners or repeated virtual getters. Full clipping callback/allocator/collection behavior and bindings still unfinished; no claim restoration.",
+  "source_sha256": {
+    "crates/tkernel/src/standard/intrusive_reference_slot.rs": "e0a3d20797da459a87384810b0b78338f5c3dc0bac47211020f33cd7895f917a",
+    "crates/tkernel/src/standard/intrusive_reference_slot_tests.rs": "659cf06cc01b303f414974e5935190431ee8085b400220b454b6414e4d571c54",
+    "crates/tkservice/src/graphic3d/cview.rs": "4235dbcc813d99268068e91aaa615db50573b38d96ee049de68e88e9e33dd908",
+    "crates/tkservice/src/graphic3d/cview_camera_reference.rs": "f6eefdd872917bcfa12f1e2906af70f4d54312eaf2e429a7296b17f308e8f3cf",
+    "crates/tkv3d/src/v3d/view.rs": "4d56658c9b5cc616b253f628a2e35df559751f87b562b1f83d1af45dd9a6b368",
+    "crates/tkv3d/src/v3d/view_camera_alias_fixture.rs": "223bc21c7c9224d4fc555cfa00ee3ca339c3ebf6d7b5a555c7d636a804e6a638",
+    "crates/tkv3d/src/v3d/view_camera_alias_forward.rs": "231777c7e976bbef8d1085f37712d57166e0c06fb2a727a11a8d477efc21b4e1",
+    "crates/tkv3d/src/v3d/view_camera_alias_tests.rs": "e0bd77a8c453e60a4d8ab05d23992c0f603ce83c2f466e0c484bf65c74e510bf",
+    "crates/tkv3d/src/v3d/view_construction.rs": "455f9a2e2726b61b363b67bad1dffb54a890f051d97d3a91231867e2777abd01",
+    "crates/tkv3d/src/v3d/view_redraw.rs": "c29c35255ca14388aaa866ba7d4089356a711d8ba19312303453dd3559644894",
+    "crates/tkv3d/src/v3d/view_source_redraw.rs": "27d9376601b46453bff15ed53cd5ed3f0e1283fed02435df61cd41c301d17a62",
+    "crates/tkv3d/src/v3d/view_subviews.rs": "78d6f41b9eb0617ada256d7acf90bec943ed30361e4743087da3d44f6ca4c238"
+  },
+  "checks": {
+    "camera_alias_regressions": 7,
+    "owned_slot_constructor_regression": 1,
+    "three_crate_all_target_clippy": "TKernel/TKService/TKV3d passed -D warnings",
+    "format_diff": "cargo fmt/diff check passed"
+  },
+  "native_replay_scope": "Existing5-record native camera slot/count fixture replay passes. New protected driver-view alias test uses one replacement owning anchor, hence counts1/2; it does not claim the10-record native clipping callback fixture (which intentionally keeps a second replacement base handle, counts1/3).",
+  "pending": [
+    "Checked main allocator adoption",
+    "Actual borrowed virtual ClipPlanes and full10-record native callback replay",
+    "Live collection/allocator current-Free transport",
+    "Scoped bindings and both-device functional/performance proof"
+  ],
+  "api_completion_claims": false,
+  "class_constructor_completion": false,
+  "binary_reverse_engineering_or_debugger_work": false
+}

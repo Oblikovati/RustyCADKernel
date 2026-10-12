@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::base_type",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipSequenceParent",
+      "status": "implemented",
+      "notes": "Actual public Graphic3dClipSequenceParent alias of StandardTransient. Five pinned native records and Rust replay prove alias equivalence and descriptor target name/parent/kind, without claiming const Handle field identity or full class closure. See docs/clipping-live-transport.md and sequence-parent-alias/receipt.json.",
+      "cpp_declaration_id": "ef530938ccca1a6ab4b13e2849eae5bab8a0a91958de5c5541089c934df315cc",
+      "generated_by": "tools/generate_api_macro_rows.py",
+      "source_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dClipSequenceParent",
+          "declaration_sha256": "da216f987de8e0ca964fc4383fc16c1cd1ec1674d05712ad1e021ea07da33d1a",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "V3d_View::View",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "45d8c0de361208439178f6a65cc1ff0cb6d1e2e5db49c1148547e338907aca66",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewMembers::view_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewMembers::view_ref",
+          "declaration_sha256": "c648f022010495b83bb8f4a4b2d92b1682dd93a7d8bdd1804fb20be74c3518c8",
+          "impl_context": null
+        }
+      ],
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below."
+    },
+    {
+      "upstream_id": "V3d_View::Camera",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "195d159365f40952a71903975e1e7577f9cacf53101036edbd01c13b7249eb76",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewMembers::camera_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewMembers::camera_ref",
+          "declaration_sha256": "e3ad5f2e5c035fdd72f0f67c70179e1b55791519ceecb5b19b1c01f8a2b686f4",
+          "impl_context": null
+        }
+      ],
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below."
+    },
+    {
+      "upstream_id": "V3d_View::AddClipPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "02629eed1e7f1d062015a4ec5948d7bd3c5a23a75888d5c1b894ca456c62153d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::add_clip_plane",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewSource::add_clip_plane",
+          "declaration_sha256": "e2909b09228485c451ca5ea9d5902279b4a628bb24270f08fa0cecb5552d2d7b",
+          "impl_context": null
+        }
+      ],
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Contract audit 2026-10-12: valid native ClipPlanes getter callbacks replace the protected myView slot, while AddClipPlane/RemoveClipPlane retain the old sequence and reread myView for SetClipPlanes. Current Rust stores an immutable private driver-view Handle and cannot represent this proven native callback. Full behavior remains partial pending genuine live protected-field storage and setter reread. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below."
+    },
+    {
+      "upstream_id": "V3d_View::RemoveClipPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "49da25f1a5b9af0e44842595015f299282c5de83c2df9d6010f5d7f8c01bd75d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::remove_clip_plane",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewSource::remove_clip_plane",
+          "declaration_sha256": "1cb69c831e84842ebcfb99898ac76c05c293a015140b46bc04f9832c6f6ff3c8",
+          "impl_context": null
+        }
+      ],
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Contract audit 2026-10-12: valid native ClipPlanes getter callbacks replace the protected myView slot, while AddClipPlane/RemoveClipPlane retain the old sequence and reread myView for SetClipPlanes. Current Rust stores an immutable private driver-view Handle and cannot represent this proven native callback. Full behavior remains partial pending genuine live protected-field storage and setter reread. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below."
+    },
+    {
+      "upstream_id": "V3d_View::myView",
+      "toolkit": "TKV3d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::driver_view_slot",
+      "status": "implemented",
+      "notes": "Historical ledger evidence (superseded only for this mapped contract): Genuine protected myView storage, shared by View aliases and inherited clipping receiver rereads. Current full live clipping transport proof: original caller references survive allocator/retirement/failure callbacks; actual nodes and selected fields retain alias identity without extra native ownership; derived sources preserve equations/materials. Native assets and Rust-only replay: docs/clipping-live-transport.md and porting/runtime-evidence/clipping-live-transport-2026-10-12/. Old copied conveniences are unclaimed; exact current compiler selector below.",
+      "cpp_declaration_id": "aff33cff2a320e6da6f2404572c0e6111c1ed770e778c4f2fdb517e4a6667735",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "rust_kind": "struct_field",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::driver_view_slot",
+          "declaration_sha256": "02daaae6438721f2af783d2997c6c09e49e9e592be77be732d30b584e6f57a0e",
+          "impl_context": null
+        }
+      ]
+    }
+  ]
+}

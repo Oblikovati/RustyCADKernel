@@ -5,7 +5,7 @@ use rustycad_tkservice::graphic3d::{Graphic3dCViewMembers as _, Graphic3dStructu
 
 /// Execute native base Redraw, including lost-device retry; `v3d_view_redraw(view.view_base())`.
 pub fn v3d_view_redraw(view: &V3dView) {
-    if !view.view.is_defined() || !view.view.is_active() {
+    if !view.driver_view_observer().is_defined() || !view.driver_view_observer().is_active() {
         return;
     }
     view.state.write().is_invalidated_immediate = false;
@@ -27,14 +27,14 @@ fn inherited_redraw_attempt(view: &V3dView, manager: &Graphic3dStructureManager)
     if let Err(failure) = view.auto_z_fit() {
         raise_native_failure::<()>(Err(failure));
     }
-    view.view.redraw();
+    view.driver_view_observer().redraw();
     !manager.is_device_lost()
 }
 /// Execute native base RedrawImmediate; `v3d_view_redraw_immediate(view.view_base())`.
 pub fn v3d_view_redraw_immediate(view: &V3dView) {
-    if !view.view.is_defined() || !view.view.is_active() {
+    if !view.driver_view_observer().is_defined() || !view.driver_view_observer().is_active() {
         return;
     }
     view.state.write().is_invalidated_immediate = false;
-    view.view.redraw_immediate();
+    view.driver_view_observer().redraw_immediate();
 }

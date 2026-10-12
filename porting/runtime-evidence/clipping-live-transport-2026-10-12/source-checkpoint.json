@@ -1,0 +1,88 @@
+{
+  "project": "Martensite",
+  "parent": "9f5e02065",
+  "source_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "sources": {
+    "crates/tkservice/src/graphic3d/clip_plane_sequence.rs": "64686658c91fc4f23f7b0b72269874a5ffd7bb12fb3f07875b7dfd457084f3e5",
+    "crates/tkservice/src/graphic3d/clip_source_handle_arguments.rs": "385d946a47fcfb8f31fd8d69290aef87637d8e9c896fd35cf652b6ab76ce7195",
+    "crates/tkservice/src/graphic3d/cview.rs": "faef8fcd407e54a371af778da38b1a231ca516d6ab52b704f1e3f376ef632ade",
+    "crates/tkservice/src/graphic3d/mod.rs": "68de85a1d379adf2c8d31a05e08499d1029970d7c440bf17bcbba986dbe15d0e",
+    "crates/tkservice/src/graphic3d/retained_view.rs": "ffb76afc981da040e7d1d555b67cd6410fb543fc5dd896cf4c935b0d6c063c2c",
+    "crates/tkv3d/src/v3d/mod.rs": "95035d2f16919a0f9eff0cbab365cdf1f8f795d42129eab075b91d94758282bd",
+    "crates/tkv3d/src/v3d/view_camera_alias_driver.rs": "226f799b9f35c370d6f89708d8d423931550a1929eb21e9bff4a07ef0ebe079d",
+    "crates/tkv3d/src/v3d/view_camera_alias_fixture.rs": "55213db190c6cacc1f5c08dd439eb45c9a5d16c3cfb6353b764f02e11e95a38a",
+    "crates/tkv3d/src/v3d/view_camera_alias_forward.rs": "740914e64814c73734f53f5fd3a278cfccbfc18f402464f75ef4826f47a1b0f1",
+    "crates/tkv3d/src/v3d/view_render.rs": "cdaf7a81e5abde98e41cad5059da4335c65a8f8d77891b77b778b07e9a7b959f",
+    "crates/tkv3d/src/v3d/view_source.rs": "64fa5b15f3bf9e67fb9dc0e8eb4e4fb04eb8f6f84b451517a733d67d115c3814",
+    "crates/tkv3d/src/v3d/view_source_clipping.rs": "c4a6849d99edcd90b6a59c03220c1b361bad1168e672f01e24ab7d8688bd1c99",
+    "crates/tkv3d/src/v3d/view_source_fixture.rs": "a70f8c772a5446b50358ffc0e7fe3d1598a3e29ae9a7f665e33ec10430e94f1d",
+    "crates/vulkan/src/driver_view.rs": "960a6ba829b2809f82f52fc0a2add2fb5815c1b71772244f5510a0f879aa5742",
+    "crates/vulkan/src/view_forward.rs": "525df3c40d8a54c568c34e04a4375441c92dafaf590625e9a12d1aa31edccf48",
+    "crates/vulkan/src/view_scene.rs": "cdcfcd05dff16022f3281bcfc5968aae5fa31ae99629ba220dbf6b93f3a7056a",
+    "crates/vulkan/tests/support/capping_scene.rs": "8bd6407a87907c11162fbe88e62d3d7a9d5734ed3d1676ea0d23e4f7926ce217",
+    "crates/vulkan/tests/support/clipping_persistence.rs": "852f80fcc92bc0c492a84018a309b649bd370ced64fbe089f372e552241adda4",
+    "crates/vulkan/tests/support/clipping_scene.rs": "8bdcb27ae597a5629d7d247763998039f692e988d9f0c469978857814cdb7208",
+    "crates/tkservice/src/graphic3d/clip_sequence_allocator_fixture.rs": "572278774f31611960fa22b23002c8db254d03f21137c3954d069aa9c82a4c1f",
+    "crates/tkservice/src/graphic3d/clip_sequence_allocator_replay.rs": "4e16b83de86eb65add8a967b83daa80bcc8cd1cddf9d946d333a9dd78cab6db7",
+    "crates/tkservice/src/graphic3d/clip_sequence_field_ref.rs": "785933aebafce9bdf07b0dcfd5fec31ee5276bd378337c8b8964b71d7066779d",
+    "crates/tkservice/src/graphic3d/clip_sequence_inspection.rs": "d853a2dbd6c8c0f18598194f44eedbe611f44534de8ed231c87e99e60b4b3747",
+    "crates/tkservice/src/graphic3d/clip_sequence_iterator.rs": "65d9bbc0eb7d4eddd944cfe4cd29cc07efecd967a5530451bf6eb93311ac318f",
+    "crates/tkservice/src/graphic3d/clip_sequence_mutation.rs": "c6aefa18b262058ca8213f5c47273f6e21e4b8a2747da2e9e4504097d712a59b",
+    "crates/tkservice/src/graphic3d/clip_sequence_reference_replay.rs": "eb7165c55c944a76a0f2c18a2027df83fa9effd32fa4d21f1ee3aade2a9989ae",
+    "crates/tkservice/src/graphic3d/clip_sequence_retirement_fixture.rs": "4034f10424d5a610280890b15a2d0857645a79e4e2bbcc77353e90636afd05ad",
+    "crates/tkservice/src/graphic3d/clip_sequence_retirement_replay.rs": "3c5453f1cbe5409b5e5f1c3ddf84cf3d0ef96c61cdefa51c51c8b6715952ddd7",
+    "crates/tkservice/src/graphic3d/clip_sequence_storage.rs": "92341f479fb0ce62a4dc5d15595d9ec94d7483d4cfd248575788d87abc42d117",
+    "crates/tkv3d/src/v3d/view_clip_retarget_fixture.rs": "986ef12cb614d69bfe4f876abf79686967c30fb236bbfa5dd3e2b4e8908efce5",
+    "crates/tkv3d/src/v3d/view_clip_retarget_probe.rs": "1a24a03a0198c106a6194a323daf1a75f6f18019ebde3c081ae27b330532f53d",
+    "crates/tkv3d/src/v3d/view_clip_retarget_replay.rs": "d4ced71fbbf4d10f1594345fb8d51ad5d2ff65c1bdc42e33ceaa4d831c7ae4bd",
+    "docs/clipping-live-transport.md": "1101a81f9214eb227ef55e38682afae47ea24c1c950384bb15e0ec062095c3bd"
+  },
+  "native_family": {
+    "records": 44,
+    "fixtures": {
+      "crates/tkservice/tests/fixtures/clip-source-protocol-native.txt": "e2f5556ba683048b726b5a95f05f816c053011ec5138572a33d020247313e27e",
+      "crates/tkservice/tests/fixtures/clip-collection-references-native.txt": "7697663a9efe5aaf35cb90d722637910b412a08e9b80215bab4cd11989db6a07",
+      "crates/tkservice/tests/fixtures/clip-collection-retirement-native.txt": "cf953c15362c72b1d85fe53a4c77fd1702b45e34d8dca3c45435f58e477536f5",
+      "crates/tkservice/tests/fixtures/clip-allocator-argument-native.txt": "e4ea2c59efa7e0c947863587b55a626d2e1516bad57a60b0bde6cd21bdf6d6f1",
+      "crates/tkv3d/tests/fixtures/v3d-clip-view-retarget-native.txt": "41ea641332bdd8851d1fe14512b05c9f4ce8ddb00ff0efee74db7eb70c3e60d2"
+    }
+  },
+  "checks": {
+    "cpu": {
+      "reported_passed": 1141,
+      "failed": 0,
+      "executables": 8
+    },
+    "software": {
+      "reported_passed": 484,
+      "failed": 0,
+      "executables": 61
+    },
+    "amd": {
+      "reported_passed": 484,
+      "failed": 0,
+      "executables": 61
+    },
+    "typecheck_exit": 0,
+    "clippy_exit": 0,
+    "fmt_exit": 0,
+    "diff_check_exit": 0
+  },
+  "profiles": {
+    "software": {
+      "icd": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "sha256": "8468db31369dbd0140b68783f1a7943e6158cadcf5314e949e6be31f42068e13"
+    },
+    "amd": {
+      "icd": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "sha256": "bca32a660ca32a42b598d53cdc63b3e3e917ea40c0b3b1e00fdbd3115280b51d"
+    }
+  },
+  "limitations": [
+    "Source checkpoint only; all audited partial statuses unchanged.",
+    "No class/constructor completion or global ledger publication.",
+    "No fresh native generation: reused source-pinned independently validated assets.",
+    "Dedicated callback-failure/derived rendering captures and coordinated performance remain pending.",
+    "Initial software invocation selected nonexistent legacy ICD filename;6instance-creation failures preserved separately; corrected exact ICD run484passed."
+  ]
+}

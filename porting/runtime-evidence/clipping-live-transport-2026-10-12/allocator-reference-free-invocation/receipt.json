@@ -1,0 +1,22 @@
+{
+  "upstream_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_rows": 4,
+  "native_repetitions": 2,
+  "native_exact": true,
+  "original_rust_red": "destructor delayed until after Allocate returned",
+  "corrected_rust_exact": true,
+  "kernel_reported_passes": 5015,
+  "service_reported_passes": 282,
+  "full_class_credit": false,
+  "sha256": {
+    "tools/oracle/martensite_clip_allocator_active_owner_loss.cxx": "eb11c857d452a5c2dba75c42098f93683622aa3bfaed594b0b41342b8ce5d9d4",
+    "tools/oracle/martensite_clip_allocator_argument.cxx": "3d1370c27257417bfebc41115d35ef6a4524d7cf49cb9eaf1e29d3a0906179db",
+    "crates/tkservice/tests/fixtures/clip-allocator-active-owner-loss-native.txt": "38e7d370b1fbf88441a34e2d5186dd3142ac354f76e81276abc3f285fffaadb5",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_BaseAllocator.hxx": "39ede399a6198966fce79e22040602c89da303984279fb5836d98439539259ca",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "target/clip-active-loss": "d2a2f7a35f6c51a8e222d6a6d9227a0068a1517e6aac923804cecf709b31fbe0"
+  },
+  "miri_focused_passes": 2,
+  "borrow_escape_compile_fail_passes": 1,
+  "active_owner_loss_miri_passes": 1
+}

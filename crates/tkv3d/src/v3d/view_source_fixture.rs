@@ -44,7 +44,10 @@ impl V3dViewSource for NativeStyleViewProbe {
         self.fail_if_requested("immediate");
         v3d_view_redraw_immediate(&self.base);
     }
-    fn add_clip_plane(&self, plane: &dyn HandleReference<Graphic3dClipPlane>) {
+    fn add_clip_plane(
+        &self,
+        plane: &dyn HandleReference<dyn rustycad_tkservice::graphic3d::Graphic3dClipPlaneSource>,
+    ) {
         self.record("add");
         self.fail_if_requested("add");
         if *self.trace.replace_on_add.read() {
@@ -52,7 +55,10 @@ impl V3dViewSource for NativeStyleViewProbe {
         }
         v3d_view_add_clip_plane(&self.base, plane);
     }
-    fn remove_clip_plane(&self, plane: &dyn HandleReference<Graphic3dClipPlane>) {
+    fn remove_clip_plane(
+        &self,
+        plane: &dyn HandleReference<dyn rustycad_tkservice::graphic3d::Graphic3dClipPlaneSource>,
+    ) {
         self.record("remove");
         self.fail_if_requested("remove");
         v3d_view_remove_clip_plane(&self.base, plane);

@@ -1,0 +1,22 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checkpoint_status": "native allocator prerequisite only; genuine Rust allocator virtual dispatch and live collection replay pending",
+  "rows": 5,
+  "two_runs_identical": true,
+  "hashes": {
+    "tools/oracle/martensite_clip_allocator_argument.cxx": "3d1370c27257417bfebc41115d35ef6a4524d7cf49cb9eaf1e29d3a0906179db",
+    "crates/tkservice/tests/fixtures/clip-allocator-argument-native.txt": "e4ea2c59efa7e0c947863587b55a626d2e1516bad57a60b0bde6cd21bdf6d6f1",
+    "target/martensite_clip_allocator_argument": "2b8796ac88c26d88d630458a7020b11fe37a9f6e7440bdf362319d329d0db68d",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_ClipPlane.hxx": "b1908fd3cc2ab1e625de8e3ccd3940e979468c739c5164066b52aed61737c00a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_Sequence.hxx": "131278a50ac7588c166accadc5395fa00a0758523a617dab3260a761db98607f",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_BaseAllocator.hxx": "39ede399a6198966fce79e22040602c89da303984279fb5836d98439539259ca",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb"
+  },
+  "observations": [
+    "Allocate sees an empty collection and two actual allocator owners; no collection guard spans its callback.",
+    "Allocate retargets the caller-owned constHandle argument before the node copies it; Append stores the replacement, not an earlier owning snapshot.",
+    "Free observes the old Clear size but target ownership has already been released.",
+    "Original/replacement/allocator intrusive counts are source-pinned at every callback boundary."
+  ]
+}
