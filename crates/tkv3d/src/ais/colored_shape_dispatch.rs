@@ -20,6 +20,7 @@ pub(super) struct ColoredDispatchParent {
 }
 impl ColoredDispatchParent {
     fn child(kind: ShapeEnum, closed: bool) -> Self {
+        // Each recursion carries the resolved parent type and closed-solid policy independently.
         Self { kind, closed }
     }
 }

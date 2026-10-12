@@ -120,6 +120,7 @@ impl Shape {
     /// `TShape(theTShape)`: replaces the TShape, keeping the location and orientation;
     /// `shape.set_tshape(&tshape)`.
     pub fn set_tshape(&mut self, tshape: &Handle<dyn TShape>) {
+        // Explicit replacement installs owned topology rather than another scoped observation.
         self.tshape = ShapeTopologyStorage::Owned(tshape.clone());
     }
 

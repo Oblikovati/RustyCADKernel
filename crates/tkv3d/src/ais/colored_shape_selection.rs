@@ -117,13 +117,14 @@ struct ColoredSubshapeSelection<'a, S: AisColoredShapeSource + ?Sized> {
     deflection: f64,
     angle: f64,
 }
+type ColoredSelectionReferences<'a> = (
+    &'a dyn HandleReference<SelectMgrSelection>,
+    &'a AisShapeDrawerMap,
+);
 impl<'a, S: AisColoredShapeSource + ?Sized> ColoredSubshapeSelection<'a, S> {
     fn new(
         object: &'a S,
-        references: (
-            &'a dyn HandleReference<SelectMgrSelection>,
-            &'a AisShapeDrawerMap,
-        ),
+        references: ColoredSelectionReferences<'a>,
         kind: ShapeEnum,
         criteria: (i32, f64, f64),
     ) -> Self {

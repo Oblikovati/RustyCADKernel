@@ -26,6 +26,39 @@ impl SensitiveDisplayGroup {
             trace,
         }
     }
+    fn record_buffer_counts(
+        &self,
+        indices: &Handle<dyn Graphic3dIndexBufferSource>,
+        attribs: &Handle<dyn Graphic3dBufferSource>,
+        bounds: &Handle<Graphic3dBoundBuffer>,
+    ) {
+        self.trace.write().ownership_counts.push([
+            2,
+            self.transient.ref_count(),
+            indices.ref_count(),
+            attribs.ref_count(),
+            bounds.ref_count(),
+        ]);
+    }
+    fn record_buffer_values(
+        &self,
+        kind: Graphic3dTypeOfPrimitiveArray,
+        indices: &Handle<dyn Graphic3dIndexBufferSource>,
+        attribs: &Handle<dyn Graphic3dBufferSource>,
+    ) {
+        let mut values = vec![4., f64::from(kind as i32), f64::from(attribs.nb_elements())];
+        let (_, start, stride) = attribs
+            .attribute_data(Graphic3dTypeOfAttribute::Pos)
+            .unwrap();
+        for index in 0..attribs.nb_elements() {
+            let vertex: rustycad_tkernel::ncollection::Vec3<f32> =
+                attribs.read_at(start + index as usize * stride).unwrap();
+            values.extend([vertex.x, vertex.y, vertex.z].map(f64::from));
+        }
+        append_display_indices(&mut values, indices);
+        self.trace.write().events.extend(values);
+    }
+
     fn record_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
         let color = aspect.interior_color();
         self.trace.write().events.extend([
@@ -142,24 +175,8 @@ impl Graphic3dGroup for SensitiveDisplayGroup {
         bounds: &Handle<Graphic3dBoundBuffer>,
         evaluate: bool,
     ) {
-        self.trace.write().ownership_counts.push([
-            2,
-            self.transient.ref_count(),
-            indices.ref_count(),
-            attribs.ref_count(),
-            bounds.ref_count(),
-        ]);
-        let mut values = vec![4., f64::from(kind as i32), f64::from(attribs.nb_elements())];
-        let (_, start, stride) = attribs
-            .attribute_data(Graphic3dTypeOfAttribute::Pos)
-            .unwrap();
-        for index in 0..attribs.nb_elements() {
-            let vertex: rustycad_tkernel::ncollection::Vec3<f32> =
-                attribs.read_at(start + index as usize * stride).unwrap();
-            values.extend([vertex.x, vertex.y, vertex.z].map(f64::from));
-        }
-        append_display_indices(&mut values, indices);
-        self.trace.write().events.extend(values);
+        self.record_buffer_counts(indices, attribs, bounds);
+        self.record_buffer_values(kind, indices, attribs);
         self.inner
             .add_primitive_array_buffers(kind, indices, attribs, bounds, evaluate);
     }

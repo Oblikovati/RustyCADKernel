@@ -40,10 +40,7 @@ fn reference_scope_releases_observation_after_result_or_typed_failure() {
         &topology,
         &Location::default(),
         Orientation::Forward,
-        |_| {
-            raise_native_failure::<()>(Err(failure.clone()));
-            Ok(())
-        },
+        |_| raise_scope_native_failure(failure.clone()),
     );
     assert_eq!(panicked, Err(failure));
     assert_eq!(topology.ref_count(), 1);
@@ -67,4 +64,9 @@ fn reference_scope_resumes_unrelated_panics_and_supports_null_reference_reads() 
         )
     }));
     assert!(panic.is_err());
+}
+
+fn raise_scope_native_failure(failure: Failure) -> Result<(), Failure> {
+    raise_native_failure::<()>(Err(failure));
+    Ok(())
 }
