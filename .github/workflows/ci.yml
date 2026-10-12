@@ -34,6 +34,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev libvulkan1 mesa-vulkan-drivers vulkan-validationlayers
           echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+          python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
       - name: Install macOS native prerequisites
         if: runner.os == 'macOS'
         run: |
@@ -98,6 +99,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pkg-config tcl8.6-dev tk8.6-dev libfreetype-dev libfontconfig-dev libx11-dev libvulkan1 mesa-vulkan-drivers vulkan-validationlayers
           echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+          python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
       - run: rustup show
       - run: cargo install cargo-nextest --version 0.9.148 --locked
       - run: cargo install cargo-llvm-cov --version 0.9.1 --locked
@@ -119,6 +121,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers glslang-tools spirv-tools xvfb xauth
+      - name: Select the verified parallel-safe validation layer
+        run: python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
       - name: Select the installed software Vulkan ICD
         run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
       - run: cargo test -p martensite-vulkan --all-targets --locked
