@@ -138,6 +138,6 @@ impl DelaunConnectivity {
 fn resource(allocator: &MeshAllocator) -> BaseAllocator {
     allocator
         .get()
-        .map(|a| a.resource().clone())
+        .map(|_| BaseAllocator::from_handle(allocator))
         .unwrap_or_else(BaseAllocator::common)
 }

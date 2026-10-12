@@ -2,17 +2,21 @@
 use super::super::BRepMeshEdgeDiscret;
 use super::*;
 use crate::imesh_data::{EdgePtr, MEMORY_BLOCK_SIZE_HUGE};
-use rustycad_tkernel::ncollection::{DefaultHashPolicy, IncrementalAllocatorObject, Map, map_algo};
+use rustycad_tkernel::ncollection::{
+    BaseAllocator, DefaultHashPolicy, IncrementalAllocatorObject, Map, map_algo,
+};
 impl BRepMeshModelHealer {
     pub(super) fn amplify_edges(&self) -> Result<(), Failure> {
-        let allocator = IncrementalAllocatorObject::new(MEMORY_BLOCK_SIZE_HUGE);
+        let allocator = rustycad_tkernel::standard::Handle::new(IncrementalAllocatorObject::new(
+            MEMORY_BLOCK_SIZE_HUGE,
+        ));
         let mut edges: Map<EdgePtr> =
-            Map::with_allocator(DefaultHashPolicy, 1, allocator.resource().clone());
+            Map::with_allocator(DefaultHashPolicy, 1, BaseAllocator::from_handle(&allocator));
         for _ in 0..5 {
             if !self.pop_edges(&mut edges) {
                 break;
             }
-            self.amplify_iteration(&edges, allocator.resource().clone())?;
+            self.amplify_iteration(&edges, BaseAllocator::from_handle(&allocator))?;
             // Rust allocation guards must be released before the native arena rewind.
             edges.clear(false);
             allocator.resource().reset(false)?;

@@ -1,9 +1,13 @@
 use super::*;
 use crate::imesh_data::{EdgeHandle, MEMORY_BLOCK_SIZE_HUGE};
+use rustycad_tkernel::ncollection::BaseAllocator;
 use rustycad_tkernel::ncollection::{DefaultHashPolicy, IncrementalAllocatorObject, Map};
 pub(super) fn clear_outdated_polygons(model: &Handle<dyn MeshModel>) -> Result<(), Failure> {
-    let allocator = IncrementalAllocatorObject::new(MEMORY_BLOCK_SIZE_HUGE);
-    let mut used_faces = Map::with_allocator(DefaultHashPolicy, 1, allocator.resource().clone());
+    let allocator = rustycad_tkernel::standard::Handle::new(IncrementalAllocatorObject::new(
+        MEMORY_BLOCK_SIZE_HUGE,
+    ));
+    let mut used_faces =
+        Map::with_allocator(DefaultHashPolicy, 1, BaseAllocator::from_handle(&allocator));
     for index in 0..model.edges_nb() {
         let edge = model.get_edge(index)?;
         if edge.is_free() {

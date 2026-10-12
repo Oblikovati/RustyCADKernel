@@ -42,7 +42,9 @@ impl BRepMeshVertexTool {
             state: SharedState::new(VertexToolState {
                 filter: CellFilter::with_allocator(
                     tolerance + 0.05 * tolerance,
-                    allocator.get().map(|a| a.resource().clone()),
+                    allocator
+                        .get()
+                        .map(|_| BaseAllocator::from_handle(allocator)),
                 ),
                 selector,
                 tolerance: [tolerance; 2],
@@ -52,9 +54,12 @@ impl BRepMeshVertexTool {
     /// Reset uniform cells before clearing vertices; `tool.set_cell_size(0.1)?`.
     pub fn set_cell_size(&self, size: f64) -> Result<(), Failure> {
         let mut state = self.state.write();
-        state
-            .filter
-            .reset(size, self.allocator.get().map(|a| a.resource().clone()))?;
+        state.filter.reset(
+            size,
+            self.allocator
+                .get()
+                .map(|_| BaseAllocator::from_handle(&self.allocator)),
+        )?;
         state.selector.clear();
         Ok(())
     }
@@ -64,9 +69,12 @@ impl BRepMeshVertexTool {
             .map_err(|e| e.into_failure("BRepMesh_VertexTool"))?;
         sizes.as_mut_slice().copy_from_slice(&[first, second]);
         let mut state = self.state.write();
-        state
-            .filter
-            .reset_sizes(&sizes, self.allocator.get().map(|a| a.resource().clone()));
+        state.filter.reset_sizes(
+            &sizes,
+            self.allocator
+                .get()
+                .map(|_| BaseAllocator::from_handle(&self.allocator)),
+        );
         state.selector.clear();
         Ok(())
     }
@@ -119,6 +127,6 @@ impl BRepMeshVertexTool {
 fn allocator_resource(allocator: &MeshAllocator) -> BaseAllocator {
     allocator
         .get()
-        .map(|a| a.resource().clone())
+        .map(|_| BaseAllocator::from_handle(allocator))
         .unwrap_or_else(BaseAllocator::common)
 }
