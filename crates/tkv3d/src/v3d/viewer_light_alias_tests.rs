@@ -128,3 +128,36 @@ fn light_field_references_copy_without_owners_and_cursor_identity_survives_appen
     assert_eq!(copied.len(), 3);
     assert!(!copied.is_empty());
 }
+
+#[test]
+fn empty_light_node_reference_reports_typed_shape_without_native_credit() {
+    let scene = make_light_probe_scene(0);
+    scene.viewer.set_light_off().unwrap();
+    let alias = scene.viewer.active_light_iterator().value_ref();
+    let failure = rustycad_tkernel::standard::catch_native_failure(|| Ok(alias.observe()))
+        .err()
+        .unwrap();
+    assert_eq!(failure.exception_type(), "Standard_ProgramError");
+    assert!(
+        failure
+            .message()
+            .contains("None: expected a live native list node")
+    );
+}
+#[test]
+fn removed_light_node_reference_reports_erasure_with_original_target_alive() {
+    let scene = make_light_probe_scene(0);
+    let alias = scene.viewer.active_light_iterator().value_ref();
+    scene.viewer.set_light_off_one(&scene.lights[0]).unwrap();
+    let failure =
+        rustycad_tkernel::standard::catch_native_failure(|| Ok(alias.reference_address()))
+            .err()
+            .unwrap();
+    assert_eq!(failure.exception_type(), "Standard_ProgramError");
+    assert!(
+        failure
+            .message()
+            .contains("expected a live native list node")
+    );
+    assert!(!scene.lights[0].is_null());
+}
