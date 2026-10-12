@@ -110,7 +110,10 @@ fn textured_file_constructor_consumes_cstring_prefix_without_rewriting_stored_fi
     let AisTexturedTextureSource::File(path) = &sources[0] else {
         panic!("expected native file source");
     };
-    assert_eq!(path.as_bytes(), object.texture_file().as_bytes());
+    assert_eq!(
+        path.as_bytes(),
+        object.texture_file().read().unwrap().as_bytes()
+    );
     assert_eq!(object.base.fields.read().texture_file, file);
     compare_native_cstring_path(path.as_bytes());
     assert_eq!(path.as_bytes(), b"texture.png");

@@ -420,11 +420,13 @@ include!("test_modules.rs");
 
 mod shape;
 mod textured_shape;
+mod textured_shape_file_ref;
 mod textured_shape_mapping;
 mod textured_shape_source;
 mod textured_shape_sources;
 pub use shape::{AisShapeBase, AisShapeFields, AisShapeSource};
 pub use textured_shape::{AisTexturedShapeBase, AisTexturedShapeFields};
+pub use textured_shape_file_ref::AisTexturedShapeFileRef;
 pub use textured_shape_mapping::AisTexturedShapeMappingMembers;
 pub use textured_shape_source::{AisTexturedShapeMembers, AisTexturedShapeSource};
 pub use textured_shape_sources::{

@@ -33,6 +33,11 @@ the OCCT header says the driver ignores `IsTopDown`, pinned `TextureRoot::GetIma
 and the actual native captures show that rendering honors that flag. The port
 preserves the source rows and flag instead of silently rewriting either.
 
+`texture_file()` borrows the actual filename allocation, with no owner count
+increase or persistent lock. Its bounded `read()` observes valid in-place
+assignments and ownership transfers; released buffers return a typed failure.
+See [the buffer lifetime proof](ais-textured-shape-file-buffer.md).
+
 `ais_textured_shape_update_attributes` copies the current shading aspect before
 texture construction, creates a fresh texture when mapping is enabled and
 updates every live presentation group. Native callbacks can append groups or

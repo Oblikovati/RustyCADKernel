@@ -58,11 +58,10 @@ pub trait AisTexturedShapeMembers: AisTexturedShapeSource {
         let mut fields = self.textured_shape_base().fields.write();
         fields.map_texture = false;
     }
-    /// Read current path bytes; `object.texture_file().as_bytes()`.
-    fn texture_file(&self) -> std::ffi::CString {
-        let fields = self.textured_shape_base().fields.read();
-        let bytes = native_textured_cstring_prefix(&fields.texture_file);
-        std::ffi::CString::new(bytes).expect("native CString prefix excludes NUL")
+    /// Borrow the actual current filename allocation; `object.texture_file().read()?.as_bytes()`.
+    fn texture_file(&self) -> super::AisTexturedShapeFileRef {
+        // Capture once, so later allocation replacement cannot silently retarget an old alias.
+        super::AisTexturedShapeFileRef::new(&self.textured_shape_base().fields)
     }
     /// Borrow genuine native handle storage across assignments; `let source=object.texture_pix_map(); object.set_texture_pix_map(&next);`.
     fn texture_pix_map(&self) -> super::textured_shape_pixmap_ref::AisTexturedShapePixMapRef<'_> {

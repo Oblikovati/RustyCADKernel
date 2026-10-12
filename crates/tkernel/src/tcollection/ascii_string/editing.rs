@@ -117,7 +117,7 @@ impl AsciiString {
                 "byte 0 (NULL terminator); expected a nonzero byte".into(),
             ));
         }
-        self.terminated[position as usize - 1] = byte;
+        self.terminated.write()[position as usize - 1] = byte;
         Ok(())
     }
     /// `SetValue(int, const char*, int)` and its string overloads: overwrites from `position`,
@@ -136,9 +136,10 @@ impl AsciiString {
         let offset = position as usize - 1;
         let end = offset + what.len();
         if end > self.len() {
-            self.terminated.resize(end + 1, 0);
+            self.reserve_buffer_length(end + 1);
+            self.terminated.write().resize(end + 1, 0);
         }
-        self.terminated[offset..end].copy_from_slice(what);
+        self.terminated.write()[offset..end].copy_from_slice(what);
         Ok(())
     }
     /// `Remove`: erases `count` bytes from `position` when `position + count <= len + 1`;
@@ -157,7 +158,9 @@ impl AsciiString {
             ));
         }
         let offset = position as usize - 1;
-        self.terminated.drain(offset..offset + count as usize);
+        self.terminated
+            .write()
+            .drain(offset..offset + count as usize);
         Ok(())
     }
     /// `Trunc`: keeps the first `length` bytes, `length` in `0..=len`; `text.truncate(5)?`.
@@ -193,7 +196,7 @@ impl AsciiString {
             *self = Self::from_raw(bytes);
             return;
         }
-        self.terminated[..bytes.len()].copy_from_slice(bytes);
+        self.terminated.write()[..bytes.len()].copy_from_slice(bytes);
         self.set_length(bytes.len());
     }
     /// `Copy(const char*, int)` with a pointer into this string: moves the zero-based `source`
@@ -209,7 +212,7 @@ impl AsciiString {
             return;
         }
         let length = source.len();
-        self.terminated.copy_within(source, 0);
+        self.terminated.write().copy_within(source, 0);
         self.set_length(length);
     }
 }

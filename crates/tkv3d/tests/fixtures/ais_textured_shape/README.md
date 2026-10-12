@@ -60,6 +60,11 @@ texture and virtual-dispatch implementations.
   receives the new aspect. This uses genuine context ownership and presentation
   manager display, without invoking the incomplete inherited selection family.
   `public-attributes-provenance.json` records byte-identical native repeats.
+- `native-file-buffer.txt`: 15 actual captured `TextureFile` pointer rows cover
+  native same/shorter Copy reuse, full embedded-NUL storage, protected mutation,
+  owned truncation, static-empty lifetime and actual Move/Swap transfers.
+  Native intrusive counts remain one; invalid released pointers are never read.
+  `file-buffer-provenance.json` records repeat and generator/library identities.
 
 The wider `AIS_Shape` family remains partial. Inherited selection and HLR are
 explicit unimplemented paths. File/predefined image decoding, triangle-edge

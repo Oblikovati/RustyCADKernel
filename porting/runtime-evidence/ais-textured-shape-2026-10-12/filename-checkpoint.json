@@ -1,0 +1,213 @@
+{
+  "project": "Martensite",
+  "recorded_utc": "2026-10-12T09:01:50.619472+00:00",
+  "checks": [
+    {
+      "name": "filename-consumer-tests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkernel",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "--all-targets"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-consumer-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkernel",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 101
+    },
+    {
+      "name": "filename-consumer-clippy-corrected",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkernel",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-global-fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-test-fmt",
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--check",
+        "crates/tkv3d/tests/textured_shape_file_buffer.rs",
+        "crates/tkv3d/tests/textured_shape_concrete.rs",
+        "crates/tkv3d/tests/textured_shape_aspect_order.rs"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "filename-test-fmt-corrected",
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--check",
+        "crates/tkv3d/tests/textured_shape_file_buffer.rs",
+        "crates/tkv3d/tests/textured_shape_concrete.rs",
+        "crates/tkv3d/tests/textured_shape_aspect_order.rs"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-discovery",
+      "command": [
+        "python3",
+        "tools/toolkit_test_suites.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-final-consumer-tests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkernel",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "total_passed": 6052
+    },
+    {
+      "name": "filename-final-consumer-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkernel",
+        "-p",
+        "rustycad-tkservice",
+        "-p",
+        "rustycad-tkv3d",
+        "-p",
+        "martensite-vulkan",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-barrier-final-tests",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkernel",
+        "--lib",
+        "ascii_string::buffer_identity_tests"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-barrier-final-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkernel",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-protocol-final-replay",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkv3d",
+        "--test",
+        "toolkit",
+        "textured_filename"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-protocol-final-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkv3d",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "filename-protocol-final-fmt",
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--check",
+        "crates/tkv3d/tests/textured_shape_file_buffer.rs"
+      ],
+      "exit": 0
+    }
+  ],
+  "scope": "Actual allocation-owned weak filename observer; no whole TexturedShape/parent completion or renderer parity claim.",
+  "consumer_tests_passed": 6052,
+  "final_status": "checked bounded filename observer; wider TexturedShape renderer and parent families partial",
+  "superseded_checks": {
+    "filename-consumer-clippy": "one needless-borrow lint, fixed and superseded by final-consumer-clippy",
+    "filename-test-fmt": "new integration source needed explicit formatting, fixed and superseded by corrected fmt"
+  },
+  "native_scope": "15 defined lifetime cases; no claim about native concurrent reads or potentially invalidated Standard::Reallocate aliases within padding"
+}

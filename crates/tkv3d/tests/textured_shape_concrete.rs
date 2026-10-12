@@ -43,7 +43,10 @@ fn textured_concrete_virtual_source_retains_actual_pixmap_field() {
     assert_eq!(retained.read().object_address(), pixels.object_address());
     source.set_texture_file_name(&"texture.png".into()).unwrap();
     assert!(retained.read().is_null());
-    assert_eq!(source.texture_file().as_bytes(), b"texture.png");
+    assert_eq!(
+        source.texture_file().read().unwrap().as_bytes(),
+        b"texture.png"
+    );
 }
 
 #[test]

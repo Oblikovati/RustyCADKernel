@@ -20,11 +20,11 @@ pub fn ais_textured_shape_set_texture_file_name<S: AisTexturedShapeSource + ?Siz
     let name = textured_predefined_name(file, &base.messenger)?;
     let mut fields = base.fields.write();
     fields.predefined_texture = name;
-    fields.texture_file = if name == Graphic3dNameOfTexture2D::Unknown {
-        file.clone()
-    } else {
-        AsciiString::default()
-    };
+    if name == Graphic3dNameOfTexture2D::Unknown {
+        fields.texture_file.assign_from(file);
+        return Ok(());
+    }
+    fields.texture_file.clear();
     Ok(())
 }
 /// Native base body retains the exact source handle; `ais_textured_shape_set_texture_pix_map(&object,&pixmap)`.
