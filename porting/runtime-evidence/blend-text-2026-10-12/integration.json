@@ -1,0 +1,32 @@
+{
+  "project": "Martensite",
+  "merge_commit": "e08890ca6",
+  "checked_main_source": "42f78f9b2",
+  "feature_commit": "2fa7e07a8f3c2f5f3367b90984f7a9f8dc9507ec",
+  "vulkan_all_target_tests": 364,
+  "clippy_all_targets": "passed",
+  "global_format": "passed",
+  "canonical_discovery": "passed",
+  "discovery_tests": 13,
+  "bounded_vulkan_python_modules": 25,
+  "actual_retained_texture_boundary_modes": [
+    "nearest",
+    "phong",
+    "mask-blend",
+    "blend"
+  ],
+  "boundary_devices": 2,
+  "boundary_assertions": "Exact color and depth identity after genuine retained image draws follow actual full-viewport XOR; controls use yellow clear instead of blue plus white XOR. No dummy surfaces or gate changes.",
+  "stable_native_cases_per_device": 13,
+  "final_main_functional_examples_per_device": 2,
+  "merged_backend_intents": [
+    "Glyph-only upload RGB encoding preserves public linear RenderVertex input.",
+    "Texture UV packing, sampler capabilities and full texture/lighting/alpha/cache identity retained.",
+    "UNORM XOR attachment transitions restore SRGB sampled-surface rendering with color/depth/stencil LOAD."
+  ],
+  "timing_scope": "Frozen branch source/binary72workloads per device20warmups100samples remain individually bound; no accepted baseline or combined-main timing claim.",
+  "strict_branch_replay": "67/72lavapipe65/72AMD, raw residuals retained; main stable subset and boundary controls verified.",
+  "whole_text_or_renderer_completion": false,
+  "local_only": true,
+  "cleanup_pending": true
+}
