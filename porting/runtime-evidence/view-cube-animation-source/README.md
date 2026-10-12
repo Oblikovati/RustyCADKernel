@@ -28,3 +28,13 @@ Strict identical-RGBA and maximum depth delta<=1e-6 checks remain unchanged.
 All 18 strict comparison failures are retained; no pixel-boundary acceptance or
 historical performance baseline is claimed. Whole widget/owner/sensitive classes
 remain partial pending generated RTTI/base-alias obligations.
+
+The final optimized executable ran eight completed-frame workloads on each
+device, with 20 warmups and 100 samples per workload (1,600 raw samples).
+The added workload dispatches the actual derived camera UpdateTimer and inherited
+atom before completing every rendered frame; final counters are 1/123/124.
+The coordinator held other workers and verified the executable, 69 focused
+source files and all 11,984 crate/build-input files before GO. Each manifest and
+the executable was rechecked before and after both profiles without changes.
+Raw vectors, device identities, commands, process observations and the final
+optimized relink log are retained. No historical performance baseline is accepted.

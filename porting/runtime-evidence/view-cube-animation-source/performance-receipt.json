@@ -1,0 +1,36 @@
+{
+  "project": "Martensite",
+  "source_commit": "b6027106e4f7041e06ad8f9b404158b1ec1e38a9",
+  "timing_session": 57614,
+  "profiles": 2,
+  "workloads_per_profile": 8,
+  "warmups_per_workload": 20,
+  "samples_per_workload": 100,
+  "total_samples": 1600,
+  "validation": false,
+  "derived_dispatch_counts": [
+    1,
+    123,
+    124
+  ],
+  "optimized_binary_sha256": "84e2e5e2895dbd85fc57bbbcb38559388fecd8443590f98ed33737c0aa1ac15b",
+  "profile_environment": {
+    "CARGO_PROFILE_RELEASE_DEBUG": "0",
+    "CARGO_INCREMENTAL": "0",
+    "CARGO_BUILD_JOBS": "2"
+  },
+  "relink_log": "optimized-relink.log.gz",
+  "focused_source_manifest": "performance-source-hashes.json",
+  "full_build_inputs_manifest": "performance-full-build-inputs.json.gz",
+  "full_manifest_files": 11984,
+  "raw_results": "performance-results.json",
+  "hash_checks": "All 69 focused source and 11,984 full build-input files plus executable verified unchanged immediately before and after each profile.",
+  "isolation": "Root exclusively held all other workers, independently verified both manifests and executable, confirmed terminal compiler/test/native/GPU handles and clear host process audit before GO. Before/after process snapshots preserved per profile.",
+  "baseline_accepted": false,
+  "strict_native_capture_failures": 18,
+  "classes_remain_partial": [
+    "AIS_ViewCube",
+    "AIS_ViewCubeOwner",
+    "AIS_ViewCubeSensitive"
+  ]
+}
