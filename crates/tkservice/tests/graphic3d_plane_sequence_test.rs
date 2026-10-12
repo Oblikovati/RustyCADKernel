@@ -75,7 +75,11 @@ fn assert_native_end_cursor(
     sequence: &Graphic3dSequenceOfHClipPlane,
     iterator: &Graphic3dSequenceOfHClipPlaneIterator,
 ) {
-    let actual = format!("remove-end {} {}", i32::from(iterator.more()), sequence.size());
+    let actual = format!(
+        "remove-end {} {}",
+        i32::from(iterator.more()),
+        sequence.size()
+    );
     let expected = include_str!("fixtures/clip-collection-references-native.txt");
     assert_eq!(actual, expected.lines().last().unwrap());
 }
