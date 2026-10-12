@@ -1,7 +1,8 @@
 //! Native metadata and cursor updates finish before each removal's destructor boundary.
 use super::super::{
     BaseAllocator, BaseSequence, BaseSequenceRawIterator, SeqNode, Sequence, SequenceCursor,
-    iteration::pointer_address, owner::take_owner, topology::SequenceTopology,
+    SequenceNodeRetirement, iteration::pointer_address, owner::take_owner,
+    topology::SequenceTopology,
 };
 use super::{Failure, no_such_node, out_of_range};
 struct ClearMetadata<'a>(&'a mut SequenceTopology);
@@ -51,20 +52,37 @@ impl<T> Sequence<T> {
     }
     /// Removes current and advances it with previous retained; `sequence.remove_cursor(&mut cursor)?`.
     pub fn remove_cursor(&mut self, cursor: &mut SequenceCursor) -> Result<(), Failure> {
+        drop(self.detach_cursor(cursor)?);
+        Ok(())
+    }
+    /// Unlink current and advance before returning its owner; `let retired=sequence.detach_cursor(&mut cursor)?`.
+    /// Drop the owner after releasing any surrounding field guard, so destructors can reenter.
+    pub fn detach_cursor(
+        &mut self,
+        cursor: &mut SequenceCursor,
+    ) -> Result<Option<SequenceNodeRetirement<T>>, Failure> {
         if !cursor.more() {
-            return Ok(());
+            return Ok(None);
         }
         let node = self
             .owned_node(cursor.address)
             .ok_or_else(|| no_such_node("Remove", *cursor))?;
+        Ok(Some(self.detach_owned_cursor(cursor, node)))
+    }
+    fn detach_owned_cursor(
+        &mut self,
+        cursor: &mut SequenceCursor,
+        node: *mut SeqNode,
+    ) -> SequenceNodeRetirement<T> {
         let mut raw = BaseSequenceRawIterator {
             current: node,
             previous: std::ptr::null_mut(),
         };
         self.prepare_owned_cursor(&mut raw);
         cursor.address = pointer_address(raw.current);
-        drop(take_owner(&mut self.owners, node));
-        Ok(())
+        SequenceNodeRetirement {
+            owner: take_owner(&mut self.owners, node),
+        }
     }
     pub(crate) fn prepare_owned_cursor(&mut self, raw: &mut BaseSequenceRawIterator) {
         self.topology

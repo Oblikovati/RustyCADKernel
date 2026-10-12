@@ -187,6 +187,10 @@ mod borrowed;
 #[allow(unsafe_code)]
 mod prepared_node;
 pub use prepared_node::SequencePreparedNode;
+// Detached owners preserve native removal order without holding adapters' field guards during Drop.
+#[allow(unsafe_code)]
+mod retired_node;
+pub use retired_node::SequenceNodeRetirement;
 mod copy_assignment;
 mod copy_construction;
 mod cursor_contracts;

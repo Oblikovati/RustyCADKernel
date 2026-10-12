@@ -1,0 +1,26 @@
+{
+  "purpose": "Martensite live clipping collection prerequisites; no upstream API or class completion claims.",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "sequence_filtered_all_targets_passed": 147,
+  "sequence_clippy_all_targets_exit": 0,
+  "prepared_node_tests_passed": 2,
+  "handle_interface_tests_passed": 10,
+  "clip_argument_tests_passed": 2,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sequence/prepared_node.rs": "8ff47d122d035f31690584ff0b4c6b58b868a2d2e9144161303794555c7b5e71",
+    "crates/tkernel/src/ncollection/sequence/retired_node.rs": "fc2c026d0b35e9ddf06803c1e4d457c166d9b44b1523d7cfe90ef1b4fcdebbe0",
+    "crates/tkernel/src/ncollection/sequence/editing/removal.rs": "dc829658cd329966d64133ed156936bca3ebf0e8292a4600015eaa9ddf659ba0",
+    "crates/tkernel/src/standard/handle_reference.rs": "0a9dff6b74e5b8784d52f7470fe3cdcb1b5295f99f52916e115ff237c5240a01"
+  },
+  "semantics": [
+    "Prepared nodes retain their actual physical payload across intervening collection edits; insertion uses current tail.",
+    "Detached cursor removal updates actual native metadata/cursor before returning sole original node allocation ownership.",
+    "Dropping retirement after releasing outer field guard permits real destructor reentry with updated size and no copied payload.",
+    "Projected borrowed arguments reread original slot replacement/null without temporary intrusive ownership."
+  ],
+  "remaining": [
+    "Controlled Clear old-metadata and first-reference retirement.",
+    "Checked genuine allocator dispatch/noncounting leases/current-resource free.",
+    "Full collection/view aliases, native Rust replay and renderer proof."
+  ]
+}
