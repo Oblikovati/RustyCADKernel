@@ -1,0 +1,26 @@
+{
+  "project": "Martensite",
+  "native_getters": {
+    "Aspect_XRSession::GenericAction": "Aspect_XRSession.hxx:211-216 returns const Handle& to role/action slot",
+    "V3d_View::View": "V3d_View.hxx:894 returns const Handle& to driver-view slot"
+  },
+  "rust_source_sha256": {
+    "crates/tkservice/src/aspect/xr_session.rs": "be7f60cddf060df88a98b63a1ac49bd5dc50df56761fc1ae09bf2e7f717fd3df",
+    "crates/tkv3d/src/v3d/view.rs": "e3183aa6199aa0bf0561ff9ea70d02555c727eae0e62d350ad1022edfba65215"
+  },
+  "gap": "Rust getters currently clone owning handles. Defined slot replacement/callback aliases and native refcounts require genuine reference transport.",
+  "rows": [
+    {
+      "upstream_id": "Aspect_XRSession::GenericAction",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "V3d_View::View",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::view",
+      "status": "partial"
+    }
+  ],
+  "correction_owner": "porting/martensite-controller-frame-events",
+  "snapshot_note": "These two downgrades follow snapshot40c2142d8; next integrated feature inventory must include their correction or verified live-reference replacements."
+}

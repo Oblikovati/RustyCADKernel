@@ -492346,8 +492346,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
       "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action",
-      "status": "implemented",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+      "status": "partial",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native const Handle& getter is currently mapped to an owning clone; native slot alias/refcount and callback mutation behavior require the frame slice live-reference adapter. See porting/runtime-evidence/frame-handle-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Aspect_XRSession::myRoleActions",
@@ -569061,10 +569061,10 @@
       "upstream_id": "V3d_View::V3d_View(const occ::handle<V3d_Viewer> &,const V3d_TypeOfView)"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Source audit 2026-10-12: native const Handle& getter is currently mapped to an owning clone; native slot alias/refcount and callback mutation behavior require the frame slice live-reference adapter. See porting/runtime-evidence/frame-handle-reference-gap-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::view",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::View"
     },
