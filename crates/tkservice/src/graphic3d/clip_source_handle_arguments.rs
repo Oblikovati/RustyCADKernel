@@ -4,7 +4,7 @@ use super::{
     Graphic3dSequenceOfHClipPlane,
 };
 use rustycad_tkernel::standard::{
-    Handle, HandleObserver, HandleReference, ProjectedHandleReference,
+    Handle, HandleFieldRef, HandleObserver, HandleReference, ProjectedHandleReference,
 };
 
 macro_rules! borrowed_clip_source_argument {
@@ -16,6 +16,16 @@ macro_rules! borrowed_clip_source_argument {
             }
             fn reference_address(&self) -> *const () {
                 std::ptr::from_ref(self).cast()
+            }
+        }
+        impl<S> HandleReference<$source> for HandleFieldRef<'_, S, $concrete> {
+            fn observe(&self) -> HandleObserver<$source> {
+                // Field replacement must be reread before each actual native argument use.
+                ProjectedHandleReference::<$concrete, $source>::new(self).observe()
+            }
+            fn reference_address(&self) -> *const () {
+                // Keep actual field identity independently of its dynamically assigned target.
+                HandleFieldRef::reference_address(self)
             }
         }
     };

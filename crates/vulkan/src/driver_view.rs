@@ -74,7 +74,7 @@ impl Graphic3dRenderView {
             return Err(error.clone());
         }
         let extent = capture_extent(self, self.limit)?;
-        let frame = frame_for_view(self, extent)?;
+        let frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
         self.render_target(&frame)
     }
 }

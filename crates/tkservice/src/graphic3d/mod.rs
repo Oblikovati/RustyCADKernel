@@ -35,7 +35,11 @@ mod clip_plane_handle_field;
 mod clip_plane_probe;
 mod clip_plane_sequence;
 mod clip_plane_source;
+mod clip_sequence_inspection;
+mod clip_sequence_iterator;
+mod clip_sequence_mutation;
 mod clip_sequence_source;
+mod clip_sequence_storage;
 mod clip_source_handle_arguments;
 mod cstructure;
 mod cube_map;
@@ -158,9 +162,7 @@ pub use camera_projection::Graphic3dCameraScalar;
 pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
 pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dClipState};
 pub use clip_plane_handle_field::Graphic3dClipPlaneHandleField;
-pub use clip_plane_sequence::{
-    Graphic3dSequenceOfHClipPlane, Graphic3dSequenceOfHClipPlaneIterator,
-};
+pub use clip_plane_sequence::Graphic3dSequenceOfHClipPlane;
 pub use clip_plane_source::{Graphic3dClipPlaneSource, graphic3d_clip_plane_clone};
 pub use clip_sequence_source::Graphic3dClipPlaneSequenceSource;
 pub use cstructure::{
@@ -317,3 +319,22 @@ pub use cview_camera_reference::{Graphic3dDataStructureManager, graphic3d_cview_
 
 #[cfg(test)]
 mod clip_source_protocol_tests;
+
+pub use clip_sequence_iterator::Graphic3dSequenceOfHClipPlaneIterator;
+pub use clip_sequence_storage::ClipPlaneNativeItems;
+
+#[cfg(test)]
+mod clip_sequence_reference_replay;
+
+#[cfg(test)]
+mod clip_sequence_retirement_fixture;
+#[cfg(test)]
+mod clip_sequence_retirement_replay;
+
+#[cfg(test)]
+mod clip_sequence_allocator_fixture;
+#[cfg(test)]
+mod clip_sequence_allocator_replay;
+
+mod clip_sequence_field_ref;
+pub use clip_sequence_field_ref::Graphic3dClipSequenceFieldRef;

@@ -8,15 +8,15 @@ use crate::graphic3d::{
     GRAPHIC3D_ZLAYER_ID_DEFAULT, GRAPHIC3D_ZLAYER_ID_UNKNOWN, Graphic3dBufferType,
     Graphic3dCStructure, Graphic3dCStructureMembers as _, Graphic3dCView, Graphic3dCViewBase,
     Graphic3dDataStructureManager, Graphic3dDiagnosticInfo, Graphic3dDisplayPriority,
-    Graphic3dFrameStatsDict, Graphic3dLayer, Graphic3dLightSet, Graphic3dSequenceOfHClipPlane,
-    Graphic3dStructureManager, Graphic3dTextureEnv, Graphic3dTextureMap, Graphic3dZLayerId,
-    Graphic3dZLayerSettings, graphic3d_cview_diagnostic_information, graphic3d_cview_register,
-    graphic3d_cview_resized,
+    Graphic3dFrameStatsDict, Graphic3dLayer, Graphic3dLightSet, Graphic3dStructureManager,
+    Graphic3dTextureEnv, Graphic3dTextureMap, Graphic3dZLayerId, Graphic3dZLayerSettings,
+    graphic3d_cview_diagnostic_information, graphic3d_cview_register, graphic3d_cview_resized,
 };
 use crate::image::ImagePixMap;
 use rustycad_tkernel::standard::exceptions::program_error;
 use rustycad_tkernel::standard::{
-    Failure, Handle, HandleFieldRef, HandleReference, SharedState, StandardTransient,
+    Failure, Handle, HandleFieldRef, HandleReference, IntrusiveReferenceSlot, SharedState,
+    StandardTransient, raise_native_failure,
 };
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::bvh::constants::{LEAF_NODE_SIZE_SINGLE, MAX_TREE_DEPTH};
@@ -42,7 +42,6 @@ struct RetainedViewFields {
     image_style: Option<AspectFillMethod>,
     texture_env: Handle<Graphic3dTextureEnv>,
     lights: Handle<Graphic3dLightSet>,
-    clip_planes: Handle<Graphic3dSequenceOfHClipPlane>,
     fbo: Handle<StandardTransient>,
 }
 
@@ -51,6 +50,7 @@ pub struct Graphic3dRetainedView {
     transient: StandardTransient,
     base: Graphic3dCViewBase,
     state: SharedState<RetainedViewFields>,
+    clip_plane_slot: Arc<IntrusiveReferenceSlot<dyn super::Graphic3dClipPlaneSequenceSource>>,
 }
 rustycad_tkernel::impl_transient!(Graphic3dRetainedView, "Martensite_RetainedView", StandardTransient, transient,
     interfaces: [dyn Graphic3dCView, dyn Graphic3dDataStructureManager]);
@@ -71,21 +71,12 @@ impl Graphic3dRetainedView {
         manager: &Handle<Graphic3dStructureManager>,
         layers: &[Handle<Graphic3dLayer>],
     ) -> Result<Self, Failure> {
-        let builder = culling_builder();
-        let copies = layers.iter().filter_map(Handle::get).map(|layer| {
-            let copy = Graphic3dLayer::new(layer.layer_id(), builder.clone());
-            copy.set_layer_settings(&layer.layer_settings());
-            Handle::new(copy)
-        });
-        let state = RetainedViewFields {
-            layers: copies.collect(),
-            builder,
-            ..Default::default()
-        };
+        let state = retained_layer_state(layers);
         Ok(Self {
             transient: StandardTransient::default(),
             base: Graphic3dCViewBase::new(manager)?,
             state: SharedState::new(state),
+            clip_plane_slot: Arc::default(),
         })
     }
     /// The layer of a structure, or the default layer.
@@ -330,11 +321,19 @@ impl Graphic3dCView for Graphic3dRetainedView {
     fn set_lights(&self, lights: &dyn HandleReference<Graphic3dLightSet>) {
         self.state.write().lights = lights.clone_handle();
     }
-    fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
-        self.state.read().clip_planes.clone()
+    fn clip_planes_ref(
+        &self,
+    ) -> Box<dyn HandleReference<dyn super::Graphic3dClipPlaneSequenceSource>> {
+        Box::new(super::Graphic3dClipSequenceFieldRef::new(
+            &self.clip_plane_slot,
+        ))
     }
-    fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {
-        self.state.write().clip_planes = planes.clone();
+    fn set_clip_planes(
+        &self,
+        planes: &dyn HandleReference<dyn super::Graphic3dClipPlaneSequenceSource>,
+    ) {
+        // Native assignment exposes its old pointer through callbacks without a retained state lock.
+        raise_native_failure(self.clip_plane_slot.assign(planes));
     }
     fn diagnostic_information(
         &self,
@@ -397,5 +396,29 @@ impl Graphic3dCView for Graphic3dRetainedView {
         if let Some(layer) = self.layer_of(layer_id).get() {
             layer.add(cstructure, priority, true);
         }
+    }
+}
+
+impl Graphic3dRetainedView {
+    /// Borrow actual renderer-owned clipping storage, bypassing virtual getter overrides; `retained.render_clip_planes()`.
+    pub fn render_clip_planes(
+        &self,
+    ) -> &dyn HandleReference<dyn super::Graphic3dClipPlaneSequenceSource> {
+        // OpenGl_View rendering consumes myClipPlanes directly, unlike public V3d getter forwarding.
+        self.clip_plane_slot.as_ref()
+    }
+}
+
+fn retained_layer_state(layers: &[Handle<Graphic3dLayer>]) -> RetainedViewFields {
+    let builder = culling_builder();
+    let copies = layers.iter().filter_map(Handle::get).map(|layer| {
+        let copy = Graphic3dLayer::new(layer.layer_id(), builder.clone());
+        copy.set_layer_settings(&layer.layer_settings());
+        Handle::new(copy)
+    });
+    RetainedViewFields {
+        layers: copies.collect(),
+        builder,
+        ..Default::default()
     }
 }

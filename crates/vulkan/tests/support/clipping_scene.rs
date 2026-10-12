@@ -64,7 +64,9 @@ fn update_live_planes(scene: &ViewerScene, first: &Graphic3dClipPlane, mode: &st
         first.set_equation(Vec4::new(1., 0., 0., -2.)).unwrap();
     }
     if mode == "clip-cleared" {
-        scene.view.set_clip_planes(&Handle::default());
+        scene
+            .view
+            .set_clip_planes(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     }
 }
 fn configure_chains(
@@ -102,7 +104,9 @@ fn configure_local(scene: &ViewerScene, mode: &str) {
         local.clear();
     }
     if mode == "clip-local" {
-        scene.view.set_clip_planes(&Handle::default());
+        scene
+            .view
+            .set_clip_planes(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     }
     scene.structure.set_clip_planes(&local);
 }

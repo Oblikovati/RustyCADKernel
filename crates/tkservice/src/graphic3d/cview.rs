@@ -6,12 +6,12 @@ use super::Graphic3dDataStructureManager;
 use super::cview_virtuals as defaults;
 use super::{
     GRAPHIC3D_ZLAYER_ID_BOT_OSD, Graphic3dBufferType, Graphic3dCStructure, Graphic3dCamera,
-    Graphic3dDiagnosticInfo, Graphic3dDisplayPriority, Graphic3dFrameStatsDict,
-    Graphic3dGraduatedTrihedron, Graphic3dLayer, Graphic3dLightSet, Graphic3dRenderingParams,
-    Graphic3dSequenceOfHClipPlane, Graphic3dStructureManager, Graphic3dStructureSource,
-    Graphic3dTextureEnv, Graphic3dTextureMap, Graphic3dTypeOfBackfacingModel,
-    Graphic3dTypeOfBackground, Graphic3dTypeOfVisualization, Graphic3dVertex, Graphic3dZLayerId,
-    Graphic3dZLayerSettings,
+    Graphic3dClipPlaneSequenceSource, Graphic3dDiagnosticInfo, Graphic3dDisplayPriority,
+    Graphic3dFrameStatsDict, Graphic3dGraduatedTrihedron, Graphic3dLayer, Graphic3dLightSet,
+    Graphic3dRenderingParams, Graphic3dSequenceOfHClipPlane, Graphic3dStructureManager,
+    Graphic3dStructureSource, Graphic3dTextureEnv, Graphic3dTextureMap,
+    Graphic3dTypeOfBackfacingModel, Graphic3dTypeOfBackground, Graphic3dTypeOfVisualization,
+    Graphic3dVertex, Graphic3dZLayerId, Graphic3dZLayerSettings,
 };
 use super::{Graphic3dCubeMap, Graphic3dStructureSet};
 use crate::aspect::{
@@ -407,10 +407,17 @@ pub trait Graphic3dCView: Graphic3dDataStructureManager {
     }
     /// `SetLights`.
     fn set_lights(&self, lights: &dyn HandleReference<Graphic3dLightSet>);
-    /// `ClipPlanes`.
-    fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane>;
-    /// `SetClipPlanes`.
-    fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>);
+    /// Capture the actual native clipping field once; `let alias=view.clip_planes_ref()`.
+    fn clip_planes_ref(&self) -> Box<dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>>;
+    /// Explicit owning convenience; native ClipPlanes uses clip_planes_ref; `view.clip_planes()`.
+    fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
+        self.clip_planes_ref()
+            .observe()
+            .observe_as::<Graphic3dSequenceOfHClipPlane>()
+            .clone()
+    }
+    /// Borrow the caller slot throughout assignment callbacks; `view.set_clip_planes(&planes)`.
+    fn set_clip_planes(&self, planes: &dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>);
     /// `DiagnosticInformation` (pure natively, with the base body
     /// [`defaults::diagnostic_information`] that adds the XR device strings).
     fn diagnostic_information(

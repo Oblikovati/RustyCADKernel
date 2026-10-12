@@ -1,7 +1,6 @@
 //! Native V3d_View subclasses own the actual view base and override its four virtual operations.
 use super::V3dView;
 use rustycad_tkernel::standard::{HandleReference, RuntimeType, RuntimeTyped, Transient};
-use rustycad_tkservice::graphic3d::Graphic3dClipPlane;
 
 /// Embed the genuine view fields; `derived.view_base().viewer()`.
 pub trait V3dViewSource: Transient {
@@ -16,11 +15,17 @@ pub trait V3dViewSource: Transient {
         super::view_source_redraw::v3d_view_redraw_immediate(self.view_base());
     }
     /// Native virtual insertion borrows the caller's live plane slot; `view.add_clip_plane(&plane)`.
-    fn add_clip_plane(&self, plane: &dyn HandleReference<Graphic3dClipPlane>) {
+    fn add_clip_plane(
+        &self,
+        plane: &dyn HandleReference<dyn rustycad_tkservice::graphic3d::Graphic3dClipPlaneSource>,
+    ) {
         super::view_source_clipping::v3d_view_add_clip_plane(self.view_base(), plane);
     }
     /// Native virtual removal borrows the caller's live plane slot; `view.remove_clip_plane(&plane)`.
-    fn remove_clip_plane(&self, plane: &dyn HandleReference<Graphic3dClipPlane>) {
+    fn remove_clip_plane(
+        &self,
+        plane: &dyn HandleReference<dyn rustycad_tkservice::graphic3d::Graphic3dClipPlaneSource>,
+    ) {
         super::view_source_clipping::v3d_view_remove_clip_plane(self.view_base(), plane);
     }
 }

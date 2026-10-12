@@ -179,10 +179,20 @@ impl Graphic3dCView for BorrowedCameraView {
         }
         self.retained.set_lights(lights)
     }
-    fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
-        self.retained.clip_planes()
+    fn clip_planes_ref(&self) -> Box<dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>> {
+        if let Some(probe) = self.control.clip_probe.read().as_ref() {
+            return super::view_clip_retarget_probe::clip_probe_getter(self, probe);
+        }
+        self.retained.clip_planes_ref()
     }
-    fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {
+    fn set_clip_planes(
+        &self,
+        planes: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
+    ) {
+        if let Some(probe) = self.control.clip_probe.read().as_ref() {
+            super::view_clip_retarget_probe::clip_probe_setter(self, probe, planes);
+            return;
+        }
         self.retained.set_clip_planes(planes)
     }
     fn diagnostic_information(
