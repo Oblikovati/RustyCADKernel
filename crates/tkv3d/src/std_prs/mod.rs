@@ -16,3 +16,23 @@ mod plane;
 mod plane_arrows;
 mod plane_geometry;
 pub use plane::StdPrsPlane;
+
+mod shaded_shape_indices;
+mod shaded_shape_triangles;
+mod shaded_shape_vertices;
+mod triangulated_shape;
+pub use shaded_shape_triangles::StdPrsShadedShape;
+pub use triangulated_shape::{
+    StdPrsNativeShapeMesher, StdPrsShapeMesher, StdPrsToolTriangulatedShape,
+};
+
+mod wf_shape_edges;
+mod wf_shape_vertices;
+pub use wf_shape_edges::StdPrsWfShape;
+
+mod shaded_shape_volumes;
+mod shape_planarity;
+pub use shaded_shape_volumes::StdPrsVolume;
+pub use shape_planarity::StdPrsShapeTool;
+
+mod shaded_shape_boundaries;
