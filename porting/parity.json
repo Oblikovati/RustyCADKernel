@@ -579430,7 +579430,28 @@
       "cpp_declaration_id": "cfc591e6ea629c25350a556eacb46f40e1f73e410d71c1208aa335429e515ef8",
       "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_detected",
       "status": "implemented",
-      "notes": "Martensite AIS selection actions, owner/object queries, highlight grouping and callback timing. tests/ais_selection_actions_test.rs and v3_ais_selection_actions compare pinned OCCT calls, scheme transitions, failures, style replacement, appended owners and real camera picks. Overall context remains partial."
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::select_detected",
+          "declaration_sha256": "41f03315eac39447db547e062270a2cc356d358dc18be37fcb83a972cd5d36fa",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_SOP_Error",
@@ -594022,7 +594043,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::new",
-          "declaration_sha256": "48b5f6b917a7b0668ab008bc8f052feea7cbc96f37918e9fc1f80a4bc8f2d372",
+          "declaration_sha256": "c04ddd0531abd481a87e3a93ed6602baa2c81ef02d926dcd3d46b74fb972b7df",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594245,8 +594266,15 @@
       "cpp_declaration_id": "8ec7e3bdaa6d909142249730f67df37c085c8b2a0a1535365e7efc5c49e63c75",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+          "declaration_sha256": "50107922f15a1c176d81c159d450f89de9e80e3570500a4bd27bd7cdfab33328",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::UpdateAnimation",
@@ -594256,8 +594284,15 @@
       "cpp_declaration_id": "76f7cca54f35f4c23dfaee5472b82a23ab5f1eb6894831b54e197161f63cb522",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+          "declaration_sha256": "7e80457a2c29d38de8947bb4c27117b7bf7a90c61943d72cfc3e1c46505d0fc3",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::HandleClick",
@@ -594267,8 +594302,15 @@
       "cpp_declaration_id": "968a5d947a09b14cedd0ae08e7da32297e0b3b558775856ed610727bac378c2c",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+          "declaration_sha256": "ae27b2ef80c08df4e9e9331b413166551929c55292d0a3658993945c1d1e685c",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::updateAnimation",
@@ -594278,8 +594320,15 @@
       "cpp_declaration_id": "a220b227c946ada67f263ecca98357a26b0cbadef202c125c09b2011f4d312b7",
       "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+          "declaration_sha256": "14eef2f44d4d3928605e5c5e590a2b735422e3464c0cd1ac89db85a24e7bda36",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::viewFitAll",
@@ -594287,10 +594336,17 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
       "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
       "cpp_declaration_id": "579a06c2dac7eb72ce283a96454f19e6a1492cf94e9de9c2a75e9792b497e024",
-      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_view_fit_all",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeSource::view_fit_all",
       "rust_kind": "function",
       "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md."
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeSource::view_fit_all",
+          "declaration_sha256": "9a51b38708701cd2d3048c2f7ec42f75b0360de514b1559950183d4e2f886c1e",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::onAfterAnimation",
@@ -594322,8 +594378,15 @@
       "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite native live animation-handle reference: two aliases observe setter replacement/null/restore and protected-field replacement without retaining a lock or old target. Seven pinned native snapshots replay slot/target identity, null state and reference counts exactly; copied view_animation remains an unclaimed convenience. See docs/ais-view-cube-animation-reference.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
+          "declaration_sha256": "301df65babef752e26ec2c08e21362a97d6101a426efddcbc78d5f9f288091ff",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::SetViewAnimation",
@@ -594333,8 +594396,15 @@
       "cpp_declaration_id": "e5c909252b354ac0c0459151b78323be83097b9f40ba9ec56347af0355131e29",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::set_view_animation",
       "rust_kind": "function",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeMembers::set_view_animation",
+          "declaration_sha256": "1cd80516019174352b58d86ee0629c8d8c1e7a5dcdf24abbe355f6c1c4a38737",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::Duration",
@@ -594465,8 +594535,15 @@
       "cpp_declaration_id": "472f4ff1d204111e438285534a9dbad77b63d716adba281618e0466a47df6708",
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
       "rust_kind": "struct_field",
-      "status": "partial",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Source audit 2026-10-12: concrete camera-animation storage cannot accept native derived animation inputs or dispatch their virtual Start/Update/UpdateTimer overrides. Concrete live-reference/capture evidence is preserved; derived source-slot transport pending. See porting/runtime-evidence/view-cube-derived-animation-gap-2026-10-12.json."
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
+          "declaration_sha256": "dfe0e118c8510ce942e78c44fd5f20ce79832d18bdfdc9190f29d5937206bc43",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "AIS_ViewCube::myStartState",
@@ -594557,7 +594634,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCubeOwner::new",
-          "declaration_sha256": "82a1783e2f5bec0b40ab550cf4d5c1ff40bb36b0bb8a219718e49def7c0a5cb9",
+          "declaration_sha256": "297c16a3fb7b54c9ca05944fc26cc6484bc889f3e0946bb20a5b466d654682b6",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594588,7 +594665,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCubeOwner::main_orientation",
-          "declaration_sha256": "9960fd9fefa4e2fc1e6d97ac186bdb23523d12ac5c2049bd7f4b74c916c8964f",
+          "declaration_sha256": "9fdb90657777d129bc77c22f79e5b35ad5319014d36d760f41bee93e45bb7fc1",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594619,7 +594696,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::is_forced_hilight",
-          "declaration_sha256": "98f1d4368bc1565072fb48de2c70f6ebc9087e8b8e5fcad5bedf57f4c95accd7",
+          "declaration_sha256": "f963e432a422344681aa7f7e99269beb3839f4c76787c15540b4f99e0dd3054f",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594650,17 +594727,17 @@
       "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::handle_mouse_click",
       "rust_kind": "function",
       "status": "implemented",
-      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md.",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::handle_mouse_click",
-          "declaration_sha256": "66b76c82c6684ea5222687a1840076b7f7e7701da32c030ca17223022ca4ace0",
+          "declaration_sha256": "389aebd2aed557ef7437f5b6a59d1ae827154f3324f90cfb2b6d2d68ff964f18",
           "impl_context": {
             "for": {
               "resolved_path": {
-                "args": null,
                 "path": "AisViewCubeOwner",
-                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner",
+                "args": null
               }
             },
             "generics": {
@@ -594668,9 +594745,9 @@
               "where_predicates": []
             },
             "trait": {
-              "args": null,
               "path": "SelectMgrEntityOwnerSource",
-              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource"
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource",
+              "args": null
             }
           }
         }
@@ -596172,7 +596249,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "b3b3e0961c88ac2dfb0240a4a9686c0dcbbd04a15bc79e176149abbf19637ca3",
+          "declaration_sha256": "ed931d5aa78ea794afb592dec80d9d5412cea3a3d8949e1824e5149b60e27b84",
           "impl_context": null
         }
       ]
@@ -596331,7 +596408,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "82f2091d23a74edde52ec399c2829e7a95b2a41040fb4eb85f931583a1a2aacd",
+          "declaration_sha256": "063af39fc77e09378f2e70a37d5f5bc3b90c3c248b9a8ec7348723d1e09bd11a",
           "impl_context": null
         }
       ]
@@ -596827,6 +596904,276 @@
       "cpp_declaration_id": "fbc45473015d87211625471f96ffff0efd84c7b1e492efdb44ee54b99210b901",
       "status": "implemented",
       "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::Orientation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::orientation",
+      "status": "implemented",
+      "cpp_declaration_id": "105aaf911e1e5ef235b9f68bcf1063648a199a74f27e7c174be8046e2b178ca9",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines",
+      "status": "implemented",
+      "cpp_declaration_id": "288bc83da4743d3a6cb047ab387ddabde22a9dbac0c755514acc187f14a71575",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::SegOnIso::operator<",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsSegOnIso::less_than",
+      "status": "implemented",
+      "cpp_declaration_id": "33f824c0266bceef94e59bf2dbe412be9c274993e9ab8c8096e3ed437f188ace",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::PntOnIso::Param",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPntOnIso::param",
+      "status": "implemented",
+      "cpp_declaration_id": "3463c38e70006ca63677b3d022e5f7102d51be99304e7219a9a5aa71b94a5cf0",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add",
+      "status": "implemented",
+      "cpp_declaration_id": "3adcdcfd0c8417ec82bcb5ea3500c978566bbe1727de7abb92acfe7e86615ded",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::AddOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_triangulation_polylines",
+      "status": "implemented",
+      "cpp_declaration_id": "51fc311b3b3f1ab70833e9b490ff96d111d08c2b451c5f6add1bcab823b3abfc",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::SegOnIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsSegOnIso",
+      "status": "implemented",
+      "cpp_declaration_id": "6e5696905a5f3857d2221ffd5599f3a1d27e2e9f014653ac5680ac0aee8f62af",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::AddOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_triangulation",
+      "status": "implemented",
+      "cpp_declaration_id": "6e6d60e9ab173ade3bf544717e9faa41ceffb39126db837bdaa573f8652c6659",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::AddOnSurface",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_surface_polylines",
+      "status": "implemented",
+      "cpp_declaration_id": "761cc98760f846378689de90e6fadd7140d99d592d531673afbbaf9370be20d1",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::Next",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::next",
+      "status": "implemented",
+      "cpp_declaration_id": "7b0616d9c5ca2859b9a9ca0d8123810346e670996db8d511dae3d5ec929b5e7e",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::SegOnIso::operator const StdPrs_Isolines::PntOnIso *",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsSegOnIso::as_ptr",
+      "status": "implemented",
+      "cpp_declaration_id": "826d13dc54f42140507753ddffce159448429e7130a13d4d12c9a93b6a5d0480",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::AddOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_triangulation_parameters",
+      "status": "implemented",
+      "cpp_declaration_id": "86df6a971109547c5c092413d214ee481d05ffe6a9ccc14502af921b11195db5",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::AddOnSurface",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_surface",
+      "status": "implemented",
+      "cpp_declaration_id": "8ee80a82ce6878ff12fd54a7d7b2da333dffe762ff432846e57549c76d317c64",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::AddOnSurface",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_surface_references",
+      "status": "implemented",
+      "cpp_declaration_id": "9e16c1d84310ab8c53bbacb173c9a2ae28815ab791e4a64ff55eccd93cbf3525",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::SegOnIso::Pnts",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsSegOnIso::pnts",
+      "status": "implemented",
+      "cpp_declaration_id": "a5b1a918c2fcd5f56650403ddf5fcbac4a2bb0b5de5161eb8ed3ba7c2370e3d1",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::PntOnIso::Pnt",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPntOnIso::pnt",
+      "status": "implemented",
+      "cpp_declaration_id": "b0083520434450db6ed5736cd1695deb8c93d10852b1cccd2bee87a602875863",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::SegOnIso::operator StdPrs_Isolines::PntOnIso *",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsSegOnIso::as_mut_ptr",
+      "status": "implemented",
+      "cpp_declaration_id": "b6ddf30f991b3b1348aeb4691a2944e848ec72d994dc4237bf835f68578d2e16",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::Add",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_native_polylines",
+      "status": "implemented",
+      "cpp_declaration_id": "bab33c829fbf775fa4bcfbdf28ab4022bc4966e6168499f67691fc8638f22415",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::IsInvalidGeometry",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::is_invalid_geometry",
+      "status": "implemented",
+      "cpp_declaration_id": "d2a6b90030cfaa5edd53e98834fca2aaffaf0e8915467924e74da6edb7987563",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::IsOriented",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::is_oriented",
+      "status": "implemented",
+      "cpp_declaration_id": "d43b35af572e322aa2623da6807169385cb87467260fff93ef860985cbfb839c",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::StdPrs_ToolRFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::with_surface",
+      "status": "implemented",
+      "cpp_declaration_id": "d62248fbeb76695ea3e922f9f7c2753c1e0dc43c867128f48a4e88a5bbf0af1f",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::More",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::more",
+      "status": "implemented",
+      "cpp_declaration_id": "dd21d9e1e71afa5c98bd19dabab8b2b0f834b62e21316e1122d7b23f957e610d",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::PntOnIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsPntOnIso",
+      "status": "implemented",
+      "cpp_declaration_id": "df9b919add10fcf7f6ed8c8e7a96a124296b6faa9968769ea8bf83b846c3e8bf",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::Value",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::value",
+      "status": "implemented",
+      "cpp_declaration_id": "e02667334135153462b5594d36949110441d1b98f6a54e266593cb87f9aada1c",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::Init",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::init",
+      "status": "implemented",
+      "cpp_declaration_id": "e9f9b0e8571a6de1377278b622a06134432b393196caf7226d7e3fff1cd4041e",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_Isolines::UVIsoParameters",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx",
+      "source_sha256": "7ae28bd3715b8976028c7c235747bdd1e00c5a4743e3f9d1a7ab09aa4dd31b01",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsIsolines::uv_iso_parameters",
+      "status": "implemented",
+      "cpp_declaration_id": "f42ee2bb84a4e1720d765e69abdc3de74c9de8938d896c46fa8a6bd62e0f006b",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
+    },
+    {
+      "upstream_id": "StdPrs_ToolRFace::StdPrs_ToolRFace",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx",
+      "source_sha256": "1d1280c721ff1f850ef263f3074d71e901033370e5d67c95cbbfa60d0a180920",
+      "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::new",
+      "status": "implemented",
+      "cpp_declaration_id": "f8504903ee86ec979811c1c7e3f56953bc30daa6fa0faf7ef80e78988100ad66",
+      "notes": "Martensite pinned isoline surface/triangulation behavior. Native two-run fixtures preserve output aliases, initialized segment storage, GNU stable ordering, callback partial failure and repair, live input replacement, located/offset face mesh routing and actual presentation buffers. Full Isolines defined-visible 18-declaration scope; ToolRFace claims are bounded 9 traversal declarations, class remains partial without Edge/allocation surfaces. See docs/isoline-builders.md and local runtime receipt."
     }
   ],
   "tests": [
