@@ -451,3 +451,26 @@ mod shape_drawer_oracle_rows;
 
 #[cfg(test)]
 mod shape_drawer_reference_tests;
+
+mod shape;
+pub use shape::{AisShapeBase, AisShapeFields, AisShapeSource};
+
+mod colored_shape;
+mod colored_shape_members;
+pub use colored_shape::{
+    AisColoredShapeBase, AisColoredShapeSource, ais_colored_shape_clear_custom_aspects,
+    ais_colored_shape_custom_aspects,
+};
+pub use colored_shape_members::AisColoredShapeMembers;
+mod colored_shape_object;
+pub use colored_shape_object::AisColoredShape;
+#[cfg(test)]
+mod colored_shape_owner_tests;
+mod shape_reference;
+pub use shape_reference::{AisShapeMembers, AisShapeRef};
+#[cfg(test)]
+mod colored_shape_dispatch_fixture;
+#[cfg(test)]
+mod colored_shape_dispatch_tests;
+#[cfg(test)]
+mod colored_shape_parent_drop;
