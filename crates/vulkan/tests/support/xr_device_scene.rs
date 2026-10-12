@@ -1,4 +1,5 @@
 //! Actual AIS_XRTrackedDevice context presentations exercise retained mesh, texture and laser draws.
+use rustycad_tkv3d::v3d::V3dViewSource;
 #[path = "xr_device_image.rs"]
 mod image_source;
 use super::view_setup;
@@ -26,7 +27,7 @@ pub const XR_CAPTURE_MODES: [&str; 8] = [
 ];
 pub struct XrDeviceScene {
     pub viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub context: Handle<AisInteractiveContext>,
     pub device: Handle<AisXrTrackedDevice>,
 }
@@ -114,7 +115,7 @@ fn validate_xr_capture_mode(mode: &str) {
         "received mode={mode}; expected XR_CAPTURE_MODES"
     );
 }
-fn xr_capture_view(viewer: &V3dViewer) -> Result<Handle<V3dView>, Failure> {
+fn xr_capture_view(viewer: &V3dViewer) -> Result<Handle<dyn V3dViewSource>, Failure> {
     let view = viewer.create_view()?;
     view_setup::configure_view(&view);
     // Cardinal projected rays avoid the deferred oblique raster case; broad depth keeps both driver precision gates strict.

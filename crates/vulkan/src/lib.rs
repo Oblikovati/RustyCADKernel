@@ -105,3 +105,5 @@ mod surface_texture_compressed;
 mod surface_texture_lifetime;
 mod surface_texture_pixels;
 mod surface_texture_uv;
+
+mod view_render_camera;

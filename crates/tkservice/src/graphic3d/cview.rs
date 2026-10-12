@@ -23,7 +23,7 @@ use rustycad_tkernel::ncollection::{Vec2, Vec3};
 use rustycad_tkernel::quantity::{ColorRgba, NamedColor};
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{
-    Failure, Handle, SharedState, StandardTransient, Transient, WeakHandle,
+    Failure, Handle, HandleReference, SharedState, StandardTransient, Transient, WeakHandle,
 };
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::bnd::BoundingBox3;
@@ -33,8 +33,12 @@ use std::io;
 /// `Graphic3d_DataStructureManager`: an object with a camera that structures are computed
 /// for (the views).
 pub trait Graphic3dDataStructureManager: Transient {
-    /// `Camera`; `manager.camera()`.
-    fn camera(&self) -> Handle<Graphic3dCamera>;
+    /// Native virtual constHandle borrow; `let alias=manager.camera_ref()`.
+    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_>;
+    /// Explicit owning snapshot convenience; native Camera binds camera_ref; `manager.camera()`.
+    fn camera(&self) -> Handle<Graphic3dCamera> {
+        self.camera_ref().clone_handle()
+    }
     /// `DumpJson`: the class name; `manager.dump_json(&mut stream, -1)?`.
     fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
         let _ = depth;
@@ -227,6 +231,10 @@ impl Drop for Graphic3dCViewBase {
 pub trait Graphic3dCView: Graphic3dDataStructureManager {
     /// The embedded base; `view.cview_base()`.
     fn cview_base(&self) -> &Graphic3dCViewBase;
+    /// Override the genuine native Camera getter's selected slot; `view.cview_camera_ref()`.
+    fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
+        super::cview_camera_reference::graphic3d_cview_camera_ref(self.cview_base())
+    }
     /// `Activate`: displays the accepted structures of the manager and updates; `view.activate()`.
     fn activate(&self) {
         defaults::activate(self);
@@ -241,8 +249,8 @@ pub trait Graphic3dCView: Graphic3dDataStructureManager {
         defaults::remove(self);
     }
     /// `SetCamera`; `view.set_camera(&camera)`.
-    fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
-        self.cview_base().fields.write().camera = camera.clone();
+    fn set_camera(&self, camera: &dyn HandleReference<Graphic3dCamera>) {
+        self.cview_base().fields.write().camera = camera.clone_handle();
     }
     /// `ToFlipOutput`: false by default.
     fn to_flip_output(&self) -> bool {
@@ -486,14 +494,3 @@ rustycad_tkernel::impl_transient_interface!(
     "Graphic3d_CView",
     dyn Graphic3dDataStructureManager
 );
-
-impl<T: Graphic3dCView> Graphic3dDataStructureManager for T {
-    /// `Camera`: the view camera.
-    fn camera(&self) -> Handle<Graphic3dCamera> {
-        self.cview_base().fields.read().camera.clone()
-    }
-    /// `DumpJson`: the view dump.
-    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
-        self.cview_dump_json(stream, depth)
-    }
-}

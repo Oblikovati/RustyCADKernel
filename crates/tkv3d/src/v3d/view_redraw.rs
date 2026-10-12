@@ -1,5 +1,5 @@
 //! `V3d_View` update, redraw, invalidation and the automatic Z fit.
-use super::{V3dView, V3dViewer};
+use super::V3dView;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::exceptions::program_error;
 use rustycad_tkservice::graphic3d::{
@@ -24,35 +24,21 @@ impl V3dView {
     }
     /// `Redraw`: fits Z and redraws, recomputing once after a lost device; `view.redraw()`.
     pub fn redraw(&self) {
-        if !self.view.is_defined() || !self.view.is_active() {
+        let source = self.this.read().observe();
+        if let Some(source) = source.get() {
+            source.redraw();
             return;
         }
-        self.state.write().is_invalidated_immediate = false;
-        let Some(viewer) = self.viewer().get().map(V3dViewer::structure_manager) else {
-            return;
-        };
-        let Some(manager) = viewer.get() else {
-            return;
-        };
-        for _ in 0..2 {
-            if manager.is_device_lost() {
-                manager.recompute_structures();
-            }
-            // A failed Z fit leaves the camera range; the native void member reports nothing.
-            let _ = self.auto_z_fit();
-            self.view.redraw();
-            if !manager.is_device_lost() {
-                return;
-            }
-        }
+        super::view_source_redraw::v3d_view_redraw(self);
     }
-    /// `RedrawImmediate`: redraws the immediate layers; `view.redraw_immediate()`.
+    /// `RedrawImmediate`: dispatches the actual native subclass; `view.redraw_immediate()`.
     pub fn redraw_immediate(&self) {
-        if !self.view.is_defined() || !self.view.is_active() {
+        let source = self.this.read().observe();
+        if let Some(source) = source.get() {
+            source.redraw_immediate();
             return;
         }
-        self.state.write().is_invalidated_immediate = false;
-        self.view.redraw_immediate();
+        super::view_source_redraw::v3d_view_redraw_immediate(self);
     }
     /// `Invalidate`: marks the view for a redraw; `view.invalidate()`.
     pub fn invalidate(&self) {

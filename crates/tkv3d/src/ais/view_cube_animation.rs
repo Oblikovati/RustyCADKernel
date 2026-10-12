@@ -3,7 +3,8 @@ use super::{
     AisAnimationCameraMembers, AisAnimationCameraSource, AisAnimationMembers, AisViewCubeMembers,
     AisViewCubeOwner, AisViewCubeSource,
 };
-use crate::{ais::AisInteractiveObjectMembers, v3d::V3dView};
+use crate::ais::AisInteractiveObjectMembers;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure, exceptions::null_object};
 /// Start the picked orientation on the context's last active view; `ais_view_cube_start_animation(&cube,&owner)?`.
 pub fn ais_view_cube_start_animation<C: AisViewCubeSource + ?Sized>(
@@ -26,7 +27,7 @@ fn cube_start_animation<C: AisViewCubeSource + ?Sized>(
 }
 fn prepare_cube_animation<C: AisViewCubeSource + ?Sized>(
     cube: &C,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
 ) -> Result<(), Failure> {
     with_cube_animation(cube, |animation| {
         animation.set_view(view);
@@ -122,7 +123,7 @@ pub(super) fn with_cube_animation<C: AisViewCubeSource + ?Sized, R>(
 
 fn cube_last_active_view<C: AisViewCubeSource + ?Sized>(
     cube: &C,
-) -> Result<Handle<V3dView>, Failure> {
+) -> Result<Handle<dyn V3dViewSource>, Failure> {
     // OCCT's owning GetContext temporary ends before any later virtual fitting/start callbacks.
     let context = cube.get_context();
     let context = context.get().ok_or_else(|| {

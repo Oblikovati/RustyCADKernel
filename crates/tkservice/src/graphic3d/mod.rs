@@ -305,3 +305,6 @@ pub use retained_view::Graphic3dRetainedView;
 
 #[cfg(test)]
 mod texture_2d_rtti_tests;
+
+mod cview_camera_reference;
+pub use cview_camera_reference::graphic3d_cview_camera_ref;

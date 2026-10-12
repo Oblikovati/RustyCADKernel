@@ -9,7 +9,7 @@ use std::sync::RwLockWriteGuard;
 pub trait SelectMgrViewerSelectorMembers: SelectMgrViewerSelectorSource {
     /// Erase, clear and remove debug structures, then update a non-null view.
     /// Example: `selector.clear_sensitive(&view)?`.
-    fn clear_sensitive(&self, view: &Handle<crate::v3d::V3dView>) -> Result<(), Failure> {
+    fn clear_sensitive(&self, view: &Handle<dyn crate::v3d::V3dViewSource>) -> Result<(), Failure> {
         super::viewer_selector_debug::clear_selector_sensitive(self.viewer_selector_base(), view)
     }
 

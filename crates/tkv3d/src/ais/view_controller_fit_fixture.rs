@@ -1,4 +1,5 @@
 //! Actual context geometry, selections and view cameras mirror the local native oracle.
+use crate::v3d::V3dViewSource;
 use super::*;
 use crate::select3d::Select3DSensitiveEntityMembers as _;
 use crate::{
@@ -18,7 +19,7 @@ use rustycad_tkservice::{
 };
 pub(super) struct NativeFitScene {
     _viewer: Handle<V3dViewer>,
-    pub(super) view: Handle<V3dView>,
+    pub(super) view: Handle<dyn V3dViewSource>,
     pub(super) context: Handle<AisInteractiveContext>,
     pub(super) selected: Handle<AisPointCloud>,
     pub(super) outer: Handle<AisPointCloud>,

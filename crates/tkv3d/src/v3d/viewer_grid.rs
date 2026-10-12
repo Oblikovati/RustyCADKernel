@@ -1,5 +1,6 @@
 //! The privileged plane, grid and grid echo members of `V3d_Viewer`.
 use super::{V3dCircularGrid, V3dRectangularGrid, V3dView, V3dViewer};
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::short_real::short_real_last;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -302,7 +303,7 @@ impl V3dViewer {
     /// Example: `viewer.show_grid_echo(&view, &vertex)?`.
     pub fn show_grid_echo(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         vertex: &Graphic3dVertex,
     ) -> Result<(), Failure> {
         if !self.state.read().grid_echo {
@@ -356,7 +357,7 @@ impl V3dViewer {
         Ok(())
     }
     /// `HideGridEcho`: erases the echo when it is visible in a view; `viewer.hide_grid_echo(&view)`.
-    pub fn hide_grid_echo(&self, view: &Handle<V3dView>) {
+    pub fn hide_grid_echo(&self, view: &Handle<dyn V3dViewSource>) {
         let structure = self.state.read().grid_echo_structure.clone();
         let Some(value) = structure.get() else {
             return;

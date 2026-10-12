@@ -1,4 +1,5 @@
 //! Named CPU scene and injected clock exercise the real widget without GPU or sleeping.
+use crate::v3d::V3dViewSource;
 use super::*;
 use crate::v3d::*;
 use rustycad_tkernel::{
@@ -68,7 +69,7 @@ impl AisViewCubeAnimationEvents for WidgetEvents {
 }
 pub(super) struct WidgetScene {
     pub(super) viewer: Handle<V3dViewer>,
-    pub(super) view: Handle<V3dView>,
+    pub(super) view: Handle<dyn V3dViewSource>,
     pub(super) context: Handle<AisInteractiveContext>,
     pub(super) cube: Handle<AisViewCube>,
     pub(super) clock: Arc<WidgetClock>,

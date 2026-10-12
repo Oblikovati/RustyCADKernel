@@ -10,6 +10,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::geom::GeomAxis2Placement;
 use rustycad_tkmath::gp::{Axis2, Point3};
 use rustycad_tkservice::aspect::AspectNeutralWindow;
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, prs3d::*, select_mgr::*, v3d::*};
 pub const MODES: [&str; 16] = [
     "tri-wire",
@@ -30,7 +31,7 @@ pub const MODES: [&str; 16] = [
     "tri-shaded-origin",
 ];
 pub struct TrihedronScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub object: Handle<AisTrihedron>,

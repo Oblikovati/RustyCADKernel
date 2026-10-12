@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 //! Built-in line datums through AIS display, live aspects, geometry updates and selection.
+use rustycad_tkv3d::v3d::V3dViewSource;
 #[path = "../../../tkv3d/tests/support/ais_line_fixture.rs"]
 pub(crate) mod fixture;
 use super::view_setup;
@@ -25,7 +26,7 @@ pub const MODES: [&str; 11] = [
     "datum-detected",
 ];
 pub struct LineScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub line: Handle<AisLine>,

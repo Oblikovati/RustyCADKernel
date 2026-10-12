@@ -9,7 +9,10 @@ use super::{
     V3dCircularGrid, V3dRectangularGrid, V3dTypeOfOrientation, V3dTypeOfView,
     V3dTypeOfVisualization, V3dView, v3d_bad_value,
 };
+use crate::v3d::V3dViewSource;
+use rustycad_tkernel::ncollection::AllocatorList;
 use rustycad_tkernel::quantity::{Color, NamedColor};
+use rustycad_tkernel::standard::HandleReference as _;
 use rustycad_tkernel::standard::short_real::short_real_last;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3, StandardDirection3};
@@ -29,8 +32,8 @@ use std::collections::BTreeSet;
 pub(crate) struct V3dViewerState {
     pub(crate) layer_ids: BTreeSet<i32>,
     pub(crate) z_layer_gen_id: AspectGenId,
-    pub(crate) defined_views: Vec<Handle<V3dView>>,
-    pub(crate) active_views: Vec<Handle<V3dView>>,
+    pub(crate) defined_views: AllocatorList<Handle<dyn V3dViewSource>>,
+    pub(crate) active_views: AllocatorList<Handle<dyn V3dViewSource>>,
     pub(crate) defined_lights: Vec<Handle<Graphic3dCLight>>,
     pub(crate) active_lights: Vec<Handle<Graphic3dCLight>>,
     pub(crate) background: AspectBackground,
@@ -41,6 +44,7 @@ pub(crate) struct V3dViewerState {
     pub(crate) default_type_of_view: V3dTypeOfView,
     pub(crate) default_rendering_params: Graphic3dRenderingParams,
     pub(crate) iterators: [usize; 4],
+    pub(crate) view_cursors: [rustycad_tkernel::ncollection::ListCursor; 2],
     pub(crate) computed_mode: bool,
     pub(crate) default_computed_mode: bool,
     pub(crate) privileged_plane: Axis3,
@@ -86,8 +90,8 @@ impl V3dViewer {
         let state = V3dViewerState {
             layer_ids: BTreeSet::new(),
             z_layer_gen_id: AspectGenId::new(1, i32::MAX)?,
-            defined_views: Vec::new(),
-            active_views: Vec::new(),
+            defined_views: AllocatorList::default(),
+            active_views: AllocatorList::default(),
             defined_lights: Vec::new(),
             active_lights: Vec::new(),
             background: AspectBackground::new(Color::named(NamedColor::GRAY30)),
@@ -98,6 +102,7 @@ impl V3dViewer {
             default_type_of_view: V3dTypeOfView::Orthographic,
             default_rendering_params: Graphic3dRenderingParams::new()?,
             iterators: [0; 4],
+            view_cursors: [rustycad_tkernel::ncollection::ListCursor::default(); 2],
             computed_mode: true,
             default_computed_mode: false,
             privileged_plane: plane,
@@ -135,66 +140,25 @@ impl V3dViewer {
             .is_some_and(|m| count < m.max_num_of_views())
     }
     /// `CreateView`: a new view of the default type; `viewer.create_view()?`.
-    pub fn create_view(&self) -> Result<Handle<V3dView>, Failure> {
+    pub fn create_view(&self) -> Result<Handle<dyn V3dViewSource>, Failure> {
         let kind = self.state.read().default_type_of_view;
         V3dView::new(&self.this(), kind)
     }
     /// `SetViewOn()`: activates every defined view; `viewer.set_view_on()?`.
     pub fn set_view_on(&self) -> Result<(), Failure> {
-        let views = self.state.read().defined_views.clone();
-        views.iter().try_for_each(|view| self.set_view_on_one(view))
-    }
-    /// `SetViewOff()`: deactivates every defined view; `viewer.set_view_off()`.
-    pub fn set_view_off(&self) {
-        let views = self.state.read().defined_views.clone();
-        views.iter().for_each(|view| self.set_view_off_one(view));
-    }
-    /// `SetViewOn(view)`: activates a defined view with a window, its lights and the grid,
-    /// and redraws it. Example: `viewer.set_view_on_one(&view)?`.
-    pub fn set_view_on_one(&self, view: &Handle<V3dView>) -> Result<(), Failure> {
-        let Some(value) = view.get() else {
-            return Ok(());
-        };
-        let implementation = value.view();
-        let Some(cview) = implementation.get() else {
-            return Ok(());
-        };
-        if !cview.is_defined() || self.state.read().active_views.contains(view) {
-            return Ok(());
-        }
-        self.state.write().active_views.push(view.clone());
-        cview.activate();
-        let lights = self.state.read().active_lights.clone();
-        lights
-            .iter()
-            .try_for_each(|light| value.set_light_on_one(light))?;
-        let grid = self.grid(false)?;
-        if let Some(active) = grid
-            .get()
-            .map(rustycad_tkservice::aspect::AspectGridMembers::is_active)
-        {
-            value.set_grid(&self.privileged_plane(), &grid);
-            value.set_grid_activity(active);
-        }
-        if value.set_immediate_update(false) {
-            value.redraw();
-            value.set_immediate_update(true);
+        let mut cursor = self.defined_view_iterator();
+        while cursor.more() {
+            self.set_view_on_one(&cursor.value_ref())?;
+            cursor.next();
         }
         Ok(())
     }
-    /// `SetViewOff(view)`: deactivates an active view; `viewer.set_view_off_one(&view)`.
-    pub fn set_view_off_one(&self, view: &Handle<V3dView>) {
-        let Some(cview) = view.get().map(V3dView::view) else {
-            return;
-        };
-        let Some(cview) = cview.get() else {
-            return;
-        };
-        let mut state = self.state.write();
-        if cview.is_defined() && state.active_views.contains(view) {
-            state.active_views.retain(|v| v != view);
-            drop(state);
-            cview.deactivate();
+    /// `SetViewOff()`: deactivates defined views through their native live nodes; `viewer.set_view_off()`.
+    pub fn set_view_off(&self) {
+        let mut cursor = self.defined_view_iterator();
+        while cursor.more() {
+            self.set_view_off_one(&cursor.value_ref());
+            cursor.next();
         }
     }
     /// `Update`: the same as `Redraw`; `viewer.update()`.
@@ -203,33 +167,31 @@ impl V3dViewer {
     }
     /// `Redraw`: redraws the subviews first, then the other views; `viewer.redraw()`.
     pub fn redraw(&self) {
-        let views = self.state.read().defined_views.clone();
-        for pass_subviews in [true, false] {
-            views
-                .iter()
-                .filter_map(Handle::get)
-                .filter(|v| v.is_subview() == pass_subviews)
-                .for_each(V3dView::redraw);
-        }
+        self.visit_defined_view_nodes(|view| view.redraw());
     }
     /// `RedrawImmediate`: the immediate layers, subviews first; `viewer.redraw_immediate()`.
     pub fn redraw_immediate(&self) {
-        let views = self.state.read().defined_views.clone();
-        for pass_subviews in [true, false] {
-            views
-                .iter()
-                .filter_map(Handle::get)
-                .filter(|v| v.is_subview() == pass_subviews)
-                .for_each(V3dView::redraw_immediate);
-        }
+        self.visit_defined_view_nodes(|view| view.redraw_immediate());
     }
     /// `Invalidate`: invalidates every defined view; `viewer.invalidate()`.
     pub fn invalidate(&self) {
-        let views = self.state.read().defined_views.clone();
-        views
-            .iter()
-            .filter_map(Handle::get)
-            .for_each(V3dView::invalidate);
+        let mut cursor = self.defined_view_iterator();
+        while cursor.more() {
+            cursor.value_ref().observe().invalidate();
+            cursor.next();
+        }
+    }
+    fn visit_defined_view_nodes(&self, visit: impl Fn(&dyn V3dViewSource)) {
+        for pass_subviews in [true, false] {
+            let mut cursor = self.defined_view_iterator();
+            while cursor.more() {
+                let reference = cursor.value_ref().observe();
+                if let Some(view) = reference.get().filter(|v| v.is_subview() == pass_subviews) {
+                    visit(view);
+                }
+                cursor.next();
+            }
+        }
     }
     /// `Remove`: removes every structure of the manager; `viewer.remove()`.
     pub fn remove(&self) {
@@ -258,14 +220,14 @@ impl V3dViewer {
         }
     }
     /// `AddView` (private, called by the view constructor).
-    pub(crate) fn add_view(&self, view: &Handle<V3dView>) {
+    pub(crate) fn add_view(&self, view: &Handle<dyn V3dViewSource>) {
         let mut state = self.state.write();
-        if !state.defined_views.contains(view) {
-            state.defined_views.push(view.clone());
+        if !state.defined_views.iter().any(|stored| stored == view) {
+            state.defined_views.append(view.clone());
         }
     }
     /// `DelView` (private): forgets a view, first in the active list then the defined one.
-    pub(crate) fn del_view(&self, view: *const V3dView) {
+    pub(crate) fn del_view(&self, view: *const ()) {
         let mut state = self.state.write();
         remove_view_from(&mut state.active_views, view);
         remove_view_from(&mut state.defined_views, view);
@@ -273,12 +235,20 @@ impl V3dViewer {
 }
 
 /// Removes the first view at an address from a list (`NCollection_List::Remove`).
-fn remove_view_from(list: &mut Vec<Handle<V3dView>>, view: *const V3dView) {
-    if let Some(index) = list
-        .iter()
-        .position(|v| std::ptr::eq(v.object_address(), view.cast()))
-    {
-        list.remove(index);
+pub(super) fn remove_view_from(
+    list: &mut AllocatorList<Handle<dyn V3dViewSource>>,
+    view: *const (),
+) {
+    let mut cursor = list.cursor();
+    while cursor.more() {
+        if cursor
+            .value(list)
+            .is_some_and(|value| value.object_address() == view)
+        {
+            let _ = list.remove(&mut cursor);
+            return;
+        }
+        cursor.next(list);
     }
 }
 
@@ -474,15 +444,15 @@ impl V3dViewer {
         }
     }
     /// `ActiveViews`; `viewer.active_views()`.
-    pub fn active_views(&self) -> Vec<Handle<V3dView>> {
-        self.state.read().active_views.clone()
+    pub fn active_views(&self) -> Vec<Handle<dyn V3dViewSource>> {
+        self.state.read().active_views.iter().cloned().collect()
     }
     /// `LastActiveView`: exactly one active view; `viewer.last_active_view()`.
     pub fn last_active_view(&self) -> bool {
         self.state.read().active_views.len() == 1
     }
     /// `DefinedViews`; `viewer.defined_views()`.
-    pub fn defined_views(&self) -> Vec<Handle<V3dView>> {
-        self.state.read().defined_views.clone()
+    pub fn defined_views(&self) -> Vec<Handle<dyn V3dViewSource>> {
+        self.state.read().defined_views.iter().cloned().collect()
     }
 }

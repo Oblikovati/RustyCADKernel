@@ -1,6 +1,6 @@
 //! Debug presentation cleanup follows live sequence links without holding callback locks.
 use super::SelectMgrViewerSelectorBase;
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::SequenceCursor,
     standard::{Failure, Handle, exceptions::null_object},
@@ -8,7 +8,7 @@ use rustycad_tkernel::{
 use rustycad_tkservice::graphic3d::{Graphic3dStructureNetwork, Graphic3dStructureSource};
 pub(super) fn clear_selector_sensitive(
     base: &SelectMgrViewerSelectorBase,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
 ) -> Result<(), Failure> {
     let mut cursor = SequenceCursor::new(&base.fields.read().debug_structures, true);
     while cursor.more() {

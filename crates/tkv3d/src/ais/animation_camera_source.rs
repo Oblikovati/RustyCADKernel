@@ -1,6 +1,6 @@
 //! Owned native camera-animation base preserves real virtual timeline subclass dispatch.
 use super::{AisAnimationBase, AisAnimationCameraFields, AisAnimationProgress, AisAnimationSource};
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     standard::{Failure, Handle, HandleFieldRef, SharedState},
     tcollection::AsciiString,
@@ -15,7 +15,7 @@ pub struct AisAnimationCameraBase {
 }
 impl AisAnimationCameraBase {
     /// Own the native stopped timeline and null endpoints; `AisAnimationCameraBase::new("camera",&view)`.
-    pub fn new(name: impl Into<AsciiString>, view: &Handle<V3dView>) -> Self {
+    pub fn new(name: impl Into<AsciiString>, view: &Handle<dyn V3dViewSource>) -> Self {
         Self {
             animation: AisAnimationBase::new(name),
             fields: std::sync::Arc::new(SharedState::new(AisAnimationCameraFields {
@@ -34,7 +34,7 @@ pub trait AisAnimationCameraSource: AisAnimationSource {
 /// Nonvirtual native members share retained storage and cannot be replaced by subclass virtual overrides.
 pub trait AisAnimationCameraMembers: AisAnimationCameraSource {
     /// Borrow the actual target handle field; `let alias=animation.target_view_ref()`.
-    fn target_view_ref(&self) -> HandleFieldRef<'_, AisAnimationCameraFields, V3dView> {
+    fn target_view_ref(&self) -> HandleFieldRef<'_, AisAnimationCameraFields, dyn V3dViewSource> {
         let fields = &self.camera_animation_base().fields;
         HandleFieldRef::new(fields, camera_target_field)
     }
@@ -49,7 +49,7 @@ pub trait AisAnimationCameraMembers: AisAnimationCameraSource {
         HandleFieldRef::new(fields, camera_end_field)
     }
     /// Explicitly retain a target snapshot; native View parity uses target_view_ref; `animation.target_view()`.
-    fn target_view(&self) -> Handle<V3dView> {
+    fn target_view(&self) -> Handle<dyn V3dViewSource> {
         let alias = self.target_view_ref();
         alias.clone_handle()
     }
@@ -64,7 +64,7 @@ pub trait AisAnimationCameraMembers: AisAnimationCameraSource {
         alias.clone_handle()
     }
     /// Replace the native target by identity; `animation.set_view(&view)`.
-    fn set_view(&self, view: &Handle<V3dView>) {
+    fn set_view(&self, view: &Handle<dyn V3dViewSource>) {
         let fields = &self.camera_animation_base().fields;
         fields.write().view = view.clone();
     }
@@ -91,7 +91,7 @@ impl rustycad_tkernel::standard::RuntimeTyped for dyn AisAnimationCameraSource {
         rustycad_tkernel::standard::project_interface::<Self>(object)
     }
 }
-fn camera_target_field(fields: &AisAnimationCameraFields) -> &Handle<V3dView> {
+fn camera_target_field(fields: &AisAnimationCameraFields) -> &Handle<dyn V3dViewSource> {
     // Return storage directly so an alias observes future setter changes.
     &fields.view
 }

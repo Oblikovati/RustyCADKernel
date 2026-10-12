@@ -10,6 +10,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::geom::GeomPlane;
 use rustycad_tkmath::gp::{Axis3, Point3};
 use rustycad_tkservice::aspect::AspectNeutralWindow;
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, prs3d::Prs3dDatumParts, v3d::*};
 pub const MODES: [&str; 14] = [
     "plane-base",
@@ -28,7 +29,7 @@ pub const MODES: [&str; 14] = [
     "plane-detected",
 ];
 pub struct PlaneScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub object: Handle<AisPlaneTrihedron>,

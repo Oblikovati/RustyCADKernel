@@ -3,10 +3,11 @@ pub use super::view_setup::unlit_aspects::unlit_style;
 use martensite_vulkan::{Graphic3dRenderDriver, Graphic3dRenderView};
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{aspect::AspectNeutralWindow, graphic3d::*};
-use rustycad_tkv3d::v3d::{V3dView, V3dViewer};
+use rustycad_tkv3d::v3d::V3dViewSource;
+use rustycad_tkv3d::v3d::V3dViewer;
 pub struct ViewerScene {
     pub viewer: Handle<V3dViewer>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub structure: Handle<Graphic3dStructure>,
     pub group: Handle<dyn Graphic3dGroup>,

@@ -1,6 +1,6 @@
 //! Martensite camera animation follows AIS_AnimationCamera at OCCT 3d097a0.
 use super::{AisAnimationBase, AisAnimationProgress, AisAnimationSource};
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     standard::{Failure, Handle, StandardTransient},
     tcollection::AsciiString,
@@ -10,7 +10,7 @@ use rustycad_tkservice::graphic3d::Graphic3dCamera;
 /// Native protected camera handles; `animation.camera_animation_base().fields.read().view`.
 pub struct AisAnimationCameraFields {
     /// Target view, which may be detached.
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     /// Starting camera, retained by identity.
     pub camera_start: Handle<Graphic3dCamera>,
     /// Ending camera, retained by identity.
@@ -25,7 +25,7 @@ rustycad_tkernel::impl_transient!(AisAnimationCamera,"AIS_AnimationCamera",dyn A
     interfaces:[dyn super::AisAnimationCameraSource,dyn AisAnimationSource]);
 impl AisAnimationCamera {
     /// Construct a stopped animation with unspecified endpoints; `AisAnimationCamera::new("orbit", &view)`.
-    pub fn new(name: impl Into<AsciiString>, view: &Handle<V3dView>) -> Self {
+    pub fn new(name: impl Into<AsciiString>, view: &Handle<dyn V3dViewSource>) -> Self {
         let base = super::AisAnimationCameraBase::new(name, view);
         Self {
             transient: StandardTransient::default(),
@@ -35,12 +35,12 @@ impl AisAnimationCamera {
 
     /// Explicit copied target; native View parity uses AisAnimationCameraMembers::target_view_ref.
     /// Target view including null; `animation.target_view()`.
-    pub fn target_view(&self) -> Handle<V3dView> {
+    pub fn target_view(&self) -> Handle<dyn V3dViewSource> {
         // A copied convenience acquires ownership explicitly; native parity uses the live alias.
         super::AisAnimationCameraMembers::target_view(self)
     }
     /// Retarget or detach the animation; `animation.set_view(&view)`.
-    pub fn set_view(&self, view: &Handle<V3dView>) {
+    pub fn set_view(&self, view: &Handle<dyn V3dViewSource>) {
         // Concrete and derived handles mutate the same retained base field.
         super::AisAnimationCameraMembers::set_view(self, view);
     }

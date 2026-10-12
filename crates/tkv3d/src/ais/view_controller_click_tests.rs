@@ -1,6 +1,7 @@
 //! Committed local oracle snapshots keep CI independent of native OCCT.
+use crate::v3d::V3dViewSource;
 use super::*;
-use crate::v3d::{V3dView, V3dViewer};
+use crate::v3d::V3dViewer;
 use rustycad_tkernel::{
     ncollection::Vec2,
     standard::{Failure, Handle, SharedState, StandardTransient},
@@ -157,7 +158,7 @@ fn default_timelines_have_native_names_and_independent_handle_identity() {
     assert!(first.view_animation() != second.view_animation());
     assert!(first.objects_animation() != second.objects_animation());
 }
-fn click_camera_target() -> Handle<V3dView> {
+fn click_camera_target() -> Handle<dyn V3dViewSource> {
     V3dViewer::new(&NullGraphicDriver::new_handle())
         .unwrap()
         .create_view()

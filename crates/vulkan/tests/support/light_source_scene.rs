@@ -1,4 +1,5 @@
 //! Shared real Martensite light scene for functional captures and completed-frame timings.
+use rustycad_tkv3d::v3d::V3dViewSource;
 #[allow(dead_code)]
 #[path = "view_setup.rs"]
 pub(crate) mod view_setup;
@@ -11,7 +12,9 @@ use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkservice::graphic3d::*;
 use rustycad_tkv3d::{ais::*, v3d::*};
 /// Configure a real AIS light capture view; `light_view(&driver)`.
-pub fn light_view(driver: &Handle<Graphic3dRenderDriver>) -> (Handle<V3dViewer>, Handle<V3dView>) {
+pub fn light_view(
+    driver: &Handle<Graphic3dRenderDriver>,
+) -> (Handle<V3dViewer>, Handle<dyn V3dViewSource>) {
     let viewer = V3dViewer::new(&driver.cast()).unwrap();
     let view = viewer.create_view().unwrap();
     view_setup::configure_view(&view);

@@ -1,10 +1,11 @@
 //! Borrowed context handles and scalar state preserve native storage identity.
 use super::{AisInteractiveContext, AisInteractiveContextFields, AisSelectionSource};
+use crate::v3d::V3dViewSource;
 use crate::{
     prs_mgr::PrsMgrPresentationManager,
     prs3d::{Prs3dDrawer, Prs3dTypeOfHighlight},
     select_mgr::*,
-    v3d::{V3dView, V3dViewer},
+    v3d::V3dViewer,
 };
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped, exceptions::out_of_range};
 use std::{ops::Deref, sync::RwLockReadGuard};
@@ -112,7 +113,7 @@ impl AisInteractiveContext {
         }
     }
     /// Return the remembered view only while it is in the viewer's active list; `context.last_active_view()`.
-    pub fn last_active_view(&self) -> Handle<V3dView> {
+    pub fn last_active_view(&self) -> Handle<dyn V3dViewSource> {
         let fields = self.fields.read();
         let address = fields.last_active_view.object_address();
         let viewer = fields.viewer.clone();

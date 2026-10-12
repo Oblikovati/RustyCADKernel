@@ -14,6 +14,35 @@ mod rectangular_grid;
 mod trihedron;
 mod trihedron_compute;
 mod view;
+#[cfg(test)]
+mod view_camera_alias_driver;
+#[cfg(test)]
+mod view_camera_alias_fixture;
+#[cfg(test)]
+mod view_camera_alias_forward;
+#[cfg(test)]
+mod view_camera_alias_tests;
+mod view_construction;
+mod view_source;
+#[cfg(test)]
+mod view_source_failure_tests;
+#[cfg(test)]
+mod view_source_fixture;
+#[cfg(test)]
+mod view_source_list_fixture;
+#[cfg(test)]
+mod view_source_list_tests;
+mod view_source_members;
+#[cfg(test)]
+mod view_source_tests;
+pub use view_source_members::V3dViewMembers;
+mod view_list_reference;
+pub use view_list_reference::{V3dViewCursor, V3dViewListRef, V3dViewNodeRef};
+mod view_source_clipping;
+mod view_source_redraw;
+pub use view_source::V3dViewSource;
+pub use view_source_clipping::{v3d_view_add_clip_plane, v3d_view_remove_clip_plane};
+pub use view_source_redraw::{v3d_view_redraw, v3d_view_redraw_immediate};
 mod view_camera;
 mod view_convert;
 mod view_dump;
@@ -25,6 +54,7 @@ mod view_redraw;
 mod view_render;
 mod view_subviews;
 mod viewer;
+mod viewer_activation;
 mod viewer_dump;
 mod viewer_grid;
 mod viewer_iter;

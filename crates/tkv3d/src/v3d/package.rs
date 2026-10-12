@@ -1,6 +1,7 @@
 //! The package class `V3d`: projection axes, the arrow and circle helpers of the grid and
 //! light presentations, and the orientation names.
-use super::{V3dTypeOfOrientation, V3dView};
+use super::V3dTypeOfOrientation;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::{Direction3, dx, dy, dz};
 use rustycad_tkservice::graphic3d::{
@@ -206,8 +207,8 @@ impl V3d {
     /// `SwitchViewsinWindow`: turns the previous view off and the next one on in the same
     /// window. Example: `V3d::switch_views_in_window(&previous, &next)?`.
     pub fn switch_views_in_window(
-        previous_view: &Handle<V3dView>,
-        next_view: &Handle<V3dView>,
+        previous_view: &Handle<dyn V3dViewSource>,
+        next_view: &Handle<dyn V3dViewSource>,
     ) -> Result<(), Failure> {
         let (Some(previous), Some(next)) = (previous_view.get(), next_view.get()) else {
             return Ok(());
