@@ -35,10 +35,11 @@ static occ::handle<Image_PixMap> surface_format_image(const std::string& mode) {
   std::memcpy(image->ChangeData(),bytes.data(),bytes.size());image->SetTopDown(true);return image;
 }
 static occ::handle<Graphic3d_Texture2D> texture_source(const std::string& mode) {
+  if(mode.rfind("missing-file",0)==0)return new Graphic3d_Texture2D("Martensite-missing-standard2D-fixture.png");
   const auto formatted=surface_format_image(mode);
   if(!formatted.IsNull())return new Graphic3d_Texture2D(formatted);
   if(mode.rfind("bc",0)==0) {
-    const std::string file=(mode=="bc1-minified"||mode=="bc1-base-level")?"bc1-rgb":mode;
+    const std::string file=(mode.rfind("bc1-",0)==0&&mode!="bc1-rgba")?"bc1-rgb":mode;
     return new Graphic3d_Texture2D(("crates/vulkan/tests/fixtures/surface_textures/"+file+".dds").c_str());
   }
   const occ::handle<Image_PixMap> image=new Image_PixMap;
@@ -63,18 +64,23 @@ static void texture_lights(const occ::handle<V3d_View>& view) {
   ambient->SetColor(texture_rgb(.5f,.25f,.125f));
   const occ::handle<Graphic3d_LightSet> lights=new Graphic3d_LightSet;lights->Add(ambient);view->View()->SetLights(lights);
 }
-static void texture_style(const occ::handle<Graphic3d_AspectFillArea3d>& style,
-                          const occ::handle<Graphic3d_Texture2D>& texture,const std::string& mode) {
-  texture_material(style);const auto params=texture->GetParams();
-  if(mode=="back-vertex")style->SetUseVertexColorForBackFaces(false);
+static void texture_parameter_style(const occ::handle<Graphic3d_Texture2D>& texture,const std::string& mode) {
+  const auto params=texture->GetParams();
   if(mode=="nearest")params->SetFilter(Graphic3d_TOTF_NEAREST);
   if(mode=="bilinear")params->SetFilter(Graphic3d_TOTF_BILINEAR);
   if(mode=="clamp")params->SetRepeat(false);
   if(mode=="linear")texture->SetColorMap(false);
   if(mode=="no-modulate")params->SetModulate(false);
-  if(mode=="bc1-minified")params->SetScale(NCollection_Vec2<float>(128,128));
+  if(mode=="no-mips")texture->SetMipmapsGeneration(false);
+  if(mode=="generated-mips"||mode=="bc1-minified")params->SetScale(NCollection_Vec2<float>(128,128));
+  if(mode=="anisotropy-fast")params->SetAnisoFilter(Graphic3d_LOTA_FAST);
+  if(mode=="anisotropy-middle")params->SetAnisoFilter(Graphic3d_LOTA_MIDDLE);
+  if(mode=="anisotropy-quality")params->SetAnisoFilter(Graphic3d_LOTA_QUALITY);
   if(mode=="bc1-base-level")params->SetLevelsRange(1,1000);
   if(mode=="transformed") {params->SetRotation(30);params->SetScale(NCollection_Vec2<float>(2,3));params->SetTranslation(NCollection_Vec2<float>(.125,.25));}
+}
+static void texture_surface_style(const occ::handle<Graphic3d_AspectFillArea3d>& style,const std::string& mode) {
+  if(mode=="back-vertex")style->SetUseVertexColorForBackFaces(false);
   if(mode=="phong"||mode=="no-modulate")style->SetShadingModel(Graphic3d_TypeOfShadingModel_Phong);
   if(mode=="gouraud")style->SetShadingModel(Graphic3d_TypeOfShadingModel_Gouraud);
   if(mode=="facet")style->SetShadingModel(Graphic3d_TypeOfShadingModel_PhongFacet);
@@ -82,6 +88,11 @@ static void texture_style(const occ::handle<Graphic3d_AspectFillArea3d>& style,
   if(mode=="mask-blend")style->SetAlphaMode(Graphic3d_AlphaMode_MaskBlend,.5f);
   if(mode=="blend")style->SetAlphaMode(Graphic3d_AlphaMode_Blend,.5f);
   if(mode=="opaque-alpha")style->SetAlphaMode(Graphic3d_AlphaMode_Opaque,.5f);
+}
+static void texture_style(const occ::handle<Graphic3d_AspectFillArea3d>& style,
+                          const occ::handle<Graphic3d_Texture2D>& texture,const std::string& fixture_mode) {
+  const std::string mode=fixture_mode.rfind("missing-file-",0)==0?fixture_mode.substr(13):fixture_mode;
+  texture_material(style);texture_parameter_style(texture,mode);texture_surface_style(style,mode);
 }
 static void projective_surface_geometry(const occ::handle<Graphic3d_Group>& group) {
   const occ::handle<Graphic3d_Buffer> buffer=new Graphic3d_Buffer(Graphic3d_Buffer::DefaultAllocator());
@@ -132,17 +143,36 @@ static void texture_mutate(const occ::handle<Graphic3d_Texture2D>& texture,const
     image->SetPixelColor(0,0,Quantity_ColorRGBA(0,0,0,1),false);texture->SetImage(image);
     if(mode=="image-updated")texture->UpdateRevision();
   }
+  if(mode=="image-null-updated"||mode=="image-empty-updated") {
+    const occ::handle<Image_PixMap> image=mode=="image-empty-updated"?occ::handle<Image_PixMap>(new Image_PixMap):occ::handle<Image_PixMap>();
+    texture->SetImage(image);texture->UpdateRevision();
+  }
   if(mode=="sampler-updated")texture->GetParams()->SetFilter(Graphic3d_TOTF_NEAREST);
+  if(mode=="bc1-levels-updated"||mode=="bc1-filter-levels-updated") {
+    texture->GetParams()->SetLevelsRange(1,1000);
+    if(mode=="bc1-filter-levels-updated")texture->GetParams()->SetFilter(Graphic3d_TOTF_NEAREST);
+  }
+}
+static void texture_view_fixture(const occ::handle<V3d_View>& view,const std::string& mode) {
+  texture_camera(view);texture_lights(view);
+  if(mode=="perspective")view->Camera()->SetProjectionType(Graphic3d_Camera::Projection_Perspective);
+  if(mode!="clipped")return;
+  const occ::handle<Graphic3d_SequenceOfHClipPlane> planes=new Graphic3d_SequenceOfHClipPlane;
+  planes->Append(new Graphic3d_ClipPlane(NCollection_Vec4<double>(1,0,0,0)));view->SetClipPlanes(planes);
+}
+static void texture_capture_mutation(const occ::handle<V3d_View>& view,
+  const occ::handle<Graphic3d_Structure>& structure,const occ::handle<Graphic3d_Texture2D>& texture,
+  const std::string& mode,const std::string& prefix) {
+  if(mode=="image-repaired") {
+    texture_mutate(texture,"image-empty-updated");structure->Groups().Last()->SynchronizeAspects();
+    texture_capture(view,prefix+"-failed");texture_mutate(texture,"image-updated");
+  }else texture_mutate(texture,mode);
+  structure->Groups().Last()->SynchronizeAspects();texture_capture(view,prefix);
 }
 int main(int argc,char** argv) {
   if(argc!=3)throw Standard_Failure("surface texture arguments; expected fixture mode and capture prefix");
-  auto probe=create_policy_probe();texture_camera(probe.view);texture_lights(probe.view);
-  if(std::string(argv[1])=="perspective")probe.view->Camera()->SetProjectionType(Graphic3d_Camera::Projection_Perspective);
-  if(std::string(argv[1])=="clipped") {
-    const occ::handle<Graphic3d_SequenceOfHClipPlane> planes=new Graphic3d_SequenceOfHClipPlane;
-    planes->Append(new Graphic3d_ClipPlane(NCollection_Vec4<double>(1,0,0,0)));probe.view->SetClipPlanes(planes);
-  }
+  auto probe=create_policy_probe();texture_view_fixture(probe.view,argv[1]);
   const auto texture=texture_source(argv[1]);
   const auto structure=texture_geometry(probe.view->Viewer(),texture,argv[1]);
-  probe.view->Redraw();texture_mutate(texture,argv[1]);structure->Groups().Last()->SynchronizeAspects();texture_capture(probe.view,argv[2]);probe.view->Remove();
+  probe.view->Redraw();texture_capture_mutation(probe.view,structure,texture,argv[1],argv[2]);probe.view->Remove();
 }

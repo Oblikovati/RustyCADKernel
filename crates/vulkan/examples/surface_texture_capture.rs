@@ -4,6 +4,7 @@ mod device_options;
 #[allow(dead_code)]
 #[path = "../tests/support/viewer_scene.rs"]
 mod scene;
+#[allow(dead_code)]
 #[path = "../tests/support/surface_texture_scene.rs"]
 mod texture_scene;
 #[path = "support/view_capture.rs"]

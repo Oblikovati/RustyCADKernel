@@ -16,6 +16,7 @@ pub(crate) enum SurfaceImageEncoding {
 }
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct SurfaceTextureImage {
+    pub lifetime: Arc<crate::surface_texture_lifetime::SurfaceTextureLifetime>,
     pub id: Vec<u8>,
     pub revision: usize,
     pub extent: [u32; 2],
@@ -55,12 +56,28 @@ pub(crate) struct SurfaceTextureStyle {
 }
 impl SurfaceTextureStyle {
     pub fn validate(&self, vertices: usize) -> Result<(), RenderError> {
-        if self.uv.len() != vertices || self.uv.iter().flatten().any(|v| !v.is_finite()) {
+        if self.uv.len() != vertices {
             return Err(rejected(
                 (self.uv.len(), vertices),
-                "one finite texture coordinate per vertex",
+                "one texture coordinate per vertex",
             ));
+        }
+        if let Some(uv) = self
+            .uv
+            .iter()
+            .find(|uv| uv.iter().any(|value| !value.is_finite()))
+        {
+            return Err(rejected(uv, "finite Vec4 texture coordinates"));
         }
         Ok(())
     }
+}
+
+/// Explicit legacy incomplete-sampler policy; no image was decoded or uploaded.
+#[derive(Clone, Debug, PartialEq)]
+pub(crate) struct SurfaceTextureUnavailable {
+    pub resource_id: Vec<u8>,
+    pub modulate: bool,
+    pub vertex_override: bool,
+    pub back_vertex: bool,
 }

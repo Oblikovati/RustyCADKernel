@@ -13,14 +13,19 @@ pub(crate) fn apply_surface_lighting(
     context: &TextSceneContext<'_>,
 ) -> Result<(), RenderError> {
     let mut model = resolved_model(&**aspects, context.rendering.shading_model);
-    if draws
-        .iter()
-        .any(|draw| draw.surface_texture.as_ref().is_some_and(|t| !t.modulate))
-    {
+    if draws.iter().any(|draw| {
+        draw.surface_texture.as_ref().is_some_and(|t| !t.modulate)
+            || draw
+                .surface_texture_unavailable
+                .as_ref()
+                .is_some_and(|t| !t.modulate)
+    }) {
         model = Graphic3dTypeOfShadingModel::Unlit;
     }
     if model == Graphic3dTypeOfShadingModel::Unlit {
-        return if draws.iter().any(|draw| draw.surface_texture.is_some()) {
+        return if draws.iter().any(|draw| {
+            draw.surface_texture.is_some() || draw.surface_texture_unavailable.is_some()
+        }) {
             Ok(())
         } else {
             validate_unlit_surface(&**aspects)

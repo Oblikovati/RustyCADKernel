@@ -22,11 +22,7 @@ impl SampledSurfaceImage {
         let levels = sampled_levels(source);
         let format = sampled_format(source.encoding);
         validate_sampled_image(runtime, source, format, levels)?;
-        let extent = vk::Extent3D {
-            width: source.extent[0],
-            height: source.extent[1],
-            depth: 1,
-        };
+        let extent = sampled_surface_extent(source);
         let handle = create_sampled_image(runtime, extent, format, levels)?;
         let mut image = Self {
             runtime: runtime.clone(),
@@ -41,20 +37,7 @@ impl SampledSurfaceImage {
         Ok(Arc::new(image))
     }
     fn allocate(&mut self) -> Result<(), RenderError> {
-        let needs = unsafe {
-            self.runtime
-                .device()
-                .get_image_memory_requirements(self.handle)
-        };
-        let kind = self.runtime.memory_type(
-            needs.memory_type_bits,
-            vk::MemoryPropertyFlags::DEVICE_LOCAL,
-        )?;
-        let info = vk::MemoryAllocateInfo::default()
-            .allocation_size(needs.size)
-            .memory_type_index(kind);
-        self.memory = unsafe { self.runtime.device().allocate_memory(&info, None) }
-            .map_err(|e| vk_error("allocate sampled image", e))?;
+        self.memory = allocate_sampled_memory(&self.runtime, self.handle)?;
         unsafe {
             self.runtime
                 .device()
@@ -110,29 +93,14 @@ fn validate_sampled_image(
     format: vk::Format,
     levels: u32,
 ) -> Result<(), RenderError> {
-    if source.extent.contains(&0)
-        || source
-            .extent
-            .iter()
-            .any(|v| *v > runtime.limits.max_image_dimension2_d)
-    {
-        return Err(rejected(
-            source.extent,
-            "positive sampled dimensions within maxImageDimension2D",
-        ));
-    }
+    validate_sampled_extent(source.extent, runtime.limits.max_image_dimension2_d)?;
     let support = unsafe {
         runtime
             .instance
             .get_physical_device_format_properties(runtime.physical, format)
     }
     .optimal_tiling_features;
-    let mut required = vk::FormatFeatureFlags::SAMPLED_IMAGE | vk::FormatFeatureFlags::TRANSFER_DST;
-    if source.supplied_levels.is_empty() && levels > 1 {
-        required |= vk::FormatFeatureFlags::BLIT_SRC
-            | vk::FormatFeatureFlags::BLIT_DST
-            | vk::FormatFeatureFlags::SAMPLED_IMAGE_FILTER_LINEAR;
-    }
+    let required = required_sampled_features(source.supplied_levels.is_empty() && levels > 1);
     if !support.contains(required) {
         return Err(rejected(
             (format, support, required),
@@ -140,4 +108,61 @@ fn validate_sampled_image(
         ));
     }
     Ok(())
+}
+
+fn sampled_surface_extent(source: &SurfaceTextureImage) -> vk::Extent3D {
+    vk::Extent3D {
+        width: source.extent[0],
+        height: source.extent[1],
+        depth: 1,
+    }
+}
+fn allocate_sampled_memory(
+    runtime: &VulkanRuntime,
+    image: vk::Image,
+) -> Result<vk::DeviceMemory, RenderError> {
+    let needs = unsafe { runtime.device().get_image_memory_requirements(image) };
+    let kind = runtime.memory_type(
+        needs.memory_type_bits,
+        vk::MemoryPropertyFlags::DEVICE_LOCAL,
+    )?;
+    let info = vk::MemoryAllocateInfo::default()
+        .allocation_size(needs.size)
+        .memory_type_index(kind);
+    unsafe { runtime.device().allocate_memory(&info, None) }
+        .map_err(|e| vk_error("allocate sampled image", e))
+}
+fn validate_sampled_extent(extent: [u32; 2], maximum: u32) -> Result<(), RenderError> {
+    if extent.contains(&0) || extent.iter().any(|value| *value > maximum) {
+        return Err(rejected(
+            (extent, maximum),
+            "positive sampled dimensions within maxImageDimension2D",
+        ));
+    }
+    Ok(())
+}
+fn required_sampled_features(generate_mips: bool) -> vk::FormatFeatureFlags {
+    let mut features = vk::FormatFeatureFlags::SAMPLED_IMAGE
+        | vk::FormatFeatureFlags::TRANSFER_DST
+        | vk::FormatFeatureFlags::TRANSFER_SRC;
+    if generate_mips {
+        features |= vk::FormatFeatureFlags::BLIT_SRC
+            | vk::FormatFeatureFlags::BLIT_DST
+            | vk::FormatFeatureFlags::SAMPLED_IMAGE_FILTER_LINEAR;
+    }
+    features
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn sampled_extent_and_mip_feature_requirements_are_explicit_before_allocating() {
+        assert!(validate_sampled_extent([0, 4], 1024).is_err());
+        assert!(validate_sampled_extent([4, 2048], 1024).is_err());
+        assert!(validate_sampled_extent([4, 4], 1024).is_ok());
+        assert!(required_sampled_features(true).contains(
+            vk::FormatFeatureFlags::BLIT_SRC | vk::FormatFeatureFlags::SAMPLED_IMAGE_FILTER_LINEAR
+        ));
+        assert!(!required_sampled_features(false).contains(vk::FormatFeatureFlags::BLIT_SRC));
+    }
 }

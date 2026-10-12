@@ -9,57 +9,101 @@ use std::{
     collections::BTreeMap,
     sync::{Arc, Mutex},
 };
+enum SurfaceImageLoad {
+    Ready(SurfaceTextureImage),
+    Unavailable,
+    Empty,
+}
+type SurfaceSnapshotMap = BTreeMap<Vec<u8>, Arc<SurfaceTextureImage>>;
 #[derive(Default)]
 pub(crate) struct RetainedTextureImages {
-    images: Mutex<BTreeMap<Vec<u8>, Arc<SurfaceTextureImage>>>,
+    images: Mutex<SurfaceSnapshotMap>,
+    pub samplers: crate::retained_texture_samplers::RetainedTextureSamplers,
 }
 impl RetainedTextureImages {
+    /// Retire dead image handles without invalidating submitted snapshots; `cache.prune()?`.
+    pub fn prune(&self) -> Result<(), RenderError> {
+        self.images
+            .lock()
+            .map_err(|error| rejected(error.to_string(), "unpoisoned texture snapshot cache"))?
+            .retain(|_, image| image.lifetime.is_alive());
+        self.samplers.prune()
+    }
+    /// Freeze content at its native revision; `cache.snapshot(&texture)?`.
     pub fn snapshot(
         &self,
-        texture: &dyn Graphic3dTextureMap,
+        handle: &Handle<dyn Graphic3dTextureMap>,
     ) -> Result<Option<Arc<SurfaceTextureImage>>, RenderError> {
-        let id = texture.get_id().as_bytes().to_vec();
-        let revision = texture.revision();
+        let id = handle.get_id().as_bytes().to_vec();
+        let revision = handle.revision();
         let mut images = self
             .images
             .lock()
-            .map_err(|e| rejected(e.to_string(), "unpoisoned texture snapshot cache"))?;
+            .map_err(|error| rejected(error.to_string(), "unpoisoned texture snapshot cache"))?;
+        images.retain(|_, image| image.lifetime.is_alive());
         if let Some(image) = images
             .get(&id)
             .filter(|image| !id.is_empty() && image.revision == revision)
         {
+            image.lifetime.register(handle);
             return Ok(Some(image.clone()));
         }
-        let Some(image) = load_surface_image(texture, id.clone(), revision)? else {
-            return Ok(None);
-        };
-        let image = Arc::new(image);
-        if !id.is_empty() {
-            images.insert(id, image.clone());
-        }
-        Ok(Some(image))
+        cache_surface_snapshot(&mut images, handle, id, revision)
     }
+}
+fn cache_surface_snapshot(
+    images: &mut SurfaceSnapshotMap,
+    handle: &Handle<dyn Graphic3dTextureMap>,
+    id: Vec<u8>,
+    revision: usize,
+) -> Result<Option<Arc<SurfaceTextureImage>>, RenderError> {
+    let image = match load_surface_image(&**handle, id.clone(), revision)? {
+        SurfaceImageLoad::Ready(image) => image,
+        SurfaceImageLoad::Unavailable => return Ok(images.get(&id).cloned()),
+        SurfaceImageLoad::Empty => {
+            images.remove(&id);
+            return Ok(None);
+        }
+    };
+    image.lifetime.register(handle);
+    let image = Arc::new(image);
+    if !id.is_empty() {
+        images.insert(id, image.clone());
+    }
+    Ok(Some(image))
 }
 fn load_surface_image(
     texture: &dyn Graphic3dTextureMap,
     id: Vec<u8>,
     revision: usize,
-) -> Result<Option<SurfaceTextureImage>, RenderError> {
+) -> Result<SurfaceImageLoad, RenderError> {
     let supported = surface_supported_formats();
     if let Some(image) = texture.get_compressed_image(&supported).get() {
         return crate::surface_texture_compressed::snapshot_compressed_texture(
             image, texture, id, revision,
         )
-        .map(Some);
+        .map(SurfaceImageLoad::Ready);
     }
     let handle = texture.get_image(&supported);
-    let Some(image) = handle.get().filter(|image| !image.is_empty()) else {
-        return Ok(None);
+    let Some(image) = handle.get() else {
+        return Ok(SurfaceImageLoad::Unavailable);
     };
+    if image.is_empty() {
+        return Ok(SurfaceImageLoad::Empty);
+    }
+    snapshot_uncompressed_image(image, texture, id, revision).map(SurfaceImageLoad::Ready)
+}
+fn snapshot_uncompressed_image(
+    image: &ImagePixMap,
+    texture: &dyn Graphic3dTextureMap,
+    id: Vec<u8>,
+    revision: usize,
+) -> Result<SurfaceTextureImage, RenderError> {
     let (encoding, bytes) = snapshot_surface_pixels(image, texture.is_color_map())?;
     let width = u32::try_from(image.width()).map_err(|e| rejected(e, "32bit texture width"))?;
     let height = u32::try_from(image.height()).map_err(|e| rejected(e, "32bit texture height"))?;
-    Ok(Some(SurfaceTextureImage {
+    Ok(SurfaceTextureImage {
+        lifetime: Arc::default(),
         id,
         revision,
         extent: [width, height],
@@ -68,7 +112,7 @@ fn load_surface_image(
         top_down: image.is_top_down(),
         mipmaps: texture.has_mipmaps(),
         supplied_levels: vec![],
-    }))
+    })
 }
 fn surface_supported_formats() -> Handle<ImageSupportedFormats> {
     let formats = Handle::new(ImageSupportedFormats::default());
@@ -85,7 +129,17 @@ fn surface_supported_formats() -> Handle<ImageSupportedFormats> {
     }
     formats
 }
-
+/// Reclaim snapshots even when the next view is empty; `prune_view_texture_snapshots(view)?`.
+pub(crate) fn prune_view_texture_snapshots(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
+    let driver = view
+        .structure_manager()
+        .graphic_driver()
+        .cast::<crate::Graphic3dRenderDriver>();
+    if let Some(driver) = driver.get() {
+        driver.texture_images.prune()?;
+    }
+    Ok(())
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -96,39 +150,73 @@ mod tests {
         image
     }
     #[test]
-    fn set_image_requires_content_revision_and_sampler_updates_reuse_upload() {
-        let texture = Graphic3dTexture2D::from_pix_map(one_pixel(255));
+    fn null_replacement_retains_native_content_but_empty_replacement_releases_and_repairs() {
+        let texture = Handle::new(Graphic3dTexture2D::from_pix_map(one_pixel(255)));
         let cache = RetainedTextureImages::default();
-        let first = cache.snapshot(&texture).unwrap().unwrap();
+        let original = cache.snapshot(&texture.cast()).unwrap().unwrap();
+        texture.set_image(Handle::default());
+        texture.update_revision();
+        assert!(Arc::ptr_eq(
+            &original,
+            &cache.snapshot(&texture.cast()).unwrap().unwrap()
+        ));
+        texture.set_image(Handle::new(ImagePixMap::default()));
+        texture.update_revision();
+        assert!(cache.snapshot(&texture.cast()).unwrap().is_none());
+        assert!(cache.images.lock().unwrap().is_empty());
+        texture.set_image(one_pixel(64));
+        texture.update_revision();
+        assert_eq!(
+            *cache.snapshot(&texture.cast()).unwrap().unwrap().bytes,
+            vec![64, 0, 0, 255]
+        );
+        assert_eq!(*original.bytes, vec![255, 0, 0, 255]);
+    }
+    #[test]
+    fn dead_texture_owners_are_reclaimed_while_existing_snapshots_remain_valid() {
+        let texture = Handle::new(Graphic3dTexture2D::from_pix_map(one_pixel(255)));
+        let cache = RetainedTextureImages::default();
+        let prior = cache.snapshot(&texture.cast()).unwrap().unwrap();
+        assert_eq!(cache.images.lock().unwrap().len(), 1);
+        drop(texture);
+        cache.prune().unwrap();
+        assert!(cache.images.lock().unwrap().is_empty());
+        assert_eq!(*prior.bytes, vec![255, 0, 0, 255]);
+    }
+    #[test]
+    fn set_image_requires_content_revision_and_sampler_updates_reuse_upload() {
+        let texture = Handle::new(Graphic3dTexture2D::from_pix_map(one_pixel(255)));
+        let cache = RetainedTextureImages::default();
+        let first = cache.snapshot(&texture.cast()).unwrap().unwrap();
         texture.set_image(one_pixel(64));
         texture.get_params().set_repeat(false);
         texture
             .get_params()
             .set_filter(Graphic3dTypeOfTextureFilter::Nearest);
-        let stale = cache.snapshot(&texture).unwrap().unwrap();
+        let stale = cache.snapshot(&texture.cast()).unwrap().unwrap();
         assert!(Arc::ptr_eq(&first, &stale));
         assert_eq!(*stale.bytes, vec![255, 0, 0, 255]);
         texture.update_revision();
-        let updated = cache.snapshot(&texture).unwrap().unwrap();
+        let updated = cache.snapshot(&texture.cast()).unwrap().unwrap();
         assert!(!Arc::ptr_eq(&first, &updated));
         assert_eq!(*updated.bytes, vec![64, 0, 0, 255]);
         assert_eq!(updated.revision, first.revision + 1);
     }
     #[test]
     fn failed_image_is_not_cached_and_metadata_changes_require_revision() {
-        let texture = Graphic3dTexture2D::from_pix_map(Handle::default());
+        let texture = Handle::new(Graphic3dTexture2D::from_pix_map(Handle::default()));
         let cache = RetainedTextureImages::default();
-        assert!(cache.snapshot(&texture).unwrap().is_none());
+        assert!(cache.snapshot(&texture.cast()).unwrap().is_none());
         texture.set_image(one_pixel(127));
-        let first = cache.snapshot(&texture).unwrap().unwrap();
+        let first = cache.snapshot(&texture.cast()).unwrap().unwrap();
         texture.set_color_map(false);
         texture
             .get_image(&surface_supported_formats())
             .set_top_down(false);
-        let stale = cache.snapshot(&texture).unwrap().unwrap();
+        let stale = cache.snapshot(&texture.cast()).unwrap().unwrap();
         assert!(Arc::ptr_eq(&first, &stale));
         texture.update_revision();
-        let updated = cache.snapshot(&texture).unwrap().unwrap();
+        let updated = cache.snapshot(&texture.cast()).unwrap().unwrap();
         assert_eq!(updated.encoding, SurfaceImageEncoding::Linear8);
         assert!(!updated.top_down);
     }

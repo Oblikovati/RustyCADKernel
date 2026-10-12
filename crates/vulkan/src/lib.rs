@@ -96,7 +96,9 @@ pub use polygon_offset::RenderPolygonOffset;
 
 mod retained_surface_texture;
 mod retained_texture_images;
+mod retained_texture_samplers;
 mod surface_texture;
 mod surface_texture_compressed;
+mod surface_texture_lifetime;
 mod surface_texture_pixels;
 mod surface_texture_uv;

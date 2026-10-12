@@ -8,36 +8,62 @@ pub(crate) fn snapshot_compressed_texture(
     id: Vec<u8>,
     revision: usize,
 ) -> Result<SurfaceTextureImage, RenderError> {
+    let source = read_compressed_surface(image, texture)?;
+    Ok(SurfaceTextureImage {
+        lifetime: Arc::default(),
+        id,
+        revision,
+        extent: source.extent,
+        encoding: source.encoding,
+        bytes: Arc::new(source.bytes),
+        top_down: true,
+        mipmaps: source.levels.len() > 1,
+        supplied_levels: source.levels,
+    })
+}
+struct CompressedSurfaceSource {
+    extent: [u32; 2],
+    encoding: SurfaceImageEncoding,
+    bytes: Vec<u8>,
+    levels: Vec<usize>,
+}
+fn read_compressed_surface(
+    image: &ImageCompressedPixMap,
+    texture: &dyn Graphic3dTextureMap,
+) -> Result<CompressedSurfaceSource, RenderError> {
     let encoding = compressed_encoding(image.compressed_format(), texture.is_color_map())?;
-    let levels = image
-        .mip_maps()
-        .into_iter()
-        .map(|v| usize::try_from(v).map_err(|_| rejected(v, "positive compressed mip bytes")))
-        .collect::<Result<Vec<_>, _>>()?;
-    let buffer = image.face_data();
-    let bytes = buffer
-        .get()
-        .ok_or_else(|| rejected("null DDS data", "allocated compressed face"))?
-        .as_slice()
-        .to_vec();
+    let levels = compressed_level_bytes(image)?;
+    let bytes = compressed_face_bytes(image)?;
     let extent = compressed_extent(image.size_x(), image.size_y())?;
     validate_compressed_levels(extent, encoding, &levels)?;
-    if extent.contains(&0) || levels.is_empty() || levels.iter().sum::<usize>() != bytes.len() {
+    if levels.is_empty() || levels.iter().sum::<usize>() != bytes.len() {
         return Err(rejected(
             (extent, levels, bytes.len()),
             "complete compressed 2D image mip buffers",
         ));
     }
-    Ok(SurfaceTextureImage {
-        id,
-        revision,
+    Ok(CompressedSurfaceSource {
         extent,
         encoding,
-        bytes: Arc::new(bytes),
-        top_down: true,
-        mipmaps: levels.len() > 1,
-        supplied_levels: levels,
+        bytes,
+        levels,
     })
+}
+fn compressed_level_bytes(image: &ImageCompressedPixMap) -> Result<Vec<usize>, RenderError> {
+    image
+        .mip_maps()
+        .into_iter()
+        .map(|length| {
+            usize::try_from(length).map_err(|_| rejected(length, "positive compressed mip bytes"))
+        })
+        .collect()
+}
+fn compressed_face_bytes(image: &ImageCompressedPixMap) -> Result<Vec<u8>, RenderError> {
+    let handle = image.face_data();
+    let face = handle
+        .get()
+        .ok_or_else(|| rejected("null DDS data", "allocated compressed face"))?;
+    Ok(face.as_slice().to_vec())
 }
 fn compressed_encoding(
     format: ImageCompressedFormat,
@@ -72,27 +98,42 @@ fn validate_compressed_levels(
             "nonzero compressed extent with valid mip count",
         ));
     }
-    let block = if matches!(
-        encoding,
-        SurfaceImageEncoding::Bc1Rgb(_) | SurfaceImageEncoding::Bc1Rgba(_)
-    ) {
-        8
-    } else {
-        16
-    };
     for (level, length) in levels.iter().enumerate() {
-        let width = (extent[0] >> level).max(1).div_ceil(4) as usize;
-        let height = (extent[1] >> level).max(1).div_ceil(4) as usize;
-        let expected = width.checked_mul(height).and_then(|v| v.checked_mul(block));
-        if expected != Some(*length) {
-            return Err(rejected(
-                (level, length, expected),
-                "complete BC mip block bytes",
-            ));
-        }
+        validate_bc_mip_size(extent, encoding, level, *length)?;
     }
     Ok(())
 }
+fn validate_bc_mip_size(
+    extent: [u32; 2],
+    encoding: SurfaceImageEncoding,
+    level: usize,
+    length: usize,
+) -> Result<(), RenderError> {
+    let block = compressed_block_bytes(encoding);
+    let width = (extent[0] >> level).max(1).div_ceil(4) as usize;
+    let height = (extent[1] >> level).max(1).div_ceil(4) as usize;
+    let expected = width
+        .checked_mul(height)
+        .and_then(|value| value.checked_mul(block));
+    if expected != Some(length) {
+        return Err(rejected(
+            (level, length, expected),
+            "complete BC mip block bytes",
+        ));
+    }
+    Ok(())
+}
+
+fn compressed_block_bytes(encoding: SurfaceImageEncoding) -> usize {
+    if matches!(
+        encoding,
+        SurfaceImageEncoding::Bc1Rgb(_) | SurfaceImageEncoding::Bc1Rgba(_)
+    ) {
+        return 8;
+    }
+    16
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

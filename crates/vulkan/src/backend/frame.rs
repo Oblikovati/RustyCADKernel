@@ -40,6 +40,7 @@ impl FrameResources {
         frame: &RenderFrame,
         pipeline: &RasterPipelines,
     ) -> Result<Self, RenderError> {
+        pipeline.surface_images.prune()?;
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
             width: frame.width,
@@ -145,6 +146,9 @@ fn upload_draw(
             )
         })
         .transpose()?;
+    if let Some(unavailable) = &draw.surface_texture_unavailable {
+        pipelines.surface_images.forget(&unavailable.resource_id)?;
+    }
     let surface_image = draw
         .surface_texture
         .as_ref()
@@ -234,7 +238,10 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
-        if draw.surface_texture.is_some() || draw.surface_cutoff.is_some() {
+        if draw.surface_texture.is_some()
+            || draw.surface_cutoff.is_some()
+            || draw.surface_texture_unavailable.is_some()
+        {
             let uv = draw
                 .surface_texture
                 .as_ref()
@@ -273,9 +280,14 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         bytes.extend(style.alpha_cutoff.to_ne_bytes());
         bytes.extend(0u32.to_ne_bytes());
     }
-    if draw.surface_texture.is_some() || draw.surface_cutoff.is_some() {
+    if draw.surface_texture.is_some()
+        || draw.surface_cutoff.is_some()
+        || draw.surface_texture_unavailable.is_some()
+    {
         let flags = draw.surface_texture.as_ref().map_or(0, |s| {
             1 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
+        }) + draw.surface_texture_unavailable.as_ref().map_or(0, |s| {
+            16 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
         }) + 8 * u32::from(draw.surface_cutoff.is_some());
         bytes.extend(draw.surface_cutoff.unwrap_or(0.).to_ne_bytes());
         bytes.extend(flags.to_ne_bytes());

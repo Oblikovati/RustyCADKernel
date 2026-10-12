@@ -126,7 +126,8 @@ impl RasterPipelines {
         })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        if draw.surface_texture.is_some()
+        if draw.surface_texture_unavailable.is_some()
+            || draw.surface_texture.is_some()
             || draw.surface_cutoff.is_some()
             || draw.surface_forced_blend
             || draw.lighting.is_some()
@@ -144,10 +145,7 @@ impl RasterPipelines {
         })
     }
     fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        let index = variant_index(draw)
-            + 64 * usize::from(draw.lighting.is_some())
-            + 128 * usize::from(draw.surface_texture.is_some())
-            + 256 * usize::from(draw.surface_cutoff.is_some());
+        let index = special_variant_key(draw);
         let mut variants = self
             .special_variants
             .lock()
@@ -155,18 +153,45 @@ impl RasterPipelines {
         if let Some(pipeline) = variants.get(&index) {
             return Ok(pipeline.clone());
         }
-        let mut kind = PipelineVariant::from_index(index % 64, self.stencil);
-        kind.lighting = draw.lighting.is_some();
-        kind.surface_texture = draw.surface_texture.is_some();
-        kind.surface_alpha = draw.surface_cutoff.is_some();
-        kind.capping = draw.capping_pass;
-        if kind.clamp && !self.runtime.depth_clamp {
-            return Err(rejected(true, "device depth-clamp support"));
-        }
+        let kind = special_variant(draw, self.stencil);
+        validate_special_features(kind, self.runtime.depth_clamp, self.runtime.lines.bresenham)?;
         let pipeline = Arc::new(DrawPipeline::new(&self.runtime, kind)?);
         variants.insert(index, pipeline.clone());
         Ok(pipeline)
     }
+}
+fn special_variant_key(draw: &PrimitiveDraw) -> usize {
+    variant_index(draw)
+        + 64 * usize::from(draw.lighting.is_some())
+        + 128 * usize::from(draw.surface_texture.is_some())
+        + 256 * usize::from(draw.surface_cutoff.is_some())
+        + 512 * usize::from(draw.surface_texture_unavailable.is_some())
+        + 1024 * (draw.capping_pass as usize)
+}
+fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
+    let mut kind = PipelineVariant::from_index(variant_index(draw), stencil);
+    kind.lighting = draw.lighting.is_some();
+    kind.surface_texture = draw.surface_texture.is_some();
+    kind.surface_alpha =
+        draw.surface_cutoff.is_some() || draw.surface_texture_unavailable.is_some();
+    kind.capping = draw.capping_pass;
+    kind
+}
+fn validate_special_features(
+    kind: PipelineVariant,
+    depth_clamp: bool,
+    bresenham: bool,
+) -> Result<(), RenderError> {
+    if kind.clamp && !depth_clamp {
+        return Err(rejected(kind.clamp, "device depth-clamp support"));
+    }
+    if kind.line && !bresenham {
+        return Err(rejected(
+            kind.line,
+            "device Bresenham line-rasterization support",
+        ));
+    }
+    Ok(())
 }
 fn variant_index(draw: &PrimitiveDraw) -> usize {
     if let Some(index) = alpha_variant_index(draw) {
@@ -313,5 +338,33 @@ mod subtitle_pipeline_tests {
         assert!(kind.surface_blend && !kind.text && !kind.line);
         draw.text_background_blend = false;
         assert_eq!(variant_index(&draw), 0);
+    }
+}
+
+#[cfg(test)]
+mod surface_variant_tests {
+    use super::*;
+    #[test]
+    fn surface_mask_blend_keeps_ordered_depth_and_independent_capping_identity() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        draw.surface_cutoff = Some(0.5);
+        draw.surface_forced_blend = true;
+        let ordinary = special_variant_key(&draw);
+        let kind = special_variant(&draw, true);
+        assert!(kind.surface_alpha && kind.surface_blend && !draw.surface_blend);
+        draw.capping_pass = RenderCappingPass::Surface;
+        assert_ne!(ordinary, special_variant_key(&draw));
+        assert_eq!(
+            special_variant(&draw, true).capping,
+            RenderCappingPass::Surface
+        );
+    }
+    #[test]
+    fn unsupported_special_line_and_clamp_features_fail_before_pipeline_creation() {
+        let mut kind = PipelineVariant::from_index(32, false);
+        assert!(validate_special_features(kind, true, false).is_err());
+        assert!(validate_special_features(kind, true, true).is_ok());
+        kind.clamp = true;
+        assert!(validate_special_features(kind, false, true).is_err());
     }
 }

@@ -1,0 +1,30 @@
+{
+  "project": "Martensite",
+  "oracle_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "oracle": "OpenGl retained Graphic3d_Texture2D actual64x64 Default-layer SOLID surfaces",
+  "native_renderer": "OCCT_GL_RENDERER=AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)",
+  "image_loader": "USE_FREEIMAGE=OFF; in-memory pixels and compressed-first DDS do not require codecs",
+  "software_native": "LLVM oracle SIGSEGV139; no same-profile native asset claim",
+  "replay": "These AMD-native buffers also pass strict RGBA/depth replay on Vulkan lavapipe; broader filtered matrices retain failures",
+  "sha256": {
+    "bc1-base-level.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "mask-exact.rgba": "ef7bac826edb4b1002867cf3838729d2547c8de76236a38ec44cc4d25a49b2ee",
+    "bc1-base-level.rgba": "f584fa27fa902d8a68449bf4da2df0f64a751a7ec33b16c431146ca371e81e5e",
+    "bc1-minified.rgba": "c34fb4331b2d031d7c644860b54a678424c66ef12352fc165a91dc09840d98fd",
+    "nearest.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "bc3.rgba": "ef7bac826edb4b1002867cf3838729d2547c8de76236a38ec44cc4d25a49b2ee",
+    "bc1-rgb.rgba": "ef7bac826edb4b1002867cf3838729d2547c8de76236a38ec44cc4d25a49b2ee",
+    "bc1-rgba.rgba": "ef7bac826edb4b1002867cf3838729d2547c8de76236a38ec44cc4d25a49b2ee",
+    "bc1-rgb.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "bc3.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "mask-exact.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "bc2.rgba": "ef7bac826edb4b1002867cf3838729d2547c8de76236a38ec44cc4d25a49b2ee",
+    "bc1-minified.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "nearest.rgba": "45ef03cb57b0d8686712ac9ed248feb8ea3d6a1aa589aa666e2c9f4cab9b62bf",
+    "bc1-rgba.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc",
+    "bc2.depth": "2a34f977e0e00ef032e13bf474541ec4197b348a969534b365a28495356122dc"
+  },
+  "capture_source_sha256": "5567dbccd7598ad91698e8b9996a083056b0cff16aca29d574a7b59e4e245efa",
+  "capture_binary_sha256": "e8ae5116231ebc89ebe737f439c98661461ef5eb21bd959e18fa05d13fac8d73",
+  "final_recapture": "All eight native buffers recaptured byte-identically with the final source/binary; functional matrix retains all 68 variants and strict failures."
+}

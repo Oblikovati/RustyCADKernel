@@ -1,0 +1,32 @@
+import gzip, hashlib, json, os, re, struct, subprocess, sys, time
+from pathlib import Path
+ROOT=Path('/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-standard-textures')
+sys.path.insert(0,str(ROOT/'tools'))
+from vulkan_capture_artifacts import FileCaptureStore, export_comparison
+from vulkan_capture_compare import depth_delta
+folder=Path('/tmp/martensite-standard-textures/final');folder.mkdir(exist_ok=True)
+source=(ROOT/'crates/vulkan/tests/support/surface_texture_modes.rs').read_text().split('];')[0]
+modes=re.findall(r'^    "([^"]+)",',source,re.M)
+formats=[p.stem for p in sorted((ROOT/'crates/vulkan/tests/fixtures/surface_textures').glob('*.pixels')) if p.stem!='cutoff']
+modes += ['format-'+name for name in formats]
+base=dict(os.environ,DISPLAY=':1',MARTENSITE_VULKAN_DEVICE='0')
+commands=[]
+for profile,executable,extra in [('native-amd',Path('/tmp/martensite-standard-textures/surface-oracle-final'),{}),('host',ROOT/'target/debug/examples/surface_texture_capture',{'VK_DRIVER_FILES':'/usr/share/vulkan/icd.d/radeon_icd.json'}),('software',ROOT/'target/debug/examples/surface_texture_capture',{'VK_DRIVER_FILES':'/usr/share/vulkan/icd.d/lvp_icd.json'})]:
+ for mode in modes:
+  prefix=folder/(profile+'-'+mode)
+  start=time.time()
+  result=subprocess.run([str(executable),mode,str(prefix)],cwd=ROOT,env=dict(base,**extra),stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+  prefix.with_suffix('.log').write_bytes(result.stdout)
+  commands.append({'profile':profile,'mode':mode,'exit':result.returncode,'duration_s':time.time()-start,'executable_sha256':hashlib.sha256(executable.read_bytes()).hexdigest()})
+  if result.returncode: raise RuntimeError(commands[-1])
+rows=[]
+for profile in ['host','software']:
+ for mode in modes:
+  native=folder/('native-amd-'+mode);ported=folder/(profile+'-'+mode)
+  row=export_comparison(profile+'-'+mode,64,64,native,ported,FileCaptureStore())
+  a=Path(str(native)+'.rgba').read_bytes();b=Path(str(ported)+'.rgba').read_bytes()
+  row.update(profile=profile,mode=mode,color_mismatch_pixels=sum(a[i:i+4]!=b[i:i+4] for i in range(0,len(a),4)),maximum_channel_delta=max(abs(x-y) for x,y in zip(a,b)),maximum_depth_delta=depth_delta(mode,4096,Path(str(native)+'.depth').read_bytes(),Path(str(ported)+'.depth').read_bytes()))
+  rows.append(row)
+receipt={'modes':modes,'commands':commands,'comparisons':rows,'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'native_software':'Earlier configured LLVM GL probe SIGSEGV139; AMD-native buffers replayed, no same-profile software-oracle claim.'}
+(folder/'functional.json').write_text(json.dumps(receipt,indent=2)+'\n')
+print(json.dumps({p:{'strict_pass':sum(r['status']=='passed' for r in rows if r['profile']==p),'total':len(modes),'failed_modes':[r['mode'] for r in rows if r['profile']==p and r['status']!='passed']} for p in ['host','software']}))

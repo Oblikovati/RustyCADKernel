@@ -74,18 +74,7 @@ impl SurfaceImageBinding {
             .set_layouts(&layouts);
         self.set = unsafe { runtime.device().allocate_descriptor_sets(&info) }
             .map_err(|e| vk_error("allocate surface image set", e))?[0];
-        let images = [vk::DescriptorImageInfo::default()
-            .sampler(self.sampler)
-            .image_view(self.view)
-            .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)];
-        let writes = [vk::WriteDescriptorSet::default()
-            .dst_set(self.set)
-            .dst_binding(0)
-            .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
-            .image_info(&images)];
-        unsafe {
-            runtime.device().update_descriptor_sets(&writes, &[]);
-        }
+        write_surface_descriptor(runtime, self.set, self.view, self.sampler);
         Ok(())
     }
 }
@@ -115,4 +104,24 @@ fn create_image_pool(runtime: &VulkanRuntime) -> Result<vk::DescriptorPool, Rend
         .pool_sizes(&sizes);
     unsafe { runtime.device().create_descriptor_pool(&info, None) }
         .map_err(|e| vk_error("create surface image pool", e))
+}
+
+fn write_surface_descriptor(
+    runtime: &VulkanRuntime,
+    set: vk::DescriptorSet,
+    view: vk::ImageView,
+    sampler: vk::Sampler,
+) {
+    let images = [vk::DescriptorImageInfo::default()
+        .sampler(sampler)
+        .image_view(view)
+        .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)];
+    let writes = [vk::WriteDescriptorSet::default()
+        .dst_set(set)
+        .dst_binding(0)
+        .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+        .image_info(&images)];
+    unsafe {
+        runtime.device().update_descriptor_sets(&writes, &[]);
+    }
 }

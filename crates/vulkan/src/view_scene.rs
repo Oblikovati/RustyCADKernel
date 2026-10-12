@@ -10,6 +10,7 @@ pub(crate) fn frame_for_view(
     extent: [u32; 2],
 ) -> Result<RenderFrame, RenderError> {
     validate_view(view)?;
+    crate::retained_texture_images::prune_view_texture_snapshots(view)?;
     let camera = view.camera();
     let mut layers = view.layers();
     // OpenGl_FilteredIndexedLayerIterator at the pinned baseline renders normal layers before immediate ones.
