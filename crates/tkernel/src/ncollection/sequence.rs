@@ -7,10 +7,12 @@ use topology::SequenceTopology;
 /// Allocator-owned one-based sequence; `let mut s = Sequence::default(); s.append(1);`.
 pub struct Sequence<T> {
     topology: SequenceTopology,
-    owners: SequenceNodeOwners<T>,
+    // Native clearing observers need a stable registry address even when Sequence itself moves.
+    owners: Box<SequenceNodeOwners<T>>,
 }
 /// Shared double-ended iterator in index order; `sequence.iter()`.
 pub struct SequenceIter<'a, T> {
+    owners: &'a SequenceNodeOwners<T>,
     front: *mut SeqNode,
     back: *mut SeqNode,
     remaining: usize,
@@ -18,6 +20,7 @@ pub struct SequenceIter<'a, T> {
 }
 /// Exclusive double-ended iterator in index order; `sequence.iter_mut()`.
 pub struct SequenceIterMut<'a, T> {
+    owners: &'a SequenceNodeOwners<T>,
     front: *mut SeqNode,
     back: *mut SeqNode,
     remaining: usize,
@@ -37,7 +40,7 @@ impl<T> Sequence<T> {
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
             topology: SequenceTopology::new(resource),
-            owners: SequenceNodeOwners::new(),
+            owners: Box::default(),
         }
     }
     /// Returns selected allocator identity; `sequence.allocator() == &arena`.
@@ -183,6 +186,19 @@ pub use base_storage::{BaseSequence, BaseSequenceRawIterator, DelSeqNode};
 #[allow(unsafe_code)]
 mod assignment;
 mod borrowed;
+// Prepared owners let collection adapters release their guards before native allocation callbacks.
+#[allow(unsafe_code)]
+mod prepared_node;
+pub use prepared_node::SequencePreparedNode;
+// Detached owners preserve native removal order without holding adapters' field guards during Drop.
+mod current_release;
+#[allow(unsafe_code)]
+mod retired_node;
+pub use retired_node::SequenceNodeRetirement;
+// Controlled clearing keeps real old metadata while adapters release payloads outside guards.
+#[allow(unsafe_code)]
+mod controlled_clear;
+pub use controlled_clear::SequenceClearProgress;
 mod copy_assignment;
 mod copy_construction;
 mod cursor_contracts;
@@ -224,3 +240,8 @@ pub use topology::{SequenceBaseAccess, SequenceObservation, SequenceObserver};
 #[allow(unsafe_code)]
 mod native_cursor;
 pub use native_cursor::{SequenceCursorObserver, SequenceNativeCursor};
+
+#[cfg(test)]
+mod current_native_fixture;
+#[cfg(test)]
+mod current_native_replay;

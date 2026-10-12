@@ -7,6 +7,12 @@ mod circular_grid;
 mod computed_structure;
 mod enums;
 mod grid_common;
+#[allow(unsafe_code)] // The public native const-char field has an anchored foreign-pointer seam.
+mod light_name;
+#[cfg(test)]
+mod light_name_callback_fixture;
+#[cfg(test)]
+mod light_name_callback_tests;
 mod lights;
 mod package;
 mod plane;
@@ -64,6 +70,7 @@ mod viewer_plane;
 pub use circular_grid::V3dCircularGrid;
 pub use computed_structure::{V3dComputedStructure, V3dStructureComputer};
 pub use enums::*;
+pub use light_name::V3dLightName;
 pub use lights::{
     V3dAmbientLight, V3dDirectionalLight, V3dPositionLight, V3dPositionalLight, V3dSpotLight,
 };

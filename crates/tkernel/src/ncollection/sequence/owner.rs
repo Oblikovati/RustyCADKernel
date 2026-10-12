@@ -27,6 +27,15 @@ impl<T> SequenceNodeOwner<T> {
     }
 }
 impl<T> SequenceNodeOwner<T> {
+    pub(super) unsafe fn retire_using(self, current: impl FnOnce() -> BaseAllocator) {
+        let owner = std::mem::ManuallyDrop::new(self);
+        // SAFETY: ownership is transferred once; the suppressed owner cannot release it twice.
+        let original = unsafe { std::ptr::read(&owner.allocator) };
+        // SAFETY: caller supplies a compatible resource after payload callbacks finish.
+        unsafe {
+            super::current_release::release(owner.link.cast::<SequenceNode<T>>(), original, current)
+        };
+    }
     pub(super) fn abandon(self) {
         let owner = std::mem::ManuallyDrop::new(self);
         // Native failed sequence construction does not destroy completed nodes. No item

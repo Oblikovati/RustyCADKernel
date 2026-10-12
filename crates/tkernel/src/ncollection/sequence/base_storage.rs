@@ -3,9 +3,11 @@ use super::{BaseAllocator, SeqNode};
 use crate::standard::Failure;
 mod insertion;
 mod iterator;
+mod node_liveness;
 mod removal;
 mod reorder;
 pub use iterator::BaseSequenceRawIterator;
+pub(super) use node_liveness::SequenceNodeLiveness;
 
 /// Native deletion callback type; `let delete: DelSeqNode = Sequence::<i32>::del_node`.
 pub type DelSeqNode = unsafe fn(*mut SeqNode, &mut BaseAllocator);
@@ -15,6 +17,7 @@ pub type DelSeqNode = unsafe fn(*mut SeqNode, &mut BaseAllocator);
 /// Raw operations require exclusive, live, well-formed links. Drop never deletes nodes,
 /// matching the native base destructor; subclasses must explicitly call clear_seq.
 pub struct BaseSequence {
+    pub(super) clear_node_scope: Option<SequenceNodeLiveness>,
     /// Native protected allocator for derived-class composition.
     pub allocator: BaseAllocator,
     /// Native protected first link; raw operations require consistent metadata.
@@ -37,6 +40,7 @@ impl BaseSequence {
     /// Uses the common allocator when no resource is supplied; `BaseSequence::new(Some(arena))`.
     pub fn new(allocator: Option<BaseAllocator>) -> Self {
         Self {
+            clear_node_scope: None,
             allocator: allocator.unwrap_or_default(),
             first: std::ptr::null_mut(),
             last: std::ptr::null_mut(),
@@ -96,11 +100,12 @@ impl BaseSequence {
     pub unsafe fn find(&self, index: usize) -> *mut SeqNode {
         let (mut node, start) = self.search_origin(index);
         for _ in index..start {
-            node = unsafe { (*node).previous() };
+            node = unsafe { self.guarded_link(node).previous() };
         }
         for _ in start..index {
-            node = unsafe { (*node).next() };
+            node = unsafe { self.guarded_link(node).next() };
         }
+        self.require_live_link(node);
         node
     }
     fn search_origin(&self, index: usize) -> (*mut SeqNode, usize) {
@@ -125,7 +130,7 @@ impl BaseSequence {
         }
         Ok(())
     }
-    fn nullify(&mut self) {
+    pub(super) fn nullify(&mut self) {
         self.first = std::ptr::null_mut();
         self.last = std::ptr::null_mut();
         self.current = std::ptr::null_mut();

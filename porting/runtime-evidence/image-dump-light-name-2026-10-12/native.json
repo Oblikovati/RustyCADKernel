@@ -1,0 +1,99 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "header_source_hashes": {
+    "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+    "src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.hxx": "5ce11a239588c7bcdfe62652b4152ea0f283207909c125772ed737e833fe6e3c",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.lxx": "47aa5de12a3e74380006b3d31d43bbbb41cc23bab8529f7c8cc99fc8f11d8188",
+    "src/FoundationClasses/TKernel/TCollection/TCollection_AsciiString.cxx": "e31486afffb8c13e128fee2f903646f47573309ea17392b9ccb21c5f3e3b003a"
+  },
+  "library_hashes": {
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24"
+  },
+  "original_V3d_include_first": true,
+  "original_TCollection_include_first_for_pointer_probe": true,
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "probes": [
+    {
+      "source": "tools/oracle/martensite_image_dump_light_name.cxx",
+      "source_sha256": "e4aa7b847b39cdbf6ba8ddbf25389189e129eaf8d40312074829284773524814",
+      "executable_sha256": "d0c8c6d010c82caf14552af41f908f6c5cabf7d27205f9c644095484d78e1ff9",
+      "runs": 2,
+      "exits": [
+        0,
+        0
+      ]
+    },
+    {
+      "source": "tools/oracle/martensite_light_name_dump_boundary.cxx",
+      "source_sha256": "ddea1be36283aca25d182e8b6f3800963dc1f88ff79116528dfeedf1697dd52d",
+      "executable_sha256": "b43f8ed4e3d134013ec54db26ff3fc46a5bd7efe6559346f646453c71e88932c",
+      "runs": 2,
+      "exits": [
+        0,
+        0
+      ]
+    },
+    {
+      "source": "tools/oracle/martensite_light_name_redraw_callback.cxx",
+      "source_sha256": "2b2ecf77906e21f38cda75eaebae020a58d0cc168e02502479f2320cec8d0b21",
+      "executable_sha256": "9e7869b1e9e32f685f3bc0b98fed20dd6a1d62d6d573f2927ffa63e37dd71471",
+      "runs": 2,
+      "exits": [
+        0,
+        0
+      ]
+    }
+  ],
+  "schema_extraction": [
+    {
+      "probe": "boundary",
+      "extraction": "UTF8 decode raw stdout+stderr, splitlines, retain exact record-label prefix tuple, append LF; preserve all raw messenger/ANSI lines separately",
+      "prefix_tuple": [
+        "rgb-null ",
+        "shadow-null ",
+        "shadow-bytes "
+      ],
+      "fixture": "crates/tkv3d/tests/fixtures/light-name-dump-boundary-native.txt",
+      "fixture_sha256": "00a5f2fe2db1b7207558f5df6417e0a426ec98bf14cd172ad156bcddbbc3bdbf",
+      "record_count": 3,
+      "filtered_asset_is_not_raw_stdout": true,
+      "raw_repeats_byte_identical": true
+    },
+    {
+      "probe": "callback",
+      "extraction": "UTF8 decode raw stdout+stderr, splitlines, retain exact record-label prefix tuple, append LF; preserve all raw messenger/ANSI lines separately",
+      "prefix_tuple": [
+        "consumed ",
+        "after "
+      ],
+      "fixture": "crates/tkv3d/tests/fixtures/light-name-redraw-callback-native.txt",
+      "fixture_sha256": "be9c456de31189aa46748506fc9a2787abe0eb11b823c0d70d4585a2d964936e",
+      "record_count": 2,
+      "filtered_asset_is_not_raw_stdout": true,
+      "raw_repeats_byte_identical": true
+    }
+  ],
+  "pointer_fixture_rows": 13,
+  "prior_value_fixture_rows": 15,
+  "all_platform_credit": false,
+  "compile_commands": {
+    "pointer": [
+      "c++",
+      "-std=c++17",
+      "-I../OCCT/src/Visualization/TKV3d/V3d",
+      "-I../OCCT/src/FoundationClasses/TKernel/TCollection",
+      "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_image_dump_light_name.cxx",
+      "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKernel",
+      "-o",
+      "/tmp/martensite_image_dump_light_name"
+    ],
+    "boundary_and_callback": "Same c++17 originalV3d+installed dependency includes, TKV3d/TKService/TKMath/TKernel libraries and exact prefix rpath; sources/executable names recorded in probes."
+  }
+}

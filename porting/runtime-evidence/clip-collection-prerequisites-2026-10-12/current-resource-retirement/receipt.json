@@ -1,0 +1,42 @@
+{
+  "project": "Martensite",
+  "base": "6128c4672",
+  "checked_allocator_dependency": "336ecc788",
+  "source_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_files": {
+    "crates/tkernel/src/ncollection/node_release.rs": "195592025fe95a669c307963e999dbb2438e7b06bb4ca2d00d294f47c599ee60",
+    "crates/tkernel/src/ncollection/sequence.rs": "da60ead5da8ea7ef5b8f90902f0efeae7f82e233ea933d2905ae42e9474d685a",
+    "crates/tkernel/src/ncollection/sequence/owner.rs": "f2ee3a0439d45d7dc52ea09f33072c957c045f888a839547e1b50a83f969f74e",
+    "crates/tkernel/src/ncollection/sequence/retired_node.rs": "79b83fc05a036e1c3d0e68e8432543f4ad3d5d50cef4f6db6e161ec12a014577",
+    "crates/tkernel/src/ncollection/sequence/current_release.rs": "d8f5058457ad18cc22c3a9c7ca58e5e072a26cb86f4caeb3f75dc0f83b7cbd19",
+    "crates/tkernel/src/ncollection/sequence/current_release_tests.rs": "5c422f473f6c35fc08a7b234c7fe1efa19fe02497a13cd2b982cd3f9aa7e593b",
+    "crates/tkernel/src/ncollection/sequence/current_native_fixture.rs": "77c3db508c09f7d1a8c5ca86e7b8a834af906dd6e8b369a28a6ba57f7958e3cb",
+    "crates/tkernel/src/ncollection/sequence/current_native_replay.rs": "8585c2fca2511ad0a4b6314a9b6d286416ef0226ce99f1a1a23b106fd3fd47b7"
+  },
+  "native": {
+    "fixture": "crates/tkernel/tests/fixtures/allocator-retirement-native.txt",
+    "fixture_sha256": "31f7498f510083521fb868179e9e18813733822f9215a16a158202a9e5081ff6",
+    "generator": "tools/oracle/martensite_allocator_retirement.cxx",
+    "generator_sha256": "688b780dd53cd7814faf3488393a6d5e642dbdfb86d7f07aee6bd11165966952",
+    "rows": 6,
+    "rust_replay": "actual Sequence nodes, prepared allocation callback, native resource retarget, real destructor/count/old-size metadata",
+    "provenance": "porting/runtime-evidence/base-allocator-dispatch-2026-10-12/native-probes.json",
+    "fresh_native_run": false,
+    "reason": "Reuses independently rebuilt checked allocator fixture; new execution is Rust-only."
+  },
+  "checks": {
+    "passed": 5013,
+    "failed": 0,
+    "executables": 29,
+    "clippy_exit": 0,
+    "fmt_exit": 0,
+    "diff_check_exit": 0
+  },
+  "limits": [
+    "Full clipping production/live view transport not yet migrated.",
+    "No class, constructor, global ledger or method restoration.",
+    "Active virtual allocator callback last-owner loss remains unproved.",
+    "Caught Rust payload unwind checks Rust cleanup, not throwing C++ destructor parity.",
+    "No GPU proof or timing requested for this prerequisite checkpoint."
+  ]
+}

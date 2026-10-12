@@ -33,6 +33,10 @@ impl std::ops::Deref for SequenceBaseAccess<'_> {
     }
 }
 impl SequenceTopology {
+    pub(super) fn identity(&self) -> usize {
+        // A token follows the actual canonical base allocation, never a copied metadata view.
+        Arc::as_ptr(&self.shared) as usize
+    }
     pub(super) fn new(allocator: BaseAllocator) -> Self {
         Self::from_base(BaseSequence::new(Some(allocator)))
     }
