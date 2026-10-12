@@ -102,3 +102,5 @@ mod surface_texture_compressed;
 mod surface_texture_lifetime;
 mod surface_texture_pixels;
 mod surface_texture_uv;
+mod texture_coordinate_pipeline;
+pub use texture_coordinate_pipeline::RenderTextureCoordinatePipeline;

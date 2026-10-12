@@ -17,10 +17,15 @@ enum SurfaceImageLoad {
 type SurfaceSnapshotMap = BTreeMap<Vec<u8>, Arc<SurfaceTextureImage>>;
 #[derive(Default)]
 pub(crate) struct RetainedTextureImages {
+    pub coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
     images: Mutex<SurfaceSnapshotMap>,
     pub samplers: crate::retained_texture_samplers::RetainedTextureSamplers,
 }
 impl RetainedTextureImages {
+    /// Inject coordinate semantics without coupling image revisions to UVs; `Self::with_coordinate_pipeline(policy)`.
+    pub fn with_coordinate_pipeline(coordinate_pipeline: crate::RenderTextureCoordinatePipeline) -> Self {
+        Self {coordinate_pipeline,..Default::default()}
+    }
     /// Retire dead image handles without invalidating submitted snapshots; `cache.prune()?`.
     pub fn prune(&self) -> Result<(), RenderError> {
         self.images

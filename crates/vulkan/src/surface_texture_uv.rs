@@ -7,6 +7,11 @@ pub(crate) fn surface_texture_coordinates(
     parameters: &Graphic3dTextureParams,
     top_down: bool,
 ) -> Result<Vec<[f32; 4]>, RenderError> {
+    surface_input_uv(primitive).map(|coordinates| coordinates.into_iter()
+        .map(|uv| transform_surface_uv(uv,parameters,top_down)).collect())
+}
+/// Preserve the actual UV buffer before choosing a coordinate pipeline; `surface_input_uv(primitive)?`.
+pub(crate) fn surface_input_uv(primitive: &PrimitiveSubmission) -> Result<Vec<[f32;4]>,RenderError> {
     let buffer = &*primitive.attributes;
     let attribute = buffer.attribute_data(Graphic3dTypeOfAttribute::Uv);
     (0..buffer.nb_elements())
@@ -17,7 +22,7 @@ pub(crate) fn surface_texture_coordinates(
                 }
                 None => [0., 0., 0., 1.],
             };
-            Ok(transform_surface_uv(uv, parameters, top_down))
+            Ok(uv)
         })
         .collect()
 }
@@ -47,20 +52,35 @@ pub(crate) fn transform_surface_uv(
     parameters: &Graphic3dTextureParams,
     top_down: bool,
 ) -> [f32; 4] {
-    let angle = (-parameters.rotation()).to_radians();
-    let (sin, cos) = angle.sin_cos();
-    let scale = parameters.scale();
-    let shift = parameters.translation();
-    let x = uv[0] * cos - uv[1] * sin;
-    let y = uv[0] * sin + uv[1] * cos;
-    // The actual OCCT oracle uses bottom-up UV convention; Vulkan image rows retain source order.
-    let ty = if top_down {
-        -shift.y() + 1. / scale.y()
-    } else {
-        -shift.y()
-    };
-    let v = (y + ty) * if top_down { -scale.y() } else { scale.y() };
-    [(x - shift.x()) * scale.x(), v, uv[2], uv[3]]
+    SurfaceUvTransform::read(parameters,top_down).programmable(uv)
+}
+#[derive(Clone,Copy,Debug,PartialEq)]
+pub(crate) struct SurfaceUvTransform {
+    sine: f32,
+    cosine: f32,
+    scale: [f32;2],
+    shift: [f32;2],
+}
+impl SurfaceUvTransform {
+    pub fn read(parameters:&Graphic3dTextureParams,top_down:bool) -> Self {
+        let (sine,cosine)=(-parameters.rotation()).to_radians().sin_cos();
+        let scale=parameters.scale();let shift=parameters.translation();
+        // The actual OCCT oracle uses bottom-up UV convention; Vulkan image rows retain source order.
+        let ty=-shift.y()+if top_down {1./scale.y()}else{0.};
+        Self {sine,cosine,scale:[scale.x(),if top_down {-scale.y()}else{scale.y()}],shift:[-shift.x(),ty]}
+    }
+    pub fn programmable(self,uv:[f32;4]) -> [f32;4] {
+        self.apply(uv,1.)
+    }
+    pub fn generated(self,uv:[f32;4]) -> [f32;4] {
+        // OCCT3d097a0 SetTextureMatrix multiplies Q in FFP; THE_VARY_TexCoord_Trsf does not.
+        self.apply(uv,uv[3])
+    }
+    fn apply(self,uv:[f32;4],weight:f32) -> [f32;4] {
+        let x=uv[0]*self.cosine-uv[1]*self.sine;
+        let y=uv[0]*self.sine+uv[1]*self.cosine;
+        [(x+self.shift[0]*weight)*self.scale[0],(y+self.shift[1]*weight)*self.scale[1],uv[2],uv[3]]
+    }
 }
 
 #[cfg(test)]
