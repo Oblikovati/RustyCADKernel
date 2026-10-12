@@ -1,0 +1,78 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "existing_native_build": "../RustyCADKernel/target/occt-all-full",
+  "no_occt_rebuild": true,
+  "runs": [
+    {
+      "source": "tools/oracle/martensite_colored_drawer.cxx",
+      "source_sha256": "8929f741d01dd01fb6ad85de8527bf82627174b63053f2a1a085e0b640deb413",
+      "compile_command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_drawer.cxx",
+        "-L",
+        "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-drawer-oracle"
+      ],
+      "executable_sha256": "a6cb4580eacb4cb69b1df13e5367f50d31a80b9006cbed87cbc9bdbc85a1e772",
+      "run_command": [
+        "/tmp/martensite-colored-drawer-oracle"
+      ],
+      "run_count": 2,
+      "return_codes": [
+        0,
+        0
+      ],
+      "fixture": "crates/tkv3d/tests/fixtures/colored-drawer/native-flags.txt",
+      "fixture_sha256": "e86f336e33d63ef2704982e0d8a320d36f39fe317fa5e3cd1ed8df80c591f4c2",
+      "repeated_output_sha256": "e86f336e33d63ef2704982e0d8a320d36f39fe317fa5e3cd1ed8df80c591f4c2",
+      "rows": 17,
+      "byte_identical": true
+    },
+    {
+      "source": "tools/oracle/martensite_colored_drawer_runtime.cxx",
+      "source_sha256": "98ba13f56114b90ea600ef62224f2e88adee86b99216837782e3f1bb70dbc3c0",
+      "compile_command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_drawer_runtime.cxx",
+        "-L",
+        "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-drawer-runtime"
+      ],
+      "executable_sha256": "0a2666f232c31695d38d51d3b9cbc4ab4ed832be81069c92c876c319d7cd596f",
+      "run_command": [
+        "/tmp/martensite-colored-drawer-runtime"
+      ],
+      "run_count": 2,
+      "return_codes": [
+        0,
+        0
+      ],
+      "fixture": "crates/tkv3d/tests/fixtures/colored-drawer/native-runtime.txt",
+      "fixture_sha256": "cbed1ebcfb0581fd43f2d7a1b71e2926bfe0cc6d8348e66ab6591311154f4484",
+      "repeated_output_sha256": "cbed1ebcfb0581fd43f2d7a1b71e2926bfe0cc6d8348e66ab6591311154f4484",
+      "rows": 11,
+      "byte_identical": true
+    }
+  ]
+}

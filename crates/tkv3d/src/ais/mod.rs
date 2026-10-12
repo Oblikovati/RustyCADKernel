@@ -415,3 +415,12 @@ pub(crate) mod xr_tests;
 
 #[cfg(test)]
 include!("test_modules.rs");
+
+mod colored_drawer;
+pub use colored_drawer::{AisColoredDrawer, AisColoredDrawerFlags, AisColoredDrawerParent};
+
+#[cfg(test)]
+mod colored_drawer_tests;
+
+#[cfg(test)]
+mod colored_drawer_runtime_tests;

@@ -1,0 +1,92 @@
+{
+  "upstream_id": "AIS_ColoredDrawer::SetHidden",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "5c3fdd67413013798fc985e54e7a85d4bda8a658afd40f65119e8239b491af9a"
+  ],
+  "cpp_matches": [
+    {
+      "id": "5c3fdd67413013798fc985e54e7a85d4bda8a658afd40f65119e8239b491af9a",
+      "usr": "c:@S@AIS_ColoredDrawer@F@SetHidden#b#",
+      "qualified_name": "AIS_ColoredDrawer::SetHidden",
+      "kind": "CXXMethod",
+      "signature": "void (bool)",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::ais::AisColoredDrawer::set_hidden"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::ais::AisColoredDrawer::set_hidden"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::ais::AisColoredDrawer::set_hidden",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "hidden",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisColoredDrawer",
+            "resolved_item_path": "rustycad_tkv3d::ais::colored_drawer::AisColoredDrawer"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "ecd81e84a1513a1571517230c184ebefd78f76d5948071a3a778633146332b61",
+      "source_file": "crates/tkv3d/src/ais/colored_drawer.rs",
+      "source_status": null,
+      "source_sha256": "22b79c271e8f2d684a9101c513844e374c0977fcbe47b923a7f323bdb7acb150"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx"
+}
