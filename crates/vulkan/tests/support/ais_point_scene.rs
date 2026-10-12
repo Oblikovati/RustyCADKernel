@@ -12,6 +12,7 @@ use rustycad_tkservice::{
     aspect::{AspectNeutralWindow, AspectTypeOfMarker},
     graphic3d::*,
 };
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, prs3d::Prs3dPointAspect, v3d::*};
 pub const MODES: [&str; 24] = [
     "point-plus",
@@ -40,7 +41,7 @@ pub const MODES: [&str; 24] = [
     "point-batch",
 ];
 pub struct PointScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub point: Handle<AisPoint>,

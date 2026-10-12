@@ -2,7 +2,8 @@
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::graphic3d::Graphic3dCamera;
-use rustycad_tkv3d::{ais::*, v3d::V3dView};
+use rustycad_tkv3d::ais::*;
+use rustycad_tkv3d::v3d::V3dViewSource;
 pub const MODES: [&str; 8] = [
     "animcam-start",
     "animcam-mid",
@@ -14,7 +15,7 @@ pub const MODES: [&str; 8] = [
     "animcam-detached",
 ];
 /// Retain endpoints for a two-second camera move; `animation(&scene.view)`.
-pub fn animation(view: &Handle<V3dView>) -> Handle<AisAnimationCamera> {
+pub fn animation(view: &Handle<dyn V3dViewSource>) -> Handle<AisAnimationCamera> {
     let start = Handle::new(Graphic3dCamera::default());
     start.copy(&view.camera());
     let end = Handle::new(Graphic3dCamera::default());
@@ -29,7 +30,7 @@ pub fn animation(view: &Handle<V3dView>) -> Handle<AisAnimationCamera> {
     animation
 }
 /// Apply one capture mode without submitting a frame; `apply(&view, "animcam-mid")`.
-pub fn apply(view: &Handle<V3dView>, mode: &str) {
+pub fn apply(view: &Handle<dyn V3dViewSource>, mode: &str) {
     let animation = animation(view);
     configure(&animation, mode);
     animation.start(false).unwrap();

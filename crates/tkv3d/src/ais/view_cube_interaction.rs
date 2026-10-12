@@ -86,7 +86,7 @@ pub trait AisViewCubeSource: AisViewCubePresentationSource {
     /// Fit the requested camera using selection/scene bounds; `cube.view_fit_all(&view,&camera)?`.
     fn view_fit_all(
         &self,
-        view: &dyn HandleReference<crate::v3d::V3dView>,
+        view: &dyn HandleReference<dyn crate::v3d::V3dViewSource>,
         camera: &dyn HandleReference<Graphic3dCamera>,
     ) -> Result<(), Failure> {
         super::view_cube_camera_fit::ais_view_cube_view_fit_all(self, view, camera)

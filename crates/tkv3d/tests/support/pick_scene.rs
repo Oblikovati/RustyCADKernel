@@ -6,11 +6,12 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::{Axis1, Direction3, Point2, Point3};
 use rustycad_tkservice::{aspect::AspectNeutralWindow, null_driver::NullGraphicDriver};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{
     select_mgr::*,
     v3d::{V3dView, V3dViewer},
 };
-pub fn pick_view(config: TraversalConfig) -> (Handle<V3dViewer>, Handle<V3dView>) {
+pub fn pick_view(config: TraversalConfig) -> (Handle<V3dViewer>, Handle<dyn V3dViewSource>) {
     let viewer = V3dViewer::new(&NullGraphicDriver::new_handle()).unwrap();
     let view = viewer.create_view().unwrap();
     let window = Handle::new(AspectNeutralWindow::default());

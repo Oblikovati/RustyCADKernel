@@ -5,6 +5,7 @@ use super::{
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkservice::{graphic3d::*, null_driver::NullGraphicDriver};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, select_mgr::*, v3d::*};
 use std::sync::atomic::Ordering;
 pub(super) struct LoadScene {
@@ -12,7 +13,7 @@ pub(super) struct LoadScene {
     pub(super) ctx: Handle<AisInteractiveContext>,
     pub(super) foreign: Handle<AisInteractiveContext>,
     pub(super) objects: [Handle<ContextObject>; 4],
-    pub(super) views: [Handle<V3dView>; 2],
+    pub(super) views: [Handle<dyn V3dViewSource>; 2],
 }
 pub(super) fn display_state(value: i32) -> PrsMgrDisplayStatus {
     match value {

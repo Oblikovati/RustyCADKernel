@@ -49,7 +49,7 @@ fn replay_synthesis_chunk(fixture: &str) {
 }
 fn replay_synthesis_frame(
     c: &mut AisViewController,
-    view: &Handle<crate::v3d::V3dView>,
+    view: &Handle<dyn crate::v3d::V3dViewSource>,
     row: &[f64],
 ) {
     advance_touch_case(c, row[0] as usize, row[1] as usize);

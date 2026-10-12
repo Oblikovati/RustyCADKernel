@@ -1,4 +1,5 @@
 //! Native drag lifecycle replay uses a real context, view, and sphere selector.
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkernel::{ncollection::Vec2, standard::Handle};
 use rustycad_tkmath::gp::*;
 use rustycad_tkservice::{
@@ -53,7 +54,7 @@ fn replay_drag_actions(probe: DragLifecycleProbe<'_>) -> Vec<f64> {
 struct DragLifecycleProbe<'a> {
     object: &'a AisLightSource,
     context: &'a Handle<AisInteractiveContext>,
-    view: &'a Handle<V3dView>,
+    view: &'a Handle<dyn V3dViewSource>,
     owner: &'a Handle<dyn rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>,
     target: i32,
 }
@@ -61,7 +62,7 @@ impl DragLifecycleProbe<'_> {
     fn new<'a>(
         object: &'a AisLightSource,
         context: &'a Handle<AisInteractiveContext>,
-        view: &'a Handle<V3dView>,
+        view: &'a Handle<dyn V3dViewSource>,
         owner: &'a Handle<dyn rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>,
         target: i32,
     ) -> DragLifecycleProbe<'a> {
@@ -85,7 +86,7 @@ impl DragLifecycleProbe<'_> {
     }
 }
 
-fn drag_view() -> (Handle<V3dViewer>, Handle<V3dView>) {
+fn drag_view() -> (Handle<V3dViewer>, Handle<dyn V3dViewSource>) {
     let viewer = V3dViewer::new(&NullGraphicDriver::new_handle()).unwrap();
     let view = viewer.create_view().unwrap();
     let window = Handle::new(AspectNeutralWindow::default());

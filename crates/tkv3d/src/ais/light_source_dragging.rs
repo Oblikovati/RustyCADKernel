@@ -1,5 +1,6 @@
 //! Native directional light dragging retains its initial frame and picks on its sensitive sphere.
 use super::*;
+use crate::v3d::V3dViewSource;
 use crate::{prs_mgr::*, select_mgr::*, v3d::V3dView};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::{
@@ -12,7 +13,7 @@ use rustycad_tkservice::graphic3d::*;
 pub fn ais_light_source_process_dragging<O: AisLightSourceSource + ?Sized>(
     object: &O,
     context: &Handle<AisInteractiveContext>,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     owner: &Handle<dyn SelectMgrEntityOwnerSource>,
     from: Vec2<i32>,
     to: Vec2<i32>,
@@ -26,7 +27,7 @@ pub fn ais_light_source_process_dragging<O: AisLightSourceSource + ?Sized>(
 fn dispatch_light_drag<O: AisLightSourceSource + ?Sized>(
     object: &O,
     context: &Handle<AisInteractiveContext>,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     owner: &Handle<dyn SelectMgrEntityOwnerSource>,
     from: Vec2<i32>,
     to: Vec2<i32>,

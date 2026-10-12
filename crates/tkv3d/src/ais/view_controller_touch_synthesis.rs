@@ -1,13 +1,13 @@
 //! Native touch synthesis preserves pending render requests and contact origins.
 use super::{AisInteractiveContext, AisViewController};
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::standard::{Failure, Handle};
 impl AisViewController {
     /// Synthesize render gestures from contacts; `controller.flush_gestures(&context, &view)?`.
     pub fn flush_gestures(
         &mut self,
         _context: &Handle<AisInteractiveContext>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
     ) -> Result<(), Failure> {
         let count = self.input_base.touch_points.extent();
         if self.touch_dispatch.last_touch_count != count {
@@ -31,7 +31,7 @@ impl AisViewController {
         }
     }
 }
-pub(super) fn invalidate_touch_view(view: &Handle<V3dView>) -> Result<(), Failure> {
+pub(super) fn invalidate_touch_view(view: &Handle<dyn V3dViewSource>) -> Result<(), Failure> {
     let view = view.get().ok_or_else(|| {
         Failure::new(
             "touch gesture view=null; expected nonnull V3dView when starting rotation or pan",

@@ -1,10 +1,8 @@
 //! Owned context state with non-owning links from interactive objects.
 use super::{AisGlobalStatus, AisInteractiveObject, AisSelection, AisSelectionSource};
+use crate::v3d::V3dViewSource;
 use crate::{
-    prs_mgr::PrsMgrPresentationManager,
-    prs3d::Prs3dDrawer,
-    select_mgr::*,
-    v3d::{V3dView, V3dViewer},
+    prs_mgr::PrsMgrPresentationManager, prs3d::Prs3dDrawer, select_mgr::*, v3d::V3dViewer,
 };
 use rustycad_tkernel::{
     ncollection::{DataMap, Sequence},
@@ -23,7 +21,7 @@ pub struct AisInteractiveContextFields {
     /// `myMainVwr`.
     pub viewer: Handle<V3dViewer>,
     /// `myLastActiveView`: native uninitialized until a selection operation; safely null here.
-    pub last_active_view: WeakHandle<V3dView>,
+    pub last_active_view: WeakHandle<dyn V3dViewSource>,
     /// `myLastPicked`.
     pub last_picked: Handle<dyn SelectMgrEntityOwnerSource>,
     /// `myToHilightSelected`.

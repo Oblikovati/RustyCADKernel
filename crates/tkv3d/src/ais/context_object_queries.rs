@@ -1,7 +1,8 @@
 //! Query overloads append to caller lists; None has different filtering meanings upstream.
 use super::{context_object_walk::AisObjectWalk, *};
+use crate::prs_mgr::PrsMgrDisplayStatus;
 use crate::prs_mgr::PrsMgrPresentableObjectMembers;
-use crate::{prs_mgr::PrsMgrDisplayStatus, v3d::V3dView};
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::List,
     standard::{Failure, Handle},
@@ -82,7 +83,7 @@ impl AisInteractiveContext {
     pub fn objects_for_view(
         &self,
         objects: &mut InteractiveList,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         visible: bool,
         status: PrsMgrDisplayStatus,
     ) -> Result<(), Failure> {

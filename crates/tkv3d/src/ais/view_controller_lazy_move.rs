@@ -1,5 +1,6 @@
 //! Native detection temporarily fits depth and restores it only after successful MoveTo.
 use super::{AisInteractiveContext, AisViewController};
+use crate::v3d::V3dViewSource;
 use crate::{select_mgr::SelectMgrEntityOwnerSource, v3d::V3dView};
 use rustycad_tkernel::{
     ncollection::Vec2,
@@ -11,7 +12,7 @@ impl AisViewController {
     pub fn context_lazy_move_to(
         &mut self,
         context: &AisInteractiveContext,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         pixel: &Vec2<i32>,
     ) -> Result<(), Failure> {
         rustycad_tkernel::standard::catch_native_failure(|| {
@@ -21,7 +22,7 @@ impl AisViewController {
     fn dispatch_lazy_move_to(
         &mut self,
         context: &AisInteractiveContext,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         pixel: &Vec2<i32>,
     ) -> Result<(), Failure> {
         if self.previous_move_to == *pixel || self.camera_action_state.had_computed_hlr {
@@ -34,13 +35,15 @@ impl AisViewController {
         Ok(())
     }
 }
-pub(super) fn camera_action_view(view: &Handle<V3dView>) -> Result<&V3dView, Failure> {
+pub(super) fn camera_action_view(
+    view: &Handle<dyn V3dViewSource>,
+) -> Result<&dyn V3dViewSource, Failure> {
     view.get().ok_or_else(|| {
         null_object("camera action view=null; expected V3dView for camera/detection operations")
     })
 }
 fn refresh_lazy_grid_echo(
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     pixel: &Vec2<i32>,
     picked: &Handle<dyn SelectMgrEntityOwnerSource>,
 ) -> Result<(), Failure> {
@@ -56,7 +59,7 @@ fn refresh_lazy_grid_echo(
 
 fn execute_lazy_detection(
     context: &AisInteractiveContext,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     pixel: &Vec2<i32>,
 ) -> Result<(ActionOwner, ActionOwner), Failure> {
     let last = context.detected_owner().clone();
@@ -70,22 +73,26 @@ fn execute_lazy_detection(
     Ok((last, picked))
 }
 fn invalidate_lazy_detection_views(
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     last: &Handle<dyn SelectMgrEntityOwnerSource>,
     picked: &Handle<dyn SelectMgrEntityOwnerSource>,
 ) -> Result<(), Failure> {
     if last == picked && (picked.is_null() || !picked.is_forced_hilight()) {
         return Ok(());
     }
-    for other in camera_action_view(view)?.viewer().active_view_iterator() {
+    let viewer = camera_action_view(view)?.viewer();
+    let mut cursor = viewer.active_view_iterator();
+    while cursor.more() {
+        let other = rustycad_tkernel::standard::HandleReference::observe(&cursor.value_ref());
         other.invalidate_immediate();
+        cursor.next();
     }
     Ok(())
 }
 
 fn update_lazy_grid_echo(
     actual: &V3dView,
-    view: &Handle<V3dView>,
+    view: &Handle<dyn V3dViewSource>,
     pixel: &Vec2<i32>,
     missed: bool,
 ) -> Result<(), Failure> {

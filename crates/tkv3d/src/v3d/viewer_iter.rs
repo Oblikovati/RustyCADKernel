@@ -2,8 +2,9 @@
 //! iterators are list iterators kept in the viewer; here each is a position in its list.
 //! Native quirk kept: `Next*` does nothing on an empty list, and `ActiveView` past the end
 //! gives a null handle (natively undefined behavior).
-use super::{V3dView, V3dViewer};
-use rustycad_tkernel::standard::Handle;
+use super::V3dViewer;
+use crate::v3d::V3dViewSource;
+use rustycad_tkernel::standard::{Handle, HandleReference as _};
 use rustycad_tkservice::graphic3d::Graphic3dCLight;
 
 /// The cursor slots of the four deprecated iterations.
@@ -24,51 +25,45 @@ impl V3dViewer {
             self.set_cursor(slot, self.cursor(slot) + 1);
         }
     }
-    /// Deprecated `InitActiveViews`; `viewer.init_active_views()`.
+    /// Deprecated native first-node initialization; `viewer.init_active_views()`.
     pub fn init_active_views(&self) {
-        self.set_cursor(ACTIVE_VIEWS, 0);
+        let mut state = self.state.write();
+        state.view_cursors[ACTIVE_VIEWS] = state.active_views.cursor();
     }
-    /// Deprecated `MoreActiveViews`; `viewer.more_active_views()`.
+    /// Deprecated native node check; `viewer.more_active_views()`.
     pub fn more_active_views(&self) -> bool {
-        self.cursor(ACTIVE_VIEWS) < self.state.read().active_views.len()
+        self.state.read().view_cursors[ACTIVE_VIEWS].more()
     }
-    /// Deprecated `NextActiveViews`; `viewer.next_active_views()`.
+    /// Deprecated native advance after callbacks; `viewer.next_active_views()`.
     pub fn next_active_views(&self) {
-        let len = self.state.read().active_views.len();
-        self.advance(ACTIVE_VIEWS, len);
+        let mut state = self.state.write();
+        let mut cursor = state.view_cursors[ACTIVE_VIEWS];
+        cursor.next(&state.active_views);
+        state.view_cursors[ACTIVE_VIEWS] = cursor;
     }
-    /// Deprecated `ActiveView`; `viewer.active_view()`.
-    pub fn active_view(&self) -> Handle<V3dView> {
-        let index = self.cursor(ACTIVE_VIEWS);
-        self.state
-            .read()
-            .active_views
-            .get(index)
-            .cloned()
-            .unwrap_or_default()
+    /// Explicit owning snapshot convenience; native ActiveView binds active_view_ref; `viewer.active_view()`.
+    pub fn active_view(&self) -> Handle<dyn V3dViewSource> {
+        self.active_view_ref().clone_handle()
     }
-    /// Deprecated `InitDefinedViews`; `viewer.init_defined_views()`.
+    /// Deprecated native first-node initialization; `viewer.init_defined_views()`.
     pub fn init_defined_views(&self) {
-        self.set_cursor(DEFINED_VIEWS, 0);
+        let mut state = self.state.write();
+        state.view_cursors[DEFINED_VIEWS] = state.defined_views.cursor();
     }
-    /// Deprecated `MoreDefinedViews`; `viewer.more_defined_views()`.
+    /// Deprecated native node check; `viewer.more_defined_views()`.
     pub fn more_defined_views(&self) -> bool {
-        self.cursor(DEFINED_VIEWS) < self.state.read().defined_views.len()
+        self.state.read().view_cursors[DEFINED_VIEWS].more()
     }
-    /// Deprecated `NextDefinedViews`; `viewer.next_defined_views()`.
+    /// Deprecated native advance after callbacks; `viewer.next_defined_views()`.
     pub fn next_defined_views(&self) {
-        let len = self.state.read().defined_views.len();
-        self.advance(DEFINED_VIEWS, len);
+        let mut state = self.state.write();
+        let mut cursor = state.view_cursors[DEFINED_VIEWS];
+        cursor.next(&state.defined_views);
+        state.view_cursors[DEFINED_VIEWS] = cursor;
     }
-    /// Deprecated `DefinedView`; `viewer.defined_view()`.
-    pub fn defined_view(&self) -> Handle<V3dView> {
-        let index = self.cursor(DEFINED_VIEWS);
-        self.state
-            .read()
-            .defined_views
-            .get(index)
-            .cloned()
-            .unwrap_or_default()
+    /// Explicit owning snapshot convenience; native DefinedView binds defined_view_ref; `viewer.defined_view()`.
+    pub fn defined_view(&self) -> Handle<dyn V3dViewSource> {
+        self.defined_view_ref().clone_handle()
     }
     /// Deprecated `InitActiveLights`; `viewer.init_active_lights()`.
     pub fn init_active_lights(&self) {
@@ -117,12 +112,12 @@ impl V3dViewer {
             .unwrap_or_default()
     }
     /// `ActiveViewIterator`: the active views to iterate; `viewer.active_view_iterator()`.
-    pub fn active_view_iterator(&self) -> std::vec::IntoIter<Handle<V3dView>> {
-        self.active_views().into_iter()
+    pub fn active_view_iterator(&self) -> super::V3dViewCursor<'_> {
+        self.active_views_ref().cursor()
     }
     /// `DefinedViewIterator`; `viewer.defined_view_iterator()`.
-    pub fn defined_view_iterator(&self) -> std::vec::IntoIter<Handle<V3dView>> {
-        self.defined_views().into_iter()
+    pub fn defined_view_iterator(&self) -> super::V3dViewCursor<'_> {
+        self.defined_views_ref().cursor()
     }
     /// `ActiveLightIterator`; `viewer.active_light_iterator()`.
     pub fn active_light_iterator(&self) -> std::vec::IntoIter<Handle<Graphic3dCLight>> {

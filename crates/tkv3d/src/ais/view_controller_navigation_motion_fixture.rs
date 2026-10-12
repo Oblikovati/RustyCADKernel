@@ -1,4 +1,5 @@
 //! Actual retained scenes and stopped named clocks replay native navigation frames.
+use crate::v3d::V3dViewSource;
 use super::view_controller_camera_fixture::append_primitive_camera as append_navigation_camera;
 use super::view_controller_keyboard_fixture::{FrozenNavigationClock, frame, prepare};
 use super::view_controller_keyboard_fixture::{component_values, walk_queries};
@@ -32,7 +33,7 @@ const MOTION_MODES: [AisNavigationMode; 3] = [
 pub(super) struct NavigationScene {
     _viewer: Handle<V3dViewer>,
     _context: Handle<AisInteractiveContext>,
-    pub(super) view: Handle<V3dView>,
+    pub(super) view: Handle<dyn V3dViewSource>,
     pub(super) controller: AisViewController,
     clock: Arc<FrozenNavigationClock>,
 }

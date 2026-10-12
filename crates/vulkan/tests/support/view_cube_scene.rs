@@ -1,4 +1,6 @@
 //! Actual AIS context display keeps native Topmost and triedron persistence defaults.
+#[path = "derived_view_scene.rs"]
+mod derived_view_scene;
 use super::view_setup;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -7,13 +9,14 @@ use rustycad_tkservice::{
     aspect::AspectTypeOfTriedronPosition,
     graphic3d::{Graphic3dTransModeFlags, Graphic3dTransformPersMembers},
 };
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{
     ais::*,
     prs_mgr::{PrsMgrDisplayStatus, PrsMgrPresentableObjectMembers},
     v3d::*,
 };
 pub struct ViewCubeCaptureScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub context: Handle<AisInteractiveContext>,
     pub cube: Handle<AisViewCube>,
 }
@@ -31,6 +34,7 @@ impl ViewCubeCaptureScene {
             cube,
         };
         scene.assert_display_defaults();
+        derived_view_scene::prove_render_source_dispatch(&scene.view);
         Ok(scene)
     }
 }
@@ -47,8 +51,8 @@ impl ViewCubeCaptureScene {
     }
 }
 
-fn cube_capture_view(viewer: &V3dViewer) -> Result<Handle<V3dView>, Failure> {
-    let view = viewer.create_view()?;
+fn cube_capture_view(viewer: &Handle<V3dViewer>) -> Result<Handle<dyn V3dViewSource>, Failure> {
+    let view = derived_view_scene::create_embedded_render_view(viewer)?;
     let window = view_setup::configure_view(&view);
     window.set_size(320, 320);
     view.must_be_resized();

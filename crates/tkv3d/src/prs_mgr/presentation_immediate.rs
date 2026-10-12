@@ -5,7 +5,7 @@ use super::{
     PrsMgrPresentationManager,
 };
 use crate::prs3d::{Prs3dDrawer, Prs3dPresentationShadow};
-use crate::v3d::{V3dView, V3dViewer};
+use crate::v3d::V3dViewer;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::toploc::Datum3;
 use rustycad_tkservice::graphic3d::{
@@ -23,7 +23,7 @@ fn active_cviews(viewer: &Handle<V3dViewer>) -> Vec<Handle<dyn Graphic3dCView>> 
     views
         .iter()
         .filter_map(Handle::get)
-        .map(V3dView::view)
+        .map(|view| view.view())
         .collect()
 }
 

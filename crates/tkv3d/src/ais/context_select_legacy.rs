@@ -1,6 +1,6 @@
 //! Deprecated selection entry points preserve their selection scheme and redraw timing.
 use super::*;
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::{Array1, Vec2},
     standard::{Failure, Handle},
@@ -24,7 +24,7 @@ impl AisInteractiveContext {
         ymin: i32,
         xmax: i32,
         ymax: i32,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         update: bool,
     ) -> Result<AisStatusOfPick, Failure> {
         let status = self.select_rectangle(
@@ -42,7 +42,7 @@ impl AisInteractiveContext {
         ymin: i32,
         xmax: i32,
         ymax: i32,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         update: bool,
     ) -> Result<AisStatusOfPick, Failure> {
         let status = self.select_rectangle(
@@ -57,7 +57,7 @@ impl AisInteractiveContext {
     pub fn select_polyline(
         &self,
         points: &Array1<'_, Point2>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         update: bool,
     ) -> Result<AisStatusOfPick, Failure> {
         let status = self.select_polygon(points, view, AisSelectionScheme::Replace)?;
@@ -67,7 +67,7 @@ impl AisInteractiveContext {
     pub fn shift_select_polyline(
         &self,
         points: &Array1<'_, Point2>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         update: bool,
     ) -> Result<AisStatusOfPick, Failure> {
         let status = self.select_polygon(points, view, AisSelectionScheme::Xor)?;

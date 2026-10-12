@@ -1,4 +1,5 @@
 //! Local native fixtures exercise real V3d_View invalidation through a retained CPU driver.
+use crate::v3d::V3dViewSource;
 use super::{AisNavigationMode, AisViewController};
 use crate::v3d::{V3dView, V3dViewer};
 use rustycad_tkernel::{ncollection::Vec2, standard::Handle};
@@ -13,7 +14,7 @@ const TOUCH_MODES: [AisNavigationMode; 3] = [
 ];
 const TOUCH_SCALES: [f32; 6] = [1.0, 0.0, -1.0, 2.0, f32::INFINITY, f32::NAN];
 const TOUCH_MOVES: [f64; 8] = [0.0, 4.0, 6.0, 6.0001, -8.0, 0.25, 3.9999, 4.0001];
-pub(super) fn synthesis_view() -> (Handle<V3dViewer>, Handle<V3dView>) {
+pub(super) fn synthesis_view() -> (Handle<V3dViewer>, Handle<dyn V3dViewSource>) {
     let viewer = V3dViewer::new(&NullGraphicDriver::new_handle()).unwrap();
     let view = viewer.create_view().unwrap();
     let window = Handle::new(AspectNeutralWindow::default());

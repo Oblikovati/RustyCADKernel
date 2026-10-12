@@ -9,6 +9,7 @@ use rustycad_tkernel::{
 use rustycad_tkg3d::geom::{GeomAxis1Placement, GeomAxis2Placement};
 use rustycad_tkmath::gp::{Axis1, Axis2, Direction3, Point3};
 use rustycad_tkservice::aspect::{AspectNeutralWindow, AspectTypeOfLine};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, prs3d::Prs3dLineAspect, v3d::*};
 pub const MODES: [&str; 18] = [
     "axis-x",
@@ -31,7 +32,7 @@ pub const MODES: [&str; 18] = [
     "axis-detected",
 ];
 pub struct AxisScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub axis: Handle<AisAxis>,

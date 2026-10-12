@@ -1,6 +1,7 @@
 //! Camera feedback decisions retain the pre-operation mouse-rotation predicate.
 use super::{AisViewController, AisWalkDelta, view_controller_lazy_move::camera_action_view};
 use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::Vec2,
     standard::{Failure, Handle},
@@ -36,7 +37,7 @@ impl AisViewController {
     pub(super) fn finish_camera_action_feedback(
         &mut self,
         context: &super::AisInteractiveContext,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         feedback: &CameraActionFeedback,
     ) -> Result<(), Failure> {
         let actual = camera_action_view(view)?;
@@ -68,7 +69,7 @@ impl AisViewController {
     fn update_camera_action_cursor(
         &mut self,
         context: &super::AisInteractiveContext,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         feedback: &CameraActionFeedback,
     ) -> Result<(), Failure> {
         let actual = camera_action_view(view)?;

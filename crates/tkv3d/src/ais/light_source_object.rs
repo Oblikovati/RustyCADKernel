@@ -43,7 +43,7 @@ impl AisInteractiveObject for AisLightSource {
     fn process_dragging(
         &self,
         context: &Handle<AisInteractiveContext>,
-        view: &Handle<crate::v3d::V3dView>,
+        view: &Handle<dyn crate::v3d::V3dViewSource>,
         owner: &Handle<dyn SelectMgrEntityOwnerSource>,
         from: Vec2<i32>,
         to: Vec2<i32>,

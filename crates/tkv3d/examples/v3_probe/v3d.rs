@@ -6,6 +6,7 @@ use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkservice::aspect::{AspectNeutralWindow, AspectWindow};
 use rustycad_tkservice::graphic3d::Graphic3dCameraProjection;
 use rustycad_tkservice::null_driver::NullGraphicDriver;
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::v3d::{V3dTypeOfAxe, V3dTypeOfOrientation, V3dView, V3dViewer};
 
 /// `v3_axe`: the axis of an integer code (0 X, 1 Y, otherwise Z).
@@ -129,7 +130,7 @@ fn view_op_high(v: &V3dView, code: i32, [a, b, c, d]: [f64; 4]) -> Result<(), Fa
 
 /// A viewer and its view of a `w` x `h` window on the null driver, with the default lights
 /// on; the view only refers to its viewer, so the caller keeps both.
-fn open_view(w: i32, h: i32) -> Result<(Handle<V3dViewer>, Handle<V3dView>), Failure> {
+fn open_view(w: i32, h: i32) -> Result<(Handle<V3dViewer>, Handle<dyn V3dViewSource>), Failure> {
     let viewer = V3dViewer::new(&NullGraphicDriver::new_handle())?;
     viewer.set_default_lights()?;
     viewer.set_light_on()?;

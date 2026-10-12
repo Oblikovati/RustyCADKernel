@@ -1,7 +1,7 @@
 //! Single contact uses native mode acceleration and precise-device tolerance.
 use super::view_controller_touch_synthesis::invalidate_touch_view;
 use super::{AisNavigationMode, AisViewController};
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::Vec2,
     standard::{Failure, Handle},
@@ -10,7 +10,7 @@ use rustycad_tkservice::aspect::AspectTouch;
 impl AisViewController {
     pub(super) fn synthesize_touch_rotation(
         &mut self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
     ) -> Result<(), Failure> {
         self.start_touch_rotation(view)?;
         let touch = *self
@@ -25,7 +25,7 @@ impl AisViewController {
         }
         Ok(())
     }
-    fn start_touch_rotation(&mut self, view: &Handle<V3dView>) -> Result<(), Failure> {
+    fn start_touch_rotation(&mut self, view: &Handle<dyn V3dViewSource>) -> Result<(), Failure> {
         if !self.touch_dispatch.update_start_rotation {
             return Ok(());
         }

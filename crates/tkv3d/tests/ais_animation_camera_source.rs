@@ -1,4 +1,5 @@
 //! Derived camera atoms retain actual native base state and live handle references.
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped, StandardTransient};
 use rustycad_tkservice::{graphic3d::Graphic3dCamera, null_driver::NullGraphicDriver};
 use rustycad_tkv3d::{ais::*, v3d::*};
@@ -35,7 +36,7 @@ impl AisAnimationSource for ProtocolCameraSubclass {
         Ok(0.25)
     }
 }
-fn protocol_camera(view: &Handle<V3dView>) -> Handle<ProtocolCameraSubclass> {
+fn protocol_camera(view: &Handle<dyn V3dViewSource>) -> Handle<ProtocolCameraSubclass> {
     Handle::new(ProtocolCameraSubclass {
         transient: StandardTransient::default(),
         base: AisAnimationCameraBase::new("protocol", view),

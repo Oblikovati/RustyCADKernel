@@ -9,6 +9,7 @@ use rustycad_tkernel::{
 };
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkservice::aspect::{AspectNeutralWindow, AspectTypeOfLine};
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, v3d::*};
 pub const MODES: [&str; 8] = [
     "rubber-rectangle",
@@ -21,7 +22,7 @@ pub const MODES: [&str; 8] = [
     "rubber-updated",
 ];
 pub struct RubberBandScene {
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub window: Handle<AspectNeutralWindow>,
     pub context: Handle<AisInteractiveContext>,
     pub object: Handle<AisRubberBand>,

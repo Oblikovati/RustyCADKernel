@@ -1,4 +1,5 @@
 //! A real context/selector/view used by Rust tests and the native comparison twin.
+use rustycad_tkv3d::v3d::V3dViewSource;
 #[path = "detection_object.rs"]
 pub mod object;
 use object::*;
@@ -13,7 +14,7 @@ use rustycad_tkv3d::{
 use std::sync::Arc;
 pub struct DetectionScene {
     pub context: Handle<AisInteractiveContext>,
-    pub view: Handle<V3dView>,
+    pub view: Handle<dyn V3dViewSource>,
     pub object: Handle<DetectionObject>,
     pub owners: Vec<Handle<dyn SelectMgrEntityOwnerSource>>,
     pub trace: DetectionEvents,
@@ -219,7 +220,7 @@ impl DetectionScene {
             .map_or(-1, |index| index as i32)
     }
 }
-fn detection_view(viewer: &Handle<V3dViewer>) -> Handle<V3dView> {
+fn detection_view(viewer: &Handle<V3dViewer>) -> Handle<dyn V3dViewSource> {
     let view = viewer.create_view().unwrap();
     let window = Handle::new(AspectNeutralWindow::default());
     window.set_size(80, 60);

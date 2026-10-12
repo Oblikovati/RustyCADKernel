@@ -1,12 +1,13 @@
 //! Cycling is independent from detection iteration and automatic-highlight flags.
 use super::AisInteractiveContext;
-use crate::{select_mgr::SelectMgrViewerSelectorResultMembers, v3d::V3dView};
+use crate::select_mgr::SelectMgrViewerSelectorResultMembers;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::standard::{Failure, Handle};
 impl AisInteractiveContext {
     /// Highlight the next detected owner, wrapping at the end; `context.hilight_next_detected(&view,true)?`.
     pub fn hilight_next_detected(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         redraw: bool,
     ) -> Result<i32, Failure> {
         self.cycle_detected_owner(view, redraw, 1)
@@ -14,14 +15,14 @@ impl AisInteractiveContext {
     /// Highlight the previous detected owner, wrapping at the start; `context.hilight_previous_detected(&view,true)?`.
     pub fn hilight_previous_detected(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         redraw: bool,
     ) -> Result<i32, Failure> {
         self.cycle_detected_owner(view, redraw, -1)
     }
     fn cycle_detected_owner(
         &self,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         redraw: bool,
         step: i32,
     ) -> Result<i32, Failure> {

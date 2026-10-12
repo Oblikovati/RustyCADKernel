@@ -1,6 +1,6 @@
 //! Two contacts retain origins until any native pinch component exceeds its tolerance.
 use super::{AisViewController, view_controller_touch_synthesis::invalidate_touch_view};
-use crate::v3d::V3dView;
+use crate::v3d::V3dViewSource;
 use rustycad_tkernel::{
     ncollection::Vec2,
     precision::confusion,
@@ -45,7 +45,10 @@ impl TouchPinchMotion {
     }
 }
 impl AisViewController {
-    pub(super) fn synthesize_touch_pinch(&mut self, view: &Handle<V3dView>) -> Result<(), Failure> {
+    pub(super) fn synthesize_touch_pinch(
+        &mut self,
+        view: &Handle<dyn V3dViewSource>,
+    ) -> Result<(), Failure> {
         let touches = &self.input_base.touch_points;
         let motion = TouchPinchMotion::new(
             *touches.find_from_index(1).expect("two touches"),
@@ -87,7 +90,7 @@ impl AisViewController {
     fn queue_touch_pinch_pan(
         &mut self,
         motion: &TouchPinchMotion,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
     ) -> Result<bool, Failure> {
         let tolerance = if motion.first.is_precise_device {
             rustycad_tkmath::gp::resolution()
@@ -103,7 +106,7 @@ impl AisViewController {
         }
         Ok(false)
     }
-    fn start_touch_pinch_pan(&mut self, view: &Handle<V3dView>) -> Result<(), Failure> {
+    fn start_touch_pinch_pan(&mut self, view: &Handle<dyn V3dViewSource>) -> Result<(), Failure> {
         if !self.touch_dispatch.update_start_pan {
             return Ok(());
         }

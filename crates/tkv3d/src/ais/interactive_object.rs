@@ -1,5 +1,6 @@
 //! Abstract AIS object state, native context links and virtual object behavior.
 use super::{AisDragAction, AisInteractiveContext, AisKindOfInteractive};
+use crate::v3d::V3dViewSource;
 use crate::{
     prs_mgr::{
         PrsMgrPresentableObjectBase, PrsMgrPresentableObjectMembers, PrsMgrTypeOfPresentation3d,
@@ -7,7 +8,6 @@ use crate::{
     select_mgr::{
         SelectMgrEntityOwnerSource, SelectMgrSelectableObject, SelectMgrSelectableObjectBase,
     },
-    v3d::V3dView,
 };
 use rustycad_tkernel::{
     ncollection::Vec2,
@@ -74,7 +74,7 @@ pub trait AisInteractiveObject: SelectMgrSelectableObject {
     fn process_dragging(
         &self,
         context: &Handle<AisInteractiveContext>,
-        view: &Handle<V3dView>,
+        view: &Handle<dyn V3dViewSource>,
         owner: &Handle<dyn SelectMgrEntityOwnerSource>,
         from: Vec2<i32>,
         to: Vec2<i32>,

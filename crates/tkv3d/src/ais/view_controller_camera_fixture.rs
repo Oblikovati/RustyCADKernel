@@ -1,4 +1,5 @@
 //! Actual cameras, queues and XR pose state mirror the pinned CPU native oracle.
+use crate::v3d::V3dViewSource;
 use super::{
     AisAnimationMembers as _, AisAnimationSource as _, AisViewController,
     view_controller_transfer_fixture::*,
@@ -19,7 +20,7 @@ const PRIMITIVE_PROJECTIONS: [Graphic3dCameraProjection; 5] = [
 ];
 pub(super) struct PrimitiveScene {
     _viewer: Handle<V3dViewer>,
-    pub(super) view: Handle<V3dView>,
+    pub(super) view: Handle<dyn V3dViewSource>,
     pub(super) controller: AisViewController,
 }
 pub(super) fn primitive_scene(index: usize) -> PrimitiveScene {
