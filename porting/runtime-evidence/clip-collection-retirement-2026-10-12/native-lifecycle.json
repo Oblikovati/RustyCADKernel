@@ -1,0 +1,22 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checkpoint_status": "native lifecycle evidence only; Rust collection replay and transport implementation pending",
+  "rows": 7,
+  "two_runs_identical": true,
+  "hashes": {
+    "tools/oracle/martensite_clip_collection_retirement.cxx": "012c283de84353b80b904fb1d27a2b8e57ebca7f08c5e7ad185a7d69c8c5cf63",
+    "crates/tkservice/tests/fixtures/clip-collection-retirement-native.txt": "2e28ae84ebb390a581b2733ee218493adc1433e66b5b7c84d03248b928d1cb45",
+    "target/martensite_clip_collection_retirement": "9b445bed8393c794905e379112a04fbe926fb87f07fe50a0d9991cb3b9c4cbd8",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_ClipPlane.hxx": "b1908fd3cc2ab1e625de8e3ccd3940e979468c739c5164066b52aed61737c00a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_Sequence.hxx": "131278a50ac7588c166accadc5395fa00a0758523a617dab3260a761db98607f",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_BaseSequence.hxx": "ac6658bf21afdae92b4c4a79e1396f9f65b6fbefdf14220f117874da1cce594a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb"
+  },
+  "observations": [
+    "Clear retains original size/nonempty metadata during all three ordered callbacks.",
+    "First is a valid dying-pointee reference during the first callback, with native count zero.",
+    "Later Clear callbacks inspect metadata only; dereferencing an already freed first node is excluded native undefined behavior.",
+    "Iterator removal updates list metadata before last-owner destruction and advances the same cursor."
+  ]
+}
