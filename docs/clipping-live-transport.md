@@ -45,8 +45,42 @@ sequence counts and prior edits: getter failure does not edit the collection, se
 failure keeps the old collection edits, and completed assignment is not rolled back.
 The native generator runs twice with identical 26 records and retained strong anchors.
 
-This is a source checkpoint, not full-family completion. No audited partial claims
-or class/constructor markers are promoted. Dedicated derived render capture proof,
-final scoped compiler bindings and coordinated optimized performance still remain. Ordinary both-device tests are tracked separately from
-native image-capture parity. Weak alias expiration is safe-null outside C++'s valid
-reference lifetime, rather than a claim about native dangling-reference behavior.
+The full collection/view transport checkpoint now includes the native default-setter
+retirement fixture, live Dump callback visitation, derived iterator initialization,
+and allocator active-owner-loss proof. The allocator invocation copies immutable
+code and weak identity; bounded callback-free field capture ends before invocation.
+It retains physical backing independently of logical receiver destruction and adds
+no intrusive ownership. Native Allocate retires the last owner before returning,
+retargets the actual incoming plane slot, and the appended payload observes that
+replacement. Focused Miri and borrow-escape checks cover this required boundary.
+See [allocator-reference-free-invocation.md](allocator-reference-free-invocation.md).
+
+Final source `e4e51d28e` was captured for all 31 workspace libraries. Four scoped
+fragments contain 24 unique visible declarations: 22 implemented methods/actual
+fields/parent alias, and two partial class records. The class and Iterator records
+remain partial; basic descriptor target tests and the real parent type alias do
+not establish every inherited/RTTI reference contract. Clip-plane chain-reference
+closure is separately unproved. Existing copied conveniences receive no credit.
+Explicitly deprecated/obsolete upstream APIs remain excluded by the project policy.
+
+Three real retained scenes per device exercise inherited clipping, derived plane
+and collection sources, and an actual returned-field alias clear. Native captures
+repeat exactly; all six unchanged strict comparisons pass with zero RGBA mismatch.
+The software maximum depth error is 1.4901161193847656e-8; AMD depth is exact.
+Earlier-source captures remain separately attributed. Current final-source buffers,
+commands, hashes and device receipts are under `derived-captures-freeze-source/`.
+
+The frozen optimized executable measures eight workloads per device, including
+actual live append, retirement and slot self-assignment. Each uses 20 warmups and
+100 completed redraw/readback samples with validation disabled. All 1,600 samples
+are finite and positive. Whole-process peak RSS is 100,292 KiB on default256
+lavapipe and 63,836 KiB on AMD; GPU memory was not measured. Source/full-input,
+external ICD/layer and executable hashes pass independent root bookends. Timing
+is descriptive and no baseline was accepted. Raw vectors, process observations,
+peak-memory output and prior evidence are preserved in `performance-freeze-source/`.
+
+The final durable receipt is
+`porting/runtime-evidence/clipping-live-transport-2026-10-12/final-handoff-receipt.json`.
+No global ledger or generated inventory is edited on this branch. Weak alias
+expiration remains safe-null outside C++'s valid reference lifetime; it receives
+no native dangling-reference parity claim.
