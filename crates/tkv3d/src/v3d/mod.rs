@@ -86,7 +86,35 @@ pub fn v3d_un_mapped(message: &str) -> Failure {
     Failure::with_type("V3d_UnMapped", message, "")
 }
 
+mod handle_chain_reference;
+pub use handle_chain_reference::{V3dHandleChainCursor, V3dHandleChainNodeRef, V3dHandleChainRef};
+
+mod light_list_reference;
+pub use light_list_reference::{V3dLightCursor, V3dLightListRef, V3dLightNodeRef};
+
+mod view_light_members;
+mod viewer_light_mutation;
+
+mod viewer_light_defaults;
+
+#[cfg(test)]
+mod viewer_light_probe_callback;
+#[cfg(test)]
+mod viewer_light_probe_fixture;
+#[cfg(test)]
+mod viewer_light_probe_replay;
+#[cfg(test)]
+mod viewer_light_probe_tests;
+
+#[cfg(test)]
+mod viewer_light_alias_tests;
+
+#[cfg(test)]
+mod viewer_light_edge_tests;
+
 mod subview_sequence_reference;
+#[cfg(test)]
+mod viewer_light_member_tests;
 pub use subview_sequence_reference::{V3dSubviewCursor, V3dSubviewNodeRef};
 #[cfg(test)]
 mod subview_sequence_reference_tests;

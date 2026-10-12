@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "source_revision": "151ce6e09a60f9e8221749642e09529ececa19cd",
+  "checked_main_dependency": "8aff7549a83771148b2cc579d7a5fef976dbe005",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scoped_claims": {
+    "feature_replacements": 40,
+    "unchanged_status_dependency_selector_refreshes": 12,
+    "class_or_constructor_completion": false,
+    "global_ledger_modified_by_worker": false
+  },
+  "checks": {
+    "all_target_tests": 6511,
+    "executables": 97,
+    "four_crate_clippy": "passed -D warnings",
+    "format": "passed",
+    "toolkit_discovery": "passed",
+    "current_compiler_bindings": 52,
+    "native_records": 118,
+    "fresh_native_generators": 4,
+    "native_repeatability": "two fresh runs per generator equal committed Rust replay assets"
+  },
+  "functional": {
+    "profiles": [
+      "llvmpipe LLVM20.1.2 default256",
+      "AMD Radeon8060S RADV STRIX_HALO"
+    ],
+    "paired_rgba_depth_captures": 18,
+    "exact_previous_checked_pairs": 18,
+    "exact_before_foundation_pairs": 18,
+    "strict_native_gate_passes": 0,
+    "strict_gate_change": false,
+    "limitation": "Previously documented edge-row/covered-vs-clear precision failures remain raw diagnostics; no class or native pixel-parity credit."
+  },
+  "performance": {
+    "profiles": 2,
+    "workloads_per_profile": 8,
+    "warmups": 20,
+    "samples_per_workload": 100,
+    "raw_samples": 1600,
+    "validation": false,
+    "source_full_inputs": 12881,
+    "source_focused_inputs": 44,
+    "binary_sha256": "9dcdae99e0919c755ca36a7e3031029a40953e41946f448652586d610dff15f4",
+    "root_independent_bookends": [
+      "before-software",
+      "middle-verification",
+      "final-verification"
+    ],
+    "scope": "Descriptive timings; unrelated ai-memory nextest lowCPU I/O activity recorded, no isolated-baseline claim."
+  },
+  "validation_layer_resolution": {
+    "old_layer": "1.3.275 installed",
+    "old_feature_parallel_sigsegv": true,
+    "old_checked_main_parallel_sigsegv": true,
+    "no_unload_control_resolved": false,
+    "isolated_official_noble_layer": "1.4.313.0~rc2-1lunarg24.04-1",
+    "same_frozen_binary_parallel_repeats_passed": 100,
+    "validation_enabled": true,
+    "test_parallelism_unchanged": true,
+    "system_install": false,
+    "application_source_change": false,
+    "scope": "Original executable A/B plus installed dispatch lookup disassembly/source audit; root owns prerequisite wrapper integration."
+  },
+  "native_oracle_policy": "Local generation only; Rust regression replay has no OCCT runtime dependency.",
+  "artifact_layout": {
+    "bindings": "bindings/*.json.gz",
+    "fresh_rustdoc": "rustdoc/*.json.gz",
+    "native_builds": "native/fresh-build-provenance.json.gz",
+    "functional": "functional-comparisons.json and captures/",
+    "timings": "performance/*/raw-samples.json.gz",
+    "validation_diagnosis": "validation-diagnostic/*.gz",
+    "repeat_log_collections": "validation-diagnostic/repeat-logs.json.gz and main-baseline/repeat-logs.json.gz preserve each original log under its exact filename"
+  }
+}

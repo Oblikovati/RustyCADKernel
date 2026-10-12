@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "Graphic3d_CView::Lights",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::lights_ref",
+      "status": "implemented",
+      "notes": "Martensite actual native light-list/reference transport: 118 pinned local CPU records, native counts, callback slot/list replacement and failure ordering, Rust-only replay, and actual derived-view functional captures on lavapipe 256-bit and native AMD. All 18 RGBA/depth pairs match the prior checked Vulkan proof byte-for-byte; original strict native raster failures remain. Copied handle/list conveniences are not native reference bindings; classes/constructors remain partial. See docs/viewer-live-light-contract.md.",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "cpp_declaration_id": "0018ef8d5e7e44fee33b02e767124dd802f51fe3904aea7b3558f9fe6ee00520",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::lights_ref",
+          "declaration_sha256": "c61719e8f8e6ee25e59052ad74e4ad8fcf9094193e33188de58b8a2730fecf22",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "Graphic3d_CView::SetLights",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::set_lights",
+      "status": "implemented",
+      "notes": "Martensite actual native light-list/reference transport: 118 pinned local CPU records, native counts, callback slot/list replacement and failure ordering, Rust-only replay, and actual derived-view functional captures on lavapipe 256-bit and native AMD. All 18 RGBA/depth pairs match the prior checked Vulkan proof byte-for-byte; original strict native raster failures remain. Copied handle/list conveniences are not native reference bindings; classes/constructors remain partial. See docs/viewer-live-light-contract.md.",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "cpp_declaration_id": "a671c411cc2edacc3aefce407bad182ed2b9fb82f02e5aa0b9db75f54b32ecec",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::set_lights",
+          "declaration_sha256": "21029a26447dcf63b1d753dd596ade2b77700aec1ea49a2f77f33bb821ffa8d1",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "notes": "Martensite actual native light-list/reference transport: 118 pinned local CPU records, native counts, callback slot/list replacement and failure ordering, Rust-only replay, and actual derived-view functional captures on lavapipe 256-bit and native AMD. All 18 RGBA/depth pairs match the prior checked Vulkan proof byte-for-byte; original strict native raster failures remain. Copied handle/list conveniences are not native reference bindings; classes/constructors remain partial. See docs/viewer-live-light-contract.md.",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::active_light_ref",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "status": "implemented",
+      "toolkit": "TKV3d",
+      "upstream_id": "V3d_View::ActiveLight",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "760b4412c966338c01cf698bd0295e85015cfdae3f89d6f5836d913d58efabf4",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::active_light_ref",
+          "declaration_sha256": "69cdfce2eded96fe2b0bcb67c47d510976136f5bf1552f27b478f19a2dc36d32",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "notes": "Martensite actual native light-list/reference transport: 118 pinned local CPU records, native counts, callback slot/list replacement and failure ordering, Rust-only replay, and actual derived-view functional captures on lavapipe 256-bit and native AMD. All 18 RGBA/depth pairs match the prior checked Vulkan proof byte-for-byte; original strict native raster failures remain. Copied handle/list conveniences are not native reference bindings; classes/constructors remain partial. See docs/viewer-live-light-contract.md.",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::active_light_iterator",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "status": "implemented",
+      "toolkit": "TKV3d",
+      "upstream_id": "V3d_View::ActiveLightIterator",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "025d88071094981747256915b0fcac06326c36ad39ea3eae24a6795dd4d56de8",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::active_light_iterator",
+          "declaration_sha256": "06742d5b8a74f6cfdae060057d5264d663b8ea90a72be256a20b3bfdf0711d12",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    },
+    {
+      "notes": "Martensite actual native light-list/reference transport: 118 pinned local CPU records, native counts, callback slot/list replacement and failure ordering, Rust-only replay, and actual derived-view functional captures on lavapipe 256-bit and native AMD. All 18 RGBA/depth pairs match the prior checked Vulkan proof byte-for-byte; original strict native raster failures remain. Copied handle/list conveniences are not native reference bindings; classes/constructors remain partial. See docs/viewer-live-light-contract.md.",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::active_lights_ref",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "status": "implemented",
+      "toolkit": "TKV3d",
+      "upstream_id": "V3d_View::ActiveLights",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "a1e86e067d298350be46abd668c44254e1dffea7e4e2aad5b4d143ebfa8bbc7d",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::active_lights_ref",
+          "declaration_sha256": "ab9c553311636a0084a6131607fae25f0832347b3eac357b0574ea7ad7e958ef",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    }
+  ]
+}

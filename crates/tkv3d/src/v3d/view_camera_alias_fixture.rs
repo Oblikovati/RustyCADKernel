@@ -6,6 +6,9 @@ use rustycad_tkservice::graphic3d::{
 };
 use std::sync::Arc;
 pub(super) struct CameraAliasControl {
+    pub light_probe:
+        SharedState<Option<Arc<super::viewer_light_probe_fixture::ViewerLightProbeControl>>>,
+    pub light_identity: std::sync::atomic::AtomicUsize,
     pub alternate_selected: SharedState<bool>,
     pub alternate: SharedState<Handle<Graphic3dCamera>>,
     pub caller: SharedState<Handle<Graphic3dCamera>>,
@@ -17,6 +20,7 @@ pub(super) struct CameraAliasControl {
 }
 pub(super) struct BorrowedCameraView {
     pub transient: StandardTransient,
+    pub identity: usize,
     pub retained: Graphic3dRetainedView,
     pub control: Arc<CameraAliasControl>,
 }
@@ -42,6 +46,8 @@ pub(super) fn camera_alias_driver(
 }
 pub(super) fn fresh_camera_alias_control() -> Arc<CameraAliasControl> {
     Arc::new(CameraAliasControl {
+        light_probe: Default::default(),
+        light_identity: std::sync::atomic::AtomicUsize::new(0),
         alternate_selected: SharedState::new(false),
         alternate: SharedState::new(Handle::new(Graphic3dCamera::default())),
         caller: SharedState::new(Handle::default()),

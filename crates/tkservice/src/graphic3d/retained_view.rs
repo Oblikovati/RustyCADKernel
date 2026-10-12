@@ -15,7 +15,9 @@ use crate::graphic3d::{
 };
 use crate::image::ImagePixMap;
 use rustycad_tkernel::standard::exceptions::program_error;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{
+    Failure, Handle, HandleFieldRef, HandleReference, SharedState, StandardTransient,
+};
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::bvh::constants::{LEAF_NODE_SIZE_SINGLE, MAX_TREE_DEPTH};
 use rustycad_tkmath::bvh::{BvhLinearBuilder, BvhVec3d};
@@ -322,11 +324,11 @@ impl Graphic3dCView for Graphic3dRetainedView {
         self.state.write().texture_env = texture_env.clone();
         self.cview_base().fields.write().texture_env_data = texture_env.clone();
     }
-    fn lights(&self) -> Handle<Graphic3dLightSet> {
-        self.state.read().lights.clone()
+    fn lights_ref(&self) -> Box<dyn HandleReference<Graphic3dLightSet> + '_> {
+        Box::new(HandleFieldRef::new(&self.state, |fields| &fields.lights))
     }
-    fn set_lights(&self, lights: &Handle<Graphic3dLightSet>) {
-        self.state.write().lights = lights.clone();
+    fn set_lights(&self, lights: &dyn HandleReference<Graphic3dLightSet>) {
+        self.state.write().lights = lights.clone_handle();
     }
     fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
         self.state.read().clip_planes.clone()
