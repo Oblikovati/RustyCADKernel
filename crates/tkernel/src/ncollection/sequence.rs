@@ -7,10 +7,12 @@ use topology::SequenceTopology;
 /// Allocator-owned one-based sequence; `let mut s = Sequence::default(); s.append(1);`.
 pub struct Sequence<T> {
     topology: SequenceTopology,
-    owners: SequenceNodeOwners<T>,
+    // Native clearing observers need a stable registry address even when Sequence itself moves.
+    owners: Box<SequenceNodeOwners<T>>,
 }
 /// Shared double-ended iterator in index order; `sequence.iter()`.
 pub struct SequenceIter<'a, T> {
+    owners: &'a SequenceNodeOwners<T>,
     front: *mut SeqNode,
     back: *mut SeqNode,
     remaining: usize,
@@ -18,6 +20,7 @@ pub struct SequenceIter<'a, T> {
 }
 /// Exclusive double-ended iterator in index order; `sequence.iter_mut()`.
 pub struct SequenceIterMut<'a, T> {
+    owners: &'a SequenceNodeOwners<T>,
     front: *mut SeqNode,
     back: *mut SeqNode,
     remaining: usize,
@@ -37,7 +40,7 @@ impl<T> Sequence<T> {
     pub fn with_allocator(resource: BaseAllocator) -> Self {
         Self {
             topology: SequenceTopology::new(resource),
-            owners: SequenceNodeOwners::new(),
+            owners: Box::default(),
         }
     }
     /// Returns selected allocator identity; `sequence.allocator() == &arena`.
@@ -191,6 +194,10 @@ pub use prepared_node::SequencePreparedNode;
 #[allow(unsafe_code)]
 mod retired_node;
 pub use retired_node::SequenceNodeRetirement;
+// Controlled clearing keeps real old metadata while adapters release payloads outside guards.
+#[allow(unsafe_code)]
+mod controlled_clear;
+pub use controlled_clear::SequenceClearProgress;
 mod copy_assignment;
 mod copy_construction;
 mod cursor_contracts;

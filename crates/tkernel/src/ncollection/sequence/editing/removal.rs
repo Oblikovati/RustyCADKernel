@@ -90,6 +90,13 @@ impl<T> Sequence<T> {
     }
     /// Frees items in native order and optionally replaces the allocator; `sequence.clear(Some(arena))`.
     pub fn clear(&mut self, allocator: Option<BaseAllocator>) {
+        if self.topology.access().clear_node_scope.is_some() {
+            self.reset_interrupted_clear(allocator);
+            return;
+        }
+        self.clear_uninterrupted(allocator);
+    }
+    fn clear_uninterrupted(&mut self, allocator: Option<BaseAllocator>) {
         let mut owners = std::mem::take(&mut self.owners);
         let mut node = self.topology.endpoints().0;
         let reset = ClearMetadata(&mut self.topology);
@@ -99,6 +106,15 @@ impl<T> Sequence<T> {
             node = next;
         }
         drop(reset);
+        if let Some(allocator) = allocator {
+            self.topology.edit(|base| base.allocator = allocator);
+        }
+    }
+    fn reset_interrupted_clear(&mut self, allocator: Option<BaseAllocator>) {
+        // A discarded partial traversal contains freed native prefixes. Reset before cleanup;
+        // re-clearing those native pointers is undefined, so safe Rust never dereferences them.
+        self.reset_clear_metadata();
+        drop(std::mem::take(&mut self.owners));
         if let Some(allocator) = allocator {
             self.topology.edit(|base| base.allocator = allocator);
         }
