@@ -1,0 +1,1416 @@
+{
+  "changed_source_files": [
+    "crates/tkv3d/src/select_mgr/axis_members.rs",
+    "crates/tkv3d/src/select_mgr/base_frustum.rs",
+    "crates/tkv3d/src/select_mgr/base_intersector.rs",
+    "crates/tkv3d/src/select_mgr/camera_argument_fixture.rs",
+    "crates/tkv3d/src/select_mgr/camera_argument_geometry_tests.rs",
+    "crates/tkv3d/src/select_mgr/camera_argument_tests.rs",
+    "crates/tkv3d/src/select_mgr/frustum_builder.rs",
+    "crates/tkv3d/src/select_mgr/frustum_set_intersector.rs",
+    "crates/tkv3d/src/select_mgr/mod.rs",
+    "crates/tkv3d/src/select_mgr/rectangular_intersector.rs",
+    "crates/tkv3d/src/select_mgr/selecting_volume.rs",
+    "crates/tkv3d/src/select_mgr/triangular_intersector.rs"
+  ],
+  "comparison": "Recursively identical every normalized field except source_sha256/declaration_sha256, including nested reexport hashes; top-level baseline source SHA verified against actual checked-main git files",
+  "unchanged_bindings": [
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::Camera() const",
+      "cpp_declaration_id": "08b79a06b1b5aa8e614decfe338f3f064c7355c513297a73651ffc7939f332b2",
+      "status": "partial",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::SignedPlanePntDist(const NCollection_Vec3<double> &, const NCollection_Vec3<double> &) const",
+      "cpp_declaration_id": "0ec9789d0cb5343669f8cad2f7028beb29b8d1309059ffa4280bda7e1a3cdd67",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::signed_plane_pnt_dist"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::WindowSize(int &, int &) const",
+      "cpp_declaration_id": "2bc1b66eb12e663549c19eb397be9b08eb19229db80f2e4be412b9c1fe0e437a",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder",
+      "cpp_declaration_id": "36bd24026b448ba5baec2f6f021a801b2437624f32276c7922c8ca52cbb48392",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::SetWindowSize(const int, const int)",
+      "cpp_declaration_id": "518819c32cb688bdbce19e13228ec89e25076e410d6467fdb64e0cae45cbd3d3",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::ProjectPntOnViewPlane(const double &, const double &, const double &) const",
+      "cpp_declaration_id": "7b4a851675f48ccd00aafb7521be0bf5c09273e971286a7528730ff0757dd40c",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::project_pnt_on_view_plane"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::SelectMgr_FrustumBuilder()",
+      "cpp_declaration_id": "890fb949b6f7d29af91e05b228f967013b83334a64b42f0d58ecd8c3b015e85a",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::new"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::SetViewport(const double, const double, const double, const double)",
+      "cpp_declaration_id": "892ffd68719ca60806952601b5c6c08af4a2b538b67d807887bfe37053e9bd32",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_viewport"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_ViewClipRange",
+      "cpp_declaration_id": "b048a0db4f2654dfd791c3a66bcc8e0b976959d268492a182edb8390f1f006b2",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrViewClipRange"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::InvalidateViewport()",
+      "cpp_declaration_id": "d41dde84d8abc5b0efc766797fa2d4baf0ec53117d602ca499095c10c06e03e8",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::invalidate_viewport"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_FrustumBuilder::base_type",
+      "cpp_declaration_id": "59ea69236a1816c591f298986429adc7e3fe011586f7c0dba60dc0011a079859",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsSphere(const class gp_Pnt &, double, bool *) const",
+      "cpp_declaration_id": "081aff99f6541866a05ca98ce15eca3e837b02280ac95f28871ea599a003aead",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_sphere"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsCircle(double, const class gp_Trsf &, bool, bool *) const",
+      "cpp_declaration_id": "08b68cbf8edcf3f6a8506d03938555776e7d63b4d62aefebe36380d51ef10b25",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_circle"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::SelectMgr_BaseIntersector()",
+      "cpp_declaration_id": "0d0687abc2b73d698019de2c750891300e042874cbffd590ee8a6f10ec9962c6",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorBase::<core::default::Default>::default"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsSegment(const class gp_Pnt &, const class gp_Pnt &, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "1dbf818a9403053bd7d2d72a7f3c793bee344893a330831d368889202d26b3fb",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_segment"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector",
+      "cpp_declaration_id": "2381fd4fc0c58b0d3be55520da808c5fff5554610ed6090d87d8f2d1feedf717",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsSphere(const class gp_Pnt &, double, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "253b5394ab2b1aff6a6cf1cbcae9af657160396f088f45a53f62d07df9bf5a6f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_sphere_pick"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::mySelectionType",
+      "cpp_declaration_id": "27455e99a3b1302f051e2ad1a8320ec86121ed0b39c45a35e86e59f6ac7dfacb",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorBase::selection_type"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::myCamera",
+      "cpp_declaration_id": "3b0af0aa26325327755ac10fbd8f7a380911814856404ceb98b0a436f18a55cd",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorBase::camera"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::Build()",
+      "cpp_declaration_id": "4833518c98c3fbc58b074455ec3ff6554a690b8065051721bd47aa880735b79f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::build"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsBox(const class NCollection_Vec3<double> &, const class NCollection_Vec3<double> &, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "49bb9bec777ac352036595ddeeb29687989145032b0ef637759d6a73b1d58b2f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_box_pick"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::WindowSize(int &, int &) const",
+      "cpp_declaration_id": "4a6a25ccff5426f91df82cf9847af5cc3d3ab34808df3c114e093a1f2f6e7cd4",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsBox(const class NCollection_Vec3<double> &, const class NCollection_Vec3<double> &, bool *) const",
+      "cpp_declaration_id": "4a898e834e85b511057fc27855e4dcc3ef02820af9af851c2cb48d4614f637ef",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_box"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::RayCircleIntersection(double, const class gp_Pnt &, const class gp_Dir &, bool, double &) const",
+      "cpp_declaration_id": "50c5d3d285b4a1e62ec956d6f3948231c1192a90fd987e6e43b6f8ba2f45263c",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::ray_circle_intersection"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::GetPlanes(class NCollection_DynamicArray<class NCollection_Vec4<double>> &) const",
+      "cpp_declaration_id": "61773b0057ad0af7203fed6e3c08da5b1575d8fa3d9d4d7ff3f33dd45a1b2e3a",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_planes"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::GetSelectionType() const",
+      "cpp_declaration_id": "6c93a46a1016125270dcdb34b2b445d38bccd68ce8969de8f8312361e8bde9fd",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::get_selection_type"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::SetWindowSize(int, int)",
+      "cpp_declaration_id": "6f77dad40fa1a9a5557c77ed4d0a7a4013153d14156dc0d6c077d489dd270947",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::IsScalable() const",
+      "cpp_declaration_id": "7b659190357623bc17c78de35567b9579e34be2fc80be6d62fa7541bae9c0b39",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::is_scalable"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::RayCylinderIntersection(double, double, double, const class gp_Pnt &, const class gp_Dir &, bool, double &, double &) const",
+      "cpp_declaration_id": "7f8609f2dfdc66b2b60304a9ce6cd13f271800cfb91857c72b2dcf114049c4e5",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::ray_cylinder_intersection"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsCylinder(double, double, double, const class gp_Trsf &, bool, bool *) const",
+      "cpp_declaration_id": "912fba2583a20c03b858f657984ef0b73eadda449fba5a1fc5b6a38a1821a2da",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_cylinder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::ScaleAndTransform(int, const class gp_GTrsf &, const class opencascade::handle<class SelectMgr_FrustumBuilder> &) const",
+      "cpp_declaration_id": "96fa0ea0387a960518535e3b14036ee8d2aa0211dce464a5fc0aa4728234ef2c",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::scale_and_transform"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsCylinder(double, double, double, const class gp_Trsf &, bool, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "972a82848af0a185c553f51ee171eb93a7bcee933ddfe3ba0992d40491ef6d37",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_cylinder_pick"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::RaySphereIntersection(const class gp_Pnt &, double, const class gp_Pnt &, const class gp_Dir &, double &, double &) const",
+      "cpp_declaration_id": "988f016f4048a3eaa9dc9b1b4c62b03a4783cb7e78dd0abb7f1d9096a9d532c6",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::ray_sphere_intersection"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::GetViewRayDirection() const",
+      "cpp_declaration_id": "a6cc9fcfb20b27b4d534c20210aba4dec16b7346a758a9f25cb61d3190f456f6",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_view_ray_direction"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::SetPixelTolerance(int)",
+      "cpp_declaration_id": "ab5e3baf0a1b23c2332451c8a843bebe2e2c6cfa62ae945ba2d93a1aae6f8f74",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_pixel_tolerance"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::GetFarPnt() const",
+      "cpp_declaration_id": "b449ec518b1331ebdd10dcae2bf783126eeb8ae6d150494320a201a846b5a585",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_far_pnt"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::DistToGeometryCenter(const class gp_Pnt &) const",
+      "cpp_declaration_id": "b49388e10cc7d40c5dc085b198219de4add129faf8220b55b58619687210314d",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::dist_to_geometry_center"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsPolygon(const class NCollection_Array1<class gp_Pnt> &, enum Select3D_TypeOfSensitivity, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "b81f6adbaf9dd73c28627786d0747c9773795b504e46628590296cb374efc7fd",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_polygon"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsPoint(const class gp_Pnt &, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "b9f079bfea6a40d770e28d4719f1b71f99d458c83a7c0a2da0d9c931a9577d86",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_point_pick"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsCircle(double, const class gp_Trsf &, bool, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "c163566ea1c6f23c1c01ec525dd09a799e9152dfd45a77bb9187a49258369e3f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_circle_pick"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::DetectedPoint(double) const",
+      "cpp_declaration_id": "cae904425fcb7861a87b4042d980e7dd8f22614d5462e45f7d05cc9dc30bdea4",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::detected_point"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsTriangle(const class gp_Pnt &, const class gp_Pnt &, const class gp_Pnt &, enum Select3D_TypeOfSensitivity, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
+      "cpp_declaration_id": "cffb52f1c6409f6ceb59e89805d1d39fafcfade374a3c51ab704b5cddc499bec",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_triangle"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::CopyWithBuilder(const class opencascade::handle<class SelectMgr_FrustumBuilder> &) const",
+      "cpp_declaration_id": "d62b8568632e39b7cd0b9f48e1ba6da480352c656551f6099ca49d7d7f0503a7",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::copy_with_builder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::OverlapsPoint(const class gp_Pnt &) const",
+      "cpp_declaration_id": "d703338f7611f51ddce4c07c70a8599a248bcefabb5c115d6bf64a3625be1643",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::overlaps_point"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::GetMousePosition() const",
+      "cpp_declaration_id": "dda93b407d73c4d5cade265e7bbc396c995fb89f8561c7b19d1d0892bfc3d60a",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_mouse_position"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::DumpJson(class std::basic_ostream<char> &, int) const",
+      "cpp_declaration_id": "e25c98803349521ec4cca1227ca26e99ad69db1f35014d77b951fc37a00f88fb",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::dump_json"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::SetViewport(double, double, double, double)",
+      "cpp_declaration_id": "efa553182b6d172dc0add5f3fc5ffb7a34b4a2aef956715f20b87f464ac7e22f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_viewport"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::GetNearPnt() const",
+      "cpp_declaration_id": "f6547ae1a810c717c3392e5ae40ac8eae0f75befcd11d6b9d22b5b65e22417b9",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_near_pnt"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::Camera() const",
+      "cpp_declaration_id": "ff40e8623c6adfe8cbbdc5aa2c8d6a0f050dc8bbc7b8e7464afd662ffed5549e",
+      "status": "partial",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::DynamicType() const",
+      "cpp_declaration_id": "f26bf4375ae2728c5636f9c872081f21ea33ce496c886bf57ae739695bf624b6",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::base_type",
+      "cpp_declaration_id": "f67c45185307d6a75795bb3c0d4ad17cb1837d5e88d334e858d8d8efbb7b0719",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::get_type_descriptor()",
+      "cpp_declaration_id": "9ba9b21e8fc3eeb64a7240aad53588759894f27102cc145d0ec47f20f9f9d8bf",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseIntersector::get_type_name()",
+      "cpp_declaration_id": "a96189aded0f583c846197b3c3e1c66ed10b8580c96487364afc1179c2c6d249",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::WindowSize(int &, int &) const",
+      "cpp_declaration_id": "14e1174bbc83dbedb7075106278ece2eaac5663e31b9c7ca4991634599b450d2",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::SetWindowSize(int, int)",
+      "cpp_declaration_id": "4be48c6d6ac7570230225c307fbccc2a28878c7296f914840c6fb9face3b7851",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum",
+      "cpp_declaration_id": "6061622b335a861bce7fa25da86a9493149134eb9a70edaff9daf6293e1f8361",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::myPixelTolerance",
+      "cpp_declaration_id": "689b822b7512fb449f38c5c05848c5237194deefe64b6d593b13ce08b4ca0c30",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::pixel_tolerance"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::SetViewport(double, double, double, double)",
+      "cpp_declaration_id": "6c87c96a20e0c0878c0c1c3ead5d9a72b7ebfb1e7014d3b3675baeb66e366979",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_viewport"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::DumpJson(class std::basic_ostream<char> &, int) const",
+      "cpp_declaration_id": "823c67258aae3d788a3c9e5059c0a71b9b1cc63ef8636e593331abd87671f184",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::dump_json"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::SetPixelTolerance(int)",
+      "cpp_declaration_id": "8587e5f570b3c38c67a0ee39e9cc4ae19f0617829094c9897c008fc3388eba4f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_pixel_tolerance"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::SetBuilder(const class opencascade::handle<class SelectMgr_FrustumBuilder> &)",
+      "cpp_declaration_id": "9aa0fc2464a239174bd347003494ab04d7a7d7abf3f587dce7714f2b884f3a43",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::set_builder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::IsBoundaryIntersectSphere(const class gp_Pnt &, double, const class gp_Dir &, const class NCollection_Array1<class gp_Pnt> &, bool &) const",
+      "cpp_declaration_id": "cf4034c67dfe9006f3fe96a21bfc7d8a300f23aa6cad35c291cdd00652de0b0e",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum::is_boundary_intersect_sphere"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::myBuilder",
+      "cpp_declaration_id": "d37751ca484c90a6536524b08f29c0cb1c24b26c923b05cbd4d4dd0dd1a7f5d0",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::builder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::SelectMgr_BaseFrustum()",
+      "cpp_declaration_id": "fe70097a1fe873d4d980135b23333d060ee82f08b42c60be909d2fa8a993a018",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::<core::default::Default>::default"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::DynamicType() const",
+      "cpp_declaration_id": "2f13e2ff69d8b406c55d596558e12a0e26690012573275cbb2fef52cd11cb9f3",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::base_type",
+      "cpp_declaration_id": "2a92797970db09712bbfa38ec593aa6aec82c3852041c47615b10563f0ccd9a1",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::get_type_descriptor()",
+      "cpp_declaration_id": "cb2b42f5247b9726121cc3e4db0bf3078c9dcff17a7dc0caf9b9448719354ad3",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::get_type_name()",
+      "cpp_declaration_id": "66f22c6f451489502267335fbc5b8982edb53b079ab52b71665b88dd0608a239",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BaseFrustum::~SelectMgr_BaseFrustum() noexcept",
+      "cpp_declaration_id": "68e8fe13342d5ce1a8504516b4a9bca88688c27faa7adce2a73c5759df5fb920",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_TriangularFrustum",
+      "cpp_declaration_id": "448c6bc28cf0d205a807f3de483bc2a772fa61395ad5b29bf5342cfde9feca94",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrTriangularFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_TriangularFrustum::SelectionTriangle",
+      "cpp_declaration_id": "ae350f2bc549096dfaaf92eb02c1946e69a9ac6938c89e18c87bfc6c77183f05",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectionTriangle"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_AxisIntersector",
+      "cpp_declaration_id": "984632a7b893ab07725ecfc2d23c449174fdf0494ae5562d23176d9ae7455ef2",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_RectangularFrustum::SelectionRectangle",
+      "cpp_declaration_id": "3ef3c2b74fdd354c83e01d95aa711183e8df79ae4105c61cf9fd8f6295f15319",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectionRectangle"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_RectangularFrustum",
+      "cpp_declaration_id": "751f6d78513a8a1a5a6a95ef0344ca63c6d1866e68bb3a547b0b990134ed9b72",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_TriangularFrustumSet",
+      "cpp_declaration_id": "5a0d4b2d99b08fa4de0bbdd5bf29b08316d8c97c47c47c707c71e7b1fd6725d9",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrTriangularFrustumSet"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_TriangularFrustumSet::SelectionPolyline",
+      "cpp_declaration_id": "61c6f785e2c52e939690100599f5b511dfde6c6cc416f7217340b46e2cd36a5c",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectionPolyline"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::SetWindowSize(int, int)",
+      "cpp_declaration_id": "094645836ca8313ac96fa70b060520f248d79da57ecd34c57c9d696b50b059d9",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::SetViewport(double, double, double, double)",
+      "cpp_declaration_id": "2037ef2eba6b7d67485274fd6586a72e7bc43da4d7915af5466bca64a40ec3e2",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_viewport"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::BuildSelectingVolume()",
+      "cpp_declaration_id": "233ccfa390dcbf8a98293ba38c2fc0f3ea04ed823d794f4e62ab345fbda1c2f6",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::build_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::SetPixelTolerance(int)",
+      "cpp_declaration_id": "23d90d988987682270901225fb1b7db2957e1eb94b50563bbfbfe0f5a3a4cece",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_pixel_tolerance"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::InitAxisSelectingVolume(const class gp_Ax1 &)",
+      "cpp_declaration_id": "3f7f8ea3ddd774f6f8804c866cb5c4630aa0d37ffefe71358ea3068dfb159119",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::init_axis_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::InitSelectingVolume(const class opencascade::handle<class SelectMgr_BaseIntersector> &)",
+      "cpp_declaration_id": "42089cb797e8806f6ec2daecab032a84cd7b8e5a31d1ada89a9759fc506f50f1",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::init_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::Camera() const",
+      "cpp_declaration_id": "4b98d620e66c73dc4993a8150a96a628d391d6e5feedc1a81bdf23ce1ec14adb",
+      "status": "partial",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::ScaleAndTransform(int, const class gp_GTrsf &, const class opencascade::handle<class SelectMgr_FrustumBuilder> &) const",
+      "cpp_declaration_id": "6caa23c39609d165f1ab920f31a1f4327ec2daf7fc2e2ae5d5da807e8ba1ec9f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::scale_and_transform"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::BuildSelectingVolume(const class gp_Pnt2d &)",
+      "cpp_declaration_id": "70339d9aa5973f12e9dc3f81ab16fbaedab68afcb4f6fbd8b2537f688429e3d1",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::build_point_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::CopyWithBuilder(const class opencascade::handle<class SelectMgr_FrustumBuilder> &) const",
+      "cpp_declaration_id": "7cddacbb07a85a0c3991aae60def4f27413e2e01c7d30b5caaa890ea8d5a04fb",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::copy_with_builder"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::WindowSize(int &, int &) const",
+      "cpp_declaration_id": "91fcab08fa15e597b849c7ed0e96c739511fd897e81d17af77fa618ed698a824",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::window_size"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::SelectMgr_SelectingVolumeManager()",
+      "cpp_declaration_id": "9dd43d61b4fdee10080432b9dacc9cb85ee8b26175cd17cefd86f79f7e9029fa",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::new"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::InitPointSelectingVolume(const class gp_Pnt2d &)",
+      "cpp_declaration_id": "a518f53572831be9dac473cda8875716aeb9b499355d1df52a1f2cf85dee3630",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::init_point_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::AllowOverlapDetection(bool)",
+      "cpp_declaration_id": "b024568dec58c1e59d9a21626aeabc96cf26bd2a92659626350a6469294c628f",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::allow_overlap_detection"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::ActiveVolume() const",
+      "cpp_declaration_id": "b60a652dc7c2aa5a6f084f95119678b7c79d886d9ef358ec2f7331566d8e4d7c",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::active_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::InitBoxSelectingVolume(const class gp_Pnt2d &, const class gp_Pnt2d &)",
+      "cpp_declaration_id": "b6c73ca2ca9af06ed66203bef28d4ef2bd891027247f2378aadc120d5a7a6d1e",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::init_box_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::BuildSelectingVolume(const class gp_Pnt2d &, const class gp_Pnt2d &)",
+      "cpp_declaration_id": "d5c843c2a075676f0ff97aa8076c84620848a8aadd8d380b61fc21232900226a",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::build_box_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::InitPolylineSelectingVolume(const class NCollection_Array1<class gp_Pnt2d> &)",
+      "cpp_declaration_id": "e78b618aabbacac6bb529e358235da4bb4983e21cc22be4ff91a301af577ae60",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::init_polyline_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::GetVertices() const",
+      "cpp_declaration_id": "ecc93fab9d9e98b8fa90bdc5e8386300b9cd66104a145037033bab710ebdbfaf",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::get_vertices"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager",
+      "cpp_declaration_id": "fc3245dc00374b149ec614a27a67ec97e6e41854e3a033428ea4fdc77cc7ffa2",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::BuildSelectingVolume(const class NCollection_Array1<class gp_Pnt2d> &)",
+      "cpp_declaration_id": "fedb880d91f0944e340ef31e8088dddc15719a9dfeb8b1b85eb872ea59f97103",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::build_polyline_selecting_volume"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectingVolumeManager::~SelectMgr_SelectingVolumeManager() noexcept",
+      "cpp_declaration_id": "fb6c7234276f8cbbea4c9ae2a2970f129e8c42acb5e27b556322099c79904b58",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_ToleranceMap",
+      "cpp_declaration_id": "5f12618510d1887ba4d559acc842a33453c25af59ea9fdd62f3b610377e6815a",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrToleranceMap"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion",
+      "cpp_declaration_id": "7531aeb5a9fe29f41e19478604e82805d4fe9c8296d6988ba709ec0ec3bf7712",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion::operator delete(void*) noexcept",
+      "cpp_declaration_id": "3060cc60b7a01864e7bede04c3265fb868aa526f420d19e6b054097099748209",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion::operator delete(void*,void*) noexcept",
+      "cpp_declaration_id": "f58a1eb19137ba1c1ac05dc38d53c2564b828dd77ac8d03bdbf81968e3eb419c",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion::operator delete[](void*) noexcept",
+      "cpp_declaration_id": "45376a685897ae052280abf97f0f2acb4a7a8c9cd5aafd1d651212eacaffef32",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion::operator new(size_t)",
+      "cpp_declaration_id": "de7de8e49e47cdb9f2f7b30e8884d3f98bd7e122a5c46812bf819570ecf0b2dd",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion::operator new(size_t,void*) noexcept",
+      "cpp_declaration_id": "f216f387107374990d0cd458ada55ba05f6110fc4a8c9c1b54e2cae48d245a14",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SortCriterion::operator new[](size_t)",
+      "cpp_declaration_id": "8852cf0c34dd431cbe3514ae0a30f15764f2965e32a28c2b1306d695eb592f5f",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSortCriterion"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntitySet",
+      "cpp_declaration_id": "d01a725814ad70a89d4727c7cabde4b38fd9af98c4647416b0b74d66c2892430",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntitySet::~SelectMgr_SensitiveEntitySet() noexcept",
+      "cpp_declaration_id": "a2b3c81ad94add196a19cdcc2b61cde043d034f8a58d9bdb8e1365e9f1077485",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntitySet"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObjectSet::BVHSubset",
+      "cpp_declaration_id": "5320255aae6012b1459d82e895468bf7a9c071c168359e0fef6e8e7a1205f63e",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhSubset"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObjectSet::Iterator",
+      "cpp_declaration_id": "d7d4d2bb290d7e2bbaaacf43c65b99fce9bd0dfdecb786cd7276226fb5f5c382",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectSetIterator"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObjectSet",
+      "cpp_declaration_id": "ed3e17288ec4b33b9914007a6fd0efeaca265ac6b92dd1ddd924d522dcf16281",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectSet"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObjectSet::~SelectMgr_SelectableObjectSet()",
+      "cpp_declaration_id": "0ceb81443009bed04b0198bf7e8e48fe0c3c371d8e6ac1eeb875b736e849fc15",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObjectSet"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BVHThreadPool::Sentry::Sentry(const class SelectMgr_BVHThreadPool::Sentry &)",
+      "cpp_declaration_id": "394978dcc8f840bbe2ca471b81a626c9d5f1dfa72bcba12334fba482e71f4442",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BVHThreadPool::Sentry",
+      "cpp_declaration_id": "5e9d3adbb709860c5c8e168ad413ae3463023bd42ec93d93932a7ef01ebb4116",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BVHThreadPool::Sentry::operator=(const class SelectMgr_BVHThreadPool::Sentry &)",
+      "cpp_declaration_id": "eb2a69949f2b65bdbd54003ae98b3f4c8347b328a24fd8b6ad58f41b8860f1c1",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadSentry"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BVHThreadPool::BVHThread",
+      "cpp_declaration_id": "fbccecbab276ad68fb9a4105279784426820ed63dabff8dc00722ca069d21406",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhThread"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BVHThreadPool",
+      "cpp_declaration_id": "fc6b5cc71498d71f540479d81570492b12fc144e40a53741d7494c1432e1d3bf",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_BVHThreadPool::base_type",
+      "cpp_declaration_id": "63f2c259a7f2a31bc02879d5cd779e55abbc2a70dca5b02d0dcad1abb9e94351",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrBvhThreadPool"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector",
+      "cpp_declaration_id": "3c1d63a3cdac0c68228a8cef9b718dc786a3c195aa9129d0d43f4f1531965ba7",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrViewerSelector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionManager::base_type",
+      "cpp_declaration_id": "886dd897bea4f2a1cefa58660700db98fadc50aa1135f5e59f1db33828f20557",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionManager",
+      "cpp_declaration_id": "f7a339fc0718974576b58920204424c364cab28f3a5d5b8a7e8cbf6570c6b0b7",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectionManager"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::DynamicType() const",
+      "cpp_declaration_id": "17eb4a551db541b9dc912037a37bb4e1353dd3915dbfc3acc5cea2c1a02020b4",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::base_type",
+      "cpp_declaration_id": "51f3a3878eb522f5089971ad13a39d523bb1a9794de980e214a43e39d6af6444",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::get_type_descriptor()",
+      "cpp_declaration_id": "c67195923140adcd6a4d9709196e4da9ad32a1339ddb049c024b269f1f107d36",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectableObject::get_type_name()",
+      "cpp_declaration_id": "436fd57b31cdbdbb1ae064d10c9f6d3560cb1d99d9ff9940841e1842f44b8299",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectableObject"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector::checkOverlap(const class opencascade::handle<class Select3D_SensitiveEntity> &, const class gp_GTrsf &, class SelectMgr_SelectingVolumeManager &)",
+      "cpp_declaration_id": "0563bed120c918166d387006e6929f0d8fd7f3afb906cde7470998c836ab02bd",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::select_mgr_check_overlap"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector::traverseObject(const class opencascade::handle<class SelectMgr_SelectableObject> &, const class SelectMgr_SelectingVolumeManager &, const class opencascade::handle<class Graphic3d_Camera> &, const class NCollection_Mat4<double> &, const class NCollection_Mat4<double> &, const class NCollection_Vec2<int> &)",
+      "cpp_declaration_id": "f6158f121db6c21e95e53310a31542afa5542b3dcf9743f809b6eee1e4fdfc8c",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::select_mgr_traverse_object"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller::CreateFiller(class Image_PixMap &, class SelectMgr_ViewerSelector *, enum StdSelect_TypeOfSelectionImage)",
+      "cpp_declaration_id": "ab88cbddc654091a86b8f36c7412ad2e5266f23a20a98d64453265e58968c7d0",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::select_mgr_create_selection_image_filler"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SelectionImageFiller",
+      "cpp_declaration_id": "d13513e660873999772b630aa3bc012d3dc6559bd5d819ec46ede17b33880760",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelectionImageFiller"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_ViewerSelector::base_type",
+      "cpp_declaration_id": "47dbc4ad3feb3859d588fe8cb849d6bfa52bf6b0cf5953970f14612029d8c371",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrViewerSelector"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr",
+      "cpp_declaration_id": "a874d3630deceb8b2b259064eb0f81ee5b9dd0be1fd9259bbf294f112ad8bcce",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgr"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::base_type",
+      "cpp_declaration_id": "3d59b29868dda000aa9a5d13e5fa8b573b05c85c2fac3c680eb9251a7ddab5dc",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrEntityOwner"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_Filter::DynamicType() const",
+      "cpp_declaration_id": "70b2862273bc2851d568f316cd48f06629cfac4656c4292b6e675c7df028ba8e",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFilter"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_Filter::base_type",
+      "cpp_declaration_id": "038895dfd5f5722f939d7d1db6a81866f4971ba14f6736c3e2c0a71bb6ce4e8f",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFilter"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_Filter::get_type_descriptor()",
+      "cpp_declaration_id": "eb68f73c2fe65e4f32bb2f62c6707458e79f17deaa3ea3bc867ed0f54544644e",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFilter"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_Filter::get_type_name()",
+      "cpp_declaration_id": "25cc381a03a7436f99e6b52c8cec7917ce1b883c2070390c4a2bc2a1eae400ed",
+      "status": "implemented",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrFilter"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_Selection::base_type",
+      "cpp_declaration_id": "753372c511a113278a162897152b8d6a9e8ed5486a68e42c9cf57a934d92f588",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSelection"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::base_type",
+      "cpp_declaration_id": "f6c16e0bff841aa250880e64e6cf275a63d3984d878174a8227b758a85b9287d",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    },
+    {
+      "upstream_id": "SelectMgr_SensitiveEntity::~SelectMgr_SensitiveEntity() noexcept",
+      "cpp_declaration_id": "82d3c7afa043658d56fd23705cc88eaf6b74f12e7b3ff04bf255107aedfe51bb",
+      "status": "excluded",
+      "verified_paths": [
+        "rustycad_tkv3d::select_mgr::SelectMgrSensitiveEntity"
+      ],
+      "explicit_selectors": 0,
+      "recursive_structurally_identical": true
+    }
+  ],
+  "refresh_rows": [],
+  "unproved_structural_comparisons": [],
+  "baseline_inventory": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/api-proof/rust-api-inventory.json",
+  "baseline_inventory_sha256": "c7e9a9cc956e3c7465c0cbad6b1e268de5f2dfbcca8967b2a723aef2aca894a7",
+  "published_baseline_commit": "df7a8b979",
+  "baseline_checked_source": "92c7c7995",
+  "result": "139 affected existing bindings recursively structurally identical excluding only source_sha256/declaration_sha256; zero stale explicit selectors and zero unproved comparisons. No additional refresh fragment required. Getter partial statuses and every existing class/status/note untouched."
+}

@@ -56,3 +56,19 @@ mod view_cube_test_probe;
 mod context_selected_applicative_tests;
 
 mod context_isoline_policy_tests;
+
+// Keep regression registration in the existing test-only include as AIS grows.
+mod colored_shape_dispatch_fixture;
+mod colored_shape_dispatch_tests;
+mod colored_shape_parent_drop;
+mod colored_shape_alias_inputs;
+mod colored_shape_alias_tests;
+mod colored_shape_expansion_inputs;
+mod colored_shape_expansion_tests;
+mod shape_drawer_cursor_tests;
+mod colored_shape_appearance_snapshot;
+mod colored_shape_appearance_tests;
+mod colored_shape_copy_tests;
+mod colored_shape_custom_dispatch_tests;
+mod context_frame_reference_fixture;
+mod context_frame_reference_tests;

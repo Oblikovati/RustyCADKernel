@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "AIS_InteractiveContext::CurrentViewer() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "0e3dabacaa9b5973f39cc2c33091dbff0f914a0c8fafdcff826d2f180ee9b0fc",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer_ref",
+          "declaration_sha256": "4acd1ecbff6f9ef858aed0d1e5cbfcfc650fbff40e334f72fabbaca2da520db7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite actual context field reference, no retained lock or intrusive copy; actual native owner callback replaces fields, invokes SetDefaultDrawer and observes same references/counts, typed/unrelated faults and retry. Six exact pinned native rows twice byte-identical and Rust-only replay. Replaces former guarded convenience binding; context/controller classes remain partial. See docs/context-field-references.md."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::MainPrsMgr() const",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9c260731897ffc63e499abb6e5c6798904345b7d28ee4f9b8b4e30301a21dcd7",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr_ref",
+          "declaration_sha256": "8c052f35b3c3b97ec920db044324aba3659d9027820926489f22fd2f4c9b2aa2",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite actual context field reference, no retained lock or intrusive copy; actual native owner callback replaces fields, invokes SetDefaultDrawer and observes same references/counts, typed/unrelated faults and retry. Six exact pinned native rows twice byte-identical and Rust-only replay. Replaces former guarded convenience binding; context/controller classes remain partial. See docs/context-field-references.md."
+    }
+  ]
+}

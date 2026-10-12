@@ -1,0 +1,34 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checked_main_dependency": "92c7c7995",
+  "frame_baseline": "Isolated subset of519765a59 only; full Frame9a1f70c86 preserved separately",
+  "status": "Standalone actual selecting-volume virtual SetCamera borrowed argument; no full ViewerSelector/Frame/getter/class credit",
+  "row_count": 6,
+  "native_runs": "Two byte-identical exact integer native CPU runs",
+  "fixture_sha256": "1dc30b069f8b55c6b0f4ce005a954b4697cc3075c8d6ba82abde414b1048bdfa",
+  "second_run_uncompressed_sha256": "1dc30b069f8b55c6b0f4ce005a954b4697cc3075c8d6ba82abde414b1048bdfa",
+  "second_run_gzip_sha256": "40b1c8554862b077e669ae0a5be295177a0efe92d00d215ce936c8eca619de22",
+  "oracle_executable_sha256": "18f49a230fa2b32d91305a1a064043f97b443a2e9d3fade474543d8c9e3ac98b",
+  "sources": {
+    "tools/oracle/martensite_selector_camera_argument.cxx": "dc87bc970a2506e1d05b603d5be6cefe44f2da1f2910e42baeafad9628c7b610",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.cxx": "752995c32ac50d008d37356bc7174cd6f90b0ebba0969e27a8f3f94dc20b4d18",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.cxx": "644f62dfdbebd53c41a947d5787b29e9a029849ba8ee9bf97071d67871b20334",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.cxx": "c6a9a92384fb66e286dda183db53a3531b5aa56395f4be371bac20a41c2ef238",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_ViewerSelector.cxx": "7f3b718d43edf3291b69488a704521cc6ab70cf791618adb9b6214125756ea84"
+  },
+  "native_library_sha256": {
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKService.so.8.1.0": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so.8.1.0": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG3d.so.8.1.0": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKV3d.so.8.1.0": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24"
+  },
+  "build": "g++ -std=c++17 -O0 main pinned SDK include/libi/rpath, committed null-driver helper; link TKV3d TKG3d TKService TKMath TKernel. No temporary wrappers/GPU/OCCT rebuild.",
+  "schema": "mode frame failure records[5] managerCameraIsReplacement managerCameraNull firstCameraCount secondCameraCount volumeCount. Records: sameArgumentField originalCameraCount volumeCount currentArgumentIsReplacement currentArgumentCameraCount.",
+  "configuration": "Real V3dView and SelectingVolumeManager owning actual derived rectangular-frustum volume. Declared virtual SetCamera receives view Camera constHandle&; override uses actual view SetCamera to replace original camera field before qualified rectangular SetCamera. Success/Standard_Failure/unrelated then retry; exact ownership/state. No whole ViewerSelector Pick body/geometry/native getter alias credit.",
+  "comparison": "All integer fields exact. Rust test state inspects actual intersector field with nonown storage lease because existing copied Camera getter conveniences add temporary native owners and remain known partial. No count subtraction or mirrored bounds. Derived Rust volume embeds real rectangle and delegates required geometry; separate13-shape/copy/build regression verifies real delegation, not stubs.",
+  "regression": "Native6 exact alias/count/typedFailure/unrelated/retry replay. Original full Frame red logs remain outside this standalone tree; no dependency on old tree artifacts.",
+  "final_checks": "1134 toolkit alltarget/allfeature tests across8executables; both toolkit alltarget/allfeature Clippy-Dwarnings; globalfmt; Vulkan alltarget consumer check; canonical13 and preflight13 tool suites. Actual pinned nightly61 compiler output and production verification resolve5 unique source-pinned existing setter bindings. Native6 independently rebuilt twice byteexact. Full Frame/getters/classes remain partial."
+}

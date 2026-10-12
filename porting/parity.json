@@ -506239,9 +506239,30 @@
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Attributes",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ArrayOfPrimitives.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::attributes",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::attributes_ref",
       "status": "implemented",
-      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe. Checked 2026-10-12: native const-handle getters bind actual *_ref members instead of owning convenience copies. Three pinned native rows prove real field identity, optional null buffers and unchanged intrusive counts; group dispatch forwards those fields directly. Root toolkit and both-device Vulkan gates are recorded in porting/runtime-evidence/array-buffer-reference-2026-10-12; classes remain partial.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::attributes_ref",
+          "declaration_sha256": "0f3f0687c9dde3e98058bfae85c2e9267cdddf0ff410a290e0fa27560688bf4a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dArrayOfPrimitives",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::array_of_primitives::Graphic3dArrayOfPrimitives"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Type",
@@ -506623,9 +506644,30 @@
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Indices",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ArrayOfPrimitives.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::indices",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::indices_ref",
       "status": "implemented",
-      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe. Checked 2026-10-12: native const-handle getters bind actual *_ref members instead of owning convenience copies. Three pinned native rows prove real field identity, optional null buffers and unchanged intrusive counts; group dispatch forwards those fields directly. Root toolkit and both-device Vulkan gates are recorded in porting/runtime-evidence/array-buffer-reference-2026-10-12; classes remain partial.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::indices_ref",
+          "declaration_sha256": "672f5f3c9be1a675cdbeedd14799d33bb278f0435a846f7edc8af4bcb6b612b4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dArrayOfPrimitives",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::array_of_primitives::Graphic3dArrayOfPrimitives"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Graphic3d_ArrayOfPrimitives::EdgeNumber",
@@ -506767,9 +506809,30 @@
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Bounds",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ArrayOfPrimitives.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::bounds",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::bounds_ref",
       "status": "implemented",
-      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe. Checked 2026-10-12: native const-handle getters bind actual *_ref members instead of owning convenience copies. Three pinned native rows prove real field identity, optional null buffers and unchanged intrusive counts; group dispatch forwards those fields directly. Root toolkit and both-device Vulkan gates are recorded in porting/runtime-evidence/array-buffer-reference-2026-10-12; classes remain partial.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::bounds_ref",
+          "declaration_sha256": "9554025d8b958e7d568da9d9756811c74be4c49f68b5ad29dbecdc311b3f83d9",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dArrayOfPrimitives",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::array_of_primitives::Graphic3dArrayOfPrimitives"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Graphic3d_ArrayOfPrimitives::HasBoundColors",
@@ -563684,8 +563747,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dLineAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dLineAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_LineAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -564216,8 +564279,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dPointAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dPointAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_PointAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -564532,8 +564595,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dShadingAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dShadingAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_ShadingAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -566097,92 +566160,114 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default).",
+      "upstream_id": "V3d_ImageDumpOptions",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "4861136baed7484ecb65dbdca573d1fbc136b136c509df073807b4a8fb2a82ae",
       "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions",
-      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
       "status": "implemented",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions"
+      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default). Martensite OCCT 3d097a0 public ImageDumpOptions audit: Actual public value fields are mapped, but native LightName is a borrowed const char* and Rust String ownership/copy semantics do not preserve that contract. Rust derives Clone, not Copy; no whole struct completion. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::BufferType",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::BufferType"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "eb52d5fc2fea84de8d7658a6e9de27fa2be1f69e645d19e458daae58b3783052",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::buffer_type",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::Height",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::Height"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "d16c8ad3644fe6a495f57f86550428544ba727227b119cf0df3419bed1f6de0e",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::height",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::IsSingleLayer",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::IsSingleLayer"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "397501365b71ed7c59058a04cd3b21ed6daae8498b6fd7be618c00af0515ecf8",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::is_single_layer",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::LightName",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::LightName"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "0737790281c20453a9a923e771f6da50649328334554ceffbf923ffc4901ab54",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::light_name",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite OCCT 3d097a0 public ImageDumpOptions audit: Public native const char* field; Rust String value counterpart exists, but arbitrary borrowed buffer pointer identity, external mutation, shallow-copy alias and lifetime are not implemented/proved. Exclusion as private state was false; keep full obligation open. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::StereoOptions",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::StereoOptions"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "6605fdbe3a96d61867fd7dda9aa76b13380ff9c7592c599ca8c85c62fbc9f590",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::stereo_options",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::TargetZLayerId",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::TargetZLayerId"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "f0e8688390b9fe9cef753bc7fff89875a6542afbc3f6e187cf0b18b2e3130b02",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::target_z_layer_id",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::TileSize",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::TileSize"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "091a6d4d73374aae47a1c3b48086d1906fcac8ea650b0a9b46738eca7b09e6cc",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::tile_size",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::ToAdjustAspect",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::ToAdjustAspect"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "2e190c2c266f6f6fb8cba59eb5d9d33fb942efbfef97dbb389163f949ef28c91",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::to_adjust_aspect",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default).",
+      "upstream_id": "V3d_ImageDumpOptions::V3d_ImageDumpOptions",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "9cff6eb7e8beab3f4494ad2c63be1d2086887cb03e164f5b681a4df04741d53d",
       "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::<core::default::Default>::default",
-      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
       "status": "implemented",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::V3d_ImageDumpOptions"
+      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default). Martensite OCCT 3d097a0 public ImageDumpOptions audit: Native zero/RGB/Mono/BottomOSD/true/false value defaults match Rust Default and repeated native fixture; LightName default is empty text, while general borrowed field lifetime remains partial. Rust type is Clone, not Copy. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
-      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
+      "upstream_id": "V3d_ImageDumpOptions::Width",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::Width"
+      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "622be08bf627c9e0083fc9edca04809f87926a257d527f98b1df2352a66f0dd5",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::width",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md. Checked replacement: Martensite complete public ImageDumpOptions aggregate at OCCT3d097a0: eight direct mutable value fields, actual nullable lifetime-bound const-char pointer, shallow Copy/rebind and external byte edits, nonUTF8/first-NUL conversion, static-empty default, hostC-layout proof. Committed13pointer/layout +15value +3actualToPixMap boundary native records repeat2; Rust-only replay, safe-anchor compile-fail and Miri. Native dangling/racing reads are invalid; explicit foreign pointer constructor documents anchored validity/synchronization. Conversion occurs onlyafterRedraw in untiledShadowMap; nullFailure preserves native pre-cleanup state. No View/rendererfamily completion. See docs/image-dump-light-name.md."
     },
     {
       "notes": "Typedef of Graphic3d_CLight: Rust spells the light as Handle<rustycad_tkservice::graphic3d::Graphic3dCLight>.",
@@ -569231,18 +569316,18 @@
       "upstream_id": "V3d_View::TextureEnv"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Audited 2026-10-12: actual native Redraw can rebind the same caller-owned options.LightName via a valid mutable alias while ToPixMap holds its const reference; independent two-run native probe consumes the replacement seven-byte name. Current immutable &V3dImageDumpOptions transport cannot represent this live field mutation. Pointer-buffer mutation and pure options fields are separately proved, not whole-consumer completion. See porting/runtime-evidence/image-dump-consumer-audit-2026-10-12.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::to_pix_map",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::ToPixMap(Image_PixMap &,const V3d_ImageDumpOptions &)"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Audited 2026-10-12: native explicit-argument overload also accepts target Z layer, integer single-layer flag, stereo mode and nullable light-name pointer; current to_pix_map_sized exposes only dimensions, buffer type and aspect adjustment. Defaults-only convenience is not full overload coverage. See porting/runtime-evidence/image-dump-consumer-audit-2026-10-12.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::to_pix_map_sized",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::ToPixMap(Image_PixMap &,const int,const int,const Graphic3d_BufferType &,const bool,const Graphic3d_ZLayerId,const int,const V3d_StereoDumpOptions,const char *const)"
     },
@@ -572897,7 +572982,28 @@
       "cpp_declaration_id": "4e318ad239756cb0881d68c6365460bd10c700a7fcc0b47dffc65f74f24247d0",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_camera",
       "status": "implemented",
-      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available."
+      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_camera",
+          "declaration_sha256": "283e19376bd7ab1d91fb1bf54f41550467efb695209fec39a27f6297f864e84a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrFrustumBuilder",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_FrustumBuilder::SetWindowSize(const int, const int)",
@@ -573107,7 +573213,15 @@
       "cpp_declaration_id": "0e75b254319f3c203156749fe9c0fcc48bcd2d86dfb43d373551d4578a9bef9a",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_camera",
       "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_camera",
+          "declaration_sha256": "ccae81c8a5cd3aa0daec769bc0daccd56ac04e7afd443ec8476785ffb87ff523",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::OverlapsSegment(const class gp_Pnt &, const class gp_Pnt &, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
@@ -573607,7 +573721,28 @@
       "cpp_declaration_id": "fe3fd64acc2fd93eae1d4a6ea5a5d20039e05b546fd7b4a62d1e21da749cac4f",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera",
       "status": "implemented",
-      "notes": "Full base-frustum state and concrete native bodies, delegated by derived intersectors; see v3d-design.md section 6. Nine Rust tests and 1032 added native comparisons cover default independent builders, tolerance, camera/viewport propagation, builder replacement/removal, dump depth, boundary closure/projection, unchanged inside outputs, virtual sphere overrides and projected-direction failure. DumpJson compared on matching readable streams. No claim of concrete rectangular/triangular frustum implementations."
+      "notes": "Full base-frustum state and concrete native bodies, delegated by derived intersectors; see v3d-design.md section 6. Nine Rust tests and 1032 added native comparisons cover default independent builders, tolerance, camera/viewport propagation, builder replacement/removal, dump depth, boundary closure/projection, unchanged inside outputs, virtual sphere overrides and projected-direction failure. DumpJson compared on matching readable streams. No claim of concrete rectangular/triangular frustum implementations. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera",
+          "declaration_sha256": "767bd24740fb43213482239deee679db9998f2a0ce2171ba03b4247617105b2c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrBaseFrustumBase",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_BaseFrustum::SelectMgr_BaseFrustum()",
@@ -574276,7 +574411,32 @@
       "cpp_declaration_id": "76dc23b39865f682038112e3d4f6c7bad71f68d21660ec10c08c04bcedb30b66",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::set_camera",
       "status": "implemented",
-      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::set_camera",
+          "declaration_sha256": "6d1f6d79cc4f422f7dbf8c746226cc813cd6ce055eacb2c95a887e22fd89c684",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "SelectMgrAxisIntersector",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::axis_intersector::SelectMgrAxisIntersector"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrBaseIntersector",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector"
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_AxisIntersector::OverlapsCylinder(double, double, double, const class gp_Trsf &, bool, bool *) const",
@@ -575636,7 +575796,28 @@
       "cpp_declaration_id": "c3d6827f568ff30171488469c3963428ca97f6934f202c440c19608310990b3f",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_camera",
       "status": "implemented",
-      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6."
+      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_camera",
+          "declaration_sha256": "4dd96fdb22e9b78b8d48914fc73fcb85b3a3c05e49d85eed31174635a939cdcb",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrSelectingVolumeManager",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::selecting_volume::SelectMgrSelectingVolumeManager",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_SelectingVolumeManager::ViewClipRanges() const",
@@ -578364,9 +578545,30 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
       "cpp_declaration_id": "0e3dabacaa9b5973f39cc2c33091dbff0f914a0c8fafdcff826d2f180ee9b0fc",
-      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer",
-      "status": "partial",
-      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md. Contract audit 2026-10-12: native const Handle& aliases the actual mutable context field. The current Rust AisContextHandle holds a whole-context read guard across use, blocking declared callback context mutation and retained-slot replacement observation. Status remains partial until the genuine current_viewer_ref/main_prs_mgr_ref paths are integrated and the compiler bindings retargeted; native six-row proof exists on controller checkpoint f4cafd57f."
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer_ref",
+      "status": "implemented",
+      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md. Contract audit 2026-10-12: native const Handle& aliases the actual mutable context field. The current Rust AisContextHandle holds a whole-context read guard across use, blocking declared callback context mutation and retained-slot replacement observation. Status remains partial until the genuine current_viewer_ref/main_prs_mgr_ref paths are integrated and the compiler bindings retargeted; native six-row proof exists on controller checkpoint f4cafd57f. Checked replacement: Martensite actual context field reference, no retained lock or intrusive copy; actual native owner callback replaces fields, invokes SetDefaultDrawer and observes same references/counts, typed/unrelated faults and retry. Six exact pinned native rows twice byte-identical and Rust-only replay. Replaces former guarded convenience binding; context/controller classes remain partial. See docs/context-field-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer_ref",
+          "declaration_sha256": "4acd1ecbff6f9ef858aed0d1e5cbfcfc650fbff40e334f72fabbaca2da520db7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_KindOfInteractive_Datum",
@@ -578864,9 +579066,30 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
       "cpp_declaration_id": "9c260731897ffc63e499abb6e5c6798904345b7d28ee4f9b8b4e30301a21dcd7",
-      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr",
-      "status": "partial",
-      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md. Contract audit 2026-10-12: native const Handle& aliases the actual mutable context field. The current Rust AisContextHandle holds a whole-context read guard across use, blocking declared callback context mutation and retained-slot replacement observation. Status remains partial until the genuine current_viewer_ref/main_prs_mgr_ref paths are integrated and the compiler bindings retargeted; native six-row proof exists on controller checkpoint f4cafd57f."
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr_ref",
+      "status": "implemented",
+      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md. Contract audit 2026-10-12: native const Handle& aliases the actual mutable context field. The current Rust AisContextHandle holds a whole-context read guard across use, blocking declared callback context mutation and retained-slot replacement observation. Status remains partial until the genuine current_viewer_ref/main_prs_mgr_ref paths are integrated and the compiler bindings retargeted; native six-row proof exists on controller checkpoint f4cafd57f. Checked replacement: Martensite actual context field reference, no retained lock or intrusive copy; actual native owner callback replaces fields, invokes SetDefaultDrawer and observes same references/counts, typed/unrelated faults and retry. Six exact pinned native rows twice byte-identical and Rust-only replay. Replaces former guarded convenience binding; context/controller classes remain partial. See docs/context-field-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr_ref",
+          "declaration_sha256": "8c052f35b3c3b97ec920db044324aba3659d9027820926489f22fd2f4c9b2aa2",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_InteractiveObject::InteractiveContext() const",
@@ -595507,7 +595730,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
-          "declaration_sha256": "e2b06612eedfe358330f90a691573a6c68cb0a1be0f77cb58d314ee0301a22d7",
+          "declaration_sha256": "a9991fd5ffb4f536611018b2b916726ec06554b0cfb1b57e908555eedafa4904",
           "impl_context": null
         }
       ]
@@ -595525,7 +595748,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
-          "declaration_sha256": "8503701ad9b17fcb0e3c91fab3f42d399c72aa7a824fc9ccc0379ceea3685828",
+          "declaration_sha256": "4b7c56693f8793b53469a637c22c4cd5a53ef663868b321861d9d6d49247350f",
           "impl_context": null
         }
       ]
@@ -595543,7 +595766,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
-          "declaration_sha256": "0011e89db4b640bbd903102c1cda4e055e699ae1454b8b7044e97041f36ac881",
+          "declaration_sha256": "9e4e13d7f60078cf19c650cc71c63ca0cc68530db91dd5103747d0490c863b1a",
           "impl_context": null
         }
       ]
@@ -595561,7 +595784,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
-          "declaration_sha256": "8ec5b9f106bca7acf3b8754608767f930dd7dd980271d0b7c05d083e3c0c0ee8",
+          "declaration_sha256": "545bf357cf24bd9bab8fc5e40c24289d06d3c648cb5141fba8ed14ed5317563b",
           "impl_context": null
         }
       ]
@@ -597485,7 +597708,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "fe529738f364b5a824d5ccb9b67fda7830ef455a65db74ec57a257d8ab8176a5",
+          "declaration_sha256": "3d2b57fdcd75ffad83660211c59c6bf752be1be2f10e4027a92b46081f718839",
           "impl_context": null
         }
       ]
@@ -597644,7 +597867,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "3b9a250f6af102ecf3bd2613a2d62bad66d208cfbb115e4ece481e34812ce200",
+          "declaration_sha256": "ccb47cbda7b8be44c89a42c530a35b4522cc1efc4f3619240b92af488d7104be",
           "impl_context": null
         }
       ]
@@ -598733,7 +598956,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisTypeOfIso",
-          "declaration_sha256": "fa8afb38077cb77864349455d4668b39d46a31697c4e624e7f70bdff688721ee",
+          "declaration_sha256": "014e3fbad8d110e87cb48fa9839487faeae35e0625cbe3e8663f10738d0222b4",
           "impl_context": null
         }
       ],
