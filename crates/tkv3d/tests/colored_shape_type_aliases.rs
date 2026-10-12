@@ -45,7 +45,7 @@ fn record_colored_group_alias(
     rows.push(format!(
         "group-alias {} {} {} {}",
         groups.len(),
-        i32::from(node.drawer_address().unwrap() == drawer.object_address()),
+        i32::from(groups.add(drawer, shape).unwrap() == 1),
         i32::from(node.clone_compound().unwrap().is_equal(&shape)),
         drawer.ref_count()
     ));

@@ -16,7 +16,7 @@ int main() {
   }
   const occ::handle<AIS_ColoredDrawer> drawer=new AIS_ColoredDrawer(object->Attributes());
   ColoredAliasProbe::CompoundGroups groups;groups.Add(drawer,shape);
-  std::cout<<"group-alias "<<groups.Extent()<<' '<<(groups.FindKey(1)==drawer)<<' '<<groups.FindFromIndex(1).IsEqual(shape)<<' '<<drawer->GetRefCount()<<'\n';
+  std::cout<<"group-alias "<<groups.Extent()<<' '<<(groups.Add(drawer,shape)==1)<<' '<<groups.FindFromIndex(1).IsEqual(shape)<<' '<<drawer->GetRefCount()<<'\n';
   groups.Clear(false);
   std::cout<<"aliases-finished "<<object->GetRefCount()<<' '<<drawer->GetRefCount()<<' '<<shape.TShape()->GetRefCount()<<'\n';
   return 0;
