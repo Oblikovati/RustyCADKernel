@@ -481383,8 +481383,8 @@
         "kind": "FunctionTemplate"
       },
       "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
-      "status": "implemented",
-      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Image_PixMap::ChangeValue",
@@ -481394,8 +481394,8 @@
         "kind": "FunctionTemplate"
       },
       "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
-      "status": "implemented",
-      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The mutable reference is a typed write."
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The mutable reference is a typed write. Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Image_PixMap::ValueXY",
@@ -481405,8 +481405,8 @@
         "kind": "FunctionTemplate"
       },
       "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
-      "status": "implemented",
-      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row). Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Image_PixMap::ChangeValueXY",
@@ -481416,8 +481416,8 @@
         "kind": "FunctionTemplate"
       },
       "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
-      "status": "implemented",
-      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+      "status": "partial",
+      "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row). Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Image_PixMap::ValueXYZ",
@@ -481449,8 +481449,8 @@
         "kind": "ClassTemplate"
       },
       "rust_item": "rustycad_tkservice::image::ImagePixMapData",
-      "status": "implemented",
-      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The class template is ImagePixMapData with generic typed accessors over ImagePixel."
+      "status": "partial",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The class template is ImagePixMapData with generic typed accessors over ImagePixel. Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "std::hash",
@@ -482505,16 +482505,16 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
       "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
-      "status": "implemented",
-      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer)."
+      "status": "partial",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Image_PixMapTypedData::ChangeValue",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
       "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
-      "status": "implemented",
-      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The mutable reference is a typed write."
+      "status": "partial",
+      "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The mutable reference is a typed write. Native reference parity remains open: Value/ChangeValue return const PixelType_t&/PixelType_t& into actual image storage; typed returns an owned Option<P> snapshot and set_typed performs a one-shot write, so a native-valid retained pixel alias does not observe subsequent mutation or write through that same reference. XY coordinate adaptation also remains unproven. The parent typed-image class retains its existing byte-storage and numeric evidence but cannot be complete while these typed-reference members remain partial. See porting/runtime-evidence/image-pixel-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Image_ColorRGB",
@@ -594022,7 +594022,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::new",
-          "declaration_sha256": "428f50a769810a94a1356ef05bbbfa51b409a242c0c73edd51c8e1513f9b21c2",
+          "declaration_sha256": "48b5f6b917a7b0668ab008bc8f052feea7cbc96f37918e9fc1f80a4bc8f2d372",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594075,7 +594075,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::global_sel_owner",
-          "declaration_sha256": "6c3fbd5cd0a5dd8487ed79e7c9624b33083056073526cf1274420acbef342204",
+          "declaration_sha256": "5b95c1620e2be5246ebb1513438de648334097ca386097132ad4ad477fb6fbb8",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594110,7 +594110,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::is_auto_hilight",
-          "declaration_sha256": "fd8914f2ff942ecd54f30945f23d4650aa5b2ff96179378098994de6edb090af",
+          "declaration_sha256": "db10c3b016cf16032b016139e20002f842df0c2ef1828142d7fa4728a7f0023b",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594145,7 +594145,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::clear_selected",
-          "declaration_sha256": "6a40aa22d755538d0904ae3ced6f93c827fa7fd9ba08f5c7924c31c8101cc8c1",
+          "declaration_sha256": "4ce793ad637ca71274b4ce3b7d903a9c93ee67d27bc303e1bb0d2b8541dc6ba2",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594180,7 +594180,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::hilight_selected",
-          "declaration_sha256": "39c40203a0540bcc34fb8a61f560fefbaa72e42ead1600cb22d76f30762f75e2",
+          "declaration_sha256": "b11101294f1c9d0b8eb45d8a564253a3001cd74cba6ef62b46b31527c9fb92b4",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594215,7 +594215,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
-          "declaration_sha256": "7391d53a859e3c4b6f1d70dfd6c9dc2eea6f7aa82bb824765d989e3da803f697",
+          "declaration_sha256": "d0abded44ef739d9c90ae9c14d1b7375903ea216ec0bf0c0af699f08dd76f7c2",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -596172,7 +596172,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "5fe3b5bc7557a9ff096775122158fd390d3de27ccd4fbbc1e20d06de800bbf73",
+          "declaration_sha256": "de5c26496464caaccbfe4a306230b84baa390ad5a855db7215d7c7d480f57677",
           "impl_context": null
         }
       ]
@@ -596331,7 +596331,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "1d654cc43a0cf4c54f1e9af0fb0da7dd66dde7eaa5d79b712e770f8abfbbd941",
+          "declaration_sha256": "b8842a3a2c32a804cde2dd0dfbe36bd0f5acc72254613ac6e0877faee75cc7ab",
           "impl_context": null
         }
       ]
