@@ -51,7 +51,9 @@ serializes local `main` integration, checks and deletion of completed worktrees.
    [Subtitle backgrounds](vulkan-subtitle-text.md), and [Decal outlines](vulkan-decal-text.md)
    are integrated with native
    fixtures, both-device captures and optimized workloads. Strict text raster
-   parity, Blend/XOR and broader text capabilities remain partial.
+   parity and broader text capabilities remain partial. [Blend/XOR](vulkan-blend-text.md)
+   adds real logic operations and explicit native pixel text, with quantified color
+   conversion/raster limitations retained.
    [AIS_Axis and labeled axis presentations](ais-axis.md) now add coordinate datums,
    native selection snapshots and inherited text-aspect rendering.
    [Plane presentation builders](plane-presentations.md) now preserve native edges,

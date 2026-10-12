@@ -93,7 +93,10 @@ performance distributions. Their receipts identify the exact checked source
 revisions. Strict raster/color differences remain recorded; these slices do not
 complete the text capability family. [Decal text](vulkan-decal-text.md) now adds
 four ordered outline passes and corrects shared local-plane state and glyph Fill
-offsets. Standard surface textures and Blend/XOR remain unfinished.
+offsets. [Blend/XOR text](vulkan-blend-text.md) now uses real Vulkan logic
+operations and an explicit native Set2D seam; strict quantization and raster
+limitations keep the wider text family partial. Standard surface textures remain
+separately owned work.
 
 ## Reproduce the checks
 

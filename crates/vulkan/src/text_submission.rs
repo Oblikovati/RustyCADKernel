@@ -50,6 +50,7 @@ impl TextSceneContext<'_> {
                 }),
             camera_rotation,
             viewport: [0, 0, extent[0] as i32, extent[1] as i32],
+            pixel_coordinates: false,
         })
     }
     fn text_scene_matrices(&self, extent: [u32; 2]) -> Result<(Mat4<f64>, Mat4<f64>), RenderError> {
@@ -69,13 +70,15 @@ impl TextSceneContext<'_> {
         Ok((projection, model_view))
     }
 }
-fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
+/// Reject unsupported display/shader requests; `validate_text_style(&aspect)?` preserves native paths.
+pub(crate) fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
     if !matches!(
         aspect.text_display_type(),
         AspectTypeOfDisplayText::Normal
             | AspectTypeOfDisplayText::Shadow
             | AspectTypeOfDisplayText::Subtitle
             | AspectTypeOfDisplayText::Dekale
+            | AspectTypeOfDisplayText::Blend
     ) || !aspect.shader_program().is_null()
     {
         return Err(rejected(
@@ -83,7 +86,7 @@ fn validate_text_style(aspect: &dyn Graphic3dAspectsSource) -> Result<(), Render
                 aspect.text_display_type(),
                 aspect.shader_program().object_address(),
             ),
-            "Normal, Shadow, Subtitle or Dekale text display without a custom shader",
+            "Normal, Shadow, Subtitle, Dekale or Blend text display without a custom shader",
         ));
     }
     Ok(())

@@ -30,6 +30,7 @@ pub(super) struct VulkanRuntime {
     pub memory: vk::PhysicalDeviceMemoryProperties,
     pub limits: vk::PhysicalDeviceLimits,
     pub depth_clamp: bool,
+    pub logic_op: bool,
     pub large_points: bool,
     pub lines: super::line_device::LineCapabilities,
     pub name: String,
@@ -67,6 +68,7 @@ impl VulkanRuntime {
             memory: Default::default(),
             limits: Default::default(),
             depth_clamp: false,
+            logic_op: false,
             large_points: false,
             lines: Default::default(),
             name: String::new(),
@@ -89,6 +91,8 @@ impl VulkanRuntime {
         self.large_points = unsafe { self.instance.get_physical_device_features(physical) }
             .large_points
             == vk::TRUE;
+        self.logic_op =
+            unsafe { self.instance.get_physical_device_features(physical) }.logic_op == vk::TRUE;
         self.lines = super::line_device::LineCapabilities::query(&self.instance, physical)?;
         self.memory = unsafe {
             self.instance
@@ -102,6 +106,7 @@ impl VulkanRuntime {
             self.depth_clamp,
             self.large_points,
             self.lines,
+            self.logic_op,
         )?);
         let families = unsafe {
             self.instance
@@ -210,6 +215,7 @@ fn create_device(
     depth_clamp: bool,
     large_points: bool,
     lines: super::line_device::LineCapabilities,
+    logic_op: bool,
 ) -> Result<Device, RenderError> {
     let families = unsafe { instance.get_physical_device_queue_family_properties(physical) };
     let queues: Vec<_> = (0..families.len())
@@ -225,7 +231,8 @@ fn create_device(
     let core_features = vk::PhysicalDeviceFeatures::default()
         .depth_clamp(depth_clamp)
         .large_points(large_points)
-        .wide_lines(lines.wide);
+        .wide_lines(lines.wide)
+        .logic_op(logic_op);
     let mut info = vk::DeviceCreateInfo::default()
         .enabled_features(&core_features)
         .queue_create_infos(&queues)

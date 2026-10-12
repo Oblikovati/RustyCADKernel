@@ -28,6 +28,7 @@ fn subtitle_fixture_transform() -> TextTransform {
         model_world: Mat4::identity(),
         camera_rotation: Mat4::identity(),
         viewport: [0, 0, 128, 128],
+        pixel_coordinates: false,
     }
 }
 fn subtitle_fixture_draws(aspect: &Graphic3dAspectText3d) -> Vec<PrimitiveDraw> {

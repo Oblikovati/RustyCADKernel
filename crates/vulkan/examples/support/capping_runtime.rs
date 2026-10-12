@@ -7,7 +7,7 @@ fn quad(z: f32, color: [f32; 4]) -> PrimitiveDraw {
         .to_vec();
     PrimitiveDraw::new(vertices, vec![0, 1, 2, 0, 2, 3], identity_clip()).unwrap()
 }
-fn batch(count: usize, color: [f32; 4]) -> Vec<PrimitiveDraw> {
+pub(super) fn batch(count: usize, color: [f32; 4]) -> Vec<PrimitiveDraw> {
     let clip = RenderClipping::new(vec![vec![[1., 0., 0., 0.]]], identity_clip()).unwrap();
     let mut draws: Vec<_> = (0..count)
         .map(|i| {
