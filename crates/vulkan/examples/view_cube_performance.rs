@@ -7,6 +7,8 @@ mod view_cube_scene;
 #[allow(dead_code)]
 #[path = "../tests/support/view_cube_widget.rs"]
 mod view_cube_widget;
+#[path = "../tests/support/view_cube_widget_animation.rs"]
+mod view_cube_widget_animation;
 #[allow(dead_code)]
 #[path = "../tests/support/view_setup.rs"]
 mod view_setup;
@@ -64,10 +66,65 @@ fn measure_widget_frames(
     view_cube_widget::detect_widget_center(scene)?;
     print_cube_samples("view-cube-hover", &measure_cube_frames(&render));
     view_cube_widget::click_widget_center(scene)?;
+    measure_derived_cube_camera(scene, &clock);
     for (label, time) in view_cube_widget::widget_animation_frames() {
         clock.seek(time);
         scene.cube.update_animation(false)?;
         print_cube_samples(&format!("view-cube-{label}"), &measure_cube_frames(&render));
     }
+    view_cube_widget::verify_widget_camera_dispatch(&clock);
     Ok(())
+}
+
+fn measure_cube_camera_frames(scene: &view_cube_scene::ViewCubeCaptureScene) -> Vec<f64> {
+    for _ in 0..20 {
+        completed_cube_camera_frame(scene);
+    }
+    (0..100)
+        .map(|_| {
+            let start = std::time::Instant::now();
+            completed_cube_camera_frame(scene);
+            start.elapsed().as_secs_f64() * 1000.
+        })
+        .collect()
+}
+fn completed_cube_camera_frame(scene: &view_cube_scene::ViewCubeCaptureScene) {
+    use rustycad_tkv3d::ais::AisViewCubeSource;
+    assert!(scene.cube.update_animation(false).unwrap());
+    scene.render_view().try_redraw().unwrap();
+}
+
+fn measure_derived_cube_camera(
+    scene: &view_cube_scene::ViewCubeCaptureScene,
+    clock: &view_cube_widget::CubeWidgetClock,
+) {
+    clock.seek(0.125);
+    print_cube_samples(
+        "view-cube-derived-camera-frame",
+        &measure_cube_camera_frames(scene),
+    );
+}
+
+#[cfg(test)]
+mod camera_frame_tests {
+    use super::*;
+    #[test]
+    fn completed_camera_samples_dispatch_real_source_and_render_each_frame() {
+        let device = recording_device::RecordingDevice::default();
+        let driver = view_cube_widget::widget_recording_driver(&device);
+        let scene = view_cube_scene::ViewCubeCaptureScene::new(&driver).unwrap();
+        let clock = view_cube_widget::configure_widget_timer(&scene);
+        view_cube_widget::detect_widget_center(&scene).unwrap();
+        view_cube_widget::click_widget_center(&scene).unwrap();
+        clock.seek(0.125);
+        let samples = measure_cube_camera_frames(&scene);
+        assert_eq!(samples.len(), 100);
+        assert!(
+            samples
+                .iter()
+                .all(|sample| sample.is_finite() && *sample >= 0.)
+        );
+        assert_eq!(clock.dispatch_counts(), [1, 120, 121]);
+        scene.view.remove();
+    }
 }

@@ -51,7 +51,7 @@ pub(super) struct WidgetEvents {
     pub(super) finish_attached: AtomicBool,
     pub(super) advance_clock: AtomicBool,
     clock: Arc<WidgetClock>,
-    animation: Handle<AisAnimationCamera>,
+    animation: Handle<dyn AisAnimationCameraSource>,
 }
 impl AisViewCubeAnimationEvents for WidgetEvents {
     fn after_animation(&self) {

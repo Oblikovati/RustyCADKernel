@@ -34,6 +34,11 @@ impl<'a, S, T: ?Sized + RuntimeTyped> HandleFieldRef<'a, S, T> {
         let right = other.fields.read();
         std::ptr::eq((self.select)(&left), (other.select)(&right))
     }
+    /// Identify the actual field slot independently of its target; `alias.reference_address()`.
+    pub fn reference_address(&self) -> *const () {
+        let fields = self.fields.read();
+        std::ptr::from_ref((self.select)(&fields)).cast()
+    }
     /// Explicitly retain a target snapshot; `let owning=alias.clone_handle()`.
     pub fn clone_handle(&self) -> Handle<T> {
         let fields = self.fields.read();

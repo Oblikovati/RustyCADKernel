@@ -5,8 +5,8 @@ protected fields of OCCT `AIS_ViewCube` at
 `3d097a0328e71b826377d4814ab05ec3c3d23871`. The concrete widget uses real
 presentation geometry, 26 sensitive owners, immediate part highlighting and
 camera animation. Whole-class coverage remains partial: generated class
-API/type aliases and transport of arbitrary derived camera animations are still
-separate work. No getter-only façade or GPU pixel-parity credit is claimed.
+API/type aliases remain separate work. The [derived camera transport](ais-view-cube-animation-source.md)
+now preserves virtual dispatch, live slot references and native counts. No getter-only façade or GPU pixel-parity credit is claimed.
 
 Geometry setters retain native Confusion guards and only mark presentations
 stale. `SetSize` always assigns its value, including a tiny change; adaptation

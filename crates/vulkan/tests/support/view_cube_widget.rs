@@ -11,29 +11,44 @@ use rustycad_tkservice::media::MediaTimer;
 use rustycad_tkv3d::{ais::*, prs_mgr::PrsMgrPresentableObjectMembers, select_mgr::*};
 use std::sync::{
     Arc,
-    atomic::{AtomicU64, Ordering},
+    atomic::{AtomicU64, AtomicUsize, Ordering},
 };
 /// Injected wall clock drives the existing native animation timer without sleeping.
-pub struct CubeWidgetClock(AtomicU64);
+pub struct CubeWidgetClock {
+    seconds: AtomicU64,
+    dispatch: [AtomicUsize; 3],
+}
 impl WallClock for CubeWidgetClock {
     fn now(&self) -> f64 {
-        f64::from_bits(self.0.load(Ordering::SeqCst))
+        f64::from_bits(self.seconds.load(Ordering::SeqCst))
     }
 }
 impl CubeWidgetClock {
+    /// Record actual source override execution; `clock.record_dispatch(1)`.
+    pub fn record_dispatch(&self, slot: usize) {
+        self.dispatch[slot].fetch_add(1, Ordering::SeqCst);
+    }
+    /// Read StartTimer/UpdateTimer/updateOwn counts; `clock.dispatch_counts()`.
+    pub fn dispatch_counts(&self) -> [usize; 3] {
+        self.dispatch
+            .each_ref()
+            .map(|counter| counter.load(Ordering::SeqCst))
+    }
     /// Seek the actual timer's wall clock; `clock.seek(0.25)`.
     pub fn seek(&self, seconds: f64) {
-        self.0.store(seconds.to_bits(), Ordering::SeqCst);
+        self.seconds.store(seconds.to_bits(), Ordering::SeqCst);
     }
 }
 /// Install event-loop stepping on the real camera animation; `let clock=configure_widget_timer(&scene)`.
 pub fn configure_widget_timer(scene: &ViewCubeCaptureScene) -> Arc<CubeWidgetClock> {
-    let clock = Arc::new(CubeWidgetClock(AtomicU64::new(0)));
+    let clock = Arc::new(CubeWidgetClock {
+        seconds: AtomicU64::new(0),
+        dispatch: std::array::from_fn(|_| AtomicUsize::new(0)),
+    });
     let timer = Timer::with_clocks(Chronometer::default(), clock.clone());
-    scene
-        .cube
-        .view_animation()
-        .set_timer(&Handle::new(MediaTimer::with_timer(timer)));
+    let animation = super::view_cube_widget_animation::CubeWidgetAnimation::new(&clock);
+    animation.set_timer(&Handle::new(MediaTimer::with_timer(timer)));
+    scene.cube.set_view_animation(&animation.cast());
     scene.cube.set_fixed_animation_loop(false);
     clock
 }
@@ -69,7 +84,7 @@ mod tests {
     #[test]
     fn actual_widget_context_detection_highlight_click_and_camera_animation_are_submitted() {
         let device = crate::recording_device::RecordingDevice::default();
-        let driver = widget_recording_driver(&device);
+        let driver = super::widget_recording_driver(&device);
         let scene = ViewCubeCaptureScene::new(&driver).unwrap();
         let clock = configure_widget_timer(&scene);
         scene.render_view().try_redraw().unwrap();
@@ -82,13 +97,6 @@ mod tests {
         assert_widget_appearance_submission(&scene, &device);
         scene.view.remove();
     }
-    fn widget_recording_driver(
-        device: &crate::recording_device::RecordingDevice,
-    ) -> Handle<martensite_vulkan::Graphic3dRenderDriver> {
-        let fonts = Arc::new(crate::fixed_glyph_source::FixedGlyphSource::default());
-        martensite_vulkan::Graphic3dRenderDriver::with_backend_and_fonts(device.clone(), 512, fonts)
-            .unwrap()
-    }
     fn assert_widget_camera_progress(
         scene: &ViewCubeCaptureScene,
         clock: &CubeWidgetClock,
@@ -100,6 +108,7 @@ mod tests {
         clock.seek(0.5);
         assert!(!scene.cube.update_animation(false).unwrap());
         assert!(scene.cube.view_animation().target_view().is_null());
+        assert_eq!(clock.dispatch_counts(), [1, 2, 3]);
     }
     fn assert_widget_appearance_submission(
         scene: &ViewCubeCaptureScene,
@@ -216,4 +225,24 @@ pub fn widget_animation_frames() -> [(&'static str, f64); 3] {
         ("animation-half", 0.25),
         ("animation-end", 0.5),
     ]
+}
+
+/// Verify actual derived dispatch occurred; `verify_widget_camera_dispatch(&clock)` after three frames.
+pub fn verify_widget_camera_dispatch(clock: &CubeWidgetClock) {
+    let counts = clock.dispatch_counts();
+    assert!(
+        counts[0] == 1 && counts[1] >= 3 && counts[2] == counts[1] + 1,
+        "ViewCube derived dispatch counts={counts:?}; expected one StartTimer, at least three UpdateTimer and one additional updateOwn"
+    );
+    println!("{{\"martensite_widget_camera_dispatch\":{counts:?}}}");
+}
+
+/// Bind the named recording backend through the real driver; `widget_recording_driver(&device)`.
+#[cfg(test)]
+pub(crate) fn widget_recording_driver(
+    device: &crate::recording_device::RecordingDevice,
+) -> Handle<martensite_vulkan::Graphic3dRenderDriver> {
+    let fonts = Arc::new(crate::fixed_glyph_source::FixedGlyphSource::default());
+    martensite_vulkan::Graphic3dRenderDriver::with_backend_and_fonts(device.clone(), 512, fonts)
+        .unwrap()
 }

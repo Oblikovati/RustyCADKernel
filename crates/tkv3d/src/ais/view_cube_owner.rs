@@ -3,7 +3,7 @@ use super::{AisViewCube, AisViewCubeSource};
 use crate::{select_mgr::*, v3d::V3dTypeOfOrientation};
 use rustycad_tkernel::{
     ncollection::Vec2,
-    standard::{Handle, SharedState, StandardTransient},
+    standard::{Handle, HandleObserver, SharedState, StandardTransient, raise_native_failure},
 };
 use rustycad_tkservice::aspect::{AspectVKeyFlags, AspectVKeyMouse};
 /// Owner identity and orientation; `owner.main_orientation()`.
@@ -58,11 +58,28 @@ impl SelectMgrEntityOwnerSource for AisViewCubeOwner {
         _: AspectVKeyFlags,
         _: bool,
     ) -> bool {
-        let cube = self.selectable().cast::<dyn AisViewCubeSource>();
+        let cube = cube_owner_selectable_lease(self);
         let Some(cube) = cube.get() else {
             return false;
         };
-        // Native ignores all button/modifier inputs. Invalid detached owner failures are not successful clicks.
-        cube.handle_click(&self.base.this().cast()).is_ok()
+        // Native returns true only after HandleClick; exceptions cross this boolean virtual hook.
+        let owner = cube_owner_click_argument(self);
+        raise_native_failure(cube.handle_click(&owner));
+        true
     }
+}
+
+fn cube_owner_click_argument(owner: &AisViewCubeOwner) -> Handle<AisViewCubeOwner> {
+    let current = owner.base.this();
+    let argument = current.cast();
+    drop(current);
+    argument
+}
+
+fn cube_owner_selectable_lease(owner: &AisViewCubeOwner) -> HandleObserver<dyn AisViewCubeSource> {
+    // Native Selectable's temporary is gone before raw dynamic_cast dispatches HandleClick.
+    let current = owner.selectable().cast::<dyn AisViewCubeSource>();
+    let observed = current.observe();
+    drop(current);
+    observed
 }

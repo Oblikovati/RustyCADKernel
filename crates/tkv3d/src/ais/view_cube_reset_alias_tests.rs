@@ -16,7 +16,7 @@ struct CubeResetOwners {
     dynamic: Handle<Prs3dDrawer>,
     highlight: Handle<Prs3dShadingAspect>,
     ordinary: Handle<Prs3dDrawer>,
-    animation: Handle<AisAnimationCamera>,
+    animation: Handle<dyn AisAnimationCameraSource>,
     persistence: Handle<dyn rustycad_tkservice::graphic3d::Graphic3dTransformPersSource>,
     start: Handle<rustycad_tkservice::graphic3d::Graphic3dCamera>,
     end: Handle<rustycad_tkservice::graphic3d::Graphic3dCamera>,

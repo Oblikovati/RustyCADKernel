@@ -1,5 +1,5 @@
 //! OCCT 3d097a0 ViewAnimation returns the mutable handle slot, not a copied handle.
-use super::{AisAnimationCamera, AisViewCubeInteractionFields};
+use super::{AisAnimationCameraSource, AisViewCubeInteractionFields};
 use rustycad_tkernel::standard::{Handle, SharedState};
 /// Borrow the live animation slot without retaining a lock or animation object.
 /// Example: `let alias=cube.view_animation_ref(); cube.set_view_animation(&next); assert_eq!(alias.object_address(),next.object_address());`.
@@ -24,13 +24,16 @@ impl<'a> AisViewCubeAnimationRef<'a> {
         std::ptr::eq(self.fields, other.fields)
     }
     /// Explicitly retain a snapshot of the current target; `let owning=alias.clone_handle()`.
-    pub fn clone_handle(&self) -> Handle<AisAnimationCamera> {
+    pub fn clone_handle(&self) -> Handle<dyn AisAnimationCameraSource> {
         self.fields.read().animation.clone()
     }
     /// Access the current object outside its field lock; `alias.with_animation(|value| value.is_some())`.
-    /// A temporary owning handle prevents concurrent replacement from invalidating the callback borrow.
-    pub fn with_animation<R>(&self, inspect: impl FnOnce(Option<&AisAnimationCamera>) -> R) -> R {
-        let current = self.clone_handle();
+    /// A storage lease permits replacement inside callbacks without adding a native reference.
+    pub fn with_animation<R>(
+        &self,
+        inspect: impl FnOnce(Option<&dyn AisAnimationCameraSource>) -> R,
+    ) -> R {
+        let current = self.fields.read().animation.observe();
         inspect(current.get())
     }
 }

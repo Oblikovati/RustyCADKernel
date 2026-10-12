@@ -1,28 +1,26 @@
 //! Real timer-backed click animation with native detach, redraw and callback ordering.
 use super::{
-    AisAnimationCamera, AisAnimationMembers, AisAnimationSource, AisViewCubeMembers,
+    AisAnimationCameraMembers, AisAnimationCameraSource, AisAnimationMembers, AisViewCubeMembers,
     AisViewCubeOwner, AisViewCubeSource,
 };
 use crate::{ais::AisInteractiveObjectMembers, v3d::V3dView};
-use rustycad_tkernel::standard::{Failure, Handle, exceptions::null_object};
+use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure, exceptions::null_object};
 /// Start the picked orientation on the context's last active view; `ais_view_cube_start_animation(&cube,&owner)?`.
 pub fn ais_view_cube_start_animation<C: AisViewCubeSource + ?Sized>(
     cube: &C,
     owner: &Handle<AisViewCubeOwner>,
 ) -> Result<(), Failure> {
-    let context = cube.get_context();
-    let context = context.get().ok_or_else(|| {
-        null_object("AIS_ViewCube context=null; expected an attached interactive context")
-    })?;
-    let view = context.last_active_view();
-    let (Some(owner), Some(view_ref)) = (owner.get(), view.get()) else {
+    catch_native_failure(|| cube_start_animation(cube, owner))
+}
+fn cube_start_animation<C: AisViewCubeSource + ?Sized>(
+    cube: &C,
+    owner: &Handle<AisViewCubeOwner>,
+) -> Result<(), Failure> {
+    let view = cube_last_active_view(cube)?;
+    let (Some(owner), Some(_)) = (owner.get(), view.get()) else {
         return Ok(());
     };
-    super::view_cube_camera_fit::cube_oriented_end_camera(
-        cube,
-        view_ref,
-        owner.main_orientation(),
-    )?;
+    super::view_cube_camera_fit::cube_oriented_end_camera(cube, &view, owner.main_orientation())?;
     prepare_cube_animation(cube, &view)?;
     Ok(())
 }
@@ -30,25 +28,30 @@ fn prepare_cube_animation<C: AisViewCubeSource + ?Sized>(
     cube: &C,
     view: &Handle<V3dView>,
 ) -> Result<(), Failure> {
-    let fields = cube.interaction_base().fields.read();
-    let animation = fields.animation.clone();
-    let (start, end) = (fields.start.clone(), fields.end.clone());
-    drop(fields);
-    let animation = required_cube_animation(&animation)?;
-    animation.set_view(view);
-    animation.set_camera_start(&start);
-    animation.set_camera_end(&end);
-    animation.start_timer(0.0, 1.0, true, false)
+    with_cube_animation(cube, |animation| {
+        animation.set_view(view);
+        let fields = cube.interaction_base().fields.read();
+        animation.set_camera_start(&fields.start);
+        animation.set_camera_end(&fields.end);
+        Ok(())
+    })?;
+    with_cube_animation(cube, |animation| {
+        animation.start_timer(0.0, 1.0, true, false)
+    })
 }
 /// Advance a native timer frame and optionally redraw; `ais_view_cube_update_animation(&cube,false)?`.
 pub fn ais_view_cube_update_animation<C: AisViewCubeSource + ?Sized>(
     cube: &C,
     redraw: bool,
 ) -> Result<bool, Failure> {
-    let handle = cube.interaction_base().fields.read().animation.clone();
-    let animation = required_cube_animation(&handle)?;
-    let view = animation.target_view();
-    if animation.is_stopped() || !ais_view_cube_update_animation_step(cube)? {
+    catch_native_failure(|| cube_update_animation(cube, redraw))
+}
+fn cube_update_animation<C: AisViewCubeSource + ?Sized>(
+    cube: &C,
+    redraw: bool,
+) -> Result<bool, Failure> {
+    let view = with_cube_animation(cube, |animation| Ok(animation.target_view()))?;
+    if !cube.has_animation()? || !ais_view_cube_update_animation_step(cube)? {
         return Ok(false);
     }
     if redraw && let Some(view) = view.get() {
@@ -65,19 +68,30 @@ pub fn ais_view_cube_update_animation<C: AisViewCubeSource + ?Sized>(
 pub fn ais_view_cube_update_animation_step<C: AisViewCubeSource + ?Sized>(
     cube: &C,
 ) -> Result<bool, Failure> {
-    let handle = cube.interaction_base().fields.read().animation.clone();
-    let animation = required_cube_animation(&handle)?;
-    let pts = animation.update_timer()?;
-    if pts >= animation.own_duration() {
-        animation.stop()?;
+    catch_native_failure(|| cube_update_animation_step(cube))
+}
+fn cube_update_animation_step<C: AisViewCubeSource + ?Sized>(cube: &C) -> Result<bool, Failure> {
+    let pts = with_cube_animation(cube, |animation| animation.update_timer())?;
+    let duration = with_cube_animation(cube, |animation| Ok(animation.own_duration()))?;
+    if pts >= duration {
+        with_cube_animation(cube, |animation| animation.stop())?;
         cube.on_animation_finished();
-        animation.set_view(&Handle::default());
+        with_cube_animation(cube, |animation| {
+            animation.set_view(&Handle::default());
+            Ok(())
+        })?;
         return Ok(false);
     }
     Ok(true)
 }
 /// Honor disabled auto-start and non-fixed click policies; `ais_view_cube_handle_click(&cube,&owner)?`.
 pub fn ais_view_cube_handle_click<C: AisViewCubeSource + ?Sized>(
+    cube: &C,
+    owner: &Handle<AisViewCubeOwner>,
+) -> Result<(), Failure> {
+    catch_native_failure(|| cube_handle_click(cube, owner))
+}
+fn cube_handle_click<C: AisViewCubeSource + ?Sized>(
     cube: &C,
     owner: &Handle<AisViewCubeOwner>,
 ) -> Result<(), Failure> {
@@ -93,10 +107,26 @@ pub fn ais_view_cube_handle_click<C: AisViewCubeSource + ?Sized>(
     }
     Ok(())
 }
-pub(super) fn required_cube_animation(
-    animation: &Handle<AisAnimationCamera>,
-) -> Result<&AisAnimationCamera, Failure> {
-    animation.get().ok_or_else(|| {
-        null_object("AIS_ViewCube animation=null; expected a non-null camera animation")
+pub(super) fn with_cube_animation<C: AisViewCubeSource + ?Sized, R>(
+    cube: &C,
+    action: impl FnOnce(&dyn AisAnimationCameraSource) -> Result<R, Failure>,
+) -> Result<R, Failure> {
+    // Native rereads myViewAnimation between virtual calls, whose overrides can replace it.
+    cube.view_animation_ref().with_animation(|animation| {
+        let animation = animation.ok_or_else(|| {
+            null_object("AIS_ViewCube animation=null; expected a non-null camera animation")
+        })?;
+        action(animation)
     })
+}
+
+fn cube_last_active_view<C: AisViewCubeSource + ?Sized>(
+    cube: &C,
+) -> Result<Handle<V3dView>, Failure> {
+    // OCCT's owning GetContext temporary ends before any later virtual fitting/start callbacks.
+    let context = cube.get_context();
+    let context = context.get().ok_or_else(|| {
+        null_object("AIS_ViewCube context=null; expected an attached interactive context")
+    })?;
+    Ok(context.last_active_view())
 }
