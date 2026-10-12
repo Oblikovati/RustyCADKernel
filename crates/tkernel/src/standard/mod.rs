@@ -85,4 +85,4 @@ mod weak_handle_slot_assignment;
 pub use weak_handle_slot_assignment::WeakHandleSlotAssignment;
 
 mod intrusive_reference_slot;
-pub use intrusive_reference_slot::IntrusiveReferenceSlot;
+pub use intrusive_reference_slot::{IntrusiveReferenceSlot, IntrusiveRetirementBorrow};

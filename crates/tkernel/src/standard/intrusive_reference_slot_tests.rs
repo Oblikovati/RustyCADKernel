@@ -83,3 +83,21 @@ fn assert_retiring_projection_failure(failure: &crate::standard::Failure) {
     let message = failure.message();
     assert!(message.contains("expected a projectable live pointee"));
 }
+
+#[test]
+fn reference_slot_retiring_reborrow_checks_actual_pointer_and_phase() {
+    let slot = IntrusiveReferenceSlot::<StandardTransient>::default();
+    let target = Handle::new(StandardTransient::default());
+    let foreign = StandardTransient::default();
+    slot.assign(&target).unwrap();
+    assert!(slot.with_retiring_pointee(&*target, |_| ()).is_err());
+    let ownership = slot.begin_retirement(std::ptr::null()).unwrap();
+    assert!(slot.with_retiring_pointee(&foreign, |_| ()).is_err());
+    assert_eq!(
+        slot.with_retiring_pointee(&*target, |p| p.ref_count())
+            .unwrap(),
+        2
+    );
+    drop(ownership);
+    slot.finish_retirement(Handle::<StandardTransient>::default().observe());
+}

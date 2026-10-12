@@ -52,7 +52,7 @@ def command_environment(
     cache: Path, inherited: dict[str, str], cache_io: ValidationCacheIO,
     system: str, machine: str,
 ) -> dict[str, str]:
-    """Prepare the pinned test dependency; e.g. `command_environment(cache, os.environ.copy())`."""
+    """Prepare the pinned test dependency; e.g. `command_environment(cache, env, io, 'Linux', 'x86_64')`."""
     require_noble_platform(system, machine)
     paths = VerifiedValidationCache(cache, noble_validation_pin(), cache_io).prepare()
     return paths.environment(inherited)

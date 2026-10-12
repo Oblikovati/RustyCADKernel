@@ -17,6 +17,13 @@ pub fn ais_textured_shape_set_texture_file_name<S: AisTexturedShapeSource + ?Siz
 ) -> Result<(), Failure> {
     let base = object.textured_shape_base();
     base.texture_pix_map.clear()?;
+    assign_textured_file_after_retirement(object, file)
+}
+pub(super) fn assign_textured_file_after_retirement<S: AisTexturedShapeSource + ?Sized>(
+    object: &S,
+    file: &AsciiString,
+) -> Result<(), Failure> {
+    let base = object.textured_shape_base();
     let name = textured_predefined_name(file, &base.messenger)?;
     let mut fields = base.fields.write();
     fields.predefined_texture = name;
@@ -32,12 +39,16 @@ pub fn ais_textured_shape_set_texture_pix_map<S: AisTexturedShapeSource + ?Sized
     object: &S,
     pixmap: &dyn HandleReference<ImagePixMap>,
 ) {
+    reset_textured_file_for_pixmap(object);
+    rustycad_tkernel::standard::raise_native_failure(object.textured_shape_base().texture_pix_map.assign(pixmap));
+}
+pub(super) fn reset_textured_file_for_pixmap<S: AisTexturedShapeSource + ?Sized>(object: &S) {
     let base = object.textured_shape_base();
     let mut fields = base.fields.write();
     fields.texture_file = AsciiString::default();
     fields.predefined_texture = Graphic3dNameOfTexture2D::Unknown;
+    // The caller performs native Assign only after releasing the source-field guard.
     drop(fields);
-    rustycad_tkernel::standard::raise_native_failure(base.texture_pix_map.assign(pixmap));
 }
 fn textured_predefined_name(
     file: &AsciiString,
