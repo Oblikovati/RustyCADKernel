@@ -491978,8 +491978,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
       "rust_item": "rustycad_tkservice::aspect::AspectXRSession",
-      "status": "implemented",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+      "status": "partial",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native HeadPose/TrackedPoses return live field references; current Rust getters copy the transform/clone the vector. Retained alias and derived callback mutation proofs pending. See porting/runtime-evidence/xr-session-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Aspect_XRSession::Aspect_XRSession",
@@ -492306,16 +492306,16 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
       "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose",
-      "status": "implemented",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+      "status": "partial",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native HeadPose/TrackedPoses return live field references; current Rust getters copy the transform/clone the vector. Retained alias and derived callback mutation proofs pending. See porting/runtime-evidence/xr-session-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Aspect_XRSession::TrackedPoses",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
       "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses",
-      "status": "implemented",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+      "status": "partial",
+      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native HeadPose/TrackedPoses return live field references; current Rust getters copy the transform/clone the vector. Retained alias and derived callback mutation proofs pending. See porting/runtime-evidence/xr-session-reference-gap-2026-10-12.json."
     },
     {
       "upstream_id": "Aspect_XRSession::TriggerHapticVibrationAction",

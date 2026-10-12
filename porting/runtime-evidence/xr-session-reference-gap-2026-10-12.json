@@ -1,0 +1,32 @@
+{
+  "project": "Martensite",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_source": "../OCCT/src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+  "native_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+  "native_reference_lines": {
+    "HeadPose": 131,
+    "TrackedPoses": 148
+  },
+  "rust_source": "crates/tkservice/src/aspect/xr_session.rs",
+  "rust_sha256": "be7f60cddf060df88a98b63a1ac49bd5dc50df56761fc1ae09bf2e7f717fd3df",
+  "gap": "HeadPose copies Transform3; TrackedPoses clones Vec. Native const-reference aliases must observe defined in-place mutations, including inside derived callbacks.",
+  "value_returning_hand_getters": "LeftHandPose and RightHandPose remain implemented; native returns by value.",
+  "correction_owner": "porting/martensite-controller-frame-events",
+  "rows": [
+    {
+      "upstream_id": "Aspect_XRSession",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSession",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "Aspect_XRSession::HeadPose",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "Aspect_XRSession::TrackedPoses",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses",
+      "status": "partial"
+    }
+  ]
+}
