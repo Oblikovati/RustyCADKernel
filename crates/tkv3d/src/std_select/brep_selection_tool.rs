@@ -1,4 +1,4 @@
-//! Heavyweight prebuilding from OCCT 3d097a0; shape construction is not yet ported.
+//! Martensite BRep selection namespace; native geometry construction and heavyweight prebuilding use focused modules.
 use crate::{
     select_mgr::SelectMgrSelection,
     select3d::{Select3DSensitiveEntity, Select3DSensitiveGroup},

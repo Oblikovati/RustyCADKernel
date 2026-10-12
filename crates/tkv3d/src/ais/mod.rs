@@ -420,67 +420,7 @@ include!("test_modules.rs");
 
 include!("shape_modules.rs");
 
-mod colored_drawer;
-pub use colored_drawer::{AisColoredDrawer, AisColoredDrawerFlags, AisColoredDrawerParent};
-
-#[cfg(test)]
-mod colored_drawer_tests;
-
-#[cfg(test)]
-mod colored_drawer_runtime_tests;
-
-mod shape_drawer_map;
-mod shape_drawer_node;
-pub use shape_drawer_map::AisShapeDrawerMap;
-
-mod shape_drawer_container;
-mod shape_drawer_references;
-pub use shape_drawer_container::{AisShapeDrawerMapMut, AisShapeDrawerMapRef};
-pub use shape_drawer_references::{AisShapeDrawerNodeRef, AisShapeDrawerValueMut};
-
-mod shape_drawer_lifecycle;
-
-#[cfg(test)]
-mod shape_drawer_map_tests;
-#[cfg(test)]
-mod shape_drawer_oracle_inputs;
-
-#[cfg(test)]
-mod shape_drawer_lifecycle_tests;
-
-#[cfg(test)]
-mod shape_drawer_oracle_rows;
-
-#[cfg(test)]
-mod shape_drawer_reference_tests;
-
-mod colored_shape;
-mod colored_shape_members;
-pub use colored_shape::{
-    AisColoredShapeBase, AisColoredShapeSource, ais_colored_shape_clear_custom_aspects,
-    ais_colored_shape_custom_aspects,
-};
-pub use colored_shape_members::AisColoredShapeMembers;
-mod colored_shape_object;
-pub use colored_shape_object::AisColoredShape;
-#[cfg(test)]
-mod colored_shape_owner_tests;
-mod shape_reference;
-pub use shape_reference::{AisShapeMembers, AisShapeRef};
-mod colored_shape_expansion;
-mod shape_drawer_cursor;
-pub use colored_shape_expansion::AisColoredShapeExpansion;
-
-mod colored_shape_expansion_fill;
-pub use colored_shape_expansion_fill::ais_colored_shape_fill_subshape_drawer_map;
-mod colored_shape_custom_appearance;
-pub use colored_shape_custom_appearance::AisColoredShapeCustomAppearance;
-mod colored_shape_global_appearance;
-pub use colored_shape_global_appearance::{
-    ais_colored_shape_set_color, ais_colored_shape_set_material,
-    ais_colored_shape_set_transparency, ais_colored_shape_set_width,
-};
-mod colored_shape_copy_appearance;
+include!("colored_shape_registration.rs");
 
 mod textured_shape_retirement;
 pub use textured_shape_retirement::{

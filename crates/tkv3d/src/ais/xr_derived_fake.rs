@@ -2,6 +2,7 @@
 use super::xr_recording_group::XrRecordingEvents;
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{
     Failure, Handle, InterfaceCaster, InterfaceEntry, RuntimeType, RuntimeTyped, SharedState,
     StandardTransient, Transient, project_concrete,
@@ -123,12 +124,12 @@ impl PrsMgrPresentableObject for XrDerivedFake {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.events.callbacks.write().push(500 + mode);
-        ais_xr_tracked_device_compute(self, prs, mode)?;
+        ais_xr_tracked_device_compute(self, &prs.observe(), mode)?;
         if *self.fail_after_compute.read() {
             return Err(Failure::new(
                 "XR derived compute fail=true; expected completed callback",
@@ -145,10 +146,10 @@ impl SelectMgrSelectableObject for XrDerivedFake {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.events.callbacks.write().push(600 + mode);
-        ais_xr_tracked_device_compute_selection(self, selection, mode)
+        ais_xr_tracked_device_compute_selection(self, &selection.observe(), mode)
     }
 }

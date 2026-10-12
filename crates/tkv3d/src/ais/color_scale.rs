@@ -1,6 +1,7 @@
 //! Martensite color-scale interactive presentation, from OCCT 3d097a0.
 use super::{AisInteractiveObject, AisInteractiveObjectBase};
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::*,
     standard::{Failure, Handle, SharedState, StandardTransient},
@@ -124,7 +125,11 @@ impl SelectMgrSelectableObject for AisColorScale {
         &self.base.selectable
     }
     // Native ColorScale deliberately contributes no selection entities.
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 }

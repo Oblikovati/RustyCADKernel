@@ -7,6 +7,7 @@ use crate::{
     select3d::Select3DSensitivePoint,
     std_prs::StdPrsPoint,
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
     standard::{Failure, Handle},
@@ -66,11 +67,11 @@ impl PrsMgrPresentableObject for AisPoint {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        self.compute_point(prs, mode)
+        self.compute_point(&prs.observe(), mode)
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.set_point_color(color)
@@ -86,12 +87,12 @@ impl SelectMgrSelectableObject for AisPoint {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         _: i32,
     ) -> Result<(), Failure> {
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 10);
-        selection.add(
+        selection.observe().add(
             &Handle::new(Select3DSensitivePoint::new(
                 &owner.cast(),
                 self.component().pnt(),

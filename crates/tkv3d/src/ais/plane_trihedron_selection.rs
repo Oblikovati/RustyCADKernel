@@ -5,6 +5,7 @@ use crate::{
     select_mgr::*,
     select3d::{Select3DSensitivePoint, Select3DSensitiveSegment},
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::Point3;
 impl AisPlaneTrihedron {
@@ -15,18 +16,16 @@ impl AisPlaneTrihedron {
     ) -> Result<(), Failure> {
         let whole =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 5);
-        for (index, (origin, direction, length)) in
-            self.plane_axis_geometry()?.into_iter().enumerate()
-        {
+        let axes = self.plane_axis_geometry()?;
+        for (index, (origin, direction, length)) in axes.into_iter().enumerate() {
             let owner = if mode == 0 {
                 whole.clone()
             } else {
                 SelectMgrEntityOwner::with_selectable(&self.children.read()[index + 1], 7)
             };
             let last = Point3::from(origin.xyz() + direction.xyz() * length);
-            selection.add(
-                &Handle::new(Select3DSensitiveSegment::new(&owner.cast(), origin, last)).cast(),
-            )?;
+            let segment = Select3DSensitiveSegment::new(&owner.cast(), origin, last);
+            selection.observe().add(&Handle::new(segment).cast())?;
         }
         Ok(())
     }
@@ -37,26 +36,28 @@ impl SelectMgrSelectableObject for AisPlaneTrihedron {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         match mode {
-            0 | 2 => self.select_plane_segments(selection, mode),
-            1 => {
-                let owner = SelectMgrEntityOwner::with_selectable(&self.children.read()[0], 8);
-                selection.add(
-                    &Handle::new(Select3DSensitivePoint::new(
-                        &owner.cast(),
-                        self.component().pln().location(),
-                    ))
-                    .cast(),
-                )
-            }
+            0 | 2 => self.select_plane_segments(&selection.observe(), mode),
+            1 => self.select_plane_origin(selection),
             -1 => {
-                selection.clear();
+                selection.observe().clear();
                 Ok(())
             }
             _ => Ok(()),
         }
+    }
+}
+
+impl AisPlaneTrihedron {
+    fn select_plane_origin(
+        &self,
+        selection: &dyn HandleReference<SelectMgrSelection>,
+    ) -> Result<(), Failure> {
+        let owner = SelectMgrEntityOwner::with_selectable(&self.children.read()[0], 8);
+        let point = Select3DSensitivePoint::new(&owner.cast(), self.component().pln().location());
+        selection.observe().add(&Handle::new(point).cast())
     }
 }

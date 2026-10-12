@@ -1,6 +1,7 @@
 //! Native ResetStyles invokes real derived unset hooks before restoring geometry.
 use super::{view_cube_interaction_fixture::widget_rows, *};
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -32,10 +33,10 @@ impl SelectMgrSelectableObject for CubeResetOverrides {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_view_cube_compute_selection(self, selection, mode)
+        ais_view_cube_compute_selection(self, &selection.observe(), mode)
     }
 }
 impl PrsMgrPresentableObject for CubeResetOverrides {
@@ -44,11 +45,11 @@ impl PrsMgrPresentableObject for CubeResetOverrides {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_view_cube_compute(self, prs, mode)
+        ais_view_cube_compute(self, &prs.observe(), mode)
     }
     fn unset_attributes(&self) {
         self.attributes.fetch_add(1, Ordering::SeqCst);

@@ -1,6 +1,7 @@
 //! Native label setters retain aspect identity; only color and transparency synchronize.
 use super::AisTextLabel;
 use crate::{prs_mgr::*, prs3d::Prs3dTextAspect};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::{Color, ColorRgba},
     standard::{Failure, Handle},
@@ -81,14 +82,14 @@ impl PrsMgrPresentableObject for AisTextLabel {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         if mode != 0 {
             return Ok(());
         }
-        self.compute_label(prs)
+        self.compute_label(&prs.observe())
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.set_label_color(color);

@@ -4,20 +4,20 @@ use super::{StdPrsShadedShape, StdPrsToolTriangulatedShape, StdPrsVolume};
 use crate::prs3d::Prs3dDrawer;
 use rustycad_tkbrep::{
     brep::BRepBuilder,
-    topods::{Compound, Shape},
+    topods::{Compound, Shape, TopoDSShapeReadSource},
 };
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, HandleReference};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::Point2;
 use rustycad_tkservice::graphic3d::*;
 struct ShadedPresentationContext<'a> {
-    prs: &'a Handle<dyn Graphic3dStructureSource>,
+    prs: &'a dyn HandleReference<dyn Graphic3dStructureSource>,
     drawer: &'a Handle<Prs3dDrawer>,
     group: &'a Handle<dyn Graphic3dGroup>,
     texels: ShadedTexelParameters,
 }
 type ShadedPresentationResources<'a> = (
-    &'a Handle<dyn Graphic3dStructureSource>,
+    &'a dyn HandleReference<dyn Graphic3dStructureSource>,
     &'a Handle<Prs3dDrawer>,
     &'a Handle<dyn Graphic3dGroup>,
 );
@@ -45,7 +45,7 @@ impl<'a> ShadedPresentationContext<'a> {
 impl StdPrsShadedShape {
     /// Build native shaded groups without UVs; `Self::add(&prs,&shape,&drawer,StdPrsVolume::Autodetection,&Handle::default())?`.
     pub fn add(
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         shape: &Shape,
         drawer: &Handle<Prs3dDrawer>,
         volume: StdPrsVolume,
@@ -56,10 +56,25 @@ impl StdPrsShadedShape {
             prs, shape, drawer, false, dummy, dummy, dummy, volume, group,
         )
     }
+    /// Read the current borrowed shape between native graphics callbacks; `Self::add_reference(&prs,&source,&drawer,StdPrsVolume::Autodetection,&Handle::default())?`.
+    pub fn add_reference<S: TopoDSShapeReadSource>(
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
+        source: &S,
+        drawer: &Handle<Prs3dDrawer>,
+        volume: StdPrsVolume,
+        group: &Handle<dyn Graphic3dGroup>,
+    ) -> Result<(), Failure> {
+        let dummy = Point2::default();
+        let context = ShadedPresentationContext::from_arguments(
+            (prs, drawer, group),
+            (false, dummy, dummy, dummy),
+        );
+        add_shaded_presentation(source, volume, &context)
+    }
     /// Preserve the full native UV and optional group overload; `Self::add_with_texels(&prs,&shape,&drawer,true,origin,repeat,scale,volume,&group)?`.
     #[allow(clippy::too_many_arguments)] // Pinned OCCT 3d097a0 overload carries the UV triple and grouping policy.
     pub fn add_with_texels(
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         shape: &Shape,
         drawer: &Handle<Prs3dDrawer>,
         enabled: bool,
@@ -75,41 +90,51 @@ impl StdPrsShadedShape {
         add_shaded_presentation(shape, volume, &context)
     }
 }
-fn add_shaded_presentation(
-    shape: &Shape,
+fn add_shaded_presentation<S: TopoDSShapeReadSource>(
+    source: &S,
     volume: StdPrsVolume,
     context: &ShadedPresentationContext<'_>,
 ) -> Result<(), Failure> {
-    if shape.is_null() {
+    if source.read_current_shape(|shape| Ok(shape.is_null()))? {
         return Ok(());
     }
     if context.drawer.is_auto_triangulation() {
-        StdPrsToolTriangulatedShape::tessellate(shape, context.drawer)?;
+        source.read_current_shape(|shape| {
+            StdPrsToolTriangulatedShape::tessellate(shape, context.drawer)
+        })?;
     }
-    StdPrsShadedShape::add_wireframe_for_free_elements(context.prs, shape, context.drawer)?;
-    StdPrsShadedShape::add_wireframe_for_faces_without_triangles(
-        context.prs,
-        shape,
-        context.drawer,
-    )?;
-    add_shaded_volume_groups(shape, volume, context)?;
-    add_shaded_face_boundary_group(shape, context)
+    StdPrsShadedShape::add_free_elements_reference(context.prs, source, context.drawer)?;
+    StdPrsShadedShape::add_unmeshed_faces_reference(context.prs, source, context.drawer)?;
+    add_shaded_volume_groups(source, volume, context)?;
+    add_shaded_face_boundary_group(source, context)
 }
-fn shade_native_shape(
-    shape: &Shape,
+fn shade_native_shape<S: TopoDSShapeReadSource>(
+    source: &S,
     closed: bool,
     context: &ShadedPresentationContext<'_>,
 ) -> Result<(), Failure> {
     let uv = context.texels;
-    let triangles = StdPrsShadedShape::fill_triangles_with_texels(
-        shape, uv.enabled, uv.origin, uv.repeat, uv.scale,
-    )?;
+    let triangles = source.read_current_shape(|shape| {
+        StdPrsShadedShape::fill_triangles_with_texels(
+            shape, uv.enabled, uv.origin, uv.repeat, uv.scale,
+        )
+    })?;
     if triangles.is_null() {
         return Ok(());
     }
+    emit_shaded_triangle_group(&triangles, closed, context)
+}
+fn emit_shaded_triangle_group(
+    triangles: &Handle<Graphic3dArrayOfTriangles>,
+    closed: bool,
+    context: &ShadedPresentationContext<'_>,
+) -> Result<(), Failure> {
     let group = selected_shaded_group(context)?;
     group.set_closed(closed);
-    group.set_group_primitives_aspect(&context.drawer.shading_aspect().aspect().cast());
+    let shading = context.drawer.shading_aspect().downgrade().observe();
+    let reference = shading.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
+    group.set_group_primitives_aspect(&aspect);
     group.add_primitive_array(&triangles.cast(), true);
     Ok(())
 }
@@ -117,16 +142,16 @@ fn selected_shaded_group(
     context: &ShadedPresentationContext<'_>,
 ) -> Result<Handle<dyn Graphic3dGroup>, Failure> {
     if context.group.is_null() {
-        return context.prs.new_group();
+        return context.prs.observe().new_group();
     }
     Ok(context.group.clone())
 }
-fn add_shaded_volume_groups(
-    shape: &Shape,
+fn add_shaded_volume_groups<S: TopoDSShapeReadSource>(
+    shape: &S,
     volume: StdPrsVolume,
     context: &ShadedPresentationContext<'_>,
 ) -> Result<(), Failure> {
-    let kind = shape.shape_type()?;
+    let kind = shape.read_current_shape(|current| current.shape_type())?;
     let collect = matches!(
         kind,
         ShapeEnum::Compound | ShapeEnum::CompSolid | ShapeEnum::Solid
@@ -134,7 +159,7 @@ fn add_shaded_volume_groups(
     if volume != StdPrsVolume::Autodetection || !collect {
         return shade_native_shape(shape, volume == StdPrsVolume::Closed, context);
     }
-    let (closed, opened) = shaded_volume_compounds(shape)?;
+    let (closed, opened) = shape.read_current_shape(shaded_volume_compounds)?;
     shade_native_volume_compound(&closed, true, context)?;
     shade_native_volume_compound(&opened, false, context)
 }
@@ -146,24 +171,35 @@ fn shade_native_volume_compound(
     if compound.nb_children() == 0 {
         return Ok(());
     }
-    shade_native_shape(compound, closed, context)
+    shade_native_shape(&**compound, closed, context)
 }
-fn add_shaded_face_boundary_group(
-    shape: &Shape,
+fn add_shaded_face_boundary_group<S: TopoDSShapeReadSource>(
+    shape: &S,
     context: &ShadedPresentationContext<'_>,
 ) -> Result<(), Failure> {
     if !context.drawer.face_boundary_draw() {
         return Ok(());
     }
-    let lines = StdPrsShadedShape::fill_face_boundaries_with_continuity(
-        shape,
-        context.drawer.face_boundary_upper_continuity(),
-    )?;
+    let lines = shape.read_current_shape(|current| {
+        StdPrsShadedShape::fill_face_boundaries_with_continuity(
+            current,
+            context.drawer.face_boundary_upper_continuity(),
+        )
+    })?;
     if lines.is_null() {
         return Ok(());
     }
+    emit_shaded_boundary_group(&lines, context)
+}
+fn emit_shaded_boundary_group(
+    lines: &Handle<Graphic3dArrayOfSegments>,
+    context: &ShadedPresentationContext<'_>,
+) -> Result<(), Failure> {
     let group = selected_shaded_group(context)?;
-    group.set_group_primitives_aspect(&context.drawer.face_boundary_aspect().aspect().cast());
+    let line = context.drawer.face_boundary_aspect().downgrade().observe();
+    let reference = line.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
+    group.set_group_primitives_aspect(&aspect);
     group.add_primitive_array(&lines.cast(), true);
     Ok(())
 }

@@ -1,4 +1,5 @@
 //! Application subclasses preserve AIS_RubberBand RTTI, protected caches and overridden hooks.
+use rustycad_tkernel::standard::HandleReference;
 #[allow(dead_code)]
 #[path = "support/sensitive_display_driver.rs"]
 mod display_driver;
@@ -33,18 +34,22 @@ impl PrsMgrPresentableObject for ApplicationRubberBand {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_rubber_band_compute(self, prs, mode)
+        ais_rubber_band_compute(self, &prs.observe(), mode)
     }
 }
 impl SelectMgrSelectableObject for ApplicationRubberBand {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.base.interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 }

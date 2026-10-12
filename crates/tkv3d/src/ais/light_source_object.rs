@@ -1,6 +1,7 @@
 //! Concrete native light construction with retained aspects and virtual drawing hooks.
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     ncollection::Vec2,
     standard::{Failure, Handle, StandardTransient},
@@ -63,11 +64,11 @@ impl PrsMgrPresentableObject for AisLightSource {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_light_source_compute(self, prs, mode)
+        ais_light_source_compute(self, &prs.observe(), mode)
     }
     fn set_local_transformation_datum(
         &self,
@@ -83,10 +84,10 @@ impl SelectMgrSelectableObject for AisLightSource {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        super::light_source_selection::light_selection(self, selection, mode)
+        super::light_source_selection::light_selection(self, &selection.observe(), mode)
     }
 }
 

@@ -1,6 +1,7 @@
 //! Plane axes deliberately share the X line aspect (native OCCT 3d097a0).
 use super::AisPlaneTrihedron;
 use crate::{dsg_prs::DsgPrsXYZAxisPresentation, prs_mgr::*, prs3d::Prs3dDatumParts};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::Color,
     standard::{Failure, Handle},
@@ -62,11 +63,11 @@ impl PrsMgrPresentableObject for AisPlaneTrihedron {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
-        self.compute_plane_axes(prs)
+        self.compute_plane_axes(&prs.observe())
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.base.presentable.fields.write().has_own_color = true;

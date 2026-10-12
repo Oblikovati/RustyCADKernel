@@ -4,6 +4,7 @@ use super::{
     trihedron::{TRI_AXIS_PARTS, TRI_PLANE_PARTS},
 };
 use crate::{prs_mgr::*, prs3d::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::Color,
     standard::{Failure, Handle},
@@ -150,11 +151,11 @@ impl PrsMgrPresentableObject for AisTrihedron {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_trihedron_compute(self, prs, mode)
+        ais_trihedron_compute(self, &prs.observe(), mode)
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         super::ais_trihedron_set_color(self, color)

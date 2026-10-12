@@ -1,6 +1,7 @@
 //! Native presentation routing and in-place appearance synchronization.
 use super::AisCameraFrustum;
 use crate::prs_mgr::*;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
     standard::{Failure, Handle},
@@ -47,11 +48,11 @@ impl PrsMgrPresentableObject for AisCameraFrustum {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        self.compute_frustum(prs, mode)
+        self.compute_frustum(&prs.observe(), mode)
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.attributes().set_color(color);

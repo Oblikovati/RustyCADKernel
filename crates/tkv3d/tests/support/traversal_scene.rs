@@ -1,4 +1,5 @@
 //! Named real-point scene records visit order, sorting dispatch and partial failure state.
+use rustycad_tkernel::standard::HandleReference;
 #[path = "traversal_volume.rs"]
 pub mod volume;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
@@ -58,8 +59,8 @@ impl PrsMgrPresentableObject for TraversalObject {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        _: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
         Ok(())
@@ -75,7 +76,11 @@ impl SelectMgrSelectableObject for TraversalObject {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 }

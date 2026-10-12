@@ -1,6 +1,7 @@
 //! Cached screen-space border/fill presentation; native callbacks append rather than clear.
 use super::{AisRubberBand, AisRubberBandSource};
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     ncollection::Vec2,
     standard::{Failure, Handle},
@@ -70,11 +71,11 @@ impl PrsMgrPresentableObject for AisRubberBand {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_rubber_band_compute(self, prs, mode)
+        ais_rubber_band_compute(self, &prs.observe(), mode)
     }
     crate::ais_presentable_overrides!();
 }
@@ -82,7 +83,11 @@ impl SelectMgrSelectableObject for AisRubberBand {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.rubber_band_base().interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 }

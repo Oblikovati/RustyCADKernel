@@ -1,4 +1,5 @@
 //! Named object records callbacks, hierarchy traversal and recoverable compute failures.
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::{bnd::BoundingBox3, gp::Point3};
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
@@ -52,8 +53,8 @@ impl PrsMgrPresentableObject for ManagedSelectionObject {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        _: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
         Ok(())
@@ -72,7 +73,7 @@ impl SelectMgrSelectableObject for ManagedSelectionObject {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.events.write().push(self.tag * 10 + mode);
@@ -85,21 +86,38 @@ impl SelectMgrSelectableObject for ManagedSelectionObject {
         if self.empty.load(Ordering::Acquire) != 0 {
             return Ok(());
         }
-        if let Some(entities) = self.provided.snapshot() {
-            for entity in entities {
-                selection.add(&entity)?;
-            }
+        if append_provided_fixture_entities(&self.provided, selection)? {
             return Ok(());
         }
-        let owner = SelectMgrEntityOwner::new(1).cast();
-        let point = Handle::new(Select3DSensitivePoint::new(
-            &owner,
-            Point3::new(f64::from(mode), 0., 0.),
-        ));
-        point.set_sensitivity_factor(mode + 2)?;
-        selection.add(&point.cast())
+        append_managed_fixture_point(selection, mode)
     }
+
     fn update_transformations(&self, _: &Handle<SelectMgrSelection>) {
         self.events.write().push(100 + self.tag);
     }
+}
+
+fn append_managed_fixture_point(
+    selection: &dyn HandleReference<SelectMgrSelection>,
+    mode: i32,
+) -> Result<(), Failure> {
+    let owner = SelectMgrEntityOwner::new(1).cast();
+    let point = Handle::new(Select3DSensitivePoint::new(
+        &owner,
+        Point3::new(f64::from(mode), 0., 0.),
+    ));
+    point.set_sensitivity_factor(mode + 2)?;
+    selection.observe().add(&point.cast())
+}
+fn append_provided_fixture_entities(
+    provided: &SharedState<Option<Vec<Handle<dyn Select3DSensitiveEntity>>>>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
+) -> Result<bool, Failure> {
+    let Some(entities) = provided.snapshot() else {
+        return Ok(false);
+    };
+    for entity in entities {
+        selection.observe().add(&entity)?;
+    }
+    Ok(true)
 }

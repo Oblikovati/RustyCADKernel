@@ -1,6 +1,7 @@
 //! Native presentation and sensitive-segment construction; units are read for every selection.
 use super::{AisLine, line_appearance::LineDatumAppearance};
 use crate::{prs_mgr::*, select_mgr::*, select3d::Select3DSensitiveSegment, std_prs::StdPrsCurve};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::Color,
     standard::{Failure, Handle},
@@ -49,11 +50,11 @@ impl PrsMgrPresentableObject for AisLine {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
-        self.compute_line(prs)
+        self.compute_line(&prs.observe())
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.set_line_color(color)
@@ -75,7 +76,7 @@ impl SelectMgrSelectableObject for AisLine {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         if mode != 0 {
@@ -85,6 +86,7 @@ impl SelectMgrSelectableObject for AisLine {
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 5);
         selection
+            .observe()
             .add(&Handle::new(Select3DSensitiveSegment::new(&owner.cast(), first, last)).cast())
     }
 }

@@ -1,8 +1,8 @@
 //! Borrow the actual native AIS_Shape topology field across assignments.
 use super::{AisShapeFields, AisShapeSource};
 use crate::{prs_mgr::PrsMgrPresentableObjectFields, prs3d::Prs3dDrawer};
-use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::standard::{Handle, HandleFieldRef, SharedState};
+use rustycad_tkbrep::topods::{Shape, TopoDSShapeReadSource};
+use rustycad_tkernel::standard::{Failure, Handle, HandleFieldRef, SharedState};
 /// Non-owning live `Shape()` reference; `let alias=object.shape_ref();`.
 #[derive(Clone, Copy)]
 pub struct AisShapeRef<'a> {
@@ -23,6 +23,19 @@ impl AisShapeRef<'_> {
     pub fn clone_shape(&self) -> Shape {
         let fields = self.fields.read();
         fields.shape.clone()
+    }
+}
+impl TopoDSShapeReadSource for AisShapeRef<'_> {
+    fn read_current_shape<R>(
+        &self,
+        project: impl FnOnce(&Shape) -> Result<R, Failure>,
+    ) -> Result<R, Failure> {
+        let fields = self.fields.read();
+        let topology = fields.shape.tshape().observe();
+        let location = fields.shape.location().clone();
+        let orientation = fields.shape.orientation();
+        drop(fields);
+        Shape::with_reference_parts(&*topology, &location, orientation, project)
     }
 }
 /// Nonvirtual parent topology methods; `object.set_shape(&replacement)`.

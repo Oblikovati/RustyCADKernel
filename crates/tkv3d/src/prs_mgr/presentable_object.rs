@@ -12,6 +12,7 @@ use super::{
 };
 use crate::prs3d::Prs3dDrawer;
 use rustycad_tkernel::quantity::Color;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{
     Failure, Handle, SharedState, StandardTransient, Transient, WeakHandle,
@@ -162,12 +163,12 @@ pub fn prs_mgr_presentable_bind(object: &Handle<dyn PrsMgrPresentableObject>) {
 pub trait PrsMgrPresentableObject: Transient {
     /// The embedded base; `object.presentable_base()`.
     fn presentable_base(&self) -> &PrsMgrPresentableObjectBase;
-    /// `Compute` (pure virtual): fills the presentation of a display mode.
+    /// `Compute` (pure virtual): lends original manager/presentation fields to the subclass.
     /// Example: `object.compute(&manager, &prs, 0)?`.
     fn compute(
         &self,
-        manager: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        manager: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure>;
     /// `SetZLayer`: the drawer layer and the layer of every presentation; `object.set_z_layer(id)`.

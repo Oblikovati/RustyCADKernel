@@ -13,6 +13,7 @@ use crate::prs_mgr::{
 };
 use crate::prs3d::Prs3dDrawer;
 use crate::select3d::Select3DSensitiveEntityMembers as _;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::exceptions::not_implemented;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState};
@@ -86,7 +87,7 @@ pub trait SelectMgrSelectableObject: PrsMgrPresentableObject {
     /// Example: `object.compute_selection(&selection, 0)?`.
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure>;
     /// `AcceptShapeDecomposition`: false by default; `object.accept_shape_decomposition()`.
