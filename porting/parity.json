@@ -115653,8 +115653,8 @@
       "toolkit": "TKXSBase",
       "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferDeadLoop.hxx",
       "rust_item": "rustycad_tkxsbase::transfer::transfer_dead_loop",
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkxsbase::transfer::transfer_dead_loop(message) builds the same exception. Partial: C++ derives Transfer_TransferDeadLoop from Transfer_TransferFailure, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
+      "status": "excluded",
+      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust rustycad_tkxsbase::transfer::transfer_dead_loop(message) builds the same exception. Partial: C++ derives Transfer_TransferDeadLoop from Transfer_TransferFailure, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check. Scope decision ADR0002: pinned OCCT explicitly retires this API; retain existing Martensite implementation and historical partial proof. Evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz.",
       "cpp_declaration_id": "84845a59ccf56f59bc1c08cbc4b89f205a34000720f58c403ba3f03f73b88a9c",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -115667,8 +115667,8 @@
         "rustycad_tkernel::standard::Failure::with_type",
         "rustycad_tkxsbase::transfer::transfer_dead_loop"
       ],
-      "status": "partial",
-      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Transfer_TransferDeadLoop\", message, stack) builds the same exception. Partial: C++ derives Transfer_TransferDeadLoop from Transfer_TransferFailure, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check.",
+      "status": "excluded",
+      "notes": "DEFINE_STANDARD_EXCEPTION constructor: Rust Failure::with_type(\"Transfer_TransferDeadLoop\", message, stack) builds the same exception. Partial: C++ derives Transfer_TransferDeadLoop from Transfer_TransferFailure, but the Rust exception hierarchy tables lack that pair, so Failure::is_kind answers only Standard_Failure for a catch-by-base check. Scope decision ADR0002: pinned OCCT explicitly retires this API; retain existing Martensite implementation and historical partial proof. Evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz.",
       "cpp_declaration_id": "32deb8fbd465dc10460ff695e1b90aa9703707cc6f290089c094f5de52ed711f",
       "generated_by": "tools/generate_api_macro_rows.py"
     },
@@ -600663,6 +600663,816 @@
       "rust_item": "rustycad_tkv3d::ais::ais_shape_transparency",
       "status": "implemented",
       "notes": "Martensite bounded actual ColoredShape expansion/custom-global appearance/copy slice: pinned real native CPU alias, topology, flags, material/face queries, virtual callback failure/partial state/repair and constructor-unwind ownership fixtures with independent Rust replay. Shared AIS_Shape query prerequisites only; whole classes, Compute, selection, remaining protected routing and renderer/performance remain partial/unclaimed. Invalid native iterator lifetimes and null handle dereference UB explicitly excluded; checked Rust safety extensions not parity claims."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeDistance",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "29b731f2ed02437432dcddf19a4be9bc5f8bc9e5a8c52f39de2112e602a3821b",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeParallel",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "a59131b9d0d766abea46dcd55bcd15d8e27f4ff8db9ae5324418a784283a775c",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeTangent",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "ba21763f9b44ea64d473d6db4b21dc34c00aa70128abe9c018ac3f864f8e93ca",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputePerpendicular",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "03f23c351a868fe69fb99f8884204960917229891db5eb5f3e2b77b94ff1b84c",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeConcentric",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "d0dce53fdf69b835ed06c3cf577fd6e091d8ca9b3452466a38d5053b53b1e7d1",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeSymmetry",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "d3f265b5bb540a36ae0bb9d86d48e0d94f7c37e83d4d882feb3b91734963b89c",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeMidPoint",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "1717cd2f23c013bd037c1bbbbe1c40d5293332cbf0d6826c3e3b060469ac1522",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeAngle",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "713614e0644a2c65e353bb34be5a17b2cfe8ace858d40013da98f3ac4fef11c4",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "ebf5c964c361ab8654b45d1697e1773eafd5a88bf3011ad5928c6df6d36e315c",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeMinRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "14a00d50436a4a2eea822bd3d77c93f34aa4b935afb2338b8c4acb08aaf9b2e3",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeMaxRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "2da27bd5c2691e93bee43f67075857a41360b02e5e6d045de2cbf36a34e08baf",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeEqualDistance",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "4449395112556412f09bb32d39c0f16893ce03e41775f586a8ccdee6ea291884",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeEqualRadius",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "1185a440a21d9afc1d092eb90c34c47d73481299365c070050115745e2f67cc8",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeFix",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "ffadd97229b97b2059e0a7d77601ff765fc85740a5518b8b7ee5f479cdb9aefc",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeDiameter",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "46836d44ed2695452ee650910e45dbf1a0205ee11f1851b7a83478b93c768e77",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeOffset",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "c88710697fb903fb1c4ef6cea16009eafa57253ed4e54d21271b3e53f6487582",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputePlacement",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "c6bdcaa3ed16a29828376eec985211c753181f9764e72a9eea9dc3147db81a1a",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeCoincident",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "50ad87b34dc746422f68b80f35e4b4637dc0a059f3839c868d3c65d1d1b283d2",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeRound",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "869b1c842dd6f0af4b929729eb6391cec269e7ffc71b03a218e4fc726fe0aeac",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeOthers",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "ac21c847decbe4dccd37a69b9e19fe4adc670715d87ba6f6a645e75cf907c409",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "TPrsStd_ConstraintTools::ComputeAngleForOneFace",
+      "toolkit": "TKVCAF",
+      "source": "src/ApplicationFramework/TKVCAF/TPrsStd/TPrsStd_ConstraintTools.hxx",
+      "source_sha256": "8ded9af021a413b6ac250b0311289747a32495dd185c6257655b343d57d41650",
+      "cpp_declaration_id": "adaab76d3259d95c3b53ad032e3ec11987f2c1586644621ef41eb3be0670be07",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "StlAPI::Read",
+      "toolkit": "TKDESTL",
+      "source": "src/DataExchange/TKDESTL/StlAPI/StlAPI.hxx",
+      "source_sha256": "d3407788267bf0870d5caf3c99377d7e431c8562452ef2da0cbb39f768b418fa",
+      "cpp_declaration_id": "8c94e455a00b098a14bff23523973c5992ca233a69a16645e046397fa29f10d6",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "VrmlAPI_Writer::SetTransparencyToMaterial",
+      "toolkit": "TKDEVRML",
+      "source": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "source_sha256": "be043e3caf0babbd4c77416dcca5dbea24a3c9f10927aa6592ea6518765c773c",
+      "cpp_declaration_id": "9e1657eab84a5e3960f6b553b23422b5085fbae894c6405e837ca0b75351bab8",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "VrmlAPI_Writer::SetShininessToMaterial",
+      "toolkit": "TKDEVRML",
+      "source": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "source_sha256": "be043e3caf0babbd4c77416dcca5dbea24a3c9f10927aa6592ea6518765c773c",
+      "cpp_declaration_id": "416643260d18d77e6d4f4205358244d9241476b7980f6452f93b76aee1cb3202",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "VrmlAPI_Writer::SetAmbientColorToMaterial",
+      "toolkit": "TKDEVRML",
+      "source": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "source_sha256": "be043e3caf0babbd4c77416dcca5dbea24a3c9f10927aa6592ea6518765c773c",
+      "cpp_declaration_id": "ac927473557afb980f1eec054d80d94182e5f9fbae821825c0488abf6d62baae",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "VrmlAPI_Writer::SetDiffuseColorToMaterial",
+      "toolkit": "TKDEVRML",
+      "source": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "source_sha256": "be043e3caf0babbd4c77416dcca5dbea24a3c9f10927aa6592ea6518765c773c",
+      "cpp_declaration_id": "578d05cc33890742681929e6a88c7c7b4434d4144ae7361f379b7419d5baec3c",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "VrmlAPI_Writer::SetSpecularColorToMaterial",
+      "toolkit": "TKDEVRML",
+      "source": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "source_sha256": "be043e3caf0babbd4c77416dcca5dbea24a3c9f10927aa6592ea6518765c773c",
+      "cpp_declaration_id": "7e3e8ad63c5436b074918834c86320e82e98f80c50ac0dba48b62a1d4f6eb83b",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "VrmlAPI_Writer::SetEmissiveColorToMaterial",
+      "toolkit": "TKDEVRML",
+      "source": "src/DataExchange/TKDEVRML/VrmlAPI/VrmlAPI_Writer.hxx",
+      "source_sha256": "be043e3caf0babbd4c77416dcca5dbea24a3c9f10927aa6592ea6518765c773c",
+      "cpp_declaration_id": "28e7ee5b55441c6135eddcfe9b8099e80dab28cc8dc334e0831b07aa548acc46",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "XCAFDoc_VisMaterial::IsDoubleSided",
+      "toolkit": "TKXCAF",
+      "source": "src/DataExchange/TKXCAF/XCAFDoc/XCAFDoc_VisMaterial.hxx",
+      "source_sha256": "30d191925c55a53e9d317770325d3662ca8653c1689c995faae4ae8bdb0c9d31",
+      "cpp_declaration_id": "c0d1da799e5e7a95ab17c58cc2d0878cf837a8caa1eb130ecfb400a4542f3f2e",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "XCAFDoc_VisMaterial::SetDoubleSided",
+      "toolkit": "TKXCAF",
+      "source": "src/DataExchange/TKXCAF/XCAFDoc/XCAFDoc_VisMaterial.hxx",
+      "source_sha256": "30d191925c55a53e9d317770325d3662ca8653c1689c995faae4ae8bdb0c9d31",
+      "cpp_declaration_id": "0266a433c5d1abf84255870e651bb351ec97d4c3f116a91200f52b6eac8d5126",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "Transfer_TransferDeadLoop",
+      "toolkit": "TKXSBase",
+      "source": "src/DataExchange/TKXSBase/Transfer/Transfer_TransferDeadLoop.hxx",
+      "source_sha256": "303b05219d65ce157d5ae611ccf778b160086c837f3af0268ccfee1763716057",
+      "cpp_declaration_id": "b891e4c262a8fe8d3b6e69e4bb4df89e82b7b51118c044450f2d813b9947c50f",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "ViewerTest::ParseColor",
+      "toolkit": "TKViewerTest",
+      "source": "src/Draw/TKViewerTest/ViewerTest/ViewerTest.hxx",
+      "source_sha256": "13822a0d68e9815305643888e2f563a2f02dbecab844849543433119270b0eda",
+      "cpp_declaration_id": "0ce280f54b88f3a295fd1670413953210e3bf2d50361d1437474dd9e503a5a43",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "ViewerTest::ParseColor",
+      "toolkit": "TKViewerTest",
+      "source": "src/Draw/TKViewerTest/ViewerTest/ViewerTest.hxx",
+      "source_sha256": "13822a0d68e9815305643888e2f563a2f02dbecab844849543433119270b0eda",
+      "cpp_declaration_id": "97dde21bee2879c1cf2f03dd200c6b9e8299483bce48467a189a65d01e157b19",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "ViewerTest::ParseOnOff",
+      "toolkit": "TKViewerTest",
+      "source": "src/Draw/TKViewerTest/ViewerTest/ViewerTest.hxx",
+      "source_sha256": "13822a0d68e9815305643888e2f563a2f02dbecab844849543433119270b0eda",
+      "cpp_declaration_id": "bbfbe91e40d045b9aa0b786ba74c3d45479c158ea26da0365a16848e730fabf5",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "ViewerTest::GetColorFromName",
+      "toolkit": "TKViewerTest",
+      "source": "src/Draw/TKViewerTest/ViewerTest/ViewerTest.hxx",
+      "source_sha256": "13822a0d68e9815305643888e2f563a2f02dbecab844849543433119270b0eda",
+      "cpp_declaration_id": "53c9555c5b8de1c76e9fabf854440520c09ac5e94ea93152ff3baba26b15973b",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "FilletSurf_Builder::Section",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_Builder.hxx",
+      "source_sha256": "b2c7e562a093d7c7aa01dc103ef39687c3f7d0ed3aaac5b6eaf2e2f6f9b76051",
+      "cpp_declaration_id": "174ff63c7d01bbcc7e72a3ce54fb3aa9f6786b3e2557a6f2ab2587b8be2e4672",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "FilletSurf_InternalBuilder::Section",
+      "toolkit": "TKFillet",
+      "source": "src/ModelingAlgorithms/TKFillet/FilletSurf/FilletSurf_InternalBuilder.hxx",
+      "source_sha256": "98abf2e3d5c3428b14a28b1c39c9b4dd9d3c0aaa3caa6c99b566f0ec81b7833e",
+      "cpp_declaration_id": "0bc41c02b36d485786bfa70bda53071b15b5bb3a7178ba4c81fcbf94b6ff8208",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "BRepMesh_FastDiscret",
+      "toolkit": "TKMesh",
+      "source": "src/ModelingAlgorithms/TKMesh/BRepMesh/BRepMesh_FastDiscret.hxx",
+      "source_sha256": "37e2c3e36df38255bcf9cc1bcb5391ed27a6b9653d0a87f2d6a8f84d25f989b8",
+      "cpp_declaration_id": "51785740e6cae0f9369442f02033ba931cea14582ce97e5d2036036929d3563a",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "MeshVS_Mesh::FindBuilder",
+      "toolkit": "TKMeshVS",
+      "source": "src/Visualization/TKMeshVS/MeshVS/MeshVS_Mesh.hxx",
+      "source_sha256": "de92505dc7682c3fd7f37ade5d995711c629832cd33fc2b9ef8c5696a2e9d592",
+      "cpp_declaration_id": "441eb07638e7f860ab09f088e9bd5cc5875eb79633cde2a864b9d00d083d7d77",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Context::BindTextures",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Context.hxx",
+      "source_sha256": "a944b525c4b5d57dfd0099b32917ecbbb3d37f4252a415c76752510061a4581e",
+      "cpp_declaration_id": "9b4606696bf61ff188c3583c073da532f48cb5398113d17554ffa6515924a0f5",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Context::core15fwd",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Context.hxx",
+      "source_sha256": "a944b525c4b5d57dfd0099b32917ecbbb3d37f4252a415c76752510061a4581e",
+      "cpp_declaration_id": "0d9528a2cab9b6b2ec0d44707d639421ac4ef98b51712b67f34a6f0475d8cbdf",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Context::core20fwd",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Context.hxx",
+      "source_sha256": "a944b525c4b5d57dfd0099b32917ecbbb3d37f4252a415c76752510061a4581e",
+      "cpp_declaration_id": "7957d7db9864db5e81a1907059387367fc4d71ee494de283ff4db6db9f15c865",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_FrameBuffer::Init",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "source_sha256": "4ae9f011847006f3bcfd2369e92c2f844ad32022d5e890040af2bb08893651bc",
+      "cpp_declaration_id": "52215fe54edce990127f1a56ce9f6b10c8a923e60f8a50ce963bb12d950353ae",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_FrameBuffer::Init",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "source_sha256": "4ae9f011847006f3bcfd2369e92c2f844ad32022d5e890040af2bb08893651bc",
+      "cpp_declaration_id": "d8410c7102f1bb7bf98bc87a707f0f28d9dd8b3015b7120e0f5ae94567c58313",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_FrameBuffer::Init",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "source_sha256": "4ae9f011847006f3bcfd2369e92c2f844ad32022d5e890040af2bb08893651bc",
+      "cpp_declaration_id": "2806eb1944d53c0ce69dbe35e8abd70f430b6625897c6c3bd0cb20b182415050",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_FrameBuffer::InitLazy",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "source_sha256": "4ae9f011847006f3bcfd2369e92c2f844ad32022d5e890040af2bb08893651bc",
+      "cpp_declaration_id": "7cb53d455eb4f72002931af7283d311a06c9c72823aefeb914ea820143d6682f",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_FrameBuffer::InitLazy",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "source_sha256": "4ae9f011847006f3bcfd2369e92c2f844ad32022d5e890040af2bb08893651bc",
+      "cpp_declaration_id": "83c8108b811537498dec0862741111434d6593b2725cb27cd239f49498dac711",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_FrameBuffer::InitWithRB",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_FrameBuffer.hxx",
+      "source_sha256": "4ae9f011847006f3bcfd2369e92c2f844ad32022d5e890040af2bb08893651bc",
+      "cpp_declaration_id": "bf0817456a1418569f640bf597929506cac339d8932127c10b4800d9fd2fe657",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Text::Init",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.hxx",
+      "source_sha256": "bb7c93472fe733e2ae008a7414dacebd3a679a53be984f27768a85d654132b74",
+      "cpp_declaration_id": "4414cba246aa6e366a49552567f357ac9051cb29c75a260218aa6a4b5eb86efd",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Text::SetPosition",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Text.hxx",
+      "source_sha256": "bb7c93472fe733e2ae008a7414dacebd3a679a53be984f27768a85d654132b74",
+      "cpp_declaration_id": "53853e60b5f69dc2463d90d1e52bc866f1e9cce0b3e2aca6217fb19ad89ad777",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Texture::GetDataFormat",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "source_sha256": "b1894846d8213fcc6f3427e7b7da048f3974100deeceeb77a87d4265f5a75540",
+      "cpp_declaration_id": "d52fee3ad6a997fafd47ba4e2ddfd3e039825aa69b202d6c0a0661b01d08cc12",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Texture::GetDataFormat",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "source_sha256": "b1894846d8213fcc6f3427e7b7da048f3974100deeceeb77a87d4265f5a75540",
+      "cpp_declaration_id": "f767bf114a36e577e999cf13bd8ee714e9bbceafafae0980b48217edb3a0e0aa",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Texture::Init",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "source_sha256": "b1894846d8213fcc6f3427e7b7da048f3974100deeceeb77a87d4265f5a75540",
+      "cpp_declaration_id": "d6ec3e673eb8d6304d3d89546813205dee7eca5bb294b62b8354207709c905e0",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Texture::Init",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "source_sha256": "b1894846d8213fcc6f3427e7b7da048f3974100deeceeb77a87d4265f5a75540",
+      "cpp_declaration_id": "f275acca410cc36ebef4a30decc154be0ab41443a2d11a7647737a1b1250a1a4",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_Texture::Init3D",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_Texture.hxx",
+      "source_sha256": "b1894846d8213fcc6f3427e7b7da048f3974100deeceeb77a87d4265f5a75540",
+      "cpp_declaration_id": "00ce5b7c7d95aae529d0782894a81e6ac18a9e9c4fb82596f6b87229d1cbe847",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "OpenGl_View::GraduatedTrihedronDisplay",
+      "toolkit": "TKOpenGl",
+      "source": "src/Visualization/TKOpenGl/OpenGl/OpenGl_View.hxx",
+      "source_sha256": "967ca0e303eda8a3a182db5a9b4924864bf471151b0f25ad62524dc1d7577dc6",
+      "cpp_declaration_id": "dbc4babd7480904b795a8dbab8c2b24e4357c5de6fcd9a5f351dbd57062b1a7b",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetDisplayPriority",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "f5f101607db176ab71efed7085e3d73a324b0a7a07d38c5ee02d2c40666f0898",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HasDetectedShape",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "07d1ec68901def3065f096f6b6b477db8b2d72dfc0a6f56aedbc4caf2dcadc0e",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DetectedShape",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "eb38d1ec27c20f43e78a5c3958a85505124a9447bde87a1f83905533847556f9",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::BoundingBoxOfSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "3612ef966820d3f1d31b9273ba5b543edd685214ca00668deaac5237438761e7",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::BeginImmediateDraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "12975b37248fcbdf42a97251df18cb72e8488326c3c7553ec833533a07a8fe0e",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ImmediateAdd",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "24cc775a338c0a49fa417b1fc511c3ab0110a0ba392a1e72753d39457119f228",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::EndImmediateDraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "1d19ab6f05683010afa6671f39327843aaae00cde296024458097c1ec03f2ae6",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::EndImmediateDraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "6505e34daea89c0a8784a3a46aa3eeea705d6675b929f81fae70dc43fc3d7214",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsImmediateModeOn",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "f4ee412db3bab721e7a57a9b4cc09fd2d6750a275e5cfee60e64ed139c7bdff5",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Hilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "fbaad62d823275caab13e0f78ac737e28a19202993a5503b321478021b9fc416",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetSelectedAspect",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "e2d438ac093aaeea400ec75a417a49cb3b78ea287e098c01a19a2cca653afdd3",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetCurrentObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "91395a4309bb4c00926b4d187611423ea8bcec4ad300f4f4e8ce5afbb578a487",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::AddOrRemoveCurrentObject",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "7e6a07dc0bb956acaa09aafb5a5d2b0926c026452dd498a3a92475222968580a",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::UpdateCurrent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "6fa72753bdc4807f7a28bd4abbbd7a489535565b754eae4916ec7c87678767e5",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsCurrent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "2833d286ec80e5be46c92167c1411e9e492cb06a3eeb93dc7250b4fef3ba7a66",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::InitCurrent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "98faac75cafc90ac0fcd02aa57f02067d19d947cf1735e25cb16de971e67976e",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::MoreCurrent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "54cedf8a86876ba4fea93a7bbcd6323fa4f385eaee91b3e38d4a6de6680b042a",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::NextCurrent",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "0c8e43373637d146270a2fe2a25f4ed2996aba7adae349a02461bf8168f908c4",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::Current",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "7808b11fd54dcdea3952442a3656ddc86c2fb9b3b9f6a681a1b744bc32de3afa",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::NbCurrents",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "fee9a49e6652ac7ee32277e9fd3aeb4dac29aa9f27c1f3df119ca6991cc10690",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HilightCurrents",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "eb6b05c54dd093ada914ff5d7e8fedf57555dff4aad43ceeccc510e8ed20853b",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::UnhilightCurrents",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "a817eadba08960fb8831cdac787c80f299cea08b093841bc0ab6b3b16a795e64",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::ClearCurrents",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "8bc5a53be78437e8e488aa10828dafe7b89099226a6cbc4245b6620a19397b10",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DetectedCurrentShape",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "e70d3cdda46d664a58e5047e3d730a6372de6260ee547f42deea761e7b1d88b7",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SubIntensityColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "5a1110911a8184da7fe3ba6b7fb58f4c0b2198de8b06c3c68cecd40bbc2baa12",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "Select3D_InteriorSensitivePointSet::GetPoints",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_InteriorSensitivePointSet.hxx",
+      "source_sha256": "f949136498f44ed61a40de7e19f8b4d915e739299c8d705831c8b62fd908eba7",
+      "cpp_declaration_id": "447be1b37f2e04756949e6d01fc5f4b38d51aa6c969839bd695580bf1888be65",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "Select3D_SensitiveFace::GetPoints",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveFace.hxx",
+      "source_sha256": "2457d4e3583095e39fdf4cd8b848f57fe78c8f207cdfe50b02449e601883ba89",
+      "cpp_declaration_id": "f4977a2f44918dcb8a2321686f83032f8823d889d75d7e6573c817679de5bf66",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "Select3D_SensitivePoly::Points3D",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitivePoly.hxx",
+      "source_sha256": "bb573501939a9ed13715486781e37d496707657a3723963460b7eb7c19cc24db",
+      "cpp_declaration_id": "30cf76c7c367e95e96a36078807811e5421e83c1b1995c57cbb28c2d0a850ff6",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::State",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "source_sha256": "b890bc0226515689161f13610ebcd20817a3ff8deab967c62353fa77b55d8fb0",
+      "cpp_declaration_id": "8cff14ac709d23aa36dd444b8fe8b5b171edaaf5be4ad4ed00e612922c0cf323",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::State",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "source_sha256": "b890bc0226515689161f13610ebcd20817a3ff8deab967c62353fa77b55d8fb0",
+      "cpp_declaration_id": "6ce18e1f30bbe4ece6db85cda311811b67abb93be5886a59d5572640f459b3c8",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Set",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "source_sha256": "b890bc0226515689161f13610ebcd20817a3ff8deab967c62353fa77b55d8fb0",
+      "cpp_declaration_id": "4873f52416d2950814a0bfcdb714b616a57f3d60ac4601170b9db5b5d8713616",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "SelectMgr_EntityOwner::Set",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx",
+      "source_sha256": "b890bc0226515689161f13610ebcd20817a3ff8deab967c62353fa77b55d8fb0",
+      "cpp_declaration_id": "9e7b8bf7f2b0156d6642798fc52558a341dc30043b44eba8627923e78f72d11d",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "V3d_CircularGrid::~V3d_CircularGrid",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_CircularGrid.hxx",
+      "source_sha256": "f3dd7a992fdfcc73f25f820622a19645ac7ab3c27000e51d4c8433e06d3fb193",
+      "cpp_declaration_id": "52039d35ca79b6bbd82005d0be397dc247fd616e0f2222f2c0fdb5775c0f16fb",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
+    },
+    {
+      "upstream_id": "V3d_RectangularGrid::~V3d_RectangularGrid",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_RectangularGrid.hxx",
+      "source_sha256": "03c5bd86adf700c3625e83211175fd087abbad3a298c46551cf63208f046ae31",
+      "cpp_declaration_id": "484b6ac4fd76c82a14f114f812e3d5babbedb5268f4e5f890c1b6ab4f75f7973",
+      "status": "excluded",
+      "notes": "ADR0002: explicitly deprecated/obsolete in pinned OCCT; excluded from new Martensite porting. Exact marker/source evidence: porting/audits/upstream-retirement-2026-10-12/catalog.json.gz."
     }
   ],
   "tests": [

@@ -28,8 +28,14 @@ bool InventoryVisitor::VisitDecl(clang::Decl *declaration) {
   ++kinds_[kind];
   ++dispositions_[visible ? "candidate" : reason.str()];
   if (!visible && reason == "unhandled_decl_kind") unhandledKinds_.insert(kind);
-  ++emitted_;
-  writeEvent(event);
+  const bool selected = !config_.retirementMarkersOnly ||
+      event.getArray("upstream_retirement_markers") ||
+      llvm::isa<clang::EnumDecl, clang::EnumConstantDecl>(declaration);
+  if (selected) {
+    ++emitted_;
+    writeEvent(event);
+  }
+  if (config_.retirementMarkersOnly) return true;
   emitAliasReachability(*declaration, event);
   if (visible) {
     for (auto exposure : returnedTypeReachabilityEvents(*declaration, context_, config_)) {
@@ -69,7 +75,8 @@ void InventoryVisitor::emitSummary() {
       {"declarations_by_kind", std::move(kinds)},
       {"declarations_by_disposition", std::move(dispositions)},
       {"unhandled_decl_kinds", std::move(unhandled)},
-      {"complete_for_emit_scope", unhandledKinds_.empty()}});
+      {"retirement_markers_only", config_.retirementMarkersOnly},
+      {"complete_for_emit_scope", unhandledKinds_.empty() && !config_.retirementMarkersOnly}});
 }
 
 bool InventoryVisitor::hasUnhandledKinds() const { return !unhandledKinds_.empty(); }

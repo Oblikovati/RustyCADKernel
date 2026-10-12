@@ -10,6 +10,7 @@ add_executable(occt-api-extract
   src/InventoryVisitor.cpp
   src/PreprocessorEvents.cpp
   src/Schema.cpp)
+target_sources(occt-api-extract PRIVATE src/UpstreamRetirement.cpp)
 target_include_directories(occt-api-extract PRIVATE include ${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS})
 target_compile_features(occt-api-extract PRIVATE cxx_std_17)
 target_compile_options(occt-api-extract PRIVATE -fno-rtti)
@@ -22,6 +23,9 @@ target_link_libraries(occt-api-extract PRIVATE clang-cpp)
 include(CTest)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 if(BUILD_TESTING)
+  add_test(NAME api_inventory_upstream_retirement
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_retirement.py
+      $<TARGET_FILE:occt-api-extract> ${CMAKE_CURRENT_SOURCE_DIR}/fixtures/source)
   add_test(NAME api_inventory_returned_type_reachability
     COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_returned_reachability.py
       $<TARGET_FILE:occt-api-extract> ${CMAKE_CURRENT_SOURCE_DIR}/fixtures)

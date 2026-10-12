@@ -233,3 +233,20 @@ PYTHONPATH=. python3 -m tools.api_inventory.gap_audit \
   --source /path/to/OCCT \
   --output porting/api-inventory/occt-capture-gap-audit.json
 ```
+
+## Upstream retirement metadata
+
+Clang declaration events retain `upstream_retirement_markers` for formal
+deprecation attributes and attached documentation candidates, including owner
+markers for members. Documentation is classified by
+`tools/api_retirement_markers.py`; a mention of an obsolete parameter or
+implementation is insufficient to retire an API. Explicit obsolete enum alias
+groups use compiler-proven enum source bounds.
+
+For a supplemental status scan, add `--retirement-markers-only` before `--` and
+`-fparse-all-comments` among the compiler flags. This mode emits marked
+declarations and enum context, sets `retirement_markers_only`, and never claims
+`complete_for_emit_scope`. Join to the primary inventory by exact declaration
+identity; unmatched identities remain unresolved. Scope policy and the initial
+evidence catalog are described in
+[ADR0002](../../docs/adr/0002-exclude-upstream-retired-apis.md).

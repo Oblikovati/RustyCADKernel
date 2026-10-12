@@ -1,4 +1,5 @@
 #include "Schema.h"
+#include "UpstreamRetirement.h"
 #include "clang/AST/ASTContext.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclFriend.h"
@@ -388,6 +389,8 @@ llvm::json::Object declarationEvent(const clang::Decl &declaration,
       {"api_visible", reason.empty()},
       {"exclusion_reason", reason},
       {"canonical_type", declarationType(declaration, context)}};
+  auto retirement = upstreamRetirementMarkers(declaration, context);
+  if (!retirement.empty()) event["upstream_retirement_markers"] = std::move(retirement);
   if (llvm::isa<clang::UnresolvedUsingValueDecl>(&declaration)) {
     event["api_resolution"] = "unresolved_using_value_target";
     event["callable_status"] = "unknown";
@@ -402,6 +405,10 @@ llvm::json::Object declarationEvent(const clang::Decl &declaration,
   }
   if (const auto *tag = llvm::dyn_cast<clang::TagDecl>(&declaration))
     event["tag_kind"] = tag->getKindName();
+  if (llvm::isa<clang::EnumDecl>(&declaration))
+    event["source_range"] = llvm::json::Object{
+        {"begin", locationObject(sources.getExpansionLoc(declaration.getBeginLoc()), sources)},
+        {"end", locationObject(sources.getExpansionLoc(declaration.getEndLoc()), sources)}};
   return event;
 }
 
