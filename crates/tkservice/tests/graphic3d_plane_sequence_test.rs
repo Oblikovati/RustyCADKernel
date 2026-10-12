@@ -50,7 +50,9 @@ fn iterator_remove_moves_to_the_next_plane() {
     it.next();
     assert!(!it.more());
     sequence.remove_at(&mut it).unwrap();
-    let null = Graphic3dSequenceOfHClipPlaneIterator::from_handle(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
+    let null = Graphic3dSequenceOfHClipPlaneIterator::from_handle(&Handle::<
+        Graphic3dSequenceOfHClipPlane,
+    >::default());
     assert!(!null.more());
     sequence.clear();
     assert!(sequence.is_empty());
