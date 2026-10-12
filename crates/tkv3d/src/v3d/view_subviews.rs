@@ -16,13 +16,14 @@ impl V3dView {
     pub fn parent_view(&self) -> Handle<dyn V3dViewSource> {
         self.state.read().parent_view.upgrade()
     }
-    /// `Subviews`; `view.subviews()`.
+    /// Copy subview owners explicitly; native `Subviews` uses `view.subviews_ref()`.
+    /// Example: `let copied = view.subviews()`.
     pub fn subviews(&self) -> Vec<Handle<dyn V3dViewSource>> {
-        self.state.read().subviews.clone()
+        self.state.read().subviews.iter().cloned().collect()
     }
     /// `AddSubview`; `view.add_subview(&subview)`.
     pub fn add_subview(&self, view: &Handle<dyn V3dViewSource>) {
-        self.state.write().subviews.push(view.clone());
+        self.state.write().subviews.append_ref(view);
     }
     /// `RemoveSubview`: true when the view was a subview; `view.remove_subview(&subview)`.
     pub fn remove_subview(&self, view: &V3dView) -> bool {
@@ -31,7 +32,11 @@ impl V3dView {
             .subviews
             .iter()
             .position(|v| std::ptr::eq(v.object_address(), view.this.read().object_address()));
-        found.map(|index| state.subviews.remove(index)).is_some()
+        found
+            .map(|index| {
+                rustycad_tkernel::standard::raise_native_failure(state.subviews.remove(index + 1))
+            })
+            .is_some()
     }
     /// `PickSubview`: the topmost active subview under a pixel, this view inside the window
     /// without subview, null outside the window. Example: `view.pick_subview(Vec2::new(10, 10))`.

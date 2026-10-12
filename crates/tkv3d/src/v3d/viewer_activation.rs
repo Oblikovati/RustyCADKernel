@@ -18,9 +18,7 @@ impl V3dViewer {
         if !implementation.is_defined() || self.contains_active_view(view.object_address()) {
             return Ok(());
         }
-        // Method-call receivers evaluate first: a native node alias must be read before this write guard.
-        let activated = view.clone_handle();
-        self.state.write().active_views.append(activated);
+        self.append_active_view_reference(view);
         activate_driver_view_properties(self, view, &implementation)
     }
     /// Deactivate the referenced native node with the original driver-view copy; `viewer.set_view_off_one(&slot)`.
@@ -32,11 +30,18 @@ impl V3dViewer {
         if !implementation.is_defined() || !self.contains_active_view(view.object_address()) {
             return;
         }
-        super::viewer::remove_view_from(
-            &mut self.state.write().active_views,
-            view.object_address(),
-        );
+        self.remove_active_view_reference(view);
         implementation.deactivate();
+    }
+    fn remove_active_view_reference(&self, view: &dyn HandleReference<dyn V3dViewSource>) {
+        // e3fa94fbd: read a same-viewer node before locking; removal invalidates that node alias.
+        let identity = view.object_address();
+        super::viewer::remove_view_from(&mut self.state.write().active_views, identity);
+    }
+    fn append_active_view_reference(&self, view: &dyn HandleReference<dyn V3dViewSource>) {
+        // Method-call receivers evaluate first: a native node alias must be read before this write guard.
+        let activated = view.clone_handle();
+        self.state.write().active_views.append(activated);
     }
     fn contains_active_view(&self, identity: *const ()) -> bool {
         self.state

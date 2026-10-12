@@ -31,6 +31,8 @@ pub(super) struct VulkanRuntime {
     pub limits: vk::PhysicalDeviceLimits,
     pub depth_clamp: bool,
     pub logic_op: bool,
+    pub geometry_shader: bool,
+    pub polygon_lines: bool,
     pub large_points: bool,
     pub sampler_anisotropy: bool,
     pub lines: super::line_device::LineCapabilities,
@@ -70,6 +72,8 @@ impl VulkanRuntime {
             limits: Default::default(),
             depth_clamp: false,
             logic_op: false,
+            geometry_shader: false,
+            polygon_lines: false,
             large_points: false,
             sampler_anisotropy: false,
             lines: Default::default(),
@@ -98,6 +102,9 @@ impl VulkanRuntime {
             == vk::TRUE;
         self.logic_op =
             unsafe { self.instance.get_physical_device_features(physical) }.logic_op == vk::TRUE;
+        let native_features = unsafe { self.instance.get_physical_device_features(physical) };
+        self.geometry_shader = native_features.geometry_shader == vk::TRUE;
+        self.polygon_lines = native_features.fill_mode_non_solid == vk::TRUE;
         self.lines = super::line_device::LineCapabilities::query(&self.instance, physical)?;
         self.memory = unsafe {
             self.instance
@@ -240,7 +247,9 @@ fn create_device(
         .depth_clamp(depth_clamp)
         .large_points(large_points)
         .wide_lines(lines.wide)
-        .logic_op(logic_op);
+        .logic_op(logic_op)
+        .geometry_shader(supported.geometry_shader == vk::TRUE)
+        .fill_mode_non_solid(supported.fill_mode_non_solid == vk::TRUE);
     let mut info = vk::DeviceCreateInfo::default()
         .enabled_features(&core_features)
         .queue_create_infos(&queues)

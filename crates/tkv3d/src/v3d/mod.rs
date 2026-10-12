@@ -112,5 +112,15 @@ mod viewer_light_alias_tests;
 #[cfg(test)]
 mod viewer_light_edge_tests;
 
+mod subview_sequence_reference;
 #[cfg(test)]
 mod viewer_light_member_tests;
+pub use subview_sequence_reference::{V3dSubviewCursor, V3dSubviewNodeRef};
+#[cfg(test)]
+mod subview_sequence_reference_tests;
+
+mod subview_sequence_field;
+pub use subview_sequence_field::V3dSubviewSequenceRef;
+
+#[cfg(test)]
+mod subview_sequence_field_tests;

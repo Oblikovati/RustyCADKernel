@@ -1,0 +1,84 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "no_occt_rebuild": true,
+  "native_rows": 43,
+  "rust_compared_map_rows": 42,
+  "native_only_metadata_rows": 1,
+  "native_only_metadata": "Actual AIS_Shape shape/parent baseline; isolated Rust map has no fabricated parent",
+  "cpp_claim_count": 0,
+  "runs": [
+    {
+      "source": "tools/oracle/martensite_shape_drawer_map.cxx",
+      "source_sha256": "00d943556b9e54d7055829b42f139d4d53fa75d127e56e24eaa02aae6f4173b3",
+      "compile_command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_shape_drawer_map.cxx",
+        "-L",
+        "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKBRep",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-shape-drawer-map"
+      ],
+      "executable_sha256": "36a4764fc1c6cdb160f4db7adda58ba1d2c5951d377cce29d1d7dbd248db5958",
+      "run_command": [
+        "/tmp/martensite-shape-drawer-map"
+      ],
+      "run_count": 2,
+      "return_codes": [
+        0,
+        0
+      ],
+      "fixture": "crates/tkv3d/tests/fixtures/shape-drawer-map/native-map.txt",
+      "fixture_sha256": "47be4991480278c721216bf5b8163c69e14ca9dcce0ef48f1140aedd8a4be6ba",
+      "repeated_output_sha256": "47be4991480278c721216bf5b8163c69e14ca9dcce0ef48f1140aedd8a4be6ba",
+      "rows": 26,
+      "byte_identical": true
+    },
+    {
+      "source": "tools/oracle/martensite_colored_shape_lifecycle.cxx",
+      "source_sha256": "45c34eeaf84a79f9240342d3e576200b12e00145b28eaadaa83daa228992f78a",
+      "compile_command": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I",
+        "../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_lifecycle.cxx",
+        "-L",
+        "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKBRep",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-lifecycle"
+      ],
+      "executable_sha256": "2f471fd69b8527b6ea964a0bf2864d468470d26e7a40145972cde732932bb3a9",
+      "run_command": [
+        "/tmp/martensite-colored-shape-lifecycle"
+      ],
+      "run_count": 2,
+      "return_codes": [
+        0,
+        0
+      ],
+      "fixture": "crates/tkv3d/tests/fixtures/shape-drawer-map/native-lifecycle.txt",
+      "fixture_sha256": "ec5011263898cf4011c925a55f96dabbfd890fe3acc9b0d9e9f3d408603126ba",
+      "repeated_output_sha256": "ec5011263898cf4011c925a55f96dabbfd890fe3acc9b0d9e9f3d408603126ba",
+      "rows": 17,
+      "byte_identical": true
+    }
+  ]
+}

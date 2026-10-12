@@ -7,17 +7,23 @@ pub fn configure_surface_view(
     vertices: &Graphic3dArrayOfPrimitives,
     mode: &str,
 ) {
+    configure_texture_view(scene, mode);
     if mode == "perspective" {
-        scene
-            .view
-            .camera()
-            .set_projection_type(Graphic3dCameraProjection::Perspective);
         for (index, z) in [-4., -4., 4., 4.].into_iter().enumerate() {
             let point = vertices.vertice(index as i32 + 1).unwrap();
             vertices
                 .set_vertice(index as i32 + 1, point.x() as f32, point.y() as f32, z)
                 .unwrap();
         }
+    }
+}
+/// Apply actual camera and clip state without changing topology; `configure_texture_view(scene,"clipped")`.
+pub fn configure_texture_view(scene: &ViewerScene, mode: &str) {
+    if mode == "perspective" {
+        scene
+            .view
+            .camera()
+            .set_projection_type(Graphic3dCameraProjection::Perspective);
     }
     if mode == "clipped" {
         let planes = Handle::new(Graphic3dSequenceOfHClipPlane::default());

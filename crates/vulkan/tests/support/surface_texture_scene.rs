@@ -11,7 +11,7 @@ pub mod modes;
 #[path = "surface_texture_projective.rs"]
 pub mod projective;
 #[path = "surface_texture_view.rs"]
-mod texture_view;
+pub mod texture_view;
 #[path = "surface_texture_updates.rs"]
 pub mod updates;
 use martensite_vulkan::Graphic3dRenderDriver;

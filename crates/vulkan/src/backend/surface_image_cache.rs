@@ -20,6 +20,23 @@ pub(super) struct SurfaceImageCache {
     images: Mutex<BTreeMap<Vec<u8>, SurfaceImageEntry>>,
 }
 impl SurfaceImageCache {
+    pub fn touch(
+        &self,
+        runtime: &Arc<VulkanRuntime>,
+        source: &Arc<SurfaceTextureImage>,
+    ) -> Result<(), RenderError> {
+        if source.id.is_empty() {
+            return Ok(());
+        }
+        let mut images = self.images.lock().map_err(|error| {
+            rejected(
+                error.to_string(),
+                "unpoisoned unsampled texture upload cache",
+            )
+        })?;
+        cache_entry(&mut images, runtime, source)?;
+        Ok(())
+    }
     pub fn forget(&self, resource_id: &[u8]) -> Result<(), RenderError> {
         self.images
             .lock()
@@ -113,6 +130,59 @@ mod tests {
         graphic3d::*,
         image::{ImageFormat, ImagePixMap},
     };
+    #[test]
+    fn mapped_line_uploads_image_revisions_without_allocating_sampler_bindings() {
+        let texture = retained_red_texture();
+        let frame = sampled_texture_frame(&texture);
+        let mut renderer =
+            super::super::VulkanRenderer::new(super::super::VulkanOptions::default()).unwrap();
+        let line = mapped_line_frame(&frame);
+        renderer.render(&line).unwrap();
+        assert_eq!(cached_surface_count(&renderer), 1);
+        assert_eq!(cached_sampler_count(&renderer), 0);
+        let before = retained_cached_image(&renderer);
+        texture.set_image(replacement_green_image());
+        texture.update_revision();
+        renderer
+            .render(&mapped_line_frame(&sampled_texture_frame(&texture)))
+            .unwrap();
+        assert!(!Arc::ptr_eq(&before, &retained_cached_image(&renderer)));
+        assert_eq!(cached_sampler_count(&renderer), 0);
+        renderer.render(&sampled_texture_frame(&texture)).unwrap();
+        assert_eq!(cached_sampler_count(&renderer), 1);
+        assert!(renderer.validation_errors().is_empty());
+    }
+    fn replacement_green_image() -> Handle<ImagePixMap> {
+        let image = Handle::new(ImagePixMap::default());
+        assert!(image.init_wrapper(ImageFormat::Rgba, Some(vec![0, 255, 0, 255]), 1, 1, 4));
+        image.set_top_down(true);
+        image
+    }
+    fn mapped_line_frame(frame: &RenderFrame) -> RenderFrame {
+        let mut draw = PrimitiveDraw::segments(
+            frame.draws()[0].vertices[..2].to_vec(),
+            vec![0, 1],
+            identity_clip(),
+            crate::LineStyle::new(1., 0xffff, 1).unwrap(),
+        )
+        .unwrap();
+        draw.surface_texture = frame.draws()[0].surface_texture.clone();
+        draw.surface_texture_binding_only = true;
+        RenderFrame::new(8, 8, [0., 0., 0., 1.], vec![draw]).unwrap()
+    }
+    fn retained_cached_image(renderer: &super::super::VulkanRenderer) -> Arc<SampledSurfaceImage> {
+        renderer
+            .pipeline
+            .surface_images
+            .images
+            .lock()
+            .unwrap()
+            .values()
+            .next()
+            .unwrap()
+            .image
+            .clone()
+    }
     fn retained_red_texture() -> Handle<Graphic3dTexture2D> {
         let image = Handle::new(ImagePixMap::default());
         assert!(image.init_wrapper(ImageFormat::Rgba, Some(vec![255, 0, 0, 255]), 1, 1, 4));

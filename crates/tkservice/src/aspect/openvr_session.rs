@@ -29,11 +29,12 @@ rustycad_tkernel::impl_transient!(AspectOpenVRSession, "Aspect_OpenVRSession", d
 
 /// The `Standard_ProgramError` of an action of the wrong type (or null).
 fn check_action(
-    action: &Handle<AspectXRAction>,
+    action: &super::AspectXrActionRef,
     expected: AspectXRActionType,
     member: &str,
 ) -> Result<(), Failure> {
-    match action.get() {
+    let observed = action.observe();
+    match observed.get() {
         Some(a) if a.action_type() == expected => Ok(()),
         found => Err(program_error(&format!(
             "Aspect_OpenVRSession::{member}() called for wrong action; got {:?}, expected {expected:?}",
@@ -133,7 +134,7 @@ impl AspectXRSession for AspectOpenVRSession {
     }
     fn get_digital_action_data(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<AspectXRDigitalActionData, Failure> {
         check_action(
             action,
@@ -144,7 +145,7 @@ impl AspectXRSession for AspectOpenVRSession {
     }
     fn get_analog_action_data(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<AspectXRAnalogActionData, Failure> {
         check_action(
             action,
@@ -155,7 +156,7 @@ impl AspectXRSession for AspectOpenVRSession {
     }
     fn get_pose_action_data_for_next_frame(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
     ) -> Result<AspectXRPoseActionData, Failure> {
         check_action(
             action,
@@ -180,7 +181,7 @@ impl AspectXRSession for AspectOpenVRSession {
     }
     fn trigger_haptic_vibration_action_impl(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &super::AspectXrActionRef,
         _params: &AspectXRHapticActionData,
     ) -> Result<(), Failure> {
         check_action(

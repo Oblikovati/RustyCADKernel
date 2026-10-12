@@ -69,14 +69,14 @@ impl PipelineState {
             ..
         } = kind;
         Self {
-            vertex: if kind.surface_texture || kind.surface_alpha {
+            vertex: if kind.surface_texture || kind.surface_alpha || kind.mesh_edges {
                 super::surface_texture_pipeline::surface_vertex_state(kind.lighting)
             } else {
                 vertex_state(text, kind.lighting)
             },
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
                 vk::PrimitiveTopology::POINT_LIST
-            } else if line {
+            } else if line && !kind.polygon_edges {
                 vk::PrimitiveTopology::LINE_LIST
             } else {
                 vk::PrimitiveTopology::TRIANGLE_LIST
@@ -84,7 +84,11 @@ impl PipelineState {
             viewport: vk::PipelineViewportStateCreateInfo::default()
                 .viewport_count(1)
                 .scissor_count(1),
-            raster: raster_state(depth_clamp),
+            raster: raster_state(depth_clamp).polygon_mode(if kind.polygon_edges {
+                vk::PolygonMode::LINE
+            } else {
+                vk::PolygonMode::FILL
+            }),
             samples: vk::PipelineMultisampleStateCreateInfo::default()
                 .rasterization_samples(vk::SampleCountFlags::TYPE_1),
             depth: super::capping_state::depth_state(kind.capping),
@@ -164,7 +168,7 @@ fn vertex_state(text: bool, lighting: bool) -> vk::PipelineVertexInputStateCreat
 pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateCreateInfo<'static> {
     vk::PipelineRasterizationStateCreateInfo::default()
         .depth_clamp_enable(depth_clamp)
-        .depth_bias_enable(true)
+        .depth_bias_enable(false)
         .polygon_mode(vk::PolygonMode::FILL)
         .cull_mode(vk::CullModeFlags::NONE)
         .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
@@ -172,7 +176,7 @@ pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateC
 }
 
 fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
-    const STATES: [vk::DynamicState; 8] = [
+    const STATES: [vk::DynamicState; 9] = [
         vk::DynamicState::VIEWPORT,
         vk::DynamicState::SCISSOR,
         vk::DynamicState::DEPTH_TEST_ENABLE,
@@ -180,9 +184,10 @@ fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
         vk::DynamicState::CULL_MODE,
         vk::DynamicState::FRONT_FACE,
         vk::DynamicState::DEPTH_BIAS,
+        vk::DynamicState::DEPTH_BIAS_ENABLE,
         vk::DynamicState::LINE_WIDTH,
     ];
-    &STATES[..if line { 8 } else { 7 }]
+    &STATES[..if line { 9 } else { 8 }]
 }
 
 #[cfg(test)]
@@ -209,7 +214,7 @@ mod tests {
     fn triangle_pipelines_do_not_require_dynamic_line_width() {
         assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));
         assert!(dynamic_states(true).contains(&vk::DynamicState::LINE_WIDTH));
-        assert_eq!(&dynamic_states(true)[..7], dynamic_states(false));
+        assert_eq!(&dynamic_states(true)[..8], dynamic_states(false));
     }
 }
 

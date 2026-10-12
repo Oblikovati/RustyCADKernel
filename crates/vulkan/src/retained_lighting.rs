@@ -12,32 +12,58 @@ pub(crate) fn apply_surface_lighting(
     aspects: &Handle<dyn Graphic3dAspectsSource>,
     context: &TextSceneContext<'_>,
 ) -> Result<(), RenderError> {
-    let mut model = resolved_model(&**aspects, context.rendering.shading_model);
-    if draws.iter().any(texture_replaces_lighting) {
-        model = Graphic3dTypeOfShadingModel::Unlit;
-    }
-
+    let model = primitive_shading_model(draws, &**aspects, context.rendering.shading_model);
     if model == Graphic3dTypeOfShadingModel::Unlit {
-        return if draws.iter().any(|draw| {
-            draw.surface_texture.is_some() || draw.surface_texture_unavailable.is_some()
-        }) {
-            Ok(())
-        } else {
-            validate_unlit_surface(&**aspects)
-        };
+        return validate_unlit_draws(draws, &**aspects);
     }
+    apply_resolved_lighting(draws, primitive, aspects, context, model)
+}
+fn primitive_shading_model(
+    draws: &[PrimitiveDraw],
+    aspect: &dyn Graphic3dAspectsSource,
+    view: Graphic3dTypeOfShadingModel,
+) -> Graphic3dTypeOfShadingModel {
+    let model = resolved_model(aspect, view);
+    if draws.iter().any(texture_replaces_lighting) {
+        return Graphic3dTypeOfShadingModel::Unlit;
+    }
+    if model == Graphic3dTypeOfShadingModel::PhongFacet
+        && draws
+            .iter()
+            .all(|draw| draw.topology() == crate::PrimitiveTopology::Lines)
+    {
+        return Graphic3dTypeOfShadingModel::Unlit;
+    }
+    model
+}
+fn validate_unlit_draws(
+    draws: &[PrimitiveDraw],
+    aspect: &dyn Graphic3dAspectsSource,
+) -> Result<(), RenderError> {
+    if draws
+        .iter()
+        .all(|draw| draw.topology() == crate::PrimitiveTopology::Lines)
+        || draws.iter().any(|draw| {
+            draw.surface_texture.is_some() || draw.surface_texture_unavailable.is_some()
+        })
+    {
+        return Ok(());
+    }
+    validate_unlit_surface(aspect)
+}
+fn apply_resolved_lighting(
+    draws: &mut [PrimitiveDraw],
+    primitive: &PrimitiveSubmission,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    context: &TextSceneContext<'_>,
+    model: Graphic3dTypeOfShadingModel,
+) -> Result<(), RenderError> {
     let normals = primitive.normals()?;
     if draws
         .iter()
         .any(|draw| draw.topology() != crate::PrimitiveTopology::Triangles)
     {
-        if draws
-            .iter()
-            .all(|draw| draw.point_style.is_some() || draw.line_style.is_some())
-        {
-            return apply_nodal_lighting(draws, primitive, aspects, context, model, normals);
-        }
-        return validate_non_surface_lighting(model, normals.is_some());
+        return lower_nodal_lighting(draws, primitive, aspects, context, model, normals);
     }
     let lighting = surface_lighting(primitive, &**aspects, context, model, normals.as_deref())?;
     for draw in draws {
@@ -49,15 +75,33 @@ pub(crate) fn apply_surface_lighting(
     }
     Ok(())
 }
+fn lower_nodal_lighting(
+    draws: &mut [PrimitiveDraw],
+    primitive: &PrimitiveSubmission,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    context: &TextSceneContext<'_>,
+    model: Graphic3dTypeOfShadingModel,
+    normals: Option<Vec<[f32; 3]>>,
+) -> Result<(), RenderError> {
+    if draws
+        .iter()
+        .all(|draw| draw.point_style.is_some() || draw.line_style.is_some())
+    {
+        return apply_nodal_lighting(draws, primitive, aspects, context, model, normals);
+    }
+    validate_non_surface_lighting(model, normals.is_some())
+}
 
 pub(crate) fn texture_replaces_lighting(draw: &PrimitiveDraw) -> bool {
-    draw.surface_texture
-        .as_ref()
-        .is_some_and(|texture| !texture.modulate)
-        || draw
-            .surface_texture_unavailable
+    !draw.surface_texture_binding_only
+        && (draw
+            .surface_texture
             .as_ref()
             .is_some_and(|texture| !texture.modulate)
+            || draw
+                .surface_texture_unavailable
+                .as_ref()
+                .is_some_and(|texture| !texture.modulate))
 }
 
 fn apply_nodal_lighting(
@@ -78,7 +122,12 @@ fn apply_nodal_lighting(
         return validate_non_surface_lighting(model, true);
     }
     let mut lighting = surface_lighting(primitive, &**aspects, context, model, Some(&normals))?;
-    lighting.validate_opaque_annotation_or_cap()?;
+    if draws
+        .iter()
+        .any(|draw| draw.topology() == crate::PrimitiveTopology::Points)
+    {
+        lighting.validate_opaque_marker_lighting()?;
+    }
     lighting.normals = normals;
     for draw in draws {
         draw.lighting = Some(lighting.clone());

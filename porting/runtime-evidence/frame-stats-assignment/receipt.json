@@ -1,0 +1,46 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_records": 6,
+  "native_runs_identical": true,
+  "tests": 262,
+  "executables": 3,
+  "source_sha256": {
+    "tools/oracle/martensite_frame_stats_assignment.cxx": "d0db2d7d3293ed2b8c5047b7e52a084d928e8c73e325f3d44757319e2aac5807",
+    "crates/tkservice/src/graphic3d/frame_stats_assignment_tests.rs": "493b4ce25a9356cf468c0e3783f5980e8a993f7802276568787dd7e257ae6e1d",
+    "crates/tkservice/tests/fixtures/frame-stats-assignment.txt": "35b90dba26ec3188090c8cc8bef4d50be21fd008d7aeb5b58f4d2d778055ad69"
+  },
+  "native_binary_sha256": "ceb26eb3345fa0cfbd91bb958ba0ed0ba936907cdbec4caa7915541d436e30f8",
+  "native_header_sha256": {
+    "Graphic3d_FrameStatsData.hxx": "4eba63bfe3effb2c71492f38d533a90a579cf73e6ff7e5739fe67c9006afd9ff",
+    "Graphic3d_FrameStatsTimer.hxx": "ce434044f212c81fea69a3c09a2cc5ef78b2be10ab6766b4e1981225f13bb422",
+    "OSD_Timer.hxx": "aec81599da54627a0076e96aef700fbbf3b71e953f36ebbb416437b736d330bb",
+    "OSD_Chronometer.hxx": "4892e49c46f2899d99d03fa7e1994f58c9d80ad993f70e91aa524782d3b31f21"
+  },
+  "native_library_sha256": {
+    "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_frame_stats_assignment.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "target/frame-stats-assignment-native/probe"
+  ],
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "scope": "Actual existing assign_data body: copies frame values while retaining previous samples and real OSD timer object/running state. No OSD timing magnitudes, generic vector storage/reference surface, self-alias inputs forbidden by safe Rust borrowing, move assignment, whole-class or GPU performance claim.",
+  "compiler_verified_bindings": 1,
+  "scoped_capture_complete": false,
+  "capture_feature_revision": "293d57ccb"
+}

@@ -1,0 +1,21 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "row_count": 5,
+  "native_runs": "two independently executed byte-identical CPU runs",
+  "schema": "phase sameSequenceObject lower upper length empty firstIdentity lastIdentity middleIdentityOrMinusOne childARefCount childBRefCount childCRefCount",
+  "configuration": "Retained native const Subviews sequence object through declared public AddSubview/RemoveSubview; actual three V3d_View children, CPU recording driver, no GPU/headset. No private mutation or node transfer criterion.",
+  "fixture_sha256": "55841fd54cc6c584fca270ca7b99f0248eb2ed854bd571b8bc4aead51f862c87",
+  "second_run_compressed_sha256": "60a6d1c36cbdb4fecee63628a54deee9c7613b571f98129715ad661198fec9e7",
+  "oracle_executable_sha256": "b55d1daae0ffa1c3528079f56237bb546fc55ba80770cf748c8b9cb3cfb803de",
+  "sources": {
+    "tools/oracle/martensite_v3d_subview_reference.cxx": "541f591ea53312506ed1292b49e99a3757546ccf80c08c9723fe92aaf8dcfbd2",
+    "tools/oracle/martensite_controller_camera_primitives.cxx": "dbf9f6ffb2512b14f4cc24d4652d174d9951150c693c9c200a7423be651f4e1a",
+    "tools/oracle/martensite_view_controller_transfer.cxx": "343128301ebcac151850c0997fae7d9ed644464b1b5912ec890f3ed26a2aea13",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "OCCT/src/Visualization/TKV3d/V3d/V3d_View.hxx": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+    "OCCT/src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012",
+    "OCCT/src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx": "a1172b06eec049b5016f2f478a354ce837811a78c0fdac5a76d99c1608509beb"
+  },
+  "shared_wrapper_sha256": "2f99b337bfa8d82525868560d8c708ab496a96f60379ba8d0c67c57fde05f2da",
+  "shared_wrapper_generation": "replace only int main( with int martensite_unused_martensite_controller_camera_primitives_main( in martensite_controller_camera_primitives.cxx"
+}

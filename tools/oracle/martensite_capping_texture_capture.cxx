@@ -8,6 +8,7 @@ static occ::handle<Graphic3d_AspectFillArea3d> unlit_aspects() {
   aspect->SetPolygonOffsets(Aspect_POM_Off,0,0);aspect->SetInteriorColor(texture_rgb(1,0,0));return aspect;
 }
 #include "martensite_vulkan_capping.cxx"
+#include "martensite_cap_edge_boundaries.hxx"
 static std::string cap_texture_mode(const std::string& mode) {
   for(const auto name:{"bc1-rgb","bc1-rgba","bc2","bc3","mask-exact","mask-blend","mask","blend","opaque-alpha"})
     if(mode.find(name)!=std::string::npos)return name;
@@ -46,6 +47,7 @@ static occ::handle<Graphic3d_ClipPlane> textured_cap_scene(
       mode.find("facet")!=std::string::npos?Graphic3d_TypeOfShadingModel_PhongFacet:Graphic3d_TypeOfShadingModel_Phong);
   }
   cap_object_properties(group,plane,mode);
+  cap_edge_boundary(group,texture,mode);
   const occ::handle<Graphic3d_SequenceOfHClipPlane> planes=new Graphic3d_SequenceOfHClipPlane;
   planes->Append(plane);view->SetClipPlanes(planes);structure->CalculateBoundBox();structure->Display();return plane;
 }
@@ -64,6 +66,8 @@ int main(int argc,char** argv) {
   probe.workspace->GetGlContext()->caps->ffpEnable=std::string(argv[1]).find("generated")!=std::string::npos||std::string(argv[1]).find("fixed")!=std::string::npos;
   const occ::handle<Graphic3d_Structure> structure=new Graphic3d_Structure(probe.viewer->StructureManager());
   const auto plane=textured_cap_scene(probe.view,structure,argv[1]);
-  probe.view->Redraw();cap_live_update(plane,argv[1]);texture_capture(probe.view,argv[2]);
+  probe.view->Redraw();cap_live_update(plane,argv[1]);
+  if(std::string(argv[1]).find("line-synchronized")!=std::string::npos)structure->Groups().First()->SynchronizeAspects();
+  texture_capture(probe.view,argv[2]);
   probe.view->Remove();return 0;
 }

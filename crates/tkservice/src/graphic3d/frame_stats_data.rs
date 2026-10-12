@@ -8,6 +8,10 @@ use rustycad_tkernel::osd::Timer;
 use rustycad_tkernel::standard::real::real_last;
 use std::ops::{Deref, DerefMut, Index, IndexMut};
 
+#[cfg(test)]
+#[path = "frame_stats_assignment_tests.rs"]
+mod assignment_tests;
+
 /// The native `std::max`: `a < b ? b : a`.
 pub(crate) fn native_max(a: f64, b: f64) -> f64 {
     if a < b { b } else { a }

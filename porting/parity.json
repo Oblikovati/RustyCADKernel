@@ -514939,9 +514939,19 @@
       "upstream_id": "Graphic3d_DataStructureManager::Camera",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_DataStructureManager.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dDataStructureManager::camera",
+      "source_sha256": "624a2f1686d5e73c04dcb76be2ce1ba21cd5329a7061b264a1d82d4e5c78968a",
+      "cpp_declaration_id": "93ae40c3723ddc87219ce135d03910d5c29f9dc7386ce5c01272d769046c32fc",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dDataStructureManager::camera_ref",
+      "rust_kind": "function",
       "status": "implemented",
-      "notes": "Graphic3d driver support classes mapping (visualization-design.md section 1): Graphic3d_DataStructureManager is the Graphic3dDataStructureManager trait (implemented by every view); the driver factory registry is a process-wide list behind free functions; the BVH structure sets are plain structs owned by the layer (held by value natively) over the tkmath BVH (weak structure handles where the native keeps raw pointers); checked by the sv_scene oracle (culling) and tests/graphic3d_driver_model_test.rs."
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dDataStructureManager::camera_ref",
+          "declaration_sha256": "db7b8cb8eb5de14f673b28f6931c9bee728e95c944c94ae520b676188ea629ef",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "upstream_id": "Graphic3d_DataStructureManager::DumpJson",
@@ -517134,9 +517144,19 @@
       "upstream_id": "Graphic3d_CView::Camera",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dDataStructureManager::camera",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "cpp_declaration_id": "526a1ff5e1d916c8cf255a6d42933958b0e417db81a118330f7e6ae0e01947b2",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::cview_camera_ref",
+      "rust_kind": "function",
       "status": "implemented",
-      "notes": "Graphic3d_CView mapping (visualization-design.md section 1): the abstract view is the Graphic3dCView trait (virtual and pure members; Camera through the blanket Graphic3dDataStructureManager impl) over Graphic3dCViewBase (protected fields on Graphic3dCViewFields; the parent view is a weak handle); graphic3d_cview_register takes the identifier from the manager once the handle exists; the non-virtual members are split by topic in Graphic3dCViewMembers, Graphic3dCViewStructures, Graphic3dCViewComputed, Graphic3dCViewXr and Graphic3dCViewSubviews; the displayed set keeps insertion order (natively pointer-hash order); checked by the sv_scene oracle (activation, computed mode, display flows, bounds, dumps) and tests/graphic3d_driver_model_test.rs. The override of every view (blanket implementation)."
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::cview_camera_ref",
+          "declaration_sha256": "4ef3b2370f40a271f6f861ddffbf575f1816d420271b0a1dad444d66fd942726",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "upstream_id": "Graphic3d_CView::DumpJson",
@@ -517326,9 +517346,19 @@
       "upstream_id": "Graphic3d_CView::SetCamera",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "cpp_declaration_id": "17e4e2c1485db7bebb5a34e79a5d7b56f8db2c531662fa6b349bff694ce2821b",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::set_camera",
+      "rust_kind": "function",
       "status": "implemented",
-      "notes": "Graphic3d_CView mapping (visualization-design.md section 1): the abstract view is the Graphic3dCView trait (virtual and pure members; Camera through the blanket Graphic3dDataStructureManager impl) over Graphic3dCViewBase (protected fields on Graphic3dCViewFields; the parent view is a weak handle); graphic3d_cview_register takes the identifier from the manager once the handle exists; the non-virtual members are split by topic in Graphic3dCViewMembers, Graphic3dCViewStructures, Graphic3dCViewComputed, Graphic3dCViewXr and Graphic3dCViewSubviews; the displayed set keeps insertion order (natively pointer-hash order); checked by the sv_scene oracle (activation, computed mode, display flows, bounds, dumps) and tests/graphic3d_driver_model_test.rs."
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::set_camera",
+          "declaration_sha256": "541944bab14882faa6b7e97252cb504fa3a0f030e998c0b723ef9920204f819b",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "upstream_id": "Graphic3d_CView::ToFlipOutput",
@@ -567500,12 +567530,22 @@
       "upstream_id": "V3d_View::ActiveLights"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::add_clip_plane",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "partial",
+      "upstream_id": "V3d_View::AddClipPlane",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::AddClipPlane"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "02629eed1e7f1d062015a4ec5948d7bd3c5a23a75888d5c1b894ca456c62153d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::add_clip_plane",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewSource::add_clip_plane",
+          "declaration_sha256": "749871331d2dc5c41a34af2648c52f9e80b479450f8697f2809df6b92c37e3ef",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -567596,12 +567636,22 @@
       "upstream_id": "V3d_View::BackgroundSkydome"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::camera",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_View::Camera",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::Camera"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "195d159365f40952a71903975e1e7577f9cacf53101036edbd01c13b7249eb76",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewMembers::camera_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewMembers::camera_ref",
+          "declaration_sha256": "e3ad5f2e5c035fdd72f0f67c70179e1b55791519ceecb5b19b1c01f8a2b686f4",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -567724,12 +567774,22 @@
       "upstream_id": "V3d_View::ConvertWithProj"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::default_camera",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_View::DefaultCamera",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::DefaultCamera"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "1f4c7779e797d4f1a50fce26ecb6ab444c55097107e6d372bf77b424e5a31b2d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewMembers::default_camera_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewMembers::default_camera_ref",
+          "declaration_sha256": "6571e498bb2321ba9d0a20839cd5a86861fc404cccd01773140dc9d92df70959",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -568172,20 +568232,40 @@
       "upstream_id": "V3d_View::Project(const double,const double,const double,double &,double &,double &) const"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::redraw",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "partial",
+      "upstream_id": "V3d_View::Redraw",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::Redraw"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "6b8daa8a6a76c2a611fdd00520d6e1bddfd5586f5e64905cfadab138bae92caa",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::redraw",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewSource::redraw",
+          "declaration_sha256": "5ac6ebe42afdb8519271741d3588755031b50c91510ad59fc20c9cd13aa559d9",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::redraw_immediate",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "partial",
+      "upstream_id": "V3d_View::RedrawImmediate",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::RedrawImmediate"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "3808a12ab3740f945fe37eeb063fa90ca35ab7f56fc5b1a484949d8d594b4527",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::redraw_immediate",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewSource::redraw_immediate",
+          "declaration_sha256": "8e6bed4df8f6fee41afa0becb1c4254a765ad51da47c7b58ba8efb620a4ae985",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -568196,12 +568276,22 @@
       "upstream_id": "V3d_View::Remove"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::remove_clip_plane",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "partial",
+      "upstream_id": "V3d_View::RemoveClipPlane",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::RemoveClipPlane"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "49da25f1a5b9af0e44842595015f299282c5de83c2df9d6010f5d7f8c01bd75d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::remove_clip_plane",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewSource::remove_clip_plane",
+          "declaration_sha256": "6be1dcf9f33a6e0f9fa1158b09fdd563f9ce0dd0b3cc126a095bcbf85939249a",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -568420,12 +568510,35 @@
       "upstream_id": "V3d_View::SetBgImageStyle"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::set_camera",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_View::SetCamera",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::SetCamera"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "9c8dccbb19cf65cba0c196fbd12e90806139d8205af2017fdabdfa52ad6e1149",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::set_camera",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::set_camera",
+          "declaration_sha256": "2f2a79f44257c77ff2424db6ce1f345be32aa246b0e0dbf45e9a765c3ec12bc6",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -568908,12 +569021,22 @@
       "upstream_id": "V3d_View::V3d_View(const occ::handle<V3d_Viewer> &,const V3d_TypeOfView)"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Source audit 2026-10-12: native const Handle& getter is currently mapped to an owning clone; native slot alias/refcount and callback mutation behavior require the frame slice live-reference adapter. See porting/runtime-evidence/frame-handle-reference-gap-2026-10-12.json.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::view",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "partial",
+      "upstream_id": "V3d_View::View",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::View"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "45d8c0de361208439178f6a65cc1ff0cb6d1e2e5db49c1148547e338907aca66",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewMembers::view_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewMembers::view_ref",
+          "declaration_sha256": "c648f022010495b83bb8f4a4b2d92b1682dd93a7d8bdd1804fb20be74c3518c8",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -569148,28 +569271,97 @@
       "upstream_id": "V3d_Viewer::ActiveLights"
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_view",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_Viewer::ActiveView",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::ActiveView"
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "020e4d521785745ad720a69ddbffc319a64b728fcd91808829443240e621e06c",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_view_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::active_view_ref",
+          "declaration_sha256": "26c771d1c7a9291013f087a8606087ffa2abcfcfc31d4475307718717f6dea38",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
+      "upstream_id": "V3d_Viewer::ActiveViewIterator",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "368db16a45ca0b37513a2578e1c2719905ffb81f294d45e5b502527fc548c6d3",
       "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_view_iterator",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "rust_kind": "function",
       "status": "implemented",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::ActiveViewIterator"
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::active_view_iterator",
+          "declaration_sha256": "4de1be89c506b6b32464538fea22cc742f86031e17333260414887027d340bb7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_views",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_Viewer::ActiveViews",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::ActiveViews"
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "77885bdbb9c63b17ea1bdeca4908bbdc92a553f6e76b29a7c8026ddf925c7bed",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_views_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::active_views_ref",
+          "declaration_sha256": "285ba847e160463844cf72f09b19f42af535016f6fe5f31ef92692658099e8d4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
@@ -569324,28 +569516,97 @@
       "upstream_id": "V3d_Viewer::DefinedLights"
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_view",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_Viewer::DefinedView",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::DefinedView"
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "aea0809bbf0e56a946d82350e0d22d50ec2d4a2bb5274881b37c4f31a4072872",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_view_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::defined_view_ref",
+          "declaration_sha256": "b2b3ec790decf4d727f7c02a1c7bee4df5e3df5822077f2349df983b0f4d0727",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
+      "upstream_id": "V3d_Viewer::DefinedViewIterator",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "afa90db4396fcd820c8821447a855f5c2574ce918830c2725eeee3a37d8181f4",
       "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_view_iterator",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "rust_kind": "function",
       "status": "implemented",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::DefinedViewIterator"
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::defined_view_iterator",
+          "declaration_sha256": "a3e6caccdb81a7df2992eb91ddc3c9e624ea54dea96e016fd9e9f36aebce7d49",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_views",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_Viewer::DefinedViews",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::DefinedViews"
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "a5aaa120a42bc9598dca8512016133cf7b27f5d93c5dee10944b4973ac9d29a4",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_views_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::defined_views_ref",
+          "declaration_sha256": "5f635a0d211421c83cbb83acc9771483e315f397502c1fb503f9be376e4de564",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
@@ -569636,20 +569897,66 @@
       "upstream_id": "V3d_Viewer::RectangularGridValues"
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::redraw",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_Viewer::Redraw",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::Redraw"
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "2a92ac6ff2aad9809a0e9966382c914fc90e0c85a6ee71bcb28ea52ec58e155a",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::redraw",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::redraw",
+          "declaration_sha256": "ccb87c3f6329f4ab81db5ec87e174e8eef296f11b79f4f6bf5337a630c8e2d06",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::redraw_immediate",
-      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_Viewer::RedrawImmediate",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_Viewer::RedrawImmediate"
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "ff98b251d2a6d99ba34967dbccd5d59a65ed51c6c98b6f879f3350535963f9b0",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::redraw_immediate",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::redraw_immediate",
+          "declaration_sha256": "cf6897cbb9bd2910ec576b0c1b7e26bdc7e1fd83d5513aa60a8e73b34d3530a4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
     },
     {
       "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
@@ -579435,7 +579742,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisInteractiveContext::select_detected",
-          "declaration_sha256": "41f03315eac39447db547e062270a2cc356d358dc18be37fcb83a972cd5d36fa",
+          "declaration_sha256": "11b78d8582a2893b95b3f56da4100a5b7179b569e83cbb4a2c9abd8849a5ec39",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -593289,7 +593596,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
-          "declaration_sha256": "63278204759e99238b33be53a40f3a115b1467bb444eb159762bfb2c195fe01d",
+          "declaration_sha256": "0a89515b7c11b14862c7eb10407dc450808cd5e686af01182014eb9be75ce638",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -593363,7 +593670,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
-          "declaration_sha256": "f05f3b7cddde1e0a0711a4c0d889a9153d4146ea2af0715d23b1907609edf5ba",
+          "declaration_sha256": "f042c757e308f4f4771f5fde0e2c8f8a8353b80a34f354d2327d29a155d29afb",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -593431,7 +593738,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
-          "declaration_sha256": "7d7d95e4e794de5a3fa069c9f7d61024bfd33a2f7836d743c941ed03a41a921d",
+          "declaration_sha256": "6fd5306265546b6b652786c1c85f5ee4212c9229ff80565c2ce9d8f7600c5fee",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -593509,7 +593816,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisLightSourceSource>::update_light_aspects",
-          "declaration_sha256": "fd35bfbdfc79b31169c11a27291b5863d97c39ed6ecbd5abc4bc13f31f65c86c",
+          "declaration_sha256": "fc4a30ef11b813d73080a117db62643f80f9454dfe37bca15868a001d9ad0032",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594043,7 +594350,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCube::new",
-          "declaration_sha256": "c04ddd0531abd481a87e3a93ed6602baa2c81ef02d926dcd3d46b74fb972b7df",
+          "declaration_sha256": "5755e50118e2817b6606a4fa74f214a0f73ee85a74e427e1e00f89f295b9dbf0",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -594271,7 +594578,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
-          "declaration_sha256": "a9c7e77d74aef34b2ebb16903a315aa42dca52127afe9c59f4b53dcba8e20070",
+          "declaration_sha256": "a2868d4a89c30ddd5229c75a8f536e835d92be87dc61846d5514506bbf8ce947",
           "impl_context": null
         }
       ]
@@ -594289,7 +594596,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
-          "declaration_sha256": "f13f218aa2dff71e2906fc0cf86745dfb03545ba9db82baececd4a87657459fc",
+          "declaration_sha256": "8f3296fa6d043ecac007349befadf55851889d249051ea578e906e56a89ab076",
           "impl_context": null
         }
       ]
@@ -594307,7 +594614,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
-          "declaration_sha256": "3207dde5681fb2db41ea15dc0bb91b390c44aa045936ede9a652a34c46bbdede",
+          "declaration_sha256": "743c6c27eba98b5627691ced1c8f084a1fd268c7ebe1e566ec02cb74cfd8b896",
           "impl_context": null
         }
       ]
@@ -594325,7 +594632,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
-          "declaration_sha256": "a29377936170636e5d55763d0e91645be65fa4fa401a9fac544a537063ff88c2",
+          "declaration_sha256": "1c551f81d1df7088256a5876e7e77166b6c63a01f6fe72cc72743dbba45195c1",
           "impl_context": null
         }
       ]
@@ -594343,7 +594650,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCubeSource::view_fit_all",
-          "declaration_sha256": "9a51b38708701cd2d3048c2f7ec42f75b0360de514b1559950183d4e2f886c1e",
+          "declaration_sha256": "6739491f9c65c4c9bf4b9a3a8be0ee42b8a63e435dd3b5e4cc1618822af0d60b",
           "impl_context": null
         }
       ]
@@ -594540,7 +594847,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
-          "declaration_sha256": "dfe0e118c8510ce942e78c44fd5f20ce79832d18bdfdc9190f29d5937206bc43",
+          "declaration_sha256": "8400148ffa5e2c97c71ba72ea56455a174c45bca816f8150c8858a6d77047d46",
           "impl_context": null
         }
       ]
@@ -596249,7 +596556,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "c28f8d523a1a708fc8f17a94daa1f2f3b579f85ff22d3fc56373d4af364c1cd6",
+          "declaration_sha256": "1d0d9fde1a43cb4a1fc2a5557a0214f9a06715306cf799774b818fecaca8ca5a",
           "impl_context": null
         }
       ]
@@ -596408,7 +596715,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "45f23cd2c0b3423e743c94dd99fb0bbd4f4acee439f866507e5dddfc679483c9",
+          "declaration_sha256": "4a8722a5581d244bb52a4b20a68580308967b2f3f7d691358795cd3d3b971e55",
           "impl_context": null
         }
       ]
@@ -597246,6 +597553,624 @@
       "rust_item": "rustycad_tkv3d::std_prs::StdPrsToolRFace::edge_ref",
       "status": "implemented",
       "notes": "Martensite actual borrowed explorer edge slot:20 pinned native alias rows plus retained-topology/source-lifetime probe, twice byte-identical. Root, sibling, pop-reset, wire-slot reuse, repeated Init, shared TShape flags versus copied orientation, checked Standard_TypeMismatch at end, and real nonvirtual parent Face/source destruction proved. Underlying Explorer retains and reads actual iterator shape slots; no cached getter copies. ToolRFace remains partial:allocation operators/class record unclaimed; no parent-family or private helper credits."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::SetOwnWidth",
+      "cpp_declaration_id": "06c491064dd7e82c7cb6e8f53d3fc9ebf7768a965ac1a0874f37aee0a22f64b7",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::set_own_width",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::HasOwnColor",
+      "cpp_declaration_id": "08d197345a68c6f7ad390106ceaf0a391003215b1b8056bb4e54e4552340a2ea",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::has_own_color",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::base_type",
+      "cpp_declaration_id": "1073b2429f8d062d3d697da36444f8734d57b058d3aa586e5b007a1f0b9f4587",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawerParent",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::HasOwnMaterial",
+      "cpp_declaration_id": "14a7e971a330fe2101d179022bd825122c30137d58c78407a43c9d81f99d7103",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::has_own_material",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::UnsetOwnWidth",
+      "cpp_declaration_id": "23f3eccdd527a27f458b92946f279d593ae23f6c8bb8a99513d351d7083057d6",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::unset_own_width",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::get_type_name",
+      "cpp_declaration_id": "24528bdc2607316011a1541fee31c88c5e3b5344a7e4d1d799075dba95307512",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::HasOwnWidth",
+      "cpp_declaration_id": "30b237f07e8ce439e837cd855943cbdbb8697f97e1b9495d9295b9269967a4cf",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::has_own_width",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::UnsetOwnMaterial",
+      "cpp_declaration_id": "30fb24098526daa6869158beb2dc0017492e67541e2edcf7575646ee38cc7c75",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::unset_own_material",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::get_type_descriptor",
+      "cpp_declaration_id": "36f3db3a7cd6e81299286dc375d99ac2dba669a4828e6742e8b1962cab775a9c",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::UnsetOwnTransparency",
+      "cpp_declaration_id": "41f73d0473dc190e4dc4e84480ccc6e853ebbf3d19be5e7cea0d903c09a0bb3f",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::unset_own_transparency",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::SetHidden",
+      "cpp_declaration_id": "5c3fdd67413013798fc985e54e7a85d4bda8a658afd40f65119e8239b491af9a",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::set_hidden",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::UnsetOwnColor",
+      "cpp_declaration_id": "77b26bffa5690e930a09c3edd7ab32b1b881cc2c8e7560a64cea0e0ebaef47d8",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::unset_own_color",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::myIsHidden",
+      "cpp_declaration_id": "7a08b9ef0f181de98601f61f8a1327c5e196d63d88356822e33889fa5d4579b3",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawerFlags::is_hidden",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::myHasOwnColor",
+      "cpp_declaration_id": "95b82e8a3a6e683d632224c9117e3bbda977da525bdc91187c852be25e7cf3ad",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawerFlags::has_own_color",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::SetOwnColor",
+      "cpp_declaration_id": "99e53315d25788bd174a3aa26d98f930575d3641a86fc649ba4053f2535dfd8c",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::set_own_color",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::IsHidden",
+      "cpp_declaration_id": "a766389271f732be9e79c87cacf515b7ed7c75bd398d4872cbea0a3f26a27dcf",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::is_hidden",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::DynamicType",
+      "cpp_declaration_id": "a869230cb216cc769849e1c6ec168c499f1665e264d786a5574f76a8a40eedfb",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::myHasOwnWidth",
+      "cpp_declaration_id": "b1567f9b1ff63a4a02dbbd1a14f4a9148d45208960eb0f13507d8aa857396686",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawerFlags::has_own_width",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::AIS_ColoredDrawer",
+      "cpp_declaration_id": "b7ad097a2af6f3f186d4a2c1b71ab48a3eea8a286ec36ecd0b1867a50c6ab936",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::new",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::myHasOwnMaterial",
+      "cpp_declaration_id": "bde068a70c1eadb031864fe4b4bd64a611f7acb378783ae50cd77497a38ef404",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawerFlags::has_own_material",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::myHasOwnTransp",
+      "cpp_declaration_id": "d44d9b281e1c626f06968cbacdc2172b654509fb69eecc641e22d9c02e99ca57",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawerFlags::has_own_transparency",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::SetOwnMaterial",
+      "cpp_declaration_id": "d4b72b0c0d1d5e8ef24176e5fffbc4020eb42181915c50734c69fa9b17a5e6bd",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::set_own_material",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::SetOwnTransparency",
+      "cpp_declaration_id": "f27decd83e9c2341df90ce93a2df329a7e9f62862ef8766527849375abed0297",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::set_own_transparency",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredDrawer::HasOwnTransparency",
+      "cpp_declaration_id": "fd1fa30c6f7aa4ea2dc9b56d38e009e38bc6f9ce7c7e667cadee97ed422b016e",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx",
+      "source_sha256": "f3bbea158c80c4484a0d34e388fd8a7672ad389a22a4f5f68e2323b23cb68832",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredDrawer::has_own_transparency",
+      "status": "implemented",
+      "notes": "Martensite colored-drawer prerequisite: 28 pinned native rows repeat byte-identically. Genuine owned Prs3dDrawer base/runtime projection, independent flag-only ignored-argument setters (negative/zero/out-of-range/infinity/NaN), writable actual public storage, native intrusive ownership, retained link slot aliases and application virtual JSON dispatch verified by Rust-only replay. No parent-family/private/ColoredShape/class-record completion credit."
+    },
+    {
+      "upstream_id": "AIS_TypeOfIso",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfIso.hxx",
+      "source_sha256": "1e7a0eb744ca536191f9b1fae312bf098c0257869e03f6ebad604e2ba146b7f6",
+      "cpp_declaration_id": "4c9065360f5d2c87d61614430484a4acc6586100e1717237331d60f5d5cb2158",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfIso",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisTypeOfIso",
+          "declaration_sha256": "68dd8ac858b88598ae344b6f545368fd56ab2ce17cee29a6fdd9263426506c9e",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_TOI_IsoU",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfIso.hxx",
+      "source_sha256": "1e7a0eb744ca536191f9b1fae312bf098c0257869e03f6ebad604e2ba146b7f6",
+      "cpp_declaration_id": "46015ad100f822aba89cda45f35fe0cd91b1c15154fd21bea6cbeaccc78a44aa",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfIso::U",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisTypeOfIso::U",
+          "declaration_sha256": "04a4b3809b1d23e3c032f535545ea7187f21c03f97562ca3e9ded141cb8323f0",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_TOI_IsoV",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfIso.hxx",
+      "source_sha256": "1e7a0eb744ca536191f9b1fae312bf098c0257869e03f6ebad604e2ba146b7f6",
+      "cpp_declaration_id": "5b254143a09a6d14ed6daf71a468532347d01e6a54d5b0223254964b69272f6f",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfIso::V",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisTypeOfIso::V",
+          "declaration_sha256": "384a86d8b53705dff1cee519b95586e2c1416148bd3870f66fb038e4842054a1",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_TOI_Both",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_TypeOfIso.hxx",
+      "source_sha256": "1e7a0eb744ca536191f9b1fae312bf098c0257869e03f6ebad604e2ba146b7f6",
+      "cpp_declaration_id": "151e92b5a147b3b2efcfa1aa362d169b502a3ce10fc078d951e0062167c19aec",
+      "rust_item": "rustycad_tkv3d::ais::AisTypeOfIso::Both",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisTypeOfIso::Both",
+          "declaration_sha256": "f4ffd96dc5cdfdb7dfa2049086f8cec6cdc43aafb9ff9dd61fd4de7499ef19be",
+          "impl_context": null
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetIsoNumber",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "80e6f5fd29f80593665bab7bd0a81426d189bb199d9b6921397a313a99846d22",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_iso_number",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::set_iso_number",
+          "declaration_sha256": "07b8bdc73f2e8a0f12df88e9e47cb7d0274b1d67940e792db107937cb5306405",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsoNumber",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "8ba395987fc2b697e32dce3703c3f2021fea8dc153b4080094c87809de0f0cc0",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::iso_number",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::iso_number",
+          "declaration_sha256": "94f51768c01b5803c6526161a3624e5b727d314bfe5b13ed7bb4207d601d0baf",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsoOnPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "88918e3b94d0cb9ae48f73ca766da7e06dbbff1b1b005a80bcdf67fa6a657ab1",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::iso_on_plane",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::iso_on_plane",
+          "declaration_sha256": "9b845e7ff736abdafe9ad4f4ae9e88156d800a3060ba1853232c39cd76d2ad2e",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsoOnPlane",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "79c37e26996ca71cecf2211af9c778365ed48d5ad9b71901e554ffc035830ce8",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_iso_on_plane",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::set_iso_on_plane",
+          "declaration_sha256": "77b14bd703847f2fedeb09bf1578d3eb266ad4beefa430f729a46467a1b10470",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsoOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "d5fc9beaad6e94d25d658c6d319387914bfd3e56e6580f7d2987c312dcac501a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::iso_on_triangulation",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::iso_on_triangulation",
+          "declaration_sha256": "d10f92c5a0f726a0c97955ec27ab1d07c9ab5fb745368928e68ceb2618a800c5",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::IsoOnTriangulation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "891c143c43198a535e6f3c6798477e0b482e51ddcb9e8153b8e72d168d234c6f",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_iso_on_triangulation",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::set_iso_on_triangulation",
+          "declaration_sha256": "c31c08f965e94d64994e077ec5731a27d735e3cb045700d57324f7a349aa1c65",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DeviationCoefficient",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "790de1ac0c231b27da083d197287dd8fedf5d3cd87acab9a250977987bf83ea9",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::deviation_coefficient",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::deviation_coefficient",
+          "declaration_sha256": "a36ebb1cedaf68adb6665a178450b3da13eca0e7406de3c6b9e85918e06964b5",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetDeviationCoefficient",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9e1d580306945fbfc4a934cfe322a3a887d15e2c168e36b7280088ce384a4f0a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_deviation_coefficient",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::set_deviation_coefficient",
+          "declaration_sha256": "b0f60d94fc36f16d3ca74d0e34677edd2472f5779f88accbb471aec6109a150e",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::DeviationAngle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "ba9e506066d8894c1da88b5aa8655709551031c12bf8cb50899e0404d17a6580",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::deviation_angle",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::deviation_angle",
+          "declaration_sha256": "77c717e8db7fd585e2c895636a5ac949c164415e4a12b6d87cf50bdb9aa13223",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SetDeviationAngle",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "23b749f36e4fdf5500fa00d5b8bdc67501c19ecd3769bf3db32d1d394423dbed",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::set_deviation_angle",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::set_deviation_angle",
+          "declaration_sha256": "597067212cd67f2bd8f05cf77f72319310977693eb7b92f1501408ddc94fcf9b",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
     }
   ],
   "tests": [

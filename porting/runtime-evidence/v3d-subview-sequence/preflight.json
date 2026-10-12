@@ -1,0 +1,122 @@
+[
+  {
+    "upstream_id": "V3d_View::Subviews",
+    "toolkit": "TKV3d",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "93b48f4249e881f12694481d9258e48dcdea2a42771991a929162d1625d2cb4d"
+    ],
+    "cpp_matches": [
+      {
+        "id": "93b48f4249e881f12694481d9258e48dcdea2a42771991a929162d1625d2cb4d",
+        "usr": "c:@S@V3d_View@F@Subviews#1",
+        "qualified_name": "V3d_View::Subviews",
+        "kind": "CXXMethod",
+        "signature": "const class NCollection_Sequence<class opencascade::handle<class V3d_View>> &() const",
+        "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": "function",
+    "declared_rust_selectors": [
+      {
+        "path": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+        "declaration_sha256": "fb7dea567238e0f1cdaab4bdfcb05bdfb47e2ff39e86250c381bcb7842c85fdc",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::V3dView",
+              "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        }
+      }
+    ],
+    "declared_rust_paths": [
+      "rustycad_tkv3d::v3d::V3dView::subviews_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::v3d::V3dView::subviews_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "V3dSubviewSequenceRef",
+                "resolved_item_path": "rustycad_tkv3d::v3d::subview_sequence_field::V3dSubviewSequenceRef",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "super::V3dView",
+              "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "fb7dea567238e0f1cdaab4bdfcb05bdfb47e2ff39e86250c381bcb7842c85fdc",
+        "source_file": "crates/tkv3d/src/v3d/subview_sequence_field.rs",
+        "source_status": null,
+        "source_sha256": "e8d7fbd76b2f4b0a5498719e0391662d610712419a183240813754a71d5f6c58"
+      }
+    ],
+    "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx"
+  }
+]

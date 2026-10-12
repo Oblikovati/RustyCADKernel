@@ -127,6 +127,10 @@ pub mod triangular_frustum_set;
 pub mod v3d_viewer_test;
 #[path = "../view_clip_range.rs"]
 pub mod view_clip_range;
+#[path = "../viewer_activation_alias.rs"]
+pub mod viewer_activation_alias;
+#[path = "../viewer_deactivation_alias.rs"]
+pub mod viewer_deactivation_alias;
 #[path = "../viewer_selector_geometry.rs"]
 pub mod viewer_selector_geometry;
 #[path = "../viewer_selector_overlap.rs"]

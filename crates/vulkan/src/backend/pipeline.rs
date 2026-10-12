@@ -35,7 +35,12 @@ impl DrawPipeline {
             handle: vk::Pipeline::null(),
             layout: vk::PipelineLayout::null(),
             push_stages: push_range(
-                line || point || text || kind.surface_texture || kind.surface_alpha,
+                line || kind.polygon_edges
+                    || point
+                    || text
+                    || kind.surface_texture
+                    || kind.surface_alpha,
+                kind.mesh_edges,
             )
             .stage_flags,
             sprite_set: if lighting && (point || kind.surface_texture) {
@@ -76,16 +81,25 @@ impl DrawPipeline {
                 None
             },
         };
-        if kind.surface_texture || kind.surface_alpha {
+        if kind.mesh_edges {
+            for bytes in super::mesh_edge_pipeline::edge_shader_bytes(kind) {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else if kind.surface_texture || kind.surface_alpha {
             for bytes in super::surface_texture_pipeline::surface_shaders(kind) {
                 pipeline.shaders.push(load_shader(runtime, bytes)?);
             }
         } else {
-            pipeline.load_shaders(line, point, text, clipped, lighting)?;
+            pipeline.load_shaders(line || kind.polygon_edges, point, text, clipped, lighting)?;
         }
         pipeline.layout = create_layout(
             runtime,
-            line || point || text || kind.surface_texture || kind.surface_alpha,
+            line || kind.polygon_edges
+                || point
+                || text
+                || kind.surface_texture
+                || kind.surface_alpha,
+            kind.mesh_edges,
             pipeline
                 .sprite_layout
                 .as_ref()
@@ -159,7 +173,12 @@ impl DrawPipeline {
             .push_next(&mut rendering);
         let mut line_state = vk::PipelineRasterizationLineStateCreateInfoEXT::default()
             .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM);
-        let mut raster = super::pipeline_state::raster_state(kind.clamp);
+        let mut raster =
+            super::pipeline_state::raster_state(kind.clamp).polygon_mode(if kind.polygon_edges {
+                vk::PolygonMode::LINE
+            } else {
+                vk::PolygonMode::FILL
+            });
         if kind.line {
             raster = raster.push_next(&mut line_state);
             info = info.rasterization_state(&raster);
@@ -201,8 +220,8 @@ fn load_shader(runtime: &VulkanRuntime, bytes: &[u8]) -> Result<vk::ShaderModule
     }
     .map_err(|e| vk_error("create shader module", e))
 }
-fn shader_stages(shaders: &[vk::ShaderModule]) -> [vk::PipelineShaderStageCreateInfo<'static>; 2] {
-    [
+fn shader_stages(shaders: &[vk::ShaderModule]) -> Vec<vk::PipelineShaderStageCreateInfo<'static>> {
+    let mut stages = vec![
         vk::PipelineShaderStageCreateInfo::default()
             .stage(vk::ShaderStageFlags::VERTEX)
             .module(shaders[0])
@@ -211,7 +230,16 @@ fn shader_stages(shaders: &[vk::ShaderModule]) -> [vk::PipelineShaderStageCreate
             .stage(vk::ShaderStageFlags::FRAGMENT)
             .module(shaders[1])
             .name(c"main"),
-    ]
+    ];
+    if shaders.len() == 3 {
+        stages.push(
+            vk::PipelineShaderStageCreateInfo::default()
+                .stage(vk::ShaderStageFlags::GEOMETRY)
+                .module(shaders[2])
+                .name(c"main"),
+        );
+    }
+    stages
 }
 fn create_pipeline(
     runtime: &VulkanRuntime,
@@ -235,12 +263,13 @@ fn create_pipeline(
 fn create_layout(
     runtime: &VulkanRuntime,
     line: bool,
+    edges: bool,
     sprite: Option<vk::DescriptorSetLayout>,
     lighting: Option<&super::storage_descriptor::StorageDescriptorLayout>,
     clipping: Option<&super::storage_descriptor::StorageDescriptorLayout>,
 ) -> Result<vk::PipelineLayout, RenderError> {
     // Fragment constants force redundant lavapipe state work on every surface draw.
-    let ranges = [push_range(line)];
+    let ranges = [push_range(line, edges)];
     let layouts = descriptor_layout_handles(
         sprite,
         lighting.map(|s| s.handle),
@@ -254,15 +283,25 @@ fn create_layout(
     Ok(layout)
 }
 
-fn push_range(line: bool) -> vk::PushConstantRange {
-    let stages = if line {
+fn push_range(line: bool, edges: bool) -> vk::PushConstantRange {
+    let stages = if edges {
+        vk::ShaderStageFlags::VERTEX
+            | vk::ShaderStageFlags::GEOMETRY
+            | vk::ShaderStageFlags::FRAGMENT
+    } else if line {
         vk::ShaderStageFlags::VERTEX | vk::ShaderStageFlags::FRAGMENT
     } else {
         vk::ShaderStageFlags::VERTEX
     };
     vk::PushConstantRange::default()
         .stage_flags(stages)
-        .size(if line { 80 } else { 64 })
+        .size(if edges {
+            128
+        } else if line {
+            80
+        } else {
+            64
+        })
 }
 
 fn clipping_shaders(line: bool, point: bool, text: bool) -> [&'static [u8]; 2] {
@@ -341,13 +380,28 @@ mod tests {
     use super::*;
     #[test]
     fn triangle_constants_do_not_invalidate_fragment_state() {
-        assert_eq!(push_range(false).stage_flags, vk::ShaderStageFlags::VERTEX);
-        assert_eq!(push_range(false).size, 64);
-        assert_eq!(push_range(true).size, 80);
+        assert_eq!(
+            push_range(false, false).stage_flags,
+            vk::ShaderStageFlags::VERTEX
+        );
+        assert_eq!(push_range(false, false).size, 64);
+        assert_eq!(push_range(true, false).size, 80);
         assert!(
-            push_range(true)
+            push_range(true, false)
                 .stage_flags
                 .contains(vk::ShaderStageFlags::FRAGMENT)
+        );
+    }
+    #[test]
+    fn native_mesh_constants_are_visible_to_all_three_shader_stages() {
+        let range = push_range(false, true);
+        assert_eq!(range.size, 128);
+        assert_eq!(range.offset, 0);
+        assert_eq!(
+            range.stage_flags,
+            vk::ShaderStageFlags::VERTEX
+                | vk::ShaderStageFlags::GEOMETRY
+                | vk::ShaderStageFlags::FRAGMENT
         );
     }
 }
