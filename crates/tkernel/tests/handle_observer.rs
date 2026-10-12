@@ -46,3 +46,17 @@ fn observers_survive_container_growth_without_affecting_its_handle_counts() {
     container.clear();
     assert_eq!(observed.ref_count(), 0);
 }
+
+#[test]
+fn projected_observers_preserve_identity_counts_and_reject_unrelated_types() {
+    use rustycad_tkernel::standard::RuntimeType;
+    let handle = Handle::new(StandardTransient::default());
+    let projected = handle.observe_as::<StandardTransient>();
+    let unrelated = handle.observe_as::<RuntimeType>();
+    assert_eq!(projected.object_address(), handle.object_address());
+    assert_eq!(handle.ref_count(), 1);
+    assert!(unrelated.is_null());
+    drop(projected);
+    assert_eq!(handle.ref_count(), 1);
+    assert!(Handle::<StandardTransient>::default().observe_as::<RuntimeType>().is_null());
+}

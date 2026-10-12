@@ -23,7 +23,8 @@ rustycad_tkernel::impl_transient!(
     Graphic3dSequenceOfHClipPlane,
     "Graphic3d_SequenceOfHClipPlane",
     StandardTransient,
-    transient
+    transient,
+    interfaces: [dyn super::Graphic3dClipPlaneSequenceSource]
 );
 
 /// `Graphic3d_SequenceOfHClipPlane::Iterator`: a cursor over a snapshot of the planes.

@@ -33,6 +33,8 @@ mod clip_plane_capping;
 mod clip_plane_chain;
 mod clip_plane_probe;
 mod clip_plane_sequence;
+mod clip_plane_source;
+mod clip_sequence_source;
 mod cstructure;
 mod cube_map;
 mod cube_map_order;
@@ -156,6 +158,8 @@ pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dCl
 pub use clip_plane_sequence::{
     Graphic3dSequenceOfHClipPlane, Graphic3dSequenceOfHClipPlaneIterator,
 };
+pub use clip_plane_source::{Graphic3dClipPlaneSource, graphic3d_clip_plane_clone};
+pub use clip_sequence_source::Graphic3dClipPlaneSequenceSource;
 pub use cstructure::{
     Graphic3dCStructure, Graphic3dCStructureBase, Graphic3dCStructureFields,
     Graphic3dCStructureMembers,
@@ -307,3 +311,6 @@ mod texture_2d_rtti_tests;
 
 mod cview_camera_reference;
 pub use cview_camera_reference::{Graphic3dDataStructureManager, graphic3d_cview_camera_ref};
+
+#[cfg(test)]
+mod clip_source_protocol_tests;

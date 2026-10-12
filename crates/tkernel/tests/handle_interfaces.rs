@@ -72,6 +72,18 @@ fn mutation_through_concrete_handle_is_visible_through_interface_handle() {
 }
 
 #[test]
+fn interface_observer_uses_registered_projection_without_intrusive_ownership() {
+    let concrete = disk(2.0);
+    let projected = concrete.observe_as::<dyn FakeShape>();
+    assert_eq!(projected.object_address(), concrete.object_address());
+    assert_eq!(projected.area(), 12.0);
+    projected.scale(0.5);
+    assert_eq!(concrete.radius(), 1.0);
+    assert_eq!(concrete.ref_count(), 1);
+    assert!(concrete.observe_as::<dyn FakeUnrelated>().is_null());
+}
+
+#[test]
 fn interface_handles_down_cast_and_keep_identity() {
     let concrete: Handle<FakeDisk> = disk(1.0);
     let shape: Handle<dyn FakeShape> = concrete.cast();
