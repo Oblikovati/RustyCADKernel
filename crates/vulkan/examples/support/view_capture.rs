@@ -16,14 +16,14 @@ pub fn capture_view(
     ] {
         let options = V3dImageDumpOptions {
             buffer_type: kind,
-            ..options.clone()
+            ..options
         };
         capture_image(view, &options, &format!("{prefix}.{extension}"))?;
     }
     Ok(())
 }
 
-fn capture_options(width: i32, height: i32, full: bool) -> V3dImageDumpOptions {
+fn capture_options(width: i32, height: i32, full: bool) -> V3dImageDumpOptions<'static> {
     V3dImageDumpOptions {
         width,
         height,

@@ -149,8 +149,9 @@ impl V3dTypeOfOrientation {
 /// `V3d_ImageDumpOptions`: the parameters of `V3d_View::ToPixMap`.
 ///
 /// Example: `let options = V3dImageDumpOptions { width: 64, height: 32, ..Default::default() };`.
-#[derive(Clone, Debug, PartialEq)]
-pub struct V3dImageDumpOptions {
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[repr(C)] // Native public aggregate field order includes padding before the pointer.
+pub struct V3dImageDumpOptions<'anchor> {
     /// `Width`: 0 means an already allocated image.
     pub width: i32,
     /// `Height`: 0 means an already allocated image.
@@ -168,10 +169,10 @@ pub struct V3dImageDumpOptions {
     /// `IsSingleLayer`.
     pub is_single_layer: bool,
     /// `LightName`: the light whose shadow map is dumped.
-    pub light_name: String,
+    pub light_name: super::V3dLightName<'anchor>,
 }
 
-impl Default for V3dImageDumpOptions {
+impl Default for V3dImageDumpOptions<'_> {
     /// RGB, mono, automatic tiling, aspect adjusted, up to the bottom OSD layer.
     fn default() -> Self {
         Self {
@@ -183,7 +184,7 @@ impl Default for V3dImageDumpOptions {
             to_adjust_aspect: true,
             target_z_layer_id: GRAPHIC3D_ZLAYER_ID_BOT_OSD,
             is_single_layer: false,
-            light_name: String::new(),
+            light_name: super::V3dLightName::default(),
         }
     }
 }
