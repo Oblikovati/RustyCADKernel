@@ -129,7 +129,7 @@ fn replay_null_initialization(rows: &mut Vec<String>) {
     sequence.append(Handle::new(Graphic3dClipPlane::default()));
     let mut iterator = Graphic3dSequenceOfHClipPlaneIterator::from_handle(&sequence);
     record_iterator_borrow(rows, &sequence, &iterator);
-    iterator.init_handle(&Handle::default());
+    iterator.init_handle(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     record_empty_cursor(rows, "iterator-null", sequence.ref_count(), &iterator);
     sequence.remove_at(&mut iterator).unwrap();
     record_empty_cursor(rows, "remove-end", sequence.size(), &iterator);

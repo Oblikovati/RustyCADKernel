@@ -1,9 +1,10 @@
 //! Native iterator links observe original clipping nodes rather than an owning Vec snapshot.
 use super::clip_sequence_storage::ClipPlaneNodeLease;
-use super::{Graphic3dClipPlane, Graphic3dSequenceOfHClipPlane};
+use super::{Graphic3dClipPlane, Graphic3dClipPlaneSequenceSource, Graphic3dSequenceOfHClipPlane};
 use rustycad_tkernel::ncollection::{Sequence, SequenceNativeCursor};
 use rustycad_tkernel::standard::{
-    Failure, Handle, SharedState, exceptions::no_such_object, raise_native_failure,
+    Failure, Handle, HandleReference, RuntimeTyped, SharedState, exceptions::no_such_object,
+    raise_native_failure,
 };
 use std::sync::{Arc, Weak};
 
@@ -22,9 +23,21 @@ impl Graphic3dSequenceOfHClipPlaneIterator {
         }
     }
     /// Null initializes an empty native iterator; `Self::from_handle(&handle)`.
-    pub fn from_handle(planes: &Handle<Graphic3dSequenceOfHClipPlane>) -> Self {
+    pub fn from_handle<T: ?Sized + RuntimeTyped + Graphic3dClipPlaneSequenceSource>(
+        planes: &Handle<T>,
+    ) -> Self {
+        Self::from_reference::<T>(planes)
+    }
+    /// Borrow any actual native collection slot; `Self::from_reference::<dyn Graphic3dClipPlaneSequenceSource>(&slot)`.
+    pub fn from_reference<T: ?Sized + RuntimeTyped + Graphic3dClipPlaneSequenceSource>(
+        planes: &dyn HandleReference<T>,
+    ) -> Self {
         // The native constructor borrows the handle; no collection ownership is copied.
-        planes.get().map(Self::new).unwrap_or_default()
+        let selected = planes.observe();
+        selected
+            .get()
+            .map(|source| Self::new(source.clip_sequence_base()))
+            .unwrap_or_default()
     }
     /// Restart at the actual first node; `iterator.init(&planes)`.
     pub fn init(&mut self, planes: &Graphic3dSequenceOfHClipPlane) {
@@ -32,9 +45,20 @@ impl Graphic3dSequenceOfHClipPlaneIterator {
         *self = Self::new(planes);
     }
     /// Restart with null producing default links; `iterator.init_handle(&handle)`.
-    pub fn init_handle(&mut self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {
+    pub fn init_handle<T: ?Sized + RuntimeTyped + Graphic3dClipPlaneSequenceSource>(
+        &mut self,
+        planes: &Handle<T>,
+    ) {
         // Native null Init resets both current and remembered predecessor links.
         *self = Self::from_handle(planes);
+    }
+    /// Restart from any real borrowed slot; `iterator.init_reference::<dyn Graphic3dClipPlaneSequenceSource>(&slot)`.
+    pub fn init_reference<T: ?Sized + RuntimeTyped + Graphic3dClipPlaneSequenceSource>(
+        &mut self,
+        planes: &dyn HandleReference<T>,
+    ) {
+        // Capture the selected actual collection once, never retain its handle.
+        *self = Self::from_reference::<T>(planes);
     }
     /// Observe the native current link; `iterator.more()`.
     pub fn more(&self) -> bool {

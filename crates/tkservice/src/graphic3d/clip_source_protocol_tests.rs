@@ -165,3 +165,49 @@ fn capture_plane_protocol_rows() -> String {
     ));
     rows
 }
+
+#[test]
+fn derived_sequence_iterator_captures_actual_nodes_without_owners() {
+    let concrete = Handle::new(NativeClipProtocolSequence {
+        base: Graphic3dSequenceOfHClipPlane::default(),
+        dump_calls: SharedState::new(0),
+    });
+    let plane = protocol_plane().into_cast::<dyn Graphic3dClipPlaneSource>();
+    concrete.base.append_reference(&plane);
+    let rows = replay_derived_iterator(&concrete, &plane);
+    assert_eq!(
+        rows,
+        include_str!("../../tests/fixtures/clip-derived-iterator-native.txt")
+    );
+    concrete.base.clear();
+}
+fn replay_derived_iterator(
+    sequence: &Handle<NativeClipProtocolSequence>,
+    plane: &Handle<dyn Graphic3dClipPlaneSource>,
+) -> String {
+    let mut cursor = Graphic3dSequenceOfHClipPlaneIterator::from_reference::<
+        NativeClipProtocolSequence,
+    >(sequence);
+    let same = cursor.value_ref().unwrap().object_address() == plane.object_address();
+    let mut rows = derived_iterator_count_row("initial", sequence, plane, same);
+    cursor.next();
+    rows += &format!("next {}\n", i32::from(cursor.more()));
+    cursor.init_reference::<NativeClipProtocolSequence>(sequence);
+    rows += &derived_iterator_count_row("restart", sequence, plane, cursor.more());
+    rows
+}
+
+fn derived_iterator_count_row(
+    label: &str,
+    sequence: &Handle<NativeClipProtocolSequence>,
+    plane: &Handle<dyn Graphic3dClipPlaneSource>,
+    flag: bool,
+) -> String {
+    // Native constructor and Init borrow collection and current payload without temporary owners.
+    format!(
+        "{label} {} {} {}\n",
+        sequence.ref_count(),
+        i32::from(flag),
+        plane.ref_count()
+    )
+}
