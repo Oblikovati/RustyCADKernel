@@ -1,0 +1,35 @@
+{
+  "project": "Martensite",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "CPU null-driver shadow lifecycle; no renderer/controller/API-completion claim",
+  "schema": [
+    "phase",
+    "root_refcount_or_first_group_count",
+    "root_groups_or_second_group_count",
+    "root_bounds_valid_or_first_bounds_valid",
+    "root_first_group_bounds_valid_or_second_bounds_valid"
+  ],
+  "source_sha256": {
+    "tools/oracle/martensite_null_shadow_lifecycle.cxx": "9111871515ff3fd947a3745519f4bfaf4bef5c864320285d61022b0b0298f64f",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "tools/oracle/tkservice_probe_driver.cxx": "f906960e9275b24935c88140706810dd4d6406e67b5f722aa0c85ab679d17221",
+    "tools/oracle/martensite_controller_camera_primitives.cxx": "dbf9f6ffb2512b14f4cc24d4652d174d9951150c693c9c200a7423be651f4e1a",
+    "tools/oracle/martensite_navigation_motion.cxx": "e4e2c2068ea137890db991cfac95cb699abdd5ef97747000048a38611a610ed3",
+    "tools/oracle/martensite_camera_rotation.cxx": "ce2dab91fe2c939ee64789cec0abc72f5c9e4858988493ff75bae4bdc2cc2aaa",
+    "tools/oracle/martensite_camera_actions.cxx": "d3a6b7fc1964a5f588a77ed6aeb163d0d0e450a76170f9781dad0afc9c3a2139",
+    "tools/oracle/martensite_camera_actions_scene.cxx": "35ace69d8fec020f4a3890e1249334a91c73ad0c65bd8119b265d312872ef89a",
+    "tools/oracle/martensite_view_controller_transfer.cxx": "343128301ebcac151850c0997fae7d9ed644464b1b5912ec890f3ed26a2aea13"
+  },
+  "native_definition_sha256": {
+    "src/Visualization/TKOpenGl/OpenGl/OpenGl_StructureShadow.cxx": "b7d04d69faf0d58c10c9f1852a4d035be5ca1f9b2753a132dab17f665c4bb4e8",
+    "src/Visualization/TKService/Graphic3d/Graphic3d_Structure.cxx": "dc9e322dda602abcbf0dc649b31cd58989dc1024883bc4c5a7cc599845f137e8"
+  },
+  "native_executable_sha256": "4a0290771d934e752c2330cd77fbbc7631c6917f066b193693099592b748114f",
+  "first_run_sha256": "4b45804af459b6f9dbc52199e35f418f3db3beb43d875fb2cdbc4241f44b2149",
+  "second_run_sha256": "4b45804af459b6f9dbc52199e35f418f3db3beb43d875fb2cdbc4241f44b2149",
+  "fixture_sha256": "4b45804af459b6f9dbc52199e35f418f3db3beb43d875fb2cdbc4241f44b2149",
+  "rows": 6,
+  "raw_byte_equal": true,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "provenance_note": "Fixes the previous native CPU probe copying removable parent group nodes. Old corrupted frame diagnostic runs were excluded from behavior assets. No numeric canonicalization/tolerance changes."
+}

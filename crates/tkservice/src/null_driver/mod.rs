@@ -2,6 +2,7 @@
 //! (visualization-design.md section 1) that keeps the scene data (structures, groups,
 //! layers) and draws nothing. The tests and the native probes of the driver-facing data
 //! model run on it; the C++ twin is `SvDriver` in tools/oracle/tkservice_probe_driver.cxx.
+mod shadow;
 mod structure;
 mod view;
 
@@ -54,7 +55,7 @@ impl Graphic3dGraphicDriver for NullGraphicDriver {
         &self,
         manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCStructure>, Failure> {
-        Ok(Handle::new(NullCStructure::new(manager)?).cast())
+        Ok(NullCStructure::new(manager)?.cast())
     }
     fn remove_structure(&self, cstructure: &mut Handle<dyn Graphic3dCStructure>) {
         *cstructure = Handle::default();
@@ -126,3 +127,5 @@ impl Graphic3dGraphicDriver for NullGraphicDriver {
         false
     }
 }
+#[cfg(test)]
+mod shadow_tests;

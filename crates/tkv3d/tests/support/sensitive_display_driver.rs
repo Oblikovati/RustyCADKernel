@@ -120,7 +120,7 @@ impl Graphic3dGraphicDriver for SensitiveDisplayDriver {
 }
 struct SensitiveDisplayStructure {
     transient: StandardTransient,
-    inner: NullCStructure,
+    inner: Handle<NullCStructure>,
     trace: DisplayTrace,
 }
 rustycad_tkernel::impl_transient!(SensitiveDisplayStructure, "SensitiveDisplayStructure", StandardTransient, transient, interfaces: [dyn Graphic3dCStructure]);
