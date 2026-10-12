@@ -2,7 +2,12 @@
 use rustycad_tkservice::graphic3d::Graphic3dTypeOfPrimitiveArray as Kind;
 pub(crate) fn native_flat_sources(kind: Kind, source: &[u32], triangles: &[u32]) -> Vec<u32> {
     match kind {
-        Kind::Quadrangles => source.chunks_exact(4).flat_map(|q| [q[3]; 2]).collect(),
+        Kind::Quadrangles => source
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .flat_map(|q| [q[3]; 2])
+            .collect(),
         Kind::Quadranglestrips => source
             .windows(4)
             .step_by(2)
@@ -11,7 +16,7 @@ pub(crate) fn native_flat_sources(kind: Kind, source: &[u32], triangles: &[u32])
         Kind::Polygons => source
             .first()
             .map_or_else(Vec::new, |last| vec![*last; triangles.len() / 3]),
-        _ => triangles.chunks_exact(3).map(|t| t[2]).collect(),
+        _ => triangles.as_chunks::<3>().0.iter().map(|t| t[2]).collect(),
     }
 }
 #[cfg(test)]

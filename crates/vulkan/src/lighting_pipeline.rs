@@ -15,8 +15,11 @@ pub(crate) fn structure_lighting_pipeline(
         dyn rustycad_tkservice::graphic3d::Graphic3dStructureSource,
     >,
 ) -> RenderLightingPipeline {
-    structure
-        .structure_manager()
+    let manager = structure.structure_manager();
+    let Some(manager) = manager.get() else {
+        return RenderLightingPipeline::default();
+    };
+    manager
         .graphic_driver()
         .cast::<crate::Graphic3dRenderDriver>()
         .get()

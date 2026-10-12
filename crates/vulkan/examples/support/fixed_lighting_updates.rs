@@ -11,6 +11,7 @@ pub const LIVE_WORKLOADS: &[(&str, bool)] = &[
     ("lit-sampler-updated", true),
     ("lit-mask-blend", true),
 ];
+/// Mutate retained sources before each timed redraw; `refresh_fixed_workload(&workload,"lit-light-off",1)`.
 pub fn refresh_fixed_workload(workload: &FixedLightingWorkload, mode: &str, frame: usize) {
     let alternate = frame.is_multiple_of(2);
     match workload {
@@ -105,4 +106,69 @@ fn fixed_live_texture_filter(alternate: bool) -> Graphic3dTypeOfTextureFilter {
         return Graphic3dTypeOfTextureFilter::Nearest;
     }
     Graphic3dTypeOfTextureFilter::Bilinear
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    fn retained_workload(mode: &str, texture: bool) -> FixedLightingWorkload {
+        let driver = martensite_vulkan::Graphic3dRenderDriver::with_backend(
+            super::super::recording_device::RecordingDevice::default(),
+            128,
+        )
+        .unwrap();
+        FixedLightingWorkload::new(&driver, mode, texture)
+    }
+    #[test]
+    fn primitive_updates_change_genuine_sources_on_each_frame() {
+        for mode in [
+            "lit-normal-updated",
+            "lit-light-updated",
+            "lit-light-off",
+            "lit-alpha-opacity-updated",
+            "lit-perspective",
+        ] {
+            let workload = retained_workload(mode, false);
+            refresh_fixed_workload(&workload, mode, 0);
+            let before = primitive_update_signature(&workload);
+            refresh_fixed_workload(&workload, mode, 1);
+            assert_ne!(before, primitive_update_signature(&workload), "{mode}");
+        }
+    }
+    fn primitive_update_signature(
+        workload: &FixedLightingWorkload,
+    ) -> ([f64; 3], [f64; 3], bool, f32, f64) {
+        let FixedLightingWorkload::Primitives(fixture) = workload else {
+            panic!("expected primitive fixture");
+        };
+        (
+            fixture.vertices.vertex_normal_xyz(2).unwrap(),
+            fixture.light.direction_coords(),
+            fixture.light.is_enabled(),
+            fixture.aspect.front_material().alpha(),
+            fixture.base.view.camera().scale(),
+        )
+    }
+    #[test]
+    fn texture_updates_change_real_revision_filter_and_alpha_selection() {
+        for mode in ["lit-image-updated", "lit-sampler-updated", "lit-mask-blend"] {
+            let workload = retained_workload(mode, true);
+            refresh_fixed_workload(&workload, mode, 0);
+            let before = texture_update_signature(&workload);
+            refresh_fixed_workload(&workload, mode, 1);
+            assert_ne!(before, texture_update_signature(&workload), "{mode}");
+        }
+    }
+    fn texture_update_signature(
+        workload: &FixedLightingWorkload,
+    ) -> (usize, Graphic3dTypeOfTextureFilter, Graphic3dAlphaMode) {
+        let FixedLightingWorkload::Surface(fixture) = workload else {
+            panic!("expected texture fixture");
+        };
+        (
+            fixture.texture.revision(),
+            fixture.texture.get_params().filter(),
+            fixture.aspects.alpha_mode(),
+        )
+    }
 }

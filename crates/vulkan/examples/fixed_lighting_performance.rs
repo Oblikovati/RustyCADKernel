@@ -106,3 +106,8 @@ fn measure_fixed_frames(
     assert!(workload.scene().render_view().capture().is_ok());
     Ok(samples)
 }
+
+#[cfg(test)]
+#[allow(dead_code)]
+#[path = "../tests/support/recording_device.rs"]
+mod recording_device;

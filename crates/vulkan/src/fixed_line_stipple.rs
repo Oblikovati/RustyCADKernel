@@ -25,7 +25,13 @@ pub(crate) fn restore_fixed_line_strip(draw: &mut PrimitiveDraw) {
     }
     let mut strip = Vec::with_capacity(draw.indices.len() / 2 + 1);
     strip.push(draw.indices[0]);
-    strip.extend(draw.indices.chunks_exact(2).map(|segment| segment[1]));
+    strip.extend(
+        draw.indices
+            .as_chunks::<2>()
+            .0
+            .iter()
+            .map(|segment| segment[1]),
+    );
     draw.indices = strip;
 }
 #[cfg(test)]
