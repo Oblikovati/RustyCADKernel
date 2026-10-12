@@ -17,6 +17,8 @@ from release_inventory import (
     ReleaseCrate,
     SystemCommands,
     release_inventory,
+    release_crate_from_metadata,
+    release_feature_names,
     release_revision,
     validate_inventory,
 )
@@ -67,6 +69,7 @@ class FakeCommands:
         self.dirty = ""
         self.tagged = REVISION
         self.fail_tests = False
+        self.features: object = {}
         self.calls: list[list[str]] = []
 
     def run(self, arguments: list[str], root: Path) -> str:
@@ -78,6 +81,7 @@ class FakeCommands:
                 "id": "kernel",
                 "name": CRATE.name,
                 "version": CRATE.version,
+                "features": self.features,
                 "manifest_path": str(
                     self.fixture.root / CRATE.directory / "Cargo.toml"
                 ),
@@ -113,6 +117,49 @@ class ReleasePackageTests(unittest.TestCase):
     def test_inventory_and_named_archive(self) -> None:
         self.assertEqual(release_inventory(self.fixture.root, self.runner), [CRATE])
         self.assertEqual(CRATE.archive, "rustycad-kernel-0.1.0.crate")
+
+    def test_featureless_release_does_not_repeat_identical_cargo_tests(self) -> None:
+        build_release(self.fixture.root, "v0.1.0", self.runner)
+        tests = [call for call in self.runner.calls if call[:2] == ["cargo", "test"]]
+        self.assertEqual(len(tests), 2)
+        self.assertFalse(any("--all-features" in call for call in tests))
+
+    def test_cargo_metadata_preserves_available_features(self) -> None:
+        self.runner.features = {"default": [], "debug": ["default"]}
+        crate = release_inventory(self.fixture.root, self.runner)[0]
+        self.assertEqual(crate.features, ("debug", "default"))
+
+    def test_malformed_features_cannot_silently_skip_release_tests(self) -> None:
+        for features in (None, [], {"debug": "dependency"}, {"debug": [12]}, {12: []}):
+            with self.subTest(features=features), self.assertRaisesRegex(
+                ValueError, "expected"
+            ):
+                release_feature_names({"features": features})
+
+    def test_feature_bearing_release_still_runs_both_profiles(self) -> None:
+        self.runner.features = {"debug": []}
+        build_release(self.fixture.root, "v0.1.0", self.runner)
+        tests = [call for call in self.runner.calls if call[:2] == ["cargo", "test"]]
+        self.assertEqual(len(tests), 4)
+        self.assertEqual(sum("--all-features" in call for call in tests), 2)
+
+    def test_malformed_package_fields_are_rejected_before_profile_selection(
+        self,
+    ) -> None:
+        for field in ("name", "version", "manifest_path"):
+            package = {
+                "name": CRATE.name,
+                "version": CRATE.version,
+                "manifest_path": str(
+                    self.fixture.root / CRATE.directory / "Cargo.toml"
+                ),
+                "features": {},
+            }
+            package[field] = 12
+            with self.subTest(field=field), self.assertRaisesRegex(
+                ValueError, "expected a string"
+            ):
+                release_crate_from_metadata(package, self.fixture.root)
 
     def test_invalid_inventories_are_rejected(self) -> None:
         invalid = [
@@ -165,7 +212,7 @@ class ReleasePackageTests(unittest.TestCase):
         )
         self.assertEqual(
             len([call for call in self.runner.calls if call[:2] == ["cargo", "test"]]),
-            4,
+            2,
         )
         for line in (output / "SHA256SUMS").read_text().splitlines():
             digest, name = line.split("  ")
@@ -185,7 +232,7 @@ class ReleasePackageTests(unittest.TestCase):
         ]
         self.assertEqual(
             [call[1] for call in cargo_calls],
-            ["test", "test", "clean", "test", "test", "clean"],
+            ["test", "test", "clean"],
         )
         for call in cargo_calls:
             if call[1] == "test":
@@ -195,17 +242,28 @@ class ReleasePackageTests(unittest.TestCase):
         self.assertEqual(len(targets), 1)
         self.assertTrue(next(iter(targets)).endswith("workspace/target"))
 
-    def test_release_reuses_dependencies_across_packages_and_cleans_after_profiles(self) -> None:
-        second = ReleaseCrate("rustycad-cmath", "0.1.0", "crates/cmath")
-        self.fixture.write_archive(f"{second.name}-{second.version}/Cargo.toml", crate=second)
+    def test_release_reuses_dependencies_across_packages_and_cleans_after_profiles(
+        self,
+    ) -> None:
+        second = ReleaseCrate("rustycad-cmath", "0.1.0", "crates/cmath", ("debug",))
+        self.fixture.write_archive(
+            f"{second.name}-{second.version}/Cargo.toml", crate=second
+        )
         package_test_support(self.fixture.root, self.runner)
-        test_archives(self.fixture.root, self.fixture.root / "stage", self.runner, [CRATE, second])
+        test_archives(
+            self.fixture.root, self.fixture.root / "stage", self.runner, [CRATE, second]
+        )
         calls = [call for call in self.runner.calls if call[0] == "cargo"]
-        self.assertEqual([call[1] for call in calls], ["test", "test", "test", "test", "clean"] * 2)
+        self.assertEqual(
+            [call[1] for call in calls],
+            ["test", "test", "test", "test", "clean", "test", "test", "clean"],
+        )
         tests = [call for call in calls if call[1] == "test"]
-        for index, package in enumerate([CRATE, second, CRATE, second]):
-            pair = tests[index * 2:index * 2 + 2]
-            self.assertEqual([call[call.index("--package") + 1] for call in pair], [package.name] * 2)
+        for index, package in enumerate([CRATE, second, second]):
+            pair = tests[index * 2 : index * 2 + 2]
+            self.assertEqual(
+                [call[call.index("--package") + 1] for call in pair], [package.name] * 2
+            )
             self.assertIn("--all-targets", pair[0])
             self.assertIn("--doc", pair[1])
             self.assertEqual("--all-features" in pair[0], index >= 2)

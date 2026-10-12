@@ -1,0 +1,17 @@
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-q6tfhhft/workspace/target --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-q6tfhhft/workspace/target --doc
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-q6tfhhft/workspace/target --all-features --all-targets
++ cargo test --package rustycad-kernel --locked --target-dir /tmp/martensite-packages-q6tfhhft/workspace/target --all-features --doc
+F
+======================================================================
+FAIL: test_featureless_release_does_not_repeat_identical_cargo_tests (tools.tests.test_release_packages.ReleasePackageTests.test_featureless_release_does_not_repeat_identical_cargo_tests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/tests/test_release_packages.py", line 120, in test_featureless_release_does_not_repeat_identical_cargo_tests
+    self.assertEqual(len(tests), 2)
+AssertionError: 4 != 2
+
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+FAILED (failures=1)
