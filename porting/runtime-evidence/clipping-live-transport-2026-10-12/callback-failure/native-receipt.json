@@ -1,0 +1,69 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_checkpoint": "bfe1e1c6f",
+  "native_runs_identical": 2,
+  "native_exit_codes": [
+    0,
+    0
+  ],
+  "native_cases": 6,
+  "native_records": 26,
+  "fixture": "crates/tkv3d/tests/fixtures/v3d-clip-callback-failure-native.txt",
+  "fixture_sha256": "f8c5cd2b9f4639f47a6fa81b0a19ebb6ddb0a7ef8373e6456b71308d868475f5",
+  "source_hashes": {
+    "tools/oracle/martensite_v3d_clip_callback_failure.cxx": "1a487544ed2689a2d1bd315d760c7564f6dcfee1f78eb1809eebe67361aab372",
+    "tools/oracle/martensite_v3d_clip_view_retarget.cxx": "8633e9a5fd1f1ab6ac6f334e8f79a57870e184fbc9abeb715a4dc3ce0518b884",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "crates/tkv3d/src/v3d/view_clip_callback_failure_replay.rs": "50fc36eb2201a5ec392df96977260c300917fa53fc04b428c0f36da5a2b38aeb",
+    "crates/tkv3d/src/v3d/view_clip_retarget_probe.rs": "4d1dbdca3dd9de246570924c74425ba7fe1fb88deab42bbee817373ebf8cae4f"
+  },
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O0",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_v3d_clip_callback_failure.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "target/v3d-clip-callback-failure"
+  ],
+  "executable_sha256": "068f7623eae67a38e310505c19bc8bbf16cb4d73bf26f31cfd3c2715dd6ef91d",
+  "headers": {
+    "V3d_View.hxx": "c13418252b29597572643d3cb966148c6e5b4cd1cc1a111041f2b4f5158bc05b",
+    "Graphic3d_CView.hxx": "c8f3b05d3b4093a333e51a08a58dfeae745879cd303e54d3cdcbd7c4ed85b6e2",
+    "Standard_ProgramError.hxx": "50763f8929f9d30d1b7cf7478052282f6b23922e4b38a1a0f889b33e831e04d1",
+    "Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb",
+    "Standard_Transient.hxx": "3310b0daaadb07c61a9cc09b410d1d0381c70174194def87c4a86ec397ed3416"
+  },
+  "libraries": {
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "behavior": "Real inherited Add/Remove on actual derived CView. Getter failure after protected myView replacement; setter failure before/after actual field assignment. Strong old/new CView anchors exclude dangling inputs. Actual prior mutations and native reference counts remain after typed failure; no rollback. Null driver is external rendering fake, no rendering/class parity credit.",
+  "class_or_api_completion_claims": false,
+  "binary_reverse_engineering_or_debugger_work": false,
+  "rust_checks": {
+    "replay_tests": 2,
+    "failed": 0,
+    "all_target_test_clippy": "passed",
+    "fmt": "passed"
+  },
+  "check_logs": {
+    "replay": {
+      "original_sha256": "1ce6350b7aae39c8497ff41a4247f4acaa19e74dffc7efabc47d7f9b4244b97e",
+      "gzip_sha256": "3c7517e901dbba6ce21d1c38ee9f58121807cdcee088dafa9d099b11d7b0ecfb"
+    },
+    "clippy": {
+      "original_sha256": "6a8d76023f10438da37e891bedd075412b66cc78c0defa7a8ac6af92c2be3140",
+      "gzip_sha256": "a9cd69f8ecb8e1866608aa39b58fd3794ee460f415b3d4d78cad8e92b5754ea1"
+    }
+  }
+}

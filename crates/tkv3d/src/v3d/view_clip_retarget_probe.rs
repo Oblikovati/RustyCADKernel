@@ -16,6 +16,7 @@ pub(super) struct ViewClipRetargetProbe {
     pub owner: SharedState<WeakHandle<dyn V3dViewSource>>,
     pub replacement: SharedState<Handle<dyn Graphic3dCView>>,
     pub replace_once: SharedState<bool>,
+    pub failure_stage: SharedState<i32>,
 }
 pub(super) type OwnedClipProbeSlot =
     Arc<IntrusiveReferenceSlot<dyn Graphic3dClipPlaneSequenceSource>>;
@@ -38,6 +39,7 @@ pub(super) fn clip_probe_getter(
         slot.observe().ref_count()
     ));
     replace_probe_driver_view(probe);
+    fail_clip_probe_stage(view, probe, 1);
     Box::new(Graphic3dClipSequenceFieldRef::new(slot))
 }
 fn replace_probe_driver_view(probe: &ViewClipRetargetProbe) {
@@ -54,6 +56,7 @@ pub(super) fn clip_probe_setter(
     probe: &ViewClipRetargetProbe,
     incoming: &dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
 ) {
+    fail_clip_probe_stage(view, probe, 2);
     let before = incoming.observe().ref_count();
     let slot = view
         .clip_probe_slot
@@ -66,5 +69,19 @@ pub(super) fn clip_probe_setter(
         view.transient.ref_count(),
         before,
         incoming.observe().ref_count()
+    ));
+    fail_clip_probe_stage(view, probe, 3);
+}
+fn fail_clip_probe_stage(view: &BorrowedCameraView, probe: &ViewClipRetargetProbe, stage: i32) {
+    // The original getter and replacement setter are distinct actual receivers.
+    let expected_receiver = if stage == 1 { 1 } else { 2 };
+    if view.identity != expected_receiver || *probe.failure_stage.read() != stage {
+        return;
+    }
+    raise_native_failure(Err::<(), _>(
+        rustycad_tkernel::standard::Failure::with_message(
+            "Standard_ProgramError",
+            &format!("clip failure stage={stage}; expected completion"),
+        ),
     ));
 }

@@ -38,9 +38,15 @@ The separate real-node allocator retirement prerequisite replays six further row
 The callback fixture's external anchors match C++ lifetime/count ordering; retained
 Camera aliases stay on the old field while retained View aliases follow myView.
 
+Six further native cases exercise getter failure after protected-myView replacement,
+setter failure before assignment, and setter failure after assignment for both
+inherited Add and Remove. Typed Rust failures preserve the same receiver, plane and
+sequence counts and prior edits: getter failure does not edit the collection, setter
+failure keeps the old collection edits, and completed assignment is not rolled back.
+The native generator runs twice with identical 26 records and retained strong anchors.
+
 This is a source checkpoint, not full-family completion. No audited partial claims
-or class/constructor markers are promoted. Dedicated callback-failure and derived
-render capture proof, final scoped compiler bindings and coordinated optimized
-performance still remain. Ordinary both-device tests are tracked separately from
+or class/constructor markers are promoted. Dedicated derived render capture proof,
+final scoped compiler bindings and coordinated optimized performance still remain. Ordinary both-device tests are tracked separately from
 native image-capture parity. Weak alias expiration is safe-null outside C++'s valid
 reference lifetime, rather than a claim about native dangling-reference behavior.

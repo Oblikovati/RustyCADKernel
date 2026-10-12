@@ -139,6 +139,8 @@ mod cview_bounds_camera_callback_tests;
 mod view_clip_retarget_probe;
 
 #[cfg(test)]
+mod view_clip_callback_failure_replay;
+#[cfg(test)]
 mod view_clip_retarget_fixture;
 #[cfg(test)]
 mod view_clip_retarget_replay;
