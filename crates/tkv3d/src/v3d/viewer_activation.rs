@@ -18,7 +18,7 @@ impl V3dViewer {
         if !implementation.is_defined() || self.contains_active_view(view.object_address()) {
             return Ok(());
         }
-        self.state.write().active_views.append(view.clone_handle());
+        self.append_active_view_reference(view);
         implementation.activate();
         apply_active_view_properties(self, view)
     }
@@ -36,6 +36,11 @@ impl V3dViewer {
             view.object_address(),
         );
         implementation.deactivate();
+    }
+    fn append_active_view_reference(&self, view: &dyn HandleReference<dyn V3dViewSource>) {
+        // Method receivers evaluate first; read a same-viewer node alias before locking for append.
+        let activated = view.clone_handle();
+        self.state.write().active_views.append(activated);
     }
     fn contains_active_view(&self, identity: *const ()) -> bool {
         self.state
