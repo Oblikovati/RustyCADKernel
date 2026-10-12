@@ -1,0 +1,60 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_records": 23,
+  "native_runs_identical": true,
+  "tests": 762,
+  "executables": 5,
+  "checks": [
+    "context-isoline-alltargets.log",
+    "context-isoline-clippy-corrected.log",
+    "context-isoline-format.log",
+    "context-isoline-discovery.log"
+  ],
+  "source_sha256": {
+    "tools/oracle/martensite_context_isoline_policies.cxx": "6ba3026b6ef223f1ecbc85a8ac93a4e909dbe1e05f693ac3fa2c42a239e11cdd",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "crates/tkv3d/src/ais/context_isoline_policies.rs": "b9cea9ec956c4d4ba8e9c479d055a2d1d1b7a6489633848796157d76660cdaa9",
+    "crates/tkv3d/src/ais/context_isoline_policy_tests.rs": "c3965d6748e33c678e48a6e51c6db6b20e68b18ceb2ce8a57ba2169103d5e1f1",
+    "crates/tkv3d/tests/fixtures/context-isoline-policies.txt": "fc9cdcc3f3924506a4574e67a788f40c7e3b5738bc28a727f2a85d9aebd58d83",
+    "crates/tkv3d/tests/fixtures/context-isoline-null.txt": "f4a8ae8e74ddfb896a256de4e3099911dcaa6a9302591713898069b0bcd6e3d7"
+  },
+  "native_binary_sha256": "5f22d996f91f59d7e68a1143103d5f8b33816485222c3ea67f193c63b064f1be",
+  "scope": "Ten context default methods; enum and three upstream named values. No object-specific redisplay, meshing, full-context or unnamed-upstream-enumerator claim.",
+  "oracle_wrapper_correction": "The initial replacement link had no initialized iso aspects. Native count access dereferenced null; SetupOwnDefaults initializes the actual link before replacement. Undefined wrapper output is excluded.",
+  "native_provenance_status": "Recompiled exact recorded command; both native cases repeated twice and matched committed assets byte-for-byte.",
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_context_isoline_policies.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-lTKG3d",
+    "-lTKBRep",
+    "-o",
+    "target/context-isoline-native/probe"
+  ],
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "native_library_sha256": {
+    "TKV3d": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "TKG3d": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "TKBRep": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d"
+  },
+  "native_header_sha256": {
+    "AIS_InteractiveContext.hxx": "965934bfefea894bcc6ee24abd6428d91fcbdf44bc2ad690f1fd68e0f9733504",
+    "AIS_TypeOfIso.hxx": "c14e9bca7eb73527b795fa4f9a6cc31372b16cb5e2c860e68eb7359d32f99c58",
+    "Prs3d_Drawer.hxx": "52dd18dbcc383edfac3d0cc0a3f641a337a5df53ca9287c348c40f11dd44ce81",
+    "Prs3d_IsoAspect.hxx": "188d00d96e11ae8fa9735ae405278c802abb498aa248959733adb905ef06271d"
+  }
+}

@@ -62,8 +62,10 @@ pub use context_highlight::AisHighlightStyle;
 pub use detection_status::AisStatusOfDetection;
 
 mod context_highlight_owners;
+mod context_isoline_policies;
 mod context_owner_walk;
 mod context_selected_applicative;
+pub use context_isoline_policies::AisTypeOfIso;
 mod context_selected_members;
 mod context_selection_actions;
 mod context_unhighlight_owners;
