@@ -1,0 +1,106 @@
+{
+  "upstream_id": "StdPrs_ToolRFace::Value",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "e02667334135153462b5594d36949110441d1b98f6a54e266593cb87f9aada1c"
+  ],
+  "cpp_matches": [
+    {
+      "id": "e02667334135153462b5594d36949110441d1b98f6a54e266593cb87f9aada1c",
+      "usr": "c:@S@StdPrs_ToolRFace@F@Value#1",
+      "qualified_name": "StdPrs_ToolRFace::Value",
+      "kind": "CXXMethod",
+      "signature": "const class Adaptor2d_Curve2d &() const",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::value"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::value"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsToolRFace::value",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": null,
+              "type": {
+                "dyn_trait": {
+                  "lifetime": null,
+                  "traits": [
+                    {
+                      "generic_params": [],
+                      "trait": {
+                        "args": null,
+                        "path": "Adaptor2dCurve2d",
+                        "resolved_item_path": "rustycad_tkg2d::adaptor2d::curve2d::Adaptor2dCurve2d"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "StdPrsToolRFace",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::tool_r_face::StdPrsToolRFace"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "d21642562e4ae866af1f6af4b77d1f8e96a47556f82d01abb8c865a81db88769",
+      "source_file": "crates/tkv3d/src/std_prs/tool_r_face.rs",
+      "source_status": null,
+      "source_sha256": "22aeb7c7705cab6ab417907d577426dd7c1f74c5198cef04cb6f3ec1b4492224"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+}

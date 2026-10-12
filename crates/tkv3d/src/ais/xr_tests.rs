@@ -12,9 +12,9 @@ mod xr_derived_fake;
 #[path = "xr_dispatch_tests.rs"]
 mod xr_dispatch_tests;
 #[path = "xr_recording_group.rs"]
-mod xr_recording_group;
+pub(crate) mod xr_recording_group;
 #[path = "xr_recording_structure.rs"]
-mod xr_recording_structure;
+pub(crate) mod xr_recording_structure;
 #[path = "xr_selection_tests.rs"]
 mod xr_selection_tests;
 #[path = "xr_state_fixture.rs"]

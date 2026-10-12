@@ -16,3 +16,73 @@ mod plane;
 mod plane_arrows;
 mod plane_geometry;
 pub use plane::StdPrsPlane;
+
+mod tool_r_face;
+pub use tool_r_face::StdPrsToolRFace;
+mod isoline_outputs;
+pub use isoline_outputs::{StdPrsIsolineDestination, StdPrsIsolinePolylines};
+mod isoline_segments;
+pub use isoline_segments::{StdPrsPntOnIso, StdPrsSegOnIso};
+
+mod isolines;
+pub use isolines::StdPrsIsolines;
+mod isoline_parameters;
+pub use isoline_parameters::StdPrsIsolineUvOutputs;
+
+mod isoline_triangle_refs;
+pub use isoline_triangle_refs::StdPrsIsolineTriangulationInputs;
+mod isoline_segment_sort;
+mod isoline_triangle_crossing;
+mod isoline_triangle_projection;
+
+mod isoline_triangle_collect;
+
+mod isoline_triangle_api;
+mod isoline_triangle_face;
+
+mod isoline_surface_hatch;
+mod isoline_surface_trim;
+
+mod isoline_surface_api;
+mod isoline_surface_collect;
+mod isoline_surface_curves;
+
+mod isoline_surface_source;
+pub use isoline_surface_source::StdPrsIsolineSurfaceSource;
+
+mod isoline_face_api;
+
+#[cfg(test)]
+mod isoline_face_fixture;
+#[cfg(test)]
+mod isoline_surface_tests;
+
+#[cfg(test)]
+mod isoline_triangle_fixture;
+#[cfg(test)]
+mod isoline_triangle_tests;
+
+#[cfg(test)]
+mod isoline_rface_tests;
+
+#[cfg(test)]
+mod isoline_adaptor_fake;
+#[cfg(test)]
+mod isoline_adaptor_tests;
+
+#[cfg(test)]
+mod isoline_alias_surface_fake;
+#[cfg(test)]
+mod isoline_face_path_tests;
+#[cfg(test)]
+mod isoline_fault_tests;
+#[cfg(test)]
+mod isoline_live_input_tests;
+#[cfg(test)]
+mod isoline_parameter_edge_tests;
+#[cfg(test)]
+mod isoline_reference_tests;
+
+mod isoline_surface_reference;
+#[cfg(test)]
+mod isoline_surface_slot_tests;
