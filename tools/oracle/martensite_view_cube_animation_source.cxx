@@ -12,7 +12,7 @@ static void transportCase(int scenario) {
   occ::handle<TransportAnimation> owners[3];
   for(int id=0;id<3;++id){owners[id]=new TransportAnimation(cube.get(),id+1);cube->probes[id]=owners[id].get();}
   cube->SetViewAnimation(owners[0]);owners[1]->SetOwnDuration(scenario==1?1.0:0.2);
-  auto owner=occ::handle<AIS_ViewCubeOwner>(new AIS_ViewCubeOwner(cube,V3d_Xpos));
+  auto owner=occ::handle<AIS_ViewCubeOwner>(new AIS_ViewCubeOwner(cube,V3d_Xpos));cube->clickedOwner=owner.get();
   try {
     cube->StartAnimation(owner);transportSnapshot(*cube,"started");
     if(scenario==5||scenario==7||scenario==8)owners[0]->next=0.5;

@@ -5,6 +5,7 @@ use std::sync::{Arc, atomic::AtomicU64};
 pub(super) struct CubeTransportTrace {
     pub(super) scenario: usize,
     pub(super) cube: WeakHandle<AisViewCube>,
+    pub(super) clicked_owner: SharedState<WeakHandle<AisViewCubeOwner>>,
     pub(super) probes: SharedState<Vec<WeakHandle<CubeTransportAnimation>>>,
     pub(super) rows: SharedState<Vec<String>>,
 }
@@ -23,12 +24,21 @@ impl CubeTransportTrace {
     pub(super) fn record(&self, event: &str, actor: Option<&CubeTransportAnimation>) {
         let channels = actor.map_or([0; 7], CubeTransportAnimation::channels);
         self.rows.write().push(format!(
-            "event {} {event} {} {} {}",
+            "event {} {event} {} {} {} {}",
             self.scenario,
             channels[0],
             self.slot(),
-            join_transport_channels(&channels[1..])
+            join_transport_channels(&channels[1..]),
+            self.clicked_owner_count()
         ));
+    }
+    fn clicked_owner_count(&self) -> i32 {
+        let current = self.clicked_owner.read().upgrade();
+        let owner = current.observe();
+        drop(current);
+        owner
+            .get()
+            .map_or(0, |owner| owner.transient_base().ref_count())
     }
     pub(super) fn replace(&self, id: usize) {
         let probe = self.probes.read()[id].upgrade();
@@ -130,6 +140,7 @@ fn cube_transport_trace(scene: &WidgetScene, scenario: usize) -> Arc<CubeTranspo
     Arc::new(CubeTransportTrace {
         scenario,
         cube: scene.cube.downgrade(),
+        clicked_owner: SharedState::new(WeakHandle::default()),
         probes: SharedState::new(Vec::new()),
         rows: SharedState::new(Vec::new()),
     })

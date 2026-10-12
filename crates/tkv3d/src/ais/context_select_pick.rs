@@ -95,15 +95,15 @@ impl AisInteractiveContext {
         self.select_owners(&Array1::from_shared(&[owner], 1), scheme)
     }
     fn detected_click_consumed(&self, scheme: AisSelectionScheme) -> bool {
-        if matches!(
-            scheme,
-            AisSelectionScheme::Remove | AisSelectionScheme::Clear
-        ) || !self.has_detected()
-        {
+        if !click_selection_scheme(scheme) || !self.has_detected() {
             return false;
         }
         let pixels = self.detected_click_position();
-        let owner = self.fields.read().last_picked.clone();
+        // OCCT 3d097a0 invokes the field directly; a storage lease preserves native owner counts.
+        let owner = self.fields.read().last_picked.observe();
+        let Some(owner) = owner.get() else {
+            return false;
+        };
         owner.handle_mouse_click(
             pixels,
             ASPECT_VKEY_MOUSE_LEFT_BUTTON,
@@ -125,4 +125,11 @@ impl AisInteractiveContext {
             Vec2::new(point.x() as i32, point.y() as i32)
         }
     }
+}
+
+fn click_selection_scheme(scheme: AisSelectionScheme) -> bool {
+    !matches!(
+        scheme,
+        AisSelectionScheme::Remove | AisSelectionScheme::Clear
+    )
 }

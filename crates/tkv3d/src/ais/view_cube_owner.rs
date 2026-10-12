@@ -63,7 +63,15 @@ impl SelectMgrEntityOwnerSource for AisViewCubeOwner {
             return false;
         };
         // Native returns true only after HandleClick; exceptions cross this boolean virtual hook.
-        raise_native_failure(cube.handle_click(&self.base.this().cast()));
+        let owner = cube_owner_click_argument(self);
+        raise_native_failure(cube.handle_click(&owner));
         true
     }
+}
+
+fn cube_owner_click_argument(owner: &AisViewCubeOwner) -> Handle<AisViewCubeOwner> {
+    let current = owner.base.this();
+    let argument = current.cast();
+    drop(current);
+    argument
 }

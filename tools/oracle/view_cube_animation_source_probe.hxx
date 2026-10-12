@@ -12,6 +12,7 @@ class TransportAnimation;
 class TransportCube:public WidgetCube {
 public:
   int scenario=0;
+  SelectMgr_EntityOwner* clickedOwner=nullptr;
   TransportAnimation* probes[3]={};
   int slot() const;
   void record(const char* event,TransportAnimation* actor) const;
@@ -57,7 +58,7 @@ inline void TransportCube::record(const char* event,TransportAnimation* actor) c
     <<(actor->CameraStart().IsNull()?0:actor->CameraStart()->GetRefCount())<<' '
     <<(actor->CameraEnd().IsNull()?0:actor->CameraEnd()->GetRefCount())<<' '<<(actor->View().IsNull()?0:actor->View()->GetRefCount())<<' '<<actor->IsStopped();
   else std::cout<<" 0 0 0 0 0 0";
-  std::cout<<'\n';
+  std::cout<<' '<<(clickedOwner?clickedOwner->GetRefCount():0)<<'\n';
 }
 inline double TransportAnimation::UpdateTimer() {
   cube->record("timer-update",this);

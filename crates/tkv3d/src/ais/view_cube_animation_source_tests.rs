@@ -32,6 +32,7 @@ fn run_transport_case(
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
     let cube = &proof.scene.cube;
     let owner = AisViewCubeOwner::new(cube, V3dTypeOfOrientation::Xpos, 5);
+    *proof.trace.clicked_owner.write() = owner.downgrade();
     cube.start_animation(&owner)?;
     proof.snapshot("started");
     seek_transport_failure_frame(proof);
@@ -83,6 +84,7 @@ fn native_click_failure_propagates_from_owner_and_context_without_selection() {
 fn replay_failed_transport_click(entry: usize) -> Vec<String> {
     let proof = CubeTransportScene::new(3);
     let owner = AisViewCubeOwner::new(&proof.scene.cube, V3dTypeOfOrientation::Xpos, 5);
+    *proof.trace.clicked_owner.write() = owner.downgrade();
     proof.scene.context.fields.write().last_picked = owner.cast();
     let failure = transport_click_result(&proof, &owner, entry).unwrap_err();
     let animation = &proof.owners[0];
