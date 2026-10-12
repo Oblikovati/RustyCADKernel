@@ -16,7 +16,10 @@ fn xr_named_driver_delegates_structure_and_group_hooks() {
     let group = prs.new_group().unwrap();
     exercise_xr_group_hooks(&group);
     let shadow = driver.shadow_link(&prs.structure_manager()).unwrap();
-    assert_eq!(shadow.groups().len(), 1);
+    // OCCT 3d097a0 shadows retain parents without adopting removable group nodes.
+    assert!(shadow.groups().is_empty());
+    shadow.clear();
+    assert_eq!(driver.groups().len(), 1);
     driver.remove_group(&group);
     assert!(driver.groups().is_empty());
     driver.clear();
