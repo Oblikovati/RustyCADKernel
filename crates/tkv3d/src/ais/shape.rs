@@ -38,10 +38,11 @@ impl AisShapeFields {
 }
 /// Genuine inherited shape state; `AisShapeBase::new(&shape)` initializes projector-dependent presentation.
 pub struct AisShapeBase {
-    /// Inherited AIS state.
-    pub interactive: AisInteractiveObjectBase,
     /// Native shape and parameter fields.
+    /// Rust drops fields forward: native AIS_Shape releases topology before its AIS parent.
     pub fields: SharedState<AisShapeFields>,
+    /// Inherited AIS state, still alive during topology destruction.
+    pub interactive: AisInteractiveObjectBase,
 }
 impl AisShapeBase {
     /// Retain native shape/UV defaults without claiming the whole parent family; `AisShapeBase::new(&shape)`.

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "original_main_commit": "e3fa94fbded9d7cdf7f6b60833bb63fe523a4326",
+  "original_source_sha256": "b130a2540d712d3d44cdfeca4808d2e65b461793ee2145a1b0586f86449194c1",
+  "pinned_occt": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_repeat_runs": 2,
+  "native_records": 9,
+  "native_generator": "tools/oracle/martensite_viewer_deactivation_alias.cxx",
+  "generator_sha256": "22e5881d9e022a68ba2a0bd17dae5ec7298c75d69ecd383e7608c1f0af34b3b5",
+  "named_drawing_fixture_sha256": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+  "native_executable_sha256": "9be284f4b24deb5b0dbc4002c6abe5ca2087426c846117d7f32060f25e07b985",
+  "fixture_sha256": "740b22aab502d2a39218ec66cda7b501e2d6c0eec3c0eb7d6dd0ae46ed84db3d",
+  "native_sources": {
+    "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+    "src/Visualization/TKV3d/V3d/V3d_Viewer.cxx": "ef5ad15d676d7402a67abd061792f85160940af46e56a4d7be324e4ed1013b8e",
+    "src/Visualization/TKV3d/V3d/V3d_View.hxx": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+    "src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012"
+  },
+  "native_libraries": {
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "red_before": {
+    "command": "cargo test --locked -p rustycad-tkv3d --test toolkit active_node_deactivation",
+    "exit_code": 101,
+    "failure": "3-second timeout in actual active node alias case"
+  },
+  "audit": {
+    "same_viewer_live_view_argument_apis": [
+      "SetViewOn(const Handle<V3d_View>&)",
+      "SetViewOff(const Handle<V3d_View>&)"
+    ],
+    "aggregate_affected": "SetViewOff() passes defined-node references through the same corrected individual method",
+    "already_corrected": "SetViewOn clones the argument before append write guard",
+    "read_only_safe": "Live list/cursor getters and Redraw/Invalidate visitors release node read locks before external callbacks",
+    "private_add_view": "Takes owning Handle, not HandleReference",
+    "private_del_view": "Takes already evaluated raw identity",
+    "other_view_parameters": "Remaining current viewer APIs take owning Handle references, with no same-viewer node HandleReference transport"
+  },
+  "limits": [
+    "No class or constructor completion claim",
+    "No access to erased active node after removal; original strong view and defined alias remain valid",
+    "No renderer policy, raster gate, or global ledger change"
+  ],
+  "rust_checks": {
+    "all_targets_passed": 785,
+    "clippy_exit_code": 0,
+    "fmt_exit_code": 0,
+    "toolkit_discovery_exit_code": 0,
+    "test_source_sha256": "e6b0e3d81fcfc7c8cceddae6efde2f4bea4d8ab7a614a8c7d06b1b894cd0335b",
+    "fixed_source_sha256": "1ef6837e647a29231386fdbbbce1c36656a2ca94ea00249e73e990d884ab470f"
+  }
+}

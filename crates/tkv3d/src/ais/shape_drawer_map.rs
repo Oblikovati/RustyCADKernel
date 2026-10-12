@@ -8,24 +8,32 @@ use rustycad_tkernel::{
     ncollection::{DataMap, HashPolicy},
     standard::{Failure, Handle, SharedState},
 };
-use std::sync::Arc;
+use std::sync::{
+    Arc,
+    atomic::{AtomicUsize, Ordering},
+};
 pub(super) type ShapeDrawerNodeTable = DataMap<Arc<ShapeDrawerNode>, (), ShapeDrawerNodeHasher>;
 /// Owned native `NCollection_DataMap<TopoDS_Shape,Handle<AIS_ColoredDrawer>,TopTools_ShapeMapHasher>` semantics.
 /// Example: `let map=AisShapeDrawerMap::default(); map.bind(&shape, &drawer)?;`.
 #[derive(Default)]
 pub struct AisShapeDrawerMap {
     pub(super) nodes: SharedState<ShapeDrawerNodeTable>,
+    // OCCT 3d097a0 BaseMap::destroy72–97 resets mySize after destructors.
+    // ChainedSlots::clear26–30 takes payload before destruction; its borrowed
+    // length cannot represent mySize after unlocking for callbacks. This actual
+    // scalar lets valid destructor queries run without holding the node-table guard.
+    extent: AtomicUsize,
 }
 impl AisShapeDrawerMap {
     /// Observes the actual binding count; `map.len()`.
     pub fn len(&self) -> usize {
-        let nodes = self.nodes.read();
-        nodes.len()
+        // Native scalar reads remain valid while unlocked child destructors run.
+        self.extent.load(Ordering::Relaxed)
     }
     /// Checks the owned container, including later Clear operations; `map.is_empty()`.
     pub fn is_empty(&self) -> bool {
-        let nodes = self.nodes.read();
-        nodes.is_empty()
+        let extent = self.len();
+        extent == 0
     }
     /// Checks native IsSame equality, independently of orientation; `map.is_bound(&shape)`.
     pub fn is_bound(&self, key: &Shape) -> bool {
@@ -43,7 +51,9 @@ impl AisShapeDrawerMap {
             node.replace_value(value)?;
             return Ok(false);
         }
-        Ok(nodes.bind(Arc::new(ShapeDrawerNode::new(key, value)), ()))
+        let inserted = nodes.bind(Arc::new(ShapeDrawerNode::new(key, value)), ());
+        self.set_native_extent(nodes.len());
+        Ok(inserted)
     }
     /// Removes the actual node and releases its key/value despite retained aliases.
     /// Example: `map.unbind(&shape)`.
@@ -53,6 +63,7 @@ impl AisShapeDrawerMap {
             return false;
         };
         let removed = nodes.unbind(&node);
+        self.set_native_extent(nodes.len());
         drop(nodes);
         node.release_fields();
         removed
@@ -67,6 +78,11 @@ impl AisShapeDrawerMap {
         for node in removed {
             node.release_fields();
         }
+        self.set_native_extent(0);
+    }
+    fn set_native_extent(&self, extent: usize) {
+        // All visible count/empty/container views read this same native scalar.
+        self.extent.store(extent, Ordering::Relaxed);
     }
     /// Rehashes existing nodes without changing their stored key/value locations.
     /// Example: `map.resize(1000)`.
