@@ -1,0 +1,39 @@
+{
+  "project": "Martensite",
+  "native_source": "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.hxx",
+  "native_reference_lines": [
+    33,
+    39,
+    48
+  ],
+  "native_reference_contract": "const Handle& getters alias mutable slots; copied conveniences remain unclaimed.",
+  "rust_source": "crates/tkv3d/src/ais/animation_camera.rs",
+  "missing_source_contract": "Derived camera animation virtual UpdateTimer/update dispatch and live field references need proof.",
+  "rows": [
+    {
+      "upstream_id": "AIS_AnimationCamera::View() const",
+      "cpp_declaration_id": "511a7501e67e12cab20c94b60f412e249ae9f6c82578ed2637ce71ffaf9fa89d",
+      "old_rust_item": "rustycad_tkv3d::ais::AisAnimationCamera::target_view",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_AnimationCamera::CameraStart() const",
+      "cpp_declaration_id": "883f5e63183347ab7ec095756ffce988060fa53749c58882fa56d38c08445916",
+      "old_rust_item": "rustycad_tkv3d::ais::AisAnimationCamera::camera_start",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_AnimationCamera",
+      "cpp_declaration_id": "b79fd8ce9215cde69d5febc9a06032b193a760da3f07cd4371e98774cb1d5850",
+      "old_rust_item": "rustycad_tkv3d::ais::AisAnimationCamera",
+      "status": "partial"
+    },
+    {
+      "upstream_id": "AIS_AnimationCamera::CameraEnd() const",
+      "cpp_declaration_id": "f5b882bc53d0f419f6d77e079830ba1e33550891ff271d0f788755298082755c",
+      "old_rust_item": "rustycad_tkv3d::ais::AisAnimationCamera::camera_end",
+      "status": "partial"
+    }
+  ],
+  "correction_owner": "porting/martensite-controller-frame-events"
+}
