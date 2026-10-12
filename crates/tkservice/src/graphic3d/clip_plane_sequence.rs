@@ -3,6 +3,9 @@
 use super::Graphic3dClipPlane;
 use rustycad_tkernel::standard::{Handle, SharedState, StandardTransient};
 
+/// Genuine `Graphic3d_SequenceOfHClipPlane::base_type`; `let parent=Graphic3dClipSequenceParent::default()`.
+pub type Graphic3dClipSequenceParent = StandardTransient;
+
 /// A sequence of distinct clip planes; `Graphic3dSequenceOfHClipPlane::default().append(plane)`.
 #[derive(Default)]
 pub struct Graphic3dSequenceOfHClipPlane {

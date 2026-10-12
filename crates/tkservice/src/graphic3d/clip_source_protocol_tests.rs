@@ -211,3 +211,42 @@ fn derived_iterator_count_row(
         plane.ref_count()
     )
 }
+
+#[test]
+fn sequence_parent_alias_and_generated_descriptor_replay_native() {
+    let sequence = Handle::new(Graphic3dSequenceOfHClipPlane::default());
+    let mut rows = clip_sequence_parent_name_rows();
+    rows += &clip_sequence_descriptor_rows(&sequence);
+    assert_eq!(
+        rows,
+        include_str!("../../tests/fixtures/clip-sequence-type-native.txt")
+    );
+}
+fn clip_sequence_parent_name_rows() -> String {
+    let same = std::any::TypeId::of::<Graphic3dClipSequenceParent>()
+        == std::any::TypeId::of::<rustycad_tkernel::standard::StandardTransient>();
+    format!(
+        "parent {}\nname {}\n",
+        i32::from(same),
+        Graphic3dSequenceOfHClipPlane::TYPE_NAME
+    )
+}
+fn clip_sequence_descriptor_rows(sequence: &Handle<Graphic3dSequenceOfHClipPlane>) -> String {
+    let descriptor = Graphic3dSequenceOfHClipPlane::static_type();
+    let dynamic = sequence.dynamic_type().unwrap();
+    let mut rows = format!(
+        "descriptor {} {}\n",
+        descriptor.name(),
+        descriptor.parent().unwrap().name()
+    );
+    rows += &format!(
+        "identity {}\n",
+        i32::from(std::ptr::eq(descriptor, dynamic))
+    );
+    rows += &format!(
+        "kind {} {}\n",
+        i32::from(sequence.is_kind(Graphic3dClipSequenceParent::static_type())),
+        i32::from(sequence.is_instance(descriptor))
+    );
+    rows
+}

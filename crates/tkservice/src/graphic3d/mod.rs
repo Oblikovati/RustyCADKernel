@@ -162,7 +162,7 @@ pub use camera_projection::Graphic3dCameraScalar;
 pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
 pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dClipState};
 pub use clip_plane_handle_field::Graphic3dClipPlaneHandleField;
-pub use clip_plane_sequence::Graphic3dSequenceOfHClipPlane;
+pub use clip_plane_sequence::{Graphic3dClipSequenceParent, Graphic3dSequenceOfHClipPlane};
 pub use clip_plane_source::{Graphic3dClipPlaneSource, graphic3d_clip_plane_clone};
 pub use clip_sequence_source::Graphic3dClipPlaneSequenceSource;
 pub use cstructure::{
