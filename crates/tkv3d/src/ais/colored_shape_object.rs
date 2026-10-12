@@ -28,12 +28,14 @@ impl AisColoredShape {
         object
     }
     /// Copy native topology and owned global appearance, leaving custom nodes independent; `AisColoredShape::from_shape(&source)?`.
-    pub fn from_shape(source: &Handle<dyn AisShapeSource>) -> Result<Handle<Self>, Failure> {
-        let shape = source.shape_ref().clone_shape();
+    pub fn from_shape(
+        source: &dyn HandleReference<dyn AisShapeSource>,
+    ) -> Result<Handle<Self>, Failure> {
+        let shape = source.observe().shape_ref().clone_shape();
         let object = Self::new(&shape);
         drop(shape);
         rustycad_tkernel::standard::catch_native_failure(|| {
-            super::colored_shape_copy_appearance::copy_colored_shape_appearance(&object, &**source)
+            super::colored_shape_copy_appearance::copy_colored_shape_appearance(&object, source)
         })?;
         Ok(object)
     }

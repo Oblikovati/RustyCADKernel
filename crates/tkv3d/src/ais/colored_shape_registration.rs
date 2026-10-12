@@ -106,3 +106,8 @@ pub use shape_selection::{
 };
 #[cfg(test)]
 mod colored_compound_cursor_tests;
+
+#[cfg(test)]
+mod colored_copy_source_fixture;
+#[cfg(test)]
+mod colored_copy_source_tests;
