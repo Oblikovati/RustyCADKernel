@@ -1,0 +1,89 @@
+{
+  "upstream_id": "Select3D_SensitiveGroup::get_type_descriptor()",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "1359fa37a30450837f6db752e916260be9c07ae61bdbcb7efcb8b3a393e59d15"
+  ],
+  "cpp_matches": [
+    {
+      "id": "1359fa37a30450837f6db752e916260be9c07ae61bdbcb7efcb8b3a393e59d15",
+      "usr": "c:@S@Select3D_SensitiveGroup@F@get_type_descriptor#S",
+      "qualified_name": "Select3D_SensitiveGroup::get_type_descriptor",
+      "kind": "CXXMethod",
+      "signature": "const class opencascade::handle<class Standard_Type> &()",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::<rustycad_tkernel::standard::RuntimeTyped>::static_type"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::<rustycad_tkernel::standard::RuntimeTyped>::static_type"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::select3d::Select3DSensitiveGroup::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [],
+          "output": {
+            "borrowed_ref": {
+              "lifetime": "'static",
+              "is_mutable": false,
+              "type": {
+                "resolved_path": {
+                  "path": "$crate::standard::RuntimeType",
+                  "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType",
+                  "args": null
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "Select3DSensitiveGroup",
+            "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_group::Select3DSensitiveGroup",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped",
+          "args": null
+        }
+      },
+      "declaration_sha256": "e1d2329074cc0caa0437a03769746622c2e718e32f997244cca81451a76f758a",
+      "source_file": "crates/tkv3d/src/select3d/sensitive_group.rs",
+      "source_status": null,
+      "source_sha256": "72d8fb4e6d062c1b8adc92c538b7ca62f12bd5b059ee4d7a8621cdd56ea27407"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+}

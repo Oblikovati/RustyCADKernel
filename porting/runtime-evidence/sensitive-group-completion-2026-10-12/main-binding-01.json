@@ -1,0 +1,62 @@
+{
+  "upstream_id": "Select3D_SensitiveGroup::base_type",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "1a98c4658a5e509f24ef70f27f4661821c15511c9ac92f3f3113b3a274b36f53"
+  ],
+  "cpp_matches": [
+    {
+      "id": "1a98c4658a5e509f24ef70f27f4661821c15511c9ac92f3f3113b3a274b36f53",
+      "usr": "c:Select3D_SensitiveGroup.hxx@S@Select3D_SensitiveGroup@T@base_type",
+      "qualified_name": "Select3D_SensitiveGroup::base_type",
+      "kind": "Typedef",
+      "signature": "class Select3D_SensitiveSet",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroupBase"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroupBase"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::select3d::Select3DSensitiveGroupBase",
+      "kind": "type_alias",
+      "signature": {
+        "type": {
+          "dyn_trait": {
+            "traits": [
+              {
+                "trait": {
+                  "path": "Select3DSensitiveSet",
+                  "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_set::Select3DSensitiveSet",
+                  "args": null
+                },
+                "generic_params": []
+              }
+            ],
+            "lifetime": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        }
+      },
+      "impl_context": null,
+      "declaration_sha256": "be6cf72f84b859cbf25bde2142df7c43820ab18e656a6f0055a841f52d9221d5",
+      "source_file": "crates/tkv3d/src/select3d/group_source.rs",
+      "source_status": null,
+      "source_sha256": "09c6faf27b2388d60df71dc20c291eb2707d0d1da2beaea7be741ca81167b0db"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+}

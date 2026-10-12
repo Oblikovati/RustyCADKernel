@@ -1,0 +1,129 @@
+{
+  "upstream_id": "Select3D_SensitiveGroup::Set",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "dee3f03e1aa76babb037bcd068ab45375011291f099e46c567b7da7f657acbad"
+  ],
+  "cpp_matches": [
+    {
+      "id": "dee3f03e1aa76babb037bcd068ab45375011291f099e46c567b7da7f657acbad",
+      "usr": "c:@S@Select3D_SensitiveGroup@F@Set#&1$@N@opencascade@S@handle>#$@S@SelectMgr_EntityOwner#",
+      "qualified_name": "Select3D_SensitiveGroup::Set",
+      "kind": "CXXMethod",
+      "signature": "void (const class opencascade::handle<class SelectMgr_EntityOwner> &)",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::<rustycad_tkv3d::select3d::Select3DSensitiveEntity>::set"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::<rustycad_tkv3d::select3d::Select3DSensitiveEntity>::set"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::select3d::Select3DSensitiveGroup::<rustycad_tkv3d::select3d::Select3DSensitiveEntity>::set",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "resolved_path": {
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "traits": [
+                                    {
+                                      "trait": {
+                                        "path": "SelectMgrEntityOwnerSource",
+                                        "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource",
+                                        "args": null
+                                      },
+                                      "generic_params": []
+                                    }
+                                  ],
+                                  "lifetime": null
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::Select3DSensitiveGroup",
+            "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_group::Select3DSensitiveGroup",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "path": "Select3DSensitiveEntity",
+          "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_entity::Select3DSensitiveEntity",
+          "args": null
+        }
+      },
+      "declaration_sha256": "59e63f3f16140136a3c63e66dedd4282d85f343141e12679e3111f8f24bafc59",
+      "source_file": "crates/tkv3d/src/select3d/group_entity.rs",
+      "source_status": null,
+      "source_sha256": "38f6f1a59143905cfca85fca2b2399cdfbd6ccc2a2a41099e6ff5fedd8310d6b"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+}

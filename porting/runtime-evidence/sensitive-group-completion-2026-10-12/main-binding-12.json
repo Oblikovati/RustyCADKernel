@@ -1,0 +1,92 @@
+{
+  "upstream_id": "Select3D_SensitiveGroup::SetCheckOverlapAll",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "6d6c680fce56dc19f0df38a60ca024bcd48e7ba88ed1acf561cd94701b289a2c"
+  ],
+  "cpp_matches": [
+    {
+      "id": "6d6c680fce56dc19f0df38a60ca024bcd48e7ba88ed1acf561cd94701b289a2c",
+      "usr": "c:@S@Select3D_SensitiveGroup@F@SetCheckOverlapAll#b#",
+      "qualified_name": "Select3D_SensitiveGroup::SetCheckOverlapAll",
+      "kind": "CXXMethod",
+      "signature": "void (bool)",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::set_check_overlap_all"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::set_check_overlap_all"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::select3d::Select3DSensitiveGroup::set_check_overlap_all",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "check_overlap_all",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "output": null,
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::Select3DSensitiveGroup",
+            "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_group::Select3DSensitiveGroup",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "194419a6b5e34cb5822cbf2718e039e822ca10e03a1ff7ea4d072e0bca882acb",
+      "source_file": "crates/tkv3d/src/select3d/group_selection.rs",
+      "source_status": null,
+      "source_sha256": "913f93dedc9d5b7b5c0dfd9269e3e84aa4e1a5f9aa18b82148d13c4335f65d5f"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+}

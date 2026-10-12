@@ -1,0 +1,131 @@
+{
+  "upstream_id": "Select3D_SensitiveGroup::SubEntity",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "0dddf76b585b5694a3a70a3e8a30aee203d177b5fd58b0188091ce3f7666a1ee"
+  ],
+  "cpp_matches": [
+    {
+      "id": "0dddf76b585b5694a3a70a3e8a30aee203d177b5fd58b0188091ce3f7666a1ee",
+      "usr": "c:@S@Select3D_SensitiveGroup@F@SubEntity#I#1",
+      "qualified_name": "Select3D_SensitiveGroup::SubEntity",
+      "kind": "CXXMethod",
+      "signature": "const class opencascade::handle<class Select3D_SensitiveEntity> &(int) const",
+      "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::sub_entity_ref"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::select3d::Select3DSensitiveGroup::sub_entity_ref"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::select3d::Select3DSensitiveGroup::sub_entity_ref",
+      "kind": "function",
+      "signature": {
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "lifetime": null,
+                  "is_mutable": false,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "index",
+              {
+                "primitive": "i32"
+              }
+            ]
+          ],
+          "output": {
+            "resolved_path": {
+              "path": "Result",
+              "resolved_item_path": "core::result::Result",
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "Select3DGroupSubEntityRef",
+                          "resolved_item_path": "rustycad_tkv3d::select3d::group_references::Select3DGroupSubEntityRef",
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "lifetime": "'_"
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                          "args": null
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              }
+            }
+          },
+          "is_c_variadic": false
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "header": {
+          "is_const": false,
+          "is_unsafe": false,
+          "is_async": false,
+          "abi": "Rust"
+        },
+        "has_body": true,
+        "default_unstable": null
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "path": "super::Select3DSensitiveGroup",
+            "resolved_item_path": "rustycad_tkv3d::select3d::sensitive_group::Select3DSensitiveGroup",
+            "args": null
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "0fa32afbb50a021cf7e9a8c7b67877c1046ee8752daaef2249d51c5cd55bca01",
+      "source_file": "crates/tkv3d/src/select3d/group_references.rs",
+      "source_status": null,
+      "source_sha256": "a125040f880377ca52cab431c3bedfc5e1c09c480052efd0cbf1ce270e4935fc"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/Select3D/Select3D_SensitiveGroup.hxx"
+}
