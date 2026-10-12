@@ -1,0 +1,1526 @@
+[
+  {
+    "upstream_id": "AIS_ViewCube::StartAnimation",
+    "before": {
+      "declaration_sha256": "52083ab6c2962777acc543faf3e5400ceb5cfad979a8a874eec06cc434d4fb86",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_start_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_start_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "after": {
+      "declaration_sha256": "a02656aea96da1a89480a596811e68662cac73418c3f9bc998a7b8c5cb125128",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_start_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_start_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/view_cube_animation.rs"
+  },
+  {
+    "upstream_id": "AIS_ViewCube::UpdateAnimation",
+    "before": {
+      "declaration_sha256": "86d3717eda83ffb7e58df64966d55498c8000d4110072cbc950edb5fb145cb25",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "redraw",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "after": {
+      "declaration_sha256": "d34d6578fbb2da795027a60676919270f319adf81b42b06ecb474d6be6e802a1",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "redraw",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/view_cube_animation.rs"
+  },
+  {
+    "upstream_id": "AIS_ViewCube::HandleClick",
+    "before": {
+      "declaration_sha256": "d0da123ee337174e8acccf534c94b3f3341796a90426ff0c2cd51a86e928e301",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_handle_click",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_handle_click",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "after": {
+      "declaration_sha256": "2f66fb787b969a175203247dd49995d238eb3226975bcc4b9ee90068fc870561",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_handle_click",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_handle_click",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/view_cube_animation.rs"
+  },
+  {
+    "upstream_id": "AIS_ViewCube::updateAnimation",
+    "before": {
+      "declaration_sha256": "5e53f2762434ab7cf6fcca8762c5d845a658eb4dbcca09b4aacacc4f15bd50bf",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation_step",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation_step",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "after": {
+      "declaration_sha256": "7580d73f7134b4f0656e34dcd8551cb50ae47d4a9544a0d646cbb493b586fc11",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation_step",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation_step",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/view_cube_animation.rs"
+  },
+  {
+    "upstream_id": "AIS_ViewCube::setDefaultAttributes",
+    "before": {
+      "declaration_sha256": "6e4751c0b695fab4942375bac2b479622a7e6ea2341666e1438137eab1f0e292",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_appearance::ais_view_cube_default_attributes",
+        "is_glob": false,
+        "source": "view_cube_appearance::ais_view_cube_default_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "super::AisViewCubePresentationSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_presentation::AisViewCubePresentationSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_appearance.rs",
+      "source_sha256": "c772b9f10ae6dfc5e33b977a6e6cbba93f5464a3ff70163e05c527c49ffd341c",
+      "source_status": null
+    },
+    "after": {
+      "declaration_sha256": "b204b51efbcc928bfc5d504c5893a212a2a88a743951c53ac7f590a7d1fb736e",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_appearance::ais_view_cube_default_attributes",
+        "is_glob": false,
+        "source": "view_cube_appearance::ais_view_cube_default_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "super::AisViewCubePresentationSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_presentation::AisViewCubePresentationSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_appearance.rs",
+      "source_sha256": "c772b9f10ae6dfc5e33b977a6e6cbba93f5464a3ff70163e05c527c49ffd341c",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/view_cube_appearance.rs"
+  },
+  {
+    "upstream_id": "AIS_ViewCube::setDefaultHighlightAttributes",
+    "before": {
+      "declaration_sha256": "b691d2ed591479e91097919d304c3326bd25998a947eb0de1816b57566e66b6e",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "is_glob": false,
+        "source": "view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_reset_members.rs",
+      "source_sha256": "9e4680311228a11022d218577280054a92bc582b5ebb1069b05eec2fdd1f9ec8",
+      "source_status": null
+    },
+    "after": {
+      "declaration_sha256": "dffae68947fbacdbd0c83f720797599fbbe7fc8df25a6263e32e47ada224f4f8",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "is_glob": false,
+        "source": "view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_reset_members.rs",
+      "source_sha256": "9e4680311228a11022d218577280054a92bc582b5ebb1069b05eec2fdd1f9ec8",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/view_cube_reset_members.rs"
+  },
+  {
+    "upstream_id": "AIS_TypeOfIso",
+    "before": {
+      "canonical_type_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+      "declaration_sha256": "dd768c51698e65161ebca68d5def892561825fe6c1e6f43fde1886806f8439ec",
+      "kind": "enum",
+      "path": "rustycad_tkv3d::ais::AisTypeOfIso",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+        "is_glob": false,
+        "source": "context_isoline_policies::AisTypeOfIso",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "9f287e9c55ff462deeb95cfd7b742d95bd3494a78a449d7c001f6ba78c656e1a",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_stripped_variants": false,
+        "variant_count": 4
+      },
+      "source_file": "crates/tkv3d/src/ais/context_isoline_policies.rs",
+      "source_sha256": "b9cea9ec956c4d4ba8e9c479d055a2d1d1b7a6489633848796157d76660cdaa9",
+      "source_status": null
+    },
+    "after": {
+      "canonical_type_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+      "declaration_sha256": "0b5400f720e7d24cc03de7424c5a53b8980d981936f3ae6f7b382c102e148635",
+      "kind": "enum",
+      "path": "rustycad_tkv3d::ais::AisTypeOfIso",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+        "is_glob": false,
+        "source": "context_isoline_policies::AisTypeOfIso",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_stripped_variants": false,
+        "variant_count": 4
+      },
+      "source_file": "crates/tkv3d/src/ais/context_isoline_policies.rs",
+      "source_sha256": "b9cea9ec956c4d4ba8e9c479d055a2d1d1b7a6489633848796157d76660cdaa9",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "source_change": "Only shape module registration and reexports changed; retained view-cube function definitions and isoline enum reexport are unchanged.",
+    "source_diff_command": "git diff 353ce245e 8aff7549a -- crates/tkv3d/src/ais/context_isoline_policies.rs"
+  }
+]
