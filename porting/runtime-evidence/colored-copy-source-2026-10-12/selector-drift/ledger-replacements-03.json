@@ -1,0 +1,180 @@
+{
+  "api": [
+    {
+      "upstream_id": "AIS_ViewCube::updateAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "a220b227c946ada67f263ecca98357a26b0cbadef202c125c09b2011f4d312b7",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+          "declaration_sha256": "9ddd389c9d49f4bd47b81fee514f88e5d44686988f8e098131df7247e769fe49",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::UnsetColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "0df4d27db06e9a0135daf5c09e4522983172d030e99fdd28010bd56c62a25135",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite ViewCube appearance: 154 pinned native CPU snapshots replay mutation, presentation/selection caching, retained aliases, inherited slots and reset ownership. Protected fields bind actual retained storage; whole classes remain partial. See docs/ais-view-cube-appearance.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+          "declaration_sha256": "0c32256447883d6dd880a07da60b7b05e4db616a90c52b9ec4904542c23a30ee",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisViewCube",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCube"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PrsMgrPresentableObject",
+              "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::setDefaultAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "49ad448187de4dc4b7a22781c32349529d3c9eba655af2a71a5774d9126daece",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite ViewCube appearance: 154 pinned native CPU snapshots replay mutation, presentation/selection caching, retained aliases, inherited slots and reset ownership. Protected fields bind actual retained storage; whole classes remain partial. See docs/ais-view-cube-appearance.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
+          "declaration_sha256": "50d0e92b9306204a4c11289454b539bf965ff8cf982a9b4b8c67d2da9552af6c",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::UnsetHilightAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "4e8b87a1e6bae875ba6658a8cb910b4deeb2d1be8ca6df7472a51f07855a221e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_hilight_attributes",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite ViewCube appearance: 154 pinned native CPU snapshots replay mutation, presentation/selection caching, retained aliases, inherited slots and reset ownership. Protected fields bind actual retained storage; whole classes remain partial. See docs/ais-view-cube-appearance.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_hilight_attributes",
+          "declaration_sha256": "fcdeda7eb9194bd73ab60e7a20cbcb7168774f133ff8f9b9cf2b79f25d910db6",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisViewCube",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCube"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PrsMgrPresentableObject",
+              "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::UnsetMaterial",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "50c5ea8945ade70de3d5569614bcae8926705924e1e1b34dc7fcde3bbb7cc14e",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_material",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite ViewCube appearance: 154 pinned native CPU snapshots replay mutation, presentation/selection caching, retained aliases, inherited slots and reset ownership. Protected fields bind actual retained storage; whole classes remain partial. See docs/ais-view-cube-appearance.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_material",
+          "declaration_sha256": "4a6c53a85765670cdd20409fc01f61468c827b13358162495306bd7c4f3ea979",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisViewCube",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCube"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PrsMgrPresentableObject",
+              "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::UnsetAttributes",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "70197319736517ed941b3fe2da58b6887541ef2e8bd76ef0f6d1cc6dc5bb107f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_attributes",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite ViewCube appearance: 154 pinned native CPU snapshots replay mutation, presentation/selection caching, retained aliases, inherited slots and reset ownership. Protected fields bind actual retained storage; whole classes remain partial. See docs/ais-view-cube-appearance.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_attributes",
+          "declaration_sha256": "0a2e9da4e04c4df335d2713f99253c8aeb7ead553f9fa807fe794c042e1176b0",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisViewCube",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCube"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PrsMgrPresentableObject",
+              "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

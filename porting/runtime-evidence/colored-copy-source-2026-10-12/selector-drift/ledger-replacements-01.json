@@ -1,0 +1,210 @@
+{
+  "api": [
+    {
+      "upstream_id": "AIS_LightSource::AcceptDisplayMode(const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "332c6df99a3f3cab6ee83fdba4389897cf29c47af8de223245fa904b1991cc62",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "status": "implemented",
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+          "declaration_sha256": "d42f658c1ce7d36b48840b9bdef76b976ec8785399f4ce1019623d12c3bf3d99",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "PrsMgrPresentableObject",
+              "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_LightSource::ComputeSelection(const occ::handle<SelectMgr_Selection> &,const int)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "772e07d628a26635c347c7658874331f0091d72f6b3ab266a3616ae33d8aa28a",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "status": "partial",
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md. Current-source drift audit: Selection adapter signature changed to HandleReference but observes it once before native helper. Existing48 selection rows prove ordinary retained selection only; original argument slot rebinding/count transport after allocation callbacks is not proved.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+          "declaration_sha256": "2e4321debdf3a94ee4a1f7fe3660a3306df9e6531dd13efa7ff7e3bd8ae27abb",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrSelectableObject",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_LightSource::Type()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "d047356ec756efed7f6ef1ce2dcde0655ed5b8ab7ae363da0241e7d98737f863",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+      "status": "implemented",
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisInteractiveObject>::kind_of_interactive",
+          "declaration_sha256": "79899a25b3f5ab2e3602b62d8fa0a2492667853a25a86ec69aade050f633883d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "AisInteractiveObject",
+              "resolved_item_path": "rustycad_tkv3d::ais::interactive_object::AisInteractiveObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_LightSource::updateLightAspects()",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_LightSource.hxx",
+      "source_sha256": "9709da5c88026f8064e0d126b4bac90e05ee1faf4ffade1b35d3c19c384df55a",
+      "cpp_declaration_id": "e3ed9a59ab2afb3a7b32e1b83eac1a4934226b64cb78c1279c19fa077fc63f28",
+      "rust_item": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisLightSourceSource>::update_light_aspects",
+      "status": "implemented",
+      "notes": "Martensite concrete light construction, real primitive buffer drawing and native ownership at OCCT 3d097a0. Rust-only replay:89 presentation/48 selection/128 click/24 actual sphere highlight/24 real view context dragging snapshots; typed bool Failure unwind and derived transform hooks. See docs/ais-light-source-presentation.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisLightSource::<rustycad_tkv3d::ais::AisLightSourceSource>::update_light_aspects",
+          "declaration_sha256": "d9b411346e0108acd22d85f084d27694f79171905aac9ebd3a58291d1735838a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisLightSource",
+                "resolved_item_path": "rustycad_tkv3d::ais::light_source_object::AisLightSource"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "AisLightSourceSource",
+              "resolved_item_path": "rustycad_tkv3d::ais::light_source::AisLightSourceSource"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::GlobalSelOwner",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "03208a6a0547028c1beb708eb8a8968f79a12ebd35b2fc21a16c25169b839986",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::global_sel_owner",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::global_sel_owner",
+          "declaration_sha256": "d562f2150a5449eb040bc356a24589b5091e7fa6d7e86954f0881cc873fe6a97",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisViewCube",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCube"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrSelectableObject",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::IsAutoHilight",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "da0c95740003bfa042320ec96ec0b44a26f7465332a9207a83c64d539acb574f",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::is_auto_hilight",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite concrete ViewCube interaction: 1808 pinned native CPU records replay real owners, indexed picking, immediate highlights, selection/scene fitting, camera timers and callback order. Whole classes remain partial; see docs/ais-view-cube-interaction.md. Current-source drift audit: Original selected declaration/body unchanged; neighboring trait signature and/or reexport registration changed captured declaration fingerprint.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCube::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::is_auto_hilight",
+          "declaration_sha256": "d8a3837d3b510f1ae95d40b879709f0509a2b1d473584b7fdb1701a49a21b472",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "AisViewCube",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCube"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "args": null,
+              "path": "SelectMgrSelectableObject",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selectable_object::SelectMgrSelectableObject"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
