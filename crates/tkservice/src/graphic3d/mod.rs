@@ -302,3 +302,6 @@ pub use z_layer_settings::Graphic3dZLayerSettings;
 
 mod retained_view;
 pub use retained_view::Graphic3dRetainedView;
+
+#[cfg(test)]
+mod texture_2d_rtti_tests;
