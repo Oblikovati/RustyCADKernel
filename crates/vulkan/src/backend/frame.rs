@@ -233,21 +233,25 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
-        if draw.surface_texture.is_some()
-            || draw.surface_cutoff.is_some()
-            || draw.surface_texture_unavailable.is_some()
-        {
-            let uv = draw
-                .surface_texture
-                .as_ref()
-                .map_or([0., 0., 0., 1.], |style| style.uv[index]);
-            bytes.extend(uv.iter().flat_map(|v| v.to_ne_bytes()));
-        }
+        append_surface_coordinates(&mut bytes, draw, index);
         if let Some(lighting) = &draw.lighting {
             bytes.extend(lighting.normals[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
     }
     bytes
+}
+fn append_surface_coordinates(bytes: &mut Vec<u8>, draw: &PrimitiveDraw, index: usize) {
+    if draw.surface_texture.is_none()
+        && draw.surface_cutoff.is_none()
+        && draw.surface_texture_unavailable.is_none()
+    {
+        return;
+    }
+    let uv = draw
+        .surface_texture
+        .as_ref()
+        .map_or([0., 0., 0., 1.], |style| style.uv[index]);
+    bytes.extend(uv.iter().flat_map(|value| value.to_ne_bytes()));
 }
 
 fn encoded_vertex_header(vertex: &crate::RenderVertex, xor: bool) -> Vec<u8> {
@@ -325,5 +329,19 @@ mod xor_tests {
             let slice = &bytes[16 + index * 4..20 + index * 4];
             f32::from_ne_bytes(slice.try_into().unwrap())
         })
+    }
+    #[test]
+    fn unavailable_surface_and_alpha_only_pack_projective_default_coordinates() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        let mut bytes = vec![];
+        append_surface_coordinates(&mut bytes, &draw, 0);
+        assert!(bytes.is_empty());
+        draw.surface_cutoff = Some(0.5);
+        append_surface_coordinates(&mut bytes, &draw, 0);
+        let expected: Vec<u8> = [0_f32, 0., 0., 1.]
+            .iter()
+            .flat_map(|value| value.to_ne_bytes())
+            .collect();
+        assert_eq!(bytes, expected);
     }
 }

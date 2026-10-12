@@ -49,6 +49,8 @@ pub mod point_primitives;
 pub mod polygon_primitives;
 #[path = "../quadrangle_primitives.rs"]
 pub mod quadrangle_primitives;
+#[path = "../sampled_xor_boundary.rs"]
+pub mod sampled_xor_boundary;
 #[path = "../scene_inputs.rs"]
 pub mod scene_inputs;
 #[path = "../shadow_presentations.rs"]

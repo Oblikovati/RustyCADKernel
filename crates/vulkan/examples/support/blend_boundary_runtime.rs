@@ -17,7 +17,8 @@ pub fn check_blend_boundaries(renderer: &mut VulkanRenderer) {
     let empty = RenderFrame::new(64, 64, [0., 0., 1., 1.], vec![]).unwrap();
     assert_capture_identity(renderer, &double, &empty, "repeated XOR cancellation");
 }
-fn assert_capture_identity(
+/// Verify ordered attachment transitions preserve both buffers; `assert_capture_identity(renderer, actual, control, "surface")`.
+pub fn assert_capture_identity(
     renderer: &mut VulkanRenderer,
     actual: &RenderFrame,
     control: &RenderFrame,
@@ -34,7 +35,8 @@ fn assert_capture_identity(
         "{label}: XOR↔ordinary depth LOAD"
     );
 }
-fn fullscreen_xor() -> PrimitiveDraw {
+/// Lower genuine full-viewport pixel text for attachment boundaries; `let draw = fullscreen_xor()`.
+pub fn fullscreen_xor() -> PrimitiveDraw {
     let text = Graphic3dText::new(16.);
     let aspect = Graphic3dAspectText3d::default();
     aspect.set_text_display_type(AspectTypeOfDisplayText::Blend);
@@ -81,23 +83,6 @@ fn boundary_lit(draw: PrimitiveDraw) -> PrimitiveDraw {
     .unwrap();
     draw.with_lighting(lighting).unwrap()
 }
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn boundary_geometry_preserves_expected_native_depth_and_distinct_pipelines() {
-        let xor = fullscreen_xor();
-        assert_eq!(xor.indices().len(), 6);
-        assert!(boundary_surface("atlas").textured_style().is_some());
-        assert!(boundary_surface("lit").lighting().is_some());
-        assert!(boundary_surface("ordinary").textured_style().is_none());
-        assert_eq!(
-            boundary_cap([1.; 4])[0].capping_pass(),
-            RenderCappingPass::MaskStart
-        );
-    }
-}
-
 fn check_layered_blend(renderer: &mut VulkanRenderer) {
     for depth_write in [false, true] {
         let layers = vec![
@@ -138,4 +123,21 @@ fn boundary_atlas(vertices: Vec<RenderVertex>) -> PrimitiveDraw {
     PrimitiveDraw::textured(vertices, vec![0, 1, 2], identity_clip(), style)
         .unwrap()
         .with_polygon_offset(RenderPolygonOffset::default())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn boundary_geometry_preserves_expected_native_depth_and_distinct_pipelines() {
+        let xor = fullscreen_xor();
+        assert_eq!(xor.indices().len(), 6);
+        assert!(boundary_surface("atlas").textured_style().is_some());
+        assert!(boundary_surface("lit").lighting().is_some());
+        assert!(boundary_surface("ordinary").textured_style().is_none());
+        assert_eq!(
+            boundary_cap([1.; 4])[0].capping_pass(),
+            RenderCappingPass::MaskStart
+        );
+    }
 }
