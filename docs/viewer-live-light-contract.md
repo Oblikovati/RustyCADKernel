@@ -65,12 +65,35 @@ aliases and retained driver light-set aliases, including self-assignment.
 membership failures and callback replacement of a borrowed caller light-set
 slot. A derived driver also observes LightLimit and IfMoreLights without an
 extra driver owner; Driver borrows its actual immutable handle field.
-Final run, source, library, and executable provenance belongs in the
-runtime receipt; authored probes are not a claim that final gates passed.
+The [runtime receipt](../porting/runtime-evidence/viewer-live-lights-2026-10-12/receipt.json)
+binds 118 fresh native records, two identical runs per generator, the
+actual headers/libraries/executables, and Rust-only regression replay.
+The current-source gate passed 6,511 tests, four-crate Clippy, formatting,
+toolkit discovery, and all 52 compiler bindings. Forty rows replace the
+bounded light-family claims; twelve refresh existing dependency selectors
+without changing their status or behavior.
+
+The actual derived-view/widget captures on lavapipe and AMD preserve all
+18 previous RGBA/depth pairs exactly. The existing strict native raster
+diagnostics remain unchanged; no tolerance or baseline was accepted.
+The optimized eight-workload harness records 1,600 raw samples and source,
+binary, ICD, and layer bookends independently verified by the coordinator.
+An unrelated low-CPU I/O test was still active, so these measurements are
+descriptive timings, not an isolated performance baseline.
+
+Parallel testing exposed a pre-existing crash with the host's Khronos
+validation layer 1.3.275, also reproduced on checked main without this
+feature. Disabling library unloading did not resolve it. The unchanged
+test executable passed 100 parallel repeats with an isolated official
+LunarG layer 1.4.313 package, with validation enabled. The receipt retains
+the original failures, debugger dispatch traces, exact layer selection,
+and package hashes; no system installation or application-source fix was
+made for this comparison.
 
 Removing the currently referenced node, dangling owner storage, or a
 reallocated native alias has no successful native contract. Martensite
 emits a typed diagnostic for an invalid node rather than claiming parity
 with that undefined behavior. No viewer/view class or constructor is
-completed by this bounded family. SetViewOn claims remain partial until
-all scoped callback and failure-order proof is complete.
+completed by this bounded family. Both SetViewOn overloads are proposed
+for restoration only within this proven callback, ownership, live-list,
+and failure-order family; the coordinator owns the central ledger update.

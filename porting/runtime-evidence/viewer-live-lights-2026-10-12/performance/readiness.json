@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "source_revision": "151ce6e09a60f9e8221749642e09529ececa19cd",
+  "checked_dependency": "8aff7549a83771148b2cc579d7a5fef976dbe005",
+  "binary": "/home/vmiguel/git/oblikovati-workspace/Martensite-viewer-live-lights/target/release/examples/view_cube_performance",
+  "binary_sha256": "9dcdae99e0919c755ca36a7e3031029a40953e41946f448652586d610dff15f4",
+  "full_inputs_path": "/home/vmiguel/git/oblikovati-workspace/Martensite-viewer-live-lights/target/viewer-light-performance-current-foundation/full-build-inputs.json.gz",
+  "full_inputs_sha256": "d090535de1eda2bd3b97b760c9863374881bf8203bf6cae36efeaba0a8379fd8",
+  "full_inputs_count": 12881,
+  "focused_inputs_path": "/home/vmiguel/git/oblikovati-workspace/Martensite-viewer-live-lights/target/viewer-light-performance-current-foundation/focused-source-inputs.json",
+  "focused_inputs_sha256": "9d690820c62e9e8f0855d24d5ffa1c357bd02fb4c546e19f91cf84a645f10a0f",
+  "focused_inputs_count": 44,
+  "external_harness_inputs": {
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/lib/x86_64-linux-gnu/libVkLayer_khronos_validation.so": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json": "f328caf95d75607075575cf5849b4e765f9eabe111ea5be7f971c92a9a7d1a58",
+    "/usr/share/vulkan/icd.d/lvp_icd.json": "8468db31369dbd0140b68783f1a7943e6158cadcf5314e949e6be31f42068e13",
+    "/usr/share/vulkan/icd.d/radeon_icd.json": "bca32a660ca32a42b598d53cdc63b3e3e917ea40c0b3b1e00fdbd3115280b51d"
+  },
+  "workloads": 8,
+  "warmup": 20,
+  "samples": 100,
+  "validation": false,
+  "software_profile": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+    "GALLIUM_OVERRIDE_CPU_CAPS": null,
+    "LP_NATIVE_VECTOR_WIDTH": null,
+    "LLVM_TARGET_FEATURES": null
+  },
+  "native_profile": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json"
+  },
+  "fixed_environment": {
+    "DISPLAY": ":1",
+    "MARTENSITE_VULKAN_DEVICE": "0",
+    "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/share/vulkan/explicit_layer.d",
+    "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/lib/x86_64-linux-gnu"
+  },
+  "relink_log": "target/viewer-light-post-adoption-example-relink.log",
+  "status": "frozen-awaiting-root-independent-verification-and-exclusive-GO; no timings collected"
+}
