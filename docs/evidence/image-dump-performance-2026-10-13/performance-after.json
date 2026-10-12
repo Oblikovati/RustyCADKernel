@@ -1,0 +1,51 @@
+{
+  "phase": "after",
+  "utc": "2026-10-12T23:06:39Z",
+  "source_checkpoint": "862c17a9e55f213f6439a821a9873c8d2897d94e",
+  "input_count": 14275,
+  "changed_inputs": [],
+  "manifest_sha256": "bc4676ccb349c34799ef637da2d23f12ca3b39c51eef13682b7f4431b7aa7f68",
+  "executable_sha256": "378a99f7772ac2666d2be92471ebb0256d16c35be247625d3445a5779949155b",
+  "loadavg": "2.13 4.70 6.04 2/6700 2624000",
+  "results": [
+    {
+      "profile": "lavapipe",
+      "selected_device": "llvmpipe (LLVM 20.1.2, 128 bits)",
+      "exit_code": 0,
+      "workloads": 6,
+      "total_samples": 600,
+      "peak_rss_kib": 98552,
+      "medians_ms": {
+        "image-dump-rgba64-tile0-topdownfalse": 0.2624805,
+        "image-dump-rgba64-tile0-topdowntrue": 0.24855,
+        "image-dump-rgba64-tile32-topdownfalse": 0.919161,
+        "image-dump-rgba64-tile32-topdowntrue": 0.924766,
+        "image-dump-rgba64-tile17-topdownfalse": 3.2125190000000003,
+        "image-dump-rgba64-tile17-topdowntrue": 3.220834
+      },
+      "raw_log_sha256": "6f5b799ee5b3aedd89126eb7866d5ee3cb118687cce9ec4991a29efd43a06f14",
+      "time_log_sha256": "5d33127cc23444cdd0fce8a44d6da69a79b04bc98f0ffb19d15a461c3049b6dd"
+    },
+    {
+      "profile": "amd",
+      "selected_device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+      "exit_code": 0,
+      "workloads": 6,
+      "total_samples": 600,
+      "peak_rss_kib": 63916,
+      "medians_ms": {
+        "image-dump-rgba64-tile0-topdownfalse": 0.217838,
+        "image-dump-rgba64-tile0-topdowntrue": 0.23415799999999998,
+        "image-dump-rgba64-tile32-topdownfalse": 0.793413,
+        "image-dump-rgba64-tile32-topdowntrue": 0.8160695,
+        "image-dump-rgba64-tile17-topdownfalse": 3.372675,
+        "image-dump-rgba64-tile17-topdowntrue": 3.3511905
+      },
+      "raw_log_sha256": "eb7c044bc432b79821710f61969aaa733c4be9d36b6cacacac34eba039801644",
+      "time_log_sha256": "a52e51ad8fb1638ff2f16acc0c56833a3ea1a842fe61dd856fc50fe3d3c47968"
+    }
+  ],
+  "baseline_accepted": false,
+  "gpu_memory": "unknown",
+  "process_status": "Timing session41411 terminal0; time-v records both child exit0."
+}

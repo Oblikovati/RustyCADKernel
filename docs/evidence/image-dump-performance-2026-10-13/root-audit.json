@@ -1,0 +1,39 @@
+{
+  "source": "862c17a9e55f213f6439a821a9873c8d2897d94e",
+  "root_independently_verified_inputs": 14275,
+  "binary_sha256": "378a99f7772ac2666d2be92471ebb0256d16c35be247625d3445a5779949155b",
+  "warmup": 20,
+  "validation": false,
+  "software_vector_profile": "SSE2/128",
+  "baseline_accepted": false,
+  "gpu_memory": "unmeasured",
+  "contract": "target allocation+actual ToPixMap+Vulkan readback+logical-row copying; RGBA64 untiled/tile32/tile17, both row orders",
+  "results": {
+    "lavapipe": {
+      "workloads": 6,
+      "samples": 600,
+      "peak_rss_kib": 98552,
+      "median_ms": {
+        "image-dump-rgba64-tile0-topdownfalse": 0.262656,
+        "image-dump-rgba64-tile0-topdowntrue": 0.249422,
+        "image-dump-rgba64-tile32-topdownfalse": 0.920193,
+        "image-dump-rgba64-tile32-topdowntrue": 0.9250120000000001,
+        "image-dump-rgba64-tile17-topdownfalse": 3.216902,
+        "image-dump-rgba64-tile17-topdowntrue": 3.22112
+      }
+    },
+    "amd": {
+      "workloads": 6,
+      "samples": 600,
+      "peak_rss_kib": 63916,
+      "median_ms": {
+        "image-dump-rgba64-tile0-topdownfalse": 0.217953,
+        "image-dump-rgba64-tile0-topdowntrue": 0.23421299999999998,
+        "image-dump-rgba64-tile32-topdownfalse": 0.793608,
+        "image-dump-rgba64-tile32-topdowntrue": 0.81636,
+        "image-dump-rgba64-tile17-topdownfalse": 3.373702,
+        "image-dump-rgba64-tile17-topdowntrue": 3.35652
+      }
+    }
+  }
+}
