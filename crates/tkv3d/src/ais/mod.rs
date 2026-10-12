@@ -505,3 +505,8 @@ mod colored_shape_copy_appearance;
 mod colored_shape_copy_tests;
 #[cfg(test)]
 mod colored_shape_custom_dispatch_tests;
+
+mod textured_shape_retirement;
+pub use textured_shape_retirement::{
+    AisTexturedShapeRetirement, ais_textured_shape_with_retirement,
+};

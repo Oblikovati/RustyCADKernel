@@ -1,5 +1,5 @@
 //! Native field aliases never retain a lock or acquire pixmap ownership.
-use rustycad_tkernel::standard::{Handle, HandleObserver, HandleReference, IntrusiveReferenceSlot};
+use rustycad_tkernel::standard::{Failure, Handle, HandleObserver, HandleReference, IntrusiveReferenceSlot, Transient};
 use rustycad_tkservice::image::ImagePixMap;
 /// Borrowed actual pointer slot; `object.texture_pix_map().object_address()`.
 #[derive(Clone, Copy)]
@@ -30,6 +30,16 @@ impl<'a> AisTexturedShapePixMapRef<'a> {
     pub fn ref_count(&self) -> i32 {
         let pixels = self.pixels;
         pixels.ref_count()
+    }
+    /// Inspect the real destructor borrow; `alias.with_retiring_pointee(self, |p| p.width())?`.
+    /// The original field identity is checked and no native owning count is acquired.
+    pub fn with_retiring_pointee<R>(
+        &self,
+        retiring: &dyn Transient,
+        inspect: impl FnOnce(&ImagePixMap) -> R,
+    ) -> Result<R, Failure> {
+        // Rust Drop already owns the valid reborrow; an expired Arc must not be resurrected.
+        self.pixels.with_retiring_pointee(retiring, inspect)
     }
     /// Acquire ownership explicitly, independently of the native const field alias; `alias.clone_handle()`.
     pub fn clone_handle(&self) -> Handle<ImagePixMap> {
