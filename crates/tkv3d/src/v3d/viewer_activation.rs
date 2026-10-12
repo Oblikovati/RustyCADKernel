@@ -31,11 +31,13 @@ impl V3dViewer {
         if !implementation.is_defined() || !self.contains_active_view(view.object_address()) {
             return;
         }
-        super::viewer::remove_view_from(
-            &mut self.state.write().active_views,
-            view.object_address(),
-        );
+        self.remove_active_view_reference(view);
         implementation.deactivate();
+    }
+    fn remove_active_view_reference(&self, view: &dyn HandleReference<dyn V3dViewSource>) {
+        // e3fa94fbd: read a same-viewer node before locking; removal invalidates that node alias.
+        let identity = view.object_address();
+        super::viewer::remove_view_from(&mut self.state.write().active_views, identity);
     }
     fn append_active_view_reference(&self, view: &dyn HandleReference<dyn V3dViewSource>) {
         // Method receivers evaluate first; read a same-viewer node alias before locking for append.
