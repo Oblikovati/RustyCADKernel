@@ -37,6 +37,10 @@ preserves the source rows and flag instead of silently rewriting either.
 texture construction, creates a fresh texture when mapping is enabled and
 updates every live presentation group. Native callbacks can append groups or
 presentations during the operation; the same native iteration observes them.
+The public `UpdateAttributes` entry resolves the associated context's current
+mode presentation. A separate native/Rust replay proves that this entry keeps
+existing geometry while replacing texture/aspect ownership and updating the
+actual group aspect; direct manager display avoids inherited selection setup.
 `UnsetColor` preserves the native distinction from mode-3 aspect refreshing.
 `SetMaterial`/`UnsetMaterial` use the actual inherited shape bodies and refresh
 mode-3 presentations. The shading catch retains partially emitted groups and

@@ -54,6 +54,12 @@ texture and virtual-dispatch implementations.
   U/V/common aspect routing and plane isoline policies. All 16 rows replay
   through the registered default serial WF presentation path; this does not
   claim completion of its broader overload family.
+- `native-public-attributes.txt`: actual public `UpdateAttributes` resolves the
+  associated context's current mode-3 presentation. Its existing geometry group
+  survives while texture and copied aspect identities change and the group
+  receives the new aspect. This uses genuine context ownership and presentation
+  manager display, without invoking the incomplete inherited selection family.
+  `public-attributes-provenance.json` records byte-identical native repeats.
 
 The wider `AIS_Shape` family remains partial. Inherited selection and HLR are
 explicit unimplemented paths. File/predefined image decoding, triangle-edge

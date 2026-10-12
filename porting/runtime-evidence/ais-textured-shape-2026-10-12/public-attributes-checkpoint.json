@@ -1,0 +1,53 @@
+{
+  "project": "Martensite",
+  "recorded_utc": "2026-10-12T07:49:46.859215+00:00",
+  "checks": [
+    {
+      "name": "public-attributes-replay",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "rustycad-tkv3d",
+        "--test",
+        "toolkit",
+        "textured_public_attributes"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "public-attributes-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "rustycad-tkv3d",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "public-attributes-fmt",
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--check",
+        "crates/tkv3d/tests/textured_shape_public_attributes.rs"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "public-attributes-discovery",
+      "command": [
+        "python3",
+        "tools/toolkit_test_suites.py"
+      ],
+      "exit": 0
+    }
+  ],
+  "scope": "Real public UpdateAttributes context presentation replay only; class rendering and wider AIS_Shape remain partial."
+}

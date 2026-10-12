@@ -137,6 +137,8 @@ pub mod textured_shape_concrete;
 pub mod textured_shape_deviation;
 #[path = "../textured_shape_presentation_append.rs"]
 pub mod textured_shape_presentation_append;
+#[path = "../textured_shape_public_attributes.rs"]
+pub mod textured_shape_public_attributes;
 #[path = "../textured_shape_state.rs"]
 pub mod textured_shape_state;
 #[path = "../textured_shape_tessellate.rs"]
