@@ -1,0 +1,16 @@
+{
+  "status": "rejected native software oracle assets",
+  "profile": "LIBGL_ALWAYS_SOFTWARE=1 DISPLAY=:1",
+  "observed_initial_probe_exit_codes": [
+    139,
+    139
+  ],
+  "native_renderer": "llvmpipe (LLVM20.1.2,256bits)",
+  "provenance": "Exit statuses observed during initial and subsequent SOLID-fixture probes before finalsource capture; not a final-source software oracle result. No repeated crash probe or pixel tuning.",
+  "raw_logs": [
+    "exploratory-diagnostics.tar.gz:first-gl-software.log",
+    "exploratory-diagnostics.tar.gz:gl-solid-software.log"
+  ],
+  "diagnostic_limit": "gdb unavailable; native-crash.log retained. The underlying crash remains unresolved, without attribution to renderer/host beyond observed software profile.",
+  "accepted_buffers": "Final AMD-native oracle buffers only; Vulkan lavapipe comparisons use those cross-device assets."
+}

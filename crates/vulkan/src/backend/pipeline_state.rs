@@ -69,7 +69,11 @@ impl PipelineState {
             ..
         } = kind;
         Self {
-            vertex: vertex_state(text, kind.lighting),
+            vertex: if kind.surface_texture || kind.surface_alpha {
+                super::surface_texture_pipeline::surface_vertex_state(kind.lighting)
+            } else {
+                vertex_state(text, kind.lighting)
+            },
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
                 vk::PrimitiveTopology::POINT_LIST
             } else if line {

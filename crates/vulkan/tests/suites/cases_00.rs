@@ -53,6 +53,8 @@ pub mod scene_inputs;
 pub mod shadow_presentations;
 #[path = "../shadow_text.rs"]
 pub mod shadow_text;
+#[path = "../standard_surface_textures.rs"]
+pub mod standard_surface_textures;
 #[path = "../subtitle_text_policy.rs"]
 pub mod subtitle_text_policy;
 #[path = "../surface_blending.rs"]

@@ -134,3 +134,11 @@ impl VulkanRenderer {
 }
 
 mod capping_record;
+
+mod sampled_surface_image;
+mod sampled_surface_upload;
+mod surface_image_cache;
+mod surface_image_descriptor;
+mod surface_image_format;
+mod surface_sampler;
+mod surface_texture_pipeline;

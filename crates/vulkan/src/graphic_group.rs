@@ -70,6 +70,7 @@ pub struct Graphic3dDrawGroup {
     base: Graphic3dGroupBase,
     submissions: SharedState<GroupSubmissionState>,
     text_source: Arc<dyn crate::TextLayoutSource>,
+    pub(crate) texture_images: Arc<crate::retained_texture_images::RetainedTextureImages>,
 }
 rustycad_tkernel::impl_transient!(Graphic3dDrawGroup,"Martensite_Graphic3dDrawGroup",StandardTransient,transient,interfaces:[dyn Graphic3dGroup]);
 impl Graphic3dDrawGroup {
@@ -87,6 +88,7 @@ impl Graphic3dDrawGroup {
             base: Graphic3dGroupBase::new(structure),
             submissions: SharedState::default(),
             text_source,
+            texture_images: crate::retained_surface_texture::driver_texture_images(structure),
         })
     }
     /// Extract visible primitives using current styles, buffers and camera; `group.primitive_draws(&camera)?`.
@@ -424,6 +426,12 @@ fn lower_group_surface(
     context: &crate::text_submission::TextSceneContext<'_>,
 ) -> Result<Vec<PrimitiveDraw>, RenderError> {
     let mut lowered = lower_styled_primitive(primitive, aspects, closed, matrix, highlighted)?;
+    crate::retained_surface_texture::apply_surface_texture(
+        &mut lowered,
+        primitive,
+        aspects,
+        context,
+    )?;
     crate::retained_lighting::apply_surface_lighting(&mut lowered, primitive, aspects, context)?;
     Ok(lowered)
 }
@@ -434,6 +442,12 @@ fn surface_alpha_policy(
 ) -> PrimitiveDraw {
     if draw.topology() == crate::PrimitiveTopology::Triangles && draw.textured_style.is_none() {
         draw.surface_blend = crate::style::surface_uses_blending(&**aspects);
+        draw.surface_forced_blend = aspects.alpha_mode() == Graphic3dAlphaMode::MaskBlend;
+        draw.surface_cutoff = matches!(
+            aspects.alpha_mode(),
+            Graphic3dAlphaMode::Mask | Graphic3dAlphaMode::MaskBlend
+        )
+        .then_some(aspects.alpha_cutoff());
     }
     draw
 }

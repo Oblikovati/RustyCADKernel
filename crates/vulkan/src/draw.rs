@@ -71,8 +71,13 @@ pub struct PrimitiveDraw {
     pub(crate) text_shadow_bias: bool,
     pub(crate) text_background_blend: bool,
     pub(crate) surface_blend: bool,
+    pub(crate) surface_cutoff: Option<f32>,
+    pub(crate) surface_forced_blend: bool,
     pub(crate) line_style: Option<LineStyle>,
     pub(crate) textured_style: Option<crate::TexturedStyle>,
+    pub(crate) surface_texture: Option<crate::surface_texture::SurfaceTextureStyle>,
+    pub(crate) surface_texture_unavailable:
+        Option<crate::surface_texture::SurfaceTextureUnavailable>,
     pub(crate) point_style: Option<crate::PointStyle>,
 }
 /// Compatibility name for the original submission type; `TriangleDraw::new(vertices, indices, matrix)?`.
@@ -122,8 +127,12 @@ impl PrimitiveDraw {
             text_shadow_bias: false,
             text_background_blend: false,
             surface_blend: false,
+            surface_cutoff: None,
+            surface_forced_blend: false,
             line_style: None,
             textured_style: None,
+            surface_texture: None,
+            surface_texture_unavailable: None,
             point_style: Some(style),
         })
     }
@@ -174,8 +183,12 @@ impl PrimitiveDraw {
             text_shadow_bias: false,
             text_background_blend: false,
             surface_blend,
+            surface_cutoff: None,
+            surface_forced_blend: false,
             line_style,
             textured_style: None,
+            surface_texture: None,
+            surface_texture_unavailable: None,
             point_style: None,
         })
     }

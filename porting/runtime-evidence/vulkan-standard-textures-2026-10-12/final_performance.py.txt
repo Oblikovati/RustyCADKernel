@@ -1,0 +1,41 @@
+import gzip,hashlib,json,os,subprocess,sys,time
+from dataclasses import asdict
+from pathlib import Path
+ROOT=Path('/home/vmiguel/git/oblikovati-workspace/Martensite-vulkan-standard-textures')
+sys.path.insert(0,str(ROOT/'tools'))
+from vulkan_source_receipt import source_hashes
+from vulkan_performance import summarize_samples
+from vulkan_profiles import probe_profile,confirm_device
+folder=Path('/tmp/martensite-standard-textures/final')
+def process_state() -> dict[str, object]:
+ result=[]
+ for p in Path('/proc').iterdir():
+  if not p.name.isdigit():continue
+  try:
+   name=(p/'comm').read_text().strip()
+   if name in ['cargo','rustc','rustdoc','cc1plus','glslangValidator','surface_texture','surface-oracle']:
+    result.append({'pid':int(p.name),'name':name,'arguments':(p/'cmdline').read_bytes().decode(errors='replace').replace('\0',' ')[:1000]})
+  except (FileNotFoundError,PermissionError,ProcessLookupError):pass
+ return {'utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'load':list(os.getloadavg()),'processes':result}
+def run(command: list[str], env: dict[str, str]) -> str:
+ r=subprocess.run(command,cwd=ROOT,env=env,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+ if r.returncode:raise RuntimeError((command,r.returncode,r.stdout))
+ return r.stdout
+binary=ROOT/'target/release/examples/surface_texture_performance'
+receipt={'start_head':run(['git','rev-parse','HEAD'],dict(os.environ)).strip(),'binary_sha256':hashlib.sha256(binary.read_bytes()).hexdigest(),'source_hashes':source_hashes(),'profiles':[],'baseline':'No accepted baseline exists for these new texture workloads. Measurements are qualified local evidence, not baseline acceptance.'}
+for name in ['lavapipe','host']:
+ profile=probe_profile(name,dict(os.environ,DISPLAY=':1'),list(Path('/usr/share/vulkan/icd.d').glob('*.json')),run,Path('/usr/share/vulkan/icd.d/radeon_icd.json'))
+ before=process_state();start=time.time()
+ output=run([str(binary)],profile.environment)
+ after=process_state();confirm_device(output,profile.device)
+ (folder/(name+'-performance.log')).write_text(output)
+ rows=[]
+ for line in output.splitlines():
+  if not line.startswith('MARTENSITE_PERFORMANCE='):continue
+  row=json.loads(line.split('=',1)[1]);assert row['warmup']==20 and len(row['samples_ms'])==100
+  row.update(summarize_samples(row['samples_ms']));rows.append(row)
+ assert len(rows)==51 and len({r['workload'] for r in rows})==51
+ receipt['profiles'].append({'profile':name,'device':asdict(profile.device),'icd_sha256':hashlib.sha256(Path(profile.environment['VK_DRIVER_FILES']).read_bytes()).hexdigest(),'probe':profile.probe,'start':before,'end':after,'duration_s':time.time()-start,'exit':0,'performance':rows})
+ assert receipt['source_hashes']==source_hashes(),'source changed during timing'
+with gzip.open(folder/'performance.json.gz','wt') as f:json.dump(receipt,f,indent=2)
+print(json.dumps({p['profile']:{'workloads':len(p['performance']),'median_range_ms':[min(r['median_ms'] for r in p['performance']),max(r['median_ms'] for r in p['performance'])],'upload':next(r['median_ms'] for r in p['performance'] if r['workload'].endswith('image-updated-each-frame')),'sampler':next(r['median_ms'] for r in p['performance'] if r['workload'].endswith('sampler-updated-each-frame'))} for p in receipt['profiles']}))
