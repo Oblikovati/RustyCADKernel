@@ -14,6 +14,7 @@ pub(super) struct UploadedDraw {
     pub transform: Vec<u8>,
     pub pipeline: Arc<DrawPipeline>,
     pub line_width: Option<f32>,
+    pub line_stipple: Option<(u32, u16)>,
     pub annotation: bool,
     pub text_shadow_bias: bool,
     pub text_logic_xor: bool,
@@ -123,8 +124,13 @@ fn upload_draw(
             runtime.limits.point_size_range,
         )?;
     }
-    let vertices = encode_vertices(draw);
-    let indices: Vec<u8> = crate::quad_assembly::device_quad_indices(draw, runtime.quad_diagonal)
+    let original_indices = crate::quad_assembly::device_quad_indices(draw, runtime.quad_diagonal);
+    let sources = super::fixed_vertex_sources::fixed_vertex_sources(draw, &original_indices);
+    let vertices = encode_vertex_sources(draw, &sources);
+    let expanded = super::fixed_vertex_sources::fixed_expanded_indices(draw, sources.len());
+    let indices: Vec<u8> = expanded
+        .as_deref()
+        .unwrap_or(&original_indices)
         .iter()
         .flat_map(|i| i.to_ne_bytes())
         .collect();
@@ -227,6 +233,7 @@ fn upload_draw(
         vertices: vertex_buffer,
         indices: index_buffer,
         count,
+        line_stipple: crate::fixed_line_stipple::fixed_line_stipple(draw),
         line_width: draw
             .line_style
             .or(draw.polygon_edge_style)
@@ -245,9 +252,43 @@ fn upload_bytes(
     Ok(buffer)
 }
 
+#[cfg(test)]
 fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
+    let sources: Vec<_> = (0..draw.vertices.len())
+        .map(|index| (index, index))
+        .collect();
+    encode_vertex_sources(draw, &sources)
+}
+
+#[cfg(test)]
+mod fixed_pack_tests {
+    use super::*;
+    #[test]
+    fn fixed_provoking_position_keeps_homogeneous_weight_and_full_stride() {
+        let vertex = crate::RenderVertex::homogeneous([1., 2., 3., 4.], [0.25, 0.5, 0.75, 1.]);
+        let mut draw =
+            PrimitiveDraw::new(vec![vertex; 3], vec![0, 1, 2], crate::identity_clip()).unwrap();
+        let mut lighting = crate::RenderLighting::new(
+            vec![[0., 0., 1.]; 3],
+            crate::RenderMaterial::default(),
+            crate::identity_clip(),
+            crate::identity_clip(),
+            false,
+            crate::RenderShading::Phong,
+        )
+        .unwrap();
+        lighting.prepare_fixed_lighting().unwrap();
+        draw.lighting = Some(lighting);
+        let bytes = encode_vertices(&draw);
+        assert_eq!(bytes.len(), 3 * 88);
+        assert_eq!(f32::from_ne_bytes(bytes[56..60].try_into().unwrap()), 4.);
+        assert_eq!(f32::from_ne_bytes(bytes[72..76].try_into().unwrap()), 0.25);
+    }
+}
+fn encode_vertex_sources(draw: &PrimitiveDraw, sources: &[(usize, usize)]) -> Vec<u8> {
     let mut bytes = Vec::new();
-    for (index, vertex) in draw.vertices.iter().enumerate() {
+    for &(index, source) in sources {
+        let vertex = &draw.vertices[index];
         bytes.extend(encoded_vertex_header(vertex, draw.text_logic_xor));
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
@@ -255,6 +296,18 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
         append_surface_coordinates(&mut bytes, draw, index);
         if let Some(lighting) = &draw.lighting {
             bytes.extend(lighting.normals[index].iter().flat_map(|v| v.to_ne_bytes()));
+            if lighting.is_fixed_lighting() {
+                let selected = &draw.vertices[source];
+                bytes.extend(
+                    selected
+                        .position
+                        .into_iter()
+                        .chain(std::iter::once(selected.weight))
+                        .chain(lighting.normals[source])
+                        .chain(selected.color)
+                        .flat_map(f32::to_ne_bytes),
+                );
+            }
         }
     }
     bytes

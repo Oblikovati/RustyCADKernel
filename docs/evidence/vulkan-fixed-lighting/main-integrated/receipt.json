@@ -1,0 +1,74 @@
+{
+  "merge_revision": "9c34969a43a75239159e7771b905854bf38f809a",
+  "feature_revision": "24c1a3b53005b9374b2395bb8bb1a33bba19887b",
+  "source_delta": "Existing surface variant tests relocated unchanged into a separate test file so pipeline_variants.rs is below500 lines. Final checks cover this delta.",
+  "source_inputs": 14151,
+  "tested_source_hashes_sha256": "509f95eb84c1a300b707dace452a4e39896c858f1f162ced1ff83461100a5209",
+  "test_summaries": {
+    "before-test-split-vulkan-host": {
+      "groups": 65,
+      "passed": 528,
+      "failed": 0,
+      "ignored": 4
+    },
+    "before-test-split-vulkan-software": {
+      "groups": 65,
+      "passed": 528,
+      "failed": 0,
+      "ignored": 4
+    },
+    "doc-tests": {
+      "groups": 1,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    "toolkit-tests": {
+      "groups": 8,
+      "passed": 1143,
+      "failed": 0,
+      "ignored": 0
+    },
+    "vulkan-host": {
+      "groups": 65,
+      "passed": 528,
+      "failed": 0,
+      "ignored": 4
+    },
+    "vulkan-software": {
+      "groups": 65,
+      "passed": 528,
+      "failed": 0,
+      "ignored": 4
+    }
+  },
+  "checks": {
+    "terminal_exit": 0,
+    "clippy_3_crates_all_targets_all_features": 0,
+    "workspace_and_explicit_changed_leaf_fmt": 0,
+    "python_new_shader_and_catalog_modules": 0,
+    "current_shaders_compiled_byte_matched_validated": 90,
+    "new_fixed_shaders": 34,
+    "ordinary56_spirv_preserved": true,
+    "test_relocation_body_identical": true
+  },
+  "logs_sha256": {
+    "before-test-split-clippy.log": "2c6e89bd2bfdab31267afb431ecf9cc1af424856fa980c5169da0f99c8908d2a",
+    "before-test-split-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "before-test-split-python-tests.log": "6273232de4d3ef7acd4ecafa5c86beeeb974f56586b21089a2990b3f72facbe6",
+    "before-test-split-shader-checks.log": "2f7f33b88c57ef8667ad124e40e30a761d11ed29a9b5de1520c05873eba4cf2e",
+    "before-test-split-vulkan-host.log": "1fbe8999f7814d51ce0d57d704d72ea2af96f7778767ef2aacb9213e87f13828",
+    "before-test-split-vulkan-software.log": "67390555f09ef0cb841210f85d59f79a27a19ddafc9cfb04bdbdd2e626b62ee8",
+    "clippy.log": "6db2152dd9c4ff02dbe76f0e6955e261e536f31f2f23ba767ffca7a6a88b40a6",
+    "doc-tests.log": "4a7fcbcfd2d3bb18061baa175075d129871154f73c9a68c443d4f89528e5cb1e",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "leaf-fmt-before.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "leaf-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "toolkit-tests.log": "6050f6503cc3aa0567e7d71c1f4287c6d24a76dbe977880054e2cf2177de8223",
+    "vulkan-host.log": "d79b4a2b7d16aa8f3d93691ba351b8ac8d8ffd2341474586a9dc6ec4efb78d3c",
+    "vulkan-software.log": "1369cd0b7e1bfd4bb5b5d6c09761d683196a632868aa691bd2a9ba1125161a81"
+  },
+  "performance_source": "6b9fd58f48aa8de6a471304b14668107ff48fa82; independently audited frozen branch build, not a claim of timing the later combined main source. See adjacent root audits and optimized reports.",
+  "baseline_accepted": false,
+  "native_proof": "Branch native232 repeated pairs and464 native RGBA/depth assets; root replays committed assets via both actual Vulkan devices. Native oracle was not rebuilt by this main check."
+}

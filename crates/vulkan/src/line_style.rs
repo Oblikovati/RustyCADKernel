@@ -27,6 +27,27 @@ pub(crate) fn primitive_style(
     line_parameters(style)
 }
 
+pub(crate) fn primitive_style_in_pipeline(
+    kind: Graphic3dTypeOfPrimitiveArray,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    closed: bool,
+    pipeline: crate::RenderLightingPipeline,
+) -> Result<([f32; 4], Option<LineStyle>), RenderError> {
+    let nodal = matches!(
+        kind,
+        Graphic3dTypeOfPrimitiveArray::Points
+            | Graphic3dTypeOfPrimitiveArray::Segments
+            | Graphic3dTypeOfPrimitiveArray::Polylines
+    );
+    if pipeline == crate::RenderLightingPipeline::FixedFunction && !nodal {
+        return Ok((
+            crate::style::surface_color_in_pipeline(aspects, pipeline)?,
+            None,
+        ));
+    }
+    primitive_style(kind, aspects, closed)
+}
+
 fn line_parameters(
     style: &dyn Graphic3dAspectsSource,
 ) -> Result<([f32; 4], Option<LineStyle>), RenderError> {

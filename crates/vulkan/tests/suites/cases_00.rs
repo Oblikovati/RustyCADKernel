@@ -25,6 +25,8 @@ pub mod clipping_draw;
 pub mod clipping_view;
 #[path = "../decal_text_policy.rs"]
 pub mod decal_text_policy;
+#[path = "../fixed_lighting_replay.rs"]
+pub mod fixed_lighting_replay;
 #[path = "../graphic_buffers.rs"]
 pub mod graphic_buffers;
 #[path = "../graphic_submission.rs"]

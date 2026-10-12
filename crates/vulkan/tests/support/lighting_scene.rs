@@ -194,7 +194,7 @@ fn fill_lighting_vertex_slots(vertices: &Graphic3dArrayOfPrimitives, mode: &str)
         }
     }
 }
-fn configure_lights(base: &ViewerScene, mode: &str) -> Handle<Graphic3dCLight> {
+pub(crate) fn configure_lights(base: &ViewerScene, mode: &str) -> Handle<Graphic3dCLight> {
     let light = lighting_source(mode);
     configure_light_parameters(&light, mode);
     let ambient = Handle::new(Graphic3dCLight::new(Graphic3dTypeOfLightSource::Ambient));

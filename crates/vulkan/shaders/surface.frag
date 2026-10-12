@@ -42,12 +42,23 @@ layout(location=2) in vec3 viewDirection;
 layout(location=4) in vec4 worldPosition;
 layout(location=5) in vec4 frontColor;
 layout(location=6) in vec4 backColor;
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=9) flat in vec4 fixedFrontColor;
+#endif
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=10) flat in vec4 fixedBackColor;
+#endif
 #include "lit_fragment.glsl"
 #endif
 #include "clipping.glsl"
 layout(location=0) out vec4 outColor;
 vec4 sampledSurfaceColor() {
     vec4 primary=vertexColor;
+#ifdef MARTENSITE_LIGHTING
+#ifdef MARTENSITE_FIXED_LIGHTING
+    if(lighting.settings.x>=3u)primary=litFragmentColor();
+#endif
+#endif
     if ((transform.flags&2048u)!=0u) primary.a=transform.fixedPrimaryAlpha;
     if ((transform.flags&32u)!=0u) return primary*surfaceTexel();
     if ((transform.flags&128u)!=0u) return vec4(vertexColor.rgb,surfaceTexel().a);

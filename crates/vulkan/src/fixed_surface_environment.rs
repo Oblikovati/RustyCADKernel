@@ -1,7 +1,11 @@
 //! Native unlit FFP textures retain OpenGl_Sampler component and encoded-target semantics.
 use crate::PrimitiveDraw;
 pub(crate) fn uses_fixed_surface_environment(draw: &PrimitiveDraw) -> bool {
-    draw.lighting.is_none()
+    (draw.lighting.is_none()
+        || draw
+            .lighting
+            .as_ref()
+            .is_some_and(|state| state.is_fixed_lighting()))
         && (draw
             .surface_texture
             .as_ref()
@@ -26,6 +30,9 @@ pub(crate) fn fixed_surface_environment_flags(draw: &PrimitiveDraw) -> u32 {
     flags + 2048 * u32::from(fixed_uniform_alpha(draw).is_some())
 }
 pub(crate) fn fixed_uniform_alpha(draw: &PrimitiveDraw) -> Option<f32> {
+    if draw.lighting.is_some() {
+        return None;
+    }
     let vertex_override = fixed_vertex_override(draw)?;
     if !uses_fixed_surface_environment(draw)
         || (vertex_override && draw.polygon_edge_style.is_none())

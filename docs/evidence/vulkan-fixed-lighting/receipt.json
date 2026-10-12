@@ -1,0 +1,198 @@
+{
+  "project": "Martensite",
+  "feature": "Explicit fixed-function common-material lighting in Vulkan1.3",
+  "branch": "porting/martensite-fixed-lighting",
+  "frozen_source_head": "6b9fd58f48aa8de6a471304b14668107ff48fa82",
+  "integrated_base_main": "3f01c0663",
+  "native_upstream_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "functional": {
+    "cases_per_profile": 116,
+    "software_strict": 116,
+    "host_strict": 108,
+    "native_repeat_identical_pairs": 232,
+    "native_rgba_depth_assets_unchanged": 464,
+    "tests_per_profile": 528,
+    "executables_per_profile": 65,
+    "ignored_diagnostics_per_profile": 4,
+    "clippy_exit": 0,
+    "bounded_python_modules": 29,
+    "fmt_exit": 0,
+    "canonical_discovery_exit": 0,
+    "current_validated_spirv": 90,
+    "ordinary_spirv_original_base_unchanged": 56
+  },
+  "strict_host_diagnostics": [
+    {
+      "profile": "host",
+      "mode": "lit-colored",
+      "color_differences": 9,
+      "max_color_delta": 1,
+      "native_repeat_exact": true,
+      "max_depth_delta": 0.0
+    },
+    {
+      "profile": "host",
+      "mode": "lit-rotation",
+      "color_differences": 1,
+      "max_color_delta": 1,
+      "native_repeat_exact": true,
+      "max_depth_delta": 1.1026859283447266e-06
+    },
+    {
+      "profile": "host",
+      "mode": "lit-normal-updated",
+      "color_differences": 7,
+      "max_color_delta": 1,
+      "native_repeat_exact": true,
+      "max_depth_delta": 0.0
+    },
+    {
+      "profile": "host",
+      "mode": "lit-light-updated",
+      "color_differences": 9,
+      "max_color_delta": 1,
+      "native_repeat_exact": true,
+      "max_depth_delta": 0.0
+    },
+    {
+      "profile": "host",
+      "mode": "lit-alpha-opacity-updated",
+      "color_differences": 6,
+      "max_color_delta": 1,
+      "native_repeat_exact": true,
+      "max_depth_delta": 0.0
+    },
+    {
+      "profile": "host",
+      "mode": "lit-adjacent-basic",
+      "color_differences": 0,
+      "max_color_delta": 0,
+      "native_repeat_exact": true,
+      "max_depth_delta": 5.200505256652832e-06
+    },
+    {
+      "profile": "host",
+      "mode": "lit-adjacent-point",
+      "color_differences": 0,
+      "max_color_delta": 0,
+      "native_repeat_exact": true,
+      "max_depth_delta": 5.200505256652832e-06
+    },
+    {
+      "profile": "host",
+      "mode": "lit-adjacent-spot",
+      "color_differences": 0,
+      "max_color_delta": 0,
+      "native_repeat_exact": true,
+      "max_depth_delta": 5.200505256652832e-06
+    }
+  ],
+  "performance": {
+    "baseline_accepted": false,
+    "validation": false,
+    "warmup": 20,
+    "samples_per_workload": 100,
+    "profiles": [
+      {
+        "profile": "software",
+        "device": "llvmpipe (LLVM 20.1.2, 128 bits)",
+        "workloads": 124,
+        "samples": 12400,
+        "median_range_ms": [
+          0.19987,
+          0.559099
+        ],
+        "representative": [
+          {
+            "workload": "fixed-lit-basic",
+            "median_ms": 0.251425,
+            "p95_ms": 0.388378
+          },
+          {
+            "workload": "fixed-lit-marker-ball",
+            "median_ms": 0.32875350000000003,
+            "p95_ms": 0.475159
+          },
+          {
+            "workload": "fixed-texture-lit-bilinear",
+            "median_ms": 0.2778035,
+            "p95_ms": 0.34242300000000003
+          },
+          {
+            "workload": "fixed-lit-normal-updated-each-frame",
+            "median_ms": 0.23454400000000003,
+            "p95_ms": 0.318138
+          },
+          {
+            "workload": "fixed-texture-lit-image-updated-each-frame",
+            "median_ms": 0.3944345,
+            "p95_ms": 0.5768179999999999
+          }
+        ]
+      },
+      {
+        "profile": "host",
+        "device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "workloads": 124,
+        "samples": 12400,
+        "median_range_ms": [
+          0.19587700000000002,
+          0.42058300000000004
+        ],
+        "representative": [
+          {
+            "workload": "fixed-lit-basic",
+            "median_ms": 0.23494500000000001,
+            "p95_ms": 0.27316599999999996
+          },
+          {
+            "workload": "fixed-lit-marker-ball",
+            "median_ms": 0.300276,
+            "p95_ms": 0.474458
+          },
+          {
+            "workload": "fixed-texture-lit-bilinear",
+            "median_ms": 0.23740450000000002,
+            "p95_ms": 0.34700200000000003
+          },
+          {
+            "workload": "fixed-lit-normal-updated-each-frame",
+            "median_ms": 0.236728,
+            "p95_ms": 0.370325
+          },
+          {
+            "workload": "fixed-texture-lit-image-updated-each-frame",
+            "median_ms": 0.35939,
+            "p95_ms": 0.46482
+          }
+        ]
+      }
+    ],
+    "source_binary_external_bookends_equal": true,
+    "root_independent_audits": [
+      "root-before.json.gz",
+      "root-middle.json.gz",
+      "root-final.json.gz"
+    ],
+    "freeze_manifest": "optimized-freeze.json.gz",
+    "isolated_host_or_new_baseline_claim": false
+  },
+  "remaining_scope": [
+    "No universal bitwise claim for eight configured AMD precision controls; strictraw comparisons retained.",
+    "GL2.1 lighting undefined at eye-spacew0: native positional/spot section captures and red-capable ignoredRust test remain diagnostic, not a fabricatedportable result.",
+    "PBR aspects use native common-material FFPfallback, not physical PBRshaders.",
+    "Other renderer obligations and existing raster/offset specialcases remain tracked separately; no API/class completion claim or baseline acceptance."
+  ],
+  "repairs_proven": [
+    "Native flatpolygon/quad provoking inputs and distinct position/lightingvertex storage.",
+    "Actual point/sprite GL_REPLACE, encoded image rows and native alpha cutoff ordering.",
+    "Intrinsic material opacity restored independently of opaque pass classification.",
+    "Detached structure policy defaults without nullmanager dereference; explicit regression."
+  ],
+  "raw_invalid_controller_note": {
+    "name": "refreshed-final-cohort texture rows",
+    "reason": "Missing native texture- dispatch prefix; primitive fixture captured instead; corrected62pairs strictgreen retained separately."
+  },
+  "no_native_dependency_for_rust_replay": true,
+  "native_provenance": "native-provenance.json.gz"
+}

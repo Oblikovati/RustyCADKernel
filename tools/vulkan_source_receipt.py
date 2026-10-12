@@ -5,6 +5,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RECEIPT_ORACLE_PATHS = (
+    "tools/oracle/martensite_fixed_lighting_capture.cxx",
+    "tools/oracle/martensite_fixed_lighting_cap_capture.cxx",
+    "tools/oracle/martensite_fixed_cap_lights.hxx",
+    "tools/oracle/martensite_fixed_lighting_fixture.hxx",
+    "tools/oracle/martensite_fixed_lighting_arrays.hxx",
+    "tools/oracle/martensite_fixed_lighting_markers.hxx",
+    "tools/oracle/martensite_fixed_lighting_binding.hxx",
+    "tools/oracle/martensite_fixed_light_trace.hxx",
     "tools/oracle/martensite_triangle_edges_capture.cxx",
     "tools/oracle/martensite_triangle_edge_geometry.hxx",
     "tools/oracle/martensite_standard_texture_format.cxx",

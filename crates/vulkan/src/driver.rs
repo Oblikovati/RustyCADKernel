@@ -19,6 +19,7 @@ pub struct Graphic3dRenderDriver {
     device: SharedRenderDevice,
     text_source: Arc<dyn crate::TextLayoutSource>,
     pub(crate) mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
+    pub(crate) lighting_pipeline: crate::RenderLightingPipeline,
     pub(crate) texture_images: Arc<crate::retained_texture_images::RetainedTextureImages>,
     views: SharedState<Vec<WeakHandle<dyn Graphic3dCView>>>,
     limit: u32,
@@ -62,6 +63,20 @@ impl Graphic3dRenderDriver {
         coordinates: crate::RenderTextureCoordinatePipeline,
         edges: crate::RenderMeshEdgePipeline,
     ) -> Result<Handle<Self>, RenderError> {
+        Self::with_render_pipelines(
+            options,
+            coordinates,
+            edges,
+            crate::RenderLightingPipeline::default(),
+        )
+    }
+    /// Inject lighting, coordinates and edges; `Self::with_render_pipelines(options, coordinates, edges, RenderLightingPipeline::FixedFunction)?`.
+    pub fn with_render_pipelines(
+        options: VulkanOptions,
+        coordinates: crate::RenderTextureCoordinatePipeline,
+        edges: crate::RenderMeshEdgePipeline,
+        lighting: crate::RenderLightingPipeline,
+    ) -> Result<Handle<Self>, RenderError> {
         let renderer = VulkanRenderer::new(options)?;
         let limit = renderer.capture_limit();
         Ok(Self::build(
@@ -70,6 +85,7 @@ impl Graphic3dRenderDriver {
             Arc::new(crate::FreeTypeTextSource::default()),
             coordinates,
             edges,
+            lighting,
         ))
     }
     /// Inject a named backend and its extent limit; `Graphic3dRenderDriver::with_backend(recorder, 4096)?`.
@@ -112,6 +128,7 @@ impl Graphic3dRenderDriver {
             fonts,
             coordinate_pipeline,
             crate::RenderMeshEdgePipeline::default(),
+            crate::RenderLightingPipeline::default(),
         ))
     }
     fn build(
@@ -120,18 +137,21 @@ impl Graphic3dRenderDriver {
         text_source: Arc<dyn crate::TextLayoutSource>,
         coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
         mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
+        lighting_pipeline: crate::RenderLightingPipeline,
     ) -> Handle<Self> {
+        let texture_images = Arc::new(
+            crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(
+                coordinate_pipeline,
+            ),
+        );
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dGraphicDriverBase::new(&Handle::default()),
             device: Arc::new(SharedState::new(backend)),
             text_source,
             mesh_edge_pipeline,
-            texture_images: Arc::new(
-                crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(
-                    coordinate_pipeline,
-                ),
-            ),
+            lighting_pipeline,
+            texture_images,
             views: SharedState::default(),
             limit,
             vertical_sync: Arc::new(SharedState::new(false)),

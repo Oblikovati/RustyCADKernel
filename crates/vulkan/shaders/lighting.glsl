@@ -24,7 +24,13 @@ float spotAttenuation(vec3 direction, RenderLight light) {
     if (cosine >= 1.0 || cosine < cos(light.params.z)) return 0.0;
     return light.params.w > 0.0 ? pow(cosine, light.params.w * 128.0) : 1.0;
 }
+#ifdef MARTENSITE_FIXED_LIGHTING
+#include "fixed_lighting.glsl"
+#endif
 vec4 computeLighting(vec3 normal, vec3 view, vec4 world, bool front, vec4 vertexColor) {
+#ifdef MARTENSITE_FIXED_LIGHTING
+    return computeFixedLighting(normal,world,front,vertexColor);
+#else
     uint face = front ? 0u : 4u;
     vec3 diffuse = vec3(0.0), specular = vec3(0.0);
     vec3 faceNormal = front ? normal : -normal;
@@ -56,4 +62,5 @@ vec4 computeLighting(vec3 normal, vec3 view, vec4 world, bool front, vec4 vertex
 #endif
     result.rgb += lighting.materials[face+1u].rgb;
     return result;
+#endif
 }
