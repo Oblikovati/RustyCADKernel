@@ -563684,8 +563684,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dLineAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dLineAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_LineAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -564216,8 +564216,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dPointAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dPointAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_PointAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -564532,8 +564532,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dShadingAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dShadingAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_ShadingAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
