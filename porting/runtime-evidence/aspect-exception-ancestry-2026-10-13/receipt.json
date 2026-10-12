@@ -1,0 +1,31 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_rows": 32,
+  "native_runs": 2,
+  "native_runs_byte_identical": true,
+  "rust_tests_passed": 5307,
+  "rust_test_groups": 32,
+  "rust_failed": 0,
+  "source_sha256": {
+    "crates/tkernel/src/standard/failure.rs": "1f37387c4d2c498f47132a58ff984e09059ef3d8183d10a3f1ee2ad1a76505ae",
+    "crates/tkernel/src/standard/failure/byte_messages.rs": "ce817e5d164fc5988f25939e6e3ca790c4c912abd54d4c560b1854e6f4bd9498",
+    "crates/tkernel/src/standard/exceptions.rs": "756d159722dfb8e6736fe3fb20e6ef16b75d859100a13954748e98642fb92258",
+    "crates/tkernel/tests/standard_exceptions_behavior.rs": "ea3822eb2960c025e61a520eff64753e4452e948707b2c92dc5dea0befb43c53",
+    "crates/tkservice/src/aspect/exceptions.rs": "83cc3c21a7cfa7a210b753b456b7ea24f9ff723833c2ac09943e8d6050a82fa0",
+    "crates/tkservice/src/aspect/exceptions/exception_bytes.rs": "37ec900875ecd4d9da7535f3f3f8d44cf5f9ddb6fe53733da44f1f5668f78a71",
+    "crates/tkservice/tests/fixtures/aspect-exception-ancestry-native.txt": "fdb4ed93baea83ab3a04b572be0361c974f90447142aab747470b493eca7ebe7",
+    "tools/oracle/martensite_aspect_exception_ancestry.cxx": "5f2e6fc37a41c7786e6af5de7bb3d6291d2b215956f487c5bde240d46ce8a726"
+  },
+  "native_executable_sha256": "c749fce3235104f4448f51305fe135bc9ccde7b54d31b3dffbb9af450637047b",
+  "changes": "constructor-injected declared parent; message capture preserved; eight byte+explicit stack factories; clone/base-assignment ancestry; base slicing removes derived ancestry",
+  "limits": [
+    "nonzero stack-capture depth not added to this corpus; constructors delegate existing checked Kernel capture",
+    "no API ledger promotion yet",
+    "main integration pending"
+  ],
+  "ownership": "static parent name adds no allocations; no reverse toolkit dependency/global registry",
+  "clippy_exit": 0,
+  "superseded_attempts": {
+    "aspect-exception-ancestry-green.log.gz": "initial sibling field privacy compile failure; corrected pub(super) visibility, later toolkit/Clippy gates green"
+  }
+}

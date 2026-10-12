@@ -13,6 +13,7 @@ impl Failure {
     pub fn with_message_bytes(exception_type: &'static str, message: &[u8]) -> Self {
         Self {
             exception_type,
+            exception_parent: None,
             message: FailureText::from_bytes(message),
             stack: stack_capture::capture_stack_trace(),
             own_buffer: None,
@@ -24,6 +25,7 @@ impl Failure {
     pub fn with_type_bytes(exception_type: &'static str, message: &[u8], stack: &[u8]) -> Self {
         Self {
             exception_type,
+            exception_parent: None,
             message: FailureText::from_bytes(message),
             stack: FailureText::from_bytes(stack),
             own_buffer: None,
