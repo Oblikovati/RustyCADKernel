@@ -93,10 +93,15 @@ macro_rules! retained_view_methods {
         fn set_texture_env(&self, texture_env: &Handle<Graphic3dTextureEnv>) {
             self.retained.set_texture_env(texture_env)
         }
-        fn lights(&self) -> Handle<Graphic3dLightSet> {
-            self.retained.lights()
+        fn lights_ref(
+            &self,
+        ) -> Box<dyn rustycad_tkernel::standard::HandleReference<Graphic3dLightSet> + '_> {
+            self.retained.lights_ref()
         }
-        fn set_lights(&self, lights: &Handle<Graphic3dLightSet>) {
+        fn set_lights(
+            &self,
+            lights: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dLightSet>,
+        ) {
             self.retained.set_lights(lights)
         }
         fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {

@@ -252,25 +252,40 @@ pub trait Graphic3dCViewComputed: Graphic3dCView {
     /// `ConsiderZoomPersistenceObjects`: the largest layer coefficient (at least 1; 1 for an
     /// undefined view); `view.consider_zoom_persistence_objects()?`.
     fn consider_zoom_persistence_objects(&self) -> Result<f64, Failure> {
-        if !self.is_defined() {
-            return Ok(1.0);
-        }
-        let camera = self.camera();
-        let size = self.window().get().map_or([0, 0], |w| {
-            let (width, height) = w.size();
-            [width, height]
-        });
-        let mut max_coef = 1.0;
-        for layer in self.layers().iter().filter_map(Handle::get) {
-            max_coef = native_max(
-                max_coef,
-                layer.consider_zoom_persistence_objects(self.identification(), &camera, size)?,
-            );
-        }
-        Ok(max_coef)
+        rustycad_tkernel::standard::catch_native_failure(|| {
+            if !self.is_defined() {
+                return Ok(1.0);
+            }
+            // OCCT 3d097a0 keeps the virtual getter's selected field across Size callbacks.
+            let camera = self.camera_ref();
+            let size = self.window().get().map_or([0, 0], |w| {
+                let (width, height) = w.size();
+                [width, height]
+            });
+            maximum_zoom_persistence_coefficient(self, camera.as_ref(), size)
+        })
     }
 }
 impl<T: Graphic3dCView + ?Sized> Graphic3dCViewComputed for T {}
+
+fn maximum_zoom_persistence_coefficient<V: Graphic3dCView + ?Sized>(
+    view: &V,
+    camera: &dyn rustycad_tkernel::standard::HandleReference<super::Graphic3dCamera>,
+    size: [i32; 2],
+) -> Result<f64, Failure> {
+    let mut max_coef = 1.0;
+    for layer in view.layers().iter().filter_map(Handle::get) {
+        max_coef = native_max(
+            max_coef,
+            layer.consider_zoom_persistence_objects(
+                view.identification(),
+                &camera.observe(),
+                size,
+            )?,
+        );
+    }
+    Ok(max_coef)
+}
 
 /// Whether a corner coordinate is at or beyond the short-real range.
 fn beyond_short_real(bounds: &BoundingBox3) -> bool {

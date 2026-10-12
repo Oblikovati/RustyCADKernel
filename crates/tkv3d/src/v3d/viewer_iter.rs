@@ -1,30 +1,16 @@
-//! The deprecated iteration members of `V3d_Viewer` (`InitActiveViews`...). The native
-//! iterators are list iterators kept in the viewer; here each is a position in its list.
-//! Native quirk kept: `Next*` does nothing on an empty list, and `ActiveView` past the end
-//! gives a null handle (natively undefined behavior).
+//! Deprecated V3d_Viewer iteration retains actual list-node cursors in the viewer.
+//! Native empty-list Next guards preserve the cursor; invalid end-node references have no
+//! native success contract and produce Martensite's typed diagnostic rather than a copied null.
 use super::V3dViewer;
 use crate::v3d::V3dViewSource;
 use rustycad_tkernel::standard::{Handle, HandleReference as _};
 use rustycad_tkservice::graphic3d::Graphic3dCLight;
 
-/// The cursor slots of the four deprecated iterations.
+/// Native view cursor slots remain distinct from the light cursor storage.
 const ACTIVE_VIEWS: usize = 0;
 const DEFINED_VIEWS: usize = 1;
-const ACTIVE_LIGHTS: usize = 2;
-const DEFINED_LIGHTS: usize = 3;
 
 impl V3dViewer {
-    fn cursor(&self, slot: usize) -> usize {
-        self.state.read().iterators[slot]
-    }
-    fn set_cursor(&self, slot: usize, value: usize) {
-        self.state.write().iterators[slot] = value;
-    }
-    fn advance(&self, slot: usize, list_len: usize) {
-        if list_len != 0 {
-            self.set_cursor(slot, self.cursor(slot) + 1);
-        }
-    }
     /// Deprecated native first-node initialization; `viewer.init_active_views()`.
     pub fn init_active_views(&self) {
         let mut state = self.state.write();
@@ -65,51 +51,45 @@ impl V3dViewer {
     pub fn defined_view(&self) -> Handle<dyn V3dViewSource> {
         self.defined_view_ref().clone_handle()
     }
-    /// Deprecated `InitActiveLights`; `viewer.init_active_lights()`.
+    /// Initialize native active-light node; `viewer.init_active_lights()`.
     pub fn init_active_lights(&self) {
-        self.set_cursor(ACTIVE_LIGHTS, 0);
+        let mut fields = self.state.write();
+        fields.light_cursors[0] = fields.active_lights.cursor();
     }
-    /// Deprecated `MoreActiveLights`; `viewer.more_active_lights()`.
+    /// Test native active-light node; `viewer.more_active_lights()`.
     pub fn more_active_lights(&self) -> bool {
-        self.cursor(ACTIVE_LIGHTS) < self.state.read().active_lights.len()
+        self.state.read().light_cursors[0].more()
     }
-    /// Deprecated `NextActiveLights` (advances even on an empty list, as natively).
-    /// Example: `viewer.next_active_lights()`.
+    /// Advance native active-light node; `viewer.next_active_lights()`.
     pub fn next_active_lights(&self) {
-        self.set_cursor(ACTIVE_LIGHTS, self.cursor(ACTIVE_LIGHTS) + 1);
+        let mut fields = self.state.write();
+        let mut cursor = fields.light_cursors[0];
+        cursor.next(&fields.active_lights);
+        fields.light_cursors[0] = cursor;
     }
-    /// Deprecated `ActiveLight`; `viewer.active_light()`.
+    /// Explicit owning convenience; native ActiveLight binds active_light_ref; `viewer.active_light()`.
     pub fn active_light(&self) -> Handle<Graphic3dCLight> {
-        let index = self.cursor(ACTIVE_LIGHTS);
-        self.state
-            .read()
-            .active_lights
-            .get(index)
-            .cloned()
-            .unwrap_or_default()
+        self.active_light_ref().clone_handle()
     }
-    /// Deprecated `InitDefinedLights`; `viewer.init_defined_lights()`.
+    /// Initialize native defined-light node; `viewer.init_defined_lights()`.
     pub fn init_defined_lights(&self) {
-        self.set_cursor(DEFINED_LIGHTS, 0);
+        let mut fields = self.state.write();
+        fields.light_cursors[1] = fields.defined_lights.cursor();
     }
-    /// Deprecated `MoreDefinedLights`; `viewer.more_defined_lights()`.
+    /// Test native defined-light node; `viewer.more_defined_lights()`.
     pub fn more_defined_lights(&self) -> bool {
-        self.cursor(DEFINED_LIGHTS) < self.state.read().defined_lights.len()
+        self.state.read().light_cursors[1].more()
     }
-    /// Deprecated `NextDefinedLights`; `viewer.next_defined_lights()`.
+    /// Advance native defined-light node; `viewer.next_defined_lights()`.
     pub fn next_defined_lights(&self) {
-        let len = self.state.read().defined_lights.len();
-        self.advance(DEFINED_LIGHTS, len);
+        let mut fields = self.state.write();
+        let mut cursor = fields.light_cursors[1];
+        cursor.next(&fields.defined_lights);
+        fields.light_cursors[1] = cursor;
     }
-    /// Deprecated `DefinedLight`; `viewer.defined_light()`.
+    /// Explicit owning convenience; native DefinedLight binds defined_light_ref; `viewer.defined_light()`.
     pub fn defined_light(&self) -> Handle<Graphic3dCLight> {
-        let index = self.cursor(DEFINED_LIGHTS);
-        self.state
-            .read()
-            .defined_lights
-            .get(index)
-            .cloned()
-            .unwrap_or_default()
+        self.defined_light_ref().clone_handle()
     }
     /// `ActiveViewIterator`: the active views to iterate; `viewer.active_view_iterator()`.
     pub fn active_view_iterator(&self) -> super::V3dViewCursor<'_> {
@@ -120,11 +100,11 @@ impl V3dViewer {
         self.defined_views_ref().cursor()
     }
     /// `ActiveLightIterator`; `viewer.active_light_iterator()`.
-    pub fn active_light_iterator(&self) -> std::vec::IntoIter<Handle<Graphic3dCLight>> {
-        self.active_lights().into_iter()
+    pub fn active_light_iterator(&self) -> super::V3dLightCursor<'_> {
+        self.active_lights_ref().cursor()
     }
     /// `DefinedLightIterator`; `viewer.defined_light_iterator()`.
-    pub fn defined_light_iterator(&self) -> std::vec::IntoIter<Handle<Graphic3dCLight>> {
-        self.defined_lights().into_iter()
+    pub fn defined_light_iterator(&self) -> super::V3dLightCursor<'_> {
+        self.defined_lights_ref().cursor()
     }
 }

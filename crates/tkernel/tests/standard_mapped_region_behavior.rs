@@ -3,9 +3,46 @@
 #![allow(unsafe_code)]
 
 use rustycad_tkernel::standard::MMgrOpt;
+use std::process::Command;
+
+const MAPPED_REGION_CHILD: &str = "MARTENSITE_MAPPED_REGION_CHILD";
 
 #[test]
 fn mapped_prefix_free_unmaps_prefix_and_keeps_suffix_resident() {
+    if std::env::var_os(MAPPED_REGION_CHILD).is_some() {
+        assert_prefix_release();
+        return;
+    }
+    assert_isolated_prefix_release();
+}
+
+fn isolated_prefix_release() -> std::process::Output {
+    // Freed addresses are process-global: parallel allocations can reuse the prefix before mincore.
+    Command::new(std::env::current_exe().expect("test executable path"))
+        .args([
+            "--exact",
+            "standard_mapped_region_behavior::mapped_prefix_free_unmaps_prefix_and_keeps_suffix_resident",
+            "--test-threads=1",
+        ])
+        .env(MAPPED_REGION_CHILD, "1")
+        .output()
+        .expect("spawn isolated mapped-region check")
+}
+
+fn assert_isolated_prefix_release() {
+    let output = isolated_prefix_release();
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    assert!(
+        output.status.success(),
+        "mapped-region child expected success: {output:?}"
+    );
+    assert!(
+        stdout.contains("1 passed; 0 failed"),
+        "expected exactly one checked test: {stdout}"
+    );
+}
+
+fn assert_prefix_release() {
     let mut manager = MMgrOpt::default();
     let (page, mut block) = allocate_three_pages(&mut manager);
     let prefix = block.address().get();

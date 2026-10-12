@@ -81,6 +81,7 @@ mod mesh_edges;
 mod retained_aspect_textures;
 mod retained_cap_textures;
 mod retained_capping;
+mod retained_eye_edge_matrix;
 mod retained_mesh_edges;
 mod surface_alpha;
 pub use mesh_edges::{RenderMeshEdgePipeline, RenderMeshEdges};
@@ -103,6 +104,7 @@ mod capping_mask_aspect;
 
 mod quad_assembly;
 
+mod fixed_surface_environment;
 mod polygon_offset;
 pub use polygon_offset::RenderPolygonOffset;
 

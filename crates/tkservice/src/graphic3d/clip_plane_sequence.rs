@@ -108,11 +108,15 @@ impl Graphic3dSequenceOfHClipPlane {
         state.items.remove(position);
         true
     }
-    /// Removes the current plane of `it` (which then points at the following plane); an
-    /// iterator past the end raises `Standard_OutOfRange`. Example: `planes.remove_at(&mut it)?`.
+    /// Removes current and advances it; an end iterator is unchanged, as natively.
+    /// Example: `planes.remove_at(&mut it)?` also accepts a default iterator.
     pub fn remove_at(&self, it: &mut Graphic3dSequenceOfHClipPlaneIterator) -> Result<(), Failure> {
+        // OCCT 3d097a0 BaseSequence::Remove returns before touching null CurrentNode.
+        if !it.more() {
+            return Ok(());
+        }
         let mut state = self.state.write();
-        if it.index >= state.items.len() || !it.more() {
+        if it.index >= state.items.len() {
             return Err(out_of_range(&format!(
                 "Graphic3d_SequenceOfHClipPlane::Remove() - iterator position {} of {} planes; expected a current plane",
                 it.index,

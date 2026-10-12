@@ -18,9 +18,9 @@ impl SampledSurfaceImage {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
         source: &SurfaceTextureImage,
+        format: vk::Format,
     ) -> Result<Arc<Self>, RenderError> {
         let levels = sampled_levels(source);
-        let format = sampled_format(source.encoding);
         validate_sampled_image(runtime, source, format, levels)?;
         let extent = sampled_surface_extent(source);
         let handle = create_sampled_image(runtime, extent, format, levels)?;

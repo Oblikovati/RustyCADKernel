@@ -1,0 +1,50 @@
+name: Martensite release renderer diagnostics
+on:
+  push:
+    branches: [diagnostics/release-0.2.2]
+permissions:
+  contents: read
+env:
+  CARGO_PROFILE_DEV_DEBUG: "0"
+  CARGO_PROFILE_TEST_DEBUG: "0"
+  CARGO_INCREMENTAL: "0"
+  GALLIUM_OVERRIDE_CPU_CAPS: sse2
+  LP_NATIVE_VECTOR_WIDTH: "128"
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    steps:
+      # Diagnose run38259557702 without changing its immutable release source.
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: v0.2.2
+      - name: Install the same runner graphics stack
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers vulkan-tools
+          echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+          python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
+      - name: Record runner CPU, packages and driver identity
+        run: |
+          mkdir -p target/renderer-diagnostics
+          lscpu --json > target/renderer-diagnostics/cpu.json
+          dpkg-query -W mesa-vulkan-drivers libllvm20 > target/renderer-diagnostics/packages.txt
+          vulkaninfo --summary > target/renderer-diagnostics/vulkan.txt 2>&1
+          sha256sum /usr/lib/x86_64-linux-gnu/libvulkan_lvp.so /usr/lib/x86_64-linux-gnu/libLLVM.so.20.1 > target/renderer-diagnostics/libraries.sha256
+          rustup show > target/renderer-diagnostics/toolchain.txt
+      - name: Replay the exact release toolkit
+        run: cargo test -p martensite-vulkan --test toolkit --locked
+      - name: Capture the AIS texture control
+        if: always()
+        run: cargo run -p martensite-vulkan --example ais_textured_shape_capture --locked -- map-5 target/renderer-diagnostics/map-5
+      - name: Capture the XR texture control
+        if: always()
+        run: cargo run -p martensite-vulkan --example xr_device_capture --locked -- texture target/renderer-diagnostics/xr-texture
+      - name: Capture the feathered triangle control
+        if: always()
+        run: cargo run -p martensite-vulkan --example triangle_edges_capture --locked -- feather-two target/renderer-diagnostics/feather-two
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: release-0.2.2-renderer-diagnostics
+          path: target/renderer-diagnostics

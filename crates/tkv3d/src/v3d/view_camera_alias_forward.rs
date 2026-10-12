@@ -7,6 +7,9 @@ use rustycad_tkernel::{
 use rustycad_tkservice::{aspect::*, graphic3d::*, image::ImagePixMap};
 impl Graphic3dCView for BorrowedCameraView {
     fn activate(&self) {
+        if let Some(control) = self.control.light_probe.read().as_ref() {
+            super::viewer_light_probe_fixture::reject_light_probe_virtual(control, 13, "Activate");
+        }
         self.retained.activate();
         if *self.control.replace_activation_argument.read() {
             *self.control.view_caller.write() =
@@ -23,6 +26,9 @@ impl Graphic3dCView for BorrowedCameraView {
         self.retained.cview_base()
     }
     fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
+        self.control
+            .bounds_getter_calls
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         if *self.control.alternate_selected.read() {
             return Box::new(HandleFieldRef::new(&self.control.alternate, |slot| slot));
         }
@@ -152,10 +158,23 @@ impl Graphic3dCView for BorrowedCameraView {
     fn set_texture_env(&self, texture_env: &Handle<Graphic3dTextureEnv>) {
         self.retained.set_texture_env(texture_env)
     }
-    fn lights(&self) -> Handle<Graphic3dLightSet> {
-        self.retained.lights()
+    fn lights_ref(
+        &self,
+    ) -> Box<dyn rustycad_tkernel::standard::HandleReference<Graphic3dLightSet> + '_> {
+        self.retained.lights_ref()
     }
-    fn set_lights(&self, lights: &Handle<Graphic3dLightSet>) {
+    fn set_lights(
+        &self,
+        lights: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dLightSet>,
+    ) {
+        if let Some(control) = self.control.light_probe.read().clone() {
+            super::viewer_light_probe_callback::record_light_set_callback(
+                &control,
+                self.identity,
+                self.transient.ref_count(),
+                lights,
+            );
+        }
         self.retained.set_lights(lights)
     }
     fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {

@@ -44,10 +44,15 @@ pub fn ais_shape_compute_selection_with_messenger<S: AisShapeSource + ?Sized>(
     mode: i32,
     messenger: &Messenger,
 ) -> Result<(), Failure> {
-    let source=object.shape_ref();
-    if source.read_current_shape(|shape| Ok(shape.is_null() || (shape.shape_type()? == ShapeEnum::Compound && shape.nb_children() == 0)))? {return Ok(());}
+    let source = object.shape_ref();
+    if source.read_current_shape(|shape| {
+        Ok(shape.is_null()
+            || (shape.shape_type()? == ShapeEnum::Compound && shape.nb_children() == 0))
+    })? {
+        return Ok(());
+    }
     let kind = ais_shape_selection_type(mode);
-    let shape=source.clone_shape();
+    let shape = source.clone_shape();
     let drawer = object.attributes();
     let deflection = StdPrsToolTriangulatedShape::get_deflection(&shape, &drawer)?;
     let selectable = object.presentable_base().this().cast();

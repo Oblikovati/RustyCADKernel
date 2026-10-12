@@ -1,0 +1,37 @@
+{
+  "selection": "newest validation package offered by official LunarG noble apt index; not a claim of newest SDK release",
+  "package_version": "1.4.313.0~rc2-1lunarg24.04-1",
+  "url": "https://packages.lunarg.com/vulkan/pool/main/v/vulkan-validationlayers/vulkan-validationlayers_1.4.313.0~rc2-1lunarg24.04-1_amd64.deb",
+  "package_sha256": "b100bfafac3df98c5d8ef5a572b423bcd9ebf3fab963e2e68957f4bf6f2423f0",
+  "manifest_path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json",
+  "manifest_sha256": "f328caf95d75607075575cf5849b4e765f9eabe111ea5be7f971c92a9a7d1a58",
+  "library_path": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/lib/x86_64-linux-gnu/libVkLayer_khronos_validation.so",
+  "library_sha256": "89e618526d6d1532096dbbd62ee1dc710dda647061cd3b7b66b542dc7dbce104",
+  "layer_api_version": "1.4.313",
+  "manifest_library_path": "libVkLayer_khronos_validation.so",
+  "dependencies_ldd": "\tlinux-vdso.so.1 (0x0000725ab0653000)\n\t/usr/local/lib/AppProtection/libAppProtection.so (0x0000725aae800000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x0000725aae400000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x0000725aaeb17000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x0000725ab0601000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000725aae000000)\n\t/lib64/ld-linux-x86-64.so.2 (0x0000725ab0655000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x0000725ab05fa000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x0000725ab05f5000)\n\tlibX11.so.6 => /lib/x86_64-linux-gnu/libX11.so.6 (0x0000725aae6c3000)\n\tlibxcb.so.1 => /lib/x86_64-linux-gnu/libxcb.so.1 (0x0000725ab05cc000)\n\tlibXi.so.6 => /lib/x86_64-linux-gnu/libXi.so.6 (0x0000725ab05b9000)\n\tlibXau.so.6 => /lib/x86_64-linux-gnu/libXau.so.6 (0x0000725ab05b1000)\n\tlibXdmcp.so.6 => /lib/x86_64-linux-gnu/libXdmcp.so.6 (0x0000725aaeb0f000)\n\tlibXext.so.6 => /lib/x86_64-linux-gnu/libXext.so.6 (0x0000725aaeafb000)\n\tlibbsd.so.0 => /lib/x86_64-linux-gnu/libbsd.so.0 (0x0000725aaeae5000)\n\tlibmd.so.0 => /lib/x86_64-linux-gnu/libmd.so.0 (0x0000725aaead6000)\n",
+  "environment": {
+    "VK_LAYER_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/share/vulkan/explicit_layer.d",
+    "LD_LIBRARY_PATH": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-layer-ab/extracted/usr/lib/x86_64-linux-gnu"
+  },
+  "system_install": false,
+  "application_sources_changed": false,
+  "validation_enabled": true,
+  "old_control": {
+    "library_path": "/usr/lib/x86_64-linux-gnu/libVkLayer_khronos_validation.so",
+    "library_sha256": "1d486283e4ceb342ef7931f97782f03b95a9fad379da638537ea24527780a287",
+    "manifest_path": "/usr/share/vulkan/explicit_layer.d/VkLayer_khronos_validation.json",
+    "manifest_sha256": "1c3625d8a05576ea7470377ada95825d80c09ed6a9e25128b9d9d7901144f50c",
+    "api_version": "1.3.275"
+  },
+  "installed_dependency_versions": "libc6:amd64\t2.39-0ubuntu8.9\nlibgcc-s1:amd64\t14.2.0-4ubuntu2~24.04.1\nlibstdc++6:amd64\t14.2.0-4ubuntu2~24.04.1\nlibvulkan1:amd64\t1.3.280.0-1pop1~1722439676~24.04~a41a7d6\n",
+  "upstream_source_leads": {
+    "old": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-ValidationLayers/vulkan-sdk-1.3.275.0/layers/containers/custom_containers.h",
+    "new": "https://raw.githubusercontent.com/KhronosGroup/Vulkan-ValidationLayers/vulkan-sdk-1.4.313.0/layers/chassis/dispatch_object_manual.cpp",
+    "inference": "Old global dispatch-map lookup/insert/erase unsynchronized; new version uses instance/device shared mutexes. Package A/B must establish actual behavior; source alone does not prove cause."
+  },
+  "source_file_sha256": {
+    "old-custom-containers.h": "39e4d680cb85cf2bf5f86cea7504c1ac459915bc13e3d4faaa1adad17cfb439b",
+    "new-dispatch-object-manual.cpp": "9fb15f67e113664a198cb326229917317a730ae140f0fc58d8d0530f5a5496b0"
+  }
+}

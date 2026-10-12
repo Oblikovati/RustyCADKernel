@@ -20,6 +20,20 @@ pub(super) fn sampled_format(encoding: SurfaceImageEncoding) -> vk::Format {
         Bc3(false) => F::BC3_UNORM_BLOCK,
     }
 }
+pub(super) fn sampled_binding_format(encoding: SurfaceImageEncoding, encoded: bool) -> vk::Format {
+    use SurfaceImageEncoding::*;
+    // OCCT3d097a0 FindCompressedFormat also disables sRGB DXT decoding under FFP.
+    // Select storage before filtering/mip generation; recovering after an sRGB sample is too late.
+    let encoding = match (encoding, encoded) {
+        (Srgb8, true) => Linear8,
+        (Bc1Rgb(true), true) => Bc1Rgb(false),
+        (Bc1Rgba(true), true) => Bc1Rgba(false),
+        (Bc2(true), true) => Bc2(false),
+        (Bc3(true), true) => Bc3(false),
+        (original, _) => original,
+    };
+    sampled_format(encoding)
+}
 pub(super) fn sampled_levels(image: &crate::surface_texture::SurfaceTextureImage) -> u32 {
     if !image.supplied_levels.is_empty() {
         return image.supplied_levels.len() as u32;
@@ -35,4 +49,42 @@ pub(super) fn image_range(first: u32, count: u32) -> vk::ImageSubresourceRange {
         .base_mip_level(first)
         .level_count(count)
         .layer_count(1)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn native_encoded_filtering_selects_unorm_before_sampling_and_mipmap_generation() {
+        use SurfaceImageEncoding::*;
+        for (encoded, linear) in [
+            (Srgb8, Linear8),
+            (Bc1Rgb(true), Bc1Rgb(false)),
+            (Bc1Rgba(true), Bc1Rgba(false)),
+            (Bc2(true), Bc2(false)),
+            (Bc3(true), Bc3(false)),
+        ] {
+            assert_eq!(
+                sampled_binding_format(encoded, true),
+                sampled_format(linear)
+            );
+            assert_eq!(
+                sampled_binding_format(encoded, false),
+                sampled_format(encoded)
+            );
+        }
+        for encoding in [
+            Linear8,
+            Linear16,
+            Float16,
+            Float32,
+            Bc1Rgb(false),
+            Bc3(false),
+        ] {
+            assert_eq!(
+                sampled_binding_format(encoding, true),
+                sampled_format(encoding)
+            );
+        }
+    }
 }

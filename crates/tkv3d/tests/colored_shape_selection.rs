@@ -11,8 +11,8 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Axis1, Direction3, Point3};
 use rustycad_tkprim::brep_prim_api::*;
 use rustycad_tkv3d::{
-    prs_mgr::PrsMgrPresentableObjectMembers,
-    ais::*, select_basics::SelectBasicsPickResult, select_mgr::*, select3d::*, std_select::*,
+    ais::*, prs_mgr::PrsMgrPresentableObjectMembers, select_basics::SelectBasicsPickResult,
+    select_mgr::*, select3d::*, std_select::*,
 };
 #[test]
 fn native_colored_selection_replays_constructed_owners_and_real_axis_picks() {

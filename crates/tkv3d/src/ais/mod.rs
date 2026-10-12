@@ -549,3 +549,8 @@ pub use shape_selection::{
 };
 #[cfg(test)]
 mod colored_compound_cursor_tests;
+
+mod textured_shape_retirement;
+pub use textured_shape_retirement::{
+    AisTexturedShapeRetirement, ais_textured_shape_with_retirement,
+};

@@ -15,7 +15,8 @@ pub(crate) fn classify_capping_batches(draws: &mut [PrimitiveDraw]) {
         match draws[index].capping_pass {
             RenderCappingPass::MaskStart => start = Some(index),
             RenderCappingPass::MaskContinue => {}
-            RenderCappingPass::Surface => assign_cap_batch_alpha(draws, start.take(), index),
+            // Native polygon-line cap edges retain the same stencil and transparent batch.
+            RenderCappingPass::Surface => assign_cap_batch_alpha(draws, start, index),
             RenderCappingPass::None => start = None,
         }
     }
