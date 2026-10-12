@@ -13,7 +13,7 @@ use crate::v3d::V3dViewer;
 use rustycad_tkernel::ncollection::Vec2;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{
-    Failure, Handle, SharedState, StandardTransient, Transient, WeakHandle,
+    Failure, Handle, HandleReference, SharedState, StandardTransient, Transient, WeakHandle,
 };
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkservice::aspect::{AspectVKeyFlags, AspectVKeyMouse};
@@ -173,14 +173,15 @@ pub trait SelectMgrEntityOwnerSource: Transient {
     /// Example: `owner.update_highlight_trsf(&viewer, &manager, 0)?`.
     fn update_highlight_trsf(
         &self,
-        viewer: &Handle<V3dViewer>,
-        manager: &Handle<PrsMgrPresentationManager>,
+        viewer: &dyn HandleReference<V3dViewer>,
+        manager: &dyn HandleReference<PrsMgrPresentationManager>,
         disp_mode: i32,
     ) -> Result<(), Failure> {
         let selectable = self.selectable();
+        let manager = manager.observe();
         match (selectable.is_null(), manager.get()) {
             (false, Some(m)) => m.update_highlight_trsf(
-                viewer,
+                &viewer.observe(),
                 &presentable_of(&selectable),
                 disp_mode,
                 &Handle::default(),
