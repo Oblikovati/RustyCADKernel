@@ -56,3 +56,7 @@ use rustycad_tkernel::standard::Failure;
 pub fn prs3d_invalid_angle(message: &str) -> Failure {
     Failure::with_type("Prs3d_InvalidAngle", message, "")
 }
+
+#[cfg(test)]
+mod aspect_reference_tests;
+mod aspect_references;
