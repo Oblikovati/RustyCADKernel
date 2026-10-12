@@ -23,3 +23,15 @@ Source 7cf634c331559ff2f61a903b0ed5e892bd6f79c7 and optimized executable SHA 764
 These workloads measure steady redraw/readback AFTER one appearance update, excluding Compute/Update creation cost. No timing baseline is accepted. `/usr/bin/time` reports process-wide peak resident memory across all eight workloads: llvmpipe 110,392 KiB; AMD Radeon 8060S RADV 73,384 KiB. GPU/device memory is explicitly unmeasured. The updated workload performs one update before timing, not an update on every sample. No new workload or source/binary change occurred during timing.
 
 The upstream inherited projected-presentation dependency remains precise: AIS_Shape.hxx declares computeHLR, while presentable_object.rs still provides the generic Standard_NotImplemented default and ColoredShape has no override. This record does not hide that native behavior behind class completion. Null dereference/dangling native lifetimes and invalidated map iterators remain outside parity claims; safe checked invalidation is an extension, not a native guarantee.
+
+## Integration review
+
+The original own-family preflight describes the frozen feature revision. During
+main integration the coordinator marked the previously implemented copy
+constructor partial: its appearance helper captures one source object before
+virtual callbacks, whereas native OCCT rereads the caller handle between queries.
+The audit is `porting/audits/colored-copy-source-reference-current-main.json`.
+Consequently the current own-family accounting is 29 implemented declarations,
+one partial constructor, and one partial class. Existing copy/failure tests and
+original evidence are retained; a live source-slot replacement regression is
+required before restoring that constructor credit.

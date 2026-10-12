@@ -1,0 +1,28 @@
+{
+  "reason": "Repeated original const-handle reads across virtual callbacks are not preserved by a single captured object reference. No runtime parity credit is inferred.",
+  "previous_row": {
+    "upstream_id": "AIS_ColoredShape::AIS_ColoredShape",
+    "cpp_declaration_id": "cfd9492c5fd71c79b60bdbea757d45ab634a7c8a6d4378fb375f7e7f2f7f0276",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+    "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+    "rust_item": "rustycad_tkv3d::ais::AisColoredShape::from_shape",
+    "status": "implemented",
+    "notes": "Martensite bounded actual ColoredShape expansion/custom-global appearance/copy slice: pinned real native CPU alias, topology, flags, material/face queries, virtual callback failure/partial state/repair and constructor-unwind ownership fixtures with independent Rust replay. Shared AIS_Shape query prerequisites only; whole classes, Compute, selection, remaining protected routing and renderer/performance remain partial/unclaimed. Invalid native iterator lifetimes and null handle dereference UB explicitly excluded; checked Rust safety extensions not parity claims."
+  },
+  "current_row": {
+    "upstream_id": "AIS_ColoredShape::AIS_ColoredShape",
+    "cpp_declaration_id": "cfd9492c5fd71c79b60bdbea757d45ab634a7c8a6d4378fb375f7e7f2f7f0276",
+    "toolkit": "TKV3d",
+    "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+    "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+    "rust_item": "rustycad_tkv3d::ais::AisColoredShape::from_shape",
+    "status": "partial",
+    "notes": "Martensite bounded actual ColoredShape expansion/custom-global appearance/copy slice: pinned real native CPU alias, topology, flags, material/face queries, virtual callback failure/partial state/repair and constructor-unwind ownership fixtures with independent Rust replay. Shared AIS_Shape query prerequisites only; whole classes, Compute, selection, remaining protected routing and renderer/performance remain partial/unclaimed. Invalid native iterator lifetimes and null handle dereference UB explicitly excluded; checked Rust safety extensions not parity claims. Current-source audit: from_shape captures &**source once before virtual appearance callbacks, while pinned OCCT rereads the original const handle after each query. Source-slot replacement through a valid callback remains unproved; see porting/audits/colored-copy-source-reference-current-main.json. Existing normal-copy and failure regression evidence is retained."
+  },
+  "sources": {
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_ColoredShape.cxx": "3ee45b9f6a0369fe71406f3ac58317216241c7e334621ca5d115d4842ef28b6e",
+    "crates/tkv3d/src/ais/colored_shape_object.rs": "7056889e6774a57567b1d0780c2ad997ebc859f15e32043e525225d809c28504",
+    "crates/tkv3d/src/ais/colored_shape_copy_appearance.rs": "0aff2a2601b26f1cded5a55a780901b7b0c0f2d8fdbde046781635740bc870c5"
+  }
+}
