@@ -15,7 +15,7 @@ use std::io;
 /// Example: `let aspect = Prs3dLineAspect::new(red, AspectTypeOfLine::Solid, 1.0)?; aspect.set_width(2.0)?;`.
 pub struct Prs3dLineAspect {
     transient: StandardTransient,
-    aspect: SharedState<Handle<Graphic3dAspectLine3d>>,
+    pub(super) aspect: SharedState<Handle<Graphic3dAspectLine3d>>,
 }
 rustycad_tkernel::impl_transient!(Prs3dLineAspect, "Prs3d_LineAspect", dyn Prs3dBasicAspect, transient,
     interfaces: [dyn Prs3dBasicAspect]);

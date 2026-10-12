@@ -16,7 +16,7 @@ use std::io;
 /// Example: `let aspect = Prs3dShadingAspect::new()?; aspect.set_color(red, AspectTypeOfFacingModel::BothSide)?;`.
 pub struct Prs3dShadingAspect {
     transient: StandardTransient,
-    aspect: SharedState<Handle<Graphic3dAspectFillArea3d>>,
+    pub(super) aspect: SharedState<Handle<Graphic3dAspectFillArea3d>>,
 }
 rustycad_tkernel::impl_transient!(Prs3dShadingAspect, "Prs3d_ShadingAspect", dyn Prs3dBasicAspect, transient,
     interfaces: [dyn Prs3dBasicAspect]);
