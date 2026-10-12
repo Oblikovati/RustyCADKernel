@@ -1,0 +1,53 @@
+{
+  "upstream_id": "StdPrs_Isolines::SegOnIso::Pnts",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "a5b1a918c2fcd5f56650403ddf5fcbac4a2bb0b5de5161eb8ed3ba7c2370e3d1"
+  ],
+  "cpp_matches": [
+    {
+      "id": "a5b1a918c2fcd5f56650403ddf5fcbac4a2bb0b5de5161eb8ed3ba7c2370e3d1",
+      "usr": "c:@S@StdPrs_Isolines@S@SegOnIso@FI@Pnts",
+      "qualified_name": "StdPrs_Isolines::SegOnIso::Pnts",
+      "kind": "Field",
+      "signature": "struct StdPrs_Isolines::PntOnIso[2]",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsSegOnIso::pnts"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsSegOnIso::pnts"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsSegOnIso::pnts",
+      "kind": "struct_field",
+      "signature": {
+        "array": {
+          "len": "2",
+          "type": {
+            "resolved_path": {
+              "args": null,
+              "path": "StdPrsPntOnIso",
+              "resolved_item_path": "rustycad_tkv3d::std_prs::isoline_segments::StdPrsPntOnIso"
+            }
+          }
+        }
+      },
+      "impl_context": null,
+      "declaration_sha256": "508e70e7c07afb81fa9d4cd342e974b37e82a449cf654bfb2a5e301670270c24",
+      "source_file": "crates/tkv3d/src/std_prs/isoline_segments.rs",
+      "source_status": null,
+      "source_sha256": "cf41f0b33edfab0e93bace40cd57a43722e94b55ebf07acf21acf29b602f2096"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+}

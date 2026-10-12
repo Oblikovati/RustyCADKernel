@@ -4,7 +4,7 @@ use rustycad_tkernel::standard::Failure as XrProbeFailure;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkservice::{graphic3d::*, null_driver::NullGraphicDriver};
 use std::sync::Arc;
-pub(super) fn xr_recording_presentation(
+pub(crate) fn xr_recording_presentation(
     events: &Arc<XrRecordingEvents>,
 ) -> Handle<dyn Graphic3dStructureSource> {
     let manager =
@@ -16,7 +16,7 @@ pub(super) fn xr_recording_presentation(
 
     prs
 }
-pub(super) fn install_xr_recording(
+pub(crate) fn install_xr_recording(
     prs: &Handle<dyn Graphic3dStructureSource>,
     events: &Arc<XrRecordingEvents>,
 ) {

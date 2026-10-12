@@ -408,7 +408,7 @@ pub use xr_tracked_device_presentation::{
 pub use xr_tracked_device_selection::ais_xr_tracked_device_compute_selection;
 
 #[cfg(test)]
-mod xr_tests;
+pub(crate) mod xr_tests;
 
 #[cfg(test)]
 include!("test_modules.rs");

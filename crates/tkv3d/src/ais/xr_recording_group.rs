@@ -7,7 +7,7 @@ use rustycad_tkernel::{
 use rustycad_tkmath::gp::Axis2;
 use rustycad_tkservice::{graphic3d::*, null_driver::NullGroup};
 use std::sync::Arc;
-pub(super) struct XrRecordingEvents {
+pub(crate) struct XrRecordingEvents {
     pub callbacks: SharedState<Vec<i32>>,
     pub fail_aspect: SharedState<bool>,
     pub unexpected_panic: SharedState<bool>,
@@ -29,7 +29,7 @@ struct XrRecordedGroupState {
     arrays: Vec<Vec<f64>>,
     clears: i32,
 }
-pub(super) struct XrRecordingGroup {
+pub(crate) struct XrRecordingGroup {
     transient: StandardTransient,
     inner: NullGroup,
     events: Arc<XrRecordingEvents>,

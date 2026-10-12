@@ -1,0 +1,310 @@
+{
+  "upstream_id": "StdPrs_Isolines::AddOnSurface",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "9e16c1d84310ab8c53bbacb173c9a2ae28815ab791e4a64ff55eccd93cbf3525"
+  ],
+  "cpp_matches": [
+    {
+      "id": "9e16c1d84310ab8c53bbacb173c9a2ae28815ab791e4a64ff55eccd93cbf3525",
+      "usr": "c:@S@StdPrs_Isolines@F@AddOnSurface#&1$@N@opencascade@S@handle>#$@S@Graphic3d_Structure#&1$@N@opencascade@S@handle>#$@S@BRepAdaptor_Surface#&1$@N@opencascade@S@handle>#$@S@Prs3d_Drawer#d#&1$@S@NCollection_Sequence>#d#S9_#S",
+      "qualified_name": "StdPrs_Isolines::AddOnSurface",
+      "kind": "CXXMethod",
+      "signature": "void (const class opencascade::handle<class Graphic3d_Structure> &, const class opencascade::handle<class BRepAdaptor_Surface> &, const class opencascade::handle<class Prs3d_Drawer> &, double, const class NCollection_Sequence<double> &, const class NCollection_Sequence<double> &)",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_surface_references"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_surface_references"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_surface_references",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "StdPrsIsolineSurfaceSource",
+                          "resolved_item_path": "rustycad_tkv3d::std_prs::isoline_surface_source::StdPrsIsolineSurfaceSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::RuntimeTyped",
+                          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "S"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "prs",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "lifetime": null,
+                                  "traits": [
+                                    {
+                                      "generic_params": [],
+                                      "trait": {
+                                        "args": null,
+                                        "path": "Graphic3dStructureSource",
+                                        "resolved_item_path": "rustycad_tkservice::graphic3d::structure::Graphic3dStructureSource"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "surface",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": {
+                                    "angle_bracketed": {
+                                      "args": [
+                                        {
+                                          "type": {
+                                            "generic": "S"
+                                          }
+                                        }
+                                      ],
+                                      "constraints": []
+                                    }
+                                  },
+                                  "path": "Handle",
+                                  "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "SharedState",
+                      "resolved_item_path": "rustycad_tkernel::standard::shared_state::SharedState"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "drawer",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "Prs3dDrawer",
+                                  "resolved_item_path": "rustycad_tkv3d::prs3d::drawer::Prs3dDrawer"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "deflection",
+              {
+                "primitive": "f64"
+              }
+            ],
+            [
+              "parameters",
+              {
+                "array": {
+                  "len": "2",
+                  "type": {
+                    "borrowed_ref": {
+                      "is_mutable": false,
+                      "lifetime": null,
+                      "type": {
+                        "resolved_path": {
+                          "args": {
+                            "angle_bracketed": {
+                              "args": [
+                                {
+                                  "type": {
+                                    "resolved_path": {
+                                      "args": {
+                                        "angle_bracketed": {
+                                          "args": [
+                                            {
+                                              "type": {
+                                                "primitive": "f64"
+                                              }
+                                            }
+                                          ],
+                                          "constraints": []
+                                        }
+                                      },
+                                      "path": "Sequence",
+                                      "resolved_item_path": "rustycad_tkernel::ncollection::sequence::Sequence"
+                                    }
+                                  }
+                                }
+                              ],
+                              "constraints": []
+                            }
+                          },
+                          "path": "SharedState",
+                          "resolved_item_path": "rustycad_tkernel::standard::shared_state::SharedState"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "super::StdPrsIsolines",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::isolines::StdPrsIsolines"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "5002c40015896ec68ff0a17ed2ba80ba47e61aaeae3c1357e42ec2156973fefd",
+      "source_file": "crates/tkv3d/src/std_prs/isoline_surface_api.rs",
+      "source_status": null,
+      "source_sha256": "1c8e2a1b3523550f6f03a35991d3f75f06acb11d566641a4d891c7fc5b89364f"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+}

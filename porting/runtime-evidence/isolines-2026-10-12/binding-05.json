@@ -1,0 +1,166 @@
+{
+  "upstream_id": "StdPrs_Isolines::AddOnTriangulation",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "51fc311b3b3f1ab70833e9b490ff96d111d08c2b451c5f6add1bcab823b3abfc"
+  ],
+  "cpp_matches": [
+    {
+      "id": "51fc311b3b3f1ab70833e9b490ff96d111d08c2b451c5f6add1bcab823b3abfc",
+      "usr": "c:@S@StdPrs_Isolines@F@AddOnTriangulation#&1$@S@TopoDS_Face#&1$@N@opencascade@S@handle>#$@S@Prs3d_Drawer#&$@S@NCollection_List>#$@N@opencascade@S@handle>#$@S@NCollection_HSequence>#$@S@gp_Pnt#S5_#S",
+      "qualified_name": "StdPrs_Isolines::AddOnTriangulation",
+      "kind": "CXXMethod",
+      "signature": "void (const class TopoDS_Face &, const class opencascade::handle<class Prs3d_Drawer> &, class NCollection_List<class opencascade::handle<class NCollection_HSequence<class gp_Pnt>>> &, class NCollection_List<class opencascade::handle<class NCollection_HSequence<class gp_Pnt>>> &)",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_triangulation_polylines"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_triangulation_polylines"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsIsolines::add_on_triangulation_polylines",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "face",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Face",
+                      "resolved_item_path": "rustycad_tkbrep::topods::typed::Face"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "drawer",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "Prs3dDrawer",
+                                  "resolved_item_path": "rustycad_tkv3d::prs3d::drawer::Prs3dDrawer"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "output",
+              {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "lifetime": "'_"
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "StdPrsIsolineDestination",
+                  "resolved_item_path": "rustycad_tkv3d::std_prs::isoline_outputs::StdPrsIsolineDestination"
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "super::StdPrsIsolines",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::isolines::StdPrsIsolines"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "3cfe62d43174c2882cd671c839f000f67a4e5e1f93c24cd2e0cb07f2b9b5f5f3",
+      "source_file": "crates/tkv3d/src/std_prs/isoline_triangle_api.rs",
+      "source_status": null,
+      "source_sha256": "2e11850d3979a10d49270fdfde02a5eaa0946251dc268e4a1eb0f629a759f249"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+}

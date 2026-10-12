@@ -1,0 +1,152 @@
+{
+  "upstream_id": "StdPrs_Isolines::UVIsoParameters",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "f42ee2bb84a4e1720d765e69abdc3de74c9de8938d896c46fa8a6bd62e0f006b"
+  ],
+  "cpp_matches": [
+    {
+      "id": "f42ee2bb84a4e1720d765e69abdc3de74c9de8938d896c46fa8a6bd62e0f006b",
+      "usr": "c:@S@StdPrs_Isolines@F@UVIsoParameters#&1$@S@TopoDS_Face#I#I#d#&$@S@NCollection_Sequence>#d#S2_#&d#S4_#S4_#S4_#S",
+      "qualified_name": "StdPrs_Isolines::UVIsoParameters",
+      "kind": "CXXMethod",
+      "signature": "void (const class TopoDS_Face &, int, int, double, class NCollection_Sequence<double> &, class NCollection_Sequence<double> &, double &, double &, double &, double &)",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::uv_iso_parameters"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::uv_iso_parameters"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsIsolines::uv_iso_parameters",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "face",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Face",
+                      "resolved_item_path": "rustycad_tkbrep::topods::typed::Face"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "counts",
+              {
+                "array": {
+                  "len": "2",
+                  "type": {
+                    "primitive": "i32"
+                  }
+                }
+              }
+            ],
+            [
+              "limit",
+              {
+                "primitive": "f64"
+              }
+            ],
+            [
+              "outputs",
+              {
+                "resolved_path": {
+                  "args": {
+                    "angle_bracketed": {
+                      "args": [
+                        {
+                          "lifetime": "'_"
+                        }
+                      ],
+                      "constraints": []
+                    }
+                  },
+                  "path": "StdPrsIsolineUvOutputs",
+                  "resolved_item_path": "rustycad_tkv3d::std_prs::isoline_parameters::StdPrsIsolineUvOutputs"
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "super::StdPrsIsolines",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::isolines::StdPrsIsolines"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "8a83eb3e661b2069c1bcde4f8424dff54827503a44f7e8161a0d7d794166e673",
+      "source_file": "crates/tkv3d/src/std_prs/isoline_parameters.rs",
+      "source_status": null,
+      "source_sha256": "fe35e18056bf901a7a71441aa90f45e3050ccd53fe5f56efdea48d91ccd62bd4"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+}

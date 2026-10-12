@@ -12,6 +12,15 @@ pub(super) fn find_limits_bounded(
     budget: Option<usize>,
 ) -> Result<Option<[f64; 2]>, Failure> {
     let bounds = [curve.first_parameter()?, curve.last_parameter()?];
+    expand_curve_bounds(curve, limit, bounds, budget)
+}
+/// Expand the intersected native interval geometrically; `expand_curve_bounds(curve,100.,bounds,None)?`.
+pub(super) fn expand_curve_bounds(
+    curve: &dyn Adaptor3dCurve,
+    limit: f64,
+    bounds: [f64; 2],
+    budget: Option<usize>,
+) -> Result<Option<[f64; 2]>, Failure> {
     match (
         precision::is_negative_infinite(bounds[0]),
         precision::is_positive_infinite(bounds[1]),

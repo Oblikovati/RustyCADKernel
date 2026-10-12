@@ -1,0 +1,192 @@
+{
+  "upstream_id": "StdPrs_Isolines::Add",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "3adcdcfd0c8417ec82bcb5ea3500c978566bbe1727de7abb92acfe7e86615ded"
+  ],
+  "cpp_matches": [
+    {
+      "id": "3adcdcfd0c8417ec82bcb5ea3500c978566bbe1727de7abb92acfe7e86615ded",
+      "usr": "c:@S@StdPrs_Isolines@F@Add#&1$@N@opencascade@S@handle>#$@S@Graphic3d_Structure#&1$@S@TopoDS_Face#&1$@N@opencascade@S@handle>#$@S@Prs3d_Drawer#d#S",
+      "qualified_name": "StdPrs_Isolines::Add",
+      "kind": "CXXMethod",
+      "signature": "void (const class opencascade::handle<class Graphic3d_Structure> &, const class TopoDS_Face &, const class opencascade::handle<class Prs3d_Drawer> &, double)",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::add"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsIsolines::add"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsIsolines::add",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "prs",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "lifetime": null,
+                                  "traits": [
+                                    {
+                                      "generic_params": [],
+                                      "trait": {
+                                        "args": null,
+                                        "path": "Graphic3dStructureSource",
+                                        "resolved_item_path": "rustycad_tkservice::graphic3d::structure::Graphic3dStructureSource"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "face",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Face",
+                      "resolved_item_path": "rustycad_tkbrep::topods::typed::Face"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "drawer",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "Prs3dDrawer",
+                                  "resolved_item_path": "rustycad_tkv3d::prs3d::drawer::Prs3dDrawer"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "deflection",
+              {
+                "primitive": "f64"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "super::StdPrsIsolines",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::isolines::StdPrsIsolines"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "f02500e0be0df09ec2b31e4f47a1ac1b4d889ecb2c857e03db6a1cde16a6f404",
+      "source_file": "crates/tkv3d/src/std_prs/isoline_face_api.rs",
+      "source_status": null,
+      "source_sha256": "7459a06642ce10f94032760c7b6b4a30e5808b8371f9ef1641b6e4ed4e32f95f"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_Isolines.hxx"
+}
