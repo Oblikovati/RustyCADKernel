@@ -1,17 +1,24 @@
 //! Named real camera subclass records dispatch and native intrusive counts without owning aliases.
 use super::super::{view_cube_interaction_fixture::WidgetScene, *};
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
+use rustycad_tkernel::standard::{
+    Failure, Handle, SharedState, StandardTransient, Transient, WeakHandle,
+};
 use std::sync::{Arc, atomic::AtomicU64};
 pub(super) struct CubeTransportTrace {
     pub(super) scenario: usize,
-    pub(super) cube: WeakHandle<AisViewCube>,
+    pub(super) cube: SharedState<WeakHandle<dyn AisViewCubeSource>>,
     pub(super) clicked_owner: SharedState<WeakHandle<AisViewCubeOwner>>,
     pub(super) probes: SharedState<Vec<WeakHandle<CubeTransportAnimation>>>,
     pub(super) rows: SharedState<Vec<String>>,
 }
 impl CubeTransportTrace {
     pub(super) fn slot(&self) -> i32 {
-        let address = self.cube.upgrade().view_animation_ref().object_address();
+        let address = self
+            .cube
+            .read()
+            .upgrade()
+            .view_animation_ref()
+            .object_address();
         if address.is_null() {
             return 0;
         }
@@ -24,13 +31,20 @@ impl CubeTransportTrace {
     pub(super) fn record(&self, event: &str, actor: Option<&CubeTransportAnimation>) {
         let channels = actor.map_or([0; 7], CubeTransportAnimation::channels);
         self.rows.write().push(format!(
-            "event {} {event} {} {} {} {}",
+            "event {} {event} {} {} {} {} {}",
             self.scenario,
             channels[0],
             self.slot(),
             join_transport_channels(&channels[1..]),
-            self.clicked_owner_count()
+            self.clicked_owner_count(),
+            join_transport_channels(&self.widget_reference_counts())
         ));
+    }
+    pub(super) fn widget_reference_counts(&self) -> [i32; 2] {
+        let observed = self.cube.read().observe();
+        let cube = observed.get().unwrap();
+        let context = cube.interactive_base().fields.read().context.observe();
+        [context.ref_count(), observed.ref_count()]
     }
     fn clicked_owner_count(&self) -> i32 {
         let current = self.clicked_owner.read().upgrade();
@@ -42,7 +56,7 @@ impl CubeTransportTrace {
     }
     pub(super) fn replace(&self, id: usize) {
         let probe = self.probes.read()[id].upgrade();
-        self.cube.upgrade().set_view_animation(&probe.cast());
+        self.cube.read().upgrade().set_view_animation(&probe.cast());
     }
     pub(super) fn reject(&self, stage: &str) -> Failure {
         Failure::new(&format!(
@@ -61,7 +75,7 @@ pub(super) struct CubeTransportAnimation {
 rustycad_tkernel::impl_transient!(CubeTransportAnimation,"TransportAnimation",dyn AisAnimationCameraSource,transient,
     interfaces:[dyn AisAnimationCameraSource,dyn AisAnimationSource]);
 impl CubeTransportAnimation {
-    fn new(trace: &Arc<CubeTransportTrace>, identity: i32) -> Handle<Self> {
+    pub(super) fn new(trace: &Arc<CubeTransportTrace>, identity: i32) -> Handle<Self> {
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: AisAnimationCameraBase::new("transport", &Handle::default()),
@@ -139,7 +153,7 @@ pub(super) fn join_transport_channels(channels: &[i32]) -> String {
 fn cube_transport_trace(scene: &WidgetScene, scenario: usize) -> Arc<CubeTransportTrace> {
     Arc::new(CubeTransportTrace {
         scenario,
-        cube: scene.cube.downgrade(),
+        cube: SharedState::new(scene.cube.cast::<dyn AisViewCubeSource>().downgrade()),
         clicked_owner: SharedState::new(WeakHandle::default()),
         probes: SharedState::new(Vec::new()),
         rows: SharedState::new(Vec::new()),

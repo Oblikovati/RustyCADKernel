@@ -1,0 +1,30 @@
+{
+  "project": "Martensite",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "generators_and_assets": {
+    "tools/oracle/view_cube_animation_source_probe.hxx": "ac2d9b312413a393b760664cf6053629bca86b35ca6a87087670673774dfab2d",
+    "tools/oracle/martensite_view_cube_interaction.cxx": "f20331bb5f9b7f96fc9ee4351dc6d27ff3e71d5c4e5d6e29a9c6b38301d42f19",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
+    "tools/oracle/martensite_view_cube_animation_source.cxx": "ddcd4fbddf9a067f2f8618a6a3f1bf121996105275b304dda13bb9df314dda06",
+    "tools/oracle/martensite_view_cube_click_failure.cxx": "813f08245165599750d596644f75d00743832a5d9934fa8e5ef390bf094d495d",
+    "tools/oracle/martensite_view_cube_fit_reference.cxx": "e58299ca321809ac256284d33d9e5edaf87388229feee510c3faf8fb6528ff27",
+    "crates/tkv3d/tests/fixtures/view-cube-animation-source.txt": "4bcf1132fd5203ab442c1ca46fac7c033334aa59269dc805d8775491e463d8f0",
+    "crates/tkv3d/tests/fixtures/view-cube-click-failure.txt": "ac82cbd7791716ccdcb530c8b60f71d45ef79420c406b14663c5af31472d1d2a",
+    "crates/tkv3d/tests/fixtures/view-cube-fit-reference.txt": "4f788261642ab20702af775a130fdf763e4fb29a83991b417da4becc5abec65f"
+  },
+  "upstream_sources": {
+    "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+    "src/Visualization/TKV3d/AIS/AIS_ViewCube.cxx": "49c4696acd43ab80e1d53a423c3a02c27ed186cb9c1eafb4bd48ad84ca3365f2",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.hxx": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+    "src/Visualization/TKV3d/AIS/AIS_Animation.cxx": "6d8efaacccf41a662def60e2350d4692ffac7b767b429014c9d725e8a8b841a3",
+    "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.hxx": "878f723d92c60ea72dc0c34ebc2d4d2e6ca2c002fe0ddaf51dc70ae5ef2f6afd",
+    "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.cxx": "7715b22a6fca8871023b230e3ee7b1019b223c4dd6c04cec98b291dfcc90e0e8",
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.cxx": "4a5a57f205b5ab55fb9e9f97072d5dc2e48da871902abd61f4a24d4d8b8bd4ae"
+  },
+  "native_record_count": 198,
+  "libraries": "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+  "build_template": "c++ -std=c++17 -I ../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/{generator}.cxx -L ../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKV3d -lTKService -lTKMath -lTKernel -o target/oracle/{generator}",
+  "domain": "Actual native context-linked widgets and derived camera-animation overrides. All original objects and replaced camera/animation targets retained by strong native handles; no native dangling/null dereference case credited.",
+  "native_count_columns": "animation, target view, start/end cameras, owner argument, raw context and widget intrusive counts; native raw context measurement uses InteractiveContext(), not owning GetContext()",
+  "two_identical_executions": "Each198-row generator output compared byte-for-byte to a repeated run."
+}

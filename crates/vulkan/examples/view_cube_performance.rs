@@ -104,3 +104,27 @@ fn measure_derived_cube_camera(
         &measure_cube_camera_frames(scene),
     );
 }
+
+#[cfg(test)]
+mod camera_frame_tests {
+    use super::*;
+    #[test]
+    fn completed_camera_samples_dispatch_real_source_and_render_each_frame() {
+        let device = recording_device::RecordingDevice::default();
+        let driver = view_cube_widget::widget_recording_driver(&device);
+        let scene = view_cube_scene::ViewCubeCaptureScene::new(&driver).unwrap();
+        let clock = view_cube_widget::configure_widget_timer(&scene);
+        view_cube_widget::detect_widget_center(&scene).unwrap();
+        view_cube_widget::click_widget_center(&scene).unwrap();
+        clock.seek(0.125);
+        let samples = measure_cube_camera_frames(&scene);
+        assert_eq!(samples.len(), 100);
+        assert!(
+            samples
+                .iter()
+                .all(|sample| sample.is_finite() && *sample >= 0.)
+        );
+        assert_eq!(clock.dispatch_counts(), [1, 120, 121]);
+        scene.view.remove();
+    }
+}

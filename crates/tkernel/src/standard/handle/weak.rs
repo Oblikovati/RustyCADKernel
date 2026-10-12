@@ -2,7 +2,7 @@
 //! `T*` fields that some OCCT classes keep beside their handles (MAT_Arc, MAT_Node
 //! and MAT_BasicElt of TKTopAlgo) so that a graph of transients has no reference
 //! cycle.
-use super::{Handle, Owner, RuntimeTyped, Transient};
+use super::{Handle, HandleObserver, Owner, RuntimeTyped, Transient};
 use std::{
     marker::PhantomData,
     sync::{Arc, Weak},
@@ -52,6 +52,15 @@ impl<T: ?Sized + RuntimeTyped> WeakHandle<T> {
     /// `pointer.is_null()`.
     pub fn is_null(&self) -> bool {
         self.owner.is_none()
+    }
+    /// Lease native raw-pointer storage without an intrusive increment; `let target=pointer.observe()`.
+    pub fn observe(&self) -> HandleObserver<T> {
+        let owner = match self.owner.as_ref() {
+            Some(WeakOwner::Shared(owner)) => owner.upgrade().map(Owner::Shared),
+            Some(WeakOwner::Static(owner)) => Some(Owner::Static(*owner)),
+            None => None,
+        };
+        HandleObserver::from_owner(owner)
     }
     /// A new owning handle to the pointed object, or a null handle when the pointer
     /// is null or the object is gone; `let arc: Handle<T> = pointer.upgrade();`.

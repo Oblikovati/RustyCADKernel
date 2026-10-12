@@ -84,7 +84,7 @@ mod tests {
     #[test]
     fn actual_widget_context_detection_highlight_click_and_camera_animation_are_submitted() {
         let device = crate::recording_device::RecordingDevice::default();
-        let driver = widget_recording_driver(&device);
+        let driver = super::widget_recording_driver(&device);
         let scene = ViewCubeCaptureScene::new(&driver).unwrap();
         let clock = configure_widget_timer(&scene);
         scene.render_view().try_redraw().unwrap();
@@ -96,13 +96,6 @@ mod tests {
         assert_widget_camera_progress(&scene, &clock, original);
         assert_widget_appearance_submission(&scene, &device);
         scene.view.remove();
-    }
-    fn widget_recording_driver(
-        device: &crate::recording_device::RecordingDevice,
-    ) -> Handle<martensite_vulkan::Graphic3dRenderDriver> {
-        let fonts = Arc::new(crate::fixed_glyph_source::FixedGlyphSource::default());
-        martensite_vulkan::Graphic3dRenderDriver::with_backend_and_fonts(device.clone(), 512, fonts)
-            .unwrap()
     }
     fn assert_widget_camera_progress(
         scene: &ViewCubeCaptureScene,
@@ -242,4 +235,14 @@ pub fn verify_widget_camera_dispatch(clock: &CubeWidgetClock) {
         "ViewCube derived dispatch counts={counts:?}; expected one StartTimer, at least three UpdateTimer and one additional updateOwn"
     );
     println!("{{\"martensite_widget_camera_dispatch\":{counts:?}}}");
+}
+
+/// Bind the named recording backend through the real driver; `widget_recording_driver(&device)`.
+#[cfg(test)]
+pub(crate) fn widget_recording_driver(
+    device: &crate::recording_device::RecordingDevice,
+) -> Handle<martensite_vulkan::Graphic3dRenderDriver> {
+    let fonts = Arc::new(crate::fixed_glyph_source::FixedGlyphSource::default());
+    martensite_vulkan::Graphic3dRenderDriver::with_backend_and_fonts(device.clone(), 512, fonts)
+        .unwrap()
 }

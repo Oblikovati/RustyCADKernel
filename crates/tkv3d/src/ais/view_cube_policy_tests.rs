@@ -7,7 +7,10 @@ fn cube_animation_policy_replacement_duration_and_null_errors() {
     let cube = AisViewCube::new().unwrap();
     let animation = Handle::new(AisAnimationCamera::new("replacement", &Handle::default()));
     cube.set_view_animation(&animation.cast());
-    assert_eq!(cube.view_animation(), animation.cast());
+    assert_eq!(
+        cube.view_animation(),
+        animation.cast::<dyn AisAnimationCameraSource>()
+    );
     cube.set_duration(-0.75).unwrap();
     assert_eq!(cube.duration().unwrap(), -0.75);
     cube.set_duration(f64::NAN).unwrap();
@@ -30,7 +33,7 @@ fn cube_empty_click_preconditions_and_detached_scene_fit_are_explicit() {
 }
 fn assert_detached_cube_scene_fit(scene: &WidgetScene, owner: &Handle<AisViewCubeOwner>) {
     let detached = AisViewCube::new().unwrap();
-    assert!(detached.start_animation(&owner).is_err());
+    assert!(detached.start_animation(owner).is_err());
     detached.set_fit_selected(false);
     detached
         .view_fit_all(&scene.view, &scene.view.camera())

@@ -19,11 +19,11 @@ fn native_derived_camera_dispatch_counts_replacements_and_failure_order_replay()
 fn replay_transport_case(proof: &CubeTransportScene) {
     let result = run_transport_case(proof);
     if let Err(failure) = result {
-        proof
-            .trace
-            .rows
-            .write()
-            .push(format!("failure {} {failure}", proof.trace.scenario));
+        proof.trace.rows.write().push(format!(
+            "failure {} {}",
+            proof.trace.scenario,
+            failure.message()
+        ));
     }
     proof.snapshot("final");
 }
@@ -89,7 +89,7 @@ fn replay_failed_transport_click(entry: usize) -> Vec<String> {
     let failure = transport_click_result(&proof, &owner, entry).unwrap_err();
     let animation = &proof.owners[0];
     let mut rows = proof.trace.rows.read().clone();
-    rows.push(format!("click-failure {entry} {failure}"));
+    rows.push(format!("click-failure {entry} {}", failure.message()));
     rows.push(format!(
         "click-state {entry} {} {} {} {} {}",
         proof.scene.context.nb_selected(),
@@ -105,7 +105,6 @@ fn transport_click_result(
     owner: &rustycad_tkernel::standard::Handle<AisViewCubeOwner>,
     entry: usize,
 ) -> Result<(), rustycad_tkernel::standard::Failure> {
-    use crate::select_mgr::SelectMgrEntityOwnerSource;
     if entry == 1 {
         return proof
             .scene

@@ -58,7 +58,7 @@ inline void TransportCube::record(const char* event,TransportAnimation* actor) c
     <<(actor->CameraStart().IsNull()?0:actor->CameraStart()->GetRefCount())<<' '
     <<(actor->CameraEnd().IsNull()?0:actor->CameraEnd()->GetRefCount())<<' '<<(actor->View().IsNull()?0:actor->View()->GetRefCount())<<' '<<actor->IsStopped();
   else std::cout<<" 0 0 0 0 0 0";
-  std::cout<<' '<<(clickedOwner?clickedOwner->GetRefCount():0)<<'\n';
+  std::cout<<' '<<(clickedOwner?clickedOwner->GetRefCount():0)<<' '<<InteractiveContext()->GetRefCount()<<' '<<GetRefCount()<<'\n';
 }
 inline double TransportAnimation::UpdateTimer() {
   cube->record("timer-update",this);

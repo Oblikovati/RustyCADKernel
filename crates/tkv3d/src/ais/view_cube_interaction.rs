@@ -6,7 +6,7 @@ use super::{
 use crate::{prs_mgr::*, prs3d::*, select_mgr::*};
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
-    standard::{Failure, Handle, SharedState, StandardTransient},
+    standard::{Failure, Handle, HandleReference, SharedState, StandardTransient},
 };
 use rustycad_tkservice::{aspect::AspectTypeOfFacingModel, graphic3d::*};
 use std::sync::Arc;
@@ -86,8 +86,8 @@ pub trait AisViewCubeSource: AisViewCubePresentationSource {
     /// Fit the requested camera using selection/scene bounds; `cube.view_fit_all(&view,&camera)?`.
     fn view_fit_all(
         &self,
-        view: &crate::v3d::V3dView,
-        camera: &Graphic3dCamera,
+        view: &dyn HandleReference<crate::v3d::V3dView>,
+        camera: &dyn HandleReference<Graphic3dCamera>,
     ) -> Result<(), Failure> {
         super::view_cube_camera_fit::ais_view_cube_view_fit_all(self, view, camera)
     }
@@ -112,7 +112,7 @@ rustycad_tkernel::impl_transient_interface!(
     dyn AisInteractiveObject
 );
 /// Concrete picking/highlight/camera widget; `AisViewCube::new()?`.
-/// Whole-class parity remains partial while generated class declarations and derived animation transport are unfinished.
+/// Whole-class parity remains partial while generated RTTI declarations and base aliases await complete proof.
 pub struct AisViewCube {
     transient: StandardTransient,
     /// Native constructor and mutable interaction state.

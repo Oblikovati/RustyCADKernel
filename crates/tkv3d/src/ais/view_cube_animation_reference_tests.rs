@@ -97,3 +97,8 @@ fn animation_reference_fixture_channels(row: &str) -> Vec<i32> {
         .map(|value| value.parse().unwrap())
         .collect()
 }
+
+#[path = "view_cube_fit_reference_fixture.rs"]
+mod view_cube_fit_reference_fixture;
+#[path = "view_cube_fit_reference_tests.rs"]
+mod view_cube_fit_reference_tests;

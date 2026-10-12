@@ -36,8 +36,8 @@ impl AisAnimationCamera {
     /// Explicit copied target; native View parity uses AisAnimationCameraMembers::target_view_ref.
     /// Target view including null; `animation.target_view()`.
     pub fn target_view(&self) -> Handle<V3dView> {
-        let snapshot = super::AisAnimationCameraMembers::target_view(self);
-        snapshot
+        // A copied convenience acquires ownership explicitly; native parity uses the live alias.
+        super::AisAnimationCameraMembers::target_view(self)
     }
     /// Retarget or detach the animation; `animation.set_view(&view)`.
     pub fn set_view(&self, view: &Handle<V3dView>) {
@@ -47,8 +47,8 @@ impl AisAnimationCamera {
     /// Explicit copied start; native CameraStart parity uses AisAnimationCameraMembers::camera_start_ref.
     /// Retained start camera including null; `animation.camera_start()`.
     pub fn camera_start(&self) -> Handle<Graphic3dCamera> {
-        let snapshot = super::AisAnimationCameraMembers::camera_start(self);
-        snapshot
+        // A copied convenience acquires ownership explicitly; native parity uses the live alias.
+        super::AisAnimationCameraMembers::camera_start(self)
     }
     /// Retain the start endpoint by identity; `animation.set_camera_start(&camera)`.
     pub fn set_camera_start(&self, camera: &Handle<Graphic3dCamera>) {
@@ -58,8 +58,8 @@ impl AisAnimationCamera {
     /// Explicit copied end; native CameraEnd parity uses AisAnimationCameraMembers::camera_end_ref.
     /// Retained end camera including null; `animation.camera_end()`.
     pub fn camera_end(&self) -> Handle<Graphic3dCamera> {
-        let snapshot = super::AisAnimationCameraMembers::camera_end(self);
-        snapshot
+        // A copied convenience acquires ownership explicitly; native parity uses the live alias.
+        super::AisAnimationCameraMembers::camera_end(self)
     }
     /// Retain the end endpoint by identity; `animation.set_camera_end(&camera)`.
     pub fn set_camera_end(&self, camera: &Handle<Graphic3dCamera>) {

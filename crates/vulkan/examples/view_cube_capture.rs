@@ -98,7 +98,7 @@ fn capture_widget_interaction(
     scene: &view_cube_scene::ViewCubeCaptureScene,
     prefix: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    use rustycad_tkv3d::ais::AisViewCubeMembers;
+    use rustycad_tkv3d::ais::{AisAnimationCameraMembers, AisViewCubeMembers};
     scene.restore_labels()?;
     let clock = view_cube_widget::configure_widget_timer(scene);
     let orientation = view_cube_widget::detect_widget_center(scene)?;

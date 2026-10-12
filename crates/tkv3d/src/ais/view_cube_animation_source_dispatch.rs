@@ -68,7 +68,10 @@ impl AisViewCubeAnimationEvents for CubeTransportTrace {
             self.replace(2);
         }
         if self.scenario == 10 {
-            self.cube.upgrade().set_view_animation(&Handle::default());
+            self.cube
+                .read()
+                .upgrade()
+                .set_view_animation(&Handle::default());
         }
     }
     fn animation_finished(&self) {

@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "AIS_ViewCube::ViewAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "44e5569df4adee49e32c68fe760f545112b97ef25f98eea66fb236b3c8b9452c",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeMembers::view_animation_ref",
+          "declaration_sha256": "301df65babef752e26ec2c08e21362a97d6101a426efddcbc78d5f9f288091ff",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::SetViewAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "e5c909252b354ac0c0459151b78323be83097b9f40ba9ec56347af0355131e29",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeMembers::set_view_animation",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeMembers::set_view_animation",
+          "declaration_sha256": "1cd80516019174352b58d86ee0629c8d8c1e7a5dcdf24abbe355f6c1c4a38737",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::myViewAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "472f4ff1d204111e438285534a9dbad77b63d716adba281618e0466a47df6708",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
+      "rust_kind": "struct_field",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeInteractionFields::animation",
+          "declaration_sha256": "dfe0e118c8510ce942e78c44fd5f20ce79832d18bdfdc9190f29d5937206bc43",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::StartAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "8ec7e3bdaa6d909142249730f67df37c085c8b2a0a1535365e7efc5c49e63c75",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+          "declaration_sha256": "a8a9c0c210f4db6bb31e95adb7fe30d36a31eca580256eabd09081bfe1fe87b8",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::UpdateAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "76f7cca54f35f4c23dfaee5472b82a23ab5f1eb6894831b54e197161f63cb522",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+          "declaration_sha256": "ec134d644088df52ce83dc6914365013ec9a055ec2a923a21ffd8ced6195e110",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::updateAnimation",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "a220b227c946ada67f263ecca98357a26b0cbadef202c125c09b2011f4d312b7",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+          "declaration_sha256": "ff35f165c1ff1109b0d0e823ac7933c05c34e83675de67f2b4971cb5c5c21430",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::HandleClick",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "968a5d947a09b14cedd0ae08e7da32297e0b3b558775856ed610727bac378c2c",
+      "rust_item": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+          "declaration_sha256": "992b79c621aef4a5181addc6d304d27575a1c08b4683b32aa4508617c0e2a0ed",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCube::viewFitAll",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "579a06c2dac7eb72ce283a96454f19e6a1492cf94e9de9c2a75e9792b497e024",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeSource::view_fit_all",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeSource::view_fit_all",
+          "declaration_sha256": "9a51b38708701cd2d3048c2f7ec42f75b0360de514b1559950183d4e2f886c1e",
+          "impl_context": null
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_ViewCubeOwner::HandleMouseClick",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewCube.hxx",
+      "source_sha256": "97d8457897aab67c6ce7e858c32c03ac49672b9725368375e22e571313b753a8",
+      "cpp_declaration_id": "e470da8c2c35f8bc82613990c58c28b15f6933382eecdc39a085361faf9b4406",
+      "rust_item": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::handle_mouse_click",
+      "rust_kind": "function",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisViewCubeOwner::<rustycad_tkv3d::select_mgr::SelectMgrEntityOwnerSource>::handle_mouse_click",
+          "declaration_sha256": "389aebd2aed557ef7437f5b6a59d1ae827154f3324f90cfb2b6d2d68ff964f18",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisViewCubeOwner",
+                "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "SelectMgrEntityOwnerSource",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::entity_owner::SelectMgrEntityOwnerSource",
+              "args": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::SelectDetected(enum AIS_SelectionScheme)",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "cfc591e6ea629c25350a556eacb46f40e1f73e410d71c1208aa335429e515ef8",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::select_detected",
+      "status": "implemented",
+      "notes": "Martensite derived camera-animation transport: actual Source/Base storage accepts subclasses, dispatches native virtual lifecycle/camera atoms, rereads the live animation slot after callbacks, and preserves borrowed endpoint/view references plus exact intrusive counts. 198 pinned native CPU records and seven prior live-animation alias rows replay replacement/null/restore, failure order and actual camera states. Concrete widget GPU captures use a real derived camera source on both devices. Whole classes remain partial; strict raster failures remain unaccepted. See docs/ais-view-cube-animation-source.md and porting/runtime-evidence/view-cube-animation-source/.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::select_detected",
+          "declaration_sha256": "41f03315eac39447db547e062270a2cc356d358dc18be37fcb83a972cd5d36fa",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
+    }
+  ]
+}

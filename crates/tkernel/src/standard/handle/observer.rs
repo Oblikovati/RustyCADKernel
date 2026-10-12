@@ -1,5 +1,5 @@
 //! Keep callback targets addressable without fabricating an OCCT owning reference.
-use super::{Handle, RuntimeTyped};
+use super::{Handle, Owner, RuntimeTyped};
 use std::{marker::PhantomData, ops::Deref};
 /// A storage-backed const handle reference; `let observed=handle.observe(); assert_eq!(observed.ref_count(),handle.ref_count());`.
 ///
@@ -12,12 +12,7 @@ pub struct HandleObserver<T: ?Sized + RuntimeTyped> {
 impl<T: ?Sized + RuntimeTyped> Handle<T> {
     /// Release a container guard while retaining a const handle reference; `let observed=handle.observe(); callback(&observed);`.
     pub fn observe(&self) -> HandleObserver<T> {
-        HandleObserver {
-            handle: Handle {
-                owner: self.owner.clone(),
-                projected: PhantomData,
-            },
-        }
+        HandleObserver::from_owner(self.owner.clone())
     }
 }
 impl<T: ?Sized + RuntimeTyped> Deref for HandleObserver<T> {
@@ -30,5 +25,16 @@ impl<T: ?Sized + RuntimeTyped> Drop for HandleObserver<T> {
     fn drop(&mut self) {
         // Only storage was cloned; remove it before Handle::drop could decrement the native count.
         self.handle.owner.take();
+    }
+}
+
+impl<T: ?Sized + RuntimeTyped> HandleObserver<T> {
+    pub(super) fn from_owner(owner: Option<Owner>) -> Self {
+        Self {
+            handle: Handle {
+                owner,
+                projected: PhantomData,
+            },
+        }
     }
 }
