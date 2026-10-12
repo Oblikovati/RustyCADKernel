@@ -4,6 +4,8 @@ use super::{scene, scene::ViewerScene, texture_scene::texture_handle};
 mod edge_boundaries;
 #[path = "capping_scene.rs"]
 mod section_geometry;
+#[path = "capping_section_mesh.rs"]
+mod section_mesh;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::{
     ncollection::{Vec2, Vec4},
@@ -82,10 +84,35 @@ fn cap_texture(mode: &str) -> Handle<Graphic3dTexture2D> {
         texture.get_params().set_modulate(false);
     }
     configure_generated_cap_planes(&texture, mode);
+    configure_fixed_filter_control(&texture, mode);
     texture
 }
+fn configure_fixed_filter_control(texture: &Graphic3dTexture2D, mode: &str) {
+    let params = texture.get_params();
+    if mode.contains("fixed-bilinear") {
+        params.set_filter(Graphic3dTypeOfTextureFilter::Bilinear);
+    }
+    if mode.contains("fixed-trilinear") {
+        params.set_filter(Graphic3dTypeOfTextureFilter::Trilinear);
+    }
+    configure_fixed_filter_coordinates(texture, mode);
+}
+fn configure_fixed_filter_coordinates(texture: &Graphic3dTexture2D, mode: &str) {
+    let params = texture.get_params();
+    if mode.contains("fixed-center") {
+        params.set_gen_mode(
+            Graphic3dTypeOfTextureMode::Object,
+            Vec4::new(0., 0., 0., 0.),
+            Vec4::new(0., 0., 0., 0.),
+        );
+        params.set_translation(Vec2::new(-0.5, -0.5));
+    }
+    if mode.contains("fixed-minified") {
+        params.set_scale(Vec2::new(128., 128.));
+    }
+}
 fn configure_generated_cap_planes(texture: &Graphic3dTexture2D, mode: &str) {
-    if mode.contains("generated") {
+    if mode.contains("generated") || mode.contains("shader-eye") {
         texture.get_params().set_gen_mode(
             if mode.contains("eye") {
                 Graphic3dTypeOfTextureMode::Eye
@@ -104,7 +131,7 @@ fn configure_cap_aspect(
 ) {
     let aspect = plane.capping_aspect();
     aspect.set_texture_map(texture.cast());
-    aspect.set_texture_map_on(true);
+    aspect.set_texture_map_on(!mode.contains("unmapped"));
     aspect.set_interior_color(rustycad_tkernel::quantity::Color::named(
         rustycad_tkernel::quantity::NamedColor::WHITE,
     ));
@@ -116,10 +143,15 @@ fn configure_cap_aspect(
         _ => Graphic3dAlphaMode::BlendAuto,
     };
     aspect.set_alpha_mode(alpha, 0.5);
+    section_mesh::configure_section_mesh_edges(&*aspect, mode);
 }
 
 fn cap_image_mode(mode: &str) -> &str {
     for name in [
+        "format-alpha-f",
+        "format-alpha",
+        "format-gray",
+        "format-rgb",
         "bc1-rgb",
         "bc1-rgba",
         "bc2",
@@ -204,7 +236,24 @@ fn cap_fixture_is_lit(mode: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::cap_fixture_equation;
+    use super::*;
+    #[test]
+    fn fixed_filter_controls_use_real_sampler_coordinate_and_mipmap_parameters() {
+        let center = cap_texture("generated-fixed-bilinear-fixed-center");
+        assert_eq!(
+            center.get_params().filter(),
+            Graphic3dTypeOfTextureFilter::Bilinear
+        );
+        assert_eq!(center.get_params().translation(), Vec2::new(-0.5, -0.5));
+        assert_eq!(center.get_params().gen_plane_s(), Vec4::new(0., 0., 0., 0.));
+        let minified = cap_texture("generated-fixed-trilinear-fixed-minified");
+        assert_eq!(
+            minified.get_params().filter(),
+            Graphic3dTypeOfTextureFilter::Trilinear
+        );
+        assert_eq!(minified.get_params().scale(), Vec2::new(128., 128.));
+        assert!(minified.has_mipmaps());
+    }
     #[test]
     fn compound_oblique_policies_keep_the_actual_native_plane() {
         for mode in [

@@ -1,4 +1,5 @@
 //! Frame resources are private and never outlive the device that created them.
+use super::transform_constants::encode_transform;
 use super::{
     buffer::DeviceBuffer, image::TargetImage, memory_selection::HostBufferAccess,
     pipeline::DrawPipeline, pipeline_variants::RasterPipelines, runtime::VulkanRuntime,
@@ -16,6 +17,7 @@ pub(super) struct UploadedDraw {
     pub annotation: bool,
     pub text_shadow_bias: bool,
     pub text_logic_xor: bool,
+    pub encoded_surface: bool,
     pub polygon_offset: Option<crate::RenderPolygonOffset>,
     pub polygon: bool,
     pub polygon_edge: bool,
@@ -154,7 +156,11 @@ fn upload_draw(
     if draw.surface_texture_binding_only
         && let Some(style) = &draw.surface_texture
     {
-        pipelines.surface_images.touch(runtime, &style.image)?;
+        pipelines.surface_images.touch(
+            runtime,
+            &style.image,
+            crate::fixed_surface_environment::uses_fixed_surface_environment(draw),
+        )?;
     }
     let surface_image = draw
         .surface_texture
@@ -168,6 +174,7 @@ fn upload_draw(
                     .as_ref()
                     .expect("surface image layout"),
                 style,
+                crate::fixed_surface_environment::uses_fixed_surface_environment(draw),
             )
         })
         .transpose()?;
@@ -207,6 +214,7 @@ fn upload_draw(
         annotation: draw.annotation,
         text_shadow_bias: draw.text_shadow_bias,
         text_logic_xor: draw.text_logic_xor,
+        encoded_surface: super::pipeline_variants::encoded_surface_attachment(draw),
         polygon_offset: draw.polygon_offset,
         // Native font glyph triangles retain ordinary Fill slope/units; OpenGl_Text at 3d097a0.
         polygon: draw.topology() == crate::PrimitiveTopology::Triangles,
@@ -279,57 +287,35 @@ fn encoded_vertex_header(vertex: &crate::RenderVertex, xor: bool) -> Vec<u8> {
         .collect()
 }
 
-fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
-    let mut bytes: Vec<u8> = draw
-        .clip_transform
-        .iter()
-        .flat_map(|v| v.to_ne_bytes())
-        .collect();
-    if let Some(style) = draw.line_style.or(draw.polygon_edge_style) {
-        bytes.extend(
-            [extent.width as f32, extent.height as f32]
-                .iter()
-                .flat_map(|v| v.to_ne_bytes()),
-        );
-        bytes.extend(u32::from(style.pattern).to_ne_bytes());
-        bytes.extend(u32::from(style.factor).to_ne_bytes());
-    }
-    if let Some(style) = &draw.point_style {
-        bytes.extend(style.size.to_ne_bytes());
-        bytes.extend(style.image.extent.into_iter().flat_map(|v| v.to_ne_bytes()));
-        bytes.extend((style.color_policy as u32).to_ne_bytes());
-    }
-    if let Some(style) = &draw.textured_style {
-        bytes.extend(style.image.extent.iter().flat_map(|v| v.to_ne_bytes()));
-        bytes.extend(style.alpha_cutoff.to_ne_bytes());
-        bytes.extend(0u32.to_ne_bytes());
-    }
-    if !draw.surface_texture_binding_only
-        && (draw.surface_texture.is_some()
-            || draw.surface_cutoff.is_some()
-            || draw.surface_texture_unavailable.is_some()
-            || draw.mesh_edges.is_some())
-    {
-        let flags = draw.surface_texture.as_ref().map_or(0, |s| {
-            1 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
-        }) + draw.surface_texture_unavailable.as_ref().map_or(0, |s| {
-            16 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
-        }) + 8 * u32::from(draw.surface_cutoff.is_some());
-        bytes.extend(draw.surface_cutoff.unwrap_or(0.).to_ne_bytes());
-        bytes.extend(flags.to_ne_bytes());
-        bytes.extend([0_u8; 8]);
-    }
-    crate::mesh_edges::append_mesh_constants(
-        &mut bytes,
-        draw.mesh_edges,
-        [extent.width, extent.height],
-    );
-    bytes
-}
-
 #[cfg(test)]
 mod xor_tests {
     use super::*;
+    #[test]
+    fn sampled_polygon_alpha_constants_preserve_surface_layout_before_line_parameters() {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        draw.polygon_edge_style = Some(crate::LineStyle::new(3., 0xff00, 2).unwrap());
+        draw.surface_cutoff = Some(0.285);
+        let bytes = encode_transform(
+            &draw,
+            vk::Extent2D {
+                width: 64,
+                height: 64,
+            },
+        );
+        assert_eq!(bytes.len(), 80);
+        assert_eq!(&bytes[64..68], &0.285_f32.to_ne_bytes());
+        assert_eq!(&bytes[68..72], &8_u32.to_ne_bytes());
+        draw.surface_texture_binding_only = true;
+        let line = encode_transform(
+            &draw,
+            vk::Extent2D {
+                width: 64,
+                height: 64,
+            },
+        );
+        assert_eq!(&line[72..76], &0xff00_u32.to_ne_bytes());
+        assert_eq!(&line[76..80], &2_u32.to_ne_bytes());
+    }
     #[test]
     fn xor_pack_encodes_only_upload_rgb_and_preserves_linear_submission_and_alpha() {
         let color = [0.18, 0.4, 0.7, 0.4];

@@ -454,8 +454,13 @@ fn lower_group_edges(
         draws,
         &**aspects,
         context.group.mesh_edge_pipeline,
+        context.group.texture_images.coordinate_pipeline,
     )?;
-    crate::retained_mesh_edges::apply_graphic3d_raster_widths(draws, context.rendering)
+    crate::retained_mesh_edges::apply_graphic3d_raster_widths(draws, context.rendering)?;
+    crate::retained_eye_edge_matrix::apply_eye_edge_matrices(
+        draws,
+        crate::persistent_transform::group_projection_only(context)?,
+    )
 }
 
 fn surface_alpha_policy(

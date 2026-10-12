@@ -103,6 +103,7 @@ mod tests {
             revision: 0,
             extent: [4, 4],
             encoding: SurfaceImageEncoding::Linear8,
+            alpha_only: false,
             bytes: Arc::new(vec![0; 64]),
             top_down: true,
             mipmaps: true,

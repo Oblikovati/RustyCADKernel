@@ -232,3 +232,27 @@ pub(crate) fn cap_lighting_matrices(
     }
     Ok((transform.model.data(), transform.world_view.data()))
 }
+pub(crate) fn cap_projection_only(
+    camera: &Graphic3dCamera,
+    structure: &Graphic3dCStructureFields,
+    extent: [u32; 2],
+) -> Result<[f32; 16], RenderError> {
+    let mut transform = PersistentView::new(camera, Mat4::identity());
+    transform.apply(&structure.trsf_pers, viewport_size(Some(extent))?, None)?;
+    Ok(transform.projection.data())
+}
+pub(crate) fn group_projection_only(
+    context: &crate::text_submission::TextSceneContext<'_>,
+) -> Result<[f32; 16], RenderError> {
+    if context.structure.trsf_pers.is_null() && context.group.transform_persistence().is_null() {
+        return Ok(Mat4::<f32>::from_other(&context.camera.projection_matrix()).data());
+    }
+    let transform = persistent_view(
+        context.camera,
+        model_transform(context.group, context.structure),
+        &context.structure.trsf_pers,
+        &context.group.transform_persistence(),
+        context.extent,
+    )?;
+    Ok(transform.projection.data())
+}
