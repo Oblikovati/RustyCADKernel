@@ -497,3 +497,9 @@ mod view_cube_reset_alias_tests;
 mod view_cube_reset_dispatch_tests;
 #[cfg(test)]
 mod view_cube_shading_alias_tests;
+mod animation_camera_source;
+mod animation_camera_update;
+pub use animation_camera_source::{
+    AisAnimationCameraBase, AisAnimationCameraMembers, AisAnimationCameraSource,
+    ais_animation_camera_update,
+};

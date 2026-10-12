@@ -111,11 +111,18 @@ pub trait AisAnimationSource: Transient {
         Ok(())
     }
 }
-rustycad_tkernel::impl_transient_interface!(
-    dyn AisAnimationSource,
-    "AIS_Animation",
-    StandardTransient
-);
+impl rustycad_tkernel::standard::RuntimeTyped for dyn AisAnimationSource {
+    const TYPE_NAME: &'static str = "AIS_Animation";
+    fn static_type() -> &'static rustycad_tkernel::standard::RuntimeType {
+        // Derived Source handles must recognize the actual concrete native ancestor descriptor.
+        <AisAnimation as rustycad_tkernel::standard::RuntimeTyped>::static_type()
+    }
+    fn project_from(object: &dyn rustycad_tkernel::standard::Transient) -> Option<&Self> {
+        // Projection changes the Rust interface while retaining the same live native object.
+        rustycad_tkernel::standard::project_interface::<Self>(object)
+    }
+}
+
 /// Native concrete animation container; `Handle::new(AisAnimation::new("timeline"))`.
 pub struct AisAnimation {
     transient: StandardTransient,
