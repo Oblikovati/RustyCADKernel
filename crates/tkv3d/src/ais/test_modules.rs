@@ -52,3 +52,5 @@ mod view_cube_reset_dispatch_tests;
 mod view_cube_shading_alias_tests;
 mod view_cube_submission_tests;
 mod view_cube_test_probe;
+
+mod context_selected_applicative_tests;

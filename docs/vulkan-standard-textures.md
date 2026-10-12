@@ -57,36 +57,23 @@ point cutoff rules are unchanged. MaskBlend remains ordered with depth writes;
 Blend uses the existing deferred blend path without depth writes. BlendAuto
 classification depends on material opacity rather than image alpha.
 
-The ordinary surface path retains clipping, culling and depth behavior.
-Non-manual texture generation, textured section caps and cap mask/blend modes
-remain explicit unsupported-feature boundaries. The next dependency is native
-texture-generation and section-coordinate policy, followed by textured cap
-mask/depth behavior. One standard 2D base-color texture is supported; texture
-arrays, additional units, 1D/3D/cube/media textures, custom shaders and PBR are
-outside this slice.
+The ordinary surface path retains clipping, culling and depth behavior. The
+[generated-coordinate and section-texture slice](vulkan-texture-texgen-capping.md)
+adds Object/Eye coordinate policy and native homogeneous cap UVs, material and
+texture inheritance, Mask/MaskBlend/Blend batch ordering, and dedicated-cap
+readiness. The default programmable policy preserves native supplied-UV
+behavior; the injected compatibility policy covers coordinates without claiming
+whole fixed-function lighting or encoded-byte blending parity.
 
-## Next dependency slice
+## Remaining legacy dependencies
 
-1. Capture actual `OpenGl_Sampler::applyGlobalTextureParams` Object and Eye
-   generation, including its fixed-function versus programmable distinction,
-   native S/T planes, model/view changes and parameter revisions. Add a retained
-   coordinate-generation policy rather than substituting existing vertex UVs.
-   `retained_surface_texture::validate_surface_generation` currently rejects
-   every mode other than Manual, including Object, Eye, Sphere and Sprite.
-2. Preserve the homogeneous position, normal and UV coordinates in
-   `OpenGl_CappingPlaneResource`'s section-plane primitive, its orientation and
-   the `OpenGl_CappingAlgo::renderPlane` model-state transition. Port the actual
-   section-coordinate path and object-texture inheritance independently of
-   ordinary surface UVs. `capping_lighting::validate_cap_texture_alpha` currently
-   rejects cap aspects with texture mapping enabled.
-3. Prove stencil winding, clipped chains, front/back materials, depth and
-   texture alpha through actual native cap scenes. Then remove the cap alpha
-   gate for the proven modes; it currently permits only Opaque and BlendAuto.
-   Mask, MaskBlend and Blend caps remain rejected. Repeat strict captures on
-   both Vulkan devices and retain native identity/precision qualifications.
-
-These dependencies precede unrelated renderer expansion. Multiple texture
-units and non-2D texture families retain the separate family-validation gate.
+Sphere/Sprite coordinate generation, other texture targets and units,
+PBR/custom shaders and unsupported interior styles remain explicit renderer
+obligations. Actual triangle-edge rendering and textured boundary/free-element
+line groups also need native geometry/shader/order proof. Full fixed-function
+lighting and color/attachment state remain separate from coordinate generation.
+These dependencies precede unrelated renderer expansion; the supported standard
+2D path does not grant whole-family or OCCT class completion credit.
 
 ## Local validation
 
@@ -107,8 +94,11 @@ ICD and `MARTENSITE_VULKAN_DEVICE=0` to select the tested device.
 Committed OCCT-generated buffers replay in Rust without loading OCCT. Native
 AMD OpenGL and Vulkan RADV have different renderer identities; software Vulkan
 replay of AMD-native buffers does not prove a software OpenGL oracle result.
-The local native software OpenGL probe exited with signal 139 and its rejected
-outputs are retained as diagnostics. Strict filtered, transformed and
+The original native software probe had an invalid viewer lifetime; its rejected
+outputs remain diagnostic artifacts. The repaired owned-viewer helper
+(`700823fd11f9d959a29ed69fcbe8c3375f1e2559`) subsequently produced actual
+same-profile software oracle captures, separately recorded from the original
+manual-surface receipt. Strict filtered, transformed and
 perspective precision differences remain visible. Existing gates are not
 relaxed, and timings do not establish a new accepted performance baseline.
 

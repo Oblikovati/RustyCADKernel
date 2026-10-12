@@ -105,6 +105,12 @@ impl ShapeIterator {
         Ok(&self.shape)
     }
 
+    /// Borrow actual inline current storage even after reset; `iterator.reference_shape()`.
+    pub fn reference_shape(&self) -> &Shape {
+        // Native const references access myShape directly, not Value's More precondition.
+        &self.shape
+    }
+
     /// `updateCurrentShape`: the child composed with the cumulated orientation and moved
     /// by the cumulated location.
     fn update_current_shape(&mut self) {

@@ -30,6 +30,21 @@ impl RetainedTextureSamplers {
             });
         Ok(())
     }
+    pub fn bound_parameters(
+        &self,
+        image: &Arc<SurfaceTextureImage>,
+        fallback: &Handle<Graphic3dTextureParams>,
+    ) -> Result<Handle<Graphic3dTextureParams>, RenderError> {
+        let snapshots = self
+            .snapshots
+            .lock()
+            .map_err(|e| rejected(e.to_string(), "unpoisoned texture sampler cache"))?;
+        Ok(snapshots
+            .get(&image.id)
+            .map(|snapshot| snapshot.parameters.upgrade())
+            .filter(|parameters| !parameters.is_null())
+            .unwrap_or_else(|| fallback.clone()))
+    }
     pub fn policy(
         &self,
         image: &Arc<SurfaceTextureImage>,

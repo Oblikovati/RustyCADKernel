@@ -62,21 +62,30 @@ fn translucent_lighting_cannot_enter_nodal_pipelines() {
     assert!(line.with_lighting(opacity_state(0.5, 1.).unwrap()).is_err());
 }
 #[test]
-fn translucent_lighting_cannot_enter_cap_pipelines() {
+fn translucent_caps_retain_lighting_and_allow_explicit_alpha_pass_selection() {
     let cap = opacity_triangle()
         .with_capping_pass(RenderCappingPass::Surface)
         .unwrap();
-    assert!(cap.with_lighting(opacity_state(0.5, 1.).unwrap()).is_err());
+    assert!(
+        cap.with_lighting(opacity_state(0.5, 1.).unwrap())
+            .unwrap()
+            .is_surface_blended()
+    );
     let draw = opacity_triangle()
         .with_lighting(opacity_state(0.5, 1.).unwrap())
         .unwrap()
         .with_surface_blending(false)
         .unwrap();
-    assert!(draw.with_capping_pass(RenderCappingPass::Surface).is_err());
+    assert!(
+        !draw
+            .with_capping_pass(RenderCappingPass::Surface)
+            .unwrap()
+            .is_surface_blended()
+    );
 }
 
 #[test]
-fn explicit_surface_blending_rejects_nodal_and_cap_topology() {
+fn explicit_surface_blending_rejects_nodal_topology_and_accepts_caps() {
     let line = PrimitiveDraw::segments(
         vec![RenderVertex::new([0.; 3], [1.; 4]); 2],
         vec![0, 1],
@@ -88,5 +97,9 @@ fn explicit_surface_blending_rejects_nodal_and_cap_topology() {
     let cap = opacity_triangle()
         .with_capping_pass(RenderCappingPass::Surface)
         .unwrap();
-    assert!(cap.with_surface_blending(false).is_err());
+    assert!(
+        !cap.with_surface_blending(false)
+            .unwrap()
+            .is_surface_blended()
+    );
 }

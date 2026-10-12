@@ -134,6 +134,7 @@ mod tests {
         .unwrap();
         draw.surface_texture = Some(SurfaceTextureStyle {
             image,
+            pending_texgen: None,
             sampler: SurfaceSamplerPolicy::read(&texture.get_params()),
             uv: vec![[0., 0., 0., 1.]; 3],
             back_vertex: true,

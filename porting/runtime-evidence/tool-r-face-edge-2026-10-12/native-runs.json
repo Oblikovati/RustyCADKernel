@@ -1,0 +1,60 @@
+[
+  {
+    "source": "tools/oracle/martensite_rface_edge.cxx",
+    "source_sha256": "f1ee87cedb5cff4f871fe90b1e15dec054234833948809ea99d30b61dea2402a",
+    "executable_sha256": "ae88d9321921642cd97ccc92aa60e42cba10e5a89462e1a83a4d1155bf279592",
+    "row_count": 20,
+    "first_sha256": "c3585952b648f768917ebd93a048d51360061553e1b34f75d35387a2c734c041",
+    "repeat_sha256": "c3585952b648f768917ebd93a048d51360061553e1b34f75d35387a2c734c041",
+    "compile_command": [
+      "c++",
+      "-std=c++17",
+      "-O2",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_rface_edge.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKTopAlgo",
+      "-lTKGeomAlgo",
+      "-lTKBRep",
+      "-lTKGeomBase",
+      "-lTKG3d",
+      "-lTKG2d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "/tmp/martensite-rface-edge"
+    ]
+  },
+  {
+    "source": "tools/oracle/martensite_rface_ownership.cxx",
+    "source_sha256": "28c144e250e028d0efc41b2d580597de192ff072b917ce1c36a228947294100b",
+    "executable_sha256": "77322df6f25cfc2d152fa7ee81e6a5659e617bede77b5258d87572d583dba7fe",
+    "row_count": 1,
+    "first_sha256": "51eee30035ca39fe9dc4ef9491814854c60f39ec2a3f38038571c10f6a7b2075",
+    "repeat_sha256": "51eee30035ca39fe9dc4ef9491814854c60f39ec2a3f38038571c10f6a7b2075",
+    "compile_command": [
+      "c++",
+      "-std=c++17",
+      "-O2",
+      "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_rface_ownership.cxx",
+      "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKTopAlgo",
+      "-lTKGeomAlgo",
+      "-lTKBRep",
+      "-lTKGeomBase",
+      "-lTKG3d",
+      "-lTKG2d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "/tmp/martensite-rface-ownership"
+    ]
+  }
+]

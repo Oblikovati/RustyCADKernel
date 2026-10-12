@@ -1,5 +1,5 @@
 //! Native oriented p-curve traversal for Martensite isoline trimming; OCCT 3d097a0.
-use super::StdPrsIsolineSurfaceSource;
+use super::{StdPrsIsolineSurfaceSource, StdPrsToolRFaceEdgeRef};
 use rustycad_tkbrep::{
     brep::BRepTool,
     topexp::Explorer,
@@ -76,6 +76,16 @@ impl StdPrsToolRFace {
     pub fn value(&self) -> &dyn Adaptor2dCurve2d {
         // Native Value refers to myCurve rather than an adaptor snapshot, including after Init/Next.
         &self.curve
+    }
+    /// Bind actual explorer edge storage; `let edge = tool.edge_ref()?; tool.next()?; edge.snapshot()?`.
+    pub fn edge_ref(&self) -> Result<StdPrsToolRFaceEdgeRef<'_>, Failure> {
+        let explorer = self.explorer.read();
+        // Check only acquisition: retained typed native references can later observe a reset or root face.
+        edge(explorer.current())?;
+        Ok(StdPrsToolRFaceEdgeRef::new(
+            &self.explorer,
+            explorer.current_shape_slot(),
+        ))
     }
     /// Report whether any missing p-curve was skipped; `tool.is_invalid_geometry()`.
     pub fn is_invalid_geometry(&self) -> bool {

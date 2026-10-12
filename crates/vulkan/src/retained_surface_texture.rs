@@ -97,14 +97,20 @@ fn complete_surface_style(
         .texture_images
         .samplers
         .policy(&image, &parameters)?;
-    Ok(extracted_surface_style(
-        image,
-        uv,
-        &parameters,
-        sampler,
-        primitive,
-        &**aspects,
-    ))
+    let mut style = extracted_surface_style(image, uv, &parameters, sampler, primitive, &**aspects);
+    if context.group.texture_images.coordinate_pipeline
+        == crate::RenderTextureCoordinatePipeline::GeneratedCompatibility
+    {
+        let (world, view) = crate::persistent_transform::lighting_matrices(context)?;
+        style.pending_texgen = Some(crate::surface_texgen::SurfaceTexgen::snapshot(
+            crate::surface_texture_uv::surface_input_uv(primitive)?,
+            &parameters,
+            style.image.top_down,
+            world,
+            view,
+        ));
+    }
+    Ok(style)
 }
 fn extracted_surface_style(
     image: Arc<SurfaceTextureImage>,
@@ -120,6 +126,7 @@ fn extracted_surface_style(
         .is_some();
     SurfaceTextureStyle {
         image,
+        pending_texgen: None,
         uv,
         sampler,
         back_vertex: aspects.to_use_vertex_color_for_back_faces(),
@@ -127,7 +134,7 @@ fn extracted_surface_style(
         modulate: parameters.is_modulate(),
     }
 }
-fn validate_texture_family(
+pub(crate) fn validate_texture_family(
     texture: &dyn Graphic3dTextureMap,
     aspects: &dyn Graphic3dAspectsSource,
 ) -> Result<(), RenderError> {
@@ -151,12 +158,17 @@ fn validate_texture_family(
     ))
 }
 fn validate_surface_generation(generation: Graphic3dTypeOfTextureMode) -> Result<(), RenderError> {
-    if generation == Graphic3dTypeOfTextureMode::Manual {
+    if matches!(
+        generation,
+        Graphic3dTypeOfTextureMode::Manual
+            | Graphic3dTypeOfTextureMode::Object
+            | Graphic3dTypeOfTextureMode::Eye
+    ) {
         return Ok(());
     }
     Err(rejected(
         generation,
-        "manual standard2D texture coordinates; legacy texgen is not implemented yet",
+        "Manual/Object/Eye standard2D coordinates; Sphere/Sprite generation remains unsupported",
     ))
 }
 
@@ -171,7 +183,7 @@ mod tests {
         aspects.set_texture_map(texture.cast());
         assert!(validate_texture_family(&*texture, &aspects).is_ok());
         texture.get_params().set_gen_mode(
-            Graphic3dTypeOfTextureMode::Object,
+            Graphic3dTypeOfTextureMode::Sphere,
             Vec4::new(1., 0., 0., 0.),
             Vec4::new(0., 1., 0., 0.),
         );

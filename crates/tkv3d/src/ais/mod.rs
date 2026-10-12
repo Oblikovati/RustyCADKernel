@@ -44,6 +44,8 @@ pub use interactive_object::{
 };
 mod context_members;
 pub use context_members::AisContextHandle;
+mod context_selector_reference;
+pub use context_selector_reference::AisMainSelectorRef;
 
 mod context_updates;
 mod interactive_object_members;
@@ -61,6 +63,7 @@ pub use detection_status::AisStatusOfDetection;
 
 mod context_highlight_owners;
 mod context_owner_walk;
+mod context_selected_applicative;
 mod context_selected_members;
 mod context_selection_actions;
 mod context_unhighlight_owners;

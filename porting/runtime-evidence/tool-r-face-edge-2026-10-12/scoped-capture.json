@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "raw_capture_complete": false,
+  "normalized_public_inventory": false,
+  "workspace_library_count": 2,
+  "feature_policy": "all-features per workspace library package",
+  "rustdoc_item_policy": "document-private-items-v1",
+  "rustdoc_json_format_version": 61,
+  "cargo_arguments": [
+    "rustdoc",
+    "--locked",
+    "--package {package}",
+    "--lib",
+    "--all-features",
+    "-Z unstable-options",
+    "-- --document-private-items --output-format json -Z unstable-options"
+  ],
+  "rustdoc_json": [
+    {
+      "package": "rustycad-tkbrep",
+      "package_id": "path+file:///home/vmiguel/git/oblikovati-workspace/Martensite-tool-r-face/crates/tkbrep#rustycad-tkbrep@0.2.1",
+      "library_target": "rustycad_tkbrep",
+      "manifest_path": "crates/tkbrep/Cargo.toml",
+      "available_features": [],
+      "feature_selection": "all-features",
+      "package_inputs_sha256": "d08c1d5cecc78509be7a206c5057f99c509008f0f55f403b1bf15f91f1670fc6",
+      "artifact": "crates/rustycad_tkbrep.json",
+      "artifact_sha256": "2b3d11d1fc9429281c0e77665321be67783b247cf8cfd13d48637eacc74ee6f5",
+      "artifact_bytes": 15048128,
+      "rustdoc_format_version": 61,
+      "indexed_items": 20044
+    },
+    {
+      "package": "rustycad-tkv3d",
+      "package_id": "path+file:///home/vmiguel/git/oblikovati-workspace/Martensite-tool-r-face/crates/tkv3d#rustycad-tkv3d@0.2.1",
+      "library_target": "rustycad_tkv3d",
+      "manifest_path": "crates/tkv3d/Cargo.toml",
+      "available_features": [],
+      "feature_selection": "all-features",
+      "package_inputs_sha256": "ff8dff50ec558e676eee3730546bc76e7d57d7bff0932ec2a93c464709d96d70",
+      "artifact": "crates/rustycad_tkv3d.json",
+      "artifact_sha256": "d60002609ccf5699d38a1a93de91bbd8b9209cd2c723ef016e1e4c512211a8c0",
+      "artifact_bytes": 11871768,
+      "rustdoc_format_version": 61,
+      "indexed_items": 15605
+    }
+  ],
+  "inputs": {
+    "workspace_revision": "a9edf5f15eb3c96a6e6452b0cc65e730f71b732a",
+    "tool_versions": {
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n"
+    }
+  },
+  "scope": "Only TKBRep and TKV3d; bounded compiler proof, not whole-workspace capture"
+}

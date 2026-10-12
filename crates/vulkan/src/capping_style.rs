@@ -53,3 +53,6 @@ mod tests {
         assert_eq!(plane.capping_aspect().interior_color().green(), 1.);
     }
 }
+#[cfg(test)]
+#[path = "capping_style_native_tests.rs"]
+mod native_tests;

@@ -3,17 +3,17 @@ use super::scene::ViewerScene;
 #[path = "surface_texture_formats.rs"]
 mod formats;
 #[path = "surface_texture_geometry.rs"]
-mod geometry;
+pub mod geometry;
 #[path = "surface_texture_lighting.rs"]
-mod lighting;
+pub mod lighting;
 #[path = "surface_texture_modes.rs"]
 pub mod modes;
 #[path = "surface_texture_projective.rs"]
-mod projective;
+pub mod projective;
 #[path = "surface_texture_view.rs"]
 mod texture_view;
 #[path = "surface_texture_updates.rs"]
-mod updates;
+pub mod updates;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::{
@@ -33,7 +33,7 @@ impl SurfaceTextureScene {
         scene.group.clear(true);
         let texture = texture_handle(mode);
         let aspects = texture_fixture_aspects(&texture, mode);
-        lighting::texture_lighting(&scene, &aspects);
+        lighting::texture_lighting(&scene, &*aspects);
         let vertices = geometry::surface_texture_quad(mode);
         scene.group.set_group_primitives_aspect(&aspects.cast());
         scene.group.add_primitive_array(&vertices, true);
@@ -61,7 +61,7 @@ impl SurfaceTextureScene {
         self.scene.group.synchronize_aspects();
     }
 }
-fn texture_image(mode: &str) -> Handle<ImagePixMap> {
+pub fn texture_image(mode: &str) -> Handle<ImagePixMap> {
     if let Some(image) = formats::surface_format_image(mode) {
         return image;
     }
@@ -88,7 +88,7 @@ fn texture_fixture_aspects(
     aspects
 }
 
-fn texture_handle(mode: &str) -> Handle<Graphic3dTexture2D> {
+pub fn texture_handle(mode: &str) -> Handle<Graphic3dTexture2D> {
     if mode.starts_with("missing-file") {
         return Handle::new(Graphic3dTexture2D::from_file(
             &"Martensite-missing-standard2D-fixture.png".into(),

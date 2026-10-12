@@ -1,0 +1,59 @@
+{
+  "project": "Martensite",
+  "scope": [
+    "AIS_InteractiveContext::HasApplicative",
+    "AIS_InteractiveContext::Applicative"
+  ],
+  "base_revision": "79f2f8382d1a9269c4df55ae5a5e6371ef2d2d0b",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_records": 7,
+  "native_runs_identical": true,
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "source_sha256": {
+    "tools/oracle/martensite_selected_applicative.cxx": "001683768fe867448ebc1d46a5777cdbc10f572272c996ea407399dc0d9ca67c",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9"
+  },
+  "native_header_sha256": {
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+    "src/Visualization/TKV3d/AIS/AIS_Selection.hxx": "2a52d1115820da991309e33851f151fb8e6158db42a8f5ba7ccfbe412bfbd8fe",
+    "src/Visualization/TKV3d/AIS/AIS_InteractiveObject.hxx": "8b29fc42835ea0716d5552e11f252c6fff5ee208cca4b8a5d51f2f1d53b1641d",
+    "src/Visualization/TKV3d/SelectMgr/SelectMgr_EntityOwner.hxx": "b890bc0226515689161f13610ebcd20817a3ff8deab967c62353fa77b55d8fb0"
+  },
+  "native_library_sha256": {
+    "TKV3d": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "TKG3d": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "TKBRep": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d"
+  },
+  "binary_sha256": "c89e5a40fec3d9a6d8e8c5bb621e72b20a3a357abafb9fcd1e76b212a028779d",
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_selected_applicative.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-lTKG3d",
+    "-lTKBRep",
+    "-o",
+    "target/selected-applicative-native/probe"
+  ],
+  "tests": 756,
+  "executables": 5,
+  "checks": [
+    "all-feature all-target TKV3d tests",
+    "Clippy -D warnings",
+    "format",
+    "toolkit discovery"
+  ],
+  "constraints": "Actual selected-object state and owning copy counts only. Empty selection is native undefined behavior and has an explicit Rust precondition error; no native exception credit or whole-context completion claim."
+}

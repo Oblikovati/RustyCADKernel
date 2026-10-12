@@ -112,6 +112,15 @@ fn invalid_or_unsupported_planes_fail_redraw_and_cannot_return_stale_capture() {
     assert!(scene.render_view().capture().is_err());
     let cap = plane([1., 0., 0., 0.]);
     cap.set_capping(true);
+    let texture = Handle::new(Graphic3dTexture2D::from_pix_map(Handle::new(
+        rustycad_tkservice::image::ImagePixMap::default(),
+    )));
+    texture.get_params().set_gen_mode(
+        Graphic3dTypeOfTextureMode::Sphere,
+        rustycad_tkernel::ncollection::Vec4::new(1., 0., 0., 0.),
+        rustycad_tkernel::ncollection::Vec4::new(0., 1., 0., 0.),
+    );
+    cap.capping_aspect().set_texture_map(texture.cast());
     cap.capping_aspect().set_texture_map_on(true);
     scene.group.set_closed(true);
     scene.cview().set_clip_planes(&sequence(&cap));
