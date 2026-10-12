@@ -4,7 +4,7 @@ use crate::{select_basics::SelectBasicsSelectingVolumeManager, select_mgr::*, v3
 use rustycad_tkernel::{
     ncollection::{Array1, Vec2},
     precision,
-    standard::{Failure, Handle, exceptions::program_error},
+    standard::{Failure, Handle, catch_native_failure, exceptions::program_error},
 };
 use rustycad_tkmath::gp::Point2;
 use rustycad_tkservice::aspect::{ASPECT_VKEY_FLAGS_NONE, ASPECT_VKEY_MOUSE_LEFT_BUTTON};
@@ -82,6 +82,12 @@ impl AisInteractiveContext {
     }
     /// Select the detected owner unless it consumes the mouse click; `context.select_detected(AisSelectionScheme::Replace)?`.
     pub fn select_detected(&self, scheme: AisSelectionScheme) -> Result<AisStatusOfPick, Failure> {
+        catch_native_failure(|| self.select_detected_checked(scheme))
+    }
+    fn select_detected_checked(
+        &self,
+        scheme: AisSelectionScheme,
+    ) -> Result<AisStatusOfPick, Failure> {
         if self.detected_click_consumed(scheme) {
             return Ok(AisStatusOfPick::NothingSelected);
         }

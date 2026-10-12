@@ -1,7 +1,7 @@
 //! Martensite's usable ViewCube retains native animation and dynamic-highlight state.
 use super::{
-    AisAnimationCamera, AisAnimationMembers, AisInteractiveObject, AisInteractiveObjectBase,
-    AisViewCubePresentationBase, AisViewCubePresentationSource,
+    AisAnimationCamera, AisAnimationCameraSource, AisAnimationMembers, AisInteractiveObject,
+    AisInteractiveObjectBase, AisViewCubePresentationBase, AisViewCubePresentationSource,
 };
 use crate::{prs_mgr::*, prs3d::*, select_mgr::*};
 use rustycad_tkernel::{
@@ -21,7 +21,7 @@ pub trait AisViewCubeAnimationEvents: Send + Sync {
 /// Native protected interaction policy and camera handles; `cube.interaction.fields.read()`.
 pub struct AisViewCubeInteractionFields {
     /// Native stopped camera animation, initially duration 0.5 seconds.
-    pub animation: Handle<AisAnimationCamera>,
+    pub animation: Handle<dyn AisAnimationCameraSource>,
     /// Retained starting camera, copied in place at every click.
     pub start: Handle<Graphic3dCamera>,
     /// Retained ending camera, copied in place at every click.
@@ -52,7 +52,7 @@ impl AisViewCubeInteractionBase {
         let base = Self {
             presentation: AisViewCubePresentationBase::new()?,
             fields: SharedState::new(AisViewCubeInteractionFields {
-                animation,
+                animation: animation.cast(),
                 start: Handle::new(Graphic3dCamera::default()),
                 end: Handle::new(Graphic3dCamera::default()),
                 auto_start: true,

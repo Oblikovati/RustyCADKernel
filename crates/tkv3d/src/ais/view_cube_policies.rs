@@ -1,5 +1,5 @@
 //! Native widget policy setters keep animation identity and affect subsequent clicks.
-use super::{AisAnimationCamera, AisAnimationMembers, AisViewCubeSource};
+use super::{AisAnimationCameraSource, AisAnimationMembers, AisViewCubeSource};
 use rustycad_tkernel::standard::{Failure, Handle};
 /// Nonvirtual native ViewCube policy members; `cube.set_fixed_animation_loop(false)`.
 pub trait AisViewCubeMembers: AisViewCubeSource {
@@ -9,28 +9,31 @@ pub trait AisViewCubeMembers: AisViewCubeSource {
     }
     /// Copy the current animation handle; replacements do not alter this snapshot.
     /// Example: `let owned=cube.view_animation()`; native ViewAnimation parity uses `view_animation_ref`.
-    fn view_animation(&self) -> Handle<AisAnimationCamera> {
+    fn view_animation(&self) -> Handle<dyn AisAnimationCameraSource> {
         self.interaction_base().fields.read().animation.clone()
     }
     /// Replace the retained native camera animation; `cube.set_view_animation(&animation)`.
-    fn set_view_animation(&self, animation: &Handle<AisAnimationCamera>) {
+    fn set_view_animation(&self, animation: &Handle<dyn AisAnimationCameraSource>) {
         self.interaction_base().fields.write().animation = animation.clone();
     }
     /// Read own duration or diagnose a null animation; `cube.duration()?`.
     fn duration(&self) -> Result<f64, Failure> {
-        let animation = self.view_animation();
-        Ok(super::view_cube_animation::required_cube_animation(&animation)?.own_duration())
+        super::view_cube_animation::with_cube_animation(self, |animation| {
+            Ok(animation.own_duration())
+        })
     }
     /// Set own duration without normalization, matching native; `cube.set_duration(0.5)?`.
     fn set_duration(&self, seconds: f64) -> Result<(), Failure> {
-        let animation = self.view_animation();
-        super::view_cube_animation::required_cube_animation(&animation)?.set_own_duration(seconds);
-        Ok(())
+        super::view_cube_animation::with_cube_animation(self, |animation| {
+            animation.set_own_duration(seconds);
+            Ok(())
+        })
     }
     /// Paused/stopped animations are finished; `cube.has_animation()?`.
     fn has_animation(&self) -> Result<bool, Failure> {
-        let animation = self.view_animation();
-        Ok(!super::view_cube_animation::required_cube_animation(&animation)?.is_stopped())
+        super::view_cube_animation::with_cube_animation(self, |animation| {
+            Ok(!animation.is_stopped())
+        })
     }
     /// Read automatic owner-click behavior; `cube.to_auto_start_animation()`.
     fn to_auto_start_animation(&self) -> bool {

@@ -3,7 +3,7 @@ use super::{AisViewCube, AisViewCubeSource};
 use crate::{select_mgr::*, v3d::V3dTypeOfOrientation};
 use rustycad_tkernel::{
     ncollection::Vec2,
-    standard::{Handle, SharedState, StandardTransient},
+    standard::{Handle, SharedState, StandardTransient, raise_native_failure},
 };
 use rustycad_tkservice::aspect::{AspectVKeyFlags, AspectVKeyMouse};
 /// Owner identity and orientation; `owner.main_orientation()`.
@@ -62,7 +62,8 @@ impl SelectMgrEntityOwnerSource for AisViewCubeOwner {
         let Some(cube) = cube.get() else {
             return false;
         };
-        // Native ignores all button/modifier inputs. Invalid detached owner failures are not successful clicks.
-        cube.handle_click(&self.base.this().cast()).is_ok()
+        // Native returns true only after HandleClick; exceptions cross this boolean virtual hook.
+        raise_native_failure(cube.handle_click(&self.base.this().cast()));
+        true
     }
 }
