@@ -78,3 +78,16 @@ and the standard shader verification command require current Vulkan1.3 SPIR-V.
 116 fixtures and eight additional per-frame update workloads, with 20 warmups
 and 100 samples per workload. Performance receipts record device, source,
 binary, raw vectors and process observations; no new baseline is accepted.
+
+The final paired cohort matches 116/116 software and 108/116 AMD cases at the
+unchanged strict gates. Both profiles pass 528 ordinary tests across 65 executables;
+90 compiled shader stages validate, and all 56 ordinary shader binaries remain
+identical to the original checked base. The [receipt](evidence/vulkan-fixed-lighting/receipt.json)
+records scoped gates, raw diagnostics and independent coordinator audits.
+
+The frozen source `6b9fd58f48aa8de6a471304b14668107ff48fa82` produced
+24,800 finite positive optimized samples across 124 workloads per profile.
+Workload medians ranged from 0.200–0.559ms on llvmpipe and 0.196–0.421ms on AMD;
+these local redraw/readback measurements do not establish an accepted performance
+baseline or an isolated-host claim. Source, binary and 47 external library hashes
+matched before, between and after the runs.
