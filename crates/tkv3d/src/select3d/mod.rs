@@ -199,3 +199,6 @@ pub use group_source::select3d_group_downcast;
 
 #[cfg(test)]
 mod group_subclass_json_tests;
+
+#[cfg(test)]
+pub(crate) use triangulation_oracle_snapshot::compare_oracle_snapshot;

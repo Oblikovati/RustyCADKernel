@@ -456,3 +456,29 @@ mod view_controller_action_seed_fixture;
 mod view_controller_action_snapshot_fixture;
 #[cfg(test)]
 mod view_controller_action_tests;
+
+mod xr_laser_color_reference;
+mod xr_tracked_device;
+mod xr_tracked_device_members;
+mod xr_tracked_device_object;
+mod xr_tracked_device_presentation;
+mod xr_tracked_device_selection;
+mod xr_tracked_device_texture;
+pub use xr_laser_color_reference::AisXrLaserColorRef;
+pub use xr_tracked_device::{AisXrTrackedDeviceBase, AisXrTrackedDeviceSource};
+pub use xr_tracked_device_members::AisXrTrackedDeviceMembers;
+pub use xr_tracked_device_object::AisXrTrackedDevice;
+pub use xr_tracked_device_presentation::{
+    ais_xr_tracked_device_compute, ais_xr_tracked_device_compute_laser_ray,
+};
+pub use xr_tracked_device_selection::ais_xr_tracked_device_compute_selection;
+
+#[cfg(test)]
+mod xr_recording_group;
+#[cfg(test)]
+mod xr_recording_structure;
+
+#[cfg(test)]
+mod xr_state_fixture;
+#[cfg(test)]
+mod xr_state_tests;
