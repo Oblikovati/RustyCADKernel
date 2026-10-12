@@ -1,6 +1,5 @@
 //! V3d viewer and view behaviour on the TKService null driver: view creation and activation,
 //! window attachment, camera orientation, sizes, fits, conversions, lights, grids and dumps.
-use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
@@ -8,6 +7,7 @@ use rustycad_tkservice::aspect::{
     AspectGridDrawMode, AspectGridType, AspectNeutralWindow, AspectWindow,
 };
 use rustycad_tkservice::null_driver::NullGraphicDriver;
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::v3d::{V3d, V3dTypeOfOrientation, V3dViewer};
 
 /// A viewer on the null driver with the default lights on.

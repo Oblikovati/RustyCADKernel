@@ -1,12 +1,9 @@
 //! Camera animation preserves endpoint identity and the existing live view camera.
-use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkservice::{graphic3d::Graphic3dCamera, null_driver::NullGraphicDriver};
-use rustycad_tkv3d::{
-    ais::*,
-    v3d::V3dViewer,
-};
+use rustycad_tkv3d::v3d::V3dViewSource;
+use rustycad_tkv3d::{ais::*, v3d::V3dViewer};
 fn view() -> Handle<dyn V3dViewSource> {
     V3dViewer::new(&NullGraphicDriver::new_handle())
         .unwrap()
