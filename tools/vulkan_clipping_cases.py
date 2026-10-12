@@ -2,6 +2,8 @@
 
 CLIPPING_MODES = (
     "clip-global",
+    "clip-derived-source",
+    "clip-derived-alias-clear",
     "clip-intersection",
     "clip-union",
     "clip-two-chains",

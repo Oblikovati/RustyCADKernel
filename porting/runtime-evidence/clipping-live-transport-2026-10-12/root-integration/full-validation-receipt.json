@@ -1,0 +1,47 @@
+{
+  "production_source": "14f3b6acc",
+  "cpu_workspace": {
+    "passed": 17414,
+    "failed": 0,
+    "executables": 122
+  },
+  "doctests": {
+    "passed": 1485,
+    "failed": 0
+  },
+  "gpu": {
+    "lavapipe": {
+      "passed": 537,
+      "failed": 0,
+      "ignored": 4,
+      "executables": 68,
+      "ignored_diagnostics": [
+        "test ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics ... ignored, Full strict matrix retains exact-color rounding and software line-coverage diagnostics",
+        "test fixed_lighting_replay::complete_fixed_lighting_strict_native_diagnostic ... ignored, retains native AMD one-byte and rotated-depth strict diagnostics; no gate relaxation",
+        "test fixed_lighting_replay::fixed_cap_point_source_preserves_homogeneous_lighting ... ignored, GL2.1 lighting is undefined for eye-space w=0 section vertices; retain configured-driver diagnostic",
+        "test triangle_edge_replay::full_textured_cap_edge_strict_native_diagnostic ... ignored, Strict native raster/offset diagnostics remain partial; run explicitly on each profile"
+      ]
+    },
+    "host": {
+      "passed": 537,
+      "failed": 0,
+      "ignored": 4,
+      "executables": 68,
+      "ignored_diagnostics": [
+        "test ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics ... ignored, Full strict matrix retains exact-color rounding and software line-coverage diagnostics",
+        "test fixed_lighting_replay::complete_fixed_lighting_strict_native_diagnostic ... ignored, retains native AMD one-byte and rotated-depth strict diagnostics; no gate relaxation",
+        "test fixed_lighting_replay::fixed_cap_point_source_preserves_homogeneous_lighting ... ignored, GL2.1 lighting is undefined for eye-space w=0 section vertices; retain configured-driver diagnostic",
+        "test triangle_edge_replay::full_textured_cap_edge_strict_native_diagnostic ... ignored, Strict native raster/offset diagnostics remain partial; run explicitly on each profile"
+      ]
+    }
+  },
+  "tooling": {
+    "first_modules_passed": 209,
+    "first_modules_failed": 1,
+    "cause": "Python matrix lacked two real derived clipping modes",
+    "after_fix_modules_passed": 210,
+    "after_fix_modules_failed": 0
+  },
+  "release_ready": false,
+  "release_hold": "Reproduced shared descriptor count-test interference; fix under independent investigation. Constructor update has separate923test/current-source proof."
+}

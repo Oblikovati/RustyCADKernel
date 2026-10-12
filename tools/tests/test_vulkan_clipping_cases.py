@@ -12,14 +12,15 @@ class ClippingCaptureCasesTests(unittest.TestCase):
         declared = source.split('pub const MODES:', 1)[1].split('];', 1)[0]
         self.assertEqual(tuple(re.findall(r'"(clip-[a-z0-9-]+)"', declared)), CLIPPING_MODES)
         self.assertEqual(len(CLIPPING_MODES), len(set(CLIPPING_MODES)))
-        self.assertEqual(len(CASES) * len(CLIPPING_MODES), 162)
+        self.assertEqual(len(CASES) * len(CLIPPING_MODES), 174)
 
     def test_ownership_chains_live_changes_and_all_primitive_families_are_in_matrix(self) -> None:
         self.assertTrue({'clip-local', 'clip-override', 'clip-empty-override',
                          'clip-intersection', 'clip-union', 'clip-two-chains',
                          'clip-head-off', 'clip-child-off', 'clip-equation-updated',
                          'clip-cleared', 'clip-group-transform', 'clip-lines',
-                         'clip-points', 'clip-outside', 'clip-inside'} <= set(CLIPPING_MODES))
+                         'clip-points', 'clip-outside', 'clip-inside',
+                         'clip-derived-source', 'clip-derived-alias-clear'} <= set(CLIPPING_MODES))
 
 class ClippingFontPolicyTests(unittest.TestCase):
     def test_white_glyphs_ignore_fragment_planes_but_obey_structure_culling(self) -> None:

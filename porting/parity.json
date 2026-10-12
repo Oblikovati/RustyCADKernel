@@ -508999,16 +508999,16 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_previous_plane",
-      "status": "implemented",
-      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+      "status": "partial",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Current source audit: next getter returns an owning concrete copy rather than original const handle field; setter consumes concrete owned input rather than original borrowed slot; previous getter is owning as native but lacks valid derived-plane transport. Chain reference/lifecycle closure remains unproved. Existing equation/capping/count tests retained. See porting/audits/clip-plane-chain-reference-current-main.json."
     },
     {
       "upstream_id": "Graphic3d_ClipPlane::ChainNextPlane",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_next_plane",
-      "status": "implemented",
-      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+      "status": "partial",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Current source audit: next getter returns an owning concrete copy rather than original const handle field; setter consumes concrete owned input rather than original borrowed slot; previous getter is owning as native but lacks valid derived-plane transport. Chain reference/lifecycle closure remains unproved. Existing equation/capping/count tests retained. See porting/audits/clip-plane-chain-reference-current-main.json."
     },
     {
       "upstream_id": "Graphic3d_ClipPlane::NbChainNextPlanes",
@@ -509023,8 +509023,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_chain_next_plane",
-      "status": "implemented",
-      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. An associated function taking the plane's own handle (the native `this` stored as the next plane's back pointer). A link that closes a loop recurses endlessly natively; it raises Standard_ProgramError here before anything changes. The chain lengths are updated iteratively."
+      "status": "partial",
+      "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. An associated function taking the plane's own handle (the native `this` stored as the next plane's back pointer). A link that closes a loop recurses endlessly natively; it raises Standard_ProgramError here before anything changes. The chain lengths are updated iteratively. Current source audit: next getter returns an owning concrete copy rather than original const handle field; setter consumes concrete owned input rather than original borrowed slot; previous getter is owning as native but lacks valid derived-plane transport. Chain reference/lifecycle closure remains unproved. Existing equation/capping/count tests retained. See porting/audits/clip-plane-chain-reference-current-main.json."
     },
     {
       "upstream_id": "Graphic3d_ClipPlane::CappingColor",
@@ -600495,8 +600495,28 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
       "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
       "rust_item": "rustycad_tkv3d::ais::AisColoredShape::from_shape",
-      "status": "partial",
-      "notes": "Martensite bounded actual ColoredShape expansion/custom-global appearance/copy slice: pinned real native CPU alias, topology, flags, material/face queries, virtual callback failure/partial state/repair and constructor-unwind ownership fixtures with independent Rust replay. Shared AIS_Shape query prerequisites only; whole classes, Compute, selection, remaining protected routing and renderer/performance remain partial/unclaimed. Invalid native iterator lifetimes and null handle dereference UB explicitly excluded; checked Rust safety extensions not parity claims. Current-source audit: from_shape captures &**source once before virtual appearance callbacks, while pinned OCCT rereads the original const handle after each query. Source-slot replacement through a valid callback remains unproved; see porting/audits/colored-copy-source-reference-current-main.json. Existing normal-copy and failure regression evidence is retained."
+      "status": "implemented",
+      "notes": "Martensite genuine original const source handle-reference rereads during copy construction at OCCT3d097a0. Actual native repeated108rows/18scenarios cover Material/Color/Transparency virtual source rebind, complete/default incoming flags, typed/foreign exception preservation and repair, initial-old versus repaired-new topology, original/incoming referencecounts and independent custom map. Existing ordinary copy/failure corpus retained. Only this constructor declaration is proved; inherited AIS_Shape/ColoredShape class scope remains partial.",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisColoredShape::from_shape",
+          "declaration_sha256": "421312eb3de2f017d458d8a131c34274eb09bae433628a8fac0afba6244bbd2d",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "AisColoredShape",
+                "resolved_item_path": "rustycad_tkv3d::ais::colored_shape_object::AisColoredShape",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_Shape::Color",
