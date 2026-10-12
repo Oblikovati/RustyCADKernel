@@ -7,6 +7,7 @@ pub(super) struct TargetImage {
     runtime: Arc<VulkanRuntime>,
     pub handle: vk::Image,
     pub view: vk::ImageView,
+    pub xor_view: vk::ImageView,
     memory: vk::DeviceMemory,
     pub aspect: vk::ImageAspectFlags,
 }
@@ -26,11 +27,16 @@ impl TargetImage {
             runtime: runtime.clone(),
             handle,
             view: vk::ImageView::null(),
+            xor_view: vk::ImageView::null(),
             memory: vk::DeviceMemory::null(),
             aspect,
         };
         image.allocate()?;
-        image.create_view(format)?;
+        image.view = image.create_view(format)?;
+        if !depth {
+            check_format(runtime, vk::Format::R8G8B8A8_UNORM, false)?;
+            image.xor_view = image.create_view(vk::Format::R8G8B8A8_UNORM)?;
+        }
         Ok(image)
     }
     fn allocate(&mut self) -> Result<(), RenderError> {
@@ -55,15 +61,14 @@ impl TargetImage {
         }
         .map_err(|e| vk_error("bind image memory", e))
     }
-    fn create_view(&mut self, format: vk::Format) -> Result<(), RenderError> {
+    fn create_view(&self, format: vk::Format) -> Result<vk::ImageView, RenderError> {
         let info = vk::ImageViewCreateInfo::default()
             .image(self.handle)
             .view_type(vk::ImageViewType::TYPE_2D)
             .format(format)
             .subresource_range(self.range());
-        self.view = unsafe { self.runtime.device().create_image_view(&info, None) }
-            .map_err(|e| vk_error("create target view", e))?;
-        Ok(())
+        unsafe { self.runtime.device().create_image_view(&info, None) }
+            .map_err(|e| vk_error("create target view", e))
     }
     pub fn range(&self) -> vk::ImageSubresourceRange {
         vk::ImageSubresourceRange::default()
@@ -77,6 +82,11 @@ impl Drop for TargetImage {
         unsafe {
             if self.view != vk::ImageView::null() {
                 self.runtime.device().destroy_image_view(self.view, None);
+            }
+            if self.xor_view != vk::ImageView::null() {
+                self.runtime
+                    .device()
+                    .destroy_image_view(self.xor_view, None);
             }
             self.runtime.device().destroy_image(self.handle, None);
             if self.memory != vk::DeviceMemory::null() {
@@ -143,6 +153,12 @@ fn image_description(
     usage: vk::ImageUsageFlags,
 ) -> vk::ImageCreateInfo<'static> {
     vk::ImageCreateInfo::default()
+        // Vulkan logic ops ignore sRGB targets; compatible UNORM views preserve encoded bytes.
+        .flags(if format == vk::Format::R8G8B8A8_SRGB {
+            vk::ImageCreateFlags::MUTABLE_FORMAT
+        } else {
+            vk::ImageCreateFlags::empty()
+        })
         .image_type(vk::ImageType::TYPE_2D)
         .format(format)
         .extent(vk::Extent3D {
@@ -185,5 +201,31 @@ mod tests {
         );
         assert!(info.usage.contains(vk::ImageUsageFlags::TRANSFER_SRC));
         assert_eq!(info.extent.height, 48);
+    }
+}
+
+#[cfg(test)]
+mod xor_tests {
+    use super::*;
+    #[test]
+    fn only_color_attachments_allow_compatible_encoded_byte_views() {
+        let extent = vk::Extent2D {
+            width: 8,
+            height: 8,
+        };
+        let color = image_description(
+            extent,
+            vk::Format::R8G8B8A8_SRGB,
+            vk::ImageUsageFlags::COLOR_ATTACHMENT,
+        );
+        let depth = image_description(
+            extent,
+            vk::Format::D32_SFLOAT,
+            vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+        );
+        assert_eq!(color.flags, vk::ImageCreateFlags::MUTABLE_FORMAT);
+        assert!(depth.flags.is_empty());
+        assert_eq!(color.samples, vk::SampleCountFlags::TYPE_1);
+        assert_eq!(color.array_layers, 1);
     }
 }

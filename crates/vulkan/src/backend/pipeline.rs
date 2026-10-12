@@ -141,8 +141,13 @@ impl DrawPipeline {
     ) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
         let state = super::pipeline_state::PipelineState::new(kind);
+        let color_format = [if kind.text_logic_xor {
+            vk::Format::R8G8B8A8_UNORM
+        } else {
+            vk::Format::R8G8B8A8_SRGB
+        }];
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
-            .color_attachment_formats(&[vk::Format::R8G8B8A8_SRGB])
+            .color_attachment_formats(&color_format)
             .depth_attachment_format(kind.depth_format())
             .stencil_attachment_format(if kind.stencil {
                 kind.depth_format()

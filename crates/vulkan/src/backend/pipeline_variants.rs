@@ -16,12 +16,16 @@ pub(super) struct PipelineVariant {
     pub point: bool,
     pub text: bool,
     pub text_blend: bool,
+    pub text_logic_xor: bool,
     pub clipped: bool,
     pub stencil: bool,
     pub capping: RenderCappingPass,
 }
 impl PipelineVariant {
     fn from_index(index: usize, stencil: bool) -> Self {
+        if (40..44).contains(&index) {
+            return text_xor_variant(index, stencil);
+        }
         if index >= 28 {
             return blended_variant(index, stencil);
         }
@@ -89,6 +93,7 @@ fn empty_variant(
         point: false,
         text: false,
         text_blend: false,
+        text_logic_xor: false,
         clipped,
         stencil,
         capping,
@@ -133,6 +138,7 @@ impl RasterPipelines {
             || draw.lighting.is_some()
             || draw.surface_blend
             || draw.text_background_blend
+            || draw.text_logic_xor
             || draw.line_style.is_some_and(|s| s.alpha_blend)
             || draw.point_style.as_ref().is_some_and(|s| !s.alpha_blend)
         {
@@ -145,6 +151,7 @@ impl RasterPipelines {
         })
     }
     fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
+        crate::text_logic::require_text_xor(draw.text_logic_xor, self.runtime.logic_op)?;
         let index = special_variant_key(draw);
         let mut variants = self
             .special_variants
@@ -213,6 +220,9 @@ fn variant_index(draw: &PrimitiveDraw) -> usize {
 }
 
 fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
+    if draw.text_logic_xor {
+        return Some(40 + usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some()));
+    }
     let flags = usize::from(draw.depth_clamp) + 2 * usize::from(draw.clipping.is_some());
     if draw.line_style.is_some_and(|s| s.alpha_blend) {
         return Some(32 + flags);
@@ -366,5 +376,38 @@ mod surface_variant_tests {
         assert!(validate_special_features(kind, true, true).is_ok());
         kind.clamp = true;
         assert!(validate_special_features(kind, false, true).is_err());
+    }
+}
+
+pub(super) fn text_xor_variant(index: usize, stencil: bool) -> PipelineVariant {
+    let mut kind = empty_variant(
+        index & 1 != 0,
+        index & 2 != 0,
+        stencil,
+        RenderCappingPass::None,
+    );
+    kind.text = true;
+    kind.text_logic_xor = true;
+    kind
+}
+
+#[cfg(test)]
+mod xor_tests {
+    use super::*;
+    #[test]
+    fn xor_cache_indices_keep_all_existing_variant_flags_and_texture_reservations() {
+        for index in 40..44 {
+            let kind = PipelineVariant::from_index(index, true);
+            assert!(kind.text && kind.text_logic_xor && kind.stencil);
+            assert!(!kind.text_blend && !kind.surface_blend && !kind.point);
+            let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+            draw.text_logic_xor = true;
+            draw.depth_clamp = kind.clamp;
+            draw.clipping = kind
+                .clipped
+                .then(|| crate::RenderClipping::new(vec![], crate::identity_clip()).unwrap());
+            assert_eq!(variant_index(&draw), index);
+            assert!(variant_index(&draw) < 64);
+        }
     }
 }

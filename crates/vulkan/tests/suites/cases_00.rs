@@ -3,6 +3,8 @@
 pub mod ais_integration;
 #[path = "../ais_light_source.rs"]
 pub mod ais_light_source;
+#[path = "../blend_text_policy.rs"]
+pub mod blend_text_policy;
 #[path = "../camera_animation_capture_cases.rs"]
 pub mod camera_animation_capture_cases;
 #[path = "../capping_pass.rs"]
