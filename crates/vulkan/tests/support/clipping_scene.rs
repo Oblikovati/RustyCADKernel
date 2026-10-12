@@ -3,8 +3,10 @@ use super::scene::ViewerScene;
 use rustycad_tkernel::{ncollection::Vec4, standard::Handle};
 use rustycad_tkmath::gp::{Transform3, Vector3};
 use rustycad_tkservice::{aspect::AspectTypeOfMarker, graphic3d::*};
-pub const MODES: [&str; 27] = [
+pub const MODES: [&str; 29] = [
     "clip-global",
+    "clip-derived-source",
+    "clip-derived-alias-clear",
     "clip-intersection",
     "clip-union",
     "clip-two-chains",
@@ -46,6 +48,13 @@ pub fn configure_clipping(scene: &ViewerScene, mode: &str) {
         MODES.contains(&mode),
         "received {mode}; expected a clipping capture mode"
     );
+    if mode.starts_with("clip-derived-") {
+        derived_clip_scene::configure(scene, mode);
+        return;
+    }
+    configure_concrete_clipping(scene, mode);
+}
+fn configure_concrete_clipping(scene: &ViewerScene, mode: &str) {
     let first = clip_plane(1., 0., 0.);
     let global = single_plane(first.clone());
     configure_chains(&global, &first, mode);
@@ -145,3 +154,6 @@ fn clipped_vertices(mode: &str) -> Handle<Graphic3dArrayOfPrimitives> {
 
 #[path = "clipping_persistence.rs"]
 mod persistence;
+
+#[path = "derived_clip_scene.rs"]
+mod derived_clip_scene;
