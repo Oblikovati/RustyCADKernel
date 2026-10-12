@@ -28,5 +28,16 @@ Texture2D's native descriptor identity/ancestry prerequisite is independently
 committed and checked, without broader parent-family completion credits. Native
 undefined dangling/null/invalid-index/data-race cases are excluded explicitly.
 
-This receipt proves CPU semantics only. Actual OpenGL/Vulkan rendering captures
-and both-device optimized workloads remain required before final integration.
+Actual context-owned XR presentations now have sixteen strict native/Vulkan
+comparisons across AMD and lavapipe, repeated native frame identity, PNG/raw
+artifacts, and Rust-only golden replay. Both profiles pass three focused Rust
+rendering tests. Post-merge checks pass 250 TKService and 735 TKV3d tests plus
+combined three-toolkit Clippy/format/discovery and nineteen current bindings.
+
+`rendering/performance-receipt.json` retains the root-authorized frozen optimized
+runs: ten workloads per profile, twenty warmups, one hundred measured samples,
+2,000 samples total. Full raw reports/logs are compressed; summaries link their
+hashes. Root independently verified 7,432 source entries and the executable
+before GO; every source/binary hash was rechecked before and after each profile.
+No historical baseline was accepted. Earlier camera-dependent special cases
+remain explicit and do not receive blanket raster parity claims.

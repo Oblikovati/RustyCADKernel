@@ -67,3 +67,17 @@ hashes are recorded in the runtime receipt.
 Native null dereferences, dangling references, invalid enum values, unchecked
 invalid native array indices and concurrent data races remain undefined and
 receive no parity claims. Valid reference cases retain their owning device.
+
+The retained rendering harness displays the actual device through an AIS context.
+Eight native/Vulkan frame cases per AMD/lavapipe profile pass exact RGBA and the
+unchanged depth tolerance of `1e-6`; native captures repeat byte-identically.
+Committed PNG/raw buffers and Rust-only golden replay remain independent of OCCT.
+The final camera projects axes/rays cardinally with scale 20 and depth range
+1..1000. Oblique-axis and narrow-depth AMD diagnostics remain recorded as deferred
+raster special cases; these captures do not establish blanket renderer parity.
+
+Frozen optimized runs measure ten workloads per device, including native finite
+ray accumulation and infinite-group clearing during each-frame color changes.
+Twenty warmups and one hundred measured samples give 2,000 total observations.
+Source/binary hashes were independently checked before GO and verified unchanged
+around both runs; this is initial performance evidence, not an accepted baseline.
