@@ -28,6 +28,7 @@ use rustycad_tkg3d::top_abs::ShapeEnum;
 #[derive(Clone)]
 pub struct Explorer {
     stack: Vec<ShapeIterator>,
+    active_depth: usize,
     shape: Shape,
     to_find: ShapeEnum,
     to_avoid: ShapeEnum,
@@ -39,6 +40,7 @@ impl Default for Explorer {
     fn default() -> Self {
         Self {
             stack: Vec::new(),
+            active_depth: 0,
             shape: Shape::default(),
             to_find: ShapeEnum::Shape,
             to_avoid: ShapeEnum::Shape,
@@ -65,12 +67,7 @@ impl Explorer {
         to_avoid: ShapeEnum,
     ) -> Result<(), Failure> {
         self.clear();
-        self.shape = shape.clone();
-        self.to_find = to_find;
-        self.to_avoid = to_avoid;
-        // Nothing is found in a null shape, for SHAPE, or in a shape simpler than `to_find`.
-        let kind = shape.tshape().get().map(|tshape| tshape.shape_type());
-        let Some(kind) = kind.filter(|kind| to_find != ShapeEnum::Shape && *kind <= to_find) else {
+        let Some(kind) = self.initialize_search(shape, to_find, to_avoid) else {
             return Ok(());
         };
         self.has_more = true;
@@ -78,6 +75,20 @@ impl Explorer {
             self.next()?;
         }
         Ok(())
+    }
+
+    fn initialize_search(
+        &mut self,
+        shape: &Shape,
+        to_find: ShapeEnum,
+        to_avoid: ShapeEnum,
+    ) -> Option<ShapeEnum> {
+        self.shape = shape.clone();
+        self.to_find = to_find;
+        self.to_avoid = to_avoid;
+        // Nothing is found in a null shape, for SHAPE, or in a shape simpler than `to_find`.
+        let kind = shape.tshape().get().map(|tshape| tshape.shape_type());
+        kind.filter(|kind| to_find != ShapeEnum::Shape && *kind <= to_find)
     }
 
     /// `More()`: true while a shape remains; `explorer.more()`.
@@ -91,18 +102,8 @@ impl Explorer {
     /// `explorer.next()?`.
     #[allow(clippy::should_implement_trait)] // OCCT's More/Next protocol; Iterator is implemented too.
     pub fn next(&mut self) -> Result<(), Failure> {
-        if self.stack.is_empty() {
-            let kind = self
-                .shape
-                .shape_type()
-                .map_err(|_| null_shape("TopExp_Explorer::Next"))?;
-            if kind == self.to_find || self.should_avoid(kind) {
-                self.has_more = false;
-                return Ok(());
-            }
-            self.stack.push(ShapeIterator::new(&self.shape, true, true));
-        } else if let Some(top) = self.stack.last_mut() {
-            top.next();
+        if !self.advance_search_level()? {
+            return Ok(());
         }
         self.descend();
         Ok(())
@@ -111,31 +112,61 @@ impl Explorer {
     /// The loop of `Next`: goes down into more complex shapes that are not avoided,
     /// stops on a shape of the searched type, pops exhausted levels.
     fn descend(&mut self) {
-        let (to_find, to_avoid) = (self.to_find, self.to_avoid);
-        while let Some(top) = self.stack.last_mut() {
-            let step = match top.value() {
-                Err(_) => Step::Pop,
-                Ok(current) => classify(current, to_find, to_avoid),
-            };
-            match step {
-                Step::Found => {
-                    self.has_more = true;
-                    return;
-                }
-                Step::Push(child) => self.stack.push(child),
-                Step::Skip => top.next(),
-                Step::Pop => self.pop_iterator(),
+        while self.active_depth > 0 {
+            if self.advance_descent_step() {
+                self.has_more = true;
+                return;
             }
         }
         self.has_more = false;
     }
+    fn advance_search_level(&mut self) -> Result<bool, Failure> {
+        if self.active_depth > 0 {
+            self.stack[self.active_depth - 1].next();
+            return Ok(true);
+        }
+        let kind = self
+            .shape
+            .shape_type()
+            .map_err(|_| null_shape("TopExp_Explorer::Next"))?;
+        if kind == self.to_find || self.should_avoid(kind) {
+            self.has_more = false;
+            return Ok(false);
+        }
+        self.push_iterator(ShapeIterator::new(&self.shape, true, true));
+        Ok(true)
+    }
+    fn advance_descent_step(&mut self) -> bool {
+        let top = &mut self.stack[self.active_depth - 1];
+        let step = match top.value() {
+            Err(_) => Step::Pop,
+            Ok(current) => classify(current, self.to_find, self.to_avoid),
+        };
+        match step {
+            Step::Found => return true,
+            Step::Push(child) => self.push_iterator(child),
+            Step::Skip => top.next(),
+            Step::Pop => self.pop_iterator(),
+        }
+        false
+    }
 
     /// `popIterator` followed by `myStack[myStackTop].Next()` when a level remains.
     fn pop_iterator(&mut self) {
-        self.stack.pop();
-        if let Some(top) = self.stack.last_mut() {
-            top.next();
+        self.active_depth -= 1;
+        // OCCT 3d097a0 resets in place: retained Current references observe null then slot reuse.
+        self.stack[self.active_depth] = ShapeIterator::default();
+        if self.active_depth > 0 {
+            self.stack[self.active_depth - 1].next();
         }
+    }
+    fn push_iterator(&mut self, child: ShapeIterator) {
+        if self.active_depth == self.stack.len() {
+            self.stack.push(child);
+        } else {
+            self.stack[self.active_depth] = child;
+        }
+        self.active_depth += 1;
     }
 
     fn should_avoid(&self, kind: ShapeEnum) -> bool {
@@ -145,7 +176,7 @@ impl Explorer {
     /// `Current()` (and `Value()`): the current shape; at the end, and before any
     /// descent, the explored shape itself; `explorer.current()`.
     pub fn current(&self) -> &Shape {
-        match self.stack.last() {
+        match self.stack[..self.active_depth].last() {
             // A level on the stack always has a current shape (exhausted levels are popped).
             Some(top) => top.value().unwrap_or(&self.shape),
             None => &self.shape,
@@ -170,12 +201,15 @@ impl Explorer {
 
     /// `Depth()`: the stack depth, 0 for the explored shape itself; `explorer.depth()`.
     pub fn depth(&self) -> i32 {
-        self.stack.len() as i32
+        self.active_depth as i32
     }
 
     /// `Clear()`: empties the stack and ends the exploration; `explorer.clear()`.
     pub fn clear(&mut self) {
-        self.stack.clear();
+        for slot in &mut self.stack[..self.active_depth] {
+            *slot = ShapeIterator::default();
+        }
+        self.active_depth = 0;
         self.has_more = false;
     }
 }
@@ -226,4 +260,38 @@ impl Iterator for Explorer {
         Explorer::next(self).ok()?;
         Some(current)
     }
+}
+
+/// Identifies native Current storage rather than its detached value; `explorer.current_shape_slot()`.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ExplorerShapeSlot {
+    /// The explorer's own stable root-shape member.
+    Root,
+    /// An inline iterator slot retained after pop/reset and reused on later descent.
+    Iterator(usize),
+}
+impl Explorer {
+    /// Bind the actual current source slot; `let slot = explorer.current_shape_slot()`.
+    pub fn current_shape_slot(&self) -> ExplorerShapeSlot {
+        match self.active_depth.checked_sub(1) {
+            Some(index) => ExplorerShapeSlot::Iterator(index),
+            None => ExplorerShapeSlot::Root,
+        }
+    }
+    /// Read live storage, including inactive reset slots; `explorer.reference_shape(slot)?`.
+    pub fn reference_shape(&self, slot: ExplorerShapeSlot) -> Result<&Shape, Failure> {
+        let ExplorerShapeSlot::Iterator(index) = slot else {
+            return Ok(&self.shape);
+        };
+        let iterator = self
+            .stack
+            .get(index)
+            .ok_or_else(|| invalid_shape_slot(index, self.stack.len()))?;
+        Ok(iterator.reference_shape())
+    }
+}
+fn invalid_shape_slot(index: usize, count: usize) -> Failure {
+    let message =
+        format!("TopExp_Explorer reference slot={index}; expected retained index below {count}");
+    Failure::with_type("Standard_OutOfRange", &message, "")
 }
