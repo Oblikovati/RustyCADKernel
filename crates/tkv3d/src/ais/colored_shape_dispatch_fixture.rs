@@ -86,6 +86,18 @@ impl PrsMgrPresentableObject for ColoredDispatchFake {
         // Every callback observes actual inherited presentation state.
         &self.base.shape.interactive.presentable
     }
+    fn color(&self) -> rustycad_tkernel::quantity::Color {
+        copy_getter_failure(self, 4);
+        super::shape_appearance_queries::shape_color_value(self)
+    }
+    fn material(&self) -> rustycad_tkservice::graphic3d::Graphic3dNameOfMaterial {
+        copy_getter_failure(self, 3);
+        super::ais_shape_material(self)
+    }
+    fn transparency(&self) -> f64 {
+        copy_getter_failure(self, 5);
+        super::ais_shape_transparency(self)
+    }
     fn compute(
         &self,
         _: &Handle<PrsMgrPresentationManager>,
@@ -106,5 +118,16 @@ impl SelectMgrSelectableObject for ColoredDispatchFake {
         Err(Failure::new(&format!(
             "probe selection mode={mode}; expected lifecycle-only call"
         )))
+    }
+}
+
+fn copy_getter_failure(object: &ColoredDispatchFake, stage: i32) {
+    if object.failure.load(Ordering::Relaxed) == 6 {
+        std::panic::panic_any("unrelated copy-source panic");
+    }
+    if object.failure.load(Ordering::Relaxed) == stage {
+        rustycad_tkernel::standard::raise_native_failure::<()>(Err(Failure::new(&format!(
+            "copy getter stage={stage}; expected successful getter"
+        ))));
     }
 }

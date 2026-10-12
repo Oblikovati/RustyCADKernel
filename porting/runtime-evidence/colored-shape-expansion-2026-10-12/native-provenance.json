@@ -1,0 +1,233 @@
+{
+  "project": "Martensite",
+  "feature_source_commit": "ee0c34801bf34f9e9d2ed837b5f2c6229565048a",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "probes": [
+    {
+      "name": "alias",
+      "oracle_source": "martensite_colored_shape_alias.cxx",
+      "rows": 5,
+      "output_sha256": "3c1995ad074ed4b540598a048552849760878f57342151450ede0661f465a7e8",
+      "executable_sha256": "21c4208377d06ebaf21288d59fced61c5cb78ec0d006162c0e7d4a514deeec34",
+      "repeat_runs": 2,
+      "compile_arguments": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_alias.cxx",
+        "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKGeomBase",
+        "-lTKG3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-alias"
+      ],
+      "repeat_stdout_sha256": [
+        "3c1995ad074ed4b540598a048552849760878f57342151450ede0661f465a7e8",
+        "3c1995ad074ed4b540598a048552849760878f57342151450ede0661f465a7e8"
+      ]
+    },
+    {
+      "name": "expansion",
+      "oracle_source": "martensite_colored_shape_expansion.cxx",
+      "rows": 15,
+      "output_sha256": "2b24ca2a4730641913fe053cfab6d1b92f5fce8c9d2e9d3f5328323a0e70b39b",
+      "executable_sha256": "0e7ad208cc0c280446a25a18b7cc101e91e386d3665091d644820a2cdcb0d730",
+      "repeat_runs": 2,
+      "compile_arguments": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Itools/oracle",
+        "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_expansion.cxx",
+        "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKGeomBase",
+        "-lTKG3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-expansion"
+      ],
+      "repeat_stdout_sha256": [
+        "2b24ca2a4730641913fe053cfab6d1b92f5fce8c9d2e9d3f5328323a0e70b39b",
+        "2b24ca2a4730641913fe053cfab6d1b92f5fce8c9d2e9d3f5328323a0e70b39b"
+      ]
+    },
+    {
+      "name": "appearance",
+      "oracle_source": "martensite_colored_shape_appearance.cxx",
+      "rows": 24,
+      "output_sha256": "8f9e563d8c2f4818f52109cc3c6073e2bc26a8dad86afff609322046f48403cf",
+      "executable_sha256": "a280a0b478e1e67a8218f3cbb0a121cd113b994c384e084444ad4106397dcfe8",
+      "repeat_runs": 2,
+      "compile_arguments": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Itools/oracle",
+        "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_appearance.cxx",
+        "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKGeomBase",
+        "-lTKG3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-appearance"
+      ],
+      "repeat_stdout_sha256": [
+        "8f9e563d8c2f4818f52109cc3c6073e2bc26a8dad86afff609322046f48403cf",
+        "8f9e563d8c2f4818f52109cc3c6073e2bc26a8dad86afff609322046f48403cf"
+      ]
+    },
+    {
+      "name": "copy",
+      "oracle_source": "martensite_colored_shape_copy.cxx",
+      "rows": 13,
+      "output_sha256": "2d872a7dc052a06d0d70a330050ff81efd0344fe8d7bd806482568a15f8d43e1",
+      "executable_sha256": "e83a4919443bc1653484c5232cdf8bb3634a35b31fcc75fb3c80f9fc72bd20e0",
+      "repeat_runs": 2,
+      "compile_arguments": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Itools/oracle",
+        "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_copy.cxx",
+        "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKGeomBase",
+        "-lTKG3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-copy"
+      ],
+      "repeat_stdout_sha256": [
+        "2d872a7dc052a06d0d70a330050ff81efd0344fe8d7bd806482568a15f8d43e1",
+        "2d872a7dc052a06d0d70a330050ff81efd0344fe8d7bd806482568a15f8d43e1"
+      ]
+    },
+    {
+      "name": "custom-dispatch",
+      "oracle_source": "martensite_colored_shape_custom_dispatch.cxx",
+      "rows": 39,
+      "output_sha256": "bc5275c319ac353f7c9fb56aad82f394c63e141d685c6acd26e327e4e1a6cf9a",
+      "executable_sha256": "5f7939d5bd1639c8c599a0eadf64de45f0e0f9d51f19cfab4d6d7610ec88f766",
+      "repeat_runs": 2,
+      "compile_arguments": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Itools/oracle",
+        "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_custom_dispatch.cxx",
+        "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKGeomBase",
+        "-lTKG3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-custom-dispatch"
+      ],
+      "repeat_stdout_sha256": [
+        "bc5275c319ac353f7c9fb56aad82f394c63e141d685c6acd26e327e4e1a6cf9a",
+        "bc5275c319ac353f7c9fb56aad82f394c63e141d685c6acd26e327e4e1a6cf9a"
+      ]
+    },
+    {
+      "name": "copy-failure",
+      "oracle_source": "martensite_colored_shape_copy_failure.cxx",
+      "rows": 6,
+      "output_sha256": "4b228deb770b47220fcd962e5b83abf44b07ba361cd9b8a7f2a7f43aeb205ac8",
+      "executable_sha256": "658951a207a240a007f271ddf112b7ec5b11abe387601bde127a2349367dcb0d",
+      "repeat_runs": 2,
+      "compile_arguments": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Itools/oracle",
+        "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+        "tools/oracle/martensite_colored_shape_copy_failure.cxx",
+        "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKGeomBase",
+        "-lTKG3d",
+        "-lTKService",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/tmp/martensite-colored-shape-copy-failure"
+      ],
+      "repeat_stdout_sha256": [
+        "4b228deb770b47220fcd962e5b83abf44b07ba361cd9b8a7f2a7f43aeb205ac8",
+        "4b228deb770b47220fcd962e5b83abf44b07ba361cd9b8a7f2a7f43aeb205ac8"
+      ]
+    }
+  ],
+  "oracle_sources": {
+    "tools/oracle/martensite_colored_shape_alias.cxx": "db458846ee90ac11d6f7a63ec528cc485250f25bb95772287d970c27f3bc65d0",
+    "tools/oracle/martensite_colored_shape_expansion.cxx": "906e4b9991ef9eff47f72fd81b998c9036395975e22e424ccf9311e458e0e173",
+    "tools/oracle/martensite_colored_shape_appearance.cxx": "a10e190c19206a4e6ad18ae1c0c483555dd662b2260e6dfe3f0f4ea2f1ce7ac8",
+    "tools/oracle/martensite_colored_shape_copy.cxx": "670da7762645ec3f28c963c3876b2949962fe84015d501c5e9e2974315f6a35b",
+    "tools/oracle/martensite_colored_shape_custom_dispatch.cxx": "a9d3bfe7540ff11a957aac74e09f4240c51001162396ce2e746546a0ffd9851a",
+    "tools/oracle/martensite_colored_shape_copy_failure.cxx": "cb584158eb05f32bcec6ef8bf886884b8fb6b4e3ae93745a20f28bbbcac39dc1",
+    "tools/oracle/martensite_colored_expansion_inputs.hxx": "9571e2bbbf9676f17280c8a3185c35df0918e89a9125055cede6a7e48ecfd285",
+    "tools/oracle/martensite_colored_appearance_state.hxx": "815ce36fa02d073455fc9c2e292d2f55b9260f8cbcbb7314fe1d3726d1a46e46",
+    "tools/oracle/martensite_colored_shape_dispatch.cxx": "31225ec539b50d480e910d259814f3ff324dbb6f821ae7d23f4c864cbcbc58c6",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9"
+  },
+  "upstream_sources": {
+    "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+    "src/Visualization/TKV3d/AIS/AIS_ColoredShape.cxx": "3ee45b9f6a0369fe71406f3ac58317216241c7e334621ca5d115d4842ef28b6e",
+    "src/Visualization/TKV3d/AIS/AIS_Shape.hxx": "c0889c43fb2904c2a40faa304102b013243de05018eb4fa15776f03daefe05fc",
+    "src/Visualization/TKV3d/AIS/AIS_Shape.cxx": "5757c1d24235d87c8e2b2d9d87f863ba7e82856f773ddf550178bcbe36f33491",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_DataMap.hxx": "042b96740ec8d4ddb424994ff6c8aaec2a17e97940275df47fee17b4eb80a33a",
+    "src/FoundationClasses/TKernel/NCollection/NCollection_BaseMap.cxx": "a4a84687e85059dad70193d2b839dbffb6650dd360ff86dc94e61bb8f3461da0",
+    "src/ModelingData/TKBRep/TopTools/TopTools_ShapeMapHasher.hxx": "0f10c93946df144fa1cc46433b29c78ead9d87ce991b6968886e8eae01d60b8d"
+  },
+  "libraries": {
+    "TKV3d": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "TKTopAlgo": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "TKBRep": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "TKGeomBase": "bb5616b53df21edbc3e012d6b704e2e8d8cab670c89b362c97b2434589071a37",
+    "TKG3d": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "total_new_rows": 102,
+  "repeat_bytes_equal": true,
+  "gpu_or_performance_claim": false
+}

@@ -47,3 +47,5 @@ mod textured_shape_compute;
 mod textured_shape_object;
 pub use textured_shape_compute::ais_textured_shape_compute;
 pub use textured_shape_object::{AisTexturedShape, AisTexturedShapeParent};
+mod shape_appearance_queries;
+pub use shape_appearance_queries::{ais_shape_color_into, ais_shape_material, ais_shape_transparency};

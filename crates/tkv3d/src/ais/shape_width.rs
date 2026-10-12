@@ -11,10 +11,7 @@ pub fn ais_shape_set_width<S: AisShapeSource + ?Sized>(
 ) -> Result<(), Failure> {
     object.presentable_base().fields.write().own_width = width as f32;
     let drawer = object.attributes();
-    let recompute = drawer.set_own_line_aspects(&Handle::default())?;
-    for line in shape_colored_line_aspects(&drawer) {
-        line.set_width(width)?;
-    }
+    let recompute = set_shape_drawer_width(&drawer, width)?;
     refresh_shape_aspect_ownership(object, recompute);
     object.recompute_computed();
     Ok(())
@@ -62,4 +59,15 @@ fn restore_shape_linked_widths<S: AisShapeSource + ?Sized>(object: &S) -> Result
         line.set_width(width)?;
     }
     Ok(())
+}
+
+pub(super) fn set_shape_drawer_width(
+    drawer: &Handle<crate::prs3d::Prs3dDrawer>,
+    width: f64,
+) -> Result<bool, Failure> {
+    let recompute = drawer.set_own_line_aspects(&Handle::default())?;
+    for line in shape_colored_line_aspects(drawer) {
+        line.set_width(width)?;
+    }
+    Ok(recompute)
 }

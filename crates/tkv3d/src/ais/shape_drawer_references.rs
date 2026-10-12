@@ -61,13 +61,13 @@ impl AisShapeDrawerNodeRef<'_> {
     /// Example: `node.key_reference_address()?`.
     pub fn key_reference_address(&self) -> Result<*const (), Failure> {
         let node = self.live_node()?;
-        node.read_fields(|fields| std::ptr::from_ref(&fields.key).cast())
+        node.read_fields(|fields| std::ptr::from_ref(fields.key).cast())
     }
     /// Identifies the actual handle slot, preserved by replacement and rehash.
     /// Example: `node.value_reference_address()?`.
     pub fn value_reference_address(&self) -> Result<*const (), Failure> {
         let node = self.live_node()?;
-        node.read_fields(|fields| std::ptr::from_ref(&fields.drawer).cast())
+        node.read_fields(|fields| std::ptr::from_ref(fields.drawer).cast())
     }
     /// Checks original key identity and location without cloning its TShape handle.
     /// Example: `node.is_same_key(&shape)?`.

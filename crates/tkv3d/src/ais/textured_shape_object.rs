@@ -84,6 +84,18 @@ impl PrsMgrPresentableObject for AisTexturedShape {
     ) -> Result<(), Failure> {
         super::textured_shape_compute::ais_textured_shape_compute(self, prs, mode)
     }
+    fn color(&self) -> Color {
+        // Native AIS_Shape selects actual shading color using its current facing model.
+        super::shape_appearance_queries::shape_color_value(self)
+    }
+    fn material(&self) -> rustycad_tkservice::graphic3d::Graphic3dNameOfMaterial {
+        // Native inherited material queries select the current shading face.
+        super::ais_shape_material(self)
+    }
+    fn transparency(&self) -> f64 {
+        // Preserve native tiny values and NaN instead of the presentable drawer threshold.
+        super::ais_shape_transparency(self)
+    }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         // Use the textured override so existing mode-3 presentations receive native aspect refresh.
         ais_textured_shape_set_color(self, color)

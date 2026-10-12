@@ -3,40 +3,68 @@ use super::AisColoredDrawer;
 use rustycad_tkbrep::{topods::Shape, toptools::ShapeMapHasher};
 use rustycad_tkernel::{
     ncollection::HashPolicy,
-    standard::{Failure, Handle, SharedState},
+    standard::{Failure, Handle, HandleFieldRef, HandleReference, SharedState},
 };
 use std::{fmt, sync::Arc};
 pub(super) struct ShapeDrawerNodeFields {
     pub key: Shape,
-    pub drawer: Handle<AisColoredDrawer>,
+}
+pub(super) struct ShapeDrawerBorrowedFields<'a> {
+    pub key: &'a Shape,
+    pub drawer: &'a Handle<AisColoredDrawer>,
 }
 pub(super) struct ShapeDrawerNode {
     pub fields: SharedState<Option<ShapeDrawerNodeFields>>,
+    // Native immutable Key references may coexist with assignment to the actual Value slot.
+    drawer: SharedState<Option<Handle<AisColoredDrawer>>>,
 }
 impl ShapeDrawerNode {
-    pub(super) fn new(key: &Shape, value: &Handle<AisColoredDrawer>) -> Self {
+    pub(super) fn new(key: &Shape, value: &impl HandleReference<AisColoredDrawer>) -> Self {
         // OCCT 3d097a0 DataMap constructs the handle-valued base before copying the original key.
-        let drawer = value.clone();
+        let drawer = value.clone_handle();
         let key = key.clone();
         Self {
-            fields: SharedState::new(Some(ShapeDrawerNodeFields { key, drawer })),
+            fields: SharedState::new(Some(ShapeDrawerNodeFields { key })),
+            drawer: SharedState::new(Some(drawer)),
         }
     }
     pub(super) fn read_fields<R>(
         &self,
-        inspect: impl FnOnce(&ShapeDrawerNodeFields) -> R,
+        inspect: impl FnOnce(&ShapeDrawerBorrowedFields<'_>) -> R,
     ) -> Result<R, Failure> {
         let fields = self.fields.read();
         let live = fields.as_ref().ok_or_else(removed_shape_drawer_node)?;
-        Ok(inspect(live))
+        let drawer = self.drawer.read();
+        let value = drawer.as_ref().ok_or_else(removed_shape_drawer_node)?;
+        Ok(inspect(&ShapeDrawerBorrowedFields {
+            key: &live.key,
+            drawer: value,
+        }))
+    }
+    pub(super) fn with_entry<R>(
+        &self,
+        inspect: impl FnOnce(
+            &Shape,
+            &HandleFieldRef<'_, Option<Handle<AisColoredDrawer>>, AisColoredDrawer>,
+        ) -> R,
+    ) -> Result<R, Failure> {
+        let fields = self.fields.read();
+        let live = fields.as_ref().ok_or_else(removed_shape_drawer_node)?;
+        let value = HandleFieldRef::new(&self.drawer, live_shape_drawer_value);
+        Ok(inspect(&live.key, &value))
     }
     pub(super) fn release_fields(&self) {
         // OCCT 3d097a0 removal must not let storage leases delay key/value ownership release on Clear/UnBind.
-        let removed = self.fields.write().take();
-        drop(removed);
+        let removed_key = self.fields.write().take();
+        let removed_value = self.drawer.write().take();
+        drop(removed_key);
+        drop(removed_value);
     }
-    pub(super) fn replace_value(&self, value: &Handle<AisColoredDrawer>) -> Result<(), Failure> {
-        let replacement = value.clone();
+    pub(super) fn replace_value(
+        &self,
+        value: &impl HandleReference<AisColoredDrawer>,
+    ) -> Result<(), Failure> {
+        let replacement = value.clone_handle();
         let removed = self.exchange_value(replacement)?;
         drop(removed);
         Ok(())
@@ -45,9 +73,9 @@ impl ShapeDrawerNode {
         &self,
         replacement: Handle<AisColoredDrawer>,
     ) -> Result<Handle<AisColoredDrawer>, Failure> {
-        let mut fields = self.fields.write();
-        let live = fields.as_mut().ok_or_else(removed_shape_drawer_node)?;
-        Ok(std::mem::replace(&mut live.drawer, replacement))
+        let mut value = self.drawer.write();
+        let live = value.as_mut().ok_or_else(removed_shape_drawer_node)?;
+        Ok(std::mem::replace(live, replacement))
     }
 }
 impl fmt::Debug for ShapeDrawerNode {
@@ -90,4 +118,10 @@ pub(super) fn removed_shape_drawer_node() -> Failure {
         "ShapeDrawerNode fields=None; expected a live native key/value reference",
         "",
     )
+}
+
+fn live_shape_drawer_value(slot: &Option<Handle<AisColoredDrawer>>) -> &Handle<AisColoredDrawer> {
+    // This internal borrow spans a live iterator node; erasing that node invalidates native references.
+    slot.as_ref()
+        .expect("ShapeDrawerNode value=None; expected a live iterator value slot")
 }

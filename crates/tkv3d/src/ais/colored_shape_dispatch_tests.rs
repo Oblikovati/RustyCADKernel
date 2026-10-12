@@ -5,7 +5,7 @@ use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::{graphic3d::Graphic3dStructureManager, null_driver::NullGraphicDriver};
 use std::{fmt::Write, sync::atomic::Ordering};
-fn dispatch_scene() -> Handle<ColoredDispatchFake> {
+pub(super) fn dispatch_scene() -> Handle<ColoredDispatchFake> {
     let key = shape_drawer_oracle_inputs::shape_drawer_vertex(Point3::new(1., 2., 3.));
     let object = ColoredDispatchFake::new(&key);
     let structures =

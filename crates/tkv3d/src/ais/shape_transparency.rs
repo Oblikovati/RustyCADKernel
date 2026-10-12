@@ -14,9 +14,7 @@ pub fn ais_shape_set_transparency<S: AisShapeSource + ?Sized>(
 ) -> Result<(), Failure> {
     let drawer = object.attributes();
     let recompute = !drawer.has_own_shading_aspect();
-    drawer.setup_own_shading_aspect(&Handle::default())?;
-    let facing = object.presentable_base().read().current_facing_model;
-    drawer.shading_aspect().set_transparency(value, facing)?;
+    set_shape_drawer_transparency(object, &drawer, value)?;
     drawer.set_transparency(value as f32);
     refresh_shape_aspect_ownership(object, recompute);
     Ok(())
@@ -48,4 +46,15 @@ fn retain_shape_transparency_aspect<S: AisShapeSource + ?Sized>(object: &S) -> b
         .aspect()
         .to_map_texture();
     object.has_color() || object.has_material() || textured
+}
+
+pub(super) fn set_shape_drawer_transparency<S: AisShapeSource + ?Sized>(
+    object: &S,
+    drawer: &Handle<crate::prs3d::Prs3dDrawer>,
+    value: f64,
+) -> Result<(), Failure> {
+    drawer.setup_own_shading_aspect(&Handle::default())?;
+    let facing = object.presentable_base().read().current_facing_model;
+    drawer.shading_aspect().set_transparency(value, facing)?;
+    Ok(())
 }
