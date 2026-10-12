@@ -6,6 +6,13 @@ pub struct SequenceNodeRetirement<T> {
     pub(super) owner: SequenceNodeOwner<T>,
 }
 impl<T> SequenceNodeRetirement<T> {
+    /// Retire outside collection guards, then select its current resource; `unsafe { node.retire_using(|| resource.storage_lease()) }`.
+    /// # Safety
+    /// The selected resource must accept this node's original raw allocation and layout.
+    pub unsafe fn retire_using(self, current: impl FnOnce() -> super::BaseAllocator) {
+        // SAFETY: the caller guarantees compatibility; selection follows payload destruction.
+        unsafe { self.owner.retire_using(current) };
+    }
     /// Borrow the actual detached payload before destruction; `retired.value()`.
     pub fn value(&self) -> &T {
         // SAFETY: this owner keeps the original allocation alive and excludes mutable access.

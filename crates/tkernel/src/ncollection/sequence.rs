@@ -191,6 +191,7 @@ mod borrowed;
 mod prepared_node;
 pub use prepared_node::SequencePreparedNode;
 // Detached owners preserve native removal order without holding adapters' field guards during Drop.
+mod current_release;
 #[allow(unsafe_code)]
 mod retired_node;
 pub use retired_node::SequenceNodeRetirement;
@@ -239,3 +240,8 @@ pub use topology::{SequenceBaseAccess, SequenceObservation, SequenceObserver};
 #[allow(unsafe_code)]
 mod native_cursor;
 pub use native_cursor::{SequenceCursorObserver, SequenceNativeCursor};
+
+#[cfg(test)]
+mod current_native_fixture;
+#[cfg(test)]
+mod current_native_replay;
