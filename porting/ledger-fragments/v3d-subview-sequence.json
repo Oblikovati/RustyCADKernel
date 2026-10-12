@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "V3d_View::Subviews",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "93b48f4249e881f12694481d9258e48dcdea2a42771991a929162d1625d2cb4d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+          "declaration_sha256": "fb7dea567238e0f1cdaab4bdfcb05bdfb47e2ff39e86250c381bcb7842c85fdc",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite actual const subview sequence-object alias and readonly one-based values/endpoints/live cursor; five pinned native public AddSubview/RemoveSubview phases plus six auxiliary callback/node rows, exact intrusive counts and Rust-only replay. Private storage/class/controller frame claims excluded; no declared V3d API node transfer. See docs/v3d-subview-sequence.md."
+    }
+  ]
+}

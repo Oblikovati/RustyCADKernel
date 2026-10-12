@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "Graphic3d_DataStructureManager::Camera",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_DataStructureManager.hxx",
+      "source_sha256": "624a2f1686d5e73c04dcb76be2ce1ba21cd5329a7061b264a1d82d4e5c78968a",
+      "cpp_declaration_id": "93ae40c3723ddc87219ce135d03910d5c29f9dc7386ce5c01272d769046c32fc",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dDataStructureManager::camera_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dDataStructureManager::camera_ref",
+          "declaration_sha256": "f3a64c0f2a5a34ed99550f43e68ca127ea409f2c266852835610fb4a4d85379d",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "Graphic3d_CView::Camera",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "cpp_declaration_id": "526a1ff5e1d916c8cf255a6d42933958b0e417db81a118330f7e6ae0e01947b2",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::cview_camera_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::cview_camera_ref",
+          "declaration_sha256": "3fbca94d461850eb62690d2bf483d56f502931a9382edc1adbaa361621c3a6ff",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "Graphic3d_CView::SetCamera",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx",
+      "source_sha256": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+      "cpp_declaration_id": "17e4e2c1485db7bebb5a34e79a5d7b56f8db2c531662fa6b349bff694ce2821b",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::set_camera",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dCView::set_camera",
+          "declaration_sha256": "dd35f7c0d4ffee7b38f547441756c4cbb3e68985708db4465b62b4e6025e114f",
+          "impl_context": null
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_View::SetCamera",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "9c8dccbb19cf65cba0c196fbd12e90806139d8205af2017fdabdfa52ad6e1149",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::set_camera",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::set_camera",
+          "declaration_sha256": "1f05972d523a564b136c3b3748fbdf9c21f9a05e3ad723c12881e3a73e893ac4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::ActiveView",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "020e4d521785745ad720a69ddbffc319a64b728fcd91808829443240e621e06c",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_view_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::active_view_ref",
+          "declaration_sha256": "fc701e2898e95641221f534bcf568cd4a0d227e2b80aaf3585ea456172364c43",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::ActiveViewIterator",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "368db16a45ca0b37513a2578e1c2719905ffb81f294d45e5b502527fc548c6d3",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_view_iterator",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::active_view_iterator",
+          "declaration_sha256": "7839d4b03f6752e03967b844ad15421eb0e2fe7e07ca2c4e4904a62439083bce",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::ActiveViews",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "77885bdbb9c63b17ea1bdeca4908bbdc92a553f6e76b29a7c8026ddf925c7bed",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::active_views_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::active_views_ref",
+          "declaration_sha256": "395d6eeca0724c4fd04acaee6cd0ef62474b5bd523c4caadfe9740060e846cf1",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::DefinedView",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "aea0809bbf0e56a946d82350e0d22d50ec2d4a2bb5274881b37c4f31a4072872",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_view_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::defined_view_ref",
+          "declaration_sha256": "284e4b7c7265d71979ea4ca5213d626d7a351505f10e20c36f9b28186c4c64c3",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::DefinedViewIterator",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "afa90db4396fcd820c8821447a855f5c2574ce918830c2725eeee3a37d8181f4",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_view_iterator",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::defined_view_iterator",
+          "declaration_sha256": "76332c596af88a7a2c4d4c60dd24d2db3269da15df66ebdcc61aecc1360fcb54",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::DefinedViews",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "a5aaa120a42bc9598dca8512016133cf7b27f5d93c5dee10944b4973ac9d29a4",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::defined_views_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::defined_views_ref",
+          "declaration_sha256": "e5fc182fad40fd18d85f30f5f14d4afa5888d202bc07038b3e7198b39b7b71d3",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::Redraw",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "2a92ac6ff2aad9809a0e9966382c914fc90e0c85a6ee71bcb28ea52ec58e155a",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::redraw",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::redraw",
+          "declaration_sha256": "2d31baa4ce9a059a048971b80578ef55972a18a4190ac7002826ef253ed34c5c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    },
+    {
+      "upstream_id": "V3d_Viewer::RedrawImmediate",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
+      "source_sha256": "e1951d9ea68b2c6e9e30fa28d7628466b5eb7f4b715f81b72d120eb80b2d4602",
+      "cpp_declaration_id": "ff98b251d2a6d99ba34967dbccd5d59a65ed51c6c98b6f879f3350535963f9b0",
+      "rust_item": "rustycad_tkv3d::v3d::V3dViewer::redraw_immediate",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dViewer::redraw_immediate",
+          "declaration_sha256": "078087f4f8bb5eb8b6bd9a14ba5483fa9f9b66ed8d0ab09d1e3c03828ff57955",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "V3dViewer",
+                "resolved_item_path": "rustycad_tkv3d::v3d::viewer::V3dViewer",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Source-selector refresh after Martensite live-light storage changes and focused DSM trait relocation; native ID, status and behavior are unchanged. Final main crosswalk must resolve these against current full-crate capture."
+    }
+  ]
+}

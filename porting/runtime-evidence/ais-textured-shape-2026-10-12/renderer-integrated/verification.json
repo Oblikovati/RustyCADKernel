@@ -1,0 +1,107 @@
+{
+  "implementation_revision": "27f996645",
+  "native_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checks": {
+    "tkv3d_after_parent_merge": {
+      "passed": 838,
+      "failed": 0
+    },
+    "vulkan_all_targets_host": {
+      "passed": 431,
+      "failed": 0,
+      "ignored_full_strict_diagnostic": 1
+    },
+    "vulkan_all_targets_lavapipe": {
+      "passed": 431,
+      "failed": 0,
+      "ignored_full_strict_diagnostic": 1
+    },
+    "clippy": "all targets in TKernel/TKService/TKV3d/Vulkan, warnings denied",
+    "format": "global check, 2 bounded commands; new include registration explicitly rustfmt formatted",
+    "canonical_discovery": "all integration sources discovered",
+    "claim_preflight": {
+      "visible_native_declarations": 49,
+      "implemented": 39,
+      "partial": 10,
+      "private_helper_credit": 0
+    },
+    "final_cpu_consumers": {
+      "passed": 6073,
+      "failed": 0
+    }
+  },
+  "functional_captures": {
+    "modes_per_device": 24,
+    "commands": 48,
+    "exit": 0,
+    "validation_errors": 0,
+    "rgba_depth_buffers_unchanged_after_registration_split": 96
+  },
+  "selected_replay": {
+    "native_cases_per_device": 4,
+    "host_exit": 0,
+    "lavapipe_exit": 0
+  },
+  "full_strict_matrix": {
+    "test": "ais_textured_shape_native_replay::textured_full_native_matrix_preserves_all_unresolved_diagnostics",
+    "host": {
+      "exit": 101,
+      "matched": 23,
+      "total": 24,
+      "triangles_color_bytes": 52,
+      "triangles_color_pixels": 44,
+      "maximum_color_byte_difference": 1
+    },
+    "lavapipe": {
+      "exit": 101,
+      "matched": 4,
+      "total": 24,
+      "wireframe": {
+        "depth_delta": 0.80808085,
+        "extra_geometry_pixels": 19,
+        "missing_geometry_pixels": 18
+      },
+      "bbox": {
+        "depth_delta": 0.80808085,
+        "extra_geometry_pixels": 13,
+        "missing_geometry_pixels": 13
+      },
+      "face_boundaries_meshed": {
+        "depth_delta": 0.8080808,
+        "extra_geometry_pixels": 19
+      }
+    },
+    "classification": "Deferred pixel-row raster special cases: Rust row15 versus native row16; all large depth deltas compare geometry0.19191917 to background1.0, not both-geometry interpolation. Other exact-color differences remain max1byte. No comparison gates changed."
+  },
+  "fixed_actual_failures": [
+    "Native peer destructor counts Rust2/2/2 versus native3/3/3 corrected in388434e55",
+    "Triangle edge and meshed textured-line unsupported renderer dependencies removed by checked main e3fa94fbd",
+    "Duplicate shape module/export registration after checked parent merge corrected in4a447f162",
+    "Merged view-camera trait import formatting corrected by default formatter"
+  ],
+  "limitations": [
+    "Class and parent families partial: inherited selection/HLR and file/predefined codec dependencies remain explicit",
+    "Full strict rendering matrix red and raw buffers/logs preserved",
+    "Default serial WF with actual isolines; explicit parallel parameter remains partial",
+    "15 defined filename-buffer cases proved, no dangling native pointers dereferenced; Rust padding growth/concurrency safety does not claim native allocation or concurrency parity",
+    "No accepted performance baseline, no Windows/macOS evidence",
+    "TexturePixMap retained-read guard and prior-pixmap destructor callback source-slot observation remain partial; no full source-setter reference/failure-ordering credit. Native callback oracle and actual callback-safe slot transport required next."
+  ],
+  "performance": {
+    "source_revision": "27f996645",
+    "profiles": [
+      "lavapipe",
+      "AMD Radeon8060S"
+    ],
+    "workloads_per_profile": 24,
+    "warmups": 20,
+    "samples_per_workload": 100,
+    "total_samples": 4800,
+    "validation": false,
+    "optimized": true,
+    "baseline_accepted": false,
+    "owned_processes_quiet_by_coordination": true,
+    "continuous_unowned_host_isolation_claim": false,
+    "source_entries_verified_before_middle_after_by_root": 12865
+  }
+}

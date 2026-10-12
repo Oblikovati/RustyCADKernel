@@ -16,6 +16,11 @@ impl Graphic3dGraphicDriver for BorrowedCameraDriver {
         let retained = Graphic3dRetainedView::new(manager, &self.delegate.layers())?;
         let view = Handle::new(BorrowedCameraView {
             transient: Default::default(),
+            identity: self
+                .control
+                .light_identity
+                .fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+                + 1,
             retained,
             control: self.control.clone(),
         })
@@ -24,6 +29,13 @@ impl Graphic3dGraphicDriver for BorrowedCameraDriver {
         Ok(view)
     }
     fn inquire_limit(&self, limit: Graphic3dTypeOfLimit) -> i32 {
+        if let Some(control) = self.control.light_probe.read().as_ref() {
+            super::viewer_light_probe_callback::record_driver_light_limit(
+                control,
+                limit,
+                self.transient.ref_count(),
+            );
+        }
         self.delegate.inquire_limit(limit)
     }
     fn create_structure(

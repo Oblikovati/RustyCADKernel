@@ -602,3 +602,27 @@ Endpoint and color interpolation failures remain explicit. The new normal/light
 redraw workload brings the release matrix to 34 workloads; an independent repeat
 passes all median/p95 budgets on both devices. This remains partial renderer
 coverage while strict captures and other legacy capabilities remain open.
+
+## Linux validation dependency
+
+Run the Linux x86_64 toolkit checks with the checksum-pinned validation layer:
+
+```sh
+python3 tools/with_vulkan_validation.py -- cargo test-all --no-fail-fast
+```
+
+The wrapper downloads only the 5.7 MB Ubuntu 24.04-compatible validation-layer
+package into `target/vulkan-validation`, verifies the archive, library and
+manifest, and selects it for the child command. It preserves the caller's ICD,
+CPU profile and other environment settings. Validation stays enabled; this does
+not install or change system packages. Other operating systems need their own
+compatible validation dependency when their test coverage resumes.
+
+On this host, installed validation layer 1.3.275 intermittently crashed during
+parallel Vulkan toolkit tests on both AMD and lavapipe. Checked main reproduced
+the crash after 17 successful repeats. With the same feature test binary and
+validation enabled, isolated layer 1.4.313.0~rc2 passed 100 parallel repeats and
+all 6,511 four-toolkit tests. Disabling dynamic library unloading still crashed.
+This package comparison supports changing the test dependency; it does not
+justify disabling validation or serializing renderer behavior. The exact package
+and extracted-file digests are pinned in `tools/vulkan_validation_cache.py`.

@@ -1,0 +1,4984 @@
+[
+  {
+    "upstream_id": "AIS_ViewCube::StartAnimation",
+    "previous": {
+      "declaration_sha256": "a02656aea96da1a89480a596811e68662cac73418c3f9bc998a7b8c5cb125128",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_start_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_start_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "12337ed4a680c057897bd2e8b28e4a3343d17116a684444a7e3dae518b263997",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_start_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_start_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_ViewCube::UpdateAnimation",
+    "previous": {
+      "declaration_sha256": "d34d6578fbb2da795027a60676919270f319adf81b42b06ecb474d6be6e802a1",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "redraw",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "5291a2f1af14753b4ddecc0691cbe60550d709e3bba7a2595fa9be50df456a97",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "redraw",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_ViewCube::HandleClick",
+    "previous": {
+      "declaration_sha256": "2f66fb787b969a175203247dd49995d238eb3226975bcc4b9ee90068fc870561",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_handle_click",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_handle_click",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "3187d3d2fd5d3602b9521275fe2b97bbd7a21b8d0a4a60237bd818175e0f1721",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_handle_click",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_handle_click",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ],
+            [
+              "owner",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "super::AisViewCubeOwner",
+                                  "resolved_item_path": "rustycad_tkv3d::ais::view_cube_owner::AisViewCubeOwner"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_ViewCube::updateAnimation",
+    "previous": {
+      "declaration_sha256": "7580d73f7134b4f0656e34dcd8551cb50ae47d4a9544a0d646cbb493b586fc11",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation_step",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation_step",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "bdaaa356379ba87acca40f0d4eeb25fc9dde9a172de430b7b596e85597fb99dc",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_animation::ais_view_cube_update_animation_step",
+        "is_glob": false,
+        "source": "view_cube_animation::ais_view_cube_update_animation_step",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "primitive": "bool"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_animation.rs",
+      "source_sha256": "738d8bfca609a059c5d6310d60efa77e3f098acb5ae3f492d5b77a094bce9652",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_ViewCube::setDefaultAttributes",
+    "previous": {
+      "declaration_sha256": "b204b51efbcc928bfc5d504c5893a212a2a88a743951c53ac7f590a7d1fb736e",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_appearance::ais_view_cube_default_attributes",
+        "is_glob": false,
+        "source": "view_cube_appearance::ais_view_cube_default_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "super::AisViewCubePresentationSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_presentation::AisViewCubePresentationSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_appearance.rs",
+      "source_sha256": "c772b9f10ae6dfc5e33b977a6e6cbba93f5464a3ff70163e05c527c49ffd341c",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "dfca1297f59ea8ed0dfa9bedf80d59bd6979865957a4db4da73940b85486b99e",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_appearance::ais_view_cube_default_attributes",
+        "is_glob": false,
+        "source": "view_cube_appearance::ais_view_cube_default_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "super::AisViewCubePresentationSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_presentation::AisViewCubePresentationSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_appearance.rs",
+      "source_sha256": "c772b9f10ae6dfc5e33b977a6e6cbba93f5464a3ff70163e05c527c49ffd341c",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_ViewCube::setDefaultHighlightAttributes",
+    "previous": {
+      "declaration_sha256": "dffae68947fbacdbd0c83f720797599fbbe7fc8df25a6263e32e47ada224f4f8",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "is_glob": false,
+        "source": "view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_reset_members.rs",
+      "source_sha256": "9e4680311228a11022d218577280054a92bc582b5ebb1069b05eec2fdd1f9ec8",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "230eb76f1ec0ee57d0bf3778ca57a1f8f13a1e9e0f9b657e63f8eaf2163643bc",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "is_glob": false,
+        "source": "view_cube_reset_members::ais_view_cube_default_highlight_attributes",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisViewCubeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::view_cube_interaction::AisViewCubeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "C"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "cube",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "C"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/view_cube_reset_members.rs",
+      "source_sha256": "9e4680311228a11022d218577280054a92bc582b5ebb1069b05eec2fdd1f9ec8",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TypeOfIso",
+    "previous": {
+      "canonical_type_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+      "declaration_sha256": "0b5400f720e7d24cc03de7424c5a53b8980d981936f3ae6f7b382c102e148635",
+      "kind": "enum",
+      "path": "rustycad_tkv3d::ais::AisTypeOfIso",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+        "is_glob": false,
+        "source": "context_isoline_policies::AisTypeOfIso",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "e3a752df223505c0ee4025f084e7c4ba6a8826ecda5eee4252480e736928a6b8",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_stripped_variants": false,
+        "variant_count": 4
+      },
+      "source_file": "crates/tkv3d/src/ais/context_isoline_policies.rs",
+      "source_sha256": "b9cea9ec956c4d4ba8e9c479d055a2d1d1b7a6489633848796157d76660cdaa9",
+      "source_status": null
+    },
+    "current": {
+      "canonical_type_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+      "declaration_sha256": "1d122bba57776a33e607f3ca21de2b955e3407fa7c0e4f649ef2a04743eb487c",
+      "kind": "enum",
+      "path": "rustycad_tkv3d::ais::AisTypeOfIso",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::context_isoline_policies::AisTypeOfIso",
+        "is_glob": false,
+        "source": "context_isoline_policies::AisTypeOfIso",
+        "source_file": "crates/tkv3d/src/ais/mod.rs",
+        "source_sha256": "734a75e66bc01138a79aef616219386534f1fa7471d56d1713f60c655b3bef85",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_stripped_variants": false,
+        "variant_count": 4
+      },
+      "source_file": "crates/tkv3d/src/ais/context_isoline_policies.rs",
+      "source_sha256": "b9cea9ec956c4d4ba8e9c479d055a2d1d1b7a6489633848796157d76660cdaa9",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::AIS_TexturedShape",
+    "previous": {
+      "declaration_sha256": "db573dbc5c54ca93c3170bbf39c5db36b7e305cc847d5aae26ce864b0b6150f9",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::new",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "shape",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Shape",
+                      "resolved_item_path": "rustycad_tkbrep::topods::shape::Shape"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Handle",
+              "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "c647840061c66cff43224e1266e90c457b7205bc548f141b86baa1a5a4526a60",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::new",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "shape",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Shape",
+                      "resolved_item_path": "rustycad_tkbrep::topods::shape::Shape"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "Self"
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Handle",
+              "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myToRepeat",
+    "previous": {
+      "declaration_sha256": "458f8c32ae5a32331869f781489c94fc6dce56fd1fffd61fad929ccfd8c8ea5b",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::repeat",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "c924bb98237c04609d0245fa5e3d2a3d8c44aaaf1c719c1896e78e6039da9c8a",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::repeat",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::SetColor",
+    "previous": {
+      "declaration_sha256": "5e684f006dd0d93ba70c09dc175c32e261a24f47b7ffaf6320b9a2d36fdecedf",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "color",
+              {
+                "resolved_path": {
+                  "args": null,
+                  "path": "Color",
+                  "resolved_item_path": "rustycad_tkernel::quantity::color::Color"
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "0bfc43f3e40d027b023ded7ceaa4e294942751bc0f9db9d50157f134496f387b",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_color",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "color",
+              {
+                "resolved_path": {
+                  "args": null,
+                  "path": "Color",
+                  "resolved_item_path": "rustycad_tkernel::quantity::color::Color"
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myAspect",
+    "previous": {
+      "declaration_sha256": "12b7901a762c12cb55174f2f4b96b5b3fb8ecf7e7c84e82403a27ce1b3a94cfd",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::aspect",
+      "signature": {
+        "resolved_path": {
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Graphic3dAspectFillArea3d",
+                      "resolved_item_path": "rustycad_tkservice::graphic3d::aspect_classes::Graphic3dAspectFillArea3d"
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          },
+          "path": "rustycad_tkernel::standard::Handle",
+          "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "376d39cc34309df20a421d9a26cf16d516b815a184c5e6b72d4412f21bf0928d",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::aspect",
+      "signature": {
+        "resolved_path": {
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Graphic3dAspectFillArea3d",
+                      "resolved_item_path": "rustycad_tkservice::graphic3d::aspect_classes::Graphic3dAspectFillArea3d"
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          },
+          "path": "rustycad_tkernel::standard::Handle",
+          "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::SetMaterial",
+    "previous": {
+      "declaration_sha256": "1986bfbfe10487eac851d15930afefd17d7159d40efea0225977ccde3a7e2842",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_material",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "material",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Graphic3dMaterialAspect",
+                      "resolved_item_path": "rustycad_tkservice::graphic3d::material_aspect::Graphic3dMaterialAspect"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "be1c70e3be770d6cb10391bbb404c47de48c35ef527498d05b5c64de585fe654",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::set_material",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "material",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": null,
+                      "path": "Graphic3dMaterialAspect",
+                      "resolved_item_path": "rustycad_tkservice::graphic3d::material_aspect::Graphic3dMaterialAspect"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::DisableTextureModulate",
+    "previous": {
+      "declaration_sha256": "dc003d5a8f41611aeee19e087d421b0a41914cd195784cae69c1f21ca1f78a67",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::disable_texture_modulate",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "adcf453c26403c4fd996772cecaaade50338ad209d71c1e1f0e3f09b90959923",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::disable_texture_modulate",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myTextureFile",
+    "previous": {
+      "declaration_sha256": "1b14e9e056049e3e0a3d6feac7678b27f4444ad14adcaeb263daae210615b093",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::texture_file",
+      "signature": {
+        "resolved_path": {
+          "args": null,
+          "path": "rustycad_tkernel::tcollection::AsciiString",
+          "resolved_item_path": "rustycad_tkernel::tcollection::ascii_string::AsciiString"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "df675af1067da74ee698bb1538047f96c58f281cb7b1880a8770d85bdc81ae7c",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::texture_file",
+      "signature": {
+        "resolved_path": {
+          "args": null,
+          "path": "rustycad_tkernel::tcollection::AsciiString",
+          "resolved_item_path": "rustycad_tkernel::tcollection::ascii_string::AsciiString"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::ShowTriangles",
+    "previous": {
+      "declaration_sha256": "d1e5caadb93a8f19e1757fda37adadff36e38eb9e6a1b6d488f6ecd256a0def2",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::show_triangles",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "248d67d48b7f4f964fc16a2c75336d6bea36ae90ba6c23b59e49c567ff24e4bd",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::show_triangles",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::DynamicType",
+    "previous": {
+      "declaration_sha256": "8da81be06a8111574377426624d4ca4fcd1553641880fd9862b4fbdb2784cdd5",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "Transient",
+          "resolved_item_path": "rustycad_tkernel::standard::transient::Transient"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": "'static",
+              "type": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "$crate::standard::RuntimeType",
+                  "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType"
+                }
+              }
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "054dc6130d945b88a714998a4de70acc19524a9ec165955d9d1cb462a1447753",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "Transient",
+          "resolved_item_path": "rustycad_tkernel::standard::transient::Transient"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": "'static",
+              "type": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "$crate::standard::RuntimeType",
+                  "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType"
+                }
+              }
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::SetTextureMapOff",
+    "previous": {
+      "declaration_sha256": "0750e489c9c5d39b45cc755fd8bf6ae8ff799e483cd623bb6db06a90d63fcc0e",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::set_texture_map_off",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "02f11ae7ed84a385933b822d3d79f922379e2fe1cdcd89ec91d6ce0150a3d878",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::set_texture_map_off",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::Compute",
+    "previous": {
+      "declaration_sha256": "ed2c5a6cdd75ea4e20641abbac6a585bca2a46af67a27d1d4b9ad45c153cd014",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "_",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "PrsMgrPresentationManager",
+                                  "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentation_manager::PrsMgrPresentationManager"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "prs",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "lifetime": null,
+                                  "traits": [
+                                    {
+                                      "generic_params": [],
+                                      "trait": {
+                                        "args": null,
+                                        "path": "Graphic3dStructureSource",
+                                        "resolved_item_path": "rustycad_tkservice::graphic3d::structure::Graphic3dStructureSource"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "mode",
+              {
+                "primitive": "i32"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "6607e6597f10cae857bd4de64bde3731938d5d3a16c53c6c19fb4b7b47a4ca9e",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "_",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "args": null,
+                                  "path": "PrsMgrPresentationManager",
+                                  "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentation_manager::PrsMgrPresentationManager"
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "prs",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "lifetime": null,
+                                  "traits": [
+                                    {
+                                      "generic_params": [],
+                                      "trait": {
+                                        "args": null,
+                                        "path": "Graphic3dStructureSource",
+                                        "resolved_item_path": "rustycad_tkservice::graphic3d::structure::Graphic3dStructureSource"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ],
+            [
+              "mode",
+              {
+                "primitive": "i32"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::updateAttributes",
+    "previous": {
+      "declaration_sha256": "54da9cf34301dbe7915eea24d2682d398fe89db14e39f879a646675434576c07",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_textured_shape_update_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::textured_shape_aspects::ais_textured_shape_update_attributes",
+        "is_glob": false,
+        "source": "textured_shape_aspects::ais_textured_shape_update_attributes",
+        "source_file": "crates/tkv3d/src/ais/shape_modules.rs",
+        "source_sha256": "c5dd8984cc1ffdb7b4a2aa65e1f31a220e9ef1070f947bf5db47d1cf9b3e93d0",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisTexturedShapeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_source::AisTexturedShapeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "S"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "object",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "S"
+                  }
+                }
+              }
+            ],
+            [
+              "presentation",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "lifetime": null,
+                                  "traits": [
+                                    {
+                                      "generic_params": [],
+                                      "trait": {
+                                        "args": null,
+                                        "path": "Graphic3dStructureSource",
+                                        "resolved_item_path": "rustycad_tkservice::graphic3d::structure::Graphic3dStructureSource"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_aspects.rs",
+      "source_sha256": "66a9cf87bc84bc91e409271f4224dd239f4656958af8cb8b6988ce207dabf31d",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "65d9030c24061eb1b5bbb62a2f287e8fd9424fddf2e3f3245a9e0a1c470a13a6",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::ais_textured_shape_update_attributes",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::textured_shape_aspects::ais_textured_shape_update_attributes",
+        "is_glob": false,
+        "source": "textured_shape_aspects::ais_textured_shape_update_attributes",
+        "source_file": "crates/tkv3d/src/ais/shape_modules.rs",
+        "source_sha256": "963efab3c59f9a778e7224ff80f1f72a5502547df13244958035e1c17d192886",
+        "source_status": null
+      },
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "AisTexturedShapeSource",
+                          "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_source::AisTexturedShapeSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "S"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "object",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "S"
+                  }
+                }
+              }
+            ],
+            [
+              "presentation",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "dyn_trait": {
+                                  "lifetime": null,
+                                  "traits": [
+                                    {
+                                      "generic_params": [],
+                                      "trait": {
+                                        "args": null,
+                                        "path": "Graphic3dStructureSource",
+                                        "resolved_item_path": "rustycad_tkservice::graphic3d::structure::Graphic3dStructureSource"
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "rustycad_tkernel::standard::Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_aspects.rs",
+      "source_sha256": "8fc9804e97c89d051019601ad498a76c8ca31f032594a14f52793b502c126f1b",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::get_type_descriptor",
+    "previous": {
+      "declaration_sha256": "2dd115168f70c4760f42c480ddbd57ddadb2508730345e1972eab370dc5b7e20",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": "'static",
+              "type": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "$crate::standard::RuntimeType",
+                  "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType"
+                }
+              }
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "ed67663051cab77ccd89f26fef75fd91ace3c41fa781816bf257de65261ad2c2",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [],
+          "is_c_variadic": false,
+          "output": {
+            "borrowed_ref": {
+              "is_mutable": false,
+              "lifetime": "'static",
+              "type": {
+                "resolved_path": {
+                  "args": null,
+                  "path": "$crate::standard::RuntimeType",
+                  "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeType"
+                }
+              }
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::SetTextureMapOn",
+    "previous": {
+      "declaration_sha256": "bb2277412fc58232840ffe9a1e34be5f324b77f6ed6e1b2820a2e11ac9b35561",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::set_texture_map_on",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "cd7da40730488e6ff3757e9d9e9a659727a6b09360bb52881de10a41b53bd081",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::set_texture_map_on",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::base_type",
+    "previous": {
+      "canonical_type_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShapeParent",
+      "declaration_sha256": "37295137938111a4dc0834b58882cb263f82552023f9cc68d0c4af7830e2a6df",
+      "kind": "type_alias",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeParent",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShapeParent",
+        "is_glob": false,
+        "source": "textured_shape_object::AisTexturedShapeParent",
+        "source_file": "crates/tkv3d/src/ais/shape_modules.rs",
+        "source_sha256": "c5dd8984cc1ffdb7b4a2aa65e1f31a220e9ef1070f947bf5db47d1cf9b3e93d0",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "type": {
+          "dyn_trait": {
+            "lifetime": null,
+            "traits": [
+              {
+                "generic_params": [],
+                "trait": {
+                  "args": null,
+                  "path": "AisShapeSource",
+                  "resolved_item_path": "rustycad_tkv3d::ais::shape::AisShapeSource"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "canonical_type_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShapeParent",
+      "declaration_sha256": "b7f997cf670a796f66d300f95982df9025e10d788841f0cb489d1c34e5197cb1",
+      "kind": "type_alias",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeParent",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShapeParent",
+        "is_glob": false,
+        "source": "textured_shape_object::AisTexturedShapeParent",
+        "source_file": "crates/tkv3d/src/ais/shape_modules.rs",
+        "source_sha256": "963efab3c59f9a778e7224ff80f1f72a5502547df13244958035e1c17d192886",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "type": {
+          "dyn_trait": {
+            "lifetime": null,
+            "traits": [
+              {
+                "generic_params": [],
+                "trait": {
+                  "args": null,
+                  "path": "AisShapeSource",
+                  "resolved_item_path": "rustycad_tkv3d::ais::shape::AisShapeSource"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myIsCustomOrigin",
+    "previous": {
+      "declaration_sha256": "2f3d30a6ae92d69d670bfe439f04b90104861c4e2ece207512b12d85aadc5982",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::custom_origin",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "217933fdbed45d4a4fdf1a079cce3779013c17090a90bbb29d6d2217c3866d7e",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::custom_origin",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::TextureModulate",
+    "previous": {
+      "declaration_sha256": "b9fee0d043c46e973f448650e76aa841416c7788c13bbe2c822e9ee95e33121d",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::texture_modulate",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "69a42c3bc4fddf3b2f9a273a2fa6fb4baaa9a986bfae9511da9b9aefc132ebe2",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::texture_modulate",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myModulate",
+    "previous": {
+      "declaration_sha256": "8d5b8a7701967f6205a121c6232e0118e8fda43b3d858aba4721aebe5ddb66df",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::modulate",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "bd5d5eb6e2d61bab370e1cb95830094a63bc8449b84daccfeef9935ace1e9eeb",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::modulate",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myToScale",
+    "previous": {
+      "declaration_sha256": "d9152a10b9412f6b74748f93898a8c518be46a0974f59a0099055107e22138c7",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::scale",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "9c76bf1b58dae9b22ce3575023a1f9b518f63df8d88e8a0cae060ecdec3c3eb5",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::scale",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myPredefTexture",
+    "previous": {
+      "declaration_sha256": "1350dec4159c26d8159ad83ee098f9db1282ef5c9d6bcd1f341e337ea9b54b09",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::predefined_texture",
+      "signature": {
+        "resolved_path": {
+          "args": null,
+          "path": "Graphic3dNameOfTexture2D",
+          "resolved_item_path": "rustycad_tkservice::graphic3d::texture_enums::Graphic3dNameOfTexture2D"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "79fec2753a6a041689bf1b95add3e0821e9699e27230014da1d35120577f55c0",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::predefined_texture",
+      "signature": {
+        "resolved_path": {
+          "args": null,
+          "path": "Graphic3dNameOfTexture2D",
+          "resolved_item_path": "rustycad_tkservice::graphic3d::texture_enums::Graphic3dNameOfTexture2D"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::UpdateAttributes",
+    "previous": {
+      "declaration_sha256": "7dbf77bb3974fc30ba29e1363d87fc7fca22fcdeb0d730bd83b70affd1330095",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::update_attributes",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "86737b7234d4cae05c70d4f443eb5e51e772bd8f56e893bd5e477b0f54fcd3a7",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::update_attributes",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myTexture",
+    "previous": {
+      "declaration_sha256": "bfe2bcafc5b2789cb4eb7e535204c453da8beb68fb3c96e3ebd8bea9d0cb9339",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::texture",
+      "signature": {
+        "resolved_path": {
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "dyn_trait": {
+                      "lifetime": null,
+                      "traits": [
+                        {
+                          "generic_params": [],
+                          "trait": {
+                            "args": null,
+                            "path": "Graphic3dTexture2DSource",
+                            "resolved_item_path": "rustycad_tkservice::graphic3d::texture_2d::Graphic3dTexture2DSource"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          },
+          "path": "rustycad_tkernel::standard::Handle",
+          "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "693b8b0fbfed3db725fe9a14a8313139a8fbafd6eec63029ba358856dd57c4d0",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::texture",
+      "signature": {
+        "resolved_path": {
+          "args": {
+            "angle_bracketed": {
+              "args": [
+                {
+                  "type": {
+                    "dyn_trait": {
+                      "lifetime": null,
+                      "traits": [
+                        {
+                          "generic_params": [],
+                          "trait": {
+                            "args": null,
+                            "path": "Graphic3dTexture2DSource",
+                            "resolved_item_path": "rustycad_tkservice::graphic3d::texture_2d::Graphic3dTexture2DSource"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "constraints": []
+            }
+          },
+          "path": "rustycad_tkernel::standard::Handle",
+          "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::UnsetColor",
+    "previous": {
+      "declaration_sha256": "8ab04836bd52bc4d4eed7f25149eba72e5e6e897f0c6aef643a8c9d7cbadd4d8",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "027a198b01c8452ddb91ea8aaeed433212a0465205e9afe8ac3b03e50d96efae",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_color",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::UnsetMaterial",
+    "previous": {
+      "declaration_sha256": "775d5ecff3667406ba9237c632ae1f64772d7ce11932902682d92f896e948ca8",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_material",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "b1411665c107472be39b8cec7b74f275c0a29601bd8bd9de6f3489549ffb15b4",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::unset_material",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::AcceptDisplayMode",
+    "previous": {
+      "declaration_sha256": "a5e41b6d9797953b20b0c31f6040b504685eefb176743a1f4e7938e37ad86d62",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "mode",
+              {
+                "primitive": "i32"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "1481b41404df5196bed703eeaada456528db11e9e1dfbdec21f8fd6fae099995",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "PrsMgrPresentableObject",
+          "resolved_item_path": "rustycad_tkv3d::prs_mgr::presentable_object::PrsMgrPresentableObject"
+        }
+      },
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "mode",
+              {
+                "primitive": "i32"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::EnableTextureModulate",
+    "previous": {
+      "declaration_sha256": "720c74a7f8b813ef027d86208e9b249a621991078eee2de64aeb851d7491e629",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::enable_texture_modulate",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "75abfd257e7c3cdb91ede9488186ea3b03d0944bc58c7f4ad84ffb3de0f2f909",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::enable_texture_modulate",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape",
+    "previous": {
+      "canonical_type_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape",
+      "declaration_sha256": "ff63b0a83942ecba2978c9dbd3a5cdf4e331ac0ed0a8b04597fb052a29f56477",
+      "kind": "struct",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape",
+        "is_glob": false,
+        "source": "textured_shape_object::AisTexturedShape",
+        "source_file": "crates/tkv3d/src/ais/shape_modules.rs",
+        "source_sha256": "c5dd8984cc1ffdb7b4a2aa65e1f31a220e9ef1070f947bf5db47d1cf9b3e93d0",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "shape": {
+          "field_count": 2,
+          "has_stripped_fields": false,
+          "kind": "plain"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "canonical_type_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape",
+      "declaration_sha256": "531b84c2c9319ae829581c24a3de7877e5173504e3a5187cb97e785342f94c20",
+      "kind": "struct",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape",
+      "reexport": {
+        "canonical_target_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape",
+        "is_glob": false,
+        "source": "textured_shape_object::AisTexturedShape",
+        "source_file": "crates/tkv3d/src/ais/shape_modules.rs",
+        "source_sha256": "963efab3c59f9a778e7224ff80f1f72a5502547df13244958035e1c17d192886",
+        "source_status": null
+      },
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "shape": {
+          "field_count": 2,
+          "has_stripped_fields": false,
+          "kind": "plain"
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myToShowTriangles",
+    "previous": {
+      "declaration_sha256": "bcfa926ab07f94fc82fa4fb41054e3b3242e57591db92e580a30633bf0bda20e",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::show_triangles",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "761c0e4e964aeb712840e9e093e702d0870235ada82eed37e7d87efcc604c69c",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::show_triangles",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::myToMapTexture",
+    "previous": {
+      "declaration_sha256": "4f722cba74a7f6a73f0b83e8fc683688ae830ccf89714be48846dccbb82ec54b",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::map_texture",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "ad5115290b3505b2397c54892496d3324cf4f6cd42888d2cb7657549820e5c87",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "098e6b28906fcd9520e692011540f656cffc1d43f399cfdb63bd84e88989815a",
+      "kind": "struct_field",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeFields::map_texture",
+      "signature": {
+        "primitive": "bool"
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape.rs",
+      "source_sha256": "6e6ae500dc5b4bc2a1b3d040d81d3bcfdacdf6ce6821d6b9119140793164dcb0",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::ShowTriangles",
+    "previous": {
+      "declaration_sha256": "b8f5d961455c608eb61e57a2757b0695f6376c5cf6b6f5ec0b5e3dfec6c5177b",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::set_show_triangles",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "show",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "8ed363cb5ed90d5126da9649866d3525dfd60e587bc072ea1e3eb7d0c38abbaa",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::set_show_triangles",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ],
+            [
+              "show",
+              {
+                "primitive": "bool"
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": null
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::TextureMapState",
+    "previous": {
+      "declaration_sha256": "ea68ffdbfbfced32b53cb24ca5b955ec7d0a5b1935feccb99760b1f119fae722",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::texture_map_state",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "0005566aa590cead571d3ab731aa970957b89481531785c6a80ed5853368327e",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::texture_map_state",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "primitive": "bool"
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::TextureFile",
+    "previous": {
+      "declaration_sha256": "3010a64ff38acc79e06a61646edd315bd423d755cbe9f396b18ed8eb1189b590",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::texture_file",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": null,
+              "path": "super::AisTexturedShapeFileRef",
+              "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_file_ref::AisTexturedShapeFileRef"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "c8407517dba8132dcfb9952c4fa517e23098178ebc9dba53941811596291db3a",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "a2d14f58a8b98721f8c6238a995f0b1f1b719803c1521f2e42801ec19274e2c0",
+      "kind": "function",
+      "path": "rustycad_tkv3d::ais::AisTexturedShapeMembers::texture_file",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": null,
+              "path": "super::AisTexturedShapeFileRef",
+              "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_file_ref::AisTexturedShapeFileRef"
+            }
+          }
+        }
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_source.rs",
+      "source_sha256": "62db169f0259d4e07e35edf8237b70d6fbb177265655c306b3896cf91f27cc08",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  },
+  {
+    "upstream_id": "AIS_TexturedShape::get_type_name",
+    "previous": {
+      "declaration_sha256": "d58e1f38b095420d00dd31b0ed6fdaead60261631367da277b966574d11239b3",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      },
+      "kind": "assoc_const",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "signature": {
+        "default_unstable": null,
+        "type": {
+          "borrowed_ref": {
+            "is_mutable": false,
+            "lifetime": "'static",
+            "type": {
+              "primitive": "str"
+            }
+          }
+        },
+        "value": "\"AIS_TexturedShape\""
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "79367e5768f7010a44d7959c48b3e8d9e111704a1813906114b957bfa07ecf6b",
+      "source_status": null
+    },
+    "current": {
+      "declaration_sha256": "059e177c8e174f925c2b9dd0c7b3c2979cfec9341abd02c17f4ea27a5cbfaef8",
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisTexturedShape",
+            "resolved_item_path": "rustycad_tkv3d::ais::textured_shape_object::AisTexturedShape"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      },
+      "kind": "assoc_const",
+      "path": "rustycad_tkv3d::ais::AisTexturedShape::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "signature": {
+        "default_unstable": null,
+        "type": {
+          "borrowed_ref": {
+            "is_mutable": false,
+            "lifetime": "'static",
+            "type": {
+              "primitive": "str"
+            }
+          }
+        },
+        "value": "\"AIS_TexturedShape\""
+      },
+      "source_file": "crates/tkv3d/src/ais/textured_shape_object.rs",
+      "source_sha256": "92c9fe9c7e5f60e5140277045dee7e9b4cd9f6b3fd2b5ac2c5734eda49484cea",
+      "source_status": null
+    },
+    "semantic_metadata_unchanged": true,
+    "behavioral_check": "Reviewed source changes: module registration, three added native-facing parent query overrides, genuine pixmap slot storage/borrowed setter, and explicit owned clone at texture construction. Selected declaration signatures remain unchanged. Integrated native102+12+118 records rerun twice; full workspace19099 tests and both Vulkan toolkit profiles pass. Four original texture retiring bindings explicitly remain partial."
+  }
+]

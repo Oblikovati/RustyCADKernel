@@ -168,8 +168,7 @@ pub use cube_map_packed::{Graphic3dCubeMapPacked, graphic3d_cube_map_packed_chec
 pub use cube_map_separate::Graphic3dCubeMapSeparate;
 pub use culling_tool::{Graphic3dCullingContext, Graphic3dCullingPlane, Graphic3dCullingTool};
 pub use cview::{
-    Graphic3dCView, Graphic3dCViewBase, Graphic3dCViewFields, Graphic3dDataStructureManager,
-    graphic3d_cview_register,
+    Graphic3dCView, Graphic3dCViewBase, Graphic3dCViewFields, graphic3d_cview_register,
 };
 pub use cview_computed::Graphic3dCViewComputed;
 pub use cview_members::Graphic3dCViewMembers;
@@ -307,4 +306,4 @@ pub use retained_view::Graphic3dRetainedView;
 mod texture_2d_rtti_tests;
 
 mod cview_camera_reference;
-pub use cview_camera_reference::graphic3d_cview_camera_ref;
+pub use cview_camera_reference::{Graphic3dDataStructureManager, graphic3d_cview_camera_ref};

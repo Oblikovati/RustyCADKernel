@@ -24,6 +24,11 @@ User decision, 2026-10-11: parallel porting uses at most six agents, including
 the coordinating agent. Independent slices use separate checkouts; the coordinator
 serializes local `main` integration, checks and deletion of completed worktrees.
 
+User decision, 2026-10-12: use [acadrust](https://github.com/hakanaktt/acadrust)
+for Martensite DWG format support through a Martensite-owned adapter. See the
+[DWG backend decision](adr/0001-use-acadrust-for-dwg.md). Implement this with the
+exchange-format work that follows the visualization and Vulkan renderer priorities.
+
 1. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
    camera-dependent selection, native comparisons and regression tests.
 2. Continue Martensite's Vulkan renderer through the existing Graphic3d interfaces.

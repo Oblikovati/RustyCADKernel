@@ -2,6 +2,7 @@
 //! (visualization-design.md section 1). The view is the [`Graphic3dCView`] trait over the
 //! embedded [`Graphic3dCViewBase`]; its non-virtual members are split by topic in
 //! `cview_members`, `cview_structures`, `cview_computed`, `cview_xr` and `cview_subviews`.
+use super::Graphic3dDataStructureManager;
 use super::cview_virtuals as defaults;
 use super::{
     GRAPHIC3D_ZLAYER_ID_BOT_OSD, Graphic3dBufferType, Graphic3dCStructure, Graphic3dCamera,
@@ -23,33 +24,12 @@ use rustycad_tkernel::ncollection::{Vec2, Vec3};
 use rustycad_tkernel::quantity::{ColorRgba, NamedColor};
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{
-    Failure, Handle, HandleReference, SharedState, StandardTransient, Transient, WeakHandle,
+    Failure, Handle, HandleReference, SharedState, StandardTransient, WeakHandle,
 };
 use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::Axis3;
 use std::io;
-
-/// `Graphic3d_DataStructureManager`: an object with a camera that structures are computed
-/// for (the views).
-pub trait Graphic3dDataStructureManager: Transient {
-    /// Native virtual constHandle borrow; `let alias=manager.camera_ref()`.
-    fn camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_>;
-    /// Explicit owning snapshot convenience; native Camera binds camera_ref; `manager.camera()`.
-    fn camera(&self) -> Handle<Graphic3dCamera> {
-        self.camera_ref().clone_handle()
-    }
-    /// `DumpJson`: the class name; `manager.dump_json(&mut stream, -1)?`.
-    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
-        let _ = depth;
-        super::driver_dump::dump_data_structure_manager(stream)
-    }
-}
-rustycad_tkernel::impl_transient_interface!(
-    dyn Graphic3dDataStructureManager,
-    "Graphic3d_DataStructureManager",
-    StandardTransient
-);
 
 /// The protected fields of a view.
 pub struct Graphic3dCViewFields {
@@ -267,7 +247,9 @@ pub trait Graphic3dCView: Graphic3dDataStructureManager {
     /// `MinMaxValues(bool)`: the union of the layer boxes (void for an undefined view);
     /// `view.min_max_values(false)?`.
     fn min_max_values(&self, include_auxiliary: bool) -> Result<BoundingBox3, Failure> {
-        defaults::min_max_values(self, include_auxiliary)
+        rustycad_tkernel::standard::catch_native_failure(|| {
+            defaults::min_max_values(self, include_auxiliary)
+        })
     }
     /// `ZFitAllBounds`: the primary and the graphic boxes; `view.z_fit_all_bounds()?`.
     fn z_fit_all_bounds(&self) -> Result<(BoundingBox3, BoundingBox3), Failure> {
@@ -417,9 +399,13 @@ pub trait Graphic3dCView: Graphic3dDataStructureManager {
     /// `SetTextureEnv`.
     fn set_texture_env(&self, texture_env: &Handle<Graphic3dTextureEnv>);
     /// `Lights`.
-    fn lights(&self) -> Handle<Graphic3dLightSet>;
+    fn lights_ref(&self) -> Box<dyn HandleReference<Graphic3dLightSet> + '_>;
+    /// Explicit owning convenience; native Lights returns the borrowed field; `view.lights()`.
+    fn lights(&self) -> Handle<Graphic3dLightSet> {
+        self.lights_ref().clone_handle()
+    }
     /// `SetLights`.
-    fn set_lights(&self, lights: &Handle<Graphic3dLightSet>);
+    fn set_lights(&self, lights: &dyn HandleReference<Graphic3dLightSet>);
     /// `ClipPlanes`.
     fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane>;
     /// `SetClipPlanes`.

@@ -9,16 +9,17 @@ use crate::standard::{Failure, character};
 impl AsciiString {
     /// `UpperCase`: maps ASCII lowercase bytes in place; `text.upper_case()`.
     pub fn upper_case(&mut self) {
-        self.terminated.make_ascii_uppercase();
+        self.terminated.write().make_ascii_uppercase();
     }
     /// `LowerCase`: maps ASCII uppercase bytes in place; `text.lower_case()`.
     pub fn lower_case(&mut self) {
-        self.terminated.make_ascii_lowercase();
+        self.terminated.write().make_ascii_lowercase();
     }
     /// `Capitalize`: uppercases the first byte and lowercases the rest; `text.capitalize()`.
     pub fn capitalize(&mut self) {
         self.lower_case();
-        if let Some(first) = self.terminated.first_mut() {
+        let mut bytes = self.terminated.write();
+        if let Some(first) = bytes.first_mut() {
             first.make_ascii_uppercase();
         }
     }
@@ -27,7 +28,8 @@ impl AsciiString {
     pub fn change_all(&mut self, from: u8, to: u8, case_sensitive: bool) {
         let length = self.len();
         let wanted = fold(from, case_sensitive);
-        for byte in &mut self.terminated[..length] {
+        let mut bytes = self.terminated.write();
+        for byte in &mut bytes[..length] {
             if fold(*byte, case_sensitive) == wanted {
                 *byte = to;
             }
@@ -43,13 +45,15 @@ impl AsciiString {
         let wanted = fold(byte, case_sensitive);
         let length = self.len();
         let mut retained = 0;
+        let mut bytes = self.terminated.write();
         for offset in 0..length {
-            let value = self.terminated[offset];
+            let value = bytes[offset];
             if fold(value, case_sensitive) != wanted {
-                self.terminated[retained] = value;
+                bytes[retained] = value;
                 retained += 1;
             }
         }
+        drop(bytes);
         self.set_length(retained);
     }
     /// `LeftAdjust`: removes leading C-locale whitespace; `text.left_adjust()`.
@@ -59,7 +63,7 @@ impl AsciiString {
             .iter()
             .take_while(|&&byte| character::is_space(byte))
             .count();
-        self.terminated.drain(..leading);
+        self.terminated.write().drain(..leading);
     }
     /// `RightAdjust`: removes trailing C-locale whitespace; `text.right_adjust()`.
     pub fn right_adjust(&mut self) {
@@ -80,9 +84,11 @@ impl AsciiString {
         if padding == 0 {
             return Ok(());
         }
+        self.reserve_buffer_length(self.len() + padding + 1);
         self.ensure_owned_terminator();
         let length = self.len();
         self.terminated
+            .write()
             .splice(length..length, std::iter::repeat_n(filler, padding));
         Ok(())
     }
@@ -95,8 +101,10 @@ impl AsciiString {
         if padding == 0 {
             return Ok(());
         }
+        self.reserve_buffer_length(self.len() + padding + 1);
         self.ensure_owned_terminator();
         self.terminated
+            .write()
             .splice(0..0, std::iter::repeat_n(filler, padding));
         Ok(())
     }

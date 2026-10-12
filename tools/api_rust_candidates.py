@@ -132,11 +132,18 @@ def row_rust_candidates(
 ) -> tuple[str, list[dict[str, JSONValue]]]:
     """Require all accessor targets; e.g. `row_rust_candidates(row, crates)`."""
     if "rust_kind" in row:
-        selected = select_rust_kind(crates, row["rust_kind"])
+        selected = select_rust_kind(crates, row["rust_kind"], requested_kind_paths(row))
         if selected is None:
             return "invalid_rust_kind", []
         crates = selected
     return rust_target_candidates(row, crates)
+
+
+def requested_kind_paths(row: dict[str, JSONValue]) -> set[str]:
+    """Limit kind work without deciding target validity; `requested_kind_paths(row)`."""
+    paired = row.get("rust_items")
+    supplied = paired if isinstance(paired, list) else [row.get("rust_item")]
+    return {path for path in supplied if isinstance(path, str)}
 
 
 def rust_target_candidates(

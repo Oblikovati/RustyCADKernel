@@ -11,6 +11,9 @@
 //!
 //! The design rules, including how the viewer reaches the Vulkan 1.3 driver through the
 //! Graphic3d interfaces only, are in `docs/v3d-design.md`.
+#[cfg(test)]
+#[macro_use]
+mod test_window_forwarding;
 pub mod ais;
 pub mod prs3d;
 pub mod prs_mgr;
