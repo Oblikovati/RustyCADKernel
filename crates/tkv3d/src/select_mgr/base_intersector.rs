@@ -13,12 +13,12 @@ use rustycad_tkmath::gp::{
 };
 use rustycad_tkservice::graphic3d::Graphic3dCamera;
 use rustycad_tkservice::json_dump::{class_begin, field_integer, field_pointer};
-use std::io;
+use std::{io, sync::Arc};
 
 /// The camera and selection type of every intersector.
 pub struct SelectMgrBaseIntersectorBase {
     /// `myCamera`.
-    pub camera: SharedState<Handle<Graphic3dCamera>>,
+    pub camera: Arc<SharedState<Handle<Graphic3dCamera>>>,
     /// `mySelectionType`.
     pub selection_type: SharedState<SelectMgrSelectionType>,
 }
@@ -27,7 +27,7 @@ impl Default for SelectMgrBaseIntersectorBase {
     /// No camera, unknown selection type.
     fn default() -> Self {
         Self {
-            camera: SharedState::new(Handle::default()),
+            camera: Arc::new(SharedState::new(Handle::default())),
             selection_type: SharedState::new(SelectMgrSelectionType::Unknown),
         }
     }
@@ -278,6 +278,11 @@ pub trait SelectMgrBaseIntersectorMembers: SelectMgrBaseIntersector {
     /// `Camera`; `volume.camera()`.
     fn camera(&self) -> Handle<Graphic3dCamera> {
         self.intersector_base().camera.read().clone()
+    }
+    /// Capture the actual camera field without an owner or retained lock.
+    /// Example: `let alias=volume.camera_ref(); volume.set_camera(&camera); assert!(!alias.is_null());`.
+    fn camera_ref(&self) -> super::SelectMgrCameraFieldReference {
+        super::SelectMgrCameraFieldReference::capture(&self.intersector_base().camera)
     }
     /// Whether the camera is orthographic (false without camera, natively a null dereference).
     fn is_orthographic(&self) -> bool {

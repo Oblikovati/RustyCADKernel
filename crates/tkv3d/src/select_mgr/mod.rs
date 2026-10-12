@@ -199,3 +199,13 @@ mod camera_argument_fixture;
 mod camera_argument_geometry_tests;
 #[cfg(test)]
 mod camera_argument_tests;
+
+mod camera_field_reference;
+pub use camera_field_reference::SelectMgrCameraFieldReference;
+
+#[cfg(test)]
+mod camera_getter_fixture;
+#[cfg(test)]
+mod camera_getter_rows;
+#[cfg(test)]
+mod camera_getter_tests;

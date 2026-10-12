@@ -1,0 +1,335 @@
+[
+  {
+    "upstream_id": "SelectMgr_FrustumBuilder::Camera() const",
+    "toolkit": "TKV3d",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "08b79a06b1b5aa8e614decfe338f3f064c7355c513297a73651ffc7939f332b2"
+    ],
+    "cpp_matches": [
+      {
+        "id": "08b79a06b1b5aa8e614decfe338f3f064c7355c513297a73651ffc7939f332b2",
+        "usr": "c:@S@SelectMgr_FrustumBuilder@F@Camera#1",
+        "qualified_name": "SelectMgr_FrustumBuilder::Camera",
+        "kind": "CXXMethod",
+        "signature": "const class opencascade::handle<class Graphic3d_Camera> &() const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_FrustumBuilder.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": "function",
+    "declared_rust_selectors": [
+      {
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera_ref",
+        "declaration_sha256": "7a0c358d64b4a1ddb2834eb25148236e7c0c42fd35d95e1a821e0b48dfd0962f",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "SelectMgrFrustumBuilder",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        }
+      }
+    ],
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "impl_trait": [
+                {
+                  "trait_bound": {
+                    "trait": {
+                      "path": "HandleReference",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle_reference::HandleReference",
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "resolved_path": {
+                                  "path": "Graphic3dCamera",
+                                  "resolved_item_path": "rustycad_tkservice::graphic3d::camera::Graphic3dCamera",
+                                  "args": null
+                                }
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      }
+                    },
+                    "generic_params": [],
+                    "modifier": "none"
+                  }
+                },
+                {
+                  "use": []
+                }
+              ]
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "SelectMgrFrustumBuilder",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "7a0c358d64b4a1ddb2834eb25148236e7c0c42fd35d95e1a821e0b48dfd0962f",
+        "source_file": "crates/tkv3d/src/select_mgr/frustum_builder.rs",
+        "source_status": null,
+        "source_sha256": "dc220a02fa0536db1b5c824346726bc9ac20d9d2a91aa664e9a87bafc32749f6"
+      }
+    ],
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_FrustumBuilder.hxx"
+  },
+  {
+    "upstream_id": "SelectMgr_BaseIntersector::Camera() const",
+    "toolkit": "TKV3d",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "ff40e8623c6adfe8cbbdc5aa2c8d6a0f050dc8bbc7b8e7464afd662ffed5549e"
+    ],
+    "cpp_matches": [
+      {
+        "id": "ff40e8623c6adfe8cbbdc5aa2c8d6a0f050dc8bbc7b8e7464afd662ffed5549e",
+        "usr": "c:@S@SelectMgr_BaseIntersector@F@Camera#1",
+        "qualified_name": "SelectMgr_BaseIntersector::Camera",
+        "kind": "CXXMethod",
+        "signature": "const class opencascade::handle<class Graphic3d_Camera> &() const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": "function",
+    "declared_rust_selectors": [
+      {
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera_ref",
+        "declaration_sha256": "4127204f374c6f228d8485f7e60034f829f04983b6f59c873a0aaed939e966b5",
+        "impl_context": null
+      }
+    ],
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "super::SelectMgrCameraFieldReference",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::camera_field_reference::SelectMgrCameraFieldReference",
+                "args": null
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": null,
+        "declaration_sha256": "4127204f374c6f228d8485f7e60034f829f04983b6f59c873a0aaed939e966b5",
+        "source_file": "crates/tkv3d/src/select_mgr/base_intersector.rs",
+        "source_status": null,
+        "source_sha256": "8acbd9e4f46f59effab57c4b43158e44525286ca61cbfd4ee43d9d3b39fc76d0"
+      }
+    ],
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx"
+  },
+  {
+    "upstream_id": "SelectMgr_SelectingVolumeManager::Camera() const",
+    "toolkit": "TKV3d",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "4b98d620e66c73dc4993a8150a96a628d391d6e5feedc1a81bdf23ce1ec14adb"
+    ],
+    "cpp_matches": [
+      {
+        "id": "4b98d620e66c73dc4993a8150a96a628d391d6e5feedc1a81bdf23ce1ec14adb",
+        "usr": "c:@S@SelectMgr_SelectingVolumeManager@F@Camera#1",
+        "qualified_name": "SelectMgr_SelectingVolumeManager::Camera",
+        "kind": "CXXMethod",
+        "signature": "const class opencascade::handle<class Graphic3d_Camera> &() const",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": "function",
+    "declared_rust_selectors": [
+      {
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera_ref",
+        "declaration_sha256": "459e942a32fd23c7a5416dfd8a2b49d0b633f660a55a14b22e7ee3216806ddd6",
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "SelectMgrSelectingVolumeManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selecting_volume::SelectMgrSelectingVolumeManager",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        }
+      }
+    ],
+    "declared_rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "SelectMgrCameraFieldReference",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::camera_field_reference::SelectMgrCameraFieldReference",
+                "args": null
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": {
+          "for": {
+            "resolved_path": {
+              "path": "SelectMgrSelectingVolumeManager",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::selecting_volume::SelectMgrSelectingVolumeManager",
+              "args": null
+            }
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "trait": null
+        },
+        "declaration_sha256": "459e942a32fd23c7a5416dfd8a2b49d0b633f660a55a14b22e7ee3216806ddd6",
+        "source_file": "crates/tkv3d/src/select_mgr/selecting_volume.rs",
+        "source_status": null,
+        "source_sha256": "6c1c3ff4128221a1c714584747010e57e49e84146f8e4762feac9fdd32245cc4"
+      }
+    ],
+    "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.hxx"
+  }
+]

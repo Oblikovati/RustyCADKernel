@@ -25,6 +25,18 @@ impl<T: ?Sized + RuntimeTyped> Default for IntrusiveReferenceSlot<T> {
     }
 }
 impl<T: ?Sized + RuntimeTyped> IntrusiveReferenceSlot<T> {
+    /// Move existing ownership into the actual slot; `IntrusiveReferenceSlot::from_owned(target)`.
+    pub fn from_owned(target: Handle<T>) -> Self {
+        // Constructor transfer must not manufacture a temporary native owning reference.
+        let pointer = target.downgrade();
+        Self {
+            members: SharedState::new(ReferenceSlotMembers {
+                pointer,
+                ownership: Some(target),
+                retiring: false,
+            }),
+        }
+    }
     /// Preserve native EndScope/BeginScope sequencing; `slot.assign(&source)?`.
     pub fn assign(&self, source: &dyn HandleReference<T>) -> Result<(), Failure> {
         let pointer = source.object_address();

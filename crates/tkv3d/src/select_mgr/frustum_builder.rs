@@ -2,9 +2,12 @@
 //! world points for the selecting frustums.
 use rustycad_tkernel::ncollection::{Vec3, Vec4};
 use rustycad_tkernel::precision::confusion;
-use rustycad_tkernel::standard::{Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{
+    Handle, HandleReference, SharedState, StandardTransient, WeakHandleFieldRef,
+};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::graphic3d::Graphic3dCamera;
+use std::sync::Arc;
 
 /// The mutable fields of a builder.
 #[derive(Clone)]
@@ -21,7 +24,7 @@ struct BuilderState {
 /// Example: `let builder = SelectMgrFrustumBuilder::new(); builder.set_window_size(400, 300);`.
 pub struct SelectMgrFrustumBuilder {
     transient: StandardTransient,
-    state: SharedState<BuilderState>,
+    state: Arc<SharedState<BuilderState>>,
 }
 rustycad_tkernel::impl_transient!(
     SelectMgrFrustumBuilder,
@@ -49,12 +52,17 @@ impl SelectMgrFrustumBuilder {
         };
         Self {
             transient: StandardTransient::default(),
-            state: SharedState::new(state),
+            state: Arc::new(SharedState::new(state)),
         }
     }
     /// `Camera`; `builder.camera()`.
     pub fn camera(&self) -> Handle<Graphic3dCamera> {
         self.state.read().camera.clone()
+    }
+    /// Capture the builder camera field without owning the builder or current camera.
+    /// Example: `let alias=builder.camera_ref(); builder.set_camera(&camera); assert!(!alias.is_null());`.
+    pub fn camera_ref(&self) -> impl HandleReference<Graphic3dCamera> + use<> {
+        WeakHandleFieldRef::new(&self.state, builder_camera_field)
     }
     /// `SetCamera`; `builder.set_camera(&camera)`.
     pub fn set_camera(
@@ -124,4 +132,9 @@ impl SelectMgrFrustumBuilder {
         };
         camera.un_project(&xyz)
     }
+}
+
+fn builder_camera_field(state: &BuilderState) -> &Handle<Graphic3dCamera> {
+    // Capture this field once; later reads must never repeat an object getter.
+    &state.camera
 }

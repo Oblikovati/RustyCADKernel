@@ -45,13 +45,13 @@ fn assign_options(options: &mut V3dImageDumpOptions, index: i32) {
 #[test]
 fn native_public_value_fields_replay() {
     let mut options = V3dImageDumpOptions::default();
-    assert!(options.light_name.is_empty());
+    assert!(options.light_name.to_ascii_string().unwrap().is_empty());
     let mut actual = emit_options("default", &options);
     for index in 0..12 {
         assign_options(&mut options, index);
         actual.push_str(&emit_options("assigned", &options));
     }
-    let copy = options.clone();
+    let copy = options;
     assign_options(&mut options, 42);
     actual.push_str(&emit_options("copy", &copy));
     actual.push_str(&emit_options("original", &options));

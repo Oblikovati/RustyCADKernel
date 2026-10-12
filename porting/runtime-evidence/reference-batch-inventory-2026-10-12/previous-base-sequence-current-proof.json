@@ -1,0 +1,52 @@
+{
+  "schema": "rustycad.exact-partial-binding-current-proof.v1",
+  "status": "current_source_proof_pending_integration",
+  "scope": "Refresh compiler-derived body evidence only; exact native IDs, proposed ledger rows and partial domains preserved. All existing signature/impl/kind/path fields are identical. Declaration digests change with whole-file source hashes; the five affected existing method bodies are independently checked unchanged against Git base. Historical receipt and archives unchanged.",
+  "base_revision": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "historical_receipt": "porting/audits/base-sequence-api-reconciliation.json",
+  "native_ids_preserved": 71,
+  "ledger_rows_unchanged": true,
+  "implemented_credit_delta": 0,
+  "changed_source_hash_records": [
+    {
+      "cpp_id": "7cb3e0b16e543233cf0e4404d2f63428d6967edf8a23c6595840e878d9dc5157",
+      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_node",
+      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
+      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+    },
+    {
+      "cpp_id": "857785921041e3c26b1fb8efe86fa744b1b8ca8ef2e20b1f272d3a7e59bf3442",
+      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::change_value",
+      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
+      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+    },
+    {
+      "cpp_id": "e5fb702bcf20d742ec7b7c2fc1aa73fc7b2e7019b4a7b4a24c423a73d73ceeb7",
+      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::value",
+      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
+      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+    },
+    {
+      "cpp_id": "f6e804d6a169e7b387362a32534db9655451f468ed7e43023493db21cd51a04b",
+      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_previous_node",
+      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
+      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+    }
+  ],
+  "bindings_path": "porting/runtime-evidence/base-iterator-address-base-sequence-current.jsonl.gz",
+  "bindings_sha256": "0f2dfc5e710eabaee1169b1d27567c67f72e3d760fda1b7f39f031a2b53e5333",
+  "rust_inventory_path": "porting/runtime-evidence/base-iterator-address-normalized.json.gz",
+  "rust_inventory_sha256": "172311ac079321500a03d68367c7ed77c7cb6f63e2bb540f4bd96a20a2b0bec3",
+  "raw_compiler_path": "porting/runtime-evidence/base-iterator-address-rustdoc.json.gz",
+  "raw_compiler_sha256": "e308bfe2ff5fc11415774abc66ef028233fa209de04a43afcd200371c6d21175",
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator.rs": "e7bb35786564e05625b42ee168dc2f2560473fbd8253a801b0bba1e0b471141c",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/movement.rs": "f6fb47da14de5f01dd22bd0a1e3b7778d75d20fbe02ee067c697b934838eb265",
+    "crates/tkernel/src/ncollection/sequence/base_storage/iterator.rs": "e43004262b135482a7354071fd91452a366e1dfac3caa48f3eb94823760711b0",
+    "crates/tkernel/src/ncollection/sequence/basic_iterator/access.rs": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+  }
+}

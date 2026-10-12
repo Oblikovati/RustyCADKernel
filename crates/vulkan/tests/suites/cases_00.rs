@@ -33,6 +33,8 @@ pub mod graphic_submission;
 pub mod group_flipping;
 #[path = "../homogeneous_vertices.rs"]
 pub mod homogeneous_vertices;
+#[path = "../light_name_dump_boundary.rs"]
+pub mod light_name_dump_boundary;
 #[path = "../lighting_submission.rs"]
 pub mod lighting_submission;
 #[path = "../line_alpha.rs"]

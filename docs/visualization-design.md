@@ -44,6 +44,15 @@ uploads these byte buffers unchanged as vertex, index and draw-range buffers; th
 descriptions become `VkVertexInputAttributeDescription`s. Native probes compare the byte layout,
 stride and the values that `AddVertex`, `AddEdge` and `AddBound` write.
 
+Native `Attributes()`, `Indices()` and `Bounds()` const-handle getters map to
+`attributes_ref()`, `indices_ref()` and `bounds_ref()`. They borrow the actual
+buffer fields, including null optional buffers. Group submission forwards these
+references to the driver without temporary intrusive owners. Clone a borrowed
+handle explicitly when ownership is needed; the existing getters without `_ref`
+remain owning conveniences. The
+[integration receipt](../porting/runtime-evidence/array-buffer-reference-2026-10-12/receipt.json)
+records native field/count replay and both-device Vulkan validation.
+
 The new Martensite Vulkan 1.3 driver follows the Oblikovati renderer
 (`Oblikovati/renderer`, `architecture/core/08-renderer-vulkan.md`): draw-call-as-data (each group
 primitive array is one draw item with its aspects resolved), dynamic rendering, a layered back end

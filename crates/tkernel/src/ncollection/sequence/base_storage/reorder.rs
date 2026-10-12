@@ -8,11 +8,11 @@ impl BaseSequence {
     pub unsafe fn reverse(&mut self) {
         let mut node = self.first;
         while !node.is_null() {
-            let next = unsafe { (*node).next() };
-            let previous = unsafe { (*node).previous() };
+            let next = unsafe { self.guarded_link(node).next() };
+            let previous = unsafe { self.guarded_link(node).previous() };
             unsafe {
-                (*node).set_next(previous);
-                (*node).set_previous(next);
+                self.guarded_link_mut(node).set_next(previous);
+                self.guarded_link_mut(node).set_previous(next);
             }
             node = next;
         }
@@ -52,10 +52,11 @@ impl BaseSequence {
         destination.last = self.last;
         destination.size = self.size - index + 1;
         destination.cache_first();
-        self.last = unsafe { (*node).previous() };
+        self.last = unsafe { self.guarded_link(node).previous() };
         unsafe {
             self.truncate_prefix(index);
-            (*node).set_previous(std::ptr::null_mut());
+            self.guarded_link_mut(node)
+                .set_previous(std::ptr::null_mut());
         }
         Ok(())
     }
@@ -73,25 +74,29 @@ impl BaseSequence {
             self.nullify();
             return;
         }
-        unsafe { (*self.last).set_next(std::ptr::null_mut()) };
+        unsafe {
+            self.guarded_link_mut(self.last)
+                .set_next(std::ptr::null_mut())
+        };
         self.size = index - 1;
         if self.current_index >= index {
             self.cache_first();
         }
     }
     unsafe fn swap_nodes(&mut self, left: *mut SeqNode, right: *mut SeqNode) {
-        let before = unsafe { (*left).previous() };
-        let after = unsafe { (*right).next() };
-        let left_next = unsafe { (*left).next() };
-        let right_previous = unsafe { (*right).previous() };
+        let before = unsafe { self.guarded_link(left).previous() };
+        let after = unsafe { self.guarded_link(right).next() };
+        let left_next = unsafe { self.guarded_link(left).next() };
+        let right_previous = unsafe { self.guarded_link(right).previous() };
         unsafe { self.swap_outer_links(before, after, left, right) };
-        unsafe { Self::swap_inner_links(left, right, left_next, right_previous) };
+        unsafe { self.swap_inner_links(left, right, left_next, right_previous) };
         unsafe {
-            (*right).set_previous(before);
-            (*left).set_next(after);
+            self.guarded_link_mut(right).set_previous(before);
+            self.guarded_link_mut(left).set_next(after);
         }
     }
     unsafe fn swap_inner_links(
+        &mut self,
         left: *mut SeqNode,
         right: *mut SeqNode,
         left_next: *mut SeqNode,
@@ -99,16 +104,25 @@ impl BaseSequence {
     ) {
         if left_next == right {
             unsafe {
-                (*right).set_next(left);
-                (*left).set_previous(right);
+                self.guarded_link_mut(right).set_next(left);
+                self.guarded_link_mut(left).set_previous(right);
             }
-        } else {
-            unsafe {
-                (*left_next).set_previous(right);
-                (*right_previous).set_next(left);
-                (*right).set_next(left_next);
-                (*left).set_previous(right_previous);
-            }
+            return;
+        }
+        unsafe { self.swap_separated_inner(left, right, left_next, right_previous) };
+    }
+    unsafe fn swap_separated_inner(
+        &mut self,
+        left: *mut SeqNode,
+        right: *mut SeqNode,
+        left_next: *mut SeqNode,
+        right_previous: *mut SeqNode,
+    ) {
+        unsafe {
+            self.guarded_link_mut(left_next).set_previous(right);
+            self.guarded_link_mut(right_previous).set_next(left);
+            self.guarded_link_mut(right).set_next(left_next);
+            self.guarded_link_mut(left).set_previous(right_previous);
         }
     }
     unsafe fn swap_outer_links(
@@ -121,12 +135,12 @@ impl BaseSequence {
         if before.is_null() {
             self.first = right;
         } else {
-            unsafe { (*before).set_next(right) };
+            unsafe { self.guarded_link_mut(before).set_next(right) };
         }
         if after.is_null() {
             self.last = left;
         } else {
-            unsafe { (*after).set_previous(left) };
+            unsafe { self.guarded_link_mut(after).set_previous(left) };
         }
     }
 }
