@@ -42,12 +42,12 @@ texture and virtual-dispatch implementations.
   BRep face, modes 0/1/2/3/unsupported 4 and all three mapping booleans.
   Actual group/aspect/position/index callbacks are captured; this recording
   driver does not capture UV attributes, so effective mapped UV rendering still
-  requires the paired renderer captures. This replay awaits concrete-class
-  registration with the genuine isoline prerequisite.
+  requires the paired renderer captures. All 40 rows now replay through the
+  registered concrete class and the genuine Isolines prerequisite.
 - `native-wireframe.txt`: genuine finite plane wireframe presentations across
-  U/V/common aspect routing and plane isoline policies. This asset is awaiting
-  registration of the full isoline prerequisite; it is not an implementation
-  completion claim.
+  U/V/common aspect routing and plane isoline policies. All 16 rows replay
+  through the registered default serial WF presentation path; this does not
+  claim completion of its broader overload family.
 
 The wider `AIS_Shape` family remains partial. Inherited selection and HLR are
 explicit unimplemented paths. File/predefined image decoding, triangle-edge

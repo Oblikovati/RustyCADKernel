@@ -1,4 +1,4 @@
-//! Concrete protected Compute fixture awaits the genuine isoline prerequisite registration.
+//! Concrete protected Compute replay uses the genuine inherited WF/shading presentation path.
 #[allow(dead_code)]
 #[path = "sensitive_display_driver.rs"]
 mod display_driver;

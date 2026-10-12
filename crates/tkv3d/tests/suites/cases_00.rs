@@ -121,12 +121,16 @@ pub mod stdprs_curve;
 pub mod stdprs_deflection;
 #[path = "../textured_face_triangles.rs"]
 pub mod textured_face_triangles;
+#[path = "../textured_presentation_native.rs"]
+pub mod textured_presentation_native;
 #[path = "../textured_shape_appearance.rs"]
 pub mod textured_shape_appearance;
 #[path = "../textured_shape_aspect_order.rs"]
 pub mod textured_shape_aspect_order;
 #[path = "../textured_shape_aspect_replay.rs"]
 pub mod textured_shape_aspect_replay;
+#[path = "../textured_shape_concrete.rs"]
+pub mod textured_shape_concrete;
 #[path = "../textured_shape_deviation.rs"]
 pub mod textured_shape_deviation;
 #[path = "../textured_shape_presentation_append.rs"]

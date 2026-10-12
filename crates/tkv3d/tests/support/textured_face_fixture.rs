@@ -28,7 +28,7 @@ pub fn textured_face_fixture(scenario: i32) -> Result<Face, Failure> {
     }
     Ok(face)
 }
-fn textured_face_mesh(scenario: i32) -> Result<Handle<Triangulation>, Failure> {
+pub fn textured_face_mesh(scenario: i32) -> Result<Handle<Triangulation>, Failure> {
     let mesh = Handle::new(Triangulation::with_sizes(4, 3, true, scenario & 1 != 0)?);
     for (offset, [x, y]) in [[-2., -3.], [4., -3.], [4., 5.], [-2., 5.]]
         .into_iter()

@@ -1,4 +1,4 @@
-//! Native serial WF presentation sequencing; registered when the genuine isoline dependency lands.
+//! Native serial WF presentation sequencing consumes genuine ordered face isolines.
 use super::wf_shape_edges::{append_wf_edge_polylines, classified_wf_edges};
 use super::{
     StdPrsIsolineDestination, StdPrsIsolinePolylines, StdPrsIsolines, StdPrsShapeTool,

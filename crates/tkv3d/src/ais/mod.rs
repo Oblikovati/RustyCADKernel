@@ -453,3 +453,9 @@ pub use shape_transparency::{ais_shape_set_transparency, ais_shape_unset_transpa
 
 mod shape_width;
 pub use shape_width::{ais_shape_set_width, ais_shape_unset_width};
+
+mod shape_bounds;
+mod textured_shape_compute;
+mod textured_shape_object;
+pub use textured_shape_compute::ais_textured_shape_compute;
+pub use textured_shape_object::AisTexturedShape;

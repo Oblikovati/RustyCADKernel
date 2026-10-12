@@ -1,4 +1,4 @@
-//! Native shaded Add orchestration; genuine WF/isolines remain an explicit prerequisite.
+//! Native shaded Add orchestration preserves actual WF fallbacks and ordered face boundaries.
 use super::shaded_shape_triangles::ShadedTexelParameters;
 use super::{StdPrsShadedShape, StdPrsToolTriangulatedShape, StdPrsVolume};
 use crate::prs3d::Prs3dDrawer;

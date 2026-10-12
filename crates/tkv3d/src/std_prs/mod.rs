@@ -36,7 +36,10 @@ pub use shaded_shape_volumes::StdPrsVolume;
 pub use shape_planarity::StdPrsShapeTool;
 
 mod shaded_shape_boundaries;
+mod shaded_shape_presentation;
+mod shaded_shape_wireframe;
 mod tool_r_face;
+mod wf_shape_presentation;
 pub use tool_r_face::StdPrsToolRFace;
 mod isoline_outputs;
 pub use isoline_outputs::{StdPrsIsolineDestination, StdPrsIsolinePolylines};

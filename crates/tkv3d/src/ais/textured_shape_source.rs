@@ -22,11 +22,18 @@ pub trait AisTexturedShapeSource: AisShapeSource {
         super::textured_shape_sources::ais_textured_shape_set_texture_pix_map(self, pixmap);
     }
 }
-rustycad_tkernel::impl_transient_interface!(
-    dyn AisTexturedShapeSource,
-    "AIS_TexturedShape",
-    dyn AisShapeSource
-);
+// OCCT 3d097a0 defines one concrete descriptor; the source view must not add an ancestor.
+impl rustycad_tkernel::standard::RuntimeTyped for dyn AisTexturedShapeSource {
+    const TYPE_NAME: &'static str = "AIS_TexturedShape";
+    fn static_type() -> &'static rustycad_tkernel::standard::RuntimeType {
+        // Genuine source casts share the concrete class descriptor and its AIS_Shape parent.
+        <super::AisTexturedShape as rustycad_tkernel::standard::RuntimeTyped>::static_type()
+    }
+    fn project_from(object: &dyn rustycad_tkernel::standard::Transient) -> Option<&Self> {
+        // Retain application subclass overrides through the actual interface projection.
+        rustycad_tkernel::standard::project_interface::<Self>(object)
+    }
+}
 
 /// Native nonvirtual getters/operations shared by concrete classes and application subclasses.
 /// Example: `object.texture_pix_map().read().object_address()` inspects the live handle field.
