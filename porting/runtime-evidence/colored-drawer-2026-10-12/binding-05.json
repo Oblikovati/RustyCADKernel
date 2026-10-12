@@ -1,0 +1,71 @@
+{
+  "upstream_id": "AIS_ColoredDrawer::get_type_name",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "24528bdc2607316011a1541fee31c88c5e3b5344a7e4d1d799075dba95307512"
+  ],
+  "cpp_matches": [
+    {
+      "id": "24528bdc2607316011a1541fee31c88c5e3b5344a7e4d1d799075dba95307512",
+      "usr": "c:@S@AIS_ColoredDrawer@F@get_type_name#S",
+      "qualified_name": "AIS_ColoredDrawer::get_type_name",
+      "kind": "CXXMethod",
+      "signature": "const char *()",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::ais::AisColoredDrawer::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::ais::AisColoredDrawer::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::ais::AisColoredDrawer::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "kind": "assoc_const",
+      "signature": {
+        "default_unstable": null,
+        "type": {
+          "borrowed_ref": {
+            "is_mutable": false,
+            "lifetime": "'static",
+            "type": {
+              "primitive": "str"
+            }
+          }
+        },
+        "value": "\"AIS_ColoredDrawer\""
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "AisColoredDrawer",
+            "resolved_item_path": "rustycad_tkv3d::ais::colored_drawer::AisColoredDrawer"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": {
+          "args": null,
+          "path": "RuntimeTyped",
+          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+        }
+      },
+      "declaration_sha256": "cb2ff7be9b839e60f4cb4c2d2fd23aa22135885d8de329c190801954ec42ba56",
+      "source_file": "crates/tkv3d/src/ais/colored_drawer.rs",
+      "source_status": null,
+      "source_sha256": "22b79c271e8f2d684a9101c513844e374c0977fcbe47b923a7f323bdb7acb150"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx"
+}

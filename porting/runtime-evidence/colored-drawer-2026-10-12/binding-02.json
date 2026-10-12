@@ -1,0 +1,54 @@
+{
+  "upstream_id": "AIS_ColoredDrawer::base_type",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "1073b2429f8d062d3d697da36444f8734d57b058d3aa586e5b007a1f0b9f4587"
+  ],
+  "cpp_matches": [
+    {
+      "id": "1073b2429f8d062d3d697da36444f8734d57b058d3aa586e5b007a1f0b9f4587",
+      "usr": "c:AIS_ColoredDrawer.hxx@S@AIS_ColoredDrawer@T@base_type",
+      "qualified_name": "AIS_ColoredDrawer::base_type",
+      "kind": "Typedef",
+      "signature": "class Prs3d_Drawer",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::ais::AisColoredDrawerParent"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::ais::AisColoredDrawerParent"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::ais::AisColoredDrawerParent",
+      "kind": "type_alias",
+      "signature": {
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "type": {
+          "resolved_path": {
+            "args": null,
+            "path": "crate::prs3d::Prs3dDrawer",
+            "resolved_item_path": "rustycad_tkv3d::prs3d::drawer::Prs3dDrawer"
+          }
+        }
+      },
+      "impl_context": null,
+      "declaration_sha256": "1f050ab709fc6d3dd6297a34920bcd92a577ede0c0495b356ff52615d86550ef",
+      "source_file": "crates/tkv3d/src/ais/colored_drawer.rs",
+      "source_status": null,
+      "source_sha256": "22b79c271e8f2d684a9101c513844e374c0977fcbe47b923a7f323bdb7acb150"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/AIS/AIS_ColoredDrawer.hxx"
+}
