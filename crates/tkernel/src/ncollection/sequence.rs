@@ -183,6 +183,10 @@ pub use base_storage::{BaseSequence, BaseSequenceRawIterator, DelSeqNode};
 #[allow(unsafe_code)]
 mod assignment;
 mod borrowed;
+// Prepared owners let collection adapters release their guards before native allocation callbacks.
+#[allow(unsafe_code)]
+mod prepared_node;
+pub use prepared_node::SequencePreparedNode;
 mod copy_assignment;
 mod copy_construction;
 mod cursor_contracts;
