@@ -12,6 +12,10 @@ use std::ops::{Deref, DerefMut, Index, IndexMut};
 #[path = "frame_stats_assignment_tests.rs"]
 mod assignment_tests;
 
+#[cfg(test)]
+#[path = "frame_stats_reset_tests.rs"]
+mod reset_tests;
+
 /// The native `std::max`: `a < b ? b : a`.
 pub(crate) fn native_max(a: f64, b: f64) -> f64 {
     if a < b { b } else { a }
@@ -87,7 +91,15 @@ impl Graphic3dFrameStatsData {
     /// `Reset`: the rates to -1, the counters and timers to 0, the minima to `RealLast`;
     /// `data.reset()`.
     pub fn reset(&mut self) {
-        *self = Self::default();
+        // OCCT 3d097a0 fills existing storage so references to counters/timers remain stable.
+        self.fps = -1.0;
+        self.fps_cpu = -1.0;
+        self.fps_immediate = -1.0;
+        self.fps_cpu_immediate = -1.0;
+        self.counters.fill(0);
+        self.timers.fill(0.0);
+        self.timers_min.fill(real_last());
+        self.timers_max.fill(0.0);
     }
     /// `FillMax`: keeps the larger rates and counters, the extreme timers, and the timers
     /// set to the maxima; `max_data.fill_max(&frame)`.
