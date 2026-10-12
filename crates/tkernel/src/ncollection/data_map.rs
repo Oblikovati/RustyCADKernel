@@ -164,3 +164,5 @@ pub use cursor::{DataMapIterator, DataMapIteratorMut};
 
 mod borrowed_operations;
 mod signed_sizes;
+
+mod hashed_query;

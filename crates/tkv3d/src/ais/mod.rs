@@ -424,3 +424,28 @@ mod colored_drawer_tests;
 
 #[cfg(test)]
 mod colored_drawer_runtime_tests;
+
+mod shape_drawer_map;
+mod shape_drawer_node;
+pub use shape_drawer_map::AisShapeDrawerMap;
+
+mod shape_drawer_container;
+mod shape_drawer_references;
+pub use shape_drawer_container::{AisShapeDrawerMapMut, AisShapeDrawerMapRef};
+pub use shape_drawer_references::{AisShapeDrawerNodeRef, AisShapeDrawerValueMut};
+
+mod shape_drawer_lifecycle;
+
+#[cfg(test)]
+mod shape_drawer_map_tests;
+#[cfg(test)]
+mod shape_drawer_oracle_inputs;
+
+#[cfg(test)]
+mod shape_drawer_lifecycle_tests;
+
+#[cfg(test)]
+mod shape_drawer_oracle_rows;
+
+#[cfg(test)]
+mod shape_drawer_reference_tests;
