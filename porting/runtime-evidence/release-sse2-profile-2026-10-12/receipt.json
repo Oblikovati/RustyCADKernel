@@ -1,0 +1,43 @@
+{
+  "failed_release": "v0.2.0",
+  "failed_revision": "e9f6bd84f9c217c8490a1606aeff321e73b253bb",
+  "workflow_run": 38200556316,
+  "failure": "XR texture replay first mismatch byte4492; actual failed buffer unavailable from runner",
+  "other_hosted_checks": "all passed, including coverage; package and publish skipped",
+  "cause_status": "CPU/JIT profile sensitivity supported by controlled native/Vulkan experiments; no assumption of universal determinism",
+  "profile": {
+    "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+    "LP_NATIVE_VECTOR_WIDTH": "128"
+  },
+  "native_software_environment": {
+    "LIBGL_ALWAYS_SOFTWARE": "true",
+    "GALLIUM_DRIVER": "llvmpipe"
+  },
+  "native_Mesa": "26.1.6-1pop0~1787580452~24.04~a5619ea",
+  "Vulkan_Mesa": "25.2.8-0ubuntu0.24.04.4",
+  "isolated_vulkan_library_sha256": "5a218118760fee2398cc783820a1cc052de162d8c937dafcd6045576dfd9576c",
+  "native_executable_sha256": "4a8e5fb19dd392df7e08cfa0fef6ab4d4a3172b36d2ffa60af46869bc0398582",
+  "rust_executable_sha256": "ffe965e0c8a8c353ffdf57355c5cdb412cce353895dd4635e1371539bee5acc3",
+  "native_generator_sha256": "a98b49a9baea870f176a3282d359cab21caf42eefc54690416f306d5cee487d5",
+  "shared_native_helper_sha256": "de097f6eba453ca6ab484339f2ad8aa8069437f3327ba58d7766d14ab0c11012",
+  "cases": 8,
+  "repeats_per_implementation": 2,
+  "gates": {
+    "rgba": "exact equality",
+    "depth": 1e-06
+  },
+  "original_rgba_assets_changed": false,
+  "native_depth_against_original_assets_maximum_difference": 5.960464477539063e-08,
+  "proof_archives": {
+    "rust-sse2.tar.gz": "b605c76f70159c8b81f1c253356a05572e3d085065c67f9184b104a6e641bb9f",
+    "native-sse2.tar.gz": "4b7b57b3962d83011848f8609e2886b878476f557f42051e940965d71fa0a7aa"
+  },
+  "official_Mesa_source": "https://archive.mesa3d.org/mesa-25.2.8.tar.xz",
+  "official_source_sha256": "097842f3e49d996868b38688db87b006f7d4541e93ce86d2f341d8b3e7be7c93",
+  "source_paths": [
+    "src/util/u_cpu_detect.c",
+    "src/gallium/auxiliary/gallivm/lp_bld_misc.cpp",
+    "src/gallium/auxiliary/gallivm/lp_bld_init_common.c"
+  ],
+  "scope": "bounded XR native and Vulkan replay; shader/filter/fixture/gate unchanged"
+}

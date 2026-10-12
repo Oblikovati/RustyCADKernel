@@ -31,7 +31,7 @@ registry. This process does not publish to crates.io.
 On a clean checkout at the release tag, use the pinned Rust toolchain and run:
 
 ```sh
-python3 tools/release_packages.py --tag v0.2.0
+python3 tools/release_packages.py --tag v0.2.1
 ```
 
 The command derives the package inventory from Cargo metadata. Cargo creates
@@ -231,3 +231,18 @@ exactly. These baselines are owned by the Rust test crates and included directly
 in their Cargo archives. Removing the OCCT generators and porting receipts does
 not remove these behavior tests or their fixtures. Legacy test resources still
 enter the extracted-package test-support bundle until their ownership is migrated.
+
+## Software renderer CPU profile
+
+Software rendering checks use `GALLIUM_OVERRIDE_CPU_CAPS=sse2` and
+`LP_NATIVE_VECTOR_WIDTH=128`, documented by [Mesa](https://docs.mesa3d.org/envvars.html).
+These constrain the shared Gallivm SIMD/FMA paths used by software OpenGL and
+lavapipe. They preserve sampler settings, shaders, exact RGBA checks, and the
+existing depth limit. Native hardware checks retain their device-specific assets.
+
+Release run `38200556316` failed the XR texture replay at byte 4492 despite the
+same test passing on another runner. All other checks, including coverage,
+passed. Fresh native GL and Vulkan captures under the constrained profile match
+all eight XR scenes with the original strict gates. The profile does not promise
+byte identity for every Mesa/LLVM/CPU combination; CI still verifies the actual
+rendered output. The failed `v0.2.0` tag remains immutable and unpublished.
