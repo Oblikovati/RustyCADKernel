@@ -3,6 +3,7 @@ use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::quantity::Color;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dMaterialAspect;
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
@@ -72,8 +73,8 @@ impl PrsMgrPresentableObject for AisColoredShape {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         super::ais_colored_shape_compute(self, prs, mode)
@@ -131,7 +132,7 @@ impl SelectMgrSelectableObject for AisColoredShape {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         super::ais_colored_shape_compute_selection(self, selection, mode)

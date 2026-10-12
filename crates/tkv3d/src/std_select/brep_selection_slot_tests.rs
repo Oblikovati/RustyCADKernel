@@ -27,7 +27,7 @@ fn native_curve_callback_replaces_const_selection_slot_before_sensitive_append()
         include_str!("../../tests/fixtures/colored-shape-compute/native-selection-slot.txt");
     assert_eq!(*rows.read(), native);
 }
-fn activate_selection_slot_hook(
+pub(super) fn activate_selection_slot_hook(
     curve: &BrepContourMutationCurveFake,
     slot: &Arc<SharedState<Handle<SelectMgrSelection>>>,
     incoming: &Handle<SelectMgrSelection>,
@@ -36,7 +36,9 @@ fn activate_selection_slot_hook(
     let hook = BrepCurveSlotReplacement::new(slot, incoming, rows, "selection");
     *curve.slot_callback.write() = Some(Box::new(hook));
 }
-fn selection_slot_identity(slot: &Handle<SelectMgrSelection>) -> &Handle<SelectMgrSelection> {
+pub(super) fn selection_slot_identity(
+    slot: &Handle<SelectMgrSelection>,
+) -> &Handle<SelectMgrSelection> {
     // This is the actual argument slot changed by the native curve callback.
     slot
 }

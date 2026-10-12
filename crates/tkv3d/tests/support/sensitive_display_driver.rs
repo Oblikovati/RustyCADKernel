@@ -7,6 +7,19 @@ use std::sync::Arc;
 #[path = "sensitive_display_group.rs"]
 mod recording_group;
 use recording_group::SensitiveDisplayGroup;
+/// Named fixture callback runs after native CStructure group allocation; `probe.group_created()`.
+pub trait SensitiveGroupCreationCallback: Send + Sync {
+    /// Observe the real allocated group before its receiver returns; `probe.group_created()`.
+    fn group_created(&self);
+}
+/// Named group override receives the actual native argument field; `probe.aspect_received(&slot)`.
+pub trait SensitiveAspectArgumentCallback: Send + Sync {
+    /// Observe or replace a live argument before base delegation; `probe.aspect_received(&slot)`.
+    fn aspect_received(
+        &self,
+        argument: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    );
+}
 #[derive(Default)]
 pub struct SensitiveDisplayTrace {
     pub events: Vec<f64>,
@@ -17,6 +30,8 @@ pub struct SensitiveDisplayTrace {
     pub groups: i32,
     pub append_selection: Handle<rustycad_tkv3d::select_mgr::SelectMgrSelection>,
     pub append_object: Handle<dyn rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>,
+    pub new_group_callback: Option<Box<dyn SensitiveGroupCreationCallback>>,
+    pub aspect_argument_callback: Option<Box<dyn SensitiveAspectArgumentCallback>>,
 }
 pub type DisplayTrace = Arc<SharedState<SensitiveDisplayTrace>>;
 pub struct SensitiveDisplayDriver {
@@ -136,6 +151,23 @@ impl SensitiveDisplayStructure {
             trace,
         })
     }
+    fn record_group_creation(&self) -> Result<(), Failure> {
+        let mut trace = self.trace.write();
+        trace.events.push(2.);
+        trace.groups += 1;
+        if trace.groups == trace.fail_group {
+            return Err(rustycad_tkernel::standard::exceptions::program_error(
+                "injected group failure; expected a successful group",
+            ));
+        }
+        Ok(())
+    }
+    fn notify_group_creation(&self) {
+        let callback = self.trace.write().new_group_callback.take();
+        if let Some(callback) = callback {
+            callback.group_created();
+        }
+    }
 }
 impl Graphic3dCStructure for SensitiveDisplayStructure {
     fn cstructure_base(&self) -> &Graphic3dCStructureBase {
@@ -169,16 +201,7 @@ impl Graphic3dCStructure for SensitiveDisplayStructure {
         &self,
         structure: &Handle<dyn Graphic3dStructureSource>,
     ) -> Result<Handle<dyn Graphic3dGroup>, Failure> {
-        {
-            let mut trace = self.trace.write();
-            trace.events.push(2.);
-            trace.groups += 1;
-            if trace.groups == trace.fail_group {
-                return Err(rustycad_tkernel::standard::exceptions::program_error(
-                    "injected group failure; expected a successful group",
-                ));
-            }
-        }
+        self.record_group_creation()?;
         let group: Handle<dyn Graphic3dGroup> =
             Handle::new(SensitiveDisplayGroup::new(structure, self.trace.clone())).cast();
         self.inner
@@ -187,6 +210,7 @@ impl Graphic3dCStructure for SensitiveDisplayStructure {
             .write()
             .groups
             .push(group.clone());
+        self.notify_group_creation();
         Ok(group)
     }
     fn remove_group(&self, group: &Handle<dyn Graphic3dGroup>) {

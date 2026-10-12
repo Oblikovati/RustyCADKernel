@@ -1,7 +1,7 @@
 //! Real widget subclass retains argument aliases through endpoint replacement and inherited fitting.
-use crate::v3d::V3dViewSource;
 use super::super::*;
 use super::view_cube_animation_source_fixture::*;
+use crate::v3d::V3dViewSource;
 use crate::{prs_mgr::*, select_mgr::*, v3d::V3dView};
 use rustycad_tkernel::standard::{
     Failure, Handle, HandleFieldRef, HandleReference, SharedState, StandardTransient,
@@ -129,10 +129,10 @@ impl SelectMgrSelectableObject for CubeFitReferenceProbe {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_view_cube_compute_selection(self, selection, mode)
+        ais_view_cube_compute_selection(self, &selection.observe(), mode)
     }
 }
 impl PrsMgrPresentableObject for CubeFitReferenceProbe {
@@ -141,11 +141,11 @@ impl PrsMgrPresentableObject for CubeFitReferenceProbe {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_view_cube_compute(self, prs, mode)
+        ais_view_cube_compute(self, &prs.observe(), mode)
     }
 }
 fn fit_reference_end_slot(fields: &AisViewCubeInteractionFields) -> &Handle<Graphic3dCamera> {

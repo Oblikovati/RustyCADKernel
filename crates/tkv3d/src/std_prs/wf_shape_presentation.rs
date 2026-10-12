@@ -9,7 +9,7 @@ use rustycad_tkbrep::{
     topexp::Explorer,
     topods::{self, Face, Shape, TopoDSShapeReadSource},
 };
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, HandleReference};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkservice::graphic3d::*;
 const WF_ISO_U: usize = 0;
@@ -22,7 +22,7 @@ type WfPresentationPolylines = [StdPrsIsolinePolylines; 5];
 impl StdPrsWfShape {
     /// Build the native default serial presentation from real topology; `Self::add(&prs,&shape,&drawer)?`.
     pub fn add(
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         shape: &Shape,
         drawer: &Handle<Prs3dDrawer>,
     ) -> Result<(), Failure> {
@@ -30,7 +30,7 @@ impl StdPrsWfShape {
     }
     /// Preserve a live source across graphics callbacks; `Self::add_reference(&prs,&map.node_ref(1)?,&drawer)?`.
     pub fn add_reference<S: TopoDSShapeReadSource>(
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         source: &S,
         drawer: &Handle<Prs3dDrawer>,
     ) -> Result<(), Failure> {
@@ -48,7 +48,7 @@ impl StdPrsWfShape {
     }
 }
 fn add_wf_reference_free_edges<S: TopoDSShapeReadSource>(
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     source: &S,
     drawer: &Handle<Prs3dDrawer>,
 ) -> Result<(), Failure> {
@@ -57,19 +57,16 @@ fn add_wf_reference_free_edges<S: TopoDSShapeReadSource>(
     if edges.is_null() {
         return Ok(());
     }
-    let group = prs.new_group()?;
-    group.set_primitives_aspect(
-        &drawer
-            .free_boundary_aspect()
-            .aspect_ref()
-            .observe()
-            .observe_as::<dyn Graphic3dAspectsSource>(),
-    );
+    let group = prs.observe().new_group()?;
+    let line = drawer.free_boundary_aspect().downgrade().observe();
+    let reference = line.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
+    group.set_primitives_aspect(&aspect);
     group.add_primitive_array(&edges, true);
     Ok(())
 }
 fn add_wf_reference_polylines<S: TopoDSShapeReadSource>(
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     source: &S,
     drawer: &Handle<Prs3dDrawer>,
 ) -> Result<(), Failure> {
@@ -87,7 +84,7 @@ fn add_wf_reference_polylines<S: TopoDSShapeReadSource>(
     emit_wf_boundary_groups(prs, drawer, &mut polylines)
 }
 fn add_wf_reference_vertices<S: TopoDSShapeReadSource>(
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     source: &S,
     drawer: &Handle<Prs3dDrawer>,
 ) -> Result<(), Failure> {
@@ -98,14 +95,11 @@ fn add_wf_reference_vertices<S: TopoDSShapeReadSource>(
     if vertices.is_null() {
         return Ok(());
     }
-    let group = prs.new_group()?;
-    group.set_primitives_aspect(
-        &drawer
-            .point_aspect()
-            .aspect_ref()
-            .observe()
-            .observe_as::<dyn Graphic3dAspectsSource>(),
-    );
+    let group = prs.observe().new_group()?;
+    let point = drawer.point_aspect().downgrade().observe();
+    let reference = point.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
+    group.set_primitives_aspect(&aspect);
     group.add_primitive_array(&vertices.cast(), true);
     Ok(())
 }
@@ -165,12 +159,20 @@ fn wf_isoline_destination(
 }
 
 fn emit_wf_iso_groups(
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     drawer: &Prs3dDrawer,
     polylines: &mut WfPresentationPolylines,
 ) -> Result<(), Failure> {
-    Prs3d::add_primitives_group(prs, &drawer.u_iso_aspect().cast(), &mut polylines[WF_ISO_U])?;
-    Prs3d::add_primitives_group(prs, &drawer.v_iso_aspect().cast(), &mut polylines[WF_ISO_V])
+    Prs3d::add_primitives_group(
+        &prs.observe(),
+        &drawer.u_iso_aspect().cast(),
+        &mut polylines[WF_ISO_U],
+    )?;
+    Prs3d::add_primitives_group(
+        &prs.observe(),
+        &drawer.v_iso_aspect().cast(),
+        &mut polylines[WF_ISO_V],
+    )
 }
 fn wf_boundary_route(
     enabled: bool,
@@ -199,17 +201,22 @@ fn append_wf_boundary_groups(
     Ok(())
 }
 fn emit_wf_boundary_groups(
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     drawer: &Prs3dDrawer,
     polylines: &mut WfPresentationPolylines,
 ) -> Result<(), Failure> {
+    let unfree = drawer.un_free_boundary_aspect();
+    Prs3d::add_primitives_group(&prs.observe(), &unfree, &mut polylines[WF_UNFREE])?;
     Prs3d::add_primitives_group(
-        prs,
-        &drawer.un_free_boundary_aspect(),
-        &mut polylines[WF_UNFREE],
+        &prs.observe(),
+        &drawer.free_boundary_aspect(),
+        &mut polylines[WF_FREE],
     )?;
-    Prs3d::add_primitives_group(prs, &drawer.free_boundary_aspect(), &mut polylines[WF_FREE])?;
-    Prs3d::add_primitives_group(prs, &drawer.wire_aspect(), &mut polylines[WF_COMMON])
+    Prs3d::add_primitives_group(
+        &prs.observe(),
+        &drawer.wire_aspect(),
+        &mut polylines[WF_COMMON],
+    )
 }
 
 fn wf_boundary_routes(drawer: &Prs3dDrawer) -> [Option<usize>; 3] {

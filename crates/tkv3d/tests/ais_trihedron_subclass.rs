@@ -1,4 +1,5 @@
 //! Application subclasses retain upstream trihedron RTTI and mutable protected fields.
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::{Color, NamedColor},
     standard::{Failure, Handle, StandardTransient},
@@ -28,11 +29,11 @@ impl PrsMgrPresentableObject for ApplicationTrihedron {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_trihedron_compute(self, prs, mode)
+        ais_trihedron_compute(self, &prs.observe(), mode)
     }
 }
 impl SelectMgrSelectableObject for ApplicationTrihedron {
@@ -41,10 +42,10 @@ impl SelectMgrSelectableObject for ApplicationTrihedron {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_trihedron_compute_selection(self, selection, mode)
+        ais_trihedron_compute_selection(self, &selection.observe(), mode)
     }
 }
 struct ApplicationTrihedronOwner {

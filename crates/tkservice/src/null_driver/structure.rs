@@ -129,11 +129,17 @@ impl Graphic3dGroup for NullGroup {
     fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource> {
         self.state.read().aspects.clone()
     }
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
-        self.state.write().aspects = aspect.clone();
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
+        self.state.write().aspects = aspect.observe().clone();
     }
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
-        self.state.write().aspects = aspect.clone();
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
+        self.state.write().aspects = aspect.observe().clone();
     }
     fn synchronize_aspects(&self) {}
     /// Replaces the group aspects when the map has them.

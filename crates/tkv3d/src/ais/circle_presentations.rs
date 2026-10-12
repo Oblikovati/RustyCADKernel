@@ -6,6 +6,7 @@ use crate::{
     select3d::{Select3DSensitiveCircle, Select3DSensitivePoly},
     std_prs::StdPrsDeflectionCurve,
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::Color,
     standard::{Failure, Handle},
@@ -39,11 +40,11 @@ impl PrsMgrPresentableObject for AisCircle {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
-        self.compute_circle(prs)
+        self.compute_circle(&prs.observe())
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.set_line_color(color)
@@ -65,33 +66,33 @@ impl SelectMgrSelectableObject for AisCircle {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         _: i32,
     ) -> Result<(), Failure> {
         let geometry = self.geometry.read().clone();
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 0);
-        let circle = geometry.component.circ()?;
-        if geometry.arc {
-            return selection.add(
-                &Handle::new(Select3DSensitivePoly::circle(
-                    &owner.cast(),
-                    &circle,
-                    geometry.bounds[0],
-                    geometry.bounds[1],
-                    geometry.filled,
-                    12,
-                )?)
-                .cast(),
-            );
-        }
-        selection.add(
-            &Handle::new(Select3DSensitiveCircle::new(
-                &owner.cast(),
-                &circle,
-                geometry.filled,
-            ))
-            .cast(),
-        )
+        let sensitive = circle_selection_sensitive(&geometry, &owner.cast())?;
+        selection.observe().add(&sensitive)
     }
+}
+
+fn circle_selection_sensitive(
+    geometry: &super::circle::CircleGeometry,
+    owner: &Handle<dyn SelectMgrEntityOwnerSource>,
+) -> Result<Handle<dyn crate::select3d::Select3DSensitiveEntity>, Failure> {
+    let circle = geometry.component.circ()?;
+    if geometry.arc {
+        let poly = Select3DSensitivePoly::circle(
+            owner,
+            &circle,
+            geometry.bounds[0],
+            geometry.bounds[1],
+            geometry.filled,
+            12,
+        )?;
+        return Ok(Handle::new(poly).cast());
+    }
+    let sensitive = Select3DSensitiveCircle::new(owner, &circle, geometry.filled);
+    Ok(Handle::new(sensitive).cast())
 }

@@ -1,4 +1,5 @@
 //! Named interactive object records callbacks and reads back context state during them.
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, Transient};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::graphic3d::{
@@ -45,8 +46,8 @@ impl PrsMgrPresentableObject for ContextObject {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        presentation: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        presentation: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.observe_context(100 + mode);
@@ -57,7 +58,7 @@ impl PrsMgrPresentableObject for ContextObject {
             ));
         }
         if !presentation.is_null() {
-            presentation.new_group()?;
+            presentation.observe().new_group()?;
         }
         Ok(())
     }
@@ -84,7 +85,7 @@ impl SelectMgrSelectableObject for ContextObject {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.observe_context(200 + mode);
@@ -96,13 +97,8 @@ impl SelectMgrSelectableObject for ContextObject {
         }
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), mode);
-        selection.add(
-            &Handle::new(Select3DSensitivePoint::new(
-                &owner.cast(),
-                Point3::default(),
-            ))
-            .cast(),
-        )?;
+        let point = Select3DSensitivePoint::new(&owner.cast(), Point3::default());
+        selection.observe().add(&Handle::new(point).cast())?;
         Ok(())
     }
 }

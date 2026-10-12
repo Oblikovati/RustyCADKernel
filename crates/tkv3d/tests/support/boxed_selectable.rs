@@ -1,4 +1,5 @@
 //! Named selectable with observable bounds reads for subset update tests and probes.
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
@@ -47,8 +48,8 @@ impl PrsMgrPresentableObject for BoxedSelectable {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        _: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
         Ok(())
@@ -62,7 +63,11 @@ impl SelectMgrSelectableObject for BoxedSelectable {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 }

@@ -1,6 +1,7 @@
 //! A real empty user presentation observes camera callbacks without changing scene bounds.
 use super::{AisInteractiveObject, AisInteractiveObjectBase};
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{
     Failure, Handle, SharedState, StandardTransient, raise_native_failure,
 };
@@ -37,11 +38,11 @@ impl PrsMgrPresentableObject for ActionCallbackObject {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        presentation: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        presentation: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
-        presentation.new_group()?;
+        presentation.observe().new_group()?;
         Ok(())
     }
     fn recompute_transformation(&self, camera: &Handle<Graphic3dCamera>) {
@@ -62,7 +63,11 @@ impl SelectMgrSelectableObject for ActionCallbackObject {
         // Empty selection keeps this legitimate user presentation out of picking.
         &self.base.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         // The native observer has no sensitive entities either.
         Ok(())
     }

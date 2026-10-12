@@ -34,11 +34,17 @@ impl Graphic3dGroup for ColoredCompoundReferenceGroupFake {
         let group = &self.inner;
         group.aspects()
     }
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         let group = &self.inner;
         group.set_group_primitives_aspect(aspect);
     }
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         let group = &self.inner;
         group.set_primitives_aspect(aspect);
     }

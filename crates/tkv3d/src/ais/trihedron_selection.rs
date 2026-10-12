@@ -4,6 +4,7 @@ use super::{
     trihedron::{TRI_AXIS_PARTS, TRI_PLANE_PARTS},
 };
 use crate::{prs_mgr::*, prs3d::*, select_mgr::*, select3d::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkservice::graphic3d::*;
@@ -100,10 +101,10 @@ impl SelectMgrSelectableObject for AisTrihedron {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_trihedron_compute_selection(self, selection, mode)
+        ais_trihedron_compute_selection(self, &selection.observe(), mode)
     }
     fn hilight_owner_with_color(
         &self,

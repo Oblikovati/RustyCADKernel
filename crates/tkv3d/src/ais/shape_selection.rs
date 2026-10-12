@@ -8,6 +8,7 @@ use crate::{
     std_select::{StdSelectBRepOwner, StdSelectBrepSelectionTool},
 };
 use rustycad_tkbrep::topods::TopoDSShapeReadSource;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     message::{Message, Messenger},
     standard::{Failure, Handle, catch_native_failure},
@@ -31,7 +32,7 @@ pub fn ais_shape_selection_type(mode: i32) -> ShapeEnum {
 /// Invoke the actual inherited native body; `ais_shape_compute_selection(object,&selection,0)?`.
 pub fn ais_shape_compute_selection<S: AisShapeSource + ?Sized>(
     object: &S,
-    selection: &Handle<SelectMgrSelection>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     mode: i32,
 ) -> Result<(), Failure> {
     let messenger = Message::default_messenger();
@@ -40,7 +41,7 @@ pub fn ais_shape_compute_selection<S: AisShapeSource + ?Sized>(
 /// Inject message delivery while preserving native construction and catch ordering; `ais_shape_compute_selection_with_messenger(object,&selection,0,&messenger)?`.
 pub fn ais_shape_compute_selection_with_messenger<S: AisShapeSource + ?Sized>(
     object: &S,
-    selection: &Handle<SelectMgrSelection>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     mode: i32,
     messenger: &Messenger,
 ) -> Result<(), Failure> {
@@ -56,7 +57,7 @@ pub fn ais_shape_compute_selection_with_messenger<S: AisShapeSource + ?Sized>(
     protect_shape_selection_load(object, mode, messenger, resources, (kind, deflection))
 }
 type ShapeSelectionResources<'a> = (
-    &'a Handle<SelectMgrSelection>,
+    &'a dyn HandleReference<SelectMgrSelection>,
     &'a rustycad_tkbrep::topods::Shape,
     &'a Handle<crate::prs3d::Prs3dDrawer>,
 );
@@ -116,13 +117,13 @@ fn report_shape_selection_failure(messenger: &Messenger, mode: i32, failure: &Fa
 }
 fn add_shape_fallback_selection<S: AisShapeSource + ?Sized>(
     object: &S,
-    selection: &Handle<SelectMgrSelection>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     shape: &rustycad_tkbrep::topods::Shape,
     selectable: &Handle<dyn SelectMgrSelectableObject>,
 ) -> Result<(), Failure> {
-    selection.clear();
+    selection.observe().clear();
     let bounds = super::shape_bounds::shape_presentation_bounds_snapshot(object)?;
     let owner = StdSelectBRepOwner::with_selectable(shape, selectable, 0, false).into_cast();
     let sensitive = Select3DSensitiveBox::new(&owner, &bounds)?;
-    selection.add(&Handle::new(sensitive).cast())
+    selection.observe().add(&Handle::new(sensitive).cast())
 }

@@ -58,6 +58,8 @@ mod brep_contour_orientation_tests;
 mod brep_origin_callback_tests;
 
 #[cfg(test)]
+mod brep_colored_selection_slot_tests;
+#[cfg(test)]
 mod brep_edge_borrow_tests;
 #[cfg(test)]
 mod brep_origin_slot_owner;
@@ -69,3 +71,5 @@ mod brep_owner_slot_curve_callback;
 mod brep_owner_slot_tests;
 #[cfg(test)]
 mod brep_selection_slot_tests;
+#[cfg(test)]
+mod brep_subshape_owner_slot_tests;

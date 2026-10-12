@@ -99,4 +99,5 @@ int main(int argc,char**)
   std::cout<<std::setprecision(17);
   for(int scenario=0;scenario<11;++scenario)
     for(int mode:{0,1,2,17})for(bool fail:{false,true})compute_case(scenario,mode,fail);
+  return 0;
 }

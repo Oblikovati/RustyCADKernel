@@ -1,6 +1,7 @@
 //! Native edge groups and aliased triangle sensitivity; selection is not invalidated by camera updates.
 use super::AisCameraFrustum;
 use crate::{prs_mgr::*, select_mgr::*, select3d::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::toploc::Location;
 impl AisCameraFrustum {
@@ -45,7 +46,7 @@ impl SelectMgrSelectableObject for AisCameraFrustum {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         let owner =
@@ -55,6 +56,6 @@ impl SelectMgrSelectableObject for AisCameraFrustum {
             1 => self.frustum_volume_selection(&owner)?,
             _ => return Ok(()),
         };
-        selection.add(&sensitive)
+        selection.observe().add(&sensitive)
     }
 }

@@ -10,6 +10,15 @@ pub(super) struct SensitiveDisplayGroup {
 }
 rustycad_tkernel::impl_transient!(SensitiveDisplayGroup, "SensitiveDisplayGroup", StandardTransient, transient, interfaces: [dyn Graphic3dGroup]);
 impl SensitiveDisplayGroup {
+    fn apply_aspect_argument_callback(
+        &self,
+        argument: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
+        let callback = self.trace.write().aspect_argument_callback.take();
+        if let Some(callback) = callback {
+            callback.aspect_received(argument);
+        }
+    }
     pub fn new(structure: &Handle<dyn Graphic3dStructureSource>, trace: DisplayTrace) -> Self {
         Self {
             transient: StandardTransient::default(),
@@ -73,27 +82,35 @@ impl Graphic3dGroup for SensitiveDisplayGroup {
     fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource> {
         self.inner.aspects()
     }
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
+        self.apply_aspect_argument_callback(aspect);
         self.trace.write().ownership_counts.push([
             1,
             self.transient.ref_count(),
-            aspect.ref_count(),
+            aspect.observe().ref_count(),
             0,
             0,
         ]);
-        self.record_aspect(aspect);
+        self.record_aspect(&aspect.observe());
         self.apply_plane_aspect_change();
         self.inner.set_group_primitives_aspect(aspect)
     }
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
+        self.apply_aspect_argument_callback(aspect);
         self.trace.write().ownership_counts.push([
             1,
             self.transient.ref_count(),
-            aspect.ref_count(),
+            aspect.observe().ref_count(),
             0,
             0,
         ]);
-        self.record_aspect(aspect);
+        self.record_aspect(&aspect.observe());
         self.apply_plane_aspect_change();
         self.inner.set_primitives_aspect(aspect)
     }

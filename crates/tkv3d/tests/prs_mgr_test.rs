@@ -2,6 +2,7 @@
 //! highlight and immediate mode, transformations of children, clipping, style members and
 //! update flags. `SegmentObject` is the named fake presentable object.
 use rustycad_tkernel::quantity::{Color, NamedColor};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
@@ -37,11 +38,12 @@ impl PrsMgrPresentableObject for SegmentObject {
     }
     fn compute(
         &self,
-        _manager: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _manager: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        let Some(prs) = prs.get() else {
+        let observed = prs.observe();
+        let Some(prs) = observed.get() else {
             return Ok(());
         };
         let segments = Graphic3dArrayOfSegments::new(2, 0, 0)?;

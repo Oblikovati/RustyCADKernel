@@ -1,6 +1,7 @@
 //! Native point arrays and cached bounding boxes feed presentations and selection.
 use super::{AisPointCloud, AisPointCloudOwner, AisPointCloudSource};
 use crate::{prs_mgr::*, prs3d::Prs3dBndBox, select_mgr::*, select3d::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::toploc::Location;
 use rustycad_tkservice::graphic3d::*;
@@ -84,11 +85,11 @@ impl PrsMgrPresentableObject for AisPointCloud {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_point_cloud_compute(self, prs, mode)
+        ais_point_cloud_compute(self, &prs.observe(), mode)
     }
     fn set_color(&self, color: rustycad_tkernel::quantity::Color) -> Result<(), Failure> {
         super::ais_point_cloud_set_color(self, color)
@@ -110,10 +111,10 @@ impl SelectMgrSelectableObject for AisPointCloud {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_point_cloud_compute_selection(self, selection, mode)
+        ais_point_cloud_compute_selection(self, &selection.observe(), mode)
     }
 }
 

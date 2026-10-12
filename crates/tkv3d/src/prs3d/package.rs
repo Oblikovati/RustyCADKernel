@@ -203,10 +203,8 @@ fn add_borrowed_line_primitives(
         return Ok(());
     };
     // OCCT 3d097a0 passes the actual const handle slot; an owning cast changes driver-visible counts.
-    let aspect = line
-        .aspect_ref()
-        .observe()
-        .observe_as::<dyn rustycad_tkservice::graphic3d::Graphic3dAspectsSource>();
+    let reference = line.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
     group.set_primitives_aspect(&aspect);
     group.add_primitive_array(primitives, true);
     Ok(())

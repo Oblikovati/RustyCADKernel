@@ -1,6 +1,7 @@
 //! Named presentation-only subclass keeps selection explicitly unsupported, never silently empty.
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*, v3d::V3dViewer};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     standard::{Failure, Handle, StandardTransient, exceptions::program_error},
     tcollection::AsciiString,
@@ -56,11 +57,11 @@ impl PrsMgrPresentableObject for CubePresentationProbe {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_view_cube_compute(self, prs, mode)
+        ais_view_cube_compute(self, &prs.observe(), mode)
     }
     crate::ais_presentable_overrides!();
 }
@@ -68,7 +69,11 @@ impl SelectMgrSelectableObject for CubePresentationProbe {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.display.interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, mode: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        mode: i32,
+    ) -> Result<(), Failure> {
         Err(program_error(&format!(
             "CubePresentationProbe selection mode={mode}; expected application-provided selection implementation"
         )))

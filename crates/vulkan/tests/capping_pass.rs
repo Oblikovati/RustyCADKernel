@@ -64,7 +64,11 @@ fn multiple_cap_surface_passes_retain_one_mask_and_defer_together() {
     ];
     faces.push(triangle(None));
     let frame = RenderFrame::new(4, 4, [0.; 4], faces).unwrap();
-    let phases: Vec<_> = frame.draws().iter().map(PrimitiveDraw::capping_pass).collect();
+    let phases: Vec<_> = frame
+        .draws()
+        .iter()
+        .map(PrimitiveDraw::capping_pass)
+        .collect();
     assert_eq!(phases, [None, MaskStart, Surface, Surface]);
 }
 #[test]

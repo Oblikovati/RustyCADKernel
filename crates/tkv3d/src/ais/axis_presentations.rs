@@ -4,6 +4,7 @@ use crate::{
     dsg_prs::DsgPrsXYZAxisPresentation, prs_mgr::*, select_mgr::*,
     select3d::Select3DSensitiveSegment, std_prs::StdPrsCurve,
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::Color,
     standard::{Failure, Handle},
@@ -43,11 +44,11 @@ impl PrsMgrPresentableObject for AisAxis {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
-        self.compute_axis(prs)
+        self.compute_axis(&prs.observe())
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.set_axis_color(color);
@@ -71,13 +72,13 @@ impl SelectMgrSelectableObject for AisAxis {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         _: i32,
     ) -> Result<(), Failure> {
         let g = self.geometry.read();
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 3);
-        selection.add(
+        selection.observe().add(
             &Handle::new(Select3DSensitiveSegment::new(
                 &owner.cast(),
                 g.first,

@@ -10,6 +10,7 @@ use rustycad_tkbrep::{
     brep_tools,
     topods::{Shape, ShapeIterator, TopoDSShapeReadSource},
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     precision,
     standard::{Failure, Handle, catch_native_failure},
@@ -19,7 +20,7 @@ use rustycad_tkmesh::brep_mesh::BRepMeshIncrementalMesh;
 /// Execute actual native whole/per-subshape selection policy; `ais_colored_shape_compute_selection(object,&selection,4)?`.
 pub fn ais_colored_shape_compute_selection<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    selection: &Handle<SelectMgrSelection>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     mode: i32,
 ) -> Result<(), Failure> {
     catch_native_failure(|| compute_colored_shape_selection(object, selection, mode))
@@ -32,8 +33,8 @@ pub fn ais_colored_shape_compute_subshape_selection<S: AisColoredShapeSource + ?
     parent: &Handle<AisColoredDrawer>,
     styles: &AisShapeDrawerMap,
     shape: &Shape,
-    owner: &Handle<StdSelectBRepOwner>,
-    selection: &Handle<SelectMgrSelection>,
+    owner: &dyn HandleReference<StdSelectBRepOwner>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     kind: ShapeEnum,
     priority: i32,
     deflection: f64,
@@ -46,7 +47,7 @@ pub fn ais_colored_shape_compute_subshape_selection<S: AisColoredShapeSource + ?
 }
 fn compute_colored_shape_selection<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    selection: &Handle<SelectMgrSelection>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     mode: i32,
 ) -> Result<(), Failure> {
     let source = object.shape_ref();
@@ -60,7 +61,7 @@ fn compute_colored_shape_selection<S: AisColoredShapeSource + ?Sized>(
 }
 fn compute_hidden_colored_selection<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    selection: &Handle<SelectMgrSelection>,
+    selection: &dyn HandleReference<SelectMgrSelection>,
     mode: i32,
 ) -> Result<(), Failure> {
     let kind = ais_shape_selection_type(mode);
@@ -70,7 +71,10 @@ fn compute_hidden_colored_selection<S: AisColoredShapeSource + ?Sized>(
     let context = ColoredSubshapeSelection::new(object, (selection, &styles), kind, criteria);
     begin_colored_subshape_selection(&context)?;
     let selectable = object.presentable_base().this().cast();
-    crate::std_select::brep_selection_load::set_brep_selection_origin(selection, &selectable);
+    crate::std_select::brep_selection_load::set_brep_selection_origin(
+        &selection.observe(),
+        &selectable,
+    );
     Ok(())
 }
 fn prepare_colored_selection_geometry<S: AisColoredShapeSource + ?Sized>(
@@ -106,7 +110,7 @@ fn prepare_colored_selection_mesh<S: AisColoredShapeSource + ?Sized>(
 }
 struct ColoredSubshapeSelection<'a, S: AisColoredShapeSource + ?Sized> {
     object: &'a S,
-    selection: &'a Handle<SelectMgrSelection>,
+    selection: &'a dyn HandleReference<SelectMgrSelection>,
     styles: &'a AisShapeDrawerMap,
     kind: ShapeEnum,
     priority: i32,
@@ -116,7 +120,10 @@ struct ColoredSubshapeSelection<'a, S: AisColoredShapeSource + ?Sized> {
 impl<'a, S: AisColoredShapeSource + ?Sized> ColoredSubshapeSelection<'a, S> {
     fn new(
         object: &'a S,
-        references: (&'a Handle<SelectMgrSelection>, &'a AisShapeDrawerMap),
+        references: (
+            &'a dyn HandleReference<SelectMgrSelection>,
+            &'a AisShapeDrawerMap,
+        ),
         kind: ShapeEnum,
         criteria: (i32, f64, f64),
     ) -> Self {
@@ -161,7 +168,7 @@ fn new_colored_root_owner<S: AisColoredShapeSource + ?Sized>(
 fn compute_colored_subshape_selection<S: AisColoredShapeSource + ?Sized>(
     parent: &Handle<AisColoredDrawer>,
     shape: &Shape,
-    owner: &Handle<StdSelectBRepOwner>,
+    owner: &dyn HandleReference<StdSelectBRepOwner>,
     context: &ColoredSubshapeSelection<'_, S>,
 ) -> Result<(), Failure> {
     let (drawer, _) =
@@ -189,7 +196,7 @@ fn build_colored_decomposed_sensitive<S: AisColoredShapeSource + ?Sized>(
 fn select_colored_children<S: AisColoredShapeSource + ?Sized>(
     drawer: &Handle<AisColoredDrawer>,
     shape: &Shape,
-    owner: &Handle<StdSelectBRepOwner>,
+    owner: &dyn HandleReference<StdSelectBRepOwner>,
     context: &ColoredSubshapeSelection<'_, S>,
 ) -> Result<(), Failure> {
     let mut children = ShapeIterator::new(shape, true, true);
@@ -202,10 +209,10 @@ fn select_colored_children<S: AisColoredShapeSource + ?Sized>(
 
 fn build_colored_sensitive<S: AisColoredShapeSource + ?Sized>(
     shape: &Shape,
-    owner: &Handle<StdSelectBRepOwner>,
+    owner: &dyn HandleReference<StdSelectBRepOwner>,
     context: &ColoredSubshapeSelection<'_, S>,
 ) -> Result<(), Failure> {
-    let owner = owner.cast();
+    let owner = rustycad_tkernel::standard::ProjectedHandleReference::new(owner);
     StdSelectBrepSelectionTool::compute_sensitive(
         shape,
         &owner,

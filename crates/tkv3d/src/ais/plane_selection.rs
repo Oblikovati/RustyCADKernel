@@ -5,6 +5,7 @@ use crate::{
     select_mgr::*,
     select3d::{Select3DSensitiveTriangulation, Select3DTypeOfSensitivity},
 };
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     ncollection::Array1,
     standard::{Failure, Handle},
@@ -42,10 +43,10 @@ impl SelectMgrSelectableObject for AisPlane {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         _: i32,
     ) -> Result<(), Failure> {
-        selection.clear();
+        selection.observe().clear();
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 10);
         let mesh = self.plane_selection_mesh()?;
@@ -55,6 +56,6 @@ impl SelectMgrSelectableObject for AisPlane {
             &Location::default(),
             self.type_of_sensitivity() == Select3DTypeOfSensitivity::Interior,
         )?);
-        selection.add(&sensitive.cast())
+        selection.observe().add(&sensitive.cast())
     }
 }

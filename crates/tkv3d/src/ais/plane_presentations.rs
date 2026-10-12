@@ -1,6 +1,7 @@
 //! Native AIS_Plane presentation modes; public mode acceptance remains wireframe-only.
 use super::AisPlane;
 use crate::{dsg_prs::*, prs_mgr::*, std_prs::StdPrsPlane};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     quantity::Color,
     standard::{Failure, Handle},
@@ -76,11 +77,11 @@ impl PrsMgrPresentableObject for AisPlane {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        self.compute_plane_presentation(prs, mode)
+        self.compute_plane_presentation(&prs.observe(), mode)
     }
     fn set_color(&self, color: Color) -> Result<(), Failure> {
         self.set_plane_color(color)

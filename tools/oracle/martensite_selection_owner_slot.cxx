@@ -4,6 +4,9 @@
 #undef main
 #include <SelectMgr_Selection.hxx>
 #include <SelectBasics_PickResult.hxx>
+#include <AIS_ColoredShape.hxx>
+#include <BRepBuilderAPI_MakeVertex.hxx>
+#include <StdSelect_BRepOwner.hxx>
 class OwnerSlotMutationCurve:public ContourMutationCurve
 {
 public:
@@ -18,12 +21,16 @@ public:
   NCollection_Sequence<occ::handle<Select3D_SensitiveEntity>>* faceSequence=nullptr;
   const occ::handle<SelectMgr_EntityOwner>* faceOwner=nullptr;
   mutable bool appendSequence=false;
+  occ::handle<StdSelect_BRepOwner>* brepOwnerSlot=nullptr;
+  const occ::handle<StdSelect_BRepOwner>* brepOwnerIncoming=nullptr;
+  mutable bool replaceBrepOwner=false;
   gp_Pnt EvalD0(double u) const override
   {
     record_topology_count();
     replace_owner_slot();
     replace_selection_slot();
     append_face_sequence();
+    replace_brep_owner_slot();
     return gp_Pnt(u,0,0);
   }
   void record_topology_count() const
@@ -53,6 +60,14 @@ public:
     std::cout<<"face-sequence-before "<<faceSequence->Length()<<' '<<(*faceOwner)->GetRefCount()<<'\n';
     faceSequence->Append(new Select3D_SensitivePoint(*faceOwner,gp_Pnt(7,8,9)));
     std::cout<<"face-sequence-appended "<<faceSequence->Length()<<' '<<(*faceOwner)->GetRefCount()<<'\n';
+  }
+  void replace_brep_owner_slot() const
+  {
+    if(!replaceBrepOwner)return;
+    replaceBrepOwner=false;
+    std::cout<<"subshape-owner-before "<<(*brepOwnerSlot)->GetRefCount()<<' '<<(*brepOwnerIncoming)->GetRefCount()<<'\n';
+    *brepOwnerSlot=*brepOwnerIncoming;
+    std::cout<<"subshape-owner-replaced "<<(*brepOwnerSlot)->GetRefCount()<<' '<<(*brepOwnerIncoming)->GetRefCount()<<'\n';
   }
 
 };
@@ -124,8 +139,50 @@ static void face_sequence_case()
   const bool accepted=StdSelect_BRepSelectionTool::GetSensitiveForFace(face,owner,entities,false,9,500.,true);
   std::cout<<"face-sequence-finished "<<accepted<<' '<<entities.Length()<<' '<<(&alias==&entities.First())<<' '<<(alias==seed)<<' '<<owner->GetRefCount()<<'\n';
 }
+class ColoredSelectionSlotProbe:public AIS_ColoredShape
+{
+public:
+  using AIS_ColoredShape::AIS_ColoredShape;
+  using AIS_ColoredShape::ComputeSelection;
+  using AIS_ColoredShape::computeSubshapeSelection;
+};
+static void colored_selection_slot_case(bool hidden)
+{
+  std::cout<<"colored-selection-slot-case "<<hidden<<'\n';
+  const occ::handle<OwnerSlotMutationCurve> curve=new OwnerSlotMutationCurve;
+  const TopoDS_Edge edge=BRepBuilderAPI_MakeEdge(curve,0.,1.);
+  const occ::handle<ColoredSelectionSlotProbe> object=new ColoredSelectionSlotProbe(edge);
+  object->Attributes()->SetupOwnDefaults();object->Attributes()->SetAutoTriangulation(false);
+  if(hidden)object->CustomAspects(BRepBuilderAPI_MakeVertex(gp_Pnt(9,8,7)))->SetHidden(true);
+  const occ::handle<SelectMgr_Selection> previous=new SelectMgr_Selection(0);
+  const occ::handle<SelectMgr_Selection> incoming=new SelectMgr_Selection(0);
+  occ::handle<SelectMgr_Selection> slot=previous;
+  curve->selectionSlot=&slot;curve->selectionIncoming=&incoming;curve->replaceSelection=true;
+  object->ComputeSelection(slot,0);
+  const auto entity=incoming->Entities().First()->BaseSensitive();
+  std::cout<<"colored-selection-slot-finished "<<previous->GetRefCount()<<' '<<incoming->GetRefCount()<<' '<<previous->Entities().Size()<<' '<<incoming->Entities().Size()<<' '<<entity->OwnerId()->HasSelectable()<<'\n';
+}
+static void subshape_owner_slot_case()
+{
+  const occ::handle<OwnerSlotMutationCurve> curve=new OwnerSlotMutationCurve;
+  const TopoDS_Edge edge=BRepBuilderAPI_MakeEdge(curve,0.,1.);
+  const occ::handle<ColoredSelectionSlotProbe> object=new ColoredSelectionSlotProbe(edge);
+  object->Attributes()->SetAutoTriangulation(false);
+  const occ::handle<StdSelect_BRepOwner> previous=new StdSelect_BRepOwner(edge,19,false);
+  const occ::handle<StdSelect_BRepOwner> incoming=new StdSelect_BRepOwner(edge,27,false);
+  occ::handle<StdSelect_BRepOwner> slot=previous;
+  curve->brepOwnerSlot=&slot;curve->brepOwnerIncoming=&incoming;curve->replaceBrepOwner=true;
+  const occ::handle<AIS_ColoredDrawer> parent=new AIS_ColoredDrawer(object->Attributes());
+  const occ::handle<SelectMgr_Selection> selection=new SelectMgr_Selection(0);
+  const NCollection_DataMap<TopoDS_Shape,occ::handle<AIS_ColoredDrawer>,TopTools_ShapeMapHasher> styles;
+  object->computeSubshapeSelection(parent,styles,edge,slot,selection,TopAbs_SHAPE,42,.1,.5);
+  const auto entity=selection->Entities().First()->BaseSensitive();const auto owner=entity->OwnerId();
+  std::cout<<"subshape-owner-finished "<<previous->GetRefCount()<<' '<<incoming->GetRefCount()<<' '<<owner->Priority()<<' '<<(owner==incoming)<<' '<<selection->Entities().Size()<<'\n';
+}
 int main(int argc,char**)
 {
+  if(argc>5){subshape_owner_slot_case();return 0;}
+  if(argc>4){colored_selection_slot_case(false);colored_selection_slot_case(true);return 0;}
   if(argc>3){face_sequence_case();return 0;}
   if(argc>2){topology_face_case();return 0;}
   if(argc>1){topology_slot_case();return 0;}

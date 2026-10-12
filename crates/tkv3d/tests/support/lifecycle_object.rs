@@ -1,5 +1,6 @@
 //! Named callback fixture allows context mutation without holding a Rust collection guard.
 use super::context_object::ContextObject;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
 use rustycad_tkv3d::{ais::*, prs_mgr::*, select_mgr::*};
@@ -37,8 +38,8 @@ impl PrsMgrPresentableObject for LifecycleObject {
     }
     fn compute(
         &self,
-        manager: &Handle<PrsMgrPresentationManager>,
-        presentation: &Handle<dyn Graphic3dStructureSource>,
+        manager: &dyn HandleReference<PrsMgrPresentationManager>,
+        presentation: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.callback(&self.on_compute);
@@ -52,7 +53,7 @@ impl SelectMgrSelectableObject for LifecycleObject {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.inner.compute_selection(selection, mode)

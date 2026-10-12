@@ -1,4 +1,5 @@
 //! Named interactive fixture observes callbacks and replaces the native drawer slots.
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkservice::graphic3d::{
     Graphic3dPresentationAttributesMembers, Graphic3dPresentationAttributesSource,
@@ -71,12 +72,12 @@ impl PrsMgrPresentableObject for DetectionObject {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        presentation: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        presentation: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         self.trace.write().events.push(400 + mode);
-        presentation.new_group()?;
+        presentation.observe().new_group()?;
         Ok(())
     }
     rustycad_tkv3d::ais_presentable_overrides!();
@@ -85,7 +86,11 @@ impl SelectMgrSelectableObject for DetectionObject {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.base.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
     fn hilight_selected(

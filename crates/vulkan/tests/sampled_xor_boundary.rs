@@ -23,7 +23,11 @@ use martensite_vulkan::*;
 fn actual_retained_sampled_surfaces_preserve_xor_attachment_color_and_depth() {
     let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
     for mode in ["nearest", "phong", "mask-blend", "blend"] {
-        assert_retained_texture_boundary(&mut renderer, mode, RenderTextureCoordinatePipeline::Programmable);
+        assert_retained_texture_boundary(
+            &mut renderer,
+            mode,
+            RenderTextureCoordinatePipeline::Programmable,
+        );
     }
     assert!(renderer.validation_errors().is_empty());
 }
@@ -31,14 +35,27 @@ fn actual_retained_sampled_surfaces_preserve_xor_attachment_color_and_depth() {
 fn actual_retained_fixed_surfaces_preserve_xor_to_unorm_sampling_and_blending() {
     let mut renderer = VulkanRenderer::new(device_options::validation_options()).unwrap();
     for mode in ["nearest", "bilinear", "mask-blend", "blend"] {
-        assert_retained_texture_boundary(&mut renderer, mode, RenderTextureCoordinatePipeline::GeneratedCompatibility);
+        assert_retained_texture_boundary(
+            &mut renderer,
+            mode,
+            RenderTextureCoordinatePipeline::GeneratedCompatibility,
+        );
     }
     assert!(renderer.validation_errors().is_empty());
 }
-fn assert_retained_texture_boundary(renderer: &mut VulkanRenderer, mode: &str, policy: RenderTextureCoordinatePipeline) {
+fn assert_retained_texture_boundary(
+    renderer: &mut VulkanRenderer,
+    mode: &str,
+    policy: RenderTextureCoordinatePipeline,
+) {
     let recorded = recording_device::RecordingDevice::default();
     let driver = Graphic3dRenderDriver::with_backend_and_texture_coordinates(
-        recorded.clone(), 128, std::sync::Arc::new(FreeTypeTextSource::default()), policy).unwrap();
+        recorded.clone(),
+        128,
+        std::sync::Arc::new(FreeTypeTextSource::default()),
+        policy,
+    )
+    .unwrap();
     let fixture = texture_scene::SurfaceTextureScene::with_mode(&driver, mode);
     fixture.scene.render_view().try_redraw().unwrap();
     let sampled = recorded.last_frame().draws().to_vec();

@@ -15,13 +15,7 @@ pub(super) fn emit_colored_shading<S: AisColoredShapeSource + ?Sized>(
     let triangles = collect_colored_triangles(reference, drawer, emission.object)?;
     if !triangles.is_null() {
         let group = colored_shaded_group(closed, emission)?;
-        group.set_primitives_aspect(
-            &drawer
-                .shading_aspect()
-                .aspect_ref()
-                .observe()
-                .observe_as::<dyn Graphic3dAspectsSource>(),
-        );
+        set_colored_group_shading(&**group, drawer);
         group.add_primitive_array(&triangles.cast(), true);
     }
     emit_colored_face_boundaries(reference, drawer, emission)
@@ -50,7 +44,7 @@ fn colored_shaded_group<'s, S: AisColoredShapeSource + ?Sized>(
         &mut emission.opened
     };
     if slot.is_null() {
-        *slot = emission.prs.new_group()?;
+        *slot = emission.prs.observe().new_group()?;
         slot.set_closed(closed);
     }
     Ok(slot)
@@ -80,16 +74,21 @@ fn emit_colored_boundary_array<S: AisColoredShapeSource + ?Sized>(
     emission: &mut ColoredShapeEmission<'_, S>,
 ) -> Result<(), Failure> {
     if emission.boundary.is_null() {
-        emission.boundary = emission.prs.new_group()?;
+        emission.boundary = emission.prs.observe().new_group()?;
     }
     let line = drawer.face_boundary_aspect();
-    let aspect = line
-        .aspect_ref()
-        .observe()
-        .observe_as::<dyn Graphic3dAspectsSource>();
+    let reference = line.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
     emission.boundary.set_primitives_aspect(&aspect);
     emission
         .boundary
         .add_primitive_array(&segments.observe_as::<Graphic3dArrayOfPrimitives>(), true);
     Ok(())
+}
+
+fn set_colored_group_shading(group: &dyn Graphic3dGroup, drawer: &Prs3dDrawer) {
+    let shading = drawer.shading_aspect().downgrade().observe();
+    let reference = shading.aspect_ref();
+    let aspect = rustycad_tkernel::standard::ProjectedHandleReference::new(&reference);
+    group.set_primitives_aspect(&aspect);
 }

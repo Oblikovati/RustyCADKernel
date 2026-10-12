@@ -9,12 +9,12 @@ use crate::{
     std_prs::{StdPrsShadedShape, StdPrsWfShape},
 };
 use rustycad_tkbrep::topods::TopoDSShapeReadSource;
-use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure};
+use rustycad_tkernel::standard::{Failure, Handle, HandleReference, catch_native_failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkservice::{aspect::AspectTypeOfDeflection, graphic3d::*};
 pub(super) struct ColoredShapeEmission<'a, S: AisColoredShapeSource + ?Sized> {
     pub object: &'a S,
-    pub prs: &'a Handle<dyn Graphic3dStructureSource>,
+    pub prs: &'a dyn HandleReference<dyn Graphic3dStructureSource>,
     pub mode: i32,
     pub opened: Handle<dyn Graphic3dGroup>,
     pub closed: Handle<dyn Graphic3dGroup>,
@@ -23,7 +23,7 @@ pub(super) struct ColoredShapeEmission<'a, S: AisColoredShapeSource + ?Sized> {
 /// Emit native grouped custom topology without replacing map ownership; `ais_colored_shape_add_custom_props(&object,&prs,&opened,&closed,1)?`.
 pub fn ais_colored_shape_add_custom_props<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     opened: &AisColoredOpenedCompounds,
     closed: &AisColoredDrawerCompounds,
     mode: i32,

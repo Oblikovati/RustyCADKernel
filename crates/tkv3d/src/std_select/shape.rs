@@ -2,6 +2,7 @@
 use super::shape_reference::{StdSelectShapeFields, StdSelectShapeRef};
 use crate::{prs_mgr::*, prs3d::Prs3dDrawer, std_prs::*};
 use rustycad_tkbrep::topods::{Shape, TopoDSShapeReadSource};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
 /// Genuine derived state; `let base=StdSelectShapeBase::new(&shape,&drawer);`.
@@ -89,8 +90,8 @@ impl PrsMgrPresentableObject for StdSelectShape {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         std_select_shape_compute(self, prs, mode)
@@ -99,7 +100,7 @@ impl PrsMgrPresentableObject for StdSelectShape {
 /// Execute native highlight shape mode policy using current geometry; `std_select_shape_compute(source,&prs,0)?`.
 pub fn std_select_shape_compute<S: StdSelectShapeSource + ?Sized>(
     source: &S,
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     mode: i32,
 ) -> Result<(), Failure> {
     let shape = source.shape_ref();
@@ -118,7 +119,7 @@ pub fn std_select_shape_compute<S: StdSelectShapeSource + ?Sized>(
 }
 
 fn compute_std_select_shading(
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     shape: &StdSelectShapeRef<'_>,
     drawer: &Handle<Prs3dDrawer>,
 ) -> Result<(), Failure> {

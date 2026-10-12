@@ -81,8 +81,12 @@ pub mod base_frustum;
 pub mod base_intersector;
 #[path = "../bvh_thread_pool.rs"]
 pub mod bvh_thread_pool;
+#[path = "../colored_shape_aspect_argument.rs"]
+pub mod colored_shape_aspect_argument;
 #[path = "../colored_shape_emission.rs"]
 pub mod colored_shape_emission;
+#[path = "../colored_shape_presentation_slot.rs"]
+pub mod colored_shape_presentation_slot;
 #[path = "../colored_shape_selection.rs"]
 pub mod colored_shape_selection;
 #[path = "../colored_shape_selection_failure.rs"]

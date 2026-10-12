@@ -2,20 +2,20 @@
 use super::*;
 use crate::{prs_mgr::PrsMgrPresentableObjectMembers, std_prs::StdPrsToolTriangulatedShape};
 use rustycad_tkbrep::topods::TopoDSShapeReadSource;
-use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure};
+use rustycad_tkernel::standard::{Failure, Handle, HandleReference, catch_native_failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkservice::graphic3d::*;
 /// Compute native ColoredShape modes without clearing prior groups; `ais_colored_shape_compute(&object,&prs,1)?`.
 pub fn ais_colored_shape_compute<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     mode: i32,
 ) -> Result<(), Failure> {
     catch_native_failure(|| compute_colored_shape_modes(object, prs, mode))
 }
 fn compute_colored_shape_modes<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     mode: i32,
 ) -> Result<(), Failure> {
     let source = object.shape_ref();
@@ -23,7 +23,7 @@ fn compute_colored_shape_modes<S: AisColoredShapeSource + ?Sized>(
         return Ok(());
     }
     if object.is_infinite() {
-        prs.set_infinite_state(true);
+        prs.observe().set_infinite_state(true);
     }
     match mode {
         0 => prepare_colored_wireframe(object)?,
@@ -61,7 +61,7 @@ fn prepare_colored_shading<S: AisColoredShapeSource + ?Sized>(object: &S) -> Res
 }
 fn dispatch_colored_presentation<S: AisColoredShapeSource + ?Sized>(
     object: &S,
-    prs: &Handle<dyn Graphic3dStructureSource>,
+    prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
     mode: i32,
 ) -> Result<(), Failure> {
     let styles = AisShapeDrawerMap::default();
