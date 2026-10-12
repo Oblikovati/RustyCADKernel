@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "api": [
+    {
+      "upstream_id": "AIS_InteractiveContext::Applicative",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "000b722d5aed83979a3d8aa0f4fea8a61e5caa0c381d29c9293cc86d1b255226",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::applicative",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::applicative",
+          "declaration_sha256": "21e6e513dfa6fe1fba853d6fe6c27cf56e6b1f6de849607f768e128e00eea234",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite selected application-owner queries preserve actual cursor selection, owning copy identity and intrusive counts through null-owner, replacement, clear, retained-copy and second-object transitions. Seven actual pinned native rows repeat exactly and replay in Rust. Native requires a selected interactive object; explicit Rust guard covers the otherwise undefined null dereference. No native exception or whole-context completion credit. See docs/selected-application-owners.md and porting/runtime-evidence/selected-applicative/."
+    },
+    {
+      "upstream_id": "AIS_InteractiveContext::HasApplicative",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
+      "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+      "cpp_declaration_id": "9f5c92f0836b3676edb44724d90fab850c5ed4d0b8ae26f3904e18718beb5e0a",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::has_applicative",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::has_applicative",
+          "declaration_sha256": "0a99d429dc3af6f97b0a782add4c0653d29b0dccb2125ce9770364119b955539",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite selected application-owner queries preserve actual cursor selection, owning copy identity and intrusive counts through null-owner, replacement, clear, retained-copy and second-object transitions. Seven actual pinned native rows repeat exactly and replay in Rust. Native requires a selected interactive object; explicit Rust guard covers the otherwise undefined null dereference. No native exception or whole-context completion credit. See docs/selected-application-owners.md and porting/runtime-evidence/selected-applicative/."
+    }
+  ]
+}
