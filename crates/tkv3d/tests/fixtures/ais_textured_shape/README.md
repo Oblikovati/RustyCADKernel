@@ -65,6 +65,10 @@ texture and virtual-dispatch implementations.
   owned truncation, static-empty lifetime and actual Move/Swap transfers.
   Native intrusive counts remain one; invalid released pointers are never read.
   `file-buffer-provenance.json` records repeat and generator/library identities.
+- `native-drop-peers.txt`: an actual `Image_PixMap` subclass destructor reads
+  retained drawer/aspect/texture peer counts during `AIS_TexturedShape` release.
+  The original Rust `2 2 2` failure and native `3 3 3` trace prove that derived
+  resources must release before their inherited base and later texture peers.
 
 The wider `AIS_Shape` family remains partial. Inherited selection and HLR are
 explicit unimplemented paths. File/predefined image decoding, triangle-edge

@@ -38,6 +38,12 @@ increase or persistent lock. Its bounded `read()` observes valid in-place
 assignments and ownership transfers; released buffers return a typed failure.
 See [the buffer lifetime proof](ais-textured-shape-file-buffer.md).
 
+Destruction explicitly releases filename, pixmap, fill aspect and texture before
+the inherited shape base. A genuine native pixmap destructor observes all three
+peer handles still owned by the object; the Rust regression preserves those
+counts and the original failing trace. This bounded lifetime proof does not
+complete inherited selection or HLR.
+
 `ais_textured_shape_update_attributes` copies the current shading aspect before
 texture construction, creates a fresh texture when mapping is enabled and
 updates every live presentation group. Native callbacks can append groups or

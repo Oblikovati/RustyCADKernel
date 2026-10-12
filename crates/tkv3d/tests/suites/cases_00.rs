@@ -135,6 +135,8 @@ pub mod textured_shape_aspect_replay;
 pub mod textured_shape_concrete;
 #[path = "../textured_shape_deviation.rs"]
 pub mod textured_shape_deviation;
+#[path = "../textured_shape_drop_peers.rs"]
+pub mod textured_shape_drop_peers;
 #[path = "../textured_shape_file_buffer.rs"]
 pub mod textured_shape_file_buffer;
 #[path = "../textured_shape_presentation_append.rs"]

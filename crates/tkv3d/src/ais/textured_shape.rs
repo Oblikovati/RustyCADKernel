@@ -62,6 +62,18 @@ pub struct AisTexturedShapeBase {
     /// Native texture construction and filesystem queries are an owned injectable boundary.
     pub texture_factory: Arc<dyn super::textured_shape_factory::AisTexturedTextureFactory>,
 }
+impl Drop for AisTexturedShapeBase {
+    fn drop(&mut self) {
+        // OCCT 3d097a0 destroys derived fields before AIS_Shape, reversing their declarations.
+        self.fields.write().texture_file.clear();
+        let pixels = std::mem::take(&mut *self.texture_pix_map.write());
+        drop(pixels);
+        let aspect = std::mem::take(&mut self.fields.write().aspect);
+        drop(aspect);
+        let texture = std::mem::take(&mut self.fields.write().texture);
+        drop(texture);
+    }
+}
 impl AisTexturedShapeBase {
     /// Initialize actual native source/parent defaults; `AisTexturedShapeBase::new(&shape)`.
     pub fn new(shape: &Shape) -> Self {
