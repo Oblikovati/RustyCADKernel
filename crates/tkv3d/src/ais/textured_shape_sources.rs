@@ -2,7 +2,7 @@
 use super::textured_shape_source::AisTexturedShapeSource;
 use rustycad_tkernel::{
     message::{Gravity, Messenger},
-    standard::{Failure, Handle},
+    standard::{Failure, HandleReference},
     tcollection::AsciiString,
 };
 use rustycad_tkservice::{
@@ -16,7 +16,7 @@ pub fn ais_textured_shape_set_texture_file_name<S: AisTexturedShapeSource + ?Siz
     file: &AsciiString,
 ) -> Result<(), Failure> {
     let base = object.textured_shape_base();
-    base.texture_pix_map.write().nullify();
+    base.texture_pix_map.clear()?;
     let name = textured_predefined_name(file, &base.messenger)?;
     let mut fields = base.fields.write();
     fields.predefined_texture = name;
@@ -30,14 +30,14 @@ pub fn ais_textured_shape_set_texture_file_name<S: AisTexturedShapeSource + ?Siz
 /// Native base body retains the exact source handle; `ais_textured_shape_set_texture_pix_map(&object,&pixmap)`.
 pub fn ais_textured_shape_set_texture_pix_map<S: AisTexturedShapeSource + ?Sized>(
     object: &S,
-    pixmap: &Handle<ImagePixMap>,
+    pixmap: &dyn HandleReference<ImagePixMap>,
 ) {
     let base = object.textured_shape_base();
     let mut fields = base.fields.write();
     fields.texture_file = AsciiString::default();
     fields.predefined_texture = Graphic3dNameOfTexture2D::Unknown;
     drop(fields);
-    *base.texture_pix_map.write() = pixmap.clone();
+    rustycad_tkernel::standard::raise_native_failure(base.texture_pix_map.assign(pixmap));
 }
 fn textured_predefined_name(
     file: &AsciiString,

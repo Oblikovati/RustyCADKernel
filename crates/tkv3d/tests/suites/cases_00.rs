@@ -119,6 +119,8 @@ pub mod sensitive_entity_set;
 pub mod stdprs_curve;
 #[path = "../stdprs_deflection.rs"]
 pub mod stdprs_deflection;
+#[path = "../texture_source_callbacks.rs"]
+pub mod texture_source_callbacks;
 #[path = "../textured_compute_failure.rs"]
 pub mod textured_compute_failure;
 #[path = "../textured_face_triangles.rs"]

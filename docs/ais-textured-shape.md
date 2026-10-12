@@ -91,3 +91,9 @@ workloads using the shared 20-warmup/100-sample contract. Final source-frozen
 functional captures and optimized timings retain those strict limitations;
 the intermediate receipts do not accept a performance baseline or complete
 class parity.
+
+The [source callback correction](texture-source-callbacks.md) preserves native
+retiring-handle observation and incoming ownership order without holding a field
+guard across pixmap destructors. Twelve pinned native records have Rust-only
+replay. The getter, both source setters and protected pixmap slot remain partial
+for retiring pointee projection and conflicting nested retirement.

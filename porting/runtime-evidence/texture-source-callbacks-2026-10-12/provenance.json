@@ -1,0 +1,49 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_commit": "8aff7549a83771148b2cc579d7a5fef976dbe005",
+  "native_records": 12,
+  "native_repeat_byte_identical": true,
+  "before_regression_exit": 124,
+  "scope": "CPU actual native destructor and live-field callback sequencing; not rendering or whole-class completion",
+  "sha256": {
+    "tools/oracle/martensite_texture_source_callbacks.cxx": "ef8b70196ad3ab0a44ee95bb5ed3ff2e45c1f68a57e8b7f5ccf6f64923497bdf",
+    "crates/tkv3d/tests/fixtures/ais_textured_shape/native-source-callbacks.txt": "e88f38a415b8afbf2749640540c492d9f82c0261d4d1b3efe3fb45e35bcbfc09",
+    "../OCCT/src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx": "17324edfa4eac229897635d359554f699e70e1c95522c17dadf7c8c34644c25f",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_TexturedShape.cxx": "3ccf131ae52e98fbf49317c392e5b633bdcf7f191b3292a605b937d27e3fd6ed",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_TexturedShape.hxx": "072908fd2669a0ed319e3af5f2e6b72630f8464959b95b2e4554f0589e9a938f",
+    "target/texture-source-callbacks/native-probe-final": "2ce79b85fdf1b44a9eb448eb418ed3869aacb3f0ff3f0f5c6076f82c1215dfc4"
+  },
+  "checks": {
+    "cpu_passed": 6079,
+    "foundation_focused_passed": 4,
+    "four_crate_clippy_exit": 0,
+    "selected_gpu_both_profiles_exit": 0,
+    "strict_gpu_both_profiles_exit": 101,
+    "renderer_submission_changed": false,
+    "performance_baseline_accepted": false,
+    "claim_preflight_unique_pinned_rows": 4
+  },
+  "gpu_binary_sha256": "0266127b07804beb865d9f58ea2faf86f9d3f30652373e25b5ae99c3a04e2c9d",
+  "native_linked_libraries_sha256": {
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKTopAlgo.so": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "libTKBRep.so": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "libTKG3d.so": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a"
+  },
+  "strict_mismatched_cases": {
+    "host": 1,
+    "lavapipe": 20
+  },
+  "affected_claim_rows": {
+    "unique": 4,
+    "implemented": 0,
+    "partial": 4
+  },
+  "capture_scope": [
+    "rustycad-tkernel",
+    "rustycad-tkv3d"
+  ]
+}

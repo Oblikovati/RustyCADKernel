@@ -2,7 +2,7 @@
 use super::AisInteractiveObjectMembers;
 use super::{shape::AisShapeSource, textured_shape::AisTexturedShapeBase};
 use rustycad_tkernel::{
-    standard::{Failure, Handle},
+    standard::{Failure, HandleReference},
     tcollection::AsciiString,
 };
 use rustycad_tkservice::image::ImagePixMap;
@@ -17,7 +17,7 @@ pub trait AisTexturedShapeSource: AisShapeSource {
         super::textured_shape_sources::ais_textured_shape_set_texture_file_name(self, file)
     }
     /// Retain the exact pixmap without changing its row-order flag; `object.set_texture_pix_map(&pixmap)`.
-    fn set_texture_pix_map(&self, pixmap: &Handle<ImagePixMap>) {
+    fn set_texture_pix_map(&self, pixmap: &dyn HandleReference<ImagePixMap>) {
         // Forward the exact handle rather than copying image contents.
         super::textured_shape_sources::ais_textured_shape_set_texture_pix_map(self, pixmap);
     }

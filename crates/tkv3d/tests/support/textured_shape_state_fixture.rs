@@ -45,7 +45,7 @@ impl AisTexturedShapeSource for TexturedStateFixture {
         self.file_calls.fetch_add(1, Ordering::Relaxed);
         ais_textured_shape_set_texture_file_name(self, file)
     }
-    fn set_texture_pix_map(&self, pixmap: &Handle<ImagePixMap>) {
+    fn set_texture_pix_map(&self, pixmap: &dyn HandleReference<ImagePixMap>) {
         self.pixmap_calls.fetch_add(1, Ordering::Relaxed);
         ais_textured_shape_set_texture_pix_map(self, pixmap);
     }
