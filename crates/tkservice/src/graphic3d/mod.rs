@@ -35,6 +35,7 @@ mod clip_plane_probe;
 mod clip_plane_sequence;
 mod clip_plane_source;
 mod clip_sequence_source;
+mod clip_source_handle_arguments;
 mod cstructure;
 mod cube_map;
 mod cube_map_order;
