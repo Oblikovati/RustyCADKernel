@@ -1,9 +1,34 @@
 {
   "class_completion_claim": false,
   "clippy_exit": 0,
+  "compiler_capture_crates": 31,
+  "compiler_fingerprint_status": "source/ledger/artifact/tool fingerprints current",
   "consumer_check_exit": 0,
+  "focused_tool_modules_passed": 2,
   "format_exit": 0,
+  "incomplete_clipping_claim_audit": "porting/audits/clipping-class-field-current-main.json",
+  "inventory_counts": {
+    "defined": 76041,
+    "done": 52831,
+    "open": 22170,
+    "partial": 1040
+  },
   "main_source_revision_before_fix": "4ef95a2d07a4256515737d62cc810850f00c144f",
+  "native_compile_command": [
+    "c++",
+    "-std=c++17",
+    "tools/oracle/martensite_frame_stats_reset.cxx",
+    "-I",
+    "target/occt-all-full/include/opencascade",
+    "-L",
+    "target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKService",
+    "-lTKernel",
+    "-o",
+    "target/frame-stats-reset/probe"
+  ],
+  "native_compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
   "native_executable_sha256": "faada946075e621439a6366a20c605a9fc8ede5e53cddbaf957dae65eb6ab966",
   "native_library_sha256": {
     "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so.8.1": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
@@ -45,12 +70,19 @@
     "result_groups": 3
   },
   "scope": "Actual base/temporary/repeated Reset keeps four protected storage addresses and resets every rate/vector value. Public mutable counter/timer field addresses remain unchanged. No generic live-reference, assignment, class or GPU performance claim.",
+  "sdk_forwarding_header_sha256": {
+    "Graphic3d_FrameStatsData.hxx": "4eba63bfe3effb2c71492f38d533a90a579cf73e6ff7e5739fe67c9006afd9ff",
+    "NCollection_LinearVector.hxx": "699b3d43e99999675e634022f7ba388603602aaaef763902825a120655e5d8d2",
+    "Standard_Real.hxx": "f70096b36ec43b32aec5e5087bf8a3c7d61287804a4070e5f4144742bf3547f9"
+  },
   "source_sha256": {
     "crates/tkservice/src/graphic3d/frame_stats_data.rs": "52c11d3fb0ae1a0a6cea571aaef9b5a214eaeafe50422cb3f96158e4650ec575",
     "crates/tkservice/src/graphic3d/frame_stats_reset_tests.rs": "60a4cb983ee7b839af0a66f97c2d1294e935e1aa400611058f06c1efa86e7bd9",
     "crates/tkservice/tests/fixtures/frame-stats-reset.txt": "035edb3e633cc36c864062d2ea30662a7ed0f21f684fef2e2e942a4e50842364",
     "tools/oracle/martensite_frame_stats_reset.cxx": "335b4dd0190cf38c4f09f083fc2ba93e04e3bbbcb14007bc09769d107bb458c2"
   },
+  "unchanged_assignment_binding_refresh": "unchanged-assignment-binding-refresh.json",
+  "unresolved_ledger_rows": 0,
   "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "upstream_source_sha256": {
     "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx": "9d67e2a63e541a44ba6eddbe12f94d21b2fdd7fe3324cc2e3b4af684b6bbfb6e",

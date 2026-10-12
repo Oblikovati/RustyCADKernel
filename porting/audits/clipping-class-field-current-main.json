@@ -1,0 +1,25 @@
+{
+  "main_revision": "e5ad5c5746ec7f60642a384f55a369db05b1bfeb",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "upstream_header_sha256": "f2dc0af18c9f29a42c9a50a833694a822e8801442b6c99fcf220987eab2d13c9",
+  "rust_source_sha256": "b1cc7b42a50a17a8c8059c53b4805b1365599a4025a6a526141d5d953958f773",
+  "rows": [
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane",
+      "previous_status": "implemented",
+      "status": "partial",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane",
+      "gap": "Class contains unresolved live-node/cursor/retained-reference and callback-lifecycle contracts; class presence is not whole-class completion."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::myToOverrideGlobal",
+      "previous_status": "implemented",
+      "status": "partial",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::to_override_global",
+      "gap": "Protected writable native field maps to to_override_global getter returning copied bool, not actual retained field storage."
+    }
+  ],
+  "new_completion_claims": 0
+}
