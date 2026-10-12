@@ -4,6 +4,10 @@ pub(crate) fn apply_native_stencil_aspect(mask: &mut PrimitiveDraw) {
     // OCCT3d097a0 OpenGl_Workspace::ShouldRender rejects OpenGl_Aspects under FillModeOnly.
     mask.lighting = None;
     mask.surface_texture = None;
+    mask.mesh_edges = None;
+    mask.polygon_edge_style = None;
+    mask.edge_background_fallback = false;
+    mask.surface_texture_binding_only = false;
     mask.surface_texture_unavailable = None;
     mask.surface_cutoff = None;
     mask.surface_forced_blend = false;

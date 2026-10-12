@@ -18,6 +18,7 @@ pub struct Graphic3dRenderDriver {
     base: Graphic3dGraphicDriverBase,
     device: SharedRenderDevice,
     text_source: Arc<dyn crate::TextLayoutSource>,
+    pub(crate) mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
     pub(crate) texture_images: Arc<crate::retained_texture_images::RetainedTextureImages>,
     views: SharedState<Vec<WeakHandle<dyn Graphic3dCView>>>,
     limit: u32,
@@ -45,6 +46,22 @@ impl Graphic3dRenderDriver {
             limit,
             Arc::new(crate::FreeTypeTextSource::default()),
             coordinate_pipeline,
+            crate::RenderMeshEdgePipeline::default(),
+        ))
+    }
+    /// Select native polygon edge compatibility; `Self::with_mesh_edge_pipeline(options, RenderMeshEdgePipeline::PolygonCompatibility)?`.
+    pub fn with_mesh_edge_pipeline(
+        options: VulkanOptions,
+        pipeline: crate::RenderMeshEdgePipeline,
+    ) -> Result<Handle<Self>, RenderError> {
+        let renderer = VulkanRenderer::new(options)?;
+        let limit = renderer.capture_limit();
+        Ok(Self::build(
+            DriverBackend::Vulkan(renderer),
+            limit,
+            Arc::new(crate::FreeTypeTextSource::default()),
+            crate::RenderTextureCoordinatePipeline::default(),
+            pipeline,
         ))
     }
     /// Inject a named backend and its extent limit; `Graphic3dRenderDriver::with_backend(recorder, 4096)?`.
@@ -86,6 +103,7 @@ impl Graphic3dRenderDriver {
             limit,
             fonts,
             coordinate_pipeline,
+            crate::RenderMeshEdgePipeline::default(),
         ))
     }
     fn build(
@@ -93,12 +111,14 @@ impl Graphic3dRenderDriver {
         limit: u32,
         text_source: Arc<dyn crate::TextLayoutSource>,
         coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
+        mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
     ) -> Handle<Self> {
         Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dGraphicDriverBase::new(&Handle::default()),
             device: Arc::new(SharedState::new(backend)),
             text_source,
+            mesh_edge_pipeline,
             texture_images: Arc::new(
                 crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(
                     coordinate_pipeline,

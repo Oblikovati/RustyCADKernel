@@ -127,7 +127,7 @@ impl CappingScene<'_> {
         group
             .draws
             .iter()
-            .filter(|draw| is_cap_geometry(draw))
+            .filter(|draw| is_cap_geometry(draw) && draw.polygon_edge_style.is_none())
             .map(|draw| {
                 let mut mask = draw.clone().with_clipping(clipping.clone());
                 crate::capping_mask_aspect::apply_native_stencil_aspect(&mut mask);
@@ -145,6 +145,12 @@ impl CappingScene<'_> {
         texture_images: &crate::retained_texture_images::RetainedTextureImages,
     ) -> Result<PrimitiveDraw, RenderError> {
         let aspect = crate::capping_style::cap_aspect(&cap.plane, group);
+        if aspect.to_draw_edges() {
+            return Err(crate::error::rejected(
+                true,
+                "section-edge shader proof before enabling cap mesh edges",
+            ));
+        }
         let color = crate::style::surface_color(&aspect, true)?;
         let orientation = crate::capping_geometry::cap_orientation(cap.plane.get_equation().data());
         let (matrix, clamp) = crate::persistent_transform::plane_clip_transform(

@@ -41,10 +41,26 @@ impl PolygonOffsetState {
         [self.current.units + 1., self.current.factor]
     }
     pub fn advance(&mut self, offset: Option<RenderPolygonOffset>, polygon: bool) -> [f32; 2] {
+        self.advance_raster(offset, if polygon { 1 } else { 0 })
+    }
+    pub fn advance_polygon_line(&mut self, offset: Option<RenderPolygonOffset>) -> [f32; 2] {
+        self.advance_raster(offset, 2)
+    }
+    pub fn raster_bias_enabled(&self, polygon: bool, polygon_line: bool) -> bool {
+        let mode = if polygon_line {
+            2
+        } else if polygon {
+            1
+        } else {
+            0
+        };
+        mode != 0 && self.current.mode & mode != 0
+    }
+    fn advance_raster(&mut self, offset: Option<RenderPolygonOffset>, mode: i32) -> [f32; 2] {
         if let Some(offset) = offset.filter(|offset| offset.mode & 8 == 0) {
             self.current = offset;
         }
-        if !polygon || self.current.mode & 1 == 0 {
+        if mode == 0 || self.current.mode & mode == 0 {
             return [0., 0.];
         }
         [self.current.units, self.current.factor]
@@ -53,6 +69,21 @@ impl PolygonOffsetState {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn native_polygon_lines_use_line_bias_and_preserve_none_ordering() {
+        let mut state = PolygonOffsetState::new(RenderPolygonOffset::new(1, 2., 3.).unwrap());
+        assert_eq!(state.advance_polygon_line(None), [0., 0.]);
+        assert!(!state.raster_bias_enabled(true, true));
+        let line = RenderPolygonOffset::new(2, 4., 5.).unwrap();
+        assert_eq!(state.advance_polygon_line(Some(line)), [5., 4.]);
+        assert!(state.raster_bias_enabled(true, true));
+        assert!(!state.raster_bias_enabled(true, false));
+        assert_eq!(state.advance(None, true), [0., 0.]);
+        let preserve = RenderPolygonOffset::new(8, 9., 9.).unwrap();
+        assert_eq!(state.advance_polygon_line(Some(preserve)), [5., 4.]);
+        assert_eq!(state.advance(None, false), [0., 0.]);
+        assert!(!state.raster_bias_enabled(false, false));
+    }
     #[test]
     fn shadow_fill_bias_is_temporary_and_preserves_factor_even_when_fill_disabled() {
         let mut state = PolygonOffsetState::new(RenderPolygonOffset::new(2, 3., -2.).unwrap());

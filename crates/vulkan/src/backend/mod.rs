@@ -142,3 +142,5 @@ mod surface_image_descriptor;
 mod surface_image_format;
 mod surface_sampler;
 mod surface_texture_pipeline;
+
+mod mesh_edge_pipeline;

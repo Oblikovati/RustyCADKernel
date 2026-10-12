@@ -172,13 +172,23 @@ fn record_draws(
             culling = (draw.face_culling, draw.mirrored);
             super::capping_record::set_culling(runtime, command, culling);
         }
-        let ordinary_bias = offsets.advance(draw.polygon_offset, draw.polygon);
+        let ordinary_bias = if draw.polygon_edge {
+            offsets.advance_polygon_line(draw.polygon_offset)
+        } else {
+            offsets.advance(draw.polygon_offset, draw.polygon)
+        };
         let [units, factor] = if draw.text_shadow_bias && policy.0 {
             offsets.shadow_bias()
         } else {
             ordinary_bias
         };
         unsafe {
+            // OCCT3d097a0 disables offset for Aspect_POM_Off; zero factors still bias edge-on triangles.
+            runtime.device().cmd_set_depth_bias_enable(
+                command,
+                (draw.text_shadow_bias && policy.0)
+                    || offsets.raster_bias_enabled(draw.polygon, draw.polygon_edge),
+            );
             runtime
                 .device()
                 .cmd_set_depth_bias(command, units, 0., factor)
