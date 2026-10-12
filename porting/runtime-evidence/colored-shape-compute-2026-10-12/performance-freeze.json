@@ -1,0 +1,21 @@
+{
+  "project": "Martensite",
+  "source_revision": "7cf634c331559ff2f61a903b0ed5e892bd6f79c7",
+  "source_count": 15879,
+  "source_manifest": "porting/runtime-evidence/colored-shape-compute-2026-10-12/performance-source-manifest.jsonl.gz",
+  "source_manifest_sha256": "c18c642cb0289c6fff1de4ebbe67e915d87ee48bf05e1b9590857be311208eac",
+  "executable": "/home/vmiguel/git/oblikovati-workspace/Martensite-colored-shape-compute/target/release/examples/ais_colored_shape_performance",
+  "executable_sha256": "764e07686b66b51c5a0b7664be394ba131835e38d08adc4070112b9b16009e0b",
+  "workloads": 8,
+  "profiles": [
+    "lavapipe",
+    "host"
+  ],
+  "warmup": 20,
+  "samples_per_workload": 100,
+  "validation": false,
+  "baseline_accepted": false,
+  "status": "both profiles terminal 0; all frozen hashes unchanged",
+  "measurement_scope": "steady redraw after one update; excludes Compute/Update construction cost",
+  "gpu_memory": "unmeasured"
+}
