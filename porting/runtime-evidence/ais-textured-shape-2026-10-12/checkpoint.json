@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "project": "Martensite",
+  "checkpoint": "unfinished family, awaiting checked triangle-edge/textured-line dependency and final source freeze",
+  "recorded_utc": "2026-10-12T06:52:08.779006+00:00",
+  "native_profiles": 2,
+  "native_class_modes": 24,
+  "native_generation_commands": 96,
+  "native_repeat_pairs": 48,
+  "native_repeat_pairs_byte_identical": 48,
+  "original_gpu_capture_commands": 46,
+  "original_gpu_capture_exits_zero": 44,
+  "genuine_meshed_boundary_native_exits": [
+    0,
+    0
+  ],
+  "genuine_meshed_boundary_rust_exits": [
+    1,
+    1
+  ],
+  "rust_replay": {
+    "selected_cases": 4,
+    "host_exit": 0,
+    "lavapipe_exit": 0,
+    "full_strict_cases": 24,
+    "host_matches": 22,
+    "lavapipe_matches": 4,
+    "full_strict_exits": [
+      101,
+      101
+    ],
+    "depth_gate": 1e-06,
+    "color_gate": "byte exact RGBA"
+  },
+  "checks": {
+    "tkv3d_library": 272,
+    "tkv3d_fatal": 1,
+    "tkv3d_toolkit": 518,
+    "vulkan_retained_class_tests": 3,
+    "capture_cli_test": 1,
+    "shared_performance_contract_test": 1,
+    "both_crate_clippy": "pass",
+    "format": "pass",
+    "canonical_discovery": "pass"
+  },
+  "known_diagnostics": [
+    "Both devices reject genuine triangle edges and populated textured boundary lines until checked renderer integration.",
+    "Software texture filtering differences are one byte; software lines/bounds retain wider raster/depth differences.",
+    "Original map-off native harness prefix parser aborts preserved; corrected 96 native commands passed.",
+    "Original direct full-frame replay depth dump mismatch preserved; corrected single Default layer matches native ToPixMap."
+  ],
+  "artifact_identity_limit": "Initial GPU prototype source manifests were not frozen; binary hashes and raw command/device logs retained. These are intermediate diagnostics, not final source acceptance; final paired captures/replay and optimized timings remain required after checked dependency integration.",
+  "performance": {
+    "prepared_supported_workloads": 22,
+    "warmup": 20,
+    "samples": 100,
+    "optimized_timings": "not run",
+    "baseline_accepted": false
+  },
+  "class_scope": "AIS_TexturedShape remains partial; no inherited AIS_Shape selection/HLR, native codec, or wider WF overload completion claim."
+}

@@ -418,6 +418,8 @@ pub(crate) mod xr_tests;
 #[cfg(test)]
 include!("test_modules.rs");
 
+include!("shape_modules.rs");
+
 mod colored_drawer;
 pub use colored_drawer::{AisColoredDrawer, AisColoredDrawerFlags, AisColoredDrawerParent};
 
@@ -451,9 +453,6 @@ mod shape_drawer_oracle_rows;
 
 #[cfg(test)]
 mod shape_drawer_reference_tests;
-
-mod shape;
-pub use shape::{AisShapeBase, AisShapeFields, AisShapeSource};
 
 mod colored_shape;
 mod colored_shape_members;

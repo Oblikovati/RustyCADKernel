@@ -17,7 +17,29 @@ mod plane_arrows;
 mod plane_geometry;
 pub use plane::StdPrsPlane;
 
+mod shaded_shape_indices;
+mod shaded_shape_triangles;
+mod shaded_shape_vertices;
+mod triangulated_shape;
+pub use shaded_shape_triangles::StdPrsShadedShape;
+pub use triangulated_shape::{
+    StdPrsNativeShapeMesher, StdPrsShapeMesher, StdPrsToolTriangulatedShape,
+};
+
+mod wf_shape_edges;
+mod wf_shape_vertices;
+pub use wf_shape_edges::StdPrsWfShape;
+
+mod shaded_shape_volumes;
+mod shape_planarity;
+pub use shaded_shape_volumes::StdPrsVolume;
+pub use shape_planarity::StdPrsShapeTool;
+
+mod shaded_shape_boundaries;
+mod shaded_shape_presentation;
+mod shaded_shape_wireframe;
 mod tool_r_face;
+mod wf_shape_presentation;
 pub use tool_r_face::StdPrsToolRFace;
 mod isoline_outputs;
 pub use isoline_outputs::{StdPrsIsolineDestination, StdPrsIsolinePolylines};
