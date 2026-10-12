@@ -112,7 +112,7 @@ rustycad_tkernel::impl_transient_interface!(
     dyn AisInteractiveObject
 );
 /// Concrete picking/highlight/camera widget; `AisViewCube::new()?`.
-/// Remaining appearance-management APIs do not receive whole-class parity credit.
+/// Whole-class parity remains partial while generated class declarations and derived animation transport are unfinished.
 pub struct AisViewCube {
     transient: StandardTransient,
     /// Native constructor and mutable interaction state.
@@ -162,10 +162,7 @@ fn initialize_cube_dynamic_highlight(base: &AisViewCubeInteractionBase) -> Resul
             .read()
             .drawer,
     );
-    let shading = cube_dynamic_shading()?;
-    drawer.set_shading_aspect(shading);
-    drawer.set_z_layer(GRAPHIC3D_ZLAYER_ID_TOPMOST);
-    drawer.set_color(Color::named(NamedColor::CYAN1));
+    configure_cube_dynamic_drawer(&drawer)?;
     store_cube_dynamic_drawer(base, drawer);
     Ok(())
 }
@@ -190,4 +187,12 @@ fn store_cube_dynamic_drawer(base: &AisViewCubeInteractionBase, drawer: Handle<P
         .fields
         .write()
         .dyn_hilight_drawer = drawer;
+}
+
+pub(super) fn configure_cube_dynamic_drawer(drawer: &Prs3dDrawer) -> Result<(), Failure> {
+    let shading = cube_dynamic_shading()?;
+    drawer.set_shading_aspect(shading);
+    drawer.set_z_layer(GRAPHIC3D_ZLAYER_ID_TOPMOST);
+    drawer.set_color(Color::named(NamedColor::CYAN1));
+    Ok(())
 }

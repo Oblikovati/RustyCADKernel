@@ -1,0 +1,56 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_commit": "d1947246b",
+  "scope": "real concrete widget appearance/selection/click/animation; classes partial; GPU strict parity unclaimed",
+  "native_cpu_records": 154,
+  "native_cpu_repeatability": "125 state plus29aliases/reset states, each complete generator run twice byte-identically",
+  "capture_extent": [
+    320,
+    320
+  ],
+  "capture_cases": 9,
+  "highlight_style": "explicit dynamic drawer TopOSD; ordinary cube retains native Topmost/LEFT_LOWER(100,100)",
+  "functional_validation": "both Vulkan devices terminal0, no validation errors,orientation2,quarter/half running,endpoint stopped/detached; cyan4149on native/lavapipe/AMD",
+  "strict_policy": "identicalRGBA+maxdepth1e-6, unchanged; failures retained",
+  "endpoint_diagnosis": "source/start/end+quarter/half/endcamera components match; main bounds void, auxiliarybounds agree,AutoZFit disabled; >0.1depth differences are covered-vs-clear onepixel silhouette columns. Original failure captures separately retained. No camera/FitAll correction warranted.",
+  "cpu_checks": {
+    "tkv3d_all_targets": 703,
+    "vulkan_all_targets": 288,
+    "clippy": "bothpackagesalltargets -Dwarnings passed",
+    "fmt": "cargo fmt --all"
+  },
+  "binary_sha256": {
+    "native": "61207d2db30cc01ab23de5ce6a8ba168218e1b39588738cc375a344797a98e1f",
+    "debug": "9f0a02d7ae5bcdb3a1fa7d29dfbf21bd7e21642d9e8dac9eea5ad4018116bd53",
+    "performance": "aea6a3a7f6e2464935dd349bc11bca915087e76ff61bdc5c0e579e29bd75ef87"
+  },
+  "claims": {
+    "implemented": 76,
+    "appearance_methods": 58,
+    "protected_fields": 18,
+    "global_ledger_modified": false,
+    "overlap_with_existing_claims": 0
+  },
+  "canonical_preflight": "all76bindings passed production tools/verify_api_claims.py usingfresh canonical publictrait normalization",
+  "camera_component_checks": {
+    "camera_snapshots": 18,
+    "channels_per_snapshot": 19,
+    "largest_absolute_difference": 3.643160599749666e-18
+  },
+  "performance": {
+    "devices": 2,
+    "workloads_per_device": 7,
+    "warmup": 20,
+    "samples_per_workload": 100,
+    "completed_samples": 1400,
+    "validation": false,
+    "exclusive_root_authorized": true,
+    "terminal_exit_code": 0,
+    "executable_sha256": "aea6a3a7f6e2464935dd349bc11bca915087e76ff61bdc5c0e579e29bd75ef87",
+    "source_manifest": "performance-source-hashes.json",
+    "final_release_relink_log": "final-release-relink.log",
+    "release_sha_note": "verified final SHA aea6 also matched the earlier executable; final27.19s successful rebuild recompiledTKV3d/Vulkan afterResetStyles change, which is not invoked by these workloads; no stale executable or rebuild duringtiming",
+    "historical_baseline_accepted": false
+  }
+}

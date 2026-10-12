@@ -1,5 +1,5 @@
 //! Actual AIS context display keeps native Topmost and triedron persistence defaults.
-use super::{view_cube_adapter::ViewCubeCaptureAdapter, view_setup};
+use super::view_setup;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::gp::Point3;
@@ -15,7 +15,7 @@ use rustycad_tkv3d::{
 pub struct ViewCubeCaptureScene {
     pub view: Handle<V3dView>,
     pub context: Handle<AisInteractiveContext>,
-    pub cube: Handle<ViewCubeCaptureAdapter>,
+    pub cube: Handle<AisViewCube>,
 }
 impl ViewCubeCaptureScene {
     /// Display native defaults through a real context; `ViewCubeCaptureScene::new(&driver)?`.
@@ -23,8 +23,8 @@ impl ViewCubeCaptureScene {
         let viewer = V3dViewer::new(&driver.cast())?;
         let view = cube_capture_view(&viewer)?;
         let context = AisInteractiveContext::new(&viewer)?;
-        let cube = ViewCubeCaptureAdapter::new()?;
-        context.display_with_modes(&cube.cast(), 0, -1, false, PrsMgrDisplayStatus::Displayed)?;
+        let cube = AisViewCube::new()?;
+        context.display_with_modes(&cube.cast(), 0, 0, false, PrsMgrDisplayStatus::Displayed)?;
         let scene = Self {
             view,
             context,
@@ -60,10 +60,10 @@ impl ViewCubeCaptureScene {
     /// Clear only label strings through the live context; `scene.hide_labels()?`.
     pub fn hide_labels(&self) -> Result<(), Failure> {
         let empty = rustycad_tkernel::tcollection::AsciiString::default();
-        self.cube.presentation.settings.write().side_labels =
-            std::array::from_fn(|_| empty.clone());
-        self.cube.presentation.settings.write().axes_labels =
-            std::array::from_fn(|_| empty.clone());
+        for side in &V3dTypeOfOrientation::ALL[..6] {
+            self.cube.set_box_side_label(*side, &empty)?;
+        }
+        self.cube.set_axes_labels(&empty, &empty, &empty);
         self.context
             .recompute_prs_only(&self.cube.cast(), false, false)
     }
@@ -123,9 +123,16 @@ impl ViewCubeCaptureScene {
 impl ViewCubeCaptureScene {
     /// Restore native label strings without changing geometry; `scene.restore_labels()?`.
     pub fn restore_labels(&self) -> Result<(), Failure> {
-        let defaults = AisViewCubePresentationSettings::default();
-        self.cube.presentation.settings.write().side_labels = defaults.side_labels;
-        self.cube.presentation.settings.write().axes_labels = defaults.axes_labels;
+        let defaults = AisViewCube::new()?;
+        for side in &V3dTypeOfOrientation::ALL[..6] {
+            self.cube
+                .set_box_side_label(*side, &defaults.box_side_label(*side))?;
+        }
+        self.cube.set_axes_labels(
+            &defaults.axis_label(rustycad_tkv3d::prs3d::Prs3dDatumParts::XAxis),
+            &defaults.axis_label(rustycad_tkv3d::prs3d::Prs3dDatumParts::YAxis),
+            &defaults.axis_label(rustycad_tkv3d::prs3d::Prs3dDatumParts::ZAxis),
+        );
         self.context
             .recompute_prs_only(&self.cube.cast(), false, false)
     }

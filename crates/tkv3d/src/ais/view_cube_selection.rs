@@ -31,13 +31,7 @@ fn append_cube_sensitive_part<C: AisViewCubeSource + ?Sized>(
     let owner =
         AisViewCubeOwner::with_source(&cube.presentable_base().this().cast(), orientation, 5);
     let sensitive = Handle::new(AisViewCubeSensitive::new(&owner.cast(), &triangles)?);
-    let factor = if ais_view_cube_is_box_corner(orientation) {
-        8
-    } else if ais_view_cube_is_box_edge(orientation) {
-        4
-    } else {
-        2
-    };
+    let factor = cube_part_sensitivity(orientation);
     sensitive.set_sensitivity_factor(factor)?;
     selection.add(&sensitive.cast())
 }
@@ -50,11 +44,7 @@ pub(super) fn cube_part_selection_triangles<C: AisViewCubePresentationSource + ?
     if counts.vertices <= 0 {
         return Ok(Handle::default());
     }
-    let triangles = Handle::new(Graphic3dArrayOfTriangles::new(
-        counts.vertices,
-        counts.triangles * 3,
-        0,
-    )?);
+    let triangles = allocate_cube_selection_array(counts)?;
     cube.create_box_part_triangles(
         &triangles,
         &mut AisViewCubeTriangleCounts::default(),
@@ -116,5 +106,53 @@ impl PrsMgrPresentableObject for AisViewCube {
     fn accept_display_mode(&self, mode: i32) -> bool {
         mode == 0
     }
+    fn set_color(&self, color: rustycad_tkernel::quantity::Color) -> Result<(), Failure> {
+        self.set_box_color(color)
+    }
+    fn unset_color(&self) -> Result<(), Failure> {
+        super::view_cube_style_members::cube_unset_color(self)
+    }
+    fn set_transparency(&self, value: f64) -> Result<(), Failure> {
+        self.set_box_transparency(value)
+    }
+    fn unset_transparency(&self) -> Result<(), Failure> {
+        self.set_box_transparency(0.0)
+    }
+    fn set_material(&self, material: &Graphic3dMaterialAspect) -> Result<(), Failure> {
+        super::view_cube_style_members::cube_set_material(self, material);
+        Ok(())
+    }
+    fn unset_material(&self) -> Result<(), Failure> {
+        super::view_cube_style_members::cube_unset_material(self)
+    }
+    fn unset_attributes(&self) {
+        super::ais_view_cube_unset_attributes(self)
+            .expect("AIS_ViewCube drawer/aspects invalid; expected initialized native style slots");
+    }
+    fn unset_hilight_attributes(&self) {
+        super::ais_view_cube_unset_hilight_attributes(self).expect(
+            "AIS_ViewCube dynamic drawer invalid; expected initialized native highlight slots",
+        );
+    }
     crate::ais_presentable_overrides!();
+}
+
+fn cube_part_sensitivity(orientation: V3dTypeOfOrientation) -> i32 {
+    if ais_view_cube_is_box_corner(orientation) {
+        8
+    } else if ais_view_cube_is_box_edge(orientation) {
+        4
+    } else {
+        2
+    }
+}
+
+fn allocate_cube_selection_array(
+    counts: AisViewCubeTriangleCounts,
+) -> Result<Handle<Graphic3dArrayOfTriangles>, Failure> {
+    Ok(Handle::new(Graphic3dArrayOfTriangles::new(
+        counts.vertices,
+        counts.triangles * 3,
+        0,
+    )?))
 }
