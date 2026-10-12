@@ -44,10 +44,15 @@ mod tests {
         let rows = vec![[0., 0., 0., 0.25], [1., 1., 1., 0.75]];
         let mut style = PointStyle::new(2., [1, 2], rows.clone()).unwrap();
         prepare_fixed_marker_image(&mut style).unwrap();
-        assert_eq!(style.image.pixels(), &[rows[1], rows[0]]);
+        let encoded: Vec<_> = rows
+            .iter()
+            .copied()
+            .map(ColorRgba::linear_to_srgb_vec4)
+            .collect();
+        assert_eq!(style.image.pixels(), &[encoded[1], encoded[0]]);
         let mut bottom = PointStyle::new(2., [1, 2], rows.clone()).unwrap();
         bottom.native_image_top_down = false;
         prepare_fixed_marker_image(&mut bottom).unwrap();
-        assert_eq!(bottom.image.pixels(), rows.as_slice());
+        assert_eq!(bottom.image.pixels(), encoded.as_slice());
     }
 }

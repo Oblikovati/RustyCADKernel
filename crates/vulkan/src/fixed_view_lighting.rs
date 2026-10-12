@@ -36,6 +36,7 @@ fn prepare_fixed_draw(
         return Ok(());
     }
     draw.fixed_function_lighting = true;
+    prepare_fixed_texture_environment(draw);
     if let Some(style) = draw.point_style.as_mut() {
         crate::fixed_marker_environment::prepare_fixed_marker_image(style)?;
     }
@@ -46,6 +47,15 @@ fn prepare_fixed_draw(
         return Ok(());
     }
     Ok(())
+}
+fn prepare_fixed_texture_environment(draw: &mut PrimitiveDraw) {
+    // Native ToRenderSRGB is disabled by FFP lighting, independently of coordinate generation.
+    if let Some(texture) = draw.surface_texture.as_mut() {
+        texture.fixed_environment = true;
+    }
+    if let Some(texture) = draw.surface_texture_unavailable.as_mut() {
+        texture.fixed_environment = true;
+    }
 }
 
 #[cfg(test)]

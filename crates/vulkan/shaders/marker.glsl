@@ -11,7 +11,11 @@ vec4 markerTexel(uvec2 extent) {
 // OCCT 3d097a0 sprite coverage replaces alpha; plain POINT retains vertex alpha.
 vec4 unlitMarkerColor(vec4 texel, vec4 vertex, uint policy) {
     if (policy == 4u) return vertex;
+#ifdef MARTENSITE_FIXED_LIGHTING
+    if (policy == 2u || policy == 3u) return texel;
+#else
     if (policy == 2u) return texel;
+#endif
     if (policy == 1u || policy == 3u) return vec4(vertex.rgb, texel.a);
     return texel * vertex;
 }

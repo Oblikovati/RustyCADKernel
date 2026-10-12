@@ -6,13 +6,26 @@ pub(crate) fn surface_color(
     style: &Handle<dyn Graphic3dAspectsSource>,
     _closed: bool,
 ) -> Result<[f32; 4], RenderError> {
+    surface_color_in_pipeline(style, crate::RenderLightingPipeline::Programmable)
+}
+pub(crate) fn surface_color_in_pipeline(
+    style: &Handle<dyn Graphic3dAspectsSource>,
+    pipeline: crate::RenderLightingPipeline,
+) -> Result<[f32; 4], RenderError> {
     let style = style
         .get()
         .ok_or_else(|| rejected("null aspects", "explicit solid aspects"))?;
-    validated_surface_color(style)
+    validated_surface_color_in_pipeline(style, pipeline)
 }
+#[cfg(test)]
 fn validated_surface_color(style: &dyn Graphic3dAspectsSource) -> Result<[f32; 4], RenderError> {
-    validate_shading(style)?;
+    validated_surface_color_in_pipeline(style, crate::RenderLightingPipeline::Programmable)
+}
+fn validated_surface_color_in_pipeline(
+    style: &dyn Graphic3dAspectsSource,
+    pipeline: crate::RenderLightingPipeline,
+) -> Result<[f32; 4], RenderError> {
+    validate_shading(style, pipeline)?;
     validate_alpha_offset(style)?;
     let color = style.interior_color_rgba();
     Ok([
@@ -22,24 +35,37 @@ fn validated_surface_color(style: &dyn Graphic3dAspectsSource) -> Result<[f32; 4
         color.alpha(),
     ])
 }
-fn validate_shading(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
-    if !matches!(
-        style.shading_model(),
-        Graphic3dTypeOfShadingModel::Default
-            | Graphic3dTypeOfShadingModel::Unlit
-            | Graphic3dTypeOfShadingModel::PhongFacet
-            | Graphic3dTypeOfShadingModel::Gouraud
-            | Graphic3dTypeOfShadingModel::Phong
-    ) || style.interior_style() != AspectInteriorStyle::Solid
+fn validate_shading(
+    style: &dyn Graphic3dAspectsSource,
+    pipeline: crate::RenderLightingPipeline,
+) -> Result<(), RenderError> {
+    let pbr_fallback = pipeline == crate::RenderLightingPipeline::FixedFunction
+        && matches!(
+            style.shading_model(),
+            Graphic3dTypeOfShadingModel::Pbr | Graphic3dTypeOfShadingModel::PbrFacet
+        );
+    if (!pbr_fallback
+        && !matches!(
+            style.shading_model(),
+            Graphic3dTypeOfShadingModel::Default
+                | Graphic3dTypeOfShadingModel::Unlit
+                | Graphic3dTypeOfShadingModel::PhongFacet
+                | Graphic3dTypeOfShadingModel::Gouraud
+                | Graphic3dTypeOfShadingModel::Phong
+        ))
+        || style.interior_style() != AspectInteriorStyle::Solid
     {
         return Err(rejected(
             (style.shading_model(), style.interior_style()),
             "solid Unlit, PhongFacet, Gouraud or Phong shading",
         ));
     }
-    validate_style_features(style)
+    validate_style_features(style, pipeline)
 }
-fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
+fn validate_style_features(
+    style: &dyn Graphic3dAspectsSource,
+    pipeline: crate::RenderLightingPipeline,
+) -> Result<(), RenderError> {
     let features = (
         style.to_map_texture(),
         !style.shader_program().is_null(),
@@ -49,7 +75,11 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
         !style.to_use_vertex_color_for_back_faces(),
     );
     let unlit = style.shading_model() == Graphic3dTypeOfShadingModel::Unlit;
-    if features.1 || features.3 || (unlit && !features.0 && (features.4 || features.5)) {
+    let programmable = pipeline == crate::RenderLightingPipeline::Programmable;
+    if features.1
+        || features.3
+        || (programmable && unlit && !features.0 && (features.4 || features.5))
+    {
         return Err(rejected(
             features,
             "built-in solid surface shading, silhouettes disabled, valid unlit material/back-color policy",

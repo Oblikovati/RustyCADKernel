@@ -19,7 +19,12 @@ layout(location=0) out vec4 fragmentColor;
 #ifdef MARTENSITE_MARKER_LIGHTING
 #define MARTENSITE_SPRITE_SET 2
 #include "marker.glsl"
-layout(push_constant) uniform Transform { mat4 clip; float size; uint width; uint height; uint policy; } transform;
+layout(push_constant) uniform Transform {
+    mat4 clip;float size;uint width;uint height;uint policy;
+#ifdef MARTENSITE_FIXED_LIGHTING
+    float materialCutoff;
+#endif
+} transform;
 #endif
 #ifdef MARTENSITE_LINE_LIGHTING
 layout(push_constant) uniform LineTransform { mat4 clip; vec2 viewport; uint pattern; uint factor; } transform;
@@ -37,7 +42,8 @@ void main() {
     fragmentColor = litMarkerColor(markerTexel(uvec2(transform.width, transform.height)), fragmentColor, transform.policy);
 #ifdef MARTENSITE_FIXED_LIGHTING
     // GL_POINTS bypasses sprite alpha testing; sprite GL_GEQUAL accepts the exact cutoff.
-    if (transform.policy!=4u && fragmentColor.a < 0.1) discard;
+    float cutoff=transform.policy==4u?transform.materialCutoff:0.1;
+    if (fragmentColor.a < cutoff) discard;
 #else
     if (fragmentColor.a <= 0.1) discard;
 #endif

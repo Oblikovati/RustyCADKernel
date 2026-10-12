@@ -7,6 +7,7 @@ struct NativeFixedLightScene {
   occ::handle<Graphic3d_CLight> light;
 };
 static std::string fixed_lighting_mode(const std::string& mode) {
+  if(mode.rfind("lit-unlit-",0)==0)return "lit-"+mode.substr(10);
   if(mode.rfind("lit-adjacent-",0)==0)return "lit-"+mode.substr(13);
   if(mode.rfind("lit-persist-",0)==0)return "lit-"+mode.substr(12);
   if(mode.rfind("lit-facet-",0)==0)return "lit-facet";
@@ -19,9 +20,13 @@ static NativeFixedLightScene fixed_native_scene(const NativeTextPolicyProbe& pro
   const std::string mode=fixed_lighting_mode(input);
   const occ::handle<Graphic3d_Structure> structure=new Graphic3d_Structure(probe.viewer->StructureManager());
   const auto aspect=lighting_aspects(mode);const bool line=input.rfind("lit-line-",0)==0||input.rfind("lit-strip-",0)==0;
-  if(input=="lit-unlit")aspect->SetShadingModel(Graphic3d_TypeOfShadingModel_Unlit);
+  if(input.rfind("lit-unlit",0)==0)aspect->SetShadingModel(Graphic3d_TypeOfShadingModel_Unlit);
   const bool marker=input.rfind("lit-marker-",0)==0;
   if(marker)fixed_marker_aspect(aspect,input);
+  if(input.find("facet")!=std::string::npos&&marker)aspect->SetShadingModel(Graphic3d_TypeOfShadingModel_PhongFacet);
+  if(input.find("unlit")!=std::string::npos&&marker)aspect->SetShadingModel(Graphic3d_TypeOfShadingModel_Unlit);
+  if(input.find("pbr")!=std::string::npos)aspect->SetShadingModel(input.find("facet")!=std::string::npos
+    ?Graphic3d_TypeOfShadingModel_PbrFacet:Graphic3d_TypeOfShadingModel_Pbr);
   if(input.rfind("lit-alpha-",0)==0)lighting_opacity_aspects(aspect,mode);
   if(line) {aspect->SetLineWidth(3);if(mode=="lit-patterned")aspect->SetLineType(Aspect_TOL_DASH);}
   auto vertices=marker?fixed_marker_array(input):fixed_array_override(input);if(vertices.IsNull())vertices=lighting_vertices(mode,line);const auto group=structure->NewGroup();

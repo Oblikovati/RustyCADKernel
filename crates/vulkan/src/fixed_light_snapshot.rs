@@ -59,7 +59,8 @@ fn fixed_eye_light(light: &Graphic3dCLight, view: Mat4<f32>) -> PackedRenderLigh
 }
 fn fixed_light_position(light: &Graphic3dCLight) -> [f32; 4] {
     if light.light_type() == Graphic3dTypeOfLightSource::Directional {
-        return light.packed_direction_range().data().map(|v| -v);
+        let [x, y, z] = light.packed_direction().data();
+        return [-x, -y, -z, 0.];
     }
     let [x, y, z] = light.position_coords().map(|v| v as f32);
     [x, y, z, 1.]
@@ -81,11 +82,13 @@ fn fixed_spot_direction(light: &Graphic3dCLight, matrix: Mat4<f32>) -> [f32; 4] 
 #[cfg(test)]
 mod tests {
     use super::*;
-    #[test]
-    fn disabled_ambient_headlight_and_eight_slot_rules_are_separate() {
+    fn fixed_fixture_light_set() -> Handle<Graphic3dLightSet> {
         let lights = Handle::new(Graphic3dLightSet::default());
-        let ambient = Handle::new(Graphic3dCLight::new(Graphic3dTypeOfLightSource::Ambient));
-        lights.add(&ambient).unwrap();
+        lights
+            .add(&Handle::new(Graphic3dCLight::new(
+                Graphic3dTypeOfLightSource::Ambient,
+            )))
+            .unwrap();
         for _ in 0..10 {
             lights
                 .add(&Handle::new(Graphic3dCLight::new(
@@ -93,18 +96,30 @@ mod tests {
                 )))
                 .unwrap();
         }
+        lights
+    }
+    #[test]
+    fn ambient_and_eight_slot_rules_use_actual_enabled_light_set() {
+        let lights = fixed_fixture_light_set();
         let mut view = crate::identity_clip();
         view[14] = -20.;
         let snapshot = snapshot_fixed_lights(&lights, view).unwrap();
         assert_eq!(snapshot.source_count(), 8);
         assert_eq!(snapshot.sources[0].position[2], -20.);
+        assert!(snapshot_fixed_lights(&lights, [f32::NAN; 16]).is_err());
+        assert!(snapshot_fixed_lights(&lights, [0.; 16]).is_err());
+    }
+    #[test]
+    fn headlight_and_spot_direction_do_not_inherit_world_view_translation() {
         let head = Handle::new(Graphic3dCLight::new(Graphic3dTypeOfLightSource::Spot));
         head.set_headlight(true).unwrap();
+        let mut view = crate::identity_clip();
+        view[14] = -20.;
         assert_eq!(
             fixed_eye_light(&head, Mat4::from_data(view)).position[2],
             0.
         );
         assert_eq!(fixed_spot_direction(&head, Mat4::identity())[3], 0.);
-        assert!(snapshot_fixed_lights(&lights, [f32::NAN; 16]).is_err());
+        assert_eq!(fixed_light_position(&head)[3], 1.);
     }
 }

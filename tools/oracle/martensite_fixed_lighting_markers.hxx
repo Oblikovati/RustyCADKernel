@@ -17,6 +17,10 @@ static void fixed_marker_aspect(const occ::handle<Graphic3d_Aspects>& aspect,con
   aspect->SetMarkerScale(5);
   aspect->SetMarkerType(mode.find("ball")!=std::string::npos?Aspect_TOM_BALL:
     mode.find("plus")!=std::string::npos?Aspect_TOM_PLUS:Aspect_TOM_POINT);
+  if(mode.find("alpha-mask-blend")!=std::string::npos)aspect->SetAlphaMode(Graphic3d_AlphaMode_MaskBlend,.9f);
+  else if(mode.find("alpha-mask")!=std::string::npos)aspect->SetAlphaMode(Graphic3d_AlphaMode_Mask,.9f);
+  else if(mode.find("alpha-opaque")!=std::string::npos)aspect->SetAlphaMode(Graphic3d_AlphaMode_Opaque,.9f);
+  else if(mode.find("alpha-blend")!=std::string::npos)aspect->SetAlphaMode(Graphic3d_AlphaMode_Blend,.9f);
   if(mode.find("opacity")!=std::string::npos) {
     auto material=aspect->FrontMaterial();material.SetTransparency(.5f);
     aspect->SetFrontMaterial(material);

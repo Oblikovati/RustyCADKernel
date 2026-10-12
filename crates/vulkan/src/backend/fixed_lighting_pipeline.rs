@@ -56,3 +56,9 @@ pub(super) fn fixed_unlit_line_pair(clipped: bool) -> [&'static [u8]; 2] {
     }
     fixed_pair!("line.fixed")
 }
+pub(super) fn fixed_unlit_point_pair(clipped: bool) -> [&'static [u8]; 2] {
+    if clipped {
+        return fixed_pair!("point.fixed.clipped");
+    }
+    fixed_pair!("point.fixed")
+}

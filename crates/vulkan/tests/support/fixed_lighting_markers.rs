@@ -17,6 +17,10 @@ pub fn fixed_marker_array(mode: &str) -> Handle<Graphic3dArrayOfPrimitives> {
         Graphic3dArrayOfPrimitives::new(Graphic3dTypeOfPrimitiveArray::Points, 3, 0, 0, flags)
             .unwrap(),
     );
+    populate_fixed_marker_nodes(&points, colored);
+    points
+}
+fn populate_fixed_marker_nodes(points: &Graphic3dArrayOfPrimitives, colored: bool) {
     for (index, normal) in [[0., 0., 1.], [0.6, 0., 0.8], [0., 0.6, 0.8]]
         .into_iter()
         .enumerate()
@@ -34,17 +38,13 @@ pub fn fixed_marker_array(mode: &str) -> Handle<Graphic3dArrayOfPrimitives> {
                 .unwrap();
         }
     }
-    points
 }
 pub fn fixed_marker_aspect(aspect: &Graphic3dAspects, mode: &str) {
+    if let Some(alpha) = fixed_marker_alpha_mode(mode) {
+        aspect.set_alpha_mode(alpha, 0.9);
+    }
     aspect.set_marker_scale(5.).unwrap();
-    aspect.set_marker_type(if mode.contains("ball") {
-        AspectTypeOfMarker::Ball
-    } else if mode.contains("plus") {
-        AspectTypeOfMarker::Plus
-    } else {
-        AspectTypeOfMarker::Point
-    });
+    aspect.set_marker_type(fixed_marker_kind(mode));
     if mode.contains("opacity") {
         let mut material = aspect.front_material();
         material.set_transparency(0.5).unwrap();
@@ -54,10 +54,44 @@ pub fn fixed_marker_aspect(aspect: &Graphic3dAspects, mode: &str) {
         fixed_custom_marker(aspect, mode);
     }
 }
+fn fixed_marker_kind(mode: &str) -> AspectTypeOfMarker {
+    if mode.contains("ball") {
+        return AspectTypeOfMarker::Ball;
+    }
+    if mode.contains("plus") {
+        return AspectTypeOfMarker::Plus;
+    }
+    AspectTypeOfMarker::Point
+}
+fn fixed_marker_alpha_mode(mode: &str) -> Option<Graphic3dAlphaMode> {
+    if mode.contains("alpha-mask-blend") {
+        return Some(Graphic3dAlphaMode::MaskBlend);
+    }
+    if mode.contains("alpha-mask") {
+        return Some(Graphic3dAlphaMode::Mask);
+    }
+    if mode.contains("alpha-opaque") {
+        return Some(Graphic3dAlphaMode::Opaque);
+    }
+    if mode.contains("alpha-blend") {
+        return Some(Graphic3dAlphaMode::Blend);
+    }
+    None
+}
 fn fixed_custom_marker(aspect: &Graphic3dAspects, mode: &str) {
     use rustycad_tkservice::image::{ImageFormat, ImagePixMap};
     let image = Handle::new(ImagePixMap::default());
-    let pixels = [
+    let pixels = fixed_custom_marker_pixels();
+    assert!(image.init_wrapper(ImageFormat::Rgba, Some(pixels), 4, 4, 16));
+    image.set_top_down(!mode.contains("bottom"));
+    aspect.set_marker_type(AspectTypeOfMarker::Userdefined);
+    aspect.set_marker_image(Handle::new(
+        Graphic3dMarkerImage::from_images(image, Handle::default()).unwrap(),
+    ));
+}
+
+fn fixed_custom_marker_pixels() -> Vec<u8> {
+    [
         [128, 64, 32, 255],
         [32, 128, 64, 128],
         [64, 32, 128, 0],
@@ -65,11 +99,5 @@ fn fixed_custom_marker(aspect: &Graphic3dAspects, mode: &str) {
     ]
     .into_iter()
     .flat_map(|pixel| [pixel; 4].into_iter().flatten())
-    .collect();
-    assert!(image.init_wrapper(ImageFormat::Rgba, Some(pixels), 4, 4, 16));
-    image.set_top_down(!mode.contains("bottom"));
-    aspect.set_marker_type(AspectTypeOfMarker::Userdefined);
-    aspect.set_marker_image(Handle::new(
-        Graphic3dMarkerImage::from_images(image, Handle::default()).unwrap(),
-    ));
+    .collect()
 }

@@ -61,5 +61,6 @@ fn cap_lighting_snapshot(
     )?;
     snapshot.normalize_fixed =
         crate::fixed_normalization::native_normalize_state(scene.camera, scene.fields, view, false);
+    crate::fixed_lighting::snapshot_fixed_material_opacity(&mut snapshot, aspects);
     Ok(snapshot)
 }

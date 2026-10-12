@@ -1,27 +1,27 @@
 //! Fixed vertices carry geometric and logical provoking inputs independently.
 use ash::vk;
+const BASIC: [vk::VertexInputBindingDescription; 1] = [binding(88)];
+const SURFACE: [vk::VertexInputBindingDescription; 1] = [binding(104)];
+const BASIC_ATTRS: [vk::VertexInputAttributeDescription; 6] = [
+    attr(0, 0, 4),
+    attr(1, 16, 4),
+    attr(2, 32, 3),
+    attr(4, 44, 4),
+    attr(5, 60, 3),
+    attr(6, 72, 4),
+];
+const SURFACE_ATTRS: [vk::VertexInputAttributeDescription; 7] = [
+    attr(0, 0, 4),
+    attr(1, 16, 4),
+    attr(2, 32, 4),
+    attr(3, 48, 3),
+    attr(4, 60, 4),
+    attr(5, 76, 3),
+    attr(6, 88, 4),
+];
 pub(super) fn fixed_vertex_layout(
     surface: bool,
 ) -> vk::PipelineVertexInputStateCreateInfo<'static> {
-    const BASIC: [vk::VertexInputBindingDescription; 1] = [binding(88)];
-    const SURFACE: [vk::VertexInputBindingDescription; 1] = [binding(104)];
-    const BASIC_ATTRS: [vk::VertexInputAttributeDescription; 6] = [
-        attr(0, 0, 4),
-        attr(1, 16, 4),
-        attr(2, 32, 3),
-        attr(4, 44, 4),
-        attr(5, 60, 3),
-        attr(6, 72, 4),
-    ];
-    const SURFACE_ATTRS: [vk::VertexInputAttributeDescription; 7] = [
-        attr(0, 0, 4),
-        attr(1, 16, 4),
-        attr(2, 32, 4),
-        attr(3, 48, 3),
-        attr(4, 60, 4),
-        attr(5, 76, 3),
-        attr(6, 88, 4),
-    ];
     vk::PipelineVertexInputStateCreateInfo::default()
         .vertex_binding_descriptions(if surface { &SURFACE } else { &BASIC })
         .vertex_attribute_descriptions(if surface {

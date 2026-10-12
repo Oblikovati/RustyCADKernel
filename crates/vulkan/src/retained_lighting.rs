@@ -12,8 +12,16 @@ pub(crate) fn apply_surface_lighting(
     aspects: &Handle<dyn Graphic3dAspectsSource>,
     context: &TextSceneContext<'_>,
 ) -> Result<(), RenderError> {
-    let model = primitive_shading_model(draws, &**aspects, context.rendering.shading_model);
+    let pipeline =
+        crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure());
+    let model =
+        primitive_shading_model(draws, &**aspects, context.rendering.shading_model, pipeline);
     if model == Graphic3dTypeOfShadingModel::Unlit {
+        if crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure())
+            == crate::RenderLightingPipeline::FixedFunction
+        {
+            return Ok(());
+        }
         return validate_unlit_draws(draws, &**aspects);
     }
     apply_resolved_lighting(draws, primitive, aspects, context, model)
@@ -22,19 +30,34 @@ fn primitive_shading_model(
     draws: &[PrimitiveDraw],
     aspect: &dyn Graphic3dAspectsSource,
     view: Graphic3dTypeOfShadingModel,
+    pipeline: crate::RenderLightingPipeline,
 ) -> Graphic3dTypeOfShadingModel {
-    let model = resolved_model(aspect, view);
+    let model = fixed_compatible_shading(resolved_model(aspect, view), pipeline);
     if draws.iter().any(texture_replaces_lighting) {
         return Graphic3dTypeOfShadingModel::Unlit;
     }
     if model == Graphic3dTypeOfShadingModel::PhongFacet
         && draws
             .iter()
-            .all(|draw| draw.topology() == crate::PrimitiveTopology::Lines)
+            .all(|draw| draw.topology() != crate::PrimitiveTopology::Triangles)
     {
         return Graphic3dTypeOfShadingModel::Unlit;
     }
     model
+}
+fn fixed_compatible_shading(
+    model: Graphic3dTypeOfShadingModel,
+    pipeline: crate::RenderLightingPipeline,
+) -> Graphic3dTypeOfShadingModel {
+    if pipeline != crate::RenderLightingPipeline::FixedFunction {
+        return model;
+    }
+    // FFP binds common materials; accepting a PBR request here does not implement a PBR shader.
+    match model {
+        Graphic3dTypeOfShadingModel::Pbr => Graphic3dTypeOfShadingModel::Phong,
+        Graphic3dTypeOfShadingModel::PbrFacet => Graphic3dTypeOfShadingModel::PhongFacet,
+        _ => model,
+    }
 }
 fn validate_unlit_draws(
     draws: &[PrimitiveDraw],
@@ -178,6 +201,7 @@ fn surface_lighting(
         view,
         !context.group.transform_persistence().is_null(),
     );
+    crate::fixed_lighting::snapshot_fixed_material_opacity(&mut snapshot, aspects);
     Ok(snapshot)
 }
 
@@ -245,6 +269,7 @@ pub(crate) fn aspect_material(aspect: &dyn Graphic3dAspectsSource) -> RenderMate
     );
     material
 }
+
 fn surface_material_pair(
     aspect: &dyn Graphic3dAspectsSource,
 ) -> (Graphic3dMaterialAspect, Graphic3dMaterialAspect) {

@@ -20,6 +20,7 @@ pub struct PointStyle {
     pub(crate) alpha_blend: bool,
     pub(crate) color_policy: PointColorPolicy,
     pub(crate) native_image_top_down: bool,
+    pub(crate) fixed_material_cutoff: Option<f32>,
 }
 impl PointStyle {
     /// Validate size and RGBA sprite shape before GPU work; `PointStyle::new(1., [1,1], vec![[1.;4]])?`.
@@ -33,6 +34,7 @@ impl PointStyle {
             alpha_blend: true,
             color_policy: PointColorPolicy::Modulated,
             native_image_top_down: true,
+            fixed_material_cutoff: None,
         })
     }
     /// Preserve in-place native blending; `style.with_alpha_blending(false)`.
@@ -65,9 +67,17 @@ pub(crate) fn marker_style(
     {
         let mut style = PointStyle::new(aspect.marker_scale(), [1, 1], vec![[1.; 4]])?;
         style.color_policy = PointColorPolicy::Plain;
+        style.fixed_material_cutoff = fixed_point_material_cutoff(aspect);
         return Ok(style.with_alpha_blending(aspect.alpha_mode() == Graphic3dAlphaMode::MaskBlend));
     }
     marker_sprite_style(aspect, highlighted, vertex_colors)
+}
+fn fixed_point_material_cutoff(aspect: &dyn Graphic3dAspectsSource) -> Option<f32> {
+    matches!(
+        aspect.alpha_mode(),
+        Graphic3dAlphaMode::Mask | Graphic3dAlphaMode::MaskBlend
+    )
+    .then(|| aspect.alpha_cutoff().clamp(0., 1.))
 }
 fn marker_sprite_style(
     aspect: &dyn Graphic3dAspectsSource,
@@ -150,6 +160,22 @@ fn sprite_pixel(image: &ImagePixMap, x: u32, y: u32, alpha: bool) -> Result<[f32
 mod tests {
     use super::*;
     use rustycad_tkservice::image::ImageFormat;
+    #[test]
+    fn fixed_plain_point_material_mask_keeps_native_gequal_reference() {
+        let aspect = Graphic3dAspects::default();
+        aspect.set_marker_type(AspectTypeOfMarker::Point);
+        aspect.set_alpha_mode(Graphic3dAlphaMode::Mask, 0.9);
+        assert_eq!(
+            marker_style(&aspect, false, false)
+                .unwrap()
+                .fixed_material_cutoff,
+            Some(0.9)
+        );
+        aspect.set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.9);
+        assert_eq!(fixed_point_material_cutoff(&aspect), None);
+        aspect.set_alpha_mode(Graphic3dAlphaMode::MaskBlend, 1.5);
+        assert_eq!(fixed_point_material_cutoff(&aspect), Some(1.));
+    }
     #[test]
     fn colored_markers_decode_srgb_but_preserve_coverage() {
         let image = ImagePixMap::default();

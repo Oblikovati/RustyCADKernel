@@ -22,6 +22,9 @@ def fixed_lighting_shader_variants() -> tuple[ShaderVariant, ...]:
         stem = 'line.fixed' + ('.clipped' if clipped else '')
         flags = ('-DMARTENSITE_FIXED_LINE_STIPPLE=1',) + (('-DMARTENSITE_CLIPPING=1',) if clipped else ())
         variants.extend((stem,stage,flags) for stage in ('vert','frag'))
+        stem = 'point.fixed' + ('.clipped' if clipped else '')
+        flags = ('-DMARTENSITE_FIXED_LIGHTING=1',) + (('-DMARTENSITE_CLIPPING=1',) if clipped else ())
+        variants.extend((stem,stage,flags) for stage in ('vert','frag'))
     return tuple(variants)
 
 def fixed_shader_stem(family: str, clipped: bool, extra: str) -> tuple[str, tuple[str, ...]]:
@@ -40,7 +43,7 @@ def compile_fixed_lighting_shaders(root: Path, folder: Path, env: dict[str, str]
     """Compile genuine shader interfaces; compile_fixed_lighting_shaders(root, tmp, env, run)."""
     shaders = root / 'crates/vulkan/shaders'
     for stem, stage, flags in fixed_lighting_shader_variants():
-        family = 'lighting' if stem.startswith('lighting.') else 'line' if stem.startswith('line.') else 'surface'
+        family = stem.split('.')[0]
         source = shaders / (f'{family}.{stage}' if stage != 'geom' else 'surface.edges.geom')
         runner(['glslangValidator', *flags, '--target-env', 'vulkan1.3', '-V',
                 str(source), '-o', str(folder / f'{stem}.{stage}.spv')], env)
