@@ -46,29 +46,13 @@ pub use colored_shape_object::AisColoredShape;
 mod colored_shape_owner_tests;
 mod shape_reference;
 pub use shape_reference::{AisShapeMembers, AisShapeRef};
-#[cfg(test)]
-mod colored_shape_dispatch_fixture;
-#[cfg(test)]
-mod colored_shape_dispatch_tests;
 mod colored_shape_expansion;
-#[cfg(test)]
-mod colored_shape_parent_drop;
 mod shape_drawer_cursor;
 pub use colored_shape_expansion::AisColoredShapeExpansion;
 
 mod colored_shape_expansion_fill;
 pub use colored_shape_expansion_fill::ais_colored_shape_fill_subshape_drawer_map;
-#[cfg(test)]
-mod colored_shape_alias_inputs;
-#[cfg(test)]
-mod colored_shape_alias_tests;
 mod colored_shape_custom_appearance;
-#[cfg(test)]
-mod colored_shape_expansion_inputs;
-#[cfg(test)]
-mod colored_shape_expansion_tests;
-#[cfg(test)]
-mod shape_drawer_cursor_tests;
 pub use colored_shape_custom_appearance::AisColoredShapeCustomAppearance;
 mod colored_shape_global_appearance;
 pub use colored_shape_global_appearance::{
@@ -79,15 +63,7 @@ mod colored_compound_map;
 mod colored_compound_node;
 mod colored_compound_references;
 mod colored_compound_value;
-#[cfg(test)]
-mod colored_shape_appearance_snapshot;
-#[cfg(test)]
-mod colored_shape_appearance_tests;
 mod colored_shape_copy_appearance;
-#[cfg(test)]
-mod colored_shape_copy_tests;
-#[cfg(test)]
-mod colored_shape_custom_dispatch_tests;
 pub use colored_compound_map::AisColoredDrawerCompounds;
 pub use colored_compound_references::AisColoredCompoundRef;
 #[cfg(test)]

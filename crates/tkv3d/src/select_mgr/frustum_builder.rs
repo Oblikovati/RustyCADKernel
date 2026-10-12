@@ -57,8 +57,11 @@ impl SelectMgrFrustumBuilder {
         self.state.read().camera.clone()
     }
     /// `SetCamera`; `builder.set_camera(&camera)`.
-    pub fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
-        self.state.write().camera = camera.clone();
+    pub fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) {
+        self.state.write().camera = camera.clone_handle();
     }
     /// `SetWindowSize`; `builder.set_window_size(400, 300)`.
     pub fn set_window_size(&self, width: i32, height: i32) {

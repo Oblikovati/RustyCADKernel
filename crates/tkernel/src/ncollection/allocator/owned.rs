@@ -32,7 +32,7 @@ impl BaseAllocator {
     /// throws. Example: `allocator.allocate(16).unwrap().as_slice().len() == 16`.
     pub fn allocate(&self, size: usize) -> Option<AllocatedBytes> {
         let address = self.allocate_owned_address(size)?;
-        match &*self.inner {
+        match &*self.fields.inner {
             AllocatorKind::Incremental(_) | AllocatorKind::Accumulating(_) => {}
             _ => return Some(self.owned_bytes(address, size)),
         }
@@ -42,7 +42,13 @@ impl BaseAllocator {
     }
 
     fn allocate_owned_address(&self, size: usize) -> Option<NonNull<u8>> {
-        if let AllocatorKind::Incremental(engine) = &*self.inner {
+        if self.uses_custom_source() {
+            let pointer = self.allocate_leased_virtual_raw(size)?;
+            // SAFETY: the source contract supplies an exclusive range of size initialized here.
+            unsafe { pointer.write_bytes(0, size) };
+            return Some(pointer);
+        }
+        if let AllocatorKind::Incremental(engine) = &*self.fields.inner {
             let mut engine = super::locked(engine);
             let address = engine.allocate(size)?;
             // Reset shares this lock: the lease must exist before another thread can rewind/free.
@@ -67,14 +73,14 @@ impl BaseAllocator {
     }
 
     fn acquire_owned_byte_lease(&self) {
-        if let AllocatorKind::Incremental(engine) = &*self.inner {
+        if let AllocatorKind::Incremental(engine) = &*self.fields.inner {
             super::locked(engine).acquire();
         }
     }
 
     fn owned_bytes(&self, address: NonNull<u8>, size: usize) -> AllocatedBytes {
         AllocatedBytes {
-            allocator: self.clone(),
+            allocator: self.storage_lease(),
             address,
             size,
         }
@@ -83,7 +89,7 @@ impl BaseAllocator {
     /// Allocates correctly aligned typed storage; `*allocator.allocate_value(42) == 42`.
     pub fn allocate_value<T>(&self, value: T) -> AllocatedBox<T> {
         AllocatedBox {
-            storage: AllocBox::new_in(value, self.clone()),
+            storage: AllocBox::new_in(value, self.storage_lease()),
         }
     }
 
@@ -94,7 +100,7 @@ impl BaseAllocator {
         let value = construct();
         let (pointer, _) = AllocBox::into_raw_with_allocator(AllocBox::write(storage, value));
         // SAFETY: initialized typed storage retains this same allocator and original layout.
-        unsafe { AllocatedBox::from_raw_in(pointer, self.clone()) }
+        unsafe { AllocatedBox::from_raw_in(pointer, self.storage_lease()) }
     }
 
     /// Constructs contiguous elements with this allocator; `allocator.allocate_array(5, |i| i)`.
@@ -103,7 +109,7 @@ impl BaseAllocator {
         count: usize,
         constructor: impl FnMut(usize) -> T,
     ) -> AllocatedArray<T> {
-        let mut storage = allocator_api2::vec::Vec::with_capacity_in(count, self.clone());
+        let mut storage = allocator_api2::vec::Vec::with_capacity_in(count, self.storage_lease());
         storage.extend((0..count).map(constructor));
         AllocatedArray { storage }
     }
@@ -181,7 +187,8 @@ impl<T> std::ops::DerefMut for AllocatedBox<T> {
 impl BaseAllocator {
     /// Reports actual native handle retention; `arena.ref_count() == 1` for a fresh arena.
     pub fn ref_count(&self) -> i32 {
-        std::sync::Arc::strong_count(&self.inner) as i32
+        self.source_observer()
+            .map_or(0, |source| source.ref_count())
     }
     /// Restores a typed owner for an initialized allocation abandoned to native raw ownership.
     /// # Safety
@@ -194,14 +201,14 @@ impl BaseAllocator {
             self.acquire_owned_byte_lease();
         }
         // SAFETY: the caller retains exact layout/provenance and excludes reset until this lease.
-        unsafe { AllocatedBox::from_raw_in(pointer.as_ptr(), self.clone()) }
+        unsafe { AllocatedBox::from_raw_in(pointer.as_ptr(), self.storage_lease()) }
     }
     /// Relinquishes a live typed allocation to native raw ownership without freeing it.
     /// # Safety
     /// One exclusively owned typed allocation must be abandoned exactly once. No Rust
     /// references or destructor obligations may remain; arena reset can invalidate its bytes.
     pub(in crate::ncollection) unsafe fn relinquish_typed_to_raw(&self) {
-        if let AllocatorKind::Incremental(engine) = &*self.inner {
+        if let AllocatorKind::Incremental(engine) = &*self.fields.inner {
             super::locked(engine).release();
         }
     }

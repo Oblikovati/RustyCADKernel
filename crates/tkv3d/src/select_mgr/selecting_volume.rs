@@ -143,9 +143,14 @@ impl SelectMgrSelectingVolumeManager {
             .map_or_else(Handle::default, |volume| volume.camera())
     }
     /// Set the initialized volume's camera; `manager.set_camera(&camera)?`.
-    pub fn set_camera(&self, camera: &Handle<Graphic3dCamera>) -> Result<(), Failure> {
-        self.required_volume("SetCamera")?.set_camera(camera);
-        Ok(())
+    pub fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) -> Result<(), Failure> {
+        rustycad_tkernel::standard::catch_native_failure(|| {
+            self.required_volume("SetCamera")?.set_camera(camera);
+            Ok(())
+        })
     }
     /// Read window dimensions, preserving absent native outputs; `manager.window_size()`.
     pub fn window_size(&self) -> Option<(i32, i32)> {

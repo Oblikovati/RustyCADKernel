@@ -32,7 +32,12 @@ impl BRepMeshCircleTool {
         Self {
             tolerance,
             allocator: allocator.clone(),
-            filter: CellFilter::with_allocator(10., allocator.get().map(|a| a.resource().clone())),
+            filter: CellFilter::with_allocator(
+                10.,
+                allocator
+                    .get()
+                    .map(|_| BaseAllocator::from_handle(allocator)),
+            ),
             selector: BRepMeshCircleInspector::new(tolerance, reserved.max(64), allocator),
             face_max: Xy::default(),
             face_min: Xy::default(),
@@ -44,16 +49,24 @@ impl BRepMeshCircleTool {
     }
     /// Reset spatial cells while retaining registered circles; `tool.set_cell_size(0.5)?`.
     pub fn set_cell_size(&mut self, size: f64) -> Result<(), Failure> {
-        self.filter
-            .reset(size, self.allocator.get().map(|a| a.resource().clone()))
+        self.filter.reset(
+            size,
+            self.allocator
+                .get()
+                .map(|_| BaseAllocator::from_handle(&self.allocator)),
+        )
     }
     /// Retain native one-based axis-size bounds; `tool.set_cell_sizes(0.5,0.25)?`.
     pub fn set_cell_sizes(&mut self, x: f64, y: f64) -> Result<(), Failure> {
         let mut sizes =
             Array1::with_bounds(1, 2).map_err(|e| e.into_failure("BRepMesh_CircleTool"))?;
         sizes.as_mut_slice().copy_from_slice(&[x, y]);
-        self.filter
-            .reset_sizes(&sizes, self.allocator.get().map(|a| a.resource().clone()));
+        self.filter.reset_sizes(
+            &sizes,
+            self.allocator
+                .get()
+                .map(|_| BaseAllocator::from_handle(&self.allocator)),
+        );
         Ok(())
     }
     /// Clip subsequent insertion boxes to these bounds; `tool.set_min_max_size(min,max)`.
@@ -116,6 +129,6 @@ impl BRepMeshCircleTool {
 fn resource(allocator: &MeshAllocator) -> BaseAllocator {
     allocator
         .get()
-        .map(|a| a.resource().clone())
+        .map(|_| BaseAllocator::from_handle(allocator))
         .unwrap_or_else(BaseAllocator::common)
 }

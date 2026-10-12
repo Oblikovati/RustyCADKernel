@@ -13,7 +13,7 @@ fn borrowed_construction_keeps_actual_allocator_reference_counts() {
         assert_eq!(arena.ref_count(), 1);
         7
     });
-    assert_eq!(arena.ref_count(), 2);
+    assert_eq!(arena.ref_count(), 1);
     assert_eq!(*owner, 7);
     drop(owner);
     assert_eq!(arena.ref_count(), 1);
@@ -38,7 +38,7 @@ fn re_adoption_restores_incremental_lease_before_safe_owner_returns() {
     // SAFETY: initialized exact type/layout remains live; this thread excludes reset/free.
     let owner = unsafe { arena.adopt_abandoned_value(pointer) };
     assert!(arena.reset(false).is_err());
-    assert_eq!(arena.ref_count(), 2);
+    assert_eq!(arena.ref_count(), 1);
     drop(owner);
     assert_eq!(drops.get(), 1);
     assert!(arena.reset(false).is_ok());

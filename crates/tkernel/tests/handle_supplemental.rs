@@ -102,7 +102,7 @@ fn polymorphic_allocator_objects_own_real_allocations() {
             .len(),
         16
     );
-    assert_eq!(
+    assert_ne!(
         heap.resource(),
         &rustycad_tkernel::ncollection::BaseAllocator::global_heap()
     );

@@ -16,11 +16,15 @@
 //! (`AllocatedBytes`, `AllocatedBox`, `AllocatedArray`) and the `allocator_api2::Allocator`
 //! implementation serve safe Rust code and collections.
 // Unsafe is confined to implementing allocator-api2's contract and forwarding frees.
-use crate::standard::Failure;
+use super::{
+    AccumulatingAllocatorObject, AlignedAllocatorObject, AllocatorObject, AllocatorSource,
+    HeapAllocatorObject, IncrementalAllocatorObject,
+};
+use crate::standard::{Failure, SharedState, WeakHandle};
 use allocator_api2::alloc::{AllocError, Allocator, Layout};
 use std::{
     ptr::NonNull,
-    sync::{Arc, Mutex, MutexGuard, OnceLock},
+    sync::{Arc, Mutex, MutexGuard},
 };
 mod accumulating;
 mod aligned;
@@ -31,7 +35,13 @@ mod keys;
 mod owned;
 // Keep existing allocator callers on the shared Standard backend without retaining handles.
 use crate::standard::memory::raw_heap;
-mod typed_heap;
+mod builtin;
+mod physical_storage;
+mod reference;
+mod typed_lease;
+mod typed_policy;
+pub use physical_storage::{AllocatorPhysicalStorage, AllocatorStorageLease};
+mod virtual_typed;
 use accumulating::AccEngine;
 pub use accumulating::{
     ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockLookup, AccBlockState,
@@ -49,9 +59,14 @@ pub use owned::{AllocatedArray, AllocatedBox, AllocatedBytes};
 use raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, mm_malloc_alignment};
 
 /// A shared allocator identity and policy; `BaseAllocator::common().allocate(16)`.
-#[derive(Clone)]
 pub struct BaseAllocator {
+    fields: Box<AllocatorFacadeFields>,
+}
+struct AllocatorFacadeFields {
     inner: Arc<AllocatorKind>,
+    registration: Arc<SharedState<WeakHandle<dyn AllocatorSource>>>,
+    reference: reference::AllocatorReference,
+    virtual_allocations: Arc<virtual_typed::VirtualAllocationRecords>,
 }
 
 /// A lock-scoped view of protected `NCollection_AccAllocator` extension operations.
@@ -113,7 +128,7 @@ fn locked<T>(engine: &Mutex<T>) -> MutexGuard<'_, T> {
 
 impl BaseAllocator {
     fn kind_name(&self) -> &'static str {
-        match &*self.inner {
+        match &*self.fields.inner {
             AllocatorKind::Common => "NCollection_BaseAllocator",
             AllocatorKind::Heap => "NCollection_HeapAllocator",
             AllocatorKind::Incremental(_) => "NCollection_IncAllocator",
@@ -124,52 +139,52 @@ impl BaseAllocator {
 
     fn with_kind(kind: AllocatorKind) -> Self {
         Self {
-            inner: Arc::new(kind),
+            fields: Box::new(AllocatorFacadeFields {
+                inner: Arc::new(kind),
+                registration: Arc::new(SharedState::default()),
+                reference: reference::AllocatorReference::Policy,
+                virtual_allocations: Arc::new(Mutex::new(Default::default())),
+            }),
         }
     }
 
     /// The process-wide allocator (`CommonBaseAllocator`); `BaseAllocator::common() == BaseAllocator::common()`.
     pub fn common() -> Self {
-        static COMMON: OnceLock<BaseAllocator> = OnceLock::new();
-        COMMON
-            .get_or_init(|| Self::with_kind(AllocatorKind::Common))
-            .clone()
+        Self::from_handle(AllocatorObject::common_base_allocator())
     }
 
     /// Creates an independent common-policy allocator identity, like a derived native allocator.
     /// Example: `BaseAllocator::fresh_common() != BaseAllocator::common()`.
     pub fn fresh_common() -> Self {
-        Self::with_kind(AllocatorKind::Common)
+        Self::from_handle(&crate::standard::Handle::new(AllocatorObject::default()))
     }
 
     /// The process-wide malloc allocator (`GlobalHeapAllocator`), distinct from `common`.
     ///
     /// Example: `BaseAllocator::global_heap() != BaseAllocator::common()`.
     pub fn global_heap() -> Self {
-        static HEAP: OnceLock<BaseAllocator> = OnceLock::new();
-        HEAP.get_or_init(|| Self::with_kind(AllocatorKind::Heap))
-            .clone()
+        Self::from_handle(HeapAllocatorObject::global_heap_allocator())
     }
 
     /// Creates an independent heap-policy identity, like a derived native heap allocator.
     /// Example: `BaseAllocator::fresh_heap() != BaseAllocator::global_heap()`.
     pub fn fresh_heap() -> Self {
-        Self::with_kind(AllocatorKind::Heap)
+        Self::from_handle(&crate::standard::Handle::new(HeapAllocatorObject::default()))
     }
 
     /// A new incremental allocator (`NCollection_IncAllocator(theBlockSize)`); sizes below
     /// `INC_MINIMUM_BLOCK_SIZE` select the 12 KB default. Example: `BaseAllocator::incremental(12 * 1024)`.
     pub fn incremental(block_size: usize) -> Self {
-        Self::with_kind(AllocatorKind::Incremental(Mutex::new(IncEngine::new(
-            block_size,
-        ))))
+        Self::from_handle(&crate::standard::Handle::new(
+            IncrementalAllocatorObject::new(block_size),
+        ))
     }
 
     /// Selects native incremental allocation/reordering policy; Rust synchronization
     /// remains enabled even when `is_thread_safe` is false.
     /// Example: `BaseAllocator::incremental(4096).set_thread_safe(true)?`.
     pub fn set_thread_safe(&self, is_thread_safe: bool) -> Result<(), Failure> {
-        if let AllocatorKind::Incremental(engine) = &*self.inner {
+        if let AllocatorKind::Incremental(engine) = &*self.fields.inner {
             locked(engine).set_thread_safe(is_thread_safe);
             return Ok(());
         }
@@ -187,15 +202,13 @@ impl BaseAllocator {
     ///
     /// Example: `BaseAllocator::accumulating(ACC_DEFAULT_BLOCK_SIZE)?`.
     pub fn accumulating(block_size: usize) -> Result<Self, Failure> {
-        let engine = AccEngine::new(block_size)?;
-        Ok(Self::with_kind(AllocatorKind::Accumulating(Mutex::new(
-            engine,
-        ))))
+        let object = crate::standard::Handle::new(AccumulatingAllocatorObject::new(block_size)?);
+        Ok(Self::from_handle(&object))
     }
 
     /// Borrows the shared engine under its mutex; `let mut access = allocator.accumulating_extension()?`.
     pub fn accumulating_extension(&self) -> Result<AccAllocatorExtension<'_>, Failure> {
-        let AllocatorKind::Accumulating(engine) = &*self.inner else {
+        let AllocatorKind::Accumulating(engine) = &*self.fields.inner else {
             return Err(Failure::with_message(
                 "Standard_TypeMismatch",
                 &format!(
@@ -213,7 +226,9 @@ impl BaseAllocator {
     ///
     /// Example: `BaseAllocator::aligned(16).allocate_raw(64)` is 16-byte aligned.
     pub fn aligned(alignment: usize) -> Self {
-        Self::with_kind(AllocatorKind::Aligned(alignment))
+        Self::from_handle(&crate::standard::Handle::new(AlignedAllocatorObject::new(
+            alignment,
+        )))
     }
 
     /// Raw `Allocate(theSize)`; `None` where upstream returns NULL or throws Standard_OutOfMemory.
@@ -221,13 +236,15 @@ impl BaseAllocator {
     /// The block stays allocated until `free_raw` (or, for arenas, `reset`/drop).
     /// Example: `let p = allocator.allocate_raw(16).unwrap(); unsafe { allocator.free_raw(p) }?`.
     pub fn allocate_raw(&self, size: usize) -> Option<NonNull<u8>> {
-        self.allocate_policy(size, true)
+        self.dispatch_source(|source| source.allocate(size))
+            .unwrap_or_else(|| self.allocate_policy(size, true))
     }
 
     /// Raw `AllocateOptimal(theSize)`: uninitialized `malloc` for the common allocator, the same
     /// policy as `allocate_raw` for every subclass. Example: `allocator.allocate_optimal_raw(8)`.
     pub fn allocate_optimal_raw(&self, size: usize) -> Option<NonNull<u8>> {
-        self.allocate_policy(size, !matches!(*self.inner, AllocatorKind::Common))
+        self.dispatch_source(|source| source.allocate_optimal(size))
+            .unwrap_or_else(|| self.allocate_optimal_builtin(size))
     }
 
     /// Raw `Free(theAddress)`: heap kinds free, the incremental allocator ignores the call, the
@@ -250,7 +267,15 @@ impl BaseAllocator {
     /// A non-null address must come from this allocator and still be live. Null is valid input;
     /// the accumulating allocator reports it as `Standard_ProgramError`.
     pub unsafe fn free_raw_nullable(&self, address: *mut u8) -> Result<(), Failure> {
-        match &*self.inner {
+        // SAFETY: the original nullable-pointer contract is forwarded to actual virtual Free.
+        self.dispatch_source(|source| unsafe { source.free(address) })
+            .unwrap_or_else(|| unsafe { self.free_storage_fallback(address) })
+    }
+    pub(in crate::ncollection) unsafe fn free_builtin_nullable(
+        &self,
+        address: *mut u8,
+    ) -> Result<(), Failure> {
+        match &*self.fields.inner {
             // SAFETY: forwarded from this function's contract.
             AllocatorKind::Common | AllocatorKind::Heap | AllocatorKind::Aligned(_) => unsafe {
                 if let Some(address) = NonNull::new(address) {
@@ -264,8 +289,12 @@ impl BaseAllocator {
     }
 
     /// One allocation of the handle's policy; `zeroed` only matters for heap kinds.
-    fn allocate_policy(&self, size: usize, zeroed: bool) -> Option<NonNull<u8>> {
-        match &*self.inner {
+    pub(in crate::ncollection) fn allocate_policy(
+        &self,
+        size: usize,
+        zeroed: bool,
+    ) -> Option<NonNull<u8>> {
+        match &*self.fields.inner {
             AllocatorKind::Common => heap_allocate(size, MALLOC_ALIGNMENT, zeroed),
             AllocatorKind::Heap => heap_allocate(heap_round(size)?, MALLOC_ALIGNMENT, zeroed),
             AllocatorKind::Incremental(engine) => locked(engine).allocate(size),
@@ -281,7 +310,7 @@ impl BaseAllocator {
     ///
     /// Example: `BaseAllocator::common().check_free(std::ptr::null()).is_ok()`.
     pub fn check_free(&self, address: *const u8) -> Result<(), Failure> {
-        match &*self.inner {
+        match &*self.fields.inner {
             AllocatorKind::Accumulating(engine) => {
                 locked(engine).freeable_block(address as usize).map(|_| ())
             }
@@ -295,7 +324,7 @@ impl BaseAllocator {
     /// Rust refuses while RAII or collection allocations from it are alive, because rewinding
     /// would alias them. Example: `allocator.reset(false)?`.
     pub fn reset(&self, release: bool) -> Result<(), Failure> {
-        match &*self.inner {
+        match &*self.fields.inner {
             AllocatorKind::Incremental(engine) => locked(engine).reset(release),
             _ => Ok(()),
         }
@@ -305,7 +334,7 @@ impl BaseAllocator {
     ///
     /// Example: `allocator.accumulating_block(p.as_ptr() as usize).unwrap().alloc_count == 1`.
     pub fn accumulating_block(&self, address: usize) -> Option<AccBlockState> {
-        match &*self.inner {
+        match &*self.fields.inner {
             AllocatorKind::Accumulating(engine) => locked(engine).block_state(address),
             _ => None,
         }
@@ -315,7 +344,7 @@ impl BaseAllocator {
     ///
     /// Example: `BaseAllocator::accumulating(64)?.accumulating_chain().len() == 1`.
     pub fn accumulating_chain(&self) -> Vec<AccBlockState> {
-        match &*self.inner {
+        match &*self.fields.inner {
             AllocatorKind::Accumulating(engine) => locked(engine).chain(),
             _ => Vec::new(),
         }
@@ -335,16 +364,19 @@ impl BaseAllocator {
 
     /// Stable identity address of the shared allocator object (native `myAllocator.get()`).
     pub fn identity(&self) -> *const () {
-        Arc::as_ptr(&self.inner).cast()
+        self.source_observer().map_or_else(
+            || Arc::as_ptr(&self.fields.inner).cast(),
+            |source| source.object_address(),
+        )
     }
 
     /// Whether this handle can release storage from `owner`; Common and Heap share the process
     /// heap release backend, while arena identities remain distinct.
     /// Example: `BaseAllocator::fresh_heap().can_free_from(&BaseAllocator::global_heap())`.
     pub fn can_free_from(&self, owner: &Self) -> bool {
-        Arc::ptr_eq(&self.inner, &owner.inner)
+        Arc::ptr_eq(&self.fields.inner, &owner.fields.inner)
             || matches!(
-                (&*self.inner, &*owner.inner),
+                (&*self.fields.inner, &*owner.fields.inner),
                 (
                     AllocatorKind::Common | AllocatorKind::Heap,
                     AllocatorKind::Common | AllocatorKind::Heap
@@ -365,56 +397,15 @@ impl Default for BaseAllocator {
 }
 impl PartialEq for BaseAllocator {
     fn eq(&self, other: &Self) -> bool {
-        Arc::ptr_eq(&self.inner, &other.inner)
+        self.identity() == other.identity()
     }
 }
 impl Eq for BaseAllocator {}
 impl std::fmt::Debug for BaseAllocator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_tuple("BaseAllocator")
-            .field(&Arc::as_ptr(&self.inner))
+            .field(&Arc::as_ptr(&self.fields.inner))
             .finish()
-    }
-}
-
-impl BaseAllocator {
-    /// Typed allocation for RAII owners and collections, honouring the layout alignment.
-    fn allocate_typed(&self, layout: Layout) -> Option<NonNull<u8>> {
-        let (size, align) = (layout.size(), layout.align());
-        match &*self.inner {
-            AllocatorKind::Common | AllocatorKind::Heap => {
-                typed_heap::allocate(layout, MALLOC_ALIGNMENT)
-            }
-            AllocatorKind::Incremental(engine) => {
-                let mut engine = locked(engine);
-                let address = engine.allocate_aligned(size, align)?;
-                engine.acquire();
-                Some(address)
-            }
-            AllocatorKind::Accumulating(engine) => locked(engine).allocate_aligned(size, align),
-            AllocatorKind::Aligned(alignment) => {
-                typed_heap::allocate(layout, mm_malloc_alignment(*alignment)?)
-            }
-        }
-    }
-
-    /// Releases a raw-policy owner or a typed arena allocation.
-    ///
-    /// # Safety
-    /// `address` must come from this allocator's raw policy or typed arena and not be freed.
-    /// Layout-bearing heap allocations instead use `typed_heap::deallocate`.
-    unsafe fn free_typed(&self, address: NonNull<u8>) {
-        match &*self.inner {
-            AllocatorKind::Incremental(engine) => locked(engine).release(),
-            AllocatorKind::Accumulating(engine) => {
-                // Owned layouts can exceed native lookup windows; actual block extents retain them.
-                locked(engine)
-                    .free_owned(address.as_ptr().addr())
-                    .expect("owned accumulating allocation must retain its counted block");
-            }
-            // SAFETY: forwarded from this function's contract.
-            _ => unsafe { heap_free(address) },
-        }
     }
 }
 
@@ -437,18 +428,12 @@ unsafe impl Allocator for BaseAllocator {
         if layout.size() == 0 {
             return;
         }
-        let alignment = match &*self.inner {
-            AllocatorKind::Common | AllocatorKind::Heap => Some(MALLOC_ALIGNMENT),
-            AllocatorKind::Aligned(alignment) => mm_malloc_alignment(*alignment),
-            _ => None,
-        };
-        // SAFETY: caller returns this allocator's live block with its original layout.
-        unsafe {
-            if let Some(alignment) = alignment {
-                typed_heap::deallocate(pointer, layout, alignment);
-            } else {
-                self.free_typed(pointer);
-            }
+        if self.has_virtual_allocation(pointer) {
+            // SAFETY: caller returns the exact live typed allocation.
+            unsafe { self.free_virtual_typed(pointer) };
+            return;
         }
+        // SAFETY: arenas return their live range with the original lease and layout.
+        unsafe { self.free_typed(pointer) };
     }
 }

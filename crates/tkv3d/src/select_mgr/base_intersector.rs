@@ -59,8 +59,11 @@ pub trait SelectMgrBaseIntersector: Transient {
         builder: &Handle<SelectMgrFrustumBuilder>,
     ) -> Result<Handle<dyn SelectMgrBaseIntersector>, Failure>;
     /// `SetCamera`; `volume.set_camera(&camera)`.
-    fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
-        *self.intersector_base().camera.write() = camera.clone();
+    fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) {
+        *self.intersector_base().camera.write() = camera.clone_handle();
     }
     /// `WindowSize`: None by default (natively the out arguments are untouched).
     /// Example: `volume.window_size()`.

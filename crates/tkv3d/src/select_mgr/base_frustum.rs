@@ -39,9 +39,12 @@ impl SelectMgrBaseFrustumBase {
         }
     }
     /// Propagate a camera and invalidate the old viewport; `base.set_camera(&camera)`.
-    pub fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
-        *self.intersector.camera.write() = camera.clone();
-        let builder = self.builder.read().clone();
+    pub fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) {
+        *self.intersector.camera.write() = camera.clone_handle();
+        let builder = self.builder.read().observe();
         if let Some(builder) = builder.get() {
             builder.set_camera(camera);
             builder.invalidate_viewport();

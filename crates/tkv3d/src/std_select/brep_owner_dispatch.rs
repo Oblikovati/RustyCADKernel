@@ -1,7 +1,7 @@
 //! Native virtual highlight dispatch uses the actual BRep owner and its lazily created presentable child.
 use super::{StdSelectBRepOwner, StdSelectBRepOwnerMembers, StdSelectBRepOwnerSource};
 use crate::{prs_mgr::*, prs3d::Prs3dDrawer, select_mgr::*, v3d::V3dViewer};
-use rustycad_tkernel::standard::{Failure, Handle, raise_native_failure};
+use rustycad_tkernel::standard::{Failure, Handle, HandleReference, raise_native_failure};
 use rustycad_tkmath::toploc::Location;
 impl SelectMgrEntityOwnerSource for StdSelectBRepOwner {
     fn owner_base(&self) -> &SelectMgrEntityOwnerBase {
@@ -51,15 +51,20 @@ impl SelectMgrEntityOwnerSource for StdSelectBRepOwner {
     }
     fn update_highlight_trsf(
         &self,
-        viewer: &Handle<V3dViewer>,
-        manager: &Handle<PrsMgrPresentationManager>,
+        viewer: &dyn HandleReference<V3dViewer>,
+        manager: &dyn HandleReference<PrsMgrPresentationManager>,
         mode: i32,
     ) -> Result<(), Failure> {
         let child = self.brep_owner_base().presentation.read().clone();
         if child.is_null() && !self.has_selectable() {
             return Ok(());
         }
-        manager.update_highlight_trsf(viewer, &self.selectable().cast(), mode, &child.cast())
+        manager.observe().update_highlight_trsf(
+            &viewer.observe(),
+            &self.selectable().cast(),
+            mode,
+            &child.cast(),
+        )
     }
 }
 pub(super) fn brep_owner_effective_mode<S: StdSelectBRepOwnerSource + ?Sized>(

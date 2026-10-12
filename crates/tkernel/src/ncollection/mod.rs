@@ -173,6 +173,7 @@ pub mod packed_map_algo;
 mod aliased_array;
 pub use aliased_array::{AliasedArray, ArrayValue};
 
+#[allow(unsafe_code)]
 mod allocator_object;
 pub use allocator_object::{
     AccumulatingAllocatorObject, AlignedAllocatorObject, AllocatorObject, HeapAllocatorObject,
@@ -209,3 +210,8 @@ pub use sparse_array_base::{
 };
 
 mod map_payload;
+
+#[allow(unsafe_code)]
+mod allocator_source;
+pub use allocator::{AllocatorPhysicalStorage, AllocatorStorageLease};
+pub use allocator_source::AllocatorSource;

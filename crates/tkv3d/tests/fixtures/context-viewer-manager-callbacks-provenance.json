@@ -1,0 +1,34 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "status": "Standalone actual CurrentViewer/MainPrsMgr field-reference getter contracts; context/controller classes remain partial",
+  "row_count": 6,
+  "native_runs": "Two byte-identical exact integer local CPU runs",
+  "fixture_sha256": "dfcd5611fbf0975f736dbaeab4bdd5f9910197c64581386bfdb25a0c121de5e6",
+  "second_run_uncompressed_sha256": "dfcd5611fbf0975f736dbaeab4bdd5f9910197c64581386bfdb25a0c121de5e6",
+  "second_run_gzip_sha256": "a74a90d30896eff8b8e4f0a3bd23e8da4224914821aa6d46818923879233b236",
+  "oracle_executable_sha256": "6d851bfa5837bc54d478582aa45313966a4d89b5f5aedad6905ee53453d97ef4",
+  "sources": {
+    "tools/oracle/martensite_context_viewer_manager_callbacks.cxx": "5b52150867c7ba51870be438a3f4496e0ea02966e0c17bcdb3f2d8052a5155e8",
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
+    "../OCCT/src/Visualization/TKV3d/AIS/AIS_InteractiveContext.cxx": "4a5a57f205b5ab55fb9e9f97072d5dc2e48da871902abd61f4a24d4d8b8bd4ae"
+  },
+  "native_library_sha256": {
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKService.so.8.1.0": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so.8.1.0": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG3d.so.8.1.0": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKV3d.so.8.1.0": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomAlgo.so.8.1.0": "2e48df1c0073752ef3101428161e41d0a3a78067754a51acf7dbd60f703d9c8e",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKBRep.so.8.1.0": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKGeomBase.so.8.1.0": "bb5616b53df21edbc3e012d6b704e2e8d8cab670c89b362c97b2434589071a37",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKTopAlgo.so.8.1.0": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a"
+  },
+  "build": "g++ -std=c++17 -O0 with committed null-driver helper; main pinned occt-all-full include/libi/rpath; TKV3d TKG3d TKService TKMath TKernel plus drag-owner TKBRep TKGeomBase TKGeomAlgo TKTopAlgo. No temporary wrapper or OCCT build.",
+  "schema": "mode frame failure records[8] contextViewerIsReplacement contextManagerIsSecond originalViewerCount replacementViewerCount firstManagerCount secondManagerCount. Records: viewerSameField managerSameField oldViewerCount oldManagerCount seesNewViewer seesNewManager newViewerCount newManagerCount.",
+  "configuration": "Actual virtual EntityOwner UpdateHighlightTrsf receives genuine native CurrentViewer/MainPrsMgr field references; callback replaces actual protected context fields and invokes actual public SetDefaultDrawer. Success/Standard_Failure/unrelated then retry. No whole-context lock/owning snapshot across callback. Getter conveniences remain guards; new reference methods are required. No full Context/class credit.",
+  "comparison": "All integer columns exact; Rust-only committed asset replay; original failed logs retained, later green logs supersede.",
+  "final_checks": "Fresh standalone1128 TKService/TKV3d tests/8executables, both toolkit alltargetClippy -Dwarnings, globalfmt/diff, canonical13 and claimpreflight13 green. Actual pinnednightly61 getterfragment verified2unique productionbindings. Separate corrected import/guard-argument compile logs superseded by final replay/alltargets.",
+  "main_baseline": "8c4754e89",
+  "standalone_scope": "Only actual context field references, entity-owner virtual argument reference types, one directional-light forwarding call, support owner adaptation, test registry relocation and native6 replay. No fullFrame/input-buffer/drag/point ancestry."
+}

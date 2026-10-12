@@ -3,6 +3,7 @@ use crate::{
     brep_mesh::{GeomTool, IntersectionFlag},
     imesh_data::MEMORY_BLOCK_SIZE_HUGE,
 };
+use rustycad_tkernel::ncollection::BaseAllocator;
 use rustycad_tkernel::ncollection::{DynamicArray, IncrementalAllocatorObject, TreeSelector};
 use rustycad_tkmath::{
     bnd::BoundingBox2,
@@ -19,14 +20,19 @@ pub(super) struct SegmentSelector {
 }
 impl SegmentSelector {
     pub fn new(tolerance: f64) -> Self {
-        let allocator = IncrementalAllocatorObject::new(MEMORY_BLOCK_SIZE_HUGE);
+        let allocator = rustycad_tkernel::standard::Handle::new(IncrementalAllocatorObject::new(
+            MEMORY_BLOCK_SIZE_HUGE,
+        ));
         Self {
             segments: Handle::default(),
             current: FaceSegment::default(),
             self_index: -1,
             bounds: BoundingBox2::default(),
             max_loop_size: std::f64::consts::PI * tolerance * tolerance,
-            indices: DynamicArray::with_allocator(256, Some(allocator.resource().clone())),
+            indices: DynamicArray::with_allocator(
+                256,
+                Some(BaseAllocator::from_handle(&allocator)),
+            ),
             failure: None,
         }
     }

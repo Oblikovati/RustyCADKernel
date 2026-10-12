@@ -85260,7 +85260,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe."
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. Martensite genuine derived AllocatorSource dispatch/original identity at OCCT 3d097a0. Native dispatch4/forwarding2/retirement6/protected-construction4 records plus static const-handle ownership control; committed Rust replay and Miri. Actual object Drop precedes current Free on valid Heap owner loss; physical memory leases add zero native references and do not retain the derived object. Constructor maps the real zero-count embedded base, not an already-owned facade. Unrestricted callback-observer lifetime remains partial; no family/class completion or original four source-retirement API promotion. See docs/allocator-dispatch-and-storage.md.",
+      "source_sha256": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+      "cpp_declaration_id": "987586ba7eebf79ce0c381a655b9b0a35d34d8ae5faf1950c6017b081025acb4"
     },
     {
       "upstream_id": "NCollection_BaseAllocator::AllocateOptimal(size_t)",
@@ -85268,7 +85270,9 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe."
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. Martensite genuine derived AllocatorSource dispatch/original identity at OCCT 3d097a0. Native dispatch4/forwarding2/retirement6/protected-construction4 records plus static const-handle ownership control; committed Rust replay and Miri. Actual object Drop precedes current Free on valid Heap owner loss; physical memory leases add zero native references and do not retain the derived object. Constructor maps the real zero-count embedded base, not an already-owned facade. Unrestricted callback-observer lifetime remains partial; no family/class completion or original four source-retirement API promotion. See docs/allocator-dispatch-and-storage.md.",
+      "source_sha256": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+      "cpp_declaration_id": "f1c402509943dfa337e3e6eed340fda4767a5c2a8b163113108ad6d7526d5d53"
     },
     {
       "upstream_id": "NCollection_BaseAllocator::Free(void*)",
@@ -85276,23 +85280,29 @@
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
       "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw_nullable",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. Nullable entrypoint also reproduces Free(nullptr): common/heap/incremental/aligned succeed, accumulating raises Standard_ProgramError. See tools/oracle/ncollection_free_null.md. Supplemental evidence, no added legacy declaration."
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. Nullable entrypoint also reproduces Free(nullptr): common/heap/incremental/aligned succeed, accumulating raises Standard_ProgramError. See tools/oracle/ncollection_free_null.md. Supplemental evidence, no added legacy declaration. Martensite genuine derived AllocatorSource dispatch/original identity at OCCT 3d097a0. Native dispatch4/forwarding2/retirement6/protected-construction4 records plus static const-handle ownership control; committed Rust replay and Miri. Actual object Drop precedes current Free on valid Heap owner loss; physical memory leases add zero native references and do not retain the derived object. Constructor maps the real zero-count embedded base, not an already-owned facade. Unrestricted callback-observer lifetime remains partial; no family/class completion or original four source-retirement API promotion. See docs/allocator-dispatch-and-storage.md.",
+      "source_sha256": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+      "cpp_declaration_id": "f5218d9c113f56fcea73a3b36b41586cd48bb1604e1c3ee4cb761e04d1a3161a"
     },
     {
       "upstream_id": "NCollection_BaseAllocator::CommonBaseAllocator()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::common",
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorObject::common_base_allocator",
       "status": "implemented",
-      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The singleton is a process-wide OnceLock, never destroyed, as upstream's leaked static."
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The singleton is a process-wide OnceLock, never destroyed, as upstream's leaked static. Martensite genuine derived AllocatorSource dispatch/original identity at OCCT 3d097a0. Native dispatch4/forwarding2/retirement6/protected-construction4 records plus static const-handle ownership control; committed Rust replay and Miri. Actual object Drop precedes current Free on valid Heap owner loss; physical memory leases add zero native references and do not retain the derived object. Constructor maps the real zero-count embedded base, not an already-owned facade. Unrestricted callback-observer lifetime remains partial; no family/class completion or original four source-retirement API promotion. See docs/allocator-dispatch-and-storage.md.",
+      "source_sha256": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+      "cpp_declaration_id": "75151570e9f8198dde1de07a25bb904a3f7fbb77f17edeabf37d4f89c17d03a5"
     },
     {
       "upstream_id": "NCollection_BaseAllocator::NCollection_BaseAllocator() noexcept",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
-      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::fresh_common",
-      "status": "partial",
-      "notes": "Rust creates a distinct common-policy allocator identity with the same Standard::Allocate/Free behavior. OCCT's constructor is protected and is exercised through a derived native probe; Rust does not claim native subclassing or RTTI. Native identity/allocation probe: tools/oracle/tkernel_acc_allocator_instances.md; header SHA-256 dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e."
+      "rust_item": "rustycad_tkernel::ncollection::AllocatorObject::<core::default::Default>::default",
+      "status": "implemented",
+      "notes": "Rust creates a distinct common-policy allocator identity with the same Standard::Allocate/Free behavior. OCCT's constructor is protected and is exercised through a derived native probe; Rust does not claim native subclassing or RTTI. Native identity/allocation probe: tools/oracle/tkernel_acc_allocator_instances.md; header SHA-256 dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e. Martensite genuine derived AllocatorSource dispatch/original identity at OCCT 3d097a0. Native dispatch4/forwarding2/retirement6/protected-construction4 records plus static const-handle ownership control; committed Rust replay and Miri. Actual object Drop precedes current Free on valid Heap owner loss; physical memory leases add zero native references and do not retain the derived object. Constructor maps the real zero-count embedded base, not an already-owned facade. Unrestricted callback-observer lifetime remains partial; no family/class completion or original four source-retirement API promotion. See docs/allocator-dispatch-and-storage.md.",
+      "source_sha256": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+      "cpp_declaration_id": "4c2ed1877a2009771090593a9014e53e2a7b87af4f88bf88a523d10ca2c48d64"
     },
     {
       "upstream_id": "NCollection_IncAllocator::NCollection_IncAllocator(size_t)",
@@ -563674,8 +563684,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dLineAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dLineAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_LineAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -564206,8 +564216,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dPointAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dPointAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_PointAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -564522,8 +564532,8 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles.",
-      "rust_item": "rustycad_tkv3d::prs3d::Prs3dShadingAspect::aspect",
+      "notes": "Prs3d aspect mapping (v3d-design.md section 1): each aspect class is a transient struct that implements the Prs3dBasicAspect trait (the abstract Prs3d_BasicAspect and its DumpJson), with its settable fields and Graphic3d aspect handle behind one SharedState, so a change is seen by every handle; constructors that build a Graphic3d aspect return the Standard_OutOfRange of its width or scale checks as Failure; getters that return const references natively return copies or handles. Corrected 2026-10-12: bind the genuine aspect_ref const-field alias, not the owning aspect() convenience. Pinned native nine-row replay proves actual slot identity, setter replacement/null visibility and unchanged intrusive counts; callback regression permits setter replacement without retaining the target or holding the field lock. See porting/runtime-evidence/aspect-slot-reference-2026-10-12.",
+      "rust_item": "rustycad_tkv3d::prs3d::Prs3dShadingAspect::aspect_ref",
       "source": "src/Visualization/TKV3d/Prs3d/Prs3d_ShadingAspect.hxx",
       "status": "implemented",
       "toolkit": "TKV3d",
@@ -566087,92 +566097,114 @@
       "generated_by": "tools/generate_api_macro_rows.py"
     },
     {
-      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default).",
+      "upstream_id": "V3d_ImageDumpOptions",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "4861136baed7484ecb65dbdca573d1fbc136b136c509df073807b4a8fb2a82ae",
       "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions",
+      "status": "partial",
+      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default). Martensite OCCT 3d097a0 public ImageDumpOptions audit: Actual public value fields are mapped, but native LightName is a borrowed const char* and Rust String ownership/copy semantics do not preserve that contract. Rust derives Clone, not Copy; no whole struct completion."
+    },
+    {
+      "upstream_id": "V3d_ImageDumpOptions::BufferType",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "eb52d5fc2fea84de8d7658a6e9de27fa2be1f69e645d19e458daae58b3783052",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::buffer_type",
       "status": "implemented",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions"
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::Height",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::BufferType"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "d16c8ad3644fe6a495f57f86550428544ba727227b119cf0df3419bed1f6de0e",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::height",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::IsSingleLayer",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::Height"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "397501365b71ed7c59058a04cd3b21ed6daae8498b6fd7be618c00af0515ecf8",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::is_single_layer",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::LightName",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::IsSingleLayer"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "0737790281c20453a9a923e771f6da50649328334554ceffbf923ffc4901ab54",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::light_name",
+      "status": "partial",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite OCCT 3d097a0 public ImageDumpOptions audit: Public native const char* field; Rust String value counterpart exists, but arbitrary borrowed buffer pointer identity, external mutation, shallow-copy alias and lifetime are not implemented/proved. Exclusion as private state was false; keep full obligation open."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::StereoOptions",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::LightName"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "6605fdbe3a96d61867fd7dda9aa76b13380ff9c7592c599ca8c85c62fbc9f590",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::stereo_options",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::TargetZLayerId",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::StereoOptions"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "f0e8688390b9fe9cef753bc7fff89875a6542afbc3f6e187cf0b18b2e3130b02",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::target_z_layer_id",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::TileSize",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::TargetZLayerId"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "091a6d4d73374aae47a1c3b48086d1906fcac8ea650b0a9b46738eca7b09e6cc",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::tile_size",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::ToAdjustAspect",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::TileSize"
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "2e190c2c266f6f6fb8cba59eb5d9d33fb942efbfef97dbb389163f949ef28c91",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::to_adjust_aspect",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
+      "upstream_id": "V3d_ImageDumpOptions::V3d_ImageDumpOptions",
+      "toolkit": "TKV3d",
       "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::ToAdjustAspect"
-    },
-    {
-      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default).",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "9cff6eb7e8beab3f4494ad2c63be1d2086887cb03e164f5b681a4df04741d53d",
       "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::<core::default::Default>::default",
-      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
       "status": "implemented",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::V3d_ImageDumpOptions"
+      "notes": "V3d_ImageDumpOptions mapping: a Copy value struct with the native defaults (Default). Martensite OCCT 3d097a0 public ImageDumpOptions audit: Native zero/RGB/Mono/BottomOSD/true/false value defaults match Rust Default and repeated native fixture; LightName default is empty text, while general borrowed field lifetime remains partial. Rust type is Clone, not Copy."
     },
     {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
-      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
-      "status": "excluded",
+      "upstream_id": "V3d_ImageDumpOptions::Width",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_ImageDumpOptions::Width"
+      "source": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+      "source_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+      "cpp_declaration_id": "622be08bf627c9e0083fc9edca04809f87926a257d527f98b1df2352a66f0dd5",
+      "rust_item": "rustycad_tkv3d::v3d::V3dImageDumpOptions::width",
+      "status": "implemented",
+      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dImageDumpOptions (v3d-design.md section 1); its value is reached through the ported accessors. Martensite public mutable value field, not private state. Pinned OCCT 3d097a0 native15-record default/direct-assignment/copy fixture and Rust-only replay cover all valid named buffer/stereo variants, booleans and signed integer assignments. No ToPixMap/rendering or LightName pointer-lifetime completion inferred. See docs/image-dump-options-values.md."
     },
     {
       "notes": "Typedef of Graphic3d_CLight: Rust spells the light as Handle<rustycad_tkservice::graphic3d::Graphic3dCLight>.",
@@ -567636,7 +567668,7 @@
       "cpp_declaration_id": "02629eed1e7f1d062015a4ec5948d7bd3c5a23a75888d5c1b894ca456c62153d",
       "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::add_clip_plane",
       "rust_kind": "function",
-      "status": "implemented",
+      "status": "partial",
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::v3d::V3dViewSource::add_clip_plane",
@@ -567644,7 +567676,7 @@
           "impl_context": null
         }
       ],
-      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Contract audit 2026-10-12: valid native ClipPlanes getter callbacks replace the protected myView slot, while AddClipPlane/RemoveClipPlane retain the old sequence and reread myView for SetClipPlanes. Current Rust stores an immutable private driver-view Handle and cannot represent this proven native callback. Full behavior remains partial pending genuine live protected-field storage and setter reread."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -568520,7 +568552,7 @@
       "cpp_declaration_id": "49da25f1a5b9af0e44842595015f299282c5de83c2df9d6010f5d7f8c01bd75d",
       "rust_item": "rustycad_tkv3d::v3d::V3dViewSource::remove_clip_plane",
       "rust_kind": "function",
-      "status": "implemented",
+      "status": "partial",
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::v3d::V3dViewSource::remove_clip_plane",
@@ -568528,7 +568560,7 @@
           "impl_context": null
         }
       ],
-      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md."
+      "notes": "Martensite real owned view subclasses and live native references: 35 pinned CPU oracle records, Rust-only replay, native intrusive counts and callback/failure ordering. Existing rendering edge-row strict failures preserved; classes/constructors and Viewer activation remain partial. See docs/v3d-view-source.md. Contract audit 2026-10-12: valid native ClipPlanes getter callbacks replace the protected myView slot, while AddClipPlane/RemoveClipPlane retain the old sequence and reread myView for SetClipPlanes. Current Rust stores an immutable private driver-view Handle and cannot represent this proven native callback. Full behavior remains partial pending genuine live protected-field storage and setter reread."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -569564,14 +569596,6 @@
       "status": "excluded",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::myOldMouseY"
-    },
-    {
-      "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dView (v3d-design.md section 1); its value is reached through the ported accessors.",
-      "rust_item": null,
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "excluded",
-      "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::myView"
     },
     {
       "upstream_id": "V3d_View::DynamicType() const",
@@ -572844,8 +572868,8 @@
       "source_sha256": "21a256ed88f430e1cfe8bb060786cf601dce9f41ffd3b64f873427e752e21845",
       "cpp_declaration_id": "08b79a06b1b5aa8e614decfe338f3f064c7355c513297a73651ffc7939f332b2",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera",
-      "status": "implemented",
-      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available."
+      "status": "partial",
+      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
     },
     {
       "upstream_id": "SelectMgr_FrustumBuilder::SignedPlanePntDist(const NCollection_Vec3<double> &, const NCollection_Vec3<double> &) const",
@@ -572895,7 +572919,28 @@
       "cpp_declaration_id": "4e318ad239756cb0881d68c6365460bd10c700a7fcc0b47dffc65f74f24247d0",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_camera",
       "status": "implemented",
-      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available."
+      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_camera",
+          "declaration_sha256": "283e19376bd7ab1d91fb1bf54f41550467efb695209fec39a27f6297f864e84a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrFrustumBuilder",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_FrustumBuilder::SetWindowSize(const int, const int)",
@@ -573105,7 +573150,15 @@
       "cpp_declaration_id": "0e75b254319f3c203156749fe9c0fcc48bcd2d86dfb43d373551d4578a9bef9a",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_camera",
       "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_camera",
+          "declaration_sha256": "ccae81c8a5cd3aa0daec769bc0daccd56ac04e7afd443ec8476785ffb87ff523",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::OverlapsSegment(const class gp_Pnt &, const class gp_Pnt &, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
@@ -573454,8 +573507,8 @@
       "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
       "cpp_declaration_id": "ff40e8623c6adfe8cbbdc5aa2c8d6a0f050dc8bbc7b8e7464afd662ffed5549e",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera",
-      "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::DynamicType() const",
@@ -573605,7 +573658,28 @@
       "cpp_declaration_id": "fe3fd64acc2fd93eae1d4a6ea5a5d20039e05b546fd7b4a62d1e21da749cac4f",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera",
       "status": "implemented",
-      "notes": "Full base-frustum state and concrete native bodies, delegated by derived intersectors; see v3d-design.md section 6. Nine Rust tests and 1032 added native comparisons cover default independent builders, tolerance, camera/viewport propagation, builder replacement/removal, dump depth, boundary closure/projection, unchanged inside outputs, virtual sphere overrides and projected-direction failure. DumpJson compared on matching readable streams. No claim of concrete rectangular/triangular frustum implementations."
+      "notes": "Full base-frustum state and concrete native bodies, delegated by derived intersectors; see v3d-design.md section 6. Nine Rust tests and 1032 added native comparisons cover default independent builders, tolerance, camera/viewport propagation, builder replacement/removal, dump depth, boundary closure/projection, unchanged inside outputs, virtual sphere overrides and projected-direction failure. DumpJson compared on matching readable streams. No claim of concrete rectangular/triangular frustum implementations. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseFrustumBase::set_camera",
+          "declaration_sha256": "767bd24740fb43213482239deee679db9998f2a0ce2171ba03b4247617105b2c",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrBaseFrustumBase",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::base_frustum::SelectMgrBaseFrustumBase",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_BaseFrustum::SelectMgr_BaseFrustum()",
@@ -574272,9 +574346,34 @@
       "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
       "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
       "cpp_declaration_id": "76dc23b39865f682038112e3d4f6c7bad71f68d21660ec10c08c04bcedb30b66",
-      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::set_camera",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector>::set_camera",
       "status": "implemented",
-      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector>::set_camera",
+          "declaration_sha256": "786f770d7219957b778166bcd272270e0a33d98c35589af73c99849a4cea7110",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrAxisIntersector",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::axis_intersector::SelectMgrAxisIntersector",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": {
+              "path": "SelectMgrBaseIntersector",
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector",
+              "args": null
+            }
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_AxisIntersector::OverlapsCylinder(double, double, double, const class gp_Trsf &, bool, bool *) const",
@@ -575373,8 +575472,8 @@
       "source_sha256": "3d27e65092106743071f046b4eab21052d53eefdced55195873ced8ab5be51a2",
       "cpp_declaration_id": "4b98d620e66c73dc4993a8150a96a628d391d6e5feedc1a81bdf23ce1ec14adb",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera",
-      "status": "implemented",
-      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
     },
     {
       "upstream_id": "SelectMgr_SelectingVolumeManager::SetViewClipping(const class SelectMgr_SelectingVolumeManager &)",
@@ -575634,7 +575733,28 @@
       "cpp_declaration_id": "c3d6827f568ff30171488469c3963428ca97f6934f202c440c19608310990b3f",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_camera",
       "status": "implemented",
-      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6."
+      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_camera",
+          "declaration_sha256": "4dd96fdb22e9b78b8d48914fc73fcb85b3a3c05e49d85eed31174635a939cdcb",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrSelectingVolumeManager",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::selecting_volume::SelectMgrSelectingVolumeManager",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_SelectingVolumeManager::ViewClipRanges() const",
@@ -578362,9 +578482,30 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
       "cpp_declaration_id": "0e3dabacaa9b5973f39cc2c33091dbff0f914a0c8fafdcff826d2f180ee9b0fc",
-      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer_ref",
       "status": "implemented",
-      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md."
+      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md. Contract audit 2026-10-12: native const Handle& aliases the actual mutable context field. The current Rust AisContextHandle holds a whole-context read guard across use, blocking declared callback context mutation and retained-slot replacement observation. Status remains partial until the genuine current_viewer_ref/main_prs_mgr_ref paths are integrated and the compiler bindings retargeted; native six-row proof exists on controller checkpoint f4cafd57f. Checked replacement: Martensite actual context field reference, no retained lock or intrusive copy; actual native owner callback replaces fields, invokes SetDefaultDrawer and observes same references/counts, typed/unrelated faults and retry. Six exact pinned native rows twice byte-identical and Rust-only replay. Replaces former guarded convenience binding; context/controller classes remain partial. See docs/context-field-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::current_viewer_ref",
+          "declaration_sha256": "4acd1ecbff6f9ef858aed0d1e5cbfcfc650fbff40e334f72fabbaca2da520db7",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_KindOfInteractive_Datum",
@@ -578862,9 +579003,30 @@
       "source": "src/Visualization/TKV3d/AIS/AIS_InteractiveContext.hxx",
       "source_sha256": "6b370203ece170ab06e6ea372a84596ceef164233afa1dc3471a224eb3faa44b",
       "cpp_declaration_id": "9c260731897ffc63e499abb6e5c6798904345b7d28ee4f9b8b4e30301a21dcd7",
-      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr",
+      "rust_item": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr_ref",
       "status": "implemented",
-      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md."
+      "notes": "Native AIS context/object behavior at OCCT 3d097a0: actual presentation and selection managers; shared highlight-plane-edge graphics; borrowed retained handles; weak non-owning context links; callback ordering and partial failures; selection replacement with virtual destructor Clear dispatch; real last-group aspect updates and presentation lookup; enum aliases and dump override. Fourteen direct tests, 570 new native cases and an isolated native/Rust SIGABRT comparison for failure in noexcept destruction. Native uninitialized myLastActiveView safely starts null; native oracle initializes its protected pointer explicitly. Context class remains partial; picking/display lifecycle beyond documented methods is not claimed. See docs/v3d-design.md. Contract audit 2026-10-12: native const Handle& aliases the actual mutable context field. The current Rust AisContextHandle holds a whole-context read guard across use, blocking declared callback context mutation and retained-slot replacement observation. Status remains partial until the genuine current_viewer_ref/main_prs_mgr_ref paths are integrated and the compiler bindings retargeted; native six-row proof exists on controller checkpoint f4cafd57f. Checked replacement: Martensite actual context field reference, no retained lock or intrusive copy; actual native owner callback replaces fields, invokes SetDefaultDrawer and observes same references/counts, typed/unrelated faults and retry. Six exact pinned native rows twice byte-identical and Rust-only replay. Replaces former guarded convenience binding; context/controller classes remain partial. See docs/context-field-references.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::ais::AisInteractiveContext::main_prs_mgr_ref",
+          "declaration_sha256": "8c052f35b3c3b97ec920db044324aba3659d9027820926489f22fd2f4c9b2aa2",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::AisInteractiveContext",
+                "resolved_item_path": "rustycad_tkv3d::ais::interactive_context::AisInteractiveContext",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "AIS_InteractiveObject::InteractiveContext() const",
@@ -595505,7 +595667,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
-          "declaration_sha256": "e2b06612eedfe358330f90a691573a6c68cb0a1be0f77cb58d314ee0301a22d7",
+          "declaration_sha256": "a9991fd5ffb4f536611018b2b916726ec06554b0cfb1b57e908555eedafa4904",
           "impl_context": null
         }
       ]
@@ -595523,7 +595685,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
-          "declaration_sha256": "8503701ad9b17fcb0e3c91fab3f42d399c72aa7a824fc9ccc0379ceea3685828",
+          "declaration_sha256": "4b7c56693f8793b53469a637c22c4cd5a53ef663868b321861d9d6d49247350f",
           "impl_context": null
         }
       ]
@@ -595541,7 +595703,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
-          "declaration_sha256": "0011e89db4b640bbd903102c1cda4e055e699ae1454b8b7044e97041f36ac881",
+          "declaration_sha256": "9e4e13d7f60078cf19c650cc71c63ca0cc68530db91dd5103747d0490c863b1a",
           "impl_context": null
         }
       ]
@@ -595559,7 +595721,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
-          "declaration_sha256": "8ec5b9f106bca7acf3b8754608767f930dd7dd980271d0b7c05d083e3c0c0ee8",
+          "declaration_sha256": "545bf357cf24bd9bab8fc5e40c24289d06d3c648cb5141fba8ed14ed5317563b",
           "impl_context": null
         }
       ]
@@ -597483,7 +597645,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "fe529738f364b5a824d5ccb9b67fda7830ef455a65db74ec57a257d8ab8176a5",
+          "declaration_sha256": "3d2b57fdcd75ffad83660211c59c6bf752be1be2f10e4027a92b46081f718839",
           "impl_context": null
         }
       ]
@@ -597642,7 +597804,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "3b9a250f6af102ecf3bd2613a2d62bad66d208cfbb115e4ece481e34812ce200",
+          "declaration_sha256": "ccb47cbda7b8be44c89a42c530a35b4522cc1efc4f3619240b92af488d7104be",
           "impl_context": null
         }
       ]
@@ -598731,7 +598893,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisTypeOfIso",
-          "declaration_sha256": "fa8afb38077cb77864349455d4668b39d46a31697c4e624e7f70bdff688721ee",
+          "declaration_sha256": "014e3fbad8d110e87cb48fa9839487faeae35e0625cbe3e8663f10738d0222b4",
           "impl_context": null
         }
       ],

@@ -77,6 +77,8 @@ mod handle_reference;
 pub use handle_reference::{HandleReference, ProjectedHandleReference};
 mod handle_field_ref;
 pub use handle_field_ref::HandleFieldRef;
+mod weak_handle_field_ref;
+pub use weak_handle_field_ref::WeakHandleFieldRef;
 
 mod weak_handle_slot_ref;
 pub use weak_handle_slot_ref::WeakHandleSlotRef;

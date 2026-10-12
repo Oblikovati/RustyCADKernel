@@ -1,0 +1,69 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_runs": "local CPU only",
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "header_sha256": "dfe168fc91f72b4e20391d015aca19da751d505f79795e4af3d0174cc71d321e",
+  "library_sha256": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+  "probes": [
+    {
+      "probe": "dispatch",
+      "source": "tools/oracle/martensite_allocator_dispatch.cxx",
+      "source_sha256": "e64227b16fd1eda54621224b3def96c44a28ba4fc3ea5d1ec14887cd260b389b",
+      "executable_sha256": "460a19b11da1e12af36a1ee3c3b6f40b26ac79f8ff6e761dae6f4d4b93d54e90",
+      "fixture": "crates/tkernel/tests/fixtures/allocator-dispatch-native.txt",
+      "fixture_sha256": "27b9629dc8be4e987ebd24ab3da0c1386535365e4bacd015d0e7f83f9f06d5ea",
+      "rows": 4,
+      "repeat_byte_identical": true,
+      "exits": [
+        0,
+        0
+      ]
+    },
+    {
+      "probe": "forwarding",
+      "source": "tools/oracle/martensite_allocator_forwarding.cxx",
+      "source_sha256": "07281a7bd117f43a17f0f9894146f4e7b80e7cc22ed485a1c2c0091f391a2a95",
+      "executable_sha256": "fd47b80afac0c34831533d71e121f72c888bc019ed7ea50500a748616f4a45f3",
+      "fixture": "crates/tkernel/tests/fixtures/allocator-forwarding-native.txt",
+      "fixture_sha256": "905ca801f0a72f50a3203527da9b73b7ccea501bb64536aaf2ab946361016158",
+      "rows": 2,
+      "repeat_byte_identical": true,
+      "exits": [
+        0,
+        0
+      ]
+    },
+    {
+      "probe": "retirement",
+      "source": "tools/oracle/martensite_allocator_retirement.cxx",
+      "source_sha256": "688b780dd53cd7814faf3488393a6d5e642dbdfb86d7f07aee6bd11165966952",
+      "executable_sha256": "c789224787d8d84355554fb6ba03eb20aa93dd5bea12cf0153214aee813e61a6",
+      "fixture": "crates/tkernel/tests/fixtures/allocator-retirement-native.txt",
+      "fixture_sha256": "31f7498f510083521fb868179e9e18813733822f9215a16a158202a9e5081ff6",
+      "rows": 6,
+      "repeat_byte_identical": true,
+      "exits": [
+        0,
+        0
+      ]
+    },
+    {
+      "probe": "construction",
+      "source": "tools/oracle/martensite_allocator_construction.cxx",
+      "source_sha256": "0e5807cf5b2e6304e9eb5db2e016b22101d172cf5b63280c24118a126483630d",
+      "executable_sha256": "35d936e37e66a7f07f555af179cbc312684126fdab4ef64a476d052274b38134",
+      "fixture": "crates/tkernel/tests/fixtures/allocator-construction-native.txt",
+      "fixture_sha256": "f7dd047b7929b667a82f5dbc5b94f82afd46122a76cdbe8b7ba5073634054234",
+      "rows": 5,
+      "repeat_byte_identical": true,
+      "exits": [
+        0,
+        0
+      ]
+    }
+  ],
+  "whole_family_complete": false,
+  "native_constructor_rows_replayed": 4,
+  "native_static_reference_control_rows": 1,
+  "original_four_texture_source_apis_complete": false
+}

@@ -426,3 +426,5 @@ mod textured_shape_retirement;
 pub use textured_shape_retirement::{
     AisTexturedShapeRetirement, ais_textured_shape_with_retirement,
 };
+
+mod context_frame_handle_references;

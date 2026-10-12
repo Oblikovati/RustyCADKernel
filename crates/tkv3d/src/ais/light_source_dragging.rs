@@ -78,7 +78,11 @@ fn apply_light_drag<O: AisLightSourceSource + ?Sized>(
     } else {
         0
     };
-    owner.update_highlight_trsf(&context.current_viewer(), &context.main_prs_mgr(), mode)
+    owner.update_highlight_trsf(
+        &context.current_viewer_ref(),
+        &context.main_prs_mgr_ref(),
+        mode,
+    )
 }
 
 fn start_light_drag<O: AisLightSourceSource + ?Sized>(object: &O) -> Result<bool, Failure> {
