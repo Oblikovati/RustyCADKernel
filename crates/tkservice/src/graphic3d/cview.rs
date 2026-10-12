@@ -30,6 +30,7 @@ use rustycad_tkernel::tcollection::AsciiString;
 use rustycad_tkmath::bnd::BoundingBox3;
 use rustycad_tkmath::gp::Axis3;
 use std::io;
+use std::sync::Arc;
 
 /// The protected fields of a view.
 pub struct Graphic3dCViewFields {
@@ -112,7 +113,7 @@ pub struct Graphic3dCViewFields {
 /// The embedded state of a view.
 pub struct Graphic3dCViewBase {
     /// The fields, shared by every handle.
-    pub fields: SharedState<Graphic3dCViewFields>,
+    pub fields: Arc<SharedState<Graphic3dCViewFields>>,
     /// The view itself (`this`), set by [`graphic3d_cview_register`].
     this: SharedState<WeakHandle<dyn Graphic3dCView>>,
 }
@@ -164,7 +165,7 @@ impl Graphic3dCViewBase {
             unit_factor: 1.0,
         };
         Ok(Self {
-            fields: SharedState::new(fields),
+            fields: Arc::new(SharedState::new(fields)),
             this: SharedState::new(WeakHandle::default()),
         })
     }
@@ -212,7 +213,7 @@ pub trait Graphic3dCView: Graphic3dDataStructureManager {
     /// The embedded base; `view.cview_base()`.
     fn cview_base(&self) -> &Graphic3dCViewBase;
     /// Override the genuine native Camera getter's selected slot; `view.cview_camera_ref()`.
-    fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
+    fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera>> {
         super::cview_camera_reference::graphic3d_cview_camera_ref(self.cview_base())
     }
     /// `Activate`: displays the accepted structures of the manager and updates; `view.activate()`.
