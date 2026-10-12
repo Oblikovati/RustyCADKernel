@@ -168,3 +168,18 @@ fn osd_error_is_a_standard_failure_without_an_intermediate_osd_base() {
     assert!(!failure.is_kind("OSD_Exception"));
     assert!(!failure.is_kind("OSD_Signal"));
 }
+
+#[test]
+fn external_declared_parent_survives_clone_and_base_assignment() {
+    let source = Failure::with_type("Martensite_TestError", "why", "trace")
+        .with_exception_parent("Standard_OutOfRange");
+    assert!(source.clone().is_kind("Standard_RangeError"));
+    let mut destination = source.clone();
+    destination.assign_base(&Failure::new("replacement"));
+    assert!(destination.is_kind("Standard_DomainError"));
+    assert_eq!(destination.message(), "replacement");
+    let sliced = Failure::copy_base(&source);
+    assert_eq!(sliced.exception_type(), "Standard_Failure");
+    assert!(!sliced.is_kind("Standard_OutOfRange"));
+    assert_eq!(sliced.stack_string(), "trace");
+}
