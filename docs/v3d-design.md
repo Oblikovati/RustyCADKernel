@@ -26,6 +26,15 @@ graphic driver only through the TKService traits (`Graphic3dGraphicDriver`, `Gra
 the same traits. Its [implementation sequence](visualization-design.md#6-vulkan-implementation-sequence)
 is active work under the current porting priorities.
 
+`Prs3dLineAspect`, `Prs3dPointAspect` and `Prs3dShadingAspect` map native
+`Aspect()` const-handle references to `aspect_ref()`. These aliases identify the
+actual member slot, observe later `set_aspect` replacement or null assignment,
+and release field locks before callbacks without incrementing intrusive counts.
+Use `aspect_ref().clone_handle()` when ownership is needed; `aspect()` remains
+an owning convenience. The pinned nine-row native replay and mutation regression
+are recorded in
+[the integration receipt](../porting/runtime-evidence/aspect-slot-reference-2026-10-12/receipt.json).
+
 ## 2. Selecting volumes
 
 `SelectBasics_SelectingVolumeManager` is the trait `SelectBasicsSelectingVolumeManager`. Its

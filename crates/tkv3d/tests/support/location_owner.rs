@@ -31,13 +31,19 @@ impl SelectMgrEntityOwnerSource for LocationOwner {
     }
     fn update_highlight_trsf(
         &self,
-        viewer: &Handle<V3dViewer>,
-        manager: &Handle<PrsMgrPresentationManager>,
+        viewer: &dyn rustycad_tkernel::standard::HandleReference<V3dViewer>,
+        manager: &dyn rustycad_tkernel::standard::HandleReference<PrsMgrPresentationManager>,
         mode: i32,
     ) -> Result<(), Failure> {
         let context = self.context.upgrade();
-        assert_eq!(*context.current_viewer(), *viewer);
-        assert_eq!(*context.main_prs_mgr(), *manager);
+        assert_eq!(
+            context.current_viewer_ref().object_address(),
+            viewer.object_address()
+        );
+        assert_eq!(
+            context.main_prs_mgr_ref().object_address(),
+            manager.object_address()
+        );
         self.modes.write().push(mode);
         Ok(())
     }

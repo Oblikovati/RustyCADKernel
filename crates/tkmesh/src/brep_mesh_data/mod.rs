@@ -17,7 +17,7 @@ pub type MeshAllocator = Handle<IncrementalAllocatorObject>;
 pub(crate) fn arena_vector<T>(allocator: &MeshAllocator) -> ArenaVec<T, BaseAllocator> {
     let resource = allocator
         .get()
-        .map(|a| a.resource().clone())
+        .map(|_| BaseAllocator::from_handle(allocator))
         .unwrap_or_else(BaseAllocator::common);
     ArenaVec::new_in(resource)
 }

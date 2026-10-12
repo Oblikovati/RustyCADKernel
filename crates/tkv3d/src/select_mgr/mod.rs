@@ -191,3 +191,10 @@ mod sensitive_presentation_triangles;
 pub use sensitive_presentation::SelectMgr;
 mod viewer_selector_display;
 pub use viewer_selector_display::SelectMgrViewerSelectorDisplayMembers;
+
+#[cfg(test)]
+mod camera_argument_fixture;
+#[cfg(test)]
+mod camera_argument_geometry_tests;
+#[cfg(test)]
+mod camera_argument_tests;

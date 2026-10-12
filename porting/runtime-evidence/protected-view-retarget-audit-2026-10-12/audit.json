@@ -1,0 +1,40 @@
+{
+  "source_main": "164e3d36c",
+  "changed_rows": [
+    {
+      "upstream_id": "V3d_View::AddClipPlane",
+      "cpp_declaration_id": "02629eed1e7f1d062015a4ec5948d7bd3c5a23a75888d5c1b894ca456c62153d",
+      "before": "implemented",
+      "after": "partial",
+      "reason": "Contract audit 2026-10-12: valid native ClipPlanes getter callbacks replace the protected myView slot, while AddClipPlane/RemoveClipPlane retain the old sequence and reread myView for SetClipPlanes. Current Rust stores an immutable private driver-view Handle and cannot represent this proven native callback. Full behavior remains partial pending genuine live protected-field storage and setter reread."
+    },
+    {
+      "upstream_id": "V3d_View::RemoveClipPlane",
+      "cpp_declaration_id": "49da25f1a5b9af0e44842595015f299282c5de83c2df9d6010f5d7f8c01bd75d",
+      "before": "implemented",
+      "after": "partial",
+      "reason": "Contract audit 2026-10-12: valid native ClipPlanes getter callbacks replace the protected myView slot, while AddClipPlane/RemoveClipPlane retain the old sequence and reread myView for SetClipPlanes. Current Rust stores an immutable private driver-view Handle and cannot represent this proven native callback. Full behavior remains partial pending genuine live protected-field storage and setter reread."
+    }
+  ],
+  "removed_exclusion": {
+    "notes": "C++ data member with no Rust counterpart: the field is private state of rustycad_tkv3d::v3d::V3dView (v3d-design.md section 1); its value is reached through the ported accessors.",
+    "rust_item": null,
+    "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+    "status": "excluded",
+    "toolkit": "TKV3d",
+    "upstream_id": "V3d_View::myView"
+  },
+  "field_cpp_declaration_id": "aff33cff2a320e6da6f2404572c0e6111c1ed770e778c4f2fdb517e4a6667735",
+  "field_reason": "Pinned V3d_View.hxx declares myView protected at line1205 after protected:1197, not private. Remove the invalid exclusion; keep the field open until genuine mutable protected storage is ported.",
+  "rust_source_sha256": {
+    "crates/tkv3d/src/v3d/view.rs": "7738df9dce447a2797f0f2cc820d7008b72b07dc61c22f5e5e2e3c5b96e7dd36",
+    "crates/tkv3d/src/v3d/view_source_clipping.rs": "71951a42d25a722ba71ddd1d2321d8f0ba42418a83fe3d1c25986af925484666",
+    "crates/tkv3d/src/v3d/view_render.rs": "b8d751b07ec3e9b4ecd080e89381585bcd640f2b25b24885455cf79c4eb956a5"
+  },
+  "native_capture_repeat_exact": true,
+  "native_proof_scope": [
+    "AddClipPlane",
+    "RemoveClipPlane"
+  ],
+  "View_and_Camera_getter_downgrades": "Not inferred from class incompleteness; retained-slot native proof pending."
+}

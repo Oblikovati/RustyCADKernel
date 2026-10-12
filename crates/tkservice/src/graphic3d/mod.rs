@@ -307,3 +307,7 @@ mod texture_2d_rtti_tests;
 
 mod cview_camera_reference;
 pub use cview_camera_reference::{Graphic3dDataStructureManager, graphic3d_cview_camera_ref};
+
+#[cfg(test)]
+mod array_buffer_reference_tests;
+mod array_buffer_references;

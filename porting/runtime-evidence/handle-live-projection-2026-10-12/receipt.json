@@ -1,0 +1,24 @@
+{
+  "original_prerequisites": [
+    "e147f7c65f827d1a899420356434dc8403a3547a",
+    "6c41b034c92ad5100363ad26f05c39dc0a82fd3e"
+  ],
+  "scope": "Only reusable TKernel observe_as and ProjectedHandleReference sources and their tests; no TKService clipping protocols.",
+  "semantics": [
+    "registered runtime projection without intrusive retain",
+    "same actual slot identity",
+    "replacement and null reread on every use",
+    "unrelated projection returns null"
+  ],
+  "checks": {
+    "all_target_all_feature_tests_reported_passed": 4981,
+    "failed": 0,
+    "result_groups": 29,
+    "clippy": "terminal 0, all-targets/all-features -D warnings",
+    "format": "cargo fmt and explicit included-leaf rustfmt terminal 0",
+    "isolated_residency_repeat_checks": 10
+  },
+  "residency_regression": "Existing mincore check observed a mapped address during parallel execution. Isolated exact child retains all release/residency assertions and verifies one test actually executed; allocator production behavior unchanged.",
+  "native_api_completion_claims": 0,
+  "full_clipping_completion": false
+}

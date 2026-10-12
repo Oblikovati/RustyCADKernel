@@ -55,7 +55,10 @@ impl SelectMgrBaseIntersector for SelectMgrTriangularFrustum {
         result.set_builder(builder);
         Ok(Handle::new(result).cast())
     }
-    fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
+    fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) {
         self.base.set_camera(camera);
     }
     fn set_pixel_tolerance(&self, tolerance: i32) {

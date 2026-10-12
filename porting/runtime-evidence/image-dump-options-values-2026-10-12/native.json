@@ -1,0 +1,36 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_revision": "336ecc78889e48044154189b2fc796de37972958",
+  "header": "src/Visualization/TKV3d/V3d/V3d_ImageDumpOptions.hxx",
+  "header_sha256": "a2e5c442d91018dec3082bb5f5b093329c1e0326eb2abc75d6b6ea2ff2de0036",
+  "native_source": "tools/oracle/martensite_image_dump_options.cxx",
+  "source_sha256": "0d8b876d945b685fc9615cadf7c08560101c7ce8f3cd04bec52f7d04011dd1bb",
+  "executable_sha256": "ab10c621961344efdd2ca610afa9d7039504e26ec57187d29a76c88e3fef4ea2",
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compile_arguments": [
+    "c++",
+    "-std=c++17",
+    "-I../OCCT/src/Visualization/TKV3d/V3d",
+    "-I../OCCT/src/Visualization/TKService/Graphic3d",
+    "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_image_dump_options.cxx",
+    "-o",
+    "/tmp/martensite_image_dump_options"
+  ],
+  "fixture": "crates/tkv3d/tests/fixtures/image-dump-options-native.txt",
+  "fixture_sha256": "b617b2ac97b59a203a8efea331475e889fa1d6d4b1284fea191132ac0a7ba820",
+  "rows": 15,
+  "runs": 2,
+  "run_exit_codes": [
+    0,
+    0
+  ],
+  "repeat_byte_identical": true,
+  "renderer_submission_changed": false,
+  "gpu_capture_or_performance_needed": false,
+  "light_name_complete": false,
+  "whole_struct_complete": false,
+  "upstream_header_includes_precede_installed_dependencies": true,
+  "default_empty_light_name_asserted": true
+}

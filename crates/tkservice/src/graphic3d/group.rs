@@ -343,12 +343,12 @@ pub trait Graphic3dGroupMembers: Graphic3dGroup {
         let Some(array) = array.get().filter(|a| !self.is_deleted() && a.is_valid()) else {
             return;
         };
-        let (indices, attribs, bounds) = (array.indices(), array.attributes(), array.bounds());
+        // OCCT 3d097a0 forwards real const-buffer fields, preserving driver-visible ownership counts.
         self.add_primitive_array_buffers(
             array.primitive_type(),
-            &indices,
-            &attribs,
-            &bounds,
+            array.indices_ref(),
+            array.attributes_ref(),
+            array.bounds_ref(),
             to_eval_min_max,
         );
     }

@@ -1,5 +1,33 @@
 //! Erase a genuine handle-slot borrow, preserving live replacement and intrusive ownership counts.
 use super::{Handle, HandleFieldRef, HandleObserver, RuntimeTyped};
+use std::marker::PhantomData;
+
+/// Project a genuine live handle slot into a registered base/interface without owning it.
+/// Example: `let base=ProjectedHandleReference::<Concrete,dyn Source>::new(&slot)`.
+pub struct ProjectedHandleReference<'a, T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> {
+    source: &'a dyn HandleReference<T>,
+    projected: PhantomData<fn() -> U>,
+}
+impl<'a, T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> ProjectedHandleReference<'a, T, U> {
+    /// Borrow the actual original slot; `ProjectedHandleReference::<Concrete,dyn Source>::new(&slot)`.
+    pub fn new(source: &'a dyn HandleReference<T>) -> Self {
+        Self {
+            source,
+            projected: PhantomData,
+        }
+    }
+}
+impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> HandleReference<U>
+    for ProjectedHandleReference<'_, T, U>
+{
+    fn observe(&self) -> HandleObserver<U> {
+        // Reread on every use: a callback may have replaced the original caller's slot.
+        self.source.observe().observe_as::<U>()
+    }
+    fn reference_address(&self) -> *const () {
+        self.source.reference_address()
+    }
+}
 /// Native constHandle reference contract for local slots and retained fields.
 /// Example: `let observed=reference.observe(); assert_eq!(reference.object_address(),observed.object_address())`.
 pub trait HandleReference<T: ?Sized + RuntimeTyped> {

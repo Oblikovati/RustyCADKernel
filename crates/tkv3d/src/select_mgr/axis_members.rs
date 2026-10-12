@@ -20,7 +20,11 @@ impl SelectMgrBaseIntersector for SelectMgrAxisIntersector {
     fn build(&self) -> Result<(), Failure> {
         Ok(())
     }
-    fn set_camera(&self, _camera: &Handle<Graphic3dCamera>) {}
+    fn set_camera(
+        &self,
+        _camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) {
+    }
     fn is_scalable(&self) -> bool {
         false
     }

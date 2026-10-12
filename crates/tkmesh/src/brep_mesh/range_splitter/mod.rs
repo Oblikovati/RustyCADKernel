@@ -2,6 +2,7 @@
 use crate::imesh_data::MEMORY_BLOCK_SIZE_HUGE;
 use crate::{imesh_data::FaceHandle, imesh_tools::MeshParameters};
 use rustycad_tkbrep::{brep::BRepTool, brep_adaptor::BRepAdaptorSurface};
+use rustycad_tkernel::ncollection::BaseAllocator;
 use rustycad_tkernel::{
     ncollection::{IncrementalAllocatorObject, List, Shared},
     precision,
@@ -36,8 +37,10 @@ pub type SurfaceNodes = Handle<Shared<List<Point2>>>;
 /// An empty node list on its own temporary incremental allocator, as every native
 /// splitter creates it; `new_surface_nodes().is_empty()`.
 pub(crate) fn new_surface_nodes() -> List<Point2> {
-    let allocator = IncrementalAllocatorObject::new(MEMORY_BLOCK_SIZE_HUGE);
-    List::with_allocator(allocator.resource().clone())
+    let allocator = rustycad_tkernel::standard::Handle::new(IncrementalAllocatorObject::new(
+        MEMORY_BLOCK_SIZE_HUGE,
+    ));
+    List::with_allocator(BaseAllocator::from_handle(&allocator))
 }
 
 /// The native regular grid of the cone and cylinder splitters: rows from `V0 + dV`

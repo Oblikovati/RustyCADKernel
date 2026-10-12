@@ -16,7 +16,7 @@ use std::io;
 /// Example: `let aspect = Prs3dPointAspect::new(AspectTypeOfMarker::Plus, yellow, 1.0)?;`.
 pub struct Prs3dPointAspect {
     transient: StandardTransient,
-    aspect: SharedState<Handle<Graphic3dAspectMarker3d>>,
+    pub(super) aspect: SharedState<Handle<Graphic3dAspectMarker3d>>,
 }
 rustycad_tkernel::impl_transient!(Prs3dPointAspect, "Prs3d_PointAspect", dyn Prs3dBasicAspect, transient,
     interfaces: [dyn Prs3dBasicAspect]);
