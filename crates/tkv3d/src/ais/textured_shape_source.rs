@@ -16,7 +16,7 @@ pub trait AisTexturedShapeSource: AisShapeSource {
         // Keep the virtual hook separate from its native failure-ordered base body.
         super::textured_shape_sources::ais_textured_shape_set_texture_file_name(self, file)
     }
-    /// Retain the exact pixmap, ignoring its row-order flag as natively documented; `object.set_texture_pix_map(&pixmap)`.
+    /// Retain the exact pixmap without changing its row-order flag; `object.set_texture_pix_map(&pixmap)`.
     fn set_texture_pix_map(&self, pixmap: &Handle<ImagePixMap>) {
         // Forward the exact handle rather than copying image contents.
         super::textured_shape_sources::ais_textured_shape_set_texture_pix_map(self, pixmap);

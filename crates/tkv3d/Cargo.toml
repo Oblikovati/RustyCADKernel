@@ -34,3 +34,7 @@ path = "tests/toolkit.rs"
 [[test]]
 name = "ais_context_fatal"
 path = "tests/ais_context_fatal.rs"
+
+[dev-dependencies]
+# Real closed volume fixtures reuse the existing Martensite primitive topology implementation.
+rustycad-tkprim = { path = "../tkprim", version = "0.1.2" }

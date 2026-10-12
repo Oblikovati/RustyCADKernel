@@ -127,10 +127,14 @@ pub mod textured_shape_aspect_order;
 pub mod textured_shape_aspect_replay;
 #[path = "../textured_shape_deviation.rs"]
 pub mod textured_shape_deviation;
+#[path = "../textured_shape_presentation_append.rs"]
+pub mod textured_shape_presentation_append;
 #[path = "../textured_shape_state.rs"]
 pub mod textured_shape_state;
 #[path = "../textured_shape_transparency.rs"]
 pub mod textured_shape_transparency;
+#[path = "../textured_shape_volumes.rs"]
+pub mod textured_shape_volumes;
 #[path = "../textured_shape_width.rs"]
 pub mod textured_shape_width;
 #[path = "../triangular_frustum.rs"]

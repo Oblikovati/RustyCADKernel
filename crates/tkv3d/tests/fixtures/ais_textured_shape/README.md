@@ -27,6 +27,12 @@ texture and virtual-dispatch implementations.
   native unordered `infinity - infinity` comparison and auto-triangulation guard.
 - `native-triangles.txt`: actual BRep face/mesh handles, optional surface/normals,
   reversed orientation and mirrored location, native normal/UV/index arrays.
+- `native-volumes.txt`: actual located/reversed compound and compsolid traversal,
+  one-dimensional filtering, real boxes meshed by the native/Martensite mesh
+  implementations, and the distinct solid/shell closure and triangulation rules.
+- `native-presentation-append.txt`: the native appearance overrides also iterate
+  a live presentation sequence; a virtual group callback appends a retained
+  mode-3 presentation and the same appearance operation refreshes it.
 - `native-group-append.txt`: live sequence iteration when a virtual group-aspect
   callback appends a new retained group during the same update.
 - `native-compute.txt`: protected concrete Compute over a genuine pretriangulated

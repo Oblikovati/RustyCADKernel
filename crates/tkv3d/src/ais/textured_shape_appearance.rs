@@ -3,8 +3,11 @@ use super::{
     AisTexturedShapeSource, ais_shape_set_color, ais_shape_set_material, ais_shape_unset_color,
     ais_shape_unset_material, ais_textured_shape_update_attributes,
 };
-use crate::prs_mgr::PrsMgrPresentableObjectMembers;
-use rustycad_tkernel::{quantity::Color, standard::Failure};
+use crate::prs_mgr::PrsMgrPresentation;
+use rustycad_tkernel::{
+    quantity::Color,
+    standard::{Failure, Handle},
+};
 use rustycad_tkservice::graphic3d::Graphic3dMaterialAspect;
 
 /// Apply inherited color then update existing textured modes; `ais_textured_shape_set_color(&object,color)?`.
@@ -40,10 +43,28 @@ pub fn ais_textured_shape_unset_material<S: AisTexturedShapeSource + ?Sized>(
 fn refresh_textured_mode_presentations<S: AisTexturedShapeSource + ?Sized>(
     object: &S,
 ) -> Result<(), Failure> {
-    for presentation in object.presentations() {
+    let mut index = 0;
+    loop {
+        // OCCT 3d097a0 iterates the live Sequence, including presentations appended by group hooks.
+        let current = live_textured_presentation_at(object, index);
+        let Some(presentation) = current else {
+            return Ok(());
+        };
         if presentation.mode() == 3 {
             ais_textured_shape_update_attributes(object, &presentation.cast())?;
         }
+        index += 1;
     }
-    Ok(())
+}
+
+fn live_textured_presentation_at<S: AisTexturedShapeSource + ?Sized>(
+    object: &S,
+    index: usize,
+) -> Option<Handle<PrsMgrPresentation>> {
+    object
+        .presentable_base()
+        .read()
+        .presentations
+        .get(index)
+        .cloned()
 }

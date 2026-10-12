@@ -1,6 +1,7 @@
 //! Native copy/fresh texture/all-group/repeat semantics replay through real retained state.
 #[path = "support/textured_allocation_factory.rs"]
 mod allocation_factory;
+#[allow(dead_code)] // Shared named fixture also serves the presentation-append regression.
 #[path = "support/textured_appending_group.rs"]
 mod appending_group;
 #[allow(dead_code)] // Shared named fixture also serves source-state-only replay modules.

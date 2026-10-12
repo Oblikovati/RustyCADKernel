@@ -285,6 +285,64 @@
         "-o",
         "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/oracle/martensite-shape-deviation-clear"
       ]
+    },
+    {
+      "generator": "tools/oracle/martensite_textured_shape_volumes.cxx",
+      "generator_sha256": "0d026927fddd4d6f78173844f8d368580386720dbe817773b65b50875488b46c",
+      "binary_sha256": "86bf1856d02a158da6485f277ba6e86c382b056bd734d25b84af52ecaaf34cb0",
+      "fixture": "crates/tkv3d/tests/fixtures/ais_textured_shape/native-volumes.txt",
+      "fixture_sha256": "e548f6858c00b269f5519257b3e8cb44eddafd20b6967311d08b4644f36580ee",
+      "repeat_stdout_byte_identical": true,
+      "repeat_stderr_byte_identical": true,
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/tools/oracle/martensite_textured_shape_volumes.cxx",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKService",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKG3d",
+        "-lTKPrim",
+        "-lTKMesh",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/oracle/martensite-textured-shape-volumes"
+      ]
+    },
+    {
+      "generator": "tools/oracle/martensite_textured_shape_presentation_append.cxx",
+      "generator_sha256": "41a0d3d9c7f7e6974efe5228e31009eb4c758d20ecd2b6eb6717edc1d1a4e7fc",
+      "binary_sha256": "f7f5b8edd05f5e22657fe404ac518964c7646ed57527ba6080087563ea0d5f61",
+      "fixture": "crates/tkv3d/tests/fixtures/ais_textured_shape/native-presentation-append.txt",
+      "fixture_sha256": "93a647a2a0847d9ea32d4668337e6b61d4b060b16e054bd78c6dc09d3aab540a",
+      "repeat_stdout_byte_identical": true,
+      "repeat_stderr_byte_identical": true,
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-I",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/tools/oracle/martensite_textured_shape_presentation_append.cxx",
+        "-L",
+        "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+        "-lTKV3d",
+        "-lTKService",
+        "-lTKTopAlgo",
+        "-lTKBRep",
+        "-lTKG3d",
+        "-lTKMath",
+        "-lTKernel",
+        "-o",
+        "/home/vmiguel/git/oblikovati-workspace/Martensite-textured-shape/target/oracle/martensite-textured-shape-presentation-append"
+      ]
     }
   ],
   "native_link_libraries_sha256": {
@@ -294,13 +352,16 @@
     "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
     "libTKBRep.so": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
     "libTKG3d.so": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
-    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24"
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKPrim.so": "b48063f4379072c6739140c99b5f3293e2f98448703fbbe626a28baa8c0c97dd",
+    "libTKMesh.so": "08bfc41062c0955d1c149ffa4736150561c87bd4ac8da23a4c310ed11e9e1325"
   },
   "probe_include_sha256": {
     "tools/oracle/martensite_textured_shape_state.hxx": "0e3298f2f0eb84d4886ddbb3c1b7dc7047ff5c0ba0c767ee06f15b7d810109aa",
     "tools/oracle/martensite_textured_face_fixture.hxx": "8a37aef3c32f7cc8ff9e338792f8a828734dd5b9dd71d050b56ec00abe2da2cf",
     "tools/oracle/tkservice_probe_null_driver.cxx": "a8925da85406c0dc8b45c2c5ad928f46a47ff2a6bbd76ba197ecf3c7866a14a5",
-    "tools/oracle/tkv3d_probe_sensitive_display_driver.cxx": "48a4c0e10752f91c57852de41f441d9d9f6bdcfdcdc36b37825d45eb9a983d9c"
+    "tools/oracle/tkv3d_probe_sensitive_display_driver.cxx": "48a4c0e10752f91c57852de41f441d9d9f6bdcfdcdc36b37825d45eb9a983d9c",
+    "tools/oracle/martensite_textured_volume_fixture.hxx": "f51696822cb5b60ae1d7d2859540dc97b1dc7eb0c68040493ebcbab138559b32"
   },
   "upstream_sources_sha256": {
     "src/Visualization/TKV3d/AIS/AIS_TexturedShape.hxx": "072908fd2669a0ed319e3af5f2e6b72630f8464959b95b2e4554f0589e9a938f",
