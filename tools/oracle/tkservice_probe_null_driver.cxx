@@ -39,8 +39,18 @@ public:
   void Disconnect(Graphic3d_CStructure&) override {}
   void GraphicHighlight(const occ::handle<Graphic3d_PresentationAttributes>& theStyle) override { myHighlightStyle = theStyle; highlight = 1; }
   void GraphicUnhighlight() override { highlight = 0; myHighlightStyle.Nullify(); }
+  occ::handle<SvCStructure> myShadowParent;
   occ::handle<Graphic3d_CStructure> ShadowLink(const occ::handle<Graphic3d_StructureManager>& theMgr) const override
-  { occ::handle<SvCStructure> aShadow = new SvCStructure(theMgr); aShadow->myGroups = myGroups; return aShadow; }
+  {
+    occ::handle<SvCStructure> aShadow = new SvCStructure(theMgr);
+    // OpenGl_StructureShadow retains its root parent without adopting removable group nodes.
+    aShadow->myShadowParent = myShadowParent.IsNull() ? this : myShadowParent;
+    aShadow->IsInfinite = aShadow->myShadowParent->IsInfinite;
+    aShadow->ChangeBoundingBox() = aShadow->myShadowParent->BoundingBox();
+    aShadow->SetTransformation(aShadow->myShadowParent->Transformation());
+    aShadow->SetTransformPersistence(aShadow->myShadowParent->TransformPersistence());
+    return aShadow;
+  }
   occ::handle<Graphic3d_Group> NewGroup(const occ::handle<Graphic3d_Structure>& theStruct) override
   { occ::handle<Graphic3d_Group> aGroup = new SvGroup(theStruct); myGroups.Append(aGroup); return aGroup; }
   void RemoveGroup(const occ::handle<Graphic3d_Group>& theGroup) override

@@ -1,0 +1,146 @@
+{
+  "project": "Martensite",
+  "device": {
+    "index": 0,
+    "name": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "kind": "PHYSICAL_DEVICE_TYPE_CPU",
+    "api_version": "1.4.354",
+    "driver": "llvmpipe"
+  },
+  "command": [
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-xr-tracked-device/target/release/examples/xr_device_performance"
+  ],
+  "environment": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+    "MARTENSITE_VULKAN_DEVICE": "0"
+  },
+  "exit_code": 0,
+  "source_verified_before_after": true,
+  "source_entries": 7432,
+  "executable_sha256": "739ea56d0c8052f48268e3fdd01c94f669120483e4b4250d3b020c2ad652f762",
+  "baseline_accepted": false,
+  "performance": [
+    {
+      "workload": "xr-device-axes",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.234138,
+      "mean_ms": 0.2555833,
+      "p95_ms": 0.363342,
+      "p99_ms": 0.507789,
+      "minimum_ms": 0.188739,
+      "maximum_ms": 0.750337,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-mesh",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.21981650000000003,
+      "mean_ms": 0.2394795,
+      "p95_ms": 0.32308800000000004,
+      "p99_ms": 0.37266900000000003,
+      "minimum_ms": 0.189911,
+      "maximum_ms": 0.544858,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-texture",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.230827,
+      "mean_ms": 0.24769905,
+      "p95_ms": 0.33416799999999997,
+      "p99_ms": 0.413344,
+      "minimum_ms": 0.182618,
+      "maximum_ms": 0.49041700000000005,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-finite-ray",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.234178,
+      "mean_ms": 0.24269499,
+      "p95_ms": 0.311236,
+      "p99_ms": 0.346491,
+      "minimum_ms": 0.19148400000000002,
+      "maximum_ms": 0.37152799999999997,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-infinite-ray",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2235335,
+      "mean_ms": 0.23366241000000001,
+      "p95_ms": 0.293794,
+      "p99_ms": 0.35249199999999997,
+      "minimum_ms": 0.184231,
+      "maximum_ms": 0.419045,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-finite-zero",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2226665,
+      "mean_ms": 0.23234122000000001,
+      "p95_ms": 0.29722,
+      "p99_ms": 0.311726,
+      "minimum_ms": 0.19167399999999998,
+      "maximum_ms": 0.32351800000000003,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-infinite-zero",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.225126,
+      "mean_ms": 0.22906035,
+      "p95_ms": 0.305205,
+      "p99_ms": 0.330341,
+      "minimum_ms": 0.175484,
+      "maximum_ms": 0.4059,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-color-update",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2386415,
+      "mean_ms": 0.25160372,
+      "p95_ms": 0.320273,
+      "p99_ms": 0.367449,
+      "minimum_ms": 0.19142399999999998,
+      "maximum_ms": 0.377097,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-finite-ray-each-frame",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.856173,
+      "mean_ms": 0.85588811,
+      "p95_ms": 1.2189150000000002,
+      "p99_ms": 1.259679,
+      "minimum_ms": 0.41289400000000004,
+      "maximum_ms": 1.265059,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-infinite-ray-each-frame",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2445875,
+      "mean_ms": 0.25574001,
+      "p95_ms": 0.30319100000000004,
+      "p99_ms": 0.41659999999999997,
+      "minimum_ms": 0.187567,
+      "maximum_ms": 0.94633,
+      "samples": 100
+    }
+  ],
+  "raw_report": "performance-lavapipe.json.gz",
+  "raw_report_sha256": "f8207323c5895d4a19ce95a44b3324fb0c7d6d0cf8b8fb74ec6bc58ba6f59e18"
+}

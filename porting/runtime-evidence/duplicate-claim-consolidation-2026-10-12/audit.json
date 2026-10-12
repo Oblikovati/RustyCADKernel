@@ -1,0 +1,632 @@
+{
+  "project": "Martensite",
+  "source_crosswalk_revision": "77028699ef5b644f6c15233a87b5e67a3834fb63",
+  "ledger_sha256_before": "64b58f4c461c0221856f1b4984ff6551ec0fcc6d0f7d0dcf3164711f2a29c246",
+  "ledger_sha256_after": "aa5230ac16a8454decd4295856133010ce145552a899f6c9257caddd54ac6feb",
+  "duplicate_declarations": 19,
+  "completion_credit": false,
+  "rationale": "Each pair resolves to one pinned C++ declaration with identical Rust binding, toolkit, source and status. Keep stricter selectors and all distinct provenance notes. Fresh full crosswalk still required.",
+  "consolidations": [
+    {
+      "cpp_id": "0d1001dcdb2ab2d9d0cd842455bd752b428fcd7420d991b4ebc2953014b8e0f5",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(const BRepAdaptor_Surface&) (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_surface",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(const BRepAdaptor_Surface&)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_surface",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(const BRepAdaptor_Surface&)",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_surface",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "702379eda79e9be91568fc4bcf5c218431f3a94cf7058d4394b6fd4d60a1c8eb",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(double) (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_tolerance",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(double)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_tolerance",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Set(double)",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_tolerance",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "8add1bfb40ca508d6e4af0d865b79a64a2a33ac3613efcd0ca3c216b4950846e",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::SetImplicitSurface(const IntSurf_Quadric&) (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_implicit_surface",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::SetImplicitSurface(const IntSurf_Quadric&)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_implicit_surface",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::SetImplicitSurface(const IntSurf_Quadric&)",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::set_implicit_surface",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "f871bd708345beb96195ee5e03470223f4a0eed9f03006b6fc300a7295640537",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Root() const (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::root",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Root() const",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::root",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Root() const",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::root",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "a209ebed6084210d49881adced978ab6b09bfa66021fa77ef04400a43dcd697b",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Tolerance() const (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::tolerance",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Tolerance() const",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::tolerance",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Tolerance() const",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::tolerance",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "ed6375dabfd4e71f6dd41842ae946ae0382126d01cda9b6b139adb0548168e0a",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Point() const (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::point",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Point() const",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::point",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Point() const",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::point",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "f5d3cf3cdb10c1218e807d10857b9c3ac05c041da0e3c1d0ea0a64657599cc4d",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction3d() (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction3d",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction3d()",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction3d",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction3d()",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction3d",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "466efe1c609bcf77ed8952ed8039950d526504a567c2522b6c53c6e9fd2f16b9",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction2d() (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction2d",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction2d()",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction2d",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::Direction2d()",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::direction2d",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "e8d096e58b889fb98edd59b2fdb621729ff73e1c9c1c16cac215930258ba5eb6",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::PSurface() const (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::p_surface",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::PSurface() const",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::p_surface",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::PSurface() const",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::p_surface",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "a10401a4130fdb7249b856479d4f90889ed4b36dc28a4ed1ee3a675d61955a56",
+      "original_rows": [
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::ISurface() const (definition)",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::i_surface",
+          "status": "implemented",
+          "notes": "Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+        },
+        {
+          "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::ISurface() const",
+          "toolkit": "TKGeomAlgo",
+          "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+          "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::i_surface",
+          "status": "implemented",
+          "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox::ISurface() const",
+        "toolkit": "TKGeomAlgo",
+        "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImp/IntImp_ZerImpFunc.lxx",
+        "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpZerImpFunc::i_surface",
+        "status": "implemented",
+        "notes": "BRepApprox template instance (docs/topalgo-design.md section 12, docs/geomalgo-design.md sections 6 and 20): the native _0.cxx instantiates the ApproxInt, IntImp, Approx and AppParCurves templates over BRepAdaptor_Surface (BRepApprox_SurfaceTool) and BRepApprox_ApproxLine; the class is an alias of the generic (the one GeomInt instantiates too, no template body is copied), with the surfaces as Handle<BRepAdaptorSurface>; overloads take distinct Rust names, output references become returned values and exceptions become Failure errors. Compared with OCCT by tools/verify_tktopalgo_numeric.py (bra_* requests). The member is defined inline in IntImp_ZerImpFunc.lxx, so the API inventory assigns this BRepApprox declaration to TKGeomAlgo. Additional existing provenance from consolidated ledger row: Inline definition from IntImp_ZerImpFunc.lxx of the TKTopAlgo instance BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: the Rust instance is the type alias rustycad_tktopalgo::brep_approx::BRepApproxTheZerImpFuncOfTheImpPrmSvSurfacesOfApprox = IntImpZerImpFunc<BRepApproxSurfaceTool, IntSurfQuadricTool>, so the member is the method of the generic (docs/geomalgo-design.md section 6)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "7ec6e3cb3f2ff12f8917b1e3584347fa45589b5eda461528452c966933bf9db5",
+      "original_rows": [
+        {
+          "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange &)",
+          "toolkit": "TKShHealing",
+          "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+          "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+          "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
+          "status": "implemented",
+          "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: ReorderOK is the negated CheckOrder DONE result, not the order status. Compared by op 28 (Perform on every face wire and free wire) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT; cancellation stays covered by the tkshhealing_wire_perform fixtures."
+        },
+        {
+          "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange&)",
+          "toolkit": "TKShHealing",
+          "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+          "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+          "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
+          "status": "implemented",
+          "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: ReorderOK is the negated CheckOrder DONE result, not the order status. Compared by op 28 (Perform on every face wire and free wire) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT; cancellation stays covered by the tkshhealing_wire_perform fixtures."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "ShapeFix_Wire::Perform(const Message_ProgressRange &)",
+        "toolkit": "TKShHealing",
+        "source": "src/ModelingAlgorithms/TKShHealing/ShapeFix/ShapeFix_Wire.hxx",
+        "source_sha256": "74099d5e77d07ebe1ce1cda71da6d67ba62f5c6ab386fc8ad2e64387144c186f",
+        "rust_item": "rustycad_tkshhealing::shape_fix::ShapeFixWire::perform_with_progress",
+        "status": "implemented",
+        "notes": "Reviewed line by line against ShapeFix_Wire.cxx / ShapeFix_Wire_1.cxx (2026-10-07). Fixed: ReorderOK is the negated CheckOrder DONE result, not the order status. Compared by op 28 (Perform on every face wire and free wire) of the sh_fix_shape requests of tools/oracle/tkshhealing_probe_fix_shape.cxx and tkshhealing_probe_fix_shape_checks.cxx (5841 requests over sewn polygons, revolved pieces, wires, faces, primitive solids, Bezier faces, raw planar faces with gaps, tails, notches, crossings and overlaps, and sphere faces with pcurve-less arcs, at two precisions), all bit-identical to OCCT; cancellation stays covered by the tkshhealing_wire_perform fixtures."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "99f305def02ff8181ee705ee2f3ff2b56ff16ea5765e6cc4aec3b23db5b4949a",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMap::Value",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "cpp_selector": {
+            "kind": "FunctionTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+        },
+        {
+          "upstream_id": "Image_PixMap::Value",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMap::Value",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+        "cpp_selector": {
+          "kind": "FunctionTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+        "status": "implemented",
+        "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "329147fe8c4698ecba29431364e7d73cfffd07f794dd8f4ccce483d328806b99",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMap::ChangeValue",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "cpp_selector": {
+            "kind": "FunctionTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The mutable reference is a typed write."
+        },
+        {
+          "upstream_id": "Image_PixMap::ChangeValue",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The mutable reference is a typed write."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMap::ChangeValue",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+        "cpp_selector": {
+          "kind": "FunctionTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+        "status": "implemented",
+        "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. The mutable reference is a typed write."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "1a663b3d04b1e5e093e6641edc2207c9bef612f310480c5bd4ba025efa4e4438",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMap::ValueXY",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "cpp_selector": {
+            "kind": "FunctionTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+        },
+        {
+          "upstream_id": "Image_PixMap::ValueXY",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMap::ValueXY",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+        "cpp_selector": {
+          "kind": "FunctionTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+        "status": "implemented",
+        "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "d557fe0b99b245850dbb3fc907bedfa233efa6623120bd2ab2a8b3d10636caea",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMap::ChangeValueXY",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "cpp_selector": {
+            "kind": "FunctionTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+        },
+        {
+          "upstream_id": "Image_PixMap::ChangeValueXY",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+          "status": "implemented",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMap::ChangeValueXY",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+        "cpp_selector": {
+          "kind": "FunctionTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+        "status": "implemented",
+        "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. (x, y) is (column, row)."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "491ba68c5874fa2d0d66dddad973afe4f5c953e2edc1e29a239127e9315bb4d1",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMap::ValueXYZ",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "cpp_selector": {
+            "kind": "FunctionTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xyz",
+          "status": "partial",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D read is the byte accessor plus ImagePixel::read_pixel."
+        },
+        {
+          "upstream_id": "Image_PixMap::ValueXYZ",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xyz",
+          "status": "partial",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D read is the byte accessor plus ImagePixel::read_pixel."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMap::ValueXYZ",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+        "cpp_selector": {
+          "kind": "FunctionTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData::value_xyz",
+        "status": "partial",
+        "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D read is the byte accessor plus ImagePixel::read_pixel."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "fe4ef6265baf13e89e0c46695d99519154d10ebf5a9ca9725718590ef2ccdeee",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMap::ChangeValueXYZ",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "cpp_selector": {
+            "kind": "FunctionTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xyz",
+          "status": "partial",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D write is the byte accessor plus ImagePixel::write_pixel."
+        },
+        {
+          "upstream_id": "Image_PixMap::ChangeValueXYZ",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xyz",
+          "status": "partial",
+          "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D write is the byte accessor plus ImagePixel::write_pixel."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMap::ChangeValueXYZ",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMap.hxx",
+        "cpp_selector": {
+          "kind": "FunctionTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData::change_value_xyz",
+        "status": "partial",
+        "notes": "Image_PixMap mapping (docs/visualization-design.md section 1): the transient keeps its buffer and format in one SharedState (ImagePixMapState); the low-level pointer accessors are the bounds-checked slice accessors of ImagePixMapData reached through data() and change_data() (None where the native pointer would leave the buffer); typed Value<T> accessors read and write native-endian bytes through the ImagePixel trait; float channels outside [0, 1] raise the Standard_OutOfRange of the Quantity_ColorRGBA constructor. Partial: the typed 3D write is the byte accessor plus ImagePixel::write_pixel."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "f94fec429af835b0349b7928e86b634cb1ea5add1e68f599ed44b5b4766798e9",
+      "original_rows": [
+        {
+          "upstream_id": "Image_PixMapTypedData",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+          "cpp_selector": {
+            "kind": "ClassTemplate"
+          },
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData",
+          "status": "implemented",
+          "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The class template is ImagePixMapData with generic typed accessors over ImagePixel."
+        },
+        {
+          "upstream_id": "Image_PixMapTypedData",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+          "rust_item": "rustycad_tkservice::image::ImagePixMapData",
+          "status": "implemented",
+          "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The class template is ImagePixMapData with generic typed accessors over ImagePixel."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Image_PixMapTypedData",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx",
+        "cpp_selector": {
+          "kind": "ClassTemplate"
+        },
+        "rust_item": "rustycad_tkservice::image::ImagePixMapData",
+        "status": "implemented",
+        "notes": "Image_PixMapData mapping (docs/visualization-design.md section 1): the NCollection_Buffer is an owned Vec<u8> (no allocator), the top-row pointer is an offset, and pointer accessors are bounds-checked slices (None where the native pointer would leave the buffer). The class template is ImagePixMapData with generic typed accessors over ImagePixel."
+      },
+      "unchanged_binding_status_source": true
+    },
+    {
+      "cpp_id": "d25449c7f740e1c2ab7011ea5eb32acf9cc4099f4b32e6ec77b6af34b8ca0d23",
+      "original_rows": [
+        {
+          "upstream_id": "Font_FTLibrary",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+          "rust_item": "rustycad_tkservice::font::FontFTLibrary",
+          "status": "implemented",
+          "notes": "Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request."
+        },
+        {
+          "upstream_id": "Font_FTLibrary",
+          "toolkit": "TKService",
+          "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+          "cpp_selector": {
+            "kind": "CXXRecord"
+          },
+          "rust_item": "rustycad_tkservice::font::FontFTLibrary",
+          "status": "implemented",
+          "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. Forward declaration."
+        }
+      ],
+      "retained_row": {
+        "upstream_id": "Font_FTLibrary",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Font/Font_FTFont.hxx",
+        "cpp_selector": {
+          "kind": "CXXRecord"
+        },
+        "rust_item": "rustycad_tkservice::font::FontFTLibrary",
+        "status": "implemented",
+        "notes": "Font_FTFont mapping: the FreeType face (owned raw handle, released by Release or drop), the Unicode-subset fallback faces, glyph identities and outlines (FT_Outline_Decompose callbacks), bitmaps and metrics, with the state behind the handle's shared lock; FindAndInit uses Font_FontMgr and the embedded fallback font. Metrics, bitmaps (pixel hash), advances with kerning, glyph identities, outlines and bounding boxes of system and embedded fonts are compared bit for bit by the sv_ftfont native probe; the GoogleTest suite Font_FTFont_Test is translated. Forward declaration. Additional existing provenance from consolidated ledger row: Font_FTLibrary mapping (visualization-design.md section 2): FreeType is loaded at run time with dlopen (font::freetype_ffi binds only the entry points the Font package calls; the record layouts follow the FreeType 2 public headers); a missing library or a failed FT_Init_FreeType leaves the library invalid, as natively; the library is released on drop. Exercised by every sv_ftfont native probe request."
+      },
+      "unchanged_binding_status_source": true
+    }
+  ]
+}

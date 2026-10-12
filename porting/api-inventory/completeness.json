@@ -3,18 +3,18 @@
   "artifacts": {
     "api-crosswalk": {
       "path": "api-crosswalk.json.gz",
-      "sha256": "8f44f2dbf44afa5e7e1a5239e74bbfec01255bfa3adea0994f3d9f1d4f5e8c9d",
-      "uncompressed_sha256": "b77da2344934db6f2b3f7014a9d56acb66c5a817d6e62e0011aa506e9421a68b"
+      "sha256": "868d08348b1411ea6df0929511ff7c0a9b1f3a5c5566de704849a4ab9002013a",
+      "uncompressed_sha256": "387ea5de8c56d0af47e99ff885a1224817f36d49a41003e65087a45728cc420d"
     },
     "rust-api": {
       "path": "rust-api.json.gz",
-      "sha256": "fb2d473a0c63ab4a9199130335d2d17720813abafb44a6634bc45d32c39c001d",
-      "uncompressed_sha256": "20b8c7e116fa08e78fb00e1b6af5c7d9d30f554a9f8d7444f499fc08c448bc06"
+      "sha256": "a7634479e4d095f16c286f97a45861707d763a2474d831d1d228a8c314d2f418",
+      "uncompressed_sha256": "f1ce2ba256cef20db9e371677cce13896c986c1305ae6aae925245b4b7e65453"
     }
   },
   "behavioral_equivalence_proven": false,
   "configuration_matrix_complete": false,
-  "cpp_declarations_with_resolved_implemented_claim": 52847,
+  "cpp_declarations_with_resolved_implemented_claim": 52928,
   "cpp_manifest_header_status": {
     "included_fragment": 384,
     "missing_compile_configuration": 28,
@@ -1787,19 +1787,18 @@
     "cpp": "4bc75a502ac655a45bacbc426fb5159028d3fb88deb4829135aca2466cd89095",
     "cpp_manifest": "9084950760947828672652eafead6d5ef81ecaf9d9e47876d1d24d5753f85fb9",
     "headers": "240a3fce1762bd3ea634922b7f6ee192c1d0c53abf83627aefd74b6b59adbc43",
-    "parity": "e2c71631730cde06294e41a3b4490ad182281f31b45928d920ca91db208e8717",
-    "rust": "20b8c7e116fa08e78fb00e1b6af5c7d9d30f554a9f8d7444f499fc08c448bc06"
+    "parity": "4ef32f9af943815dd56d719a9794c3a95d7c3397d43626f44cd94b0bed95f162",
+    "rust": "f1ce2ba256cef20db9e371677cce13896c986c1305ae6aae925245b4b7e65453"
   },
-  "matched_declared_mappings": 52871,
+  "matched_declared_mappings": 52935,
   "observed_cpp_api_declarations": 108622,
-  "parity_api_rows": 68130,
-  "partial_mappings": 1203,
+  "parity_api_rows": 68206,
+  "partial_mappings": 1215,
   "private_header_rows": [],
   "proof_gaps": [
     "cxx_configuration_matrix_incomplete",
     "cxx_declaration_inventory_incomplete",
     "cxx_headers_not_all_parsed",
-    "duplicate_parity_claims_for_cpp_declaration",
     "macro_candidate_crosswalk_pending",
     "partial_or_upstream_unimplemented_api_rows",
     "rust_unresolved_links:rustycad_kernel",
@@ -1830,20 +1829,20 @@
     "unsupported_cpp_inventory_records:5224"
   ],
   "rust_capture_inputs": {
-    "cargo_metadata_sha256": "e60e67acac0b31e2a7caad4988a6af9fb32b84dc7de78a9b3fb5b189cbca7160",
+    "cargo_metadata_sha256": "86a8e8da6a133041f3f2511745cc06c3a2d6ed7f33cf9c0f1a236b733efb5bf3",
     "tool_versions": {
       "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n",
       "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
       "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n"
     },
     "toolchain_config_sha256": "bb119cb6b393e49f9e3b13556639ff257ebef89a2b338ba596be8a53ffd1f87a",
-    "workspace_file_count": 11854,
-    "workspace_inputs_sha256": "eabf691a0f6036bd4bde9a1f7bc7c9c153dcebfd695bc815305b17740dc65b52",
-    "workspace_revision": "77028699ef5b644f6c15233a87b5e67a3834fb63"
+    "workspace_file_count": 12125,
+    "workspace_inputs_sha256": "50f73b5cdbcdd0f1b27ab2e70a9f4e17d4019434be3565f1c371d3909afa27b1",
+    "workspace_revision": "2837725909555aeed0147b98ffa088ba107fea46"
   },
-  "rust_capture_revision": "77028699ef5b644f6c15233a87b5e67a3834fb63",
+  "rust_capture_revision": "2837725909555aeed0147b98ffa088ba107fea46",
   "rust_crates": 31,
-  "rust_public_paths": 95623,
+  "rust_public_paths": 95844,
   "schema_version": 1,
   "tool_implementation_sha256": {
     "api_crosswalk": {
@@ -2212,10 +2211,10 @@
     "TKGeomAlgo": {
       "cpp_declarations_with_resolved_implemented_claim": 4573,
       "excluded": 1825,
-      "implemented": 4583,
+      "implemented": 4573,
       "inactive_configuration": 0,
       "observed_cpp_api": 6403,
-      "parity_rows": 6413,
+      "parity_rows": 6403,
       "partial": 5,
       "unclaimed_cpp_api": 0,
       "unresolved": 0,
@@ -2426,13 +2425,13 @@
       "upstream_unimplemented": 0
     },
     "TKService": {
-      "cpp_declarations_with_resolved_implemented_claim": 4644,
+      "cpp_declarations_with_resolved_implemented_claim": 4636,
       "excluded": 274,
-      "implemented": 4650,
+      "implemented": 4636,
       "inactive_configuration": 0,
       "observed_cpp_api": 5037,
-      "parity_rows": 4983,
-      "partial": 59,
+      "parity_rows": 4975,
+      "partial": 65,
       "unclaimed_cpp_api": 62,
       "unresolved": 0,
       "upstream_unimplemented": 0
@@ -2440,10 +2439,10 @@
     "TKShHealing": {
       "cpp_declarations_with_resolved_implemented_claim": 1705,
       "excluded": 539,
-      "implemented": 1706,
+      "implemented": 1705,
       "inactive_configuration": 0,
       "observed_cpp_api": 2280,
-      "parity_rows": 2267,
+      "parity_rows": 2266,
       "partial": 22,
       "unclaimed_cpp_api": 14,
       "unresolved": 0,
@@ -2522,14 +2521,14 @@
       "upstream_unimplemented": 0
     },
     "TKV3d": {
-      "cpp_declarations_with_resolved_implemented_claim": 3033,
+      "cpp_declarations_with_resolved_implemented_claim": 3122,
       "excluded": 568,
-      "implemented": 3033,
+      "implemented": 3122,
       "inactive_configuration": 0,
       "observed_cpp_api": 6095,
-      "parity_rows": 3642,
-      "partial": 41,
-      "unclaimed_cpp_api": 2453,
+      "parity_rows": 3737,
+      "partial": 47,
+      "unclaimed_cpp_api": 2358,
       "unresolved": 0,
       "upstream_unimplemented": 0
     },
@@ -2774,7 +2773,7 @@
       "upstream_unimplemented": 0
     }
   },
-  "unclaimed_cpp_count": 40551,
+  "unclaimed_cpp_count": 40456,
   "unresolved_row_count": 0,
   "upstream_unimplemented": 9
 }

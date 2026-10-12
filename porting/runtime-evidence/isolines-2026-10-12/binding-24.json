@@ -1,0 +1,112 @@
+{
+  "upstream_id": "StdPrs_ToolRFace::Init",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "e9f9b0e8571a6de1377278b622a06134432b393196caf7226d7e3fff1cd4041e"
+  ],
+  "cpp_matches": [
+    {
+      "id": "e9f9b0e8571a6de1377278b622a06134432b393196caf7226d7e3fff1cd4041e",
+      "usr": "c:@S@StdPrs_ToolRFace@F@Init#",
+      "qualified_name": "StdPrs_ToolRFace::Init",
+      "kind": "CXXMethod",
+      "signature": "void ()",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::init"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::init"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsToolRFace::init",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "tuple": []
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "StdPrsToolRFace",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::tool_r_face::StdPrsToolRFace"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "43ef5ddefd8676b032b858d24657310088fe0ccc8d5a11ebb1ad2bfaf97baca1",
+      "source_file": "crates/tkv3d/src/std_prs/tool_r_face.rs",
+      "source_status": null,
+      "source_sha256": "22aeb7c7705cab6ab417907d577426dd7c1f74c5198cef04cb6f3ec1b4492224"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+}

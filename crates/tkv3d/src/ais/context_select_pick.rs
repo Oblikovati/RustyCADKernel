@@ -4,7 +4,7 @@ use crate::{select_basics::SelectBasicsSelectingVolumeManager, select_mgr::*, v3
 use rustycad_tkernel::{
     ncollection::{Array1, Vec2},
     precision,
-    standard::{Failure, Handle, exceptions::program_error},
+    standard::{Failure, Handle, catch_native_failure, exceptions::program_error},
 };
 use rustycad_tkmath::gp::Point2;
 use rustycad_tkservice::aspect::{ASPECT_VKEY_FLAGS_NONE, ASPECT_VKEY_MOUSE_LEFT_BUTTON};
@@ -82,6 +82,12 @@ impl AisInteractiveContext {
     }
     /// Select the detected owner unless it consumes the mouse click; `context.select_detected(AisSelectionScheme::Replace)?`.
     pub fn select_detected(&self, scheme: AisSelectionScheme) -> Result<AisStatusOfPick, Failure> {
+        catch_native_failure(|| self.select_detected_checked(scheme))
+    }
+    fn select_detected_checked(
+        &self,
+        scheme: AisSelectionScheme,
+    ) -> Result<AisStatusOfPick, Failure> {
         if self.detected_click_consumed(scheme) {
             return Ok(AisStatusOfPick::NothingSelected);
         }
@@ -89,15 +95,15 @@ impl AisInteractiveContext {
         self.select_owners(&Array1::from_shared(&[owner], 1), scheme)
     }
     fn detected_click_consumed(&self, scheme: AisSelectionScheme) -> bool {
-        if matches!(
-            scheme,
-            AisSelectionScheme::Remove | AisSelectionScheme::Clear
-        ) || !self.has_detected()
-        {
+        if !click_selection_scheme(scheme) || !self.has_detected() {
             return false;
         }
         let pixels = self.detected_click_position();
-        let owner = self.fields.read().last_picked.clone();
+        // OCCT 3d097a0 invokes the field directly; a storage lease preserves native owner counts.
+        let owner = self.fields.read().last_picked.observe();
+        let Some(owner) = owner.get() else {
+            return false;
+        };
         owner.handle_mouse_click(
             pixels,
             ASPECT_VKEY_MOUSE_LEFT_BUTTON,
@@ -119,4 +125,11 @@ impl AisInteractiveContext {
             Vec2::new(point.x() as i32, point.y() as i32)
         }
     }
+}
+
+fn click_selection_scheme(scheme: AisSelectionScheme) -> bool {
+    !matches!(
+        scheme,
+        AisSelectionScheme::Remove | AisSelectionScheme::Clear
+    )
 }

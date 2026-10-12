@@ -5,24 +5,30 @@ use crate::graphic3d::{
     Graphic3dCStructureBase, Graphic3dGroup, Graphic3dGroupBase,
     Graphic3dPresentationAttributesSource, Graphic3dStructureManager, Graphic3dStructureSource,
 };
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
 use rustycad_tkmath::gp::Axis2;
 
 /// A driver structure of the null driver; `NullCStructure::new(&manager)?`.
 pub struct NullCStructure {
     transient: StandardTransient,
-    base: Graphic3dCStructureBase,
+    pub(super) base: Graphic3dCStructureBase,
+    pub(super) this: SharedState<WeakHandle<Self>>,
+    pub(super) shadow_parent: SharedState<Handle<Self>>,
 }
 rustycad_tkernel::impl_transient!(NullCStructure, "NullCStructure", StandardTransient, transient,
     interfaces: [dyn Graphic3dCStructure]);
 
 impl NullCStructure {
     /// A structure of the manager's driver; `NullCStructure::new(&manager)?`.
-    pub fn new(manager: &Handle<Graphic3dStructureManager>) -> Result<Self, Failure> {
-        Ok(Self {
+    pub fn new(manager: &Handle<Graphic3dStructureManager>) -> Result<Handle<Self>, Failure> {
+        let structure = Handle::new(Self {
             transient: StandardTransient::default(),
             base: Graphic3dCStructureBase::new(manager)?,
-        })
+            this: SharedState::new(WeakHandle::default()),
+            shadow_parent: SharedState::new(Handle::default()),
+        });
+        *structure.this.write() = structure.downgrade();
+        Ok(structure)
     }
 }
 
@@ -54,14 +60,12 @@ impl Graphic3dCStructure for NullCStructure {
         fields.highlight = false;
         fields.highlight_style = Handle::default();
     }
-    /// A new structure of the manager sharing the groups.
+    /// Retain the root parent without adopting its removable group nodes, as OpenGl shadow.
     fn shadow_link(
         &self,
         manager: &Handle<Graphic3dStructureManager>,
     ) -> Result<Handle<dyn Graphic3dCStructure>, Failure> {
-        let shadow = NullCStructure::new(manager)?;
-        shadow.base.fields.write().groups = self.base.fields.read().groups.clone();
-        Ok(Handle::new(shadow).cast())
+        super::shadow::null_structure_shadow(self, manager)
     }
     fn new_group(
         &self,

@@ -1,0 +1,75 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_header_sha256": {
+    "src/Visualization/TKService/Image/Image_PixMap.hxx": "d88fc4f0d2638dd0ef4322def2565d73db3faa41adc03c6e950ff8a73323b7f0",
+    "src/Visualization/TKService/Image/Image_PixMapTypedData.hxx": "904b66bdd98acb3e9eccfb1f098c53f578efaeb236684c403078ccb11bf6ea86"
+  },
+  "rust_source": "crates/tkservice/src/image/pix_map_data.rs",
+  "rust_source_sha256": "6b463a5cc6e8985fdddf62c6b1946fb0fe6f77dbe6a06fc5a1cc2ca155d14b2b",
+  "evidence": "Native template getters return references into mutable pixel storage; current Rust typed<P> returns Option<P>, set_typed returns bool. Byte access and numeric-value proof do not prove typed live aliases. No replacement implementation or completion credit is claimed.",
+  "rows": [
+    {
+      "upstream_id": "Image_PixMap::Value",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+      "old_status": "implemented",
+      "new_status": "partial"
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeValue",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+      "old_status": "implemented",
+      "new_status": "partial"
+    },
+    {
+      "upstream_id": "Image_PixMap::ValueXY",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+      "old_status": "implemented",
+      "new_status": "partial"
+    },
+    {
+      "upstream_id": "Image_PixMap::ChangeValueXY",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+      "old_status": "implemented",
+      "new_status": "partial"
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData",
+      "old_status": "implemented",
+      "new_status": "partial"
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::Value",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::typed",
+      "old_status": "implemented",
+      "new_status": "partial"
+    },
+    {
+      "upstream_id": "Image_PixMapTypedData::ChangeValue",
+      "rust_item": "rustycad_tkservice::image::ImagePixMapData::set_typed",
+      "old_status": "implemented",
+      "new_status": "partial"
+    }
+  ],
+  "native_runtime": {
+    "oracle_source": "tools/oracle/martensite_image_pixel_references.cxx",
+    "oracle_sha256": "322c670130b6e201f6464c84c094091f3c2dd586de48c43f535a99c41649af5a",
+    "binary_sha256": "535e995090ba20da2dfb29d15c5ae0024c2e893ed0df56324eedbaa0c6c5d5c3",
+    "compiler": "g++ Ubuntu13.3.0",
+    "flags": [
+      "-std=c++17",
+      "-O0"
+    ],
+    "linked_libraries": [
+      "TKService",
+      "TKernel"
+    ],
+    "runs": 2,
+    "byte_equal": true,
+    "rows": 4,
+    "raw_sha256": "57f44837a7c3d222079658bb3b6862b8cd3ac17888e3d6322cd8e0783138b362",
+    "valid_domain": "3x2 Gray pixmap and 3x2 unsigned-char typed image allocated with actual CommonBaseAllocator; aliases remain alive across valid byte writes.",
+    "discarded_diagnostic": "Initial typed Init(nullptr) probe exited139; null allocator is not a valid allocation dependency. Replaced with real CommonBaseAllocator, both valid runs terminal0. No output from invalid run used as oracle."
+  }
+}

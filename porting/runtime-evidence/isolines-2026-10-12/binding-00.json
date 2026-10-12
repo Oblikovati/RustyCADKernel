@@ -1,0 +1,92 @@
+{
+  "upstream_id": "StdPrs_ToolRFace::Orientation",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "105aaf911e1e5ef235b9f68bcf1063648a199a74f27e7c174be8046e2b178ca9"
+  ],
+  "cpp_matches": [
+    {
+      "id": "105aaf911e1e5ef235b9f68bcf1063648a199a74f27e7c174be8046e2b178ca9",
+      "usr": "c:@S@StdPrs_ToolRFace@F@Orientation#1",
+      "qualified_name": "StdPrs_ToolRFace::Orientation",
+      "kind": "CXXMethod",
+      "signature": "enum TopAbs_Orientation () const",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::orientation"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::orientation"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsToolRFace::orientation",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "self",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "generic": "Self"
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": null,
+              "path": "Orientation",
+              "resolved_item_path": "rustycad_tkg3d::top_abs::enums::Orientation"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "StdPrsToolRFace",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::tool_r_face::StdPrsToolRFace"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "5ce94dcab5d6932a643cd33224b47345c88e50f020b1514663083d7c0c02f19d",
+      "source_file": "crates/tkv3d/src/std_prs/tool_r_face.rs",
+      "source_status": null,
+      "source_sha256": "22aeb7c7705cab6ab417907d577426dd7c1f74c5198cef04cb6f3ec1b4492224"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+}

@@ -31,7 +31,7 @@ registry. This process does not publish to crates.io.
 On a clean checkout at the release tag, use the pinned Rust toolchain and run:
 
 ```sh
-python3 tools/release_packages.py --tag v0.1.2
+python3 tools/release_packages.py --tag v0.2.1
 ```
 
 The command derives the package inventory from Cargo metadata. Cargo creates
@@ -58,9 +58,9 @@ python3 tools/run_tool_tests.py --jobs 2 --pattern 'test_release_*.py'
 ```
 
 Python 3.12 or later is required. Linux native prerequisites include pkg-config,
-Tcl/Tk 8.6 development files, FreeType, Fontconfig, X11, and the Vulkan loader
-and
-software driver. The workflow installs them before the archive tests.
+Tcl/Tk 8.6 development files, FreeType, Fontconfig, X11, and the Vulkan loader,
+software driver, and validation layers. The workflow installs them before the
+archive tests.
 
 ## Publication
 
@@ -89,7 +89,10 @@ so native-window tests have an actual X server even on headless hosted runners.
 Neither workaround skips a test or relaxes a renderer comparison.
 
 The Linux workspace and coverage jobs install the Tcl/Tk and visualization
-development libraries explicitly. macOS uses Homebrew `tcl-tk@8` with local
+development libraries, Vulkan loader, Mesa software driver, and validation layers
+explicitly. Workspace and coverage tests select the installed lavapipe ICD.
+The current release matrix verifies Linux; Windows and macOS are deferred.
+The retained macOS setup uses Homebrew `tcl-tk@8` with local
 versioned pkg-config aliases, alongside FreeType and Fontconfig. This repairs the
 missing `tcl8.6` prerequisite observed in Dependabot run `38073783006`; it does not
 accept or merge the dependency update. Hosted verification of these fixes is pending.
@@ -104,15 +107,16 @@ these updates grant no additional API coverage.
 
 X11 window APIs, examples, and their tests are Linux-specific, matching the
 existing Xlib dependency and display implementation. Other window and offscreen
-checks remain enabled on macOS and Windows. The matrix completes every platform
-even when another fails, so a macOS failure no longer cancels Windows diagnostics.
+checks retain their platform support. The matrix strategy completes every enabled
+platform even when another fails; only Linux is enabled for the current porting
+release.
 
 Windows Tcl/Tk prerequisites are built with MSVC from the pinned upstream 8.6.18
 commits in the workflow. The installer supplies matching import-library metadata
 and runtime DLL/library paths. The Tcl build script preserves native path-list
 separators, and header checks use Clang on Windows while retaining the positive
 and negative ABI checks. Tcl header tests pass locally; hosted Windows linking
-and execution remain a required release gate.
+and execution are deferred until Windows validation is resumed.
 
 The Windows cross-check also exposed C `long`/wide-character assumptions:
 FreeType point sizes now reject overflow before conversion, glyph comparisons
@@ -227,3 +231,18 @@ exactly. These baselines are owned by the Rust test crates and included directly
 in their Cargo archives. Removing the OCCT generators and porting receipts does
 not remove these behavior tests or their fixtures. Legacy test resources still
 enter the extracted-package test-support bundle until their ownership is migrated.
+
+## Software renderer CPU profile
+
+Software rendering checks use `GALLIUM_OVERRIDE_CPU_CAPS=sse2` and
+`LP_NATIVE_VECTOR_WIDTH=128`, documented by [Mesa](https://docs.mesa3d.org/envvars.html).
+These constrain the shared Gallivm SIMD/FMA paths used by software OpenGL and
+lavapipe. They preserve sampler settings, shaders, exact RGBA checks, and the
+existing depth limit. Native hardware checks retain their device-specific assets.
+
+Release run `38200556316` failed the XR texture replay at byte 4492 despite the
+same test passing on another runner. All other checks, including coverage,
+passed. Fresh native GL and Vulkan captures under the constrained profile match
+all eight XR scenes with the original strict gates. The profile does not promise
+byte identity for every Mesa/LLVM/CPU combination; CI still verifies the actual
+rendered output. The failed `v0.2.0` tag remains immutable and unpublished.

@@ -102,7 +102,7 @@ fn append_triangle_columns(columns: &mut Vec<f64>, probe: &Select3DSensitiveTria
         append_point_columns(columns, point);
     }
 }
-pub(super) fn compare_oracle_snapshot(actual: &[f64], expected: &str) {
+pub(crate) fn compare_oracle_snapshot(actual: &[f64], expected: &str) {
     let expected: Vec<f64> = expected
         .split_whitespace()
         .map(|token| token.parse().unwrap())

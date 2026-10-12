@@ -1,0 +1,17 @@
+{
+  "feature_commit": "835ef4b624b69a1c9d15b19fc44e3e441abe3a90",
+  "integration_parent": "2b64e546f",
+  "tests": 6321,
+  "executables": 90,
+  "checks": [
+    "all-feature all-target affected tests",
+    "Clippy -D warnings",
+    "format",
+    "suite discovery",
+    "AMD and lavapipe view-cube capture"
+  ],
+  "merge_resolution": "Retained main AIS production exports and single test-module assembly. Added HandleReference and reference_address; preserved source callbacks and borrowed handle lifetime behavior. Removed redundant incoming assembly file.",
+  "same_profile_buffers_identical": 36,
+  "cpu_profile_diagnostics": "SSE2/128 differs from original software 256-bit profile by up to one RGBA byte and 2.592802047729492e-6 depth. Original-profile control is byte-identical on all 18 buffers; AMD all 18 identical. Existing strict native differences remain explicit; no tolerance changes or parity promotion.",
+  "ledger": "Ten replacement claims remain in fragment, pending fresh integrated rustdoc preflight."
+}

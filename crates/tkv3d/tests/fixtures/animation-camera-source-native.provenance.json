@@ -1,0 +1,63 @@
+{
+  "binary_sha256": "f07f3dd3ffe37742481bb1521cde02a365e61441cbcdc61f456d35fdeca25f5a",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "fixture_sha256": "bff16f198cb649ed01c56563215da79c3a6233b7762e49932a0e88c7f9770f7a",
+  "flags": [
+    "-std=c++17",
+    "-O0"
+  ],
+  "linked_libraries": [
+    "TKV3d",
+    "TKG3d",
+    "TKService",
+    "TKMath",
+    "TKernel"
+  ],
+  "native_library_directory": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+  "oracle_sha256": "f930424732ae579b2bf4a2c58a13587e2795e88958bc92c1d79cd67d564fa7bd",
+  "oracle_source": "tools/oracle/martensite_animation_camera_source.cxx",
+  "precision": 17,
+  "project": "Martensite",
+  "raw_byte_equal": true,
+  "raw_run_sha256": [
+    "bff16f198cb649ed01c56563215da79c3a6233b7762e49932a0e88c7f9770f7a",
+    "bff16f198cb649ed01c56563215da79c3a6233b7762e49932a0e88c7f9770f7a"
+  ],
+  "rows": 7,
+  "schema": {
+    "endpoints": [
+      "group1",
+      "frame",
+      "start_null",
+      "end_null",
+      "camera_refcount",
+      "other_refcount",
+      "same_start_slot",
+      "same_end_slot"
+    ],
+    "target": [
+      "group2",
+      "frame0",
+      "view_null",
+      "same_target_slot"
+    ],
+    "timer": [
+      "group0",
+      "frame",
+      "failed",
+      "timer_calls",
+      "is_kind_camera",
+      "is_kind_animation"
+    ]
+  },
+  "scope": "Compiling camera protocol checkpoint; frame and XR orchestration remain incomplete; no new API completion claims",
+  "undefined_cases_excluded": [
+    "native dangling handle/field aliases after owner deletion"
+  ],
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "upstream_sources": {
+    "src/Visualization/TKV3d/AIS/AIS_Animation.hxx": "c7f02831e3e70ca4bd4662307f888d74cad28a3d11369e0d0d8567dadbccd9c8",
+    "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.cxx": "7715b22a6fca8871023b230e3ee7b1019b223c4dd6c04cec98b291dfcc90e0e8",
+    "src/Visualization/TKV3d/AIS/AIS_AnimationCamera.hxx": "878f723d92c60ea72dc0c34ebc2d4d2e6ca2c002fe0ddaf51dc70ae5ef2f6afd"
+  }
+}

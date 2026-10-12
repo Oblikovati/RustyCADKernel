@@ -1,0 +1,52 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "native_source_sha256": {
+    "src/Visualization/TKV3d/V3d/V3d_View.hxx": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412"
+  },
+  "corrections": [
+    {
+      "upstream_id": "V3d_View::AddClipPlane",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::add_clip_plane",
+      "old_status": "implemented",
+      "new_status": "partial",
+      "reason": "Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required."
+    },
+    {
+      "upstream_id": "V3d_View::Redraw",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::redraw",
+      "old_status": "implemented",
+      "new_status": "partial",
+      "reason": "Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required."
+    },
+    {
+      "upstream_id": "V3d_View::RedrawImmediate",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::redraw_immediate",
+      "old_status": "implemented",
+      "new_status": "partial",
+      "reason": "Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required."
+    },
+    {
+      "upstream_id": "V3d_View::RemoveClipPlane",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::remove_clip_plane",
+      "old_status": "implemented",
+      "new_status": "partial",
+      "reason": "Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required."
+    },
+    {
+      "upstream_id": "AIS_ViewController::handleCameraActions(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &, const AIS_WalkDelta &)",
+      "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_camera_actions",
+      "old_status": "implemented",
+      "new_status": "partial",
+      "reason": "Native camera actions traverse live NCollection_Sequence zoom nodes, copying only the current scroll value before virtual callbacks. Current Rust snapshots the whole zoom sequence into a Vec, so valid callback append/remove-other-node edits cannot affect later traversal. Existing concrete camera-action fixtures remain valid; actual Source callback mutation requires a detached live cursor and shared buffer storage."
+    }
+  ],
+  "completion_credit": false,
+  "existing_concrete_behavior_proofs_preserved": true,
+  "work_owners": {
+    "view_source": "Camera worker after current camera-transport integration",
+    "live_zoom_nodes": "Controller-frame worker with shared UI/GL buffer migration"
+  }
+}

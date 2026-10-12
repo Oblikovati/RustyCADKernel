@@ -1,0 +1,35 @@
+{
+  "project": "Martensite",
+  "session": 20250,
+  "source_manifest": "performance-source-hashes.json.gz",
+  "source_manifest_sha256": "d5a4f925153013f0f53d5eb368ecefe606d26a5b51aa6564f57fd034b5c3e134",
+  "source_entries": 7432,
+  "executable_sha256": "739ea56d0c8052f48268e3fdd01c94f669120483e4b4250d3b020c2ad652f762",
+  "root_verified_before_GO": true,
+  "all_source_and_binary_hashes_verified_before_after_each_profile": true,
+  "source_edits_or_rebuilds_during_timing": false,
+  "validation": false,
+  "warmup": 20,
+  "samples_per_workload": 100,
+  "workloads_per_profile": 10,
+  "total_samples": 2000,
+  "historical_baseline_accepted": false,
+  "profiles": [
+    {
+      "profile": "host",
+      "raw_report": "performance-host.json.gz",
+      "sha256": "d86e7f22c8d0fd785fa3792a9d659fd6c4593ddd2cbc70470075294bc3ea41e4",
+      "exit_code": 0,
+      "workloads": 10,
+      "samples": 1000
+    },
+    {
+      "profile": "lavapipe",
+      "raw_report": "performance-lavapipe.json.gz",
+      "sha256": "f8207323c5895d4a19ce95a44b3324fb0c7d6d0cf8b8fb74ec6bc58ba6f59e18",
+      "exit_code": 0,
+      "workloads": 10,
+      "samples": 1000
+    }
+  ]
+}

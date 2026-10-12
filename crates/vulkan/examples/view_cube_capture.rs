@@ -9,6 +9,8 @@ mod view_cube_scene;
 #[allow(dead_code)]
 #[path = "../tests/support/view_cube_widget.rs"]
 mod view_cube_widget;
+#[path = "../tests/support/view_cube_widget_animation.rs"]
+mod view_cube_widget_animation;
 #[allow(dead_code)]
 #[path = "../tests/support/view_setup.rs"]
 mod view_setup;
@@ -96,7 +98,7 @@ fn capture_widget_interaction(
     scene: &view_cube_scene::ViewCubeCaptureScene,
     prefix: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    use rustycad_tkv3d::ais::AisViewCubeMembers;
+    use rustycad_tkv3d::ais::{AisAnimationCameraMembers, AisViewCubeMembers};
     scene.restore_labels()?;
     let clock = view_cube_widget::configure_widget_timer(scene);
     let orientation = view_cube_widget::detect_widget_center(scene)?;
@@ -126,5 +128,6 @@ fn capture_widget_frames(
         view_capture::capture_view(&scene.view, 320, 320, &format!("{prefix}-{label}"), true)?;
         view_cube_widget::trace_widget_view(&format!("{label}-after-dump"), scene)?;
     }
+    view_cube_widget::verify_widget_camera_dispatch(clock);
     Ok(())
 }

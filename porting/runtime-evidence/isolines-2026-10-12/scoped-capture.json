@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "raw_capture_complete": false,
+  "normalized_public_inventory": false,
+  "workspace_library_count": 1,
+  "feature_policy": "all-features per workspace library package",
+  "rustdoc_item_policy": "document-private-items-v1",
+  "rustdoc_json_format_version": 61,
+  "cargo_arguments": [
+    "rustdoc",
+    "--locked",
+    "--package {package}",
+    "--lib",
+    "--all-features",
+    "-Z unstable-options",
+    "-- --document-private-items --output-format json -Z unstable-options"
+  ],
+  "rustdoc_json": [
+    {
+      "package": "rustycad-tkv3d",
+      "package_id": "path+file:///home/vmiguel/git/oblikovati-workspace/Martensite-isolines/crates/tkv3d#rustycad-tkv3d@0.1.2",
+      "library_target": "rustycad_tkv3d",
+      "manifest_path": "crates/tkv3d/Cargo.toml",
+      "available_features": [],
+      "feature_selection": "all-features",
+      "package_inputs_sha256": "7740d168c85ed9acffa6e247c4c517d6ae2a0dc0beee0f4fa06f3b68aa3adba1",
+      "artifact": "crates/rustycad_tkv3d.json",
+      "artifact_sha256": "311d552e981f633b8de4245165c1ccf6435f1c5c88c8d8d97c9d50f8ac691b4a",
+      "artifact_bytes": 11829389,
+      "rustdoc_format_version": 61,
+      "indexed_items": 15562
+    }
+  ],
+  "inputs": {
+    "workspace_revision": "c03a97d3eee791281c7f6e18127c49f64dd0d9ec",
+    "tool_versions": {
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n"
+    }
+  },
+  "scope": "Only rustycad-tkv3d; scoped claim proof, not whole-workspace inventory"
+}

@@ -1,0 +1,32 @@
+{
+  "project": "Martensite",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "feature_source_commit": "92c12e733",
+  "native_sources": [
+    {
+      "path": "tools/oracle/martensite_vulkan_xr_device_capture.cxx",
+      "sha256": "a98b49a9baea870f176a3282d359cab21caf42eefc54690416f306d5cee487d5"
+    },
+    {
+      "path": "tools/oracle/martensite_text_culling_probe.hxx",
+      "sha256": "56b0fb9cf672783a5890ce9ba9adad349117124e0cfc182c28a4a3b2a25ac91c"
+    }
+  ],
+  "native_executable_sha256": "4a8e5fb19dd392df7e08cfa0fef6ab4d4a3172b36d2ffa60af46869bc0398582",
+  "native_command": "c++ -std=c++17 -O2 -I../RustyCADKernel/target/occt-all-full/include/opencascade tools/oracle/martensite_vulkan_xr_device_capture.cxx -L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi -Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi -lTKOpenGl -lTKV3d -lTKService -lTKMath -lTKernel -lX11 -o /tmp/martensite-xr-gl-capture",
+  "capture_command": "/tmp/martensite-xr-gl-capture MODE PREFIX; target/debug/examples/xr_device_capture MODE PREFIX",
+  "profiles": {
+    "lavapipe": "VK_DRIVER_FILES=/usr/share/vulkan/icd.d/lvp_icd.json MARTENSITE_VULKAN_DEVICE=0 LIBGL_ALWAYS_SOFTWARE=1",
+    "host": "VK_DRIVER_FILES=/usr/share/vulkan/icd.d/radeon_icd.json MARTENSITE_VULKAN_DEVICE=0; hardware OpenGL without software overrides"
+  },
+  "cases_per_profile": 8,
+  "all_native_repeats_byte_identical": true,
+  "raw_rgba_gate": "exact equality",
+  "raw_depth_gate": 1e-06,
+  "maximum_observed_depth_delta": 5.662441253662109e-07,
+  "owning_viewer_retained": true,
+  "native_source_unused_shared_factory": "The included shared create_policy_probe body is not called by this generator; dedicated XrNativeView retains the actual viewer. Parent owns its independent shared-helper correction.",
+  "Rust_only_replay": "cargo test -p martensite-vulkan --test toolkit xr_device_presentations; explicit AMD/lavapipe profile selection, no native compiler/OCCT required.",
+  "broader_raster_parity_claimed": false,
+  "diagnostic_limitations": "known-special-cases.json preserves oblique-axis and narrow-depth AMD diagnostics. Final cardinal camera is bounded functional evidence."
+}

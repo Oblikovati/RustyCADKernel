@@ -104,11 +104,18 @@ pub trait Graphic3dTexture2DSource: Graphic3dTextureMap {
     /// The embedded 2D base; `texture.texture_2d_base()`.
     fn texture_2d_base(&self) -> &Graphic3dTexture2DBase;
 }
-rustycad_tkernel::impl_transient_interface!(
-    dyn Graphic3dTexture2DSource,
-    "Graphic3d_Texture2D",
-    dyn Graphic3dTextureMap
-);
+// OCCT 3d097a0 has one Texture2D descriptor; the Rust source seam aliases that concrete class.
+impl rustycad_tkernel::standard::RuntimeTyped for dyn Graphic3dTexture2DSource {
+    const TYPE_NAME: &'static str = "Graphic3d_Texture2D";
+    fn static_type() -> &'static rustycad_tkernel::standard::RuntimeType {
+        // An abstract same-name registration would invent an extra native ancestor.
+        <Graphic3dTexture2D as rustycad_tkernel::standard::RuntimeTyped>::static_type()
+    }
+    fn project_from(object: &dyn rustycad_tkernel::standard::Transient) -> Option<&Self> {
+        // Dynamic views retain the actual implementation's image-reading override.
+        rustycad_tkernel::standard::project_interface::<Self>(object)
+    }
+}
 
 /// The non-virtual members of `Graphic3d_Texture2D`.
 pub trait Graphic3dTexture2DMembers: Graphic3dTexture2DSource {
@@ -129,7 +136,7 @@ impl<T: Graphic3dTexture2DSource + ?Sized> Graphic3dTexture2DMembers for T {}
 
 /// Implements the texture traits of a 2D texture struct with a `base: Graphic3dTexture2DBase`.
 macro_rules! texture_2d_traits {
-    ($ty:ty, $name:literal) => {
+    ($ty:ty, $name:literal, $parent:ty) => {
         impl Graphic3dTextureRoot for $ty {
             fn texture_root_base(&self) -> &Graphic3dTextureRootBase {
                 &self.base.root
@@ -141,7 +148,7 @@ macro_rules! texture_2d_traits {
                 &self.base
             }
         }
-        rustycad_tkernel::impl_transient!($ty, $name, dyn Graphic3dTexture2DSource, transient,
+        rustycad_tkernel::impl_transient!($ty, $name, $parent, transient,
             interfaces: [dyn Graphic3dTextureRoot, dyn Graphic3dTextureMap, dyn Graphic3dTexture2DSource]);
     };
 }
@@ -151,7 +158,11 @@ pub struct Graphic3dTexture2D {
     transient: StandardTransient,
     base: Graphic3dTexture2DBase,
 }
-texture_2d_traits!(Graphic3dTexture2D, "Graphic3d_Texture2D");
+texture_2d_traits!(
+    Graphic3dTexture2D,
+    "Graphic3d_Texture2D",
+    dyn Graphic3dTextureMap
+);
 
 impl Graphic3dTexture2D {
     /// Wraps a base built by a constructor; `Graphic3dTexture2D::with_base(base)`.
@@ -193,7 +204,11 @@ pub struct Graphic3dTexture2Dplane {
     base: Graphic3dTexture2DBase,
     plane_name: SharedState<Graphic3dNameOfTexturePlane>,
 }
-texture_2d_traits!(Graphic3dTexture2Dplane, "Graphic3d_Texture2Dplane");
+texture_2d_traits!(
+    Graphic3dTexture2Dplane,
+    "Graphic3d_Texture2Dplane",
+    dyn Graphic3dTexture2DSource
+);
 
 /// The S and T planes of a predefined plane.
 fn predefined_planes(plane: Graphic3dNameOfTexturePlane) -> Option<(Vec4<f32>, Vec4<f32>)> {

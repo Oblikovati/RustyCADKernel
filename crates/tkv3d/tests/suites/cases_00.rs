@@ -3,6 +3,8 @@
 pub mod ais_animation;
 #[path = "../ais_animation_camera.rs"]
 pub mod ais_animation_camera;
+#[path = "../ais_animation_camera_source.rs"]
+pub mod ais_animation_camera_source;
 #[path = "../ais_animation_object.rs"]
 pub mod ais_animation_object;
 #[path = "../ais_animation_timer.rs"]

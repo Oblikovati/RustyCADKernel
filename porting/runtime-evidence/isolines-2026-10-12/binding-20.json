@@ -1,0 +1,172 @@
+{
+  "upstream_id": "StdPrs_ToolRFace::StdPrs_ToolRFace",
+  "toolkit": "TKV3d",
+  "parity_status": "implemented",
+  "resolution": "implemented",
+  "cpp_status": "unique",
+  "cpp_ids": [
+    "d62248fbeb76695ea3e922f9f7c2753c1e0dc43c867128f48a4e88a5bbf0af1f"
+  ],
+  "cpp_matches": [
+    {
+      "id": "d62248fbeb76695ea3e922f9f7c2753c1e0dc43c867128f48a4e88a5bbf0af1f",
+      "usr": "c:@S@StdPrs_ToolRFace@F@StdPrs_ToolRFace#&1$@N@opencascade@S@handle>#$@S@BRepAdaptor_Surface#",
+      "qualified_name": "StdPrs_ToolRFace::StdPrs_ToolRFace",
+      "kind": "CXXConstructor",
+      "signature": "void (const class opencascade::handle<class BRepAdaptor_Surface> &)",
+      "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+    }
+  ],
+  "rust_status": "unique",
+  "declared_rust_kind": null,
+  "declared_rust_selectors": null,
+  "declared_rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::with_surface"
+  ],
+  "rust_paths": [
+    "rustycad_tkv3d::std_prs::StdPrsToolRFace::with_surface"
+  ],
+  "rust_matches": [
+    {
+      "path": "rustycad_tkv3d::std_prs::StdPrsToolRFace::with_surface",
+      "kind": "function",
+      "signature": {
+        "default_unstable": null,
+        "generics": {
+          "params": [
+            {
+              "kind": {
+                "type": {
+                  "bounds": [
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "StdPrsIsolineSurfaceSource",
+                          "resolved_item_path": "rustycad_tkv3d::std_prs::isoline_surface_source::StdPrsIsolineSurfaceSource"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "none",
+                        "trait": {
+                          "args": null,
+                          "path": "rustycad_tkernel::standard::RuntimeTyped",
+                          "resolved_item_path": "rustycad_tkernel::standard::runtime_type::RuntimeTyped"
+                        }
+                      }
+                    },
+                    {
+                      "trait_bound": {
+                        "generic_params": [],
+                        "modifier": "maybe",
+                        "trait": {
+                          "args": null,
+                          "path": "Sized",
+                          "resolved_item_path": "core::marker::Sized"
+                        }
+                      }
+                    }
+                  ],
+                  "default": null,
+                  "is_synthetic": false
+                }
+              },
+              "name": "S"
+            }
+          ],
+          "where_predicates": []
+        },
+        "has_body": true,
+        "header": {
+          "abi": "Rust",
+          "is_async": false,
+          "is_const": false,
+          "is_unsafe": false
+        },
+        "sig": {
+          "inputs": [
+            [
+              "surface",
+              {
+                "borrowed_ref": {
+                  "is_mutable": false,
+                  "lifetime": null,
+                  "type": {
+                    "resolved_path": {
+                      "args": {
+                        "angle_bracketed": {
+                          "args": [
+                            {
+                              "type": {
+                                "generic": "S"
+                              }
+                            }
+                          ],
+                          "constraints": []
+                        }
+                      },
+                      "path": "Handle",
+                      "resolved_item_path": "rustycad_tkernel::standard::handle::Handle"
+                    }
+                  }
+                }
+              }
+            ]
+          ],
+          "is_c_variadic": false,
+          "output": {
+            "resolved_path": {
+              "args": {
+                "angle_bracketed": {
+                  "args": [
+                    {
+                      "type": {
+                        "generic": "Self"
+                      }
+                    },
+                    {
+                      "type": {
+                        "resolved_path": {
+                          "args": null,
+                          "path": "Failure",
+                          "resolved_item_path": "rustycad_tkernel::standard::failure::Failure"
+                        }
+                      }
+                    }
+                  ],
+                  "constraints": []
+                }
+              },
+              "path": "Result",
+              "resolved_item_path": "core::result::Result"
+            }
+          }
+        }
+      },
+      "impl_context": {
+        "for": {
+          "resolved_path": {
+            "args": null,
+            "path": "StdPrsToolRFace",
+            "resolved_item_path": "rustycad_tkv3d::std_prs::tool_r_face::StdPrsToolRFace"
+          }
+        },
+        "generics": {
+          "params": [],
+          "where_predicates": []
+        },
+        "trait": null
+      },
+      "declaration_sha256": "4e4df0d8c04539fc49052d38c25c439e84dc5dd2e684d94825f45f0a8393a9d6",
+      "source_file": "crates/tkv3d/src/std_prs/tool_r_face.rs",
+      "source_status": null,
+      "source_sha256": "22aeb7c7705cab6ab417907d577426dd7c1f74c5198cef04cb6f3ec1b4492224"
+    }
+  ],
+  "source": "src/Visualization/TKV3d/StdPrs/StdPrs_ToolRFace.hxx"
+}

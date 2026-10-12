@@ -1,0 +1,60 @@
+[
+  {
+    "profile": "lavapipe",
+    "device": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "command": [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-view-cube-animation-source/target/release/examples/view_cube_performance"
+    ],
+    "environment": {
+      "DISPLAY": ":1",
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "exit_code": 0,
+    "elapsed_seconds": 1.9287651990016457,
+    "before": {
+      "focused_files": 69,
+      "full_build_inputs": 11984,
+      "binary_sha256": "84e2e5e2895dbd85fc57bbbcb38559388fecd8443590f98ed33737c0aa1ac15b",
+      "verified_at": "2026-10-12T02:56:12.453931+00:00"
+    },
+    "after": {
+      "focused_files": 69,
+      "full_build_inputs": 11984,
+      "binary_sha256": "84e2e5e2895dbd85fc57bbbcb38559388fecd8443590f98ed33737c0aa1ac15b",
+      "verified_at": "2026-10-12T02:56:14.555756+00:00"
+    },
+    "workloads": 8,
+    "samples": 800,
+    "raw_vectors": "lavapipe-performance.log.gz"
+  },
+  {
+    "profile": "amd",
+    "device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+    "command": [
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-view-cube-animation-source/target/release/examples/view_cube_performance"
+    ],
+    "environment": {
+      "DISPLAY": ":1",
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    },
+    "exit_code": 0,
+    "elapsed_seconds": 1.6846620940195862,
+    "before": {
+      "focused_files": 69,
+      "full_build_inputs": 11984,
+      "binary_sha256": "84e2e5e2895dbd85fc57bbbcb38559388fecd8443590f98ed33737c0aa1ac15b",
+      "verified_at": "2026-10-12T02:56:14.719396+00:00"
+    },
+    "after": {
+      "focused_files": 69,
+      "full_build_inputs": 11984,
+      "binary_sha256": "84e2e5e2895dbd85fc57bbbcb38559388fecd8443590f98ed33737c0aa1ac15b",
+      "verified_at": "2026-10-12T02:56:16.567067+00:00"
+    },
+    "workloads": 8,
+    "samples": 800,
+    "raw_vectors": "amd-performance.log.gz"
+  }
+]

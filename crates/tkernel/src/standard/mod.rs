@@ -72,3 +72,14 @@ pub use read_buffer::{ReadBuffer, ReadChunkIstreamError};
 pub use read_line_buffer::ReadLineBuffer;
 mod nonrecursive_mutex;
 pub use nonrecursive_mutex::{NonRecursiveMutex, NonRecursiveMutexGuard};
+
+mod handle_reference;
+pub use handle_reference::HandleReference;
+mod handle_field_ref;
+pub use handle_field_ref::HandleFieldRef;
+
+mod weak_handle_slot_ref;
+pub use weak_handle_slot_ref::WeakHandleSlotRef;
+
+mod weak_handle_slot_assignment;
+pub use weak_handle_slot_assignment::WeakHandleSlotAssignment;
