@@ -17,6 +17,15 @@ pub fn cap_fixture_pipelines(
     (texture, edges)
 }
 pub const CAP_TEXTURE_EDGE_MODES: &[&str] = &[
+    "cap-section-edges-oblique-generated-polygon-thin-sampler-updated",
+    "cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-blend-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-mask-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-mask-blend-edges-disabled",
+    "cap-section-edges-generated-polygon-thin-opaque-alpha-edges-disabled",
     "cap-section-edges-oblique-generated-polygon-thin-bc1-rgb",
     "cap-section-edges-oblique-generated-polygon-thin-bc1-rgba",
     "cap-section-edges-oblique-generated-polygon-thin-bc2",

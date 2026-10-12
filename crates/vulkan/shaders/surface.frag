@@ -23,19 +23,12 @@ layout(location=8) in vec3 edgeDistance;
 #endif
 layout(set=MARTENSITE_SURFACE_SET,binding=0) uniform sampler2D surfaceImage;
 #endif
-vec3 fixedSrgbDecode(vec3 color) {
-    return mix(pow((color+0.055)/1.055,vec3(2.4)),color/12.92,lessThanEqual(color,vec3(0.04045)));
-}
-vec3 fixedSrgbEncode(vec3 color) {
-    return mix(1.055*pow(max(color,vec3(0.0)),vec3(1.0/2.4))-0.055,color*12.92,lessThanEqual(color,vec3(0.0031308)));
-}
 vec4 surfaceTexel() {
     // OpenGL incomplete texture sampling is black with alpha one; loading still failed.
     if ((transform.flags&16u)!=0u) return vec4(0.0,0.0,0.0,1.0);
 #ifdef MARTENSITE_SURFACE_TEXTURE
     vec4 texel=texture(surfaceImage,surfaceUV.st/surfaceUV.w);
     // OCCT3d097a0 ToRenderSRGB disables texture/output sRGB conversion in the FFP policy.
-    if ((transform.flags&512u)!=0u) texel.rgb=fixedSrgbEncode(texel.rgb);
     if ((transform.flags&1024u)!=0u) texel.rgb=vec3(1.0);
     return texel;
 #else
@@ -78,7 +71,6 @@ void main() {
     float interior=smoothstep(transform.edgeWidth-transform.edgeFeather*0.5,transform.edgeWidth+transform.edgeFeather*0.5,distance);
     outColor=transform.edgeColor.a<0.0?vec4(outColor.rgb,1.0-interior):mix(transform.edgeColor,outColor,interior);
 #endif
-    if ((transform.flags&256u)!=0u) outColor.rgb=fixedSrgbDecode(clamp(outColor.rgb,0.0,1.0));
     // Surface masking uses native strict comparison; glyph cutoff remains <= in its independent shader.
     if ((transform.flags&8u)!=0u&&outColor.a<transform.cutoff) discard;
 }

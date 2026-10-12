@@ -19,6 +19,7 @@ pub(super) struct PipelineVariant {
     pub text: bool,
     pub text_blend: bool,
     pub text_logic_xor: bool,
+    pub encoded_surface: bool,
     pub clipped: bool,
     pub stencil: bool,
     pub capping: RenderCappingPass,
@@ -98,6 +99,7 @@ fn empty_variant(
         text: false,
         text_blend: false,
         text_logic_xor: false,
+        encoded_surface: false,
         clipped,
         stencil,
         capping,
@@ -191,6 +193,7 @@ fn special_variant_key(draw: &PrimitiveDraw) -> usize {
         + 8192 * usize::from(draw.mesh_edges.is_some())
         + 16384 * usize::from(draw.polygon_edge_style.is_some())
         + 32768 * usize::from(draw.surface_texture_binding_only)
+        + 65536 * usize::from(encoded_surface_attachment(draw))
 }
 fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
     let mut kind = PipelineVariant::from_index(variant_index(draw), stencil);
@@ -202,7 +205,12 @@ fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
     kind.surface_alpha = draw.surface_cutoff.is_some()
         || (draw.surface_texture_unavailable.is_some() && !draw.surface_texture_binding_only);
     kind.capping = draw.capping_pass;
+    kind.encoded_surface = encoded_surface_attachment(draw);
     kind
+}
+pub(super) fn encoded_surface_attachment(draw: &PrimitiveDraw) -> bool {
+    !draw.surface_texture_binding_only
+        && crate::fixed_surface_environment::uses_fixed_surface_environment(draw)
 }
 fn validate_special_features(
     kind: PipelineVariant,
@@ -257,6 +265,38 @@ fn alpha_variant_index(draw: &PrimitiveDraw) -> Option<usize> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn encoded_surface_alias_is_distinct_without_requiring_glyph_logic_op() {
+        let mut draw = encoded_incomplete_draw();
+        let kind = special_variant(&draw, true);
+        assert!(kind.encoded_surface && !kind.text_logic_xor);
+        assert!(crate::text_logic::require_text_xor(kind.text_logic_xor, false).is_ok());
+        let encoded = special_variant_key(&draw);
+        draw.surface_texture_unavailable
+            .as_mut()
+            .unwrap()
+            .fixed_environment = false;
+        assert_ne!(encoded, special_variant_key(&draw));
+        assert!(!encoded_surface_attachment(&draw));
+        draw.surface_texture_unavailable
+            .as_mut()
+            .unwrap()
+            .fixed_environment = true;
+        draw.surface_texture_binding_only = true;
+        assert!(!encoded_surface_attachment(&draw));
+    }
+    fn encoded_incomplete_draw() -> PrimitiveDraw {
+        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
+        draw.surface_texture_unavailable =
+            Some(crate::surface_texture::SurfaceTextureUnavailable {
+                resource_id: b"Martensite-encoded-incomplete-pipeline".to_vec(),
+                fixed_environment: true,
+                modulate: true,
+                vertex_override: false,
+                back_vertex: false,
+            });
+        draw
+    }
     #[test]
     fn plain_point_variants_preserve_clipping_clamp_and_depth_policy() {
         for index in 36..40 {

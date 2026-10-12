@@ -50,7 +50,12 @@ fn prepare_cap_image(
     crate::retained_surface_texture::validate_texture_family(texture_ref, aspect)?;
     let image = cache.cap_textures.snapshot(plane, &texture, cache)?;
     if image.image.is_none() {
-        draw.surface_texture_unavailable = Some(unavailable_cap_texture(aspect, &image));
+        draw.surface_texture_unavailable = Some(unavailable_cap_texture(
+            aspect,
+            &image,
+            cache.coordinate_pipeline
+                == crate::RenderTextureCoordinatePipeline::GeneratedCompatibility,
+        ));
     }
     Ok(image.image.is_some().then_some(image))
 }
@@ -112,9 +117,11 @@ fn programmable_cap_uv(
 fn unavailable_cap_texture(
     aspect: &dyn Graphic3dAspectsSource,
     snapshot: &crate::retained_cap_textures::CapTextureSnapshot,
+    fixed_environment: bool,
 ) -> SurfaceTextureUnavailable {
     SurfaceTextureUnavailable {
         resource_id: snapshot.resource_id.clone(),
+        fixed_environment,
         modulate: snapshot.parameters.is_modulate(),
         vertex_override: false,
         back_vertex: aspect.to_use_vertex_color_for_back_faces(),

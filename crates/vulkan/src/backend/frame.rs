@@ -17,6 +17,7 @@ pub(super) struct UploadedDraw {
     pub annotation: bool,
     pub text_shadow_bias: bool,
     pub text_logic_xor: bool,
+    pub encoded_surface: bool,
     pub polygon_offset: Option<crate::RenderPolygonOffset>,
     pub polygon: bool,
     pub polygon_edge: bool,
@@ -155,7 +156,11 @@ fn upload_draw(
     if draw.surface_texture_binding_only
         && let Some(style) = &draw.surface_texture
     {
-        pipelines.surface_images.touch(runtime, &style.image)?;
+        pipelines.surface_images.touch(
+            runtime,
+            &style.image,
+            crate::fixed_surface_environment::uses_fixed_surface_environment(draw),
+        )?;
     }
     let surface_image = draw
         .surface_texture
@@ -169,6 +174,7 @@ fn upload_draw(
                     .as_ref()
                     .expect("surface image layout"),
                 style,
+                crate::fixed_surface_environment::uses_fixed_surface_environment(draw),
             )
         })
         .transpose()?;
@@ -208,6 +214,7 @@ fn upload_draw(
         annotation: draw.annotation,
         text_shadow_bias: draw.text_shadow_bias,
         text_logic_xor: draw.text_logic_xor,
+        encoded_surface: super::pipeline_variants::encoded_surface_attachment(draw),
         polygon_offset: draw.polygon_offset,
         // Native font glyph triangles retain ordinary Fill slope/units; OpenGl_Text at 3d097a0.
         polygon: draw.topology() == crate::PrimitiveTopology::Triangles,

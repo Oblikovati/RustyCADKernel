@@ -28,7 +28,7 @@ struct NativeCapMeshDrawTrace {
       <<int(gl->glIsEnabled(GL_POLYGON_OFFSET_FILL))<<' '<<int(gl->glIsEnabled(GL_POLYGON_OFFSET_LINE))<<' '
       <<factor<<' '<<units<<' '<<int(gl->glIsEnabled(GL_TEXTURE_2D))<<' '
       <<int(gl->glIsEnabled(GL_TEXTURE_GEN_S))<<' '<<int(gl->glIsEnabled(GL_TEXTURE_GEN_T));
-    emit_fixed_texture_state();stream<<'\n';
+    emit_fixed_texture_state();emit_native_texture_storage(texture);stream<<'\n';
   }
   void emit_fixed_texture_state() {
     if(!context->core11ffp)return;
@@ -44,6 +44,15 @@ struct NativeCapMeshDrawTrace {
   void emit_native_model_matrix() {
     GLfloat matrix[16]={};context->core11fwd->glGetFloatv(GL_MODELVIEW_MATRIX,matrix);
     for(float value:matrix)stream<<' '<<value;
+  }
+  void emit_native_texture_storage(GLint texture) {
+    GLint format=0,mipWidth=0,minFilter=0;
+    if(texture!=0) {
+      context->core11fwd->glGetTexLevelParameteriv(GL_TEXTURE_2D,0,GL_TEXTURE_INTERNAL_FORMAT,&format);
+      context->core11fwd->glGetTexLevelParameteriv(GL_TEXTURE_2D,1,GL_TEXTURE_WIDTH,&mipWidth);
+      context->core11fwd->glGetTexParameteriv(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,&minFilter);
+    }
+    stream<<' '<<format<<' '<<mipWidth<<' '<<minFilter;
   }
 };
 thread_local NativeCapMeshDrawTrace* NativeCapMeshDrawTrace::active=nullptr;

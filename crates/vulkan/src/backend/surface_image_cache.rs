@@ -10,6 +10,7 @@ use std::{
     sync::{Arc, Mutex},
 };
 type SurfaceSamplerKey = (bool, i32, i32, i32, i32);
+type SurfaceImageKey = (Vec<u8>, i32);
 struct SurfaceImageEntry {
     source: Arc<SurfaceTextureImage>,
     image: Arc<SampledSurfaceImage>,
@@ -17,13 +18,14 @@ struct SurfaceImageEntry {
 }
 #[derive(Default)]
 pub(super) struct SurfaceImageCache {
-    images: Mutex<BTreeMap<Vec<u8>, SurfaceImageEntry>>,
+    images: Mutex<BTreeMap<SurfaceImageKey, SurfaceImageEntry>>,
 }
 impl SurfaceImageCache {
     pub fn touch(
         &self,
         runtime: &Arc<VulkanRuntime>,
         source: &Arc<SurfaceTextureImage>,
+        encoded: bool,
     ) -> Result<(), RenderError> {
         if source.id.is_empty() {
             return Ok(());
@@ -34,14 +36,15 @@ impl SurfaceImageCache {
                 "unpoisoned unsampled texture upload cache",
             )
         })?;
-        cache_entry(&mut images, runtime, source)?;
+        let format = super::surface_image_format::sampled_binding_format(source.encoding, encoded);
+        cache_entry(&mut images, runtime, source, format)?;
         Ok(())
     }
     pub fn forget(&self, resource_id: &[u8]) -> Result<(), RenderError> {
         self.images
             .lock()
             .map_err(|error| rejected(error.to_string(), "unpoisoned sampled image cache"))?
-            .remove(resource_id);
+            .retain(|(id, _), _| id != resource_id);
         Ok(())
     }
 
@@ -58,9 +61,12 @@ impl SurfaceImageCache {
         runtime: &Arc<VulkanRuntime>,
         layout: &SurfaceImageLayout,
         style: &SurfaceTextureStyle,
+        encoded: bool,
     ) -> Result<Arc<SurfaceImageBinding>, RenderError> {
+        let format =
+            super::surface_image_format::sampled_binding_format(style.image.encoding, encoded);
         if style.image.id.is_empty() {
-            let mut entry = SurfaceImageEntry::new(runtime, &style.image)?;
+            let mut entry = SurfaceImageEntry::new(runtime, &style.image, format)?;
             return cached_surface_binding(&mut entry, layout, &style.sampler);
         }
         let mut images = self
@@ -68,7 +74,7 @@ impl SurfaceImageCache {
             .lock()
             .map_err(|e| rejected(e.to_string(), "unpoisoned sampled image cache"))?;
         images.retain(|_, entry| entry.source.lifetime.is_alive());
-        let entry = cache_entry(&mut images, runtime, &style.image)?;
+        let entry = cache_entry(&mut images, runtime, &style.image, format)?;
         cached_surface_binding(entry, layout, &style.sampler)
     }
 }
@@ -91,26 +97,32 @@ impl SurfaceImageEntry {
     fn new(
         runtime: &Arc<VulkanRuntime>,
         source: &Arc<SurfaceTextureImage>,
+        format: ash::vk::Format,
     ) -> Result<Self, RenderError> {
         Ok(Self {
             source: source.clone(),
-            image: SampledSurfaceImage::new(runtime, source)?,
+            image: SampledSurfaceImage::new(runtime, source, format)?,
             bindings: BTreeMap::new(),
         })
     }
 }
 fn cache_entry<'a>(
-    entries: &'a mut BTreeMap<Vec<u8>, SurfaceImageEntry>,
+    entries: &'a mut BTreeMap<SurfaceImageKey, SurfaceImageEntry>,
     runtime: &Arc<VulkanRuntime>,
     source: &Arc<SurfaceTextureImage>,
+    format: ash::vk::Format,
 ) -> Result<&'a mut SurfaceImageEntry, RenderError> {
+    let key = (source.id.clone(), format.as_raw());
     let stale = entries
-        .get(&source.id)
+        .get(&key)
         .is_none_or(|entry| !Arc::ptr_eq(&entry.source, source));
     if stale {
-        entries.insert(source.id.clone(), SurfaceImageEntry::new(runtime, source)?);
+        entries.insert(
+            key.clone(),
+            SurfaceImageEntry::new(runtime, source, format)?,
+        );
     }
-    Ok(entries.get_mut(&source.id).expect("inserted sampled image"))
+    Ok(entries.get_mut(&key).expect("inserted sampled image"))
 }
 fn sampler_key(policy: &SurfaceSamplerPolicy) -> SurfaceSamplerKey {
     (
@@ -130,6 +142,132 @@ mod tests {
         graphic3d::*,
         image::{ImageFormat, ImagePixMap},
     };
+    #[test]
+    fn shared_source_keeps_encoded_and_programmable_filter_images_distinct() {
+        let texture = retained_checker_texture();
+        let frame = bilinear_checker_frame(&texture);
+        let mut renderer = texture_cache_renderer();
+        let shader = renderer.render(&frame).unwrap();
+        let fixed = renderer.render(&fixed_checker_frame(&frame)).unwrap();
+        assert!(
+            fixed.rgba[144..147]
+                .iter()
+                .all(|channel| (120..=135).contains(channel))
+        );
+        // Hardware sRGB conversion has existing one-byte profile differences; these spaces differ by ~60.
+        assert!(shader.rgba[144..147].iter().all(|channel| *channel >= 180));
+        assert_eq!(cached_surface_count(&renderer), 2);
+        assert_eq!(cached_surface_formats(&renderer), [37, 43]);
+        assert_eq!(renderer.render(&frame).unwrap().rgba, shader.rgba);
+        assert_eq!(cached_surface_count(&renderer), 2);
+        assert!(renderer.validation_errors().is_empty());
+    }
+    fn texture_cache_renderer() -> super::super::VulkanRenderer {
+        let options = super::super::VulkanOptions::default();
+        super::super::VulkanRenderer::new(options).unwrap()
+    }
+    fn cached_surface_formats(renderer: &super::super::VulkanRenderer) -> Vec<i32> {
+        renderer
+            .pipeline
+            .surface_images
+            .images
+            .lock()
+            .unwrap()
+            .values()
+            .map(|entry| entry.image.format.as_raw())
+            .collect()
+    }
+    fn retained_checker_texture() -> Handle<Graphic3dTexture2D> {
+        let texture = retained_red_texture();
+        let image = Handle::new(ImagePixMap::default());
+        let pixels = vec![
+            255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255, 255, 255, 255, 255,
+        ];
+        assert!(image.init_wrapper(ImageFormat::Rgba, Some(pixels), 2, 2, 8));
+        image.set_top_down(true);
+        texture.set_image(image);
+        texture
+    }
+    fn bilinear_checker_frame(texture: &Handle<Graphic3dTexture2D>) -> RenderFrame {
+        let frame = sampled_texture_frame(texture);
+        let mut draw = frame.draws()[0].clone();
+        let style = draw.surface_texture.as_mut().unwrap();
+        style.uv = vec![[0.5, 0.5, 0., 1.]; 3];
+        style.sampler.filter = Graphic3dTypeOfTextureFilter::Bilinear;
+        RenderFrame::new(8, 8, [0., 0., 0., 1.], vec![draw]).unwrap()
+    }
+    fn fixed_checker_frame(frame: &RenderFrame) -> RenderFrame {
+        let mut draw = frame.draws()[0].clone();
+        draw.surface_texture.as_mut().unwrap().fixed_environment = true;
+        RenderFrame::new(8, 8, [0., 0., 0., 1.], vec![draw]).unwrap()
+    }
+    #[test]
+    fn encoded_variants_share_revision_replacement_forgetting_and_retirement() {
+        let texture = retained_checker_texture();
+        let mut renderer = texture_cache_renderer();
+        render_both_texture_formats(&mut renderer, &bilinear_checker_frame(&texture));
+        let prior = retained_cached_image(&renderer);
+        texture.set_image(replacement_green_image());
+        texture.update_revision();
+        let updated = bilinear_checker_frame(&texture);
+        render_both_texture_formats(&mut renderer, &updated);
+        assert!(!Arc::ptr_eq(&prior, &retained_cached_image(&renderer)));
+        forget_frame_texture_formats(&renderer, &updated);
+        render_both_texture_formats(&mut renderer, &updated);
+        drop(texture);
+        renderer
+            .render(&RenderFrame::new(8, 8, [0.; 4], vec![]).unwrap())
+            .unwrap();
+        assert_eq!(cached_surface_count(&renderer), 0);
+        assert!(renderer.validation_errors().is_empty());
+    }
+    fn forget_frame_texture_formats(renderer: &super::super::VulkanRenderer, frame: &RenderFrame) {
+        let resource_id = &frame.draws()[0].surface_texture.as_ref().unwrap().image.id;
+        renderer
+            .pipeline
+            .surface_images
+            .forget(resource_id)
+            .unwrap();
+        assert_eq!(cached_surface_count(renderer), 0);
+    }
+    fn render_both_texture_formats(
+        renderer: &mut super::super::VulkanRenderer,
+        frame: &RenderFrame,
+    ) {
+        renderer.render(frame).unwrap();
+        renderer.render(&fixed_checker_frame(frame)).unwrap();
+        assert_eq!(cached_surface_count(renderer), 2);
+    }
+    #[test]
+    fn mixed_encoded_and_programmable_draws_resume_existing_color_and_depth() {
+        let texture = retained_checker_texture();
+        let fixed = fixed_checker_frame(&bilinear_checker_frame(&texture));
+        let overlay = ordinary_left_overlay();
+        let mixed = RenderFrame::new(
+            8,
+            8,
+            [0., 0., 0., 1.],
+            vec![fixed.draws()[0].clone(), overlay.draws()[0].clone()],
+        )
+        .unwrap();
+        let mut renderer = texture_cache_renderer();
+        let previous = renderer.render(&fixed).unwrap();
+        let control = renderer.render(&overlay).unwrap();
+        let result = renderer.render(&mixed).unwrap();
+        assert_eq!(&result.rgba[132..136], &control.rgba[132..136]);
+        assert_eq!(&result.rgba[144..148], &previous.rgba[144..148]);
+        assert_eq!(result.depth[36], previous.depth[36]);
+        assert!(renderer.validation_errors().is_empty());
+    }
+    fn ordinary_left_overlay() -> RenderFrame {
+        let vertices = vec![
+            RenderVertex::new([-1., -1., 0.], [0.25, 0.25, 0.25, 1.]),
+            RenderVertex::new([0., -1., 0.], [0.25, 0.25, 0.25, 1.]),
+            RenderVertex::new([-0.5, 1., 0.], [0.25, 0.25, 0.25, 1.]),
+        ];
+        let draw = PrimitiveDraw::new(vertices, vec![0, 1, 2], identity_clip()).unwrap();
+        RenderFrame::new(8, 8, [0., 0., 0., 1.], vec![draw]).unwrap()
+    }
     #[test]
     fn mapped_line_uploads_image_revisions_without_allocating_sampler_bindings() {
         let texture = retained_red_texture();

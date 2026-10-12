@@ -33,7 +33,13 @@ pub(crate) fn apply_surface_texture(
         return Ok(());
     }
     let Some(style) = retained_surface_style(primitive, aspects, context)? else {
-        return apply_unavailable_surface_texture(draws, primitive, &**aspects);
+        return apply_unavailable_surface_texture(
+            draws,
+            primitive,
+            &**aspects,
+            context.group.texture_images.coordinate_pipeline
+                == crate::RenderTextureCoordinatePipeline::GeneratedCompatibility,
+        );
     };
     for draw in draws {
         style.validate(draw.vertices.len())?;
@@ -46,6 +52,7 @@ fn apply_unavailable_surface_texture(
     draws: &mut [PrimitiveDraw],
     primitive: &PrimitiveSubmission,
     aspects: &dyn Graphic3dAspectsSource,
+    fixed_environment: bool,
 ) -> Result<(), RenderError> {
     let handle = aspects.texture_map();
     let Some(texture) = handle.get() else {
@@ -57,6 +64,7 @@ fn apply_unavailable_surface_texture(
         .is_some();
     let unavailable = SurfaceTextureUnavailable {
         resource_id: texture.get_id().as_bytes().to_vec(),
+        fixed_environment,
         modulate: texture.get_params().is_modulate(),
         vertex_override,
         back_vertex: aspects.to_use_vertex_color_for_back_faces(),

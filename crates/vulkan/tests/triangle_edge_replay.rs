@@ -236,7 +236,33 @@ fn replay_cap_configured_asset(asset: NativeTriangleEdgeAsset) {
     native_golden::assert_capture(&capture_cap_boundary(&driver, mode), rgba, depth, mode);
     assert!(driver.validation_errors().is_empty(), "{:?}", driver.validation_errors());
 }
+#[test]
+fn native_fixed_filter_mipmap_and_alpha_assets_replay_without_occt() {
+    for asset in [
+        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-blend-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-mask-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-mask-blend-edges-disabled"),
+        cap_asset!("cap-section-edges-generated-polygon-thin-opaque-alpha-edges-disabled"),
+    ] {
+        replay_cap_configured_asset(asset);
+    }
+}
+
 const FULL_CAP_EDGE_ASSETS: &[NativeTriangleEdgeAsset] = &[
+    cap_asset!("cap-section-edges-oblique-generated-polygon-thin-sampler-updated"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-bilinear-fixed-center-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-no-modulate-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-fixed-trilinear-fixed-minified-image-refreshed-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-blend-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-mask-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-mask-blend-edges-disabled"),
+    cap_asset!("cap-section-edges-generated-polygon-thin-opaque-alpha-edges-disabled"),
+
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-bc1-rgb"),
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-bc1-rgba"),
     cap_asset!("cap-section-edges-oblique-generated-polygon-thin-bc2"),

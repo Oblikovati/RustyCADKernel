@@ -81,6 +81,7 @@ impl SurfaceTextureStyle {
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct SurfaceTextureUnavailable {
     pub resource_id: Vec<u8>,
+    pub fixed_environment: bool,
     pub modulate: bool,
     pub vertex_override: bool,
     pub back_vertex: bool,

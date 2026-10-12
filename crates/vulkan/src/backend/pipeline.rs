@@ -155,7 +155,7 @@ impl DrawPipeline {
     ) -> Result<(), RenderError> {
         let stages = shader_stages(&self.shaders);
         let state = super::pipeline_state::PipelineState::new(kind);
-        let color_format = [if kind.text_logic_xor {
+        let color_format = [if kind.text_logic_xor || kind.encoded_surface {
             vk::Format::R8G8B8A8_UNORM
         } else {
             vk::Format::R8G8B8A8_SRGB

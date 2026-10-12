@@ -48,11 +48,18 @@ static occ::handle<Graphic3d_ClipPlane> textured_cap_scene(
   const auto group=structure->NewGroup();group->SetGroupPrimitivesAspect(unlit_aspects());cap_cube(group,0);
   const auto plane=mode.find("oblique")!=std::string::npos?cap_plane(.6,0,-.8,-2):cap_plane(0,0,-1,0);
   const auto texture=texture_source(cap_texture_mode(mode));texture->GetParams()->SetFilter(Graphic3d_TOTF_NEAREST);
+  if(mode.find("fixed-bilinear")!=std::string::npos)texture->GetParams()->SetFilter(Graphic3d_TOTF_BILINEAR);
+  if(mode.find("fixed-trilinear")!=std::string::npos)texture->GetParams()->SetFilter(Graphic3d_TOTF_TRILINEAR);
   if(mode.find("no-modulate")!=std::string::npos)texture->GetParams()->SetModulate(false);
   texture->GetParams()->SetScale(NCollection_Vec2<float>(.0625f,.0625f));
   if(mode.find("generated")!=std::string::npos||mode.find("shader-eye")!=std::string::npos)texture->GetParams()->SetGenMode(
     mode.find("eye")!=std::string::npos?Graphic3d_TOTM_EYE:Graphic3d_TOTM_OBJECT,
     NCollection_Vec4<float>(1,0,0,0),NCollection_Vec4<float>(0,0,-1,0));
+  if(mode.find("fixed-center")!=std::string::npos) {
+    texture->GetParams()->SetGenMode(Graphic3d_TOTM_OBJECT,NCollection_Vec4<float>(0),NCollection_Vec4<float>(0));
+    texture->GetParams()->SetTranslation(NCollection_Vec2<float>(-.5f,-.5f));
+  }
+  if(mode.find("fixed-minified")!=std::string::npos)texture->GetParams()->SetScale(NCollection_Vec2<float>(128,128));
   plane->CappingAspect()->SetTextureMap(texture);plane->CappingAspect()->SetTextureMapOn();
   if(mode.find("unmapped")!=std::string::npos)plane->CappingAspect()->SetTextureMapOff();
   plane->CappingAspect()->SetInteriorColor(texture_rgb(1,1,1));
