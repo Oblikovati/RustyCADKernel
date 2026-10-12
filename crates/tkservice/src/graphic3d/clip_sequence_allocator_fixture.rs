@@ -1,7 +1,9 @@
 //! Real Allocate retargets the original caller handle before native node construction.
 #![allow(unsafe_code)]
 use super::{Graphic3dClipPlane, Graphic3dSequenceOfHClipPlane};
-use rustycad_tkernel::ncollection::{AllocatorObject, AllocatorSource};
+use rustycad_tkernel::ncollection::{
+    AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource,
+};
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, Transient, WeakHandle};
 use std::{
     ptr::NonNull,
@@ -26,18 +28,12 @@ unsafe impl AllocatorSource for ClipArgumentAllocator {
         // Derived dispatch and physical allocation share the actual embedded allocator base.
         &self.parent
     }
-    fn allocate(&self, size: usize) -> Option<NonNull<u8>> {
-        let scene = self.scene.upgrade().unwrap();
-        self.record(&scene, "allocate-before");
-        *scene.argument.write() = scene.replacement.observe().clone();
-        self.record(&scene, "allocate-after");
-        self.parent.allocate_base(size)
-    }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        let scene = self.scene.upgrade().unwrap();
-        self.record(&scene, "free-before");
-        // SAFETY: current sequence resource receives this provider's original heap pointer.
-        unsafe { self.parent.free_base(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate: clip_argument_allocate,
+            free: clip_argument_free,
+            ..Default::default()
+        }
     }
 }
 impl ClipArgumentAllocator {
@@ -51,4 +47,39 @@ impl ClipArgumentAllocator {
         );
         scene.rows.write().push(row);
     }
+}
+
+fn record_argument_allocate_before(source: &ClipArgumentAllocator) -> Arc<ClipArgumentScene> {
+    let scene = source.scene.upgrade().unwrap();
+    source.record(&scene, "allocate-before");
+    scene
+}
+fn record_argument_allocate_after(source: &ClipArgumentAllocator) {
+    let scene = source.scene.upgrade().unwrap();
+    source.record(&scene, "allocate-after");
+}
+fn record_argument_free(source: &ClipArgumentAllocator) {
+    let scene = source.scene.upgrade().unwrap();
+    source.record(&scene, "free-before");
+}
+fn clip_argument_allocate(invocation: &AllocatorInvocation, size: usize) -> Option<NonNull<u8>> {
+    // SAFETY: selectors read actual fields/plain trace values without retiring native objects.
+    let scene = rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_argument_allocate_before)
+    });
+    *scene.argument.write() = scene.replacement.observe().clone();
+    rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_argument_allocate_after)
+    });
+    invocation.allocate_base(size)
+}
+unsafe fn clip_argument_free(
+    invocation: &AllocatorInvocation,
+    pointer: *mut u8,
+) -> Result<(), Failure> {
+    // SAFETY: record step is callback-free; current resource receives the original accepted pointer.
+    rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_argument_free)
+    });
+    unsafe { invocation.free_base(pointer) }
 }

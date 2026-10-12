@@ -325,9 +325,11 @@ pub use clip_sequence_iterator::Graphic3dSequenceOfHClipPlaneIterator;
 pub use clip_sequence_storage::ClipPlaneNativeItems;
 
 #[cfg(test)]
-mod clip_sequence_reference_replay;
+mod clip_allocator_active_loss_probe;
 #[cfg(test)]
 mod clip_dump_live_replay;
+#[cfg(test)]
+mod clip_sequence_reference_replay;
 #[cfg(test)]
 mod cview_clip_retirement_replay;
 

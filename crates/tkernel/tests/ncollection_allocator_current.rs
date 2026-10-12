@@ -2,7 +2,9 @@
 #![allow(unsafe_code)]
 use allocator_api2::alloc::Allocator;
 use rustycad_tkernel::{
-    ncollection::{AllocatorObject, AllocatorSource, BaseAllocator},
+    ncollection::{
+        AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource, BaseAllocator,
+    },
     standard::{Failure, Handle, SharedState, Transient},
 };
 use std::alloc::Layout;
@@ -19,10 +21,11 @@ unsafe impl AllocatorSource for CurrentFreeProbe {
         // Borrow the genuine parent; native allocator counters belong to this actual object.
         &self.parent
     }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        self.events.write().push(self.transient_base().ref_count());
-        // SAFETY: the fixture passes a live Standard heap allocation, accepted by either probe.
-        unsafe { self.parent.free_base(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            free: current_probe_free,
+            ..Default::default()
+        }
     }
 }
 #[test]
@@ -67,11 +70,37 @@ fn protected_base_construction_and_actual_source_alias_replay_native() {
     let owner = Handle::new(AllocatorObject::default());
     rows.push(format!("owned {}", owner.ref_count()));
     let source = BaseAllocator::from_handle(&owner);
-    rows.push(format!("source {} {}", owner.ref_count(), i32::from(source.identity() == owner.object_address())));
+    rows.push(format!(
+        "source {} {}",
+        owner.ref_count(),
+        i32::from(source.identity() == owner.object_address())
+    ));
     drop(source);
     rows.push(format!("released {}", owner.ref_count()));
     let actual = rows.join("\n") + "\n";
     let native = include_str!("fixtures/allocator-construction-native.txt")
-        .lines().filter(|line| !line.starts_with("common ")).collect::<Vec<_>>().join("\n") + "\n";
+        .lines()
+        .filter(|line| !line.starts_with("common "))
+        .collect::<Vec<_>>()
+        .join("\n")
+        + "\n";
     assert_eq!(actual, native);
+}
+
+fn record_current_probe(source: &CurrentFreeProbe) {
+    source
+        .events
+        .write()
+        .push(source.transient_base().ref_count());
+}
+unsafe fn current_probe_free(
+    invocation: &AllocatorInvocation,
+    pointer: *mut u8,
+) -> Result<(), Failure> {
+    // SAFETY: this step mutates only plain trace values, without callbacks or native retirement.
+    rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_current_probe)
+    });
+    // SAFETY: the original Standard range is accepted by this actual parent.
+    unsafe { invocation.free_base(pointer) }
 }

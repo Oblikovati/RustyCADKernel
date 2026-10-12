@@ -45,7 +45,7 @@ impl BaseAllocator {
         let policy = self.detached_policy();
         AllocatorStorageLease::new(Arc::new(BuiltinAllocatorBacking { policy }))
     }
-    fn detached_policy(&self) -> Self {
+    pub(in crate::ncollection) fn detached_policy(&self) -> Self {
         Self {
             fields: Box::new(super::AllocatorFacadeFields {
                 inner: self.fields.inner.clone(),

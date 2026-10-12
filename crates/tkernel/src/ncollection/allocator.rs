@@ -37,6 +37,8 @@ mod owned;
 use crate::standard::memory::raw_heap;
 mod builtin;
 mod physical_storage;
+mod policy_invocation;
+pub use policy_invocation::AllocatorPolicyInvocation;
 mod reference;
 mod typed_lease;
 mod typed_policy;
@@ -56,7 +58,7 @@ pub use incremental::{
 pub use incremental_extension::IncAllocatorExtension;
 pub use keys::{AccBlockKey, AccBlockKeyHasher};
 pub use owned::{AllocatedArray, AllocatedBox, AllocatedBytes};
-use raw_heap::{MALLOC_ALIGNMENT, heap_allocate, heap_free, mm_malloc_alignment};
+use raw_heap::MALLOC_ALIGNMENT;
 
 /// A shared allocator identity and policy; `BaseAllocator::common().allocate(16)`.
 pub struct BaseAllocator {
@@ -236,14 +238,16 @@ impl BaseAllocator {
     /// The block stays allocated until `free_raw` (or, for arenas, `reset`/drop).
     /// Example: `let p = allocator.allocate_raw(16).unwrap(); unsafe { allocator.free_raw(p) }?`.
     pub fn allocate_raw(&self, size: usize) -> Option<NonNull<u8>> {
-        self.dispatch_source(|source| source.allocate(size))
+        self.source_invocation()
+            .map(|source| source.allocate(size))
             .unwrap_or_else(|| self.allocate_policy(size, true))
     }
 
     /// Raw `AllocateOptimal(theSize)`: uninitialized `malloc` for the common allocator, the same
     /// policy as `allocate_raw` for every subclass. Example: `allocator.allocate_optimal_raw(8)`.
     pub fn allocate_optimal_raw(&self, size: usize) -> Option<NonNull<u8>> {
-        self.dispatch_source(|source| source.allocate_optimal(size))
+        self.source_invocation()
+            .map(|source| source.allocate_optimal(size))
             .unwrap_or_else(|| self.allocate_optimal_builtin(size))
     }
 
@@ -268,24 +272,16 @@ impl BaseAllocator {
     /// the accumulating allocator reports it as `Standard_ProgramError`.
     pub unsafe fn free_raw_nullable(&self, address: *mut u8) -> Result<(), Failure> {
         // SAFETY: the original nullable-pointer contract is forwarded to actual virtual Free.
-        self.dispatch_source(|source| unsafe { source.free(address) })
+        self.source_invocation()
+            .map(|source| unsafe { source.free(address) })
             .unwrap_or_else(|| unsafe { self.free_storage_fallback(address) })
     }
     pub(in crate::ncollection) unsafe fn free_builtin_nullable(
         &self,
         address: *mut u8,
     ) -> Result<(), Failure> {
-        match &*self.fields.inner {
-            // SAFETY: forwarded from this function's contract.
-            AllocatorKind::Common | AllocatorKind::Heap | AllocatorKind::Aligned(_) => unsafe {
-                if let Some(address) = NonNull::new(address) {
-                    heap_free(address);
-                }
-                Ok(())
-            },
-            AllocatorKind::Incremental(_) => Ok(()),
-            AllocatorKind::Accumulating(engine) => locked(engine).free(address as usize),
-        }
+        // SAFETY: the caller's original pointer contract is unchanged by the physical lease.
+        unsafe { self.policy_invocation().free_nullable(address) }
     }
 
     /// One allocation of the handle's policy; `zeroed` only matters for heap kinds.
@@ -294,15 +290,7 @@ impl BaseAllocator {
         size: usize,
         zeroed: bool,
     ) -> Option<NonNull<u8>> {
-        match &*self.fields.inner {
-            AllocatorKind::Common => heap_allocate(size, MALLOC_ALIGNMENT, zeroed),
-            AllocatorKind::Heap => heap_allocate(heap_round(size)?, MALLOC_ALIGNMENT, zeroed),
-            AllocatorKind::Incremental(engine) => locked(engine).allocate(size),
-            AllocatorKind::Accumulating(engine) => locked(engine).allocate(size),
-            AllocatorKind::Aligned(alignment) => {
-                heap_allocate(size, mm_malloc_alignment(*alignment)?, zeroed)
-            }
-        }
+        self.policy_invocation().allocate(size, zeroed)
     }
 
     /// Whether `Free(address)` would succeed, without freeing: only the accumulating allocator

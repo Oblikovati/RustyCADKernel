@@ -67,7 +67,7 @@ fn actual_node_construction_rereads_caller_after_allocate_and_replays_five_nativ
     );
 }
 
-fn create_argument_scene(
+pub(super) fn create_argument_scene(
     original: &Handle<Graphic3dClipPlane>,
     replacement: &Handle<Graphic3dClipPlane>,
 ) -> Arc<ClipArgumentScene> {
