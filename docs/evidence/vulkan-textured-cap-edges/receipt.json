@@ -1,27 +1,27 @@
 {
   "feature": "Martensite textured section source edges and native unlit coordinate/environment binding semantics",
-  "base_head": "e3fa94fbded9d7cdf7f6b60833bb63fe523a4326",
+  "base_head": "219814581",
   "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
   "source_manifest": "full-build-inputs.json.gz",
-  "source_manifest_sha256": "a2c415b0cd63104581c377ee9dfe1de91d0613c0f70a7344db795695fafe414c",
-  "source_input_count": 12981,
-  "optimized_binary_sha256": "8da13c82b8a03860d3d1163b73872406981f6c13aa90c9362f1e3a6a3db199ff",
-  "functional_binary_sha256": "3dfc7907956f7471513b2f06e6417e5ecd97ed52c7dec970e7e8fd400929466d",
+  "source_manifest_sha256": "cee876a1be1adede23a8b7c5773adf07543771025607e5593729d61f199de195",
+  "source_input_count": 13295,
+  "optimized_binary_sha256": "f830126635ff7ecfbca041f1da4617d1d9be8584a3f62ea704d063c77145dcfd",
+  "functional_binary_sha256": "2a09da466a17f90a24b51a8f06913618374f6b1e2154b0dde52c36a201382f4f",
   "tests": {
     "software": {
-      "passed": 463,
+      "passed": 484,
       "failed": 0,
-      "ignored": 1,
-      "result_groups": 59,
+      "ignored": 2,
+      "result_groups": 61,
       "failed_result_groups": 0,
       "command_exit_code": 0,
       "command_succeeded": true
     },
     "host": {
-      "passed": 463,
+      "passed": 484,
       "failed": 0,
-      "ignored": 1,
-      "result_groups": 59,
+      "ignored": 2,
+      "result_groups": 61,
       "failed_result_groups": 0,
       "command_exit_code": 0,
       "command_succeeded": true
@@ -31,27 +31,28 @@
     "clippy": "terminal 0, -D warnings",
     "fmt": "terminal 0",
     "canonical_discovery": "terminal 0",
-    "bounded_python_modules": 26,
+    "bounded_python_modules": 27,
     "surface_mesh_shader_binaries_verified": 28,
     "native_replay_without_occt": true,
     "original_coordinate_cap_44_case_regression": "green with exact current alpha, unchanged fixtures/gates",
-    "common_cap_strict_native_cases_per_profile": 16
+    "common_cap_strict_native_cases_per_profile": 24,
+    "mixed_format_cache_lifetime_and_ordinary_ffp_xor_load": "passed on both profiles"
   },
   "functional": {
-    "native_commands": 220,
-    "native_repeat_pairs_exact": 110,
-    "final_vulkan_capture_commands": 110,
+    "native_commands": 256,
+    "native_repeat_pairs_exact": 128,
+    "final_vulkan_capture_commands": 128,
     "all_capture_commands_exit": 0,
     "validation_errors": 0,
-    "prestyle_rgba_depth_buffers_unchanged": true,
+    "prestyle_rgba_depth_buffers_unchanged": "original fixture native assets unchanged; compatibility filtering/blending controls include real semantic fixes",
     "profiles": {
       "software": {
-        "strict_pass": 40,
-        "cases": 55
+        "strict_pass": 48,
+        "cases": 64
       },
       "host": {
-        "strict_pass": 29,
-        "cases": 55
+        "strict_pass": 38,
+        "cases": 64
       }
     },
     "strict_gates": {
@@ -68,15 +69,52 @@
     "amd_source_mask": "one native-background/Vulkan-fragment coverage difference",
     "amd_plane_update": "overlapping-fragment offset precision up to 4.619e-6 retained",
     "software_component_edges": "five raster edge pixels, 15 differing channels for some native FFP component/BC modes",
-    "native_identity": "GL renderer string retained; Vulkan device/driver identity recorded separately, no cross-API identity equivalence claim"
+    "native_identity": "GL renderer string retained; Vulkan device/driver identity recorded separately, no cross-API identity equivalence claim",
+    "software_oblique_bilinear": "45 channels/max127 at raster edges; depth <=4.48e-8, broad AMD control exact"
   },
   "performance": {
-    "status": "unmeasured pre-refresh cohort; coordinator requires final checked-main dependency refresh before timing",
-    "workloads_per_profile": 55,
+    "status": "both frozen optimized commands terminal 0; independent source/binary/library audits unchanged",
+    "workloads_per_profile": 64,
     "warmups": 20,
     "samples_per_workload": 100,
     "validation": false,
-    "baseline_accepted": false
+    "baseline_accepted": false,
+    "total_raw_samples": 12800,
+    "profiles": [
+      {
+        "profile": "software",
+        "device": "llvmpipe (LLVM 20.1.2, 128 bits)",
+        "exit": 0,
+        "workloads": 64,
+        "samples": 6400,
+        "median_range_ms": [
+          0.3068025,
+          0.5628105
+        ],
+        "raw": "raw/performance-software.json.gz",
+        "device_identity": "raw/performance-device-software.log.gz"
+      },
+      {
+        "profile": "host",
+        "device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "exit": 0,
+        "workloads": 64,
+        "samples": 6400,
+        "median_range_ms": [
+          0.3553875,
+          0.503762
+        ],
+        "raw": "raw/performance-host.json.gz",
+        "device_identity": "raw/performance-device-host.log.gz"
+      }
+    ],
+    "source_binary_library_audits": [
+      "raw/cap64-root-before.json.gz",
+      "raw/cap64-root-middle.json.gz",
+      "raw/cap64-root-final.json.gz"
+    ],
+    "host_activity": "Owned compilers/probes held; shared host desktop/background activity recorded in independent audits, no isolated-host claim",
+    "controller": "raw/run_frozen_performance.py.gz"
   },
   "api_completion_claims": 0,
   "scope": "actual configured cap edges, unlit compatibility sampling, programmable Eye binding matrix transition; full FFP lighting and strict complete parity remain partial",
@@ -84,5 +122,13 @@
   "raw_diagnostic_index": "raw/",
   "native_assets_manifest": "native-assets.json.gz",
   "native_provenance": "native-provenance.json",
-  "capture_buffers": "raw-capture-buffers.json.gz"
+  "capture_buffers": "raw-capture-buffers.json.gz",
+  "source_refresh_head": "56f5bf6b39b7c3709d4dd4736e46779c4cc8bf29",
+  "semantic_regressions": {
+    "encoded_bilinear_old": "software3838channels/max127, AMD3820/max74; source decode before filter wrong",
+    "encoded_blend_old": "both1444channels/max73; sRGB attachment blending wrong",
+    "corrected_controls": "bilinear center, trilinear minification, mip image refresh, Blend/Mask/MaskBlend/Opaque exact on bothprofiles; broad bilinear AMD exact, software raster residual retained",
+    "true_resources": "UNORM/BC-UNORM filtering+mipmaps and ordered UNORM output alias, no shader gamma recovery",
+    "raw": "raw/fixed-filter-red/, raw/fixed-blend-control/, raw/fixed-filter-expanded/, raw/refreshed-final-matrix/"
+  }
 }
