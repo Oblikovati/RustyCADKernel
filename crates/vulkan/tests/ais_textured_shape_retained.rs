@@ -12,34 +12,10 @@ mod view_setup;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkservice::graphic3d::Graphic3dStructureMembers;
-const TEXTURED_MODES: &[&str] = &[
-    "basic",
-    "bottom-up",
-    "no-modulate",
-    "map-off",
-    "transparent",
-    "face-boundaries",
-    "red",
-    "unset-red",
-    "gold",
-    "unset-gold",
-    "updated-pixels",
-    "wireframe",
-    "shaded",
-    "bbox",
-    "map-0",
-    "map-1",
-    "map-2",
-    "map-3",
-    "map-4",
-    "map-5",
-    "map-6",
-    "map-7",
-];
 
 #[test]
 fn concrete_textured_shape_retained_modes_submit_real_geometry() {
-    for mode in TEXTURED_MODES {
+    for mode in textured_scene::modes::TEXTURED_SHAPE_SUPPORTED_MODES {
         let device = recording_device::RecordingDevice::default();
         let driver = Graphic3dRenderDriver::with_backend(device.clone(), 128).unwrap();
         let fixture = textured_scene::AisTexturedShapeScene::with_mode(&driver, mode).unwrap();

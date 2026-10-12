@@ -2,6 +2,10 @@
 #[allow(dead_code)]
 #[path = "../../../tkv3d/tests/support/textured_face_fixture.rs"]
 mod mesh_fixture;
+#[path = "ais_textured_shape_modes.rs"]
+#[allow(dead_code)]
+// Individual capture runs also cover dependency diagnostics outside the benchmark cohort.
+pub mod modes;
 #[path = "ais_textured_shape_settings.rs"]
 mod settings;
 use super::scene::ViewerScene;
