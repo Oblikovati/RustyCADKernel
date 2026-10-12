@@ -6,6 +6,9 @@ use std::sync::Arc;
 #[derive(Clone, Copy)]
 pub(super) struct PipelineVariant {
     pub lighting: bool,
+    pub fixed_lighting: bool,
+    pub fixed_line_stipple: bool,
+    pub fixed_line_strip: bool,
     pub surface_texture: bool,
     pub surface_alpha: bool,
     pub mesh_edges: bool,
@@ -86,6 +89,9 @@ fn empty_variant(
 ) -> PipelineVariant {
     PipelineVariant {
         lighting: false,
+        fixed_lighting: false,
+        fixed_line_stipple: false,
+        fixed_line_strip: false,
         surface_texture: false,
         surface_alpha: false,
         mesh_edges: false,
@@ -144,6 +150,7 @@ impl RasterPipelines {
             || draw.surface_cutoff.is_some()
             || draw.surface_forced_blend
             || draw.lighting.is_some()
+            || draw.fixed_function_lighting
             || draw.surface_blend
             || draw.text_background_blend
             || draw.text_logic_xor
@@ -160,6 +167,10 @@ impl RasterPipelines {
     }
     fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
         crate::text_logic::require_text_xor(draw.text_logic_xor, self.runtime.logic_op)?;
+        crate::fixed_line_stipple::require_fixed_line_stipple(
+            crate::fixed_line_stipple::fixed_line_stipple(draw).is_some(),
+            self.runtime.lines.stippled,
+        )?;
         crate::mesh_edges::require_polygon_lines(
             draw.polygon_edge_style.is_some(),
             self.runtime.polygon_lines,
@@ -194,10 +205,24 @@ fn special_variant_key(draw: &PrimitiveDraw) -> usize {
         + 16384 * usize::from(draw.polygon_edge_style.is_some())
         + 32768 * usize::from(draw.surface_texture_binding_only)
         + 65536 * usize::from(encoded_surface_attachment(draw))
+        + 131072
+            * usize::from(
+                draw.lighting
+                    .as_ref()
+                    .is_some_and(|state| state.is_fixed_lighting()),
+            )
+        + 262144 * usize::from(crate::fixed_line_stipple::fixed_line_stipple(draw).is_some())
+        + 524288 * usize::from(draw.fixed_function_lighting && draw.source_line_strip)
 }
 fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
     let mut kind = PipelineVariant::from_index(variant_index(draw), stencil);
     kind.lighting = draw.lighting.is_some();
+    kind.fixed_line_stipple = crate::fixed_line_stipple::fixed_line_stipple(draw).is_some();
+    kind.fixed_line_strip = draw.fixed_function_lighting && draw.source_line_strip;
+    kind.fixed_lighting = draw
+        .lighting
+        .as_ref()
+        .is_some_and(|state| state.is_fixed_lighting());
     kind.mesh_edges = draw.mesh_edges.is_some();
     kind.polygon_edges = draw.polygon_edge_style.is_some();
     kind.line |= kind.polygon_edges;
@@ -210,7 +235,8 @@ fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
 }
 pub(super) fn encoded_surface_attachment(draw: &PrimitiveDraw) -> bool {
     !draw.surface_texture_binding_only
-        && crate::fixed_surface_environment::uses_fixed_surface_environment(draw)
+        && (draw.fixed_function_lighting
+            || crate::fixed_surface_environment::uses_fixed_surface_environment(draw))
 }
 fn validate_special_features(
     kind: PipelineVariant,
@@ -412,32 +438,8 @@ mod subtitle_pipeline_tests {
 }
 
 #[cfg(test)]
-mod surface_variant_tests {
-    use super::*;
-    #[test]
-    fn surface_mask_blend_keeps_ordered_depth_and_independent_capping_identity() {
-        let mut draw = PrimitiveDraw::new(vec![], vec![], crate::identity_clip()).unwrap();
-        draw.surface_cutoff = Some(0.5);
-        draw.surface_forced_blend = true;
-        let ordinary = special_variant_key(&draw);
-        let kind = special_variant(&draw, true);
-        assert!(kind.surface_alpha && kind.surface_blend && !draw.surface_blend);
-        draw.capping_pass = RenderCappingPass::Surface;
-        assert_ne!(ordinary, special_variant_key(&draw));
-        assert_eq!(
-            special_variant(&draw, true).capping,
-            RenderCappingPass::Surface
-        );
-    }
-    #[test]
-    fn unsupported_special_line_and_clamp_features_fail_before_pipeline_creation() {
-        let mut kind = PipelineVariant::from_index(32, false);
-        assert!(validate_special_features(kind, true, false).is_err());
-        assert!(validate_special_features(kind, true, true).is_ok());
-        kind.clamp = true;
-        assert!(validate_special_features(kind, false, true).is_err());
-    }
-}
+#[path = "pipeline_variant_surface_tests.rs"]
+mod surface_variant_tests;
 
 pub(super) fn text_xor_variant(index: usize, stencil: bool) -> PipelineVariant {
     let mut kind = empty_variant(

@@ -1,50 +1,271 @@
 {
   "schema": "rustycad.exact-partial-binding-current-proof.v1",
-  "status": "current_source_proof_pending_integration",
-  "scope": "Refresh compiler-derived body evidence only; exact native IDs, proposed ledger rows and partial domains preserved. All existing signature/impl/kind/path fields are identical. Declaration digests change with whole-file source hashes; the five affected existing method bodies are independently checked unchanged against Git base. Historical receipt and archives unchanged.",
-  "base_revision": "14dba9ccefe050fe5cd7aeccd6552381a3e8b61f",
+  "status": "current_source_verified",
+  "scope": "Current compiler evidence for the same 71 partial native API records. Signatures, kinds, paths and implementation contexts are identical after excluding source/declaration hashes. Lifecycle bodies changed intentionally in the integrated clipping Kernel prerequisite; see its native and Rust checks. No new behavior or implemented credit is inferred from declaration equality. Historical archives are preserved.",
+  "base_revision": "c71eb1d1b3398deb1ebe6310ee40317596d37540",
   "historical_receipt": "porting/audits/base-sequence-api-reconciliation.json",
   "native_ids_preserved": 71,
   "ledger_rows_unchanged": true,
   "implemented_credit_delta": 0,
   "changed_source_hash_records": [
     {
-      "cpp_id": "7cb3e0b16e543233cf0e4404d2f63428d6967edf8a23c6595840e878d9dc5157",
-      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_node",
-      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
-      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+      "cpp_id": "00721084aeba128456613c0e2d26cddbe8f8c88b4d2de25d72ed2729db3dcd0d",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::allocator",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
     },
     {
-      "cpp_id": "857785921041e3c26b1fb8efe86fa744b1b8ca8ef2e20b1f272d3a7e59bf3442",
-      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::change_value",
-      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
-      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+      "cpp_id": "04cdc1ce1646e2ea73f7f32d032cba7058b438fe794b8ea9d015258626ed5002",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::exchange",
+      "old_source_sha256": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+      "current_source_sha256": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+      "declaration_shape_unchanged": true
     },
     {
-      "cpp_id": "e5fb702bcf20d742ec7b7c2fc1aa73fc7b2e7019b4a7b4a24c423a73d73ceeb7",
-      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::value",
-      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
-      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+      "cpp_id": "159e5f4ad1b77a5e4e7ec0c2274c3bb825a6688f03b01e9e74860b6c59d989e3",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::remove",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
     },
     {
-      "cpp_id": "f6e804d6a169e7b387362a32534db9655451f468ed7e43023493db21cd51a04b",
-      "path": "rustycad_tkernel::ncollection::BaseSequenceBasicIterator::mutable_previous_node",
-      "old_source_sha256": "ca2b81aeb7ffa56e3f7a653dcad2e9f7dd7543b21c73a73aa662b4f8ec5a178f",
-      "current_source_sha256": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"
+      "cpp_id": "17fdb989b7b9d814766afd3b04e9466da8467cb9e5e84cc8f69a11f4d63c308d",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::prepend_node",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "1b4e46a1d3660d59afc1a9901228e7368e4b8b531ab9ea3a9d3b6b299ea9c3ab",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::clear_seq",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "1fed78d0850cd407cbf9feeea97f72c45495b26b6e8a0a76a9209a0a0e9812ac",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::insert_sequence_after",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "22312b4603dce945c7d3e9a4dafded5c4d81e251a2ed2b8150b2ca0bca0f2a78",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::length",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "375ccb276eac9eff8cfeed35cea6b56ec3f4c6112292d215f86e214b95cff033",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::append_sequence",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "3a3e38274f123e57c96866440739f1fb9a5829530c468092525b43c19cb7e4f8",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::insert_after_cursor",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "3fbdbb6333501cecc071fa0694a6214ac65f603d1b98f45aedd43adb43c37310",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::reverse",
+      "old_source_sha256": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+      "current_source_sha256": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "40813b61a3ddb7a2b21913985bdad7073d69ea778a1a9aa616b2d5ad049b7748",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::exchange",
+      "old_source_sha256": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+      "current_source_sha256": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "4b4d0309daa00d437ec52d901fec05425bd5b741225dc81ded32a633ace19eaf",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::new",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "4b9fd4e29b4cf8ef244a8e74b05130386f2d4dd15cd899382277fc3f58df3e0a",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::split",
+      "old_source_sha256": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+      "current_source_sha256": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "568ef6d85a75c4050b419d922e3528b30616d625b4c077790d7c4b30d20feebf",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::prepend_sequence",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "5dc78841f9c113e86c3f81c5c76353c1656cb8b26873519ea2180361acf62134",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::prepend_node",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "606fe7261a36c66d61746200406ad990b6b5fb5c86b06ba3e11a1338a3628726",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::insert_after",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "6576585419957a38e8647dc0cb6813c8a27cbafd7e8507d208b33b96300f8fcb",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::size",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "69e4cb2dda3db5da1bc9e0baf42f89262778012e5d1b2c85ba88282b27a2672f",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::remove_range",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "6af04c11e45709e3a8d268f1fbee631e3f0756a5c0287bf5c58775a60da13eaa",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::find",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "723a6377d73c2c3f86a7fd18e5a729991d959264f484adfcdf4c844156b444ed",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::is_empty",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "7dd85d7a837004e7482ff569c03622f53ae5357e916de986bd7bfa7a307319dd",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::remove_cursor",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "8137d87091e8466fdaa3bc3e4cadeac71318d877a59f3897f9eafffd149e8168",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::insert_after_cursor",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "816beb0a6940240f688737d0892aa7813e92f9e2bc34e73c36e01c95a0cb5eea",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::append_sequence",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "824fe6a8c7feab667faa3614830ec0fb6ea6a01b44e6a6ef941d1df2f853d13b",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::reverse",
+      "old_source_sha256": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+      "current_source_sha256": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "841f0cf4dfd1471bf097b6cbc310dd885b6309040c6567ff7712b5417387a47c",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::prepend_sequence",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "8de98140243639e863aefc1f80a732adcfe052e233ef5e48816f1efa26ae9f03",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::split",
+      "old_source_sha256": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
+      "current_source_sha256": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "91049b5d5cd95aef898737320cc4db00eb273ea7bdea7f27c9dc21b1b6e73eed",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::remove_range",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "a564b57b35e48c2df65521ac44debbe31d52c0d7ca349a14057275d27a84dfa9",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::insert_sequence_after",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "aa1ff060c1dbff40de5b563ada4cbdf71804b03b9bdc61cb2c83e386f99c935e",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::remove",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "b2656605d125e92271fa4c9fa76374e151bbbd2f716f3aafc2fc2aabcf9e3ad1",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::insert_after",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "c5a7b11704a4864ddd81b8d8e2b9961a0acaa03effadfd21a35b5a9dd8ac64ea",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::append_node",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "d62d72aa88ca429425d947b056fc619c67c3b7e9e3df4236c04b349c2a5f707e",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::find",
+      "old_source_sha256": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+      "current_source_sha256": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "da8fbb79fde1a5dfcc97f152d3a282cd3b723a48ab5065f6547a7478aef22f17",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::append_node",
+      "old_source_sha256": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+      "current_source_sha256": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "f9962c4790728dc87831d65823ba287d5044378e89a6f3164dc3791dda447f76",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::clear_seq",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
+    },
+    {
+      "cpp_id": "fbc12c991082b6f5ab45a3969faf89713fb5c45c549ce0458fedc2aab48924b3",
+      "path": "rustycad_tkernel::ncollection::BaseSequence::remove_cursor",
+      "old_source_sha256": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
+      "current_source_sha256": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+      "declaration_shape_unchanged": true
     }
   ],
-  "bindings_path": "porting/runtime-evidence/base-iterator-address-base-sequence-current.jsonl.gz",
-  "bindings_sha256": "0f2dfc5e710eabaee1169b1d27567c67f72e3d760fda1b7f39f031a2b53e5333",
-  "rust_inventory_path": "porting/runtime-evidence/base-iterator-address-normalized.json.gz",
-  "rust_inventory_sha256": "172311ac079321500a03d68367c7ed77c7cb6f63e2bb540f4bd96a20a2b0bec3",
-  "raw_compiler_path": "porting/runtime-evidence/base-iterator-address-rustdoc.json.gz",
-  "raw_compiler_sha256": "e308bfe2ff5fc11415774abc66ef028233fa209de04a43afcd200371c6d21175",
+  "bindings_path": "porting/runtime-evidence/reference-batch-inventory-2026-10-12/base-sequence-current-bindings.jsonl.gz",
+  "bindings_sha256": "5603ededda95950f85d45e517c0e911cf272ce9e904e196f46a7ddcb08b727b1",
+  "rust_inventory_path": "porting/runtime-evidence/reference-batch-inventory-2026-10-12/tkernel-normalized.json.gz",
+  "rust_inventory_sha256": "e6861819d4329e7fb481bae0f94b1f57eeb5418604c4834958018475a0331198",
+  "raw_compiler_path": "porting/runtime-evidence/reference-batch-inventory-2026-10-12/tkernel-rustdoc.json.gz",
+  "raw_compiler_sha256": "08cd9e00180b01fe37cfec5449f956fa2f64d045beee108078448d94a5572d0a",
   "source_sha256": {
-    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "8253becf20d5cdffcb54131b1a05466e388cac425e9056fe97671a7da8833caf",
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
     "crates/tkernel/src/ncollection/sequence/basic_iterator.rs": "e7bb35786564e05625b42ee168dc2f2560473fbd8253a801b0bba1e0b471141c",
-    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "8b27dcf0e5eef8b8efb52a3bba32685985d360bab7d09ecffb709e69ba9c71a9",
-    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "f8ae2327743ce33430eafb1299c0b83be04298bc90924e938762ea493c4e3c5e",
-    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "e85ac57735cb463e058c7bbd73b0bf9407302b386b70d69e555aa279a05a6a4a",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
     "crates/tkernel/src/ncollection/sequence/basic_iterator/movement.rs": "f6fb47da14de5f01dd22bd0a1e3b7778d75d20fbe02ee067c697b934838eb265",
     "crates/tkernel/src/ncollection/sequence/base_storage/iterator.rs": "e43004262b135482a7354071fd91452a366e1dfac3caa48f3eb94823760711b0",
     "crates/tkernel/src/ncollection/sequence/basic_iterator/access.rs": "8e07f98c089d4d832f77f92e72be1b6b9477ca20eafc5ab28881e3e5418be336"

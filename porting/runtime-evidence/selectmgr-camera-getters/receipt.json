@@ -1,0 +1,35 @@
+{
+  "base_commit": "e7353fb02",
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Restore only three actual borrowed Camera getter contracts; three strictly unchanged existing setter source-selector refreshes. No constructors/classes/protectedfield/Frame completion credit.",
+  "native_rows": 30,
+  "native_runs": "Independent native CPU oracle built/executed twice; byteexact integer asset; actual fields/counters and qualified setter failure/retry",
+  "native_executable": "/tmp/martensite-frame-oracle/selectmgr-camera-getters",
+  "native_executable_sha256": "5013bf5c5056c6bdde5e0cfc4ae2ef7bb7ccabdf5be970f394ae4d8f31e49c08",
+  "compiler_command": "cargo +nightly-2026-09-25 rustdoc --locked --package rustycad-tkv3d --lib --all-features --target-dir target/selectmgr-camera-getters-compiler -Z unstable-options -- --document-private-items --output-format json -Z unstable-options",
+  "compiler_json_format": 61,
+  "raw_compiler_sha256": "76f0fd1c419e16267a2efffac58954bab2524cb6141b93891a68a3cf997b53a5",
+  "raw_compiler_gzip_sha256": "2c6d75a0331459f68b9b4f79e4c9767f8a5a3d047ed0b1b4dd1a6667657fab79",
+  "normalization": "Actual fresh TKV3d make_reachable_inventory followed by production resolve_cross_crate_reexports, resolve_foreign_impl_candidates, resolve_public_trait_paths using checked-main31crate baseline; final selected declarations not fabricated or rawwalk-only.",
+  "baseline_normalized_sha256": "6b8ca1ce52ffcb293575fdfe60bac2a335d5fb061b9c59c9ffc8293c85c37326",
+  "getter_fragment_sha256": "ac072570f79562c1fb179b2704da1e8cc3563f5a66b5fd571d6eeb80c17e7437",
+  "setter_source_refresh_sha256": "aa7278fd11497e0670291861362678ae64808aec9785a85779ab9391589d2c6f",
+  "checks": {
+    "alltarget_allfeature_toolkits": {
+      "passed": 1140,
+      "executables": 8,
+      "failed": 0
+    },
+    "clippy": "both toolkits alltarget/allfeature -Dwarnings green",
+    "Vulkan_consumers": "alltarget check green",
+    "format": "globalfmt/diff green",
+    "canonical_toolkit_tools": 13,
+    "claim_preflight_tools": 13,
+    "production_preflight": "three unique getter and three unique unchanged setter bindings sourcepinned"
+  },
+  "public_rust_interface_changes": "New actual camera_ref aliases; builder precise use<> retains no selfborrow. Actual public BaseIntersectorBase.camera backing type SharedState<Handle> to Arc<SharedState<Handle>>; existing read/write access works, external base literals wrapArc. Named camera alias supports nonowning Clone; existing copied camera conveniences remain available but unclaimed.",
+  "unchanged_selector_audit": "119 affected bindings recursively structurally identical excluding source_sha256/declaration_sha256;3 existing setter selectors refreshed preservingstatus/notes.13 path-only structural differences explicitly recorded and not blindly repinned, including actual myCamera backingtypechange and trait/RTTI implementation-link metadata; no field/class credit.",
+  "failure_logs": "Initial replay compile missingfixturefield/incorrectconstructor corrected; preservedreplay.log.gz superseded alltargets-final1140green. No testassertion/nativecomparison failures.",
+  "native_lifetime_scope": "Actualowners live through nativealias probes; Rust-only safe expiration excluded from dangling-C++ parity. No object/target intrusive retention, retainedlocks/getterreselections/cachedcamera values.",
+  "preserved_unfinished_tree": "../Martensite-controller-frame-events clean e249ed782; no dependency on completed getter tree/target artifacts."
+}

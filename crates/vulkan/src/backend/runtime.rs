@@ -36,6 +36,7 @@ pub(super) struct VulkanRuntime {
     pub large_points: bool,
     pub sampler_anisotropy: bool,
     pub lines: super::line_device::LineCapabilities,
+    pub line_stipple: Option<ash::ext::line_rasterization::Device>,
     pub name: String,
     pub quad_diagonal: crate::quad_assembly::QuadDiagonal,
 }
@@ -77,6 +78,7 @@ impl VulkanRuntime {
             large_points: false,
             sampler_anisotropy: false,
             lines: Default::default(),
+            line_stipple: None,
             name: String::new(),
             quad_diagonal: Default::default(),
         })
@@ -120,6 +122,10 @@ impl VulkanRuntime {
             self.lines,
             self.logic_op,
         )?);
+        self.line_stipple = self
+            .lines
+            .stippled
+            .then(|| ash::ext::line_rasterization::Device::new(&self.instance, self.device()));
         let families = unsafe {
             self.instance
                 .get_physical_device_queue_family_properties(physical)
@@ -268,8 +274,9 @@ fn create_device(
         info = info.push_next(&mut maintenance);
     }
     info = info.enabled_extension_names(&extensions);
-    let mut line_features =
-        vk::PhysicalDeviceLineRasterizationFeaturesEXT::default().bresenham_lines(lines.bresenham);
+    let mut line_features = vk::PhysicalDeviceLineRasterizationFeaturesEXT::default()
+        .bresenham_lines(lines.bresenham)
+        .stippled_bresenham_lines(lines.stippled);
     if lines.bresenham {
         info = info
             .enabled_extension_names(&extensions)

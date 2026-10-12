@@ -407313,7 +407313,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkernel::ncollection::BaseSequence::first",
-          "declaration_sha256": "7b411019c17b5c7f81dc7ab708900873af1d0dc478e7166ab976111c70d71171",
+          "declaration_sha256": "2492608071967bc735a31dbdd83b0a60c37eff337259cfd9c5c45be40ac9418e",
           "impl_context": null
         }
       ],
@@ -407328,7 +407328,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkernel::ncollection::BaseSequence::last",
-          "declaration_sha256": "0b0c817acf8f747a97c99a1ee31c89c64c507f9c9abe6d26a6195da6fbd49149",
+          "declaration_sha256": "64f176fc0abbbf560729b56313d082277a285fc523a1add215749e16c0bd7d1a",
           "impl_context": null
         }
       ],
@@ -407343,7 +407343,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkernel::ncollection::BaseSequence::current",
-          "declaration_sha256": "5cfa8ee4d793f33c6368eddbae5438fd88206017eb2f66721be876f15235270c",
+          "declaration_sha256": "d537153fc7e9ba0330a35f91841f9823f2844ea906a24aad804828c26506dea0",
           "impl_context": null
         }
       ],
@@ -407358,7 +407358,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkernel::ncollection::BaseSequence::current_index",
-          "declaration_sha256": "d992b799139ee29f8743e3bbb7a851846e36a85dfa023990117db06987d1af5f",
+          "declaration_sha256": "7a9b5fefaf66e5afe0a01c83c782dcb0918b25961fb6cd34a2198d5096bc5fb1",
           "impl_context": null
         }
       ],
@@ -407373,7 +407373,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkernel::ncollection::BaseSequence::size",
-          "declaration_sha256": "45f20c558a260bb9361aa993b72b396cf0730a42a2574473741a9295541a4fbb",
+          "declaration_sha256": "0e8d25c37105b80c496c53aad5de4e9066b15640ca0ae64c0ab6b3619c51e348",
           "impl_context": null
         }
       ],
@@ -407388,7 +407388,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkernel::ncollection::BaseSequence::allocator",
-          "declaration_sha256": "f301463e2a8697fc1ce02edd568af1be672af4834681c92dbc9157059158797e",
+          "declaration_sha256": "1f5106b5c9cf37b4417a5f4cfd9200be01ecdd07bab4350915648b7c50828835",
           "impl_context": null
         }
       ],
@@ -572930,9 +572930,30 @@
       "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_FrustumBuilder.hxx",
       "source_sha256": "21a256ed88f430e1cfe8bb060786cf601dce9f41ffd3b64f873427e752e21845",
       "cpp_declaration_id": "08b79a06b1b5aa8e614decfe338f3f064c7355c513297a73651ffc7939f332b2",
-      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera",
-      "status": "partial",
-      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera_ref",
+      "status": "implemented",
+      "notes": "Completed the previously unexported helper from Claude commit d8e6761fe; validated against pinned OCCT. Six Rust behavior tests and 274 differential cases cover camera identity, orthographic/perspective depth conventions, viewport reset, signed plane distance, finite/void depth ranges, insertion-order merging, clipping plane chains, disabled planes, parallel/opposite picking rays, and DumpJson. GetNearestDepth maps to the output-argument form so both success and failure preserve native depth mutations; the Option-returning convenience method remains available. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract. Restored actual getter contract only: weak alias captures genuine camera field once, retains no source/camera owner or lock, follows target replacement; manager captures selected volume or one genuine shared static null slot. Native30 exact identity/count/retarget/failure/retry rows plus Rust-only expiration/explicitownership regressions. Old copied camera convenience is unclaimed. Constructors/classes and full Frame remain partial. See docs/selectmgr-camera-getters.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::camera_ref",
+          "declaration_sha256": "7a0c358d64b4a1ddb2834eb25148236e7c0c42fd35d95e1a821e0b48dfd0962f",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrFrustumBuilder",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::frustum_builder::SelectMgrFrustumBuilder",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_FrustumBuilder::SignedPlanePntDist(const NCollection_Vec3<double> &, const NCollection_Vec3<double> &) const",
@@ -572987,7 +573008,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::select_mgr::SelectMgrFrustumBuilder::set_camera",
-          "declaration_sha256": "283e19376bd7ab1d91fb1bf54f41550467efb695209fec39a27f6297f864e84a",
+          "declaration_sha256": "cf2d2843dabc5a86bcfea46d841a63a825d8dfe4b95015b9a9aaf46cfcb2f5e7",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -573218,7 +573239,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::set_camera",
-          "declaration_sha256": "ccae81c8a5cd3aa0daec769bc0daccd56ac04e7afd443ec8476785ffb87ff523",
+          "declaration_sha256": "c7fb0d508ac16d610001f53ff29a8541d86b2824084e5125b7c7e9ac9b874bdc",
           "impl_context": null
         }
       ]
@@ -573420,8 +573441,8 @@
       "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
       "cpp_declaration_id": "a6cc9fcfb20b27b4d534c20210aba4dec16b7346a758a9f25cb61d3190f456f6",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_view_ray_direction",
-      "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::SetPixelTolerance(int)",
@@ -573440,8 +573461,8 @@
       "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
       "cpp_declaration_id": "b449ec518b1331ebdd10dcae2bf783126eeb8ae6d150494320a201a846b5a585",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_far_pnt",
-      "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::DistToGeometryCenter(const class gp_Pnt &) const",
@@ -573530,8 +573551,8 @@
       "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
       "cpp_declaration_id": "dda93b407d73c4d5cade265e7bbc396c995fb89f8561c7b19d1d0892bfc3d60a",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_mouse_position",
-      "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::DumpJson(class std::basic_ostream<char> &, int) const",
@@ -573560,8 +573581,8 @@
       "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
       "cpp_declaration_id": "f6547ae1a810c717c3392e5ae40ac8eae0f75befcd11d6b9d22b5b65e22417b9",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_near_pnt",
-      "status": "implemented",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::Camera() const",
@@ -573569,9 +573590,17 @@
       "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
       "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
       "cpp_declaration_id": "ff40e8623c6adfe8cbbdc5aa2c8d6a0f050dc8bbc7b8e7464afd662ffed5549e",
-      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera",
-      "status": "partial",
-      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera_ref",
+      "status": "implemented",
+      "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract. Restored actual getter contract only: weak alias captures genuine camera field once, retains no source/camera owner or lock, follows target replacement; manager captures selected volume or one genuine shared static null slot. Native30 exact identity/count/retarget/failure/retry rows plus Rust-only expiration/explicitownership regressions. Old copied camera convenience is unclaimed. Constructors/classes and full Frame remain partial. See docs/selectmgr-camera-getters.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersectorMembers::camera_ref",
+          "declaration_sha256": "4127204f374c6f228d8485f7e60034f829f04983b6f59c873a0aaed939e966b5",
+          "impl_context": null
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_BaseIntersector::DynamicType() const",
@@ -574400,8 +574429,8 @@
       "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
       "cpp_declaration_id": "6d1ecf4195708ea5112f987e483c52dec3a1854042638c358523ce86a2ee2331",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_far_pnt",
-      "status": "implemented",
-      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      "status": "partial",
+      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_AxisIntersector::SetCamera(const class opencascade::handle<class Graphic3d_Camera> &)",
@@ -574465,8 +574494,8 @@
       "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
       "cpp_declaration_id": "818bdf9fd0277b6a0dae6db0c4396129c4bbcf6cd566df5190b7ce19fca16f5c",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_near_pnt",
-      "status": "implemented",
-      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      "status": "partial",
+      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_AxisIntersector::OverlapsTriangle(const class gp_Pnt &, const class gp_Pnt &, const class gp_Pnt &, enum Select3D_TypeOfSensitivity, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
@@ -574575,8 +574604,8 @@
       "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
       "cpp_declaration_id": "d5490ab570b6d8b443a509fdc62289d4ff0168d8cf6414f2bfaee1c6be22a56d",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_view_ray_direction",
-      "status": "implemented",
-      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      "status": "partial",
+      "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_AxisIntersector::rayPlaneIntersection(const class gp_Vec &, const class gp_Pnt &, struct SelectBasics_PickResult &) const",
@@ -574665,8 +574694,8 @@
       "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
       "cpp_declaration_id": "13cd061b03cae1f6a6bd7f10c0b6849da3a7c2049cd6e3a5155af18693dc0840",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_mouse_position",
-      "status": "implemented",
-      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_RectangularFrustum::OverlapsCircle(double, const class gp_Trsf &, bool, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
@@ -574685,8 +574714,8 @@
       "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
       "cpp_declaration_id": "2361f2c6dc100234144e4b39d1ca12c66d8a68f1f82d3307b325a46fe45b048a",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_view_ray_direction",
-      "status": "implemented",
-      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_RectangularFrustum::OverlapsPoint(const class gp_Pnt &, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
@@ -574825,8 +574854,8 @@
       "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
       "cpp_declaration_id": "5d965b64aee57b616721971f16553c6ad3f206bb09d45a63895476eef53e7f70",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_far_pnt",
-      "status": "implemented",
-      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_RectangularFrustum::OverlapsTriangle(const class gp_Pnt &, const class gp_Pnt &, const class gp_Pnt &, enum Select3D_TypeOfSensitivity, const class SelectMgr_ViewClipRange &, struct SelectBasics_PickResult &) const",
@@ -575015,8 +575044,8 @@
       "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
       "cpp_declaration_id": "b98aec573165f4a41ccb8b2932080170ac87ddd105aba3578259d4f606b80313",
       "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_near_pnt",
-      "status": "implemented",
-      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      "status": "partial",
+      "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
     },
     {
       "upstream_id": "SelectMgr_RectangularFrustum::isIntersectCircle(double, const class gp_Pnt &, const class gp_Trsf &, const class NCollection_Array1<class gp_Pnt> &) const",
@@ -575534,9 +575563,30 @@
       "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.hxx",
       "source_sha256": "3d27e65092106743071f046b4eab21052d53eefdced55195873ced8ab5be51a2",
       "cpp_declaration_id": "4b98d620e66c73dc4993a8150a96a628d391d6e5feedc1a81bdf23ce1ec14adb",
-      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera",
-      "status": "partial",
-      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract."
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera_ref",
+      "status": "implemented",
+      "notes": "OCCT 3d097a0 value manager: shared active-volume reuse, initialization assertions, virtual intersector delegation, all overlap/inside outputs and clipping, copy versus transform state, immediate CopyWithBuilder rebuild, stale ranges outside Point, world-ray clipping, sentinels and JSON dumps. 4800 new exact native scenarios plus direct Rust state and sensitive-entity error-propagation tests. GetVertices returns None for nonrectangular volumes where the native unchecked static_cast has undefined behavior. Fallible SelectBasics getters propagate intersector exceptions. See docs/v3d-design.md section 6. Contract audit 2026-10-12: native Camera() returns a const Handle reference to the actual retained camera slot (stable static empty slot for a null manager). Current Rust returns an owning copied Handle, changing intrusive counts and losing retained-slot replacement observation. Genuine live field aliases remain to be integrated; setter callback proofs do not establish this getter contract. Restored actual getter contract only: weak alias captures genuine camera field once, retains no source/camera owner or lock, follows target replacement; manager captures selected volume or one genuine shared static null slot. Native30 exact identity/count/retarget/failure/retry rows plus Rust-only expiration/explicitownership regressions. Old copied camera convenience is unclaimed. Constructors/classes and full Frame remain partial. See docs/selectmgr-camera-getters.md.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::camera_ref",
+          "declaration_sha256": "459e942a32fd23c7a5416dfd8a2b49d0b633f660a55a14b22e7ee3216806ddd6",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "SelectMgrSelectingVolumeManager",
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::selecting_volume::SelectMgrSelectingVolumeManager",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "SelectMgr_SelectingVolumeManager::SetViewClipping(const class SelectMgr_SelectingVolumeManager &)",
@@ -575801,7 +575851,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::select_mgr::SelectMgrSelectingVolumeManager::set_camera",
-          "declaration_sha256": "4dd96fdb22e9b78b8d48914fc73fcb85b3a3c05e49d85eed31174635a939cdcb",
+          "declaration_sha256": "e16cdc6f69dcef63d7036765c51e5ce22faebd46fb035cf66f11eaf393298182",
           "impl_context": {
             "for": {
               "resolved_path": {

@@ -133,6 +133,8 @@ def check_shaders(folder: Path, env: dict[str, str]) -> str:
     check_surface_shader_binaries(ROOT, folder, env, run)
     from vulkan_mesh_edge_shaders import check_mesh_edge_shader_binaries
     check_mesh_edge_shader_binaries(ROOT, folder, env, run)
+    from vulkan_fixed_lighting_shaders import check_fixed_lighting_shader_binaries
+    check_fixed_lighting_shader_binaries(ROOT, folder, env, run)
     return run(["glslangValidator", "--version"], env)
 
 

@@ -127,3 +127,13 @@ fn homogeneous_buffer() -> Handle<Graphic3dBuffer> {
     }
     buffer
 }
+
+#[test]
+fn detached_structure_extraction_uses_default_lighting_without_a_driver() {
+    let scene = GraphicScene::new();
+    assert!(scene.group.structure().structure_manager().is_null());
+    submit(&scene, &vertex_buffer(), &Handle::default());
+    let draws = scene.group.triangle_draws(&scene.camera).unwrap();
+    assert_eq!(draws.len(), 1);
+    assert_eq!(draws[0].indices(), [0, 1, 2]);
+}

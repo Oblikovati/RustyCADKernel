@@ -12,8 +12,16 @@ pub(crate) fn apply_surface_lighting(
     aspects: &Handle<dyn Graphic3dAspectsSource>,
     context: &TextSceneContext<'_>,
 ) -> Result<(), RenderError> {
-    let model = primitive_shading_model(draws, &**aspects, context.rendering.shading_model);
+    let pipeline =
+        crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure());
+    let model =
+        primitive_shading_model(draws, &**aspects, context.rendering.shading_model, pipeline);
     if model == Graphic3dTypeOfShadingModel::Unlit {
+        if crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure())
+            == crate::RenderLightingPipeline::FixedFunction
+        {
+            return Ok(());
+        }
         return validate_unlit_draws(draws, &**aspects);
     }
     apply_resolved_lighting(draws, primitive, aspects, context, model)
@@ -22,19 +30,34 @@ fn primitive_shading_model(
     draws: &[PrimitiveDraw],
     aspect: &dyn Graphic3dAspectsSource,
     view: Graphic3dTypeOfShadingModel,
+    pipeline: crate::RenderLightingPipeline,
 ) -> Graphic3dTypeOfShadingModel {
-    let model = resolved_model(aspect, view);
+    let model = fixed_compatible_shading(resolved_model(aspect, view), pipeline);
     if draws.iter().any(texture_replaces_lighting) {
         return Graphic3dTypeOfShadingModel::Unlit;
     }
     if model == Graphic3dTypeOfShadingModel::PhongFacet
         && draws
             .iter()
-            .all(|draw| draw.topology() == crate::PrimitiveTopology::Lines)
+            .all(|draw| draw.topology() != crate::PrimitiveTopology::Triangles)
     {
         return Graphic3dTypeOfShadingModel::Unlit;
     }
     model
+}
+fn fixed_compatible_shading(
+    model: Graphic3dTypeOfShadingModel,
+    pipeline: crate::RenderLightingPipeline,
+) -> Graphic3dTypeOfShadingModel {
+    if pipeline != crate::RenderLightingPipeline::FixedFunction {
+        return model;
+    }
+    // FFP binds common materials; accepting a PBR request here does not implement a PBR shader.
+    match model {
+        Graphic3dTypeOfShadingModel::Pbr => Graphic3dTypeOfShadingModel::Phong,
+        Graphic3dTypeOfShadingModel::PbrFacet => Graphic3dTypeOfShadingModel::PhongFacet,
+        _ => model,
+    }
 }
 fn validate_unlit_draws(
     draws: &[PrimitiveDraw],
@@ -125,6 +148,8 @@ fn apply_nodal_lighting(
     if draws
         .iter()
         .any(|draw| draw.topology() == crate::PrimitiveTopology::Points)
+        && crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure())
+            != crate::RenderLightingPipeline::FixedFunction
     {
         lighting.validate_opaque_marker_lighting()?;
     }
@@ -158,11 +183,7 @@ fn surface_lighting(
 ) -> Result<RenderLighting, RenderError> {
     let shading = surface_algorithm(model, normals.is_some())?;
     let (world, view) = crate::persistent_transform::lighting_matrices(context)?;
-    let colored = primitive
-        .attributes
-        .attribute_data(Graphic3dTypeOfAttribute::Color)
-        .is_some();
-    Ok(RenderLighting::new(
+    let mut snapshot = RenderLighting::new(
         Vec::new(),
         aspect_material(aspects),
         world,
@@ -170,7 +191,25 @@ fn surface_lighting(
         !context.camera.is_orthographic(),
         shading,
     )?
-    .with_vertex_colors(colored, !aspects.to_use_vertex_color_for_back_faces()))
+    .with_vertex_colors(
+        primitive_has_lighting_colors(primitive),
+        !aspects.to_use_vertex_color_for_back_faces(),
+    );
+    snapshot.normalize_fixed = crate::fixed_normalization::native_normalize_state(
+        context.camera,
+        context.structure,
+        view,
+        !context.group.transform_persistence().is_null(),
+    );
+    crate::fixed_lighting::snapshot_fixed_material_opacity(&mut snapshot, aspects);
+    Ok(snapshot)
+}
+
+fn primitive_has_lighting_colors(primitive: &PrimitiveSubmission) -> bool {
+    primitive
+        .attributes
+        .attribute_data(Graphic3dTypeOfAttribute::Color)
+        .is_some()
 }
 
 pub(crate) fn resolved_model(
@@ -230,6 +269,7 @@ pub(crate) fn aspect_material(aspect: &dyn Graphic3dAspectsSource) -> RenderMate
     );
     material
 }
+
 fn surface_material_pair(
     aspect: &dyn Graphic3dAspectsSource,
 ) -> (Graphic3dMaterialAspect, Graphic3dMaterialAspect) {
@@ -245,6 +285,9 @@ pub(crate) fn apply_view_lights(
     layers: &mut [RenderLayer],
     view: &dyn Graphic3dCView,
 ) -> Result<(), RenderError> {
+    if crate::fixed_view_lighting::uses_fixed_view_lighting(view) {
+        return crate::fixed_view_lighting::apply_fixed_view_lighting(layers, view);
+    }
     if !layers
         .iter()
         .flat_map(|layer| &layer.draws)

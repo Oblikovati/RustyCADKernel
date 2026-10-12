@@ -39,6 +39,9 @@ impl VulkanRenderer {
     }
 }
 mod buffer;
+mod fixed_lighting_pipeline;
+mod fixed_vertex_layout;
+mod fixed_vertex_sources;
 mod frame;
 mod image;
 mod memory_selection;

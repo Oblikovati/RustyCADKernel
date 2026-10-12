@@ -1,0 +1,314 @@
+{
+  "source_revision": "6d940c486bcd96f6e204a0a812751a7a1a93090b",
+  "scope": "11 virtual const gp reference getters only; SelectingVolumeManager by-value accessors unchanged. Header and Rust implementation inspection establishes missing alias transport. No native execution or behavioral parity is claimed.",
+  "records": [
+    {
+      "native_id": "a6cc9fcfb20b27b4d534c20210aba4dec16b7346a758a9f25cb61d3190f456f6",
+      "native_signature": "const class gp_Dir &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+      "native_header_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+      "rust_source": "crates/tkv3d/src/select_mgr/base_intersector.rs",
+      "rust_source_sha256": "8acbd9e4f46f59effab57c4b43158e44525286ca61cbfd4ee43d9d3b39fc76d0",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetViewRayDirection() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "a6cc9fcfb20b27b4d534c20210aba4dec16b7346a758a9f25cb61d3190f456f6",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_view_ray_direction",
+        "status": "implemented",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetViewRayDirection() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "a6cc9fcfb20b27b4d534c20210aba4dec16b7346a758a9f25cb61d3190f456f6",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_view_ray_direction",
+        "status": "partial",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "b449ec518b1331ebdd10dcae2bf783126eeb8ae6d150494320a201a846b5a585",
+      "native_signature": "const class gp_Pnt &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+      "native_header_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+      "rust_source": "crates/tkv3d/src/select_mgr/base_intersector.rs",
+      "rust_source_sha256": "8acbd9e4f46f59effab57c4b43158e44525286ca61cbfd4ee43d9d3b39fc76d0",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetFarPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "b449ec518b1331ebdd10dcae2bf783126eeb8ae6d150494320a201a846b5a585",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_far_pnt",
+        "status": "implemented",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetFarPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "b449ec518b1331ebdd10dcae2bf783126eeb8ae6d150494320a201a846b5a585",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_far_pnt",
+        "status": "partial",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "dda93b407d73c4d5cade265e7bbc396c995fb89f8561c7b19d1d0892bfc3d60a",
+      "native_signature": "const class gp_Pnt2d &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+      "native_header_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+      "rust_source": "crates/tkv3d/src/select_mgr/base_intersector.rs",
+      "rust_source_sha256": "8acbd9e4f46f59effab57c4b43158e44525286ca61cbfd4ee43d9d3b39fc76d0",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetMousePosition() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "dda93b407d73c4d5cade265e7bbc396c995fb89f8561c7b19d1d0892bfc3d60a",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_mouse_position",
+        "status": "implemented",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetMousePosition() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "dda93b407d73c4d5cade265e7bbc396c995fb89f8561c7b19d1d0892bfc3d60a",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_mouse_position",
+        "status": "partial",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "f6547ae1a810c717c3392e5ae40ac8eae0f75befcd11d6b9d22b5b65e22417b9",
+      "native_signature": "const class gp_Pnt &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+      "native_header_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+      "rust_source": "crates/tkv3d/src/select_mgr/base_intersector.rs",
+      "rust_source_sha256": "8acbd9e4f46f59effab57c4b43158e44525286ca61cbfd4ee43d9d3b39fc76d0",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetNearPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "f6547ae1a810c717c3392e5ae40ac8eae0f75befcd11d6b9d22b5b65e22417b9",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_near_pnt",
+        "status": "implemented",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_BaseIntersector::GetNearPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx",
+        "source_sha256": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+        "cpp_declaration_id": "f6547ae1a810c717c3392e5ae40ac8eae0f75befcd11d6b9d22b5b65e22417b9",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector::get_near_pnt",
+        "status": "partial",
+        "notes": "Recovered Claude untracked BaseIntersector, split ray kernels, corrected native gp_Dir() default to +X (OCCT 3d097a0). Abstract overlap/build/transform members remain required trait methods, not fake geometry implementations. Eight Rust behavior tests and 933 new native comparisons exercise concrete base defaults, retained camera identity, sentinels, no-ops, JSON, sphere/cylinder/cone/circle rays, cap/hollow and miss/single-crossing output preservation. WindowSize None and optional ray times encode native untouched output arguments. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "6d1ecf4195708ea5112f987e483c52dec3a1854042638c358523ce86a2ee2331",
+      "native_signature": "const class gp_Pnt &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+      "native_header_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+      "rust_source": "crates/tkv3d/src/select_mgr/axis_members.rs",
+      "rust_source_sha256": "e27605fa92b5da36a52ff2e5f47f2369bc8e1434cc2514cef1874b9015b23d61",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_AxisIntersector::GetFarPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+        "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+        "cpp_declaration_id": "6d1ecf4195708ea5112f987e483c52dec3a1854042638c358523ce86a2ee2331",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_far_pnt",
+        "status": "implemented",
+        "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_AxisIntersector::GetFarPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+        "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+        "cpp_declaration_id": "6d1ecf4195708ea5112f987e483c52dec3a1854042638c358523ce86a2ee2331",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_far_pnt",
+        "status": "partial",
+        "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "818bdf9fd0277b6a0dae6db0c4396129c4bbcf6cd566df5190b7ce19fca16f5c",
+      "native_signature": "const class gp_Pnt &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+      "native_header_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+      "rust_source": "crates/tkv3d/src/select_mgr/axis_members.rs",
+      "rust_source_sha256": "e27605fa92b5da36a52ff2e5f47f2369bc8e1434cc2514cef1874b9015b23d61",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_AxisIntersector::GetNearPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+        "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+        "cpp_declaration_id": "818bdf9fd0277b6a0dae6db0c4396129c4bbcf6cd566df5190b7ce19fca16f5c",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_near_pnt",
+        "status": "implemented",
+        "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_AxisIntersector::GetNearPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+        "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+        "cpp_declaration_id": "818bdf9fd0277b6a0dae6db0c4396129c4bbcf6cd566df5190b7ce19fca16f5c",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_near_pnt",
+        "status": "partial",
+        "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "d5490ab570b6d8b443a509fdc62289d4ff0168d8cf6414f2bfaee1c6be22a56d",
+      "native_signature": "const class gp_Dir &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+      "native_header_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+      "rust_source": "crates/tkv3d/src/select_mgr/axis_members.rs",
+      "rust_source_sha256": "e27605fa92b5da36a52ff2e5f47f2369bc8e1434cc2514cef1874b9015b23d61",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_AxisIntersector::GetViewRayDirection() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+        "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+        "cpp_declaration_id": "d5490ab570b6d8b443a509fdc62289d4ff0168d8cf6414f2bfaee1c6be22a56d",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_view_ray_direction",
+        "status": "implemented",
+        "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_AxisIntersector::GetViewRayDirection() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
+        "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
+        "cpp_declaration_id": "d5490ab570b6d8b443a509fdc62289d4ff0168d8cf6414f2bfaee1c6be22a56d",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_view_ray_direction",
+        "status": "partial",
+        "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "13cd061b03cae1f6a6bd7f10c0b6849da3a7c2049cd6e3a5155af18693dc0840",
+      "native_signature": "const class gp_Pnt2d &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+      "native_header_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+      "rust_source": "crates/tkv3d/src/select_mgr/rectangular_intersector.rs",
+      "rust_source_sha256": "6bcba36a1e541d4dc260c564d46337c71b5bf9adae143ee0496399d66b55b8f2",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetMousePosition() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "13cd061b03cae1f6a6bd7f10c0b6849da3a7c2049cd6e3a5155af18693dc0840",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_mouse_position",
+        "status": "implemented",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetMousePosition() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "13cd061b03cae1f6a6bd7f10c0b6849da3a7c2049cd6e3a5155af18693dc0840",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_mouse_position",
+        "status": "partial",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "2361f2c6dc100234144e4b39d1ca12c66d8a68f1f82d3307b325a46fe45b048a",
+      "native_signature": "const class gp_Dir &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+      "native_header_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+      "rust_source": "crates/tkv3d/src/select_mgr/rectangular_intersector.rs",
+      "rust_source_sha256": "6bcba36a1e541d4dc260c564d46337c71b5bf9adae143ee0496399d66b55b8f2",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetViewRayDirection() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "2361f2c6dc100234144e4b39d1ca12c66d8a68f1f82d3307b325a46fe45b048a",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_view_ray_direction",
+        "status": "implemented",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetViewRayDirection() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "2361f2c6dc100234144e4b39d1ca12c66d8a68f1f82d3307b325a46fe45b048a",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_view_ray_direction",
+        "status": "partial",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "5d965b64aee57b616721971f16553c6ad3f206bb09d45a63895476eef53e7f70",
+      "native_signature": "const class gp_Pnt &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+      "native_header_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+      "rust_source": "crates/tkv3d/src/select_mgr/rectangular_intersector.rs",
+      "rust_source_sha256": "6bcba36a1e541d4dc260c564d46337c71b5bf9adae143ee0496399d66b55b8f2",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetFarPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "5d965b64aee57b616721971f16553c6ad3f206bb09d45a63895476eef53e7f70",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_far_pnt",
+        "status": "implemented",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetFarPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "5d965b64aee57b616721971f16553c6ad3f206bb09d45a63895476eef53e7f70",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_far_pnt",
+        "status": "partial",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    },
+    {
+      "native_id": "b98aec573165f4a41ccb8b2932080170ac87ddd105aba3578259d4f606b80313",
+      "native_signature": "const class gp_Pnt &() const",
+      "native_header": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+      "native_header_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+      "rust_source": "crates/tkv3d/src/select_mgr/rectangular_intersector.rs",
+      "rust_source_sha256": "6bcba36a1e541d4dc260c564d46337c71b5bf9adae143ee0496399d66b55b8f2",
+      "previous_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetNearPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "b98aec573165f4a41ccb8b2932080170ac87ddd105aba3578259d4f606b80313",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_near_pnt",
+        "status": "implemented",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6."
+      },
+      "current_ledger_row": {
+        "upstream_id": "SelectMgr_RectangularFrustum::GetNearPnt() const",
+        "toolkit": "TKV3d",
+        "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_RectangularFrustum.hxx",
+        "source_sha256": "f09cdb1c1533111f9633a65004446ea857d9e052545aaf47adb5bd26397c72ad",
+        "cpp_declaration_id": "b98aec573165f4a41ccb8b2932080170ac87ddd105aba3578259d4f606b80313",
+        "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrRectangularFrustum::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::get_near_pnt",
+        "status": "partial",
+        "notes": "RectangularFrustum and SelectionRectangle at OCCT 3d097a0: point/box construction, native vertices and projection caches, finite view-segment helpers, all overlap and clipped pick overloads, scale/copy/transform branch order, inherited BaseFrustum RTTI with separate Rust interface casters, and exact JSON dumps. Twelve direct Rust tests and 31423 additional native comparisons exercise initialization failures, unknown sensitivity, retained and invalidated pick fields, inside outputs, coordinate transforms, geometric degeneracy, plane replacement and protected predicates. Native null-camera deep dumps are not invoked; depth-zero dumps cover the identity reset with a null builder. See docs/v3d-design.md section 6. Reference-contract audit 2026-10-12: upstream returns a const gp value reference to live field or function-static storage; this Rust virtual method returns a copied value. Captured identity and subsequent in-place callback changes remain unported. See porting/runtime-evidence/selectmgr-value-reference-audit-2026-10-12/receipt.json. Existing coordinate/exception behavior is preserved; no class completion is inferred."
+      }
+    }
+  ]
+}
