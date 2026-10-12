@@ -41,6 +41,7 @@ mod tests {
         mask.surface_texture_unavailable =
             Some(crate::surface_texture::SurfaceTextureUnavailable {
                 resource_id: b"native-mask-input".to_vec(),
+                fixed_environment: true,
                 modulate: true,
                 vertex_override: false,
                 back_vertex: true,

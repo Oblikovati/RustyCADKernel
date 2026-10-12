@@ -1,15 +1,18 @@
 use super::*;
+use rustycad_tkernel::ncollection::BaseAllocator;
 use rustycad_tkernel::ncollection::{
     DynamicArray, EBTree, IncrementalAllocatorObject, UBTreeFiller,
 };
 pub(super) fn wire(checker: &BRepMeshFaceChecker, index: i32) -> Result<(), Failure> {
     let wire = checker.face.get_wire(index)?;
-    let allocator = IncrementalAllocatorObject::default();
+    let allocator = Handle::new(IncrementalAllocatorObject::default());
     let segments = shared_collection(DynamicArray::with_allocator(
         wire.edges_nb() as usize,
-        Some(allocator.resource().clone()),
+        Some(BaseAllocator::from_handle(&allocator)),
     ));
-    let tree = shared_collection(EBTree::with_allocator(allocator.resource().clone()));
+    let tree = shared_collection(EBTree::with_allocator(BaseAllocator::from_handle(
+        &allocator,
+    )));
     let collections = checker.wires.snapshot();
     *collections
         .segments
@@ -29,9 +32,13 @@ fn fill_segments(
     segments: &Handle<FaceSegments>,
     tree: &Handle<FaceBoundsTree>,
 ) -> Result<(), Failure> {
-    let temporary = IncrementalAllocatorObject::default();
+    let temporary = Handle::new(IncrementalAllocatorObject::default());
     let mut tree = tree.write();
-    let mut filler = UBTreeFiller::new(&mut *tree, Some(temporary.resource().clone()), true);
+    let mut filler = UBTreeFiller::new(
+        &mut *tree,
+        Some(BaseAllocator::from_handle(&temporary)),
+        true,
+    );
     for edge_index in 0..wire.edges_nb() {
         let pointer = wire.get_edge(edge_index)?;
         let curve = pointer.upgrade().get_pcurve_for(

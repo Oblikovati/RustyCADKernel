@@ -58,5 +58,9 @@ fn projected_observers_preserve_identity_counts_and_reject_unrelated_types() {
     assert!(unrelated.is_null());
     drop(projected);
     assert_eq!(handle.ref_count(), 1);
-    assert!(Handle::<StandardTransient>::default().observe_as::<RuntimeType>().is_null());
+    assert!(
+        Handle::<StandardTransient>::default()
+            .observe_as::<RuntimeType>()
+            .is_null()
+    );
 }

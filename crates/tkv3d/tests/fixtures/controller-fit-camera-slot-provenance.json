@@ -1,0 +1,35 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "main_baseline": "ef66f1a3296caf9cdd2b9f2b5eb3b9fe9a081c0a",
+  "status": "focused existing CView camera ownership/transport bug fix; no additional API, class or full Frame credit",
+  "row_count": 12,
+  "native_runs": "two byte-identical local CPU runs; 12-row scene fixture uses full17-digit serialization, no precision tuning; 36-row identity/count matrix is integer exact",
+  "fixture_sha256": "78c4629ad2b0121d021a69b024d3f6893af8d4a2dcb8e174b9ad70d3c7137712",
+  "second_run_uncompressed_sha256": "78c4629ad2b0121d021a69b024d3f6893af8d4a2dcb8e174b9ad70d3c7137712",
+  "second_run_gzip_sha256": "d7ace22c8cb556f46a521a0345aea5aef2c9a9998f67b67221765fe7a3ac633e",
+  "oracle_executable_sha256": "98ab8d956f8902b97b01c78fe73f1cc4107c13ed21fc2c7f7ade9fabedf10f71",
+  "sources": {
+    "Martensite-cview-camera-bounds/tools/oracle/martensite_controller_fit_camera_slot.cxx": "f284b405a81fcb9e37c7e595a3fac474dd5735d928ab3434d3e18018a0c80d6f",
+    "Martensite-cview-camera-bounds/tools/oracle/martensite_controller_fit_all.cxx": "53713d40326ac3edc72b390b877c3545204ac6cd4639b59e87ff429d90329987",
+    "Martensite-cview-camera-bounds/tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+    "OCCT/src/Visualization/TKService/Graphic3d/Graphic3d_CView.hxx": "25ced69fcbff3466e732522469abfd5f7b25a867863393bf95fc42098ab1628d",
+    "OCCT/src/Visualization/TKService/Graphic3d/Graphic3d_CView.cxx": "adbbbb8c6453611932ce4bdca56ed74882d6fa2133fc82f52e96471168c01888",
+    "OCCT/src/Visualization/TKV3d/AIS/AIS_ViewController.cxx": "d8f83eb23610374baa54c3aa339405d0d3a8f0d9deb3721571f8d522f0684cbb",
+    "OCCT/src/Visualization/TKV3d/V3d/V3d_View.cxx": "092de1c7865ddef1d6db53595be48b77297158f96205d70c18cf1d8459cc4012"
+  },
+  "native_library_sha256": {
+    "RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKService.so.8.1.0": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKV3d.so.8.1.0": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so.8.1.0": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a"
+  },
+  "temporary_include_wrapper_sha256": {
+    "martensite_fit_all_oracle_shared.cxx": "bc6f1aeb6374b68fabce4d093458eee13037267b0e989c313e5fe98a7d900125",
+    "martensite_fit_camera_slot_oracle_shared.cxx": "1ad723b7714391ab2744ce4f1223ce4d9b8001f8462e954e9c0a6c198971c0d6"
+  },
+  "wrapper_reproduction": "Copy martensite_controller_fit_all.cxx and martensite_controller_fit_camera_slot.cxx into a temporary include directory with only their inactive int main() symbol renamed to a unique martensite_unused_* function; preserve all calculation/iteration code. Wrapper headers are named martensite_fit_all_oracle_shared.cxx and martensite_fit_camera_slot_oracle_shared.cxx.",
+  "build": "g++ -std=c++17 -O0 with temporary wrappers and tools/oracle includes, existing target/occt-all-full include/opencascade and lin64/gcc/libi; link TKV3d TKG3d TKService TKMath TKernel TKBRep TKGeomBase TKGeomAlgo TKTopAlgo; native library rpath. No OCCT rebuild, GPU or headset.",
+  "schema": "case=projection*3+fault-mode frame failure callback-count old-camera-count-at-Size new-camera-count-at-Size original-final-count replacement-final-count case frame selected-count selection-bounds[7] unfiltered-selection-bounds[7] scene-bounds[7] camera[19]",
+  "configuration": "Real selected AIS_PointCloud, other pointcloud and trihedron presentations in actual context and V3d view, orthographic/perspective cameras. First Size is the boolean scene MinMaxValues query before camera candidates; named Size callback replaces current camera then raises configured typed Failure or unrelated exception. Retry uses partial state. This proves bounds-stage capture/count/exception fidelity; it does not prove candidate-construction order at later FitMinMax callbacks or full Frame completion.",
+  "comparison": "Existing scene fit comparator unchanged: abs difference <1e-9*max(abs(expected),1); identity/count/enum/flag columns exact. Direct36 integer matrix byte exact. Rust tests replay committed assets only, no OCCT runtime coupling."
+}

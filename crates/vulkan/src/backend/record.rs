@@ -82,10 +82,10 @@ fn begin_rendering(
     clear: [f32; 4],
     first: bool,
     clear_depth: bool,
-    xor: bool,
+    encoded_attachment: bool,
 ) {
     let color = [render_attachment(
-        if xor {
+        if encoded_attachment {
             resources.color.xor_view
         } else {
             resources.color.view
@@ -142,13 +142,14 @@ fn record_draws(
     let mut state = super::draw_state::DrawState::default();
     let mut depth_policy = (layer.depth_test, layer.depth_write);
     let mut offsets = crate::polygon_offset::PolygonOffsetState::new(layer.polygon_offset);
-    let mut xor_attachment = false;
+    let mut encoded_attachment = false;
     let mut culling = (crate::RenderFaceCulling::None, false);
     super::capping_record::set_culling(runtime, command, culling);
     for draw in &resources.draws[layer.draw_range.clone()] {
-        if xor_attachment != draw.text_logic_xor {
-            change_logic_attachment(runtime, command, resources, draw.text_logic_xor);
-            xor_attachment = draw.text_logic_xor;
+        let next_attachment = draw.text_logic_xor || draw.encoded_surface;
+        if encoded_attachment != next_attachment {
+            change_encoded_attachment(runtime, command, resources, next_attachment);
+            encoded_attachment = next_attachment;
         }
         let (bind, push) = state.advance(draw.pipeline.handle, &draw.transform);
         if bind {
@@ -419,14 +420,23 @@ fn push_draw_transform(
     }
 }
 
-fn change_logic_attachment(
+fn change_encoded_attachment(
     runtime: &VulkanRuntime,
     command: vk::CommandBuffer,
     resources: &FrameResources,
-    xor: bool,
+    encoded_attachment: bool,
 ) {
     unsafe { runtime.device().cmd_end_rendering(command) };
     layer_dependency(runtime, command);
     // Loading both aspects preserves color, depth and stencil through every XOR boundary.
-    begin_rendering(runtime, command, resources, [0.; 4], false, false, xor);
+    // Native FFP encoded-space blending uses this same UNORM alias without enabling logicOp.
+    begin_rendering(
+        runtime,
+        command,
+        resources,
+        [0.; 4],
+        false,
+        false,
+        encoded_attachment,
+    );
 }

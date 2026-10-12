@@ -102,18 +102,47 @@ impl CappingScene<'_> {
             return Ok(());
         };
         first.capping_pass = RenderCappingPass::MaskStart;
-        let aspect = if cap.plane.to_use_object_properties() {
-            groups[0].group.aspects()
-        } else {
-            Handle::default()
-        };
-        let surface = self.cap_surface(cap, &aspect, &groups[0].group.texture_images)?;
+        let aspect = cap_batch_aspect(cap, groups[0]);
+        let surfaces = self.cap_surfaces(cap, &aspect, &groups[0].group)?;
         for draw in &mut mask {
-            draw.surface_blend = surface.surface_blend;
+            draw.surface_blend = surfaces[0].surface_blend;
         }
         draws.extend(mask);
-        draws.push(surface);
+        draws.extend(surfaces);
         Ok(())
+    }
+    fn cap_surfaces(
+        &self,
+        cap: &CapPlane,
+        object: &Handle<dyn Graphic3dAspectsSource>,
+        group: &Graphic3dDrawGroup,
+    ) -> Result<Vec<PrimitiveDraw>, RenderError> {
+        let aspect = crate::capping_style::cap_aspect(&cap.plane, object);
+        let surface = self.cap_surface(cap, &aspect, &group.texture_images)?;
+        let mut surfaces = vec![surface];
+        self.lower_cap_edges(&mut surfaces, &aspect, group)?;
+        Ok(surfaces)
+    }
+    fn lower_cap_edges(
+        &self,
+        surfaces: &mut Vec<PrimitiveDraw>,
+        aspect: &Handle<dyn Graphic3dAspectsSource>,
+        group: &Graphic3dDrawGroup,
+    ) -> Result<(), RenderError> {
+        let policy = crate::retained_mesh_edges::driver_mesh_edge_pipeline(&group.structure());
+        crate::retained_mesh_edges::apply_retained_mesh_edges(
+            surfaces,
+            &**aspect,
+            policy,
+            group.texture_images.coordinate_pipeline,
+        )?;
+        crate::retained_mesh_edges::apply_graphic3d_raster_widths(surfaces, self.rendering)?;
+        let projection = crate::persistent_transform::cap_projection_only(
+            self.camera,
+            self.fields,
+            self.extent,
+        )?;
+        crate::retained_eye_edge_matrix::apply_eye_edge_matrices(surfaces, projection)
     }
     fn mask_draws(
         &self,
@@ -141,17 +170,10 @@ impl CappingScene<'_> {
     fn cap_surface(
         &self,
         cap: &CapPlane,
-        group: &Handle<dyn Graphic3dAspectsSource>,
+        aspect: &Handle<dyn Graphic3dAspectsSource>,
         texture_images: &crate::retained_texture_images::RetainedTextureImages,
     ) -> Result<PrimitiveDraw, RenderError> {
-        let aspect = crate::capping_style::cap_aspect(&cap.plane, group);
-        if aspect.to_draw_edges() {
-            return Err(crate::error::rejected(
-                true,
-                "section-edge shader proof before enabling cap mesh edges",
-            ));
-        }
-        let color = crate::style::surface_color(&aspect, true)?;
+        let color = crate::style::surface_color(aspect, true)?;
         let orientation = crate::capping_geometry::cap_orientation(cap.plane.get_equation().data());
         let (matrix, clamp) = crate::persistent_transform::plane_clip_transform(
             self.camera,
@@ -159,25 +181,51 @@ impl CappingScene<'_> {
             self.fields,
             self.extent,
         )?;
-        let mut draw = cap_draw(color, matrix, &aspect)?;
-        crate::surface_alpha::apply_surface_alpha(&mut draw, &*aspect);
+        let mut draw = cap_draw(color, matrix, aspect)?;
+        self.finish_cap_surface(&mut draw, cap, aspect, texture_images, orientation, clamp)?;
+        Ok(draw)
+    }
+    fn finish_cap_surface(
+        &self,
+        draw: &mut PrimitiveDraw,
+        cap: &CapPlane,
+        aspect: &Handle<dyn Graphic3dAspectsSource>,
+        texture_images: &crate::retained_texture_images::RetainedTextureImages,
+        orientation: rustycad_tkernel::ncollection::Mat4<f32>,
+        clamp: bool,
+    ) -> Result<(), RenderError> {
+        crate::surface_alpha::apply_surface_alpha(draw, &**aspect);
         crate::capping_texture::apply_cap_texture(
-            &mut draw,
-            &aspect,
+            draw,
+            aspect,
             texture_images,
             self,
             orientation,
             &cap.plane,
         )?;
-        crate::capping_lighting::apply_cap_lighting(&mut draw, &aspect, self, orientation)?;
+        crate::capping_lighting::apply_cap_lighting(draw, aspect, self, orientation)?;
+        self.finish_clipped_cap(draw, cap, orientation, clamp)
+    }
+    fn finish_clipped_cap(
+        &self,
+        draw: &mut PrimitiveDraw,
+        cap: &CapPlane,
+        orientation: rustycad_tkernel::ncollection::Mat4<f32>,
+        clamp: bool,
+    ) -> Result<(), RenderError> {
         draw.depth_clamp = clamp;
-        draw = draw.with_clipping(RenderClipping::new(
+        draw.clipping = Some(RenderClipping::new(
             cap.remaining.clone(),
             orientation.data(),
         )?);
-        crate::highlight_style::apply_highlight(&mut draw, self.fields)?;
-        Ok(draw)
+        crate::highlight_style::apply_highlight(draw, self.fields)
     }
+}
+fn cap_batch_aspect(cap: &CapPlane, group: &CapGroup) -> Handle<dyn Graphic3dAspectsSource> {
+    if cap.plane.to_use_object_properties() {
+        return group.group.aspects();
+    }
+    Handle::default()
 }
 
 fn is_cap_geometry(draw: &PrimitiveDraw) -> bool {

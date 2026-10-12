@@ -21,6 +21,7 @@ pub(crate) struct SurfaceTextureImage {
     pub revision: usize,
     pub extent: [u32; 2],
     pub encoding: SurfaceImageEncoding,
+    pub alpha_only: bool,
     pub bytes: Arc<Vec<u8>>,
     pub top_down: bool,
     pub mipmaps: bool,
@@ -49,11 +50,13 @@ impl SurfaceSamplerPolicy {
 pub(crate) struct SurfaceTextureStyle {
     pub image: Arc<SurfaceTextureImage>,
     pub pending_texgen: Option<Box<crate::surface_texgen::SurfaceTexgen>>,
+    pub fixed_environment: bool,
     pub sampler: SurfaceSamplerPolicy,
     pub uv: Vec<[f32; 4]>,
     pub back_vertex: bool,
     pub vertex_override: bool,
     pub modulate: bool,
+    pub native_gen_mode: Graphic3dTypeOfTextureMode,
 }
 impl SurfaceTextureStyle {
     pub fn validate(&self, vertices: usize) -> Result<(), RenderError> {
@@ -78,6 +81,7 @@ impl SurfaceTextureStyle {
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct SurfaceTextureUnavailable {
     pub resource_id: Vec<u8>,
+    pub fixed_environment: bool,
     pub modulate: bool,
     pub vertex_override: bool,
     pub back_vertex: bool,

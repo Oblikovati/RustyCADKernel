@@ -1,5 +1,5 @@
 //! Buckets use Standard's optimal raw policy; nodes retain independent global ownership.
-use crate::ncollection::BaseAllocator;
+use crate::ncollection::{AllocatorObject, AllocatorSource};
 use std::alloc::{Layout, handle_alloc_error};
 use std::ptr::NonNull;
 #[cfg(test)]
@@ -8,10 +8,11 @@ pub(in super::super) mod observation;
 pub(super) fn reserve(layout: Layout) -> NonNull<u8> {
     // Pinned Standard::AllocateOptimal/Free use the native heap; keep this allocation
     // separate from global node Box allocation while preserving malloc alignment.
+    // Borrow the actual static handle; constructing an owning façade adds a non-native heap event.
     #[cfg(test)]
     observation::allocation(layout.size());
-    BaseAllocator::common()
-        .allocate_optimal_raw(layout.size())
+    AllocatorObject::common_base_allocator()
+        .allocate_optimal(layout.size())
         .unwrap_or_else(|| handle_alloc_error(layout))
 }
 
@@ -24,6 +25,6 @@ pub(super) unsafe fn release(address: *mut u8) {
         return;
     }
     // SAFETY: the table retains the exact pointer returned by reserve until this final release.
-    unsafe { BaseAllocator::common().free_raw_nullable(address) }
+    unsafe { AllocatorObject::common_base_allocator().free(address) }
         .expect("common bucket allocation: expected matching raw release");
 }

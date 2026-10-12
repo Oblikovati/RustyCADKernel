@@ -47,6 +47,7 @@ mod pipeline_state;
 mod pipeline_variants;
 mod record;
 mod submission;
+mod transform_constants;
 impl RenderBackend for VulkanRenderer {
     fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
         let resources = self.frame_resources(frame)?;

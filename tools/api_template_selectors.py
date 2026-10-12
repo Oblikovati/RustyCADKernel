@@ -47,13 +47,34 @@ def constructors_for_template(
     owners = {
         row.get("usr"): row.get("qualified_name")
         for row in templates
-        if isinstance(row.get("usr"), str) and isinstance(row.get("qualified_name"), str)
+        if isinstance(row.get("usr"), str)
+        and isinstance(row.get("qualified_name"), str)
     }
     return [
         row
-        for declarations in by_name.values()
+        for declarations in template_constructor_name_groups(by_name, owners)
         for row in declarations
         if template_constructor(row, owners)
+    ]
+
+
+def template_constructor_name_groups(
+    by_name: dict[str, list[dict[str, JSONValue]]], owners: dict[str, JSONValue]
+) -> list[list[dict[str, JSONValue]]]:
+    """Narrow the qualified-name index before USR checks; `template_constructor_name_groups(index, owners)`."""
+    stems = {
+        f"{owner}::{leaf_name(owner)}"
+        for owner in owners.values()
+        if isinstance(owner, str)
+    }
+    if not stems:
+        return []
+    prefixes = tuple(stem + "<" for stem in stems)
+    # cpp_indexes keys each compiler row by its normalized qualified name.
+    return [
+        declarations
+        for name, declarations in by_name.items()
+        if name in stems or name.startswith(prefixes)
     ]
 
 
@@ -153,21 +174,32 @@ def qualifier_match(wanted: set[str], actual: set[str]) -> bool:
 def prefer_nonconst_overload(
     candidates: list[dict[str, JSONValue]],
 ) -> list[dict[str, JSONValue]]:
-    if len(candidates) != 2 or any(row.get("kind") != "CXXMethod" for row in candidates):
+    if len(candidates) != 2 or any(
+        row.get("kind") != "CXXMethod" for row in candidates
+    ):
         return candidates
     if not same_overload_shape(candidates):
         return candidates
     qualifiers = [signature_qualifiers(row.get("signature", "")) for row in candidates]
     if not qualifier_pair(qualifiers):
         return candidates
-    return [row for row, values in zip(candidates, qualifiers, strict=True) if "const" not in values]
+    return [
+        row
+        for row, values in zip(candidates, qualifiers, strict=True)
+        if "const" not in values
+    ]
 
 
 def same_overload_shape(candidates: list[dict[str, JSONValue]]) -> bool:
     first, second = candidates
     return all(
         first.get(field) == second.get(field)
-        for field in ("qualified_name", "parent_usr", "parameter_types", "written_parameter_types")
+        for field in (
+            "qualified_name",
+            "parent_usr",
+            "parameter_types",
+            "written_parameter_types",
+        )
     )
 
 

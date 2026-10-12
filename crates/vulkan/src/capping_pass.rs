@@ -42,26 +42,40 @@ impl PrimitiveDraw {
     }
 }
 pub(crate) fn validate_capping_sequence(draws: &[PrimitiveDraw]) -> Result<(), RenderError> {
-    let mut mask = false;
+    let mut phase = CappingSequencePhase::Ordinary;
     for draw in draws {
-        match (mask, draw.capping_pass) {
-            (false, RenderCappingPass::None) => {}
-            (false, RenderCappingPass::MaskStart) => mask = true,
-            (true, RenderCappingPass::MaskContinue) => {}
-            (true, RenderCappingPass::Surface) => mask = false,
-            state => {
-                return Err(rejected(
-                    state,
-                    "a complete mask-start/accumulate/surface sequence",
-                ));
-            }
-        }
+        phase = next_capping_phase(phase, draw.capping_pass)?;
     }
-    if mask {
+    if phase == CappingSequencePhase::Mask {
         return Err(rejected(
             "unterminated mask",
             "a capping surface before the layer ends",
         ));
     }
     Ok(())
+}
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum CappingSequencePhase {
+    Ordinary,
+    Mask,
+    Surface,
+}
+fn next_capping_phase(
+    phase: CappingSequencePhase,
+    pass: RenderCappingPass,
+) -> Result<CappingSequencePhase, RenderError> {
+    use CappingSequencePhase::*;
+    let next = match (phase, pass) {
+        (Ordinary | Surface, RenderCappingPass::None) => Ordinary,
+        (Ordinary | Surface, RenderCappingPass::MaskStart) => Mask,
+        (Mask, RenderCappingPass::MaskContinue) => Mask,
+        (Mask | Surface, RenderCappingPass::Surface) => Surface,
+        state => {
+            return Err(rejected(
+                state,
+                "a complete mask-start/accumulate/surface sequence",
+            ));
+        }
+    };
+    Ok(next)
 }

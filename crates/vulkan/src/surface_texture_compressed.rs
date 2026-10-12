@@ -15,6 +15,7 @@ pub(crate) fn snapshot_compressed_texture(
         revision,
         extent: source.extent,
         encoding: source.encoding,
+        alpha_only: false,
         bytes: Arc::new(source.bytes),
         top_down: true,
         mipmaps: source.levels.len() > 1,

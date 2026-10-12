@@ -39,20 +39,28 @@ impl Graphic3dRenderDriver {
         options: VulkanOptions,
         coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
     ) -> Result<Handle<Self>, RenderError> {
-        let renderer = VulkanRenderer::new(options)?;
-        let limit = renderer.capture_limit();
-        Ok(Self::build(
-            DriverBackend::Vulkan(renderer),
-            limit,
-            Arc::new(crate::FreeTypeTextSource::default()),
+        Self::with_surface_pipelines(
+            options,
             coordinate_pipeline,
             crate::RenderMeshEdgePipeline::default(),
-        ))
+        )
     }
     /// Select native polygon edge compatibility; `Self::with_mesh_edge_pipeline(options, RenderMeshEdgePipeline::PolygonCompatibility)?`.
     pub fn with_mesh_edge_pipeline(
         options: VulkanOptions,
         pipeline: crate::RenderMeshEdgePipeline,
+    ) -> Result<Handle<Self>, RenderError> {
+        Self::with_surface_pipelines(
+            options,
+            crate::RenderTextureCoordinatePipeline::default(),
+            pipeline,
+        )
+    }
+    /// Inject independent legacy coordinate and edge policies; `Self::with_surface_pipelines(options, RenderTextureCoordinatePipeline::GeneratedCompatibility, RenderMeshEdgePipeline::PolygonCompatibility)?`.
+    pub fn with_surface_pipelines(
+        options: VulkanOptions,
+        coordinates: crate::RenderTextureCoordinatePipeline,
+        edges: crate::RenderMeshEdgePipeline,
     ) -> Result<Handle<Self>, RenderError> {
         let renderer = VulkanRenderer::new(options)?;
         let limit = renderer.capture_limit();
@@ -60,8 +68,8 @@ impl Graphic3dRenderDriver {
             DriverBackend::Vulkan(renderer),
             limit,
             Arc::new(crate::FreeTypeTextSource::default()),
-            crate::RenderTextureCoordinatePipeline::default(),
-            pipeline,
+            coordinates,
+            edges,
         ))
     }
     /// Inject a named backend and its extent limit; `Graphic3dRenderDriver::with_backend(recorder, 4096)?`.

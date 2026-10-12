@@ -21,24 +21,44 @@ impl Drop for TextureChainPixels {
     fn drop(&mut self) {
         let owner = self.owner.observe();
         let slot = owner.texture_pix_map();
-        let row = slot.with_retiring_pointee(self, |pixels| {
-            format!("POINTEE {} {} {} {} {} {}", self.stage,
-                i32::from(slot.object_address() == std::ptr::from_ref(self).cast()),
-                slot.ref_count(), pixels.width(), pixels.height(), pixels.data().data.data()[0])
-        }).unwrap();
+        let row = slot
+            .with_retiring_pointee(self, |pixels| {
+                format!(
+                    "POINTEE {} {} {} {} {} {}",
+                    self.stage,
+                    i32::from(slot.object_address() == std::ptr::from_ref(self).cast()),
+                    slot.ref_count(),
+                    pixels.width(),
+                    pixels.height(),
+                    pixels.data().data.data()[0]
+                )
+            })
+            .unwrap();
         self.trace.write().push(row);
-        ais_textured_shape_with_retirement(&**owner, self, |scope| self.run_chain_stage(&scope)).unwrap();
+        ais_textured_shape_with_retirement(&**owner, self, |scope| self.run_chain_stage(&scope))
+            .unwrap();
         let count = self.control.read().last.observe().ref_count();
         let file = owner.texture_file().read().unwrap();
-        self.trace.write().push(format!("CHAIN {} {} {} {count} {}", self.stage,
-            self.base.transient_base().ref_count(), i32::from(slot.is_null()), file.to_string_lossy()).trim_end().to_string());
+        self.trace.write().push(
+            format!(
+                "CHAIN {} {} {} {count} {}",
+                self.stage,
+                self.base.transient_base().ref_count(),
+                i32::from(slot.is_null()),
+                file.to_string_lossy()
+            )
+            .trim_end()
+            .to_string(),
+        );
     }
 }
 impl TextureChainPixels {
     fn run_chain_stage(&self, scope: &AisTexturedShapeRetirement<'_, AisTexturedShape>) {
         if self.stage == 1 {
             self.release_nested_in_scope(scope);
-            scope.set_texture_file_name(&AsciiString::from("inner.raw")).unwrap();
+            scope
+                .set_texture_file_name(&AsciiString::from("inner.raw"))
+                .unwrap();
             return;
         }
         if self.stage == 2 {
@@ -66,10 +86,21 @@ fn chain_final_field(control: &TextureChainControl) -> &Handle<ImagePixMap> {
     // This actual member is nullified after native Assign has acquired its reference.
     &control.final_pixels
 }
-pub fn texture_chain_pixels(owner: &Handle<AisTexturedShape>, control: &Arc<SharedState<TextureChainControl>>, trace: &Arc<SharedState<Vec<String>>>, stage: usize) -> Handle<ImagePixMap> {
+pub fn texture_chain_pixels(
+    owner: &Handle<AisTexturedShape>,
+    control: &Arc<SharedState<TextureChainControl>>,
+    trace: &Arc<SharedState<Vec<String>>>,
+    stage: usize,
+) -> Handle<ImagePixMap> {
     let base = ImagePixMap::default();
     assert!(base.init_trash(ImageFormat::Gray, stage + 2, 2, 0));
     base.change_data().data.change_data()[0] = (73 + stage) as u8;
-    Handle::new(TextureChainPixels { base, owner: owner.downgrade(),
-        control: control.clone(), trace: trace.clone(), stage }).into_cast()
+    Handle::new(TextureChainPixels {
+        base,
+        owner: owner.downgrade(),
+        control: control.clone(),
+        trace: trace.clone(),
+        stage,
+    })
+    .into_cast()
 }

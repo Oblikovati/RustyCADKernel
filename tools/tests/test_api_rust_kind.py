@@ -1,11 +1,21 @@
 """Declaration-kind selectors must resolve collisions without hiding missing evidence."""
 
 import unittest
+from collections.abc import ItemsView
 from api_crosswalk import row_rust_candidates
 from api_inventory.inputs import JSONValue
 from api_rust_kind import RustCrateIndex, select_rust_kind
 
 VECTOR_X = "rustycad_tkernel::ncollection::Vec2::x"
+
+
+class ExactKindPathIndexFake(dict[str, list[dict[str, JSONValue]]]):
+    def items(self) -> ItemsView[str, list[dict[str, JSONValue]]]:
+        """Detect expensive unrelated lookups; `index.items()` must fail for this fake."""
+        operation = "items()"
+        raise AssertionError(
+            f"operation={operation!r}; expected exact declared path lookups"
+        )
 
 
 def vector_kind_fixture() -> RustCrateIndex:
@@ -22,6 +32,25 @@ def vector_kind_fixture() -> RustCrateIndex:
 
 
 class RustKindSelectorTests(unittest.TestCase):
+    def test_kind_resolution_does_not_scan_unrelated_compiler_paths(self) -> None:
+        paths = ExactKindPathIndexFake(vector_kind_fixture()["rustycad_tkernel"])
+        row: dict[str, JSONValue] = {"rust_item": VECTOR_X, "rust_kind": "function"}
+        self.assertEqual(
+            row_rust_candidates(row, {"rustycad_tkernel": paths})[0], "unique"
+        )
+
+    def test_paired_kind_resolution_looks_up_every_declared_path(self) -> None:
+        paths = ExactKindPathIndexFake(vector_kind_fixture()["rustycad_tkernel"])
+        second = VECTOR_X + "_second"
+        paths[second] = [{**paths[VECTOR_X][0], "path": second}]
+        row: dict[str, JSONValue] = {
+            "rust_items": [VECTOR_X, second],
+            "rust_kind": "function",
+        }
+        status, entries = row_rust_candidates(row, {"rustycad_tkernel": paths})
+        self.assertEqual(status, "unique")
+        self.assertEqual([item["path"] for item in entries], [VECTOR_X, second])
+
     def test_absent_selector_preserves_ambiguity(self) -> None:
         status, entries = row_rust_candidates(
             {"rust_item": VECTOR_X}, vector_kind_fixture()

@@ -121,7 +121,10 @@ fn failed_projection_preserves_slot_identity_without_acquiring_a_target() {
     let concrete = disk(2.0);
     let projected = ProjectedHandleReference::<FakeDisk, dyn FakeUnrelated>::new(&concrete);
     assert!(projected.observe().is_null());
-    assert_eq!(projected.reference_address(), std::ptr::from_ref(&concrete).cast());
+    assert_eq!(
+        projected.reference_address(),
+        std::ptr::from_ref(&concrete).cast()
+    );
     assert_eq!(concrete.ref_count(), 1);
 }
 
