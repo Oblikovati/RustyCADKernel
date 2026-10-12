@@ -194,11 +194,17 @@ pub trait SelectMgrEntityOwnerSource: Transient {
         select_mgr_entity_owner_dump_json(self, stream)
     }
 }
-rustycad_tkernel::impl_transient_interface!(
-    dyn SelectMgrEntityOwnerSource,
-    "SelectMgr_EntityOwner",
-    StandardTransient
-);
+impl rustycad_tkernel::standard::RuntimeTyped for dyn SelectMgrEntityOwnerSource {
+    const TYPE_NAME: &'static str = "SelectMgr_EntityOwner";
+    fn static_type() -> &'static rustycad_tkernel::standard::RuntimeType {
+        // OCCT 3d097a0 has one concrete parent descriptor; the Rust dispatch seam is no second native class.
+        <SelectMgrEntityOwner as rustycad_tkernel::standard::RuntimeTyped>::static_type()
+    }
+    fn project_from(object: &dyn Transient) -> Option<&Self> {
+        // Runtime interface projection still returns the genuine inherited owner fields.
+        rustycad_tkernel::standard::project_interface::<Self>(object)
+    }
+}
 
 /// The native body of `SelectMgr_EntityOwner::HilightWithColor`.
 /// Example: `select_mgr_owner_hilight_with_color(&*owner, &manager, &style, 0)?`.

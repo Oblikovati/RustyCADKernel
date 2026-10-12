@@ -4,7 +4,7 @@ use crate::prs3d::{Prs3dDrawer, Prs3dVertexDrawMode};
 use rustycad_tkbrep::{
     brep::{BRepBuilder, BRepTool},
     topexp::Explorer,
-    topods::{self, Compound, Shape},
+    topods::{self, Compound, Shape, TopoDSShapeReadSource},
 };
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
@@ -18,18 +18,7 @@ impl StdPrsShadedShape {
         shape: &Shape,
         drawer: &Handle<Prs3dDrawer>,
     ) -> Result<(), Failure> {
-        if !Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?.more() {
-            return StdPrsWfShape::add(prs, shape, drawer);
-        }
-        let all_vertices = drawer.vertex_draw_mode() == Prs3dVertexDrawMode::All;
-        if !all_vertices && shape.shape_type()? != ShapeEnum::Compound {
-            return Ok(());
-        }
-        let free_elements = shaded_free_elements_compound(shape, all_vertices)?;
-        if free_elements.nb_children() > 0 {
-            StdPrsWfShape::add(prs, &free_elements, drawer)?;
-        }
-        Ok(())
+        Self::add_free_elements_reference(prs, shape, drawer)
     }
     /// Draw actual unmeshed faces with native temporary U/V count5; `Self::add_wireframe_for_faces_without_triangles(&prs,&shape,&drawer)?`.
     pub fn add_wireframe_for_faces_without_triangles(
@@ -37,7 +26,40 @@ impl StdPrsShadedShape {
         shape: &Shape,
         drawer: &Handle<Prs3dDrawer>,
     ) -> Result<(), Failure> {
-        let unmeshed = shaded_unmeshed_faces_compound(shape)?;
+        Self::add_unmeshed_faces_reference(prs, shape, drawer)
+    }
+    /// Reread a live native source before free-element collection; `Self::add_free_elements_reference(&prs,&reference,&drawer)?`.
+    pub fn add_free_elements_reference<S: TopoDSShapeReadSource>(
+        prs: &Handle<dyn Graphic3dStructureSource>,
+        source: &S,
+        drawer: &Handle<Prs3dDrawer>,
+    ) -> Result<(), Failure> {
+        let has_faces = source.read_current_shape(|shape| {
+            Ok(Explorer::new(shape, ShapeEnum::Face, ShapeEnum::Shape)?.more())
+        })?;
+        if !has_faces {
+            return StdPrsWfShape::add_reference(prs, source, drawer);
+        }
+        let all_vertices = drawer.vertex_draw_mode() == Prs3dVertexDrawMode::All;
+        if !all_vertices
+            && source.read_current_shape(|shape| shape.shape_type())? != ShapeEnum::Compound
+        {
+            return Ok(());
+        }
+        let free = source
+            .read_current_shape(|shape| shaded_free_elements_compound(shape, all_vertices))?;
+        if free.nb_children() > 0 {
+            StdPrsWfShape::add(prs, &free, drawer)?;
+        }
+        Ok(())
+    }
+    /// Collect current unmeshed faces before graphics callbacks; `Self::add_unmeshed_faces_reference(&prs,&reference,&drawer)?`.
+    pub fn add_unmeshed_faces_reference<S: TopoDSShapeReadSource>(
+        prs: &Handle<dyn Graphic3dStructureSource>,
+        source: &S,
+        drawer: &Handle<Prs3dDrawer>,
+    ) -> Result<(), Failure> {
+        let unmeshed = source.read_current_shape(shaded_unmeshed_faces_compound)?;
         if unmeshed.nb_children() == 0 {
             return Ok(());
         }

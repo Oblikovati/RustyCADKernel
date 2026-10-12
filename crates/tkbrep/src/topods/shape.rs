@@ -5,6 +5,7 @@
 //! section 1). The flag members are in `shape_flags.rs`, identity and hashing in
 //! `shape_identity.rs`.
 use super::errors::null_shape;
+use super::shape_topology_storage::ShapeTopologyStorage;
 use super::tshape::TShape;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -26,16 +27,16 @@ use std::io;
 /// ```
 #[derive(Clone)]
 pub struct Shape {
-    tshape: Handle<dyn TShape>,
-    location: Location,
-    orient: Orientation,
+    pub(super) tshape: ShapeTopologyStorage,
+    pub(super) location: Location,
+    pub(super) orient: Orientation,
 }
 
 impl Default for Shape {
     /// `TopoDS_Shape()`: no TShape, the identity location and EXTERNAL.
     fn default() -> Self {
         Self {
-            tshape: Handle::default(),
+            tshape: ShapeTopologyStorage::default(),
             location: Location::default(),
             orient: Orientation::External,
         }
@@ -51,7 +52,7 @@ impl Shape {
         orientation: Orientation,
     ) -> Self {
         Self {
-            tshape,
+            tshape: ShapeTopologyStorage::Owned(tshape),
             location,
             orient: orientation,
         }
@@ -119,7 +120,7 @@ impl Shape {
     /// `TShape(theTShape)`: replaces the TShape, keeping the location and orientation;
     /// `shape.set_tshape(&tshape)`.
     pub fn set_tshape(&mut self, tshape: &Handle<dyn TShape>) {
-        self.tshape = tshape.clone();
+        self.tshape = ShapeTopologyStorage::Owned(tshape.clone());
     }
 
     /// The TShape, or Standard_NullObject where the native member dereferences a null
@@ -199,7 +200,7 @@ impl Shape {
         let copy = self
             .checked_tshape("TopoDS_Shape::EmptyCopy")?
             .empty_copy()?;
-        self.tshape = copy;
+        self.tshape = ShapeTopologyStorage::Owned(copy);
         Ok(())
     }
 

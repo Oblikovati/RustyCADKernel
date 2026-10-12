@@ -177,3 +177,7 @@ pub mod viewer_selector_pick;
 pub mod viewer_selector_state;
 #[path = "../viewer_selector_traversal.rs"]
 pub mod viewer_selector_traversal;
+#[path = "../colored_shape_emission.rs"]
+pub mod colored_shape_emission;
+#[path = "../colored_shape_selection.rs"]
+pub mod colored_shape_selection;

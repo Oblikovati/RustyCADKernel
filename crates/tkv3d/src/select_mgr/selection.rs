@@ -7,7 +7,7 @@ use super::{
 use crate::select3d::{Select3DSensitiveEntity, Select3DSensitiveEntityMembers as _};
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::exceptions::null_object;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, HandleObserver, SharedState, StandardTransient};
 use rustycad_tkservice::json_dump::{class_begin, field_dumped, field_integer};
 use std::io;
 
@@ -281,5 +281,23 @@ impl Drop for SelectMgrSelection {
     /// The destructor calls `Destroy`.
     fn drop(&mut self) {
         self.destroy();
+    }
+}
+
+impl SelectMgrSelection {
+    pub(crate) fn native_entity_count(&self) -> usize {
+        let state = self.state.read();
+        state.entities.len()
+    }
+    pub(crate) fn native_owner_at(
+        &self,
+        index: usize,
+    ) -> Option<HandleObserver<dyn SelectMgrEntityOwnerSource>> {
+        let state = self.state.read();
+        let entity = state.entities.get(index)?.observe();
+        drop(state);
+        let sensitive = entity.sensitive.read().observe();
+        let fields = sensitive.sensitive_base().fields.read();
+        Some(fields.owner_id.observe())
     }
 }

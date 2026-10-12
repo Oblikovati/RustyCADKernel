@@ -74,11 +74,25 @@ impl Graphic3dGroup for SensitiveDisplayGroup {
         self.inner.aspects()
     }
     fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+        self.trace.write().ownership_counts.push([
+            1,
+            self.transient.ref_count(),
+            aspect.ref_count(),
+            0,
+            0,
+        ]);
         self.record_aspect(aspect);
         self.apply_plane_aspect_change();
         self.inner.set_group_primitives_aspect(aspect)
     }
     fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+        self.trace.write().ownership_counts.push([
+            1,
+            self.transient.ref_count(),
+            aspect.ref_count(),
+            0,
+            0,
+        ]);
         self.record_aspect(aspect);
         self.apply_plane_aspect_change();
         self.inner.set_primitives_aspect(aspect)
@@ -111,6 +125,13 @@ impl Graphic3dGroup for SensitiveDisplayGroup {
         bounds: &Handle<Graphic3dBoundBuffer>,
         evaluate: bool,
     ) {
+        self.trace.write().ownership_counts.push([
+            2,
+            self.transient.ref_count(),
+            indices.ref_count(),
+            attribs.ref_count(),
+            bounds.ref_count(),
+        ]);
         let mut values = vec![4., f64::from(kind as i32), f64::from(attribs.nb_elements())];
         let (_, start, stride) = attribs
             .attribute_data(Graphic3dTypeOfAttribute::Pos)

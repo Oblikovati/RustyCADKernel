@@ -10,6 +10,7 @@ use recording_group::SensitiveDisplayGroup;
 #[derive(Default)]
 pub struct SensitiveDisplayTrace {
     pub events: Vec<f64>,
+    pub ownership_counts: Vec<[i32; 5]>,
     pub texts: Vec<Handle<Graphic3dText>>,
     pub fail_group: i32,
     pub mutate_plane_aspect: Handle<rustycad_tkv3d::prs3d::Prs3dPlaneAspect>,
