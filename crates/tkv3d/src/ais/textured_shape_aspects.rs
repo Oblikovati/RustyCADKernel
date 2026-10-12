@@ -1,6 +1,6 @@
 //! Native updateAttributes ordering: fresh aspect, optional fresh texture, then every existing group.
 use super::{
-    textured_shape_factory::AisTexturedTextureSource, textured_shape_source::AisTexturedShapeSource,
+    textured_shape_factory::AisTexturedTextureSource, textured_shape_source::{AisTexturedShapeMembers, AisTexturedShapeSource},
 };
 use crate::prs_mgr::PrsMgrPresentableObjectMembers;
 use rustycad_tkernel::{
@@ -84,7 +84,7 @@ fn selected_textured_source<S: AisTexturedShapeSource + ?Sized>(
     object: &S,
 ) -> (AisTexturedTextureSource, AsciiString) {
     let base = object.textured_shape_base();
-    let pixels = base.texture_pix_map.read().clone();
+    let pixels = object.texture_pix_map().clone_handle();
     if !pixels.is_null() {
         return (
             AisTexturedTextureSource::PixMap(pixels),

@@ -1,20 +1,57 @@
-//! Read-only live handle-field lens preserves native TexturePixMap const-reference aliases.
-use rustycad_tkernel::standard::{Handle, SharedState};
+//! Native field aliases never retain a lock or acquire pixmap ownership.
+use rustycad_tkernel::standard::{Handle, HandleObserver, HandleReference, IntrusiveReferenceSlot};
 use rustycad_tkservice::image::ImagePixMap;
-use std::sync::RwLockReadGuard;
-/// A borrowed native handle field, with no assignment capability; `object.texture_pix_map().read().is_null()`.
+/// Borrowed actual pointer slot; `object.texture_pix_map().object_address()`.
 #[derive(Clone, Copy)]
 pub struct AisTexturedShapePixMapRef<'a> {
-    pixels: &'a SharedState<Handle<ImagePixMap>>,
+    pixels: &'a IntrusiveReferenceSlot<ImagePixMap>,
 }
 impl<'a> AisTexturedShapePixMapRef<'a> {
-    pub(super) fn new(pixels: &'a SharedState<Handle<ImagePixMap>>) -> Self {
-        // Borrow the field so an earlier alias observes subsequent handle assignments.
+    pub(super) fn new(pixels: &'a IntrusiveReferenceSlot<ImagePixMap>) -> Self {
+        // Keep the original slot reference rather than a pointer-value snapshot.
         Self { pixels }
     }
-    /// Read the current actual handle after source assignments; `let alias=object.texture_pix_map(); alias.read().object_address()`.
-    pub fn read(&self) -> RwLockReadGuard<'a, Handle<ImagePixMap>> {
-        // Hold native handle storage stable while the caller inspects its current identity.
-        self.pixels.read()
+    /// Compatibility inspection holds no guard; `object.texture_pix_map().read().is_null()`.
+    pub fn read(&self) -> Self {
+        // The returned alias continues observing the same actual field after callbacks.
+        *self
+    }
+    /// Current pointer nullness; `object.texture_pix_map().is_null()`.
+    pub fn is_null(&self) -> bool {
+        let pixels = self.pixels;
+        pixels.is_null()
+    }
+    /// Current pointer identity, including old-target destruction; `alias.object_address()`.
+    pub fn object_address(&self) -> *const () {
+        let pixels = self.pixels;
+        pixels.object_address()
+    }
+    /// Current native count without retaining the target; `alias.ref_count()`.
+    pub fn ref_count(&self) -> i32 {
+        let pixels = self.pixels;
+        pixels.ref_count()
+    }
+    /// Acquire ownership explicitly, independently of the native const field alias; `alias.clone_handle()`.
+    pub fn clone_handle(&self) -> Handle<ImagePixMap> {
+        let observed = self.pixels.observe();
+        observed.clone()
+    }
+}
+impl HandleReference<ImagePixMap> for AisTexturedShapePixMapRef<'_> {
+    fn observe(&self) -> HandleObserver<ImagePixMap> {
+        let pixels = self.pixels;
+        pixels.observe()
+    }
+    fn reference_address(&self) -> *const () {
+        let pixels = self.pixels;
+        pixels.reference_address()
+    }
+    fn object_address(&self) -> *const () {
+        let pixels = self.pixels;
+        pixels.object_address()
+    }
+    fn is_null(&self) -> bool {
+        let pixels = self.pixels;
+        pixels.is_null()
     }
 }

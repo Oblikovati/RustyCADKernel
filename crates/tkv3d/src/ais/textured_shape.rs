@@ -3,7 +3,7 @@ use super::shape::AisShapeBase;
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::{
     message::{Message, Messenger},
-    standard::{Handle, SharedState},
+    standard::{Handle, IntrusiveReferenceSlot, SharedState},
     tcollection::AsciiString,
 };
 use rustycad_tkservice::{graphic3d::*, image::ImagePixMap};
@@ -56,7 +56,7 @@ pub struct AisTexturedShapeBase {
     /// Native texture source and mapping fields.
     pub fields: SharedState<AisTexturedShapeFields>,
     /// `myTexturePixMap`: separate storage preserves const handle-reference aliases across assignments.
-    pub texture_pix_map: SharedState<Handle<ImagePixMap>>,
+    pub texture_pix_map: IntrusiveReferenceSlot<ImagePixMap>,
     /// Native diagnostics are injected so tests can retain exact message ordering.
     pub messenger: Arc<Messenger>,
     /// Native texture construction and filesystem queries are an owned injectable boundary.
@@ -66,8 +66,7 @@ impl Drop for AisTexturedShapeBase {
     fn drop(&mut self) {
         // OCCT 3d097a0 destroys derived fields before AIS_Shape, reversing their declarations.
         self.fields.write().texture_file.clear();
-        let pixels = std::mem::take(&mut *self.texture_pix_map.write());
-        drop(pixels);
+        self.texture_pix_map.clear().unwrap();
         let aspect = std::mem::take(&mut self.fields.write().aspect);
         drop(aspect);
         let texture = std::mem::take(&mut self.fields.write().texture);
@@ -97,7 +96,7 @@ impl AisTexturedShapeBase {
         Self {
             shape: AisShapeBase::new(shape),
             fields: SharedState::default(),
-            texture_pix_map: SharedState::default(),
+            texture_pix_map: IntrusiveReferenceSlot::default(),
             messenger,
             texture_factory,
         }

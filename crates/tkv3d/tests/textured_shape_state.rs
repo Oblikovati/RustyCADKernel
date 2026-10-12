@@ -123,9 +123,9 @@ fn native_const_pixmap_alias_survives_replacement_and_filename_nullification() {
     second.set_top_down(false);
     object.set_texture_pix_map(&first);
     let alias = object.texture_pix_map();
-    assert_eq!(*alias.read(), first);
+    assert_eq!(alias.read().object_address(), first.object_address());
     object.set_texture_pix_map(&second);
-    assert_eq!(*alias.read(), second);
+    assert_eq!(alias.read().object_address(), second.object_address());
     assert!(first.is_top_down());
     assert!(!second.is_top_down());
     object
