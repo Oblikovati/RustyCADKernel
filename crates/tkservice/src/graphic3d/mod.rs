@@ -300,6 +300,7 @@ pub use view_affinity::Graphic3dViewAffinity;
 pub use z_layer_settings::Graphic3dZLayerSettings;
 
 mod retained_view;
+mod retained_view_forward;
 pub use retained_view::Graphic3dRetainedView;
 
 #[cfg(test)]

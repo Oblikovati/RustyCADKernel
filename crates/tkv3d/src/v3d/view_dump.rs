@@ -122,7 +122,7 @@ impl V3dView {
         let success = if is_tiling {
             self.dump_tiles(image, params, &fbo, viewport, target)?
         } else {
-            self.dump_single(image, params, &fbo, target)
+            self.dump_single(image, params, &fbo, target)?
         };
         cview.set_immediate_mode_draw_to_front(previous_immediate);
         camera.copy(&store_mapping);
@@ -240,23 +240,31 @@ impl V3dView {
         params: &V3dImageDumpOptions,
         fbo: &Handle<StandardTransient>,
         target: Vec2<i32>,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         let cview = self.view();
         if !fbo.is_null() {
             cview.fbo_change_viewport(fbo, target.x, target.y);
         }
         self.redraw();
         if params.buffer_type == Graphic3dBufferType::ShadowMap {
-            if !cview.shadow_map_dump(image, &AsciiString::from(params.light_name.as_str())) {
-                Message::send_text(
-                    &AsciiString::from("OpenGl_View::BufferDump() failed to dump shadowmap"),
-                    Gravity::Fail,
-                );
-                return false;
-            }
-            return true;
+            return Self::dump_shadow_map(&*cview, image, params.light_name);
         }
-        cview.buffer_dump(image, &params.buffer_type)
+        Ok(cview.buffer_dump(image, &params.buffer_type))
+    }
+    fn dump_shadow_map(
+        cview: &dyn Graphic3dCView,
+        image: &ImagePixMap,
+        name: super::V3dLightName<'_>,
+    ) -> Result<bool, Failure> {
+        let consumed = name.to_ascii_string()?;
+        if cview.shadow_map_dump(image, &consumed) {
+            return Ok(true);
+        }
+        Message::send_text(
+            &AsciiString::from("OpenGl_View::BufferDump() failed to dump shadowmap"),
+            Gravity::Fail,
+        );
+        Ok(false)
     }
     /// The tiled dump: one redraw and one buffer dump per tile.
     fn dump_tiles(

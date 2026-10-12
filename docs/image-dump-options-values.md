@@ -25,9 +25,8 @@ negative dimensions/tile/layer identifiers, and independent copied value fields.
 The committed fifteen rows repeat byte-for-byte and replay using Rust alone:
 `cargo test -p rustycad-tkv3d --test toolkit image_dump_options_values`.
 
-`LightName` remains partial. Native stores a borrowed `const char*` and copies its
-pointer; Rust stores and clones an owned `String`. Text equality does not prove
-external buffer mutation, shallow-copy aliasing or pointer lifetime. The struct
-therefore remains partial, and its documentation describes `Clone`, not `Copy`.
-The native empty-text constructor default is preserved; general pointer behavior
-is still an obligation. This slice makes no ToPixMap, renderer or GPU parity claim.
+`LightName` now uses the project-owned lifetime-bound `V3dLightName` pointer
+transport; the complete struct is `Copy` with native shallow-pointer semantics.
+The original value-field receipt remains historical evidence for the bounded
+slice; [the pointer and consumer proof](image-dump-light-name.md) records the
+subsequent native alias, encoding, null, lifetime and layout behavior.

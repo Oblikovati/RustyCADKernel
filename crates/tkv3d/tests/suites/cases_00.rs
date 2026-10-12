@@ -89,6 +89,8 @@ pub mod dsg_prs_xyz_axis;
 pub mod frustum_builder;
 #[path = "../frustum_core.rs"]
 pub mod frustum_core;
+#[path = "../image_dump_light_name.rs"]
+pub mod image_dump_light_name;
 #[path = "../image_dump_options_values.rs"]
 pub mod image_dump_options_values;
 #[path = "../legacy_sensitive_primitive_array.rs"]
