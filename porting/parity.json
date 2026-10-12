@@ -509351,8 +509351,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane",
-      "status": "implemented",
-      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs."
+      "status": "partial",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. Current-main whole-clipping audit: Class contains unresolved live-node/cursor/retained-reference and callback-lifecycle contracts; class presence is not whole-class completion. See porting/audits/clipping-class-field-current-main.json."
     },
     {
       "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator",
@@ -509503,8 +509503,8 @@
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_SequenceOfHClipPlane.hxx",
       "rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::to_override_global",
-      "status": "implemented",
-      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. The protected field is private shared state."
+      "status": "partial",
+      "notes": "Graphic3d small classes mapping: Graphic3d_SequenceOfHClipPlane keeps its planes and override flag behind the handle's shared lock (its iterator walks a snapshot); Graphic3d_ViewAffinity keeps its mask behind the lock; the Graphic3d exception classes are Failure constructors that keep the class name (graphic3d/exceptions.rs); covered by tests/graphic3d_plane_sequence_test.rs. The protected field is private shared state. Current-main whole-clipping audit: Protected writable native field maps to to_override_global getter returning copied bool, not actual retained field storage. See porting/audits/clipping-class-field-current-main.json."
     },
     {
       "upstream_id": "Graphic3d_SequenceOfHClipPlane::DynamicType() const",
@@ -599385,7 +599385,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
-          "declaration_sha256": "25ec637827a223030c4d01f9c7ab71cd52f8c4bc563b95a1aa6df4838f709e61",
+          "declaration_sha256": "c61d420b66449bb05ec9024b8497ed597ac30ff42fd68b5e52d0c5f28dc35a83",
           "impl_context": {
             "for": {
               "resolved_path": {
