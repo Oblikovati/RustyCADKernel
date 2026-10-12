@@ -45,6 +45,9 @@ fn replay_color_material_switch(
     assert_color_alias_row(&retained, &cube.box_color_ref(), &material_field, 3);
     cube.set_box_color(alias_color(0.7, 0.2, 0.1)).unwrap();
     assert_color_alias_row(&retained, &cube.box_color_ref(), &material_field, 4);
+    replay_color_return_to_physical(cube, interior);
+}
+fn replay_color_return_to_physical(cube: &AisViewCube, interior: &AisViewCubeColorRef<'_>) {
     let retained_interior = cube.box_color_ref();
     cube.set_material(&Graphic3dMaterialAspect::new(Graphic3dNameOfMaterial::Gold))
         .unwrap();

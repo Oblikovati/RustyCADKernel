@@ -25,21 +25,7 @@ impl CubeAppearanceScene {
 pub(super) fn assert_cube_appearance(scene: &CubeAppearanceScene, row: &[&str]) {
     let values = cube_appearance_numeric(scene);
     assert_eq!(values.len(), 38);
-    for (index, (actual, expected)) in values.iter().zip(&row[1..39]).enumerate() {
-        let expected = expected.parse::<f64>().unwrap();
-        if index < 11 {
-            assert_eq!(
-                actual.to_bits(),
-                expected.to_bits(),
-                "geometry channel {index}"
-            );
-        }
-        assert!(
-            (actual - expected).abs() < 1e-6,
-            "appearance channel {index}: actual={actual}; expected={expected}; case={}",
-            row[0]
-        );
-    }
+    assert_cube_numeric_channels(&values, row);
     assert_cube_appearance_strings(&scene.scene.cube, &row[39..]);
     assert_cube_array_counts(scene, row);
 }
@@ -162,4 +148,22 @@ fn cube_appearance_cache_channels(scene: &CubeAppearanceScene) -> [f64; 4] {
         cube.selection(0).entities().len() as f64,
         cube.selection(0).update_status() as i32 as f64,
     ]
+}
+
+fn assert_cube_numeric_channels(values: &[f64], row: &[&str]) {
+    for (index, (actual, expected)) in values.iter().zip(&row[1..39]).enumerate() {
+        let expected = expected.parse::<f64>().unwrap();
+        if index < 11 {
+            assert_eq!(
+                actual.to_bits(),
+                expected.to_bits(),
+                "geometry channel {index}"
+            );
+        }
+        assert!(
+            (actual - expected).abs() < 1e-6,
+            "appearance channel {index}: actual={actual}; expected={expected}; case={}",
+            row[0]
+        );
+    }
 }

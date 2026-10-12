@@ -36,23 +36,12 @@ fn replay_corner_shading_slot(
     next: &Handle<Prs3dShadingAspect>,
     edge: &AisViewCubeShadingRef<'_>,
 ) {
-    let corner_original = cube.box_corner_style_ref().clone_handle();
+    let original = cube.box_corner_style_ref().clone_handle();
     let corner = cube.box_corner_style_ref();
-    assert_shading_alias_row(
-        &corner,
-        &cube.box_corner_style_ref(),
-        &corner_original,
-        next,
-        5,
-    );
+    let current = cube.box_corner_style_ref();
+    assert_shading_alias_row(&corner, &current, &original, next, 5);
     *cube.view_cube_presentation_base().corner_aspect.write() = next.clone();
-    assert_shading_alias_row(
-        &corner,
-        &cube.box_corner_style_ref(),
-        &corner_original,
-        next,
-        6,
-    );
+    assert_shading_alias_row(&corner, &current, &original, next, 6);
     assert!(!edge.is_same_reference(&corner));
 }
 fn assert_shading_alias_row(
@@ -62,9 +51,6 @@ fn assert_shading_alias_row(
     next: &Handle<Prs3dShadingAspect>,
     step: i32,
 ) {
-    let row = widget_rows(ALIASES, "shade")
-        .find(|row| row[0].parse::<i32>().unwrap() == step)
-        .unwrap();
     let actual = [
         alias.is_same_reference(current) as i32,
         (alias.object_address() == original.object_address()) as i32,
@@ -73,13 +59,16 @@ fn assert_shading_alias_row(
         original.ref_count(),
         next.ref_count(),
     ];
-    assert_eq!(
-        actual.to_vec(),
-        row[1..]
-            .iter()
-            .map(|v| v.parse::<i32>().unwrap())
-            .collect::<Vec<_>>()
-    );
+    assert_eq!(actual.to_vec(), native_shading_alias_values(step));
+}
+fn native_shading_alias_values(step: i32) -> Vec<i32> {
+    let row = widget_rows(ALIASES, "shade")
+        .find(|row| row[0].parse::<i32>().unwrap() == step)
+        .unwrap();
+    row[1..]
+        .iter()
+        .map(|value| value.parse::<i32>().unwrap())
+        .collect()
 }
 #[test]
 fn shading_reference_callbacks_can_replace_null_and_restore_the_native_slot() {
@@ -111,10 +100,20 @@ fn native_inherited_handle_alias_remains_in_parent_slot_when_child_overrides() {
     assert_shading_alias_row(&alias, &cube.box_side_style_ref(), &original, &next, 7);
     drawer.set_shading_aspect(next.clone());
     assert_shading_alias_row(&alias, &cube.box_side_style_ref(), &original, &next, 8);
+    replay_inherited_parent_slot(cube, &parent, &alias, &original, &next);
+}
+fn replay_inherited_parent_slot(
+    cube: &AisViewCube,
+    parent: &Prs3dDrawer,
+    alias: &AisViewCubeShadingRef<'_>,
+    original: &Handle<Prs3dShadingAspect>,
+    next: &Handle<Prs3dShadingAspect>,
+) {
+    let current = cube.box_side_style_ref();
     parent.set_shading_aspect(next.clone());
-    assert_shading_alias_row(&alias, &cube.box_side_style_ref(), &original, &next, 9);
+    assert_shading_alias_row(alias, &current, original, next, 9);
     parent.set_shading_aspect(Handle::default());
-    assert_shading_alias_row(&alias, &cube.box_side_style_ref(), &original, &next, 10);
+    assert_shading_alias_row(alias, &current, original, next, 10);
     parent.set_shading_aspect(original.clone());
-    assert_shading_alias_row(&alias, &cube.box_side_style_ref(), &original, &next, 11);
+    assert_shading_alias_row(alias, &current, original, next, 11);
 }

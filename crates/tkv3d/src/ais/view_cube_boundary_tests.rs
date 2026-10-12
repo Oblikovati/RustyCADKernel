@@ -14,12 +14,7 @@ fn replay_cube_boundary(row: &[&str]) {
     let id = row[0].parse::<usize>().unwrap();
     let scene = CubeAppearanceScene::new();
     let cube = &scene.scene.cube;
-    let values = cube_boundary_values();
-    let result = if id < 5 {
-        cube.set_round_radius(values[id])
-    } else {
-        cube.set_box_transparency(values[id])
-    };
+    let result = apply_cube_boundary(cube, id);
     assert_boundary_result(&result, row);
     let actual = if id < 5 {
         cube.round_radius()
@@ -96,6 +91,9 @@ fn assert_enum_label_hashes() {
             assert_eq!(policy.equal(&left, &right), left == right);
         }
     }
+    assert_cube_axis_enum_hashes(policy);
+}
+fn assert_cube_axis_enum_hashes(policy: AisViewCubeLabelHash) {
     for left in Prs3dDatumParts::DRAWN
         .into_iter()
         .chain([Prs3dDatumParts::None])
@@ -157,4 +155,16 @@ fn cube_boundary_values() -> [f64; 9] {
         1.0000000001,
         f64::NAN,
     ]
+}
+
+fn apply_cube_boundary(
+    cube: &AisViewCube,
+    id: usize,
+) -> Result<(), rustycad_tkernel::standard::Failure> {
+    let values = cube_boundary_values();
+    if id < 5 {
+        cube.set_round_radius(values[id])
+    } else {
+        cube.set_box_transparency(values[id])
+    }
 }

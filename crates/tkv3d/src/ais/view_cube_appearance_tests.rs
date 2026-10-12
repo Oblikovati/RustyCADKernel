@@ -8,25 +8,18 @@ use rustycad_tkernel::tcollection::AsciiString;
 #[test]
 fn native_all_appearance_setters_getters_equal_tiny_and_custom_state_cases() {
     for row in widget_rows(APPEARANCE, "mutation") {
-        let encoded = row[0].parse::<i32>().unwrap();
-        let (id, pass) = (encoded / 3, encoded % 3);
-        let scene = CubeAppearanceScene::new();
-        let cube = &scene.scene.cube;
-        let delta = match pass {
-            0 => 0.0,
-            1 => 1e-8,
-            _ => 0.2,
-        };
-        if id >= 12 && pass == 2 {
-            prepare_custom_appearance(cube);
-        }
-        if id >= 12 && pass == 1 {
-            apply_appearance_mutation(cube, id, delta);
-        }
-        scene.clear_events();
-        apply_appearance_mutation(cube, id, delta);
-        assert_cube_appearance(&scene, &row);
+        replay_cube_appearance_mutation(&row);
     }
+}
+fn replay_cube_appearance_mutation(row: &[&str]) {
+    let encoded = row[0].parse::<i32>().unwrap();
+    let (id, pass) = (encoded / 3, encoded % 3);
+    let scene = CubeAppearanceScene::new();
+    let cube = &scene.scene.cube;
+    let delta = prepare_cube_appearance_mutation(cube, id, pass);
+    scene.clear_events();
+    apply_appearance_mutation(cube, id, delta);
+    assert_cube_appearance(&scene, row);
 }
 #[test]
 fn native_arbitrary_and_missing_label_map_keys_and_y_up_remapping() {
@@ -103,4 +96,19 @@ fn advance_cube_appearance_lifecycle(scene: &CubeAppearanceScene, stage: &str) {
             .unwrap(),
         _ => {}
     }
+}
+
+fn prepare_cube_appearance_mutation(cube: &AisViewCube, id: i32, pass: i32) -> f64 {
+    let delta = match pass {
+        0 => 0.0,
+        1 => 1e-8,
+        _ => 0.2,
+    };
+    if id >= 12 && pass == 2 {
+        prepare_custom_appearance(cube);
+    }
+    if id >= 12 && pass == 1 {
+        apply_appearance_mutation(cube, id, delta);
+    }
+    delta
 }

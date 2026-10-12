@@ -1,4 +1,5 @@
 //! Native face labels use the outward plane frame with Y-up/Z-up orientation rules.
+use super::AisViewCubePresentationSettings;
 use super::AisViewCubePresentationSource;
 use crate::prs_mgr::PrsMgrPresentableObjectMembers;
 use crate::prs3d::Prs3dTextAspect;
@@ -18,11 +19,7 @@ pub(super) fn submit_cube_side_labels<O: AisViewCubePresentationSource + ?Sized>
     let group = prs.new_group()?;
     group.set_group_primitives_aspect(&aspect.aspect().cast());
     for orientation in Orientation::ALL[..6].iter() {
-        let Some(label) = settings
-            .side_labels
-            .seek(orientation)
-            .filter(|label| !label.is_empty())
-        else {
+        let Some(label) = cube_visible_side_label(&settings, *orientation) else {
             continue;
         };
         let frame = cube_label_frame(&settings, *orientation)?;
@@ -69,4 +66,14 @@ fn cube_label_frame(
     );
     let up = cube_face_up(settings.is_y_up, orientation);
     Axis2::with_x_direction(position, direction, up.crossed(direction)?)
+}
+
+fn cube_visible_side_label(
+    settings: &AisViewCubePresentationSettings,
+    orientation: Orientation,
+) -> Option<&AsciiString> {
+    settings
+        .side_labels
+        .seek(&orientation)
+        .filter(|label| !label.is_empty())
 }

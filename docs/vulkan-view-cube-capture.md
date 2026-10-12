@@ -91,3 +91,13 @@ by these workload paths, so the final linked executable retained its earlier
 hash. The coordinating agent independently verified the final binary and all 49
 source hashes before authorizing timings; no rebuild or source mutation occurred
 during the exclusive window.
+
+A later helper extraction enforces the complete 20-line function-span limit,
+including signatures. The original captured buffers and aea6 timings above
+remain earlier-source evidence. The final helper-refactored source passes 991
+combined tests and fresh 76-row binding checks. Final exclusive timings for
+binary `c9bdedd5f5d3b1f9e500ccdbec5e8eab762e378a24b9062bad28d26db2d51d8f`
+are retained separately under `post-refactor-timing/`; all seven workloads on
+each device completed 100 samples after 20 warmups. The coordinating agent's
+final-main functional capture run will verify the extracted helpers on both
+profiles. Original strict failures and gates remain unchanged.

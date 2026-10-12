@@ -115,11 +115,7 @@ fn capture_widget_frames(
     clock: &view_cube_widget::CubeWidgetClock,
 ) -> Result<(), Box<dyn std::error::Error>> {
     use rustycad_tkv3d::ais::{AisViewCubeMembers, AisViewCubeSource};
-    for (label, time) in [
-        ("animation-quarter", 0.125),
-        ("animation-half", 0.25),
-        ("animation-end", 0.5),
-    ] {
+    for (label, time) in view_cube_widget::widget_animation_frames() {
         clock.seek(time);
         let continuing = scene.cube.update_animation(false)?;
         println!(

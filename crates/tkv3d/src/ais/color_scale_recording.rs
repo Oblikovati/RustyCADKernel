@@ -182,13 +182,7 @@ impl Graphic3dGroup for ScaleRecordingGroup {
         _: &Handle<Graphic3dBoundBuffer>,
         _: bool,
     ) {
-        let indexes = if indices.is_null() {
-            Vec::new()
-        } else {
-            (0..indices.nb_elements())
-                .map(|i| indices.index(i).unwrap())
-                .collect()
-        };
+        let indexes = record_scale_indices(indices);
         self.trace.write().push(ScaleDrawRequest::Array {
             kind: kind as i32,
             vertices: record_scale_vertices(vertices),
@@ -271,4 +265,14 @@ fn wrap_existing_recording_groups(recorder: &ScaleRecordingStructure) {
             .cast()
         })
         .collect();
+}
+
+fn record_scale_indices(indices: &Handle<dyn Graphic3dIndexBufferSource>) -> Vec<i32> {
+    if indices.is_null() {
+        Vec::new()
+    } else {
+        (0..indices.nb_elements())
+            .map(|i| indices.index(i).unwrap())
+            .collect()
+    }
 }

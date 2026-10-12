@@ -47,15 +47,7 @@ fn submit_cube_datum_axis(
     let direction = [Direction3::X, Direction3::Y, Direction3::Z][index];
     let axis = Axis1::new(location, direction);
     submit_cube_axis(prs, datum, &settings.geometry, part, &axis)?;
-    let label = settings
-        .axes_labels
-        .seek(&part)
-        .filter(|label| !label.is_empty());
-    if datum.to_draw_labels()
-        && let Some(label) = label
-    {
-        submit_cube_axis_label(prs, datum, part, &axis, &settings.geometry, label)?;
-    }
+    submit_optional_cube_axis_label(prs, datum, part, &axis, settings)?;
     Ok(())
 }
 
@@ -77,15 +69,7 @@ fn submit_cube_axis(
     part: Prs3dDatumParts,
     axis: &Axis1,
 ) -> Result<(), Failure> {
-    let length = cube_axis_length(geometry);
-    let triangles = Prs3dArrow::draw_shaded(
-        axis,
-        geometry.axes_radius,
-        length,
-        geometry.axes_cone_radius,
-        0.2 * length,
-        20,
-    )?;
+    let triangles = cube_axis_shaded_triangles(geometry, axis)?;
     super::view_cube_submission::submit_cube_triangles(
         prs,
         &triangles,
@@ -100,14 +84,7 @@ fn submit_cube_axis_label(
     geometry: &AisViewCubeGeometry,
     label: &rustycad_tkernel::tcollection::AsciiString,
 ) -> Result<(), Failure> {
-    let length = cube_axis_length(geometry);
-    let offset = length + 0.2 * length;
-    let direction = axis.direction();
-    let point = axis.location().translated(Vector3::new(
-        direction.x() * offset,
-        direction.y() * offset,
-        direction.z() * offset,
-    ));
+    let point = cube_axis_label_point(geometry, axis);
     Prs3dText::draw(
         &prs.new_group()?,
         &datum.text_aspect(part),
@@ -132,4 +109,49 @@ fn submit_cube_axes_center(
     Prs3dToolSphere::new(geometry.axes_sphere_radius, 20, 20)
         .fill_array(&mut triangles, &transform)?;
     super::view_cube_submission::submit_cube_triangles(prs, &triangles, &shading.aspect())
+}
+
+fn submit_optional_cube_axis_label(
+    prs: &Handle<dyn Graphic3dStructureSource>,
+    datum: &Prs3dDatumAspect,
+    part: Prs3dDatumParts,
+    axis: &Axis1,
+    settings: &AisViewCubePresentationSettings,
+) -> Result<(), Failure> {
+    let label = settings
+        .axes_labels
+        .seek(&part)
+        .filter(|label| !label.is_empty());
+    if datum.to_draw_labels()
+        && let Some(label) = label
+    {
+        submit_cube_axis_label(prs, datum, part, axis, &settings.geometry, label)?;
+    }
+    Ok(())
+}
+
+fn cube_axis_shaded_triangles(
+    geometry: &AisViewCubeGeometry,
+    axis: &Axis1,
+) -> Result<Handle<Graphic3dArrayOfTriangles>, Failure> {
+    let length = cube_axis_length(geometry);
+    Prs3dArrow::draw_shaded(
+        axis,
+        geometry.axes_radius,
+        length,
+        geometry.axes_cone_radius,
+        0.2 * length,
+        20,
+    )
+}
+
+fn cube_axis_label_point(geometry: &AisViewCubeGeometry, axis: &Axis1) -> Point3 {
+    let length = cube_axis_length(geometry);
+    let offset = length + 0.2 * length;
+    let direction = axis.direction();
+    axis.location().translated(Vector3::new(
+        direction.x() * offset,
+        direction.y() * offset,
+        direction.z() * offset,
+    ))
 }

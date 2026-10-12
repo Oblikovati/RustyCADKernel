@@ -2,7 +2,9 @@
 use super::view_cube_scene::ViewCubeCaptureScene;
 use rustycad_tkernel::{
     osd::{Chronometer, Timer, WallClock},
+    quantity::{Color, ColorSpace},
     standard::{Failure, Handle},
+    tcollection::AsciiString,
 };
 use rustycad_tkservice::graphic3d::Graphic3dPresentationAttributesSource;
 use rustycad_tkservice::media::MediaTimer;
@@ -67,13 +69,7 @@ mod tests {
     #[test]
     fn actual_widget_context_detection_highlight_click_and_camera_animation_are_submitted() {
         let device = crate::recording_device::RecordingDevice::default();
-        let fonts = Arc::new(crate::fixed_glyph_source::FixedGlyphSource::default());
-        let driver = martensite_vulkan::Graphic3dRenderDriver::with_backend_and_fonts(
-            device.clone(),
-            512,
-            fonts,
-        )
-        .unwrap();
+        let driver = widget_recording_driver(&device);
         let scene = ViewCubeCaptureScene::new(&driver).unwrap();
         let clock = configure_widget_timer(&scene);
         scene.render_view().try_redraw().unwrap();
@@ -85,6 +81,13 @@ mod tests {
         assert_widget_camera_progress(&scene, &clock, original);
         assert_widget_appearance_submission(&scene, &device);
         scene.view.remove();
+    }
+    fn widget_recording_driver(
+        device: &crate::recording_device::RecordingDevice,
+    ) -> Handle<martensite_vulkan::Graphic3dRenderDriver> {
+        let fonts = Arc::new(crate::fixed_glyph_source::FixedGlyphSource::default());
+        martensite_vulkan::Graphic3dRenderDriver::with_backend_and_fonts(device.clone(), 512, fonts)
+            .unwrap()
     }
     fn assert_widget_camera_progress(
         scene: &ViewCubeCaptureScene,
@@ -188,10 +191,6 @@ fn widget_camera_mapping(camera: &rustycad_tkservice::graphic3d::Graphic3dCamera
 
 /// Mutate live geometry, labels and aspects before normal context redisplay; `apply_widget_appearance(&scene)?`.
 pub fn apply_widget_appearance(scene: &ViewCubeCaptureScene) -> Result<(), Failure> {
-    use rustycad_tkernel::{
-        quantity::{Color, ColorSpace},
-        tcollection::AsciiString,
-    };
     scene.context.clear_detected(false);
     scene.cube.set_size(88.0, true);
     scene.cube.set_round_radius(0.15)?;
@@ -208,4 +207,13 @@ pub fn apply_widget_appearance(scene: &ViewCubeCaptureScene) -> Result<(), Failu
         &AsciiString::from("ROOF"),
     )?;
     scene.context.redisplay(&scene.cube.cast(), false, false)
+}
+
+/// Stable real animation seek frames; `for (label,time) in widget_animation_frames()`.
+pub fn widget_animation_frames() -> [(&'static str, f64); 3] {
+    [
+        ("animation-quarter", 0.125),
+        ("animation-half", 0.25),
+        ("animation-end", 0.5),
+    ]
 }

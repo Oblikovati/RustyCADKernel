@@ -31,13 +31,7 @@ fn append_cube_sensitive_part<C: AisViewCubeSource + ?Sized>(
     let owner =
         AisViewCubeOwner::with_source(&cube.presentable_base().this().cast(), orientation, 5);
     let sensitive = Handle::new(AisViewCubeSensitive::new(&owner.cast(), &triangles)?);
-    let factor = if ais_view_cube_is_box_corner(orientation) {
-        8
-    } else if ais_view_cube_is_box_edge(orientation) {
-        4
-    } else {
-        2
-    };
+    let factor = cube_part_sensitivity(orientation);
     sensitive.set_sensitivity_factor(factor)?;
     selection.add(&sensitive.cast())
 }
@@ -50,11 +44,7 @@ pub(super) fn cube_part_selection_triangles<C: AisViewCubePresentationSource + ?
     if counts.vertices <= 0 {
         return Ok(Handle::default());
     }
-    let triangles = Handle::new(Graphic3dArrayOfTriangles::new(
-        counts.vertices,
-        counts.triangles * 3,
-        0,
-    )?);
+    let triangles = allocate_cube_selection_array(counts)?;
     cube.create_box_part_triangles(
         &triangles,
         &mut AisViewCubeTriangleCounts::default(),
@@ -145,4 +135,24 @@ impl PrsMgrPresentableObject for AisViewCube {
         );
     }
     crate::ais_presentable_overrides!();
+}
+
+fn cube_part_sensitivity(orientation: V3dTypeOfOrientation) -> i32 {
+    if ais_view_cube_is_box_corner(orientation) {
+        8
+    } else if ais_view_cube_is_box_edge(orientation) {
+        4
+    } else {
+        2
+    }
+}
+
+fn allocate_cube_selection_array(
+    counts: AisViewCubeTriangleCounts,
+) -> Result<Handle<Graphic3dArrayOfTriangles>, Failure> {
+    Ok(Handle::new(Graphic3dArrayOfTriangles::new(
+        counts.vertices,
+        counts.triangles * 3,
+        0,
+    )?))
 }

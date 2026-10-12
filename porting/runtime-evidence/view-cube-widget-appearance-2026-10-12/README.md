@@ -33,3 +33,12 @@ real geometry/label/style setters followed by context redisplay.
 CPU provenance, source hashes, functional results, compressed raw buffers,
 strict comparison diagnostics and process/timing records are separate files so
 that each document stays below the repository's 500-line limit.
+
+The subsequent function-span audit extracted helpers without changing APIs,
+defaults, geometry, order, timer behavior or strict gates. Original captures,
+source hashes and aea6 timing evidence remain unchanged. Final source hashes,
+991 repeated tests, fresh canonical bindings and relink logs are separate
+post-refactor artifacts. Functional captures were not repeated after extraction;
+the coordinating agent will run final-main captures on both profiles.
+`post-refactor-timing/` retains the independently verified final c9bd executable's
+fresh exclusive timings, raw samples and process observations.

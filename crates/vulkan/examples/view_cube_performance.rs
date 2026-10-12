@@ -60,20 +60,14 @@ fn measure_widget_frames(
 ) -> Result<(), Box<dyn std::error::Error>> {
     use rustycad_tkv3d::ais::AisViewCubeSource;
     let clock = view_cube_widget::configure_widget_timer(scene);
+    let render = scene.render_view();
     view_cube_widget::detect_widget_center(scene)?;
-    print_cube_samples(
-        "view-cube-hover",
-        &measure_cube_frames(&scene.render_view()),
-    );
+    print_cube_samples("view-cube-hover", &measure_cube_frames(&render));
     view_cube_widget::click_widget_center(scene)?;
-    for (name, time) in [
-        ("view-cube-animation-quarter", 0.125),
-        ("view-cube-animation-half", 0.25),
-        ("view-cube-animation-end", 0.5),
-    ] {
+    for (label, time) in view_cube_widget::widget_animation_frames() {
         clock.seek(time);
         scene.cube.update_animation(false)?;
-        print_cube_samples(name, &measure_cube_frames(&scene.render_view()));
+        print_cube_samples(&format!("view-cube-{label}"), &measure_cube_frames(&render));
     }
     Ok(())
 }

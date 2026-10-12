@@ -27,18 +27,7 @@ impl<'a> AisViewCubeColorRef<'a> {
     ) -> Self {
         let aspect = shading.aspect();
         let back = model == AspectTypeOfFacingModel::BackSide;
-        let material = if back {
-            aspect.back_material()
-        } else {
-            aspect.front_material()
-        };
-        let interior = material.material_type() == Graphic3dTypeOfMaterial::Aspect;
-        let leaf = match (back, interior) {
-            (false, true) => CubeColorLeaf::FrontInterior,
-            (true, true) => CubeColorLeaf::BackInterior,
-            (false, false) => CubeColorLeaf::FrontMaterial,
-            (true, false) => CubeColorLeaf::BackMaterial,
-        };
+        let leaf = cube_shading_color_leaf(&aspect, back);
         Self::field(&aspect.cast(), leaf, scope)
     }
     pub(super) fn text(
@@ -75,5 +64,20 @@ impl<'a> AisViewCubeColorRef<'a> {
     /// Observe the owning Graphic3d aspect identity without acquiring native ownership; `alias.aspect_address()`.
     pub fn aspect_address(&self) -> *const () {
         self.aspect.object_address()
+    }
+}
+
+fn cube_shading_color_leaf(aspect: &Graphic3dAspectFillArea3d, back: bool) -> CubeColorLeaf {
+    let material = if back {
+        aspect.back_material()
+    } else {
+        aspect.front_material()
+    };
+    let interior = material.material_type() == Graphic3dTypeOfMaterial::Aspect;
+    match (back, interior) {
+        (false, true) => CubeColorLeaf::FrontInterior,
+        (true, true) => CubeColorLeaf::BackInterior,
+        (false, false) => CubeColorLeaf::FrontMaterial,
+        (true, false) => CubeColorLeaf::BackMaterial,
     }
 }

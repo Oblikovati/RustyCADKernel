@@ -46,17 +46,7 @@ fn initialize_cube_fill(drawer: &Prs3dDrawer) -> Result<(), Failure> {
 }
 fn cube_secondary_aspect(drawer: &Prs3dDrawer) -> Result<Handle<Prs3dShadingAspect>, Failure> {
     let aspect = Handle::new(Prs3dShadingAspect::new()?);
-    *aspect.aspect().aspects_base().fields.write() = drawer
-        .shading_aspect()
-        .aspect()
-        .aspects_base()
-        .fields
-        .read()
-        .clone();
-    aspect.set_color(
-        Color::named(NamedColor::GRAY30),
-        AspectTypeOfFacingModel::BothSide,
-    )?;
+    reset_cube_secondary_style(&aspect, &drawer.shading_aspect())?;
     Ok(aspect)
 }
 fn initialize_cube_persistence(interactive: &AisInteractiveObjectBase) -> Result<(), Failure> {
@@ -81,18 +71,25 @@ pub fn ais_view_cube_default_attributes<C: super::AisViewCubePresentationSource 
     let drawer = cube.attributes();
     initialize_cube_text(&drawer, 16.0);
     initialize_cube_fill(&drawer)?;
+    reset_cube_secondary_styles(cube, &drawer.shading_aspect())
+}
+fn reset_cube_secondary_styles<C: super::AisViewCubePresentationSource + ?Sized>(
+    cube: &C,
+    source: &Prs3dShadingAspect,
+) -> Result<(), Failure> {
     for style in &super::view_cube_style_members::cube_style_handles(cube)[1..] {
-        *style.aspect().aspects_base().fields.write() = drawer
-            .shading_aspect()
-            .aspect()
-            .aspects_base()
-            .fields
-            .read()
-            .clone();
-        style.set_color(
-            Color::named(NamedColor::GRAY30),
-            AspectTypeOfFacingModel::BothSide,
-        )?;
+        reset_cube_secondary_style(style, source)?;
     }
     Ok(())
+}
+fn reset_cube_secondary_style(
+    target: &Prs3dShadingAspect,
+    source: &Prs3dShadingAspect,
+) -> Result<(), Failure> {
+    // Copy all inherited fields while retaining the target handle, as native assignment does.
+    crate::prs3d::prs3d_copy_aspects(&*target.aspect(), &*source.aspect());
+    target.set_color(
+        Color::named(NamedColor::GRAY30),
+        AspectTypeOfFacingModel::BothSide,
+    )
 }

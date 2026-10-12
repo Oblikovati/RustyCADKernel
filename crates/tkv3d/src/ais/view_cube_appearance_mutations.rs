@@ -39,12 +39,7 @@ fn mutate_appearance_labels(cube: &AisViewCube, id: i32) {
         14 => cube.set_draw_vertices(false),
         15 => cube.set_y_up(true, true),
         16 => cube.set_y_up(true, false),
-        17 => cube
-            .set_box_side_label(
-                crate::v3d::V3dTypeOfOrientation::Zpos,
-                &AsciiString::from("roof"),
-            )
-            .unwrap(),
+        17 => mutate_cube_roof_label(cube),
         18 => cube.set_axes_labels(
             &AsciiString::from("u"),
             &AsciiString::from("v"),
@@ -121,4 +116,12 @@ fn mutate_appearance_resets(cube: &AisViewCube, id: i32) {
         34 => ais_view_cube_default_highlight_attributes(cube).unwrap(),
         _ => panic!("reset mutation={id}; expected 30..=34"),
     }
+}
+
+fn mutate_cube_roof_label(cube: &AisViewCube) {
+    cube.set_box_side_label(
+        crate::v3d::V3dTypeOfOrientation::Zpos,
+        &AsciiString::from("roof"),
+    )
+    .unwrap();
 }
