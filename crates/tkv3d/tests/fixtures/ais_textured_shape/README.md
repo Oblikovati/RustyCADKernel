@@ -44,6 +44,12 @@ texture and virtual-dispatch implementations.
   driver does not capture UV attributes, so effective mapped UV rendering still
   requires the paired renderer captures. All 40 rows now replay through the
   registered concrete class and the genuine Isolines prerequisite.
+- `native-compute-failure.txt`: actual predefined texture construction with an
+  invalid native texture directory proves the shading catch retains its emitted
+  group, original group aspect, freshly copied aspect and null texture field.
+  Rust regressions separately prove typed constructor/bool-adapter failure
+  transport is caught while unrelated panic payloads escape; those injected
+  bool failures are transport tests, not additional native oracle rows.
 - `native-wireframe.txt`: genuine finite plane wireframe presentations across
   U/V/common aspect routing and plane isoline policies. All 16 rows replay
   through the registered default serial WF presentation path; this does not

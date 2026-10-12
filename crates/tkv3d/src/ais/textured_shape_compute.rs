@@ -7,7 +7,7 @@ use crate::{
     std_prs::{StdPrsShadedShape, StdPrsToolTriangulatedShape, StdPrsVolume, StdPrsWfShape},
 };
 use rustycad_tkbrep::topods::Shape;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, catch_native_failure};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::Point2;
 use rustycad_tkservice::graphic3d::*;
@@ -73,7 +73,8 @@ fn compute_textured_shading<S: AisTexturedShapeSource + ?Sized>(
     if shape.shape_type()? > ShapeEnum::Face || object.is_infinite() {
         return StdPrsWfShape::add(prs, shape, &drawer);
     }
-    let shaded = add_textured_shading_geometry(object, prs, shape, mode);
+    // OCCT 3d097a0 catches Standard_Failure from void/bool virtual adapters as well as checked calls.
+    let shaded = catch_native_failure(|| add_textured_shading_geometry(object, prs, shape, mode));
     if shaded.is_err() {
         // Native catches Standard_Failure from both Add and updateAttributes; keeps existing groups.
         return StdPrsWfShape::add(prs, shape, &drawer);
