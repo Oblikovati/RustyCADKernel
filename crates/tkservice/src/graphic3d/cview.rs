@@ -247,7 +247,9 @@ pub trait Graphic3dCView: Graphic3dDataStructureManager {
     /// `MinMaxValues(bool)`: the union of the layer boxes (void for an undefined view);
     /// `view.min_max_values(false)?`.
     fn min_max_values(&self, include_auxiliary: bool) -> Result<BoundingBox3, Failure> {
-        defaults::min_max_values(self, include_auxiliary)
+        rustycad_tkernel::standard::catch_native_failure(|| {
+            defaults::min_max_values(self, include_auxiliary)
+        })
     }
     /// `ZFitAllBounds`: the primary and the graphic boxes; `view.z_fit_all_bounds()?`.
     fn z_fit_all_bounds(&self) -> Result<(BoundingBox3, BoundingBox3), Failure> {
