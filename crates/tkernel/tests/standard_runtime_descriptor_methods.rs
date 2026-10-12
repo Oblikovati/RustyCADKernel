@@ -3,6 +3,13 @@ use rustycad_tkernel::standard::{
     Handle, RuntimeType, RuntimeTyped, StandardPersistent, Transient,
 };
 
+#[path = "standard_descriptor_count_scope.rs"]
+mod descriptor_count_scope;
+use descriptor_count_scope::DescriptorCountScope;
+use std::sync::Mutex;
+// These two tests are the only toolkit owners of the StandardPersistent descriptor.
+static STANDARD_DESCRIPTOR_OWNER_SCOPE: Mutex<()> = Mutex::new(());
+
 #[test]
 fn standard_type_rtti_accessors_select_the_runtime_type_descriptor() {
     let descriptor = <RuntimeType as RuntimeTyped>::static_type();
@@ -25,6 +32,7 @@ fn standard_persistent_rtti_accessors_select_the_persistent_descriptor() {
 
 #[test]
 fn static_descriptor_owner_is_an_explicit_handle_copy() {
+    let _scope = DescriptorCountScope::acquire(&STANDARD_DESCRIPTOR_OWNER_SCOPE);
     assert_static_handle_copy::<RuntimeType>();
     assert_static_handle_copy::<StandardPersistent>();
 }
@@ -51,6 +59,7 @@ fn persistent_dynamic_descriptor_is_borrowed_and_can_be_owned_explicitly() {
 
 #[test]
 fn persistent_dynamic_descriptor_handle_adds_and_releases_one_owner() {
+    let _scope = DescriptorCountScope::acquire(&STANDARD_DESCRIPTOR_OWNER_SCOPE);
     let object = Handle::new(StandardPersistent::default());
     let descriptor = <StandardPersistent as RuntimeTyped>::static_type();
     let baseline = descriptor.transient_base().ref_count();
