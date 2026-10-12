@@ -10,6 +10,15 @@ pub(super) struct TargetImage {
     pub xor_view: vk::ImageView,
     memory: vk::DeviceMemory,
     pub aspect: vk::ImageAspectFlags,
+    pub format: vk::Format,
+    pub samples: vk::SampleCountFlags,
+}
+#[derive(Clone, Copy)]
+pub(super) struct AttachmentSpec {
+    pub format: vk::Format,
+    pub usage: vk::ImageUsageFlags,
+    pub aspect: vk::ImageAspectFlags,
+    pub samples: vk::SampleCountFlags,
 }
 impl TargetImage {
     pub fn new(
@@ -18,26 +27,68 @@ impl TargetImage {
         depth: bool,
         stencil: bool,
     ) -> Result<Self, RenderError> {
+        Self::new_multisample(
+            runtime,
+            extent,
+            depth,
+            stencil,
+            vk::SampleCountFlags::TYPE_1,
+        )
+    }
+    pub fn new_multisample(
+        runtime: &Arc<VulkanRuntime>,
+        extent: vk::Extent2D,
+        depth: bool,
+        stencil: bool,
+        samples: vk::SampleCountFlags,
+    ) -> Result<Self, RenderError> {
         let (format, usage, aspect) = attachment_properties(depth, stencil);
-        check_format(runtime, format, depth)?;
-        let info = image_description(extent, format, usage);
+        Self::with_attachment(
+            runtime,
+            extent,
+            AttachmentSpec {
+                format,
+                usage,
+                aspect,
+                samples,
+            },
+        )
+    }
+    pub fn with_attachment(
+        runtime: &Arc<VulkanRuntime>,
+        extent: vk::Extent2D,
+        spec: AttachmentSpec,
+    ) -> Result<Self, RenderError> {
+        check_format(
+            runtime,
+            spec.format,
+            spec.aspect.contains(vk::ImageAspectFlags::DEPTH),
+        )?;
+        let info = image_description(extent, spec.format, spec.usage).samples(spec.samples);
         let handle = unsafe { runtime.device().create_image(&info, None) }
-            .map_err(|e| vk_error("create target image", e))?;
+            .map_err(|error| vk_error("create target image", error))?;
         let mut image = Self {
             runtime: runtime.clone(),
             handle,
             view: vk::ImageView::null(),
             xor_view: vk::ImageView::null(),
             memory: vk::DeviceMemory::null(),
-            aspect,
+            aspect: spec.aspect,
+            format: spec.format,
+            samples: spec.samples,
         };
         image.allocate()?;
-        image.view = image.create_view(format)?;
-        if !depth {
-            check_format(runtime, vk::Format::R8G8B8A8_UNORM, false)?;
-            image.xor_view = image.create_view(vk::Format::R8G8B8A8_UNORM)?;
-        }
+        image.view = image.create_view(spec.format)?;
+        image.create_encoded_alias(spec.format)?;
         Ok(image)
+    }
+    fn create_encoded_alias(&mut self, format: vk::Format) -> Result<(), RenderError> {
+        if format != vk::Format::R8G8B8A8_SRGB {
+            return Ok(());
+        }
+        check_format(&self.runtime, vk::Format::R8G8B8A8_UNORM, false)?;
+        self.xor_view = self.create_view(vk::Format::R8G8B8A8_UNORM)?;
+        Ok(())
     }
     fn allocate(&mut self) -> Result<(), RenderError> {
         let requirements = unsafe {

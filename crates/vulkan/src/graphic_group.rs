@@ -423,7 +423,7 @@ fn lower_styled_primitive(
         .map(|draws| {
             draws
                 .into_iter()
-                .map(|draw| draw.with_polygon_offset(offset))
+                .map(|draw| surface_alpha_policy(draw.with_polygon_offset(offset), aspects))
                 .collect()
         })
 }

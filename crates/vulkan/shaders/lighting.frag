@@ -15,7 +15,12 @@ layout(location=9) flat in vec4 fixedFrontColor;
 #ifdef MARTENSITE_FIXED_LIGHTING
 layout(location=10) flat in vec4 fixedBackColor;
 #endif
+#if defined(MARTENSITE_OIT_WEIGHTED) || defined(MARTENSITE_OIT_PEELING)
+#include "oit.glsl"
+#else
+#include "native_fragment_alpha.glsl"
 layout(location=0) out vec4 fragmentColor;
+#endif
 #ifdef MARTENSITE_MARKER_LIGHTING
 #define MARTENSITE_SPRITE_SET 2
 #include "marker.glsl"
@@ -32,6 +37,10 @@ layout(push_constant) uniform LineTransform { mat4 clip; vec2 viewport; uint pat
 #include "lit_fragment.glsl"
 
 void main() {
+#if defined(MARTENSITE_OIT_WEIGHTED) || defined(MARTENSITE_OIT_PEELING)
+    if(oitEarlyReturn())return;
+    vec4 fragmentColor;
+#endif
 #ifdef MARTENSITE_CLIPPING
     discardClippedFragment();
 #endif
@@ -47,5 +56,10 @@ void main() {
 #else
     if (fragmentColor.a <= 0.1) discard;
 #endif
+#endif
+#if defined(MARTENSITE_OIT_WEIGHTED) || defined(MARTENSITE_OIT_PEELING)
+    oitWriteColor(fragmentColor);
+#else
+    nativePostAlpha(fragmentColor.a);
 #endif
 }

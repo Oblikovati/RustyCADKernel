@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #define MARTENSITE_FRAGMENT
 #include "clipping.glsl"
+#include "native_fragment_alpha.glsl"
 layout(location=0) in vec4 vertexColor;
 layout(location=1) in vec2 screenSpaceCoord;
 layout(location=0) out vec4 fragmentColor;
@@ -21,4 +22,5 @@ void main() {
     if ((transform.pattern & (1u << bit)) == 0u) discard;
 #endif
     fragmentColor = vertexColor;
+    nativePostAlpha(fragmentColor.a);
 }

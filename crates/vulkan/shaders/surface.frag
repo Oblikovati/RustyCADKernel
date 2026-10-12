@@ -51,7 +51,12 @@ layout(location=10) flat in vec4 fixedBackColor;
 #include "lit_fragment.glsl"
 #endif
 #include "clipping.glsl"
+#if defined(MARTENSITE_OIT_WEIGHTED) || defined(MARTENSITE_OIT_PEELING)
+#include "oit.glsl"
+#else
+#include "native_fragment_alpha.glsl"
 layout(location=0) out vec4 outColor;
+#endif
 vec4 sampledSurfaceColor() {
     vec4 primary=vertexColor;
 #ifdef MARTENSITE_LIGHTING
@@ -73,6 +78,10 @@ vec4 sampledSurfaceColor() {
 #endif
 }
 void main() {
+#if defined(MARTENSITE_OIT_WEIGHTED) || defined(MARTENSITE_OIT_PEELING)
+    if(oitEarlyReturn())return;
+    vec4 outColor;
+#endif
 #ifdef MARTENSITE_CLIPPING
     discardClippedFragment();
 #endif
@@ -84,4 +93,9 @@ void main() {
 #endif
     // Surface masking uses native strict comparison; glyph cutoff remains <= in its independent shader.
     if ((transform.flags&8u)!=0u&&outColor.a<transform.cutoff) discard;
+#if defined(MARTENSITE_OIT_WEIGHTED) || defined(MARTENSITE_OIT_PEELING)
+    oitWriteColor(outColor);
+#else
+    nativePostAlpha(outColor.a);
+#endif
 }

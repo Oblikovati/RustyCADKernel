@@ -10,6 +10,7 @@ pub(crate) fn apply_native_stencil_aspect(mask: &mut PrimitiveDraw) {
     mask.surface_texture_binding_only = false;
     mask.surface_texture_unavailable = None;
     mask.surface_cutoff = None;
+    mask.native_material_cutoff = None;
     mask.surface_forced_blend = false;
     mask.face_culling = RenderFaceCulling::None;
 }

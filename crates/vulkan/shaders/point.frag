@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #define MARTENSITE_FRAGMENT
 #include "clipping.glsl"
+#include "native_fragment_alpha.glsl"
 layout(location=0) in vec4 vertexColor;
 layout(location=0) out vec4 outColor;
 #include "marker.glsl"
@@ -23,4 +24,5 @@ void main() {
 #else
     if (outColor.a <= 0.1) discard;
 #endif
+    nativePostAlpha(outColor.a);
 }

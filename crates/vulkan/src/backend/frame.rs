@@ -8,6 +8,10 @@ use crate::{FrameCapture, PrimitiveDraw, RenderError, RenderFrame, error::reject
 use ash::vk;
 use std::sync::Arc;
 pub(super) struct UploadedDraw {
+    pub native_alpha: Option<Arc<super::oit_descriptor::OitPassDescriptors>>,
+    pub oit_alpha: Vec<(vk::DescriptorSet, Arc<super::oit_descriptor::OitPassDescriptors>)>,
+    pub sample_alpha_cutoff: bool,
+    pub oit: Option<super::oit_upload::OitUploadedVariants>,
     pub vertices: DeviceBuffer,
     pub indices: DeviceBuffer,
     pub count: u32,
@@ -32,6 +36,9 @@ pub(super) struct UploadedDraw {
     pub surface_image: Option<Arc<super::surface_image_descriptor::SurfaceImageBinding>>,
 }
 pub(super) struct FrameResources {
+    pub fragment_alpha: super::fragment_alpha_plan::FragmentAlphaPlan,
+    pub multisample: Option<super::multisample_targets::MultisampleTargets>,
+    pub oit: Option<super::oit_frame::OitFramePass>,
     pub extent: vk::Extent2D,
     pub color: TargetImage,
     pub depth: TargetImage,
@@ -41,10 +48,10 @@ pub(super) struct FrameResources {
 }
 impl FrameResources {
     pub fn new(
-        runtime: &Arc<VulkanRuntime>,
-        frame: &RenderFrame,
-        pipeline: &RasterPipelines,
+        runtime: &Arc<VulkanRuntime>, frame: &RenderFrame, pipeline: &RasterPipelines,
+        initial_alpha: crate::legacy_fragment_alpha::LegacyFragmentAlpha,
     ) -> Result<Self, RenderError> {
+        let fragment_alpha = super::fragment_alpha_plan::FragmentAlphaPlan::new(frame, initial_alpha);
         pipeline.surface_images.prune()?;
         check_extent(runtime, frame)?;
         let extent = vk::Extent2D {
@@ -52,7 +59,35 @@ impl FrameResources {
             height: frame.height,
         };
         let bytes = u64::from(frame.width) * u64::from(frame.height) * 4;
+        let plan = super::frame_raster_plan::frame_raster_plan(runtime, frame, pipeline.stencil);
+        let mut oit = super::oit_frame::OitFramePass::new(runtime, frame, pipeline, extent, plan)?;
+        if let Some(pass) = &mut oit { pass.prepare_alpha(&fragment_alpha)?; }
+        let mut draws = frame
+            .draws
+            .iter()
+            .map(|draw| upload_draw(runtime, draw, pipeline, extent))
+            .collect::<Result<Vec<_>, _>>()?;
+        for draw in &mut draws {
+            draw.pipeline = pipeline.oit.multisample(
+                runtime,
+                &draw.pipeline,
+                plan.samples,
+                frame.raster.alpha_to_coverage && draw.sample_alpha_cutoff,
+            )?;
+        }
+        if let Some(pass) = &oit {
+            super::oit_upload::upload_oit_variants(runtime, pipeline, &mut draws, pass)?;
+        }
+        super::fragment_alpha_upload::upload_fragment_alpha(runtime, pipeline, &mut draws, &fragment_alpha, oit.as_ref(), plan.samples, frame.raster.alpha_to_coverage)?;
         Ok(Self {
+            fragment_alpha,
+            multisample: super::multisample_targets::MultisampleTargets::new(
+                runtime,
+                extent,
+                pipeline.stencil,
+                plan.samples,
+            )?,
+            oit,
             extent,
             color: TargetImage::new(runtime, extent, false, false)?,
             depth: TargetImage::new(runtime, extent, true, pipeline.stencil)?,
@@ -68,11 +103,7 @@ impl FrameResources {
                 vk::BufferUsageFlags::TRANSFER_DST,
                 HostBufferAccess::Readback,
             )?,
-            draws: frame
-                .draws
-                .iter()
-                .map(|draw| upload_draw(runtime, draw, pipeline, extent))
-                .collect::<Result<_, _>>()?,
+            draws,
         })
     }
     pub fn capture(&self) -> Result<FrameCapture, RenderError> {
@@ -91,6 +122,16 @@ impl FrameResources {
             rgba,
             depth,
         })
+    }
+    pub fn render_color(&self) -> &TargetImage {
+        self.multisample
+            .as_ref()
+            .map_or(&self.color, |targets| &targets.color)
+    }
+    pub fn render_depth(&self) -> &TargetImage {
+        self.multisample
+            .as_ref()
+            .map_or(&self.depth, |targets| &targets.depth)
     }
 }
 fn check_extent(runtime: &VulkanRuntime, frame: &RenderFrame) -> Result<(), RenderError> {
@@ -213,6 +254,11 @@ fn upload_draw(
         })
         .transpose()?;
     Ok(UploadedDraw {
+        native_alpha: None,
+        oit_alpha: vec![],
+        sample_alpha_cutoff: draw.native_material_cutoff.is_some_and(|cutoff| cutoff <= 1.)
+            || draw.surface_cutoff.is_some(),
+        oit: None,
         lighting,
         clipping,
         sprite,

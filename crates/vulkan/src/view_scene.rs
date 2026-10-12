@@ -41,7 +41,9 @@ pub(crate) fn frame_for_view(
         color.rgb().blue() as f32,
         color.alpha(),
     ];
-    RenderFrame::with_layers(extent[0], extent[1], clear, passes)
+    let mut frame=RenderFrame::with_layers(extent[0], extent[1], clear, passes)?;
+    frame.raster=crate::retained_transparency::view_raster_settings(view,&rendering)?;
+    Ok(frame)
 }
 fn update_view_culling(
     view: &dyn Graphic3dCView,
@@ -137,9 +139,7 @@ fn structure_draws(
 fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> {
     let params = view.rendering_params();
     if params.method != Graphic3dRenderingMode::Rasterization
-        || params.nb_msaa_samples != 0
         || params.render_resolution_scale != 1.0
-        || params.transparency_method != Graphic3dRenderTransparentMethod::BlendUnordered
     {
         return Err(rejected(
             (
@@ -148,7 +148,7 @@ fn validate_raster_params(view: &dyn Graphic3dCView) -> Result<(), RenderError> 
                 params.render_resolution_scale,
                 params.transparency_method,
             ),
-            "single-sample rasterization at scale 1 with unordered blending",
+            "rasterization at scale 1",
         ));
     }
     Ok(())

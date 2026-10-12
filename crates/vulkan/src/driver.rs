@@ -181,6 +181,7 @@ impl Graphic3dGraphicDriver for Graphic3dRenderDriver {
     fn inquire_limit(&self, limit: Graphic3dTypeOfLimit) -> i32 {
         match limit {
             Graphic3dTypeOfLimit::MaxNbViews => 32,
+            Graphic3dTypeOfLimit::MaxMsaa | Graphic3dTypeOfLimit::HasBlendedOit | Graphic3dTypeOfLimit::HasBlendedOitMsaa =>self.device.read().raster_limit(limit),
             Graphic3dTypeOfLimit::MaxViewDumpSizeX | Graphic3dTypeOfLimit::MaxViewDumpSizeY => {
                 self.limit as i32
             }

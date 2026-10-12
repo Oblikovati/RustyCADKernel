@@ -28,7 +28,7 @@ pub(super) struct PipelineVariant {
     pub capping: RenderCappingPass,
 }
 impl PipelineVariant {
-    fn from_index(index: usize, stencil: bool) -> Self {
+    pub(super) fn from_index(index: usize, stencil: bool) -> Self {
         if (40..44).contains(&index) {
             return text_xor_variant(index, stencil);
         }
@@ -112,6 +112,7 @@ fn empty_variant(
     }
 }
 pub(super) struct RasterPipelines {
+    pub oit:super::oit_pipeline_cache::OitPipelineCache,
     variants: Vec<Option<Arc<DrawPipeline>>>,
     pub surface_images: super::surface_image_cache::SurfaceImageCache,
     pub stencil: bool,
@@ -135,6 +136,7 @@ impl RasterPipelines {
             });
         }
         Ok(Self {
+            oit:Default::default(),
             variants,
             surface_images: Default::default(),
             stencil,

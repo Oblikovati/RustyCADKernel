@@ -9,6 +9,7 @@ pub struct VulkanRenderer {
     runtime: std::sync::Arc<VulkanRuntime>,
     pipeline: pipeline_variants::RasterPipelines,
     capping_pipeline: Option<pipeline_variants::RasterPipelines>,
+    fragment_alpha: crate::legacy_fragment_alpha::LegacyFragmentAlpha,
 }
 impl VulkanRenderer {
     /// Load Vulkan and select a capable graphics device; `VulkanRenderer::new(options)?`.
@@ -20,6 +21,7 @@ impl VulkanRenderer {
             runtime,
             pipeline,
             capping_pipeline: None,
+            fragment_alpha: Default::default(),
         })
     }
     pub(crate) fn capture_limit(&self) -> u32 {
@@ -57,6 +59,7 @@ impl RenderBackend for VulkanRenderer {
         let commands = submission::CommandSubmission::new(&self.runtime)?;
         record::record_frame(&self.runtime, commands.command, &resources, frame);
         commands.finish()?;
+        self.commit_fragment_alpha(frame, resources.fragment_alpha.ending);
         resources.capture()
     }
 }
@@ -100,6 +103,7 @@ impl VulkanRenderer {
             .semaphore(chain.sync.rendered)
             .stage_mask(ash::vk::PipelineStageFlags2::ALL_COMMANDS)];
         commands.finish_synced(&waits, &signals)?;
+        self.commit_fragment_alpha(frame, resources.fragment_alpha.ending);
         chain.present(
             self.runtime.queues[presenter.present_family as usize],
             index,
@@ -112,6 +116,13 @@ mod storage_descriptor;
 
 mod capping_state;
 impl VulkanRenderer {
+    fn commit_fragment_alpha(&mut self, frame: &RenderFrame, ending: crate::legacy_fragment_alpha::LegacyFragmentAlpha) {
+        if let Some(snapshot) = &frame.fragment_alpha_context {
+            snapshot.commit(ending);
+            return;
+        }
+        self.fragment_alpha = ending;
+    }
     fn frame_resources(
         &mut self,
         frame: &RenderFrame,
@@ -133,7 +144,7 @@ impl VulkanRenderer {
         } else {
             &self.pipeline
         };
-        frame::FrameResources::new(&self.runtime, frame, pipeline)
+        frame::FrameResources::new(&self.runtime, frame, pipeline, frame.initial_fragment_alpha(self.fragment_alpha))
     }
 }
 
@@ -148,3 +159,29 @@ mod surface_sampler;
 mod surface_texture_pipeline;
 
 mod mesh_edge_pipeline;
+
+mod oit_support;
+mod fragment_alpha_plan;
+mod fragment_alpha_upload;
+mod native_alpha_shader;
+mod native_alpha_shader_table;
+mod raster_samples;
+mod oit_targets;
+mod oit_blend;
+mod oit_plan;
+mod oit_descriptor;
+mod oit_pipeline;
+mod oit_shader_table;
+mod oit_composite;
+mod oit_pipeline_cache;
+mod oit_frame;
+mod oit_upload;
+mod oit_barriers;
+mod oit_record;
+mod multisample_targets;
+mod frame_raster_plan;
+mod pipeline_layout;
+mod render_target_record;
+mod raster_limits;
+#[cfg(test)]
+mod oit_resource_tests;

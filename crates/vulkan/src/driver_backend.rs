@@ -8,6 +8,12 @@ pub(crate) enum DriverBackend {
     Injected(Box<dyn RenderBackend + Send + Sync>),
 }
 impl DriverBackend {
+    pub fn raster_limit(&self, limit: rustycad_tkservice::graphic3d::Graphic3dTypeOfLimit) -> i32 {
+        match self {
+            Self::Vulkan(device) => device.raster_limit(limit),
+            Self::Injected(_) => 0,
+        }
+    }
     pub fn render(&mut self, frame: &RenderFrame) -> Result<FrameCapture, RenderError> {
         match self {
             Self::Vulkan(device) => device.render(frame),
