@@ -1,0 +1,124 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "audit_source_commit": "6c41b034c",
+  "purpose": "Read-only semantic audit recommendations for coordinator; no global ledger edits or completion claims.",
+  "evidence": [
+    "clip-collection-references-2026-10-12/native-references.json",
+    "clip-collection-retirement-2026-10-12/native-lifecycle.json",
+    "clip-allocator-argument-2026-10-12/native-allocator.json"
+  ],
+  "rows": [
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator",
+      "recommended_status": "partial",
+      "gap": "Snapshot index/vector does not implement inherited live native cursor/value-reference contracts."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Iterator(const Graphic3d_SequenceOfHClipPlane &)",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::new",
+      "recommended_status": "partial",
+      "gap": "Owns a cloned plane snapshot; native constructor retains no planes and follows subsequent node edits."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Iterator(const occ::handle<Graphic3d_SequenceOfHClipPlane> &)",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::from_handle",
+      "recommended_status": "partial",
+      "gap": "Owns a cloned plane snapshot; native constructor retains no planes and follows subsequent node edits."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Init(const Graphic3d_SequenceOfHClipPlane &)",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::init",
+      "recommended_status": "partial",
+      "gap": "Restarts from a cloned snapshot rather than actual current native nodes."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Iterator::Init(const occ::handle<Graphic3d_SequenceOfHClipPlane> &)",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlaneIterator::init_handle",
+      "recommended_status": "partial",
+      "gap": "Null case works, but nonnull Init restarts from an owning snapshot."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Append",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::append",
+      "recommended_status": "partial",
+      "gap": "Takes a narrowed owning argument rather than its live constHandle slot; allocator callback can retarget before copy."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Remove(const occ::handle<Graphic3d_ClipPlane> &)",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove",
+      "recommended_status": "partial",
+      "gap": "Releases last target while holding collection write guard; native destructor callback may reenter collection."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Remove(Graphic3d_SequenceOfHClipPlane::Iterator &)",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::remove_at",
+      "recommended_status": "partial",
+      "gap": "Exhausted-cursor no-op is fixed separately, but snapshot index is not actual live node/cursor removal."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::Clear",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::clear",
+      "recommended_status": "partial",
+      "gap": "Holding write guard spans target destructors, unlike valid native reentrant metadata/first callbacks."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::First",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::first",
+      "recommended_status": "partial",
+      "gap": "Returns an owning handle copy, not the actual node handle reference; protected replacement is not observed."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::DumpJson",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::dump_json",
+      "recommended_status": "partial",
+      "gap": "Clones all plane handles and iterates an owning snapshot across actual virtual plane DumpJson callbacks."
+    },
+    {
+      "upstream_id": "Graphic3d_SequenceOfHClipPlane::myItems",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dSequenceOfHClipPlane::items",
+      "recommended_status": "partial",
+      "gap": "Stored Vec lacks actual native Sequence node identity, live cursors and retained element references."
+    },
+    {
+      "upstream_id": "Graphic3d_CView::ClipPlanes",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::clip_planes",
+      "recommended_status": "partial",
+      "gap": "Getter returns an owning collection handle, not a genuine borrowed live slot."
+    },
+    {
+      "upstream_id": "Graphic3d_CView::SetClipPlanes",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkservice::graphic3d::Graphic3dCView::set_clip_planes",
+      "recommended_status": "partial",
+      "gap": "Narrowed concrete collection argument misses valid source-derived virtual collection transport."
+    },
+    {
+      "upstream_id": "V3d_View::ClipPlanes",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkv3d::v3d::V3dView::clip_planes",
+      "recommended_status": "partial",
+      "gap": "Getter returns an owning collection handle, not forwarded genuine constHandle reference."
+    },
+    {
+      "upstream_id": "V3d_View::SetClipPlanes",
+      "existing_status": "implemented",
+      "existing_rust_item": "rustycad_tkv3d::v3d::V3dView::set_clip_planes",
+      "recommended_status": "partial",
+      "gap": "Narrowed concrete collection argument misses borrowed source-derived collection transport."
+    }
+  ]
+}
