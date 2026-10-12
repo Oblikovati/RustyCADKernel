@@ -1,6 +1,6 @@
 //! Named frustum fixture: inherited state with abstract geometry guarded against calls.
 use super::abstract_intersector;
-use rustycad_tkernel::standard::{Handle, StandardTransient, dump::DumpStream};
+use rustycad_tkernel::standard::{StandardTransient, dump::DumpStream};
 use rustycad_tkmath::gp::{Direction3, Point3};
 use rustycad_tkservice::graphic3d::Graphic3dCamera;
 use rustycad_tkv3d::select_mgr::*;
@@ -24,7 +24,10 @@ impl SelectMgrBaseIntersector for FrustumDefaultsIntersector {
         &self.base.intersector
     }
     abstract_intersector::reject_abstract_geometry!();
-    fn set_camera(&self, camera: &Handle<Graphic3dCamera>) {
+    fn set_camera(
+        &self,
+        camera: &dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera>,
+    ) {
         self.base.set_camera(camera);
     }
     fn set_pixel_tolerance(&self, tolerance: i32) {
