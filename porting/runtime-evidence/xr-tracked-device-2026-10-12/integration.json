@@ -1,0 +1,59 @@
+{
+  "project": "Martensite",
+  "feature_commit": "6dd748dda6b21ffad66525d27850d407417988ce",
+  "merge_commit": "30c9b8514",
+  "checked_source_revision": "de68bae4d",
+  "new_api_claims": 19,
+  "api_scope": "Complete captured defined-visible AIS_XRTrackedDevice family; no broader parent/private/API credits. Full-scope inventory refresh remains required.",
+  "current_source_preflight": {
+    "bindings": 19,
+    "exit_code": 0
+  },
+  "rust_tests": {
+    "passed": 1355,
+    "successful_executables": 61,
+    "all_targets": true,
+    "exit_code": 0
+  },
+  "clippy": {
+    "warnings_denied": true,
+    "all_targets": true,
+    "exit_code": 0
+  },
+  "format_and_canonical_discovery": true,
+  "main_gpu_tests": {
+    "host": 3,
+    "lavapipe": 3,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "native_cases": 16,
+    "gates": "Exact RGBA and max absolute depth difference <=1e-6, unchanged."
+  },
+  "native_cpu": {
+    "root_independent_rebuild": true,
+    "generators": 6,
+    "rows": 1058,
+    "repeats": 2,
+    "all_byte_equal_committed_assets": true
+  },
+  "integration_regression": "Original XR named-driver test required obsolete shadow-owned groups. Updated to assert zero owned groups and preservation of actual parent group after clearing shadow; focused and complete suites pass. Initial failure preserved.",
+  "performance": {
+    "source_revision": "92c12e733",
+    "raw_samples_verified": 2000,
+    "workloads_per_device": 10,
+    "warmup": 20,
+    "samples_per_workload": 100,
+    "validation": false,
+    "frozen_binary_sha256": "739ea56d0c8052f48268e3fdd01c94f669120483e4b4250d3b020c2ad652f762",
+    "listed_source_files_root_verified_before_after": 7432,
+    "baseline_accepted": false,
+    "source_scope_note": "Manifest binds listed Rust sources/Cargo/harness files; the frozen executable and clean committed branch bind embedded dependencies. Main later incorporates independently checked shadow lifecycle fix and test-only expectation correction. Timings retain original frozen branch source; no relabeling as main timings."
+  },
+  "worktree_cleanup": {
+    "status": "pending clean/ancestry/process audit; no archive permitted"
+  },
+  "release_note": "User authorized publishing current checked state after full release gates green. Unfinished worker features remain local.",
+  "local_porting": true
+}

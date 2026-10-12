@@ -1,0 +1,134 @@
+[
+  {
+    "suite": "state",
+    "rows": 960,
+    "repeat_byte_equal_fixture": true,
+    "binary_sha256": "d3be9902e125192a82a06aa34045cde14f987778f493379338cd95661e724739",
+    "compile_command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Itarget/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_xr_device_state.cxx",
+      "-Ltarget/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKG3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/xr-integrated-main-native/state"
+    ]
+  },
+  {
+    "suite": "selection",
+    "rows": 60,
+    "repeat_byte_equal_fixture": true,
+    "binary_sha256": "f3133ffc880edc85d49940c8b750259c8accac2a478bc2a4f832749b314ab906",
+    "compile_command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Itarget/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_xr_device_selection.cxx",
+      "-Ltarget/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKG3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/xr-integrated-main-native/selection"
+    ]
+  },
+  {
+    "suite": "texture",
+    "rows": 12,
+    "repeat_byte_equal_fixture": true,
+    "binary_sha256": "76d8147f146127ad7f6a5853557a2fa29bd7808f1873f959f4c98ccab60675f3",
+    "compile_command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Itarget/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_xr_device_texture.cxx",
+      "-Ltarget/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKG3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/xr-integrated-main-native/texture"
+    ]
+  },
+  {
+    "suite": "color_reference",
+    "rows": 8,
+    "repeat_byte_equal_fixture": true,
+    "binary_sha256": "cb6872f05ac72870ec1e24640fdea2486d90eb969709ee58284c84fd263209ac",
+    "compile_command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Itarget/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_xr_device_color_reference.cxx",
+      "-Ltarget/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKG3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/xr-integrated-main-native/color_reference"
+    ]
+  },
+  {
+    "suite": "cached_presentation",
+    "rows": 8,
+    "repeat_byte_equal_fixture": true,
+    "binary_sha256": "232acdefc516c2626c52efd0dde00719a09c17b41e3e6bb6d6f559eb737fe6bb",
+    "compile_command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Itarget/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_xr_device_cached_presentation.cxx",
+      "-Ltarget/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKG3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/xr-integrated-main-native/cached_presentation"
+    ]
+  },
+  {
+    "suite": "dispatch",
+    "rows": 10,
+    "repeat_byte_equal_fixture": true,
+    "binary_sha256": "7629d448ac2244572389b9488591f620b2a22695ce417df9a533480a22008b7d",
+    "compile_command": [
+      "g++",
+      "-std=c++17",
+      "-O2",
+      "-Itarget/occt-all-full/include/opencascade",
+      "tools/oracle/martensite_xr_device_dispatch.cxx",
+      "-Ltarget/occt-all-full/lin64/gcc/libi",
+      "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+      "-lTKV3d",
+      "-lTKG3d",
+      "-lTKService",
+      "-lTKMath",
+      "-lTKernel",
+      "-o",
+      "target/xr-integrated-main-native/dispatch"
+    ]
+  }
+]

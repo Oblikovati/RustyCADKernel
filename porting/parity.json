@@ -567500,10 +567500,10 @@
       "upstream_id": "V3d_View::ActiveLights"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::add_clip_plane",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::AddClipPlane"
     },
@@ -568172,18 +568172,18 @@
       "upstream_id": "V3d_View::Project(const double,const double,const double,double &,double &,double &) const"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::redraw",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::Redraw"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::redraw_immediate",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::RedrawImmediate"
     },
@@ -568196,10 +568196,10 @@
       "upstream_id": "V3d_View::Remove"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
+      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver. Native V3d_View declares this method virtual. Martensite currently retains concrete V3dView handles and calls inherent methods, so valid application-derived view overrides cannot dispatch. Concrete base behavior and existing rendering evidence remain valid; owned V3dViewSource/base and generalized retained slots are required. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dView::remove_clip_plane",
       "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_View::RemoveClipPlane"
     },
@@ -595021,8 +595021,8 @@
       "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
       "cpp_declaration_id": "29f796d9da4963b93acea60a9842cbdcbce5f2d14ab52c5de18df26818439711",
       "rust_item": "rustycad_tkv3d::ais::AisViewController::handle_camera_actions",
-      "status": "implemented",
-      "notes": "Martensite full pinned OCCT3d097a0 camera actions/lazy detection with actual constructor-owned AIS_Point presentations, real AIS scene/context/cameras/XR/grids and animation callbacks.12540 committed native CPU snapshots and Rust-only replay prove full request/anchor/camera/caller state, callback Failure/nonFailure transport, animationstop retry, cursor cache/temporary depth failure order. Fresh unique pinned Rustdoc bindings in runtime-evidence/controller-camera-actions-2026-10-12/rust-binding.json; full17digit fixtures/native runs retained with exact metadata and numeric repeatability evidence. Constructor/class staypartial; constructorResult APIchange explicitly documented. No frame/hotkey orchestration claim."
+      "status": "partial",
+      "notes": "Martensite full pinned OCCT3d097a0 camera actions/lazy detection with actual constructor-owned AIS_Point presentations, real AIS scene/context/cameras/XR/grids and animation callbacks.12540 committed native CPU snapshots and Rust-only replay prove full request/anchor/camera/caller state, callback Failure/nonFailure transport, animationstop retry, cursor cache/temporary depth failure order. Fresh unique pinned Rustdoc bindings in runtime-evidence/controller-camera-actions-2026-10-12/rust-binding.json; full17digit fixtures/native runs retained with exact metadata and numeric repeatability evidence. Constructor/class staypartial; constructorResult APIchange explicitly documented. No frame/hotkey orchestration claim. Native camera actions traverse live NCollection_Sequence zoom nodes, copying only the current scroll value before virtual callbacks. Current Rust snapshots the whole zoom sequence into a Vec, so valid callback append/remove-other-node edits cannot affect later traversal. Existing concrete camera-action fixtures remain valid; actual Source callback mutation requires a detached live cursor and shared buffer storage. See porting/runtime-evidence/view-dispatch-zoom-reference-gaps-2026-10-12.json."
     },
     {
       "upstream_id": "AIS_ViewController::contextLazyMoveTo(const occ::handle<AIS_InteractiveContext> &, const occ::handle<V3d_View> &, const NCollection_Vec2<int> &)",
@@ -596637,6 +596637,196 @@
           "impl_context": null
         }
       ]
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::ComputeSelection",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::<rustycad_tkv3d::select_mgr::SelectMgrSelectableObject>::compute_selection",
+      "cpp_declaration_id": "10a31871f48b159f8421a3d68b455425205269490b8f0c565e30941d16b50916",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::SetRole",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::set_role",
+      "cpp_declaration_id": "13e5f243d37929079dbad5f882cdc04af923584e03a3e3a853e326f62897ccce",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::AcceptDisplayMode",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::accept_display_mode",
+      "cpp_declaration_id": "221030d14dca85801b6882fec2681860c3722cedae9fc12290f90e3819bbaa80",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ViewController.hxx",
+      "source_sha256": "df086f75ce82cd69880a9a927baaee6af997ab8e9f63771d1a10fd8944e59412",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice",
+      "cpp_declaration_id": "229b7f5b5ed961f25071e139795919f3f2dcfb0c94c4d713c38840f76a47d0e9",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::base_type",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceParent",
+      "cpp_declaration_id": "268991e1d9411c54f8cf231e592f04b61cb49af8ea99b5b16b6b1cd19d091b1f",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::SetLaserLength",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::set_laser_length",
+      "cpp_declaration_id": "2e040740e8ab23856495ef3ce33820fe9324a3698cdfd65067df87254f3ce20c",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::AIS_XRTrackedDevice",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::new",
+      "cpp_declaration_id": "3a3d1138ab24cc17a3366414e958770e8b516d39e2308912e0e8b650b9830062",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::SetUnitFactor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::set_unit_factor",
+      "cpp_declaration_id": "3bd624b52197fb10869a8d186d829231efde3863713424a45c10e6b0ecc4c813",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::SetLaserColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::set_laser_color",
+      "cpp_declaration_id": "48ce19cce9ae03cdd5d23692fa2742f47a6298d9369c1b8f7f815ed27873b917",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::DynamicType",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "cpp_declaration_id": "6e0615c12b857122851da75ffa2c512beae7a353dd61d7eb0696005dc724f67e",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::computeLaserRay",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::compute_laser_ray",
+      "cpp_declaration_id": "76328f71231dd37565d6a5da7c6c2f61d3a1fce6f21906706b89e508d2a8419e",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::Role",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::role",
+      "cpp_declaration_id": "844e0f02dd664aeae72a5705b71d230259ef9d08dfda297e007dadb4ad16647d",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::Compute",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::<rustycad_tkv3d::prs_mgr::PrsMgrPresentableObject>::compute",
+      "cpp_declaration_id": "8d3a529da1b25acef358f2005d680cb7055a4915236f81f5d98aca0dc2219b05",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::LaserColor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::laser_color_ref",
+      "cpp_declaration_id": "9799dd4d0dda7e66c76a490af364fba06d813ff998cbfa808341ca122001b8e8",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::AIS_XRTrackedDevice",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::with_render_model",
+      "cpp_declaration_id": "a48dca0d7150cf63a755c2c3f4464ddaf37607e32f6a4b6bc04fe57ab486930a",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::UnitFactor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::unit_factor",
+      "cpp_declaration_id": "c56cfd44821cafb41cd49585a2f05ac71a29c6ec6c166ffa1fb8b42d168eb2ee",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::get_type_name",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "cpp_declaration_id": "d6dc609157ba306115ec2b08ea8fc96b3db7f8c8c46f7608b3a51d216a0333e8",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::LaserLength",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDeviceMembers::laser_length",
+      "cpp_declaration_id": "e442c9f7093c7b9edd215610704e6a09adfba5bcf78c0a6cb4f3c83fa7833964",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
+    },
+    {
+      "upstream_id": "AIS_XRTrackedDevice::get_type_descriptor",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_XRTrackedDevice.hxx",
+      "source_sha256": "87d0d967449ae3c52167a9c6f37e89286c412c373583bcd09aaadc26a9ae7abc",
+      "rust_item": "rustycad_tkv3d::ais::AisXrTrackedDevice::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "cpp_declaration_id": "fbc45473015d87211625471f96ffff0efd84c7b1e492efdb44ee54b99210b901",
+      "status": "implemented",
+      "notes": "Martensite full defined-visible AIS_XRTrackedDevice family at pinned OCCT 3d097a0: actual interactive subclass, constructors, role/unit non-invalidation, live LaserColor const reference, exact color tolerance/NaN length predicates, nonvirtual synchronous ray update, native finite ray accumulation/infinite clear ordering, actual model/axes/ray buffers and camera-bound exclusion, model-buffer sharing/retention plus real primitive selecting volumes and owner identity, derived virtual presentation/selection/accept callbacks with inherited RTTI/real base projection, and checked failures/repair with partial writes. Six repeated CPU native corpora1058 rows plus standalone Texture2D RTTI prerequisite; Rust-only committed replay. Native class canonical source is AIS_ViewController.hxx forward site, with actual AIS_XRTrackedDevice.hxx definition site preserved. No private/nested API or broader parent-family completion credits. See docs/xr-tracked-device.md and batch receipt."
     }
   ],
   "tests": [
