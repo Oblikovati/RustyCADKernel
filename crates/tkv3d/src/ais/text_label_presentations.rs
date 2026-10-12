@@ -1,6 +1,7 @@
 //! Native mode-zero label presentation, persistence transitions and rectangle selection.
 use super::AisTextLabel;
 use crate::{prs_mgr::*, prs3d::Prs3dText, select_mgr::*, select3d::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     ncollection::Vec4,
     standard::{Failure, Handle},
@@ -136,7 +137,7 @@ impl SelectMgrSelectableObject for AisTextLabel {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         if mode != 0 {
@@ -144,26 +145,15 @@ impl SelectMgrSelectableObject for AisTextLabel {
         }
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), 10);
-        let persistence = self.transform_persistence();
-        let position =
-            if !persistence.is_null() && persistence.mode() != Graphic3dTransModeFlags::TMF_2D {
-                Point3::default()
-            } else {
-                self.position()
-            };
+        let position = text_label_selection_position(self);
         let Some((center, width, height)) = self.calculate_label_params(position)? else {
-            return selection
-                .add(&Handle::new(Select3DSensitivePoint::new(&owner.cast(), position)).cast());
+            let point = Select3DSensitivePoint::new(&owner.cast(), position);
+            return selection.observe().add(&Handle::new(point).cast());
         };
         let points = self.label_rectangle(position, center, width, height)?;
-        selection.add(
-            &Handle::new(Select3DSensitiveFace::new(
-                &owner.cast(),
-                &points,
-                Select3DTypeOfSensitivity::Interior,
-            )?)
-            .cast(),
-        )
+        let kind = Select3DTypeOfSensitivity::Interior;
+        let face = Select3DSensitiveFace::new(&owner.cast(), &points, kind)?;
+        selection.observe().add(&Handle::new(face).cast())
     }
 }
 
@@ -172,4 +162,12 @@ fn label_screen_persistence(zoomable: bool) -> Graphic3dTransModeFlags {
         return Graphic3dTransModeFlags::ROTATE_PERS;
     }
     Graphic3dTransModeFlags::ZOOM_ROTATE_PERS
+}
+
+fn text_label_selection_position(label: &AisTextLabel) -> Point3 {
+    let persistence = label.transform_persistence();
+    if !persistence.is_null() && persistence.mode() != Graphic3dTransModeFlags::TMF_2D {
+        return Point3::default();
+    }
+    label.position()
 }

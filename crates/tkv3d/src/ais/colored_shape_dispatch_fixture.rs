@@ -2,6 +2,7 @@
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
 use rustycad_tkbrep::topods::Shape;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
 use std::{
@@ -100,8 +101,8 @@ impl PrsMgrPresentableObject for ColoredDispatchFake {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        _: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         Err(Failure::new(&format!(
@@ -114,7 +115,11 @@ impl SelectMgrSelectableObject for ColoredDispatchFake {
         // Genuine parent fields remain owned even though this probe never selects geometry.
         &self.base.shape.interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, mode: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        mode: i32,
+    ) -> Result<(), Failure> {
         Err(Failure::new(&format!(
             "probe selection mode={mode}; expected lifecycle-only call"
         )))

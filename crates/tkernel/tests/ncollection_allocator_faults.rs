@@ -2,7 +2,10 @@
 #![allow(unsafe_code)]
 use allocator_api2::alloc::Allocator;
 use rustycad_tkernel::{
-    ncollection::{AllocatorObject, AllocatorSource, BaseAllocator, IncrementalAllocatorObject},
+    ncollection::{
+        AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource,
+        BaseAllocator, IncrementalAllocatorObject,
+    },
     standard::Handle,
 };
 use std::{alloc::Layout, ptr::NonNull};
@@ -18,9 +21,11 @@ unsafe impl AllocatorSource for NullAllocationProbe {
         // Projection borrows this original native count base.
         &self.parent
     }
-    fn allocate(&self, _size: usize) -> Option<NonNull<u8>> {
-        // Native derived allocators may reject allocation without constructing payload storage.
-        None
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate: null_probe_allocate,
+            ..Default::default()
+        }
     }
 }
 #[derive(Default)]
@@ -35,9 +40,11 @@ unsafe impl AllocatorSource for ThrowingIncrementalProbe {
         // The incremental forwarding body reads its actual embedded base policy.
         self.parent.allocator_object_base()
     }
-    fn allocate_optimal(&self, size: usize) -> Option<NonNull<u8>> {
-        // Inject the native virtual failure before allocation; the typed construction guard unwinds.
-        panic!("requested allocation={size}; expected successful virtual allocator")
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate_optimal: throwing_probe_optimal,
+            ..Default::default()
+        }
     }
 }
 #[test]
@@ -60,4 +67,13 @@ fn virtual_unwind_releases_pending_incremental_lease_without_payload() {
     assert!(failure.is_err());
     assert!(resource.reset(false).is_ok());
     assert_eq!(owner.ref_count(), 2);
+}
+
+fn null_probe_allocate(_invocation: &AllocatorInvocation, _size: usize) -> Option<NonNull<u8>> {
+    // Native derived allocators may reject allocation without constructing payload storage.
+    None
+}
+fn throwing_probe_optimal(_invocation: &AllocatorInvocation, size: usize) -> Option<NonNull<u8>> {
+    // Inject the native virtual failure before allocation; the typed construction guard unwinds.
+    panic!("requested allocation={size}; expected successful virtual allocator")
 }

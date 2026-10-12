@@ -5,6 +5,7 @@ use super::{
     color_scale_layout::{ColorScaleFrame, ColorScaleTextPlacement},
 };
 use crate::{prs_mgr::*, prs3d::Prs3dTextAspect};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::{
     ncollection::String8,
     quantity::{Color, NamedColor},
@@ -133,14 +134,14 @@ impl PrsMgrPresentableObject for AisColorScale {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         if mode != 0 {
             return Ok(());
         }
-        self.compute_scale(prs)
+        self.compute_scale(&prs.observe())
     }
     crate::ais_presentable_overrides!();
 }

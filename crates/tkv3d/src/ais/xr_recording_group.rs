@@ -79,7 +79,10 @@ impl Graphic3dGroup for XrRecordingGroup {
         // Aspect identity remains the exact submitted parent handle.
         self.inner.aspects()
     }
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         self.events.callbacks.write().push(100 + self.index);
         if *self.events.unexpected_panic.read() {
             std::panic::panic_any("Martensite_XrUnexpectedCallback");
@@ -99,7 +102,10 @@ impl Graphic3dGroup for XrRecordingGroup {
         drop(recorded);
         self.inner.clear(update);
     }
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         // Non-XR driver hooks still delegate to the same retained parent aspects.
         self.inner.set_primitives_aspect(aspect);
     }

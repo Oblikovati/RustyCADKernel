@@ -1,0 +1,37 @@
+{
+  "purpose": "Martensite controlled-clear prerequisite; no restored upstream/clipping class claims.",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "sequence_filtered_all_targets_passed": 151,
+  "clippy_all_targets_exit": 0,
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/mod.rs": "0de456a58f2e263cde553ad68fe9d7066053846865ce33e2c4d10a089bb875b2",
+    "crates/tkernel/src/ncollection/sequence.rs": "8db680f717e275f273bd83ff65441aaa009e451b0dc6b91663e99d53930200c3",
+    "crates/tkernel/src/ncollection/sequence/access.rs": "d49934f55415c1fc8d76365c6aa2473c239959688859c4f77fcc8dc5212bd0fe",
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion/self_splice.rs": "33b5ca5ab4dbdac5be4ff52e6c3ac4cff7d52437d55cc5f86808f3a705521907",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+    "crates/tkernel/src/ncollection/sequence/editing.rs": "976673dd0677195d6839f7055a90139fb3136859c25602311e0e39946838c769",
+    "crates/tkernel/src/ncollection/sequence/editing/removal.rs": "85720c1a9e952e036bfb8662e5619eb6d714c0143234e74499c9719027549b21",
+    "crates/tkernel/src/ncollection/sequence/iteration.rs": "907be12d8f6b9cee55f6ebf41d76ca7e71380915b8d02fd2833a5bf5dcd146a0",
+    "crates/tkernel/src/ncollection/sequence/links.rs": "6dbd2d27be4332ce004876371af242e2be63dc8b5714d2ca852839f59b1bd0cf",
+    "crates/tkernel/src/ncollection/sequence/topology.rs": "036fb5dd98bc9d51863154becbc1141e25c8c454d68593586ee2791e1d9909dd",
+    "crates/tkernel/src/ncollection/sequence/base_storage/node_liveness.rs": "947b1a463d0b5f2fead94a16aaa423050530e79bb02c6ab76a5481502c450b42",
+    "crates/tkernel/src/ncollection/sequence/controlled_clear.rs": "bffb963a84db223d3e20df3c45bf9732e1b94f7b07bb3a6bf050be05342f0d32",
+    "crates/tkernel/src/ncollection/sequence/controlled_clear_tests.rs": "8cdac38029d64caf2170fea815c4217a039d1b849d53ffbcbd120b39a673a42c"
+  },
+  "semantics": [
+    "Actual native size/endpoints/cache stay in place through per-node destruction; saved Next is captured before callbacks.",
+    "Current payload remains registered during visit; detached allocation can be dropped/Free outside caller field guards.",
+    "Per-instance boxed registry validates canonical raw metadata prefix dereferences in controlled phases; live late-node exchange/index lookup remains supported.",
+    "Already freed endpoint/iterator prefixes are rejected before safe dereference.",
+    "Final reset deliberately abandons callback-added unvisited nodes, preserving native lost handle ownership.",
+    "Interrupted/undefined reclear cleanup resets stale metadata before remaining owner release."
+  ],
+  "remaining": [
+    "Genuine clipping per-node field slots, full callback/alias Rust replay.",
+    "Checked allocator noncounting lease/current-resource Free integration.",
+    "Borrowed CView/V3d transport and actual renderer device proof."
+  ]
+}

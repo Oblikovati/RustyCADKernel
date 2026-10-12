@@ -134,3 +134,13 @@ mod subview_sequence_field_tests;
 
 #[cfg(test)]
 mod cview_bounds_camera_callback_tests;
+
+#[cfg(test)]
+mod view_clip_retarget_probe;
+
+#[cfg(test)]
+mod view_clip_callback_failure_replay;
+#[cfg(test)]
+mod view_clip_retarget_fixture;
+#[cfg(test)]
+mod view_clip_retarget_replay;

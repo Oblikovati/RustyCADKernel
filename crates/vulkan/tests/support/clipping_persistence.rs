@@ -86,7 +86,9 @@ fn configure_text(scene: &ViewerScene, mode: &str) {
 }
 fn configure_text_planes(scene: &ViewerScene, mode: &str) {
     if mode == "clip-text-baseline" {
-        scene.view.set_clip_planes(&Handle::default());
+        scene
+            .view
+            .set_clip_planes(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     } else if mode != "clip-text-cut" {
         scene
             .view

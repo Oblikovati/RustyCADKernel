@@ -2,6 +2,7 @@
 //! transformations, clipping, children and `Fill`; an override calls them as the native
 //! `PrsMgr_PresentableObject::Member` call.
 use super::{PrsMgrPresentableObject, PrsMgrPresentation, PrsMgrPresentationManager};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, WeakHandle};
 use rustycad_tkmath::gp::{GeneralTransform3, Transform3, TransformForm};
 use rustycad_tkmath::toploc::Datum3;
@@ -216,13 +217,15 @@ pub fn prs_mgr_remove_child<O: PrsMgrPresentableObject + ?Sized>(
 /// and the persistence of the object on the presentation. Example: `prs_mgr_fill(&*object, &manager, &prs, 0)?`.
 pub fn prs_mgr_fill<O: PrsMgrPresentableObject + ?Sized>(
     object: &O,
-    manager: &Handle<PrsMgrPresentationManager>,
-    prs: &Handle<PrsMgrPresentation>,
+    manager: &dyn HandleReference<PrsMgrPresentationManager>,
+    prs: &dyn HandleReference<PrsMgrPresentation>,
     mode: i32,
 ) -> Result<(), Failure> {
-    object.compute(manager, &prs.clone().cast(), mode)?;
+    let source = rustycad_tkernel::standard::ProjectedHandleReference::new(prs);
+    object.compute(manager, &source, mode)?;
     let fields = object.presentable_base().read();
-    if let Some(structure) = prs.get() {
+    let presentation = prs.observe();
+    if let Some(structure) = presentation.get() {
         structure.set_transformation(&fields.transformation);
         structure.set_clip_planes(&fields.clip_planes);
         structure.set_transform_persistence(&fields.transform_persistence);

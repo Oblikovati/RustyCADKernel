@@ -201,7 +201,9 @@ fn configure_cap_culling(scene: &ViewerScene, mode: &str) {
             )));
     }
     if mode == "cap-mirror-uncut" {
-        scene.view.set_clip_planes(&Handle::default());
+        scene
+            .view
+            .set_clip_planes(&Handle::<Graphic3dSequenceOfHClipPlane>::default());
     }
 }
 

@@ -12,7 +12,7 @@ use rustycad_tkg3d::top_abs::{self, ShapeEnum};
 use std::ops::{Deref, DerefMut};
 
 /// The check of every `TopoDS` cast: a null shape or a shape of the requested type.
-fn check_cast(shape: &Shape, kind: ShapeEnum, cast: &str) -> Result<(), Failure> {
+pub(super) fn check_cast(shape: &Shape, kind: ShapeEnum, cast: &str) -> Result<(), Failure> {
     let Some(tshape) = shape.tshape().get() else {
         return Ok(());
     };
@@ -71,8 +71,8 @@ macro_rules! typed_shape {
         }
 
         #[doc = concat!("`", $native_cast, "(S)`: `S` as a typed shape; Standard_TypeMismatch when \
-                         `S` is not null and has another type. Both native overloads (const and \
-                         non-const reference) map here and return a copy.")]
+                         `S` is not null and has another type. This owned convenience conversion \
+                         does not implement the native reference-returning overloads.")]
         pub fn $cast(shape: &Shape) -> Result<$class, Failure> {
             check_cast(shape, $kind, $native_cast)?;
             Ok($class(shape.clone()))

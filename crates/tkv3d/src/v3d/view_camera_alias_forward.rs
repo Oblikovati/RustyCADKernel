@@ -1,7 +1,7 @@
 //! Named camera-view fake forwards real retained scene operations; only its Camera slot selection differs.
 use super::view_camera_alias_fixture::BorrowedCameraView;
 use rustycad_tkernel::{
-    standard::{Failure, Handle, HandleFieldRef, HandleReference, StandardTransient},
+    standard::{Failure, Handle, HandleReference, StandardTransient, WeakHandleFieldRef},
     tcollection::AsciiString,
 };
 use rustycad_tkservice::{aspect::*, graphic3d::*, image::ImagePixMap};
@@ -25,12 +25,14 @@ impl Graphic3dCView for BorrowedCameraView {
     fn cview_base(&self) -> &Graphic3dCViewBase {
         self.retained.cview_base()
     }
-    fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
+    fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera>> {
         self.control
             .bounds_getter_calls
             .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         if *self.control.alternate_selected.read() {
-            return Box::new(HandleFieldRef::new(&self.control.alternate, |slot| slot));
+            return Box::new(WeakHandleFieldRef::new(&self.control.alternate, |slot| {
+                slot
+            }));
         }
         graphic3d_cview_camera_ref(self.cview_base())
     }
@@ -177,10 +179,20 @@ impl Graphic3dCView for BorrowedCameraView {
         }
         self.retained.set_lights(lights)
     }
-    fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
-        self.retained.clip_planes()
+    fn clip_planes_ref(&self) -> Box<dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>> {
+        if let Some(probe) = self.control.clip_probe.read().as_ref() {
+            return super::view_clip_retarget_probe::clip_probe_getter(self, probe);
+        }
+        self.retained.clip_planes_ref()
     }
-    fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {
+    fn set_clip_planes(
+        &self,
+        planes: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
+    ) {
+        if let Some(probe) = self.control.clip_probe.read().as_ref() {
+            super::view_clip_retarget_probe::clip_probe_setter(self, probe, planes);
+            return;
+        }
         self.retained.set_clip_planes(planes)
     }
     fn diagnostic_information(

@@ -52,6 +52,13 @@ impl BaseAllocator {
         };
         (!observed.is_null()).then_some(observed)
     }
+    pub(super) fn source_invocation(&self) -> Option<crate::ncollection::AllocatorInvocation> {
+        let observed = self.source_observer()?;
+        // This observer is gone before the actual virtual body can release its last native owner.
+        Some(crate::ncollection::AllocatorInvocation::from_observer(
+            &observed,
+        ))
+    }
     pub(super) fn dispatch_source<R>(
         &self,
         call: impl FnOnce(&dyn AllocatorSource) -> R,

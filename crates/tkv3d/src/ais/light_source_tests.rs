@@ -1,6 +1,7 @@
 //! Rust-only replay of committed native state and world/light propagation snapshots.
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkmath::{gp::*, toploc::Datum3};
 use rustycad_tkservice::{aspect::AspectTypeOfMarker, graphic3d::*};
@@ -63,8 +64,8 @@ impl PrsMgrPresentableObject for FakeLightPresentation {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        _: &dyn HandleReference<dyn Graphic3dStructureSource>,
         _: i32,
     ) -> Result<(), Failure> {
         Ok(())
@@ -74,7 +75,11 @@ impl SelectMgrSelectableObject for FakeLightPresentation {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.light.interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, _: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        _: i32,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 }

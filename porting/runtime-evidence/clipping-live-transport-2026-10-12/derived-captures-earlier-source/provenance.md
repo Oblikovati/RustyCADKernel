@@ -1,0 +1,1 @@
+Earlier-source derived clipping captures, preceding allocator invocation and checked-main fixed-lighting adoption. Native repeats were exact; all six strict comparisons passed. These buffers are retained as historical diagnostics, not relabeled as final-source proof. Final-source captures are collected separately.

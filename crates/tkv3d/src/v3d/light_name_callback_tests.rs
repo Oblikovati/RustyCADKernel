@@ -4,7 +4,7 @@ use super::light_name_callback_fixture::{
     CallbackNameStorage, CallbackNameView, CallbackObservedView,
 };
 use super::{V3dImageDumpOptions, V3dLightName, V3dTypeOfView, V3dView, V3dViewSource, V3dViewer};
-use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::standard::{Handle, IntrusiveReferenceSlot};
 use rustycad_tkservice::{
     aspect::AspectNeutralWindow, graphic3d::Graphic3dBufferType, image::ImagePixMap,
     null_driver::NullGraphicDriver,
@@ -14,8 +14,7 @@ fn callback_view(
     viewer: &Handle<V3dViewer>,
     control: &std::sync::Arc<CallbackNameStorage>,
 ) -> Handle<dyn V3dViewSource> {
-    let mut base = V3dView::new_embedded(viewer, V3dTypeOfView::Orthographic).unwrap();
-    base.view = CallbackObservedView::create(&viewer.structure_manager(), control);
+    let base = callback_view_base(viewer, control);
     let view = Handle::new(CallbackNameView {
         base,
         control: control.clone(),
@@ -26,6 +25,19 @@ fn callback_view(
     window.set_size(8, 8);
     view.set_window(&window.cast(), 0).unwrap();
     view
+}
+
+fn callback_view_base(
+    viewer: &Handle<V3dViewer>,
+    control: &std::sync::Arc<CallbackNameStorage>,
+) -> V3dView {
+    let mut base = V3dView::new_embedded(viewer, V3dTypeOfView::Orthographic).unwrap();
+    // Transfer the actual callback view owner; a copied slot would distort native callback counts.
+    base.driver_view_slot = IntrusiveReferenceSlot::from_owned(CallbackObservedView::create(
+        &viewer.structure_manager(),
+        control,
+    ));
+    base
 }
 
 #[test]

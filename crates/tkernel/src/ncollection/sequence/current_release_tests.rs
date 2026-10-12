@@ -1,6 +1,9 @@
 //! Resource replacement in the real payload destructor must precede the current Free call.
 #![allow(unsafe_code)]
-use crate::ncollection::{AllocatorObject, AllocatorSource, BaseAllocator, Sequence};
+use crate::ncollection::{
+    AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource, BaseAllocator,
+    Sequence,
+};
 use crate::standard::{Failure, Handle, SharedState, Transient};
 use std::sync::Arc;
 
@@ -17,12 +20,11 @@ unsafe impl AllocatorSource for RetirementFreeRecorder {
         // Counts and allocation provenance belong to this genuine embedded native base.
         &self.parent
     }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        self.free_counts
-            .write()
-            .push(self.transient_base().ref_count());
-        // SAFETY: the fixture passes an original compatible Standard heap allocation.
-        unsafe { self.parent.free_base(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            free: retirement_recorder_free,
+            ..Default::default()
+        }
     }
 }
 struct RetirementResourceReplacement {
@@ -109,4 +111,20 @@ fn payload_replacement_selects_actual_current_free_without_per_node_ownership() 
 fn rust_payload_unwind_keeps_current_resource_allocation_cleanup() {
     // Rust's existing node cleanup remains defined; no C++ throwing-destructor parity claim.
     execute_current_resource_case(true);
+}
+
+fn record_retirement_free(source: &RetirementFreeRecorder) {
+    source
+        .free_counts
+        .write()
+        .push(source.transient_base().ref_count());
+}
+unsafe fn retirement_recorder_free(
+    invocation: &AllocatorInvocation,
+    pointer: *mut u8,
+) -> Result<(), Failure> {
+    // SAFETY: plain trace values cannot cause callbacks or resource retirement.
+    crate::standard::raise_native_failure(unsafe { invocation.capture(record_retirement_free) });
+    // SAFETY: fixture passes the original compatible Standard allocation pointer.
+    unsafe { invocation.free_base(pointer) }
 }

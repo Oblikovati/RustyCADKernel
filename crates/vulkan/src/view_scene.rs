@@ -3,48 +3,87 @@ use crate::{
     PrimitiveDraw, RenderError, RenderFrame, RenderLayer, driver_structure::RenderStructure,
     error::rejected,
 };
-use rustycad_tkernel::standard::Handle;
+use rustycad_tkernel::standard::{Handle, HandleObserver, HandleReference};
 use rustycad_tkservice::graphic3d::*;
 pub(crate) fn frame_for_view(
     view: &dyn Graphic3dCView,
     extent: [u32; 2],
+    clipping: &dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
 ) -> Result<RenderFrame, RenderError> {
     validate_view(view)?;
     crate::retained_texture_images::prune_view_texture_snapshots(view)?;
     let camera = crate::view_render_camera::owned_render_camera(view);
-    let mut layers = view.layers();
-    // OpenGl_FilteredIndexedLayerIterator at the pinned baseline renders normal layers before immediate ones.
-    layers.sort_by_key(|layer| layer.is_immediate());
-    update_view_culling(view, &layers, extent)?;
-    let rendering = view.rendering_params();
-    let selected = layers
-        .iter()
-        .filter(|layer| layer_selected(view, layer.layer_id()));
-    let mut passes: Vec<RenderLayer> = selected
-        .map(|layer| {
-            layer_pass(
-                layer,
-                &camera,
-                view.identification(),
-                extent,
-                &rendering,
-                &view.clip_planes(),
-            )
-        })
-        .collect::<Result<_, _>>()?;
+    let (mut passes, rendering) = view_layer_passes(view, extent, &camera, clipping)?;
     apply_view_culling(&mut passes, view.backfacing_model());
     crate::retained_lighting::apply_view_lights(&mut passes, view)?;
+    let mut frame = RenderFrame::with_layers(extent[0], extent[1], view_clear_color(view), passes)?;
+    frame.raster = crate::retained_transparency::view_raster_settings(view, &rendering)?;
+    Ok(frame)
+}
+struct ViewLayerInputs<'a> {
+    camera: &'a Graphic3dCamera,
+    clipping: HandleObserver<Graphic3dSequenceOfHClipPlane>,
+    rendering: Graphic3dRenderingParams,
+    extent: [u32; 2],
+    view_id: i32,
+}
+impl<'a> ViewLayerInputs<'a> {
+    fn new(
+        view: &dyn Graphic3dCView,
+        extent: [u32; 2],
+        camera: &'a Graphic3dCamera,
+        clipping: &dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
+    ) -> Self {
+        // OCCT UpdateCulling precedes Reset(myClipPlanes); capture this actual owned field afterward.
+        Self {
+            camera,
+            clipping: clipping
+                .observe()
+                .observe_as::<Graphic3dSequenceOfHClipPlane>(),
+            rendering: view.rendering_params(),
+            extent,
+            view_id: view.identification(),
+        }
+    }
+    fn layer(&self, layer: &Graphic3dLayer) -> Result<RenderLayer, RenderError> {
+        layer_pass(
+            layer,
+            self.camera,
+            self.view_id,
+            self.extent,
+            &self.rendering,
+            &self.clipping,
+        )
+    }
+}
+fn view_layer_passes(
+    view: &dyn Graphic3dCView,
+    extent: [u32; 2],
+    camera: &Graphic3dCamera,
+    clipping: &dyn HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
+) -> Result<(Vec<RenderLayer>, Graphic3dRenderingParams), RenderError> {
+    let mut layers = view.layers();
+    // OpenGl_FilteredIndexedLayerIterator renders normal layers before immediate ones.
+    layers.sort_by_key(|layer| layer.is_immediate());
+    update_view_culling(view, &layers, extent)?;
+    let inputs = ViewLayerInputs::new(view, extent, camera, clipping);
+    let passes = layers
+        .iter()
+        .filter(|layer| layer_selected(view, layer.layer_id()))
+        .map(|layer| inputs.layer(layer))
+        .collect::<Result<Vec<_>, _>>()?;
+    Ok((passes, inputs.rendering))
+}
+fn view_clear_color(view: &dyn Graphic3dCView) -> [f32; 4] {
     let color = view.cview_base().fields.read().bg_color;
-    let clear = [
+    [
         color.rgb().red() as f32,
         color.rgb().green() as f32,
         color.rgb().blue() as f32,
         color.alpha(),
-    ];
-    let mut frame=RenderFrame::with_layers(extent[0], extent[1], clear, passes)?;
-    frame.raster=crate::retained_transparency::view_raster_settings(view,&rendering)?;
-    Ok(frame)
+    ]
 }
+
 fn update_view_culling(
     view: &dyn Graphic3dCView,
     layers: &[Handle<Graphic3dLayer>],

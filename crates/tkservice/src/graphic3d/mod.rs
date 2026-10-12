@@ -31,8 +31,16 @@ mod camera_values;
 mod clip_plane;
 mod clip_plane_capping;
 mod clip_plane_chain;
+mod clip_plane_handle_field;
 mod clip_plane_probe;
 mod clip_plane_sequence;
+mod clip_plane_source;
+mod clip_sequence_inspection;
+mod clip_sequence_iterator;
+mod clip_sequence_mutation;
+mod clip_sequence_source;
+mod clip_sequence_storage;
+mod clip_source_handle_arguments;
 mod cstructure;
 mod cube_map;
 mod cube_map_order;
@@ -153,9 +161,10 @@ pub use camera_fit::*;
 pub use camera_projection::Graphic3dCameraScalar;
 pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
 pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dClipState};
-pub use clip_plane_sequence::{
-    Graphic3dSequenceOfHClipPlane, Graphic3dSequenceOfHClipPlaneIterator,
-};
+pub use clip_plane_handle_field::Graphic3dClipPlaneHandleField;
+pub use clip_plane_sequence::{Graphic3dClipSequenceParent, Graphic3dSequenceOfHClipPlane};
+pub use clip_plane_source::{Graphic3dClipPlaneSource, graphic3d_clip_plane_clone};
+pub use clip_sequence_source::Graphic3dClipPlaneSequenceSource;
 pub use cstructure::{
     Graphic3dCStructure, Graphic3dCStructureBase, Graphic3dCStructureFields,
     Graphic3dCStructureMembers,
@@ -308,6 +317,34 @@ mod texture_2d_rtti_tests;
 
 mod cview_camera_reference;
 pub use cview_camera_reference::{Graphic3dDataStructureManager, graphic3d_cview_camera_ref};
+
+#[cfg(test)]
+mod clip_source_protocol_tests;
+
+pub use clip_sequence_iterator::Graphic3dSequenceOfHClipPlaneIterator;
+pub use clip_sequence_storage::ClipPlaneNativeItems;
+
+#[cfg(test)]
+mod clip_allocator_active_loss_probe;
+#[cfg(test)]
+mod clip_dump_live_replay;
+#[cfg(test)]
+mod clip_sequence_reference_replay;
+#[cfg(test)]
+mod cview_clip_retirement_replay;
+
+#[cfg(test)]
+mod clip_sequence_retirement_fixture;
+#[cfg(test)]
+mod clip_sequence_retirement_replay;
+
+#[cfg(test)]
+mod clip_sequence_allocator_fixture;
+#[cfg(test)]
+mod clip_sequence_allocator_replay;
+
+mod clip_sequence_field_ref;
+pub use clip_sequence_field_ref::Graphic3dClipSequenceFieldRef;
 
 #[cfg(test)]
 mod array_buffer_reference_tests;

@@ -1,12 +1,14 @@
-//! Concrete owned ColoredShape lifecycle; rendering/selection are explicitly unported.
+//! Concrete owned ColoredShape lifecycle and presentation; selection remains in progress.
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tkernel::quantity::Color;
-use rustycad_tkernel::standard::exceptions::not_implemented;
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dMaterialAspect;
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
+/// Genuine native parent interface; `let parent: Handle<AisColoredShapeParent> = object.cast();`.
+pub type AisColoredShapeParent = dyn AisShapeSource;
 /// Native per-subshape appearance owner; `let object=AisColoredShape::new(&shape);`.
 pub struct AisColoredShape {
     transient: StandardTransient,
@@ -26,12 +28,14 @@ impl AisColoredShape {
         object
     }
     /// Copy native topology and owned global appearance, leaving custom nodes independent; `AisColoredShape::from_shape(&source)?`.
-    pub fn from_shape(source: &Handle<dyn AisShapeSource>) -> Result<Handle<Self>, Failure> {
-        let shape = source.shape_ref().clone_shape();
+    pub fn from_shape(
+        source: &dyn HandleReference<dyn AisShapeSource>,
+    ) -> Result<Handle<Self>, Failure> {
+        let shape = source.observe().shape_ref().clone_shape();
         let object = Self::new(&shape);
         drop(shape);
         rustycad_tkernel::standard::catch_native_failure(|| {
-            super::colored_shape_copy_appearance::copy_colored_shape_appearance(&object, &**source)
+            super::colored_shape_copy_appearance::copy_colored_shape_appearance(&object, source)
         })?;
         Ok(object)
     }
@@ -73,13 +77,11 @@ impl PrsMgrPresentableObject for AisColoredShape {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        Err(not_implemented(&format!(
-            "AIS_ColoredShape Compute mode={mode}; expected ported per-subshape renderer"
-        )))
+        super::ais_colored_shape_compute(self, prs, mode)
     }
     fn color(&self) -> Color {
         // Native AIS_Shape selects actual shading color using its current facing model.
@@ -132,9 +134,11 @@ impl SelectMgrSelectableObject for AisColoredShape {
         // No substitute selection fields are allocated by the lifecycle slice.
         &self.base.shape.interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, mode: i32) -> Result<(), Failure> {
-        Err(not_implemented(&format!(
-            "AIS_ColoredShape ComputeSelection mode={mode}; expected ported per-subshape selection"
-        )))
+    fn compute_selection(
+        &self,
+        selection: &dyn HandleReference<SelectMgrSelection>,
+        mode: i32,
+    ) -> Result<(), Failure> {
+        super::ais_colored_shape_compute_selection(self, selection, mode)
     }
 }

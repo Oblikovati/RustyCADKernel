@@ -11,7 +11,10 @@ use super::{V3dTrihedron, V3dViewer, v3d_bad_value};
 use crate::v3d::V3dViewSource;
 use rustycad_tkernel::ncollection::Vec2;
 use rustycad_tkernel::standard::exceptions::{null_object, program_error};
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, WeakHandle};
+use rustycad_tkernel::standard::{
+    Failure, Handle, HandleObserver, IntrusiveReferenceSlot, SharedState, StandardTransient,
+    WeakHandle,
+};
 use rustycad_tkmath::gp::{Axis3, Direction3, Point3, Vector3};
 use rustycad_tkservice::aspect::{
     AspectGrid, AspectNeutralWindow, AspectRenderingContext, AspectTypeOfTriedronPosition,
@@ -122,7 +125,8 @@ impl V3dViewState {
 /// Example: `let view = viewer.create_view()?; view.set_window(&window, 0)?; view.fit_all(0.01, true)?;`.
 pub struct V3dView {
     pub(crate) transient: StandardTransient,
-    pub(crate) view: Handle<dyn Graphic3dCView>,
+    /// Actual protected `myView` handle field; `view.driver_view_slot.assign(&replacement)?`.
+    pub driver_view_slot: IntrusiveReferenceSlot<dyn Graphic3dCView>,
     pub(crate) default_camera: Handle<Graphic3dCamera>,
     pub(crate) this: SharedState<WeakHandle<dyn V3dViewSource>>,
     pub(crate) state: SharedState<V3dViewState>,
@@ -159,7 +163,12 @@ impl V3dView {
     }
     /// `View`: the driver view; `view.view()`.
     pub fn view(&self) -> Handle<dyn Graphic3dCView> {
-        self.view.clone()
+        self.driver_view_slot.observe().clone()
+    }
+    /// Borrow the then-current driver view without ownership; `view.driver_view_observer().redraw()`.
+    pub fn driver_view_observer(&self) -> HandleObserver<dyn Graphic3dCView> {
+        // Native direct myView uses must reread after callbacks rather than keep an owning copy.
+        self.driver_view_slot.observe()
     }
     /// `Viewer`: the viewer, null after `Remove`; `view.viewer()`.
     pub fn viewer(&self) -> Handle<V3dViewer> {
@@ -175,13 +184,13 @@ impl V3dView {
     }
     /// `Camera`: the camera of the driver view; `view.camera()`.
     pub fn camera(&self) -> Handle<Graphic3dCamera> {
-        self.view.camera()
+        self.driver_view_observer().camera()
     }
     /// Native Camera forwards the actual virtual DSM selected slot; `view.camera_ref().observe()`.
     pub fn camera_ref(
         &self,
     ) -> Box<dyn rustycad_tkernel::standard::HandleReference<Graphic3dCamera> + '_> {
-        self.view.camera_ref()
+        self.driver_view_observer().camera_ref()
     }
     /// Borrow native DefaultCamera by actual field identity; `view.default_camera_ref().observe()`.
     pub fn default_camera_ref(
@@ -191,7 +200,7 @@ impl V3dView {
     }
     /// Borrow native View by actual retained field identity; `view.view_ref().observe()`.
     pub fn view_ref(&self) -> &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dCView> {
-        &self.view
+        &self.driver_view_slot
     }
     /// `SetCamera`; a null camera is refused with `Standard_NullObject` (natively it breaks
     /// every later camera member). Example: `view.set_camera(&camera)?`.
@@ -205,7 +214,7 @@ impl V3dView {
                     "V3d_View::SetCamera: null camera; expected a camera",
                 ));
             }
-            self.view.set_camera(camera);
+            self.driver_view_observer().set_camera(camera);
             self.immediate_update()
         })
     }
@@ -230,7 +239,7 @@ impl V3dView {
         window: &Handle<dyn AspectWindow>,
         context: AspectRenderingContext,
     ) -> Result<(), Failure> {
-        if self.view.is_removed() {
+        if self.driver_view_observer().is_removed() {
             return Ok(());
         }
         if self.is_subview() {
@@ -239,7 +248,8 @@ impl V3dView {
             ));
         }
         self.state.write().window = window.clone();
-        self.view.set_window(&Handle::default(), window, context);
+        self.driver_view_observer()
+            .set_window(&Handle::default(), window, context);
         if let Some(viewer) = self.viewer().get() {
             viewer.set_view_on_one(&self.this())?;
         }
@@ -260,7 +270,7 @@ impl V3dView {
         offset: Vec2<f64>,
         margins: Vec2<i32>,
     ) -> Result<(), Failure> {
-        if self.view.is_removed() {
+        if self.driver_view_observer().is_removed() {
             return Ok(());
         }
         let Some(parent_ref) = parent_view.get() else {
@@ -288,14 +298,15 @@ impl V3dView {
         let window = AspectNeutralWindow::default();
         window.set_virtual(true);
         window.set_size(4, 4);
-        self.view.set_subview_corner(corner);
-        self.view.set_subview_size(size);
-        self.view.set_subview_offset(offset);
-        self.view.set_subview_margins(margins);
+        self.driver_view_observer().set_subview_corner(corner);
+        self.driver_view_observer().set_subview_size(size);
+        self.driver_view_observer().set_subview_offset(offset);
+        self.driver_view_observer().set_subview_margins(margins);
         let window: Handle<dyn AspectWindow> = Handle::new(window).cast();
         self.state.write().window = window.clone();
         let parent_cview = parent.get().map(|view| view.view()).unwrap_or_default();
-        self.view.set_window(&parent_cview, &window, 0);
+        self.driver_view_observer()
+            .set_window(&parent_cview, &window, 0);
         if let Some(viewer) = self.viewer().get() {
             viewer.set_view_on_one(&self.this())?;
         }
@@ -313,7 +324,7 @@ impl V3dView {
         x2: i32,
         y2: i32,
     ) -> Result<(), Failure> {
-        if self.view.is_removed() || self.view.is_defined() {
+        if self.driver_view_observer().is_removed() || self.driver_view_observer().is_defined() {
             return Ok(());
         }
         let Some(previous) = previous_view.get() else {
@@ -321,7 +332,8 @@ impl V3dView {
         };
         let (u1, v1) = previous.convert_to_view(x1, y1)?;
         let (u2, v2) = previous.convert_to_view(x2, y2)?;
-        self.view.set_window(&Handle::default(), window, 0);
+        self.driver_view_observer()
+            .set_window(&Handle::default(), window, 0);
         self.fit_all_rect(u1, v1, u2, v2)?;
         if let Some(viewer) = self.viewer().get() {
             viewer.set_view_on_one(&self.this())?;
@@ -340,7 +352,7 @@ impl V3dView {
             grid.erase();
         }
         if state.shader_grid_active {
-            self.view.grid_erase();
+            self.driver_view_observer().grid_erase();
             self.state.write().shader_grid_active = false;
         }
         if let Some(trihedron) = state.trihedron.get() {
@@ -359,7 +371,7 @@ impl V3dView {
             viewer.del_view(self.this.read().object_address());
             self.state.write().viewer = WeakHandle::default();
         }
-        self.view.remove();
+        self.driver_view_observer().remove();
         self.state.write().window = Handle::default();
     }
     /// `SetImmediateUpdate`: returns the previous mode; `view.set_immediate_update(false)`.
@@ -390,13 +402,13 @@ impl Drop for V3dView {
                 (sub_state.parent_view, sub_state.window) =
                     (WeakHandle::default(), Handle::default());
             }
-            subview.view.remove();
+            subview.driver_view_observer().remove();
             if let Some(viewer) = subview.viewer().get() {
                 viewer.set_view_off_one(&subview.this());
             }
         }
-        if !self.view.is_removed() {
-            self.view.remove();
+        if !self.driver_view_observer().is_removed() {
+            self.driver_view_observer().remove();
         }
     }
 }

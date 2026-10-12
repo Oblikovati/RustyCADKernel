@@ -2,8 +2,8 @@
 #![allow(unsafe_code)]
 use rustycad_tkernel::{
     ncollection::{
-        AllocatorObject, AllocatorPhysicalStorage, AllocatorSource, AllocatorStorageLease,
-        BaseAllocator,
+        AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorPhysicalStorage,
+        AllocatorSource, AllocatorStorageLease, BaseAllocator,
     },
     standard::{Failure, Handle, SharedState},
 };
@@ -63,17 +63,12 @@ unsafe impl AllocatorSource for IndependentHeapAllocator {
         // Only independent memory is retained, not an Arc to this derived allocator object.
         AllocatorStorageLease::new(self.backing.clone())
     }
-    fn allocate(&self, size: usize) -> Option<NonNull<u8>> {
-        // The external provider is injected through this genuine allocator's construction.
-        self.backing.allocate(size)
-    }
-    fn allocate_optimal(&self, size: usize) -> Option<NonNull<u8>> {
-        // Both real virtual entrypoints use the same injected physical provider.
-        self.backing.allocate(size)
-    }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        // SAFETY: the original live range belongs to this same independent provider.
-        unsafe { self.backing.free(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate: backing_allocate,
+            allocate_optimal: backing_allocate,
+            free: backing_free,
+        }
     }
 }
 impl Drop for IndependentHeapAllocator {
@@ -102,8 +97,30 @@ fn injected_backing_preserves_payload_after_real_allocator_object_drop() {
     assert!(backing.ranges.read().is_empty());
 }
 
-fn independent_heap_source(backing: &Arc<IndependentHeapBacking>, retired: &Arc<AtomicUsize>)
-    -> Handle<IndependentHeapAllocator> {
-    Handle::new(IndependentHeapAllocator { parent: AllocatorObject::default(),
-        backing: backing.clone(), retired: retired.clone() })
+fn independent_heap_source(
+    backing: &Arc<IndependentHeapBacking>,
+    retired: &Arc<AtomicUsize>,
+) -> Handle<IndependentHeapAllocator> {
+    Handle::new(IndependentHeapAllocator {
+        parent: AllocatorObject::default(),
+        backing: backing.clone(),
+        retired: retired.clone(),
+    })
+}
+
+fn capture_backing(source: &IndependentHeapAllocator) -> Arc<IndependentHeapBacking> {
+    // This is the injected physical provider, not a lease on the dynamic allocator object.
+    source.backing.clone()
+}
+fn backing_allocate(invocation: &AllocatorInvocation, size: usize) -> Option<NonNull<u8>> {
+    // SAFETY: selecting independent backing cannot call or retire native objects.
+    let backing = rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(capture_backing)
+    });
+    backing.allocate(size)
+}
+unsafe fn backing_free(invocation: &AllocatorInvocation, pointer: *mut u8) -> Result<(), Failure> {
+    // SAFETY: selector is pure; the original pointer belongs to this same injected provider.
+    let backing = unsafe { invocation.capture(capture_backing) }?;
+    unsafe { backing.free(pointer) }
 }

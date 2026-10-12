@@ -76,7 +76,7 @@ fn allocate_owned_view(
 ) -> V3dView {
     V3dView {
         transient: StandardTransient::default(),
-        view,
+        driver_view_slot: rustycad_tkernel::standard::IntrusiveReferenceSlot::from_owned(view),
         default_camera: Handle::new(default_camera),
         this: SharedState::new(WeakHandle::default()),
         state: SharedState::new(super::view::V3dViewState::initial(viewer)),

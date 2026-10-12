@@ -10,12 +10,12 @@ use rustycad_tkservice::aspect::{
     AspectSkydomeBackground,
 };
 use rustycad_tkservice::graphic3d::{
-    Graphic3dCViewComputed as _, Graphic3dCViewMembers as _, Graphic3dClipPlane, Graphic3dCubeMap,
-    Graphic3dDiagnosticInfo, Graphic3dFrameStatsDict, Graphic3dGraphicDriverMembers as _,
-    Graphic3dRenderingParams, Graphic3dRenderingParamsFrustumCulling,
-    Graphic3dSequenceOfHClipPlane, Graphic3dTexture2D, Graphic3dTextureEnv, Graphic3dTextureMap,
-    Graphic3dTextureMapMembers as _, Graphic3dTypeOfBackfacingModel, Graphic3dTypeOfShadingModel,
-    Graphic3dTypeOfVisualization,
+    Graphic3dCViewComputed as _, Graphic3dCViewMembers as _, Graphic3dClipPlaneSequenceSource,
+    Graphic3dClipPlaneSource, Graphic3dCubeMap, Graphic3dDiagnosticInfo, Graphic3dFrameStatsDict,
+    Graphic3dGraphicDriverMembers as _, Graphic3dRenderingParams,
+    Graphic3dRenderingParamsFrustumCulling, Graphic3dSequenceOfHClipPlane, Graphic3dTexture2D,
+    Graphic3dTextureEnv, Graphic3dTextureMap, Graphic3dTextureMapMembers as _,
+    Graphic3dTypeOfBackfacingModel, Graphic3dTypeOfShadingModel, Graphic3dTypeOfVisualization,
 };
 
 impl V3dView {
@@ -189,7 +189,10 @@ impl V3dView {
 /// Clip planes, computed mode, back faces, rendering parameters and statistics.
 impl V3dView {
     /// `AddClipPlane`: appends a plane unless present; `view.add_clip_plane(&plane)`.
-    pub fn add_clip_plane(&self, plane: &Handle<Graphic3dClipPlane>) {
+    pub fn add_clip_plane(
+        &self,
+        plane: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSource>,
+    ) {
         let source = self.this.read().observe();
         if let Some(source) = source.get() {
             source.add_clip_plane(plane);
@@ -198,7 +201,10 @@ impl V3dView {
         super::view_source_clipping::v3d_view_add_clip_plane(self, plane);
     }
     /// `RemoveClipPlane`: dispatches the actual native subclass; `view.remove_clip_plane(&plane)`.
-    pub fn remove_clip_plane(&self, plane: &Handle<Graphic3dClipPlane>) {
+    pub fn remove_clip_plane(
+        &self,
+        plane: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSource>,
+    ) {
         let source = self.this.read().observe();
         if let Some(source) = source.get() {
             source.remove_clip_plane(plane);
@@ -206,13 +212,28 @@ impl V3dView {
         }
         super::view_source_clipping::v3d_view_remove_clip_plane(self, plane);
     }
-    /// `SetClipPlanes`; `view.set_clip_planes(&planes)`.
-    pub fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {
-        self.view().set_clip_planes(planes);
+    /// Borrow the live caller sequence into the current driver-view setter; `view.set_clip_planes(&planes)`.
+    pub fn set_clip_planes(
+        &self,
+        planes: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSequenceSource>,
+    ) {
+        // The protected myView field can change between native callbacks; never retain a core snapshot.
+        self.driver_view_observer().set_clip_planes(planes);
     }
-    /// `ClipPlanes`; `view.clip_planes()`.
+    /// Capture the native selected driver-view clipping field; `let alias=view.clip_planes_ref()`.
+    pub fn clip_planes_ref(
+        &self,
+    ) -> Box<dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSequenceSource>>
+    {
+        // The virtual getter runs once; retained aliases stay attached to its actual returned field.
+        self.driver_view_observer().clip_planes_ref()
+    }
+    /// Explicit owning convenience; native ClipPlanes maps to clip_planes_ref; `view.clip_planes()`.
     pub fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
-        self.view().clip_planes()
+        self.clip_planes_ref()
+            .observe()
+            .observe_as::<Graphic3dSequenceOfHClipPlane>()
+            .clone()
     }
     /// `PlaneLimit`: the driver limit; `view.plane_limit()`.
     pub fn plane_limit(&self) -> i32 {

@@ -26,7 +26,12 @@ fn ordinary_group_projection_requires_no_persistence_viewport() {
     let group = scene.group.cast::<Graphic3dDrawGroup>();
     let draws = group.primitive_draws(&scene.view.camera()).unwrap();
     assert_eq!(draws.len(), 1);
-    assert!(draws[0].clip_transform().iter().all(|value| value.is_finite()));
+    assert!(
+        draws[0]
+            .clip_transform()
+            .iter()
+            .all(|value| value.is_finite())
+    );
 }
 #[test]
 fn all_persistence_modes_reach_the_viewer_and_select_native_depth_policy() {

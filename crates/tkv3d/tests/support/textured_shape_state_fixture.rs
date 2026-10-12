@@ -1,4 +1,5 @@
 //! Named application subclass isolates source dispatch from unported parent selection/HLR.
+use rustycad_tkernel::standard::HandleReference;
 #[path = "textured_diagnostic_printer.rs"]
 mod diagnostics;
 use rustycad_tkbrep::topods::Shape;
@@ -66,8 +67,8 @@ impl PrsMgrPresentableObject for TexturedStateFixture {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        _: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        _: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         Err(Failure::new(&format!(
@@ -79,7 +80,11 @@ impl SelectMgrSelectableObject for TexturedStateFixture {
     fn selectable_base(&self) -> &SelectMgrSelectableObjectBase {
         &self.base.shape.interactive.selectable
     }
-    fn compute_selection(&self, _: &Handle<SelectMgrSelection>, mode: i32) -> Result<(), Failure> {
+    fn compute_selection(
+        &self,
+        _: &dyn HandleReference<SelectMgrSelection>,
+        mode: i32,
+    ) -> Result<(), Failure> {
         Err(Failure::new(&format!(
             "fixture selection mode {mode}; expected source-state operations"
         )))

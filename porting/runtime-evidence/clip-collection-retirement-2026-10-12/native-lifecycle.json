@@ -1,0 +1,25 @@
+{
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checkpoint_status": "native lifecycle evidence only; Rust collection replay and transport implementation pending",
+  "rows": 13,
+  "two_runs_identical": true,
+  "hashes": {
+    "tools/oracle/martensite_clip_collection_retirement.cxx": "afaea67ebdad652ae5fbc7432cb8632718dc84a4b4624ca7a67d9b08b1c55205",
+    "crates/tkservice/tests/fixtures/clip-collection-retirement-native.txt": "cf953c15362c72b1d85fe53a4c77fd1702b45e34d8dca3c45435f58e477536f5",
+    "target/martensite_clip_collection_retirement": "115c7d5e5b7199bda5abdaa5b373f8a6707dd1af71404691d250b6ce53782845",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Graphic3d_ClipPlane.hxx": "b1908fd3cc2ab1e625de8e3ccd3940e979468c739c5164066b52aed61737c00a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_Sequence.hxx": "131278a50ac7588c166accadc5395fa00a0758523a617dab3260a761db98607f",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/NCollection_BaseSequence.hxx": "ac6658bf21afdae92b4c4a79e1396f9f65b6fbefdf14220f117874da1cce594a",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade/Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb"
+  },
+  "observations": [
+    "Clear retains original size/nonempty metadata during all three ordered callbacks.",
+    "First is a valid dying-pointee reference during the first callback, with native count zero.",
+    "Later Clear callbacks inspect metadata only; dereferencing an already freed first node is excluded native undefined behavior.",
+    "Iterator removal updates list metadata before last-owner destruction and advances the same cursor.",
+    "Append during the first Clear callback visits and destroys the callback-added plane in the same traversal.",
+    "Direct protected myItems.Append during the final callback leaves the appended ownership alive when native metadata resets: external anchor count remains two.",
+    "Ordinary Append during a later Clear callback is excluded native undefined behavior: its dedup iterator traverses the freed first node. An experimental local candidate exited139; it is not a successful oracle case and does not appear in the replay fixture."
+  ]
+}

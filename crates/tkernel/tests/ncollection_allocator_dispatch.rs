@@ -1,7 +1,9 @@
 //! Real derived allocator dispatch and native noncounting storage contracts.
 #![allow(unsafe_code)]
 use rustycad_tkernel::{
-    ncollection::{AllocatorObject, AllocatorSource, BaseAllocator},
+    ncollection::{
+        AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource, BaseAllocator,
+    },
     standard::{Failure, Handle, RuntimeTyped, SharedState, Transient},
 };
 use std::{ptr::NonNull, sync::Arc};
@@ -18,26 +20,12 @@ unsafe impl AllocatorSource for AllocatorProbe {
         // Borrow the genuine parent; native allocator counters belong to this actual object.
         &self.parent
     }
-    fn allocate(&self, size: usize) -> Option<NonNull<u8>> {
-        self.events.write().push(format!(
-            "allocate {size} {}",
-            self.parent.transient_base().ref_count()
-        ));
-        self.parent.allocate_base(size)
-    }
-    fn allocate_optimal(&self, size: usize) -> Option<NonNull<u8>> {
-        self.events.write().push(format!(
-            "optimal {size} {}",
-            self.parent.transient_base().ref_count()
-        ));
-        self.parent.allocate_optimal_base(size)
-    }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        self.events
-            .write()
-            .push(format!("free {}", self.parent.transient_base().ref_count()));
-        // SAFETY: the original live pointer is passed through unchanged.
-        unsafe { self.parent.free_base(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate: probe_allocate,
+            allocate_optimal: probe_optimal,
+            free: probe_free,
+        }
     }
 }
 #[test]
@@ -57,7 +45,10 @@ fn derived_virtuals_replay_native_count_and_payload_order() {
 fn repeated_registration_preserves_identity_without_self_cycles() {
     let owner = Handle::new(AllocatorProbe::default());
     let weak = owner.downgrade();
-    assert_eq!(std::mem::size_of::<BaseAllocator>(), std::mem::size_of::<usize>());
+    assert_eq!(
+        std::mem::size_of::<BaseAllocator>(),
+        std::mem::size_of::<usize>()
+    );
     let first = BaseAllocator::from_handle(&owner);
     let second = BaseAllocator::from_handle(&owner);
     assert_eq!(first.identity(), owner.object_address());
@@ -106,4 +97,60 @@ fn virtual_typed_alignment_returns_original_free_pointer() {
     assert_eq!(payload.0, 7);
     drop(payload);
     assert_eq!(&*owner.events.read(), &["allocate 255 2", "free 2"]);
+}
+
+fn capture_probe_events(source: &AllocatorProbe) -> (Arc<SharedState<Vec<String>>>, i32) {
+    (
+        source.events.clone(),
+        source.parent.transient_base().ref_count(),
+    )
+}
+fn record_probe_event(invocation: &AllocatorInvocation, operation: &str) {
+    // SAFETY: the selector captures independently anchored trace storage and an immediate native count.
+    let (events, count) = rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(capture_probe_events)
+    });
+    events.write().push(format!("{operation} {count}"));
+}
+fn probe_allocate(invocation: &AllocatorInvocation, size: usize) -> Option<NonNull<u8>> {
+    record_probe_event(invocation, &format!("allocate {size}"));
+    invocation.allocate_base(size)
+}
+fn probe_optimal(invocation: &AllocatorInvocation, size: usize) -> Option<NonNull<u8>> {
+    record_probe_event(invocation, &format!("optimal {size}"));
+    invocation.allocate_optimal_base(size)
+}
+unsafe fn probe_free(invocation: &AllocatorInvocation, pointer: *mut u8) -> Result<(), Failure> {
+    record_probe_event(invocation, "free");
+    // SAFETY: the original live pointer is passed through unchanged.
+    unsafe { invocation.free_base(pointer) }
+}
+
+#[test]
+fn invocation_and_parent_policy_preserve_noncounting_identity() {
+    let owner = Handle::new(AllocatorProbe::default());
+    let invocation = AllocatorInvocation::from_handle(&owner).unwrap();
+    let policy = invocation.parent_policy().unwrap();
+    assert_eq!(owner.ref_count(), 1);
+    let pointer = policy.allocate_optimal(8).unwrap();
+    drop(owner);
+    // Physical backing survives logical destruction without making the receiver callable again.
+    unsafe { policy.free_nullable(pointer.as_ptr()).unwrap() };
+    assert!(invocation.parent_policy().is_err());
+}
+
+#[test]
+fn invocation_capture_rejects_expired_and_wrong_actual_receivers() {
+    let owner = Handle::new(AllocatorProbe::default());
+    let invocation = AllocatorInvocation::from_handle(&owner).unwrap();
+    // SAFETY: these selectors only inspect actual immutable receiver fields.
+    let actual = unsafe { invocation.capture::<AllocatorProbe, _>(probe_count) }.unwrap();
+    assert_eq!(actual, 1);
+    assert!(unsafe { invocation.capture::<rustycad_tkernel::ncollection::HeapAllocatorObject, _>(|_| 0) }.is_err());
+    drop(owner);
+    assert!(unsafe { invocation.capture::<AllocatorProbe, _>(probe_count) }.is_err());
+}
+fn probe_count(probe: &AllocatorProbe) -> i32 {
+    // Count reads do not invoke native callbacks or retain the actual receiver.
+    probe.transient_base().ref_count()
 }

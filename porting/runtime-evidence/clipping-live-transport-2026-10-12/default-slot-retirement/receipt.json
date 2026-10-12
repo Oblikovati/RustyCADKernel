@@ -1,0 +1,67 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Actual OpenGl_View ClipPlanes/SetClipPlanes implementation, not an SvView setter fake. Old derived sequence retires at actual count0 while const-field aliases still identify it. Destructor replaces original caller slot, but outer assignment uses the original captured target. Two aliases remain same field through selfassignment/null/restore. Original/replacement strong anchors keep all incoming pointers valid; no arbitrary dangling observation or class completion credit. Rust counterpart uses actual Graphic3dRetainedView slot; NullGraphicDriver is only the external manager dependency. No rendering claim from this CPU fixture.",
+  "native_records": 5,
+  "native_runs_identical": 2,
+  "native_exit_codes": [
+    0,
+    0
+  ],
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O0",
+    "-I/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_cview_clip_slot_retirement.cxx",
+    "-L/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKOpenGl",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-lX11",
+    "-o",
+    "target/cview-clip-retirement"
+  ],
+  "executable_sha256": "f783c70be575abf47307d704129a3cd64868ddc619c401f4c8588327f6b23338",
+  "fixture": "crates/tkservice/tests/fixtures/cview-clip-slot-retirement-native.txt",
+  "fixture_sha256": "3d1e697d61d328b7d3884ac9667c0cb0e715dcdb327fbb711f332448df763fc9",
+  "source_hashes": {
+    "tools/oracle/martensite_cview_clip_slot_retirement.cxx": "8fb2e67d4e6d46025bfde5e9c640cc597764ba22a08786ac51bc2675a9211e7d",
+    "crates/tkservice/src/graphic3d/cview_clip_retirement_replay.rs": "00c58c8fc2cd178215a9fbe356aa110b8e7c5f8137387254a3f84e538785f88a",
+    "crates/tkservice/src/graphic3d/retained_view.rs": "ffb76afc981da040e7d1d555b67cd6410fb543fc5dd896cf4c935b0d6c063c2c",
+    "crates/tkservice/src/graphic3d/clip_sequence_field_ref.rs": "785933aebafce9bdf07b0dcfd5fec31ee5276bd378337c8b8964b71d7066779d"
+  },
+  "headers": {
+    "OpenGl_View.hxx": "66ffbad983c5a36bc7348f2316e3cae62d5104ccde08c14daa2d3bf180df16a8",
+    "Graphic3d_CView.hxx": "c8f3b05d3b4093a333e51a08a58dfeae745879cd303e54d3cdcbd7c4ed85b6e2",
+    "Graphic3d_SequenceOfHClipPlane.hxx": "6c4d791f765f614cce2953fcecc7e27e89d2e3f10578d3af8e4deb189dc60767",
+    "Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb",
+    "Standard_Transient.hxx": "3310b0daaadb07c61a9cc09b410d1d0381c70174194def87c4a86ec397ed3416"
+  },
+  "libraries": {
+    "libTKOpenGl.so": "9a6beea3fdf0d7b7b9a88a96d1313e06bb177788da56eabb09561f9e06d38932",
+    "libTKV3d.so": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "libTKService.so": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "libTKMath.so": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "libTKernel.so": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "rust_checks": {
+    "native_replay_tests": 1,
+    "failed": 0,
+    "all_target_clippy": "passed"
+  },
+  "completion_claims": false,
+  "logs": {
+    "replay": {
+      "original_sha256": "e420fdcc3e7e5d4687201f9eee0a81bd327f33cb4aa6a065c00bf28641887634",
+      "gzip_sha256": "06205cee5a070678c6804a554eb3dff4d7b4ec8d09ab315ad51b0fa9626276e8"
+    },
+    "clippy": {
+      "original_sha256": "e436c04e002749c20acb5aaf8aebf1308b8d4cf694daee9ab70a042d55c437c7",
+      "gzip_sha256": "035e37469242ce7f9901804e6798540c5a447055e08a9bc365f0ea73d6473ca4"
+    }
+  }
+}

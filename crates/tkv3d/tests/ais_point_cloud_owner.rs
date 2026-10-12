@@ -1,4 +1,5 @@
 //! Real ray detection drives forced point-cloud subsets and highlight lifecycle.
+use rustycad_tkernel::standard::HandleReference;
 #[allow(dead_code)]
 #[path = "support/sensitive_display_driver.rs"]
 mod display_driver;
@@ -144,11 +145,11 @@ impl PrsMgrPresentableObject for DynamicPointCloud {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_point_cloud_compute(self, prs, mode)
+        ais_point_cloud_compute(self, &prs.observe(), mode)
     }
 }
 impl SelectMgrSelectableObject for DynamicPointCloud {
@@ -157,10 +158,10 @@ impl SelectMgrSelectableObject for DynamicPointCloud {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        ais_point_cloud_compute_selection(self, selection, mode)
+        ais_point_cloud_compute_selection(self, &selection.observe(), mode)
     }
 }
 #[test]

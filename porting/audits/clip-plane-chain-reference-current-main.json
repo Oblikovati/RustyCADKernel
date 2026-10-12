@@ -1,0 +1,67 @@
+{
+  "reason": "Native original-reference and derived-plane contracts are not represented by copied/concrete conveniences.",
+  "sources": [
+    "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+    "crates/tkservice/src/graphic3d/clip_plane_chain.rs"
+  ],
+  "rows": [
+    {
+      "previous": {
+        "upstream_id": "Graphic3d_ClipPlane::ChainPreviousPlane",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_previous_plane",
+        "status": "implemented",
+        "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+      },
+      "current": {
+        "upstream_id": "Graphic3d_ClipPlane::ChainPreviousPlane",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_previous_plane",
+        "status": "partial",
+        "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Current source audit: next getter returns an owning concrete copy rather than original const handle field; setter consumes concrete owned input rather than original borrowed slot; previous getter is owning as native but lacks valid derived-plane transport. Chain reference/lifecycle closure remains unproved. Existing equation/capping/count tests retained. See porting/audits/clip-plane-chain-reference-current-main.json."
+      }
+    },
+    {
+      "previous": {
+        "upstream_id": "Graphic3d_ClipPlane::ChainNextPlane",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_next_plane",
+        "status": "implemented",
+        "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes."
+      },
+      "current": {
+        "upstream_id": "Graphic3d_ClipPlane::ChainNextPlane",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::chain_next_plane",
+        "status": "partial",
+        "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. Current source audit: next getter returns an owning concrete copy rather than original const handle field; setter consumes concrete owned input rather than original borrowed slot; previous getter is owning as native but lacks valid derived-plane transport. Chain reference/lifecycle closure remains unproved. Existing equation/capping/count tests retained. See porting/audits/clip-plane-chain-reference-current-main.json."
+      }
+    },
+    {
+      "previous": {
+        "upstream_id": "Graphic3d_ClipPlane::SetChainNextPlane",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_chain_next_plane",
+        "status": "implemented",
+        "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. An associated function taking the plane's own handle (the native `this` stored as the next plane's back pointer). A link that closes a loop recurses endlessly natively; it raises Standard_ProgramError here before anything changes. The chain lengths are updated iteratively."
+      },
+      "current": {
+        "upstream_id": "Graphic3d_ClipPlane::SetChainNextPlane",
+        "toolkit": "TKService",
+        "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx",
+        "rust_item": "rustycad_tkservice::graphic3d::Graphic3dClipPlane::set_chain_next_plane",
+        "status": "partial",
+        "notes": "Graphic3d_ClipPlane mapping: the plane state sits behind the handle's shared lock, so the accessors return values; the raw back pointer of the chain is a weak handle (a destroyed predecessor reads as null instead of dangling); the equations, reversed equation, plane frame, chain lengths, point and box tests, capping attributes and modification counters are compared bit for bit by the sv_clip and sv_clip_capping native probes. An associated function taking the plane's own handle (the native `this` stored as the next plane's back pointer). A link that closes a loop recurses endlessly natively; it raises Standard_ProgramError here before anything changes. The chain lengths are updated iteratively. Current source audit: next getter returns an owning concrete copy rather than original const handle field; setter consumes concrete owned input rather than original borrowed slot; previous getter is owning as native but lacks valid derived-plane transport. Chain reference/lifecycle closure remains unproved. Existing equation/capping/count tests retained. See porting/audits/clip-plane-chain-reference-current-main.json."
+      }
+    }
+  ],
+  "source_sha256": {
+    "../OCCT/src/Visualization/TKService/Graphic3d/Graphic3d_ClipPlane.hxx": "b62304139f39d0b4f59adbbf89819573d2e91cbfb75c9275628b6b3f2a73cf41",
+    "crates/tkservice/src/graphic3d/clip_plane_chain.rs": "113931d39e1c2a30f95b872bcd4e60fc6b1c31866eb0f3996ea18cd61880bc9a"
+  }
+}

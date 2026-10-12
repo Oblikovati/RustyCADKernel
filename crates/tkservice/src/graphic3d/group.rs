@@ -84,9 +84,15 @@ pub trait Graphic3dGroup: Transient {
     /// `Aspects`: the group aspects.
     fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource>;
     /// `SetGroupPrimitivesAspect`: the aspects of the whole group.
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>);
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    );
     /// `SetPrimitivesAspect`: the aspects of the next primitives.
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>);
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    );
     /// `SynchronizeAspects`: updates the presentation after an aspect change.
     fn synchronize_aspects(&self);
     /// `ReplaceAspects`: replaces aspects by the map.

@@ -261,15 +261,21 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
     fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource> {
         self.submissions.read().aspects.clone()
     }
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         if self.is_deleted() {
             return;
         }
-        self.aspect_textures.invalidate(aspect);
-        self.submissions.write().aspects = aspect.clone();
+        self.aspect_textures.invalidate(&aspect.observe());
+        self.submissions.write().aspects = aspect.observe().clone();
         self.update();
     }
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         if self.aspects().is_null() {
             self.set_group_primitives_aspect(aspect);
             return;
@@ -277,11 +283,11 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         if self.is_deleted() {
             return;
         }
-        self.aspect_textures.invalidate(aspect);
+        self.aspect_textures.invalidate(&aspect.observe());
         self.submissions
             .write()
             .commands
-            .push(GroupCommand::Aspects(aspect.clone()));
+            .push(GroupCommand::Aspects(aspect.observe().clone()));
         self.update();
     }
     fn synchronize_aspects(&self) {

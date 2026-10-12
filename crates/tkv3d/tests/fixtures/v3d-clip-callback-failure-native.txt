@@ -1,0 +1,26 @@
+case add 1
+failure clip failure stage=1; expected completion
+get 1 2 1
+state 1 0 0 0 1 3 1 1 1
+case add 2
+failure clip failure stage=2; expected completion
+get 1 2 1
+state 1 0 1 0 1 3 1 1 2
+case add 3
+failure clip failure stage=3; expected completion
+get 1 2 1
+set 2 3 2 3
+state 1 1 1 1 1 3 2 2 2
+case remove 1
+failure clip failure stage=1; expected completion
+get 1 2 1
+state 1 0 1 0 1 3 1 1 2
+case remove 2
+failure clip failure stage=2; expected completion
+get 1 2 1
+state 1 0 0 0 1 3 1 1 1
+case remove 3
+failure clip failure stage=3; expected completion
+get 1 2 1
+set 2 3 2 3
+state 1 1 0 0 1 3 2 2 1

@@ -2,7 +2,10 @@
 #![allow(unsafe_code)]
 use allocator_api2::alloc::Allocator;
 use rustycad_tkernel::{
-    ncollection::{AllocatorObject, AllocatorSource, BaseAllocator, HeapAllocatorObject},
+    ncollection::{
+        AllocatorDispatchCode, AllocatorInvocation, AllocatorObject, AllocatorSource,
+        BaseAllocator, HeapAllocatorObject,
+    },
     standard::{Failure, Handle, SharedState, Transient, WeakHandle},
 };
 use std::{
@@ -30,19 +33,11 @@ unsafe impl AllocatorSource for CurrentHeapResource {
         // Preserve the real embedded heap base and native count identity.
         self.parent.allocator_object_base()
     }
-    unsafe fn free(&self, pointer: *mut u8) -> Result<(), Failure> {
-        let scene = self.scene.upgrade().unwrap();
-        let mut scene = scene.write();
-        let row = format!(
-            "current-free {} {} {}",
-            scene.size,
-            self.transient_base().ref_count(),
-            i32::from(scene.retired)
-        );
-        scene.rows.push(row);
-        drop(scene);
-        // SAFETY: the original full-provenance heap pointer is accepted by this compatible backend.
-        unsafe { self.allocator_object_base().free_base(pointer) }
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            free: current_heap_free,
+            ..Default::default()
+        }
     }
 }
 #[derive(Default)]
@@ -59,25 +54,11 @@ unsafe impl AllocatorSource for RetiringHeapResource {
         // The original base supplies physical heap allocation, never a copied allocator.
         self.parent.allocator_object_base()
     }
-    fn allocate(&self, size: usize) -> Option<NonNull<u8>> {
-        let scene = self.scene.upgrade().unwrap();
-        let mut scene = scene.write();
-        let row = format!(
-            "allocate {} {}",
-            scene.size,
-            self.transient_base().ref_count()
-        );
-        scene.rows.push(row);
-        scene.current = Some(BaseAllocator::from_handle(&self.current.observe()));
-        let row = format!(
-            "replaced {} {} {}",
-            scene.size,
-            self.transient_base().ref_count(),
-            self.current.observe().ref_count()
-        );
-        scene.rows.push(row);
-        drop(scene);
-        self.allocator_object_base().allocate_base(size)
+    fn dispatch_code(&self) -> AllocatorDispatchCode {
+        AllocatorDispatchCode {
+            allocate: retiring_heap_allocate,
+            ..Default::default()
+        }
     }
 }
 impl Drop for RetiringHeapResource {
@@ -143,4 +124,67 @@ fn original_heap_allocator_retires_before_current_resource_free() {
     let actual = run_heap_retirement_scene();
     let native = include_str!("fixtures/allocator-retirement-native.txt");
     assert_eq!(actual, native);
+}
+
+fn record_current_heap_free(source: &CurrentHeapResource) {
+    let scene = source.scene.upgrade().unwrap();
+    let mut scene = scene.write();
+    let row = format!(
+        "current-free {} {} {}",
+        scene.size,
+        source.transient_base().ref_count(),
+        i32::from(scene.retired)
+    );
+    scene.rows.push(row);
+}
+unsafe fn current_heap_free(
+    invocation: &AllocatorInvocation,
+    pointer: *mut u8,
+) -> Result<(), Failure> {
+    // SAFETY: plain trace mutation cannot retire native resources; original provenance is accepted here.
+    rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_current_heap_free)
+    });
+    unsafe { invocation.free_base(pointer) }
+}
+fn capture_retiring_heap(
+    source: &RetiringHeapResource,
+) -> (
+    Arc<SharedState<AllocatorRetirementScene>>,
+    WeakHandle<CurrentHeapResource>,
+) {
+    let scene = source.scene.upgrade().unwrap();
+    let mut fields = scene.write();
+    let row = format!(
+        "allocate {} {}",
+        fields.size,
+        source.transient_base().ref_count()
+    );
+    fields.rows.push(row);
+    drop(fields);
+    (scene, source.current.clone())
+}
+fn record_replaced_heap(source: &RetiringHeapResource) {
+    let scene = source.scene.upgrade().unwrap();
+    let mut scene = scene.write();
+    let row = format!(
+        "replaced {} {} {}",
+        scene.size,
+        source.transient_base().ref_count(),
+        source.current.observe().ref_count()
+    );
+    scene.rows.push(row);
+}
+fn retiring_heap_allocate(invocation: &AllocatorInvocation, size: usize) -> Option<NonNull<u8>> {
+    // SAFETY: actual field selectors have no callbacks; the replaced owner is dropped outside both guards.
+    let (scene, current) = rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(capture_retiring_heap)
+    });
+    let replacement = BaseAllocator::from_handle(&current.observe());
+    let old = scene.write().current.replace(replacement);
+    drop(old);
+    rustycad_tkernel::standard::raise_native_failure(unsafe {
+        invocation.capture(record_replaced_heap)
+    });
+    invocation.allocate_base(size)
 }

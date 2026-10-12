@@ -56,14 +56,14 @@ impl V3dView {
                 continue;
             };
             let (top_left, size) = (
-                value.view.subview_top_left(),
+                value.driver_view_observer().subview_top_left(),
                 value
                     .window()
                     .get()
                     .map(|w| w.dimensions())
                     .unwrap_or(Vec2::new(0, 0)),
             );
-            if value.view.is_active()
+            if value.driver_view_observer().is_active()
                 && point.x >= top_left.x
                 && point.x < top_left.x + size.x
                 && point.y >= top_left.y

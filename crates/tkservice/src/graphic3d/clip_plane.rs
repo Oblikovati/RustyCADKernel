@@ -63,7 +63,8 @@ rustycad_tkernel::impl_transient!(
     Graphic3dClipPlane,
     "Graphic3d_ClipPlane",
     StandardTransient,
-    transient
+    transient,
+    interfaces: [dyn super::Graphic3dClipPlaneSource]
 );
 
 /// The capping aspect of a new plane (`defaultAspect`): solid gray, horizontal hatch.

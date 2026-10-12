@@ -78,7 +78,7 @@ impl Graphic3dRenderView {
             return Err(error.clone());
         }
         let extent = capture_extent(self, self.limit)?;
-        let mut frame = frame_for_view(self, extent)?;
+        let mut frame = frame_for_view(self, extent, self.retained.render_clip_planes())?;
         frame.attach_raster_feedback(&self.raster_feedback);
         frame.attach_fragment_alpha(&self.fragment_alpha_feedback);
         self.render_target(&frame)

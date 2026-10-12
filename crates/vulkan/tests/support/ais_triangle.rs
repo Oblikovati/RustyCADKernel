@@ -1,4 +1,5 @@
 //! A real interactive object builds retained groups and a selectable center point.
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient, exceptions::program_error};
 use rustycad_tkmath::gp::Point3;
 use rustycad_tkservice::graphic3d::*;
@@ -37,14 +38,14 @@ impl PrsMgrPresentableObject for AisTriangle {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        presentation: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        presentation: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
         let style = self.styles.get(mode as usize).ok_or_else(|| {
             program_error(&format!("triangle display mode {mode}; expected 0 or 1"))
         })?;
-        let group = presentation.new_group()?;
+        let group = presentation.observe().new_group()?;
         group.set_group_primitives_aspect(style);
         group.add_primitive_array(&self.vertices, true);
         self.computations.fetch_add(1, Ordering::Relaxed);
@@ -58,12 +59,12 @@ impl SelectMgrSelectableObject for AisTriangle {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
         let owner =
             SelectMgrEntityOwner::with_selectable(&self.presentable_base().this().cast(), mode);
-        selection.add(
+        selection.observe().add(
             &Handle::new(Select3DSensitivePoint::new(
                 &owner.cast(),
                 Point3::default(),

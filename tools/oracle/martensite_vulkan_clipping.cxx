@@ -1,3 +1,4 @@
+#include "martensite_vulkan_derived_clipping.cxx"
 // Native retained clipping counterpart of tests/support/clipping_scene.rs.
 #include <Graphic3d_ClipPlane.hxx>
 #include <Graphic3d_ArrayOfPoints.hxx>
@@ -90,8 +91,19 @@ static void clipping_text(const occ::handle<Graphic3d_Structure>& structure,
   if (mode == "clip-text-no-box") structure->CStructure()->SetBndBoxClipCheck(false);
 }
 
+static void update_clipping_planes(const occ::handle<V3d_View>& view,
+                                   const occ::handle<Graphic3d_ClipPlane>& first,
+                                   const std::string& mode) {
+  if (mode == "clip-equation-updated" || mode == "clip-cleared") view->Redraw();
+  if (mode == "clip-equation-updated") first->SetEquation(NCollection_Vec4<double>(1,0,0,-2));
+  if (mode == "clip-cleared") view->SetClipPlanes(occ::handle<Graphic3d_SequenceOfHClipPlane>());
+}
 static void clipping_scene(const occ::handle<Graphic3d_Structure>& structure,
                            const occ::handle<V3d_View>& view, const std::string& mode) {
+  if (mode.rfind("clip-derived-", 0) == 0) {
+    configure_derived_clipping(view, mode);
+    return;
+  }
   auto first = clip_plane(1,0,0);
   occ::handle<Graphic3d_SequenceOfHClipPlane> global = new Graphic3d_SequenceOfHClipPlane();
   global->Append(first);
@@ -102,7 +114,5 @@ static void clipping_scene(const occ::handle<Graphic3d_Structure>& structure,
   clipping_persistence(structure,mode);
   clipping_text(structure,view,mode);
   structure->CalculateBoundBox();
-  if (mode == "clip-equation-updated" || mode == "clip-cleared") view->Redraw();
-  if (mode == "clip-equation-updated") first->SetEquation(NCollection_Vec4<double>(1,0,0,-2));
-  if (mode == "clip-cleared") view->SetClipPlanes(occ::handle<Graphic3d_SequenceOfHClipPlane>());
+  update_clipping_planes(view, first, mode);
 }

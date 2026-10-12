@@ -1,0 +1,33 @@
+   Compiling rustycad-tkservice v0.2.2 (/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/crates/tkservice)
+    Finished `test` profile [unoptimized] target(s) in 2.82s
+     Running unittests src/lib.rs (target/debug/deps/rustycad_tkservice-f0e8107adac12f28)
+
+running 2 tests
+test graphic3d::frame_stats_data::reset_tests::frame_reset_preserves_all_four_native_vector_storage_addresses ... FAILED
+test graphic3d::frame_stats_data::reset_tests::temporary_frame_reset_keeps_actual_counter_and_timer_fields ... FAILED
+
+failures:
+
+---- graphic3d::frame_stats_data::reset_tests::frame_reset_preserves_all_four_native_vector_storage_addresses stdout ----
+
+thread 'graphic3d::frame_stats_data::reset_tests::frame_reset_preserves_all_four_native_vector_storage_addresses' (577800) panicked at crates/tkservice/src/graphic3d/frame_stats_reset_tests.rs:42:5:
+assertion `left == right` failed
+  left: [134367447879360, 134367447879584, 134367447878512, 134367447879632]
+ right: [134367447879040, 134367447879264, 134367447878720, 134367447879312]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- graphic3d::frame_stats_data::reset_tests::temporary_frame_reset_keeps_actual_counter_and_timer_fields stdout ----
+
+thread 'graphic3d::frame_stats_data::reset_tests::temporary_frame_reset_keeps_actual_counter_and_timer_fields' (577801) panicked at crates/tkservice/src/graphic3d/frame_stats_reset_tests.rs:57:5:
+assertion `left == right` failed
+  left: [134367313662384, 134367313662608, 134367313660784, 134367313662656]
+ right: [134367313661312, 134367313661536, 134367313660992, 134367313661584]
+
+
+failures:
+    graphic3d::frame_stats_data::reset_tests::frame_reset_preserves_all_four_native_vector_storage_addresses
+    graphic3d::frame_stats_data::reset_tests::temporary_frame_reset_keeps_actual_counter_and_timer_fields
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 103 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p rustycad-tkservice --lib`

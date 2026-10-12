@@ -5,6 +5,7 @@ Example: ``release_inventory(Path('.'), SystemCommands())``.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
 import json
 from pathlib import Path
@@ -42,6 +43,7 @@ class ReleaseCrate:
     name: str
     version: str
     directory: str
+    features: tuple[str, ...] = ()
 
     @property
     def archive(self) -> str:
@@ -57,14 +59,41 @@ def release_inventory(root: Path, commands: Commands) -> list[ReleaseCrate]:
     metadata = json.loads(output)
     members = set(metadata["workspace_members"])
     packages = [package for package in metadata["packages"] if package["id"] in members]
-    crates = [
-        ReleaseCrate(
-            p["name"], p["version"], package_directory(p["manifest_path"], root)
-        )
-        for p in packages
-    ]
+    crates = [release_crate_from_metadata(package, root) for package in packages]
     validate_inventory(crates)
     return sorted(crates, key=lambda crate: crate.name)
+
+
+def release_crate_from_metadata(
+    package: Mapping[str, object], root: Path
+) -> ReleaseCrate:
+    """Validate one Cargo package; e.g. release_crate_from_metadata(metadata_package, root)."""
+    for field in ("name", "version", "manifest_path"):
+        if not isinstance(package.get(field), str):
+            raise ValueError(f"Cargo {field}={package.get(field)!r}; expected a string")
+    return ReleaseCrate(
+        str(package["name"]),
+        str(package["version"]),
+        package_directory(str(package["manifest_path"]), root),
+        release_feature_names(package),
+    )
+
+
+def release_feature_names(package: Mapping[str, object]) -> tuple[str, ...]:
+    """Require actual Cargo feature metadata; e.g. release_feature_names({'features': {'debug': []}})."""
+    feature_map = package.get("features")
+    if not isinstance(feature_map, dict):
+        raise ValueError(f"Cargo features={feature_map!r}; expected a feature-name map")
+    for name, enabled in feature_map.items():
+        if not isinstance(name, str) or not isinstance(enabled, list):
+            raise ValueError(
+                f"Cargo feature={name!r}:{enabled!r}; expected a name and string list"
+            )
+        if any(not isinstance(feature, str) for feature in enabled):
+            raise ValueError(
+                f"Cargo feature={name!r}:{enabled!r}; expected a name and string list"
+            )
+    return tuple(sorted(feature_map))
 
 
 def package_directory(manifest: str, root: Path) -> str:

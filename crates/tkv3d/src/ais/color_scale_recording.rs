@@ -139,10 +139,16 @@ impl Graphic3dGroup for ScaleRecordingGroup {
     fn aspects(&self) -> Handle<dyn Graphic3dAspectsSource> {
         self.inner.aspects()
     }
-    fn set_group_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_group_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         self.inner.set_group_primitives_aspect(aspect);
     }
-    fn set_primitives_aspect(&self, aspect: &Handle<dyn Graphic3dAspectsSource>) {
+    fn set_primitives_aspect(
+        &self,
+        aspect: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dAspectsSource>,
+    ) {
         self.inner.set_primitives_aspect(aspect);
     }
     fn synchronize_aspects(&self) {

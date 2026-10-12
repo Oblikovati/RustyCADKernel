@@ -38,7 +38,8 @@ The command derives the package inventory from Cargo metadata. Cargo creates
 normalized archives. The command extracts them into a new temporary workspace,
 restores the packaged test support, adds local registry patches for the full
 package set, and runs all-target tests plus doctests with the owner lockfile
-in both default and all-feature configurations. No original crate path is used
+in default configuration for every package and all-feature configuration for
+packages with selectable features. No original crate path is used
 by that test workspace. Output appears
 under `target/releases/vX.Y.Z` only after those tests pass.
 
@@ -155,12 +156,23 @@ final profile set, including the TKHLR isolation refresh, uses 332 files and
 [measurement receipt](evidence/toolkit-tests-2026-10-11/measurement.json) records
 case preservation, mapped-target checks, and archive validation scope.
 
-Extracted release archives are checked one package at a time, with both default
-and all features, including all targets and doctests. The temporary build is
+Extracted release archives are checked one package at a time, including all
+targets and doctests. Every package gets its default profile; packages whose Cargo
+metadata exposes selectable features also get an all-feature profile. The temporary build is
 deleted after each complete feature profile, and release builds use the same disabled
 debug-symbol/incremental settings as CI. Dependency builds are reused across packages within each profile, while each
 package retains its own Cargo feature scope. Package contents and test coverage
 are unchanged.
+
+As of 2026-10-12, the 31-package inventory has one feature-bearing package,
+`rustycad-tkmath` (`occt-debug-checks`). This plans 64 Cargo test commands instead
+of 124, removing 60 identical featureless reruns. Cargo applies
+[`--all-features` to selected packages](https://doc.rust-lang.org/cargo/commands/cargo-test.html#feature-selection);
+it adds no feature to a selected package with an empty feature map. Real dependency
+feature trees were identical for all 30 featureless packages under both commands.
+The release inventory rejects missing/malformed feature metadata; newly added
+explicit or implicit features automatically retain both profiles. This changes
+the planned command count, not the packaged tests or existing release assets.
 
 ## Platform geometry fixtures
 

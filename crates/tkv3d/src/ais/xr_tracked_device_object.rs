@@ -1,6 +1,7 @@
 //! Native tracked-device constructors and concrete inherited virtual dispatch.
 use super::*;
 use crate::{prs_mgr::*, select_mgr::*};
+use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkservice::{graphic3d::*, image::ImageTextureSource};
 /// Auxiliary tracked-device mesh and laser; `AisXrTrackedDevice::new()?`.
@@ -50,11 +51,11 @@ impl PrsMgrPresentableObject for AisXrTrackedDevice {
     }
     fn compute(
         &self,
-        _: &Handle<PrsMgrPresentationManager>,
-        prs: &Handle<dyn Graphic3dStructureSource>,
+        _: &dyn HandleReference<PrsMgrPresentationManager>,
+        prs: &dyn HandleReference<dyn Graphic3dStructureSource>,
         mode: i32,
     ) -> Result<(), Failure> {
-        super::ais_xr_tracked_device_compute(self, prs, mode)
+        super::ais_xr_tracked_device_compute(self, &prs.observe(), mode)
     }
     crate::ais_presentable_overrides!();
 }
@@ -65,10 +66,10 @@ impl SelectMgrSelectableObject for AisXrTrackedDevice {
     }
     fn compute_selection(
         &self,
-        selection: &Handle<SelectMgrSelection>,
+        selection: &dyn HandleReference<SelectMgrSelection>,
         mode: i32,
     ) -> Result<(), Failure> {
-        super::ais_xr_tracked_device_compute_selection(self, selection, mode)
+        super::ais_xr_tracked_device_compute_selection(self, &selection.observe(), mode)
     }
 }
 

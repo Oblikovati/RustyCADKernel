@@ -108,10 +108,10 @@ macro_rules! martensite_retained_cview_methods {
         ) {
             self.retained.set_lights(lights)
         }
-        fn clip_planes(&self) -> Handle<Graphic3dSequenceOfHClipPlane> {
-            self.retained.clip_planes()
+        fn clip_planes_ref(&self) -> Box<dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSequenceSource>> {
+            self.retained.clip_planes_ref()
         }
-        fn set_clip_planes(&self, planes: &Handle<Graphic3dSequenceOfHClipPlane>) {
+        fn set_clip_planes(&self, planes: &dyn rustycad_tkernel::standard::HandleReference<dyn Graphic3dClipPlaneSequenceSource>) {
             self.retained.set_clip_planes(planes)
         }
         fn statistic_information(&self) -> AsciiString {
