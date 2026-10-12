@@ -2,6 +2,8 @@
 #include <OpenGl_CappingPlaneResource.hxx>
 #include <OpenGl_Context.hxx>
 #include <OpenGl_Aspects.hxx>
+#include <OpenGl_Workspace.hxx>
+#include <OpenGl_RenderFilter.hxx>
 #include <Graphic3d_ClipPlane.hxx>
 #include <Graphic3d_Aspects.hxx>
 #include <Graphic3d_AspectFillArea3d.hxx>
@@ -51,9 +53,19 @@ static void capping_contract_vertices(const std::string& prefix) {
   output.write(reinterpret_cast<const char*>(attributes->Data()),attributes->Size());
   std::cout<<"VERTICES "<<attributes->NbElements<<' '<<attributes->Stride<<' '<<attributes->Size()<<'\n';
 }
+static void capping_contract_filter() {
+  const occ::handle<OpenGl_Workspace> workspace=new OpenGl_Workspace(nullptr,occ::handle<OpenGl_Window>());
+  workspace->SetRenderFilter(OpenGl_RenderFilter_FillModeOnly);
+  const OpenGl_Aspects aspect(capping_contract_aspects(true));
+  const occ::handle<Graphic3d_ClipPlane> plane=new Graphic3d_ClipPlane;
+  const occ::handle<OpenGl_CappingPlaneResource> resource=new OpenGl_CappingPlaneResource(plane);
+  std::cout<<"MASK_ASPECT_FILTER "<<workspace->ShouldRender(&aspect,nullptr)<<' '
+    <<workspace->ShouldRender(&resource->Primitives(),nullptr)<<'\n';
+}
+
 int main(int argc,char** argv) {
   if(argc!=2)throw Standard_Failure("received cap CPUcontract arguments; expected output prefix");
   const occ::handle<OpenGl_Context> context=new OpenGl_Context;
-  std::cout<<std::setprecision(17);capping_contract_vertices(argv[1]);
+  std::cout<<std::setprecision(17);capping_contract_vertices(argv[1]);capping_contract_filter();
   for(int flags=0;flags<4;++flags)capping_contract_row(context,flags,argv[1]);
 }

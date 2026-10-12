@@ -27,11 +27,17 @@ rustycad_tkernel::impl_transient!(Graphic3dRenderDriver, "Martensite_RenderDrive
 impl Graphic3dRenderDriver {
     /// Create a Vulkan 1.3 driver; `Graphic3dRenderDriver::new(options)?`.
     pub fn new(options: VulkanOptions) -> Result<Handle<Self>, RenderError> {
-        Self::with_texture_coordinate_pipeline(options, crate::RenderTextureCoordinatePipeline::default())
+        Self::with_texture_coordinate_pipeline(
+            options,
+            crate::RenderTextureCoordinatePipeline::default(),
+        )
     }
     /// Inject legacy coordinate semantics; `Graphic3dRenderDriver::with_texture_coordinate_pipeline(options, RenderTextureCoordinatePipeline::GeneratedCompatibility)?`.
     /// This changes texture coordinates, not the shader lighting family.
-    pub fn with_texture_coordinate_pipeline(options: VulkanOptions, coordinate_pipeline: crate::RenderTextureCoordinatePipeline) -> Result<Handle<Self>,RenderError> {
+    pub fn with_texture_coordinate_pipeline(
+        options: VulkanOptions,
+        coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
+    ) -> Result<Handle<Self>, RenderError> {
         let renderer = VulkanRenderer::new(options)?;
         let limit = renderer.capture_limit();
         Ok(Self::build(
@@ -58,7 +64,12 @@ impl Graphic3dRenderDriver {
         limit: u32,
         fonts: Arc<dyn crate::TextLayoutSource>,
     ) -> Result<Handle<Self>, RenderError> {
-        Self::with_backend_and_texture_coordinates(backend,limit,fonts,crate::RenderTextureCoordinatePipeline::default())
+        Self::with_backend_and_texture_coordinates(
+            backend,
+            limit,
+            fonts,
+            crate::RenderTextureCoordinatePipeline::default(),
+        )
     }
     /// Inject device/font I/O and coordinate policy; `Self::with_backend_and_texture_coordinates(recorder, 4096, fonts, policy)?`.
     pub fn with_backend_and_texture_coordinates(
@@ -66,7 +77,7 @@ impl Graphic3dRenderDriver {
         limit: u32,
         fonts: Arc<dyn crate::TextLayoutSource>,
         coordinate_pipeline: crate::RenderTextureCoordinatePipeline,
-    ) -> Result<Handle<Self>,RenderError> {
+    ) -> Result<Handle<Self>, RenderError> {
         if limit == 0 || limit > i32::MAX as u32 {
             return Err(rejected(limit, "a positive 31-bit capture limit"));
         }
@@ -88,7 +99,11 @@ impl Graphic3dRenderDriver {
             base: Graphic3dGraphicDriverBase::new(&Handle::default()),
             device: Arc::new(SharedState::new(backend)),
             text_source,
-            texture_images: Arc::new(crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(coordinate_pipeline)),
+            texture_images: Arc::new(
+                crate::retained_texture_images::RetainedTextureImages::with_coordinate_pipeline(
+                    coordinate_pipeline,
+                ),
+            ),
             views: SharedState::default(),
             limit,
             vertical_sync: Arc::new(SharedState::new(false)),

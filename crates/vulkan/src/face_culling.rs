@@ -1,6 +1,6 @@
 //! Resolve OCCT's opaque automatic culling without exposing Vulkan state to scene extraction.
 use crate::PrimitiveDraw;
-use rustycad_tkservice::graphic3d::Graphic3dTypeOfBackfacingModel;
+use rustycad_tkservice::graphic3d::{Graphic3dAspectsMembers, Graphic3dTypeOfBackfacingModel};
 /// Face rejection after vertex transformation; `RenderFaceCulling::Back`.
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub enum RenderFaceCulling {
@@ -35,6 +35,14 @@ pub(crate) fn resolve_culling(
         _ => RenderFaceCulling::None,
     }
 }
+pub(crate) fn allow_surface_auto_culling(
+    aspect: &dyn rustycad_tkservice::graphic3d::Graphic3dAspectsSource,
+) -> bool {
+    use rustycad_tkservice::graphic3d::Graphic3dAlphaMode::*;
+    !matches!(aspect.alpha_mode(), Blend | Mask | MaskBlend)
+        && (aspect.alpha_mode() != BlendAuto || aspect.front_material().transparency() == 0.)
+        && aspect.interior_style() != rustycad_tkservice::aspect::AspectInteriorStyle::Hatch
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -49,5 +57,28 @@ mod tests {
             RenderFaceCulling::Front
         );
         assert_eq!(resolve_culling(BackCulled, false), RenderFaceCulling::Back);
+    }
+    #[test]
+    fn native_auto_culling_excludes_all_masked_and_blended_modes() {
+        use rustycad_tkservice::graphic3d::*;
+        let aspect = Graphic3dAspects::default();
+        for (mode, allowed) in [
+            (Graphic3dAlphaMode::Opaque, true),
+            (Graphic3dAlphaMode::BlendAuto, true),
+            (Graphic3dAlphaMode::Blend, false),
+            (Graphic3dAlphaMode::Mask, false),
+            (Graphic3dAlphaMode::MaskBlend, false),
+        ] {
+            aspect.set_alpha_mode(mode, 0.5);
+            assert_eq!(allow_surface_auto_culling(&aspect), allowed, "{mode:?}");
+        }
+        aspect.set_alpha_mode(Graphic3dAlphaMode::BlendAuto, 0.5);
+        let mut material = aspect.front_material();
+        material.set_transparency(0.25).unwrap();
+        aspect.set_front_material(material);
+        assert!(!allow_surface_auto_culling(&aspect));
+        aspect.set_alpha_mode(Graphic3dAlphaMode::Opaque, 0.5);
+        aspect.set_interior_style(rustycad_tkservice::aspect::AspectInteriorStyle::Hatch);
+        assert!(!allow_surface_auto_culling(&aspect));
     }
 }

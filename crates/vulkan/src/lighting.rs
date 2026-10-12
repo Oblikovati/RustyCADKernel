@@ -185,9 +185,7 @@ impl PrimitiveDraw {
     /// Attach surface or opaque nodal line/marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
     pub fn with_lighting(mut self, lighting: RenderLighting) -> Result<Self, RenderError> {
         self.validate_lighting_topology(&lighting)?;
-        if self.topology() != crate::PrimitiveTopology::Triangles
-            || self.capping_pass != crate::RenderCappingPass::None
-        {
+        if self.topology() != crate::PrimitiveTopology::Triangles {
             lighting.validate_opaque_annotation_or_cap()?;
         } else {
             self.surface_blend |= lighting.uses_translucent_material();
@@ -205,7 +203,7 @@ impl PrimitiveDraw {
                     self.textured_style.is_some(),
                     self.capping_pass,
                 ),
-                "one normal per untextured triangle or Gouraud/Phong line/marker vertex outside stencil masks",
+                "one normal per ordinary triangle or Gouraud/Phong line/marker vertex",
             ));
         }
         Ok(())

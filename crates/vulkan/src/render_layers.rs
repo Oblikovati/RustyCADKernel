@@ -18,8 +18,7 @@ impl RenderLayer {
         depth_write: bool,
         clear_depth: bool,
     ) -> Self {
-        // Native BLEND_UNORDERED defers transparent surfaces while retaining their submission order.
-        draws.sort_by_key(PrimitiveDraw::is_surface_blended);
+        crate::capping_order::order_layer_draws(&mut draws);
         Self {
             draws,
             depth_test,

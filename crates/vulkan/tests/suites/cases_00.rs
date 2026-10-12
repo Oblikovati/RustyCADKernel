@@ -9,6 +9,8 @@ pub mod blend_text_policy;
 pub mod camera_animation_capture_cases;
 #[path = "../capping_pass.rs"]
 pub mod capping_pass;
+#[path = "../capping_texture_updates.rs"]
+pub mod capping_texture_updates;
 #[path = "../capping_view.rs"]
 pub mod capping_view;
 #[path = "../clipping_capture_cases.rs"]
@@ -69,6 +71,10 @@ pub mod surface_primitives;
 pub mod text_culling_test;
 #[path = "../text_primitives.rs"]
 pub mod text_primitives;
+#[path = "../texture_coordinate_updates.rs"]
+pub mod texture_coordinate_updates;
+#[path = "../texture_dependencies_replay.rs"]
+pub mod texture_dependencies_replay;
 #[path = "../transform_persistence.rs"]
 pub mod transform_persistence;
 #[path = "../view_culling.rs"]

@@ -107,7 +107,10 @@ impl CappingScene<'_> {
         } else {
             Handle::default()
         };
-        let surface = self.cap_surface(cap, &aspect)?;
+        let surface = self.cap_surface(cap, &aspect, &groups[0].group.texture_images)?;
+        for draw in &mut mask {
+            draw.surface_blend = surface.surface_blend;
+        }
         draws.extend(mask);
         draws.push(surface);
         Ok(())
@@ -127,7 +130,7 @@ impl CappingScene<'_> {
             .filter(|draw| is_cap_geometry(draw))
             .map(|draw| {
                 let mut mask = draw.clone().with_clipping(clipping.clone());
-                mask.lighting = None;
+                crate::capping_mask_aspect::apply_native_stencil_aspect(&mut mask);
                 mask.clip_transform = matrix;
                 mask.depth_clamp = clamp;
                 mask.mirrored = false;
@@ -139,6 +142,7 @@ impl CappingScene<'_> {
         &self,
         cap: &CapPlane,
         group: &Handle<dyn Graphic3dAspectsSource>,
+        texture_images: &crate::retained_texture_images::RetainedTextureImages,
     ) -> Result<PrimitiveDraw, RenderError> {
         let aspect = crate::capping_style::cap_aspect(&cap.plane, group);
         let color = crate::style::surface_color(&aspect, true)?;
@@ -150,6 +154,15 @@ impl CappingScene<'_> {
             self.extent,
         )?;
         let mut draw = cap_draw(color, matrix, &aspect)?;
+        crate::surface_alpha::apply_surface_alpha(&mut draw, &*aspect);
+        crate::capping_texture::apply_cap_texture(
+            &mut draw,
+            &aspect,
+            texture_images,
+            self,
+            orientation,
+            &cap.plane,
+        )?;
         crate::capping_lighting::apply_cap_lighting(&mut draw, &aspect, self, orientation)?;
         draw.depth_clamp = clamp;
         draw = draw.with_clipping(RenderClipping::new(
@@ -179,6 +192,6 @@ fn cap_draw(
         .with_capping_pass(RenderCappingPass::Surface)?
         .with_face_culling(crate::face_culling::resolve_culling(
             aspect.face_culling(),
-            true,
+            crate::face_culling::allow_surface_auto_culling(&**aspect),
         )))
 }

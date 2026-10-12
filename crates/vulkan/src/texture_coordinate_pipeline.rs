@@ -17,7 +17,13 @@ mod tests {
     use super::*;
     #[test]
     fn default_coordinate_pipeline_preserves_programmable_behavior() {
-        assert_eq!(RenderTextureCoordinatePipeline::default(), RenderTextureCoordinatePipeline::Programmable);
-        assert_ne!(RenderTextureCoordinatePipeline::GeneratedCompatibility, RenderTextureCoordinatePipeline::Programmable);
+        assert_eq!(
+            RenderTextureCoordinatePipeline::default(),
+            RenderTextureCoordinatePipeline::Programmable
+        );
+        assert_ne!(
+            RenderTextureCoordinatePipeline::GeneratedCompatibility,
+            RenderTextureCoordinatePipeline::Programmable
+        );
     }
 }

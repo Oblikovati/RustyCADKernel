@@ -1,0 +1,142 @@
+{
+  "project": "Martensite",
+  "scope": "Standard 2D object/eye coordinate policy and textured section capping; coordinate-only compatibility, no whole-FFP or class completion credit",
+  "start_head": "adc5564475d46a001f62722722e005917c1f558e",
+  "upstream_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "source_entries": 12355,
+  "source_unchanged": true,
+  "binary_unchanged": true,
+  "binaries": {
+    "generation-native": "01f4dc940308e757a8f527a161b6bf5c22fb344b7745c7dbb005d51a02e4bf44",
+    "cap-native": "d7ee7d3a120b63fa74dd099418f4c64508caea4e1c29fac4f2d29e62f11f5354",
+    "generation-vulkan": "dbccc47374f66cb6213cc782f6a6a003cbb5057a087b312f2df10cfc2bd84c74",
+    "cap-vulkan": "9d22e020f639eadb7882d27f85363970b25cd91b8f64b49663fb37e6073e53b5",
+    "performance-vulkan": "5fa7db524f995d9db48f11ee333de41cf4cceb0188b96d2aefd8fddef57238a0"
+  },
+  "functional": {
+    "pairs": 136,
+    "golden_pairs": 88,
+    "golden_exact": 88,
+    "all_rgba_exact": 108,
+    "all_depth_pass": 135
+  },
+  "strict_gates": {
+    "rgba": "exact bytes",
+    "depth_absolute": 1e-06,
+    "changed": false
+  },
+  "diagnostics": {
+    "rgba_pairs": 28,
+    "depth_pairs": 1,
+    "remaining": [
+      "AMD cardinal cap boundary coverage",
+      "Bilinear sampler update: AMD769 pixels max13; software2 pixels max1",
+      "Native forced-FFP lighting and encoded-byte blend state are not implemented by coordinate-only policy",
+      "AMD moved-plane depth max4.6193599700927734e-6; fresh native control matches update bytes, cause unresolved"
+    ]
+  },
+  "checks": {
+    "all_targets": "145 library +183 toolkit +examples passed",
+    "clippy": "all targets -D warnings passed",
+    "format": "bounded global formatter passed",
+    "canonical": "toolkit suite generation passed",
+    "python": "bounded discovery and source-receipt test modules passed",
+    "amd_final_replay": "44 committed cases passed Rust-only"
+  },
+  "performance": {
+    "warmup": 20,
+    "samples_per_workload": 100,
+    "validation": false,
+    "size": [
+      64,
+      64
+    ],
+    "baseline_accepted": false,
+    "new_workload_baseline": "none",
+    "runs": [
+      {
+        "profile": "software",
+        "exit": 0,
+        "workloads": 52,
+        "samples": 5200,
+        "mean_ms_range": [
+          0.18505686,
+          0.54760996
+        ],
+        "p95_ms_range": [
+          0.211391,
+          0.648068
+        ],
+        "devices": [
+          "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 128 bits)",
+          "MARTENSITE_DEVICE=llvmpipe (LLVM 20.1.2, 128 bits)"
+        ],
+        "start": {
+          "heavy_processes": [],
+          "load": [
+            1.29052734375,
+            2.8857421875,
+            2.58056640625
+          ],
+          "time_utc": "2026-10-12T05:12:54Z"
+        },
+        "end": {
+          "heavy_processes": [],
+          "load": [
+            1.587890625,
+            2.9208984375,
+            2.59375
+          ],
+          "time_utc": "2026-10-12T05:12:57Z"
+        }
+      },
+      {
+        "profile": "host",
+        "exit": 0,
+        "workloads": 52,
+        "samples": 5200,
+        "mean_ms_range": [
+          0.20248222,
+          0.54397788
+        ],
+        "p95_ms_range": [
+          0.21693099999999998,
+          0.713599
+        ],
+        "devices": [
+          "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+          "MARTENSITE_DEVICE=AMD Radeon 8060S Graphics (RADV STRIX_HALO)"
+        ],
+        "start": {
+          "heavy_processes": [],
+          "load": [
+            1.587890625,
+            2.9208984375,
+            2.59375
+          ],
+          "time_utc": "2026-10-12T05:12:57Z"
+        },
+        "end": {
+          "heavy_processes": [],
+          "load": [
+            1.587890625,
+            2.9208984375,
+            2.59375
+          ],
+          "time_utc": "2026-10-12T05:12:59Z"
+        }
+      }
+    ],
+    "pre_refactor": "Preserved separately; not final-binary validation"
+  },
+  "native_identity": "Native GL and Vulkan RADV are distinct driver APIs; software uses declared SSE2/128 profile. No arbitrary cross-device bitwise claim.",
+  "artifacts": "Raw final captures contain buffers/logs only, not executables or worktree archives. Fresh control historical source requires replacing its include path with current checkout oracle source.",
+  "remaining_scope": [
+    "Whole-FFP lighting/color/attachment behavior",
+    "Sphere/Sprite generation",
+    "Other texture targets or multiple units",
+    "PBR/custom shaders and unsupported interior styles",
+    "Actual triangle-edge and textured-line policies"
+  ],
+  "historical_diagnostics": "Historical comparison/buffer logs retained separately; earlier equation and readiness failures are rejected fixture/implementation diagnostics, not final oracle passes."
+}

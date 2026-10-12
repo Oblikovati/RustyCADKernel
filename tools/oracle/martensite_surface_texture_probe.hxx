@@ -53,7 +53,7 @@ static occ::handle<Graphic3d_Texture2D> texture_source(const std::string& mode) 
   return new Graphic3d_Texture2D(image);
 }
 static Quantity_Color texture_rgb(float r,float g,float b) {return Quantity_Color(r,g,b,Quantity_TOC_RGB);}
-static void texture_material(const occ::handle<Graphic3d_AspectFillArea3d>& style) {
+static void texture_material(const occ::handle<Graphic3d_Aspects>& style) {
   Graphic3d_MaterialAspect material(Graphic3d_NameOfMaterial_Plastified);
   material.SetMaterialType(Graphic3d_MATERIAL_ASPECT);
   material.SetAmbientColor(texture_rgb(.25f,.5f,.75f));material.SetDiffuseColor(texture_rgb(.5f,.25f,.125f));

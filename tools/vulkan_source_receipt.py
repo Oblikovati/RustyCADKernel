@@ -6,6 +6,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RECEIPT_ORACLE_PATHS = (
     "tools/oracle/martensite_standard_texture_format.cxx",
+    "tools/oracle/martensite_surface_texture_probe.hxx",
+    "tools/oracle/martensite_texture_generation_capture.cxx",
+    "tools/oracle/martensite_capping_texture_contract.cxx",
+    "tools/oracle/martensite_capping_texture_capture.cxx",
     "tools/oracle/martensite_vulkan_surface_texture_capture.cxx",
     "tools/oracle/martensite_text_culling_probe.hxx",
     "tools/oracle/martensite_vulkan_ais_rubber_band.cxx",

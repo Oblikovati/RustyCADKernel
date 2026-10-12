@@ -2,6 +2,14 @@
 #include "martensite_surface_texture_probe.hxx"
 #include <Graphic3d_Texture2Dplane.hxx>
 #include <OpenGl_Caps.hxx>
+class MartensiteSharedPlaneTexture final : public Graphic3d_Texture2Dplane {
+public:
+  MartensiteSharedPlaneTexture(const occ::handle<Image_PixMap>& image,
+    const TCollection_AsciiString& identity) : Graphic3d_Texture2Dplane(image) {
+    // Native TextureRoot explicitly permits a subclass constructor to share a resource ID.
+    myTexId=identity;
+  }
+};
 
 static occ::handle<Graphic3d_Texture2Dplane> generation_texture(const std::string& mode) {
   const auto image=texture_source("nearest")->GetImage(occ::handle<Image_SupportedFormats>());
@@ -41,11 +49,27 @@ static occ::handle<Graphic3d_Structure> generation_structure(
   structure->Display();return structure;
 }
 static void generation_update(const occ::handle<Graphic3d_Texture2Dplane>& texture,const std::string& mode) {
+  if(mode=="eye-params-updated") {
+    texture->GetParams()->SetGenMode(Graphic3d_TOTM_EYE,NCollection_Vec4<float>(.03125f,0,0,.25f),
+      NCollection_Vec4<float>(0,.03125f,0,.25f));return;
+  }
   if(mode.find("updated")==std::string::npos)return;
   texture->SetPlaneS(.03125f,0,0,.25f);texture->SetPlaneT(0,.03125f,0,.25f);
 }
 static void generation_group_translation(const occ::handle<Graphic3d_Group>& group,double x) {
   gp_Trsf transform;transform.SetTranslation(gp_Vec(x,0,0));group->SetTransformation(transform);
+}
+static occ::handle<Graphic3d_Aspects> generation_second_aspect(
+  const occ::handle<Graphic3d_Group>& first,const std::string& mode) {
+  if(mode.find("revision")==std::string::npos)return first->Aspects();
+  const auto source=first->Aspects()->TextureMap();const auto parameters=source->GetParams();
+  const occ::handle<Graphic3d_Texture2Dplane> texture=new MartensiteSharedPlaneTexture(
+    source->GetImage(occ::handle<Image_SupportedFormats>()),source->GetId());
+  texture->GetParams()->SetFilter(Graphic3d_TOTF_NEAREST);
+  texture->GetParams()->SetGenMode(parameters->GenMode(),parameters->GenPlaneS(),parameters->GenPlaneT());
+  texture->UpdateRevision();
+  const occ::handle<Graphic3d_Aspects> aspect=new Graphic3d_Aspects(*first->Aspects());
+  aspect->SetTextureMap(texture);return aspect;
 }
 static void generation_shared_groups(const occ::handle<Graphic3d_Structure>& structure,const std::string& mode) {
   if(mode.find("shared")==std::string::npos)return;
@@ -57,11 +81,11 @@ static void generation_shared_groups(const occ::handle<Graphic3d_Structure>& str
     middle->SetGroupPrimitivesAspect(plain);generation_geometry(middle,"manual-uv");
     generation_group_translation(middle,100);
   }
-  const auto second=structure->NewGroup();second->SetGroupPrimitivesAspect(first->Aspects());
+  const auto second=structure->NewGroup();second->SetGroupPrimitivesAspect(generation_second_aspect(first,mode));
   generation_geometry(second,mode);generation_group_translation(second,4);
 }
 int main(int argc,char** argv) {
-  if(argc!=4)throw Standard_Failure("received texture generation arguments; expected programmable|fixed mode prefix");
+  if(argc!=4)throw Standard_Failure(("received argc="+std::to_string(argc)+"; expected programmable|fixed mode prefix").c_str());
   const std::string path=argv[1],mode=argv[2];
   if(path!="programmable"&&path!="fixed")throw Standard_Failure(("received path="+path+"; expected programmable|fixed").c_str());
   auto probe=create_policy_probe();texture_camera(probe.view);

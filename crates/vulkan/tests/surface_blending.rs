@@ -24,17 +24,26 @@ fn transparent_surfaces_follow_opaque_geometry_without_distance_sorting() {
     assert_eq!(frame.draws(), &[red, green, blue]);
 }
 #[test]
-fn transparent_capping_is_rejected_and_lines_keep_their_own_policy() {
+fn transparent_cap_batches_stay_together_and_lines_keep_their_own_policy() {
     let draw = colored_surface([1., 0., 0.], 0.5);
-    for pass in [RenderCappingPass::MaskStart, RenderCappingPass::Surface] {
-        assert!(
-            draw.clone()
-                .with_capping_pass(pass)
-                .unwrap_err()
-                .to_string()
-                .contains("opaque triangle")
-        );
-    }
+    let mask = draw
+        .clone()
+        .with_capping_pass(RenderCappingPass::MaskStart)
+        .unwrap();
+    let surface = draw
+        .clone()
+        .with_capping_pass(RenderCappingPass::Surface)
+        .unwrap();
+    let frame = RenderFrame::new(16, 16, [0.; 4], vec![mask, surface]).unwrap();
+    assert_eq!(
+        frame
+            .draws()
+            .iter()
+            .map(PrimitiveDraw::capping_pass)
+            .collect::<Vec<_>>(),
+        [RenderCappingPass::MaskStart, RenderCappingPass::Surface]
+    );
+    assert!(frame.draws().iter().all(PrimitiveDraw::is_surface_blended));
     let line = PrimitiveDraw::segments(
         draw.vertices()[..2].to_vec(),
         vec![0, 1],

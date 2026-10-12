@@ -19,30 +19,18 @@ impl RenderCappingPass {
     }
 }
 impl PrimitiveDraw {
-    /// Tag opaque triangle geometry for capping; `draw.with_capping_pass(RenderCappingPass::Surface)?`.
+    /// Tag triangle geometry for capping; `draw.with_capping_pass(RenderCappingPass::Surface)?`.
     pub fn with_capping_pass(mut self, pass: RenderCappingPass) -> Result<Self, RenderError> {
         if pass != RenderCappingPass::None
-            && (self.topology() != PrimitiveTopology::Triangles
-                || self.textured_style.is_some()
-                || self.surface_blend
-                || self
-                    .lighting
-                    .as_ref()
-                    .is_some_and(crate::RenderLighting::uses_translucent_material))
+            && (self.topology() != PrimitiveTopology::Triangles || self.textured_style.is_some())
         {
             return Err(rejected(
-                (
-                    pass,
-                    self.topology(),
-                    self.surface_blend,
-                    self.lighting
-                        .as_ref()
-                        .map(|state| state.material.common.map(|face| face.diffuse[3])),
-                ),
-                "opaque triangle capping geometry",
+                (pass, self.topology(), self.textured_style.is_some()),
+                "triangle capping geometry without a glyph atlas",
             ));
         }
         self.capping_pass = pass;
+        // Native FillModeOnly masks use the workspace unlit aspect.
         if pass.is_mask() {
             self.lighting = None;
         }
