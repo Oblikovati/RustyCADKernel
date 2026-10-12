@@ -231,10 +231,8 @@ mod view_controller_mouse_motion;
 mod view_controller_mouse_position;
 mod view_controller_mouse_state;
 
-
 mod view_controller_space_mouse;
 mod view_controller_window_listener;
-
 
 mod light_source;
 mod light_source_properties;
@@ -255,7 +253,6 @@ mod view_controller_touch_pinch;
 mod view_controller_touch_rotation;
 mod view_controller_touch_synthesis;
 
-
 mod color_scale;
 mod color_scale_placement;
 mod color_scale_policies;
@@ -270,7 +267,6 @@ mod color_scale_bar;
 mod color_scale_layout;
 mod color_scale_presentations;
 mod color_scale_uniform;
-
 
 mod context_selection_bounds;
 mod view_controller_fit_all;
@@ -291,10 +287,8 @@ pub use light_source_selection::AisLightSourceOwner;
 
 pub use light_source_aspects::ais_light_source_initialize;
 
-
 mod view_controller_camera_primitives;
 mod view_controller_camera_zoom;
-
 
 mod view_cube_appearance;
 mod view_cube_axes;
@@ -322,8 +316,6 @@ pub use view_cube_geometry::{
     ais_view_cube_create_box_side_triangles,
 };
 
-
-
 mod view_cube_animation;
 mod view_cube_camera_fit;
 mod view_cube_highlight;
@@ -347,12 +339,10 @@ pub use view_cube_policies::AisViewCubeMembers;
 pub use view_cube_selection::ais_view_cube_compute_selection;
 pub use view_cube_sensitive::AisViewCubeSensitive;
 
-
 mod view_controller_orbit_rotation;
 mod view_controller_rotation_math;
 mod view_controller_rotation_state;
 mod view_controller_view_rotation;
-
 
 mod view_cube_animation_reference;
 pub use view_cube_animation_reference::AisViewCubeAnimationRef;
