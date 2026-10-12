@@ -389,5 +389,26 @@ pub use animation_camera_source::{
     ais_animation_camera_update,
 };
 
+mod xr_laser_color_reference;
+mod xr_tracked_device;
+mod xr_tracked_device_members;
+mod xr_tracked_device_object;
+mod xr_tracked_device_presentation;
+mod xr_tracked_device_selection;
+mod xr_tracked_device_texture;
+pub use xr_laser_color_reference::AisXrLaserColorRef;
+pub use xr_tracked_device::{
+    AisXrTrackedDeviceBase, AisXrTrackedDeviceParent, AisXrTrackedDeviceSource,
+};
+pub use xr_tracked_device_members::AisXrTrackedDeviceMembers;
+pub use xr_tracked_device_object::AisXrTrackedDevice;
+pub use xr_tracked_device_presentation::{
+    ais_xr_tracked_device_compute, ais_xr_tracked_device_compute_laser_ray,
+};
+pub use xr_tracked_device_selection::ais_xr_tracked_device_compute_selection;
+
+#[cfg(test)]
+mod xr_tests;
+
 #[cfg(test)]
 include!("test_modules.rs");

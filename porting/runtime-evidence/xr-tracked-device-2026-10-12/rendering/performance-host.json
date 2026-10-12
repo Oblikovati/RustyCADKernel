@@ -1,0 +1,146 @@
+{
+  "project": "Martensite",
+  "device": {
+    "index": 0,
+    "name": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+    "kind": "PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU",
+    "api_version": "1.4.354",
+    "driver": "radv"
+  },
+  "command": [
+    "/home/vmiguel/git/oblikovati-workspace/Martensite-xr-tracked-device/target/release/examples/xr_device_performance"
+  ],
+  "environment": {
+    "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+    "MARTENSITE_VULKAN_DEVICE": "0"
+  },
+  "exit_code": 0,
+  "source_verified_before_after": true,
+  "source_entries": 7432,
+  "executable_sha256": "739ea56d0c8052f48268e3fdd01c94f669120483e4b4250d3b020c2ad652f762",
+  "baseline_accepted": false,
+  "performance": [
+    {
+      "workload": "xr-device-axes",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.18956050000000002,
+      "mean_ms": 0.20288519,
+      "p95_ms": 0.24783900000000003,
+      "p99_ms": 0.701608,
+      "minimum_ms": 0.163723,
+      "maximum_ms": 0.706977,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-mesh",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.19745050000000003,
+      "mean_ms": 0.22818386,
+      "p95_ms": 0.35717000000000004,
+      "p99_ms": 0.5700339999999999,
+      "minimum_ms": 0.174363,
+      "maximum_ms": 0.615288,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-texture",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2095325,
+      "mean_ms": 0.24096858000000002,
+      "p95_ms": 0.49063700000000005,
+      "p99_ms": 0.5394380000000001,
+      "minimum_ms": 0.187186,
+      "maximum_ms": 0.824585,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-finite-ray",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.216205,
+      "mean_ms": 0.23102971,
+      "p95_ms": 0.273365,
+      "p99_ms": 0.5564790000000001,
+      "minimum_ms": 0.187517,
+      "maximum_ms": 0.593237,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-infinite-ray",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2180785,
+      "mean_ms": 0.23485355,
+      "p95_ms": 0.276111,
+      "p99_ms": 0.5535530000000001,
+      "minimum_ms": 0.199939,
+      "maximum_ms": 0.915563,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-finite-zero",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.22198099999999998,
+      "mean_ms": 0.2349651,
+      "p95_ms": 0.320944,
+      "p99_ms": 0.401683,
+      "minimum_ms": 0.20686200000000002,
+      "maximum_ms": 0.41173099999999996,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-infinite-zero",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.19710450000000002,
+      "mean_ms": 0.20546776,
+      "p95_ms": 0.23900200000000002,
+      "p99_ms": 0.39250599999999997,
+      "minimum_ms": 0.1838,
+      "maximum_ms": 0.401733,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-color-update",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.2484,
+      "mean_ms": 0.26769814000000003,
+      "p95_ms": 0.395,
+      "p99_ms": 0.5998690000000001,
+      "minimum_ms": 0.21092,
+      "maximum_ms": 0.753513,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-finite-ray-each-frame",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 1.842077,
+      "mean_ms": 1.94377321,
+      "p95_ms": 3.132945,
+      "p99_ms": 3.3338460000000003,
+      "minimum_ms": 0.774973,
+      "maximum_ms": 3.459007,
+      "samples": 100
+    },
+    {
+      "workload": "xr-device-infinite-ray-each-frame",
+      "warmup": 20,
+      "validation": false,
+      "median_ms": 0.220453,
+      "mean_ms": 0.23606337,
+      "p95_ms": 0.307699,
+      "p99_ms": 0.395391,
+      "minimum_ms": 0.198347,
+      "maximum_ms": 0.42990500000000004,
+      "samples": 100
+    }
+  ],
+  "raw_report": "performance-host.json.gz",
+  "raw_report_sha256": "d86e7f22c8d0fd785fa3792a9d659fd6c4593ddd2cbc70470075294bc3ea41e4"
+}

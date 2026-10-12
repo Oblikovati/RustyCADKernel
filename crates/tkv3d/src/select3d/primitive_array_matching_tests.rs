@@ -182,7 +182,7 @@ fn initialize_matching_probe(probe: &Select3DSensitivePrimitiveArray, scenario: 
     };
     assert!(ok.unwrap());
 }
-pub(super) fn matching_volume(kind: i32, miss: bool) -> SelectMgrSelectingVolumeManager {
+pub(crate) fn matching_volume(kind: i32, miss: bool) -> SelectMgrSelectingVolumeManager {
     let mut volume = SelectMgrSelectingVolumeManager::new();
     let shift = if miss { 300.0 } else { 0.0 };
     initialize_matching_volume(&mut volume, kind, shift);

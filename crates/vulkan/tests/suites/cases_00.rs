@@ -75,3 +75,5 @@ pub mod transform_persistence;
 pub mod view_culling;
 #[path = "../viewer_integration.rs"]
 pub mod viewer_integration;
+#[path = "../xr_device_presentations.rs"]
+pub mod xr_device_presentations;
