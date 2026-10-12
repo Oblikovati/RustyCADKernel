@@ -1,0 +1,18 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "finding": "Original source is correct: Rust evaluates assignment RHS before the assignee place; valid Camera self-alias assignment already terminates and preserves actual reference identity/counts. No production change or implementation credit.",
+  "production_source_sha256": "343133f40ae6785ea956d248497da35596a12d48d8b4d93df833e4b6f01d1ee1",
+  "native_generator": "tools/oracle/martensite_cview_camera_self_assignment.cxx",
+  "native_generator_sha256": "5d498fe8f8776fa30c5b210f4678e66fe0d39749c6efec6da98b6a1eb0bced55",
+  "shared_native_source_sha256": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+  "native_fixture": "crates/tkservice/tests/fixtures/cview-camera-self-assignment-native.txt",
+  "native_fixture_sha256": "d4a1d1d8e38c1029458984a59393bdce44a95c9e9633ddc45a2d519746c2bf97",
+  "native_records": 3,
+  "native_runs": 2,
+  "native_runs_byte_identical": true,
+  "original_source_regression": "passed",
+  "rust_timeout_seconds": 3,
+  "all_target_tests_passed": 262,
+  "production_changes": false
+}
