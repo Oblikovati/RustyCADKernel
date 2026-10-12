@@ -1,0 +1,76 @@
+{
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "library_directory": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+  "compile_flags": [
+    "-std=c++17",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel"
+  ],
+  "shared_sources": {
+    "tools/oracle/tkservice_probe_null_driver.cxx": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9"
+  },
+  "runs": [
+    {
+      "generator": "tools/oracle/martensite_v3d_activation_argument.cxx",
+      "source_sha256": "3f8fae9dbbce33247d7ddee321c1638099159e79ed344d19860e41b0d58493dc",
+      "fixture": "crates/tkv3d/tests/fixtures/v3d-activation-argument-native.txt",
+      "fixture_sha256": "66d1e9623c9d7cdaff6fc11a584eafaa98905ac31aa2d7e161a8d1f47d570efe",
+      "records": 1,
+      "executable_sha256": "2f6f9db29fb6926911672b4eae2882e96b174f2d3e719c962470e5e8a1777e2b",
+      "repeated_runs": 2,
+      "outputs_byte_identical": true
+    },
+    {
+      "generator": "tools/oracle/martensite_v3d_camera_argument.cxx",
+      "source_sha256": "60bfe40bbbdff265d743d15c3b2f2e3a5a5de8966b9e915a0f33d0c1c9c161dc",
+      "fixture": "crates/tkv3d/tests/fixtures/v3d-camera-argument-native.txt",
+      "fixture_sha256": "eafaa24706b98312338a6cd209c1122b1cb9ed8a4bc086e9ab7ec93eb6a9fe95",
+      "records": 1,
+      "executable_sha256": "d2dd01efee479d48e09cb73115c6ff55bd38a836ae1af1e13bf3805c2de03291",
+      "repeated_runs": 2,
+      "outputs_byte_identical": true
+    },
+    {
+      "generator": "tools/oracle/martensite_v3d_camera_reference.cxx",
+      "source_sha256": "15df58b95b3d2f9e77a200ceb0d0cfe6ba20c21fcc57f0cdb57d1e916fdaab2f",
+      "fixture": "crates/tkv3d/tests/fixtures/v3d-camera-reference-native.txt",
+      "fixture_sha256": "b5740fd2d9a49e0a19fd69f01ff8dc76bdda3af21a3c8fe8f39c5664a45be44d",
+      "records": 5,
+      "executable_sha256": "6423f9de01c0e1d11b0b7dc66393dd09a91aaec7d58fca973f11b42f3889232d",
+      "repeated_runs": 2,
+      "outputs_byte_identical": true
+    },
+    {
+      "generator": "tools/oracle/martensite_v3d_view_failures.cxx",
+      "source_sha256": "79c6195062e2e6c657c208b1dece724e1df90c87c8f46785e13cf1ec284461e8",
+      "fixture": "crates/tkv3d/tests/fixtures/v3d-view-failures-native.txt",
+      "fixture_sha256": "8844a78cc526fdbaedf3fb548e8781046101c7941ef4f391fd2d5adfc90367af",
+      "records": 12,
+      "executable_sha256": "642795bc08004c4117fa2e7e6d862e322778fcfaa13544f68f22b242ec90671a",
+      "repeated_runs": 2,
+      "outputs_byte_identical": true
+    },
+    {
+      "generator": "tools/oracle/martensite_v3d_view_live_list.cxx",
+      "source_sha256": "4d59f721abf4f76ba5cb0154aad76432def399e3286d228e7950303dd2ed186f",
+      "fixture": "crates/tkv3d/tests/fixtures/v3d-view-live-list-native.txt",
+      "fixture_sha256": "820efb57e6cb3c95198b268bab71e7122633c907a3d630991a4b5751cf4b8786",
+      "records": 10,
+      "executable_sha256": "99c09db17c390f7f2a30576559f211e16fc635d74bcebedc61d0b7a043da6de9",
+      "repeated_runs": 2,
+      "outputs_byte_identical": true
+    },
+    {
+      "generator": "tools/oracle/martensite_v3d_view_source.cxx",
+      "source_sha256": "79367b2048316ce1dc39d0687db2ac54aa9765cf60412d7eccb202d47e9b132b",
+      "fixture": "crates/tkv3d/tests/fixtures/v3d-view-source-native.txt",
+      "fixture_sha256": "e270fbc795323188936eed8ff158b0c5010ba7736f5ad641d2c1215b3484c0ed",
+      "records": 6,
+      "executable_sha256": "028cc0568fc2bdb06896e8962c9728659804a12ca4c50e9756834303f759b093",
+      "repeated_runs": 2,
+      "outputs_byte_identical": true
+    }
+  ]
+}
