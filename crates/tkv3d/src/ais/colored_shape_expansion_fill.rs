@@ -86,7 +86,7 @@ fn expand_explicit_entry<S: AisColoredShapeSource + ?Sized>(
     // Preserve native leaf rebind priority over aggregate shell/wire styles, not first-entry wins.
     bind_colored_shape_leaves(output, key, drawer)
 }
-fn visit_colored_map_entries(
+pub(super) fn visit_colored_map_entries(
     source: &AisShapeDrawerMap,
     mut visit: impl FnMut(
         &Shape,

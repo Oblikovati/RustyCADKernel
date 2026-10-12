@@ -23,7 +23,7 @@ pub fn ais_shape_set_color<S: AisShapeSource + ?Sized>(
     object.recompute_computed();
     Ok(())
 }
-fn set_shape_drawer_color<S: AisShapeSource + ?Sized>(
+pub(super) fn set_shape_drawer_color<S: AisShapeSource + ?Sized>(
     object: &S,
     drawer: &Handle<Prs3dDrawer>,
     color: Color,
@@ -42,7 +42,7 @@ fn set_shape_drawer_color<S: AisShapeSource + ?Sized>(
     Ok(recompute)
 }
 pub(super) fn shape_colored_line_aspects(
-    drawer: &Handle<Prs3dDrawer>,
+    drawer: &Prs3dDrawer,
 ) -> [Handle<crate::prs3d::Prs3dLineAspect>; 6] {
     [
         drawer.line_aspect(),
@@ -60,17 +60,17 @@ pub fn ais_shape_set_material<S: AisShapeSource + ?Sized>(
 ) -> Result<(), Failure> {
     let drawer = object.attributes();
     let recompute = !drawer.has_own_shading_aspect();
-    set_shape_drawer_material(object, &drawer, material)?;
+    set_shape_drawer_material(object, &drawer, material, (object.has_color(), object.is_transparent()))?;
     object.presentable_base().fields.write().has_own_material = true;
     refresh_shape_aspect_ownership(object, recompute);
     Ok(())
 }
-fn set_shape_drawer_material<S: AisShapeSource + ?Sized>(
+pub(super) fn set_shape_drawer_material<S: AisShapeSource + ?Sized>(
     object: &S,
     drawer: &Handle<Prs3dDrawer>,
     material: &Graphic3dMaterialAspect,
+    keep: (bool, bool),
 ) -> Result<(), Failure> {
-    let keep = (object.has_color(), object.is_transparent());
     drawer.setup_own_shading_aspect(&Handle::default())?;
     let facing = object.presentable_base().read().current_facing_model;
     let shading = drawer.shading_aspect();
