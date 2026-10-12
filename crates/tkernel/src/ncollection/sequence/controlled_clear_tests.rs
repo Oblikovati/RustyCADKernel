@@ -72,7 +72,7 @@ fn active_clear_rejects_misordered_or_foreign_tokens_without_dereferencing_freed
     assert!(sequence.is_empty());
 }
 #[test]
-fn remaining_live_nodes_keep_native_index_origin_exchange_and_cursor_insertion() {
+fn remaining_live_nodes_keep_native_index_origin_and_exchange() {
     let mut sequence: Sequence<i32> = [1, 2, 3, 4].into_iter().collect();
     let mut progress = sequence.begin_clear_progress();
     retire_integer_node(&mut sequence, &mut progress);

@@ -31,6 +31,7 @@ mod camera_values;
 mod clip_plane;
 mod clip_plane_capping;
 mod clip_plane_chain;
+mod clip_plane_handle_field;
 mod clip_plane_probe;
 mod clip_plane_sequence;
 mod clip_plane_source;
@@ -156,6 +157,7 @@ pub use camera_fit::*;
 pub use camera_projection::Graphic3dCameraScalar;
 pub use camera_values::{Graphic3dCameraTile, Graphic3dWorldViewProjState};
 pub use clip_plane::{Graphic3dClipPlane, Graphic3dClipPlaneEquation, Graphic3dClipState};
+pub use clip_plane_handle_field::Graphic3dClipPlaneHandleField;
 pub use clip_plane_sequence::{
     Graphic3dSequenceOfHClipPlane, Graphic3dSequenceOfHClipPlaneIterator,
 };

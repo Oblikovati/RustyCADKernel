@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Prerequisite only: actual shared native iterator advancement before detached-node destruction, and distinct per-node handle ownership with noncounting field storage leases. Production collection/view adapters and allocator integration remain unfinished; no API or class claims restored.",
+  "native_replay": {
+    "fixture": "crates/tkservice/tests/fixtures/clip-collection-references-native.txt",
+    "sha256": "7697663a9efe5aaf35cb90d722637910b412a08e9b80215bab4cd11989db6a07",
+    "columns": "borrow/replace rows: only first and second pointee intrusive counts, not collection or iterator body completion",
+    "provenance_receipt": "porting/runtime-evidence/clip-collection-references-2026-10-12/native-references.json"
+  },
+  "source_sha256": {
+    "crates/tkernel/src/ncollection/sequence/native_cursor.rs": "67a92223f3a8ea0c5177a783fa20b3618058edb6cfd7545ee9758f3dfa735f1e",
+    "crates/tkernel/src/ncollection/sequence/retired_node.rs": "30d1b98ac1f74409bf6f818d6deae167d3b990bcda163997ff20be2d0709fe6c",
+    "crates/tkernel/src/ncollection/sequence/controlled_clear_tests.rs": "be812ccfe55ade82e6b94e374bda2e9d9746778c74817afd9def4ad430e3bd19",
+    "crates/tkservice/src/graphic3d/clip_plane_handle_field.rs": "5020ef38f87aae205cb673d74982a57990310cc0b2fdbf5608194ceb6b9a54e9",
+    "crates/tkservice/src/graphic3d/mod.rs": "6c048810fd4325ddeabcd5889144427ac4b4d3a041162f88118f8c8b2ad9a5a1"
+  },
+  "checks": [
+    {
+      "log": "native-cursor-detachment-check.log.gz",
+      "passed_tests": 42
+    },
+    {
+      "log": "clip-plane-handle-field-check.log.gz",
+      "passed_tests": 3
+    },
+    {
+      "log": "clip-slot-cursor-clippy.log.gz",
+      "passed_tests": 0
+    }
+  ],
+  "rust_safe_extension": "The physical slot lease becomes null when its Rust node payload is destroyed. Native aliases after node destruction are dangling and are not credited as successful native cases.",
+  "remaining": [
+    "Checked allocator source/storage-lease prerequisite and lazy current-resource Free after payload callbacks",
+    "Real collection live nodes/First/cursor/Dump/Clear adapters",
+    "Borrowed virtual CView/V3d transport and actual owned-field renderer clipping acquisition",
+    "Full native replay/scoped compiler bindings and both-device functional/performance proof"
+  ],
+  "binary_reverse_engineering_or_debugger_work": false
+}

@@ -15,7 +15,7 @@ impl<T> SequenceNodeRetirement<T> {
 
 #[cfg(test)]
 mod tests {
-    use crate::ncollection::{Sequence, SequenceCursor};
+    use crate::ncollection::{Sequence, SequenceCursor, SequenceNativeCursor};
     use crate::standard::SharedState;
     use std::sync::{Arc, Mutex, Weak};
 
@@ -77,5 +77,19 @@ mod tests {
                 .is_none()
         );
         assert_eq!(sequence.first(), Some(&1));
+    }
+    #[test]
+    fn native_detachment_publishes_live_cursor_before_reentrant_payload_retirement() {
+        let (scope, lengths) = populated_drop_scope();
+        let mut cursor = SequenceNativeCursor::new(&scope.read(), true);
+        let observed = cursor.observer();
+        let old = observed.current_node();
+        let retired = scope.write().detach_native(&mut cursor).unwrap().unwrap();
+        assert_ne!(observed.current_node(), old);
+        assert_eq!(scope.read().len(), 1);
+        assert!(lengths.lock().unwrap().is_empty());
+        drop(retired);
+        assert_eq!(*lengths.lock().unwrap(), vec![1]);
+        assert_eq!(observed.current_node(), cursor.position().current_node());
     }
 }
