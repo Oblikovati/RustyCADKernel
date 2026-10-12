@@ -8,6 +8,7 @@ use rustycad_tkservice::{graphic3d::*, null_driver::*};
 use std::sync::Arc;
 #[derive(Clone, Debug, PartialEq)]
 pub(super) enum ScaleDrawRequest {
+    Synchronize,
     Array {
         kind: i32,
         vertices: Vec<Vec<f64>>,
@@ -63,6 +64,7 @@ pub(super) fn install_scale_recording(
         trace: trace.clone(),
         oriented,
     });
+    wrap_existing_recording_groups(&recorder);
     prs.structure_base().fields.write().cstructure = recorder.cast();
 }
 
@@ -110,7 +112,7 @@ impl Graphic3dCStructure for ScaleRecordingStructure {
     ) -> Result<Handle<dyn Graphic3dGroup>, Failure> {
         let group: Handle<dyn Graphic3dGroup> = Handle::new(ScaleRecordingGroup {
             transient: StandardTransient::default(),
-            inner: NullGroup::new(structure),
+            inner: Handle::new(NullGroup::new(structure)).cast(),
             trace: self.trace.clone(),
             oriented: self.oriented,
         })
@@ -125,7 +127,7 @@ impl Graphic3dCStructure for ScaleRecordingStructure {
 }
 struct ScaleRecordingGroup {
     transient: StandardTransient,
-    inner: NullGroup,
+    inner: Handle<dyn Graphic3dGroup>,
     trace: ScaleDrawTrace,
     oriented: bool,
 }
@@ -144,6 +146,7 @@ impl Graphic3dGroup for ScaleRecordingGroup {
         self.inner.set_primitives_aspect(aspect);
     }
     fn synchronize_aspects(&self) {
+        self.trace.write().push(ScaleDrawRequest::Synchronize);
         self.inner.synchronize_aspects();
     }
     fn replace_aspects(&self, map: &Graphic3dAspectsReplaceMap) {
@@ -251,4 +254,21 @@ fn record_cube_text_frame(text: &Graphic3dText) -> [f64; 9] {
         x.y(),
         x.z(),
     ]
+}
+
+fn wrap_existing_recording_groups(recorder: &ScaleRecordingStructure) {
+    let mut fields = recorder.cstructure_base().fields.write();
+    fields.groups = fields
+        .groups
+        .iter()
+        .map(|group| {
+            Handle::new(ScaleRecordingGroup {
+                transient: StandardTransient::default(),
+                inner: group.clone(),
+                trace: recorder.trace.clone(),
+                oriented: recorder.oriented,
+            })
+            .cast()
+        })
+        .collect();
 }

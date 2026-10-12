@@ -116,5 +116,33 @@ impl PrsMgrPresentableObject for AisViewCube {
     fn accept_display_mode(&self, mode: i32) -> bool {
         mode == 0
     }
+    fn set_color(&self, color: rustycad_tkernel::quantity::Color) -> Result<(), Failure> {
+        self.set_box_color(color)
+    }
+    fn unset_color(&self) -> Result<(), Failure> {
+        super::view_cube_style_members::cube_unset_color(self)
+    }
+    fn set_transparency(&self, value: f64) -> Result<(), Failure> {
+        self.set_box_transparency(value)
+    }
+    fn unset_transparency(&self) -> Result<(), Failure> {
+        self.set_box_transparency(0.0)
+    }
+    fn set_material(&self, material: &Graphic3dMaterialAspect) -> Result<(), Failure> {
+        super::view_cube_style_members::cube_set_material(self, material);
+        Ok(())
+    }
+    fn unset_material(&self) -> Result<(), Failure> {
+        super::view_cube_style_members::cube_unset_material(self)
+    }
+    fn unset_attributes(&self) {
+        super::ais_view_cube_unset_attributes(self)
+            .expect("AIS_ViewCube drawer/aspects invalid; expected initialized native style slots");
+    }
+    fn unset_hilight_attributes(&self) {
+        super::ais_view_cube_unset_hilight_attributes(self).expect(
+            "AIS_ViewCube dynamic drawer invalid; expected initialized native highlight slots",
+        );
+    }
     crate::ais_presentable_overrides!();
 }

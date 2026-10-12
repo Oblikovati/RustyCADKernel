@@ -1,30 +1,93 @@
-# Martensite ViewCube presentation capture
+# Martensite concrete ViewCube capture
 
-This local fixture exercises the existing public ViewCube presentation adapter through an actual Vulkan viewer and AIS context. It is a presentation-only subclass, not a complete `AIS_ViewCube` widget. Selection requests return a typed unsupported error; display explicitly selects mode 0 and selection mode -1. Interaction, owner creation and camera animation are separate porting work.
+The local fixture now displays the actual `AisViewCube` through a Vulkan viewer
+and AIS context, with presentation mode 0 and real selection mode 0. It replaces
+the earlier presentation-only adapter. Detection at pixel (100,220) finds one of
+26 actual part owners; `select_detected(Replace)` consumes that owner click,
+leaves global selection empty and starts the camera animation.
 
-The fixture preserves native default geometry, labels, Topmost layer, and LEFT_LOWER triedron persistence with a (100,100) pixel offset. A 320×320 orthographic view observes the cube from (10,8,20), with blue background and no initial active lights. The first color/depth capture uses all layers. Clearing only label strings through the live AIS context produces a second capture and must change visible pixels. An explicitly lit variant enables the viewer's native default light preset, restores label strings, and repeats the labels-on/off comparison. The lit variation changes viewer illumination, not cube defaults.
+Ordinary geometry preserves native Topmost and LEFT_LOWER triedron persistence
+with offset (100,100). A 320×320 orthographic camera starts at (10,8,20), observes
+the origin with Y-up, scale 20 and z 1..100, and uses a blue background. Nine cases
+capture default, unlabeled, lit, lit-unlabeled, hover, animation quarter/half/end
+and a live appearance mutation. The hover case explicitly assigns the dynamic
+highlight drawer to TopOSD, exposing real cyan part geometry above the ordinary
+cube; this is an intentional supported style configuration. Native default
+Topmost highlighting is covered by the ordinary cube in this fixture.
 
-The local native oracle instantiates real `AIS_ViewCube` against OCCT commit `3d097a0328e71b826377d4814ab05ec3c3d23871`, explicitly disables selection activation, reports the actual OpenGL renderer and object layer, and follows the same camera and illumination changes. Committed raw captures support inspection without requiring OCCT. CPU tests use the named recording device and injected fixed glyph source to check real retained geometry, textured label submission, live removal/restoration, and unsupported selection.
-
-Build and capture locally:
+The injected wall clock drives the existing camera timer at 0.125, 0.25 and
+0.5 seconds. Quarter/half remain active, and the final step stops and detaches the
+animation. Appearance changes call real size, rounding, radius, font-height,
+color and label setters before normal context redisplay. Native OpenGL,
+lavapipe and AMD all produce 4,149 exact cyan pixels; appearance changes 13,311
+native pixels and 13,312 pixels on each Vulkan device. Both Vulkan captures
+finish with no validation errors. Named recording-device and fixed-font tests
+verify submitted geometry, cyan draws, cached selection and camera progress.
 
 ```sh
-cargo test -p martensite-vulkan --all-targets
-cargo build -p martensite-vulkan --example view_cube_capture
+cargo test --locked -p martensite-vulkan --all-targets
+cargo build --locked -p martensite-vulkan --example view_cube_capture
 DISPLAY=:1 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/lvp_icd.json MARTENSITE_VULKAN_DEVICE=0 target/debug/examples/view_cube_capture /tmp/view-cube
 ```
 
-Repeat with `radeon_icd.json` for the native AMD host. The executable writes default, unlabeled, lit, and lit-unlabeled `.rgba`/`.depth` pairs and rejects Vulkan validation errors. The release `view_cube_performance` example measures completed redraw/readback for default and lit presentations, each with 20 warmups and 100 samples; validation is disabled only for those timings.
+Repeat with `radeon_icd.json` for the AMD host. Each case writes complete
+`.rgba`/`.depth` pairs. The native generator uses real `AIS_ViewCube` at OCCT
+`3d097a0328e71b826377d4814ab05ec3c3d23871`; it is a local oracle only. Committed
+buffers and PNG previews permit inspection and comparison without OCCT.
 
-Strict comparisons retain the existing identical-RGBA and maximum depth difference 1e-6 gates. Initial default captures render successfully but fail strict depth parity: lavapipe has one differing color pixel and maximum depth difference 0.0017647; AMD has twelve differing color pixels and maximum depth difference 0.00244465. Removing labels produces exact color on both devices, while depth differences persist. These are unresolved diagnostics, not accepted cross-device parity. No pixel-row tuning, threshold changes, historical performance baseline acceptance or API-class completion claims accompany this fixture.
+The existing identical-RGBA and maximum depth-difference 1e-6 gates remain strict.
+The fixture renders successfully but fails those comparisons. No pixel-row
+precision tuning, threshold change or accepted historical baseline accompanies
+this work. Initial static captures retain their previous small depth failures.
+The initial animation endpoint has a maximum depth difference about 0.79 because
+native covers a pixel where Vulkan leaves the clear depth 1.0. Large differences
+are confined to narrow silhouette columns, with a one-pixel horizontal boundary
+shift at the exact front orientation.
 
-Final default and lit functional captures succeed on both devices with no validation errors. Both native and Rust label removal affect exactly 126 pixels in the unlit frame and 298 in the lit frame. The lit frame exposes readable oriented side labels. Strict comparisons still fail: lit frames differ at 46 color pixels on each device; lit unlabeled color is exact on lavapipe and differs at seven pixels on AMD. The depth failures remain, so label visibility and matching pixel counts do not imply complete parity.
+Complete native/ported source, retained start/end and quarter/half/end camera
+states match, including Eye/Center/Up/Direction, scale, FOVy/FOV2d, aspect,
+projection and clipping planes. Primary scene bounds are void in both systems,
+so fitting leaves scale 20; auxiliary bounds agree. AutoZFit is disabled.
+Native dumps leave invalidation set, while Vulkan clears rendered invalidation;
+this does not change the sampled cameras. The bounded trace identifies coverage
+precision rather than an animation or FitAll state discrepancy. Before-failure
+buffers, strict failures and diagnostic masks remain committed. GPU parity and
+whole-class completion remain unclaimed.
 
-The source-bound optimized run records these median/p95 milliseconds (20 warmups, 100 samples):
+The optimized `view_cube_performance` executable records completed redraw and
+readback for seven workloads: default, lit, hover, quarter, half, end and live
+appearance. Each has 20 warmups and 100 samples; validation is disabled only for
+those timings. Run under the coordinating agent's exclusive timing slot:
 
-| Device | Default | Lit |
+```sh
+cargo build --locked --release -p martensite-vulkan --example view_cube_performance
+DISPLAY=:1 VK_DRIVER_FILES=/usr/share/vulkan/icd.d/lvp_icd.json MARTENSITE_VULKAN_DEVICE=0 target/release/examples/view_cube_performance
+```
+
+[Current evidence](../porting/runtime-evidence/view-cube-widget-appearance-2026-10-12/README.md)
+records source/binary hashes, native CPU provenance, compressed raw captures,
+PNG previews, camera/bounds logs and strict comparison results. The older
+[presentation-only evidence](../porting/runtime-evidence/view-cube-capture-2026-10-11/receipt.json)
+remains historical provenance; it does not describe the current concrete widget.
+
+The final exclusive run measured these completed-frame median/p95 milliseconds.
+These are new workload distributions, with no accepted historical baseline:
+
+| Workload | lavapipe | AMD host |
 | --- | --- | --- |
-| lavapipe | 1.714772 / 2.043720 | 1.739447 / 2.110504 |
-| AMD host | 1.599008 / 1.896077 | 1.470285 / 1.675399 |
+| Default | 1.730581 / 2.130921 | 1.602418 / 1.941541 |
+| Lit | 1.721268 / 2.016660 | 1.532188 / 1.789630 |
+| Hover | 1.716960 / 2.242577 | 1.572323 / 1.823402 |
+| Quarter | 1.742634 / 2.175664 | 1.559149 / 1.844632 |
+| Half | 1.659344 / 1.912578 | 1.584636 / 1.852406 |
+| End | 1.616850 / 1.957650 | 1.533822 / 1.772037 |
+| Appearance | 1.850558 / 2.241345 | 1.732519 / 2.013294 |
 
-[Committed evidence](../porting/runtime-evidence/view-cube-capture-2026-10-11/receipt.json) retains raw native/Rust color and depth buffers, captures and diffs, device identities, source and binary hashes, raw samples and process/load snapshots. Committed native assets can be compared again without OCCT; the evidence README describes the existing comparison helper. The new workloads have no accepted historical baseline.
+The verified final executable SHA remains
+`aea6a3a7f6e2464935dd349bc11bca915087e76ff61bdc5c0e579e29bd75ef87`.
+The retained final relink log records the successful TKV3d/Vulkan rebuild after
+the ResetStyles subclass-dispatch correction. That generic reset is not invoked
+by these workload paths, so the final linked executable retained its earlier
+hash. The coordinating agent independently verified the final binary and all 49
+source hashes before authorizing timings; no rebuild or source mutation occurred
+during the exclusive window.

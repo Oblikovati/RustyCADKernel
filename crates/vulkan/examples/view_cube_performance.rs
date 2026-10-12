@@ -1,11 +1,12 @@
 //! Completed-frame timings for the real default ViewCube presentation, without validation overhead.
 #[path = "support/device_options.rs"]
 mod device_options;
-#[path = "../tests/support/view_cube_adapter.rs"]
-mod view_cube_adapter;
 #[allow(dead_code)]
 #[path = "../tests/support/view_cube_scene.rs"]
 mod view_cube_scene;
+#[allow(dead_code)]
+#[path = "../tests/support/view_cube_widget.rs"]
+mod view_cube_widget;
 #[allow(dead_code)]
 #[path = "../tests/support/view_setup.rs"]
 mod view_setup;
@@ -21,6 +22,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     print_cube_samples("view-cube-default", &samples);
     scene.enable_lights()?;
     print_cube_samples("view-cube-lit", &measure_cube_frames(&render));
+    measure_widget_frames(&scene)?;
+    view_cube_widget::apply_widget_appearance(&scene)?;
+    print_cube_samples("view-cube-appearance", &measure_cube_frames(&render));
     assert!(render.capture().is_ok());
     scene.view.remove();
     Ok(())
@@ -50,3 +54,26 @@ mod fixed_glyph_source;
 #[cfg(test)]
 #[path = "../tests/support/recording_device.rs"]
 mod recording_device;
+
+fn measure_widget_frames(
+    scene: &view_cube_scene::ViewCubeCaptureScene,
+) -> Result<(), Box<dyn std::error::Error>> {
+    use rustycad_tkv3d::ais::AisViewCubeSource;
+    let clock = view_cube_widget::configure_widget_timer(scene);
+    view_cube_widget::detect_widget_center(scene)?;
+    print_cube_samples(
+        "view-cube-hover",
+        &measure_cube_frames(&scene.render_view()),
+    );
+    view_cube_widget::click_widget_center(scene)?;
+    for (name, time) in [
+        ("view-cube-animation-quarter", 0.125),
+        ("view-cube-animation-half", 0.25),
+        ("view-cube-animation-end", 0.5),
+    ] {
+        clock.seek(time);
+        scene.cube.update_animation(false)?;
+        print_cube_samples(name, &measure_cube_frames(&scene.render_view()));
+    }
+    Ok(())
+}

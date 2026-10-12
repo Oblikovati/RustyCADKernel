@@ -47,15 +47,14 @@ fn submit_cube_datum_axis(
     let direction = [Direction3::X, Direction3::Y, Direction3::Z][index];
     let axis = Axis1::new(location, direction);
     submit_cube_axis(prs, datum, &settings.geometry, part, &axis)?;
-    if datum.to_draw_labels() && !settings.axes_labels[index].is_empty() {
-        submit_cube_axis_label(
-            prs,
-            datum,
-            part,
-            &axis,
-            &settings.geometry,
-            &settings.axes_labels[index],
-        )?;
+    let label = settings
+        .axes_labels
+        .seek(&part)
+        .filter(|label| !label.is_empty());
+    if datum.to_draw_labels()
+        && let Some(label) = label
+    {
+        submit_cube_axis_label(prs, datum, part, &axis, &settings.geometry, label)?;
     }
     Ok(())
 }

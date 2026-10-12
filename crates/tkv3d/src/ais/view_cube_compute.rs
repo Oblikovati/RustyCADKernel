@@ -37,14 +37,14 @@ fn submit_cube_secondary_parts<O: AisViewCubePresentationSource + ?Sized>(
         object,
         prs,
         &Orientation::ALL[6..18],
-        &base.edge_aspect.aspect(),
+        &base.edge_aspect.read().aspect(),
         false,
     )?;
     super::view_cube_submission::submit_cube_parts(
         object,
         prs,
         &Orientation::ALL[18..],
-        &base.corner_aspect.aspect(),
+        &base.corner_aspect.read().aspect(),
         false,
     )
 }

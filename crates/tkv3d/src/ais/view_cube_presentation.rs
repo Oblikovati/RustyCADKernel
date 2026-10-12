@@ -2,10 +2,7 @@
 use super::{AisInteractiveObject, AisInteractiveObjectBase};
 use crate::v3d::V3dTypeOfOrientation;
 use crate::{prs_mgr::PrsMgrTypeOfPresentation3d, prs3d::Prs3dShadingAspect};
-use rustycad_tkernel::{
-    standard::{Failure, Handle, SharedState},
-    tcollection::AsciiString,
-};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkservice::graphic3d::Graphic3dArrayOfTriangles;
 /// Native geometry controls after default SetSize(70); `geometry.size=100.0`.
 #[derive(Clone, Debug)]
@@ -49,7 +46,7 @@ impl Default for AisViewCubeGeometry {
 }
 /// Retained presentation policy; mutate before redisplaying the owning AIS object.
 /// Example: `base.settings.write().draw_axes=false`.
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct AisViewCubePresentationSettings {
     /// Native retained geometry; configure before recomputing the presentation.
     pub geometry: AisViewCubeGeometry,
@@ -62,9 +59,9 @@ pub struct AisViewCubePresentationSettings {
     /// Native retained is y up; configure before recomputing the presentation.
     pub is_y_up: bool,
     /// Native retained side labels; configure before recomputing the presentation.
-    pub side_labels: [AsciiString; 6],
+    pub side_labels: super::AisViewCubeSideLabels,
     /// Native retained axes labels; configure before recomputing the presentation.
-    pub axes_labels: [AsciiString; 3],
+    pub axes_labels: super::AisViewCubeAxesLabels,
 }
 impl Default for AisViewCubePresentationSettings {
     fn default() -> Self {
@@ -74,8 +71,8 @@ impl Default for AisViewCubePresentationSettings {
             draw_edges: true,
             draw_corners: true,
             is_y_up: false,
-            side_labels: ["RIGHT", "BACK", "TOP", "LEFT", "FRONT", "BOTTOM"].map(AsciiString::from),
-            axes_labels: ["X", "Y", "Z"].map(AsciiString::from),
+            side_labels: super::view_cube_label_maps::default_cube_side_labels(),
+            axes_labels: super::view_cube_label_maps::default_cube_axes_labels(),
         }
     }
 }
@@ -97,9 +94,9 @@ pub struct AisViewCubePresentationBase {
     /// Native retained settings; configure before recomputing the presentation.
     pub settings: SharedState<AisViewCubePresentationSettings>,
     /// Native retained edge aspect; configure before recomputing the presentation.
-    pub edge_aspect: Handle<Prs3dShadingAspect>,
+    pub edge_aspect: SharedState<Handle<Prs3dShadingAspect>>,
     /// Native retained corner aspect; configure before recomputing the presentation.
-    pub corner_aspect: Handle<Prs3dShadingAspect>,
+    pub corner_aspect: SharedState<Handle<Prs3dShadingAspect>>,
 }
 impl AisViewCubePresentationBase {
     /// Create native default presentation state; `AisViewCubePresentationBase::new()?`.
@@ -110,8 +107,8 @@ impl AisViewCubePresentationBase {
         Ok(Self {
             interactive,
             settings: SharedState::default(),
-            edge_aspect,
-            corner_aspect,
+            edge_aspect: SharedState::new(edge_aspect),
+            corner_aspect: SharedState::new(corner_aspect),
         })
     }
 }

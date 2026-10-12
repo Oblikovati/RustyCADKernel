@@ -81,7 +81,7 @@ pub(super) fn configured_cube(id: i32) -> Handle<CubePresentationProbe> {
         let datum = cube.attributes().datum_aspect();
         datum.set_draw_datum_axes(crate::prs3d::Prs3dDatumAxes::XZAxes);
         datum.set_draw_labels(true);
-        cube.display.settings.write().axes_labels = ["u", "v", "w"].map(AsciiString::from);
+        configure_cube_axis_names(&cube);
         cube.attributes().text_aspect().set_height(22.0);
     }
     cube.attributes().set_face_boundary_draw(id % 3 == 1);
@@ -120,5 +120,25 @@ fn configure_cube_minimum_parts(settings: &mut AisViewCubePresentationSettings) 
     g.edge_min_size = 6.0;
     g.corner_min_size = 3.0;
     settings.draw_axes = false;
-    settings.side_labels[4] = AsciiString::default();
+    settings.side_labels.bind(
+        crate::v3d::V3dTypeOfOrientation::Yneg,
+        AsciiString::default(),
+    );
+}
+
+fn configure_cube_axis_names(cube: &CubePresentationProbe) {
+    for (axis, label) in [
+        crate::prs3d::Prs3dDatumParts::XAxis,
+        crate::prs3d::Prs3dDatumParts::YAxis,
+        crate::prs3d::Prs3dDatumParts::ZAxis,
+    ]
+    .into_iter()
+    .zip(["u", "v", "w"])
+    {
+        cube.display
+            .settings
+            .write()
+            .axes_labels
+            .bind(axis, AsciiString::from(label));
+    }
 }
