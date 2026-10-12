@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "project": "Martensite",
+  "scope": "Reusable prerequisite only: captured actual shared handle field, zero native owner/target ownership, weak expiration, fixed locator identity validation. Does not implement V3d myView or restore any camera/clipping/class claim.",
+  "source_sha256": {
+    "crates/tkernel/src/standard/weak_handle_field_ref.rs": "7390763d3898a9f6d2352955099a387093aeb381119f7d3e4297d4da1fc486b8",
+    "crates/tkernel/src/standard/weak_handle_field_ref_tests.rs": "ca65da41a895150acbaabdcea66a8d781128edadaa6e44f5f3524e26ea186b23",
+    "crates/tkernel/src/standard/mod.rs": "2db97992538dc9cfb38e01e06b66817a90e80c341ae9b9cdce55b628b0280acd"
+  },
+  "checks": {
+    "filtered_kernel_library_tests": 4,
+    "kernel_all_target_clippy": "passed -D warnings",
+    "formatter": "cargo fmt --all passed"
+  },
+  "reference_contract": "The virtual source getter selects the returned field once. This wrapper keeps its fixed field locator and captured field address, never the source virtual getter or an owning CView snapshot. A locator choosing a different field is rejected as invalid API shape.",
+  "native_valid_lifetime": "Expired owner storage is a safe Rust extension; native references after owner destruction are dangling and are not successful native-case credit.",
+  "pending_native_integration": "porting/runtime-evidence/clip-view-retarget-2026-10-12/native-view-retarget.json contains10actualnative rows; full V3d/Camera transport Rust replay pending.",
+  "binary_reverse_engineering_or_debugger_work": false
+}
