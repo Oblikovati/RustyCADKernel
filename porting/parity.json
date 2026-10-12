@@ -492160,17 +492160,21 @@
       "upstream_id": "Aspect_XRSession::HeadPose",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose",
-      "status": "partial",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native HeadPose/TrackedPoses return live field references; current Rust getters copy the transform/clone the vector. Retained alias and derived callback mutation proofs pending. See porting/runtime-evidence/xr-session-reference-gap-2026-10-12.json."
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "68b7edf6edcf13741140468b2d5f8552865b20dfa57498e9d933a1797c85afbb",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose_ref",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
     },
     {
       "upstream_id": "Aspect_XRSession::TrackedPoses",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses",
-      "status": "partial",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native HeadPose/TrackedPoses return live field references; current Rust getters copy the transform/clone the vector. Retained alias and derived callback mutation proofs pending. See porting/runtime-evidence/xr-session-reference-gap-2026-10-12.json."
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "650558f5a1048e4137fcb8b50913507e735f2211c7a08944064eabc3b7539b91",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses_ref",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
     },
     {
       "upstream_id": "Aspect_XRSession::TriggerHapticVibrationAction",
@@ -492200,17 +492204,21 @@
       "upstream_id": "Aspect_XRSession::GenericAction",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
-      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action",
-      "status": "partial",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs. Source audit 2026-10-12: native const Handle& getter is currently mapped to an owning clone; native slot alias/refcount and callback mutation behavior require the frame slice live-reference adapter. See porting/runtime-evidence/frame-handle-reference-gap-2026-10-12.json."
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "afac9203f3e0501591793c1238efffd0d5e14ad07142d5a665c5a4debaf580a3",
+      "rust_item": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action_ref",
+      "status": "implemented",
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
     },
     {
       "upstream_id": "Aspect_XRSession::myRoleActions",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "144fd3fc3ff83b7391f0543153e64bc2cf83b71753580ca5eff9f5846f43a06c",
       "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::role_actions",
       "status": "implemented",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
     },
     {
       "upstream_id": "Aspect_XRSession::myActionSets",
@@ -492232,9 +492240,11 @@
       "upstream_id": "Aspect_XRSession::myTrackedPoses",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx",
+      "source_sha256": "f422812be88e2c42a83ebc7effd39059475b3bc6398e4094f1a5ff857170fa54",
+      "cpp_declaration_id": "9f8f50763522c3573e75e5ee5f6082b00b92f86fb632ef8f9570f23ef7ee9c73",
       "rust_item": "rustycad_tkservice::aspect::AspectXRSessionFields::tracked_poses",
       "status": "implemented",
-      "notes": "Aspect XR mapping (visualization-design.md section 1): Aspect_XRSession is the AspectXRSession trait over AspectXRSessionBase (protected fields public on AspectXRSessionFields), its non-virtual members AspectXRSessionMembers; the action data structs are values with public fields; the oracle build has no OpenVR, so Aspect_OpenVRSession is ported with its HAVE_OPENVR-off code (no headset, Open fails with the native message, the action type checks raise Standard_ProgramError); covered by tests/aspect_xr_test.rs."
+      "notes": "Martensite scoped replacement of existing XR reference/storage mapping: actual signed Array1, retained physical element offset plus storage identity, live array/head/action field aliases without intrusive ownership or held callback guards. Native13 array/head/action-bounds rows +4 exact-count action rebase rows; caller-field replacement/reallocation regressions. No Aspect_XRSession class or controller frame completion. See docs/aspect-xr-reference-storage.md and porting/runtime-evidence/aspect-xr-references/."
     },
     {
       "upstream_id": "Aspect_XRSession::myHeadPose",
@@ -568521,7 +568531,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::v3d::V3dView::set_camera",
-          "declaration_sha256": "2f2a79f44257c77ff2424db6ce1f345be32aa246b0e0dbf45e9a765c3ec12bc6",
+          "declaration_sha256": "deb78d72bd461dccaf29522b6b210121290ce1b94990a01c5841bae66d7284c1",
           "impl_context": {
             "for": {
               "resolved_path": {
@@ -568853,12 +568863,35 @@
       "upstream_id": "V3d_View::StatisticInformation(NCollection_IndexedDataMap<TCollection_AsciiString, TCollection_AsciiString> &) const"
     },
     {
-      "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
-      "rust_item": "rustycad_tkv3d::v3d::V3dView::subviews",
-      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
-      "status": "implemented",
+      "upstream_id": "V3d_View::Subviews",
       "toolkit": "TKV3d",
-      "upstream_id": "V3d_View::Subviews"
+      "source": "src/Visualization/TKV3d/V3d/V3d_View.hxx",
+      "source_sha256": "f049cb8a1be39c40b9364e31eebb596de8b2d302a902fa236bd9f0e563ba2c8c",
+      "cpp_declaration_id": "93b48f4249e881f12694481d9258e48dcdea2a42771991a929162d1625d2cb4d",
+      "rust_item": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+      "rust_kind": "function",
+      "status": "implemented",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkv3d::v3d::V3dView::subviews_ref",
+          "declaration_sha256": "fb7dea567238e0f1cdaab4bdfcb05bdfb47e2ff39e86250c381bcb7842c85fdc",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "super::V3dView",
+                "resolved_item_path": "rustycad_tkv3d::v3d::view::V3dView",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "notes": "Martensite actual const subview sequence-object alias and readonly one-based values/endpoints/live cursor; five pinned native public AddSubview/RemoveSubview phases plus six auxiliary callback/node rows, exact intrusive counts and Rust-only replay. Private storage/class/controller frame claims excluded; no declared V3d API node transfer. See docs/v3d-subview-sequence.md."
     },
     {
       "notes": "V3d_View mapping (v3d-design.md section 1): a transient struct over its driver view (Handle<dyn Graphic3dCView>) and a SharedState of the native fields; members that raise natively return Result with V3d_BadValue, V3d_UnMapped or the Standard exception of the camera; overloads are named by their arguments (rotate/rotate_about/rotate_axe/rotate_axe_about/rotate_default_axis, convert_* by direction, fit_all/fit_all_box/fit_all_rect); out arguments are returned as tuples; the view refers to its viewer weakly as the native raw pointer does. The camera members are compared bit for bit by the v3_view native probe on a null driver.",
@@ -594578,7 +594611,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_start_animation",
-          "declaration_sha256": "a2868d4a89c30ddd5229c75a8f536e835d92be87dc61846d5514506bbf8ce947",
+          "declaration_sha256": "52083ab6c2962777acc543faf3e5400ceb5cfad979a8a874eec06cc434d4fb86",
           "impl_context": null
         }
       ]
@@ -594596,7 +594629,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation",
-          "declaration_sha256": "8f3296fa6d043ecac007349befadf55851889d249051ea578e906e56a89ab076",
+          "declaration_sha256": "86d3717eda83ffb7e58df64966d55498c8000d4110072cbc950edb5fb145cb25",
           "impl_context": null
         }
       ]
@@ -594614,7 +594647,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_handle_click",
-          "declaration_sha256": "743c6c27eba98b5627691ced1c8f084a1fd268c7ebe1e566ec02cb74cfd8b896",
+          "declaration_sha256": "d0da123ee337174e8acccf534c94b3f3341796a90426ff0c2cd51a86e928e301",
           "impl_context": null
         }
       ]
@@ -594632,7 +594665,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_update_animation_step",
-          "declaration_sha256": "1c551f81d1df7088256a5876e7e77166b6c63a01f6fe72cc72743dbba45195c1",
+          "declaration_sha256": "5e53f2762434ab7cf6fcca8762c5d845a658eb4dbcca09b4aacacc4f15bd50bf",
           "impl_context": null
         }
       ]
@@ -596556,7 +596589,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_attributes",
-          "declaration_sha256": "1d0d9fde1a43cb4a1fc2a5557a0214f9a06715306cf799774b818fecaca8ca5a",
+          "declaration_sha256": "6e4751c0b695fab4942375bac2b479622a7e6ea2341666e1438137eab1f0e292",
           "impl_context": null
         }
       ]
@@ -596715,7 +596748,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::ais_view_cube_default_highlight_attributes",
-          "declaration_sha256": "4a8722a5581d244bb52a4b20a68580308967b2f3f7d691358795cd3d3b971e55",
+          "declaration_sha256": "b691d2ed591479e91097919d304c3326bd25998a947eb0de1816b57566e66b6e",
           "impl_context": null
         }
       ]
@@ -597804,7 +597837,7 @@
       "rust_declaration_selectors": [
         {
           "path": "rustycad_tkv3d::ais::AisTypeOfIso",
-          "declaration_sha256": "68dd8ac858b88598ae344b6f545368fd56ab2ce17cee29a6fdd9263426506c9e",
+          "declaration_sha256": "dd768c51698e65161ebca68d5def892561825fe6c1e6f43fde1886806f8439ec",
           "impl_context": null
         }
       ],
@@ -598171,6 +598204,137 @@
       ],
       "status": "implemented",
       "notes": "Martensite default context isoline/deviation policy: 23 actual pinned OCCT records repeat byte-for-byte and replay with exact floating-point bits. Covers negative/zero counts and deviations, unequal Both counts, true shared U/V aspects, live initialized linked replacement defaults, and unnamed enum default switch with null drawer. No object-specific redisplay, mesh output, unnamed upstream enumerator or full-context credit. See docs/context-isoline-controls.md and porting/runtime-evidence/context-isoline-policies/."
+    },
+    {
+      "upstream_id": "Graphic3d_FrameStatsDataTmp::operator=",
+      "toolkit": "TKService",
+      "source": "src/Visualization/TKService/Graphic3d/Graphic3d_FrameStatsData.hxx",
+      "source_sha256": "c0e6d29756cbec7a0ddc857b4b6a4ba4528496136933f2d4f7ef40a71eae417b",
+      "cpp_declaration_id": "dccb21ff6fa9b8ea21ea2900d5abad188cc6ca2f92f12fed102f1033299c42ca",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dFrameStatsDataTmp::assign_data",
+          "declaration_sha256": "25ec637827a223030c4d01f9c7ab71cd52f8c4bc563b95a1aa6df4838f709e61",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "path": "Graphic3dFrameStatsDataTmp",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::frame_stats_data::Graphic3dFrameStatsDataTmp",
+                "args": null
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ],
+      "status": "implemented",
+      "notes": "Martensite temporary statistics frame assignment preserves actual running OSD timer object and prior sample history while copying frame values. Six pinned native rows repeated byte-for-byte and Rust replay compares exact bits through assignment, next delta, repeated assignment, final averaging and reset. Safe Rust borrowing prohibits aliased mutable destination/source; no native exception, move/vector-reference or whole-class credit. See docs/frame-statistics-assignment.md and porting/runtime-evidence/frame-stats-assignment/."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::ClearCustomAspects",
+      "cpp_declaration_id": "0830bcbc8f247c4291670295e7bd5663f2f8e0a87ff6dc898549595c567dc8ec",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeSource::clear_custom_aspects",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::CustomAspectsMap",
+      "cpp_declaration_id": "4a8731f6b311c503d281afbdb8b36bf3f7a8a24d64532687209df002fd5c53cb",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeMembers::custom_aspects_map",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::myShapeColors",
+      "cpp_declaration_id": "7744e906e771327b2eef6abb28de0ab9345c1f0b84206341174c208d3002a3c1",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeBase::shape_colors",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::CustomAspects",
+      "cpp_declaration_id": "84fcc9f9e6a06b33c2464116e5f1146be701fff2f38408baad38b071658d8a87",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeSource::custom_aspects",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::get_type_name",
+      "cpp_declaration_id": "91526d5793610cad385d523fda2378370a0714b0387edead250a28ee5f4d40b6",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::<rustycad_tkernel::standard::RuntimeTyped>::TYPE_NAME",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::DynamicType",
+      "cpp_declaration_id": "c108628c234d4d228a4b2f7d53517d6bb489aff11c8864b25e1d46448bc85d0a",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::<rustycad_tkernel::standard::Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::ChangeCustomAspectsMap",
+      "cpp_declaration_id": "c3b8e1d4dcc1ff0c885cca4be9ec15ca8530d12776e7ff0846d3a2295c41d2c5",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeMembers::change_custom_aspects_map",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::get_type_descriptor",
+      "cpp_declaration_id": "d72d48b80e96a255048c83bfb8a2bce5606e091f9baecb391e4a3797715457b7",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::<rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::UnsetCustomAspects",
+      "cpp_declaration_id": "df686f50311d8a1dcadc54f83780cb3bbc7451fae6de19fcbb669d283fdcf18a",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShapeMembers::unset_custom_aspects",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
+    },
+    {
+      "upstream_id": "AIS_ColoredShape::AIS_ColoredShape",
+      "cpp_declaration_id": "f67a58558ac256df8077faa99a3021647abb93f428c5a36bd9f08af97ea75f7c",
+      "toolkit": "TKV3d",
+      "source": "src/Visualization/TKV3d/AIS/AIS_ColoredShape.hxx",
+      "source_sha256": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+      "rust_item": "rustycad_tkv3d::ais::AisColoredShape::new",
+      "status": "implemented",
+      "notes": "Martensite bounded ColoredShape lifecycle: actual owned AIS_Shape parent and specialization map, native invalidation/release order, live container/node/field references, virtual before/after failures and repair, own RTTI/intrusive count proved by paired native CPU fixtures and Rust-only replay. Class/copy/appearance/geometry/selection and parent family remain partial; no rendering/performance credit."
     }
   ],
   "tests": [
