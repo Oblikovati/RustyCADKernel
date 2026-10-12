@@ -50,18 +50,17 @@ impl<T> Sequence<T> {
     pub fn reverse(&mut self) {
         self.topology.edit(|base| unsafe { base.reverse() });
     }
-    pub(super) fn cursor_insertion(
+    pub(super) fn require_cursor_membership(
         &self,
         member: &str,
         cursor: &SequenceCursor,
-    ) -> Result<usize, Failure> {
+    ) -> Result<(), Failure> {
         if !cursor.more() {
-            return Ok(0);
+            return Ok(());
         }
-        cursor
-            .position(self)
-            .map(|index| index + 1)
-            .ok_or_else(|| no_such_node(member, *cursor))
+        self.owned_node(cursor.address)
+            .ok_or_else(|| no_such_node(member, *cursor))?;
+        Ok(())
     }
     pub(super) fn insert_node(&mut self, offset: usize, value: T) -> &mut T {
         self.insert_node_with(offset, || value)
@@ -85,10 +84,10 @@ impl<T> Sequence<T> {
         cursor: &SequenceCursor,
         construct: impl FnOnce() -> T,
     ) -> Result<&mut T, Failure> {
-        self.cursor_insertion("InsertAfter", cursor)?;
+        self.require_cursor_membership("InsertAfter", cursor)?;
         let current = self
-            .cursor_node(cursor.address)
-            .map_or(std::ptr::null_mut(), |(_, node)| node);
+            .owned_node(cursor.address)
+            .unwrap_or(std::ptr::null_mut());
         let raw = super::BaseSequenceRawIterator {
             current,
             previous: std::ptr::null_mut(),

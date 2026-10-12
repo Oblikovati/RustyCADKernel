@@ -2,25 +2,29 @@
 use super::BaseAllocator;
 use allocator_api2::alloc::Allocator;
 use std::{alloc::Layout, ptr::NonNull};
-struct NodeAllocationRelease<'a> {
-    allocator: &'a BaseAllocator,
-    pointer: NonNull<u8>,
-    layout: Layout,
+struct NodeAllocationRelease<F: FnOnce()> {
+    release: Option<F>,
 }
-impl Drop for NodeAllocationRelease<'_> {
+impl<F: FnOnce()> Drop for NodeAllocationRelease<F> {
     fn drop(&mut self) {
-        // SAFETY: the guard retains the original allocation and exact typed layout.
-        unsafe { self.allocator.deallocate(self.pointer, self.layout) };
+        // Exactly one cleanup consumes allocation provenance, including during unwinding.
+        self.release.take().expect("owned node cleanup runs once")();
     }
 }
-pub(super) unsafe fn release_typed_node<T>(pointer: *mut T, allocator: &BaseAllocator) {
+pub(super) unsafe fn release_node_payload<T>(pointer: *mut T, release: impl FnOnce()) {
     let allocation = NodeAllocationRelease {
-        allocator,
-        pointer: NonNull::new(pointer.cast()).expect("owned node is nonnull"),
-        layout: Layout::new::<T>(),
+        release: Some(release),
     };
     // allocator-api2 0.4.0 Box::drop lacks unwind deallocation. Retain the allocation
     // guard while invoking user destruction, with the original allocator and layout.
     unsafe { std::ptr::drop_in_place(pointer) };
     drop(allocation);
+}
+pub(super) unsafe fn release_typed_node<T>(pointer: *mut T, allocator: &BaseAllocator) {
+    let allocation = NonNull::new(pointer.cast()).expect("owned node is nonnull");
+    let layout = Layout::new::<T>();
+    // SAFETY: caller retains the original typed allocation and its exact layout.
+    unsafe {
+        release_node_payload(pointer, || allocator.deallocate(allocation, layout));
+    }
 }

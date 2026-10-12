@@ -95,8 +95,9 @@ mod sequence;
 pub use sequence::{
     BaseSequence, BaseSequenceBasicIterator, BaseSequenceIterator, BaseSequenceRawIterator,
     BasicSequenceNode, BasicSequenceNodeMut, DelSeqNode, SeqNode, Sequence, SequenceBaseAccess,
-    SequenceCursor, SequenceCursorObserver, SequenceIter, SequenceIterMut, SequenceNativeCursor,
-    SequenceNode, SequenceObservation, SequenceObserver,
+    SequenceClearProgress, SequenceCursor, SequenceCursorObserver, SequenceIter, SequenceIterMut,
+    SequenceNativeCursor, SequenceNode, SequenceNodeRetirement, SequenceObservation,
+    SequenceObserver, SequencePreparedNode,
 };
 mod h_sequence;
 pub use h_sequence::HSequence;

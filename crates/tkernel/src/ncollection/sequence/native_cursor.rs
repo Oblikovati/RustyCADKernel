@@ -1,7 +1,7 @@
 //! Canonical native cursor state can advance before Drop without aliasing its observer.
 use super::{
-    BaseSequenceRawIterator, Sequence, SequenceCursor, iteration::pointer_address,
-    owner::take_owner,
+    BaseSequenceRawIterator, SeqNode, Sequence, SequenceCursor, SequenceNodeOwner,
+    SequenceNodeRetirement, iteration::pointer_address, owner::take_owner,
 };
 use crate::standard::Failure;
 use std::sync::{Arc, Mutex, PoisonError};
@@ -110,18 +110,36 @@ impl SequenceCursorObserver {
 impl<T> Sequence<T> {
     /// Updates native topology/cache/cursor before item Drop; `sequence.remove_native(&mut cursor)?`.
     pub fn remove_native(&mut self, cursor: &mut SequenceNativeCursor) -> Result<(), Failure> {
+        // Adapters use detach_native to retire callbacks after releasing their outer field guard.
+        drop(self.detach_native(cursor)?);
+        Ok(())
+    }
+    /// Detach and publish actual iterator advancement before callbacks; `sequence.detach_native(&mut cursor)?`.
+    /// Drop the returned original node after releasing any enclosing collection guard.
+    pub fn detach_native(
+        &mut self,
+        cursor: &mut SequenceNativeCursor,
+    ) -> Result<Option<SequenceNodeRetirement<T>>, Failure> {
         let position = cursor.position();
         if !position.more() {
-            return Ok(());
+            return Ok(None);
         }
         let node = self
             .owned_node(position.address)
             .ok_or_else(|| super::no_such_node("Remove", position))?;
+        Ok(Some(SequenceNodeRetirement {
+            owner: self.detach_native_node(cursor, node),
+        }))
+    }
+    fn detach_native_node(
+        &mut self,
+        cursor: &mut SequenceNativeCursor,
+        node: *mut SeqNode,
+    ) -> SequenceNodeOwner<T> {
         let mut raw = cursor.shared.read();
         raw.current = node;
         self.prepare_owned_cursor(&mut raw);
         cursor.shared.write(raw);
-        drop(take_owner(&mut self.owners, node));
-        Ok(())
+        take_owner(&mut self.owners, node)
     }
 }

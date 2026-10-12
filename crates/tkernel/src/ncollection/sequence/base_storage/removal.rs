@@ -9,7 +9,7 @@ impl BaseSequence {
     pub unsafe fn clear_seq(&mut self, mut delete: impl FnMut(*mut SeqNode, &mut BaseAllocator)) {
         let mut node = self.first;
         while !node.is_null() {
-            let next = unsafe { (*node).next() };
+            let next = unsafe { self.guarded_link(node).next() };
             delete(node, &mut self.allocator);
             node = next;
         }
@@ -50,7 +50,7 @@ impl BaseSequence {
     ) -> Result<(), Failure> {
         let mut node = unsafe { self.prepare_range_removal(from, to) }?;
         for _ in from..=to {
-            let next = unsafe { (*node).next() };
+            let next = unsafe { self.guarded_link(node).next() };
             delete(node, &mut self.allocator);
             node = next;
         }
@@ -97,8 +97,8 @@ impl BaseSequence {
         last: *mut SeqNode,
         count: usize,
     ) -> *mut SeqNode {
-        let before = unsafe { (*first).previous() };
-        let after = unsafe { (*last).next() };
+        let before = unsafe { self.guarded_link(first).previous() };
+        let after = unsafe { self.guarded_link(last).next() };
         unsafe { self.connect_neighbors(before, after) };
         self.size -= count;
         after
@@ -107,12 +107,12 @@ impl BaseSequence {
         if before.is_null() {
             self.first = after;
         } else {
-            unsafe { (*before).set_next(after) };
+            unsafe { self.guarded_link_mut(before).set_next(after) };
         }
         if after.is_null() {
             self.last = before;
         } else {
-            unsafe { (*after).set_previous(before) };
+            unsafe { self.guarded_link_mut(after).set_previous(before) };
         }
     }
     fn cache_after_removal(&mut self, from: usize, to: usize, after: *mut SeqNode) {
