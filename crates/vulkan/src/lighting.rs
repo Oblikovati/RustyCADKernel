@@ -171,23 +171,23 @@ impl RenderLighting {
     pub(crate) fn uses_translucent_material(&self) -> bool {
         self.material.common.iter().any(|face| face.diffuse[3] < 1.)
     }
-    pub(crate) fn validate_opaque_annotation_or_cap(&self) -> Result<(), RenderError> {
+    pub(crate) fn validate_opaque_marker_lighting(&self) -> Result<(), RenderError> {
         if self.uses_translucent_material() {
             return Err(rejected(
                 self.material.common.map(|face| face.diffuse[3]),
-                "opaque line, marker or cap diffuse opacity equal to 1",
+                "opaque marker diffuse opacity equal to 1",
             ));
         }
         Ok(())
     }
 }
 impl PrimitiveDraw {
-    /// Attach surface or opaque nodal line/marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
+    /// Attach surface or native ordered nodal line/opaque marker lighting with one normal per vertex; `draw.with_lighting(state)?`.
     pub fn with_lighting(mut self, lighting: RenderLighting) -> Result<Self, RenderError> {
         self.validate_lighting_topology(&lighting)?;
-        if self.topology() != crate::PrimitiveTopology::Triangles {
-            lighting.validate_opaque_annotation_or_cap()?;
-        } else {
+        if self.topology() == crate::PrimitiveTopology::Points {
+            lighting.validate_opaque_marker_lighting()?;
+        } else if self.topology() == crate::PrimitiveTopology::Triangles {
             self.surface_blend |= lighting.uses_translucent_material();
         }
         self.lighting = Some(lighting);

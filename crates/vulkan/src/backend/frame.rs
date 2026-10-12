@@ -18,6 +18,7 @@ pub(super) struct UploadedDraw {
     pub text_logic_xor: bool,
     pub polygon_offset: Option<crate::RenderPolygonOffset>,
     pub polygon: bool,
+    pub polygon_edge: bool,
     pub surface_blend: bool,
     pub capping: crate::RenderCappingPass,
     pub mirrored: bool,
@@ -108,7 +109,7 @@ fn upload_draw(
     pipelines: &RasterPipelines,
     extent: vk::Extent2D,
 ) -> Result<UploadedDraw, RenderError> {
-    if let Some(line) = draw.line_style {
+    if let Some(line) = draw.line_style.or(draw.polygon_edge_style) {
         runtime
             .lines
             .validate(line, runtime.limits.line_width_range)?;
@@ -150,9 +151,15 @@ fn upload_draw(
     if let Some(unavailable) = &draw.surface_texture_unavailable {
         pipelines.surface_images.forget(&unavailable.resource_id)?;
     }
+    if draw.surface_texture_binding_only
+        && let Some(style) = &draw.surface_texture
+    {
+        pipelines.surface_images.touch(runtime, &style.image)?;
+    }
     let surface_image = draw
         .surface_texture
         .as_ref()
+        .filter(|_| !draw.surface_texture_binding_only)
         .map(|style| {
             pipelines.surface_images.binding(
                 runtime,
@@ -203,6 +210,7 @@ fn upload_draw(
         polygon_offset: draw.polygon_offset,
         // Native font glyph triangles retain ordinary Fill slope/units; OpenGl_Text at 3d097a0.
         polygon: draw.topology() == crate::PrimitiveTopology::Triangles,
+        polygon_edge: draw.polygon_edge_style.is_some(),
         surface_blend: draw.surface_blend,
         capping: draw.capping_pass,
         face_culling: draw.face_culling,
@@ -211,7 +219,10 @@ fn upload_draw(
         vertices: vertex_buffer,
         indices: index_buffer,
         count,
-        line_width: draw.line_style.map(|style| style.raster_width()),
+        line_width: draw
+            .line_style
+            .or(draw.polygon_edge_style)
+            .map(|style| style.raster_width()),
         transform: encode_transform(draw, extent),
     })
 }
@@ -241,9 +252,11 @@ fn encode_vertices(draw: &PrimitiveDraw) -> Vec<u8> {
     bytes
 }
 fn append_surface_coordinates(bytes: &mut Vec<u8>, draw: &PrimitiveDraw, index: usize) {
-    if draw.surface_texture.is_none()
-        && draw.surface_cutoff.is_none()
-        && draw.surface_texture_unavailable.is_none()
+    if draw.surface_texture_binding_only
+        || (draw.surface_texture.is_none()
+            && draw.surface_cutoff.is_none()
+            && draw.surface_texture_unavailable.is_none()
+            && draw.mesh_edges.is_none())
     {
         return;
     }
@@ -272,7 +285,7 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         .iter()
         .flat_map(|v| v.to_ne_bytes())
         .collect();
-    if let Some(style) = draw.line_style {
+    if let Some(style) = draw.line_style.or(draw.polygon_edge_style) {
         bytes.extend(
             [extent.width as f32, extent.height as f32]
                 .iter()
@@ -291,9 +304,11 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         bytes.extend(style.alpha_cutoff.to_ne_bytes());
         bytes.extend(0u32.to_ne_bytes());
     }
-    if draw.surface_texture.is_some()
-        || draw.surface_cutoff.is_some()
-        || draw.surface_texture_unavailable.is_some()
+    if !draw.surface_texture_binding_only
+        && (draw.surface_texture.is_some()
+            || draw.surface_cutoff.is_some()
+            || draw.surface_texture_unavailable.is_some()
+            || draw.mesh_edges.is_some())
     {
         let flags = draw.surface_texture.as_ref().map_or(0, |s| {
             1 + 2 * u32::from(s.vertex_override) + 4 * u32::from(s.back_vertex)
@@ -304,6 +319,11 @@ fn encode_transform(draw: &PrimitiveDraw, extent: vk::Extent2D) -> Vec<u8> {
         bytes.extend(flags.to_ne_bytes());
         bytes.extend([0_u8; 8]);
     }
+    crate::mesh_edges::append_mesh_constants(
+        &mut bytes,
+        draw.mesh_edges,
+        [extent.width, extent.height],
+    );
     bytes
 }
 

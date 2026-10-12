@@ -70,7 +70,9 @@ pub struct Graphic3dDrawGroup {
     base: Graphic3dGroupBase,
     submissions: SharedState<GroupSubmissionState>,
     text_source: Arc<dyn crate::TextLayoutSource>,
+    mesh_edge_pipeline: crate::RenderMeshEdgePipeline,
     pub(crate) texture_images: Arc<crate::retained_texture_images::RetainedTextureImages>,
+    pub(crate) aspect_textures: crate::retained_aspect_textures::RetainedAspectTextures,
 }
 rustycad_tkernel::impl_transient!(Graphic3dDrawGroup,"Martensite_Graphic3dDrawGroup",StandardTransient,transient,interfaces:[dyn Graphic3dGroup]);
 impl Graphic3dDrawGroup {
@@ -88,7 +90,9 @@ impl Graphic3dDrawGroup {
             base: Graphic3dGroupBase::new(structure),
             submissions: SharedState::default(),
             text_source,
+            mesh_edge_pipeline: crate::retained_mesh_edges::driver_mesh_edge_pipeline(structure),
             texture_images: crate::retained_surface_texture::driver_texture_images(structure),
+            aspect_textures: Default::default(),
         })
     }
     /// Extract visible primitives using current styles, buffers and camera; `group.primitive_draws(&camera)?`.
@@ -247,6 +251,7 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         &self.base
     }
     fn clear(&self, update: bool) {
+        self.aspect_textures.synchronize();
         self.base.fields.write().bounds.clear();
         *self.submissions.write() = GroupSubmissionState::default();
         if update {
@@ -260,6 +265,7 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         if self.is_deleted() {
             return;
         }
+        self.aspect_textures.invalidate(aspect);
         self.submissions.write().aspects = aspect.clone();
         self.update();
     }
@@ -271,6 +277,7 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         if self.is_deleted() {
             return;
         }
+        self.aspect_textures.invalidate(aspect);
         self.submissions
             .write()
             .commands
@@ -278,9 +285,11 @@ impl Graphic3dGroup for Graphic3dDrawGroup {
         self.update();
     }
     fn synchronize_aspects(&self) {
+        self.aspect_textures.synchronize();
         self.update();
     }
     fn replace_aspects(&self, map: &Graphic3dAspectsReplaceMap) {
+        self.aspect_textures.synchronize();
         let mut state = self.submissions.write();
         replace_style(&mut state.aspects, map);
         for command in &mut state.commands {
@@ -433,7 +442,20 @@ fn lower_group_surface(
         context,
     )?;
     crate::retained_lighting::apply_surface_lighting(&mut lowered, primitive, aspects, context)?;
+    lower_group_edges(&mut lowered, aspects, context)?;
     Ok(lowered)
+}
+fn lower_group_edges(
+    draws: &mut Vec<PrimitiveDraw>,
+    aspects: &Handle<dyn Graphic3dAspectsSource>,
+    context: &crate::text_submission::TextSceneContext<'_>,
+) -> Result<(), RenderError> {
+    crate::retained_mesh_edges::apply_retained_mesh_edges(
+        draws,
+        &**aspects,
+        context.group.mesh_edge_pipeline,
+    )?;
+    crate::retained_mesh_edges::apply_graphic3d_raster_widths(draws, context.rendering)
 }
 
 fn surface_alpha_policy(

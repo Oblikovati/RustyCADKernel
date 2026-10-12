@@ -77,9 +77,13 @@ mod capping_geometry;
 mod capping_planes;
 mod capping_style;
 mod capping_texture;
+mod mesh_edges;
+mod retained_aspect_textures;
 mod retained_cap_textures;
 mod retained_capping;
+mod retained_mesh_edges;
 mod surface_alpha;
+pub use mesh_edges::{RenderMeshEdgePipeline, RenderMeshEdges};
 
 mod material;
 mod material_components;

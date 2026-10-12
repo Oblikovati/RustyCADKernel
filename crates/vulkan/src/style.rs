@@ -49,14 +49,10 @@ fn validate_style_features(style: &dyn Graphic3dAspectsSource) -> Result<(), Ren
         !style.to_use_vertex_color_for_back_faces(),
     );
     let unlit = style.shading_model() == Graphic3dTypeOfShadingModel::Unlit;
-    if features.1
-        || features.2
-        || features.3
-        || (unlit && !features.0 && (features.4 || features.5))
-    {
+    if features.1 || features.3 || (unlit && !features.0 && (features.4 || features.5)) {
         return Err(rejected(
             features,
-            "textures, shaders, edges, silhouettes, material distinction and back-color suppression disabled",
+            "built-in solid surface shading, silhouettes disabled, valid unlit material/back-color policy",
         ));
     }
     Ok(())

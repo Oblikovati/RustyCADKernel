@@ -7,6 +7,8 @@ mod device_options;
 #[allow(dead_code)]
 #[path = "../tests/support/texture_generation_scene.rs"]
 mod generation_scene;
+#[path = "support/retained_redraw_samples.rs"]
+mod redraw_samples;
 #[allow(dead_code)]
 #[path = "../tests/support/viewer_scene.rs"]
 mod scene;
@@ -17,6 +19,7 @@ mod texture_scene;
 #[path = "../tests/support/view_setup.rs"]
 mod view_setup;
 use martensite_vulkan::{Graphic3dRenderDriver, RenderTextureCoordinatePipeline};
+use redraw_samples::{measure_redraws, report_samples};
 use rustycad_tkernel::{ncollection::Vec4, standard::Handle};
 use rustycad_tkservice::graphic3d::*;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -174,37 +177,6 @@ fn refresh_cap_alpha(fixture: &capping_scene::CappingTextureScene, frame: usize)
         Graphic3dAlphaMode::Blend
     };
     fixture.plane.capping_aspect().set_alpha_mode(alpha, 0.5);
-}
-fn measure_redraws(scene: &scene::ViewerScene, mut refresh: impl FnMut(usize)) -> Vec<f64> {
-    scene
-        .cview()
-        .set_z_layer_target(GRAPHIC3D_ZLAYER_ID_DEFAULT);
-    scene.cview().set_z_layer_redraw_mode(true);
-    let render = scene.render_view();
-    let samples = (0..120)
-        .filter_map(|frame| {
-            let start = std::time::Instant::now();
-            refresh(frame);
-            render.try_redraw().unwrap();
-            (frame >= 20).then(|| start.elapsed().as_secs_f64() * 1000.)
-        })
-        .collect();
-    assert_timed_capture(&render.capture().unwrap());
-    samples
-}
-fn assert_timed_capture(capture: &martensite_vulkan::FrameCapture) {
-    assert!(
-        capture
-            .depth
-            .iter()
-            .all(|depth| depth.is_finite() && (0. ..=1.).contains(depth))
-    );
-}
-fn report_samples(workload: &str, samples: Vec<f64>) {
-    assert_eq!(samples.len(), 100, "workload={workload}");
-    println!(
-        "MARTENSITE_PERFORMANCE={{\"workload\":\"{workload}\",\"warmup\":20,\"validation\":false,\"samples_ms\":{samples:?}}}"
-    );
 }
 #[cfg(test)]
 #[path = "../tests/support/recording_device.rs"]
