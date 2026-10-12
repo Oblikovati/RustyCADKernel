@@ -569860,18 +569860,18 @@
       "upstream_id": "V3d_Viewer::SetViewOff(const occ::handle<V3d_View> &)"
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
+      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe. Remaining Martensite fidelity gap: current viewer activation snapshots active-light handles rather than using the native live list; temporary ownership survives across the later virtual Redraw callback. The source/list prerequisite fixes view transport and drops light snapshots before redraw, but does not yet prove the full live-light/UpdateLights contract. See porting/runtime-evidence/viewer-active-light-reference-gap-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dViewer::set_view_on",
       "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_Viewer::SetViewOn()"
     },
     {
-      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe.",
+      "notes": "V3d_Viewer mapping (v3d-design.md section 1): a transient struct over the driver and its Graphic3d structure manager with the lists of views and lights in one SharedState; the single-view and single-light overloads of SetViewOn/SetViewOff/SetLightOn/SetLightOff are the *_one members; Grid(type, toCreate) is grid_of_type; SetGridEcho(marker) is set_grid_echo_marker; the iterator members keep the native index semantics. Covered by tests/v3d_viewer_test.rs and the v3_view probe. Remaining Martensite fidelity gap: current viewer activation snapshots active-light handles rather than using the native live list; temporary ownership survives across the later virtual Redraw callback. The source/list prerequisite fixes view transport and drops light snapshots before redraw, but does not yet prove the full live-light/UpdateLights contract. See porting/runtime-evidence/viewer-active-light-reference-gap-2026-10-12.json.",
       "rust_item": "rustycad_tkv3d::v3d::V3dViewer::set_view_on_one",
       "source": "src/Visualization/TKV3d/V3d/V3d_Viewer.hxx",
-      "status": "implemented",
+      "status": "partial",
       "toolkit": "TKV3d",
       "upstream_id": "V3d_Viewer::SetViewOn(const occ::handle<V3d_View> &)"
     },
