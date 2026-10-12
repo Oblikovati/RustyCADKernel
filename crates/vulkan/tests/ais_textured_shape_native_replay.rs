@@ -36,7 +36,7 @@ fn textured_native_mapping_assets_replay_on_either_actual_device() {
 }
 
 #[test]
-#[ignore = "Full strict matrix retains renderer dependencies and native software filtering/line diagnostics"]
+#[ignore = "Full strict matrix retains exact-color rounding and software line-coverage diagnostics"]
 fn textured_full_native_matrix_preserves_all_unresolved_diagnostics() {
     let driver = Graphic3dRenderDriver::new(device_options::validation_options()).unwrap();
     let mut failures = Vec::new();

@@ -1,11 +1,13 @@
-//! Supported class workloads; triangle edges and populated textured boundaries await checked renderer integration.
+//! Actual class workloads include checked same-pass triangle edges and populated textured boundaries.
 pub const TEXTURED_SHAPE_SUPPORTED_MODES: &[&str] = &[
     "basic",
     "bottom-up",
     "no-modulate",
     "map-off",
     "transparent",
+    "triangles",
     "face-boundaries",
+    "face-boundaries-meshed",
     "red",
     "unset-red",
     "gold",

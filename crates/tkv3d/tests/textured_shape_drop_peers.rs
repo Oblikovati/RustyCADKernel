@@ -5,7 +5,7 @@ use rustycad_tkernel::{
     tcollection::AsciiString,
 };
 use rustycad_tkservice::{graphic3d::*, image::ImagePixMap};
-use rustycad_tkv3d::{ais::*, prs3d::Prs3dDrawer, prs_mgr::PrsMgrPresentableObjectMembers};
+use rustycad_tkv3d::{ais::*, prs_mgr::PrsMgrPresentableObjectMembers, prs3d::Prs3dDrawer};
 use std::sync::Arc;
 
 struct DropPeerPixels {

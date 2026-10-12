@@ -1,7 +1,6 @@
 //! PrsMgr behaviour on the TKService null driver: presentations per mode, display and erase,
 //! highlight and immediate mode, transformations of children, clipping, style members and
 //! update flags. `SegmentObject` is the named fake presentable object.
-use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkernel::quantity::{Color, NamedColor};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkmath::bnd::BoundingBox3;
@@ -19,6 +18,7 @@ use rustycad_tkv3d::prs_mgr::{
     prs_mgr_presentable_bind,
 };
 use rustycad_tkv3d::prs3d::Prs3dDrawer;
+use rustycad_tkv3d::v3d::V3dViewSource;
 use rustycad_tkv3d::v3d::V3dViewer;
 
 /// A presentable object drawing one segment from the origin to (length, 0, 0) per mode; it

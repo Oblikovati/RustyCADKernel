@@ -59,10 +59,10 @@ recovers typed native failures crossing void/bool adapters; unrelated panic
 payloads escape. Texture construction and availability use an owned injectable
 boundary. File/predefined codec behavior is not claimed complete.
 
-The current class remains partial. The renderer dependency still rejects
-triangle edges and actual textured boundary lines. `face-boundaries-meshed`
-uses real meshing and matching polygon tables to expose that dependency;
-an empty boundary group is not rendering evidence. Inherited selection and
+The current class remains partial. Checked renderer support now renders genuine
+same-pass triangle edges and textured boundary lines. `face-boundaries-meshed`
+uses real meshing and matching polygon tables; all 24 class modes capture on
+both Vulkan devices with validation clean. Inherited selection and
 HLR return explicit typed unimplemented failures, so callers requiring those
 families must wait for the parent port.
 
@@ -71,7 +71,13 @@ dependency. Native class assets cover 24 variants separately on AMD and software
 OpenGL, with 48 byte-identical repeat pairs. Four currently proved native mapping
 cases pass the ordinary GPU replay on both Vulkan devices using exact RGBA and
 the existing `1e-6` depth gate. The full strict matrix is a separate diagnostic
-that retains renderer rejections and software filtering/line differences.
+that remains red: AMD matches 23/24 cases and lavapipe 4/24. AMD triangle
+colors differ by at most one byte in 44 pixels. Software wireframe and bounding
+box differences move horizontal line coverage between rows 15 and 16; their
+maximum depth difference of `0.80808085` compares geometry against background,
+not interpolation. Meshed boundaries add 19 software fragments on row 15.
+These deferred raster special cases and exact-color differences remain explicit;
+comparison gates are unchanged.
 
 ```sh
 cargo test -p rustycad-tkv3d --test toolkit textured_
@@ -82,6 +88,6 @@ cargo test -p martensite-vulkan --test toolkit textured_full_native_matrix -- --
 `ais_textured_shape_capture` exercises the actual retained class on either
 Vulkan device. `ais_textured_shape_performance` prepares complete redraw/readback
 workloads using the shared 20-warmup/100-sample contract. Final source-frozen
-functional captures and optimized timings follow checked renderer integration;
+functional captures and optimized timings retain those strict limitations;
 the intermediate receipts do not accept a performance baseline or complete
 class parity.
