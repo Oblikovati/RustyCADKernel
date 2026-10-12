@@ -205,11 +205,13 @@ mod tests {
         draw.surface_texture = Some(SurfaceTextureStyle {
             image,
             pending_texgen: None,
+            fixed_environment: false,
             sampler: SurfaceSamplerPolicy::read(&texture.get_params()),
             uv: vec![[0., 0., 0., 1.]; 3],
             back_vertex: true,
             vertex_override: false,
             modulate: true,
+            native_gen_mode: rustycad_tkservice::graphic3d::Graphic3dTypeOfTextureMode::Manual,
         });
         RenderFrame::new(8, 8, [0., 0., 0., 1.], vec![draw]).unwrap()
     }

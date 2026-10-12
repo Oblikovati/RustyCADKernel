@@ -9,8 +9,10 @@ static occ::handle<Graphic3d_AspectFillArea3d> unlit_aspects() {
 }
 #include "martensite_vulkan_capping.cxx"
 #include "martensite_cap_edge_boundaries.hxx"
+#include "martensite_cap_mesh_trace.hxx"
+#include <memory>
 static std::string cap_texture_mode(const std::string& mode) {
-  for(const auto name:{"bc1-rgb","bc1-rgba","bc2","bc3","mask-exact","mask-blend","mask","blend","opaque-alpha"})
+  for(const auto name:{"format-alpha-f","format-alpha","format-gray","format-rgb","bc1-rgb","bc1-rgba","bc2","bc3","mask-exact","mask-blend","mask","blend","opaque-alpha"})
     if(mode.find(name)!=std::string::npos)return name;
   return "nearest";
 }
@@ -28,6 +30,19 @@ static void cap_object_properties(const occ::handle<Graphic3d_Group>& group,
     group->Aspects()->SetFrontMaterial(material);plane->SetUseObjectMaterial(true);
   }
 }
+static void section_mesh_edges(const occ::handle<Graphic3d_Aspects>& aspect,const std::string& mode) {
+  if(mode.find("section-edges")==std::string::npos)return;
+  const float alpha=mode.find("negative-alpha")!=std::string::npos?-.25f:
+    mode.find("edge-alpha")!=std::string::npos?.25f:mode.find("edge-background")!=std::string::npos?.05f:1.f;
+  aspect->SetDrawEdges(mode.find("edges-disabled")==std::string::npos);aspect->SetEdgeColor(Quantity_ColorRGBA(0,1,1,alpha));
+  aspect->SetEdgeWidth(mode.find("thin")!=std::string::npos?1.f:3.f);
+  if(mode.find("dashed")!=std::string::npos)aspect->SetEdgeLineType(Aspect_TOL_DASH);
+  aspect->SetSkipFirstEdge(mode.find("skip-first")!=std::string::npos);
+  if(mode.find("offset")!=std::string::npos)aspect->SetPolygonOffsets(
+    mode.find("both-offset")!=std::string::npos?Aspect_POM_Fill|Aspect_POM_Line:
+    mode.find("line-offset")!=std::string::npos?Aspect_POM_Line:Aspect_POM_Fill,
+    mode.find("factor-zero")!=std::string::npos?0:2,3);
+}
 static occ::handle<Graphic3d_ClipPlane> textured_cap_scene(
   const occ::handle<V3d_View>& view,const occ::handle<Graphic3d_Structure>& structure,const std::string& mode) {
   const auto group=structure->NewGroup();group->SetGroupPrimitivesAspect(unlit_aspects());cap_cube(group,0);
@@ -35,12 +50,14 @@ static occ::handle<Graphic3d_ClipPlane> textured_cap_scene(
   const auto texture=texture_source(cap_texture_mode(mode));texture->GetParams()->SetFilter(Graphic3d_TOTF_NEAREST);
   if(mode.find("no-modulate")!=std::string::npos)texture->GetParams()->SetModulate(false);
   texture->GetParams()->SetScale(NCollection_Vec2<float>(.0625f,.0625f));
-  if(mode.find("generated")!=std::string::npos)texture->GetParams()->SetGenMode(
+  if(mode.find("generated")!=std::string::npos||mode.find("shader-eye")!=std::string::npos)texture->GetParams()->SetGenMode(
     mode.find("eye")!=std::string::npos?Graphic3d_TOTM_EYE:Graphic3d_TOTM_OBJECT,
     NCollection_Vec4<float>(1,0,0,0),NCollection_Vec4<float>(0,0,-1,0));
   plane->CappingAspect()->SetTextureMap(texture);plane->CappingAspect()->SetTextureMapOn();
+  if(mode.find("unmapped")!=std::string::npos)plane->CappingAspect()->SetTextureMapOff();
   plane->CappingAspect()->SetInteriorColor(texture_rgb(1,1,1));
   texture_surface_style(plane->CappingAspect(),cap_texture_mode(mode));
+  section_mesh_edges(plane->CappingAspect(),mode);
   if(mode.find("phong")!=std::string::npos||mode.find("gouraud")!=std::string::npos||mode.find("facet")!=std::string::npos) {
     texture_material(plane->CappingAspect());texture_lights(view);
     plane->CappingAspect()->SetShadingModel(mode.find("gouraud")!=std::string::npos?Graphic3d_TypeOfShadingModel_Gouraud:
@@ -64,8 +81,11 @@ int main(int argc,char** argv) {
   if(argc!=3)throw Standard_Failure(("received argc="+std::to_string(argc)+"; expected mode prefix").c_str());
   auto probe=create_policy_probe();texture_camera(probe.view);
   probe.workspace->GetGlContext()->caps->ffpEnable=std::string(argv[1]).find("generated")!=std::string::npos||std::string(argv[1]).find("fixed")!=std::string::npos;
+  probe.workspace->GetGlContext()->caps->usePolygonMode=std::string(argv[1]).find("polygon")!=std::string::npos;
   const occ::handle<Graphic3d_Structure> structure=new Graphic3d_Structure(probe.viewer->StructureManager());
   const auto plane=textured_cap_scene(probe.view,structure,argv[1]);
+  std::unique_ptr<NativeCapMeshDrawTrace> trace;
+  if(std::getenv("MARTENSITE_CAP_MESH_TRACE"))trace=std::make_unique<NativeCapMeshDrawTrace>(probe.workspace->GetGlContext(),argv[2]);
   probe.view->Redraw();cap_live_update(plane,argv[1]);
   if(std::string(argv[1]).find("line-synchronized")!=std::string::npos)structure->Groups().First()->SynchronizeAspects();
   texture_capture(probe.view,argv[2]);

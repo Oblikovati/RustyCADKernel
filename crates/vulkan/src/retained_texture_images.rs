@@ -175,6 +175,7 @@ fn snapshot_uncompressed_image(
         revision,
         extent: [width, height],
         encoding,
+        alpha_only: matches!(image.format(), ImageFormat::Alpha | ImageFormat::AlphaF),
         bytes: Arc::new(bytes),
         top_down: image.is_top_down(),
         mipmaps: texture.has_mipmaps(),
@@ -230,6 +231,24 @@ mod release_tests {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn native_alpha_texture_environment_keeps_original_component_semantics() {
+        for (format, pixels, alpha_only) in [
+            (ImageFormat::Alpha, vec![128], true),
+            (ImageFormat::AlphaF, 0.5_f32.to_le_bytes().to_vec(), true),
+            (ImageFormat::Gray, vec![128], false),
+            (ImageFormat::Rgba, vec![255, 0, 0, 128], false),
+        ] {
+            let image = Handle::new(ImagePixMap::default());
+            assert!(image.init_wrapper(format, Some(pixels.clone()), 1, 1, pixels.len()));
+            let texture = Handle::new(Graphic3dTexture2D::from_pix_map(image));
+            let snapshot = RetainedTextureImages::default()
+                .snapshot(&texture.cast())
+                .unwrap()
+                .unwrap();
+            assert_eq!(snapshot.alpha_only, alpha_only, "{format:?}");
+        }
+    }
     fn one_pixel(red: u8) -> Handle<ImagePixMap> {
         let image = Handle::new(ImagePixMap::default());
         assert!(image.init_wrapper(ImageFormat::Rgba, Some(vec![red, 0, 0, 255]), 1, 1, 4));

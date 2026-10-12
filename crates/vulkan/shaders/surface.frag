@@ -3,7 +3,7 @@
 #define MARTENSITE_FRAGMENT
 #define MARTENSITE_SURFACE_FAMILY
 layout(push_constant) uniform Transform {
-    mat4 clip;float cutoff;uint flags;
+    mat4 clip;float cutoff;uint flags;float fixedPrimaryAlpha;
 #ifdef MARTENSITE_MESH_EDGES
     layout(offset=80) vec4 edgeColor;
     layout(offset=96) float edgeWidth;
@@ -23,11 +23,21 @@ layout(location=8) in vec3 edgeDistance;
 #endif
 layout(set=MARTENSITE_SURFACE_SET,binding=0) uniform sampler2D surfaceImage;
 #endif
+vec3 fixedSrgbDecode(vec3 color) {
+    return mix(pow((color+0.055)/1.055,vec3(2.4)),color/12.92,lessThanEqual(color,vec3(0.04045)));
+}
+vec3 fixedSrgbEncode(vec3 color) {
+    return mix(1.055*pow(max(color,vec3(0.0)),vec3(1.0/2.4))-0.055,color*12.92,lessThanEqual(color,vec3(0.0031308)));
+}
 vec4 surfaceTexel() {
     // OpenGL incomplete texture sampling is black with alpha one; loading still failed.
     if ((transform.flags&16u)!=0u) return vec4(0.0,0.0,0.0,1.0);
 #ifdef MARTENSITE_SURFACE_TEXTURE
-    return texture(surfaceImage,surfaceUV.st/surfaceUV.w);
+    vec4 texel=texture(surfaceImage,surfaceUV.st/surfaceUV.w);
+    // OCCT3d097a0 ToRenderSRGB disables texture/output sRGB conversion in the FFP policy.
+    if ((transform.flags&512u)!=0u) texel.rgb=fixedSrgbEncode(texel.rgb);
+    if ((transform.flags&1024u)!=0u) texel.rgb=vec3(1.0);
+    return texel;
 #else
     return vec4(1.0);
 #endif
@@ -44,6 +54,11 @@ layout(location=6) in vec4 backColor;
 #include "clipping.glsl"
 layout(location=0) out vec4 outColor;
 vec4 sampledSurfaceColor() {
+    vec4 primary=vertexColor;
+    if ((transform.flags&2048u)!=0u) primary.a=transform.fixedPrimaryAlpha;
+    if ((transform.flags&32u)!=0u) return primary*surfaceTexel();
+    if ((transform.flags&128u)!=0u) return vec4(vertexColor.rgb,surfaceTexel().a);
+    if ((transform.flags&64u)!=0u) return vec4(mix(primary.rgb,surfaceTexel().rgb,surfaceTexel().a),primary.a);
 #ifdef MARTENSITE_LIGHTING
     vec4 result=litFragmentColor();
     if (lighting.settings.x==1u) result*=surfaceTexel();
@@ -63,6 +78,7 @@ void main() {
     float interior=smoothstep(transform.edgeWidth-transform.edgeFeather*0.5,transform.edgeWidth+transform.edgeFeather*0.5,distance);
     outColor=transform.edgeColor.a<0.0?vec4(outColor.rgb,1.0-interior):mix(transform.edgeColor,outColor,interior);
 #endif
+    if ((transform.flags&256u)!=0u) outColor.rgb=fixedSrgbDecode(clamp(outColor.rgb,0.0,1.0));
     // Surface masking uses native strict comparison; glyph cutoff remains <= in its independent shader.
     if ((transform.flags&8u)!=0u&&outColor.a<transform.cutoff) discard;
 }

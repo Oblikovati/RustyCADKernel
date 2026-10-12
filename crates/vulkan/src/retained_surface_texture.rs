@@ -104,19 +104,29 @@ fn complete_surface_style(
         .samplers
         .policy(&image, &parameters)?;
     let mut style = extracted_surface_style(image, uv, &parameters, sampler, primitive, &**aspects);
+    snapshot_fixed_surface_binding(&mut style, primitive, &parameters, context)?;
+    Ok(style)
+}
+fn snapshot_fixed_surface_binding(
+    style: &mut SurfaceTextureStyle,
+    primitive: &PrimitiveSubmission,
+    parameters: &Graphic3dTextureParams,
+    context: &TextSceneContext<'_>,
+) -> Result<(), RenderError> {
     if context.group.texture_images.coordinate_pipeline
         == crate::RenderTextureCoordinatePipeline::GeneratedCompatibility
     {
         let (world, view) = crate::persistent_transform::lighting_matrices(context)?;
+        style.fixed_environment = true;
         style.pending_texgen = Some(crate::surface_texgen::SurfaceTexgen::snapshot(
             crate::surface_texture_uv::surface_input_uv(primitive)?,
-            &parameters,
+            parameters,
             style.image.top_down,
             world,
             view,
         ));
     }
-    Ok(style)
+    Ok(())
 }
 fn extracted_surface_style(
     image: Arc<SurfaceTextureImage>,
@@ -133,11 +143,13 @@ fn extracted_surface_style(
     SurfaceTextureStyle {
         image,
         pending_texgen: None,
+        fixed_environment: false,
         uv,
         sampler,
         back_vertex: aspects.to_use_vertex_color_for_back_faces(),
         vertex_override,
         modulate: parameters.is_modulate(),
+        native_gen_mode: parameters.gen_mode(),
     }
 }
 pub(crate) fn validate_texture_family(

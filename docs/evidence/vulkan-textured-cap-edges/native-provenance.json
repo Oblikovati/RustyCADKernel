@@ -1,0 +1,47 @@
+{
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "generator": "tools/oracle/martensite_capping_texture_capture.cxx",
+  "native_binary_sha256": "c0f71824a270610e5a7e91d6f6442b1984469a725d8107e42af2c4af0d769bf5",
+  "sources": {
+    "tools/oracle/martensite_capping_texture_capture.cxx": "e988e93154fc83f61450c622debd6a8df4a260d1416da5e4ab1b9caff85b9871",
+    "tools/oracle/martensite_cap_mesh_trace.hxx": "2db5dfc31cfdeabb5009a1c0ee1f387dc2a3f2273f15bce73172e24abda11124",
+    "tools/oracle/martensite_text_culling_probe.hxx": "de097f6eba453ca6ab484339f2ad8aa8069437f3327ba58d7766d14ab0c11012",
+    "tools/oracle/martensite_cap_edge_boundaries.hxx": "7066d293837018b00deff7f17e7000b8349d873d6579e896aa605197b40abd7e",
+    "tools/oracle/martensite_surface_texture_probe.hxx": "8f8443d887504f0c58d7518079d1ac08ddfb63e6c25c63d5ac0d8c1786ff9cb7",
+    "crates/vulkan/tests/support/capping_texture_scene.rs": "21df91bf166d84357896a4e9dc10f80493574edfae0332aac6768bf06cedef6c",
+    "crates/vulkan/tests/support/capping_section_mesh.rs": "62388aec6296c6c84bc945430c5b90421f96a06e0dd5eca0fe65b49205091097",
+    "crates/vulkan/tests/support/capping_texture_policy.rs": "b302beda9a6356dd562b5ff726ec5ed30a31e6f636ce4b8e6d17080e4e674c2e"
+  },
+  "profiles": {
+    "host": "OCCT_GL_RENDERER=AMD Radeon 8060S Graphics (radeonsi, strix_halo, ACO, DRM 3.64, 7.1.5-76070105-generic)",
+    "software": "OCCT_GL_RENDERER=llvmpipe (LLVM 20.1.2, 128 bits)"
+  },
+  "asset_pairs": 110,
+  "native_repeat_exact_pairs": 110,
+  "rgba_shape": [
+    64,
+    64,
+    4
+  ],
+  "depth_shape": [
+    64,
+    64
+  ],
+  "depth_format": "little-endian float32",
+  "software_env": {
+    "DISPLAY": ":1",
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "LP_NATIVE_VECTOR_WIDTH": "128",
+    "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+    "LLVM_TARGET_FEATURES": null
+  },
+  "host_env": {
+    "DISPLAY": ":1",
+    "LIBGL_ALWAYS_SOFTWARE": null,
+    "LP_NATIVE_VECTOR_WIDTH": "128",
+    "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+    "LLVM_TARGET_FEATURES": null
+  },
+  "view_dump": "actual Default target, single layer, native zero-MSAA view",
+  "native_trace": "owned-context GL draw wrapper forwards unchanged; native repeat captures include exact matrix/texture/offset state"
+}

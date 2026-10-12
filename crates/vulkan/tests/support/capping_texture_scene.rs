@@ -4,6 +4,8 @@ use super::{scene, scene::ViewerScene, texture_scene::texture_handle};
 mod edge_boundaries;
 #[path = "capping_scene.rs"]
 mod section_geometry;
+#[path = "capping_section_mesh.rs"]
+mod section_mesh;
 use martensite_vulkan::Graphic3dRenderDriver;
 use rustycad_tkernel::{
     ncollection::{Vec2, Vec4},
@@ -85,7 +87,7 @@ fn cap_texture(mode: &str) -> Handle<Graphic3dTexture2D> {
     texture
 }
 fn configure_generated_cap_planes(texture: &Graphic3dTexture2D, mode: &str) {
-    if mode.contains("generated") {
+    if mode.contains("generated") || mode.contains("shader-eye") {
         texture.get_params().set_gen_mode(
             if mode.contains("eye") {
                 Graphic3dTypeOfTextureMode::Eye
@@ -104,7 +106,7 @@ fn configure_cap_aspect(
 ) {
     let aspect = plane.capping_aspect();
     aspect.set_texture_map(texture.cast());
-    aspect.set_texture_map_on(true);
+    aspect.set_texture_map_on(!mode.contains("unmapped"));
     aspect.set_interior_color(rustycad_tkernel::quantity::Color::named(
         rustycad_tkernel::quantity::NamedColor::WHITE,
     ));
@@ -116,10 +118,15 @@ fn configure_cap_aspect(
         _ => Graphic3dAlphaMode::BlendAuto,
     };
     aspect.set_alpha_mode(alpha, 0.5);
+    section_mesh::configure_section_mesh_edges(&*aspect, mode);
 }
 
 fn cap_image_mode(mode: &str) -> &str {
     for name in [
+        "format-alpha-f",
+        "format-alpha",
+        "format-gray",
+        "format-rgb",
         "bc1-rgb",
         "bc1-rgba",
         "bc2",
