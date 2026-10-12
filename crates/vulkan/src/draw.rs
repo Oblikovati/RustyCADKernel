@@ -243,12 +243,9 @@ fn validate_indices(indices: &[u32], vertices: usize, line: bool) -> Result<(), 
 }
 
 impl PrimitiveDraw {
-    /// Override the ordinary surface blend pass after lighting; `draw.with_lighting(state)?.with_surface_blending(false)?`.
+    /// Override the surface blend pass after lighting; `draw.with_lighting(state)?.with_surface_blending(false)?`.
     pub fn with_surface_blending(mut self, enabled: bool) -> Result<Self, RenderError> {
-        if self.topology() != crate::PrimitiveTopology::Triangles
-            || self.textured_style.is_some()
-            || self.capping_pass != crate::RenderCappingPass::None
-        {
+        if self.topology() != crate::PrimitiveTopology::Triangles || self.textured_style.is_some() {
             return Err(rejected(
                 (
                     enabled,
@@ -256,7 +253,7 @@ impl PrimitiveDraw {
                     self.textured_style.is_some(),
                     self.capping_pass,
                 ),
-                "ordinary untextured surface geometry outside capping passes",
+                "triangle surface geometry without a glyph atlas",
             ));
         }
         self.surface_blend = enabled;

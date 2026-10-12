@@ -5,7 +5,7 @@ use rustycad_tkernel::{
     standard::Handle,
 };
 use rustycad_tkservice::graphic3d::*;
-pub fn texture_lighting(scene: &ViewerScene, aspects: &Graphic3dAspects) {
+pub fn texture_lighting(scene: &ViewerScene, aspects: &dyn Graphic3dAspectsSource) {
     let mut material = Graphic3dMaterialAspect::new(Graphic3dNameOfMaterial::Plastified);
     material.set_material_type(Graphic3dTypeOfMaterial::Aspect);
     material.set_ambient_color(texture_rgb([0.25, 0.5, 0.75]));

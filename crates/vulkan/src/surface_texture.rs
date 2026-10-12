@@ -48,6 +48,7 @@ impl SurfaceSamplerPolicy {
 #[derive(Clone, Debug, PartialEq)]
 pub(crate) struct SurfaceTextureStyle {
     pub image: Arc<SurfaceTextureImage>,
+    pub pending_texgen: Option<Box<crate::surface_texgen::SurfaceTexgen>>,
     pub sampler: SurfaceSamplerPolicy,
     pub uv: Vec<[f32; 4]>,
     pub back_vertex: bool,

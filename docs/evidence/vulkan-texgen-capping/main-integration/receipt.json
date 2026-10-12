@@ -1,0 +1,25 @@
+{
+  "feature_commit": "25ff71700eadc2a6000af0f3830af1e2c019b328",
+  "integration_parent": "a5488dcc5",
+  "tests": 399,
+  "executables": 56,
+  "checks": [
+    "all-feature all-target locked software Vulkan tests",
+    "Clippy -D warnings",
+    "format",
+    "toolkit discovery",
+    "44-scene native AMD Rust-only replay"
+  ],
+  "functional_native_goldens": {
+    "software": 44,
+    "AMD": 44,
+    "rgba": "exact",
+    "depth_absolute": 1e-06
+  },
+  "performance": "Previously checked frozen optimized source/binary: 52 workloads per device, 100 samples, 10400 raw timings; no behavior changes made during clean integration. No baseline accepted.",
+  "remaining_strict_diagnostics": {
+    "rgba_pairs": 28,
+    "depth_pairs": 1
+  },
+  "scope": "Standard 2D object/eye texture coordinates and textured section caps; whole legacy FFP lighting/color, triangle edges and textured lines remain unfinished."
+}

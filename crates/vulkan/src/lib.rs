@@ -66,6 +66,7 @@ pub use clipping::RenderClipping;
 
 mod retained_clipping;
 
+mod capping_order;
 mod capping_pass;
 pub use capping_pass::RenderCappingPass;
 
@@ -75,7 +76,10 @@ pub use face_culling::RenderFaceCulling;
 mod capping_geometry;
 mod capping_planes;
 mod capping_style;
+mod capping_texture;
+mod retained_cap_textures;
 mod retained_capping;
+mod surface_alpha;
 
 mod material;
 mod material_components;
@@ -91,6 +95,7 @@ pub use lighting::{RenderLighting, RenderShading};
 mod retained_lighting;
 
 mod capping_lighting;
+mod capping_mask_aspect;
 
 mod quad_assembly;
 
@@ -100,8 +105,12 @@ pub use polygon_offset::RenderPolygonOffset;
 mod retained_surface_texture;
 mod retained_texture_images;
 mod retained_texture_samplers;
+mod surface_texgen;
 mod surface_texture;
 mod surface_texture_compressed;
 mod surface_texture_lifetime;
 mod surface_texture_pixels;
 mod surface_texture_uv;
+mod texture_coordinate_frame;
+mod texture_coordinate_pipeline;
+pub use texture_coordinate_pipeline::RenderTextureCoordinatePipeline;

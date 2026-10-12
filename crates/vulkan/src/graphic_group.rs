@@ -385,7 +385,7 @@ fn lower_styled_primitive(
     if primitive.kind != Graphic3dTypeOfPrimitiveArray::Points {
         let culling = crate::face_culling::resolve_culling(
             aspects.face_culling(),
-            closed && !crate::style::surface_uses_blending(&**aspects),
+            closed && crate::face_culling::allow_surface_auto_culling(&**aspects),
         );
         return primitive.draws(color, matrix, line, None).map(|draws| {
             draws
@@ -440,14 +440,6 @@ fn surface_alpha_policy(
     mut draw: PrimitiveDraw,
     aspects: &Handle<dyn Graphic3dAspectsSource>,
 ) -> PrimitiveDraw {
-    if draw.topology() == crate::PrimitiveTopology::Triangles && draw.textured_style.is_none() {
-        draw.surface_blend = crate::style::surface_uses_blending(&**aspects);
-        draw.surface_forced_blend = aspects.alpha_mode() == Graphic3dAlphaMode::MaskBlend;
-        draw.surface_cutoff = matches!(
-            aspects.alpha_mode(),
-            Graphic3dAlphaMode::Mask | Graphic3dAlphaMode::MaskBlend
-        )
-        .then_some(aspects.alpha_cutoff());
-    }
+    crate::surface_alpha::apply_surface_alpha(&mut draw, &**aspects);
     draw
 }

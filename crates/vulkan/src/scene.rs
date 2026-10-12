@@ -90,7 +90,8 @@ impl RenderFrame {
         for layer in &layers {
             crate::capping_pass::validate_capping_sequence(&layer.draws)?;
         }
-        let (draws, layers) = flatten_layers(layers);
+        let (mut draws, layers) = flatten_layers(layers);
+        crate::texture_coordinate_frame::resolve_ordered_texture_coordinates(&mut draws)?;
         validate_extent(width, height)?;
         if !clear_color.iter().all(|v| v.is_finite()) {
             return Err(rejected(clear_color, "finite clear color"));

@@ -48,9 +48,60 @@ pub(crate) fn cap_vertices(color: [f32; 4]) -> Vec<RenderVertex> {
     .map(|position| RenderVertex::homogeneous(position, color))
     .to_vec()
 }
+/// Preserve the actual section primitive's homogeneous UVs; `cap_texture_uv(&vertices)`.
+pub(crate) fn cap_texture_uv(vertices: &[RenderVertex]) -> Vec<[f32; 4]> {
+    vertices
+        .iter()
+        .map(|vertex| {
+            // OCCT3d097a0 THE_CAPPING_PLN_VERTS uses local X/-Z and the position's infinity weight.
+            let t = if vertex.position[2] == 0. {
+                0.
+            } else {
+                -vertex.position[2]
+            };
+            [vertex.position[0], t, 0., vertex.weight]
+        })
+        .collect()
+}
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn actual_native_section_buffer_preserves_position_normal_and_projective_uv() {
+        let bytes = include_bytes!("../tests/fixtures/texture-texgen-capping/native-cap.vertices");
+        let native: Vec<f32> = bytes
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .map(|b| f32::from_le_bytes(*b))
+            .collect();
+        let vertices = cap_vertices([1.; 4]);
+        let uv = cap_texture_uv(&vertices);
+        for (rank, values) in native.as_chunks::<12>().0.iter().enumerate() {
+            let v = vertices[rank];
+            assert_eq!(
+                values[..4],
+                [v.position[0], v.position[1], v.position[2], v.weight]
+            );
+            assert_eq!(values[4..8], [0., -1., 0., 0.]);
+            assert_eq!(values[8..], uv[rank]);
+        }
+    }
+    #[test]
+    fn actual_native_oblique_orientation_matches_the_section_model_replacement() {
+        let bytes =
+            include_bytes!("../tests/fixtures/texture-texgen-capping/native-cap.orientation");
+        let native: Vec<f32> = bytes
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .map(|b| f32::from_le_bytes(*b))
+            .collect();
+        assert_eq!(
+            cap_orientation([0.6, 0., -0.8, -2.]).data().as_slice(),
+            native
+        );
+    }
     #[test]
     fn homogeneous_plane_vertices_lie_on_translated_cardinal_and_oblique_planes() {
         for equation in [
