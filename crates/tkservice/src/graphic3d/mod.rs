@@ -328,6 +328,8 @@ pub use clip_sequence_storage::ClipPlaneNativeItems;
 mod clip_sequence_reference_replay;
 #[cfg(test)]
 mod clip_dump_live_replay;
+#[cfg(test)]
+mod cview_clip_retirement_replay;
 
 #[cfg(test)]
 mod clip_sequence_retirement_fixture;
