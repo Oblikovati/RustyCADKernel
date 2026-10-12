@@ -441,6 +441,14 @@ fn lower_group_surface(
         aspects,
         context,
     )?;
+    for draw in &mut lowered {
+        draw.source_line_strip = primitive.kind == Graphic3dTypeOfPrimitiveArray::Polylines;
+        draw.source_color_array = !highlighted
+            && primitive
+                .attributes
+                .attribute_data(Graphic3dTypeOfAttribute::Color)
+                .is_some();
+    }
     crate::retained_lighting::apply_surface_lighting(&mut lowered, primitive, aspects, context)?;
     lower_group_edges(&mut lowered, aspects, context)?;
     Ok(lowered)

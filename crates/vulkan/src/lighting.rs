@@ -17,9 +17,12 @@ pub enum RenderShading {
 pub struct RenderLighting {
     pub(crate) normals: Vec<[f32; 3]>,
     pub(crate) material: RenderMaterial,
-    world: [f32; 16],
-    normal: [f32; 16],
-    eye: [f32; 4],
+    pub(crate) world: [f32; 16],
+    pub(crate) view: [f32; 16],
+    pub(crate) normalize_fixed: bool,
+    pub(crate) fixed: Option<crate::fixed_lighting::FixedLightingInterpolation>,
+    pub(crate) normal: [f32; 16],
+    pub(crate) eye: [f32; 4],
     pub(crate) shading: RenderShading,
     pub(crate) lights: RenderLightSet,
     pub(crate) vertex_colors: bool,
@@ -42,6 +45,9 @@ impl RenderLighting {
             normals,
             material,
             world,
+            view,
+            normalize_fixed: false,
+            fixed: None,
             normal,
             eye,
             shading,
@@ -73,10 +79,11 @@ impl RenderLighting {
         let mut bytes = self.encode_coefficients();
         bytes.extend(
             [
-                self.shading as u32,
+                self.fixed.map_or(self.shading as u32, |mode| mode as u32),
                 self.lights.source_count() as u32,
                 u32::from(self.vertex_colors),
-                u32::from(self.front_vertex_colors_only),
+                u32::from(self.front_vertex_colors_only)
+                    + 2 * u32::from(self.is_fixed_lighting() && self.normalize_fixed),
             ]
             .into_iter()
             .flat_map(u32::to_ne_bytes),

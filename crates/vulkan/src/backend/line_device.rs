@@ -5,6 +5,7 @@ use std::ffi::CStr;
 #[derive(Clone, Copy, Default)]
 pub(super) struct LineCapabilities {
     pub bresenham: bool,
+    pub stippled: bool,
     pub wide: bool,
 }
 impl LineCapabilities {
@@ -19,6 +20,7 @@ impl LineCapabilities {
         if !present {
             return Ok(Self {
                 bresenham: false,
+                stippled: false,
                 wide,
             });
         }
@@ -27,6 +29,7 @@ impl LineCapabilities {
         unsafe { instance.get_physical_device_features2(physical, &mut features) };
         Ok(Self {
             bresenham: lines.bresenham_lines == vk::TRUE,
+            stippled: lines.stippled_bresenham_lines == vk::TRUE,
             wide,
         })
     }
@@ -51,6 +54,7 @@ mod tests {
     fn absent_line_and_wide_capabilities_reject_only_unsupported_requests() {
         let narrow = LineCapabilities {
             bresenham: true,
+            stippled: false,
             wide: false,
         };
         assert!(
@@ -73,6 +77,7 @@ mod tests {
     fn subpixel_native_lines_use_one_pixel_without_requiring_wide_lines() {
         let narrow = LineCapabilities {
             bresenham: true,
+            stippled: false,
             wide: false,
         };
         let style = LineStyle::new(0.5, 0xffff, 1).unwrap();
@@ -84,6 +89,7 @@ mod tests {
     fn widths_must_fit_the_selected_device_range() {
         let wide = LineCapabilities {
             bresenham: true,
+            stippled: false,
             wide: true,
         };
         assert!(
@@ -111,6 +117,7 @@ mod forced_blend_tests {
         assert!(error.to_string().contains("Bresenham line support"));
         let narrow = LineCapabilities {
             bresenham: true,
+            stippled: false,
             wide: false,
         };
         assert!(narrow.validate(style, [1., 8.]).is_ok());
@@ -121,6 +128,7 @@ mod forced_blend_tests {
         assert!(
             LineCapabilities {
                 bresenham: true,
+                stippled: false,
                 wide: true
             }
             .validate(wide_style, [1., 2.])

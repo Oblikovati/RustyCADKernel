@@ -118,6 +118,8 @@ fn polygon_edge_draw(
     }
     edge.mesh_edges = None;
     edge.lighting = None;
+    edge.source_color_array = false;
+    edge.source_line_strip = false;
     let fixed_texture =
         coordinates == crate::RenderTextureCoordinatePipeline::GeneratedCompatibility;
     edge.surface_cutoff = fixed_texture.then_some(face.surface_cutoff).flatten();

@@ -18,5 +18,10 @@ vec4 unlitMarkerColor(vec4 texel, vec4 vertex, uint policy) {
 vec4 litMarkerColor(vec4 texel, vec4 lit, uint policy) {
     if (policy == 4u) return lit;
     if (policy == 1u) return vec4(lit.rgb, texel.a);
+#ifdef MARTENSITE_FIXED_LIGHTING
+    // applyGlobalTextureParams overrides DECAL with REPLACE for GenMode SPRITE.
+    return texel;
+#else
     return texel * lit;
+#endif
 }

@@ -81,7 +81,20 @@ impl DrawPipeline {
                 None
             },
         };
-        if kind.mesh_edges {
+        if kind.fixed_lighting {
+            let shaders = if kind.mesh_edges {
+                super::fixed_lighting_pipeline::fixed_mesh_triple(kind).to_vec()
+            } else {
+                super::fixed_lighting_pipeline::fixed_lighting_pair(kind).to_vec()
+            };
+            for bytes in shaders {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else if kind.fixed_line_stipple && !kind.lighting {
+            for bytes in super::fixed_lighting_pipeline::fixed_unlit_line_pair(kind.clipped) {
+                pipeline.shaders.push(load_shader(runtime, bytes)?);
+            }
+        } else if kind.mesh_edges {
             for bytes in super::mesh_edge_pipeline::edge_shader_bytes(kind) {
                 pipeline.shaders.push(load_shader(runtime, bytes)?);
             }
@@ -172,7 +185,10 @@ impl DrawPipeline {
             .description(self.layout, &stages)
             .push_next(&mut rendering);
         let mut line_state = vk::PipelineRasterizationLineStateCreateInfoEXT::default()
-            .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM);
+            .line_rasterization_mode(vk::LineRasterizationModeEXT::BRESENHAM)
+            .stippled_line_enable(kind.fixed_line_stipple)
+            .line_stipple_factor(1)
+            .line_stipple_pattern(0xffff);
         let mut raster =
             super::pipeline_state::raster_state(kind.clamp).polygon_mode(if kind.polygon_edges {
                 vk::PolygonMode::LINE

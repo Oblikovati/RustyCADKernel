@@ -108,6 +108,8 @@ impl PrimitiveSubmission {
         source: &[u32],
     ) -> Result<PrimitiveDraw, RenderError> {
         let mut draw = PrimitiveDraw::new(vertices, indices, matrix)?;
+        draw.native_flat_sources =
+            crate::fixed_flat_sources::native_flat_sources(self.kind, source, &draw.indices);
         if self.kind == Graphic3dTypeOfPrimitiveArray::Quadrangles {
             draw.quad_corners = source.as_chunks::<4>().0.to_vec();
         }

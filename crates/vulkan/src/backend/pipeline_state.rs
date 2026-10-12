@@ -69,7 +69,11 @@ impl PipelineState {
             ..
         } = kind;
         Self {
-            vertex: if kind.surface_texture || kind.surface_alpha || kind.mesh_edges {
+            vertex: if kind.fixed_lighting {
+                super::fixed_vertex_layout::fixed_vertex_layout(
+                    kind.surface_texture || kind.surface_alpha || kind.mesh_edges,
+                )
+            } else if kind.surface_texture || kind.surface_alpha || kind.mesh_edges {
                 super::surface_texture_pipeline::surface_vertex_state(kind.lighting)
             } else {
                 vertex_state(text, kind.lighting)
@@ -77,7 +81,11 @@ impl PipelineState {
             assembly: vk::PipelineInputAssemblyStateCreateInfo::default().topology(if point {
                 vk::PrimitiveTopology::POINT_LIST
             } else if line && !kind.polygon_edges {
-                vk::PrimitiveTopology::LINE_LIST
+                if kind.fixed_line_strip {
+                    vk::PrimitiveTopology::LINE_STRIP
+                } else {
+                    vk::PrimitiveTopology::LINE_LIST
+                }
             } else {
                 vk::PrimitiveTopology::TRIANGLE_LIST
             }),
@@ -107,7 +115,7 @@ impl PipelineState {
                     &BLEND
                 }),
             dynamic: vk::PipelineDynamicStateCreateInfo::default()
-                .dynamic_states(dynamic_states(line)),
+                .dynamic_states(dynamic_states(line, kind.fixed_line_stipple)),
         }
     }
     pub fn description<'a>(
@@ -175,8 +183,8 @@ pub(super) fn raster_state(depth_clamp: bool) -> vk::PipelineRasterizationStateC
         .line_width(1.0)
 }
 
-fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
-    const STATES: [vk::DynamicState; 9] = [
+fn dynamic_states(line: bool, stipple: bool) -> &'static [vk::DynamicState] {
+    const STATES: [vk::DynamicState; 10] = [
         vk::DynamicState::VIEWPORT,
         vk::DynamicState::SCISSOR,
         vk::DynamicState::DEPTH_TEST_ENABLE,
@@ -186,8 +194,15 @@ fn dynamic_states(line: bool) -> &'static [vk::DynamicState] {
         vk::DynamicState::DEPTH_BIAS,
         vk::DynamicState::DEPTH_BIAS_ENABLE,
         vk::DynamicState::LINE_WIDTH,
+        vk::DynamicState::LINE_STIPPLE_EXT,
     ];
-    &STATES[..if line { 9 } else { 8 }]
+    &STATES[..if stipple {
+        10
+    } else if line {
+        9
+    } else {
+        8
+    }]
 }
 
 #[cfg(test)]
@@ -212,9 +227,12 @@ mod tests {
     }
     #[test]
     fn triangle_pipelines_do_not_require_dynamic_line_width() {
-        assert!(!dynamic_states(false).contains(&vk::DynamicState::LINE_WIDTH));
-        assert!(dynamic_states(true).contains(&vk::DynamicState::LINE_WIDTH));
-        assert_eq!(&dynamic_states(true)[..8], dynamic_states(false));
+        assert!(!dynamic_states(false, false).contains(&vk::DynamicState::LINE_WIDTH));
+        assert!(dynamic_states(true, false).contains(&vk::DynamicState::LINE_WIDTH));
+        assert_eq!(
+            &dynamic_states(true, false)[..8],
+            dynamic_states(false, false)
+        );
     }
 }
 

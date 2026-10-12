@@ -205,6 +205,14 @@ fn record_draw(
 ) {
     let device = runtime.device();
     unsafe {
+        if let Some((factor, pattern)) = draw.line_stipple {
+            (runtime
+                .line_stipple
+                .as_ref()
+                .expect("fixed stipple capability validated")
+                .fp()
+                .cmd_set_line_stipple_ext)(command, factor, pattern);
+        }
         if let Some(width) = draw.line_width {
             device.cmd_set_line_width(command, width);
         }

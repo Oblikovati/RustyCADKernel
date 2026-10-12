@@ -51,12 +51,15 @@ fn cap_lighting_snapshot(
         scene.fields,
         scene.extent,
     )?;
-    RenderLighting::new(
+    let mut snapshot = RenderLighting::new(
         vec![[0., -1., 0.]; vertex_count],
         crate::retained_lighting::aspect_material(aspects),
         world,
         view,
         !scene.camera.is_orthographic(),
         crate::retained_lighting::surface_algorithm(model, true)?,
-    )
+    )?;
+    snapshot.normalize_fixed =
+        crate::fixed_normalization::native_normalize_state(scene.camera, scene.fields, view, false);
+    Ok(snapshot)
 }

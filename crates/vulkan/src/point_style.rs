@@ -19,6 +19,7 @@ pub struct PointStyle {
     pub(crate) image: crate::RasterImage,
     pub(crate) alpha_blend: bool,
     pub(crate) color_policy: PointColorPolicy,
+    pub(crate) native_image_top_down: bool,
 }
 impl PointStyle {
     /// Validate size and RGBA sprite shape before GPU work; `PointStyle::new(1., [1,1], vec![[1.;4]])?`.
@@ -31,6 +32,7 @@ impl PointStyle {
             image: crate::RasterImage::new(extent, pixels)?,
             alpha_blend: true,
             color_policy: PointColorPolicy::Modulated,
+            native_image_top_down: true,
         })
     }
     /// Preserve in-place native blending; `style.with_alpha_blending(false)`.
@@ -123,7 +125,9 @@ fn image_style(image: &Handle<ImagePixMap>, alpha: bool) -> Result<PointStyle, R
     let pixels = (0..height)
         .flat_map(|y| (0..width).map(move |x| sprite_pixel(image, x, y, alpha)))
         .collect::<Result<Vec<_>, _>>()?;
-    PointStyle::new(width.max(height) as f32, [width, height], pixels)
+    let mut style = PointStyle::new(width.max(height) as f32, [width, height], pixels)?;
+    style.native_image_top_down = image.is_top_down();
+    Ok(style)
 }
 fn sprite_pixel(image: &ImagePixMap, x: u32, y: u32, alpha: bool) -> Result<[f32; 4], RenderError> {
     let color = image

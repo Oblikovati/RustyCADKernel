@@ -95,7 +95,9 @@ mod light_snapshot;
 pub use light_snapshot::RenderLightSet;
 
 mod lighting;
+mod lighting_pipeline;
 pub use lighting::{RenderLighting, RenderShading};
+pub use lighting_pipeline::RenderLightingPipeline;
 
 mod retained_lighting;
 
@@ -104,7 +106,14 @@ mod capping_mask_aspect;
 
 mod quad_assembly;
 
+mod fixed_flat_sources;
+mod fixed_light_snapshot;
+mod fixed_lighting;
+mod fixed_line_stipple;
+mod fixed_marker_environment;
+mod fixed_normalization;
 mod fixed_surface_environment;
+mod fixed_view_lighting;
 mod polygon_offset;
 pub use polygon_offset::RenderPolygonOffset;
 

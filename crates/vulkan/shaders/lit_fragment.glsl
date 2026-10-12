@@ -5,6 +5,13 @@ vec4 litFragmentColor() {
 #else
     bool frontFacing = gl_FrontFacing;
 #endif
+#ifdef MARTENSITE_FIXED_LIGHTING
+    vec4 result=lighting.settings.x==4u?(frontFacing?fixedFrontColor:fixedBackColor)
+        :(frontFacing?frontColor:backColor);
+    bool colored=lighting.settings.z!=0u&&(frontFacing||(lighting.settings.w&1u)==0u);
+    if(!colored)result.a=lighting.materials[frontFacing?0u:4u].a;
+    return result;
+#else
     if (lighting.settings.x == 1u) {
         return frontFacing ? frontColor : backColor;
     }
@@ -16,5 +23,6 @@ vec4 litFragmentColor() {
         normal = gl_FrontFacing ? normal : -normal;
     }
     return computeLighting(normal, normalize(viewDirection), worldPosition, frontFacing, vertexColor);
+#endif
 }
 

@@ -125,6 +125,8 @@ fn apply_nodal_lighting(
     if draws
         .iter()
         .any(|draw| draw.topology() == crate::PrimitiveTopology::Points)
+        && crate::lighting_pipeline::structure_lighting_pipeline(&context.group.structure())
+            != crate::RenderLightingPipeline::FixedFunction
     {
         lighting.validate_opaque_marker_lighting()?;
     }
@@ -158,11 +160,7 @@ fn surface_lighting(
 ) -> Result<RenderLighting, RenderError> {
     let shading = surface_algorithm(model, normals.is_some())?;
     let (world, view) = crate::persistent_transform::lighting_matrices(context)?;
-    let colored = primitive
-        .attributes
-        .attribute_data(Graphic3dTypeOfAttribute::Color)
-        .is_some();
-    Ok(RenderLighting::new(
+    let mut snapshot = RenderLighting::new(
         Vec::new(),
         aspect_material(aspects),
         world,
@@ -170,7 +168,24 @@ fn surface_lighting(
         !context.camera.is_orthographic(),
         shading,
     )?
-    .with_vertex_colors(colored, !aspects.to_use_vertex_color_for_back_faces()))
+    .with_vertex_colors(
+        primitive_has_lighting_colors(primitive),
+        !aspects.to_use_vertex_color_for_back_faces(),
+    );
+    snapshot.normalize_fixed = crate::fixed_normalization::native_normalize_state(
+        context.camera,
+        context.structure,
+        view,
+        !context.group.transform_persistence().is_null(),
+    );
+    Ok(snapshot)
+}
+
+fn primitive_has_lighting_colors(primitive: &PrimitiveSubmission) -> bool {
+    primitive
+        .attributes
+        .attribute_data(Graphic3dTypeOfAttribute::Color)
+        .is_some()
 }
 
 pub(crate) fn resolved_model(
@@ -245,6 +260,9 @@ pub(crate) fn apply_view_lights(
     layers: &mut [RenderLayer],
     view: &dyn Graphic3dCView,
 ) -> Result<(), RenderError> {
+    if crate::fixed_view_lighting::uses_fixed_view_lighting(view) {
+        return crate::fixed_view_lighting::apply_fixed_view_lighting(layers, view);
+    }
     if !layers
         .iter()
         .flat_map(|layer| &layer.draws)

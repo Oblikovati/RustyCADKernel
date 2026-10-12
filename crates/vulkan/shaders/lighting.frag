@@ -9,6 +9,12 @@ layout(location=2) in vec3 viewDirection;
 layout(location=4) in vec4 worldPosition;
 layout(location=5) in vec4 frontColor;
 layout(location=6) in vec4 backColor;
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=9) flat in vec4 fixedFrontColor;
+#endif
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=10) flat in vec4 fixedBackColor;
+#endif
 layout(location=0) out vec4 fragmentColor;
 #ifdef MARTENSITE_MARKER_LIGHTING
 #define MARTENSITE_SPRITE_SET 2
@@ -29,6 +35,11 @@ void main() {
     fragmentColor = litFragmentColor();
 #ifdef MARTENSITE_MARKER_LIGHTING
     fragmentColor = litMarkerColor(markerTexel(uvec2(transform.width, transform.height)), fragmentColor, transform.policy);
+#ifdef MARTENSITE_FIXED_LIGHTING
+    // GL_POINTS bypasses sprite alpha testing; sprite GL_GEQUAL accepts the exact cutoff.
+    if (transform.policy!=4u && fragmentColor.a < 0.1) discard;
+#else
     if (fragmentColor.a <= 0.1) discard;
+#endif
 #endif
 }

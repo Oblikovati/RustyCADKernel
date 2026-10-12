@@ -13,11 +13,23 @@ layout(location=2) in vec3 inputDirection[];
 layout(location=4) in vec4 inputPosition[];
 layout(location=5) in vec4 inputFront[];
 layout(location=6) in vec4 inputBack[];
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=9) flat in vec4 inputFixedFront[];
+#endif
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=10) flat in vec4 inputFixedBack[];
+#endif
 layout(location=1) out vec3 worldNormal;
 layout(location=2) out vec3 viewDirection;
 layout(location=4) out vec4 worldPosition;
 layout(location=5) out vec4 frontColor;
 layout(location=6) out vec4 backColor;
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=9) flat out vec4 fixedFrontColor;
+#endif
+#ifdef MARTENSITE_FIXED_LIGHTING
+layout(location=10) flat out vec4 fixedBackColor;
+#endif
 #endif
 #ifdef MARTENSITE_CLIPPING
 layout(location=3) in vec4 inputClipping[];
@@ -48,6 +60,9 @@ void main() {
 #ifdef MARTENSITE_LIGHTING
         worldNormal=inputNormal[index]; viewDirection=inputDirection[index]; worldPosition=inputPosition[index];
         frontColor=inputFront[index]; backColor=inputBack[index];
+#ifdef MARTENSITE_FIXED_LIGHTING
+        fixedFrontColor=inputFixedFront[0]; fixedBackColor=inputFixedBack[0];
+#endif
 #endif
 #ifdef MARTENSITE_CLIPPING
         clippingWorldPosition=inputClipping[index];
