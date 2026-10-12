@@ -86,3 +86,12 @@ mod isoline_reference_tests;
 mod isoline_surface_reference;
 #[cfg(test)]
 mod isoline_surface_slot_tests;
+
+mod tool_r_face_edge_ref;
+pub use tool_r_face_edge_ref::StdPrsToolRFaceEdgeRef;
+#[cfg(test)]
+mod tool_r_face_edge_tests;
+#[cfg(test)]
+mod tool_r_face_ownership_tests;
+#[cfg(test)]
+mod tool_r_face_source_fake;

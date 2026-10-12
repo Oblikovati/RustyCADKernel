@@ -12,7 +12,7 @@ mod explorer;
 mod vertices;
 
 pub use ancestors::{map_shapes_and_ancestors, map_shapes_and_unique_ancestors};
-pub use explorer::Explorer;
+pub use explorer::{Explorer, ExplorerShapeSlot};
 pub use vertices::{common_vertex, first_vertex, last_vertex, vertices, wire_vertices};
 
 use crate::topods::{Shape, ShapeIterator};
@@ -69,3 +69,5 @@ pub fn map_shapes_into_map(shape: &Shape, map: &mut MapOfShape, cum_ori: bool, c
         iterator.next();
     }
 }
+#[cfg(test)]
+mod explorer_reference_tests;
