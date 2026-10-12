@@ -14,9 +14,10 @@ impl BaseSequence {
             self.cache_first();
             return;
         }
+        let tail = self.last;
         unsafe {
-            (*self.last).set_next(node);
-            (*node).set_previous(self.last);
+            self.guarded_link_mut(self.last).set_next(node);
+            (*node).set_previous(tail);
             (*node).set_next(std::ptr::null_mut());
         }
         self.last = node;
@@ -30,9 +31,10 @@ impl BaseSequence {
             unsafe { self.append_node(node) };
             return;
         }
+        let head = self.first;
         unsafe {
-            (*self.first).set_previous(node);
-            (*node).set_next(self.first);
+            self.guarded_link_mut(self.first).set_previous(node);
+            (*node).set_next(head);
             (*node).set_previous(std::ptr::null_mut());
         }
         self.first = node;
@@ -51,8 +53,8 @@ impl BaseSequence {
             self.cache_first();
         } else {
             unsafe {
-                (*self.last).set_next(other.first);
-                (*other.first).set_previous(self.last);
+                self.guarded_link_mut(self.last).set_next(other.first);
+                other.guarded_link_mut(other.first).set_previous(self.last);
             }
         }
         self.last = other.last;
@@ -71,8 +73,8 @@ impl BaseSequence {
             return;
         }
         unsafe {
-            (*other.last).set_next(self.first);
-            (*self.first).set_previous(other.last);
+            other.guarded_link_mut(other.last).set_next(self.first);
+            self.guarded_link_mut(self.first).set_previous(other.last);
         }
         self.first = other.first;
         self.size += other.size;
@@ -141,16 +143,16 @@ impl BaseSequence {
         other.nullify();
     }
     unsafe fn link_after(&mut self, before: *mut SeqNode, first: *mut SeqNode, last: *mut SeqNode) {
-        let after = unsafe { (*before).next() };
+        let after = unsafe { self.guarded_link(before).next() };
         unsafe {
             (*first).set_previous(before);
             (*last).set_next(after);
-            (*before).set_next(first);
+            self.guarded_link_mut(before).set_next(first);
         }
         if after.is_null() {
             self.last = last;
         } else {
-            unsafe { (*after).set_previous(last) };
+            unsafe { self.guarded_link_mut(after).set_previous(last) };
         }
     }
     fn check_insertion(&self, index: usize) -> Result<(), Failure> {

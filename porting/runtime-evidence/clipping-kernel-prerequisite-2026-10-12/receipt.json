@@ -1,0 +1,60 @@
+{
+  "project": "Martensite",
+  "base": "e7353fb02",
+  "extraction_from": "9f5e02065",
+  "view_ancestry": false,
+  "source_pin": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "scope": "Real prepared/detached nodes, shared native cursors, controlled Clear saved-next/old metadata/First liveness, lazy current-resource retirement, native ownership transfer. No clipping/view production modules.",
+  "kernel_sources": {
+    "crates/tkernel/src/ncollection/mod.rs": "26de18ae0ab983a5c6eda1696df06764003accf29232fa6c1dcab0ceadc53787",
+    "crates/tkernel/src/ncollection/node_release.rs": "195592025fe95a669c307963e999dbb2438e7b06bb4ca2d00d294f47c599ee60",
+    "crates/tkernel/src/ncollection/sequence.rs": "da60ead5da8ea7ef5b8f90902f0efeae7f82e233ea933d2905ae42e9474d685a",
+    "crates/tkernel/src/ncollection/sequence/access.rs": "d49934f55415c1fc8d76365c6aa2473c239959688859c4f77fcc8dc5212bd0fe",
+    "crates/tkernel/src/ncollection/sequence/base_storage.rs": "34e8c0799ae03b225475fade9a878a6866af941e89ead1361dabfffd3fda322e",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion.rs": "9d7c3a5dc0c184c7f6726aee36a5c638c140f140fcc39cf6ace2aed6ad9a001f",
+    "crates/tkernel/src/ncollection/sequence/base_storage/insertion/self_splice.rs": "33b5ca5ab4dbdac5be4ff52e6c3ac4cff7d52437d55cc5f86808f3a705521907",
+    "crates/tkernel/src/ncollection/sequence/base_storage/removal.rs": "9230515604c9ca90aaae81c2c87b43aff0a8536a7c91f749fe6b7c54bd3233af",
+    "crates/tkernel/src/ncollection/sequence/base_storage/reorder.rs": "fd33a54bd07db70bdbe68cacaf49af402fa2944a7f6c9f7f7067a9392136d159",
+    "crates/tkernel/src/ncollection/sequence/editing.rs": "976673dd0677195d6839f7055a90139fb3136859c25602311e0e39946838c769",
+    "crates/tkernel/src/ncollection/sequence/editing/removal.rs": "85720c1a9e952e036bfb8662e5619eb6d714c0143234e74499c9719027549b21",
+    "crates/tkernel/src/ncollection/sequence/iteration.rs": "907be12d8f6b9cee55f6ebf41d76ca7e71380915b8d02fd2833a5bf5dcd146a0",
+    "crates/tkernel/src/ncollection/sequence/links.rs": "6dbd2d27be4332ce004876371af242e2be63dc8b5714d2ca852839f59b1bd0cf",
+    "crates/tkernel/src/ncollection/sequence/native_cursor.rs": "67a92223f3a8ea0c5177a783fa20b3618058edb6cfd7545ee9758f3dfa735f1e",
+    "crates/tkernel/src/ncollection/sequence/owner.rs": "f2ee3a0439d45d7dc52ea09f33072c957c045f888a839547e1b50a83f969f74e",
+    "crates/tkernel/src/ncollection/sequence/topology.rs": "036fb5dd98bc9d51863154becbc1141e25c8c454d68593586ee2791e1d9909dd",
+    "crates/tkernel/src/standard/intrusive_reference_slot.rs": "e0a3d20797da459a87384810b0b78338f5c3dc0bac47211020f33cd7895f917a",
+    "crates/tkernel/src/standard/intrusive_reference_slot_tests.rs": "659cf06cc01b303f414974e5935190431ee8085b400220b454b6414e4d571c54",
+    "crates/tkernel/src/ncollection/sequence/base_storage/node_liveness.rs": "947b1a463d0b5f2fead94a16aaa423050530e79bb02c6ab76a5481502c450b42",
+    "crates/tkernel/src/ncollection/sequence/controlled_clear.rs": "bffb963a84db223d3e20df3c45bf9732e1b94f7b07bb3a6bf050be05342f0d32",
+    "crates/tkernel/src/ncollection/sequence/controlled_clear_tests.rs": "be812ccfe55ade82e6b94e374bda2e9d9746778c74817afd9def4ad430e3bd19",
+    "crates/tkernel/src/ncollection/sequence/current_native_fixture.rs": "77c3db508c09f7d1a8c5ca86e7b8a834af906dd6e8b369a28a6ba57f7958e3cb",
+    "crates/tkernel/src/ncollection/sequence/current_native_replay.rs": "8585c2fca2511ad0a4b6314a9b6d286416ef0226ce99f1a1a23b106fd3fd47b7",
+    "crates/tkernel/src/ncollection/sequence/current_release.rs": "d8f5058457ad18cc22c3a9c7ca58e5e072a26cb86f4caeb3f75dc0f83b7cbd19",
+    "crates/tkernel/src/ncollection/sequence/current_release_tests.rs": "5c422f473f6c35fc08a7b234c7fe1efa19fe02497a13cd2b982cd3f9aa7e593b",
+    "crates/tkernel/src/ncollection/sequence/prepared_node.rs": "8ff47d122d035f31690584ff0b4c6b58b868a2d2e9144161303794555c7b5e71",
+    "crates/tkernel/src/ncollection/sequence/retired_node.rs": "79b83fc05a036e1c3d0e68e8432543f4ad3d5d50cef4f6db6e161ec12a014577"
+  },
+  "checks": {
+    "passed": 5013,
+    "failed": 0,
+    "executables": 29,
+    "clippy_exit": 0,
+    "diff_check_exit": 0
+  },
+  "native_evidence": {
+    "new_replay": "Sequence real allocator retirement:6byte-identical rows",
+    "provenance": "base-allocator-dispatch-2026-10-12/native-probes.json",
+    "inherited_lifecycle_assets": [
+      "clip-collection-retirement-2026-10-12/native-lifecycle.json",
+      "clip-collection-references-2026-10-12/native-references.json",
+      "clip-allocator-argument-2026-10-12/native-allocator.json"
+    ]
+  },
+  "limits": [
+    "No API/ledger/class restoration.",
+    "Native dangling/freed-node endpoint access returns safe absence outside valid native domain.",
+    "Rust unwind cleanup is not a throwing C++ destructor parity claim.",
+    "Active callback last-owner loss remains unproved for allocator class.",
+    "Full live clipping/view feature remains in its original branch."
+  ]
+}

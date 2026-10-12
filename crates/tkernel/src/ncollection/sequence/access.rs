@@ -39,17 +39,11 @@ impl<T> Sequence<T> {
         if first { head } else { tail }
     }
     pub(super) fn endpoint_value(&self, first: bool) -> Option<&T> {
-        let node = self.endpoint(first);
-        if node.is_null() {
-            return None;
-        }
+        let node = self.owned_node(super::iteration::pointer_address(self.endpoint(first)))?;
         Some(unsafe { owner::item_ref(node) })
     }
     pub(super) fn endpoint_mut(&mut self, first: bool) -> Option<&mut T> {
-        let node = self.endpoint(first);
-        if node.is_null() {
-            return None;
-        }
+        let node = self.owned_node(super::iteration::pointer_address(self.endpoint(first)))?;
         Some(unsafe { owner::item_mut(node) })
     }
 }

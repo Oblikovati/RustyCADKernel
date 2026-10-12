@@ -12,9 +12,10 @@ impl BaseSequence {
         if self.size == 0 {
             return;
         }
+        let (head, tail) = (self.first, self.last);
         unsafe {
-            (*self.last).set_next(self.first);
-            (*self.first).set_previous(self.last);
+            self.guarded_link_mut(tail).set_next(head);
+            self.guarded_link_mut(head).set_previous(tail);
         }
         self.nullify();
     }

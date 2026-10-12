@@ -1,6 +1,20 @@
 //! Owned-handle and actual slot observations are separate during callback release.
 use crate::standard::{Handle, IntrusiveReferenceSlot, StandardTransient};
 #[test]
+fn reference_slot_constructor_moves_exactly_one_existing_native_owner() {
+    let target = Handle::new(StandardTransient::default());
+    let observed = target.observe();
+    let pointer = target.object_address();
+    let slot = IntrusiveReferenceSlot::from_owned(target);
+    assert_eq!(observed.ref_count(), 1);
+    assert_eq!(slot.object_address(), pointer);
+    assert_eq!(slot.observe().ref_count(), 1);
+    slot.clear().unwrap();
+    assert!(slot.is_null());
+    assert_eq!(observed.ref_count(), 0);
+    assert!(IntrusiveReferenceSlot::<StandardTransient>::from_owned(Handle::default()).is_null());
+}
+#[test]
 fn reference_slot_actual_pointer_and_ownership_remain_native_separate() {
     let slot = IntrusiveReferenceSlot::<StandardTransient>::default();
     let first = Handle::new(StandardTransient::default());

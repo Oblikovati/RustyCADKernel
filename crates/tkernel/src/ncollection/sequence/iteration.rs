@@ -55,9 +55,6 @@ impl SequenceCursor {
             .owned_node(self.address)
             .and_then(|node| pointer_address(unsafe { (*node).previous() }));
     }
-    pub(super) fn position<T>(self, sequence: &Sequence<T>) -> Option<usize> {
-        sequence.cursor_node(self.address).map(|(index, _)| index)
-    }
 }
 pub(super) fn pointer_address(node: *mut super::SeqNode) -> Option<usize> {
     (!node.is_null()).then_some(node as usize)
@@ -72,6 +69,7 @@ impl<T> Sequence<T> {
     pub(super) fn linked_iter(&self) -> SequenceIter<'_, T> {
         let (front, back) = self.topology.endpoints();
         SequenceIter {
+            owners: &self.owners,
             front,
             back,
             remaining: self.len(),
@@ -81,6 +79,7 @@ impl<T> Sequence<T> {
     pub(super) fn linked_iter_mut(&mut self) -> SequenceIterMut<'_, T> {
         let (front, back) = self.topology.endpoints();
         SequenceIterMut {
+            owners: &self.owners,
             front,
             back,
             remaining: self.len(),
@@ -95,6 +94,10 @@ impl<'a, T> Iterator for SequenceIter<'a, T> {
             return None;
         }
         let node = self.front;
+        if !self.owners.contains_key(&(node as usize)) {
+            self.remaining = 0;
+            return None;
+        }
         self.front = unsafe { (*node).next() };
         self.remaining -= 1;
         Some(unsafe { owner::item_ref(node) })
@@ -109,6 +112,10 @@ impl<T> DoubleEndedIterator for SequenceIter<'_, T> {
             return None;
         }
         let node = self.back;
+        if !self.owners.contains_key(&(node as usize)) {
+            self.remaining = 0;
+            return None;
+        }
         self.back = unsafe { (*node).previous() };
         self.remaining -= 1;
         Some(unsafe { owner::item_ref(node) })
@@ -118,6 +125,7 @@ impl<T> ExactSizeIterator for SequenceIter<'_, T> {}
 impl<T> Clone for SequenceIter<'_, T> {
     fn clone(&self) -> Self {
         Self {
+            owners: self.owners,
             front: self.front,
             back: self.back,
             remaining: self.remaining,
@@ -140,6 +148,10 @@ impl<'a, T> Iterator for SequenceIterMut<'a, T> {
             return None;
         }
         let node = self.front;
+        if !self.owners.contains_key(&(node as usize)) {
+            self.remaining = 0;
+            return None;
+        }
         self.front = unsafe { (*node).next() };
         self.remaining -= 1;
         // Only value is borrowed; the link prefix remains available to the iterator.
@@ -155,6 +167,10 @@ impl<T> DoubleEndedIterator for SequenceIterMut<'_, T> {
             return None;
         }
         let node = self.back;
+        if !self.owners.contains_key(&(node as usize)) {
+            self.remaining = 0;
+            return None;
+        }
         self.back = unsafe { (*node).previous() };
         self.remaining -= 1;
         Some(unsafe { owner::item_mut(node) })
