@@ -54,3 +54,5 @@ mod view_cube_submission_tests;
 mod view_cube_test_probe;
 
 mod context_selected_applicative_tests;
+
+mod context_isoline_policy_tests;
