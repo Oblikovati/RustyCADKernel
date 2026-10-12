@@ -1,0 +1,462 @@
+[
+  {
+    "upstream_id": "Aspect_XRSession::myRoleActions",
+    "toolkit": "TKService",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "144fd3fc3ff83b7391f0543153e64bc2cf83b71753580ca5eff9f5846f43a06c"
+    ],
+    "cpp_matches": [
+      {
+        "id": "144fd3fc3ff83b7391f0543153e64bc2cf83b71753580ca5eff9f5846f43a06c",
+        "usr": "c:@S@Aspect_XRSession@FI@myRoleActions",
+        "qualified_name": "Aspect_XRSession::myRoleActions",
+        "kind": "Field",
+        "signature": "class NCollection_Array1<class opencascade::handle<class Aspect_XRAction>>[4]",
+        "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionFields::role_actions"
+    ],
+    "rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionFields::role_actions"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkservice::aspect::AspectXRSessionFields::role_actions",
+        "kind": "struct_field",
+        "signature": {
+          "array": {
+            "type": {
+              "resolved_path": {
+                "path": "rustycad_tkernel::ncollection::Array1",
+                "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'static"
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "rustycad_tkernel::standard::Handle",
+                            "resolved_item_path": "rustycad_tkernel::standard::handle::Handle",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "type": {
+                                      "resolved_path": {
+                                        "path": "super::AspectXRAction",
+                                        "resolved_item_path": "rustycad_tkservice::aspect::xr_action::AspectXRAction",
+                                        "args": null
+                                      }
+                                    }
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "len": "4"
+          }
+        },
+        "impl_context": null,
+        "declaration_sha256": "142928dfeac205cf450285219a84570f40be45a73a80139325a902393575617b",
+        "source_file": "crates/tkservice/src/aspect/xr_session.rs",
+        "source_status": null,
+        "source_sha256": "659bb9fb01eb09ca2ecafc39ea29b66ac80b29d8d4c7ba0266e09727343b1f9f"
+      }
+    ],
+    "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+  },
+  {
+    "upstream_id": "Aspect_XRSession::TrackedPoses",
+    "toolkit": "TKService",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "650558f5a1048e4137fcb8b50913507e735f2211c7a08944064eabc3b7539b91"
+    ],
+    "cpp_matches": [
+      {
+        "id": "650558f5a1048e4137fcb8b50913507e735f2211c7a08944064eabc3b7539b91",
+        "usr": "c:@S@Aspect_XRSession@F@TrackedPoses#1",
+        "qualified_name": "Aspect_XRSession::TrackedPoses",
+        "kind": "CXXMethod",
+        "signature": "const class NCollection_Array1<struct Aspect_TrackedDevicePose> &() const",
+        "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkservice::aspect::AspectXRSessionMembers::tracked_poses_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "super::AspectXrTrackedPosesRef",
+                "resolved_item_path": "rustycad_tkservice::aspect::xr_tracked_array_reference::AspectXrTrackedPosesRef",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": null,
+        "declaration_sha256": "32b3c7d8d720e7dfcdd0cc4fc325cdb296c3c3d208f0c14872b7925334bc29e4",
+        "source_file": "crates/tkservice/src/aspect/xr_session.rs",
+        "source_status": null,
+        "source_sha256": "659bb9fb01eb09ca2ecafc39ea29b66ac80b29d8d4c7ba0266e09727343b1f9f"
+      }
+    ],
+    "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+  },
+  {
+    "upstream_id": "Aspect_XRSession::HeadPose",
+    "toolkit": "TKService",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "68b7edf6edcf13741140468b2d5f8552865b20dfa57498e9d933a1797c85afbb"
+    ],
+    "cpp_matches": [
+      {
+        "id": "68b7edf6edcf13741140468b2d5f8552865b20dfa57498e9d933a1797c85afbb",
+        "usr": "c:@S@Aspect_XRSession@F@HeadPose#1",
+        "qualified_name": "Aspect_XRSession::HeadPose",
+        "kind": "CXXMethod",
+        "signature": "const class gp_Trsf &() const",
+        "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkservice::aspect::AspectXRSessionMembers::head_pose_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "super::AspectXrTransformRef",
+                "resolved_item_path": "rustycad_tkservice::aspect::xr_pose_reference::AspectXrTransformRef",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "lifetime": "'_"
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": null,
+        "declaration_sha256": "a5f6f6d07c055385df6e5050d56f6d0cea5b1941048be5be78de94d5c5f95356",
+        "source_file": "crates/tkservice/src/aspect/xr_session.rs",
+        "source_status": null,
+        "source_sha256": "659bb9fb01eb09ca2ecafc39ea29b66ac80b29d8d4c7ba0266e09727343b1f9f"
+      }
+    ],
+    "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+  },
+  {
+    "upstream_id": "Aspect_XRSession::myTrackedPoses",
+    "toolkit": "TKService",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "9f8f50763522c3573e75e5ee5f6082b00b92f86fb632ef8f9570f23ef7ee9c73"
+    ],
+    "cpp_matches": [
+      {
+        "id": "9f8f50763522c3573e75e5ee5f6082b00b92f86fb632ef8f9570f23ef7ee9c73",
+        "usr": "c:@S@Aspect_XRSession@FI@myTrackedPoses",
+        "qualified_name": "Aspect_XRSession::myTrackedPoses",
+        "kind": "Field",
+        "signature": "class NCollection_Array1<struct Aspect_TrackedDevicePose>",
+        "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionFields::tracked_poses"
+    ],
+    "rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionFields::tracked_poses"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkservice::aspect::AspectXRSessionFields::tracked_poses",
+        "kind": "struct_field",
+        "signature": {
+          "resolved_path": {
+            "path": "rustycad_tkernel::ncollection::Array1",
+            "resolved_item_path": "rustycad_tkernel::ncollection::array1::Array1",
+            "args": {
+              "angle_bracketed": {
+                "args": [
+                  {
+                    "lifetime": "'static"
+                  },
+                  {
+                    "type": {
+                      "resolved_path": {
+                        "path": "super::AspectTrackedDevicePose",
+                        "resolved_item_path": "rustycad_tkservice::aspect::input_values::AspectTrackedDevicePose",
+                        "args": null
+                      }
+                    }
+                  }
+                ],
+                "constraints": []
+              }
+            }
+          }
+        },
+        "impl_context": null,
+        "declaration_sha256": "c81d86d806ea96d4a846d7aeaf0017c4fe76ef54a18b5fd3046b93b48b7fb275",
+        "source_file": "crates/tkservice/src/aspect/xr_session.rs",
+        "source_status": null,
+        "source_sha256": "659bb9fb01eb09ca2ecafc39ea29b66ac80b29d8d4c7ba0266e09727343b1f9f"
+      }
+    ],
+    "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+  },
+  {
+    "upstream_id": "Aspect_XRSession::GenericAction",
+    "toolkit": "TKService",
+    "parity_status": "implemented",
+    "resolution": "implemented",
+    "cpp_status": "unique",
+    "cpp_ids": [
+      "afac9203f3e0501591793c1238efffd0d5e14ad07142d5a665c5a4debaf580a3"
+    ],
+    "cpp_matches": [
+      {
+        "id": "afac9203f3e0501591793c1238efffd0d5e14ad07142d5a665c5a4debaf580a3",
+        "usr": "c:@S@Aspect_XRSession@F@GenericAction#$@E@Aspect_XRTrackedDeviceRole#$@E@Aspect_XRGenericAction#1",
+        "qualified_name": "Aspect_XRSession::GenericAction",
+        "kind": "CXXMethod",
+        "signature": "const class opencascade::handle<class Aspect_XRAction> &(enum Aspect_XRTrackedDeviceRole, enum Aspect_XRGenericAction) const",
+        "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+      }
+    ],
+    "rust_status": "unique",
+    "declared_rust_kind": null,
+    "declared_rust_selectors": null,
+    "declared_rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action_ref"
+    ],
+    "rust_paths": [
+      "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action_ref"
+    ],
+    "rust_matches": [
+      {
+        "path": "rustycad_tkservice::aspect::AspectXRSessionMembers::generic_action_ref",
+        "kind": "function",
+        "signature": {
+          "sig": {
+            "inputs": [
+              [
+                "self",
+                {
+                  "borrowed_ref": {
+                    "lifetime": null,
+                    "is_mutable": false,
+                    "type": {
+                      "generic": "Self"
+                    }
+                  }
+                }
+              ],
+              [
+                "role",
+                {
+                  "resolved_path": {
+                    "path": "AspectXRTrackedDeviceRole",
+                    "resolved_item_path": "rustycad_tkservice::aspect::view_enums::AspectXRTrackedDeviceRole",
+                    "args": null
+                  }
+                }
+              ],
+              [
+                "action",
+                {
+                  "resolved_path": {
+                    "path": "AspectXRGenericAction",
+                    "resolved_item_path": "rustycad_tkservice::aspect::xr_action::AspectXRGenericAction",
+                    "args": null
+                  }
+                }
+              ]
+            ],
+            "output": {
+              "resolved_path": {
+                "path": "Result",
+                "resolved_item_path": "core::result::Result",
+                "args": {
+                  "angle_bracketed": {
+                    "args": [
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "super::AspectXrActionRef",
+                            "resolved_item_path": "rustycad_tkservice::aspect::xr_action_reference::AspectXrActionRef",
+                            "args": {
+                              "angle_bracketed": {
+                                "args": [
+                                  {
+                                    "lifetime": "'_"
+                                  }
+                                ],
+                                "constraints": []
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": {
+                          "resolved_path": {
+                            "path": "Failure",
+                            "resolved_item_path": "rustycad_tkernel::standard::failure::Failure",
+                            "args": null
+                          }
+                        }
+                      }
+                    ],
+                    "constraints": []
+                  }
+                }
+              }
+            },
+            "is_c_variadic": false
+          },
+          "generics": {
+            "params": [],
+            "where_predicates": []
+          },
+          "header": {
+            "is_const": false,
+            "is_unsafe": false,
+            "is_async": false,
+            "abi": "Rust"
+          },
+          "has_body": true,
+          "default_unstable": null
+        },
+        "impl_context": null,
+        "declaration_sha256": "30a186e7adeba28a623923ff2705dd9a549fbd7b8460ddcfd2c04a9c7153ff84",
+        "source_file": "crates/tkservice/src/aspect/xr_session.rs",
+        "source_status": null,
+        "source_sha256": "659bb9fb01eb09ca2ecafc39ea29b66ac80b29d8d4c7ba0266e09727343b1f9f"
+      }
+    ],
+    "source": "src/Visualization/TKService/Aspect/Aspect_XRSession.hxx"
+  }
+]

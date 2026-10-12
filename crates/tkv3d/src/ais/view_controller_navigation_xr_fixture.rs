@@ -69,21 +69,21 @@ impl AspectXRSession for NavigationOpenSession {
     }
     fn get_digital_action_data(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &AspectXrActionRef,
     ) -> Result<AspectXRDigitalActionData, Failure> {
         // Delegate non-headset behavior to the existing Martensite backend.
         self.backend.get_digital_action_data(action)
     }
     fn get_analog_action_data(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &AspectXrActionRef,
     ) -> Result<AspectXRAnalogActionData, Failure> {
         // Delegate non-headset behavior to the existing Martensite backend.
         self.backend.get_analog_action_data(action)
     }
     fn get_pose_action_data_for_next_frame(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &AspectXrActionRef,
     ) -> Result<AspectXRPoseActionData, Failure> {
         // Delegate non-headset behavior to the existing Martensite backend.
         self.backend.get_pose_action_data_for_next_frame(action)
@@ -108,7 +108,7 @@ impl AspectXRSession for NavigationOpenSession {
     }
     fn trigger_haptic_vibration_action_impl(
         &self,
-        action: &Handle<AspectXRAction>,
+        action: &AspectXrActionRef,
         _params: &AspectXRHapticActionData,
     ) -> Result<(), Failure> {
         // Delegate non-headset behavior to the existing Martensite backend.
@@ -162,15 +162,15 @@ fn deterministic_headset_delegates_metadata_and_tracking() {
 #[test]
 fn deterministic_headset_preserves_null_action_failures() {
     let s = NavigationOpenSession::default();
-    assert!(s.get_digital_action_data(&Handle::default()).is_err());
-    assert!(s.get_analog_action_data(&Handle::default()).is_err());
+    assert!(s.get_digital_action_data(&AspectXrActionRef::borrowed(&Handle::default())).is_err());
+    assert!(s.get_analog_action_data(&AspectXrActionRef::borrowed(&Handle::default())).is_err());
     assert!(
-        s.get_pose_action_data_for_next_frame(&Handle::default())
+        s.get_pose_action_data_for_next_frame(&AspectXrActionRef::borrowed(&Handle::default()))
             .is_err()
     );
     assert!(
         s.trigger_haptic_vibration_action_impl(
-            &Handle::default(),
+            &AspectXrActionRef::borrowed(&Handle::default()),
             &AspectXRHapticActionData::default()
         )
         .is_err()
