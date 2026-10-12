@@ -1,0 +1,61 @@
+{
+  "project": "Martensite",
+  "upstream_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "rows": 108,
+  "scenarios": 18,
+  "native_runs": 2,
+  "repeat_stdout_sha256": [
+    "551b1bf9869003bd036132b5f8f8faf52905068ba3cba84bc1d1e44e6e418124",
+    "551b1bf9869003bd036132b5f8f8faf52905068ba3cba84bc1d1e44e6e418124"
+  ],
+  "native_executable_sha256": "8c88cff5c6bec49a720877b137bc8d6dbd7ccea7ac5c0b2c06582d3afe2279e8",
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-I../RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_colored_copy_source.cxx",
+    "-L../RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKTopAlgo",
+    "-lTKBRep",
+    "-lTKGeomBase",
+    "-lTKG3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-o",
+    "target/colored-copy-source/native"
+  ],
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "oracle_sources": {
+    "tools/oracle/martensite_colored_copy_source.cxx": "536c4a894c4ad54928386b8b59b317bf6a556142cfbb6313f51e38d029d7704f",
+    "tools/oracle/martensite_colored_copy_source.hxx": "622ae404dc127a4d44c8a7a88b6b2d95bc2e525a7c734d984a205a83dc058330",
+    "tools/oracle/martensite_colored_appearance_state.hxx": "815ce36fa02d073455fc9c2e292d2f55b9260f8cbcbb7314fe1d3726d1a46e46",
+    "tools/oracle/martensite_colored_expansion_inputs.hxx": "9571e2bbbf9676f17280c8a3185c35df0918e89a9125055cede6a7e48ecfd285"
+  },
+  "upstream_sources": {
+    "AIS_ColoredShape.cxx": "3ee45b9f6a0369fe71406f3ac58317216241c7e334621ca5d115d4842ef28b6e",
+    "AIS_ColoredShape.hxx": "d7f65f7672721f4de42f3a9b89cb287e2ac2559811f7b10df2aabb4efbe0fb81",
+    "AIS_Shape.hxx": "c0889c43fb2904c2a40faa304102b013243de05018eb4fa15776f03daefe05fc",
+    "AIS_Shape.cxx": "5757c1d24235d87c8e2b2d9d87f863ba7e82856f773ddf550178bcbe36f33491"
+  },
+  "native_libraries": {
+    "TKV3d": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "TKTopAlgo": "87ea65f945fea5e6d0934b8175bf7320941552975657792303fd6246c2e9c06a",
+    "TKBRep": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d",
+    "TKGeomBase": "bb5616b53df21edbc3e012d6b704e2e8d8cab670c89b362c97b2434589071a37",
+    "TKG3d": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9"
+  },
+  "contract": "Original const handle source is reread separately at every predicate/getter. Initial geometry owns original TShape; later appearance and repaired constructor read replaced source. Both source objects remain externally owned throughout callbacks.",
+  "cases": "Material/Color/Transparency slot replacement; incoming complete/default flags; success, Standard_Failure, unrelated exception; repair copy, per-stage refcounts, topology identity, color/material/width/transparency, independent custom map.",
+  "undefined_exclusions": [
+    "Dangling original object during its virtual getter after source rebind with no external owner",
+    "Null dereference of the native constructor source handle"
+  ],
+  "class_status": "Inherited AIS_Shape HLR and other parent contracts remain partial; this constructor proof grants no class completion."
+}
