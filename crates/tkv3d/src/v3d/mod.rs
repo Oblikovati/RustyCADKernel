@@ -124,3 +124,6 @@ pub use subview_sequence_field::V3dSubviewSequenceRef;
 
 #[cfg(test)]
 mod subview_sequence_field_tests;
+
+#[cfg(test)]
+mod cview_bounds_camera_callback_tests;

@@ -26,6 +26,9 @@ impl Graphic3dCView for BorrowedCameraView {
         self.retained.cview_base()
     }
     fn cview_camera_ref(&self) -> Box<dyn HandleReference<Graphic3dCamera> + '_> {
+        self.control
+            .bounds_getter_calls
+            .fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         if *self.control.alternate_selected.read() {
             return Box::new(HandleFieldRef::new(&self.control.alternate, |slot| slot));
         }

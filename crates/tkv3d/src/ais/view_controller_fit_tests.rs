@@ -112,3 +112,6 @@ fn fitting_toggles_selection_and_scene_without_replacing_camera() {
     assert_eq!(camera.center(), selected_center);
     assert_eq!(camera, scene.view.camera());
 }
+
+#[path = "view_controller_fit_camera_slot_tests.rs"]
+mod camera_slot_tests;

@@ -105,7 +105,8 @@ pub(crate) fn min_max_values<V: Graphic3dCView + ?Sized>(
     if !view.is_defined() {
         return Ok(result);
     }
-    let camera = view.camera();
+    // OCCT 3d097a0 borrows Camera before Window::Size here; the set overload owns its copy.
+    let camera = view.camera_ref();
     let size = view.window().get().map_or([0, 0], |w| {
         let (width, height) = w.size();
         [width, height]
@@ -113,7 +114,7 @@ pub(crate) fn min_max_values<V: Graphic3dCView + ?Sized>(
     for layer in view.layers().iter().filter_map(Handle::get) {
         result.add_box(&layer.bounding_box(
             view.identification(),
-            &camera,
+            &camera.observe(),
             size,
             include_auxiliary,
         )?);
