@@ -11,9 +11,11 @@ use rustycad_tkservice::graphic3d::Graphic3dCamera;
 use std::sync::atomic::{AtomicBool, Ordering};
 pub(super) struct CameraArgumentFrustum {
     pub(super) volume: SelectMgrRectangularFrustum,
+    pub(super) getter_probe:
+        SharedState<Option<std::sync::Arc<super::camera_getter_fixture::CameraGetterSetterProbe>>>,
     view: WeakHandle<dyn V3dViewSource>,
     replacement: std::sync::Weak<SharedState<Handle<Graphic3dCamera>>>,
-    armed: AtomicBool,
+    pub(crate) armed: AtomicBool,
     mode: i32,
     pub records: SharedState<[i32; 5]>,
 }
@@ -27,6 +29,7 @@ impl CameraArgumentFrustum {
     ) -> Handle<Self> {
         Handle::new(Self {
             volume: SelectMgrRectangularFrustum::new(),
+            getter_probe: SharedState::new(None),
             view: view.downgrade(),
             replacement: std::sync::Arc::downgrade(replacement),
             armed: AtomicBool::new(true),
@@ -86,6 +89,10 @@ impl SelectMgrBaseIntersector for CameraArgumentFrustum {
         self.volume.scale_and_transform(scale, transform, builder)
     }
     fn set_camera(&self, camera: &dyn HandleReference<Graphic3dCamera>) {
+        let probe = self.getter_probe.read().clone();
+        if let Some(probe) = probe {
+            probe.modify_captured_field(self);
+        }
         if self.armed.swap(false, Ordering::Relaxed) {
             self.replace_caller_camera(camera);
         }

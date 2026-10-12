@@ -1,0 +1,32 @@
+{
+  "occt_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "checked_main_dependency": "e7353fb02",
+  "row_count": 30,
+  "scope": "Three nonvirtual Camera const-field getters only. No full Frame/Pick/classes/constructors completion. Native-valid owner lifetimes retained; Rust-only expired aliases test a safe extension, not dangling C++ references.",
+  "native_runs": "Two byte-identical exact integer CPU runs",
+  "fixture_sha256": "58c30e3a77f5a70eadb2a7954d371972b097825d8bc9b668b321533dfbda18ba",
+  "second_run_uncompressed_sha256": "58c30e3a77f5a70eadb2a7954d371972b097825d8bc9b668b321533dfbda18ba",
+  "second_run_gzip_sha256": "6230358fb7ed31ef7c48a76cb004020931fec7445833b1170af37e1c30a32121",
+  "oracle_executable": "/tmp/martensite-frame-oracle/selectmgr-camera-getters",
+  "oracle_executable_sha256": "5013bf5c5056c6bdde5e0cfc4ae2ef7bb7ccabdf5be970f394ae4d8f31e49c08",
+  "sources": {
+    "tools/oracle/martensite_selectmgr_camera_getters.cxx": "316a4c498d5a919feca62dccf60c0d4f7d2a0a742f8ca6fd027bb30c5bfa6aa5",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_FrustumBuilder.hxx": "21a256ed88f430e1cfe8bb060786cf601dce9f41ffd3b64f873427e752e21845",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseIntersector.hxx": "1d614a9933310b07247d415d7fdb4db27b9ccd3438db5d8684a45fd8229d5e99",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.hxx": "3d27e65092106743071f046b4eab21052d53eefdced55195873ced8ab5be51a2",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_SelectingVolumeManager.cxx": "c6a9a92384fb66e286dda183db53a3531b5aa56395f4be371bac20a41c2ef238",
+    "../OCCT/src/Visualization/TKV3d/SelectMgr/SelectMgr_BaseFrustum.cxx": "644f62dfdbebd53c41a947d5787b29e9a029849ba8ee9bf97071d67871b20334"
+  },
+  "native_library_sha256": {
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKernel.so.8.1.0": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKMath.so.8.1.0": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKService.so.8.1.0": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKG3d.so.8.1.0": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "../RustyCADKernel/target/occt-all-full/lin64/gcc/libi/libTKV3d.so.8.1.0": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24"
+  },
+  "build": "g++ -std=c++17 -O0 against existing pinned SDK; link TKV3d TKService TKMath TKernel, with SDKrpath. No GPU/views/OCCT rebuild/temporary wrappers.",
+  "schema": "kind phase failure aliasCameraCode freshCameraCode originalCameraCode firstCameraCount secondCameraCount originalOwnerCount nextOwnerCount aliasSameOriginalField aliasSameStaticEmptyField aliasSameFreshField. CameraCode0null/1first/2second/3unexpected. Kind0builder/1intersector/2manager/3oldfield fault/4static-null fault; fault kind phase=2*fault+frame.",
+  "configuration": "Actual owned builder/derived rectangular volumes and value manager. Retained aliases across null/A/B assignments, selected-volume retargeting/null/restoration. Manager reference captures original volume field once; static null reference remains stable independent of manager mutation. Named derived setter changes original actual camera field by qualified rectangular body before typedFailure/unrelated/success, then retry via original field or static-null argument. Exact intrusive counters/slot identities.",
+  "rust_storage": "Actual existing camera storage moved into Arc<SharedState> backing, no sidecar or mirror. Weak field alias retains neither object nor camera ownership/lock. Builder opaque return explicitly captures no self borrow; intersector/manager reference type captures one weak actual field or native function-static empty handle.",
+  "comparison": "All30rows/13columns exact. Existing owning camera conveniences remain available but unclaimed. No count subtraction or precomputed state injection."
+}

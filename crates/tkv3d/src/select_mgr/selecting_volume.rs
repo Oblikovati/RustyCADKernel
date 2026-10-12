@@ -142,6 +142,15 @@ impl SelectMgrSelectingVolumeManager {
             .get()
             .map_or_else(Handle::default, |volume| volume.camera())
     }
+    /// Capture the selected volume's camera field once, including the stable native null slot.
+    /// Example: `let old=manager.camera_ref(); manager.init_selecting_volume(&next); assert!(old.is_null());`.
+    pub fn camera_ref(&self) -> SelectMgrCameraFieldReference {
+        let volume = self.active.observe();
+        if volume.is_null() {
+            return SelectMgrCameraFieldReference::empty();
+        }
+        SelectMgrCameraFieldReference::capture(&volume.intersector_base().camera)
+    }
     /// Set the initialized volume's camera; `manager.set_camera(&camera)?`.
     pub fn set_camera(
         &self,
