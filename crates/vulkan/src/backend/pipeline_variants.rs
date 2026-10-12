@@ -8,6 +8,8 @@ pub(super) struct PipelineVariant {
     pub lighting: bool,
     pub surface_texture: bool,
     pub surface_alpha: bool,
+    pub mesh_edges: bool,
+    pub polygon_edges: bool,
     pub surface_blend: bool,
     pub line_blend: bool,
     pub point_blend: bool,
@@ -85,6 +87,8 @@ fn empty_variant(
         lighting: false,
         surface_texture: false,
         surface_alpha: false,
+        mesh_edges: false,
+        polygon_edges: false,
         surface_blend: false,
         line_blend: false,
         point_blend: false,
@@ -131,7 +135,9 @@ impl RasterPipelines {
         })
     }
     pub fn select(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
-        if draw.surface_texture_unavailable.is_some()
+        if draw.polygon_edge_style.is_some()
+            || draw.mesh_edges.is_some()
+            || draw.surface_texture_unavailable.is_some()
             || draw.surface_texture.is_some()
             || draw.surface_cutoff.is_some()
             || draw.surface_forced_blend
@@ -152,6 +158,14 @@ impl RasterPipelines {
     }
     fn select_special(&self, draw: &PrimitiveDraw) -> Result<Arc<DrawPipeline>, RenderError> {
         crate::text_logic::require_text_xor(draw.text_logic_xor, self.runtime.logic_op)?;
+        crate::mesh_edges::require_polygon_lines(
+            draw.polygon_edge_style.is_some(),
+            self.runtime.polygon_lines,
+        )?;
+        crate::mesh_edges::require_mesh_geometry(
+            draw.mesh_edges.is_some(),
+            self.runtime.geometry_shader,
+        )?;
         let index = special_variant_key(draw);
         let mut variants = self
             .special_variants
@@ -174,13 +188,19 @@ fn special_variant_key(draw: &PrimitiveDraw) -> usize {
         + 256 * usize::from(draw.surface_cutoff.is_some())
         + 512 * usize::from(draw.surface_texture_unavailable.is_some())
         + 1024 * (draw.capping_pass as usize)
+        + 8192 * usize::from(draw.mesh_edges.is_some())
+        + 16384 * usize::from(draw.polygon_edge_style.is_some())
+        + 32768 * usize::from(draw.surface_texture_binding_only)
 }
 fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
     let mut kind = PipelineVariant::from_index(variant_index(draw), stencil);
     kind.lighting = draw.lighting.is_some();
-    kind.surface_texture = draw.surface_texture.is_some();
-    kind.surface_alpha =
-        draw.surface_cutoff.is_some() || draw.surface_texture_unavailable.is_some();
+    kind.mesh_edges = draw.mesh_edges.is_some();
+    kind.polygon_edges = draw.polygon_edge_style.is_some();
+    kind.line |= kind.polygon_edges;
+    kind.surface_texture = draw.surface_texture.is_some() && !draw.surface_texture_binding_only;
+    kind.surface_alpha = draw.surface_cutoff.is_some()
+        || (draw.surface_texture_unavailable.is_some() && !draw.surface_texture_binding_only);
     kind.capping = draw.capping_pass;
     kind
 }
@@ -411,3 +431,7 @@ mod xor_tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "pipeline_variant_mesh_tests.rs"]
+mod mesh_tests;

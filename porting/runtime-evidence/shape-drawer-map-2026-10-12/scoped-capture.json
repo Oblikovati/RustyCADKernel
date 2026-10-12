@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "raw_capture_complete": false,
+  "normalized_public_inventory": false,
+  "workspace_library_count": 2,
+  "feature_policy": "all-features per workspace library package",
+  "rustdoc_item_policy": "document-private-items-v1",
+  "rustdoc_json_format_version": 61,
+  "cargo_arguments": [
+    "rustdoc",
+    "--locked",
+    "--package {package}",
+    "--lib",
+    "--all-features",
+    "-Z unstable-options",
+    "-- --document-private-items --output-format json -Z unstable-options"
+  ],
+  "rustdoc_json": [
+    {
+      "package": "rustycad-tkernel",
+      "package_id": "path+file:///home/vmiguel/git/oblikovati-workspace/Martensite-colored-shape-map/crates/tkernel#rustycad-tkernel@0.2.1",
+      "library_target": "rustycad_tkernel",
+      "manifest_path": "crates/tkernel/Cargo.toml",
+      "available_features": [],
+      "feature_selection": "all-features",
+      "package_inputs_sha256": "b134b358d5607ff505a2985ac00ad737b250eb87ab201d43a4922d15491ddde9",
+      "artifact": "crates/rustycad_tkernel.json",
+      "artifact_sha256": "1331f2c1833732e22c66d0a3e4012d2086d5745c55ad33264797fe7a80e52e8a",
+      "artifact_bytes": 20576849,
+      "rustdoc_format_version": 61,
+      "indexed_items": 26835
+    },
+    {
+      "package": "rustycad-tkv3d",
+      "package_id": "path+file:///home/vmiguel/git/oblikovati-workspace/Martensite-colored-shape-map/crates/tkv3d#rustycad-tkv3d@0.2.1",
+      "library_target": "rustycad_tkv3d",
+      "manifest_path": "crates/tkv3d/Cargo.toml",
+      "available_features": [],
+      "feature_selection": "all-features",
+      "package_inputs_sha256": "8d309904251dda008db7a4002c19cb5c1f12a588b0d9a5c11e1593e419fe5c3d",
+      "artifact": "crates/rustycad_tkv3d.json",
+      "artifact_sha256": "9e9657a2f3be4cb0985900a5254a6b264977fb0e205721fcd1a4c7b825569042",
+      "artifact_bytes": 12124736,
+      "rustdoc_format_version": 61,
+      "indexed_items": 15956
+    }
+  ],
+  "inputs": {
+    "workspace_revision": "6f3166f3059f7e982d79731001b09e1ebcb51111",
+    "tool_versions": {
+      "rustc": "rustc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "rustdoc": "rustdoc 1.100.0-nightly (f7575a9da 2026-09-24)\nbinary: rustdoc\ncommit-hash: f7575a9da8e4a4fca3b5668d5a2ea7476db44b3f\ncommit-date: 2026-09-24\nhost: x86_64-unknown-linux-gnu\nrelease: 1.100.0-nightly\nLLVM version: 23.1.1\n",
+      "cargo": "cargo 1.100.0-nightly (98a09e7e7 2026-09-21)\n"
+    }
+  },
+  "scope": "Only TKernel and TKV3d; bounded compiler proof, not whole-workspace capture"
+}

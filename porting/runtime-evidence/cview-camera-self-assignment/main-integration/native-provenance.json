@@ -1,0 +1,38 @@
+{
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-I",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/include/opencascade",
+    "tools/oracle/martensite_cview_camera_self_assignment.cxx",
+    "-L",
+    "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-Wl,-rpath,/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/occt-all-full/lin64/gcc/libi",
+    "-lTKV3d",
+    "-lTKService",
+    "-lTKMath",
+    "-lTKernel",
+    "-lTKG3d",
+    "-lTKBRep",
+    "-o",
+    "target/cview-self-assignment-native/probe"
+  ],
+  "native_binary_sha256": "108c15e3caa176ae43976a948b8bde3d4659d4a3a6be5067a97c1bdc73b0e2b7",
+  "native_library_sha256": {
+    "TKV3d": "f0f526965e64d92bd5e195b7263b8058feb82314c03cf2ff865a54a1466f3c24",
+    "TKService": "ded5e2196dc7dd6a0e09d52374fa539ecb57ab390b3cbfe64bd1e79e9964e600",
+    "TKMath": "238fe097712cb09542a070e10bbfb4eeb5cec22b473cdddee11447ea1143017a",
+    "TKernel": "6575d53be6c11be01f35ffe469b45bcd1ebada2d4a49ffb26ac286f6a53aaea9",
+    "TKG3d": "c9111e32baae91c7c1203f946bf9088d9dd272bd15c53e582e5ff06c680f210c",
+    "TKBRep": "f7a0784c7a1286953ea4ca4539c00fd6be9ff5ce1a679e983619dee688664d5d"
+  },
+  "native_header_sha256": {
+    "V3d_View.hxx": "c13418252b29597572643d3cb966148c6e5b4cd1cc1a111041f2b4f5158bc05b",
+    "Graphic3d_CView.hxx": "c8f3b05d3b4093a333e51a08a58dfeae745879cd303e54d3cdcbd7c4ed85b6e2",
+    "Standard_Handle.hxx": "e26a8c1c522e812b565fa5ebe1a5c8ea34f106b63701dd995dea95be4b0139eb"
+  },
+  "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "actual_native_rebuilt_and_repeated": true,
+  "native_fixture_byte_identical": true
+}

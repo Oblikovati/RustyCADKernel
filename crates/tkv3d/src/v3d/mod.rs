@@ -85,3 +85,14 @@ pub fn v3d_bad_value(message: &str) -> Failure {
 pub fn v3d_un_mapped(message: &str) -> Failure {
     Failure::with_type("V3d_UnMapped", message, "")
 }
+
+mod subview_sequence_reference;
+pub use subview_sequence_reference::{V3dSubviewCursor, V3dSubviewNodeRef};
+#[cfg(test)]
+mod subview_sequence_reference_tests;
+
+mod subview_sequence_field;
+pub use subview_sequence_field::V3dSubviewSequenceRef;
+
+#[cfg(test)]
+mod subview_sequence_field_tests;

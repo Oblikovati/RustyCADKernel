@@ -2,9 +2,19 @@
 #extension GL_GOOGLE_include_directive : require
 #define MARTENSITE_FRAGMENT
 #define MARTENSITE_SURFACE_FAMILY
-layout(push_constant) uniform Transform {mat4 clip;float cutoff;uint flags;} transform;
+layout(push_constant) uniform Transform {
+    mat4 clip;float cutoff;uint flags;
+#ifdef MARTENSITE_MESH_EDGES
+    layout(offset=80) vec4 edgeColor;
+    layout(offset=96) float edgeWidth;
+    layout(offset=100) float edgeFeather;
+#endif
+} transform;
 layout(location=0) in vec4 vertexColor;
 layout(location=7) in vec4 surfaceUV;
+#ifdef MARTENSITE_MESH_EDGES
+layout(location=8) in vec3 edgeDistance;
+#endif
 #ifdef MARTENSITE_SURFACE_TEXTURE
 #ifdef MARTENSITE_LIGHTING
 #define MARTENSITE_SURFACE_SET 2
@@ -48,6 +58,11 @@ void main() {
     discardClippedFragment();
 #endif
     outColor=sampledSurfaceColor();
+#ifdef MARTENSITE_MESH_EDGES
+    float distance=min(min(edgeDistance.x,edgeDistance.y),edgeDistance.z);
+    float interior=smoothstep(transform.edgeWidth-transform.edgeFeather*0.5,transform.edgeWidth+transform.edgeFeather*0.5,distance);
+    outColor=transform.edgeColor.a<0.0?vec4(outColor.rgb,1.0-interior):mix(transform.edgeColor,outColor,interior);
+#endif
     // Surface masking uses native strict comparison; glyph cutoff remains <= in its independent shader.
     if ((transform.flags&8u)!=0u&&outColor.a<transform.cutoff) discard;
 }

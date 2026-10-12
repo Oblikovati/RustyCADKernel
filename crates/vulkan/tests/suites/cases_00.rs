@@ -81,6 +81,8 @@ pub mod texture_coordinate_updates;
 pub mod texture_dependencies_replay;
 #[path = "../transform_persistence.rs"]
 pub mod transform_persistence;
+#[path = "../triangle_edge_replay.rs"]
+pub mod triangle_edge_replay;
 #[path = "../view_culling.rs"]
 pub mod view_culling;
 #[path = "../viewer_integration.rs"]

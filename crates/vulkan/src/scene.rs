@@ -92,6 +92,7 @@ impl RenderFrame {
         }
         let (mut draws, layers) = flatten_layers(layers);
         crate::texture_coordinate_frame::resolve_ordered_texture_coordinates(&mut draws)?;
+        crate::retained_mesh_edges::resolve_edge_background(&mut draws, clear_color);
         validate_extent(width, height)?;
         if !clear_color.iter().all(|v| v.is_finite()) {
             return Err(rejected(clear_color, "finite clear color"));

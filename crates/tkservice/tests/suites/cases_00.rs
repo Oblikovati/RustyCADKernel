@@ -5,6 +5,8 @@ pub mod aspect_grid_bounds_test;
 pub mod aspect_grid_params_test;
 #[path = "../aspect_xr_test.rs"]
 pub mod aspect_xr_test;
+#[path = "../cview_camera_self_assignment.rs"]
+pub mod cview_camera_self_assignment;
 #[path = "../font_platform_runtime.rs"]
 pub mod font_platform_runtime;
 #[path = "../font_test.rs"]

@@ -1,0 +1,20 @@
+{
+  "project": "Martensite",
+  "occt_revision": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "original_main": "58ba706d58ed4b066da2dd17d6f84bc4d3dd3f3f",
+  "original_source_sha256": "1d1890f65facf95197882329f708d94aacaab5aaa01c218b61c07d48b84e071d",
+  "fixed_source_sha256": "b130a2540d712d3d44cdfeca4808d2e65b461793ee2145a1b0586f86449194c1",
+  "cause": "Method-call receiver is evaluated before arguments: active_views.append(view.clone_handle()) holds the same viewer write guard while the native defined-node reference rereads viewer storage. Acquire the genuine argument before append; move the same single owned handle into the list.",
+  "minimized_reproduction": "One defined mapped view, zero lights; original aggregate activation times out after3seconds.",
+  "native_generator": "tools/oracle/martensite_viewer_activation_alias.cxx",
+  "native_generator_sha256": "e2fe8c509130cbba132830b27b8df6f1be29db2b90f7a570c6b1487510895ea2",
+  "shared_generator_sha256": "7da26e492cf4e9f8ba13d484fd41b48d453fdac1e08df10f01caa8d8faccf7a9",
+  "native_fixture": "crates/tkv3d/tests/fixtures/viewer-activation-alias-native.txt",
+  "native_fixture_sha256": "d3b1d9efcda8b00bd767c0faec4e49b6f04a7ca820ec8cbbf92d61ae78230f5b",
+  "native_runs": 2,
+  "native_byte_repeatable": true,
+  "native_records": 3,
+  "all_target_tests_passed": 784,
+  "class_credit": false,
+  "set_view_on_status": "partial: full live-light callback proof remains separate"
+}

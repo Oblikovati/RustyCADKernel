@@ -51,7 +51,7 @@ fn nonfinite_or_out_of_range_material_opacity_is_rejected() {
     }
 }
 #[test]
-fn translucent_lighting_cannot_enter_nodal_pipelines() {
+fn native_line_diffuse_opacity_preserves_ordered_nodal_submission() {
     let line = PrimitiveDraw::segments(
         vec![RenderVertex::new([0.; 3], [1.; 4]); 3],
         vec![0, 1],
@@ -59,7 +59,9 @@ fn translucent_lighting_cannot_enter_nodal_pipelines() {
         LineStyle::new(1., 0xffff, 1).unwrap(),
     )
     .unwrap();
-    assert!(line.with_lighting(opacity_state(0.5, 1.).unwrap()).is_err());
+    let draw = line.with_lighting(opacity_state(0.5, 1.).unwrap()).unwrap();
+    assert!(!draw.is_surface_blended());
+    assert_eq!(draw.lighting().unwrap().material.common[0].diffuse[3], 0.5);
 }
 #[test]
 fn translucent_caps_retain_lighting_and_allow_explicit_alpha_pass_selection() {

@@ -1,5 +1,7 @@
 //! Actual section planes select retained images and native cap alpha policies.
 use super::{scene, scene::ViewerScene, texture_scene::texture_handle};
+#[path = "capping_edge_boundaries.rs"]
+mod edge_boundaries;
 #[path = "capping_scene.rs"]
 mod section_geometry;
 use martensite_vulkan::Graphic3dRenderDriver;
@@ -29,14 +31,19 @@ impl CappingTextureScene {
         planes.append(plane.clone());
         scene.view.set_clip_planes(&planes);
         scene.structure.calculate_bound_box();
-        Self {
+        let fixture = Self {
             scene,
             plane,
             texture,
-        }
+        };
+        edge_boundaries::install_cap_edge_boundary(&fixture, mode);
+        fixture
     }
     pub fn mutate(&self, mode: &str) {
         refresh_cap_fixture_content(self, mode);
+        if mode.contains("line-synchronized") {
+            self.scene.group.synchronize_aspects();
+        }
         if mode.contains("sampler-updated") {
             self.texture
                 .get_params()

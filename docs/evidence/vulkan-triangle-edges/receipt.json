@@ -1,0 +1,102 @@
+{
+  "feature": "Martensite retained triangle edges, mapped-line bindings and shared aspect readiness",
+  "upstream_commit": "3d097a0328e71b826377d4814ab05ec3c3d23871",
+  "base_head": "de2731d2effe2f0b5c617b47b2de80458ed1a931",
+  "source_manifest": "frozen-source-hashes.json.gz",
+  "source_manifest_sha256": "28a8674f975ce78dd7a492c240bf29353d24be04fd148ff212bb1e93f73c0b0a",
+  "source_count": 12674,
+  "performance_binary_sha256": "22ec57350a82f0e622e5d746b540f0a3c32471776c320f6e45355e17e6d1ac14",
+  "tests": {
+    "rust_per_device": 422,
+    "rust_executables_per_device": 58,
+    "strict_edge_line_cases_per_device": 37,
+    "strict_shared_cap_cases_per_device": 4,
+    "bounded_python": 32,
+    "clippy": "passed -D warnings",
+    "bounded_format": "passed",
+    "canonical_discovery": "passed",
+    "spirv": "all existing and new checked"
+  },
+  "functional": {
+    "native_commands": 224,
+    "vulkan_commands": 112,
+    "all_commands_exit": 0,
+    "native_repeat_pairs_exact": 112,
+    "software_broad_strict_cases": "55/56",
+    "host_broad_strict_cases": "37/56",
+    "all_broad_depth_cases_within_1e_6": 112
+  },
+  "remaining_diagnostics": {
+    "same_pass_host_channel_differences_max": 1,
+    "software_perspective_channel_difference_max": 1,
+    "host_even_width_polygon_coverage": "polygon-resolution-144",
+    "patterned_cap_host_depth_max": 2.205371856689453e-06,
+    "configured_native_software_fill_only_depth": {
+      "count": 62,
+      "native": 0,
+      "vulkan": 0.2525252401828766,
+      "classification": "retained explicit configured-native GL discrepancy; no depth manufacture"
+    }
+  },
+  "performance": {
+    "status": "completed with source/binary bookends",
+    "workloads_per_device": 35,
+    "warmup_per_workload": 20,
+    "samples_per_workload": 100,
+    "validation": false,
+    "baseline_accepted": false,
+    "results": [
+      {
+        "profile": "software",
+        "exit": 0,
+        "device": "llvmpipe (LLVM 20.1.2, 128 bits)",
+        "workloads": 35,
+        "raw_samples": 3500,
+        "median_range_ms": [
+          0.1473025,
+          0.5172565
+        ],
+        "before_load": "2.80 2.90 3.91 2/4952 410935",
+        "after_load": "3.06 2.95 3.92 2/4952 411108",
+        "tracked_process_overlap": false,
+        "source_and_binary_unchanged": true,
+        "report": "performance-software.json.gz",
+        "baseline_accepted": false
+      },
+      {
+        "profile": "host",
+        "exit": 0,
+        "device": "AMD Radeon 8060S Graphics (RADV STRIX_HALO)",
+        "workloads": 35,
+        "raw_samples": 3500,
+        "median_range_ms": [
+          0.19279649999999998,
+          0.540996
+        ],
+        "before_load": "3.06 2.95 3.92 1/4950 411144",
+        "after_load": "3.06 2.95 3.92 4/4973 411211",
+        "tracked_process_overlap": false,
+        "source_and_binary_unchanged": true,
+        "report": "performance-host.json.gz",
+        "baseline_accepted": false
+      }
+    ],
+    "total_raw_samples": 7000
+  },
+  "unsupported_paths": [
+    "textured cap edges",
+    "existing unsupported interior styles/custom shaders/PBR/non-standard textures/point surface textures",
+    "whole fixed-function lighting not claimed"
+  ],
+  "api_completion_claims": 0,
+  "raw_index": "raw-index.json.gz",
+  "raw_special_cases": {
+    "original_no_offset_zero_depth": "raw/cap-boundaries/comparison.json.gz; corrected Off control in raw/final-offset-policy/comparison.json.gz",
+    "configured_native_fill_only_zero_depth": "raw/final-offset-policy/comparison.json.gz (native zero, Vulkan finite)",
+    "initial_bad_static_control": "raw/checks/polygon-static-bias-control.log.gz: rejected due validation error; corrected static control raw/checks/polygon-valid-static-control.log.gz",
+    "initial_negative_alpha_guard": "raw/expanded/first-expanded-comparison.json.gz; corrected final-matrix both profiles exact",
+    "initial_factory_bounds_error": "raw/expanded/native-commands.json.gz records eight invalid zero-capacity bound failures; corrected real protected constructor repeat proof final-matrix",
+    "matrix_precision": "raw/final-matrix/comparison.json.gz"
+  },
+  "evidence_includes_worktrees_or_executables": false
+}

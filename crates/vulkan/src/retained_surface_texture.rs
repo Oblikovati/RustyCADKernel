@@ -28,7 +28,7 @@ pub(crate) fn apply_surface_texture(
     if !aspects.to_map_texture()
         || draws
             .iter()
-            .all(|draw| draw.topology() != crate::PrimitiveTopology::Triangles)
+            .all(|draw| draw.topology() == crate::PrimitiveTopology::Points)
     {
         return Ok(());
     }
@@ -38,6 +38,7 @@ pub(crate) fn apply_surface_texture(
     for draw in draws {
         style.validate(draw.vertices.len())?;
         draw.surface_texture = Some(style.clone());
+        draw.surface_texture_binding_only = draw.topology() == crate::PrimitiveTopology::Lines;
     }
     Ok(())
 }
@@ -62,6 +63,7 @@ fn apply_unavailable_surface_texture(
     };
     for draw in draws {
         draw.surface_texture_unavailable = Some(unavailable.clone());
+        draw.surface_texture_binding_only = draw.topology() == crate::PrimitiveTopology::Lines;
     }
     Ok(())
 }
@@ -75,7 +77,11 @@ fn retained_surface_style(
         return Ok(None);
     };
     validate_texture_family(texture, &**aspects)?;
-    let Some(image) = context.group.texture_images.snapshot(&handle)? else {
+    let image = context
+        .group
+        .aspect_textures
+        .snapshot(aspects, &context.group.texture_images)?;
+    let Some(image) = image else {
         return Ok(None);
     };
     complete_surface_style(image, primitive, aspects, context).map(Some)

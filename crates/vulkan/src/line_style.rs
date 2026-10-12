@@ -11,7 +11,7 @@ pub(crate) fn primitive_style(
         let style = aspects
             .get()
             .ok_or_else(|| rejected("null point aspects", "explicit Graphic3d aspects"))?;
-        validate_line_shading(style)?;
+        validate_line_shading(style, false)?;
         return Ok((rgba_color(style), None));
     }
     if !matches!(
@@ -23,7 +23,7 @@ pub(crate) fn primitive_style(
     let style = aspects
         .get()
         .ok_or_else(|| rejected("null line aspects", "explicit Graphic3d aspects"))?;
-    validate_line_shading(style)?;
+    validate_line_shading(style, true)?;
     line_parameters(style)
 }
 
@@ -40,11 +40,14 @@ fn line_parameters(
     Ok((rgba, Some(line)))
 }
 
-fn validate_line_shading(style: &dyn Graphic3dAspectsSource) -> Result<(), RenderError> {
-    if style.to_map_texture() || !style.shader_program().is_null() {
+fn validate_line_shading(
+    style: &dyn Graphic3dAspectsSource,
+    ignores_surface_sampler: bool,
+) -> Result<(), RenderError> {
+    if (style.to_map_texture() && !ignores_surface_sampler) || !style.shader_program().is_null() {
         return Err(rejected(
             (style.to_map_texture(), !style.shader_program().is_null()),
-            "untextured built-in line shading",
+            "built-in line shader without sampling surface textures; unmapped point aspect",
         ));
     }
     Ok(())
