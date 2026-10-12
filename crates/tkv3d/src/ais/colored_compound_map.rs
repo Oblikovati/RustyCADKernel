@@ -21,6 +21,8 @@ pub struct AisColoredDrawerCompounds {
     // Native BaseMap resets Size after unlocked key/value destruction, not when payload is detached.
     extent: AtomicUsize,
 }
+/// Native protected `DataMapOfDrawerCompd` specialization; `let groups = AisColoredShapeDrawerCompounds::default();`.
+pub type AisColoredShapeDrawerCompounds = AisColoredDrawerCompounds;
 impl AisColoredDrawerCompounds {
     /// Read native one-based index extent; `map.len()`.
     pub fn len(&self) -> usize {

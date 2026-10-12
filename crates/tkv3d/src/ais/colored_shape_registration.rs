@@ -41,7 +41,7 @@ pub use colored_shape::{
 };
 pub use colored_shape_members::AisColoredShapeMembers;
 mod colored_shape_object;
-pub use colored_shape_object::AisColoredShape;
+pub use colored_shape_object::{AisColoredShape, AisColoredShapeParent};
 #[cfg(test)]
 mod colored_shape_owner_tests;
 mod shape_reference;
@@ -64,7 +64,7 @@ mod colored_compound_node;
 mod colored_compound_references;
 mod colored_compound_value;
 mod colored_shape_copy_appearance;
-pub use colored_compound_map::AisColoredDrawerCompounds;
+pub use colored_compound_map::{AisColoredDrawerCompounds, AisColoredShapeDrawerCompounds};
 pub use colored_compound_references::AisColoredCompoundRef;
 #[cfg(test)]
 mod colored_compound_drop_probe;

@@ -7,6 +7,8 @@ use rustycad_tkernel::standard::HandleReference;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkservice::graphic3d::Graphic3dMaterialAspect;
 use rustycad_tkservice::graphic3d::Graphic3dStructureSource;
+/// Genuine native parent interface; `let parent: Handle<AisColoredShapeParent> = object.cast();`.
+pub type AisColoredShapeParent = dyn AisShapeSource;
 /// Native per-subshape appearance owner; `let object=AisColoredShape::new(&shape);`.
 pub struct AisColoredShape {
     transient: StandardTransient,

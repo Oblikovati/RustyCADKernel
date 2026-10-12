@@ -93,6 +93,8 @@ pub mod colored_shape_selection;
 pub mod colored_shape_selection_failure;
 #[path = "../colored_shape_tessellate.rs"]
 pub mod colored_shape_tessellate;
+#[path = "../colored_shape_type_aliases.rs"]
+pub mod colored_shape_type_aliases;
 #[path = "../computed_structure_rtti.rs"]
 pub mod computed_structure_rtti;
 #[path = "../dsg_prs_xyz_axis.rs"]
