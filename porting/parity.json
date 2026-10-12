@@ -506239,9 +506239,30 @@
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Attributes",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ArrayOfPrimitives.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::attributes",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::attributes_ref",
       "status": "implemented",
-      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe. Checked 2026-10-12: native const-handle getters bind actual *_ref members instead of owning convenience copies. Three pinned native rows prove real field identity, optional null buffers and unchanged intrusive counts; group dispatch forwards those fields directly. Root toolkit and both-device Vulkan gates are recorded in porting/runtime-evidence/array-buffer-reference-2026-10-12; classes remain partial.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::attributes_ref",
+          "declaration_sha256": "0f3f0687c9dde3e98058bfae85c2e9267cdddf0ff410a290e0fa27560688bf4a",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dArrayOfPrimitives",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::array_of_primitives::Graphic3dArrayOfPrimitives"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Type",
@@ -506623,9 +506644,30 @@
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Indices",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ArrayOfPrimitives.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::indices",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::indices_ref",
       "status": "implemented",
-      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe. Checked 2026-10-12: native const-handle getters bind actual *_ref members instead of owning convenience copies. Three pinned native rows prove real field identity, optional null buffers and unchanged intrusive counts; group dispatch forwards those fields directly. Root toolkit and both-device Vulkan gates are recorded in porting/runtime-evidence/array-buffer-reference-2026-10-12; classes remain partial.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::indices_ref",
+          "declaration_sha256": "672f5f3c9be1a675cdbeedd14799d33bb278f0435a846f7edc8af4bcb6b612b4",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dArrayOfPrimitives",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::array_of_primitives::Graphic3dArrayOfPrimitives"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Graphic3d_ArrayOfPrimitives::EdgeNumber",
@@ -506767,9 +506809,30 @@
       "upstream_id": "Graphic3d_ArrayOfPrimitives::Bounds",
       "toolkit": "TKService",
       "source": "src/Visualization/TKService/Graphic3d/Graphic3d_ArrayOfPrimitives.hxx",
-      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::bounds",
+      "rust_item": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::bounds_ref",
       "status": "implemented",
-      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe."
+      "notes": "Graphic3d primitive array mapping (visualization-design.md section 1): the buffers keep the native byte layout (interleaved vertices, 16- or 32-bit indices, bound colors then counts) behind the handle's shared lock, with pointers as byte offsets; Graphic3d_Buffer is the trait Graphic3dBufferSource (its virtuals) over Graphic3dBufferBase, with the non-virtual members in Graphic3dBufferMembers; the array classes embed Graphic3dArrayOfPrimitives and reach its members through Deref; the Raise_if checks are active in the oracle build and return Standard_OutOfRange or Standard_TypeMismatch with the value; the bytes, indices, bounds and read-back values of scripted arrays of every type and flag set are compared by the sv_array native probe. Checked 2026-10-12: native const-handle getters bind actual *_ref members instead of owning convenience copies. Three pinned native rows prove real field identity, optional null buffers and unchanged intrusive counts; group dispatch forwards those fields directly. Root toolkit and both-device Vulkan gates are recorded in porting/runtime-evidence/array-buffer-reference-2026-10-12; classes remain partial.",
+      "rust_kind": "function",
+      "rust_declaration_selectors": [
+        {
+          "path": "rustycad_tkservice::graphic3d::Graphic3dArrayOfPrimitives::bounds_ref",
+          "declaration_sha256": "9554025d8b958e7d568da9d9756811c74be4c49f68b5ad29dbecdc311b3f83d9",
+          "impl_context": {
+            "for": {
+              "resolved_path": {
+                "args": null,
+                "path": "super::Graphic3dArrayOfPrimitives",
+                "resolved_item_path": "rustycad_tkservice::graphic3d::array_of_primitives::Graphic3dArrayOfPrimitives"
+              }
+            },
+            "generics": {
+              "params": [],
+              "where_predicates": []
+            },
+            "trait": null
+          }
+        }
+      ]
     },
     {
       "upstream_id": "Graphic3d_ArrayOfPrimitives::HasBoundColors",
@@ -574346,20 +574409,20 @@
       "source": "src/Visualization/TKV3d/SelectMgr/SelectMgr_AxisIntersector.hxx",
       "source_sha256": "7f17cb36dab5d3cdbea0ea1abc7c372347eaa1eaa2204c79cfd514ebc1641c82",
       "cpp_declaration_id": "76dc23b39865f682038112e3d4f6c7bad71f68d21660ec10c08c04bcedb30b66",
-      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector>::set_camera",
+      "rust_item": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::set_camera",
       "status": "implemented",
       "notes": "AxisIntersector at OCCT 3d097a0: native initialization failures, no-op configuration, identity-form reset versus transformed copies, inherited RTTI with separate Rust interface casters, fallible geometric getters, protected ray/linear helpers and all clipped picks. Ten direct axis tests, three generic handle regression tests, and 22213 additional native comparisons cover miss/success output mutation, polygon plane-only interior, triangle branches, local quadric depths, sphere root ordering, construction failures and DumpJson class name independent of RTTI. Empty destructor uses ordinary Rust field destruction and is not claimed as a callable function. See docs/v3d-design.md section 6 and docs/geom-design.md section 2. Martensite isolated borrowed camera-argument update: six native exact count/alias/fault/retry rows plus real geometry delegation; genuine HandleReference arguments and typedFailure transport. Getter copies and full classes/Frame remain partial. See docs/selecting-volume-camera-references.md.",
       "rust_kind": "function",
       "rust_declaration_selectors": [
         {
-          "path": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector>::set_camera",
-          "declaration_sha256": "786f770d7219957b778166bcd272270e0a33d98c35589af73c99849a4cea7110",
+          "path": "rustycad_tkv3d::select_mgr::SelectMgrAxisIntersector::<rustycad_tkv3d::select_mgr::SelectMgrBaseIntersector>::set_camera",
+          "declaration_sha256": "6d1f6d79cc4f422f7dbf8c746226cc813cd6ce055eacb2c95a887e22fd89c684",
           "impl_context": {
             "for": {
               "resolved_path": {
+                "args": null,
                 "path": "SelectMgrAxisIntersector",
-                "resolved_item_path": "rustycad_tkv3d::select_mgr::axis_intersector::SelectMgrAxisIntersector",
-                "args": null
+                "resolved_item_path": "rustycad_tkv3d::select_mgr::axis_intersector::SelectMgrAxisIntersector"
               }
             },
             "generics": {
@@ -574367,9 +574430,9 @@
               "where_predicates": []
             },
             "trait": {
+              "args": null,
               "path": "SelectMgrBaseIntersector",
-              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector",
-              "args": null
+              "resolved_item_path": "rustycad_tkv3d::select_mgr::base_intersector::SelectMgrBaseIntersector"
             }
           }
         }
