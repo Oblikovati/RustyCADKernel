@@ -113,7 +113,8 @@ fn textured_volume_compound() -> Result<Shape, Failure> {
     )
 }
 
-fn textured_box_volume(mesh: bool, closed: bool) -> Result<Shape, Failure> {
+/// Use real primitive topology and optional meshing; `textured_box_volume(true,false)?`.
+pub fn textured_box_volume(mesh: bool, closed: bool) -> Result<Shape, Failure> {
     let mut builder = BRepPrimAPIMakeBox::from_sizes(2., 3., 4.)?;
     let solid = builder.solid()?;
     if mesh {

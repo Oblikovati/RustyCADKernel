@@ -131,6 +131,8 @@ pub mod textured_shape_deviation;
 pub mod textured_shape_presentation_append;
 #[path = "../textured_shape_state.rs"]
 pub mod textured_shape_state;
+#[path = "../textured_shape_tessellate.rs"]
+pub mod textured_shape_tessellate;
 #[path = "../textured_shape_transparency.rs"]
 pub mod textured_shape_transparency;
 #[path = "../textured_shape_volumes.rs"]

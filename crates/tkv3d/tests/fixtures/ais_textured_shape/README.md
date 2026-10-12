@@ -27,6 +27,9 @@ texture and virtual-dispatch implementations.
   native unordered `infinity - infinity` comparison and auto-triangulation guard.
 - `native-triangles.txt`: actual BRep face/mesh handles, optional surface/normals,
   reversed orientation and mirrored location, native normal/UV/index arrays.
+- `native-tessellate.txt`: actual registered meshing factory execution over real
+  boxes, exact absolute/relative deflection storage and skip behavior for complete
+  meshes and null shapes. Rust replay uses the actual Martensite mesh factory.
 - `native-volumes.txt`: actual located/reversed compound and compsolid traversal,
   one-dimensional filtering, real boxes meshed by the native/Martensite mesh
   implementations, and the distinct solid/shell closure and triangulation rules.
