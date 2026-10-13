@@ -136,7 +136,45 @@ jobs:
         run: python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
       - name: Select the installed software Vulkan ICD
         run: echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
-      - run: cargo test -p martensite-vulkan --all-targets --locked
+      - name: Run the original cold Vulkan gate
+        id: vulkan_gate
+        shell: bash
+        run: |
+          mkdir -p target/vulkan-gate
+          printf 'Martensite original gate revision: %s\n' "$(git rev-parse HEAD)" > target/vulkan-gate/gate.log
+          printf 'Martensite original gate command: cargo test -p martensite-vulkan --all-targets --locked\n' >> target/vulkan-gate/gate.log
+          set +e
+          set -o pipefail
+          cargo test -p martensite-vulkan --all-targets --locked 2>&1 | tee -a target/vulkan-gate/gate.log
+          gate_status=${PIPESTATUS[0]}
+          printf '%s\n' "$gate_status" > target/vulkan-gate/gate.exit
+          exit "$gate_status"
+      # Current orchestration tools must not come from an older source_ref release tag.
+      - name: Check out post-failure observation tools
+        if: ${{ failure() && steps.vulkan_gate.outcome == 'failure' }}
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: diagnostic-tools
+          persist-credentials: false
+      - name: Record the original failed gate without rerunning it
+        if: ${{ failure() && steps.vulkan_gate.outcome == 'failure' }}
+        run: |
+          python3 diagnostic-tools/tools/diagnose_current_vulkan.py --root . --output target/vulkan-gate/evidence --revision "$(git rev-parse HEAD)" --phase record --gate-log target/vulkan-gate/gate.log --gate-exit target/vulkan-gate/gate.exit
+      - name: Install observation tools after the failed cold gate
+        if: ${{ failure() && steps.vulkan_gate.outcome == 'failure' }}
+        run: sudo apt-get install -y vulkan-tools
+      - name: Capture post-failure driver identities and raw strict controls
+        if: ${{ failure() && steps.vulkan_gate.outcome == 'failure' }}
+        run: |
+          python3 diagnostic-tools/tools/diagnose_current_vulkan.py --root . --output target/vulkan-gate/evidence --revision "$(git rev-parse HEAD)" --phase observe
+      - name: Upload the original failed gate and subsequent evidence
+        if: ${{ always() && steps.vulkan_gate.outcome == 'failure' }}
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: vulkan-cold-gate-failure
+          path: target/vulkan-gate
+          if-no-files-found: error
       - run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example offscreen_acceptance --locked
       - name: Validate opaque lighting and clipped lighting on lavapipe
         run: xvfb-run -a -s "-screen 0 1280x1024x24" cargo run -p martensite-vulkan --example lighting_acceptance --locked
