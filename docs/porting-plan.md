@@ -6,6 +6,13 @@ coverage; toolkit notes and runtime receipts record behavioral evidence.
 
 ## Current priorities
 
+User decision, 2026-10-13: raise critical kernel dependencies that block the
+Oblikovati application port above broader feature expansion. The
+[application blocker queue](application-blockers.md) defines the immediate work
+and its acceptance gates. Keep existing visualization regression coverage and
+unfinished work; this changes scheduling, not scope, release authorization, or
+verification standards.
+
 User decision, 2026-10-12: APIs explicitly marked deprecated or obsolete by OCCT
 do not require new ports. Keep existing implementations for now and record
 declaration-specific upstream evidence for exclusions. See the
@@ -22,7 +29,8 @@ Windows/macOS testing. Run the affected toolkit suites locally; rendering change
 retain local lavapipe and native-host functional captures and performance checks.
 Existing Linux CI remains enabled. New porting work is kept local: user decision
 on 2026-10-11, stop pushing to the remote. Integrate into local `main`, test locally,
-and delete completed merged worktrees and branches. Deferred platform checks remain part of eventual
+and delete completed merged worktrees and branches. Deferred platform checks
+remain part of eventual
 validation and do not remove APIs or behavior from the defined porting scope.
 
 User decision, 2026-10-11: parallel porting uses at most six agents, including
@@ -34,145 +42,21 @@ for Martensite DWG format support through a Martensite-owned adapter. See the
 [DWG backend decision](adr/0001-use-acadrust-for-dwg.md). Implement this with the
 exchange-format work that follows the visualization and Vulkan renderer priorities.
 
-1. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
+1. Resolve the critical [application blockers](application-blockers.md): prepare
+   the accepted spline and predicate extensions for tested release, prove the
+   general analytic sketch-region-to-solid path, and certify edit incidences.
+   Use the named consumer and acceptance gate to size each slice.
+2. Keep the integrated TKV3d AIS selection/highlighting behavior covered, including
    camera-dependent selection, native comparisons and regression tests.
-2. Continue Martensite's Vulkan renderer through the existing Graphic3d interfaces.
-   Match the legacy OCCT OpenGL renderer's capabilities using Vulkan 1.3; keep
-   additional renderer features outside the current scope. Build a tested offscreen
-   rendering path before broadening unrelated porting. The initial offscreen path
-   now runs through V3d views and AIS display/erase presentations. AIS lifecycle,
-   bulk and selected-object transitions, removal, status queries and per-view affinity
-   have native comparisons. Structure/group transform persistence is integrated as
-   partial. The 34 native AMD capture differences are traced to rasterizer precision
-   ([controlled evidence](vulkan-raster-precision.md)); retain the raw failures and
-   separate diagnostic gate before claiming bitwise parity or accepting its timing
-   baseline. Segments/polylines, widths and shader patterns now reach Vulkan;
-   [line evidence](vulkan-lines.md) records remaining gradient/depth parity gaps
-   and the new performance workload. The [standard curve presentation family](stdprs-curve.md)
-   now supplies all eight Add/Match overloads, native numeric comparisons and
-   GPU/performance fixtures. [AIS_Line](ais-line.md) now consumes this path, with
-   live appearance, unit-aware selection and GPU/performance coverage. User decision
-   on 2026-10-10: defer the two AMD infinite-line pixel-row differences as known
-   special cases; keep their evidence and continue feature work. [AIS_Point](ais-point.md)
-   now adds live point datums, native selection and a batched Vulkan sprite path
-   with functional and performance coverage. Point raster/color parity remains partial.
-   [Vulkan text](vulkan-text.md) now renders retained font glyphs and oriented labels;
-   [Shadow text](vulkan-shadow-text.md), [retained text face culling](vulkan-text-culling.md),
-   [Subtitle backgrounds](vulkan-subtitle-text.md), and [Decal outlines](vulkan-decal-text.md)
-   are integrated with native
-   fixtures, both-device captures and optimized workloads. Strict text raster
-   parity and broader text capabilities remain partial. [Blend/XOR](vulkan-blend-text.md)
-   adds real logic operations and explicit native pixel text, with quantified color
-   conversion/raster limitations retained.
-   [AIS_Axis and labeled axis presentations](ais-axis.md) now add coordinate datums,
-   native selection snapshots and inherited text-aspect rendering.
-   [Plane presentation builders](plane-presentations.md) now preserve native edges,
-   isolines, normal arrows and datum polygon submissions. [AIS plane datums](ais-plane.md)
-   add native geometry, cached triangulation selection, size/color ownership and minimum
-   persistence. Vulkan quadrangle lowering, unordered surface blending, device captures
-   and plane-update timings are integrated. Strict raster/depth and timing gates remain
-   open; the unsafe upstream XYZ constructor is explicitly partial.
-   [Plane trihedrons](ais-plane-trihedron.md) now add labeled XY frames, child-owner
-   selection, native comparisons and geometry-update performance coverage.
-   [Native X11 presentation](vulkan-window-presentation.md) now adds swapchains,
-   resize/rebind/remap checks, actual window captures and presentation timings.
-   [Circle datums and adaptive deflection curves](ais-circle.md) add circular/arc
-   construction geometry, filled/boundary selection and live geometry-update workloads.
-   [Retained clipping](vulkan-clipping.md) adds live plane chains, persistent-anchor
-   and bounding-box policy, view frustum culling, native capture controls and a
-   measured plane-update workload. [Homogeneous vertex input](vulkan-homogeneous-vertices.md)
-   preserves full position weights for the infinite planes needed by capping.
-   [Stencil capping](vulkan-capping.md) now builds closed-group masks and infinite
-   section surfaces, including native chain, instance and persistence policy.
-   Opaque Phong-family section materials now share live material/light extraction;
-   textures, custom section shaders and strict clipping-boundary parity remain open.
-   [Shader material records](vulkan-materials.md) now match native coefficient
-   packing. [Opaque Phong-family lighting](vulkan-lighting.md) now adds live normals,
-   directional/point/spot/head lights, front/back materials and clipped shaders;
-   strict native capture and performance gates remain open.
-   [AIS animation timelines](v3d-design.md#ais-animation-timelines) now provide
-   native child scheduling and timer lifecycle. [Camera animation](v3d-design.md#ais-camera-animation)
-   adds live camera interpolation and deferred redraw. [Object animation](v3d-design.md#ais-object-animation)
-   adds exact local transformation interpolation, context selection updates and
-   immediate-layer Z-fit invalidation with native and GPU/performance fixtures.
-   [Ordered group flipping](vulkan-group-flipping.md) now preserves annotation
-   brackets, live orientation, lighting/clipping transforms and native cap filtering.
-   [AIS text labels](ais-text-label.md) add native font-measured annotation placement,
-   sensitive rectangles, retained aspect changes and viewer persistence transitions.
-   [Point clouds](ais-point-cloud.md) now preserve aliased/copied buffers, cached
-   bounds, application geometry callbacks and forced subset-owner highlighting,
-   with native comparisons and both GPU profiles. [Nodal marker lighting](vulkan-lit-markers.md)
-   now supports Gouraud/Phong points, sprite coverage and clipping. Retain strict
-   point/line raster gates alongside live-normal update timings; continue remaining
-   point material/alpha policies. [Nodal line lighting](vulkan-lit-lines.md) now adds
-   Gouraud/Phong segments with clipping, native solid fallback for requested patterns,
-   live-normal snapshots and both-device functional/performance coverage. Strict
-   endpoint and color interpolation parity remains open.
-   [Translucent surface lighting](vulkan-lit-transparency.md) now combines the three
-   Phong-family algorithms with material opacity, distinguished back faces,
-   deferred pass ordering and live opaque/translucent transitions.
-   [Retained transparency](vulkan-oit-contract.md) now implements unordered blending,
-   weighted OIT and dual depth peeling with live parameters, context alpha state,
-   multisample fallback, layers and capping. Both-device functional replay and
-   35-workload performance measurements are recorded with the implementation.
-   Keep the documented texel, sprite, far-plane, high-sample and text driver
-   differences explicit; full raster parity and API completion are not claimed.
-   Continue remaining alpha-mask and cap/annotation policies alongside these
-   retained diagnostic gates.
-   [AIS trihedrons](ais-trihedron.md) now provide cached wire/shaded datum parts,
-   native owner selection and protected application subclass hooks. Vulkan polygon
-   offsets support the shaded geometry with both-device runtime checks; strict
-   shaded selection, image parity and performance-baseline gates remain open.
-   [Rubber-band overlays](ais-rubber-band.md) now preserve live screen-point sequences,
-   frontier-constrained polygon filling, reusable geometry and application subclass hooks,
-   with paired native captures and polygon-update timings.
-   [AIS view input buffers](ais-view-input-buffer.md) now preserve all public gesture
-   records, native defaults and reset/copy semantics through committed oracle assets.
-   [AIS navigation dependencies](ais-view-navigation.md) now preserve camera policies,
-   mouse gestures and six-axis walking state with native boundary/flag/copy fixtures.
-   [AIS view controller input](ais-view-controller.md) now queues native selection,
-   zoom and Z rotation, with public policies and UI-only navigation cancellation.
-   [Keyboard navigation](ais-view-controller-keyboard.md) now preserves frame
-   timing, all six axes, stance/thrust/release semantics and focus-loss reset.
-   [Click and touch dispatch](ais-view-controller-pointer.md) now preserves animation
-   ownership, selection bindings and native touch transitions.
-   [Window-listener integration](ais-view-controller-window-listener.md) now exposes
-   the complete controller callback interface with typed mouse/touch failures.
-   [UI/render queue transfer](ais-view-controller-transfer.md) preserves pending
-   requests, allocator ownership and drag priority across frames.
-   [Camera frustums](ais-camera-frustum.md) add live geometry, appearance and both
-   selection modes. [Primitive-array initialization](sensitive-primitive-initialization.md)
-   now preserves all five overloads and native retained/failed initialization state.
-   [Light-source binding](ais-light-source-binding.md) adds properties and world/local
-   transforms. [Light presentations](ais-light-source-presentation.md) now add
-   concrete construction, geometry, selection, directional highlighting and dragging,
-   with native fixtures and both-device captures and optimized timings. Classes remain
-   partial. Vulkan Shadow-style light labels now render; strict named-light capture
-   differences and native-default-layer parity remain open.
-   [Color scales](ais-color-scale.md) now preserve native palette policies, labels,
-   layout and real presentation submissions. [Controller picking](ais-controller-picking.md)
-   and [selection-aware fitting](ais-view-controller-fit.md) now use real retained
-   geometry and cameras. [Touch synthesis](ais-view-controller-gestures.md) preserves
-   native contact-count transitions and integer pan boundaries.
-   [Primitive matching](sensitive-primitive-matching.md) now has native differential
-   and ownership/lifecycle fixtures; traversal regressions preserve callback ordering.
-   [Native point alpha](vulkan-point-alpha.md) adds native point/sprite alpha policies
-   and committed GPU oracle buffers. Exact-cutoff software differences and additional
-   sprite/material capabilities remain open.
-   [Native line alpha](vulkan-line-alpha.md) now preserves forced blending in draw
-   order with depth writes. Committed native buffers support Rust-only GPU replay;
-   strict software endpoint parity and timing-baseline acceptance remain open.
-   Continue its remaining dispatch alongside the remaining presentation
-   and legacy renderer capabilities
-   (see [current evidence](vulkan-renderer.md)).
-   Keep functional captures and performance regression workloads together on both
-   lavapipe and the native host GPU.
-   Advance TKService/TKV3d functionality needed by this path alongside it; Vulkan
-   work does not wait for every visualization API to be ported.
-3. Expand interactive visualization, presentations and TKMeshVS, and the DRAW
+3. Continue Martensite's Vulkan renderer through Graphic3d, matching the legacy
+   OCCT OpenGL capabilities with Vulkan 1.3. Keep functional captures and
+   performance checks on lavapipe and the native GPU. Retain the detailed
+   [implementation status and remaining gates](visualization-priority-status.md).
+   Advance TKService/TKV3d prerequisites with each renderer slice.
+4. Expand interactive visualization, presentations and TKMeshVS, and the DRAW
    viewer commands needed to exercise them. Add renderer capabilities through
    tested scenes and observable viewer workflows.
-4. Continue other dependency-ready porting after these priorities. Exchange-format
+5. Continue other dependency-ready porting after these priorities. Exchange-format
    expansion (STEP, IGES, mesh formats and exchange wrappers) is lower priority;
    address it earlier only when a concrete prioritized workflow needs it or an
    existing regression needs repair. Preserve unfinished exchange work.
@@ -224,11 +108,13 @@ remain separate from this OCCT dependency boundary.
 
 Rust naming, ownership and error syntax may differ from C++. Each upstream API
 must still have an explicit equivalent with the same capabilities and observable
-contract. C++ ABI compatibility is not implied by a Rust port. Convenience APIs can
+contract. C++ ABI compatibility is not implied by a Rust port. Convenience APIs
+can
 be added after the mapped compatibility API passes its parity tests.
 
 Baseline: OCCT **8.1.0-dev1**, commit
-`3d097a0328e71b826377d4814ab05ec3c3d23871`. This is a development checkout, not a
+`3d097a0328e71b826377d4814ab05ec3c3d23871`. This is a development checkout, not
+a
 released OCCT version. Freeze it for this port. Any baseline update during porting
 requires review; completing the port does not establish an obligation to follow
 later OCCT changes. The existing sibling checkout is clean and remains unmodified.
@@ -237,16 +123,21 @@ later OCCT changes. The existing sibling checkout is clean and remains unmodifie
 
 The generated [inventory](../porting/inventory.json) currently contains:
 
-| Module | Toolkits | Work covered |
-| --- | ---: | --- |
-| FoundationClasses | 2 | Runtime, collections, units, tolerances, numerical algorithms |
-| ModelingData | 4 | 2D/3D geometry, geometry construction, BRep representation |
-| ModelingAlgorithms | 14 | Topology, primitives, booleans, meshing, healing, features, helix |
-| Visualization | 7 | Services, interactive display, selection, OpenGL/GLES, VTK, D3D |
-| ApplicationFramework | 13 | Documents, attributes, undo/redo, binary/XML persistence |
-| DataExchange | 14 | STEP, IGES, mesh formats, XCAF, readers/writers |
-| Draw | 21 | Interpreter, modeling/viewer commands, QA and exchange test tools |
-| **Total** | **75** | **410 package entries, including shared package references** |
+- FoundationClasses (2 toolkits): Runtime, collections, units, tolerances,
+  numerical algorithms.
+- ModelingData (4 toolkits): 2D/3D geometry, geometry construction, BRep
+  representation.
+- ModelingAlgorithms (14 toolkits): Topology, primitives, booleans, meshing,
+  healing, features, helix.
+- Visualization (7 toolkits): Services, interactive display, selection,
+  OpenGL/GLES, VTK, D3D.
+- ApplicationFramework (13 toolkits): Documents, attributes, undo/redo,
+  binary/XML persistence.
+- DataExchange (14 toolkits): STEP, IGES, mesh formats, XCAF, readers/writers.
+- Draw (21 toolkits): Interpreter, modeling/viewer commands, QA and exchange
+  test tools.
+- **Total** (**75** toolkits): **410 package entries, including shared package
+  references**.
 
 Discovery found 7,216 header candidates, 561 GoogleTest source files, 8,648
 GoogleTest declaration candidates, 16,698 DRAW case candidates and 18,309 total
@@ -270,7 +161,8 @@ port. Passing scaffold CI does not satisfy these gates.
    Protected hooks used by subclasses are part of the extension contract. Audit
    public macros and classify observable functionality separately from C++ syntax.
    APIs explicitly marked deprecated or obsolete by OCCT are excluded from required
-   new ports under [ADR0002](adr/0002-exclude-upstream-retired-apis.md); retain their
+   new ports under [ADR0002](adr/0002-exclude-upstream-retired-apis.md); retain
+   their
    existing Rust implementations and upstream exclusion evidence.
 2. **Upstream test translation is 100%.** Each upstream unit/regression case maps
    to a runnable Rust test with the same setup, inputs, assertions, cleanup and
@@ -294,7 +186,8 @@ port. Passing scaffold CI does not satisfy these gates.
    report regressions before release; numerical parity cannot be traded for speed.
 
 API coverage = verified mapped API items / total authoritative in-scope API items.
-Test translation coverage = verified translated cases / total upstream cases in the
+Test translation coverage = verified translated cases / total upstream cases in
+the
 configuration union. Report both globally and per toolkit. An item counts as
 verified only with passing evidence on every applicable profile at the current
 Rust revision. Partial mappings do not count as complete.
@@ -351,7 +244,8 @@ features, license, MSRV and parity evidence before accepting a dependency.
 
 ### Phase 0 — authoritative scope and oracle infrastructure
 
-The current change supplies Rust tooling and a source-level inventory. Complete the
+The current change supplies Rust tooling and a source-level inventory. Complete
+the
 following before claiming API percentages or marking a first toolkit complete:
 
 - Extract declarations with Clang using OCCT's actual compile commands, installed
@@ -373,7 +267,8 @@ following before claiming API percentages or marking a first toolkit complete:
   datasets referenced by tests, obtain them where available and record missing data
   as blockers. Keep large/binary artifacts in versioned artifact storage with hashes.
 - Implement the process-based oracle protocol below, its Rust driver and artifact
-  retention. Add mapping validators and a completion command that exits nonzero for
+  retention. Add mapping validators and a completion command that exits nonzero
+  for
   missing mappings, stale evidence, pending profiles, ignored tests or divergences.
 
 **Exit:** reviewed API/test denominators, reproducible foundation oracle, validated
@@ -438,7 +333,8 @@ and framebuffer settings. Compare selection and scene state exactly where possib
 use explicitly reviewed image tolerances for raster variation. Cover headless and
 interactive/platform behavior in suitable environments.
 
-**Exit:** every in-scope backend/profile, public command and corresponding regression case
+**Exit:** every in-scope backend/profile, public command and corresponding
+regression case
 has passing evidence; no permanent graphics skips are hidden in completion totals.
 
 ### Phase 6 — full parity audit and release readiness
@@ -469,16 +365,19 @@ A missing oracle executable in a live porting comparison must fail explicitly;
 it must never skip and pass. Standalone Rust behavioral tests use committed
 fixtures and must not require that executable.
 
-| Result | Default comparison |
-| --- | --- |
-| Enums, flags, counts, statuses, discrete indices | Exact |
-| Scalars/vectors/matrices | Exact where contractual; otherwise the upstream assertion's tolerance |
-| NaNs, infinities, signed zero | Explicit API-specific semantics, bit checks where needed |
-| Shapes | Type, orientation, placement, connectivity, sharing, tolerances and geometric properties |
-| Unordered collections | Canonicalize only if ordering is genuinely unspecified |
-| Files/documents | Bytes where deterministic; otherwise schema and full semantic content |
-| Images | Controlled renderer plus reviewed image metrics and thresholds |
-| Stateful calls | Result plus all observable mutations, callbacks and error timing |
+- Enums, flags, counts, statuses, discrete indices: Exact.
+- Scalars/vectors/matrices: Exact where contractual; otherwise the upstream
+  assertion's tolerance.
+- NaNs, infinities, signed zero: Explicit API-specific semantics, bit checks
+  where needed.
+- Shapes: Type, orientation, placement, connectivity, sharing, tolerances and
+  geometric properties.
+- Unordered collections: Canonicalize only if ordering is genuinely unspecified.
+- Files/documents: Bytes where deterministic; otherwise schema and full semantic
+  content.
+- Images: Controlled renderer plus reviewed image metrics and thresholds.
+- Stateful calls: Result plus all observable mutations, callbacks and error
+  timing.
 
 Mass/volume alone cannot establish shape equivalence. Store enough structure to
 detect topology and orientation differences. Canonicalization must not erase an
@@ -492,7 +391,8 @@ them; keep their tests separate from translated upstream cases.
 ## Per-change workflow and traceability
 
 1. Select a dependency-ready package/API slice and its upstream tests.
-2. Preserve original test IDs in Rust test names or mapping metadata; reference the
+2. Preserve original test IDs in Rust test names or mapping metadata; reference
+the
    upstream path and assertion locations. Do not copy OCCT copyright headers.
 3. Run the C++ tests and capture oracle cases, including error and boundary inputs.
 4. Translate the tests before implementing the Rust slice. Keep assertion counts,
@@ -518,11 +418,13 @@ not merely changing a boolean.
 Retain the repository's existing GPLv2 license for the bootstrap. OCCT source/test
 translations must retain their upstream notices, attribution and accompanying OCCT
 license/exception texts. Review distribution terms before publishing translated
-code and adding native dependencies. Translated TKernel implementation and test files now retain their OCCT notices;
+code and adding native dependencies. Translated TKernel implementation and test
+files now retain their OCCT notices;
 the accompanying upstream license texts are under `licenses/`. The inventory also
 records paths and discovery metadata.
 
-Decisions fixed now: frozen upstream commit; toolkit scope in `scope.json`; Rust 2024;
+Decisions fixed now: frozen upstream commit; toolkit scope in `scope.json`; Rust
+2024;
 pinned stable tools; native third-party libraries may remain; no production OCCT
 fallback; API/test coverage distinct from line coverage; no premature math dependency.
 Representation choices, platform profile details and numeric substitutions are made
@@ -531,4 +433,5 @@ per slice with oracle evidence and recorded alongside the mapping.
 Mouse button and pointer-motion dispatch now has committed local native oracle
 fixtures and Rust regressions; see [Martensite mouse dispatch](ais-view-controller-mouse.md).
 [3D mouse controller routing](ais-view-controller-space-mouse.md) now uses shared
-HID dispatch with committed native snapshots. Camera/window application remains open.
+HID dispatch with committed native snapshots. Camera/window application remains
+open.
