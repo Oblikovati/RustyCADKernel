@@ -1,0 +1,54 @@
+name: Martensite v0.2.5 exact Vulkan job diagnostics
+on:
+  push:
+    branches: [diagnostics/release-0.2.5-current-vulkan]
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  CARGO_PROFILE_DEV_DEBUG: '0'
+  CARGO_PROFILE_TEST_DEBUG: '0'
+  CARGO_INCREMENTAL: '0'
+  GALLIUM_OVERRIDE_CPU_CAPS: sse2
+  LP_NATIVE_VECTOR_WIDTH: '128'
+  MARTENSITE_DIAGNOSTIC_REVISION: 8118c7e1fae4d28bb5bb5656cd8f86445dadef10
+jobs:
+  mirror:
+    strategy:
+      fail-fast: false
+      matrix:
+        cohort: [1, 2]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: diagnostic-tools
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: 8118c7e1fae4d28bb5bb5656cd8f86445dadef10
+          path: kernel
+      # Match the failing CI Vulkan job before its first GPU process.
+      - name: Install only the original Vulkan job prerequisites
+        run: sudo apt-get update && sudo apt-get install -y mesa-vulkan-drivers vulkan-validationlayers glslang-tools spirv-tools xvfb xauth
+      - name: Select the verified validation layer and installed ICD
+        working-directory: kernel
+        run: |
+          python3 tools/with_vulkan_validation.py --github-env "$GITHUB_ENV"
+          echo "VK_DRIVER_FILES=$(ls /usr/share/vulkan/icd.d/lvp_icd*.json)" >> "$GITHUB_ENV"
+      - name: Retain the exact original cold all-target verdict
+        run: |
+          python3 diagnostic-tools/tools/diagnose_current_vulkan.py --root kernel --output diagnostic-output --revision "$MARTENSITE_DIAGNOSTIC_REVISION" --phase gate
+      # Observation prerequisites must not change the original cold gate's library context.
+      - name: Add post-gate observation tooling
+        if: always()
+        run: sudo apt-get install -y vulkan-tools
+      - name: Capture actual metadata and raw strict-control buffers after the gate
+        if: always()
+        run: |
+          python3 diagnostic-tools/tools/diagnose_current_vulkan.py --root kernel --output diagnostic-output --revision "$MARTENSITE_DIAGNOSTIC_REVISION" --phase observe
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: release-0.2.5-current-vulkan-${{ matrix.cohort }}
+          path: diagnostic-output

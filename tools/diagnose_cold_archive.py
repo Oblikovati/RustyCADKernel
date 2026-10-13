@@ -63,25 +63,34 @@ def record_cold_binary_after(probe: RendererDiagnosticProcess) -> None:
     )
 
 
-def run_cold_gate(probe: RendererDiagnosticProcess) -> int:
+def run_cold_gate(
+    probe: RendererDiagnosticProcess, arguments: list[str] | None = None
+) -> int:
     """Keep red exits and first-process ordering; `run_cold_gate(probe)`."""
     before = record_renderer_inputs(probe, "cold-inputs-before")
     record_environment(probe)
-    result = probe.run("cold-package-all-targets", cold_package_arguments(probe.root))
+    result = probe.run(
+        "cold-package-all-targets", arguments or cold_package_arguments(probe.root)
+    )
     retain_cold_executables(probe, result.stderr)
     require_input_bookend(before, record_renderer_inputs(probe, "cold-inputs-after"))
+    retain_cold_verdict(probe, result.returncode)
+    return result.returncode
+
+
+def retain_cold_verdict(probe: RendererDiagnosticProcess, exit_code: int) -> None:
+    """Preserve the original gate exit independently of observation; `retain_cold_verdict(probe, 101)`."""
     (probe.output / "cold-verdict.json").write_text(
         json.dumps(
             {
                 "revision": probe.revision,
-                "exit_code": result.returncode,
+                "exit_code": exit_code,
                 "release_guards_unchanged": True,
                 "observation_started_after_gate": True,
             },
             indent=2,
         )
     )
-    return result.returncode
 
 
 def cold_archive_diagnostic(root: Path, output: Path, revision: str) -> None:

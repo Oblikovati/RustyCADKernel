@@ -32,3 +32,16 @@ or signal. Post-gate observations, strict replays and three raw captures still
 run for diagnosis. Cargo's executed test binary hashes are retained before and
 after the later diagnostic builds so a changed build context stays visible.
 A successful evidence job is not approval to publish a failed release gate.
+
+The current Vulkan-job mirror pins v0.2.5 source
+`8118c7e1fae4d28bb5bb5656cd8f86445dadef10` on two independent fresh runners.
+It installs only the original job's Mesa, validation, shader tools, xvfb and
+xauth prerequisites before its exact first graphics command:
+`cargo test -p martensite-vulkan --all-targets --locked`.
+No Vulkan query, example build, extra Tcl/font prerequisite or DISPLAY override
+precedes that gate. The original exit and executed binary hashes remain recorded.
+
+Only after the original gate completes does the workflow add vulkan-tools and
+collect actual CPU/environment/library metadata, strict-control verdicts and
+three raw captures. Post-gate controls remain observations; they cannot replace
+a failed original verdict or establish a fix merely by passing later.

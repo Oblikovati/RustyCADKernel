@@ -116,6 +116,25 @@ class ColdArchiveTests(unittest.TestCase):
         self.assertTrue(verdict["release_guards_unchanged"])
         self.assertEqual(probe.arguments, cold.cold_package_arguments(self.root))
 
+    def test_injected_gate_arguments_preserve_the_actual_original_command(self) -> None:
+        probe = NamedColdProcess(self.root, self.root, 101)
+        arguments = [
+            "cargo",
+            "test",
+            "-p",
+            "martensite-vulkan",
+            "--all-targets",
+            "--locked",
+        ]
+        with patch.object(
+            cold, "record_renderer_inputs", return_value={}
+        ), patch.object(cold, "record_environment"):
+            self.assertEqual(cold.run_cold_gate(probe, arguments), 101)
+        self.assertEqual(probe.arguments, arguments)
+        self.assertEqual(
+            json.loads((self.root / "cold-verdict.json").read_text())["exit_code"], 101
+        )
+
     def test_cargo_executables_are_hashed_before_later_builds(self) -> None:
         binary = self.root / "toolkit-frozen"
         binary.write_bytes(b"executed")
