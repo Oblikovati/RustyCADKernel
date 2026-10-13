@@ -2,6 +2,8 @@
 #[allow(unsafe_code)]
 mod backend;
 mod error;
+mod render_driver_identity;
+pub use render_driver_identity::RenderDriverIdentity;
 mod scene;
 pub use backend::{VulkanOptions, VulkanRenderer};
 pub use error::RenderError;

@@ -9,6 +9,8 @@ mod device_options;
 #[allow(dead_code)]
 #[path = "support/triangle_edge_scene.rs"]
 mod edge_scene;
+#[path = "support/ffp_oracle_profile.rs"]
+mod ffp_oracle_profile;
 #[path = "../examples/support/native_golden.rs"]
 mod native_golden;
 #[allow(dead_code)]
@@ -208,6 +210,14 @@ fn select_cap_asset(
     asset: NativeTriangleEdgeAsset,
 ) -> (&'static str, &'static [u8], &'static [u8]) {
     let (mode, host_rgba, host_depth, software_rgba, software_depth) = asset;
+    if let Some((rgba, depth)) = ffp_oracle_profile::profiled_driver_asset(
+        driver,
+        mode,
+        (host_rgba, host_depth),
+        (software_rgba, software_depth),
+    ) {
+        return (mode, rgba, depth);
+    }
     if driver.device_name().contains("llvmpipe") {
         return (mode, software_rgba, software_depth);
     }

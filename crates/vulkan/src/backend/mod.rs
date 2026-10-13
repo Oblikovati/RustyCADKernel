@@ -33,12 +33,17 @@ impl VulkanRenderer {
     pub fn device_name(&self) -> &str {
         &self.runtime.name
     }
+    /// Read exact selected Vulkan implementation provenance; `renderer.driver_identity()`.
+    pub fn driver_identity(&self) -> crate::RenderDriverIdentity {
+        driver_identity::query_driver_identity(&self.runtime.instance, self.runtime.physical)
+    }
     /// Read validation errors emitted so far; `renderer.validation_errors()`.
     pub fn validation_errors(&self) -> Vec<String> {
         self.runtime.validation.errors()
     }
 }
 mod buffer;
+mod driver_identity;
 mod fixed_lighting_pipeline;
 mod fixed_vertex_layout;
 mod fixed_vertex_sources;

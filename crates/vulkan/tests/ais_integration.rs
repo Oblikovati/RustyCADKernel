@@ -176,3 +176,10 @@ fn bulk_lifecycle_updates_once_and_clear_prs_retains_selection_activation() {
     assert_eq!(device.frames.read().len(), before + 4);
     assert!(scene.context.fields.read().objects.is_empty());
 }
+
+#[test]
+fn injected_render_backend_has_no_vulkan_driver_identity() {
+    let device = RecordingDevice::default();
+    let driver = Graphic3dRenderDriver::with_backend(device, 128).unwrap();
+    assert_eq!(driver.driver_identity(), None);
+}
