@@ -11,10 +11,14 @@ integrated occurrence adapter. Real contacts produce Failed findings with both
 entities; missing pair/search completion remains Incomplete. No successful region
 operation or complete analytic self-intersection certificate is exposed.
 
-The attributed native oracle is pinned to OCCT
+The authoritative native rerun uses main `target/occt-all-full`, whose CMake
+version marker and clean source tree bind it to OCCT
 `3d097a0328e71b826377d4814ab05ec3c3d23871`.
 `tools/oracle/martensite_self_walking_completion.cxx` performs a finite tangent
-sphere/plane walk. Two executions produce the committed
+sphere/plane walk. Separate pinned-SDK runs, header/library/source bookends, compiler and executable
+hashes are in `pinned-native-receipt.json` and `pinned-sdk-bookends.json.gz`.
+The earlier `../occt-install` executions remain retained but their SDK revision
+binding was not proved. Two authoritative executions produce the committed
 `crates/tkbo/tests/fixtures/self_walking_completion.expected`: IsDone false and
 NbPoints throws StdFail_NotDone. Rust replays that actual walker independently.
 This is an inner walking witness, not a reproduced unfinished CheckerSI self-face
