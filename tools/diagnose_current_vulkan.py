@@ -26,12 +26,21 @@ from renderer_archive_inputs import (
     record_renderer_inputs,
     require_input_bookend,
 )
-from diagnose_release_renderer import RendererDiagnosticProcess
+from diagnose_release_renderer import RendererDiagnosticProcess, DiagnosticCommandResult
 
 
 def current_vulkan_arguments() -> list[str]:
     """Preserve the immutable CI invocation exactly; `current_vulkan_arguments()`."""
     return ["cargo", "test", "-p", "martensite-vulkan", "--all-targets", "--locked"]
+
+
+def gate_profile_arguments(profile: str) -> list[str]:
+    """Keep original aliases distinct from controlled builds; `gate_profile_arguments('workspace')`."""
+    if profile == "workspace":
+        return ["cargo", "test-all", "--no-fail-fast"]
+    if profile == "vulkan":
+        return current_vulkan_arguments()
+    raise ValueError(f"gate profile={profile!r}; expected workspace or vulkan")
 
 
 def current_vulkan_gate(probe: RendererDiagnosticProcess) -> None:
@@ -43,29 +52,35 @@ def current_vulkan_gate(probe: RendererDiagnosticProcess) -> None:
 
 
 def record_existing_gate(
-    probe: RendererDiagnosticProcess, gate_log: Path, gate_exit: Path
+    probe: RendererDiagnosticProcess,
+    gate_log: Path,
+    gate_exit: Path,
+    profile: str = "vulkan",
 ) -> None:
     """Import an already completed original gate without executing it; `record_existing_gate(probe, log, status)`."""
     contents = gate_log.read_text()
-    validate_original_log(probe, contents)
+    validate_original_log(probe, contents, profile)
     status = gate_exit.read_text().strip()
     if not status.isdecimal() or not 0 <= int(status) <= 255:
         raise ValueError(
             f"gate exit={status!r}; expected an integer status from 0 through 255"
         )
     (probe.output / "original-gate.log").write_text(contents)
-    write_imported_verdict(probe, int(status))
+    write_imported_verdict(probe, int(status), profile)
     # Save the cold verdict before optional metadata can fail; never replace its status.
     record_source(probe)
     require_clean_source(probe, "imported-source")
     retain_cold_executables(probe, contents)
 
 
-def validate_original_log(probe: RendererDiagnosticProcess, contents: str) -> None:
+def validate_original_log(
+    probe: RendererDiagnosticProcess, contents: str, profile: str = "vulkan"
+) -> None:
     """Bind imported evidence to the original source and command; `validate_original_log(probe, log)`."""
     expected = [
         f"Martensite original gate revision: {probe.revision}",
-        "Martensite original gate command: " + " ".join(current_vulkan_arguments()),
+        "Martensite original gate command: "
+        + " ".join(gate_profile_arguments(profile)),
     ]
     received = contents.splitlines()[:2]
     if received != expected:
@@ -74,12 +89,15 @@ def validate_original_log(probe: RendererDiagnosticProcess, contents: str) -> No
         )
 
 
-def write_imported_verdict(probe: RendererDiagnosticProcess, status: int) -> None:
+def write_imported_verdict(
+    probe: RendererDiagnosticProcess, status: int, profile: str = "vulkan"
+) -> None:
     """Keep the original exit independently of observation; `write_imported_verdict(probe, 101)`."""
     verdict = {
         "revision": probe.revision,
         "exit_code": status,
-        "arguments": current_vulkan_arguments(),
+        "arguments": gate_profile_arguments(profile),
+        "profile": profile,
         "release_guards_unchanged": True,
         "observation_started_after_gate": True,
         "imported_original_gate": True,
@@ -125,9 +143,61 @@ def main() -> None:
     parser.add_argument("--phase", choices=("gate", "observe", "record"), required=True)
     parser.add_argument("--gate-log", type=Path)
     parser.add_argument("--gate-exit", type=Path)
+    parser.add_argument("--profile", choices=("vulkan", "workspace"), default="vulkan")
     args = parser.parse_args()
     probe = diagnostic_probe(args.root, args.output, args.revision)
+    restore_command_history(probe)
     dispatch_phase(probe, args, parser)
+
+
+def restore_command_history(probe: RendererDiagnosticProcess) -> None:
+    """Append phase observations without deleting earlier evidence; `restore_command_history(probe)`."""
+    path = probe.output / "commands.json"
+    if not path.is_file():
+        return
+    recorded = json.loads(path.read_text())
+    if recorded.get("revision") != probe.revision or not isinstance(
+        recorded.get("commands"), list
+    ):
+        raise ValueError(
+            f"command history={recorded!r}; expected revision {probe.revision} and commands list"
+        )
+    probe.results.extend(recorded_command(entry) for entry in recorded["commands"])
+
+
+def recorded_command(entry: object) -> DiagnosticCommandResult:
+    """Require actual serialized command records; `recorded_command(receipt)`."""
+    keys = {"label", "arguments", "exit_code", "elapsed_seconds"}
+    if not isinstance(entry, dict) or set(entry) != keys:
+        raise ValueError(
+            f"command record={entry!r}; expected exact fields {sorted(keys)}"
+        )
+    arguments = entry["arguments"]
+    if not isinstance(arguments, list) or not all(
+        isinstance(arg, str) for arg in arguments
+    ):
+        raise ValueError(
+            f"command arguments={arguments!r}; expected string argument list"
+        )
+    validate_command_scalars(entry)
+    return DiagnosticCommandResult(
+        entry["label"], arguments, entry["exit_code"], entry["elapsed_seconds"]
+    )
+
+
+def validate_command_scalars(entry: dict[str, object]) -> None:
+    """Reject recast or invalid status/timing evidence; `validate_command_scalars(receipt)`."""
+    if not isinstance(entry["label"], str) or type(entry["exit_code"]) is not int:
+        raise ValueError(
+            f"command record={entry!r}; expected string label and integer exit"
+        )
+    if (
+        type(entry["elapsed_seconds"]) not in (int, float)
+        or entry["elapsed_seconds"] < 0
+    ):
+        raise ValueError(
+            f"command elapsed={entry['elapsed_seconds']!r}; expected nonnegative seconds"
+        )
 
 
 def dispatch_phase(
@@ -139,12 +209,30 @@ def dispatch_phase(
     if args.phase == "record":
         if args.gate_log is None or args.gate_exit is None:
             parser.error("record phase requires --gate-log and --gate-exit paths")
-        record_existing_gate(probe, args.gate_log, args.gate_exit)
+        record_existing_gate(
+            probe, args.gate_log, args.gate_exit, getattr(args, "profile", "vulkan")
+        )
+        return
+    if getattr(args, "profile", "vulkan") == "workspace":
+        dispatch_workspace_phase(probe, args.phase, parser)
         return
     action = (
         current_vulkan_gate if args.phase == "gate" else current_vulkan_observations
     )
     action(probe)
+
+
+def dispatch_workspace_phase(
+    probe: RendererDiagnosticProcess, phase: str, parser: argparse.ArgumentParser
+) -> None:
+    """Require the completed original workspace gate; `dispatch_workspace_phase(probe, 'observe', parser)`."""
+    if phase != "observe":
+        parser.error(
+            "workspace profile supports original record and observe phases only"
+        )
+    from renderer_workspace_evidence import workspace_observations
+
+    workspace_observations(probe)
 
 
 if __name__ == "__main__":

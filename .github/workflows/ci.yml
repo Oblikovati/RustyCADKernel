@@ -3,6 +3,17 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      check_scope:
+        description: Diagnostic-only Rust owner capture; release calls always run all owners
+        type: choice
+        options: [all, rust]
+        default: all
+        required: true
+      source_ref:
+        description: Optional immutable source revision for diagnostic dispatch
+        type: string
+        required: false
   workflow_call:
     inputs:
       source_ref:
@@ -88,11 +99,56 @@ jobs:
       - run: python3 tools/check_rust_format.py
       - run: cargo lint
       - name: Test every toolkit (including doctests)
-        run: cargo test-all --no-fail-fast
+        id: rust_gate
+        shell: bash
+        run: |
+          mkdir -p target/rust-gate
+          printf 'Martensite original gate revision: %s\n' "$(git rev-parse HEAD)" > target/rust-gate/gate.log
+          printf 'Martensite original gate command: cargo test-all --no-fail-fast\n' >> target/rust-gate/gate.log
+          set +e
+          set -o pipefail
+          cargo test-all --no-fail-fast 2>&1 | tee -a target/rust-gate/gate.log
+          gate_status=${PIPESTATUS[0]}
+          printf '%s\n' "$gate_status" > target/rust-gate/gate.exit
+          exit "$gate_status"
+      - name: Check out current workspace-failure observation tools
+        if: ${{ failure() && steps.rust_gate.outcome == 'failure' }}
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: diagnostic-tools
+          persist-credentials: false
+      - name: Record the original workspace gate without rerunning it
+        if: ${{ failure() && steps.rust_gate.outcome == 'failure' }}
+        run: |
+          python3 diagnostic-tools/tools/diagnose_current_vulkan.py --root . --output target/rust-gate/evidence --revision "$(git rev-parse HEAD)" --phase record --profile workspace --gate-log target/rust-gate/gate.log --gate-exit target/rust-gate/gate.exit
+      - name: Install post-failure workspace observation tooling
+        if: ${{ failure() && steps.rust_gate.outcome == 'failure' }}
+        run: sudo apt-get install -y vulkan-tools
+      - name: Retain actual workspace-feature raw controls and original binary replay
+        if: ${{ failure() && steps.rust_gate.outcome == 'failure' }}
+        run: |
+          python3 diagnostic-tools/tools/diagnose_current_vulkan.py --root . --output target/rust-gate/evidence --revision "$(git rev-parse HEAD)" --phase observe --profile workspace
+      - name: Upload failed workspace gate and post-gate evidence
+        if: ${{ always() && steps.rust_gate.outcome == 'failure' }}
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: rust-workspace-gate-failure
+          path: |
+            target/rust-gate/gate.log
+            target/rust-gate/gate.exit
+            target/rust-gate/evidence/*.json
+            target/rust-gate/evidence/*.log
+            target/rust-gate/evidence/*.stdout
+            target/rust-gate/evidence/*.stderr
+            target/rust-gate/evidence/*.rgba
+            target/rust-gate/evidence/*.depth
+          if-no-files-found: error
       - run: cargo doc --workspace --all-features --no-deps --locked
         env:
           RUSTDOCFLAGS: -D warnings
   coverage:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
     steps:
       # Leave space for instrumented toolkits and the source-built coverage tools.
@@ -126,6 +182,7 @@ jobs:
             target/lcov.info
             target/nextest/ci/junit.xml
   vulkan-runtime:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.1
@@ -195,6 +252,7 @@ jobs:
       - run: glslangValidator --target-env vulkan1.3 -V crates/vulkan/shaders/unlit.frag -o /tmp/unlit.frag.spv
       - run: spirv-val --target-env vulkan1.3 crates/vulkan/shaders/unlit.frag.spv
   dependencies:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -204,6 +262,7 @@ jobs:
       - run: cargo install cargo-deny --version 0.20.2 --locked
       - run: cargo deny check
   inventory:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
@@ -217,6 +276,7 @@ jobs:
       - run: python3 tools/porting.py check --source target/occt-source
       - run: python3 tools/porting.py status
   tools:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.check_scope != 'rust' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
