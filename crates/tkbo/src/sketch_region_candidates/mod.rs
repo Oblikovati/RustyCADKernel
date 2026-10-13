@@ -2,6 +2,7 @@
 //! Private candidate diagnostics preserve mapped generation without certifying search.
 mod ancestry;
 mod boundaries;
+mod captured_store;
 mod classification;
 mod generation;
 mod outcome;
@@ -18,3 +19,6 @@ mod native_tests;
 mod coverage_tests;
 
 pub(crate) use boundaries::capture_segment as capture_boundary_segment;
+
+#[cfg(test)]
+mod captured_tests;

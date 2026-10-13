@@ -1,18 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Positive directed winding is material in the right-handed plane; negative loops are complements/holes.
-use super::outcome::*;
+use super::{
+    captured_store::{
+        CandidateCaptureReceipt, CandidateCapturedFailure, CandidateWindingOperation,
+    },
+    outcome::*,
+};
 use rustycad_tkmath::predicates::roots::{
     RootIsolationOptions,
-    bezier_line::{
-        BezierWireError, BezierWireLocation, BezierWireQuery, BezierWireResult, BezierWireSegment,
-        classify_bezier_wire,
-    },
+    bezier_line::{BezierWireError, BezierWireLocation, CapturedBezierWireResult},
 };
 #[derive(Default)]
 struct SeedAccumulation {
     interiors: Vec<usize>,
     boundary: Vec<u64>,
-    bisections: u32,
 }
 /// Classify all captured candidates, retaining missing construction/search/body certificates.
 /// Example: `classify_candidates(&batch,[1.,1.],RootIsolationOptions::new(0.001),||false)`.
@@ -22,61 +23,50 @@ pub(crate) fn classify_candidates(
     options: RootIsolationOptions,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<CandidateClassification, CandidateCause> {
+    let mut operation = CandidateWindingOperation::new(seed, options);
+    match accumulate_seed(batch, &mut operation, &mut cancelled) {
+        Ok(accumulated) => {
+            accumulated.finish(options, !batch.unrepresented.is_empty(), operation.receipt)
+        }
+        Err(cause) => Err(retained_failure(cause, operation.receipt)),
+    }
+}
+fn accumulate_seed<'a>(
+    batch: &'a CandidateBatch,
+    operation: &mut CandidateWindingOperation<'a>,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<SeedAccumulation, CandidateCause> {
     let mut accumulated = SeedAccumulation::default();
     for (index, candidate) in batch.candidates.iter().enumerate() {
-        let winding =
-            classify_candidate(candidate, seed, options, &mut cancelled, &mut accumulated)?;
-        if winding > 0 {
+        if classify_candidate(candidate, operation, cancelled, &mut accumulated)? > 0 {
             accumulated.interiors.push(index);
         }
     }
-    accumulated.finish(options, !batch.unrepresented.is_empty())
+    Ok(accumulated)
 }
-fn classify_candidate(
-    candidate: &RegionCandidate,
-    seed: [f64; 2],
-    options: RootIsolationOptions,
+
+fn classify_candidate<'a>(
+    candidate: &'a RegionCandidate,
+    operation: &mut CandidateWindingOperation<'a>,
     cancelled: &mut impl FnMut() -> bool,
     accumulated: &mut SeedAccumulation,
 ) -> Result<i64, CandidateCause> {
     let mut winding = 0;
     for wire in &candidate.wires {
-        let effective = remaining_options(options, accumulated.bisections)?;
-        let result = classify_wire(wire, seed, effective, cancelled)?;
+        let result = operation
+            .classify(wire, cancelled)
+            .map_err(CandidateCause::CapturedNumerical)?;
         accumulated.append_result(&result, &mut winding)?;
     }
     facing_winding(candidate, winding)
 }
-fn classify_wire(
-    wire: &CandidateWire,
-    seed: [f64; 2],
-    options: RootIsolationOptions,
-    cancelled: &mut impl FnMut() -> bool,
-) -> Result<BezierWireResult, CandidateCause> {
-    let segments: Vec<BezierWireSegment<'_>> = wire.segments.iter().map(segment_query).collect();
-    let query = BezierWireQuery {
-        segments: &segments,
-        line: [seed, [seed[0] + 1., seed[1]]],
-        options,
-    };
-    classify_bezier_wire(query, cancelled).map_err(CandidateCause::Numerical)
-}
-fn segment_query(segment: &CandidateSegment) -> BezierWireSegment<'_> {
-    BezierWireSegment {
-        id: segment.occurrence,
-        controls: &segment.controls,
-        weights: segment.weights.as_deref(),
-        interval: segment.interval,
-        reversed: segment.reversed,
-    }
-}
+
 impl SeedAccumulation {
     fn append_result(
         &mut self,
-        result: &BezierWireResult,
+        result: &CapturedBezierWireResult,
         winding: &mut i64,
     ) -> Result<(), CandidateCause> {
-        self.bisections += u32::from(result.bisections());
         match result.location() {
             BezierWireLocation::Boundary { segment_ids } => self.boundary.extend(segment_ids),
             BezierWireLocation::Inside { winding: count } => {
@@ -90,15 +80,18 @@ impl SeedAccumulation {
         self,
         requested: RootIsolationOptions,
         unrepresented: bool,
+        captured: CandidateCaptureReceipt,
     ) -> Result<CandidateClassification, CandidateCause> {
-        let remaining = remaining_options(requested, self.bisections)?;
+        let bisections = u32::from(captured.work.operation_bisections);
+        let remaining = remaining_options(requested, bisections)?;
         Ok(CandidateClassification::Incomplete {
             selection: selection(self.interiors, self.boundary),
             missing: missing_certificates(unrepresented),
-            bisections: self.bisections,
+            bisections,
             requested,
             remaining,
             achieved_error: None,
+            captured: Box::new(captured),
         })
     }
 }
@@ -121,7 +114,6 @@ fn selection(interiors: Vec<usize>, boundary: Vec<u64>) -> SeedSelection {
 fn missing_certificates(unrepresented: bool) -> Vec<MissingCertificate> {
     let mut missing = vec![
         MissingCertificate::Construction,
-        MissingCertificate::SharedIncidenceReuse,
         MissingCertificate::SearchCompleteness,
         MissingCertificate::SelfIntersection,
         MissingCertificate::Tolerance,
@@ -130,16 +122,6 @@ fn missing_certificates(unrepresented: bool) -> Vec<MissingCertificate> {
         missing.push(MissingCertificate::CandidateHistoryCoverage);
     }
     missing
-}
-fn add_winding(partial: i64, contribution: i64) -> Result<i64, CandidateCause> {
-    partial
-        .checked_add(contribution)
-        .ok_or(CandidateCause::Numerical(
-            BezierWireError::WindingOverflow {
-                partial,
-                contribution,
-            },
-        ))
 }
 
 fn remaining_options(
@@ -167,4 +149,21 @@ fn facing_winding(candidate: &RegionCandidate, winding: i64) -> Result<i64, Cand
             CandidateGap::UnsupportedFaceOrientation { orientation },
         )),
     }
+}
+
+fn add_winding(partial: i64, contribution: i64) -> Result<i64, CandidateCause> {
+    partial
+        .checked_add(contribution)
+        .ok_or(CandidateCause::Numerical(
+            BezierWireError::WindingOverflow {
+                partial,
+                contribution,
+            },
+        ))
+}
+fn retained_failure(cause: CandidateCause, retained: CandidateCaptureReceipt) -> CandidateCause {
+    CandidateCause::CapturedOperation(Box::new(CandidateCapturedFailure {
+        cause: Box::new(cause),
+        retained,
+    }))
 }
