@@ -17,8 +17,8 @@ fn append_occurrences(shape: &Shape, found: &mut Vec<Shape>) -> Result<(), Failu
     }
     found.push(shape.clone());
     let mut children = ShapeIterator::new(shape, true, true);
-    while let Ok(child) = children.value() {
-        append_occurrences(child, found)?;
+    while children.more() {
+        append_occurrences(children.value()?, found)?;
         children.next();
     }
     Ok(())
@@ -28,13 +28,25 @@ pub(super) fn required_contexts(shape: &Shape) -> Result<Vec<Shape>, Failure> {
     // Native contextual loops check one IsSame entity, not both orientations.
     let mut found = Vec::new();
     for kind in required_kinds(shape.shape_type()?) {
-        for subshape in Explorer::new(shape, *kind, ShapeEnum::Shape)? {
-            if !found.iter().any(|entry: &Shape| entry.is_same(&subshape)) {
-                found.push(subshape);
-            }
-        }
+        append_kind_contexts(shape, *kind, &mut found)?;
     }
     Ok(found)
+}
+
+fn append_kind_contexts(
+    shape: &Shape,
+    kind: ShapeEnum,
+    found: &mut Vec<Shape>,
+) -> Result<(), Failure> {
+    let mut explorer = Explorer::new(shape, kind, ShapeEnum::Shape)?;
+    while explorer.more() {
+        let subshape = explorer.current();
+        if !found.iter().any(|entry| entry.is_same(subshape)) {
+            found.push(subshape.clone());
+        }
+        explorer.next()?;
+    }
+    Ok(())
 }
 
 fn required_kinds(kind: ShapeEnum) -> &'static [ShapeEnum] {

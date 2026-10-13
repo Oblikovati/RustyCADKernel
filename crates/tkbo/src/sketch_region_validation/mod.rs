@@ -14,6 +14,8 @@ mod outcome;
 mod statuses;
 #[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod traversal_tests;
 
 pub(crate) use outcome::{
     BodyKind, OrderedCoverage, SourceRelation, StageCoverage, ValidationStage,

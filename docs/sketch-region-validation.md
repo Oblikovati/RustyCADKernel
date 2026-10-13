@@ -11,6 +11,9 @@ native state transitions and may adjust representations.
 `validate_owned_candidate` checks the declared body kind, then uses distinct
 `BRepCheckAnalyzer` instances with geometry controls off and on. Every own status
 and every required mapped subshape/context status is inspected explicitly.
+Traversal guards normal end with `More` and propagates iterator `Value` and
+explorer `Next` errors. A named test-only changing-child-count TShape drives
+the real iterator error path; its original exception remains incomplete.
 An absent context, empty status list, `CheckFail` or typed native failure is
 incomplete. Other native defects are failed. Later stages stay blocked until
 the prerequisite passes. Native minimum checks can conservatively report
