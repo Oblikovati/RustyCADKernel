@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Shared exact construction bounds; extraction preserves the proved line expressions.
-// The checked consumer lands in the independently owned metric/pair follow-up.
-#[allow(dead_code)]
 pub(super) mod convolution;
 mod enclosure;
 mod rational;
