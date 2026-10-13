@@ -22,7 +22,7 @@ pub enum OrientationSign {
 /// A coordinate outside the finite binary64 domain, in input traversal order.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct NonFiniteCoordinate {
-    /// Zero-based point index (a, b, c).
+    /// Zero-based point index within the owning input (a, b, c for orientation).
     pub point: usize,
     /// Zero-based coordinate index (x, y).
     pub axis: usize,
