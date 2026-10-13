@@ -6,9 +6,14 @@ mod ray;
 pub use ray::{BezierRayError, classify_bezier_ray_contacts};
 mod solve;
 mod winding;
+mod wire;
 use super::{RootIsolation, RootIsolationOptions};
 pub use error::{BezierInput, BezierLineError, BezierStage};
 pub use winding::{BezierWinding, bezier_winding_contribution};
+pub use wire::{
+    BezierWireError, BezierWireLocation, BezierWireQuery, BezierWireResult, BezierWireSegment,
+    classify_bezier_wire,
+};
 
 /// Borrowed controls of a polynomial or rational Bézier curve and an infinite line.
 #[derive(Clone, Copy, Debug)]

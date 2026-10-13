@@ -11,6 +11,8 @@ pub enum BezierRayError {
     SupportingLineCoincidence,
     /// Longitudinal conversion or exact product failed.
     Direction(RootIsolationError),
+    /// Exact projected endpoint evaluation failed.
+    Endpoint(RootIsolationError),
     /// Exact sign certification failed.
     Signs(RootSignError),
     /// A certified isolated root did not have a nonzero local normal sign.
@@ -25,6 +27,7 @@ impl fmt::Display for BezierRayError {
                 "identically zero ray normal; expected isolated contacts, not supporting-line coincidence"
             ),
             Self::Direction(cause) => write!(formatter, "ray longitudinal numerator: {cause}"),
+            Self::Endpoint(cause) => write!(formatter, "curve endpoint: {cause}"),
             Self::Signs(cause) => write!(formatter, "ray side: {cause}"),
             Self::LocalNormalSign(root) => write!(
                 formatter,
@@ -37,7 +40,7 @@ impl std::error::Error for BezierRayError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         match self {
             Self::Line(cause) => Some(cause),
-            Self::Direction(cause) => Some(cause),
+            Self::Direction(cause) | Self::Endpoint(cause) => Some(cause),
             Self::Signs(cause) => Some(cause),
             Self::SupportingLineCoincidence | Self::LocalNormalSign(_) => None,
         }

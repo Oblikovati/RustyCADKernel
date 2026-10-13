@@ -6,6 +6,7 @@ mod fixture;
 mod ownership;
 mod rays;
 mod winding;
+mod wire;
 fn query(controls: &[[f64; 2]]) -> BezierLineQuery<'_> {
     BezierLineQuery {
         controls,
