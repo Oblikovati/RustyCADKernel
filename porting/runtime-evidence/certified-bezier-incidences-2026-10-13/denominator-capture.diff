@@ -1,0 +1,77 @@
+diff --git a/crates/tkmath/src/predicates/roots/bezier_line/ray/prepare.rs b/crates/tkmath/src/predicates/roots/bezier_line/ray/prepare.rs
+index 23e12bb70..63810722f 100644
+--- a/crates/tkmath/src/predicates/roots/bezier_line/ray/prepare.rs
++++ b/crates/tkmath/src/predicates/roots/bezier_line/ray/prepare.rs
+@@ -1,4 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0-only
++use super::super::super::RootIsolation;
+ use super::super::{projection, solve};
+ use super::{BezierLineQuery, BezierRayError, DyadicBound, IntegerPolynomial};
+ use num_bigint::BigInt;
+@@ -7,6 +8,7 @@ pub(in super::super) struct RegularProjection {
+     pub longitudinal: Vec<BigInt>,
+     pub denominator: IntegerPolynomial,
+     pub work: u16,
++    pub denominator_isolation: RootIsolation,
+ }
+ pub(in super::super) fn regular_projection(
+     query: BezierLineQuery<'_>,
+@@ -32,7 +34,7 @@ pub(in super::super) fn regular_projection_captured<T, F: FnMut() -> bool>(
+     let (projected, longitudinal) =
+         projection::project_directed(query, cancelled).map_err(BezierRayError::Line)?;
+     let captured = capture(&projected, &longitudinal, &bounds, cancelled)?;
+-    let (denominator, work) = solve::regular_denominator(
++    let (denominator, denominator_isolation) = solve::regular_denominator_certified(
+         projected.denominator,
+         bounds,
+         width,
+@@ -44,7 +46,8 @@ pub(in super::super) fn regular_projection_captured<T, F: FnMut() -> bool>(
+         normal: projected.numerator,
+         longitudinal,
+         denominator,
+-        work,
++        work: denominator_isolation.bisections(),
++        denominator_isolation,
+     };
+     Ok((regular, captured))
+ }
+diff --git a/crates/tkmath/src/predicates/roots/bezier_line/solve.rs b/crates/tkmath/src/predicates/roots/bezier_line/solve.rs
+index 46eedfdf3..ebfcb13c3 100644
+--- a/crates/tkmath/src/predicates/roots/bezier_line/solve.rs
++++ b/crates/tkmath/src/predicates/roots/bezier_line/solve.rs
+@@ -52,11 +52,21 @@ pub(super) fn regular_denominator(
+     options: RootIsolationOptions,
+     cancelled: &mut impl FnMut() -> bool,
+ ) -> Result<(super::super::polynomial::IntegerPolynomial, u16), BezierLineError> {
++    regular_denominator_certified(controls, bounds, width, options, cancelled)
++        .map(|(polynomial, isolation)| (polynomial, isolation.bisections()))
++}
++pub(super) fn regular_denominator_certified(
++    controls: Vec<BigInt>,
++    bounds: [DyadicBound; 2],
++    width: DyadicBound,
++    options: RootIsolationOptions,
++    cancelled: &mut impl FnMut() -> bool,
++) -> Result<(super::super::polynomial::IntegerPolynomial, RootIsolation), BezierLineError> {
+     let polynomial = bernstein::from_integer_controls(controls, options.max_degree, cancelled)
+         .map_err(denominator_error)?;
+     let result = solve_polynomial(polynomial.clone(), bounds, width, options, cancelled);
+-    let used = check_denominator(result)?;
+-    Ok((polynomial, used))
++    let isolation = check_denominator(result)?;
++    Ok((polynomial, isolation))
+ }
+ fn denominator_error(cause: RootIsolationError) -> BezierLineError {
+     match cause {
+@@ -69,9 +79,9 @@ fn denominator_error(cause: RootIsolationError) -> BezierLineError {
+ }
+ fn check_denominator(
+     result: Result<RootIsolation, RootIsolationError>,
+-) -> Result<u16, BezierLineError> {
++) -> Result<RootIsolation, BezierLineError> {
+     match result {
+-        Ok(roots) if roots.roots().is_empty() => Ok(roots.bisections()),
++        Ok(roots) if roots.roots().is_empty() => Ok(roots),
+         Ok(roots) => Err(BezierLineError::DenominatorRoots(roots)),
+         Err(cause) => Err(denominator_error(cause)),
+     }

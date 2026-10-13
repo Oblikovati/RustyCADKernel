@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
+use super::super::super::RootIsolation;
 use super::super::{projection, solve};
 use super::{BezierLineQuery, BezierRayError, DyadicBound, IntegerPolynomial};
 use num_bigint::BigInt;
@@ -7,6 +8,7 @@ pub(in super::super) struct RegularProjection {
     pub longitudinal: Vec<BigInt>,
     pub denominator: IntegerPolynomial,
     pub work: u16,
+    pub denominator_isolation: RootIsolation,
 }
 pub(in super::super) fn regular_projection(
     query: BezierLineQuery<'_>,
@@ -32,7 +34,7 @@ pub(in super::super) fn regular_projection_captured<T, F: FnMut() -> bool>(
     let (projected, longitudinal) =
         projection::project_directed(query, cancelled).map_err(BezierRayError::Line)?;
     let captured = capture(&projected, &longitudinal, &bounds, cancelled)?;
-    let (denominator, work) = solve::regular_denominator(
+    let (denominator, denominator_isolation) = solve::regular_denominator_certified(
         projected.denominator,
         bounds,
         width,
@@ -44,7 +46,8 @@ pub(in super::super) fn regular_projection_captured<T, F: FnMut() -> bool>(
         normal: projected.numerator,
         longitudinal,
         denominator,
-        work,
+        work: denominator_isolation.bisections(),
+        denominator_isolation,
     };
     Ok((regular, captured))
 }

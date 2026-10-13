@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Exact supplied-curve parameter classification; no B-rep is built (ADR 0006).
 mod error;
+mod incidence;
+pub use incidence::{
+    BezierConstructionEnclosure, BezierDomainDegreeLimit, BezierDomainSignOptions,
+    BezierIncidenceCause, BezierIncidenceCompletion, BezierIncidenceDegrees,
+    BezierIncidenceFailure, BezierIncidenceQuery, BezierIncidenceReport, BezierIncidenceSource,
+    BezierLineDomain, CertifiedBezierIncidence, certify_bezier_line_incidences,
+};
 mod projection;
 mod ray;
 pub use ray::{BezierRayError, classify_bezier_ray_contacts};

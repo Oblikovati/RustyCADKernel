@@ -52,11 +52,21 @@ pub(super) fn regular_denominator(
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<(super::super::polynomial::IntegerPolynomial, u16), BezierLineError> {
+    regular_denominator_certified(controls, bounds, width, options, cancelled)
+        .map(|(polynomial, isolation)| (polynomial, isolation.bisections()))
+}
+pub(super) fn regular_denominator_certified(
+    controls: Vec<BigInt>,
+    bounds: [DyadicBound; 2],
+    width: DyadicBound,
+    options: RootIsolationOptions,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<(super::super::polynomial::IntegerPolynomial, RootIsolation), BezierLineError> {
     let polynomial = bernstein::from_integer_controls(controls, options.max_degree, cancelled)
         .map_err(denominator_error)?;
     let result = solve_polynomial(polynomial.clone(), bounds, width, options, cancelled);
-    let used = check_denominator(result)?;
-    Ok((polynomial, used))
+    let isolation = check_denominator(result)?;
+    Ok((polynomial, isolation))
 }
 fn denominator_error(cause: RootIsolationError) -> BezierLineError {
     match cause {
@@ -69,9 +79,9 @@ fn denominator_error(cause: RootIsolationError) -> BezierLineError {
 }
 fn check_denominator(
     result: Result<RootIsolation, RootIsolationError>,
-) -> Result<u16, BezierLineError> {
+) -> Result<RootIsolation, BezierLineError> {
     match result {
-        Ok(roots) if roots.roots().is_empty() => Ok(roots.bisections()),
+        Ok(roots) if roots.roots().is_empty() => Ok(roots),
         Ok(roots) => Err(BezierLineError::DenominatorRoots(roots)),
         Err(cause) => Err(denominator_error(cause)),
     }
