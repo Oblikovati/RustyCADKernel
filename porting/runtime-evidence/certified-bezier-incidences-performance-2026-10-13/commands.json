@@ -1,0 +1,80 @@
+[
+  {
+    "workload": "linear",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/certified-curve-incidences/performance-2026-10-13/linear.rss.txt",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/release/deps/bezier_incidence-c12388a22937c22f",
+      "--measure",
+      "--workload=linear"
+    ],
+    "exit": 0
+  },
+  {
+    "workload": "rational-support",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/certified-curve-incidences/performance-2026-10-13/rational-support.rss.txt",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/release/deps/bezier_incidence-c12388a22937c22f",
+      "--measure",
+      "--workload=rational-support"
+    ],
+    "exit": 0
+  },
+  {
+    "workload": "rational-segment",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/certified-curve-incidences/performance-2026-10-13/rational-segment.rss.txt",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/release/deps/bezier_incidence-c12388a22937c22f",
+      "--measure",
+      "--workload=rational-segment"
+    ],
+    "exit": 0
+  },
+  {
+    "workload": "cubic-three",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/certified-curve-incidences/performance-2026-10-13/cubic-three.rss.txt",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/release/deps/bezier_incidence-c12388a22937c22f",
+      "--measure",
+      "--workload=cubic-three"
+    ],
+    "exit": 0
+  },
+  {
+    "workload": "quartic-repeated",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/certified-curve-incidences/performance-2026-10-13/quartic-repeated.rss.txt",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/release/deps/bezier_incidence-c12388a22937c22f",
+      "--measure",
+      "--workload=quartic-repeated"
+    ],
+    "exit": 0
+  },
+  {
+    "workload": "completed-empty",
+    "command": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/certified-curve-incidences/performance-2026-10-13/completed-empty.rss.txt",
+      "/home/vmiguel/git/oblikovati-workspace/Martensite-certified-curve-incidences/target/release/deps/bezier_incidence-c12388a22937c22f",
+      "--measure",
+      "--workload=completed-empty"
+    ],
+    "exit": 0
+  }
+]
