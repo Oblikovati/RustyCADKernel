@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 //! Typed defects, unknown coverage and complete parent sets must survive adapters.
-use super::outcome::{
-    SourceRelation, StageCoverage, ValidationCause, ValidationStage, attributed_occurrence,
-};
+use super::outcome::{StageCoverage, ValidationCause, ValidationStage, attributed_occurrence};
 use super::statuses::status_cause;
 use rustycad_tktopalgo::brep_check::{BRepCheckAnalyzer, BRepCheckStatus, ListOfStatus};
 
@@ -43,14 +41,8 @@ fn occurrence_parent_sets_are_complete_sorted_and_orientation_specific() {
     use rustycad_tkg3d::top_abs::Orientation;
     let face = super::tests::box_face();
     let sources = [
-        SourceRelation {
-            output: face.clone(),
-            parents: vec![7, 3],
-        },
-        SourceRelation {
-            output: face.clone(),
-            parents: vec![7, 11],
-        },
+        super::source_relation_test_support::test_source_relation(&face, &[7, 3]),
+        super::source_relation_test_support::test_source_relation(&face, &[7, 11]),
     ];
     let related = attributed_occurrence(&face, &sources);
     assert_eq!(related.source_parents, Some(vec![3, 7, 11]));
