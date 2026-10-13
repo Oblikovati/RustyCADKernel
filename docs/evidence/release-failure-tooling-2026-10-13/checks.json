@@ -1,0 +1,9 @@
+{
+  "base": "57c310204",
+  "scope": "Release orchestration/logging only; no workflow/renderer/golden/tolerance changes",
+  "command": "PYTHONPATH=tools:tools/tests python3 -m unittest test_release_failure_evidence test_release_packages test_ci_oracle_boundary -v",
+  "tests": 31,
+  "failed": 0,
+  "native_or_gpu_executions": 0,
+  "contract": "Original cold failure unchanged; bounded receipts survive stage cleanup; --root selects tagged kernel separately from tooling"
+}
