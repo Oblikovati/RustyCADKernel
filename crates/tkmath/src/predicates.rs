@@ -2,6 +2,9 @@
 //! Exact signs of supplied binary64 coordinates, separate from metric tolerance.
 //! This extension does not change mapped OCCT decisions (ADR 0003, issue #10).
 
+/// Certified polynomial roots for extension topology.
+pub mod roots;
+
 use num_bigint::{BigInt, Sign};
 use std::fmt;
 

@@ -4,3 +4,5 @@ include!("suites/cases_00.rs");
 include!("suites/cases_01.rs");
 
 mod exact_orientation;
+
+mod exact_roots;
