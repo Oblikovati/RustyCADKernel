@@ -14,23 +14,7 @@
 #include <string>
 #include <vector>
 
-std::vector<std::string> split(const std::string& text, char delimiter) {
-  std::vector<std::string> fields;
-  std::stringstream stream(text);
-  std::string field;
-  while (std::getline(stream, field, delimiter)) fields.push_back(field);
-  return fields;
-}
-std::vector<double> decode(const std::string& text) {
-  std::vector<double> values;
-  for (const auto& field : split(text, ',')) {
-    const uint64_t bits = std::stoull(field, nullptr, 16);
-    double value;
-    std::memcpy(&value, &bits, sizeof(value));
-    values.push_back(value);
-  }
-  return values;
-}
+#include "fixture_io.hpp"
 occ::handle<Geom2d_BezierCurve> curve(const std::vector<std::string>& fields) {
   const auto points = split(fields.at(1), ';');
   NCollection_Array1<gp_Pnt2d> poles(1, static_cast<int>(points.size()));

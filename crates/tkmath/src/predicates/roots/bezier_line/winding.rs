@@ -29,27 +29,55 @@ pub fn bezier_winding_contribution(
     query: BezierLineQuery<'_>,
     mut cancelled: impl FnMut() -> bool,
 ) -> Result<BezierWinding, BezierRayError> {
-    WindingQuery::prepare(query, &mut cancelled)?.evaluate(&mut cancelled)
+    Ok(WindingQuery::prepare(query, &mut cancelled)?
+        .evaluate(&mut cancelled)?
+        .incidence)
 }
 
-struct WindingQuery {
+pub(super) struct WindingEvaluation {
+    pub incidence: BezierWinding,
+    pub bisections: u16,
+}
+pub(super) struct WindingQuery {
     normal: IntegerPolynomial,
     directed: IntegerPolynomial,
     denominator: IntegerPolynomial,
     bounds: [DyadicBound; 2],
     width: DyadicBound,
     options: RootIsolationOptions,
+    denominator_work: u16,
 }
 impl WindingQuery {
     fn prepare(
         query: BezierLineQuery<'_>,
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<Self, BezierRayError> {
+        Self::prepare_captured(query, cancelled, |_, _, _, _| Ok(())).map(|(prepared, ())| prepared)
+    }
+    pub(super) fn prepare_captured<T, F: FnMut() -> bool>(
+        query: BezierLineQuery<'_>,
+        cancelled: &mut F,
+        capture: impl FnOnce(
+            &super::projection::Projection,
+            &[num_bigint::BigInt],
+            &[DyadicBound; 2],
+            &mut F,
+        ) -> Result<T, BezierRayError>,
+    ) -> Result<(Self, T), BezierRayError> {
         let (bounds, width) = super::checked_query(query).map_err(BezierRayError::Line)?;
-        let projected = ray::regular_projection(query, bounds.clone(), width.clone(), cancelled)?;
+        let (projected, captured) = ray::regular_projection_captured(
+            query,
+            bounds.clone(),
+            width.clone(),
+            cancelled,
+            capture,
+        )?;
         let mut options = query.options;
         options.max_bisections -= projected.work;
-        Self::from_projection(projected, bounds, width, options, cancelled)
+        Ok((
+            Self::from_projection(projected, bounds, width, options, cancelled)?,
+            captured,
+        ))
     }
     fn from_projection(
         projected: ray::RegularProjection,
@@ -58,12 +86,7 @@ impl WindingQuery {
         options: RootIsolationOptions,
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<Self, BezierRayError> {
-        let normal = IntegerPolynomial::accept_zero(bernstein::from_integer_controls(
-            projected.normal,
-            options.max_degree,
-            cancelled,
-        ))
-        .map_err(ray::normal_error)?;
+        let normal = normal_polynomial(projected.normal, options.max_degree, cancelled)?;
         let directed = ray::directed_product(
             projected.longitudinal,
             projected.denominator.clone(),
@@ -77,20 +100,35 @@ impl WindingQuery {
             bounds,
             width,
             options,
+            denominator_work: projected.work,
         })
     }
-    fn evaluate(
+    pub(super) fn evaluate(
         self,
         cancelled: &mut impl FnMut() -> bool,
-    ) -> Result<BezierWinding, BezierRayError> {
+    ) -> Result<WindingEvaluation, BezierRayError> {
+        let denominator_work = self.denominator_work;
+        let mut result = self.evaluate_numerator(cancelled)?;
+        result.bisections += denominator_work;
+        Ok(result)
+    }
+    fn evaluate_numerator(
+        self,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<WindingEvaluation, BezierRayError> {
         if self.normal.0.is_empty() {
             return self.coincident(cancelled);
         }
         let evaluated = self.isolated(cancelled)?;
-        if evaluated.signs().contains(&Ordering::Equal) {
-            return Ok(BezierWinding::Boundary);
-        }
-        self.sum(evaluated.isolation(), evaluated.signs(), cancelled)
+        let incidence = if evaluated.signs().contains(&Ordering::Equal) {
+            BezierWinding::Boundary
+        } else {
+            self.sum(evaluated.isolation(), evaluated.signs(), cancelled)?
+        };
+        Ok(WindingEvaluation::new(
+            incidence,
+            evaluated.isolation().bisections(),
+        ))
     }
     fn isolated(
         &self,
@@ -110,9 +148,9 @@ impl WindingQuery {
     fn coincident(
         self,
         cancelled: &mut impl FnMut() -> bool,
-    ) -> Result<BezierWinding, BezierRayError> {
+    ) -> Result<WindingEvaluation, BezierRayError> {
         if self.directed.0.is_empty() {
-            return Ok(BezierWinding::Boundary);
+            return Ok(WindingEvaluation::new(BezierWinding::Boundary, 0));
         }
         let roots = solve::solve_polynomial(
             self.directed,
@@ -122,11 +160,12 @@ impl WindingQuery {
             cancelled,
         )
         .map_err(BezierRayError::Direction)?;
-        Ok(if roots.roots().is_empty() {
+        let incidence = if roots.roots().is_empty() {
             BezierWinding::Clear(0)
         } else {
             BezierWinding::Boundary
-        })
+        };
+        Ok(WindingEvaluation::new(incidence, roots.bisections()))
     }
     fn sum(
         &self,
@@ -149,5 +188,25 @@ impl WindingQuery {
             }
         }
         Ok(BezierWinding::Clear(count))
+    }
+}
+
+fn normal_polynomial(
+    controls: Vec<num_bigint::BigInt>,
+    max_degree: u16,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<IntegerPolynomial, BezierRayError> {
+    IntegerPolynomial::accept_zero(bernstein::from_integer_controls(
+        controls, max_degree, cancelled,
+    ))
+    .map_err(ray::normal_error)
+}
+
+impl WindingEvaluation {
+    fn new(incidence: BezierWinding, bisections: u16) -> Self {
+        Self {
+            incidence,
+            bisections,
+        }
     }
 }
