@@ -53,7 +53,7 @@ class ReleaseWorkflowTests(unittest.TestCase):
         )
         self.assertIn("name: martensite-release\n", self.release)
         self.assertIn(
-            "target/releases/${{ needs.resolve.outputs.tag }}/*", self.release
+            "kernel/target/releases/${{ needs.resolve.outputs.tag }}/*", self.release
         )
 
     def test_logged_test_failure_cannot_turn_into_success(self) -> None:
@@ -62,6 +62,15 @@ class ReleaseWorkflowTests(unittest.TestCase):
             ["bash", "-c", "set -euo pipefail; false | cat"], capture_output=True
         )
         self.assertNotEqual(result.returncode, 0)
+
+    def test_repaired_tools_are_separate_from_immutable_kernel_source(self) -> None:
+        self.assertIn("path: kernel", self.release)
+        self.assertIn("path: release-tools", self.release)
+        self.assertIn(
+            'tools/release_packages.py --root . --tag "$RELEASE_TAG"', self.release
+        )
+        self.assertIn("working-directory: kernel", self.release)
+        self.assertIn("ref: ${{ github.sha }}", self.release)
 
     def test_publication_uses_the_checked_owner_and_receipt_validator(self) -> None:
         self.assertIn(
