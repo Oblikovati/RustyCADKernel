@@ -30,23 +30,38 @@ pub(super) fn upload_oit_variants(
     pass: &OitFramePass,
 ) -> Result<(), RenderError> {
     for draw in draws.iter_mut().filter(|draw| draw.surface_blend) {
-        let select = |phase| {
-            pipelines
-                .oit
-                .select(runtime, &draw.pipeline, pass.geometry_target(phase))
-        };
-        draw.oit = Some(match pass.mode {
-            RenderTransparency::Weighted { .. } => {
-                OitUploadedVariants::Weighted(select(OitGeometryPhase::Weighted)?)
-            }
-            RenderTransparency::DepthPeeling { .. } => OitUploadedVariants::Peeling {
-                initial: select(OitGeometryPhase::Initial)?,
-                peeling: select(OitGeometryPhase::Peeling)?,
-            },
-            RenderTransparency::Unordered => {
-                unreachable!("unordered frames do not allocate OIT passes")
-            }
-        });
+        draw.oit = Some(select_draw_variants(runtime, pipelines, draw, pass)?);
     }
     Ok(())
+}
+
+fn select_draw_variants(
+    runtime: &Arc<VulkanRuntime>,
+    pipelines: &RasterPipelines,
+    draw: &UploadedDraw,
+    pass: &OitFramePass,
+) -> Result<OitUploadedVariants, RenderError> {
+    let mut select = |phase| {
+        pipelines
+            .oit
+            .select(runtime, &draw.pipeline, pass.geometry_target(phase))
+    };
+    selected_phase_variants(pass.mode, &mut select)
+}
+fn selected_phase_variants(
+    mode: RenderTransparency,
+    select: &mut dyn FnMut(OitGeometryPhase) -> Result<Arc<DrawPipeline>, RenderError>,
+) -> Result<OitUploadedVariants, RenderError> {
+    match mode {
+        RenderTransparency::Weighted { .. } => Ok(OitUploadedVariants::Weighted(select(
+            OitGeometryPhase::Weighted,
+        )?)),
+        RenderTransparency::DepthPeeling { .. } => Ok(OitUploadedVariants::Peeling {
+            initial: select(OitGeometryPhase::Initial)?,
+            peeling: select(OitGeometryPhase::Peeling)?,
+        }),
+        RenderTransparency::Unordered => {
+            unreachable!("unordered frames do not allocate OIT passes")
+        }
+    }
 }

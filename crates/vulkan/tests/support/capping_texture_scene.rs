@@ -47,20 +47,40 @@ impl CappingTextureScene {
 }
 /// Mutate original retained cap inputs without rebuilding the view; `mutate_cap_inputs(scene, plane, texture, mode)`.
 pub fn mutate_cap_inputs(
-    scene: &ViewerScene, plane: &Handle<Graphic3dClipPlane>,
-    texture: &Handle<Graphic3dTexture2D>, mode: &str,
+    scene: &ViewerScene,
+    plane: &Handle<Graphic3dClipPlane>,
+    texture: &Handle<Graphic3dTexture2D>,
+    mode: &str,
 ) {
     refresh_cap_fixture_content(plane, texture, mode);
-    if mode.contains("line-synchronized") { scene.group.synchronize_aspects(); }
-    if mode.contains("sampler-updated") { texture.get_params().set_filter(Graphic3dTypeOfTextureFilter::Bilinear); }
-    if mode.contains("plane-updated") { plane.set_equation(Vec4::new(0.6, 0., -0.8, -1.)).unwrap(); }
-    if mode.contains("alpha-updated") { plane.capping_aspect().set_alpha_mode(Graphic3dAlphaMode::Blend, 0.5); }
+    if mode.contains("line-synchronized") {
+        scene.group.synchronize_aspects();
+    }
+    if mode.contains("sampler-updated") {
+        texture
+            .get_params()
+            .set_filter(Graphic3dTypeOfTextureFilter::Bilinear);
+    }
+    if mode.contains("plane-updated") {
+        plane.set_equation(Vec4::new(0.6, 0., -0.8, -1.)).unwrap();
+    }
+    if mode.contains("alpha-updated") {
+        plane
+            .capping_aspect()
+            .set_alpha_mode(Graphic3dAlphaMode::Blend, 0.5);
+    }
 }
-fn refresh_cap_fixture_content(plane: &Handle<Graphic3dClipPlane>, texture: &Handle<Graphic3dTexture2D>, mode: &str) {
+fn refresh_cap_fixture_content(
+    plane: &Handle<Graphic3dClipPlane>,
+    texture: &Handle<Graphic3dTexture2D>,
+    mode: &str,
+) {
     if mode.contains("image-updated") || mode.contains("image-refreshed") {
         super::texture_scene::updates::mutate_texture_content(texture, "image-updated");
     }
-    if mode.contains("image-refreshed") { plane.set_capping_texture(texture.cast()).unwrap(); }
+    if mode.contains("image-refreshed") {
+        plane.set_capping_texture(texture.cast()).unwrap();
+    }
 }
 fn cap_texture(mode: &str) -> Handle<Graphic3dTexture2D> {
     let texture = texture_handle(cap_image_mode(mode));

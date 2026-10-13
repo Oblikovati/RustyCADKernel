@@ -19,15 +19,7 @@ impl OitCapabilities {
         let probe = super::oit_support::DeviceOitFormats(runtime);
         let weighted = super::oit_support::weighted_attachment_formats(&probe);
         let peeling = super::oit_support::peeling_attachment_formats(&probe);
-        let mut samples = runtime.limits.framebuffer_color_sample_counts
-            & runtime.limits.framebuffer_depth_sample_counts;
-        if matches!(transparency, RenderTransparency::Weighted { .. })
-            && let Some(formats) = weighted
-        {
-            for format in formats {
-                samples &= super::oit_support::floating_sample_counts(runtime, format);
-            }
-        }
+        let samples = compatible_attachment_samples(runtime, transparency, weighted);
         Self {
             weighted_formats: weighted.is_some(),
             peeling_formats: peeling.is_some(),
@@ -36,6 +28,22 @@ impl OitCapabilities {
             attachment_samples: samples,
         }
     }
+}
+fn compatible_attachment_samples(
+    runtime: &super::runtime::VulkanRuntime,
+    transparency: RenderTransparency,
+    weighted: Option<[vk::Format; 2]>,
+) -> vk::SampleCountFlags {
+    let mut samples = runtime.limits.framebuffer_color_sample_counts
+        & runtime.limits.framebuffer_depth_sample_counts;
+    if matches!(transparency, RenderTransparency::Weighted { .. })
+        && let Some(formats) = weighted
+    {
+        for format in formats {
+            samples &= super::oit_support::floating_sample_counts(runtime, format);
+        }
+    }
+    samples
 }
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub(super) struct OitResourcePlan {
@@ -49,29 +57,48 @@ pub(super) fn choose_resource_plan(
     has_transparent_fill: bool,
 ) -> OitResourcePlan {
     let mut plan = initial_resource_plan(raster, caps);
-    if plan.transparency == RenderTransparency::Unordered { return plan; }
-    if !check_weighted_compatibility(&mut plan, caps) { return plan; }
+    if plan.transparency == RenderTransparency::Unordered {
+        return plan;
+    }
+    if !check_weighted_compatibility(&mut plan, caps) {
+        return plan;
+    }
     apply_oit_sample_fallback(&mut plan, has_transparent_fill);
     if matches!(plan.transparency, RenderTransparency::DepthPeeling { .. })
-        && (!caps.peeling_formats || caps.max_color_attachments < 3) {
+        && (!caps.peeling_formats || caps.max_color_attachments < 3)
+    {
         plan.transparency = RenderTransparency::Unordered;
     }
     plan
 }
 fn initial_resource_plan(raster: RenderRasterSettings, caps: OitCapabilities) -> OitResourcePlan {
     let samples = requested_samples(raster, caps);
-    let transparency = if raster.disabled_capabilities & 2 != 0 && samples == vk::SampleCountFlags::TYPE_1 {
-        RenderTransparency::Unordered
-    } else { raster.transparency };
-    OitResourcePlan { transparency, samples, disable_feedback: 0 }
+    let transparency =
+        if raster.disabled_capabilities & 2 != 0 && samples == vk::SampleCountFlags::TYPE_1 {
+            RenderTransparency::Unordered
+        } else {
+            raster.transparency
+        };
+    OitResourcePlan {
+        transparency,
+        samples,
+        disable_feedback: 0,
+    }
 }
 fn check_weighted_compatibility(plan: &mut OitResourcePlan, caps: OitCapabilities) -> bool {
-    let incompatible = !caps.weighted_formats || caps.max_color_attachments < 2
+    let incompatible = !caps.weighted_formats
+        || caps.max_color_attachments < 2
         || (plan.samples != vk::SampleCountFlags::TYPE_1 && !caps.sample_rate_shading);
-    if !incompatible { return true; }
+    if !incompatible {
+        return true;
+    }
     plan.transparency = RenderTransparency::Unordered;
     // Native checkOitCompatibility writes DisableMSAA for this already-selected MSAA frame.
-    plan.disable_feedback |= if plan.samples == vk::SampleCountFlags::TYPE_1 { 2 } else { 1 };
+    plan.disable_feedback |= if plan.samples == vk::SampleCountFlags::TYPE_1 {
+        2
+    } else {
+        1
+    };
     false
 }
 

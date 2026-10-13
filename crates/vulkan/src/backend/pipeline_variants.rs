@@ -238,7 +238,8 @@ fn special_variant(draw: &PrimitiveDraw, stencil: bool) -> PipelineVariant {
 }
 pub(super) fn encoded_surface_attachment(draw: &PrimitiveDraw) -> bool {
     !draw.surface_texture_binding_only
-        && (draw.compatibility_color_target || draw.fixed_function_lighting
+        && (draw.compatibility_color_target
+            || draw.fixed_function_lighting
             || crate::fixed_surface_environment::uses_fixed_surface_environment(draw))
 }
 fn validate_special_features(

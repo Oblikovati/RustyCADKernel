@@ -30,14 +30,38 @@ pub const OIT_BASIC_ASSETS: &[OitBasicAsset] = &[
 
 macro_rules! sprite_alpha_asset {
     ($mode:literal) => {
-        ($mode,
-        include_bytes!(concat!("../fixtures/oit/host/sprite-mask-",$mode,".rgba")).as_slice(),
-        include_bytes!(concat!("../fixtures/oit/host/sprite-mask-",$mode,".depth")).as_slice(),
-        include_bytes!(concat!("../fixtures/oit/software/sprite-mask-",$mode,".rgba")).as_slice(),
-        include_bytes!(concat!("../fixtures/oit/software/sprite-mask-",$mode,".depth")).as_slice())
+        (
+            $mode,
+            include_bytes!(concat!("../fixtures/oit/host/sprite-mask-", $mode, ".rgba")).as_slice(),
+            include_bytes!(concat!(
+                "../fixtures/oit/host/sprite-mask-",
+                $mode,
+                ".depth"
+            ))
+            .as_slice(),
+            include_bytes!(concat!(
+                "../fixtures/oit/software/sprite-mask-",
+                $mode,
+                ".rgba"
+            ))
+            .as_slice(),
+            include_bytes!(concat!(
+                "../fixtures/oit/software/sprite-mask-",
+                $mode,
+                ".depth"
+            ))
+            .as_slice(),
+        )
     };
 }
-type OitSpriteAsset = (&'static str, &'static [u8], &'static [u8], &'static [u8], &'static [u8]);
+type OitSpriteAsset = (
+    &'static str,
+    &'static [u8],
+    &'static [u8],
+    &'static [u8],
+    &'static [u8],
+);
 pub const SPRITE_ALPHA_ASSETS: &[OitSpriteAsset] = &[
-    sprite_alpha_asset!("weighted"), sprite_alpha_asset!("peeling"),
+    sprite_alpha_asset!("weighted"),
+    sprite_alpha_asset!("peeling"),
 ];

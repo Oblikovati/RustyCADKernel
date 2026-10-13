@@ -105,20 +105,7 @@ impl OitCommandRecorder<'_> {
         colors: &[vk::RenderingAttachmentInfo<'_>],
         depth: Option<(&vk::RenderingAttachmentInfo<'_>, bool)>,
     ) {
-        let area = vk::Rect2D {
-            offset: Default::default(),
-            extent: self.resources.extent,
-        };
-        let mut info = vk::RenderingInfo::default()
-            .render_area(area)
-            .layer_count(1)
-            .color_attachments(colors);
-        if let Some((attachment, stencil)) = depth {
-            info = info.depth_attachment(attachment);
-            if stencil {
-                info = info.stencil_attachment(attachment);
-            }
-        }
+        let info = colors_rendering_info(colors, depth, self.resources.extent);
         unsafe {
             self.runtime
                 .device()
@@ -161,4 +148,30 @@ pub(super) fn color_attachment(
         },
         initialize,
     )
+}
+
+fn colors_rendering_info<'a>(
+    colors: &'a [vk::RenderingAttachmentInfo<'a>],
+    depth: Option<(&'a vk::RenderingAttachmentInfo<'a>, bool)>,
+    extent: vk::Extent2D,
+) -> vk::RenderingInfo<'a> {
+    let area = oit_render_area(extent);
+    let mut info = vk::RenderingInfo::default()
+        .render_area(area)
+        .layer_count(1)
+        .color_attachments(colors);
+    if let Some((attachment, stencil)) = depth {
+        info = info.depth_attachment(attachment);
+        if stencil {
+            info = info.stencil_attachment(attachment);
+        }
+    }
+    info
+}
+
+fn oit_render_area(extent: vk::Extent2D) -> vk::Rect2D {
+    vk::Rect2D {
+        offset: Default::default(),
+        extent,
+    }
 }

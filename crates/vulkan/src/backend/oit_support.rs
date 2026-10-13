@@ -27,9 +27,7 @@ pub(super) fn floating_sample_counts(
     runtime: &VulkanRuntime,
     format: vk::Format,
 ) -> vk::SampleCountFlags {
-    let usage = vk::ImageUsageFlags::COLOR_ATTACHMENT
-        | vk::ImageUsageFlags::SAMPLED
-        | vk::ImageUsageFlags::TRANSFER_SRC;
+    let usage = floating_attachment_usage();
     unsafe {
         runtime
             .instance
@@ -45,19 +43,14 @@ pub(super) fn floating_sample_counts(
     .map(|properties| properties.sample_counts)
     .unwrap_or(vk::SampleCountFlags::TYPE_1)
 }
+fn floating_attachment_usage() -> vk::ImageUsageFlags {
+    vk::ImageUsageFlags::COLOR_ATTACHMENT
+        | vk::ImageUsageFlags::SAMPLED
+        | vk::ImageUsageFlags::TRANSFER_SRC
+}
 pub(super) fn weighted_attachment_formats(probe: &dyn OitFormatProbe) -> Option<[vk::Format; 2]> {
-    let color = if probe.floating_attachment(vk::Format::R16G16B16A16_SFLOAT) {
-        vk::Format::R16G16B16A16_SFLOAT
-    } else if probe.floating_attachment(vk::Format::R32G32B32A32_SFLOAT) {
-        vk::Format::R32G32B32A32_SFLOAT
-    } else {
-        return None;
-    };
-    let single = if color == vk::Format::R16G16B16A16_SFLOAT {
-        vk::Format::R16_SFLOAT
-    } else {
-        vk::Format::R32_SFLOAT
-    };
+    let color = preferred_weighted_color(probe)?;
+    let single = weighted_scalar_format(color);
     Some([
         color,
         if probe.floating_attachment(single) {
@@ -66,6 +59,20 @@ pub(super) fn weighted_attachment_formats(probe: &dyn OitFormatProbe) -> Option<
             color
         },
     ])
+}
+fn preferred_weighted_color(probe: &dyn OitFormatProbe) -> Option<vk::Format> {
+    [
+        vk::Format::R16G16B16A16_SFLOAT,
+        vk::Format::R32G32B32A32_SFLOAT,
+    ]
+    .into_iter()
+    .find(|format| probe.floating_attachment(*format))
+}
+fn weighted_scalar_format(color: vk::Format) -> vk::Format {
+    if color == vk::Format::R16G16B16A16_SFLOAT {
+        return vk::Format::R16_SFLOAT;
+    }
+    vk::Format::R32_SFLOAT
 }
 pub(super) fn peeling_attachment_formats(probe: &dyn OitFormatProbe) -> Option<[vk::Format; 3]> {
     let formats = [
@@ -109,7 +116,12 @@ mod tests {
             weighted_attachment_formats(&device),
             Some([vk::Format::R16G16B16A16_SFLOAT; 2])
         );
-        device.formats = vec![vk::Format::R32G32B32A32_SFLOAT, vk::Format::R32_SFLOAT];
+    }
+    #[test]
+    fn float_color_and_scalar_fallback_remains_usable_without_half_formats() {
+        let device = NamedOitFormatDevice {
+            formats: vec![vk::Format::R32G32B32A32_SFLOAT, vk::Format::R32_SFLOAT],
+        };
         assert_eq!(
             weighted_attachment_formats(&device),
             Some([vk::Format::R32G32B32A32_SFLOAT, vk::Format::R32_SFLOAT])

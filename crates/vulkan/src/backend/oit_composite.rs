@@ -42,15 +42,19 @@ impl OitCompositePipeline {
             descriptors,
             shaders: vec![],
         };
-        for bytes in composite_shaders(target) {
-            pipeline.shaders.push(load_shader(runtime, bytes)?);
-        }
-        let layouts = [pipeline.descriptors.handle];
-        let info = vk::PipelineLayoutCreateInfo::default().set_layouts(&layouts);
-        pipeline.layout = unsafe { runtime.device().create_pipeline_layout(&info, None) }
-            .map_err(|e| vk_error("create OIT composite layout", e))?;
+        pipeline.initialize_shaders(target)?;
         pipeline.create(target)?;
         Ok(pipeline)
+    }
+    fn initialize_shaders(&mut self, target: OitCompositeTarget) -> Result<(), RenderError> {
+        for bytes in composite_shaders(target) {
+            self.shaders.push(load_shader(&self.runtime, bytes)?);
+        }
+        let layouts = [self.descriptors.handle];
+        let info = vk::PipelineLayoutCreateInfo::default().set_layouts(&layouts);
+        self.layout = unsafe { self.runtime.device().create_pipeline_layout(&info, None) }
+            .map_err(|e| vk_error("create OIT composite layout", e))?;
+        Ok(())
     }
     fn create(&mut self, target: OitCompositeTarget) -> Result<(), RenderError> {
         let state = CompositeFixedState::new(target);
@@ -61,11 +65,7 @@ impl OitCompositePipeline {
         let mut rendering = vk::PipelineRenderingCreateInfo::default()
             .color_attachment_formats(&formats)
             .depth_attachment_format(target.depth)
-            .stencil_attachment_format(if target.stencil {
-                target.depth
-            } else {
-                vk::Format::UNDEFINED
-            });
+            .stencil_attachment_format(composite_stencil_format(target));
         let info = state
             .description(self.layout, &stages)
             .color_blend_state(&blend)
@@ -85,6 +85,12 @@ impl Drop for OitCompositePipeline {
             }
         }
     }
+}
+fn composite_stencil_format(target: OitCompositeTarget) -> vk::Format {
+    if target.stencil {
+        return target.depth;
+    }
+    vk::Format::UNDEFINED
 }
 fn composite_shaders(target: OitCompositeTarget) -> [&'static [u8]; 2] {
     let fragment = match target.phase {

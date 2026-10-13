@@ -85,14 +85,18 @@ impl OitPassDescriptors {
             images,
             depth_factor,
         };
-        descriptors.parameters = Some(upload_oit_parameters(
-            &layout.runtime,
-            depth_factor,
-            alpha_cutoff,
-        )?);
+        descriptors.initialize_parameters(alpha_cutoff)?;
         descriptors.allocate()?;
         descriptors.write(images);
         Ok(descriptors)
+    }
+    fn initialize_parameters(&mut self, cutoff: Option<f32>) -> Result<(), RenderError> {
+        self.parameters = Some(upload_oit_parameters(
+            &self.layout.runtime,
+            self.depth_factor,
+            cutoff,
+        )?);
+        Ok(())
     }
     fn allocate(&mut self) -> Result<(), RenderError> {
         let layouts = [self.layout.handle];
@@ -107,32 +111,59 @@ impl OitPassDescriptors {
         let images = self.descriptor_images(views);
         let mut writes = self.image_writes(&images);
         let buffer = self.parameters.as_ref().map(|parameters| {
-            vk::DescriptorBufferInfo::default().buffer(parameters.handle).range(16)
+            vk::DescriptorBufferInfo::default()
+                .buffer(parameters.handle)
+                .range(16)
         });
-        if let Some(buffer) = &buffer { writes.push(self.parameter_write(buffer)); }
-        unsafe { self.layout.runtime.device().update_descriptor_sets(&writes, &[]); }
+        if let Some(buffer) = &buffer {
+            writes.push(self.parameter_write(buffer));
+        }
+        unsafe {
+            self.layout
+                .runtime
+                .device()
+                .update_descriptor_sets(&writes, &[]);
+        }
     }
     fn descriptor_images(&self, views: Option<[vk::ImageView; 2]>) -> Vec<vk::DescriptorImageInfo> {
-        views.into_iter().flatten().map(|view| {
-            vk::DescriptorImageInfo::default().sampler(self.layout.sampler).image_view(view)
-                .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
-        }).collect()
+        views
+            .into_iter()
+            .flatten()
+            .map(|view| {
+                vk::DescriptorImageInfo::default()
+                    .sampler(self.layout.sampler)
+                    .image_view(view)
+                    .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
+            })
+            .collect()
     }
-    fn image_writes<'a>(&self, images: &'a [vk::DescriptorImageInfo]) -> Vec<vk::WriteDescriptorSet<'a>> {
+    fn image_writes<'a>(
+        &self,
+        images: &'a [vk::DescriptorImageInfo],
+    ) -> Vec<vk::WriteDescriptorSet<'a>> {
         let offset = u32::from(self.layout.geometry);
-        images.iter().enumerate().map(|(index, image)| {
-            vk::WriteDescriptorSet::default().dst_set(self.set).dst_binding(offset + index as u32)
-                .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
-                .image_info(std::slice::from_ref(image))
-        }).collect()
+        images
+            .iter()
+            .enumerate()
+            .map(|(index, image)| {
+                vk::WriteDescriptorSet::default()
+                    .dst_set(self.set)
+                    .dst_binding(offset + index as u32)
+                    .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+                    .image_info(std::slice::from_ref(image))
+            })
+            .collect()
     }
-    fn parameter_write<'a>(&self, buffer: &'a vk::DescriptorBufferInfo) -> vk::WriteDescriptorSet<'a> {
-        vk::WriteDescriptorSet::default().dst_set(self.set)
-            .dst_binding(if self.layout.geometry {0} else {2})
+    fn parameter_write<'a>(
+        &self,
+        buffer: &'a vk::DescriptorBufferInfo,
+    ) -> vk::WriteDescriptorSet<'a> {
+        vk::WriteDescriptorSet::default()
+            .dst_set(self.set)
+            .dst_binding(if self.layout.geometry { 0 } else { 2 })
             .descriptor_type(vk::DescriptorType::STORAGE_BUFFER)
             .buffer_info(std::slice::from_ref(buffer))
     }
-
 }
 impl Drop for OitPassDescriptors {
     fn drop(&mut self) {
@@ -147,26 +178,25 @@ impl Drop for OitPassDescriptors {
 fn oit_descriptor_bindings(geometry: bool) -> Vec<vk::DescriptorSetLayoutBinding<'static>> {
     let offset = u32::from(geometry);
     let mut bindings: Vec<_> = (0..2)
-        .map(|index| {
-            vk::DescriptorSetLayoutBinding::default()
-                .binding(index + offset)
-                .descriptor_count(1)
-                .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
-                .stage_flags(vk::ShaderStageFlags::FRAGMENT)
-        })
+        .map(|index| sampler_binding(index + offset))
         .collect();
-    {
-        let index = if geometry { 0 } else { 2 };
-        bindings.insert(
-            index,
-            vk::DescriptorSetLayoutBinding::default()
-                .binding(index as u32)
-                .descriptor_count(1)
-                .descriptor_type(vk::DescriptorType::STORAGE_BUFFER)
-                .stage_flags(vk::ShaderStageFlags::FRAGMENT),
-        );
-    }
+    let index = if geometry { 0 } else { 2 };
+    bindings.insert(
+        index,
+        vk::DescriptorSetLayoutBinding::default()
+            .binding(index as u32)
+            .descriptor_count(1)
+            .descriptor_type(vk::DescriptorType::STORAGE_BUFFER)
+            .stage_flags(vk::ShaderStageFlags::FRAGMENT),
+    );
     bindings
+}
+fn sampler_binding(index: u32) -> vk::DescriptorSetLayoutBinding<'static> {
+    vk::DescriptorSetLayoutBinding::default()
+        .binding(index)
+        .descriptor_count(1)
+        .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+        .stage_flags(vk::ShaderStageFlags::FRAGMENT)
 }
 fn oit_sampler_description() -> vk::SamplerCreateInfo<'static> {
     vk::SamplerCreateInfo::default()

@@ -20,26 +20,50 @@ pub(super) fn frame_raster_plan(
         };
     }
     let caps = raster_capabilities(runtime, frame.transparency(), stencil);
-    let mut plan = choose_resource_plan(frame.raster, caps,
-        frame.draws.iter().any(crate::PrimitiveDraw::is_surface_blended));
+    let mut plan = choose_resource_plan(
+        frame.raster,
+        caps,
+        frame
+            .draws
+            .iter()
+            .any(crate::PrimitiveDraw::is_surface_blended),
+    );
     apply_scene_resolve_limits(&mut plan, runtime, stencil);
     publish_view_fallback(frame, plan.disable_feedback);
     plan
 }
-fn raster_capabilities(runtime: &VulkanRuntime, mode: RenderTransparency, stencil: bool) -> OitCapabilities {
+fn raster_capabilities(
+    runtime: &VulkanRuntime,
+    mode: RenderTransparency,
+    stencil: bool,
+) -> OitCapabilities {
     let mut caps = OitCapabilities::query(runtime, mode);
-    if stencil { caps.attachment_samples &= runtime.limits.framebuffer_stencil_sample_counts; }
+    if stencil {
+        caps.attachment_samples &= runtime.limits.framebuffer_stencil_sample_counts;
+    }
     caps
 }
 fn apply_scene_resolve_limits(plan: &mut OitResourcePlan, runtime: &VulkanRuntime, stencil: bool) {
-    if plan.samples == vk::SampleCountFlags::TYPE_1 { return; }
-    if supports_scene_resolve(runtime.depth_resolve_modes, runtime.stencil_resolve_modes, stencil) { return; }
+    if plan.samples == vk::SampleCountFlags::TYPE_1 {
+        return;
+    }
+    if supports_scene_resolve(
+        runtime.depth_resolve_modes,
+        runtime.stencil_resolve_modes,
+        stencil,
+    ) {
+        return;
+    }
     plan.samples = vk::SampleCountFlags::TYPE_1;
     plan.disable_feedback |= 1;
 }
 fn publish_view_fallback(frame: &RenderFrame, disabled: u8) {
-    if disabled & 1 != 0 { frame.raster_feedback.disable_multisampling(); }
-    if disabled & 2 != 0 { frame.raster_feedback.disable_oit(); }
+    if disabled & 1 != 0 {
+        frame.raster_feedback.disable_multisampling();
+    }
+    if disabled & 2 != 0 {
+        frame.raster_feedback.disable_oit();
+    }
 }
 
 fn supports_scene_resolve(

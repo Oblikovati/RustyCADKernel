@@ -22,7 +22,9 @@ impl LegacyFragmentAlpha {
 }
 fn restored_material_alpha(cutoff: Option<f32>) -> Option<f32> {
     // Native ShortRealLast disables the compatibility test even for an explicit mask mode.
-    cutoff.filter(|reference| *reference < f32::MAX).map(|reference| reference.clamp(0., 1.))
+    cutoff
+        .filter(|reference| *reference < f32::MAX)
+        .map(|reference| reference.clamp(0., 1.))
 }
 pub(crate) fn capture_material_alpha(
     draw: &mut PrimitiveDraw,

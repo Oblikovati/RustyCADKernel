@@ -4,6 +4,13 @@ from vulkan_oit_cases import OitCaptureCase, oit_alpha_fallback_cases, oit_inter
 
 
 class OitCaseTests(unittest.TestCase):
+    def test_source_receipt_retains_every_native_oit_producer(self) -> None:
+        from vulkan_source_receipt import RECEIPT_ORACLE_PATHS
+        stems = ('layers.hxx', 'transition.cxx', 'alpha_scope.cxx', 'draw_trace.hxx',
+                 'capability.cxx', 'capture.cxx', 'fixture.hxx')
+        self.assertTrue(all('tools/oracle/martensite_oit_' + stem in RECEIPT_ORACLE_PATHS
+                            for stem in stems))
+
     def test_capture_arguments_share_native_and_rust_order(self) -> None:
         case = OitCaptureCase('peeling', 4, .75, 8, True, False, 'clipped')
         self.assertEqual(case.arguments('/tmp/fixture'),

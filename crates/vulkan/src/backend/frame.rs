@@ -353,7 +353,11 @@ fn encode_vertex_sources(draw: &PrimitiveDraw, sources: &[(usize, usize)]) -> Ve
     let mut bytes = Vec::new();
     for &(index, source) in sources {
         let vertex = &draw.vertices[index];
-        bytes.extend(encoded_vertex_header(vertex, draw.text_logic_xor && !draw.compatibility_color_target));
+        bytes.extend(encoded_vertex_header(
+            vertex,
+            draw.text_logic_xor && !draw.compatibility_color_target,
+            draw.compatibility_color_target && draw.textured_style.is_some(),
+        ));
         if let Some(style) = &draw.textured_style {
             bytes.extend(style.uv[index].iter().flat_map(|v| v.to_ne_bytes()));
         }
@@ -392,9 +396,13 @@ fn append_surface_coordinates(bytes: &mut Vec<u8>, draw: &PrimitiveDraw, index: 
     bytes.extend(uv.iter().flat_map(|value| value.to_ne_bytes()));
 }
 
-fn encoded_vertex_header(vertex: &crate::RenderVertex, xor: bool) -> Vec<u8> {
+fn encoded_vertex_header(vertex: &crate::RenderVertex, xor: bool, font_replace: bool) -> Vec<u8> {
     // Native framebuffer conversion precedes XOR; public submissions remain linear RGBA.
-    let color = crate::text_logic::text_target_rgba(xor, vertex.color);
+    let mut color = crate::text_logic::text_target_rgba(xor, vertex.color);
+    // OCCT 3d097a0 OpenGl_Font.cxx133 + Sampler.cxx279: ALPHA/REPLACE ignores vertex alpha.
+    if font_replace {
+        color[3] = 1.;
+    }
     vertex
         .position
         .iter()
@@ -432,6 +440,15 @@ mod xor_tests {
         );
         assert_eq!(&line[72..76], &0xff00_u32.to_ne_bytes());
         assert_eq!(&line[76..80], &2_u32.to_ne_bytes());
+    }
+    #[test]
+    fn fixed_font_alpha_replace_keeps_source_color_and_ordinary_alpha_unchanged() {
+        let vertex = crate::RenderVertex::new([0.; 3], [0.25, 0.5, 0.75, 0.5]);
+        let ordinary = encoded_vertex_header(&vertex, false, false);
+        let compatibility = encoded_vertex_header(&vertex, false, true);
+        assert_eq!(packed_vertex_rgba(&ordinary), vertex.color);
+        assert_eq!(packed_vertex_rgba(&compatibility), [0.25, 0.5, 0.75, 1.]);
+        assert_eq!(vertex.color[3], 0.5);
     }
     #[test]
     fn xor_pack_encodes_only_upload_rgb_and_preserves_linear_submission_and_alpha() {

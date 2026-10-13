@@ -86,12 +86,22 @@ pairs match exact RGBA/depth; requested6/8 retain12 edge-channel differences
 (max78), with identical centers/depth. The configured peeling retry and
 subsequent weighted fallback match exactly. No sample-coordinate tuning is used.
 
-Colored-font controls expose a genuine compatibility contract: fixed-function
-contexts disable framebuffer sRGB even while the font shader remains bound.
-The Vulkan UNORM alias now also covers those glyph passes, without claiming
-fixed lighting or clearing inherited material alpha. All12 programmed/fixed,
-three-mode, software/AMD pairs match exact RGBA (depth below7.45e-8); the old
-306-channel/max74 errors remain in raw receipts.
+Colored-font controls expose two genuine compatibility contracts. Forced
+fixed-function contexts disable framebuffer sRGB, and the native ALPHA font
+texture uses GL_REPLACE, so glyph coverage replaces vertex alpha. The Vulkan
+UNORM alias and upload policy preserve those contracts without changing public
+linear vertex colors or ordinary draw alpha. The original twelve colored-normal
+glyph pairs match exact RGBA; expanded Shadow/Subtitle/Decal/Blend controls retain
+39/48 strict matches after the alpha correction, including six AMD pairs with
+only one-byte differences. Broad old Shadow/Decal errors remain in raw receipts.
+
+A bounded actual draw-state control records GL_XOR enabled on an sRGB attachment
+with framebuffer sRGB enabled for programmable text on both drivers. Configured
+Mesa software nevertheless copies the glyph color while AMD applies XOR; both
+forced-FFP drivers apply XOR on a linear attachment. The three software
+programmable Blend cases therefore remain explicit native-driver diagnostics,
+not one-byte precision cases. No software-specific implementation workaround or
+full text raster parity claim is made.
 
 Nonpositive peeling iteration counts are outside the native defined domain.
 Pinned OpenGl_LayerList.cxx962 initializes the composite buffer index to-1;
@@ -99,3 +109,13 @@ zero/negative loops leave it unchanged and line1230 accessesFBOS[-1]. Actual
 zero/-1 controls repeat SIGSEGV on both configured drivers, while Martensite
 returns the existing typed positive-count error. No empty-render semantics
 or upstream API completion is invented from those undefined native inputs.
+
+The accepted basic, colored glyph, live cap-alpha and actual viewer-layer corpus
+has also been independently captured twice with official Ubuntu Mesa 25.2.8
+llvmpipe/LLVM 20.1.2 at SSE2/128. All 33 native/Vulkan pairs preserve byte-exact
+RGBA and the unchanged 1e-6 depth gate; native Mesa 25 color and depth assets equal the
+existing native Mesa 26 software bytes. The replay selects these proved cohorts using
+actual selected Vulkan physical-device metadata, rejecting unknown identities.
+This does not promote the separately retained sprite, texel-boundary, far-plane
+or high-sample coverage diagnostics. Source and command receipts are under
+`docs/evidence/vulkan-oit/mesa25-accepted`.

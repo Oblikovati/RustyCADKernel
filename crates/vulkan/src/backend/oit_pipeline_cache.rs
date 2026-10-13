@@ -30,8 +30,13 @@ struct OitVariantKey {
     fixed_output: bool,
 }
 impl OitPipelineCache {
-    fn lock_variants(&self, offending: &str) -> Result<std::sync::MutexGuard<'_, OitCachedVariants>, RenderError> {
-        self.0.lock().map_err(|_| rejected(offending, "an available renderer cache"))
+    fn lock_variants(
+        &self,
+        offending: &str,
+    ) -> Result<std::sync::MutexGuard<'_, OitCachedVariants>, RenderError> {
+        self.0
+            .lock()
+            .map_err(|_| rejected(offending, "an available renderer cache"))
     }
     pub fn native_alpha(
         &self,
@@ -46,13 +51,7 @@ impl OitPipelineCache {
             return Ok(pipeline.clone());
         }
         let layout = cache_layout(&mut cached, runtime)?;
-        let pipeline = Arc::new(DrawPipeline::new_native_alpha(
-            runtime,
-            source.kind,
-            samples,
-            coverage,
-            &layout,
-        )?);
+        let pipeline = native_alpha_pipeline(runtime, source, samples, coverage, &layout)?;
         cached.native_alpha.insert(key, pipeline.clone());
         Ok(pipeline)
     }
@@ -71,12 +70,7 @@ impl OitPipelineCache {
         if let Some(pipeline) = cached.multisample.get(&key) {
             return Ok(pipeline.clone());
         }
-        let pipeline = Arc::new(DrawPipeline::new_multisample(
-            runtime,
-            source.kind,
-            samples,
-            coverage,
-        )?);
+        let pipeline = multisample_pipeline(runtime, source, samples, coverage)?;
         cached.multisample.insert(key, pipeline.clone());
         Ok(pipeline)
     }
@@ -85,13 +79,7 @@ impl OitPipelineCache {
         runtime: &Arc<VulkanRuntime>,
         target: super::oit_composite::OitCompositeTarget,
     ) -> Result<Arc<super::oit_composite::OitCompositePipeline>, RenderError> {
-        let key = [
-            target.phase as u32,
-            target.format.as_raw() as u32,
-            target.depth.as_raw() as u32,
-            u32::from(target.stencil),
-            target.samples.as_raw(),
-        ];
+        let key = composite_variant_key(target);
         let mut cached = self.lock_variants("poisoned OIT composite cache")?;
         if let Some(pipeline) = cached.composites.get(&key) {
             return Ok(pipeline.clone());
@@ -121,17 +109,12 @@ impl OitPipelineCache {
             return Ok(pipeline.clone());
         }
         let layout = cache_layout(&mut cached, runtime)?;
-        let pipeline = Arc::new(DrawPipeline::new_oit(
-            runtime,
-            source.kind,
-            target,
-            &layout,
-        )?);
+        let pipeline = geometry_pipeline(runtime, source, target, &layout)?;
         cached.pipelines.insert(key, pipeline.clone());
         Ok(pipeline)
     }
 }
-fn raster_variant_key(source: u64, samples: ash::vk::SampleCountFlags, coverage: bool) -> [u64;3] {
+fn raster_variant_key(source: u64, samples: ash::vk::SampleCountFlags, coverage: bool) -> [u64; 3] {
     [source, samples.as_raw() as u64, u64::from(coverage)]
 }
 fn cache_layout(
@@ -155,16 +138,60 @@ fn variant_key(source: u64, target: OitPipelineTarget) -> OitVariantKey {
         fixed_output: target.fixed_output,
     }
 }
+fn native_alpha_pipeline(
+    runtime: &Arc<VulkanRuntime>,
+    source: &DrawPipeline,
+    samples: ash::vk::SampleCountFlags,
+    coverage: bool,
+    layout: &Arc<OitDescriptorLayout>,
+) -> Result<Arc<DrawPipeline>, RenderError> {
+    DrawPipeline::new_native_alpha(runtime, source.kind, samples, coverage, layout).map(Arc::new)
+}
+fn multisample_pipeline(
+    runtime: &Arc<VulkanRuntime>,
+    source: &DrawPipeline,
+    samples: ash::vk::SampleCountFlags,
+    coverage: bool,
+) -> Result<Arc<DrawPipeline>, RenderError> {
+    DrawPipeline::new_multisample(runtime, source.kind, samples, coverage).map(Arc::new)
+}
+fn geometry_pipeline(
+    runtime: &Arc<VulkanRuntime>,
+    source: &DrawPipeline,
+    target: OitPipelineTarget,
+    layout: &Arc<OitDescriptorLayout>,
+) -> Result<Arc<DrawPipeline>, RenderError> {
+    DrawPipeline::new_oit(runtime, source.kind, target, layout).map(Arc::new)
+}
+fn composite_variant_key(target: super::oit_composite::OitCompositeTarget) -> [u32; 5] {
+    [
+        target.phase as u32,
+        target.format.as_raw() as u32,
+        target.depth.as_raw() as u32,
+        u32::from(target.stencil),
+        target.samples.as_raw(),
+    ]
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
     fn raster_cache_identity_keeps_source_samples_and_coverage_distinct() {
-        let one=ash::vk::SampleCountFlags::TYPE_1;
-        let four=ash::vk::SampleCountFlags::TYPE_4;
-        assert_eq!(super::raster_variant_key(7,one,false), [7,1,0]);
-        assert_ne!(super::raster_variant_key(7,one,false), super::raster_variant_key(8,one,false));
-        assert_ne!(super::raster_variant_key(7,one,false), super::raster_variant_key(7,four,false));
-        assert_ne!(super::raster_variant_key(7,four,false), super::raster_variant_key(7,four,true));
+        let one = ash::vk::SampleCountFlags::TYPE_1;
+        let four = ash::vk::SampleCountFlags::TYPE_4;
+        assert_eq!(super::raster_variant_key(7, one, false), [7, 1, 0]);
+        assert_ne!(
+            super::raster_variant_key(7, one, false),
+            super::raster_variant_key(8, one, false)
+        );
+        assert_ne!(
+            super::raster_variant_key(7, one, false),
+            super::raster_variant_key(7, four, false)
+        );
+        assert_ne!(
+            super::raster_variant_key(7, four, false),
+            super::raster_variant_key(7, four, true)
+        );
     }
 
     use super::super::oit_pipeline::OitGeometryPhase;

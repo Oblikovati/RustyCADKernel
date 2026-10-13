@@ -5,10 +5,10 @@ use rustycad_tkernel::{quantity::ColorRgba, standard::Handle};
 use rustycad_tkservice::{aspect::AspectInteriorStyle, graphic3d::*};
 #[path = "oit_interaction.rs"]
 mod interaction;
-#[path = "oit_overlay.rs"]
-mod overlay;
 #[path = "oit_layers.rs"]
 mod layered;
+#[path = "oit_overlay.rs"]
+mod overlay;
 
 pub struct OitScene {
     pub scene: ViewerScene,
@@ -28,7 +28,11 @@ impl OitScene {
     ) -> Self {
         if fixture.starts_with("cap-") {
             let cap = super::capping_texture_scene::CappingTextureScene::new(driver, fixture);
-            return Self { scene: cap.scene, layer_structure: None, cap_inputs: Some((cap.plane, cap.texture)) };
+            return Self {
+                scene: cap.scene,
+                layer_structure: None,
+                cap_inputs: Some((cap.plane, cap.texture)),
+            };
         }
         assert!(
             OIT_FIXTURES.contains(&fixture),
@@ -44,7 +48,11 @@ impl OitScene {
             overlay::install_overlay(&scene, fixture);
             None
         };
-        Self { scene, layer_structure, cap_inputs: None }
+        Self {
+            scene,
+            layer_structure,
+            cap_inputs: None,
+        }
     }
     /// Replace live groups while retaining the same context; `fixture.replace_groups("two")`.
     pub fn replace_groups(&self, fixture: &str) {
@@ -91,6 +99,10 @@ const OIT_FIXTURES: &[&str] = &[
     "texture-facet",
     "texture-no-modulate",
     "text-colored",
+    "text-shadow",
+    "text-subtitle",
+    "text-decal",
+    "text-xor",
     "sprite-mask",
     "sprite-low-mask",
     "sprite-opaque",

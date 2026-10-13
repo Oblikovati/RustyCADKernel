@@ -20,6 +20,21 @@ pub(super) enum OitTargets {
     },
 }
 impl OitTargets {
+    pub fn geometry_shape(&self) -> ([vk::Format; 3], vk::SampleCountFlags) {
+        match self {
+            Self::Weighted {
+                accumulation,
+                coverage,
+            } => (
+                [accumulation.format, coverage.format, vk::Format::UNDEFINED],
+                accumulation.samples,
+            ),
+            Self::Peeling { ping, .. } => (
+                ping.each_ref().map(|image| image.format),
+                vk::SampleCountFlags::TYPE_1,
+            ),
+        }
+    }
     pub fn create(
         runtime: &Arc<VulkanRuntime>,
         extent: vk::Extent2D,

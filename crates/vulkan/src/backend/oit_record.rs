@@ -1,11 +1,11 @@
 //! Each deferred layer batch shares one OIT accumulation until the next depth-clear boundary.
+use super::oit_render_commands::{color_attachment, peeling_colors};
 use super::{
     frame::FrameResources, image::TargetImage, oit_barriers::OitAttachmentLayouts,
     oit_frame::OitFramePass, oit_pipeline::OitGeometryPhase, oit_targets::OitTargets,
     runtime::VulkanRuntime,
 };
 use crate::{RenderFrame, RenderTransparency};
-use super::oit_render_commands::{color_attachment, peeling_colors};
 use ash::vk;
 use std::ops::Range;
 
@@ -96,11 +96,8 @@ impl<'a> OitCommandRecorder<'a> {
             super::oit_render_commands::color_attachment(coverage.view, [0.; 4], true),
         ];
         self.begin_geometry(&colors);
-        self.geometry(
-            layers.clone(),
-            OitGeometryPhase::Weighted,
-            self.pass().geometry[0].set,
-        );
+        let descriptor = self.pass().geometry[0].set;
+        self.geometry(layers.clone(), OitGeometryPhase::Weighted, descriptor);
         self.transition(&targets, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
         self.final_composite(0, layers);
     }
@@ -120,34 +117,56 @@ impl<'a> OitCommandRecorder<'a> {
     }
     fn initialize_peeling(&mut self, layers: Range<usize>) {
         self.initialize_peeling_images();
-        let depth = color_attachment(self.peeling_images(0)[0].view, [-1e15,-1e15,0.,0.], false);
+        let depth = color_attachment(
+            self.peeling_images(0)[0].view,
+            [-1e15, -1e15, 0., 0.],
+            false,
+        );
         self.begin_geometry(&[depth]);
-        self.geometry(layers, OitGeometryPhase::Initial, self.pass().geometry[1].set);
+        self.geometry(
+            layers,
+            OitGeometryPhase::Initial,
+            self.pass().geometry[1].set,
+        );
     }
     fn initialize_peeling_images(&mut self) {
-        let OitTargets::Peeling { ping, pong, back } = &self.pass().targets else { unreachable!() };
-        self.clear_peeling(ping, [-1e15,-1e15,0.,0.]);
-        self.clear_peeling(pong, [0.,1.,0.,0.]);
+        let OitTargets::Peeling { ping, pong, back } = &self.pass().targets else {
+            unreachable!()
+        };
+        self.clear_peeling(ping, [-1e15, -1e15, 0., 0.]);
+        self.clear_peeling(pong, [0., 1., 0., 0.]);
         self.transition(&[back], vk::ImageLayout::ATTACHMENT_OPTIMAL);
-        self.clear_colors(&[color_attachment(back.view, [0.;4], true)]);
+        self.clear_colors(&[color_attachment(back.view, [0.; 4], true)]);
     }
-    fn peeling_images(&self, index: usize) -> &'a [TargetImage;3] {
-        let OitTargets::Peeling { ping, pong, .. } = &self.pass().targets else { unreachable!() };
+    fn peeling_images(&self, index: usize) -> &'a [TargetImage; 3] {
+        let OitTargets::Peeling { ping, pong, .. } = &self.pass().targets else {
+            unreachable!()
+        };
         if index == 0 { ping } else { pong }
     }
     fn prepare_peel_iteration(&mut self, read: usize) {
         let images = self.peeling_images(read);
-        self.transition(&[&images[0], &images[1]], vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
-        let images = self.peeling_images(1-read);
-        self.clear_peeling(images, [-1e15,-1e15,0.,0.]);
-        self.begin_geometry(&peeling_colors(images, false, [-1e15,-1e15,0.,0.]));
+        self.transition(
+            &[&images[0], &images[1]],
+            vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+        );
+        let images = self.peeling_images(1 - read);
+        self.clear_peeling(images, [-1e15, -1e15, 0., 0.]);
+        self.begin_geometry(&peeling_colors(images, false, [-1e15, -1e15, 0., 0.]));
     }
     fn peel_iteration(&mut self, layers: Range<usize>, iteration: u32) {
         let read = (iteration % 2) as usize;
-        let write = 1-read;
+        let write = 1 - read;
         self.prepare_peel_iteration(read);
-        self.geometry(layers.clone(), OitGeometryPhase::Peeling, self.pass().geometry[read].set);
-        self.transition(&self.peeling_images(write).each_ref(), vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL);
+        self.geometry(
+            layers.clone(),
+            OitGeometryPhase::Peeling,
+            self.pass().geometry[read].set,
+        );
+        self.transition(
+            &self.peeling_images(write).each_ref(),
+            vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+        );
         self.back_composite(write, layers);
     }
 }

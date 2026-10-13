@@ -16,12 +16,17 @@ use surface_texture_scene as texture_scene;
 #[allow(dead_code)]
 #[path = "support/capping_texture_scene.rs"]
 mod capping_texture_scene;
+#[allow(dead_code)]
+#[path = "support/ffp_oracle_profile.rs"]
+mod ffp_oracle_profile;
 #[path = "support/oit_basic_assets.rs"]
 mod oit_basic_assets;
 #[path = "support/oit_finite_assets.rs"]
 mod oit_finite_assets;
 #[path = "support/oit_layer_assets.rs"]
 mod oit_layer_assets;
+#[path = "support/oit_oracle_profile.rs"]
+mod oit_oracle_profile;
 #[allow(dead_code)]
 #[path = "support/oit_scene.rs"]
 mod oit_scene;
@@ -38,25 +43,28 @@ use rustycad_tkservice::graphic3d::{GRAPHIC3D_ZLAYER_ID_DEFAULT, Graphic3dCViewM
 fn retained_unordered_weighted_and_peeling_native_buffers_replay_without_occt() {
     for fixed in [false, true] {
         let driver = oit_driver(fixed);
-        let software = driver.device_name().contains("llvmpipe");
-        for &(method, policy, host_rgba, host_depth, soft_rgba, soft_depth) in
-            oit_basic_assets::OIT_BASIC_ASSETS
-        {
-            if policy != fixed {
-                continue;
-            }
-            let (rgba, depth) = if software {
-                (soft_rgba, soft_depth)
-            } else {
-                (host_rgba, host_depth)
-            };
-            native_golden::assert_capture(&capture_oit_basic(&driver, method), rgba, depth, method);
-        }
+        assert_basic_oit_assets(&driver, fixed);
         assert!(
             driver.validation_errors().is_empty(),
             "{:?}",
             driver.validation_errors()
         );
+    }
+}
+fn assert_basic_oit_assets(driver: &Handle<Graphic3dRenderDriver>, fixed: bool) {
+    let software = oit_oracle_profile::software_oracle(driver);
+    for &(method, policy, host_rgba, host_depth, soft_rgba, soft_depth) in
+        oit_basic_assets::OIT_BASIC_ASSETS
+    {
+        if policy != fixed {
+            continue;
+        }
+        let (rgba, depth) = if software {
+            (soft_rgba, soft_depth)
+        } else {
+            (host_rgba, host_depth)
+        };
+        native_golden::assert_capture(&capture_oit_basic(driver, method), rgba, depth, method);
     }
 }
 fn oit_driver(fixed: bool) -> Handle<Graphic3dRenderDriver> {
@@ -197,30 +205,46 @@ fn native_sprite_cutoff_and_opaque_restore_control_the_later_oit_composite() {
             assert_sprite_composite_control(&driver, name, mode);
         }
     }
-    assert!(driver.validation_errors().is_empty(), "{:?}", driver.validation_errors());
+    assert!(
+        driver.validation_errors().is_empty(),
+        "{:?}",
+        driver.validation_errors()
+    );
 }
 fn assert_sprite_composite_control(driver: &Handle<Graphic3dRenderDriver>, name: &str, mode: &str) {
     let fixture = oit_scene::OitScene::with_scene(driver, false, name);
     fixture.parameters(mode, 0, 0., 4);
     let expected = if name == "sprite-mask" || (name == "sprite-low-mask" && mode == "peeling") {
         [0, 0, 255, 255]
-    } else if mode == "weighted" { [142, 204, 99, 255] }
-    else if driver.device_name().contains("llvmpipe") { [187, 165, 0, 255] }
-    else { [188, 165, 0, 255] };
-    assert_eq!(capture_retained_fixture(&fixture).pixel(20, 20), Some(expected), "{name}/{mode}");
+    } else if mode == "weighted" {
+        [142, 204, 99, 255]
+    } else if driver.device_name().contains("llvmpipe") {
+        [187, 165, 0, 255]
+    } else {
+        [188, 165, 0, 255]
+    };
+    assert_eq!(
+        capture_retained_fixture(&fixture).pixel(20, 20),
+        Some(expected),
+        "{name}/{mode}"
+    );
     fixture.scene.view.remove();
 }
 #[test]
 #[ignore = "configured native sprite coverage differs by one row; strict raw diagnostic stays unchanged"]
 fn sprite_mask_strict_native_buffers_retain_the_coverage_diagnostic() {
     let driver = oit_driver(false);
-    for &(mode, host_rgba, host_depth, soft_rgba, soft_depth) in oit_basic_assets::SPRITE_ALPHA_ASSETS {
+    for &(mode, host_rgba, host_depth, soft_rgba, soft_depth) in
+        oit_basic_assets::SPRITE_ALPHA_ASSETS
+    {
         let fixture = oit_scene::OitScene::with_scene(&driver, false, "sprite-mask");
         fixture.parameters(mode, 0, 0., 4);
         let capture = capture_retained_fixture(&fixture);
         let (rgba, depth) = if driver.device_name().contains("llvmpipe") {
             (soft_rgba, soft_depth)
-        } else { (host_rgba, host_depth) };
+        } else {
+            (host_rgba, host_depth)
+        };
         native_golden::assert_capture(&capture, rgba, depth, mode);
         fixture.scene.view.remove();
     }
@@ -232,16 +256,27 @@ fn native_actual_layer_sharing_and_depth_clear_flush_replay_without_occt() {
     for asset in oit_layer_assets::OIT_LAYER_ASSETS {
         let driver = oit_driver(asset.fixed);
         assert_retained_layer_asset(&driver, asset);
-        assert!(driver.validation_errors().is_empty(), "{:?}", driver.validation_errors());
+        assert!(
+            driver.validation_errors().is_empty(),
+            "{:?}",
+            driver.validation_errors()
+        );
     }
 }
 
-fn assert_retained_layer_asset(driver: &Handle<Graphic3dRenderDriver>, asset: &oit_layer_assets::OitLayerAsset) {
+fn assert_retained_layer_asset(
+    driver: &Handle<Graphic3dRenderDriver>,
+    asset: &oit_layer_assets::OitLayerAsset,
+) {
     let fixture = oit_scene::OitScene::with_scene(driver, false, asset.fixture);
     fixture.parameters(asset.mode, 0, 0., 4);
     fixture.scene.render_view().try_redraw().unwrap();
     let capture = fixture.scene.render_view().capture().unwrap();
-    let (rgba, depth) = if driver.device_name().contains("llvmpipe") { asset.software } else { asset.host };
+    let (rgba, depth) = if oit_oracle_profile::software_oracle(driver) {
+        asset.software
+    } else {
+        asset.host
+    };
     native_golden::assert_capture(&capture, rgba, depth, asset.fixture);
     fixture.scene.view.remove();
 }
@@ -276,8 +311,16 @@ fn assert_finite_oit_asset(asset: &oit_finite_assets::OitFiniteAsset) {
     fixture.scene.render_view().try_redraw().unwrap();
     fixture.mutate_inputs(asset.fixture);
     let capture = capture_retained_fixture(&fixture);
-    let (rgba, depth) = if driver.device_name().contains("llvmpipe") { asset.software } else { asset.host };
+    let (rgba, depth) = if oit_oracle_profile::software_oracle(&driver) {
+        asset.software
+    } else {
+        asset.host
+    };
     native_golden::assert_capture(&capture, rgba, depth, asset.fixture);
-    assert!(driver.validation_errors().is_empty(), "{:?}", driver.validation_errors());
+    assert!(
+        driver.validation_errors().is_empty(),
+        "{:?}",
+        driver.validation_errors()
+    );
     fixture.scene.view.remove();
 }

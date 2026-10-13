@@ -1,4 +1,5 @@
 #pragma once
+#include <OpenGl_GlCore30.hxx>
 // Observe actual geometry/composite sample counts; requested parameters alone are insufficient.
 struct NativeOitDrawTrace {
   occ::handle<OpenGl_Context> context;
@@ -29,6 +30,19 @@ struct NativeOitDrawTrace {
   float scalar(GLenum parameter) {
     GLfloat value=0;context->core11fwd->glGetFloatv(parameter,&value);return value;
   }
+  void emit_logic_attachment() {
+    // Programmable XOR may retain a different attachment route than forced FFP.
+    output<<",\"logic_enabled\":"<<int(context->core11fwd->glIsEnabled(GL_COLOR_LOGIC_OP))
+      <<",\"logic_operation\":"<<integer(GL_LOGIC_OP_MODE)
+      <<",\"blend_enabled\":"<<int(context->core11fwd->glIsEnabled(GL_BLEND))
+      <<",\"srgb_enabled\":"<<int(context->core11fwd->glIsEnabled(GL_FRAMEBUFFER_SRGB));
+    GLint encoding=0,component=0;
+    context->core30->glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,
+      GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING,&encoding);
+    context->core30->glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,
+      GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE,&component);
+    output<<",\"attachment_encoding\":"<<encoding<<",\"attachment_component\":"<<component;
+  }
   void emit(GLenum mode,GLsizei count) {
     GLboolean mask[4]={};context->core11fwd->glGetBooleanv(GL_COLOR_WRITEMASK,mask);
     output<<"{\"primitive\":"<<mode<<",\"count\":"<<count
@@ -38,7 +52,8 @@ struct NativeOitDrawTrace {
       <<",\"alpha_to_coverage\":"<<int(context->core11fwd->glIsEnabled(GL_SAMPLE_ALPHA_TO_COVERAGE))
       <<",\"alpha_test\":"<<int(context->core11fwd->glIsEnabled(GL_ALPHA_TEST))
       <<",\"alpha_function\":"<<integer(GL_ALPHA_TEST_FUNC)<<",\"alpha_reference\":"<<scalar(GL_ALPHA_TEST_REF)
-      <<",\"color_mask\":["<<int(mask[0])<<','<<int(mask[1])<<','<<int(mask[2])<<','<<int(mask[3])<<"]}\n";
+      <<",\"color_mask\":["<<int(mask[0])<<','<<int(mask[1])<<','<<int(mask[2])<<','<<int(mask[3])<<"]";
+    emit_logic_attachment();output<<"}\n";
   }
 };
 thread_local NativeOitDrawTrace* NativeOitDrawTrace::active=nullptr;

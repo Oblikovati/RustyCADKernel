@@ -25,6 +25,23 @@ pub(super) struct OitFramePass {
     pub composite_alpha: BTreeMap<u32, Vec<Arc<OitPassDescriptors>>>,
     pub back_alpha: BTreeMap<u32, Vec<Arc<OitPassDescriptors>>>,
 }
+fn scene_composite(
+    runtime: &Arc<VulkanRuntime>,
+    frame: &RenderFrame,
+    pipelines: &RasterPipelines,
+    targets: &OitTargets,
+) -> Result<Arc<OitCompositePipeline>, RenderError> {
+    let (phase, samples) = match targets {
+        OitTargets::Weighted { accumulation, .. } => {
+            (OitCompositePhase::Weighted, accumulation.samples)
+        }
+        _ => (OitCompositePhase::Peeling, vk::SampleCountFlags::TYPE_1),
+    };
+    pipelines.oit.composite(
+        runtime,
+        scene_composite_target(frame, pipelines.stencil, phase, samples),
+    )
+}
 impl OitFramePass {
     pub fn new(
         runtime: &Arc<VulkanRuntime>,
@@ -49,37 +66,31 @@ impl OitFramePass {
         targets: OitTargets,
     ) -> Result<Self, RenderError> {
         let geometry = geometry_descriptors(runtime, pipelines, &targets, mode)?;
-        let phase = if matches!(mode, RenderTransparency::Weighted { .. }) {
-            OitCompositePhase::Weighted
-        } else {
-            OitCompositePhase::Peeling
-        };
-        let composite = pipelines.oit.composite(
-            runtime,
-            scene_composite_target(
-                frame,
-                pipelines.stencil,
-                phase,
-                match &targets {
-                    OitTargets::Weighted { accumulation, .. } => accumulation.samples,
-                    _ => vk::SampleCountFlags::TYPE_1,
-                },
-            ),
-        )?;
-        let composite_sets = final_descriptors(&targets, &composite)?;
-        let (peeling_back, back_sets) = back_descriptors(runtime, pipelines, &targets)?;
-        Ok(Self {
+        let composite = scene_composite(runtime, frame, pipelines, &targets)?;
+        let mut pass = Self::allocated(mode, targets, geometry, composite);
+        pass.fixed_output = frame.raster.fixed_function;
+        pass.composite_sets = final_descriptors(&pass.targets, &pass.composite)?;
+        (pass.peeling_back, pass.back_sets) = back_descriptors(runtime, pipelines, &pass.targets)?;
+        Ok(pass)
+    }
+    fn allocated(
+        mode: RenderTransparency,
+        targets: OitTargets,
+        geometry: Vec<OitPassDescriptors>,
+        composite: Arc<OitCompositePipeline>,
+    ) -> Self {
+        Self {
             mode,
             targets,
             geometry,
             composite,
-            composite_sets,
-            peeling_back,
-            back_sets,
-            fixed_output: frame.raster.fixed_function,
+            composite_sets: Vec::new(),
+            peeling_back: None,
+            back_sets: Vec::new(),
+            fixed_output: false,
             composite_alpha: BTreeMap::new(),
             back_alpha: BTreeMap::new(),
-        })
+        }
     }
     pub fn prepare_alpha(
         &mut self,
@@ -113,24 +124,13 @@ impl OitFramePass {
             .map_or(original[index].set, |sets| sets[index].set)
     }
     pub fn geometry_target(&self, phase: OitGeometryPhase) -> OitPipelineTarget {
-        let (formats, count, samples) = match &self.targets {
-            OitTargets::Weighted {
-                accumulation,
-                coverage,
-            } => (
-                [accumulation.format, coverage.format, vk::Format::UNDEFINED],
-                2,
-                accumulation.samples,
-            ),
-            OitTargets::Peeling { ping, .. } => (
-                ping.each_ref().map(|image| image.format),
-                if phase == OitGeometryPhase::Initial {
-                    1
-                } else {
-                    3
-                },
-                vk::SampleCountFlags::TYPE_1,
-            ),
+        let (formats, samples) = self.targets.geometry_shape();
+        let count = if matches!(self.targets, OitTargets::Weighted { .. }) {
+            2
+        } else if phase == OitGeometryPhase::Initial {
+            1
+        } else {
+            3
         };
         OitPipelineTarget {
             phase,
@@ -157,28 +157,28 @@ fn geometry_descriptors(
     mode: RenderTransparency,
 ) -> Result<Vec<OitPassDescriptors>, RenderError> {
     let layout = pipelines.oit.layout(runtime)?;
+    let factor = if let RenderTransparency::Weighted { depth_factor } = mode {
+        depth_factor
+    } else {
+        0.
+    };
+    geometry_image_pairs(targets)
+        .into_iter()
+        .map(|images| OitPassDescriptors::new(&layout, images, factor))
+        .collect()
+}
+fn geometry_image_pairs(targets: &OitTargets) -> Vec<[vk::ImageView; 2]> {
     match targets {
         OitTargets::Weighted {
             accumulation,
             coverage,
-        } => {
-            let factor = if let RenderTransparency::Weighted { depth_factor } = mode {
-                depth_factor
-            } else {
-                0.
-            };
-            Ok(vec![OitPassDescriptors::new(
-                &layout,
-                [accumulation.view, coverage.view],
-                factor,
-            )?])
+        } => vec![[accumulation.view, coverage.view]],
+        OitTargets::Peeling { ping, pong, .. } => {
+            vec![[ping[0].view, ping[1].view], [pong[0].view, pong[1].view]]
         }
-        OitTargets::Peeling { ping, pong, .. } => Ok(vec![
-            OitPassDescriptors::new(&layout, [ping[0].view, ping[1].view], 0.)?,
-            OitPassDescriptors::new(&layout, [pong[0].view, pong[1].view], 0.)?,
-        ]),
     }
 }
+
 fn final_descriptors(
     targets: &OitTargets,
     pipeline: &OitCompositePipeline,
@@ -207,13 +207,7 @@ fn back_descriptors(
     let OitTargets::Peeling { ping, pong, back } = targets else {
         return Ok((None, vec![]));
     };
-    let target = OitCompositeTarget {
-        phase: OitCompositePhase::Back,
-        format: back.format,
-        depth: vk::Format::UNDEFINED,
-        stencil: false,
-        samples: vk::SampleCountFlags::TYPE_1,
-    };
+    let target = back_composite_target(back.format);
     let pipeline = pipelines.oit.composite(runtime, target)?;
     let sets = vec![
         OitPassDescriptors::new(&pipeline.descriptors, [ping[2].view, ping[2].view], 0.)?,
@@ -229,17 +223,52 @@ fn scene_composite_target(
 ) -> OitCompositeTarget {
     OitCompositeTarget {
         phase,
-        format: if frame.raster.fixed_function {
-            vk::Format::R8G8B8A8_UNORM
-        } else {
-            vk::Format::R8G8B8A8_SRGB
-        },
-        depth: if stencil {
-            vk::Format::D32_SFLOAT_S8_UINT
-        } else {
-            vk::Format::D32_SFLOAT
-        },
+        format: composite_color_format(frame.raster.fixed_function),
+        depth: composite_depth_format(stencil),
         stencil,
         samples,
+    }
+}
+
+fn back_composite_target(format: vk::Format) -> OitCompositeTarget {
+    OitCompositeTarget {
+        phase: OitCompositePhase::Back,
+        format,
+        depth: vk::Format::UNDEFINED,
+        stencil: false,
+        samples: vk::SampleCountFlags::TYPE_1,
+    }
+}
+
+fn composite_color_format(fixed: bool) -> vk::Format {
+    if fixed {
+        return vk::Format::R8G8B8A8_UNORM;
+    }
+    vk::Format::R8G8B8A8_SRGB
+}
+fn composite_depth_format(stencil: bool) -> vk::Format {
+    if stencil {
+        return vk::Format::D32_SFLOAT_S8_UINT;
+    }
+    vk::Format::D32_SFLOAT
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn scene_composites_keep_context_encoding_and_real_stencil_depth_format() {
+        assert_eq!(composite_color_format(true), vk::Format::R8G8B8A8_UNORM);
+        assert_eq!(composite_color_format(false), vk::Format::R8G8B8A8_SRGB);
+        assert_eq!(composite_depth_format(true), vk::Format::D32_SFLOAT_S8_UINT);
+        assert_eq!(composite_depth_format(false), vk::Format::D32_SFLOAT);
+    }
+    #[test]
+    fn peeling_back_composite_has_no_depth_or_stencil_attachment() {
+        let target = back_composite_target(vk::Format::R16G16B16A16_SFLOAT);
+        assert_eq!(target.phase, OitCompositePhase::Back);
+        assert_eq!(target.format, vk::Format::R16G16B16A16_SFLOAT);
+        assert_eq!(target.depth, vk::Format::UNDEFINED);
+        assert!(!target.stencil);
+        assert_eq!(target.samples, vk::SampleCountFlags::TYPE_1);
     }
 }

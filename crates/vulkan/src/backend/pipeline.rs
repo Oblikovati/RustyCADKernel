@@ -1,7 +1,7 @@
 //! The initial unlit pipeline consumes real vertex/index buffers and a per-draw transform.
-use super::pipeline_layout::{create_layout, fixed_marker_push_range, push_range};
 #[cfg(test)]
 use super::pipeline_layout::descriptor_layout_handles;
+use super::pipeline_layout::{create_layout, fixed_marker_push_range, push_range};
 use super::runtime::{VulkanRuntime, vk_error};
 use crate::{RenderError, error::rejected};
 use ash::vk;

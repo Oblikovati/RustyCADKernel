@@ -31,12 +31,24 @@ pub(super) fn upload_fragment_alpha(
     }
     Ok(())
 }
-fn upload_ordinary_alpha(runtime: &Arc<VulkanRuntime>, pipelines: &RasterPipelines,
-    draw: &mut UploadedDraw, cutoff: f32, samples: vk::SampleCountFlags, coverage: bool) -> Result<(), RenderError> {
+fn upload_ordinary_alpha(
+    runtime: &Arc<VulkanRuntime>,
+    pipelines: &RasterPipelines,
+    draw: &mut UploadedDraw,
+    cutoff: f32,
+    samples: vk::SampleCountFlags,
+    coverage: bool,
+) -> Result<(), RenderError> {
     let layout = pipelines.oit.layout(runtime)?;
-    draw.native_alpha = Some(Arc::new(OitPassDescriptors::parameter_only(&layout, cutoff)?));
-    draw.pipeline = pipelines.oit.native_alpha(runtime, &draw.pipeline, samples,
-        samples != vk::SampleCountFlags::TYPE_1 && coverage && draw.sample_alpha_cutoff)?;
+    draw.native_alpha = Some(Arc::new(OitPassDescriptors::parameter_only(
+        &layout, cutoff,
+    )?));
+    draw.pipeline = pipelines.oit.native_alpha(
+        runtime,
+        &draw.pipeline,
+        samples,
+        samples != vk::SampleCountFlags::TYPE_1 && coverage && draw.sample_alpha_cutoff,
+    )?;
     Ok(())
 }
 fn alpha_geometry_sets(

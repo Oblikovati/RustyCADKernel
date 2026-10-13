@@ -45,8 +45,16 @@ static occ::handle<Graphic3d_ArrayOfTriangles> oit_native_quad(int rank,const st
   for(const auto& corner:corners)vertices->AddVertex(gp_Pnt(corner[0],corner[1],z),gp_Dir(0,0,1),gp_Pnt2d((corner[0]+6)/12,(corner[1]+6)/12));
   return vertices;
 }
-static void oit_native_text(const occ::handle<Graphic3d_Structure>& structure) {
-  const occ::handle<Graphic3d_AspectText3d> style=new Graphic3d_AspectText3d(texture_rgb(.18,.4,.7),"DejaVu Sans",1,0,Aspect_TOST_NORMAL,Aspect_TODT_NORMAL);
+static Aspect_TypeOfDisplayText oit_text_display(const std::string& scene) {
+  if(scene=="text-shadow")return Aspect_TODT_SHADOW;
+  if(scene=="text-subtitle")return Aspect_TODT_SUBTITLE;
+  if(scene=="text-decal")return Aspect_TODT_DEKALE;
+  if(scene=="text-xor")return Aspect_TODT_BLEND;
+  return Aspect_TODT_NORMAL;
+}
+static void oit_native_text(const occ::handle<Graphic3d_Structure>& structure,const std::string& scene) {
+  const occ::handle<Graphic3d_AspectText3d> style=new Graphic3d_AspectText3d(texture_rgb(.18,.4,.7),"DejaVu Sans",1,0,Aspect_TOST_NORMAL,oit_text_display(scene));
+  style->SetColorSubTitle(Quantity_ColorRGBA(.25f,.5f,.75f,.5f));
   const occ::handle<Graphic3d_Text> text=new Graphic3d_Text(16);text->SetText("AV");text->SetPosition(gp_Pnt(0,0,4));
   text->SetHorizontalAlignment(Graphic3d_HTA_CENTER);text->SetVerticalAlignment(Graphic3d_VTA_CENTER);
   const auto group=structure->NewGroup();group->SetPrimitivesAspect(style);group->AddText(text);
@@ -76,7 +84,7 @@ static occ::handle<Graphic3d_Structure> oit_native_geometry(
     group->SetGroupPrimitivesAspect(oit_native_aspect(rank,scene));
     group->AddPrimitiveArray(oit_native_quad(rank,scene));
   }
-  oit_native_overlay(structure,scene);if(scene=="text-colored")oit_native_text(structure);structure->Display();return structure;
+  oit_native_overlay(structure,scene);if(scene.rfind("text-",0)==0)oit_native_text(structure,scene);structure->Display();return structure;
 }
 static void oit_native_parameters(const occ::handle<V3d_View>& view,const std::string& mode,
                                   int samples,float factor,int layers) {

@@ -36,31 +36,28 @@ pub(super) fn oit_fragment_bytes(
             "a native fill primitive for an OIT geometry pass",
         ));
     }
-    let stem = oit_fill_stem(kind);
-    let name = format!(
-        "{stem}.oit.{}{}",
-        target.phase.name(),
-        if target.fixed_output {
-            ".fixed-output"
-        } else {
-            ""
-        }
-    );
+    let name = oit_fragment_name(kind, target);
     super::oit_shader_table::OIT_FRAGMENTS
         .iter()
         .find(|(key, _)| *key == name)
         .map(|(_, bytes)| *bytes)
         .ok_or_else(|| rejected(name, "a compiled OIT fill shader interface"))
 }
+fn oit_fragment_name(kind: PipelineVariant, target: OitPipelineTarget) -> String {
+    let suffix = if target.fixed_output {
+        ".fixed-output"
+    } else {
+        ""
+    };
+    format!(
+        "{}.oit.{}{suffix}",
+        oit_fill_stem(kind),
+        target.phase.name()
+    )
+}
 fn oit_fill_stem(kind: PipelineVariant) -> String {
     let surface = kind.surface_texture || kind.surface_alpha || kind.mesh_edges;
-    let family = if surface {
-        "surface"
-    } else if kind.lighting {
-        "lighting"
-    } else {
-        "unlit"
-    };
+    let family = oit_fill_family(kind, surface);
     let names = [
         (".edges", kind.mesh_edges),
         (".fixed", kind.fixed_lighting),
@@ -73,6 +70,15 @@ fn oit_fill_stem(kind: PipelineVariant) -> String {
             .into_iter()
             .filter_map(|(name, enabled)| enabled.then_some(name))
             .collect::<String>()
+}
+fn oit_fill_family(kind: PipelineVariant, surface: bool) -> &'static str {
+    if surface {
+        return "surface";
+    }
+    if kind.lighting {
+        return "lighting";
+    }
+    "unlit"
 }
 pub(super) fn geometry_blend_attachments(
     target: OitPipelineTarget,

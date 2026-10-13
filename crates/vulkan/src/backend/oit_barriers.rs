@@ -33,7 +33,7 @@ fn oit_image_barrier(
     old: vk::ImageLayout,
     new: vk::ImageLayout,
 ) -> vk::ImageMemoryBarrier2<'static> {
-    let initialized = old != vk::ImageLayout::UNDEFINED;
+    let (stage, access) = prior_attachment_access(old);
     vk::ImageMemoryBarrier2::default()
         .image(image.handle)
         .subresource_range(image.range())
@@ -41,26 +41,50 @@ fn oit_image_barrier(
         .dst_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
         .old_layout(old)
         .new_layout(new)
-        .src_stage_mask(if initialized {
-            vk::PipelineStageFlags2::ALL_GRAPHICS
-        } else {
-            vk::PipelineStageFlags2::NONE
-        })
-        .src_access_mask(if initialized {
-            vk::AccessFlags2::COLOR_ATTACHMENT_WRITE | vk::AccessFlags2::SHADER_SAMPLED_READ
-        } else {
-            vk::AccessFlags2::NONE
-        })
+        .src_stage_mask(stage)
+        .src_access_mask(access)
         .dst_stage_mask(vk::PipelineStageFlags2::ALL_GRAPHICS)
-        .dst_access_mask(if new == vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL {
-            vk::AccessFlags2::SHADER_SAMPLED_READ
-        } else {
-            vk::AccessFlags2::COLOR_ATTACHMENT_READ | vk::AccessFlags2::COLOR_ATTACHMENT_WRITE
-        })
+        .dst_access_mask(next_attachment_access(new))
+}
+fn prior_attachment_access(layout: vk::ImageLayout) -> (vk::PipelineStageFlags2, vk::AccessFlags2) {
+    if layout == vk::ImageLayout::UNDEFINED {
+        return (vk::PipelineStageFlags2::NONE, vk::AccessFlags2::NONE);
+    }
+    (
+        vk::PipelineStageFlags2::ALL_GRAPHICS,
+        vk::AccessFlags2::COLOR_ATTACHMENT_WRITE | vk::AccessFlags2::SHADER_SAMPLED_READ,
+    )
+}
+fn next_attachment_access(layout: vk::ImageLayout) -> vk::AccessFlags2 {
+    if layout == vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL {
+        return vk::AccessFlags2::SHADER_SAMPLED_READ;
+    }
+    vk::AccessFlags2::COLOR_ATTACHMENT_READ | vk::AccessFlags2::COLOR_ATTACHMENT_WRITE
 }
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn layout_access_preserves_initialized_write_to_sampled_visibility() {
+        assert_eq!(
+            prior_attachment_access(vk::ImageLayout::UNDEFINED),
+            (vk::PipelineStageFlags2::NONE, vk::AccessFlags2::NONE)
+        );
+        assert!(
+            prior_attachment_access(vk::ImageLayout::ATTACHMENT_OPTIMAL)
+                .1
+                .contains(vk::AccessFlags2::COLOR_ATTACHMENT_WRITE)
+        );
+        assert_eq!(
+            next_attachment_access(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL),
+            vk::AccessFlags2::SHADER_SAMPLED_READ
+        );
+        assert!(
+            next_attachment_access(vk::ImageLayout::ATTACHMENT_OPTIMAL)
+                .contains(vk::AccessFlags2::COLOR_ATTACHMENT_READ)
+        );
+    }
+
     #[test]
     fn repeated_batches_preserve_old_sampled_layout_instead_of_discarding_history() {
         let mut layouts = OitAttachmentLayouts::default();

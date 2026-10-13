@@ -86,6 +86,9 @@ mod tests {
             peeling.color_write_mask,
             vk::ColorComponentFlags::from_raw(0x7)
         );
+    }
+    #[test]
+    fn back_composite_preserves_accumulated_alpha_and_all_color_channels() {
         let back = peeling_back_blend();
         assert_eq!(back.src_color_blend_factor, vk::BlendFactor::SRC_ALPHA);
         assert_eq!(back.src_alpha_blend_factor, vk::BlendFactor::ONE);

@@ -23,7 +23,10 @@ int main(int argc,char** argv) {
   const auto structure=layered.empty()?oit_capture_geometry(probe,std::stoi(argv[6])!=0,scene):layered.front();
   probe.view->Redraw();
   if(scene.rfind("cap-",0)==0)cap_live_update(probe.view->ClipPlanes()->First(),scene);
-  NativeOitDrawTrace trace(probe.workspace->GetGlContext(),argv[2]);
+  const auto context=probe.workspace->GetGlContext();
+  std::cerr<<"OCCT_GL_VERSION="<<context->core11fwd->glGetString(GL_VERSION)<<std::endl;
+  std::cerr<<"OCCT_GL_VENDOR="<<context->core11fwd->glGetString(GL_VENDOR)<<std::endl;
+  NativeOitDrawTrace trace(context,argv[2]);
   if(layered.empty())texture_capture(probe.view,argv[2]);else oit_native_full_capture(probe.view,argv[2]);
   const auto glView=occ::handle<OpenGl_View>::DownCast(probe.view->View());
   const auto& params=glView->RenderingParams();
