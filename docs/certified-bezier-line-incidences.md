@@ -10,14 +10,17 @@ inputs and all requested policies. Occurrence keys identify supplied sources;
 they are not geometry-confidence assertions. Every selected contact references
 an index in the complete supporting-line root isolation. A closed-segment query
 retains exact endpoint-sign membership for every supporting root. Supporting-line
-queries retain all roots, with the same explicit domain-sign admission policy.
+queries retain all roots and skip segment-only conversion and sign stages.
 Coincident curves are declined rather than returned as an empty success.
 
 `RootIsolationOptions.max_degree` still admits the reduced normal and denominator
 polynomials. Version 1 `BezierDomainSignOptions` separately admits longitudinal
 conversion: either an explicit degree cap or the retained source basis degree.
 The report records actual normal/denominator, longitudinal conversion and derived
-sign-product degrees. Multiplication by the denominator may increase sign-product
+sign-product degrees. `domain_sign_applied()` distinguishes skipped stages from
+exact zero sign polynomials; supporting queries report no applied cap or sign
+degrees. Policy version is still validated, while an unused degree cap cannot
+reject otherwise certified supporting roots. Multiplication by the denominator may increase sign-product
 degree; this matches the existing directed-sign conversion convention. An
 unsupported policy version is invalid; insufficient domain admission is incomplete.
 The existing line/ray operations retain their original degree policy.

@@ -36,3 +36,10 @@ had a usize/u16 test assertion compilation error, corrected before the genuine
 passing runtime; it is not numerical-red evidence. Single-crate nightly rustdoc
 format61 confirms 76 public incidence items and 13 real parent reexports. Three
 unrelated inherited documentation-link warnings remain in CSLib/ElSLib modules.
+
+The source-a9 benchmark preparation and its frozen manifest were independently
+audited, but external compilers prevented a quiet timing window. No measurement
+was executed on that source. A subsequent actual regression showed unnecessary
+Support rejection by segment-only admission; new conditioning and explicit
+skipped-stage metadata require fresh current-source tests and binary preparation.
+Old preparation evidence is source-specific and is not claimed for that revision.

@@ -51,5 +51,19 @@
     "HLR deferred branch",
     "native OCCT CI/production dependency",
     "performance acceptance pending quiet GO"
-  ]
+  ],
+  "support_correction": {
+    "original_source": "a9b3896597e68c6a45388434cc7a75facc1f1c13",
+    "red": "runtime unwrap failed with DomainSignAdmission(Direction(Degree actual3 limit1)); exit101, not compiler error",
+    "behavior": "Support skips endpoint conversion/sign stages; unsupported policy versions remain invalid; Segment caps unchanged",
+    "metadata": "None effective cap/sign degrees plus domain_sign_applied false distinguishes skipped from exact-zero applied stage",
+    "affected_tests": "14 library +83 toolkit pass; six bench workloads verify, no timings",
+    "clippy": "all-target/all-feature -D warnings exit0",
+    "docs": "47 pass",
+    "format": "cargo fmt --all --check exit0",
+    "mapped_line_ray": "unchanged source and affected regressions pass",
+    "old_freeze": "historical independently audited but untimed source-a9 preparation, not final-source timing evidence",
+    "release_preparation": "relinked final conditioned source, six accepted workloads verify without --measure",
+    "compiler": "nightly2026-09-25 format61, 77 public items/13 actual reexports, exact current-source SHA"
+  }
 }

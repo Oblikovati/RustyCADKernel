@@ -5,13 +5,18 @@ use super::types::*;
 pub(super) fn domain_limit(
     policy: BezierDomainSignOptions,
     basis: usize,
-) -> Result<u16, BezierIncidenceCause> {
+    domain: BezierLineDomain,
+) -> Result<Option<u16>, BezierIncidenceCause> {
     if policy.version != 1 {
         return Err(BezierIncidenceCause::DomainPolicyVersion(policy.version));
     }
+    if domain == BezierLineDomain::Support {
+        return Ok(None);
+    }
     match policy.degree_limit {
-        BezierDomainDegreeLimit::Explicit(limit) => Ok(limit),
+        BezierDomainDegreeLimit::Explicit(limit) => Ok(Some(limit)),
         BezierDomainDegreeLimit::SourceBasis => u16::try_from(basis)
+            .map(Some)
             .map_err(|_| BezierIncidenceCause::DomainDegreeRepresentation(basis)),
     }
 }
@@ -25,10 +30,11 @@ pub(super) fn derived_degrees(
     basis: usize,
     normal: &IntegerPolynomial,
     denominator: &IntegerPolynomial,
-    endpoints: &[IntegerPolynomial; 2],
-    limit: u16,
+    endpoints: Option<&[IntegerPolynomial; 2]>,
+    limit: Option<u16>,
 ) -> BezierIncidenceDegrees {
-    let [origin_sign_product, terminal_sign_product] = endpoints.each_ref().map(query_degree);
+    let [origin_sign_product, terminal_sign_product] =
+        endpoints.map_or([None; 2], |ends| ends.each_ref().map(query_degree));
     let denominator = denominator.degree();
     BezierIncidenceDegrees {
         source_basis: basis,

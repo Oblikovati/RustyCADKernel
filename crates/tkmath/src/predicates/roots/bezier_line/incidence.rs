@@ -36,8 +36,9 @@ pub fn certify_bezier_line_incidences(
     let source = BezierIncidenceSource::retain(query);
     validate_error(query.max_world_error)
         .map_err(|cause| failure(source.clone(), cause, None, None))?;
-    let domain = domain::isolate_domain(query.curve, query.domain_sign, &mut cancelled)
-        .map_err(|cause| failure(source.clone(), cause, None, None))?;
+    let domain =
+        domain::isolate_domain(query.curve, query.domain_sign, query.domain, &mut cancelled)
+            .map_err(|cause| failure(source.clone(), cause, None, None))?;
     construct::ReportConstruction::new(query, source, domain).construct(&mut cancelled)
 }
 fn validate_error(value: f64) -> Result<(), BezierIncidenceCause> {

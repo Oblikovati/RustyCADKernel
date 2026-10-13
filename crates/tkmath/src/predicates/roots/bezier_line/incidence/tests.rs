@@ -64,7 +64,9 @@ fn world_root_polynomial(value: f64) -> ExactRatio {
 fn exhausted_world_refinement_cannot_be_a_completed_parameter_only_result() {
     let controls = [[0., 1.], [0.5, -1.], [1., 1.]];
     let mut query = rational_query(&controls, BezierLineDomain::Support);
-    let initial = domain::isolate_domain(query.curve, query.domain_sign, &mut || false).unwrap();
+    let initial =
+        domain::isolate_domain(query.curve, query.domain_sign, query.domain, &mut || false)
+            .unwrap();
     query.curve.options.max_bisections = initial.isolation.bisections();
     let error = certify_bezier_line_incidences(query, || false).unwrap_err();
     assert!(matches!(

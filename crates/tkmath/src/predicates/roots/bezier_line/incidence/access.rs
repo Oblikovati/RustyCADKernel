@@ -97,6 +97,10 @@ impl BezierIncidenceReport {
     }
 }
 impl BezierIncidenceDegrees {
+    /// Distinguish skipped signs from zero polynomials; example: `degrees.domain_sign_applied()`.
+    pub fn domain_sign_applied(&self) -> bool {
+        self.effective_domain_limit.is_some()
+    }
     /// Read source basis degree; example: `degrees.source_basis()`.
     pub fn source_basis(&self) -> usize {
         self.source_basis
@@ -125,8 +129,8 @@ impl BezierIncidenceDegrees {
     pub fn terminal_sign_product(&self) -> Option<usize> {
         self.terminal_sign_product
     }
-    /// Read effective domain conversion cap; example: `degrees.effective_domain_limit()`.
-    pub fn effective_domain_limit(&self) -> u16 {
+    /// Read applied segment cap, None for Support; example: `degrees.effective_domain_limit()`.
+    pub fn effective_domain_limit(&self) -> Option<u16> {
         self.effective_domain_limit
     }
 }

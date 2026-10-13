@@ -19,18 +19,19 @@ pub(super) struct DomainIsolation {
 }
 struct PreparedDomain {
     normal: IntegerPolynomial,
-    endpoints: [IntegerPolynomial; 2],
+    endpoints: Option<[IntegerPolynomial; 2]>,
     denominator_isolation: RootIsolation,
     degrees: BezierIncidenceDegrees,
 }
 pub(super) fn isolate_domain(
     query: BezierLineQuery<'_>,
     policy: BezierDomainSignOptions,
+    line_domain: BezierLineDomain,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<DomainIsolation, BezierIncidenceCause> {
     let (bounds, width) = super::super::checked_query(query)
         .map_err(|cause| BezierIncidenceCause::Classification(BezierRayError::Line(cause)))?;
-    let limit = domain_limit(policy, query.controls.len().saturating_sub(1))?;
+    let limit = domain_limit(policy, query.controls.len().saturating_sub(1), line_domain)?;
     let prepared = prepare_domain(query, bounds.clone(), width.clone(), limit, cancelled)
         .map_err(domain_failure)?;
     let mut remaining = query.options;
@@ -45,10 +46,11 @@ fn prepare_domain(
     query: BezierLineQuery<'_>,
     bounds: [DyadicBound; 2],
     width: DyadicBound,
-    limit: u16,
+    limit: Option<u16>,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PreparedDomain, BezierRayError> {
-    let (projection, terminal) = captured_projection(query, bounds, width, cancelled)?;
+    let (projection, terminal) =
+        captured_projection(query, bounds, width, limit.is_some(), cancelled)?;
     prepare_polynomials(
         projection,
         terminal,
@@ -62,35 +64,61 @@ fn captured_projection(
     query: BezierLineQuery<'_>,
     bounds: [DyadicBound; 2],
     width: DyadicBound,
+    signs_required: bool,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<(ray::RegularProjection, Vec<BigInt>), BezierRayError> {
+) -> Result<(ray::RegularProjection, Option<Vec<BigInt>>), BezierRayError> {
     ray::regular_projection_captured(
         query,
         bounds,
         width,
         cancelled,
         |projected, longitudinal, _, _| {
-            terminal_controls(query, &projected.denominator, longitudinal)
+            if !signs_required {
+                return Ok(None);
+            }
+            terminal_controls(query, &projected.denominator, longitudinal).map(Some)
         },
     )
 }
 fn prepare_polynomials(
     mut projection: ray::RegularProjection,
-    terminal: Vec<BigInt>,
+    terminal: Option<Vec<BigInt>>,
     root_limit: u16,
-    limit: u16,
+    limit: Option<u16>,
     basis: usize,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PreparedDomain, BezierRayError> {
     let normal = normal_polynomial(&mut projection, root_limit, cancelled)?;
-    let endpoints = endpoint_polynomials(&mut projection, terminal, limit, cancelled)?;
-    let degrees = derived_degrees(basis, &normal, &projection.denominator, &endpoints, limit);
+    let endpoints = optional_endpoints(&mut projection, terminal, limit, cancelled)?;
+    let degrees = derived_degrees(
+        basis,
+        &normal,
+        &projection.denominator,
+        endpoints.as_ref(),
+        limit,
+    );
     Ok(PreparedDomain {
         normal,
         degrees,
         endpoints,
         denominator_isolation: projection.denominator_isolation,
     })
+}
+fn optional_endpoints(
+    projection: &mut ray::RegularProjection,
+    terminal: Option<Vec<BigInt>>,
+    limit: Option<u16>,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<Option<[IntegerPolynomial; 2]>, BezierRayError> {
+    match (terminal, limit) {
+        (Some(terminal), Some(limit)) => {
+            endpoint_polynomials(projection, terminal, limit, cancelled).map(Some)
+        }
+        (None, None) => Ok(None),
+        (terminal, limit) => {
+            unreachable!("terminal {terminal:?}, limit {limit:?}; expected both applied or skipped")
+        }
+    }
 }
 fn normal_polynomial(
     projection: &mut ray::RegularProjection,
@@ -120,9 +148,7 @@ fn finish_domain(
     isolation: RootIsolation,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<DomainIsolation, BezierRayError> {
-    let [origin, end] = prepared.endpoints;
-    let origin_signs = endpoint_signs(&prepared.normal, origin, &isolation, cancelled)?;
-    let end_signs = endpoint_signs(&prepared.normal, end, &isolation, cancelled)?;
+    let [origin_signs, end_signs] = applied_signs(&prepared, &isolation, cancelled)?;
     Ok(DomainIsolation {
         normal: prepared.normal,
         degrees: prepared.degrees,
@@ -131,6 +157,18 @@ fn finish_domain(
         origin_signs,
         end_signs,
     })
+}
+fn applied_signs(
+    prepared: &PreparedDomain,
+    isolation: &RootIsolation,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<[Vec<Ordering>; 2], BezierRayError> {
+    let Some([origin, end]) = &prepared.endpoints else {
+        return Ok([Vec::new(), Vec::new()]);
+    };
+    let origin = endpoint_signs(&prepared.normal, origin.clone(), isolation, cancelled)?;
+    let end = endpoint_signs(&prepared.normal, end.clone(), isolation, cancelled)?;
+    Ok([origin, end])
 }
 fn endpoint_signs(
     normal: &IntegerPolynomial,
@@ -173,14 +211,20 @@ mod tests {
             interval: [0., 1.],
             options: RootIsolationOptions::new(0.001),
         };
-        let result = isolate_domain(query, BezierDomainSignOptions::source_basis(), &mut || {
-            false
-        })
-        .unwrap();
+        let result = segment_domain(query);
         assert_eq!(result.isolation.roots().len(), 2);
         assert_eq!(result.origin_signs, [Ordering::Greater, Ordering::Greater]);
         assert_eq!(result.end_signs, [Ordering::Less, Ordering::Greater]);
         verify_reversed_weight_signs(query);
+    }
+    fn segment_domain(query: BezierLineQuery<'_>) -> DomainIsolation {
+        isolate_domain(
+            query,
+            BezierDomainSignOptions::source_basis(),
+            BezierLineDomain::Segment,
+            &mut || false,
+        )
+        .unwrap()
     }
     fn verify_reversed_weight_signs(query: BezierLineQuery<'_>) {
         for weight in [1., -1.] {
@@ -190,12 +234,7 @@ mod tests {
                 line: [query.line[1], query.line[0]],
                 ..query
             };
-            let reverse = isolate_domain(
-                reversed,
-                BezierDomainSignOptions::source_basis(),
-                &mut || false,
-            )
-            .unwrap();
+            let reverse = segment_domain(reversed);
             assert_eq!(reverse.origin_signs, [Ordering::Greater, Ordering::Less]);
             assert_eq!(reverse.end_signs, [Ordering::Less, Ordering::Less]);
         }

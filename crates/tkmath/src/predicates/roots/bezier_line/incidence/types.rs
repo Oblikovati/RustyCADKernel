@@ -21,7 +21,7 @@ pub struct BezierIncidenceQuery<'a> {
     pub curve: BezierLineQuery<'a>,
     /// Infinite support or closed segment between the query's two line points.
     pub domain: BezierLineDomain,
-    /// Independent admission for domain-sign conversion; root policy is unchanged.
+    /// Segment-only sign admission; version remains validated for supporting queries.
     pub domain_sign: BezierDomainSignOptions,
     /// Finite positive Euclidean construction-error limit, in source world units.
     pub max_world_error: f64,
@@ -179,7 +179,7 @@ impl BezierDomainSignOptions {
         }
     }
 }
-/// Actual derived degrees and effective conversion cap; an exact zero query has no polynomial degree.
+/// Actual derived degrees; None means skipped segment stages or an exact zero sign query.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct BezierIncidenceDegrees {
     pub(super) source_basis: usize,
@@ -189,5 +189,5 @@ pub struct BezierIncidenceDegrees {
     pub(super) terminal_conversion: Option<usize>,
     pub(super) origin_sign_product: Option<usize>,
     pub(super) terminal_sign_product: Option<usize>,
-    pub(super) effective_domain_limit: u16,
+    pub(super) effective_domain_limit: Option<u16>,
 }

@@ -89,13 +89,14 @@ impl ReportConstruction {
 }
 fn classifications(policy: BezierLineDomain, domain: &DomainIsolation) -> Vec<bool> {
     use std::cmp::Ordering::{Greater, Less};
+    if policy == BezierLineDomain::Support {
+        return vec![true; domain.isolation.roots().len()];
+    }
     domain
         .origin_signs
         .iter()
         .zip(&domain.end_signs)
-        .map(|(origin, end)| {
-            policy == BezierLineDomain::Support || (*origin != Less && *end != Greater)
-        })
+        .map(|(origin, end)| *origin != Less && *end != Greater)
         .collect()
 }
 fn contact(index: usize, constructed: ConstructedRoot) -> CertifiedBezierIncidence {
