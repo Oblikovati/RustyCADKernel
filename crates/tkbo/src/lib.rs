@@ -7,3 +7,7 @@ pub mod bop_ds;
 pub mod bop_tools;
 pub mod brep_algo_api;
 pub mod int_tools;
+
+// ADR0014 keeps this prerequisite internal until the complete owned-region contract passes.
+#[allow(dead_code, unused_imports)]
+pub(crate) mod sketch_region;
