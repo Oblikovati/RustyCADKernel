@@ -36,7 +36,7 @@ fn denominator_root_is_not_geometry_or_success_and_owned_sources_survive_repair(
     controls.fill([f64::NAN, f64::NAN]);
     assert!(matches!(
         run([a.clone(), invalid]),
-        Err(PairOperationFailure::DenominatorRoots)
+        Err(PairOperationFailure::DenominatorRoots(_))
     ));
     assert_eq!(run([a, repaired]).unwrap().contacts.len(), 1);
 }

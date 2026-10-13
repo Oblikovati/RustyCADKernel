@@ -22,3 +22,10 @@ mod operation_failure;
 mod operation_limits_tests;
 
 mod exceptional;
+
+mod source_certificate;
+
+mod candidate_certificate;
+mod membership_certificate;
+#[cfg(test)]
+mod retention_tests;

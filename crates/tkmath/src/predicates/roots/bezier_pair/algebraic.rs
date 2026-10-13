@@ -5,7 +5,6 @@ use super::super::{
     isolate, polynomial::IntegerPolynomial, signs,
 };
 use super::polynomial::ExactCoefficientPolynomial;
-use std::cmp::Ordering;
 
 pub(super) fn solve(
     polynomial: &ExactCoefficientPolynomial,
@@ -18,18 +17,17 @@ pub(super) fn solve(
     let tower = chain::multiplicity_tower(source, cancelled)?;
     isolate::isolate(&tower, bounds, width, options, cancelled)
 }
-pub(super) fn query_signs(
+pub(super) fn query_evaluation(
     source: &ExactCoefficientPolynomial,
     query: &ExactCoefficientPolynomial,
     isolation: &RootIsolation,
     degree_limit: u16,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<Vec<Ordering>, signs::RootSignError> {
+) -> Result<signs::RootSignEvaluation, signs::RootSignError> {
     let source = source.primitive(degree_limit).map_err(source_failure)?;
     let query =
         IntegerPolynomial::accept_zero(query.primitive(degree_limit)).map_err(query_failure)?;
-    let evaluation = signs::evaluate_isolated(source, query, isolation.clone(), cancelled)?;
-    Ok(evaluation.signs().to_vec())
+    signs::evaluate_isolated(source, query, isolation.clone(), cancelled)
 }
 fn source_failure(cause: RootIsolationError) -> signs::RootSignError {
     signs::RootSignError::Root {

@@ -3,32 +3,30 @@
 use super::super::RootIsolation;
 use super::{
     algebraic,
+    membership_certificate::{MembershipCertificate, MembershipQuery, MembershipRule},
     operation::{GraphTask, PairOperationFailure},
     polynomial::ExactCoefficientPolynomial,
 };
-use std::cmp::Ordering;
-type MembershipPredicate = fn(Ordering) -> bool;
-type MembershipQuery = (ExactCoefficientPolynomial, MembershipPredicate);
 impl GraphTask<'_> {
     pub(super) fn membership(
         &self,
         roots: &RootIsolation,
         axis: usize,
         cancelled: &mut impl FnMut() -> bool,
-    ) -> Result<Vec<bool>, PairOperationFailure> {
-        let mut accepted = vec![true; roots.roots().len()];
-        for (query, required) in self.queries(axis, cancelled)? {
-            let signs = algebraic::query_signs(
+    ) -> Result<MembershipCertificate, PairOperationFailure> {
+        let mut certificate = MembershipCertificate::new(roots.roots().len());
+        for query in self.queries(axis, cancelled)? {
+            let evaluation = algebraic::query_evaluation(
                 &self.projection.cleared_originals[axis],
-                &query,
+                &query.polynomial,
                 roots,
                 self.options.max_degree,
                 cancelled,
             )
             .map_err(PairOperationFailure::Sign)?;
-            apply_signs(&mut accepted, signs, required);
+            certificate.append(query, evaluation);
         }
-        Ok(accepted)
+        Ok(certificate)
     }
     fn queries(
         &self,
@@ -44,20 +42,22 @@ impl GraphTask<'_> {
         axis: usize,
         cancelled: &mut impl FnMut() -> bool,
     ) -> Result<Vec<MembershipQuery>, PairOperationFailure> {
-        let queries: Vec<MembershipQuery> = vec![
-            (self.projection.alpha.clone(), |sign| {
-                sign != Ordering::Equal
-            }),
-            (
-                self.projection.cleared_originals[1 - axis].clone(),
-                |sign| sign == Ordering::Equal,
-            ),
-            (self.boundary(0, cancelled)?, |sign| sign != Ordering::Less),
-            (self.boundary(1, cancelled)?, |sign| {
-                sign != Ordering::Greater
-            }),
-        ];
-        Ok(queries)
+        let other = self.projection.cleared_originals[1 - axis].clone();
+        Ok(vec![
+            MembershipQuery::new(self.projection.alpha.clone(), MembershipRule::Nonzero),
+            MembershipQuery::new(other, MembershipRule::Zero),
+            self.boundary_query(0, MembershipRule::Nonnegative, cancelled)?,
+            self.boundary_query(1, MembershipRule::Nonpositive, cancelled)?,
+        ])
+    }
+    fn boundary_query(
+        &self,
+        endpoint: usize,
+        rule: MembershipRule,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<MembershipQuery, PairOperationFailure> {
+        let polynomial = self.boundary(endpoint, cancelled)?;
+        Ok(MembershipQuery::new(polynomial, rule))
     }
     fn append_diagonal(
         &self,
@@ -70,7 +70,10 @@ impl GraphTask<'_> {
         let diagonal =
             algebraic::off_diagonal(&self.projection.alpha, &self.projection.beta, cancelled)
                 .map_err(PairOperationFailure::Root)?;
-        queries.push((diagonal, |sign| sign == Ordering::Greater));
+        queries.push(MembershipQuery {
+            polynomial: diagonal,
+            rule: MembershipRule::Positive,
+        });
         Ok(())
     }
     fn boundary(
@@ -85,10 +88,5 @@ impl GraphTask<'_> {
             cancelled,
         )
         .map_err(PairOperationFailure::Root)
-    }
-}
-fn apply_signs(accepted: &mut [bool], signs: Vec<Ordering>, required: MembershipPredicate) {
-    for (flag, sign) in accepted.iter_mut().zip(signs) {
-        *flag &= required(sign);
     }
 }

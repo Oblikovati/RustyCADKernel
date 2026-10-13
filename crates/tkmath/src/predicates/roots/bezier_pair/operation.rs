@@ -4,6 +4,7 @@ use super::super::{
     RootBracket, RootIsolationOptions, certificate_arithmetic::world::WorldEnvelope,
     signs::RootSignEvaluation,
 };
+use super::candidate_certificate::CandidateCertificate;
 pub(super) use super::operation_failure::PairOperationFailure;
 use super::{
     algebraic, equations::PairedEquations, projection::LinearFiberProjection,
@@ -20,6 +21,8 @@ pub(super) struct PairOperationProof {
     pub projection: LinearFiberProjection,
     pub contacts: Vec<PairContact>,
     pub exceptional_fibers: RootSignEvaluation,
+    pub source_certificates: [super::source_certificate::SourceCertificate; 2],
+    pub candidate_certificate: CandidateCertificate,
 }
 pub(super) fn compute(
     sources: [OwnedBezierSource; 2],
@@ -29,17 +32,11 @@ pub(super) fn compute(
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PairOperationProof, PairOperationFailure> {
     validate_world_request(requested_error)?;
-    let (projection, exceptional_fibers) =
-        checked_projection(&sources, self_domain, options, cancelled)?;
+    let prepared = checked_projection(&sources, self_domain, options, cancelled)?;
     let settings = (self_domain, options, requested_error);
-    let task = GraphTask::new(&sources, &projection, settings);
-    let contacts = task.contacts(cancelled)?;
-    Ok(owned_proof(
-        sources,
-        projection,
-        contacts,
-        exceptional_fibers,
-    ))
+    let task = GraphTask::new(&sources, &prepared.projection, settings);
+    let outcome = task.contacts(cancelled)?;
+    Ok(owned_proof(sources, prepared, outcome))
 }
 fn validate_world_request(value: f64) -> Result<(), PairOperationFailure> {
     if !value.is_finite() || value <= 0. {
@@ -47,17 +44,23 @@ fn validate_world_request(value: f64) -> Result<(), PairOperationFailure> {
     }
     Ok(())
 }
+struct PreparedProjection {
+    projection: LinearFiberProjection,
+    exceptional_fibers: RootSignEvaluation,
+    source_certificates: [super::source_certificate::SourceCertificate; 2],
+}
 fn owned_proof(
     sources: [OwnedBezierSource; 2],
-    projection: LinearFiberProjection,
-    contacts: Vec<PairContact>,
-    exceptional_fibers: RootSignEvaluation,
+    prepared: PreparedProjection,
+    outcome: GraphOutcome,
 ) -> PairOperationProof {
     PairOperationProof {
         sources,
-        projection,
-        contacts,
-        exceptional_fibers,
+        projection: prepared.projection,
+        contacts: outcome.contacts,
+        candidate_certificate: outcome.certificate,
+        exceptional_fibers: prepared.exceptional_fibers,
+        source_certificates: prepared.source_certificates,
     }
 }
 fn checked_projection(
@@ -65,25 +68,44 @@ fn checked_projection(
     self_domain: bool,
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
-) -> Result<(LinearFiberProjection, RootSignEvaluation), PairOperationFailure> {
-    let equations = checked_equations(sources, self_domain, options, cancelled)?;
+) -> Result<PreparedProjection, PairOperationFailure> {
+    let (equations, source_certificates) =
+        checked_equations(sources, self_domain, options, cancelled)?;
     let projection = LinearFiberProjection::derive(&equations, cancelled)
         .map_err(PairOperationFailure::Root)?
         .ok_or(PairOperationFailure::NonLinearFiber)?;
     let exceptional =
         super::exceptional::certify(&projection, sources[0].interval, options, cancelled)?;
-    Ok((projection, exceptional))
+    Ok(PreparedProjection {
+        projection,
+        exceptional_fibers: exceptional,
+        source_certificates,
+    })
 }
 fn checked_equations(
     sources: &[OwnedBezierSource; 2],
     self_domain: bool,
     options: RootIsolationOptions,
     cancelled: &mut impl FnMut() -> bool,
+) -> Result<
+    (
+        PairedEquations,
+        [super::source_certificate::SourceCertificate; 2],
+    ),
+    PairOperationFailure,
+> {
+    let left = super::source_certificate::certify(&sources[0], options, cancelled)?;
+    let right = super::source_certificate::certify(&sources[1], options, cancelled)?;
+    let equations = PairedEquations::derive(&left.homogeneous, &right.homogeneous, cancelled)
+        .map_err(PairOperationFailure::Root)?;
+    let equations = divide_if_self(equations, self_domain, cancelled)?;
+    Ok((equations, [left, right]))
+}
+fn divide_if_self(
+    equations: PairedEquations,
+    self_domain: bool,
+    cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PairedEquations, PairOperationFailure> {
-    let left = checked_source(&sources[0], options, cancelled)?;
-    let right = checked_source(&sources[1], options, cancelled)?;
-    let equations =
-        PairedEquations::derive(&left, &right, cancelled).map_err(PairOperationFailure::Root)?;
     if self_domain {
         return equations
             .exclude_diagonal(cancelled)
@@ -91,25 +113,9 @@ fn checked_equations(
     }
     Ok(equations)
 }
-fn checked_source(
-    source: &OwnedBezierSource,
-    options: RootIsolationOptions,
-    cancelled: &mut impl FnMut() -> bool,
-) -> Result<super::source::HomogeneousPolynomials, PairOperationFailure> {
-    let polynomials = source
-        .homogeneous(cancelled)
-        .map_err(PairOperationFailure::Source)?;
-    let roots = algebraic::solve(
-        &polynomials.components[2],
-        source.interval,
-        options,
-        cancelled,
-    )
-    .map_err(PairOperationFailure::Root)?;
-    if !roots.roots().is_empty() {
-        return Err(PairOperationFailure::DenominatorRoots);
-    }
-    Ok(polynomials)
+struct GraphOutcome {
+    contacts: Vec<PairContact>,
+    certificate: CandidateCertificate,
 }
 pub(super) struct GraphTask<'a> {
     pub sources: &'a [OwnedBezierSource; 2],
@@ -137,22 +143,34 @@ impl GraphTask<'_> {
     fn contacts(
         &self,
         cancelled: &mut impl FnMut() -> bool,
-    ) -> Result<Vec<PairContact>, PairOperationFailure> {
+    ) -> Result<GraphOutcome, PairOperationFailure> {
         let axis = self.projection_source_axis()?;
         let polynomial = &self.projection.cleared_originals[axis];
-        let roots = algebraic::solve(
+        let roots = self.isolated_candidates(polynomial, cancelled)?;
+        let membership = self.membership(&roots, axis, cancelled)?;
+        let contacts = self.construct(&roots, membership.accepted.clone(), cancelled)?;
+        let certificate = CandidateCertificate::new(polynomial.clone(), roots, membership);
+        Ok(GraphOutcome {
+            contacts,
+            certificate,
+        })
+    }
+}
+
+impl GraphTask<'_> {
+    fn isolated_candidates(
+        &self,
+        polynomial: &super::polynomial::ExactCoefficientPolynomial,
+        cancelled: &mut impl FnMut() -> bool,
+    ) -> Result<super::super::RootIsolation, PairOperationFailure> {
+        algebraic::solve(
             polynomial,
             self.sources[0].interval,
             self.options,
             cancelled,
         )
-        .map_err(PairOperationFailure::Root)?;
-        let flags = self.membership(&roots, axis, cancelled)?;
-        self.construct(&roots, flags, cancelled)
+        .map_err(PairOperationFailure::Root)
     }
-}
-
-impl GraphTask<'_> {
     fn projection_source_axis(&self) -> Result<usize, PairOperationFailure> {
         self.projection
             .cleared_originals

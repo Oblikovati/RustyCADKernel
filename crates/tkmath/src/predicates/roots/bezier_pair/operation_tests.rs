@@ -29,6 +29,7 @@ fn real_parabola_pair_certifies_unique_bounded_contact_and_world_error() {
     assert_eq!(proof.contacts[0].world.point, [0.5, 0.25]);
     assert_eq!(proof.contacts[0].world.achieved_error, 0.);
     assert_eq!(proof.sources[0].controls, a);
+    verify_denominator_certificates(&proof);
     assert_eq!(proof.projection.alpha.0, vec![(-2).into()]);
 }
 #[test]
@@ -106,4 +107,17 @@ fn verify_invalid_error(inputs: [OwnedBezierSource; 2]) {
     .err()
     .unwrap();
     assert!(error.to_string().contains("NaN"));
+}
+
+fn verify_denominator_certificates(proof: &PairOperationProof) {
+    assert!(
+        proof
+            .source_certificates
+            .iter()
+            .all(|source| source.denominator.roots().is_empty())
+    );
+    assert_eq!(
+        proof.source_certificates[0].homogeneous.components[2].0,
+        vec![1.into()]
+    );
 }
