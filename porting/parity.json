@@ -116385,8 +116385,8 @@
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
       "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::drop::Drop>::drop",
-      "status": "implemented",
-      "notes": "The last handle's release drops the Rust object (C++ `delete this`); a Drop impl of the class is the virtual Delete override. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+      "status": "partial",
+      "notes": "Default final-owner destruction is implemented. Native virtual Delete can instead retain a constructed count-zero object and allow explicit later destruction; Rust Handle::drop lacks this override dispatch. Exact compiler identity and twice-repeated native evidence: porting/audits/transient-virtual-delete-gap-current-main. No production fix is claimed."
     },
     {
       "upstream_id": "Standard_Transient::base_type",

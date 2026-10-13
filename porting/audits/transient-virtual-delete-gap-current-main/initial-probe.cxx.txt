@@ -1,0 +1,21 @@
+#include <Graphic3d_ClipPlane.hxx>
+#include <iostream>
+struct DeleteSignals { int calls=0; int destroyed=0; int counter=-99; };
+struct RetainedDeletePlane : Graphic3d_ClipPlane {
+  explicit RetainedDeletePlane(DeleteSignals& state):signals(state) {}
+  ~RetainedDeletePlane() override { ++signals.destroyed; }
+  void Delete() const override { ++signals.calls; signals.counter=GetRefCount(); }
+  DeleteSignals& signals;
+};
+int main() {
+  DeleteSignals signals;
+  auto* raw = new RetainedDeletePlane(signals);
+  occ::handle<Graphic3d_ClipPlane> head = new Graphic3d_ClipPlane;
+  occ::handle<Graphic3d_ClipPlane> next = new Graphic3d_ClipPlane;
+  head->SetChainNextPlane(raw);
+  head->SetChainNextPlane(next);
+  std::cout << signals.calls << ' ' << signals.counter << ' ' << signals.destroyed << ' '
+            << raw->GetRefCount() << ' ' << next->GetRefCount() << '\n';
+  delete raw;
+  std::cout << signals.destroyed << '\n';
+}

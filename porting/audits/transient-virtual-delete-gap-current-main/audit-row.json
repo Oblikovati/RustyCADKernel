@@ -1,0 +1,23 @@
+{
+  "cpp_id": "43a0eba0bbd413da8ed6c28f58b8de53e4d332fcaf21c781c38da56776536185",
+  "qualified_name": "Standard_Transient::Delete",
+  "signature": "void () const",
+  "api_visible": true,
+  "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+  "spelling_location": {
+    "column": 16,
+    "file": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+    "line": 134
+  },
+  "header_sha256": "4c334b9c4f991527169e09d02b3063fbcbf1606eadd81d967af869c1d10067d7",
+  "existing_ledger_row": {
+    "upstream_id": "Standard_Transient::Delete() const",
+    "toolkit": "TKernel",
+    "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+    "rust_item": "rustycad_tkernel::standard::Handle::<core::ops::drop::Drop>::drop",
+    "status": "implemented",
+    "notes": "The last handle's release drops the Rust object (C++ `delete this`); a Drop impl of the class is the virtual Delete override. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+  },
+  "requested_status": "partial",
+  "reason": "Native virtual Delete may retain a constructed zero-count object independently of its destructor. Rust Handle::drop only decrements the embedded count; eventual Arc destruction invokes Rust Drop and has no native virtual Delete override dispatch."
+}

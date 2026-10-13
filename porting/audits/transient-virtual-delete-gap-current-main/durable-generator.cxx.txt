@@ -1,0 +1,43 @@
+// OCCT 3d097a0328e71b826377d4814ab05ec3c3d23871: Delete is distinct from destruction.
+#include <Graphic3d_ClipPlane.hxx>
+#include <iostream>
+
+struct DeleteOverrideSignals
+{
+  int calls = 0;
+  int destroyed = 0;
+  int counter = -99;
+};
+
+struct RetainedDeletePlane : Graphic3d_ClipPlane
+{
+  explicit RetainedDeletePlane(DeleteOverrideSignals& signals) : observed(signals) {}
+  ~RetainedDeletePlane() override { ++observed.destroyed; }
+  void Delete() const override
+  {
+    ++observed.calls;
+    observed.counter = GetRefCount();
+  }
+  DeleteOverrideSignals& observed;
+};
+
+static void replayRetainedDelete()
+{
+  DeleteOverrideSignals observed;
+  auto* retained = new RetainedDeletePlane(observed);
+  occ::handle<Graphic3d_ClipPlane> head = new Graphic3d_ClipPlane;
+  occ::handle<Graphic3d_ClipPlane> next = new Graphic3d_ClipPlane;
+  head->SetChainNextPlane(retained);
+  head->SetChainNextPlane(next);
+  std::cout << observed.calls << ' ' << observed.counter << ' ' << observed.destroyed << ' '
+            << retained->GetRefCount() << ' ' << next->GetRefCount() << '\n';
+  // A valid retaining Delete override leaves a constructed object for explicit later destruction.
+  delete retained;
+  std::cout << observed.destroyed << '\n';
+}
+
+int main()
+{
+  replayRetainedDelete();
+  return 0;
+}
