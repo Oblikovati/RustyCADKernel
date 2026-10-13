@@ -23,6 +23,11 @@ pub(super) struct PairOperationProof {
     pub exceptional_fibers: RootSignEvaluation,
     pub source_certificates: [super::source_certificate::SourceCertificate; 2],
     pub candidate_certificate: CandidateCertificate,
+    pub work: super::work_budget::PairWorkReceipt,
+}
+pub(super) struct AccountedPairOutcome {
+    pub completion: Result<PairOperationProof, PairOperationFailure>,
+    pub work: super::work_budget::PairWorkReceipt,
 }
 pub(super) fn compute(
     sources: [OwnedBezierSource; 2],
@@ -31,12 +36,46 @@ pub(super) fn compute(
     requested_error: f64,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PairOperationProof, PairOperationFailure> {
+    compute_accounted(sources, self_domain, options, requested_error, cancelled).completion
+}
+pub(super) fn compute_accounted(
+    sources: [OwnedBezierSource; 2],
+    self_domain: bool,
+    options: RootIsolationOptions,
+    requested_error: f64,
+    cancelled: &mut impl FnMut() -> bool,
+) -> AccountedPairOutcome {
+    let budget = super::work_budget::PairWorkBudget::new(options.max_bisections);
+    let completion = execute(
+        sources,
+        self_domain,
+        options,
+        requested_error,
+        &budget,
+        cancelled,
+    );
+    accounted_outcome(completion, budget.receipt())
+}
+fn accounted_outcome(
+    completion: Result<PairOperationProof, PairOperationFailure>,
+    work: super::work_budget::PairWorkReceipt,
+) -> AccountedPairOutcome {
+    AccountedPairOutcome { completion, work }
+}
+fn execute(
+    sources: [OwnedBezierSource; 2],
+    self_domain: bool,
+    options: RootIsolationOptions,
+    requested_error: f64,
+    budget: &super::work_budget::PairWorkBudget,
+    cancelled: &mut impl FnMut() -> bool,
+) -> Result<PairOperationProof, PairOperationFailure> {
     validate_world_request(requested_error)?;
-    let prepared = checked_projection(&sources, self_domain, options, cancelled)?;
+    let prepared = checked_projection(&sources, self_domain, options, budget, cancelled)?;
     let settings = (self_domain, options, requested_error);
-    let task = GraphTask::new(&sources, &prepared.projection, settings);
+    let task = GraphTask::new(&sources, &prepared.projection, settings, budget);
     let outcome = task.contacts(cancelled)?;
-    Ok(owned_proof(sources, prepared, outcome))
+    Ok(owned_proof(sources, prepared, outcome, budget.receipt()))
 }
 fn validate_world_request(value: f64) -> Result<(), PairOperationFailure> {
     if !value.is_finite() || value <= 0. {
@@ -53,9 +92,11 @@ fn owned_proof(
     sources: [OwnedBezierSource; 2],
     prepared: PreparedProjection,
     outcome: GraphOutcome,
+    work: super::work_budget::PairWorkReceipt,
 ) -> PairOperationProof {
     PairOperationProof {
         sources,
+        work,
         projection: prepared.projection,
         contacts: outcome.contacts,
         candidate_certificate: outcome.certificate,
@@ -67,15 +108,16 @@ fn checked_projection(
     sources: &[OwnedBezierSource; 2],
     self_domain: bool,
     options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<PreparedProjection, PairOperationFailure> {
     let (equations, source_certificates) =
-        checked_equations(sources, self_domain, options, cancelled)?;
+        checked_equations(sources, self_domain, options, budget, cancelled)?;
     let projection = LinearFiberProjection::derive(&equations, cancelled)
         .map_err(PairOperationFailure::Root)?
         .ok_or(PairOperationFailure::NonLinearFiber)?;
     let exceptional =
-        super::exceptional::certify(&projection, sources[0].interval, options, cancelled)?;
+        super::exceptional::certify(&projection, sources[0].interval, options, budget, cancelled)?;
     Ok(PreparedProjection {
         projection,
         exceptional_fibers: exceptional,
@@ -86,6 +128,7 @@ fn checked_equations(
     sources: &[OwnedBezierSource; 2],
     self_domain: bool,
     options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<
     (
@@ -94,8 +137,8 @@ fn checked_equations(
     ),
     PairOperationFailure,
 > {
-    let left = super::source_certificate::certify(&sources[0], options, cancelled)?;
-    let right = super::source_certificate::certify(&sources[1], options, cancelled)?;
+    let left = super::source_certificate::certify(&sources[0], options, budget, cancelled)?;
+    let right = super::source_certificate::certify(&sources[1], options, budget, cancelled)?;
     let equations = PairedEquations::derive(&left.homogeneous, &right.homogeneous, cancelled)
         .map_err(PairOperationFailure::Root)?;
     let equations = divide_if_self(equations, self_domain, cancelled)?;
@@ -123,16 +166,19 @@ pub(super) struct GraphTask<'a> {
     pub self_domain: bool,
     pub options: RootIsolationOptions,
     pub requested_error: f64,
+    pub budget: &'a super::work_budget::PairWorkBudget,
 }
 impl<'a> GraphTask<'a> {
     fn new(
         sources: &'a [OwnedBezierSource; 2],
         projection: &'a LinearFiberProjection,
         settings: (bool, RootIsolationOptions, f64),
+        budget: &'a super::work_budget::PairWorkBudget,
     ) -> Self {
         Self {
             sources,
             projection,
+            budget,
             self_domain: settings.0,
             options: settings.1,
             requested_error: settings.2,
@@ -167,6 +213,7 @@ impl GraphTask<'_> {
             polynomial,
             self.sources[0].interval,
             self.options,
+            self.budget,
             cancelled,
         )
         .map_err(PairOperationFailure::Root)

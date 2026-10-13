@@ -9,9 +9,10 @@ pub(super) fn certify(
     projection: &LinearFiberProjection,
     interval: [f64; 2],
     options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<RootSignEvaluation, PairOperationFailure> {
-    let roots = algebraic::solve(&projection.alpha, interval, options, cancelled)
+    let roots = algebraic::solve(&projection.alpha, interval, options, budget, cancelled)
         .map_err(PairOperationFailure::Root)?;
     let evaluation = evaluate_fibers(projection, roots, options, cancelled)?;
     if evaluation.signs().contains(&Ordering::Equal) {

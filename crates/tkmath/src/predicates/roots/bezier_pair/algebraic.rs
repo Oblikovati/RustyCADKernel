@@ -10,12 +10,20 @@ pub(super) fn solve(
     polynomial: &ExactCoefficientPolynomial,
     interval: [f64; 2],
     options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<RootIsolation, RootIsolationError> {
     let (bounds, width) = checked_policy_interval(interval, options)?;
     let source = polynomial.primitive(options.max_degree)?;
     let tower = chain::multiplicity_tower(source, cancelled)?;
-    isolate::isolate(&tower, bounds, width, options, cancelled)
+    isolate::isolate_accounted(
+        &tower,
+        bounds,
+        width,
+        budget.effective(options),
+        cancelled,
+        &mut || budget.completed_split(),
+    )
 }
 pub(super) fn query_evaluation(
     source: &ExactCoefficientPolynomial,

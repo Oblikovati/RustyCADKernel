@@ -14,12 +14,14 @@ pub(super) struct SourceCertificate {
 pub(super) fn certify(
     source: &OwnedBezierSource,
     options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<SourceCertificate, PairOperationFailure> {
     let homogeneous = source
         .homogeneous(cancelled)
         .map_err(PairOperationFailure::Source)?;
-    let denominator = checked_denominator(&homogeneous, source.interval, options, cancelled)?;
+    let denominator =
+        checked_denominator(&homogeneous, source.interval, options, budget, cancelled)?;
     Ok(SourceCertificate {
         homogeneous,
         denominator,
@@ -30,10 +32,17 @@ fn checked_denominator(
     homogeneous: &HomogeneousPolynomials,
     interval: [f64; 2],
     options: RootIsolationOptions,
+    budget: &super::work_budget::PairWorkBudget,
     cancelled: &mut impl FnMut() -> bool,
 ) -> Result<RootIsolation, PairOperationFailure> {
-    let denominator = algebraic::solve(&homogeneous.components[2], interval, options, cancelled)
-        .map_err(PairOperationFailure::Root)?;
+    let denominator = algebraic::solve(
+        &homogeneous.components[2],
+        interval,
+        options,
+        budget,
+        cancelled,
+    )
+    .map_err(PairOperationFailure::Root)?;
     if !denominator.roots().is_empty() {
         return Err(PairOperationFailure::DenominatorRoots(denominator));
     }
