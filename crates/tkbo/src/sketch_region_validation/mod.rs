@@ -11,6 +11,11 @@ mod diagnostic_tests;
 mod geometry_tests;
 mod inspection;
 mod outcome;
+#[cfg(test)]
+mod source_relation_test_support;
+#[cfg(test)]
+mod source_relation_tests;
+mod source_relations;
 mod statuses;
 #[cfg(test)]
 mod tests;
@@ -22,6 +27,7 @@ pub(crate) use outcome::{
 };
 use rustycad_tkbrep::topods::Shape;
 use rustycad_tktopalgo::brep_check::BRepCheckAnalyzer;
+pub(crate) use source_relations::source_relations;
 
 /// Inspect an already-owned candidate without exposing diagnostic geometry as success.
 /// Example: `validate_owned_candidate(&owned_face, BodyKind::PlanarRegion, &relations)`.
@@ -57,3 +63,18 @@ fn inspect_stage(
     };
     report.record(stage, findings);
 }
+
+/// Inspect owned stage output with complete member attribution, without final acceptance.
+/// Example: `validate_owned_arrangement(&owned, BodyKind::PlanarRegion)`.
+pub(crate) fn validate_owned_arrangement(
+    owned: &crate::sketch_region::OwnedArrangement,
+    kind: BodyKind,
+) -> OrderedCoverage {
+    let relations = source_relations(&owned.relations);
+    validate_owned_candidate(&owned.arrangement, kind, &relations)
+}
+
+#[cfg(test)]
+mod source_arrangement_tests;
+#[cfg(test)]
+mod source_context_tests;

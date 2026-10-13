@@ -1,0 +1,74 @@
+{
+  "project": "Martensite",
+  "base_revision": "52f0e9c4d",
+  "source_revision": "efdf2d5afaf2ee61db30e0a6d18b82ad6209a752",
+  "source_sha256": {
+    "crates/tkbo/src/sketch_region/mod.rs": "4a1a403b9db7e23405a514f01d1e599d0f1e12e0bfceb5e6b4ca084e19ed30e5",
+    "crates/tkbo/src/sketch_region/outcome.rs": "06d4cd7ad7a73d81a74e6ad91c339ff2cf3ab5bd47d5e4f5cbf4ceacdf6e345b",
+    "crates/tkbo/src/sketch_region/tests.rs": "61d808af835e0eedcbeb8fff640e9f60e95f43f37ebf594b44694759ea5cfe92",
+    "crates/tkbo/src/sketch_region_validation/diagnostic_tests.rs": "17de07d3252bdf0bca9957cc7609418e833b07377efdac6ee4c097f55b2a2471",
+    "crates/tkbo/src/sketch_region_validation/geometry_tests.rs": "38d43ad936333ba1bb2b0eed0ce949c1765a1b0aedd392605b0bf8732894f33e",
+    "crates/tkbo/src/sketch_region_validation/mod.rs": "c85304d89fb7c25e3d1ae1dc6cca6f7372c93cb0afd151971ce063ea40993c4e",
+    "crates/tkbo/src/sketch_region_validation/outcome.rs": "e9fc26f0b2bdc5af4fd00980130f00dfadeb70fd46d60987031fb4d0fb648653",
+    "crates/tkbo/src/sketch_region_validation/source_arrangement_tests.rs": "3b00fdf6faaec8c9bad6880c5b78204fe35c87b348599e85d6a929144d58e164",
+    "crates/tkbo/src/sketch_region_validation/source_context_tests.rs": "4a3b52713552d2fbf5bf34023d3f830b9279ca623c4736eef22a7c46c7a9193b",
+    "crates/tkbo/src/sketch_region_validation/source_relation_test_support.rs": "e2be3ab1c3fb747f3769f4b27d16ec08c9cb741a3c8e1fd49f7fb43ece8b4063",
+    "crates/tkbo/src/sketch_region_validation/source_relation_tests.rs": "5bca12274822b1e5a80b168fcfad81bc52e9f27543516ba7c9b2bf7bde29706a",
+    "crates/tkbo/src/sketch_region_validation/source_relations.rs": "7acf782da9359e05987f37057409879aa83a1f6b1d34c138f443696cf5202b12",
+    "docs/sketch-region-source-relations.md": "ab8e8237c26ef467256a7549ed328da1a829afacdf553f85c8eeb7bce4f96fbf"
+  },
+  "checks": [
+    {
+      "command": "cargo test -p rustycad-tkbo --all-targets",
+      "exit": 0,
+      "passed": 739,
+      "groups": 5,
+      "new_tests": 10
+    },
+    {
+      "command": "cargo clippy -p rustycad-tkbo --all-targets -- -D warnings",
+      "exit": 0
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit": 0
+    },
+    {
+      "command": "python3 tools/toolkit_test_suites.py",
+      "exit": 0
+    },
+    {
+      "command": "cargo test --locked -p rustycad-tkbo --lib sketch_region_validation",
+      "workspace": "canonical_extracted_archives",
+      "exit": 0,
+      "passed": 26,
+      "includes_new_tests": 10
+    }
+  ],
+  "canonical_archives": 31,
+  "changed_crate_sources_byte_equal": 12,
+  "mapped_validation_changed": false,
+  "operation_completed": false,
+  "native_api_promotions": false,
+  "exclusions": [
+    "No incidence/self-intersection/tolerance acceptance",
+    "No completed region-to-solid or immutable application wrapper",
+    "No camera/Transient/Handle production activation",
+    "No GPU or performance changes/runs"
+  ],
+  "development_diagnostics": [
+    "Initial test fixture omitted MakeVertex Result unwrap; corrected before runtime tests.",
+    "Initial dedup test constructed two distinct numeric-equal Location datums. Full key equality correctly retained both; fixture reuses its actual captured key and separate regression proves numeric-equal distinct location identity.",
+    "Duplicate shared cubic fixture include triggered Clippy; replaced with reuse of existing cfg(test) helper, no allow/suppression."
+  ],
+  "proof_sha256": {
+    "archive-source-equality.json": "49133ff01d3f7f31a038a370b83d7ed4b2e177adb41b1f21a93569c5acaa3f4e",
+    "clippy-00.log": "7739f6c49e543ab2d98906c3288a51cfd266bf2cc86b33fb454b3e030d19de6a",
+    "discovery-00.log": "5fe04127a26a8accef4e6ce1eca346bb08e5766d106346728a016d3f171a6aa4",
+    "extracted-00.log": "4240b26d0d77e906dd1fbce49e07462474529ce6b2e08cb1d46ac99bb3cfcec4",
+    "fmt-00.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "packages-00.log": "f94814677e66803b5f92d03d44746c013d85f412fafa96c4d512bba0db0e3bfa",
+    "toolkit-00.log": "01e45c170aeff03fe018ec0109f431b13ced5d705c75d1b7453753e158c711ee",
+    "toolkit-01.log": "f58f219c51efd8bd85744e404547fad020433d89210601c6dd71818ab28e69ef"
+  }
+}

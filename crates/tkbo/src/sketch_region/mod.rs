@@ -9,10 +9,10 @@ mod relations;
 pub(crate) use arrangement::arrange_owned_sources;
 pub(crate) use outcome::{
     ArrangementCause, ArrangementCompletion, ArrangementPhase, ArrangementRelation,
-    ArrangementSource, OwnedArrangement, RegionSourceId,
+    ArrangementSource, OriginalMemberIdentity, OwnedArrangement, RegionSourceId,
 };
 #[cfg(test)]
-mod tests;
+pub(crate) mod tests;
 
 #[cfg(test)]
 mod isolation_tests;

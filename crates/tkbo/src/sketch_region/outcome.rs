@@ -42,7 +42,7 @@ pub enum ArrangementCause {
     UnattributedOutput,
 }
 /// Operation-local original occurrence identity, not a persistent name or recovery heuristic.
-#[derive(Clone, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct OriginalMemberIdentity {
     pub source: RegionSourceId,
     pub topology_address: usize,
