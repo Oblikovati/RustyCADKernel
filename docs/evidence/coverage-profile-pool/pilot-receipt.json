@@ -1,0 +1,143 @@
+{
+  "base_revision": "52f0e9c4d67e14a6816e61665baeb15294078465",
+  "scope": "Bounded real toolkit pilot; no workspace coverage owner acceptance or historical87GB attribution",
+  "selected_tests": [
+    [
+      "rustycad-cmath::toolkit",
+      "cmath_behavior::remainder_rounds_the_quotient_to_nearest_even"
+    ],
+    [
+      "rustycad-cmath::toolkit",
+      "cmath_behavior::special_values_follow_c99"
+    ],
+    [
+      "rustycad-cmath::toolkit",
+      "cmath_behavior::values_are_inverse_hyperbolic_functions"
+    ],
+    [
+      "rustycad-tcl::toolkit",
+      "interp_behavior::completeness_of_scripts"
+    ],
+    [
+      "rustycad-tcl::toolkit",
+      "interp_behavior::dynamic_strings_and_encodings"
+    ],
+    [
+      "rustycad-tcl::toolkit",
+      "interp_behavior::evaluation_sets_result_and_completion"
+    ],
+    [
+      "rustycad-tcl::toolkit",
+      "interp_behavior::result_building_matches_the_c_calls"
+    ],
+    [
+      "rustycad-tcl::toolkit",
+      "interp_behavior::variables_and_array_list_append"
+    ]
+  ],
+  "selected_tests_per_cohort": 32,
+  "cohorts": 6,
+  "total_selected_passes": 192,
+  "nextest_profile": "ci",
+  "concurrency": [
+    1,
+    8
+  ],
+  "existing_exclusion": "not test(=bvh_bug30655::BVH_PairDistanceTest__Bug30655_SphereDistance) and (test(=cmath_behavior::remainder_rounds_the_quotient_to_nearest_even) or test(=cmath_behavior::special_values_follow_c99) or test(=cmath_behavior::values_are_inverse_hyperbolic_functions) or test(=interp_behavior::completeness_of_scripts) or test(=interp_behavior::dynamic_strings_and_encodings) or test(=interp_behavior::evaluation_sets_result_and_completion) or test(=interp_behavior::result_building_matches_the_c_calls) or test(=interp_behavior::variables_and_array_list_append))",
+  "resolved_features": {
+    "rustycad-cmath": {
+      "full_resolve_features": [],
+      "pilot_resolve_features": []
+    },
+    "rustycad-tcl": {
+      "full_resolve_features": [],
+      "pilot_resolve_features": []
+    }
+  },
+  "binaries": {
+    "rustycad-cmath": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/Martensite-coverage-profile-pool/target/debug/deps/rustycad_cmath-d03ca4edb407112a",
+      "sha256": "4f9d7b99f70c9ec5f3066475f45b1c48aefc5c595f533ef108db255a4c1e3706"
+    },
+    "rustycad-cmath::toolkit": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/Martensite-coverage-profile-pool/target/debug/deps/toolkit-32f2990365e0794d",
+      "sha256": "ba2cc83ed9cb257c4da05600c91f1b0685c201c060cba920c53acc0d25c6566a"
+    },
+    "rustycad-tcl": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/Martensite-coverage-profile-pool/target/debug/deps/rustycad_tcl-37d98b4c7f0974a7",
+      "sha256": "ca30e538f41cdb15afcb3661d5a04152980120edf7ed068386b1521502f64ce1"
+    },
+    "rustycad-tcl::toolkit": {
+      "path": "/home/vmiguel/git/oblikovati-workspace/Martensite-coverage-profile-pool/target/debug/deps/toolkit-68b6e4f2ae7ec557",
+      "sha256": "08526e2e79fc14a3c3fa1d4294afc2f5f91fa39706972c322c48032f5c4a4d69"
+    }
+  },
+  "raw_storage": {
+    "pid-c1": {
+      "raw_files": 64,
+      "raw_logical": 611840,
+      "raw_allocated": 720896
+    },
+    "pool1-c1": {
+      "raw_files": 4,
+      "raw_logical": 24504,
+      "raw_allocated": 32768
+    },
+    "pool4-c1": {
+      "raw_files": 16,
+      "raw_logical": 98016,
+      "raw_allocated": 131072
+    },
+    "pid-c8": {
+      "raw_files": 64,
+      "raw_logical": 611840,
+      "raw_allocated": 720896
+    },
+    "pool1-c8": {
+      "raw_files": 4,
+      "raw_logical": 24504,
+      "raw_allocated": 32768
+    },
+    "pool4-c8": {
+      "raw_files": 16,
+      "raw_logical": 98016,
+      "raw_allocated": 131072
+    }
+  },
+  "full_counters_json_lcov_exact_equivalence": {
+    "pool1-c1": {
+      "counters": true,
+      "json": true,
+      "lcov": true
+    },
+    "pid-c1": {
+      "counters": true,
+      "json": true,
+      "lcov": true
+    },
+    "pool4-c1": {
+      "counters": true,
+      "json": true,
+      "lcov": true
+    },
+    "pool1-c8": {
+      "counters": true,
+      "json": true,
+      "lcov": true
+    },
+    "pid-c8": {
+      "counters": true,
+      "json": true,
+      "lcov": true
+    },
+    "pool4-c8": {
+      "counters": true,
+      "json": true,
+      "lcov": true
+    }
+  },
+  "all_nextest_exit_codes": 0,
+  "all_llvm_tool_exit_codes": 0,
+  "llvm_tool_warning_bytes": 0,
+  "historical_profile_filename": "unknown: old owner receipt omitted this setting; CI%4m predates oldbb1; observed current default is not original run env"
+}
