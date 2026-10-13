@@ -1,0 +1,90 @@
+[
+  {
+    "profile": "mesa25-128",
+    "command": [
+      "python3",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "cargo",
+      "test",
+      "-p",
+      "martensite-vulkan",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "environment": {
+      "VK_DRIVER_FILES": "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/release-runner-mesa/isolated-lvp.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    }
+  },
+  {
+    "profile": "mesa26-128",
+    "command": [
+      "python3",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "cargo",
+      "test",
+      "-p",
+      "martensite-vulkan",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "environment": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    }
+  },
+  {
+    "profile": "amd",
+    "command": [
+      "python3",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "cargo",
+      "test",
+      "-p",
+      "martensite-vulkan",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "environment": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/radeon_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": "sse2",
+      "LP_NATIVE_VECTOR_WIDTH": "128",
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    }
+  },
+  {
+    "profile": "mesa26-default256",
+    "command": [
+      "python3",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/tools/with_vulkan_validation.py",
+      "--cache",
+      "/home/vmiguel/git/oblikovati-workspace/RustyCADKernel/target/vulkan-validation",
+      "--",
+      "cargo",
+      "test",
+      "-p",
+      "martensite-vulkan",
+      "--all-targets"
+    ],
+    "exit_code": 0,
+    "environment": {
+      "VK_DRIVER_FILES": "/usr/share/vulkan/icd.d/lvp_icd.json",
+      "GALLIUM_OVERRIDE_CPU_CAPS": null,
+      "LP_NATIVE_VECTOR_WIDTH": null,
+      "MARTENSITE_VULKAN_DEVICE": "0"
+    }
+  }
+]
