@@ -77,9 +77,11 @@ gh workflow run release.yml --ref main -f release_tag=v0.2.5
 
 The complete reusable kernel CI workflow must pass before packaging and testing
 the extracted files. Only the final publication job has write permission.
-It verifies checksums, creates a draft with all assets, and publishes the draft
-as a stable release. An existing release causes an error; assets are not
-replaced.
+It verifies checksums and independently binds the manifest repository, version
+and full revision to the checked tag. It checks the remote tag before creating
+and publishing a draft. An existing published release causes an error. A retry
+can resume an unpublished draft only when every downloaded asset has exactly
+the sealed local name and bytes; missing or changed assets are rejected.
 A failed Rust, tooling, Vulkan, package, or documentation check prevents publication.
 The package command keeps its original exit through `tee` with `pipefail`.
 A separate diagnostics artifact retains its log and actual CPU, installed driver

@@ -63,6 +63,16 @@ class ReleaseWorkflowTests(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
 
+    def test_publication_uses_the_checked_owner_and_receipt_validator(self) -> None:
+        self.assertIn(
+            "RELEASE_REVISION: ${{ needs.resolve.outputs.revision }}", self.release
+        )
+        self.assertIn("tools/publish_release.py --artifacts release", self.release)
+        self.assertIn(
+            '--revision "$RELEASE_REVISION" --repository "$GH_REPO"', self.release
+        )
+        self.assertNotIn("gh release create", self.release)
+
     def test_concurrency_follows_target_tag_for_dispatch_and_tag_push(self) -> None:
         self.assertIn(
             "group: martensite-release-${{ inputs.release_tag || github.ref_name }}",
